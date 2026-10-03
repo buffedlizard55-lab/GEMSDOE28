@@ -293,7 +293,7 @@
       "id": "h33-external-byte-verify-pending",
       "severity": "low",
       "issue": "H33-1 (slip/dilation tendency shapefile), H33-2 (five MT conductance GeoTIFFs) and H33-3 (heat-flow zip) depend on USGS ScienceBase files that are LISTED on official item pages (verified 2026-10-03 with file names and sizes) but not yet byte-downloaded, because this sandbox cannot reach sciencebase.gov.",
-      "action": "Byte-level availability probes added to scripts/fetch_external_layers.py (SCIENCEBASE_CHECKS); the push-triggered runner workflow will record results in evidence/external_layer_inventory.json after merge. No holdout seed may be spent on these arms until the probes report AVAILABILITY_FETCHED."
+      "action": "PARTIALLY RESOLVED 2026-10-03T17:58:38Z: the merge-triggered runner byte-verified sb_slip_tendency_shapefile_full (35,912,323 B, AVAILABILITY_FETCHED) and sb_heat_flow_zip (130,154,244 B, AVAILABILITY_FETCHED) \u2014 H33-1 and H33-3 data gates are OPEN. The two MT conductance probes returned FILE_NOT_LISTED because ScienceBase nests the GeoTIFFs in facet extensions; the probe is now facet-aware and re-runs on the next merge. H33-2 remains gated."
     },
     {
       "id": "source-feed-legacy-history-shape",
