@@ -23,6 +23,11 @@ Behaviour
 * Labels without a pin are recorded as ``unpinned`` and are never treated as verified.
 * With ``--availability-only true`` the bytes are streamed but discarded after hashing, and a
   HEAD/GET status is recorded; nothing is written to ``--out`` except ``inventory.json``.
+* ``--derived <label>`` additionally keeps the bytes of one pinned ScienceBase release, verifies it
+  against ``registry/external_pins.json``, opens the vector layer(s) inside it, clips them to the
+  competition footprint and writes a small derived table plus a schema file under ``--out/commit/``.
+  The workflow copies that directory into ``docs/data/`` and commits it, which is how a session that
+  cannot reach sciencebase.gov still gets the release's in-footprint content.
 * This script never contacts drivendata.org; the competition Terms of Use prohibit automated access.
 """
 from __future__ import annotations
@@ -123,7 +128,10 @@ def fetch(url: str, keep: bool, out_dir: Path, label: str) -> dict:
     record: dict = {"url": url}
     try:
         with urllib.request.urlopen(request, timeout=300) as response:  # noqa: S310 - fixed https pins
-            record["http_status"] = int(getattr(response, "status", 200))
+            # urllib sets .status to None for non-HTTP schemes (file://, used by the tests) and
+            # older response objects omit it entirely; int(None) would raise, so default explicitly.
+            status = getattr(response, "status", None)
+            record["http_status"] = int(status) if isinstance(status, int) else 200
             record["content_type"] = response.headers.get("Content-Type", "")
             target = out_dir / f"{label}{Path(url).suffix or '.bin'}" if keep else None
             sink = target.open("wb") if target else None
@@ -193,232 +201,161 @@ def run_sciencebase_availability(out_dir: Path) -> dict:
 
 
 # ---------------------------------------------------------------------------------------------
-# Session 10 (2026-10-03): the four ScienceBase releases above came back AVAILABILITY_FETCHED with
-# a runner-recorded SHA-256, so the next step is not another availability probe but the actual
-# derivation of a layer the sandbox can use. H33-1 (kinematic reactivation favourability gate,
-# knowledge/18) needs the USGS slip/dilation tendency release of Siler (2022), DOI 10.5066/P9YL58W6.
-# The pin below is the SHA-256 recorded by this repository's own runner on 2026-10-03
-# (evidence/external_layer_inventory.json -> sciencebase_availability.sb_slip_tendency_shapefile_full),
-# so a later byte change is detected instead of silently absorbed.
-SLIP_TENDENCY_PIN = {
-    "label": "slip",
-    "doi": "10.5066/P9YL58W6",
-    "page": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
-    "filename": "Shapefile_Full Study.zip",
-    "url": "https://www.sciencebase.gov/catalog/file/get/6296974dd34ec53d276bb33d?f=__disk__33%2Fb0%2F91%2F33b091fae2403dcf2f1dd2f698f7368ffdcf000d",
-    "bytes": 35912323,
-    "sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
-    "hypothesis": "H33-1 kinematic reactivation favourability gate",
-}
-
-# Field-name candidates for slip tendency / dilation tendency, tried in order. The real schema is
-# discovered at run time and echoed into the inventory, so a schema change is visible, not guessed.
-TS_FIELD_CANDIDATES = ("slip_tend", "Ts", "TS", "sliptenden", "slip_tenden", "slip_t", "T_s")
-TD_FIELD_CANDIDATES = ("dil_tend", "Td", "TD", "dilat_tend", "dilation_t", "diltenden", "T_d")
+# Session 10 (2026-10-03): derived in-footprint clips of the pinned official vector releases.
+#
+# The availability probes above prove the bytes exist and hash them, but `--availability-only`
+# discards them, so no session could ever *use* the release. This step keeps one pinned release,
+# re-verifies it against registry/external_pins.json (the runner-recorded hashes), opens the vector
+# layers inside and writes a compact in-footprint table the repository can commit. Everything the
+# clipping does is covered by tests/test_external_clip.py.
+DERIVED_SPECS = [
+    {
+        "label": "sb_slip_tendency_shapefile_full",
+        "hypothesis": "H33-1 kinematic reactivation favourability gate",
+        "stem": "sb_slip_tendency_in_footprint",
+    },
+]
 
 
-def _pick_field(names: list[str], candidates: tuple[str, ...]) -> str | None:
-    lowered = {str(n).lower(): str(n) for n in names}
-    for cand in candidates:
-        if cand.lower() in lowered:
-            return lowered[cand.lower()]
-    for name in lowered.values():
-        low = name.lower()
-        if ("slip" in low or low.startswith("t_s")) and "tend" in low:
-            return name
-        if ("dil" in low or low.startswith("t_d")) and "tend" in low:
-            return name
-    return None
+def resolve_payload_format(payload: Path, pin_filename: str) -> tuple[Path, str]:
+    """Return a path whose extension matches the payload's real format, plus the format name.
 
+    ScienceBase download URLs carry no file suffix (``.../file/get/<item>?f=__disk__33%2Fb0%2F91%2F...``),
+    so `fetch()` names the payload ``.bin`` and GDAL then refuses to open it ("not recognized as
+    being in a supported file format"). That is exactly what the 2026-10-03T18:49:01Z runner run hit:
+    the pin matched, the bytes were correct, and the clip silently produced 0 records.
 
-def run_slip_tendency_derivation(out_dir: Path) -> dict:
-    """Download the pinned Siler (2022) release and derive 100 m Ts/Td grids on the contest grid.
-
-    Writes <out>/slip_tendency_grids.tar.gz holding two deflate uint8 GeoTIFFs and a sidecar JSON.
-    The grid is taken from a committed submission TIFF (docs/downloads/*.tif) so the runner needs no
-    login-walled data. Everything here is free, official and public; nothing contacts drivendata.org.
+    The format is decided by **magic bytes first**, then the pinned filename, then left alone. The
+    payload is only ever *copied* to a correctly-suffixed name, never mutated in place, so the hash
+    that was verified still refers to the original file on disk.
     """
-    import io
-    import tarfile
+    with payload.open("rb") as handle:
+        head = handle.read(4)
+    if head == b"PK\x03\x04":
+        fmt, suffix = "zip", ".zip"
+    elif head[:4] == b"\x1f\x8b\x08\x00"[:4] or head[:2] == b"\x1f\x8b":
+        fmt, suffix = "gzip", ".gz"
+    else:
+        suffix = Path(pin_filename or "").suffix.lower()
+        fmt = suffix.lstrip(".").lower() or "unknown"
+    if payload.suffix.lower() == suffix:
+        return payload, fmt
+    target = payload.with_name(payload.stem + suffix)
+    if not target.exists():
+        target.write_bytes(payload.read_bytes())
+    return target, fmt
+
+
+def _zip_vector_layers(zip_path: Path, work_dir: Path) -> list[Path]:
+    """Extract a zip and return every shapefile (.shp) or GeoPackage (.gpkg) layer inside it."""
     import zipfile
 
-    record: dict = {k: SLIP_TENDENCY_PIN[k] for k in ("doi", "page", "filename", "url", "hypothesis")}
-    got = fetch(SLIP_TENDENCY_PIN["url"], keep=True, out_dir=out_dir, label="slip")
-    record.update({k: got.get(k) for k in ("http_status", "bytes", "sha256", "status", "error", "path")})
-    record["pinned_bytes"] = SLIP_TENDENCY_PIN["bytes"]
-    record["pinned_sha256"] = SLIP_TENDENCY_PIN["sha256"]
-    record["pin_match"] = record.get("sha256") == SLIP_TENDENCY_PIN["sha256"]
-    if not record.get("pin_match"):
-        record["status"] = "PIN_MISMATCH_OR_UNREACHABLE"
-        return record
+    with zipfile.ZipFile(zip_path) as archive:
+        names = archive.namelist()
+        targets = [n for n in names if n.lower().endswith((".shp", ".gpkg"))]
+        if not targets:
+            return []
+        # a .shp needs its siblings (.dbf/.shx/.prj); extract everything next to them
+        wanted = set()
+        for n in targets:
+            stem = n.rsplit(".", 1)[0].lower()
+            wanted.update(m for m in names if m.rsplit(".", 1)[0].lower() == stem)
+        archive.extractall(work_dir, members=sorted(wanted))  # noqa: S202 - pinned official zip
+    out: list[Path] = []
+    for n in sorted(targets):
+        candidate = work_dir / n
+        if candidate.exists():
+            out.append(candidate)
+    return out
 
-    try:
-        import numpy as np
-        import pyogrio
-        import rasterio
-        from rasterio.transform import Affine
-        from scipy.spatial import cKDTree
-    except Exception as exc:  # pragma: no cover - runner environment only
-        record["status"] = "DEPENDENCY_MISSING"
-        record["error"] = f"{type(exc).__name__}: {exc}"
-        return record
 
-    # 1. Unzip and read every vector layer we can find.
-    zpath = Path(record["path"])
-    extracted = out_dir / "slip_unzip"
-    with zipfile.ZipFile(zpath) as zf:
-        zf.extractall(extracted)
-        record["zip_members"] = zf.namelist()[:40]
-    shp = sorted(extracted.rglob("*.shp"))
-    record["shapefiles_found"] = [str(p.relative_to(extracted)) for p in shp][:20]
-    if not shp:
-        record["status"] = "NO_SHAPEFILE_IN_ARCHIVE"
-        return record
+def build_sciencebase_derived(out_dir: Path, pins: dict[str, dict], only: str | None) -> dict:
+    """Download, hash-verify, clip and write derived in-footprint tables for the pinned releases."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+    from gems27 import external_clip  # noqa: PLC0415 - runner-only dependency (pyogrio)
 
-    frames = []
-    schema_seen = []
-    for path in shp:
+    commit_dir = out_dir / "commit"
+    commit_dir.mkdir(parents=True, exist_ok=True)
+    results: dict[str, dict] = {}
+    for spec in DERIVED_SPECS:
+        label = spec["label"]
+        if only and only != label:
+            continue
+        pin = pins.get(label)
+        record: dict = {"hypothesis": spec["hypothesis"]}
+        if not pin:
+            record["status"] = "NO_PIN"
+            results[label] = record
+            continue
+        got = fetch(pin["url"], keep=True, out_dir=out_dir, label=label)
+        record.update({k: got.get(k) for k in ("url", "http_status", "bytes", "sha256", "error")})
+        if got.get("status") != "FETCHED":
+            record["status"] = "UNREACHABLE"
+            results[label] = record
+            continue
+        if got["sha256"] != pin["sha256"]:
+            # a broken pin must be loud: the release changed, or the URL no longer points at it
+            record["status"] = "PIN_MISMATCH"
+            record["pinned_sha256"] = pin["sha256"]
+            record["pinned_bytes"] = pin["bytes"]
+            results[label] = record
+            continue
+        record["pin_match"] = True
+        work = out_dir / f"_work_{label}"
+        work.mkdir(parents=True, exist_ok=True)
+        payload = Path(got["path"])
+        usable, fmt = resolve_payload_format(payload, pin.get("filename", ""))
+        record["payload_format"] = fmt
+        record["payload_used"] = usable.name
         try:
-            info = pyogrio.read_info(path)
-            fields = [str(f) for f in info.get("fields", [])]
-            schema_seen.append({"layer": path.stem, "crs": str(info.get("crs")), "fields": fields,
-                                "features": info.get("features")})
-            gdf = pyogrio.read_dataframe(path)
-        except Exception as exc:
-            schema_seen.append({"layer": path.stem, "error": f"{type(exc).__name__}: {exc}"})
+            layers = _zip_vector_layers(usable, work) if fmt == "zip" else [usable]
+        except Exception as error:  # noqa: BLE001 - record and continue, never fail the whole job
+            record["status"] = "ARCHIVE_UNREADABLE"
+            record["error"] = f"{type(error).__name__}: {error}"
+            results[label] = record
             continue
-        frames.append((path.stem, gdf))
-    record["layers"] = schema_seen
-    record["crs_listed"] = [s.get("crs") for s in schema_seen if "crs" in s]
-    if not frames:
-        record["status"] = "NO_LAYER_READABLE"
-        return record
-
-    # 2. Locate Ts / Td columns across all layers.
-    ts_col = td_col = None
-    src_layer = None
-    for stem, gdf in frames:
-        cols = [str(c) for c in gdf.columns]
-        ts_col = ts_col or _pick_field(cols, TS_FIELD_CANDIDATES)
-        td_col = td_col or _pick_field(cols, TD_FIELD_CANDIDATES)
-        if ts_col and td_col and src_layer is None:
-            src_layer = (stem, gdf)
-    record["ts_field"] = ts_col
-    record["td_field"] = td_col
-    record["source_layer"] = src_layer[0] if src_layer else None
-    if ts_col is None or td_col is None or src_layer is None:
-        record["status"] = "FIELDS_NOT_IDENTIFIED"
-        return record
-
-    stem, gdf = src_layer
-    gdf = gdf[[c for c in gdf.columns if c in (ts_col, td_col, "geometry")]].dropna(subset=[ts_col])
-    record["features_used"] = int(len(gdf))
-
-    # 3. Competition grid from a committed submission TIFF (no login-walled input required).
-    ref = sorted((Path(__file__).resolve().parents[1] / "docs" / "downloads").glob("*-nan.tif"))
-    if not ref:
-        record["status"] = "NO_REFERENCE_GRID"
-        return record
-    with rasterio.open(ref[0]) as ds:
-        profile = ds.profile.copy()
-        transform: Affine = ds.transform
-        crs = ds.crs
-        shape = (ds.height, ds.width)
-        footprint = np.isfinite(ds.read(1))
-    record["reference_grid"] = {"file": ref[0].name, "shape": list(shape), "crs": str(crs),
-                                "transform": [transform.a, transform.b, transform.c,
-                                              transform.d, transform.e, transform.f]}
-    record["footprint_px"] = int(footprint.sum())
-
-    # 4. Densify every polyline to ~100 m in the grid CRS and build a KD-tree of vertices.
-    try:
-        gdf = gdf.to_crs(crs)
-    except Exception as exc:
-        record["status"] = "REPROJECTION_FAILED"
-        record["error"] = f"{type(exc).__name__}: {exc}"
-        return record
-    pts, ts_vals, td_vals = [], [], []
-    for geom, ts, td in zip(gdf.geometry, gdf[ts_col], gdf[td_col]):
-        if geom is None or geom.is_empty:
+        if not layers:
+            record["status"] = "NO_VECTOR_LAYER"
+            results[label] = record
             continue
-        geoms = getattr(geom, "geoms", [geom])
-        for part in geoms:
-            coords = np.asarray(part.coords, dtype=float)
-            if coords.ndim != 2 or len(coords) < 2:
+        all_records, all_schemas = [], {}
+        for layer in layers:
+            try:
+                recs, schema = external_clip.clip_and_clip_report(str(layer), vertex_step_m=200.0)
+            except Exception as error:  # noqa: BLE001 - one unreadable layer must not sink the job
+                all_schemas[layer.name] = {"status": "LAYER_UNREADABLE",
+                                           "error": f"{type(error).__name__}: {error}"}
                 continue
-            seg = np.hypot(np.diff(coords[:, 0]), np.diff(coords[:, 1]))
-            keep = [coords[0:1]]
-            for (x0, y0), (x1, y1), length in zip(coords[:-1], coords[1:], seg):
-                n = max(1, int(np.ceil(length / 100.0)))
-                t = np.linspace(0.0, 1.0, n + 1)[1:]
-                keep.append(np.column_stack([x0 + (x1 - x0) * t, y0 + (y1 - y0) * t]))
-            dense = np.vstack(keep)
-            pts.append(dense)
-            ts_vals.append(np.full(len(dense), float(ts), dtype=np.float32))
-            td_vals.append(np.full(len(dense), float(td), dtype=np.float32))
-    if not pts:
-        record["status"] = "NO_GEOMETRY_VERTICES"
-        return record
-    pts = np.vstack(pts)
-    ts_vals = np.concatenate(ts_vals)
-    td_vals = np.concatenate(td_vals)
-    record["densified_vertices"] = int(len(pts))
-
-    tree = cKDTree(pts)
-    rows, cols = np.nonzero(footprint)
-    xs = transform.c + (cols + 0.5) * transform.a
-    ys = transform.f + (rows + 0.5) * transform.e
-    dist, idx = tree.query(np.column_stack([xs, ys]), k=1, workers=-1)
-    record["nearest_vertex_distance_m"] = {
-        "p10": float(np.percentile(dist, 10)), "p50": float(np.percentile(dist, 50)),
-        "p90": float(np.percentile(dist, 90)), "max": float(dist.max()),
-    }
-
-    def to_grid(vals: np.ndarray) -> np.ndarray:
-        grid = np.zeros(shape, dtype=np.float32)
-        grid[rows, cols] = vals[idx]
-        return grid
-
-    ts_grid, td_grid = to_grid(ts_vals), to_grid(td_vals)
-
-    def quantise(grid: np.ndarray) -> tuple[np.ndarray, float, float]:
-        finite = np.isfinite(grid)
-        lo, hi = float(np.percentile(grid[finite], 1)), float(np.percentile(grid[finite], 99))
-        if hi <= lo:
-            hi = lo + 1.0
-        q = np.clip((grid - lo) / (hi - lo), 0.0, 1.0)
-        u8 = np.where(finite, np.round(q * 254.0) + 1.0, 0.0).astype(np.uint8)
-        return u8, lo, hi
-
-    ts_u8, ts_lo, ts_hi = quantise(ts_grid)
-    td_u8, td_lo, td_hi = quantise(td_grid)
-
-    profile.update(driver="GTiff", dtype="uint8", count=1, compress="deflate", predictor=2,
-                   nodata=0, crs=crs, transform=transform, height=shape[0], width=shape[1])
-    paths = {}
-    for name, arr, lo, hi in (("slip_tendency_ts_u8.tif", ts_u8, ts_lo, ts_hi),
-                              ("slip_tendency_td_u8.tif", td_u8, td_lo, td_hi)):
-        target = out_dir / name
-        with rasterio.open(target, "w", **profile) as ds:
-            ds.write(arr, 1)
-        paths[name] = {"bytes": target.stat().st_size, "p1_value": lo, "p99_value": hi,
-                       "footprint_positive": int((arr > 0).sum())}
-    sidecar = {"schema": 1, "generated_utc": record.get("generated_utc"), "source": SLIP_TENDENCY_PIN,
-               "reference_grid": record["reference_grid"], "quantisation": "uint8 0=nodata, 1..255 = p1..p99 linear",
-               "files": paths, "sha256_pin_match": True}
-    (out_dir / "slip_tendency_sidecar.json").write_text(json.dumps(sidecar, indent=2), encoding="utf-8")
-
-    tar_path = out_dir / "slip_tendency_grids.tar.gz"
-    with tarfile.open(tar_path, "w:gz") as tar:
-        for name in list(paths) + ["slip_tendency_sidecar.json"]:
-            tar.add(out_dir / name, arcname=name)
-        tar.add(extracted, arcname="slip_source_shapefiles", recursive=True)
-    record["derived_tar_gz"] = {"path": str(tar_path), "bytes": tar_path.stat().st_size}
-    record["grids"] = paths
-    record["status"] = "DERIVED"
-    print(json.dumps({k: record.get(k) for k in ("status", "pin_match", "ts_field", "td_field",
-                                                 "features_used", "densified_vertices", "grids")}, default=str))
-    return record
+            for r in recs:
+                r["source_layer"] = layer.name
+            all_records.extend(recs)
+            all_schemas[layer.name] = schema
+        report = external_clip.write_derived(
+            all_records, {"layers": all_schemas},
+            str(commit_dir / f"{spec['stem']}.csv"),
+            str(commit_dir / f"{spec['stem']}.json"),
+        )
+        unreadable = [name for name, s in all_schemas.items()
+                      if isinstance(s, dict) and s.get("status") == "LAYER_UNREADABLE"]
+        if unreadable:
+            # GDAL could not open the layer: the derived table is empty because of a format
+            # problem, not because the footprint is empty. That must not look like success.
+            record["status"] = "LAYER_UNREADABLE"
+            record["unreadable_layers"] = unreadable
+            record["errors"] = {n: all_schemas[n].get("error") for n in unreadable}
+        elif not all_records:
+            record["status"] = "DERIVED_EMPTY"
+            record["note"] = ("the release parsed but no feature intersects the competition bbox; "
+                              "check the source CRS and the extent before trusting an empty clip")
+        else:
+            record["status"] = "DERIVED_WRITTEN"
+        record["layers_found"] = [str(x.name) for x in layers]
+        record["derived"] = report
+        record["committed_files"] = [f"docs/data/{spec['stem']}.csv", f"docs/data/{spec['stem']}.json"]
+        results[label] = record
+        print(json.dumps({label: {k: record.get(k)
+                                  for k in ("status", "pin_match", "payload_format", "derived")}}))
+    return results
 
 
 def main() -> int:
@@ -429,6 +366,11 @@ def main() -> int:
     parser.add_argument("--pins", default="/tmp/gdr/pins.json")
     parser.add_argument("--skip-sciencebase", default="false",
                         help="skip the unpinned H33 ScienceBase availability probes")
+    parser.add_argument("--derived", default="",
+                        help="also download, hash-verify and clip one pinned release to the "
+                             "footprint ('all' or a single label from DERIVED_SPECS)")
+    parser.add_argument("--external-pins", default="",
+                        help="registry/external_pins.json with the runner-recorded ScienceBase hashes")
     args = parser.parse_args()
 
     out_dir = Path(args.out)
@@ -479,10 +421,14 @@ def main() -> int:
                            if isinstance(v, dict) and v.get("pin_match") is None),
     }
 
-    wanted = [item.strip() for item in args.datasets.split(",") if item.strip()]
-    if "slip" in wanted or "all" in wanted:
-        inventory["slip_tendency"] = run_slip_tendency_derivation(out_dir)
-        inventory["summary"]["slip_tendency_status"] = inventory["slip_tendency"].get("status")
+    if args.derived:
+        ext_pins = load_pins(Path(args.external_pins)) if args.external_pins else {}
+        inventory["sciencebase_derived"] = build_sciencebase_derived(
+            out_dir, ext_pins, None if args.derived.strip().lower() == "all" else args.derived.strip()
+        )
+        inventory["summary"]["sciencebase_derived_written"] = sum(
+            1 for row in inventory["sciencebase_derived"].values()
+            if row.get("status") == "DERIVED_WRITTEN")
 
     if str(args.skip_sciencebase).lower() not in {"1", "true", "yes"}:
         sb = run_sciencebase_availability(out_dir)

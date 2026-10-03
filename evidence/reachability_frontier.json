@@ -1,0 +1,824 @@
+{
+ "generated_utc": "2026-10-03T18:17:52Z",
+ "method": "Closed-form inversion of the official DTI, identity checked against src/gems27/metric.dti_binary before use",
+ "identity_check": {
+  "n_cases": 23,
+  "max_abs_residual": 2.220446049250313e-16,
+  "tolerance": 1e-08,
+  "pass": true,
+  "closure_fpw_equals_n_minus_mpw": true,
+  "cases": [
+   {
+    "case": 1,
+    "n_truth": 62,
+    "n_emitted": 0,
+    "dti_exact": 0.0,
+    "dti_closed_form": 0.0,
+    "residual": 0.0,
+    "rho": 0.0,
+    "closure_fpw": 0.0,
+    "n_minus_mpw": 0.0
+   },
+   {
+    "case": 2,
+    "n_truth": 76,
+    "n_emitted": 76,
+    "dti_exact": 0.9999999986842106,
+    "dti_closed_form": 0.9999999986842106,
+    "residual": 0.0,
+    "rho": 1.0,
+    "closure_fpw": 0.0,
+    "n_minus_mpw": 0.0
+   },
+   {
+    "case": 3,
+    "n_truth": 1,
+    "n_emitted": 1,
+    "dti_exact": 0.9999999000000099,
+    "dti_closed_form": 0.9999999000000099,
+    "residual": 0.0,
+    "rho": 1.0,
+    "closure_fpw": 0.0,
+    "n_minus_mpw": 0.0
+   },
+   {
+    "case": 4,
+    "n_truth": 26,
+    "n_emitted": 9,
+    "dti_exact": 0.7253384567766801,
+    "dti_closed_form": 0.72533845677668,
+    "residual": 1.1102230246251565e-16,
+    "rho": 0.4490158958725625,
+    "closure_fpw": 1.0,
+    "n_minus_mpw": 1.0
+   },
+   {
+    "case": 5,
+    "n_truth": 62,
+    "n_emitted": 21,
+    "dti_exact": 0.7026963582462523,
+    "dti_closed_form": 0.7026963582462523,
+    "residual": 0.0,
+    "rho": 0.4912007105219943,
+    "closure_fpw": 1.0,
+    "n_minus_mpw": 1.0
+   },
+   {
+    "case": 6,
+    "n_truth": 36,
+    "n_emitted": 13,
+    "dti_exact": 0.7247486597713472,
+    "dti_closed_form": 0.7247486597713472,
+    "residual": 0.0,
+    "rho": 0.48818841956948317,
+    "closure_fpw": 1.0,
+    "n_minus_mpw": 1.0
+   }
+  ]
+ },
+ "inputs": {
+  "inversion_file": "/home/user/GEMSDOE28/evidence/live_inversion.json",
+  "G_used_px": 12225.896194356133,
+  "G_calibration": {
+   "label": "13GEMSDOE r13-lattice-s5 (nan-outside)",
+   "score": 0.0904,
+   "n_scored": 204504,
+   "credit_per_dot_for_uniform_truth": 0.3748109386598507,
+   "kernel_area_px": 9.380297810508182,
+   "implied_abs_G": 12225.896194356133,
+   "note": "c is exact for any truth set uniformly spread over the footprint; it is the only calibration that does not assume where the truth is."
+  },
+  "n_corpus": 24,
+  "footprint_px": 5167373,
+  "score_provenance": "Owner-reported live scores and one public leaderboard reading; not organizer receipts. Used as relative calibration only."
+ },
+ "current_state": {
+  "best_owner_anchor": "25GEMSDOE dotted-h19-5-d2-8 (e56ea318af89)",
+  "score": 0.26,
+  "emitted_px": 44090,
+  "credit_TPw": 4791.0488856019765,
+  "credit_fraction_of_G": 0.39187711145573756,
+  "average_credit_per_emitted_px": 0.10866520493540432,
+  "rho": 1.1790900709983112,
+  "emitted_fraction_of_footprint": 0.00853238192791579
+ },
+ "frontier": [
+  {
+   "target": 0.26,
+   "inclusion_threshold": 0.054852320675105495,
+   "by_budget": {
+    "20000": {
+     "credit_required_rho1": 3582.986408426076,
+     "credit_required_at_anchor_rho": 3549.927060581521,
+     "credit_required_fraction_of_G": 0.29306533864405765,
+     "credit_per_emitted_px_required": 0.1791493204213038
+    },
+    "30000": {
+     "credit_required_rho1": 4102.986408426076,
+     "credit_required_at_anchor_rho": 4065.1291465177833,
+     "credit_required_fraction_of_G": 0.33559800796608646,
+     "credit_per_emitted_px_required": 0.13676621361420255
+    },
+    "40199": {
+     "credit_required_rho1": 4633.334408426076,
+     "credit_required_at_anchor_rho": 4590.583753964177,
+     "credit_required_fraction_of_G": 0.37897707740762365,
+     "credit_per_emitted_px_required": 0.11525994199920586
+    },
+    "44090": {
+     "credit_required_rho1": 4835.6664084260765,
+     "credit_required_at_anchor_rho": 4791.0488856019765,
+     "credit_required_fraction_of_G": 0.39552653904082513,
+     "credit_per_emitted_px_required": 0.10967716961728456
+    },
+    "50000": {
+     "credit_required_rho1": 5142.986408426077,
+     "credit_required_at_anchor_rho": 5095.5333183903085,
+     "credit_required_fraction_of_G": 0.4206633466101442,
+     "credit_per_emitted_px_required": 0.10285972816852154
+    },
+    "55000": {
+     "credit_required_rho1": 5402.986408426077,
+     "credit_required_at_anchor_rho": 5353.1343613584395,
+     "credit_required_fraction_of_G": 0.4419296812711586,
+     "credit_per_emitted_px_required": 0.09823611651683777
+    },
+    "60069": {
+     "credit_required_rho1": 5666.574408426077,
+     "credit_required_at_anchor_rho": 5614.29029871953,
+     "credit_required_fraction_of_G": 0.463489491350495,
+     "credit_per_emitted_px_required": 0.0943344222215465
+    },
+    "70000": {
+     "credit_required_rho1": 6182.986408426077,
+     "credit_required_at_anchor_rho": 6125.937490262833,
+     "credit_required_fraction_of_G": 0.5057286852542019,
+     "credit_per_emitted_px_required": 0.08832837726322967
+    },
+    "90000": {
+     "credit_required_rho1": 7222.986408426077,
+     "credit_required_at_anchor_rho": 7156.341662135357,
+     "credit_required_fraction_of_G": 0.5907940238982595,
+     "credit_per_emitted_px_required": 0.08025540453806752
+    },
+    "121131": {
+     "credit_required_rho1": 8841.798408426075,
+     "credit_required_at_anchor_rho": 8760.217275863533,
+     "credit_required_fraction_of_G": 0.7232024767646672,
+     "credit_per_emitted_px_required": 0.07299368789513894
+    }
+   }
+  },
+  {
+   "target": 0.2665,
+   "inclusion_threshold": 0.056300834477659246,
+   "by_budget": {
+    "20000": {
+     "credit_required_rho1": 3672.561068636728,
+     "credit_required_at_anchor_rho": 3637.8361012791406,
+     "credit_required_fraction_of_G": 0.3003919721101591,
+     "credit_per_emitted_px_required": 0.1836280534318364
+    },
+    "30000": {
+     "credit_required_rho1": 4205.561068636728,
+     "credit_required_at_anchor_rho": 4165.796455305748,
+     "credit_required_fraction_of_G": 0.34398795816523864,
+     "credit_per_emitted_px_required": 0.1401853689545576
+    },
+    "40199": {
+     "credit_required_rho1": 4749.167768636728,
+     "credit_required_at_anchor_rho": 4704.263220377485,
+     "credit_required_fraction_of_G": 0.3884515043428143,
+     "credit_per_emitted_px_required": 0.11814144054918602
+    },
+    "44090": {
+     "credit_required_rho1": 4956.558068636728,
+     "credit_required_at_anchor_rho": 4909.6925941292375,
+     "credit_required_fraction_of_G": 0.40541470251684575,
+     "credit_per_emitted_px_required": 0.11241909885771668
+    },
+    "50000": {
+     "credit_required_rho1": 5271.561068636729,
+     "credit_required_at_anchor_rho": 5221.717163358963,
+     "credit_required_fraction_of_G": 0.4311799302753978,
+     "credit_per_emitted_px_required": 0.10543122137273458
+    },
+    "55000": {
+     "credit_required_rho1": 5538.061068636729,
+     "credit_required_at_anchor_rho": 5485.697340372267,
+     "credit_required_fraction_of_G": 0.45297792330293757,
+     "credit_per_emitted_px_required": 0.10069201942975871
+    },
+    "60069": {
+     "credit_required_rho1": 5808.238768636728,
+     "credit_required_at_anchor_rho": 5753.320443828353,
+     "credit_required_fraction_of_G": 0.4750767286342573,
+     "credit_per_emitted_px_required": 0.09669278277708515
+    },
+    "70000": {
+     "credit_required_rho1": 6337.561068636729,
+     "credit_required_at_anchor_rho": 6277.637871412177,
+     "credit_required_fraction_of_G": 0.5183719023855569,
+     "credit_per_emitted_px_required": 0.09053658669481042
+    },
+    "90000": {
+     "credit_required_rho1": 7403.561068636729,
+     "credit_required_at_anchor_rho": 7333.558579465392,
+     "credit_required_fraction_of_G": 0.6055638744957159,
+     "credit_per_emitted_px_required": 0.08226178965151922
+    },
+    "121131": {
+     "credit_required_rho1": 9062.843368636728,
+     "credit_required_at_anchor_rho": 8977.151957585622,
+     "credit_required_fraction_of_G": 0.741282538683784,
+     "credit_per_emitted_px_required": 0.07481853009251742
+    }
+   }
+  },
+  {
+   "target": 0.2701,
+   "inclusion_threshold": 0.05710480137000783,
+   "by_budget": {
+    "20000": {
+     "credit_required_rho1": 3722.171649676474,
+     "credit_required_at_anchor_rho": 3686.506740629976,
+     "credit_required_fraction_of_G": 0.3044497998759999,
+     "credit_per_emitted_px_required": 0.1861085824838237
+    },
+    "30000": {
+     "credit_required_rho1": 4262.371649676474,
+     "credit_required_at_anchor_rho": 4221.530680609048,
+     "credit_required_fraction_of_G": 0.34863469981399986,
+     "credit_per_emitted_px_required": 0.1420790549892158
+    },
+    "40199": {
+     "credit_required_rho1": 4813.321629676474,
+     "credit_required_at_anchor_rho": 4767.201596993706,
+     "credit_required_fraction_of_G": 0.393698879260766,
+     "credit_per_emitted_px_required": 0.11973734743840578
+    },
+    "44090": {
+     "credit_required_rho1": 5023.513449676474,
+     "credit_required_at_anchor_rho": 4975.379412039563,
+     "credit_required_fraction_of_G": 0.4108912238266418,
+     "credit_per_emitted_px_required": 0.1139377058216483
+    },
+    "50000": {
+     "credit_required_rho1": 5342.771649676474,
+     "credit_required_at_anchor_rho": 5291.578560567195,
+     "credit_required_fraction_of_G": 0.43700449968999977,
+     "credit_per_emitted_px_required": 0.10685543299352948
+    },
+    "55000": {
+     "credit_required_rho1": 5612.871649676475,
+     "credit_required_at_anchor_rho": 5559.090530556732,
+     "credit_required_fraction_of_G": 0.4590969496589998,
+     "credit_per_emitted_px_required": 0.10205221181229954
+    },
+    "60069": {
+     "credit_required_rho1": 5886.699029676474,
+     "credit_required_at_anchor_rho": 5830.294165732124,
+     "credit_required_fraction_of_G": 0.4814942754375719,
+     "credit_per_emitted_px_required": 0.09799895170015273
+    },
+    "70000": {
+     "credit_required_rho1": 6423.171649676474,
+     "credit_required_at_anchor_rho": 6361.626440525341,
+     "credit_required_fraction_of_G": 0.5253742995659996,
+     "credit_per_emitted_px_required": 0.0917595949953782
+    },
+    "90000": {
+     "credit_required_rho1": 7503.571649676474,
+     "credit_required_at_anchor_rho": 7431.6743204834875,
+     "credit_required_fraction_of_G": 0.6137440994419995,
+     "credit_per_emitted_px_required": 0.0833730183297386
+    },
+    "121131": {
+     "credit_required_rho1": 9185.268269676473,
+     "credit_required_at_anchor_rho": 9097.257348032339,
+     "credit_required_fraction_of_G": 0.751296111438987,
+     "credit_per_emitted_px_required": 0.07582921192491165
+    }
+   }
+  },
+  {
+   "target": 0.28,
+   "inclusion_threshold": 0.05932203389830509,
+   "by_budget": {
+    "20000": {
+     "credit_required_rho1": 3858.6007475357746,
+     "credit_required_at_anchor_rho": 3820.286921994515,
+     "credit_required_fraction_of_G": 0.31560882623206216,
+     "credit_per_emitted_px_required": 0.19293003737678874
+    },
+    "30000": {
+     "credit_required_rho1": 4418.600747535775,
+     "credit_required_at_anchor_rho": 4374.726423848443,
+     "credit_required_fraction_of_G": 0.36141323934809316,
+     "credit_per_emitted_px_required": 0.14728669158452581
+    },
+    "40199": {
+     "credit_required_rho1": 4989.744747535775,
+     "credit_required_at_anchor_rho": 4940.1992717892645,
+     "credit_required_fraction_of_G": 0.40812916028513324,
+     "credit_per_emitted_px_required": 0.12412609138376017
+    },
+    "44090": {
+     "credit_required_rho1": 5207.6407475357755,
+     "credit_required_at_anchor_rho": 5155.931681960628,
+     "credit_required_fraction_of_G": 0.425951657428581,
+     "credit_per_emitted_px_required": 0.11811387497246031
+    },
+    "50000": {
+     "credit_required_rho1": 5538.600747535776,
+     "credit_required_at_anchor_rho": 5483.6054275563,
+     "credit_required_fraction_of_G": 0.4530220655801553,
+     "credit_per_emitted_px_required": 0.11077201495071551
+    },
+    "55000": {
+     "credit_required_rho1": 5818.600747535776,
+     "credit_required_at_anchor_rho": 5760.825178483264,
+     "credit_required_fraction_of_G": 0.47592427213817085,
+     "credit_per_emitted_px_required": 0.10579274086428683
+    },
+    "60069": {
+     "credit_required_rho1": 6102.464747535775,
+     "credit_required_at_anchor_rho": 6041.870561973019,
+     "credit_required_fraction_of_G": 0.49914252914668694,
+     "credit_per_emitted_px_required": 0.10159091623858854
+    },
+    "70000": {
+     "credit_required_rho1": 6658.600747535776,
+     "credit_required_at_anchor_rho": 6592.484431264155,
+     "credit_required_fraction_of_G": 0.5446308918122174,
+     "credit_per_emitted_px_required": 0.09512286782193966
+    },
+    "90000": {
+     "credit_required_rho1": 7778.600747535776,
+     "credit_required_at_anchor_rho": 7701.363434972011,
+     "credit_required_fraction_of_G": 0.6362397180442795,
+     "credit_per_emitted_px_required": 0.08642889719484195
+    },
+    "121131": {
+     "credit_required_rho1": 9521.936747535774,
+     "credit_required_at_anchor_rho": 9427.389048193472,
+     "credit_required_fraction_of_G": 0.7788334365157955,
+     "credit_per_emitted_px_required": 0.0786085869639958
+    }
+   }
+  },
+  {
+   "target": 0.3,
+   "inclusion_threshold": 0.06382978723404255,
+   "by_budget": {
+    "20000": {
+     "credit_required_rho1": 4134.215086645472,
+     "credit_required_at_anchor_rho": 4090.26355125768,
+     "credit_required_fraction_of_G": 0.3381523138200665,
+     "credit_per_emitted_px_required": 0.20671075433227362
+    },
+    "30000": {
+     "credit_required_rho1": 4734.215086645472,
+     "credit_required_at_anchor_rho": 4683.8848504208845,
+     "credit_required_fraction_of_G": 0.38722847073009975,
+     "credit_per_emitted_px_required": 0.15780716955484908
+    },
+    "40199": {
+     "credit_required_rho1": 5346.155086645473,
+     "credit_required_at_anchor_rho": 5289.3192134374385,
+     "credit_required_fraction_of_G": 0.4372812431626427,
+     "credit_per_emitted_px_required": 0.13299224076831445
+    },
+    "44090": {
+     "credit_required_rho1": 5579.615086645473,
+     "credit_required_at_anchor_rho": 5520.297260941841,
+     "credit_required_fraction_of_G": 0.4563767758163367,
+     "credit_per_emitted_px_required": 0.12655058032763603
+    },
+    "50000": {
+     "credit_required_rho1": 5934.215086645473,
+     "credit_required_at_anchor_rho": 5871.127448747296,
+     "credit_required_fraction_of_G": 0.48538078455016637,
+     "credit_per_emitted_px_required": 0.11868430173290946
+    },
+    "55000": {
+     "credit_required_rho1": 6234.215086645473,
+     "credit_required_at_anchor_rho": 6167.938098328898,
+     "credit_required_fraction_of_G": 0.509918863005183,
+     "credit_per_emitted_px_required": 0.11334936521173587
+    },
+    "60069": {
+     "credit_required_rho1": 6538.3550866454725,
+     "credit_required_at_anchor_rho": 6468.844734874727,
+     "credit_required_fraction_of_G": 0.5347955669428788,
+     "credit_per_emitted_px_required": 0.10884741025563056
+    },
+    "70000": {
+     "credit_required_rho1": 7134.215086645473,
+     "credit_required_at_anchor_rho": 7058.370047073706,
+     "credit_required_fraction_of_G": 0.5835330983702328,
+     "credit_per_emitted_px_required": 0.10191735838064962
+    },
+    "90000": {
+     "credit_required_rho1": 8334.215086645472,
+     "credit_required_at_anchor_rho": 8245.612645400115,
+     "credit_required_fraction_of_G": 0.6816854121902993,
+     "credit_per_emitted_px_required": 0.09260238985161635
+    },
+    "121131": {
+     "credit_required_rho1": 10202.075086645471,
+     "credit_required_at_anchor_rho": 10093.615111825087,
+     "credit_required_fraction_of_G": 0.8344643962669237,
+     "credit_per_emitted_px_required": 0.08422348603285262
+    }
+   }
+  },
+  {
+   "target": 0.3195,
+   "inclusion_threshold": 0.06826193782715521,
+   "by_budget": {
+    "20000": {
+     "credit_required_rho1": 4402.939067277428,
+     "credit_required_at_anchor_rho": 4353.122561549109,
+     "credit_required_fraction_of_G": 0.3601322142183708,
+     "credit_per_emitted_px_required": 0.2201469533638714
+    },
+    "30000": {
+     "credit_required_rho1": 5041.939067277428,
+     "credit_required_at_anchor_rho": 4984.892675631092,
+     "credit_required_fraction_of_G": 0.41239832132755627,
+     "credit_per_emitted_px_required": 0.16806463557591428
+    },
+    "40199": {
+     "credit_required_rho1": 5693.6551672774285,
+     "credit_required_at_anchor_rho": 5629.235014983307,
+     "credit_required_fraction_of_G": 0.4657045239682145,
+     "credit_per_emitted_px_required": 0.1416367364182549
+    },
+    "44090": {
+     "credit_required_rho1": 5942.2900672774285,
+     "credit_required_at_anchor_rho": 5875.056766372607,
+     "credit_required_fraction_of_G": 0.48604126624439853,
+     "credit_per_emitted_px_required": 0.13477636804893237
+    },
+    "50000": {
+     "credit_required_rho1": 6319.939067277429,
+     "credit_required_at_anchor_rho": 6248.432903795059,
+     "credit_required_fraction_of_G": 0.5169305355459272,
+     "credit_per_emitted_px_required": 0.12639878134554858
+    },
+    "55000": {
+     "credit_required_rho1": 6639.439067277429,
+     "credit_required_at_anchor_rho": 6564.317960836051,
+     "credit_required_fraction_of_G": 0.5430635891005199,
+     "credit_per_emitted_px_required": 0.1207170739504987
+    },
+    "60069": {
+     "credit_required_rho1": 6963.348167277429,
+     "credit_required_at_anchor_rho": 6884.562231664208,
+     "credit_required_fraction_of_G": 0.569557278794166,
+     "credit_per_emitted_px_required": 0.11592249192224656
+    },
+    "70000": {
+     "credit_required_rho1": 7597.939067277429,
+     "credit_required_at_anchor_rho": 7511.9731319590255,
+     "credit_required_fraction_of_G": 0.6214627497642979,
+     "credit_per_emitted_px_required": 0.10854198667539185
+    },
+    "90000": {
+     "credit_required_rho1": 8875.939067277428,
+     "credit_required_at_anchor_rho": 8775.51336012299,
+     "credit_required_fraction_of_G": 0.7259949639826687,
+     "credit_per_emitted_px_required": 0.09862154519197142
+    },
+    "121131": {
+     "credit_required_rho1": 10865.209967277427,
+     "credit_required_at_anchor_rho": 10742.276902271611,
+     "credit_required_fraction_of_G": 0.8887045820242738,
+     "credit_per_emitted_px_required": 0.08969801262498805
+    }
+   }
+  }
+ ],
+ "add_arm_frontier": {
+  "0.2665": {
+   "target": 0.2665,
+   "credit_required_at_current_budget": 4956.558068636728,
+   "credit_gap": 165.5091830347519,
+   "credit_gap_fraction_of_G": 0.013537591061108164,
+   "inclusion_threshold": 0.056300834477659246,
+   "dots_needed_by_marginal_efficiency": {
+    "0.07": {
+     "dots_needed": 9910.729523039037,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.10": {
+     "dots_needed": 3544.093855133874,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.15": {
+     "dots_needed": 1711.5737645786137,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.20": {
+     "dots_needed": 1128.2152899437758,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.30": {
+     "dots_needed": 670.8925133147626,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.40": {
+     "dots_needed": 477.38443332781054,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.50": {
+     "dots_needed": 370.51529669745224,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.75": {
+     "dots_needed": 237.56162341718374,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "1.00": {
+     "dots_needed": 174.82748815332408,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    }
+   }
+  },
+  "0.2701": {
+   "target": 0.2701,
+   "credit_required_at_current_budget": 5023.513449676474,
+   "credit_gap": 232.4645640744975,
+   "credit_gap_fraction_of_G": 0.019014112370904196,
+   "inclusion_threshold": 0.05710480137000783,
+   "dots_needed_by_marginal_efficiency": {
+    "0.07": {
+     "dots_needed": 14547.219278754535,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.10": {
+     "dots_needed": 5055.775643203512,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.15": {
+     "dots_needed": 2422.0104612887844,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.20": {
+     "dots_needed": 1592.4411842341246,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.30": {
+     "dots_needed": 945.0547364602712,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.40": {
+     "dots_needed": 671.9017402002934,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.50": {
+     "dots_needed": 521.2443698697195,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.75": {
+     "dots_needed": 334.0104084521071,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "1.00": {
+     "dots_needed": 245.73940683153714,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    }
+   }
+  },
+  "0.2800": {
+   "target": 0.28,
+   "credit_required_at_current_budget": 5207.6407475357755,
+   "credit_gap": 416.591861933799,
+   "credit_gap_fraction_of_G": 0.03407454597284338,
+   "inclusion_threshold": 0.05932203389830509,
+   "dots_needed_by_marginal_efficiency": {
+    "0.07": {
+     "dots_needed": 29756.561566699933,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.10": {
+     "dots_needed": 9467.996862131797,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.15": {
+     "dots_needed": 4431.828318444671,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.20": {
+     "dots_needed": 2892.9990412069374,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.30": {
+     "dots_needed": 1707.343696449996,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.40": {
+     "dots_needed": 1211.022854458718,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.50": {
+     "dots_needed": 938.2699593103581,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.75": {
+     "dots_needed": 600.276458117866,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "1.00": {
+     "dots_needed": 441.3049384891939,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    }
+   }
+  },
+  "0.3195": {
+   "target": 0.3195,
+   "credit_required_at_current_budget": 5942.2900672774285,
+   "credit_gap": 1151.241181675452,
+   "credit_gap_fraction_of_G": 0.09416415478866097,
+   "inclusion_threshold": 0.06826193782715521,
+   "dots_needed_by_marginal_efficiency": {
+    "0.07": {
+     "dots_needed": 188728.062569746,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.10": {
+     "dots_needed": 31890.33744253329,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.15": {
+     "dots_needed": 13370.977719807806,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.20": {
+     "dots_needed": 8458.788991002586,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.30": {
+     "dots_needed": 4876.074467070954,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.40": {
+     "dots_needed": 3425.293608079298,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.50": {
+     "dots_needed": 2639.8559543119745,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "0.75": {
+     "dots_needed": 1677.949543325247,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    },
+    "1.00": {
+     "dots_needed": 1229.8271356430423,
+     "reachable_by_adding_dots": true,
+     "note": "infinite => a dot earning this much marginal credit does not clear the 0.2*target false-positive charge, so no budget of such dots can reach the target"
+    }
+   }
+  }
+ },
+ "live_measured_marginal_efficiency": {
+  "thinning_pair": {
+   "kept": "d=2.8 (0.2600)",
+   "relative_to": "d=1.5 (0.2477)",
+   "pixels_removed": 15979,
+   "credit_lost": 495.0813846971778,
+   "marginal_credit_per_removed_pixel": 0.030983252061904863,
+   "inclusion_threshold_at_0_2600": 0.054852320675105495,
+   "removal_was_correct": true
+  },
+  "near_nested_pairs": [
+   {
+    "kept": "25GEMSDOE dotted-h19-5-d2-8 (e56ea318af89)",
+    "dropped_or_added_relative_to": "19GEMSDOE h19-5",
+    "n_small": 44090,
+    "n_big": 121131,
+    "credit_small": 4791.0488856019765,
+    "credit_big": 6188.804163187549,
+    "delta_pixels": 77041,
+    "delta_credit": 1397.755277585573,
+    "marginal_credit_per_pixel": 0.01814300538136282,
+    "reading": "positive => the extra pixels earned credit; compare against the inclusion threshold at the achieved score to see whether keeping them was right"
+   },
+   {
+    "kept": "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
+    "dropped_or_added_relative_to": "19GEMSDOE h19-5",
+    "n_small": 60069,
+    "n_big": 121131,
+    "credit_small": 5286.130270299154,
+    "credit_big": 6188.804163187549,
+    "delta_pixels": 61062,
+    "delta_credit": 902.6738928883951,
+    "marginal_credit_per_pixel": 0.01478290742013683,
+    "reading": "positive => the extra pixels earned credit; compare against the inclusion threshold at the achieved score to see whether keeping them was right"
+   },
+   {
+    "kept": "27GEMSDOE topo-gap-closure-t-v2-on-d1-5 (5512495c6bd1)",
+    "dropped_or_added_relative_to": "19GEMSDOE h19-5",
+    "n_small": 61328,
+    "n_big": 121131,
+    "credit_small": 5289.104788589089,
+    "credit_big": 6188.804163187549,
+    "delta_pixels": 59803,
+    "delta_credit": 899.69937459846,
+    "marginal_credit_per_pixel": 0.015044385308403593,
+    "reading": "positive => the extra pixels earned credit; compare against the inclusion threshold at the achieved score to see whether keeping them was right"
+   }
+  ]
+ },
+ "budget_family_ceiling": {
+  "asymptote_at_current_average_efficiency": 0.5433260246770216,
+  "asymptote_at_live_marginal_efficiency": 0.1549162603095243,
+  "n_needed_at_average_efficiency_for_0_3195": 69807.32182029946,
+  "marginal_efficiency_is_below_break_even": true,
+  "reading": "DTI -> e/0.2 as N -> inf at fixed efficiency e. A budget expansion only helps while the *marginal* dot beats 0.2*target; the live-measured marginal efficiency of the last 15,979 thinned dots is reported above."
+ },
+ "G_sensitivity_for_leader_target": [
+  {
+   "g_multiplier": 0.75,
+   "g_px": 9169.422145767101,
+   "credit_required": 5161.0553004580715,
+   "credit_gap": 370.00641485609503,
+   "credit_now_fraction_of_G": 0.5225028152743167
+  },
+  {
+   "g_multiplier": 0.9,
+   "g_px": 11003.30657492052,
+   "credit_required": 5629.796160549685,
+   "credit_gap": 838.7472749477083,
+   "credit_now_fraction_of_G": 0.43541901272859734
+  },
+  {
+   "g_multiplier": 1.0,
+   "g_px": 12225.896194356133,
+   "credit_required": 5942.2900672774285,
+   "credit_gap": 1151.241181675452,
+   "credit_now_fraction_of_G": 0.39187711145573756
+  },
+  {
+   "g_multiplier": 1.1,
+   "g_px": 13448.485813791747,
+   "credit_required": 6254.783974005171,
+   "credit_gap": 1463.7350884031948,
+   "credit_now_fraction_of_G": 0.35625191950521595
+  },
+  {
+   "g_multiplier": 1.25,
+   "g_px": 15282.370242945166,
+   "credit_required": 6723.524834096785,
+   "credit_gap": 1932.475948494808,
+   "credit_now_fraction_of_G": 0.3135016891645901
+  }
+ ],
+ "conclusions": {
+  "credit_gap_to_leader_at_current_budget_px": 1151.241181675452,
+  "credit_gap_to_leader_fraction_of_G": 0.09416415478866097,
+  "relative_credit_increase_needed": 0.24029000938294603,
+  "dots_needed_if_each_new_dot_earns_0_40": 3425.293608079298,
+  "dots_needed_if_each_new_dot_earns_0_20": 8458.788991002586,
+  "dots_needed_if_each_new_dot_earns_0_10": 31890.33744253329,
+  "pruning_family_can_close_gap": false,
+  "gap_is_a_detection_gap": true
+ }
+}

@@ -11,13 +11,19 @@ name: fetch-gdr-external-layers
 # evidence/ci/external_verification.json), inventories them, clips them to the competition footprint
 # and uploads the result as a run artifact.
 #
-# It commits exactly ONE small file back to the repository - evidence/external_layer_inventory.json -
-# because the agent sandbox cannot read run logs or download artifacts (both live on hosts outside its
-# allowlist: results-receiver.actions.githubusercontent.com and *.blob.core.windows.net). Committing the
-# inventory is what makes the result verifiable from a session with `gh api`. That path is not in the
+# It commits small files back to the repository - evidence/external_layer_inventory.json plus any
+# derived in-footprint clip under docs/data/ - because the agent sandbox cannot read run logs or
+# download artifacts (both live on hosts outside its allowlist:
+# results-receiver.actions.githubusercontent.com and *.blob.core.windows.net). Committing them is what
+# makes the result verifiable AND usable from a session with `gh api`. None of those paths is in the
 # push trigger's `paths:` filter, so the commit cannot re-trigger this workflow. It never contacts
-# drivendata.org
-# (the competition Terms of Use prohibit robots/automatic access; see scripts/refresh_source_feed.py).
+# drivendata.org (the competition Terms of Use prohibit robots/automatic access; see
+# scripts/refresh_source_feed.py).
+#
+# Session 10 addition: with DERIVED=all the job also downloads the pinned USGS slip/dilation-tendency
+# release (H33-1, DOI 10.5066/P9YL58W6), re-verifies its SHA-256 against registry/external_pins.json,
+# clips the vector layer to the competition footprint and commits docs/data/sb_slip_tendency_in_footprint
+# .{csv,json}. A pin mismatch makes the job fail rather than commit a changed release silently.
 #
 # Retrieve the artifact from a session with:
 #   gh run list --workflow=fetch-gdr-external-layers.yml
@@ -34,9 +40,7 @@ on:
   # is path-filtered to this workflow and its script, so merging a change to either runs the fetch
   # without anyone needing dispatch permission - and it still runs on demand for anyone who has it.
   push:
-    # Session 10: `arena/**` added so the bridge can be re-armed from the fixed session branch
-    # without touching main first. Everything else about the trigger is unchanged.
-    branches: [main, "arena/**"]
+    branches: [main]
     paths:
       - ".github/workflows/fetch-gdr-external-layers.yml"
       - "scripts/fetch_external_layers.py"
@@ -45,11 +49,15 @@ on:
       datasets:
         description: "Comma-separated dataset keys to fetch (all | paleo,probes,volcanics)"
         required: true
-        default: "paleo,probes,volcanics,slip"
+        default: "paleo,probes,volcanics"
       availability_only:
         description: "Also HEAD-check (no download) the larger sources and record status"
         required: false
         default: "true"
+      derived:
+        description: "Pin-verify and clip an official release to the footprint (all | one label | none)"
+        required: false
+        default: "all"
 
 permissions:
   contents: write   # needed only to commit evidence/external_layer_inventory.json back to main:
@@ -68,8 +76,22 @@ jobs:
       - name: Install geospatial readers
         run: |
           python -m pip install --upgrade pip
-          # pyogrio ships GDAL wheels, so FileGDB and shapefile both read without apt packages
-          python -m pip install pyogrio shapely pyproj pandas numpy scipy rasterio
+          # pyogrio ships GDAL wheels, so FileGDB and shapefile both read without apt packages.
+          # geopandas is NOT optional: pyogrio.read_dataframe() raises
+          # "ImportError: geopandas is required to use pyogrio.read_dataframe()" without it, which is
+          # exactly what the 2026-10-03T18:54:08Z run hit after the magic-byte fix started opening the
+          # archive. tests/test_external_bridge_derived.py asserts this line names geopandas.
+          python -m pip install pyogrio shapely pyproj pandas geopandas
+
+      - name: Assert the readers this job depends on actually import
+        run: |
+          python - <<'PYCHECK'
+          import importlib
+          for mod in ("pyogrio", "shapely", "pyproj", "pandas", "geopandas"):
+              m = importlib.import_module(mod)
+              print(f"{mod} {getattr(m, '__version__', '?')}")
+          import pyogrio, geopandas  # noqa: F401  - the combination read_dataframe needs
+          PYCHECK
 
       - name: Fetch the independent pin record (2026-09-30 runner)
         run: |
@@ -78,19 +100,37 @@ jobs:
             https://raw.githubusercontent.com/buffedlizard55-lab/16GEMSDOE/main/evidence/ci/external_verification.json
           python -c "import json;d=json.load(open('/tmp/gdr/pins.json'));print('pins:',len(d.get('downloads',d)))"
 
+      - name: Show this repository's own ScienceBase pins (runner-recorded 2026-10-03)
+        run: |
+          python -c "import json;d=json.load(open('registry/external_pins.json'));[print(k, v['bytes'], v['sha256'][:16]) for k,v in d['downloads'].items()]"
+
       - name: Download, hash-verify, inventory and clip
         env:
-          DATASETS: ${{ github.event.inputs.datasets || 'paleo,probes,volcanics,slip' }}
+          DATASETS: ${{ github.event.inputs.datasets || 'paleo,probes,volcanics' }}
           AVAIL_ONLY: ${{ github.event.inputs.availability_only || 'true' }}
+          DERIVED: ${{ github.event.inputs.derived || 'all' }}
         run: |
           set -o pipefail   # a verification failure must fail the job, not be swallowed by tee
           mkdir -p /tmp/gdr/out
           python scripts/fetch_external_layers.py \
             --datasets "$DATASETS" \
             --availability-only "$AVAIL_ONLY" \
+            --derived "$DERIVED" \
+            --external-pins registry/external_pins.json \
             --out /tmp/gdr/out \
             --pins /tmp/gdr/pins.json \
             2>&1 | tee /tmp/gdr/log.txt
+          # Fail loudly rather than committing an unusable derived table. Each of these is a real
+          # defect, not an empty footprint: PIN_MISMATCH = the official release changed;
+          # LAYER_UNREADABLE = GDAL could not open the layer (the 2026-10-03T18:49:01Z run hit this
+          # because a ScienceBase URL has no file suffix, so the payload landed as .bin);
+          # DERIVED_EMPTY = parsed but nothing intersects the bbox; NO_VECTOR_LAYER / ARCHIVE_UNREADABLE
+          # = the archive is not what the pin says it is.
+          for bad in PIN_MISMATCH LAYER_UNREADABLE DERIVED_EMPTY NO_VECTOR_LAYER ARCHIVE_UNREADABLE; do
+            if grep -q "\"status\": \"$bad\"" /tmp/gdr/out/inventory.json; then
+              echo "::error::derived-clip defect: $bad" && exit 1
+            fi
+          done
 
       - name: Show inventory in the run log
         if: always()
@@ -105,33 +145,25 @@ jobs:
             echo "no inventory produced; nothing to commit"; exit 0
           fi
           cp /tmp/gdr/out/inventory.json evidence/external_layer_inventory.json
+          if [ -d /tmp/gdr/out/commit ]; then
+            mkdir -p docs/data
+            cp -f /tmp/gdr/out/commit/* docs/data/
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add evidence/external_layer_inventory.json
-          # Session 10: the derived H33-1 grids are the point of the bridge, so they come back too.
-          # Size-capped so a runaway raster can never bloat the repository history.
-          MAX_BYTES=$((25 * 1024 * 1024))
-          for f in /tmp/gdr/out/slip_tendency_grids.tar.gz /tmp/gdr/out/slip_tendency_sidecar.json; do
-            if [ -f "$f" ]; then
-              sz=$(stat -c%s "$f")
-              if [ "$sz" -le "$MAX_BYTES" ]; then
-                cp "$f" "evidence/$(basename "$f")"
-                git add "evidence/$(basename "$f")"
-                echo "committing $(basename "$f") ($sz bytes)"
-              else
-                echo "$(basename "$f") is $sz bytes > $MAX_BYTES; not committed"
-              fi
-            fi
-          done
+          git add evidence/external_layer_inventory.json docs/data
           if git diff --cached --quiet; then
             echo "inventory unchanged; nothing to commit"
           else
             git commit -F - <<'COMMIT_MSG'
-          evidence: external-layer fetch inventory (hashes, layer schemas, in-footprint counts)
+          evidence: external-layer inventory + derived in-footprint clips
 
           Written by .github/workflows/fetch-gdr-external-layers.yml on the runner, because run logs
           and artifacts are hosted outside the agent sandbox's allowlist and cannot be read from a
           session. Every dataset row carries the pin it was checked against and whether it matched.
+          docs/data/sb_slip_tendency_in_footprint.{csv,json} are the pin-verified USGS
+          slip/dilation-tendency release (DOI 10.5066/P9YL58W6) clipped to the competition footprint
+          for H33-1; attributes are copied verbatim from the release and no field is derived.
           COMMIT_MSG
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
@@ -143,8 +175,7 @@ jobs:
           path: |
             /tmp/gdr/out/inventory.json
             /tmp/gdr/out/*.csv
-            /tmp/gdr/out/slip_tendency_grids.tar.gz
-            /tmp/gdr/out/slip_tendency_sidecar.json
+            /tmp/gdr/out/commit/*
             /tmp/gdr/log.txt
           if-no-files-found: warn
           retention-days: 90

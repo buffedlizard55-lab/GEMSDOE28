@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T19:10:46Z",
+  "generated_utc": "2026-10-03T18:58:17Z",
   "pins_file": "/tmp/gdr/pins.json",
   "pins_file_loaded": true,
   "availability_only": true,
@@ -45,82 +45,36 @@
     "reachable": 3,
     "pin_mismatches": [],
     "unpinned": [],
-    "slip_tendency_status": "NO_LAYER_READABLE",
+    "sciencebase_derived_written": 1,
     "sciencebase_reachable": 4,
     "sciencebase_checked": 4
   },
-  "slip_tendency": {
-    "doi": "10.5066/P9YL58W6",
-    "page": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
-    "filename": "Shapefile_Full Study.zip",
-    "url": "https://www.sciencebase.gov/catalog/file/get/6296974dd34ec53d276bb33d?f=__disk__33%2Fb0%2F91%2F33b091fae2403dcf2f1dd2f698f7368ffdcf000d",
-    "hypothesis": "H33-1 kinematic reactivation favourability gate",
-    "http_status": 200,
-    "bytes": 35912323,
-    "sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
-    "status": "NO_LAYER_READABLE",
-    "error": null,
-    "path": "/tmp/gdr/out/slip.bin",
-    "pinned_bytes": 35912323,
-    "pinned_sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
-    "pin_match": true,
-    "zip_members": [
-      "Shapefile_Full Study/GB_Quaternary_faults_TD.lyrx",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.cpg",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.dbf",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.lyrx",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.prj",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.sbn",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.sbx",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.shp",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.shp.xml",
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.shx",
-      "Shapefile_Full Study/GB_Quaternary_faults_TS.lyrx",
-      "Shapefile_Full Study/Metadata - shapefile for slip tendency and dilation tendency calculated for Quaternary faults in the Great Basin region.xml"
-    ],
-    "shapefiles_found": [
-      "Shapefile_Full Study/GB_Quaternary_faults_TD_TS.shp"
-    ],
-    "layers": [
-      {
-        "layer": "GB_Quaternary_faults_TD_TS",
-        "crs": "PROJCS[\"North America Albers Equal Area Conic_1\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Albers_Conic_Equal_Area\"],PARAMETER[\"latitude_of_center\",40],PARAMETER[\"longitude_of_center\",-117],PARAMETER[\"standard_parallel_1\",20],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
-        "fields": [
-          "fault_name",
-          "dip_direct",
-          "slip_sense",
-          "QFFD_ID",
-          "X_START",
-          "X_END",
-          "Y_START",
-          "Y_END",
-          "APhi",
-          "ShminAZ",
-          "SegLength",
-          "Strike",
-          "FaultNum",
-          "Dip",
-          "DipAz",
-          "Shmin_Mag",
-          "SHmaxAz",
-          "SHmax_Mag",
-          "ShearStres",
-          "NormalStre",
-          "TD",
-          "TS",
-          "TS_norm",
-          "TD_TS"
-        ],
-        "features": 322344
+  "sciencebase_derived": {
+    "sb_slip_tendency_shapefile_full": {
+      "hypothesis": "H33-1 kinematic reactivation favourability gate",
+      "url": "https://www.sciencebase.gov/catalog/file/get/6296974dd34ec53d276bb33d?f=__disk__33%2Fb0%2F91%2F33b091fae2403dcf2f1dd2f698f7368ffdcf000d",
+      "http_status": 200,
+      "bytes": 35912323,
+      "sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
+      "error": null,
+      "pin_match": true,
+      "payload_format": "zip",
+      "payload_used": "sb_slip_tendency_shapefile_full.zip",
+      "status": "DERIVED_WRITTEN",
+      "layers_found": [
+        "GB_Quaternary_faults_TD_TS.shp"
+      ],
+      "derived": {
+        "csv_path": "/tmp/gdr/out/commit/sb_slip_tendency_in_footprint.csv",
+        "json_path": "/tmp/gdr/out/commit/sb_slip_tendency_in_footprint.json",
+        "n_records": 84484,
+        "n_parts": 84484
       },
-      {
-        "layer": "GB_Quaternary_faults_TD_TS",
-        "error": "ImportError: geopandas is required to use pyogrio.read_dataframe()"
-      }
-    ],
-    "crs_listed": [
-      "PROJCS[\"North America Albers Equal Area Conic_1\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Albers_Conic_Equal_Area\"],PARAMETER[\"latitude_of_center\",40],PARAMETER[\"longitude_of_center\",-117],PARAMETER[\"standard_parallel_1\",20],PARAMETER[\"standard_parallel_2\",60],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
-    ]
+      "committed_files": [
+        "docs/data/sb_slip_tendency_in_footprint.csv",
+        "docs/data/sb_slip_tendency_in_footprint.json"
+      ]
+    }
   },
   "sciencebase_availability": {
     "sb_slip_tendency_shapefile_full": {
