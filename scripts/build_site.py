@@ -7,6 +7,7 @@ README.md before changing the submission path or the claims rendered here.
 """
 from __future__ import annotations
 
+import hashlib
 import html
 import json
 import re
@@ -52,10 +53,65 @@ def range_summary(record: dict) -> str:
         "most_plausible_explanation", record.get("summary", "Historical validator cause remains unconfirmed.")))
 
 
+def h31_report_integrity(report: dict, stage: str) -> bool:
+    seeds = {"screen": list(range(160, 170)), "confirmation": list(range(170, 180))}.get(stage)
+    if not isinstance(report, dict) or seeds is None:
+        return False
+    check = dict(report)
+    recorded = check.get("sha256")
+    check["sha256"] = None
+    expected_hash = hashlib.sha256(json.dumps(check, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    expected_path = f"evidence/h31_1_euler_{'screen' if stage == 'screen' else 'confirm'}.started.json"
+    claim = report.get("single_use_seed_claim", {})
+    if not isinstance(claim, dict):
+        return False
+    claim_path = ROOT / expected_path
+    try:
+        claim_record = json.loads(claim_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    if not isinstance(claim_record, dict):
+        return False
+    try:
+        claim_sha256 = hashlib.sha256(claim_path.read_bytes()).hexdigest()
+    except OSError:
+        return False
+    return bool(
+        recorded == expected_hash
+        and report.get("schema") == 1
+        and report.get("stage") == stage
+        and report.get("seeds") == seeds
+        and claim.get("path") == expected_path
+        and claim.get("sha256") == claim_sha256
+        and claim_record.get("stage") == stage
+        and claim_record.get("seeds") == seeds
+        and claim_record.get("protocol_commit") == report.get("protocol_commit")
+        and claim_record.get("protocol_sha256") == report.get("protocol_sha256")
+        and claim_record.get("input_hashes") == report.get("input_hashes")
+        and claim_record.get("feature_hashes") == report.get("feature_hashes")
+        and claim_record.get("code_hashes") == report.get("code_hashes")
+        and claim_record.get("runtime_versions") == report.get("runtime_versions")
+        and isinstance(report.get("gate"), dict)
+        and report.get("submission_raster_written") is False
+        and report.get("drivendata_access") is False
+    )
+
+
+def h31_stage_passed(report: dict, stage: str) -> bool:
+    return h31_report_integrity(report, stage) and report.get("gate", {}).get("passed") is True
+
+
+def h31_stage_failed(report: dict, stage: str) -> bool:
+    return h31_report_integrity(report, stage) and report.get("gate", {}).get("passed") is False
+
+
 def h31_stage_line(name: str, report: dict) -> str:
-    outcome = report.get("gate", {}).get("passed")
+    stage = "screen" if name.lower() == "screen" else "confirmation"
+    outcome = report.get("gate", {}).get("passed") if h31_report_integrity(report, stage) else None
     label = "PASS" if outcome is True else "FAIL" if outcome is False else "UNVERIFIED"
     summary = report.get("summary", {})
+    if not isinstance(summary, dict):
+        summary = {}
     try:
         gain = f"{float(summary['mean_paired_gain']):+.6f}"
     except (KeyError, TypeError, ValueError):
@@ -66,40 +122,65 @@ def h31_stage_line(name: str, report: dict) -> str:
             f"positive folds {folds}/4; positive seed means {seeds}/10.")
 
 
-def h31_result_summary(screen: dict, confirmation: dict) -> str:
+def h31_result_summary(screen: dict, confirmation: dict, seed_audit: dict) -> str:
+    screen_state = seed_audit.get("range_status", {}).get("screen", "UNKNOWN")
+    confirmation_state = seed_audit.get("range_status", {}).get("confirmation", "UNKNOWN")
+    if not screen and screen_state == "INCOMPLETE":
+        return "Screen seeds 160–169 were claimed but no final report exists; treat the run as interrupted and do not rerun."
+    if not screen and screen_state in {"CONSUMED", "INVALID"}:
+        return f"Seed audit reports screen status {screen_state} but no final screen report exists; investigate before any next stage."
     if not screen and not confirmation:
-        return "No H31 classifier fit or holdout has been run."
+        if confirmation_state != "UNUSED":
+            return f"Confirmation seed status is {confirmation_state} without a final screen/confirmation report; investigate the evidence chain."
+        if seed_audit.get("status") != "PASS":
+            return f"No final H31 stage report is recorded; the local seed audit is {seed_audit.get('status', 'missing')}, so unused status is not established."
+        if screen_state == "UNUSED":
+            return "No H31 classifier fit or holdout has been run."
+        return f"No final H31 stage report is recorded; screen seed status is {screen_state}. Do not infer that the range is unused."
     parts = []
     if screen:
         parts.append(h31_stage_line("Screen", screen))
     if confirmation:
         parts.append(h31_stage_line("Confirmation", confirmation))
-    if screen and screen.get("gate", {}).get("passed") is False:
+    screen_pass = h31_stage_passed(screen, "screen") if screen else False
+    screen_fail = h31_stage_failed(screen, "screen") if screen else False
+    confirm_pass = h31_stage_passed(confirmation, "confirmation") if confirmation else False
+    if screen_fail:
         parts.append("The frozen failure ends this arm; no confirmation or retuning is allowed.")
     elif screen and confirmation:
-        if screen.get("gate", {}).get("passed") is True and confirmation.get("gate", {}).get("passed") is True:
+        if screen_pass and confirm_pass:
             parts.append("Both results remain catalogue proxies, not organizer-label or competition performance; no weekly slot is authorized.")
         else:
             parts.append("A failed or unverified stage rejects the arm for submission; no weekly slot is authorized.")
-    elif screen and screen.get("gate", {}).get("passed") is True:
+    elif screen_pass:
         parts.append("Confirmation on seeds 170–179 remains required; this screen is proxy evidence only and does not authorize a weekly slot.")
     else:
         parts.append("The screen result is not verified as a pass; no confirmation or weekly slot is authorized.")
     return " ".join(parts)
 
 
-def h31_next_step(screen: dict, confirmation: dict) -> str:
-    if not screen and not confirmation:
-        return ("The label-free build and local seed audit pass, but the classifier holdout is still unrun. "
-                "Refresh the seed ledger immediately before the single-use screen; no weekly slot is authorized.")
-    if screen and screen.get("gate", {}).get("passed") is False:
+def h31_next_step(screen: dict, confirmation: dict, seed_audit: dict) -> str:
+    screen_state = seed_audit.get("range_status", {}).get("screen", "UNKNOWN")
+    if not screen:
+        if screen_state != "UNUSED":
+            return f"Screen range status is {screen_state}; inspect its single-use claim/evidence and do not rerun an uncertain range."
+        confirmation_state = seed_audit.get("range_status", {}).get("confirmation", "UNKNOWN")
+        if confirmation_state != "UNUSED":
+            return f"Confirmation range status is {confirmation_state} without a screen report; investigate and do not fit."
+        if seed_audit.get("status") != "PASS":
+            return "The local seed audit is not PASS; do not fit until the ledger is reconciled and refreshed."
+        if not confirmation:
+            return ("The label-free build and local seed audit pass, but the classifier holdout is still unrun. "
+                    "Refresh the seed ledger immediately before the single-use screen; no weekly slot is authorized.")
+        return "A confirmation report exists without a screen report; stop and investigate the evidence chain."
+    if h31_stage_failed(screen, "screen"):
         return "The frozen screen failed; stop this arm without confirmation, retuning or a weekly slot."
     if screen and confirmation:
-        if confirmation.get("gate", {}).get("passed") is True:
+        if h31_stage_passed(screen, "screen") and h31_stage_passed(confirmation, "confirmation"):
             return ("Both frozen stages passed as catalogue-proxy evidence. Assess transfer limitations and audit any "
                     "exact research file separately; this does not authorize a weekly slot or an upload.")
         return "Confirmation did not pass its frozen gate; reject this arm for submission and do not use a weekly slot."
-    if screen and screen.get("gate", {}).get("passed") is True:
+    if h31_stage_passed(screen, "screen"):
         return ("The screen passed its frozen proxy gate. Refresh the seed ledger and, without changing the recipe, "
                 "run the one preregistered confirmation on seeds 170–179; no weekly slot is authorized yet.")
     return "The saved result is incomplete or unverified; stop and review the evidence before any next stage."
@@ -203,7 +284,7 @@ def candidate_card(slot: str, item: dict, *, featured: bool = False) -> str:
 
 
 def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, restore: dict,
-                 screen: dict, confirmation: dict) -> str:
+                 screen: dict, confirmation: dict, seed_audit: dict) -> str:
     primary = manifest["primary"]
     q = manifest.get("quaternary", {})
     observations = board.get("observations", [])
@@ -219,7 +300,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
   <h1>Evidence before<br>emission.</h1>
   <p class="lead">An auditable geoscience research workflow aimed at better fault mapping—not a submission bot. Every idea must earn its way through a spatially blocked holdout, independent confirmation, and an exact-file audit before it can approach a weekly slot.</p>
   <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO GEMSDOE28 SCORE</span></div>
-  <p><strong>Current status:</strong> the best available file below is an inherited H28-1 full-map research raster with catalogue-proxy holdout evidence. It is locally format-audited, <strong>unscored</strong>, and not slot-approved. H31-1 status: {esc(h31_result_summary(screen, confirmation))}</p>
+  <p><strong>Current status:</strong> the best available file below is an inherited H28-1 full-map research raster with catalogue-proxy holdout evidence. It is locally format-audited, <strong>unscored</strong>, and not slot-approved. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))}</p>
 </div></section>
 
 <section class="download-panel" id="download" aria-labelledby="download-heading">
@@ -256,14 +337,14 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
 </section>
 
 <section class="section"><div class="grid">
-  <article class="card span-6"><div class="eyebrow">What is next</div><h3>One frozen test at a time</h3><p>{esc(h31_next_step(screen, confirmation))}</p><a href="research.html">See ranked hypotheses and limitations →</a></article>
+  <article class="card span-6"><div class="eyebrow">What is next</div><h3>One frozen test at a time</h3><p>{esc(h31_next_step(screen, confirmation, seed_audit))}</p><a href="research.html">See ranked hypotheses and limitations →</a></article>
   <article class="card span-6"><div class="eyebrow">Manual review</div><h3>Read the original sources</h3><p>Open the dated <a href="sources.html">source ledger</a>, <a href="topology.html">topology review</a>, and <a href="executive-summary.html">submission instructions</a>. Every external-data status distinguishes a listing from actual byte/schema/coverage/licence verification.</p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official public leaderboard — human spot-check only</a></article>
 </div></section>
 """
 
 
 def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit: dict,
-                     screen: dict, confirmation: dict) -> str:
+                     screen: dict, confirmation: dict, seed_audit: dict) -> str:
     p = manifest["primary"]
     candidate = read_json("docs/downloads/h28_1_candidate_manifest.json", {"candidate": {}}).get("candidate", {})
     audit_status = file_audit.get("status", "not yet recorded")
@@ -286,7 +367,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
 <p>Alternative package: <a href="downloads/{esc(p['zip'])}" download>{esc(p['zip'])}</a>. The separately named all-finite TIFF uses zero outside the template footprint as a manual fallback; it is not claimed to solve the old portal error. Do not use the predecessor all-finite file with out-of-footprint positives.</p></section>
 
 <section class="section"><h2>Human submission checklist</h2><ol>
-<li><strong>Re-evaluate evidence, not just the file.</strong> Read <a href="../evidence/h28_1_edge_holdout.json">the exact paired holdout</a> and <a href="research.html">current limits/ranking</a>. {esc(h31_result_summary(screen, confirmation))} {h31_evidence_links(screen, confirmation)}</li>
+<li><strong>Re-evaluate evidence, not just the file.</strong> Read <a href="../evidence/h28_1_edge_holdout.json">the exact paired holdout</a> and <a href="research.html">current limits/ranking</a>. {esc(h31_result_summary(screen, confirmation, seed_audit))} {h31_evidence_links(screen, confirmation)}</li>
 <li><strong>Review the official rules and data terms manually.</strong> Check the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a>, <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules</a>, current deadline and submission cap. This site does not log in or automate any interaction.</li>
 <li><strong>Choose the exact local file yourself.</strong> The suggested `.tif` above is a single-band float32 GeoTIFF with values 0/1 within the sample-template footprint and nodata outside. Use the exact filename and SHA-256 in the local audit; do not rename it in a way that loses its content ID.</li>
 <li><strong>Paste the registered note manually.</strong> Copy the exact short note above. Include no unsupported score claim. Keep a screenshot or receipt that identifies the selected filename and the organizer's returned score.</li>
@@ -300,21 +381,28 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
 """
 
 
-def h31_hypothesis_status(screen: dict, confirmation: dict) -> str:
-    if not screen and not confirmation:
-        return "SCREEN PENDING — label-free feature build only"
-    if screen and screen.get("gate", {}).get("passed") is False:
+def h31_hypothesis_status(screen: dict, confirmation: dict, seed_audit: dict) -> str:
+    if not screen:
+        status = seed_audit.get("range_status", {}).get("screen", "UNKNOWN")
+        confirmation_state = seed_audit.get("range_status", {}).get("confirmation", "UNKNOWN")
+        if (status == "UNUSED" and confirmation_state == "UNUSED"
+                and seed_audit.get("status") == "PASS" and not confirmation):
+            return "SCREEN PENDING — label-free feature build only"
+        if status == "INCOMPLETE":
+            return "SCREEN INTERRUPTED — single-use seed range consumed; do not rerun"
+        return "SCREEN STATUS UNVERIFIED — inspect seed claim and evidence"
+    if h31_stage_failed(screen, "screen"):
         return "FROZEN SCREEN FAILED — H31-1 rejected"
     if screen and confirmation:
-        if confirmation.get("gate", {}).get("passed") is True:
+        if h31_stage_passed(screen, "screen") and h31_stage_passed(confirmation, "confirmation"):
             return "SCREEN AND CONFIRMATION PASSED — catalogue proxy only; not slot-approved"
         return "CONFIRMATION FAILED OR UNVERIFIED — H31-1 rejected for submission"
-    if screen and screen.get("gate", {}).get("passed") is True:
+    if h31_stage_passed(screen, "screen"):
         return "SCREEN PASSED — unchanged confirmation required; not slot-approved"
     return "STAGE STATUS UNVERIFIED — no weekly slot"
 
 
-def render_hypothesis_card(h: dict, screen: dict, confirmation: dict) -> str:
+def render_hypothesis_card(h: dict, screen: dict, confirmation: dict, seed_audit: dict) -> str:
     lo_hi = h.get("expected_holdout_delta_dti", [None, None])
     if isinstance(lo_hi, list) and len(lo_hi) == 2:
         range_text = f"{fmt_number(lo_hi[0], 3)} to +{fmt_number(lo_hi[1], 3)}"
@@ -325,8 +413,8 @@ def render_hypothesis_card(h: dict, screen: dict, confirmation: dict) -> str:
     validation = h.get("validation", "not recorded")
     stage_links = ""
     if h.get("id") == "H31-1":
-        status = h31_hypothesis_status(screen, confirmation)
-        validation = f"{validation} Current stage: {h31_result_summary(screen, confirmation)}"
+        status = h31_hypothesis_status(screen, confirmation, seed_audit)
+        validation = f"{validation} Current stage: {h31_result_summary(screen, confirmation, seed_audit)}"
         stage_links = h31_evidence_links(screen, confirmation)
     return f"""<article class="card span-6"><div class="rank">Rank {esc(h.get('rank'))} · {esc(h.get('id'))}</div><h3>{esc(h.get('title'))}</h3><p><span class="status blocked">{esc(status)}</span></p>
 <p><strong>Layers:</strong></p><ul class="tag-list">{layer_tags}</ul>
@@ -343,7 +431,7 @@ def render_hypothesis_card(h: dict, screen: dict, confirmation: dict) -> str:
 def render_research(registry: dict, h28: dict, euler: dict, board: dict,
                     screen: dict, confirmation: dict, seed_audit: dict) -> str:
     hypotheses = sorted(registry.get("hypotheses", []), key=lambda item: item.get("rank", 999))
-    hypothesis_html = "".join(render_hypothesis_card(h, screen, confirmation) for h in hypotheses)
+    hypothesis_html = "".join(render_hypothesis_card(h, screen, confirmation, seed_audit) for h in hypotheses)
     si0 = euler.get("structural_indices", {}).get("0", {})
     summary = si0.get("solution_summary", {})
     clusters = si0.get("lineament_cluster_stats", {})
@@ -356,9 +444,9 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 <p class="lead">Five currently ranked geological hypotheses, reviewed against in-repository experiments and evidence. Planning ranges are subjective, uncertain catalogue-holdout priors—not observed gains or competition-score predictions.</p>
 <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status proxy">PROXY ≠ COMPETITION</span></div></div></section>
 
-<section class="section"><h2>Current ranking</h2><p>Ranking weighs expected catalogue-proxy gain, testability and cost. “Untried” refers to the proposed transform/holdout arm in this checkout, not a claim of global scientific novelty. H31-1 status: {esc(h31_result_summary(screen, confirmation))}</p><div class="grid">{hypothesis_html}</div></section>
+<section class="section"><h2>Current ranking</h2><p>Ranking weighs expected catalogue-proxy gain, testability and cost. “Untried” refers to the proposed transform/holdout arm in this checkout, not a claim of global scientific novelty. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))}</p><div class="grid">{hypothesis_html}</div></section>
 
-<section class="section"><h2>H31-1: depth-labeled Euler source solutions, not gradient peaks</h2><div class="callout"><strong>State:</strong> protocol revision 2 is committed at 524bf27 before any classifier fit or holdout; the current label-free feature build is bound to it and passes all three pre-fit data-sufficiency checks. Earlier protocol commit hashes cited by prior working-copy artifacts are absent from this checkout's Git history; the initial build's commit chronology is not proven and is disclosed in the history audit. Magnetic field units remain unauthenticated. H31 current outcome: {esc(h31_result_summary(screen, confirmation))} No H31 submission candidate has been created. Local seed audit status {esc(seed_audit.get('status', 'not recorded'))} covers {comma(len(seed_audit.get('evidence_json_sha256_scanned', {})))} evidence JSON files; screen seeds 160–169 are {esc(seed_range_label(seed_audit, 'screen'))} and confirmation seeds 170–179 are {esc(seed_range_label(seed_audit, 'confirmation'))}. External/sibling-workspace seed use remains unknowable. {esc(h31_next_step(screen, confirmation))}</div>
+<section class="section"><h2>H31-1: depth-labeled Euler source solutions, not gradient peaks</h2><div class="callout"><strong>State:</strong> protocol revision 2 is committed at 524bf27 before any classifier fit or holdout; the current label-free feature build is bound to it and passes all three pre-fit data-sufficiency checks. Earlier protocol commit hashes cited by prior working-copy artifacts are absent from this checkout's Git history; the initial build's commit chronology is not proven and is disclosed in the history audit. Magnetic field units remain unauthenticated. H31 current outcome: {esc(h31_result_summary(screen, confirmation, seed_audit))} No H31 submission candidate has been created. Local seed audit status {esc(seed_audit.get('status', 'not recorded'))} covers {comma(len(seed_audit.get('evidence_json_sha256_scanned', {})))} evidence JSON files; screen seeds 160–169 are {esc(seed_range_label(seed_audit, 'screen'))} and confirmation seeds 170–179 are {esc(seed_range_label(seed_audit, 'confirmation'))}. External/sibling-workspace seed use remains unknowable. {esc(h31_next_step(screen, confirmation, seed_audit))}</div>
 <div class="grid"><article class="card span-6"><h3>What was built</h3><ul><li>Source field: owner-mirror band 14 <code>tmi</code>; embedded unit tags are absent.</li><li>Euler system solves for source coordinates, depth and base-level offset in 10 × 10 windows; source windows are screened and solutions clustered.</li><li>SI-0 primary: {comma(summary.get('n', 0))} accepted source solutions; {comma(clusters.get('aligned_solution_count', 0))} aligned to gradient ridges within 200 m; {comma(clusters.get('retained_cluster_count', 0))} retained depth-coherent clusters.</li><li>Median SI-0 depth {fmt_number(summary.get('depth_m_median'), 1)} m (P10 {fmt_number(summary.get('depth_m_p10'), 1)}, P90 {fmt_number(summary.get('depth_m_p90'), 1)}); output estimates are not verified geological depths.</li><li>Vertical-derivative coverage: {fmt_number(euler.get('derivative', {}).get('vertical_coverage_share_of_valid_field', 0) * 100, 1)}% of valid TMI cells.</li></ul></article>
 <article class="card span-6"><h3>Structural-index instability</h3><p>SI-1 retains {comma(h1.get('sensitivity_clusters', 5665))} clusters; {fmt_number(h1.get('matched_primary_share_within_600m', 0)*100, 1)}% of SI-0 centroids match within 600 m and median nearest-centroid distance is {fmt_number(h1.get('median_nearest_centroid_distance_m', 0), 0)} m.</p><p>SI-2 retains {comma(h2.get('sensitivity_clusters', 4661))} clusters; {fmt_number(h2.get('matched_primary_share_within_600m', 0)*100, 1)}% match within 600 m and median distance is {fmt_number(h2.get('median_nearest_centroid_distance_m', 0), 0)} m. SI=1/2 are descriptive sensitivity checks, not alternative indices to select after seeing a favorable holdout.</p></article></div>
 <p>SI=0 approximates an idealized contact with effectively infinite depth extent. Real faults may be finite, dipping, intersecting or have mixed geometry and may require higher indices. Euler does not estimate dip; the structural index is a geological model choice, not an automatically “correct” value. Candidate gradient ridges are used only to test alignment with Euler-derived source solutions, never as the inferred source locations.</p>
@@ -477,8 +565,8 @@ def main() -> int:
 
     topology_review = read_json("docs/data/topology_review_classes.json", {})
     pages = {
-        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation), "Overview"),
-        "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation), "Executive summary"),
+        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit), "Overview"),
+        "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),

@@ -1,3 +1,4 @@
+import hashlib
 import json
 import re
 import subprocess
@@ -51,23 +52,65 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
         assert workflow.count(f"'{path}'") == 2, f"missing push/pull_request trigger for {path}"
 
 
-def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results():
+def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp_path, monkeypatch):
     from scripts import build_site
 
-    assert build_site.h31_result_summary({}, {}) == "No H31 classifier fit or holdout has been run."
-    screen_pass = {"gate": {"passed": True}, "summary": {
-        "mean_paired_gain": 0.0012, "positive_fold_count": 3, "positive_seed_count": 8,
-    }}
-    screen_text = build_site.h31_result_summary(screen_pass, {})
+    monkeypatch.setattr(build_site, "ROOT", tmp_path)
+    evidence_dir = tmp_path / "evidence"
+    evidence_dir.mkdir()
+
+    def report(stage, passed, gain, positive_folds, positive_seeds):
+        seeds = list(range(160, 170)) if stage == "screen" else list(range(170, 180))
+        filename = f"h31_1_euler_{'screen' if stage == 'screen' else 'confirm'}.started.json"
+        relative = f"evidence/{filename}"
+        provenance = {
+            "protocol_commit": "pinned-protocol", "protocol_sha256": "protocol-hash",
+            "input_hashes": {"input": "input-hash"}, "feature_hashes": {"feature": "feature-hash"},
+            "code_hashes": {"runner": "code-hash"}, "runtime_versions": {"python": "3.x"},
+        }
+        claim = {"stage": stage, "seeds": seeds, **provenance}
+        claim_bytes = (json.dumps(claim, indent=2) + "\n").encode()
+        (evidence_dir / filename).write_bytes(claim_bytes)
+        result = {
+            "schema": 1, "stage": stage, "seeds": seeds, **provenance,
+            "single_use_seed_claim": {"path": relative, "sha256": hashlib.sha256(claim_bytes).hexdigest()},
+            "gate": {"passed": passed},
+            "summary": {"mean_paired_gain": gain, "positive_fold_count": positive_folds,
+                        "positive_seed_count": positive_seeds},
+            "submission_raster_written": False, "drivendata_access": False, "sha256": None,
+        }
+        result["sha256"] = hashlib.sha256(
+            json.dumps(result, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        return result
+
+    unused = {"status": "PASS", "range_status": {"screen": "UNUSED", "confirmation": "UNUSED"}}
+    assert build_site.h31_result_summary({}, {}, unused) == "No H31 classifier fit or holdout has been run."
+    assert build_site.h31_hypothesis_status({}, {}, unused) == "SCREEN PENDING — label-free feature build only"
+    screen_pass = report("screen", True, 0.0012, 3, 8)
+    consumed = {"status": "PASS", "range_status": {"screen": "CONSUMED", "confirmation": "UNUSED"}}
+    screen_text = build_site.h31_result_summary(screen_pass, {}, consumed)
     assert "Screen frozen gate PASS" in screen_text
+    tampered = json.loads(json.dumps(screen_pass))
+    tampered["summary"]["mean_paired_gain"] = 99.0
+    assert "Screen frozen gate UNVERIFIED" in build_site.h31_result_summary(tampered, {}, consumed)
     assert "catalogue-proxy" in screen_text and "Confirmation on seeds 170–179 remains required" in screen_text
     assert "weekly slot" in screen_text
-    confirm_fail = {"gate": {"passed": False}, "summary": {
-        "mean_paired_gain": -0.0001, "positive_fold_count": 1, "positive_seed_count": 4,
-    }}
-    failed_text = build_site.h31_result_summary(screen_pass, confirm_fail)
+    assert build_site.h31_hypothesis_status(screen_pass, {}, consumed) == "SCREEN PASSED — unchanged confirmation required; not slot-approved"
+    research = (DOCS / "research.html").read_text()
+    assert "SCREEN PENDING — label-free feature build only" in research
+    assert "UNTRIED HOLDOUT: feature build only; no model fit or candidate TIFF." not in research
+    confirm_fail = report("confirmation", False, -0.0001, 1, 4)
+    both_consumed = {"status": "PASS", "range_status": {"screen": "CONSUMED", "confirmation": "CONSUMED"}}
+    failed_text = build_site.h31_result_summary(screen_pass, confirm_fail, both_consumed)
     assert "Confirmation frozen gate FAIL" in failed_text and "rejects the arm for submission" in failed_text
-    assert "weekly slot" in build_site.h31_next_step(screen_pass, confirm_fail)
+    assert "weekly slot" in build_site.h31_next_step(screen_pass, confirm_fail, both_consumed)
+    interrupted = {"status": "PASS", "range_status": {"screen": "INCOMPLETE", "confirmation": "UNUSED"}}
+    assert "interrupted" in build_site.h31_result_summary({}, {}, interrupted)
+    assert "do not rerun" in build_site.h31_next_step({}, {}, interrupted)
+    stray_confirmation = {"status": "PASS", "range_status": {"screen": "UNUSED", "confirmation": "INCOMPLETE"}}
+    assert "without a final screen/confirmation" in build_site.h31_result_summary({}, {}, stray_confirmation)
+    assert "without a screen report" in build_site.h31_next_step({}, {}, stray_confirmation)
 
 
 def test_all_internal_links_and_assets_resolve():
