@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-04T00:05:00Z",
+  "generated": "2026-10-04T00:20:00Z",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -456,6 +456,12 @@
       "severity": "low",
       "issue": "The first cut of scripts/analyze_h37_3.py implemented the preregistered C4 integrity check by comparing the fresh-decade (260-264) base arms against the stored 210-214 diagnostic. Those are DIFFERENT SEEDS, so the comparison reports a spurious 3.5e-3 'failure' that is pure LOSFO seed-to-seed variation.",
       "action": "Analyzer corrected: C4 now uses a same-seed reproduction (the patched harness re-ran the spent seed-181 smoke panel and reproduces the pre-patch base arms to the last bit), plus a check that the fresh-decade base arms sit inside the documented -12%..+20% LOSFO spread. The record is evidence/h37_3_licence_integrity.json. Never compare arms across seed sets and call it integrity."
+    },
+    {
+      "id": "parallel-session-arm-naming-collision",
+      "severity": "low",
+      "issue": "A parallel session's commit 9d764cd added thinning.directional_dot_thin and its docstring history calls it 'the candidate H37-1 (directional / anisotropic Poisson-disk ...)'. H37-1 is already taken: knowledge/29-35, the README and registry/next_hypotheses.json define H37-1 as the metric-aware (maximum expected coverage) packing arm, which this session gated, far-field falsified and demoted. The directional thinning is otherwise undocumented in the ledger.",
+      "action": "Flagged for the owner so the two arms cannot be confused in the record. Neither arm's results are affected (directional_dot_thin only ADDS a function; dot_thin is unchanged, so every measured result still refers to the same code). When the directional arm is formally proposed it needs its own ID (e.g. H38-1), its own preregistration, and a corrected docstring history line."
     }
   ]
 }
