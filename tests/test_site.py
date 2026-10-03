@@ -98,7 +98,14 @@ def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp
     assert "weekly slot" in screen_text
     assert build_site.h31_hypothesis_status(screen_pass, {}, consumed) == "SCREEN PASSED — unchanged confirmation required; not slot-approved"
     research = (DOCS / "research.html").read_text()
+    front_page = (DOCS / "index.html").read_text()
+    assert "No model fit, holdout score, confirmation, or promotion decision." not in front_page
+    assert "The feature build is label-free; H31 screen outcome is shown above." in front_page
+    assert "screen evidence" in front_page
+    assert "single-use screen claim" in front_page
+    assert "Screen frozen gate FAIL" in front_page
     assert "Screen frozen gate FAIL" in research
+    assert "single-use screen claim" in research
     assert "minimum spacing below 1.5 px in 40/40 cells" in research
     assert "control 40/40; candidate 39/40" in research
     assert "all other listed integrity checks passed" in research
