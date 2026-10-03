@@ -1,0 +1,94 @@
+{
+  "hypothesis": "H32-2: Shallow-over-deep magnetic gradient de-screening (upward-continuation attenuation ratio) at d=2.8",
+  "preregistration": "knowledge/16_preregistration_H32-2.md",
+  "preregistration_sha256": "8396781fc23299e3ef67fcff9f82dcd3fda46e105978bd08550a4ddaa9988be0",
+  "seeds": [
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199
+  ],
+  "base_oof_d28_mean_dti": 0.09450562219866379,
+  "base_oof_d28_dots_per_seed": 48932.5,
+  "inclusion_threshold_oof": 0.01926525950703905,
+  "inclusion_threshold_live_0_2600": 0.054852320675105495,
+  "r_field_stats": {
+    "tmi_hg_p99": 189.2081387329103,
+    "hg_up150_p99": 31.531730050855124,
+    "tmi_hg_valid_frac": 0.42070076454741206,
+    "r_finite_frac": 1.0,
+    "r_p10": 0.0,
+    "r_p50": 0.0,
+    "r_p90": 1.090323393301315
+  },
+  "variants": {
+    "h32_2_p05_d28": {
+      "mean_dti": 0.09272986314383894,
+      "mean_dti_gain": -0.001775759054824849,
+      "min_seed_gain": -0.0036089323716618667,
+      "max_seed_gain": -0.00011965557603130228,
+      "seeds_won": 0,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": -0.001141538544429567,
+        "NE_LidarGapHeavy": -0.0013533246576845682,
+        "SW": -0.0020216417405807376,
+        "SE": -0.0025865312766045244
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -2448.6,
+      "removed_credit_per_removed_fp": 0.034255093985966434
+    },
+    "h32_2_p10_d28": {
+      "mean_dti": 0.09073851190514504,
+      "mean_dti_gain": -0.0037671102935187537,
+      "min_seed_gain": -0.005849195307744085,
+      "max_seed_gain": -0.0017729301755462987,
+      "seeds_won": 0,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": -0.002766649375059446,
+        "NE_LidarGapHeavy": -0.0047619535721673155,
+        "SW": -0.003250304464527326,
+        "SE": -0.004289533762320927
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -4894.9,
+      "removed_credit_per_removed_fp": 0.034349636120432396
+    },
+    "control_top_p10_d28": {
+      "mean_dti": 0.08973806340464194,
+      "mean_dti_gain": -0.004767558794021854,
+      "min_seed_gain": -0.005814760849269495,
+      "max_seed_gain": -0.0034218343043149607,
+      "seeds_won": 0,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": -0.0040615829532347795,
+        "NE_LidarGapHeavy": -0.006909470238400575,
+        "SW": -0.004825409203789825,
+        "SE": -0.003273772780662236
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -4894.9,
+      "removed_credit_per_removed_fp": 0.03827276075731454
+    }
+  },
+  "full_footprint_d28_audit": {
+    "d28_base_px": 44090,
+    "d28_px_with_finite_r": 44090,
+    "d28_p05_pruned_px": 2205,
+    "d28_p10_pruned_px": 4409,
+    "d28_dot_r_p10": 0.8520881159260424,
+    "d28_dot_r_p50": 1.0249174278558053,
+    "d28_dot_r_p90": 1.2556591033578912
+  },
+  "gate_passed": false,
+  "seconds": 108.77618741989136
+}

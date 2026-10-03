@@ -1,0 +1,126 @@
+{
+  "session": "GEMSDOE28 session 9 (arena/01a102cf-gemsdoe28)",
+  "date_utc": "2026-10-03",
+  "method": "One-off agent reads acting as a manual reader; no DrivenData login, upload, polling, or monitoring. Sandbox network note: curl cannot reach raw.githubusercontent.com / sciencebase.gov / doi.org directly (TLS exit 35), while api.github.com (gh CLI), drivendata.org, gdr.openei.org, api.datacite.org and crossref chooser are reachable via the page-fetch tool. Runner bridge (fetch-gdr-external-layers.yml) remains the byte-verification path for sciencebase.gov.",
+  "checks": [
+    {
+      "id": "dd-problem-page",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "read_in_full": true,
+      "verified_facts": [
+        "Task: models for geological faults indicative of geothermal resources; test set = expert-identified faults NOT in the public USGS database.",
+        "Metric: distance-weighted Tversky index, alpha=0.2, beta=0.8, triangular kernel k(d)=max(1-d/300 m, 0) at 100 m pixels; worked example TPw=3.00, FPw=1.89, FNw=2.00 -> 0.60.",
+        "Submission format: single-band float32 GeoTIFF, EPSG:32611, 100 m, same bounds as training data, values in [0,1], 'data outside the bounds is null or nan'.",
+        "Two rounds: Initial $50K (5 x $10K) on fixed private labels; Final $250K ($100K/$70K/$40K/$25K/$15K) rescored on expert-EXPANDED label set built by cross-referencing every team's submission.",
+        "Repo metric implementation src/gems27/metric.py matches the official formula (alpha, beta, kernel, TPw/FPw/FNw definitions)."
+      ]
+    },
+    {
+      "id": "dd-public-leaderboard",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "read_in_full": false,
+      "verified_facts": [
+        "Rank 1 DARD 0.3195 (12 submissions) — matches the user-stated target and the repo's earlier one-off observation.",
+        "Rank 2 0.3128, rank 3 0.3042, rank 4 0.2998, rank 5 0.2941.",
+        "Rank 15 wbg1 0.2600 — consistent with the owner-reported dotted-h19-5-d2-8 score.",
+        "Rank 19 extradr19 0.2449 — matches the owner-reported T-v2 live score (5512495c6bd1).",
+        "No rank/score identifies the repository owner beyond these numeric coincidences; treated as public observations only."
+      ]
+    },
+    {
+      "id": "sibling-site-gemsdoe25",
+      "url": "https://buffedlizard55-lab.github.io/GEMSDOE25/",
+      "read_in_full": false,
+      "verified_facts": [
+        "Download link gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif exists; SHA-256 prefix 91eae1ca42ec845e matches the hash pinned in this repo's README for the 0.2600 anchor file.",
+        "File described as 44,090 px, float32, [0,1] finite inside footprint, NaN outside; 'unscored; not slot-approved' on the sibling site; the 0.2600 association remains owner-reported.",
+        "Sibling site states the earlier portal range error was caused by NaNs inside the footprint (inferred from the file, portal validator not public) — consistent with evidence/range_validator_forensics_2026-10-03.json."
+      ]
+    },
+    {
+      "id": "official-rules-pdf",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "read_in_full": false,
+      "verified_facts": [
+        "Title: Geologic Enhanced Mapping System (GEMS) Prize Official Rules, September 2026; governed by 15 U.S.C. 3719.",
+        "Total pool $300,000: Phase 1 $50K split equally among top five; Phase 2 $250K as $100K/$70K/$40K/$25K/$15K.",
+        "Phase 2 rescoring: expert reviewers revise the new-fault dataset using submitted predictions; all Phase-1 competitors automatically eligible.",
+        "Key dates deferred to gems.drivendata.org (deadline must be spot-checked manually before any slot is spent).",
+        "Eligibility: US persons/entities; FFRDC and federal-employee exclusions; AI-use disclosure requirement is tracked in registry/irregularities.json (ai-use-disclosure)."
+      ]
+    },
+    {
+      "id": "reid-euler-1990-doi",
+      "url": "https://doi.org/10.1190/1.1442774",
+      "read_in_full": false,
+      "verified_facts": [
+        "Crossref record: 'Magnetic interpretation in three dimensions using Euler deconvolution', Geophysics, 1 January 1990, authors A. B. Reid, J. M. Allsop, H. Granser, A. J. Millett, I. W. Somerton; publisher Society of Exploration Geophysicists.",
+        "Confirms the citation used by src/gems27/euler.py and the standing prompt's Euler-deconvolution directive."
+      ]
+    },
+    {
+      "id": "gdr-1391",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "read_in_full": false,
+      "verified_facts": [
+        "INGENIOUS Great Basin Regional Dataset Compilation, DOI 10.15121/1881483, CC-BY 4.0 license.",
+        "Direct download links live for 2m_temperature_probe_INGENIOUS_regional_data.zip (1.03 MB), paleo_geothermal_regional.zip (82.04 kB), great_basin_q_volcanics.zip (9.44 MB) — all three byte-verified earlier by the runner bridge (evidence/external_layer_inventory.json).",
+        "Additional free official packages confirmed listed: seismicity (22.98 MB), geodetics (51.99 MB), Quaternary faults v1/v2, wellspring geodatabase (19.85 MB), study-area boundary; plus companion DOIs for MT conductance, heat flow, gravity/magnetics, detrended elevation, slip/dilation tendency."
+      ]
+    },
+    {
+      "id": "sciencebase-slip-tendency",
+      "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+      "read_in_full": false,
+      "verified_facts": [
+        "Siler, D.L., USGS data release, DOI 10.5066/P9YL58W6 (DataCite record verified: state=findable).",
+        "Attached files listed: Shapefile_Full Study.zip 34.25 MB, Shapefile_INGENIOUS area.zip 27.35 MB, KMZ_Full Study.zip 6.61 MB, KMZ_INGENIOUS area.zip 5.31 MB, FGDC metadata.",
+        "Abstract (verbatim via DataCite): 'Both conditions may make such faults likely to host as-yet-undiscovered hydrothermal processes.'",
+        "Byte-level obtainability: queued on the runner bridge (scripts/fetch_external_layers.py SCIENCEBASE_CHECKS); sandbox cannot reach sciencebase.gov."
+      ]
+    },
+    {
+      "id": "sciencebase-mt-conductance",
+      "url": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "read_in_full": false,
+      "verified_facts": [
+        "Peacock & Bedrosian 2022, DOI 10.5066/P9TWT2LU (DataCite record verified).",
+        "Five conductance GeoTIFFs listed with depth ranges: gb_conductance_surface_tp.tif (2-12 km), gb_conductance_middle_crust_tp.tif (12-20 km), gb_conductance_lower_crust_tp.tif (20-50 km), gb_conductance_upper_mantle_tp.tif (50-90 km), gb_conductance_mantle_tp.tif (90-200 km); 3.94 MB each.",
+        "Method: 3D ModEM inversion of >800 public MT transfer functions (IRIS EMTF, GDR, ScienceBase).",
+        "Byte-level obtainability: queued on the runner bridge."
+      ]
+    },
+    {
+      "id": "sciencebase-heat-flow",
+      "url": "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+      "read_in_full": false,
+      "verified_facts": [
+        "DeAngelo et al. 2022, DOI 10.5066/P9BZPVUC.",
+        "Attached file listed: heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA.zip 124.12 MB.",
+        "Summary (verbatim): point coverage 'includes an important new attribute for geothermal wells: the residual, which can be interpreted as the well's departure from estimated background heat flow conditions, and the value of residual may be useful in identifying hydrothermal or groundwater influence on conductive heat flow.'",
+        "Maps built with hydrothermal convective influence removed (2D LOESS weighted regression) — makes the residual channel directly interpretable for H33-3.",
+        "Byte-level obtainability: queued on the runner bridge."
+      ]
+    },
+    {
+      "id": "local-data-restore",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE + https://github.com/buffedlizard55-lab/GEMSDOE24 (public owner mirrors)",
+      "read_in_full": false,
+      "verified_facts": [
+        "All 17 hash-pinned inputs restored this session via scripts/restore_data.py over gh api (raw.githubusercontent.com unreachable from this sandbox); every SHA-256 matched registry/data_manifest.json (data/restore_receipt.json).",
+        "121/121 pytest checks pass with restored data; scripts/verify_downloads.py re-audited docs/downloads: 179/179 checks PASS.",
+        "sample_submission.tif (owner mirror) carries 7,111,787 NaNs with nodata=NaN; current primary download c3aeda1d31a3-nan.tif has the identical NaN count outside the footprint and strictly {0,1} inside — exactly matching the organizer's stated convention 'data outside the bounds is null or nan'."
+      ]
+    }
+  ],
+  "range_error_resolution": {
+    "observed_error": "Predicted values must be in range [0, 1]",
+    "established_cause": "The earlier NaN TIFF contained 2,344,929 NaNs INSIDE the template footprint (evidence/range_validator_forensics_2026-10-03.json). Ordinary elementwise range validation rejects NaN. The organizer's own sample submission uses NaN OUTSIDE the footprint (verified above), so NaN-outside is the expected convention.",
+    "current_artifacts": "All 14 docs/downloads GeoTIFFs: single-band float32, exact EPSG:32611 100 m grid, finite {0,1} inside footprint, NaN (or all-zero fallback variant) outside; 179/179 audit checks pass. Upload the -nan.tif primary; keep the -allfinite.tif only as manual fallback."
+  },
+  "irregularities_flagged": [
+    "H32-2 run-1 sentinel defect (|v|>=1e30 nodata ingested into P99 scaling) — invalidated run preserved as evidence/h32_2_holdout_run1_invalid_2026-10-03.json; repaired run recorded in evidence/h32_2_holdout.json; see knowledge/16_preregistration_H32-2.md run-1 integrity correction and registry/irregularities.json.",
+    "drivendata.org key dates: the rules PDF defers the deadline to the competition site; a human must spot-check the deadline before spending any weekly slot.",
+    "ScienceBase byte-level downloads for H33-1/H33-2/H33-3 layers are LISTED but not yet byte-verified from a reachable host; the merge-triggered runner bridge will record the result in evidence/external_layer_inventory.json."
+  ]
+}
