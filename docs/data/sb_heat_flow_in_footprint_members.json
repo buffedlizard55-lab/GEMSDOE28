@@ -1,0 +1,333 @@
+{
+  "label": "sb_heat_flow_zip",
+  "filename": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA.zip",
+  "bytes": 130154244,
+  "sha256": "e7fd62c6963ab390963b3f19adf4dd14bf616e7267f2ae38ad6af1005c106918",
+  "n_members": 51,
+  "vector_members": [
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.shp",
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.shp",
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.shp"
+  ],
+  "filegdb_roots": [],
+  "raster_members": [
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_equalWts.tif",
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_qcWts.tif",
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_tcWts.tif"
+  ],
+  "tabular_members": [
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/documentation_doi_10_5066_P9BZPVUC.txt",
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/readme.txt",
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/readme.txt",
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/readme.txt",
+    "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/readme.txt"
+  ],
+  "members": [
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/",
+      "bytes": 0,
+      "compressed_bytes": 0,
+      "method": 0
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/documentation_doi_10_5066_P9BZPVUC.docx",
+      "bytes": 53158,
+      "compressed_bytes": 50268,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/documentation_doi_10_5066_P9BZPVUC.txt",
+      "bytes": 28762,
+      "compressed_bytes": 9644,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/readme.txt",
+      "bytes": 2998,
+      "compressed_bytes": 1184,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/",
+      "bytes": 0,
+      "compressed_bytes": 0,
+      "method": 0
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.CPG",
+      "bytes": 5,
+      "compressed_bytes": 5,
+      "method": 0
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.dbf",
+      "bytes": 73,
+      "compressed_bytes": 30,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.prj",
+      "bytes": 443,
+      "compressed_bytes": 265,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.sbn",
+      "bytes": 132,
+      "compressed_bytes": 68,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.sbx",
+      "bytes": 116,
+      "compressed_bytes": 61,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.shp",
+      "bytes": 21500,
+      "compressed_bytes": 18793,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.shp.xml",
+      "bytes": 16547,
+      "compressed_bytes": 4747,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.shx",
+      "bytes": 108,
+      "compressed_bytes": 59,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea_symbology.lyrx",
+      "bytes": 11604,
+      "compressed_bytes": 2730,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.CPG",
+      "bytes": 5,
+      "compressed_bytes": 5,
+      "method": 0
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.dbf",
+      "bytes": 5903495,
+      "compressed_bytes": 343417,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.prj",
+      "bytes": 445,
+      "compressed_bytes": 262,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.sbn",
+      "bytes": 70252,
+      "compressed_bytes": 38490,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.sbx",
+      "bytes": 4060,
+      "compressed_bytes": 1871,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.shp",
+      "bytes": 203912,
+      "compressed_bytes": 121150,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.shp.xml",
+      "bytes": 19540,
+      "compressed_bytes": 5114,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.shx",
+      "bytes": 58332,
+      "compressed_bytes": 16082,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells_symbology.lyrx",
+      "bytes": 38858,
+      "compressed_bytes": 4610,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/readme.txt",
+      "bytes": 4115,
+      "compressed_bytes": 1669,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/",
+      "bytes": 0,
+      "compressed_bytes": 0,
+      "method": 0
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_equalWts.tif",
+      "bytes": 58833850,
+      "compressed_bytes": 32520052,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_equalWts.tif.aux.xml",
+      "bytes": 679,
+      "compressed_bytes": 285,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_equalWts.tif.ovr",
+      "bytes": 10262265,
+      "compressed_bytes": 10222717,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_equalWts.tif.xml",
+      "bytes": 14536,
+      "compressed_bytes": 4455,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_equalWts_symbology.lyrx",
+      "bytes": 9824,
+      "compressed_bytes": 1537,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_qcWts.tif",
+      "bytes": 58833850,
+      "compressed_bytes": 32528725,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_qcWts.tif.aux.xml",
+      "bytes": 679,
+      "compressed_bytes": 286,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_qcWts.tif.ovr",
+      "bytes": 10260768,
+      "compressed_bytes": 10221389,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_qcWts.tif.xml",
+      "bytes": 14692,
+      "compressed_bytes": 4499,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_qcWts_symbology.lyrx",
+      "bytes": 9810,
+      "compressed_bytes": 1543,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_tcWts.tif",
+      "bytes": 58833850,
+      "compressed_bytes": 32717068,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_tcWts.tif.aux.xml",
+      "bytes": 679,
+      "compressed_bytes": 287,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_tcWts.tif.ovr",
+      "bytes": 10353921,
+      "compressed_bytes": 10322671,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_tcWts.tif.xml",
+      "bytes": 14746,
+      "compressed_bytes": 4497,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_tcWts_symbology.lyrx",
+      "bytes": 9809,
+      "compressed_bytes": 1535,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.CPG",
+      "bytes": 5,
+      "compressed_bytes": 5,
+      "method": 0
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.dbf",
+      "bytes": 12760697,
+      "compressed_bytes": 777108,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.prj",
+      "bytes": 443,
+      "compressed_bytes": 265,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.sbn",
+      "bytes": 70252,
+      "compressed_bytes": 38490,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.sbx",
+      "bytes": 4060,
+      "compressed_bytes": 1871,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.shp",
+      "bytes": 203912,
+      "compressed_bytes": 120847,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.shp.xml",
+      "bytes": 26863,
+      "compressed_bytes": 5753,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.shx",
+      "bytes": 58332,
+      "compressed_bytes": 16082,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates_symbology.lyrx",
+      "bytes": 54900,
+      "compressed_bytes": 5008,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/readme.txt",
+      "bytes": 7308,
+      "compressed_bytes": 2014,
+      "method": 8
+    },
+    {
+      "name": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/readme.txt",
+      "bytes": 2418,
+      "compressed_bytes": 1085,
+      "method": 8
+    }
+  ]
+}
