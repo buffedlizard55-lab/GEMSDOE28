@@ -164,3 +164,79 @@ def test_repository_pin_file_covers_the_h33_1_release():
     assert row["bytes"] == 35912323
     assert row["doi"] == "10.5066/P9YL58W6"
     assert payload["drivendata_access"] is False
+
+
+# --------------------------------------------------------------------------------------------
+# the .bin-extension defect the 2026-10-03T18:49:01Z runner run hit
+# --------------------------------------------------------------------------------------------
+def test_payload_without_a_zip_suffix_is_still_recognised_as_a_zip(tmp_path):
+    """ScienceBase URLs carry no file suffix, so fetch() names the payload .bin.
+
+    The 2026-10-03T18:49:01Z runner run downloaded the right bytes (pin matched) but GDAL refused to
+    open them, producing a committed clip with 0 records. The format must be decided by magic bytes.
+    """
+    zip_path = make_zip(tmp_path)
+    bin_path = tmp_path / "payload.bin"
+    bin_path.write_bytes(zip_path.read_bytes())
+    usable, fmt = fel.resolve_payload_format(bin_path, "Shapefile_Full Study.zip")
+    assert fmt == "zip"
+    assert usable.suffix == ".zip"
+    assert usable.exists()
+    # the original is untouched, so the verified hash still refers to a real file
+    assert bin_path.exists()
+    assert hashlib.sha256(bin_path.read_bytes()).hexdigest() == hashlib.sha256(
+        zip_path.read_bytes()).hexdigest()
+
+
+def test_magic_bytes_win_over_a_misleading_pin_filename(tmp_path):
+    zip_path = make_zip(tmp_path)
+    odd = tmp_path / "payload.dat"
+    odd.write_bytes(zip_path.read_bytes())
+    usable, fmt = fel.resolve_payload_format(odd, "not_an_archive.tif")
+    assert fmt == "zip"
+    assert usable.suffix == ".zip"
+
+
+def test_non_archive_payload_keeps_its_pin_suffix(tmp_path):
+    tif = tmp_path / "layer.bin"
+    tif.write_bytes(b"II*\x00" + b"\x00" * 60)
+    usable, fmt = fel.resolve_payload_format(tif, "gb_conductance_surface_tp.tif")
+    assert fmt == "tif"
+    assert usable.suffix == ".tif"
+
+
+def test_derived_run_on_a_dot_bin_payload_produces_records(tmp_path):
+    """End-to-end regression: a .bin-named zip must still yield a non-empty clip."""
+    zip_path = make_zip(tmp_path)
+    payload = tmp_path / "sb_slip_tendency_shapefile_full.bin"
+    payload.write_bytes(zip_path.read_bytes())
+    out = tmp_path / "out"
+    out.mkdir()
+    pins = {"sb_slip_tendency_shapefile_full": {
+        "url": payload.as_uri(),
+        "bytes": payload.stat().st_size,
+        "sha256": hashlib.sha256(payload.read_bytes()).hexdigest(),
+        "filename": "Shapefile_Full Study.zip",
+    }}
+    saved = fel.DERIVED_SPECS
+    fel.DERIVED_SPECS = [{"label": "sb_slip_tendency_shapefile_full",
+                          "hypothesis": "H33-1", "stem": "clip"}]
+    try:
+        res = fel.build_sciencebase_derived(out, pins, None)
+    finally:
+        fel.DERIVED_SPECS = saved
+    row = res["sb_slip_tendency_shapefile_full"]
+    assert row["status"] == "DERIVED_WRITTEN", row
+    assert row["payload_format"] == "zip"
+    assert row["derived"]["n_records"] > 0, "the .bin regression must not produce an empty clip"
+    assert (out / "commit" / "clip.json").exists()
+
+
+def test_unreadable_layer_is_not_reported_as_written(tmp_path):
+    """A payload GDAL cannot open must surface as LAYER_UNREADABLE, never DERIVED_WRITTEN."""
+    junk = tmp_path / "release.zip"
+    junk.write_bytes(b"PK\x03\x04" + b"\x00" * 200)     # zip magic, truncated archive
+    res = run_derived(tmp_path, pins_for(junk), "sb_slip_tendency_shapefile_full")
+    row = res["sb_slip_tendency_shapefile_full"]
+    assert row["status"] in {"LAYER_UNREADABLE", "ARCHIVE_UNREADABLE", "NO_VECTOR_LAYER"}, row
+    assert row["status"] != "DERIVED_WRITTEN"
