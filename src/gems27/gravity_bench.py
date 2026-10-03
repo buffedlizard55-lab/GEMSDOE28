@@ -18,7 +18,10 @@ explicit arguments with the frozen values as defaults.
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
+import rasterio
 
 SENTINEL = 1e30  # frozen training-raster validity rule (|v| < 1e30), cf. H32-2 run-1 lesson
 
@@ -88,3 +91,50 @@ def bench_mesa(*, grav: np.ndarray, tmi: np.ndarray, step: np.ndarray,
             "fracs": {"bench": float(bench.sum() / n_foot),
                       "mesa": float((mesa & ~bench).sum() / n_foot),
                       "lidar_valid": float(lv.sum() / n_foot)}}
+
+
+def load_gravity_bench(training_path: str | Path, lidar_path: str | Path,
+                       footprint: np.ndarray) -> dict:
+    """Read the frozen H35-4 legs from the local rasters (label-free, no truth contact).
+
+    Band indices are fail-loud: the embedded descriptions must match the CORRECTED names or
+    this raises instead of silently ranking on the wrong physics.
+    """
+    def short(d: str | None) -> str:
+        # Same normalization as scripts/prepare_data.py: 'name - long gloss' -> 'name'.
+        return (d or "").split(" - ")[0].strip()
+
+    foot = np.asarray(footprint, bool)
+    with rasterio.open(training_path) as src:
+        desc = [short(d) for d in src.descriptions]
+        if desc[GRAV_BAND - 1] != "iso_grav_anom_hg":
+            raise AssertionError(f"training band {GRAV_BAND} is {desc[GRAV_BAND - 1]!r}, "
+                                 "expected 'iso_grav_anom_hg' - band layout drifted")
+        if desc[TMI_BAND - 1] != "tmi_hg":
+            raise AssertionError(f"training band {TMI_BAND} is {desc[TMI_BAND - 1]!r}, "
+                                 "expected 'tmi_hg' - band layout drifted")
+        grav = src.read(GRAV_BAND).astype(np.float64)
+        tmi = src.read(TMI_BAND).astype(np.float64)
+    with rasterio.open(lidar_path) as src:
+        desc = [short(d) for d in src.descriptions]
+        for band, want in ((STEP_BAND, "step_max"), (RELIEF_BAND, "relief"),
+                           (VALID_BAND, "valid")):
+            if desc[band - 1] != want:
+                raise AssertionError(f"lidar band {band} is {desc[band - 1]!r}, expected "
+                                     f"{want!r} - band layout drifted")
+        step = src.read(STEP_BAND).astype(np.float64)
+        relief = src.read(RELIEF_BAND).astype(np.float64)
+        valid = src.read(VALID_BAND)
+    out = bench_mesa(grav=grav, tmi=tmi, step=step, relief=relief, valid=valid, foot=foot)
+    cuts = out["cuts"]
+    return {"bench": out["bench"], "mesa": out["mesa"], "grav_hg": grav,
+            "bench_px": int(out["bench"].sum()), "mesa_px": int(out["mesa"].sum()),
+            "bench_frac_of_footprint": out["fracs"]["bench"],
+            "mesa_frac_of_footprint": out["fracs"]["mesa"],
+            "lidar_valid_frac_of_footprint": out["fracs"]["lidar_valid"],
+            "grav_cut": cuts["grav_hi"], "step_cut": cuts["step_lo"],
+            "relief_cut": cuts["relief_lo"], "step_hi_cut": cuts["step_hi"],
+            "tmi_hi_cut": cuts["tmi_hi"], "grav_lo_cut": cuts["grav_lo"],
+            "training_bands": {"grav_hg": GRAV_BAND, "tmi_hg": TMI_BAND},
+            "lidar_bands": {"step_max": STEP_BAND, "relief": RELIEF_BAND,
+                            "valid": VALID_BAND}}

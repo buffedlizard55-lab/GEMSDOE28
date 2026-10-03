@@ -90,7 +90,7 @@ def main() -> int:
     print(f"catalogue {int(labels.sum()):,} px in {n_sys:,} fault systems", flush=True)
 
     # Label-free bench/mesa legs, computed once on the full grid (no truth contact).
-    legs = gravity_bench.load_gravity_bench(paths.TRAINING, paths.LIDAR)
+    legs = gravity_bench.load_gravity_bench(paths.TRAINING, paths.LIDAR, foot)
     bench, mesa, grav = legs["bench"], legs["mesa"], legs["grav_hg"]
     print(f"bench={legs['bench_px']} ({legs['bench_frac_of_footprint']:.3f} of footprint) "
           f"mesa={legs['mesa_px']} ({legs['mesa_frac_of_footprint']:.4f}) "
