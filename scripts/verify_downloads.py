@@ -77,7 +77,8 @@ def main() -> int:
           f"{template_info['crs']} {template_info['shape']}; footprint={footprint.sum():,}")
 
     candidates = []
-    for slot in ("primary", "secondary", "tertiary", "quaternary", "quinary_probe", "research_candidate"):
+    for slot in ("primary", "secondary", "tertiary", "quaternary", "quinary_probe",
+                 "conservative_alternative", "research_candidate"):
         item = manifest.get(slot)
         if isinstance(item, dict) and item.get("nan"):
             candidates.append((slot, item))

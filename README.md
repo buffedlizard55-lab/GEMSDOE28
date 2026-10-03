@@ -5,7 +5,66 @@
 - **Core Value 1 — Maximize P(Win):** Prioritize the highest-leverage geological and mathematical actions that measurably increase expected Distance-Tolerant IoU (DTI) on the hidden test set; never spend a weekly submission slot on an idea that has not beaten the current holdout best on a spatially-blocked holdout set.
 - **Core Value 2 — Own the Outcome:** Work autonomously end-to-end with zero manual input required, verify every claim line by line from official verified trusted sources with links for manual review, flag any irregularities in `registry/irregularities.json`, and run three full verification passes (Pass 1, Pass 2, Pass 3) before opening and merging a pull request onto `main`.
 
-### Verbatim Task Prompt (Session 9, 2026-10-03 — read first every session)
+### Verbatim Task Prompt (Session 13, 2026-10-03 — read first every session)
+
+> **Read this first, every session.** It is the owner's standing brief, reproduced word-for-word at the
+> top of the repository so that every session starts from the same base instead of re-deriving it.
+>
+> **Euler deconvolution for depth, not just location.** Gradient and tilt-derivative features mark where
+> a potential-field anomaly changes, but not how deep the source sits — and depth is exactly what a
+> geologist uses to judge whether a lineament is a shallow dike, a buried contact, or a fault plane.
+> Euler deconvolution (Reid, Allsop, Granser, Millett, and Somerton, *Geophysics*, 1990) solves Euler's
+> homogeneity equation across a moving window of the field and its gradients to jointly estimate a
+> source's location and depth, and the original paper validates it on real, structurally complex terrain,
+> reporting that it yields "depth-labeled Euler trends which mark magnetic edges, notably faults, with
+> good precision." Run it with the structural index appropriate to a fault contact, cluster the resulting
+> depth-labeled solutions, and treat a cluster with shallow estimated depth aligned to a candidate
+> lineament as corroboration distinct from a gradient peak alone — two unrelated methods agreeing there is
+> both an edge and a shallow source at the same place is stronger evidence than either one, and it's a
+> concrete detail a Phase 2 reviewer can actually evaluate.
+>
+> **Why and how did `dotted-h19-5-d2-8` (`GEMSDOE25`) get the highest score, and can we generate a
+> submission that scores higher than `0.26`?** Answer with PhD-level experience, knowledge, and
+> judgement. The official public leaderboard lists **`0.3195` at #1**, so design a strategy that can
+> exceed `0.3195`.
+>
+> **Generate 3–5 candidate geological hypotheses we have not tried yet**, each naming the specific
+> layer(s) involved, the physical signature being targeted, why it should catch a fault *missing* from
+> the USGS/INGENIOUS catalogue rather than one already in it, and how it differs from anything already
+> implemented in this repo. Rank them by expected DTI improvement and implementation cost. **Validate the
+> top candidate on the spatially-blocked holdout set before touching a weekly submission slot** — do not
+> spend a submission slot on an idea that has not beaten the current holdout best. If a candidate cannot
+> be validated without new external data, name the specific free, official source needed and check that
+> it is obtainable before proposing the idea as viable.
+>
+> **Deep research mandate.** Study, analyse and understand the science of geothermal-vent and fault
+> discovery; store everything gathered from official verified sources as a starting point for other
+> projects. Be contrarian but grounded; find sources of data and angles others are overlooking.
+>
+> **Submission mechanics, verbatim from the owner.** "There should be an easy to download submission tif
+> file as described by the prompt… The site should be able to generate a TIF file that is required for
+> submission. It should be as easy as download to click a File to submit into the competition. This needs
+> to be in the executive summary or the very beginning of the site. It should be obvious when you visit
+> the site." A past upload returned **"Predicted values must be in range [0, 1]"**; submissions need a
+> unique name and a short note (≤ 200 characters). Create an executive-summary subpage that explains
+> exactly how to make a submission into the contest. The project must also "solve the problem of having
+> to manually check everything ourselves and having an up to date current feed."
+>
+> **Process (verbatim, unchanged).** Work line by line verifying from official verified trusted sources,
+> provide links for manual review; there should be no manual input — work autonomously to complete tasks;
+> flag any irregularities for review; no hallucinations; verify no hallucinations. Run three passes
+> (Pass 1 implement and verify; Pass 2 review for bugs, missing requirements, wrong assumptions and edge
+> cases, and fix; Pass 3 re-check the entire implementation against the original request and improve
+> accuracy, reliability, completeness and code quality). Then create a pull request and merge it onto
+> `main`, with suggestions for what still needs to be done and any limitations in the way of success.
+>
+> **Arena AI Core Values (focal points for every decision).** **Maximize P(Win)** — in every decision
+> weigh tradeoffs, assess risk, and choose the path that maximises the probability of winning; set aside
+> emotions. **Own the Outcome** — own results end to end, not just one slice; when problems arise and we
+> have the means to act, act without waiting for permission; treat failure and success as signals.
+>
+> **Legacy verbatim prompt (Session 9, kept for the audit trail — the scorecard it carries is the
+> owner's own list and is reproduced in §2).**
 > **Euler deconvolution for depth, not just location.** Gradient and tilt-derivative features mark where a potential-field anomaly changes, but not how deep the source sits. Euler deconvolution (Reid, Allsop, Granser, Millett, and Somerton, *Geophysics*, 1990, DOI `10.1190/1.1442774`) solves Euler's homogeneity equation across a moving window of the field and its gradients to jointly estimate a source's location and depth. Run it with the structural index appropriate to a fault contact, cluster the depth-labeled solutions, and treat a cluster with shallow estimated depth aligned to a candidate lineament as corroboration distinct from a gradient peak alone — two unrelated methods agreeing is stronger evidence than either one.
 >
 > **Scorecard (owner sites → reported live scores).** GEMSDOE `0.1563` · 6GEMSDOE `0.0286` · GEMSDOE3 nodes `0.1193` / discovery `0.0830` / ridge `0.1152` · GEMSDOE2 `0.1560` · GEMSDOE4 `0.0343` · 5GEMSDOE `0.1563` · 7GEMSDOE `0.1461` · 8GEMSDOE `0.1563` · GEMSDOE9 `0.0107` · 11GEMSDOE `0.0202` · 12GEMSDOE `0.1294` · 15GEMSDOE `0.0782` · 14GEMSDOE `0.0020` · 17GEMSDOE `0.0187` · 18GEMSDOE `0.0297` · 19GEMSDOE `0.1894`/`0.1922` · GEMSDOE10 `0.0461`/`0.0921`/`0.1280`/`0.1839` · 13GEMSDOE `0.0904` · 16GEMSDOE `0.1855`/`0.0976`/`0.0360` · GEMSDOE21 `0.1894` · 20GEMSDOE `0.1890`/`0.1859` · GEMSDOE22 `0.1002`/`0.0748` · GEMSDOE23 `0.1352` · GEMSDOE24 `0.2477` · **GEMSDOE25 `dotted-h19-5-d2-8` = `0.2600` (our best)** · GEMSDOE26 `0.1223` · GEMSDOE27 `0.2449` · 28–33GEMSDOE: no score yet.
@@ -30,14 +89,15 @@
 
 ## 1. Executive Summary & One-Click Verified Submission GeoTIFFs (`docs/downloads/`)
 
-All submission artifacts in `docs/downloads/` are verified by `scripts/verify_downloads.py` (**`179/179` checks PASS, `0` failures**, `evidence/submission_file_audit.json`): single-band `float32`, exact template grid (`EPSG:32611`, `3730 × 3292`, `100 m` pixels, `5,167,373` inside-footprint cells), values strictly in `{0.0, 1.0} ⊂ [0, 1]` inside the footprint, zero internal `NaN`s, `NaN` outside the footprint (`-nan.tif`, with an `-allfinite.tif` fallback having `0.0` outside and no `NaN` anywhere), zero overlap with the `60,988` known catalogue pixels, content-addressed 12-hex ID, single-member `.zip`, and a registered note $\le 200$ characters.
+All submission artifacts in `docs/downloads/` are verified by `scripts/verify_downloads.py` (**`208/208` checks PASS, `0` failures**, `evidence/submission_file_audit.json`; the count grew from `179` because Session 13 added an audited `conservative_alternative` slot instead of dropping the file the re-slot displaced): single-band `float32`, exact template grid (`EPSG:32611`, `3730 × 3292`, `100 m` pixels, `5,167,373` inside-footprint cells), values strictly in `{0.0, 1.0} ⊂ [0, 1]` inside the footprint, zero internal `NaN`s, `NaN` outside the footprint (`-nan.tif`, with an `-allfinite.tif` fallback having `0.0` outside and no `NaN` anywhere), zero overlap with the `60,988` known catalogue pixels, content-addressed 12-hex ID, single-member `.zip`, and a registered note $\le 200$ characters.
 
 | Slot | Filename (`docs/downloads/`) | Content ID | Emitted px | 4-Fold Spatial-CV Holdout | Hybrid Model vs `0.2600` Anchor | Registered Note ($\le 200$ chars) |
 |---|---|---|---:|---|---:|---|
-| **Primary (One-Click) — PROMOTED Session 12** | `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` | `b531dae0a36f` | `37,660` | **`+0.002599` (`10/10` seeds, `4/4` folds) on fresh seeds `240–249`**; the matched-`N` random-drop control scored `−0.001657` (`0/10` seeds, `0/4` folds), so the gain is the layout, not the budget | `0.2717–0.2727` |
-| **Secondary — demoted Session 12** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) — replicated `+0.001761` on fresh seeds 235–239 (`5/5` seeds, `4/4` folds) | `0.2686` | `28GEMSDOE H27-4 d2.8 solo | ΔDTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc` |
-| **Tertiary — demoted Session 12** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre | OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved` |
-| **Quaternary — demoted Session 12** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
+| **Primary (One-Click) — PROMOTED Session 13** | `gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif` | `0bbddf41eb6d` | `37,447` | **`+0.007289` vs the same-run `d=2.8` reference and `+0.004614` over the H36-1 incumbent, `10/10` seeds, `4/4` folds on fresh seeds `250–259`**; the content-blind matched-`N` control scored `−0.044684` (`0/10` seeds, `0/4` folds), so the gain is placement, not budget | `0.278–0.286` (modelled range) | `28GEMSDOE H37-1 cover+h19 | OOF dDTI +0.00729 vs d2.8, +0.00461 over H36-1; 10/10 seeds, 4/4 folds (seeds 250-259); no T-v2 | id 0bbddf41eb6d | UNSCORED, not slot-approved` |
+| **Secondary — demoted Session 13** | `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` | `b531dae0a36f` | `37,660` | **`+0.002599` (`10/10` seeds, `4/4` folds) on fresh seeds `240–249`, replicated `+0.002675` on the independent decade `250–259`** | `0.2717–0.2727` | `28GEMSDOE H36-1 rung3.0+r1 | …` |
+| **Tertiary** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) — replicated `+0.001761` on fresh seeds 235–239 (`5/5` seeds, `4/4` folds) | `0.2686` | `28GEMSDOE H27-4 d2.8 solo | ΔDTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc` |
+| **Quaternary** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre | OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved` |
+| **Conservative alternative (kept audited)** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
 | **Reference** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130–139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference | OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed | id 450eb6859636 | research only` |
 
 ---
@@ -503,6 +563,84 @@ truncating, and the builder is now idempotent (re-running it previously demoted 
 secondary rank). The site's above-the-fold paragraph was also split — it had become a single run-on
 `<p>` concatenating historical H31/H32-structural/H35-1 failures onto the current status.
 
+### 3.9 Session 13 — the emission rule itself was the leak, and it is now measured
+
+Session 12 closed with the emission step (`thinning.dot_thin`) unchanged: it keeps a pixel iff no
+already-kept pixel is closer than `min_dist`, walking candidates in **ascending raster index**, so the
+detector's evidence never influences the layout. H36-1 had already shown the *layout* is worth
+`+0.0026`/`−0.0017` at fixed count (`knowledge/27` §2). Session 13 replaced the rule and gated it.
+
+**Hypothesis H37-1.** Replace the raster-order cascade with a lazy-greedy **maximum expected coverage**
+of the detector's probability field under the official triangular kernel
+(`k(d) = max(1 − d/300 m, 0)`, `R = 3 px`), at a **matched dot count**, followed by the unchanged
+`H27-4` blind 1-px catalogue-flank prune:
+
+$$\text{gain}(x \mid S) = \sum_q p(q)\,\max\!\big(0,\; k(|x-q|) - C(q)\big), \qquad C(q) = \max_{y \in S} k(|y-q|)$$
+
+That is the official metric's own true-positive term used as the packing objective, so the objective
+and the score are the same object. `gain` is monotone and submodular, so the greedy order carries the
+`1 − 1/e` guarantee and lazy evaluation selects the same set. Implementation: `src/gems27/packing.py`,
+tests `tests/test_packing.py` (including a brute-force `(1 − 1/e)` bound check and a
+determinism contract). Every design choice below was fixed by an exploratory pass on **spent** seeds
+`181`/`185` (`evidence/_scratch/packing_h37_explore{,_v2,_v3}.json`) before the gate was frozen in
+`knowledge/29_preregistration_H37-1.md`.
+
+**Frozen gate, fresh seeds `250–259`, 40 cells (`evidence/h37_1_holdout.json`, 442.6 s).**
+
+| Variant | mean OOF DTI | ΔDTI vs `d=2.8` | vs incumbent | seeds | folds |
+|---|---:|---:|---:|---:|---:|
+| `base_oof_d280` | 0.098186 | — | — | — | — |
+| `rung30_blind_r1` (H36-1 incumbent) | 0.100860 | +0.002675 | — | — | 4/4 |
+| **`cover_prob_r1` (PRIMARY)** | **0.105475** | **+0.007289** | **+0.004614** | **10/10** | **4/4** |
+| `cover_prob_pool3x_r1` (pool probe, 2.45 % density) | 0.105522 | +0.007336 | +0.004661 | 10/10 | 4/4 |
+| `cover_prob_1p5n_r1` (dose, not promotable) | 0.108626 | +0.010440 | +0.007765 | 10/10 | 3/4 |
+| `control_random_matched_n` (content-blind) | 0.053502 | −0.044684 | −0.047359 | 0/10 | 0/4 |
+
+All five frozen criteria passed (G1 direction, G2 margin `+0.004614 ≥ +0.0005`, G3 `10/10` seeds and
+`4/4` folds, G4 content-control margin `+0.0520`, G5 integrity 0 violations in 40/40 cells). Two
+findings matter as much as the headline:
+
+* **The instrument reproduced.** The H36-1 incumbent returned `+0.002675` here against `+0.002599` on
+  seeds `240–249` — a `7.6e-5` difference on an independent decade.
+* **The pool probe is what makes the artifact transferable.** The gate's primary drew from *every*
+  ridge pixel (≈16 % of the footprint); the shipped H19-5 surface is only **2.34 %**. The probe
+  restricted to a 2.45 % pool measured the same effect (`+0.004661`, 10/10 seeds, 4/4 folds), so the
+  artifact is a measured analogue, not an extrapolation.
+
+**Artifact.** `docs/downloads/gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif` —
+**37,447 px** at the same 41,333-px pre-prune budget as the incumbent, SHA-256 `4557311baedb4e66…`,
+`verify_downloads.py` → **PASS, 208 checks, 0 failures**. The weight field is the full-fit detector
+probability (the emission-time analogue of the gate's out-of-fold field). A second, **not-promoted**
+probe (`…-probe-union-pool-r1-…`, 38,545 px) records the union-pool emission (H19-5 + the detector's
+own ridges) because the live record already punishes that content: 26GEMSDOE `dilcond-oof-v1`, a pure
+detector-product emission, scored `0.1223`.
+
+**Answer to the standing question.** Why did `0.2600` win, and can we beat it? `0.2600` won because
+Poisson-disk thinning at `d = 2.8` cut 63 % of the H19-5 pixels while retaining 90.6 % of the `d=1.5`
+credit (`knowledge/01`). It can be beaten — and Session 13 shows the cheapest remaining win was not new
+geology but the **selection rule**: `+0.0073` OOF at a matched budget, projecting to a modelled
+`0.278–0.286` against the incumbent's modelled `0.2717–0.2727`. Beating `0.3195` still needs
+`+1,151 px` of credit (`knowledge/20` §3.1) and remains a **detection** problem; the ranked geological
+candidates for that are in `knowledge/31_hypotheses_session13.md`.
+
+**Stated plainly, in the same breath.** The standing holdout hides catalogue components interleaved
+with the known catalogue, so 100 % of its truth lies at distance 0 from the published catalogue. A
+coverage objective aimed at a field trained on that catalogue is *a priori* favoured by the protocol.
+The gate is therefore necessary and passed with a devastating content-blind control, **but this session
+did not run the LOSFO far-field instrument on it**, and that is the highest-value next measurement.
+
+**Infrastructure irregularity found and reported this session.** GitHub Pages for this repository is
+**not deploying**: the Pages API reports `status: errored`, the last successful legacy build was at
+`2026-10-03T21:11Z`, and the runs after it (`e429135` → `"Page build failed."`; `a667805` → stuck
+`building`) leave the published site stale. The repository's own Actions deployment
+(`.github/workflows/pages.yml`, `actions/deploy-pages`) succeeds and the two paths are configured
+against each other (`build_type: legacy`, source `main:/`). Registered in
+`registry/irregularities.json: github-pages-legacy-build-errored`; whatever is published at
+`https://buffedlizard55-lab.github.io/GEMSDOE28/` should be treated as possibly stale until the Pages
+source is switched to **GitHub Actions**.
+
+---
+
 ## 4. Euler Deconvolution for Depth (Reid et al., *Geophysics*, 1990) & Screen Ledger
 
 Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `evidence/h31_1_euler_feature_audit.json`, `evidence/h31_1_euler_clusters.csv`):
@@ -520,7 +658,11 @@ Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `eviden
 
 ## 5. Candidate Geological Hypotheses
 
-**Current ledger: `knowledge/23_h35_hypotheses.md` (Session 11).** It adds the five-hypothesis H35
+**Current ledger: `knowledge/31_hypotheses_session13.md` (Session 13)** — five ranked arms, each naming
+its layers, physical signature, why it catches a fault *missing* from the catalogue rather than one
+already in it, and how it differs from everything already implemented, plus a per-claim obtainability
+ledger. It supersedes `knowledge/23_h35_hypotheses.md` (Session 11) for ranking; the H35 results
+themselves remain the record. **Previous ledger: `knowledge/23_h35_hypotheses.md` (Session 11).** It adds the five-hypothesis H35
 addition series on top of the H33 ranking below and is the file to read first; the H33 entries remain
 live for the two arms that still have no run. Session 10's ledger,
 `knowledge/20_strategy_after_reachability_frontier.md`, re-ranks
@@ -597,6 +739,18 @@ python scripts/fetch_external_layers.py --derived all --external-pins registry/e
 #     decade). Requires docs/data/sb_slip_tendency_in_footprint.json from 3e first; it aborts with
 #     exit 2 if the clip schema lacks TS/TD. ~152 s for 10 seeds x 4 folds.
 python scripts/run_h33_1_holdout.py --seeds 200-209 --out evidence/h33_1_holdout.json
+
+# 3i. Session 13: exploratory packing passes (SPENT seeds only; they chose the variant, they do not gate it)
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/explore_packing_h37.py     --seeds 181,185
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/explore_packing_h37_v2.py  --seeds 181,185
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/explore_packing_h37_v3.py  --seeds 181,185
+
+# 3j. Session 13: H37-1 frozen gate (seeds 250-259, ~7.5 min). Preregistration knowledge/29 was committed
+#     (424401b) BEFORE the decade was touched; the runner is unmodified since.
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_h37_1_holdout.py --seeds 250-259
+#     Executed: ALL FIVE CRITERIA PASSED -> cover_prob_r1 +0.007289 vs d=2.8 (+0.004614 over H36-1),
+#     10/10 seeds, 4/4 folds, content-blind matched-N control -0.044684, integrity clean.
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/build_h37_1_submissions.py
 
 # 3h. Session 12: H36-1 packing-rung re-pack + flank prune, frozen 10-seed gate (seeds 240-249, ~105 s)
 #     Preregistration knowledge/26 was committed (aaa659c) BEFORE the run; runner frozen at that commit.
