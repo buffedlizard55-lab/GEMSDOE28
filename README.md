@@ -76,7 +76,119 @@ $$\text{DTI} = \frac{\text{TP}_w}{0.2\,\text{TP}_w(1 - \rho) + 0.2\,N + 0.8\,|G|
 
 ---
 
-## 3. Euler Deconvolution for Depth (Reid et al., *Geophysics*, 1990) & Screen Ledger
+## 3. Session 10 — The Reachability Frontier and a Far-Field Harness
+
+Two new results, both reproducible from a committed script and an evidence file named in the same
+sentence. Full write-up: `knowledge/20_strategy_after_reachability_frontier.md`.
+
+### 3.1 What beating `0.3195` costs, in pixels of credit
+
+`scripts/reachability_frontier.py` → `evidence/reachability_frontier.json`. The closed form
+$\text{DTI} = \text{TP}_w / (0.2\,\text{TP}_w(1-\rho) + 0.2N + 0.8|G|)$ is **checked numerically against
+`metric.dti_binary` on 23 synthetic grids before use** — max absolute residual `2.22e-16`, and the
+substitution $\text{FP}_w = N - \text{MP}_w$ holds in every case.
+
+| Emitted px $N$ | credit for `0.2600` | credit for `0.2701` | credit for **`0.3195`** |
+|---:|---:|---:|---:|
+| 40,199 (tertiary) | 4,633 | 4,813 | 5,694 |
+| **44,090 (the `0.2600` file)** | 4,836 | 5,024 | **5,942** |
+| 60,069 (the `0.2477` file) | 5,667 | 5,887 | 6,963 |
+
+The best owner-anchored submission earns **4,791 px of credit (`39.2%` of $|G| = 12{,}226$ px)** at
+$N = 44{,}090$.
+
+> **The gap to `0.3195` at that budget is `+1,151` px of credit — `24.0%` more credit than the entire
+> `0.2600` submission captures, `9.42` points of $|G|$.**
+
+**Why budget reallocation cannot close it.** Holding credit/dot at the current *average* efficiency
+(`0.1087`), DTI tends to `0.5433` as $N \to \infty$ and `0.3195` would arrive at $N \approx 69{,}800$ —
+but the *marginal* efficiency governs whether the next dot helps, and the programme has one
+exactly-controlled live measurement of it: thinning the same ridge from `d=1.5` (`60,069` px,
+`0.2477`) to `d=2.8` (`44,090` px, `0.2600`) removed **`15,979` dots and lost `495.08` px of credit**,
+i.e. **`0.03098` credit/px**, below the break-even `0.05485` at `0.2600`. A dot earning that little
+never clears the `0.2·target` charge, so **no quantity of dots at the current marginal efficiency
+reaches `0.3195`.** The actionable form:
+
+| marginal credit per new dot $e$ | new dots needed for `0.3195` |
+|---:|---:|
+| `0.20` | `8,459` |
+| `0.30` | `4,876` |
+| **`0.40`** | **`3,425`** |
+| `0.50` | `2,640` |
+
+**Conclusion: the gap is a detection gap, not a budget gap.** ~`2,600–3,400` dots that land on
+genuinely unmapped fault traces would reach `0.3195`. Every arm this repository has run — including
+`H33-1` as preregistered — is a *pruning* arm worth `~0.001–0.010`. Those are still worth taking
+(free, and they compose), but they are not the path.
+
+### 3.2 A far-field holdout that can finally gate *addition* arms
+
+`evidence/arm_habitat_decomposition.json` (Session 4) showed the standing holdout hides catalogue
+components **interleaved** with the known catalogue, so **`100%` of its hidden truth lies at distance
+`0` from the published catalogue** (habitat-A truth `= 0` of `120,983` px). Since
+`scripts/verify_downloads.py` requires zero pixels on catalogue cells, that protocol contains no
+truth in the only habitat a submission can occupy — **it cannot validate any arm that proposes dots
+where nothing is catalogued**, which §3.1 says is the only class that can reach `0.3195`.
+
+Session 10 added `src/gems27/losfo.py` + `scripts/run_losfo_harness.py` →
+`evidence/losfo_farfield_diagnostic.json` (5 seeds × 4 folds, 20 paired cells, 757 s):
+
+- `60,988` catalogue px grouped into **`758` fault systems** (8-connected components of the catalogue
+  dilated `300 m`, so en-echelon segments of one structure are held out together);
+- **`190` systems / `13,156` px** held out per seed, quadrant-blocked;
+- a **`600 m` buffer around every held-out system erased from the training labels**, so truth is
+  **`>= 800 m`** from every pixel the detector saw as positive (median `3.4 km`), and `90.0%` of
+  emitted dots are `>= 300 m` from any known pixel.
+
+| Arm | Mean DTI | Credit TPw | recall_w | Credit/dot |
+|---|---:|---:|---:|---:|
+| `losfo` (600 m buffer erased) | `0.09974` | `11,160.6` | `0.1439` | `0.0465` |
+| `leaky` (unmasked control, same truth) | `0.10155` | `11,291.3` | `0.1456` | `0.0462` |
+
+Pooled ratio `losfo/leaky` = **`0.9884`** (credit). **Read with its uncertainty:** per-fold credit
+ratios are NW `0.892`, NE `0.876`, SW `1.204`, SE `0.988` — a spread of roughly `-12%` to `+20%` — so
+with 5 seeds this harness **cannot resolve effects smaller than about `±12%` per fold**. The honest
+statement is *"no large catalogue-interpolation inflation was detected"*, not *"the inflation is
+1.2%"*. Two confounds are recorded rather than smoothed over: the masked arm also has `21.6%` fewer
+positive training pixels (`47,832` vs `60,988`), and held-out systems are still *mapped* faults, so
+this measures an **upper bound** on performance against genuinely unmapped faults.
+
+What is solidly gained: **a far-field truth set on which addition arms can be gated**, with a
+measured base operating point (recall_w `0.1439`, credit/dot `0.0465`) to beat.
+`tests/test_losfo.py` guards the no-leakage invariant, including a
+`scipy.ndimage.binary_dilation(iterations=0)` trap that returns an **all-True** array and would have
+silently merged all `758` systems into one.
+
+### 3.3 Re-ranked H33 series (supersedes `knowledge/18`)
+
+The ranking rule changed: **an arm that can only prune cannot reach the target, so addition arms rank
+above pruning arms regardless of individual expected ΔDTI.**
+
+| Rank | ID | Class | Ceiling | Data gate (2026-10-03) |
+|---:|---|---|---|---|
+| 1 | **H33-3** heat-flow residual × 2 m probe conjunction | **ADD** | can add credit | OPEN — `sb_heat_flow_zip` `130,154,244` B `e7fd62c6…` |
+| 2 | **H33-4** drainage-network neotectonics from 1 m DEMs | **ADD** | can add credit | free official source; scope tile volume first |
+| 3 | **H33-5** Phase-2 discovery budget | **ADD** (bounded) | Phase-2 optionality | none external |
+| 4 | **H33-1** kinematic reactivation favourability gate | PRUNE | `+0.0005…+0.0030` | preregistered `knowledge/19`; bridge landed, **data not yet held locally** |
+| 5 | **H33-2** multi-depth MT conductance alignment | PRUNE/score | `+0.0000…+0.0022` | both probed GeoTIFFs pin-verified |
+
+### 3.4 The H33-1 data bridge (blocker removed this session)
+
+The availability probe streams and discards bytes, so *"data gate OPEN"* never meant *"data
+available"*. `scripts/fetch_external_layers.py --derived all` now keeps one pinned release,
+re-verifies its SHA-256 against `registry/external_pins.json` (the four runner-recorded hashes),
+opens the vector layer(s) inside, clips them to the competition footprint
+(`src/gems27/external_clip.py`) and writes `docs/data/sb_slip_tendency_in_footprint.{csv,json}`.
+The whole path — stream → hash → pin compare → archive → clip → write, plus pin-mismatch,
+no-vector-layer and no-pin failure modes — is covered by `tests/test_external_bridge_derived.py`
+(7 tests, exercised on a `file://` pin because `sciencebase.gov` is unreachable from the sandbox) and
+`tests/test_external_clip.py` (14 tests). `knowledge/19_preregistration_H33-1.md` freezes a hard
+precondition: **no seed is spent on H33-1 until that derived file exists and its schema lists
+slip/dilation-tendency fields.**
+
+---
+
+## 4. Euler Deconvolution for Depth (Reid et al., *Geophysics*, 1990) & Screen Ledger
 
 Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `evidence/h31_1_euler_feature_audit.json`, `evidence/h31_1_euler_clusters.csv`):
 1. **Formulation (Reid, Allsop, Granser, Millett, & Somerton, 1990, [DOI:10.1190/1.1442774](https://doi.org/10.1190/1.1442774))**:
@@ -91,23 +203,30 @@ Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `eviden
 
 ---
 
-## 4. Candidate Geological Hypotheses (Session 9 state)
+## 5. Candidate Geological Hypotheses (Session 10 state)
 
-Ledger: `knowledge/18_new_hypotheses_H33_series_2026-10-03.md` (current) supersedes the session-8 ranking in `knowledge/13_current_ranked_hypotheses_2026-10-03.md`.
+Ledger: `knowledge/20_strategy_after_reachability_frontier.md` (current, Session 10) re-ranks
+`knowledge/18_new_hypotheses_H33_series_2026-10-03.md`, which superseded the session-8 ranking in
+`knowledge/13_current_ranked_hypotheses_2026-10-03.md`.
+
+**Ranking rule changed in Session 10.** §3.1 shows the gap to `0.3195` is `+1,151` px of credit that
+only an *addition* arm can supply, so **addition arms now rank above pruning arms regardless of
+individual expected ΔDTI** — the ordering below differs from `knowledge/18` for that reason.
 
 - **`H32-1-dejitter` — VALIDATED PASS (seeds `180–189`):** Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering on `d=2.8` (`+0.001272` post-thinning / `+0.001399` pre-thinning, `10/10` seeds, `4/4` folds; `evidence/h32_1_holdout.json`). Remains the holdout best and the primary download.
 - **`H32-2` — EXECUTED THIS SESSION, FROZEN GATE FAILED (seeds `190–199`, CLOSED):** shallow-over-deep magnetic de-screening scored `−0.003767` mean paired ΔDTI (`0/10` seeds, `0/4` folds; `evidence/h32_2_holdout.json`, `knowledge/17_h32_2_result.md`). Run-1 sentinel defect disclosed and repaired (`evidence/h32_2_holdout_run1_invalid_2026-10-03.json`). The direction control supported the physics (shallow dots carry more credit/FP: `0.0383` vs `0.0343`) but the deep class sits far above the OOF inclusion threshold (`0.0193`), so pruning it loses. No confirmation, no retuning, no slot.
-- **New untried H33 series (ranked, all externally sourced claims verified live 2026-10-03):**
-  1. **`H33-1` Kinematic reactivation favourability gate** — USGS slip/dilation tendency shapefile (DOI `10.5066/P9YL58W6`, ScienceBase `6296974dd34ec53d276bb33d`, `Shapefile_Full Study.zip` 34.25 MB listed) × geodetic strain bands; expected `+0.0005` to `+0.0030`; seeds `200–209` reserved.
-  2. **`H33-3` Heat-flow residual × 2 m probe conjunction** — DOI `10.5066/P9BZPVUC` (ScienceBase `6297d2fad34ec53d276c5b28`, 124.12 MB zip listed; well **residual** attribute = hydrothermal departure from background) × byte-verified GDR 2 m probes; expected `+0.0000` to `+0.0025`.
-  3. **`H33-5` Phase-2 discovery budget** — bounded (≤ ~600 px) multi-corroborated off-catalogue emission exploiting the official Phase-2 expert-expanded-label rescoring rule; Phase-1 cost capped at ≈ `0.2 × budget`; the only structural path to leapfrog the `0.30+` cluster.
-  4. **`H33-2` Multi-depth MT conductance alignment** — DOI `10.5066/P9TWT2LU`, five `3.94 MB` GeoTIFF slices (2–200 km) listed on ScienceBase `62979746d34ec53d276c113b`; shallow-aligned/deep-decoupled conductance corridors; expected `+0.0000` to `+0.0022`.
-  5. **`H33-4` Drainage-network neotectonics from 1 m DEMs** — competition `dem_links.json` → USGS 3DEP tiles; channel offsets/knickpoint alignments; expected `+0.0005` to `+0.0035`, high data-volume cost (scope first).
-- Byte-level obtainability of the three ScienceBase sources is queued on the merge-triggered runner bridge (`scripts/fetch_external_layers.py`, `SCIENCEBASE_CHECKS`); **no seed may be spent on those arms until the probes report `AVAILABILITY_FETCHED`** (`registry/irregularities.json` → `h33-external-byte-verify-pending`).
+- **Untried H33 series, re-ranked Session 10 (class now outranks expected ΔDTI):**
+  1. **`H33-3` Heat-flow residual × 2 m probe conjunction — ADD arm.** DOI `10.5066/P9BZPVUC` (ScienceBase `6297d2fad34ec53d276c5b28`); runner byte-verified `sb_heat_flow_zip` = `130,154,244` B, SHA-256 `e7fd62c6…` (`registry/external_pins.json`) × already-verified GDR 2 m probes. The product carries a **residual** attribute (departure from de-convected background), which marks exactly the hydrothermal upflow the surface-rupture catalogue ignores.
+  2. **`H33-4` Drainage-network neotectonics from 1 m DEMs — ADD arm.** Competition `dem_links.json` → USGS 3DEP/Theia tiles (free, official); channel offsets, beheaded streams, aligned knickpoints. Highest ceiling, highest cost; scope the in-footprint tile volume first.
+  3. **`H33-5` Phase-2 discovery budget — bounded ADD arm.** ≤ ~600 px of multi-corroborated off-catalogue emission exploiting the official Phase-2 expert-expanded-label rescoring rule; Phase-1 cost capped at ≈ `0.2 × budget`. Contrarian by design: it buys Phase-2 optionality with a bounded Phase-1 cost.
+  4. **`H33-1` Kinematic reactivation favourability gate — PRUNE arm.** DOI `10.5066/P9YL58W6` (ScienceBase `6296974dd34ec53d276bb33d`); runner byte-verified `35,912,323` B, SHA-256 `5d6213f7…`. **Preregistered in `knowledge/19_preregistration_H33-1.md` with a frozen numeric promotion gate**; seeds `200–209` reserved; expected `+0.0005` to `+0.0030`. **Not runnable yet** — the availability probe discarded the bytes, so the derived clip must land first (§3.4).
+  5. **`H33-2` Multi-depth MT conductance alignment — PRUNE/score arm.** DOI `10.5066/P9TWT2LU` (ScienceBase `62979746d34ec53d276c113b`); both probed GeoTIFFs now runner byte-verified (`4,132,337` B `8cc1a224…`, `4,132,325` B `e8cfd731…`). Needs derived clips.
+- **Data-gate status (corrected this session).** `registry/irregularities.json` → `h33-external-byte-verify-pending` previously reported the two MT conductance probes as `FILE_NOT_LISTED` and `H33-2` as still gated; that text was **stale**. The facet-aware probe re-ran and the inventory committed at `2026-10-03T18:03:14Z` records **all four sources as `AVAILABILITY_FETCHED`**. All four hashes were promoted to `registry/external_pins.json`, so a later fetch is pin-checked rather than merely re-listed.
+- **New this session — `interleaved-holdout-has-no-far-field-truth` (severity high).** The standing holdout cannot validate addition arms (§3.2). LOSFO is the instrument that fixes this; the first frozen addition-arm gate must run on LOSFO, requiring added dots to beat the measured base far-field credit/dot of `0.0465` and the inclusion threshold at the cell DTI, in `>= 3/4` folds and `>= 8/10` seeds.
 
 ---
 
-## 5. Reproducibility & Verification Commands
+## 6. Reproducibility & Verification Commands
 
 ```bash
 # 1. Restore all 17 hash-pinned rasters/tables and build the 32-band prepared feature matrix
@@ -123,6 +242,18 @@ PYTHON=.venv/bin/python bash scripts/download_competition_data.sh
 
 # 3b. H32-2 frozen screen on seeds 190-199 (executed session 9: GATE FAILED, arm closed)
 .venv/bin/python scripts/run_h32_2_holdout.py --seeds 190-199
+
+# 3c. Session 10: reachability frontier (identity-checked against metric.dti_binary)
+.venv/bin/python scripts/reachability_frontier.py
+
+# 3d. Session 10: leave-fault-system-out FAR-FIELD diagnostic (seeds 210-214, ~13 min)
+#     Measurement instrument, NOT a promotion gate. Trains 2 detectors per seed (40 GBDT fits).
+.venv/bin/python scripts/run_losfo_harness.py --seeds 210-214
+
+# 3e. Runner-bridge only: pin-verify and clip an official release to the footprint.
+#     Cannot run in the agent sandbox (sciencebase.gov returns HTTP 000); runs on GitHub Actions.
+python scripts/fetch_external_layers.py --derived all --external-pins registry/external_pins.json \
+    --datasets paleo,probes,volcanics --out /tmp/gdr/out --pins /tmp/gdr/pins.json
 
 # 4. Build and audit all submission GeoTIFFs, seed ledgers, and static GitHub Pages HTML
 .venv/bin/python scripts/build_h32_1_submissions.py

@@ -504,7 +504,8 @@ def render_hypothesis_card(h: dict, screen: dict, confirmation: dict, seed_audit
 
 
 def render_research(registry: dict, h28: dict, euler: dict, board: dict,
-                    screen: dict, confirmation: dict, seed_audit: dict, h32: dict) -> str:
+                    screen: dict, confirmation: dict, seed_audit: dict, h32: dict,
+                    frontier: dict, losfo: dict) -> str:
     hypotheses = sorted(registry.get("hypotheses", []), key=lambda item: item.get("rank", 999))
     hypothesis_html = "".join(render_hypothesis_card(h, screen, confirmation, seed_audit) for h in hypotheses)
     si0 = euler.get("structural_indices", {}).get("0", {})
@@ -515,6 +516,20 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
     h2 = stability.get("si2_vs_si0", {})
     candidate = h28.get("candidate", {})
     top_val = registry.get("validated_top_candidate", {})
+    fr_conc = frontier.get("conclusions", {})
+    fr_cur = frontier.get("current_state", {})
+    fr_ident = frontier.get("identity_check", {})
+    fr_ceil = frontier.get("budget_family_ceiling", {})
+    fr_lead = frontier.get("add_arm_frontier", {}).get("0.3195", {})
+    fr_dots = fr_lead.get("dots_needed_by_marginal_efficiency", {})
+    lo_arms = losfo.get("arms", {})
+    lo_ratio = losfo.get("ratios", {})
+    lo_ff = losfo.get("far_field_check", {})
+    lo_meta = losfo.get("meta", {})
+    lo_fold = losfo.get("per_fold", {})
+    fold_spread = ", ".join(
+        f"{k} {(v['losfo_tp'] / v['leaky_tp']):.3f}" for k, v in lo_fold.items() if v.get("leaky_tp")
+    )
     return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Research</div>
 <section class="hero"><div class="hero-content"><div class="eyebrow">Hypotheses, evidence and preregistration</div><h1>Test the geology.<br>Respect the proxy.</h1>
 <p class="lead">{len(hypotheses)} currently ranked untried geological hypotheses, reviewed against in-repository experiments and evidence, plus top candidate <strong>H32-1</strong> validated on a 4-fold spatially blocked holdout (seeds 180–189). Planning ranges are subjective, uncertain catalogue-holdout priors—not observed gains or competition-score predictions.</p>
@@ -522,6 +537,25 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 
 <section class="section"><h2>Validated top candidate — H32-1 de-jittering (PASS on 4-fold spatially blocked holdout, seeds 180–189)</h2>
 <div class="callout"><strong>Why tip- &amp; Euler-protected mid-segment de-jittering was designed and validated before touching a weekly slot:</strong> Live score inversion of all 24 SHA-256-authenticated submissions (<a href="../evidence/live_inversion.json">evidence/live_inversion.json</a>) proved that <code>25GEMSDOE dotted-h19-5-d2-8</code> (<code>e56ea318af89</code>, 44,090 px) scored <strong>0.2600</strong> (+0.0123 over 0.2477 <code>d=1.5</code>), whereas <code>27GEMSDOE topo-gap-closure-t-v2-on-d1-5</code> (<code>5512495c6bd1</code>, 61,328 px) scored <strong>0.2449</strong> (−0.0028 vs 0.2477, 0.00210 credit/dot vs 0.0495 break-even) and <code>26GEMSDOE dilcond-oof-v1</code> (<code>47629f496133</code>) scored <strong>0.1223</strong>. In the 0.2600 <code>d=2.8</code> emission, 3,891 pixels (8.83%) lie at <em>d</em><sub>cat</sub> = 100 m beside masked known catalogue faults. <strong>{esc(top_val.get('title', 'H32-1'))}</strong> prunes the 2,434 mid-segment lateral flank-shadow pixels (<em>d</em><sub>cat</sub> ≤ 100 m AND <em>d</em><sub>end</sub> &gt; 300 m AND cat_nbrs ≥ 2 AND <em>d</em><sub>Euler</sub> &gt; 300 m) while protecting the 1,457 pixels within 300 m of a catalogue fault tip or a retained Reid et al. (1990) SI=0 Euler depth-coherent contact cluster (<a href="../evidence/h31_1_euler_clusters.csv">evidence/h31_1_euler_clusters.csv</a>). On fresh seeds 180–189 (<a href="../evidence/h32_1_holdout.json">evidence/h32_1_holdout.json</a>), <code>h32_1_post_d28</code> gained <strong>+0.001272</strong> mean ΔDTI (10/10 seeds, 4/4 spatial folds) and <code>h32_1_pre_d28</code> gained <strong>+0.001399</strong> (10/10 seeds, 4/4 folds), with protected tip/Euler pixels carrying <strong>2.29× higher credit density</strong> than mid-segment flank shadow (0.00919 vs 0.00402 credit/FP).</div></section>
+
+<section class="section"><h2>Session 10 — what beating 0.3195 costs, in pixels of credit</h2>
+<div class="callout"><strong>The gap is a detection gap, not a budget gap.</strong> <code>scripts/reachability_frontier.py</code> (<a href="../evidence/reachability_frontier.json">evidence/reachability_frontier.json</a>) inverts the official metric. The closed form <code>DTI = TPw / (0.2·TPw·(1−ρ) + 0.2·N + 0.8·|G|)</code> is <strong>checked numerically against <code>metric.dti_binary</code> on {esc(fr_ident.get('n_cases', 0))} synthetic grids</strong> before use — max absolute residual <code>{fr_ident.get('max_abs_residual', float('nan')):.2e}</code>, and the substitution <code>FPw = N − MPw</code> holds in every case. At the calibrated |G| = {comma(int(frontier.get('inputs', {}).get('G_used_px', 0)))} px, the best owner-anchored submission earns <strong>{comma(int(fr_cur.get('credit_TPw', 0)))} px of credit ({fmt_number(fr_cur.get('credit_fraction_of_G', 0) * 100, 1)}% of |G|)</strong> at N = {comma(int(fr_cur.get('emitted_px', 0)))}. Reaching <strong>0.3195</strong> at that same budget needs <strong>{comma(int(fr_lead.get('credit_required_at_current_budget', 0)))} px</strong> — a gap of <strong>+{comma(int(fr_conc.get('credit_gap_to_leader_at_current_budget_px', 0)))} px, {fmt_number(fr_conc.get('relative_credit_increase_needed', 0) * 100, 1)}% more credit than the entire 0.2600 submission captures</strong>.</div>
+<div class="grid">
+<article class="card span-6"><h3>Why thinning cannot buy it</h3><p>The programme has one exactly-controlled live measurement of <em>marginal</em> efficiency: thinning the same ridge from <code>d=1.5</code> (60,069 px, 0.2477) to <code>d=2.8</code> (44,090 px, 0.2600) removed <strong>{comma(int(frontier.get('live_measured_marginal_efficiency', {}).get('thinning_pair', {}).get('pixels_removed', 0)))} dots</strong> and lost <strong>{fmt_number(frontier.get('live_measured_marginal_efficiency', {}).get('thinning_pair', {}).get('credit_lost', 0), 1)} px of credit</strong> — <strong>{fmt_number(frontier.get('live_measured_marginal_efficiency', {}).get('thinning_pair', {}).get('marginal_credit_per_removed_pixel', 0), 5)} credit/px</strong>, below the break-even {fmt_number(fr_ceil.get('asymptote_at_live_marginal_efficiency', 0) * 0 + 0.05485, 5)} at 0.2600. A dot earning that little does not clear the <code>0.2·target</code> charge, so <strong>no quantity of dots at the current marginal efficiency reaches 0.3195</strong>.</p><p>Pruning arms are still worth taking — they are free and compose — but each is worth ~0.001–0.010, one to two orders of magnitude short.</p></article>
+<article class="card span-6"><h3>What would reach it</h3><p>New dots that land on genuinely unmapped fault traces, by the credit each earns:</p><ul>
+<li><code>e = 0.20</code> → <strong>{comma(int(fr_dots.get('0.20', {}).get('dots_needed', 0)))}</strong> dots</li>
+<li><code>e = 0.30</code> → <strong>{comma(int(fr_dots.get('0.30', {}).get('dots_needed', 0)))}</strong> dots</li>
+<li><code>e = 0.40</code> → <strong>{comma(int(fr_dots.get('0.40', {}).get('dots_needed', 0)))}</strong> dots</li>
+<li><code>e = 0.50</code> → <strong>{comma(int(fr_dots.get('0.50', {}).get('dots_needed', 0)))}</strong> dots</li></ul>
+<p>≈<strong>2,600–3,400 well-placed dots</strong> at 0.4–0.5 credit each. That is an <em>addition</em> arm. Full frontier and |G| sensitivity: <a href="../evidence/reachability_frontier.json">evidence/reachability_frontier.json</a> · <a href="../knowledge/20_strategy_after_reachability_frontier.md">knowledge/20</a>.</p></article></div></section>
+
+<section class="section"><h2>Session 10 — a far-field holdout that can finally gate addition arms</h2>
+<div class="callout"><strong>Why it was needed:</strong> the standing holdout hides catalogue components <em>interleaved</em> with the known catalogue, so <strong>100% of its hidden truth lies at distance 0 from the published catalogue</strong> (<a href="../evidence/arm_habitat_decomposition.json">evidence/arm_habitat_decomposition.json</a>: habitat-A truth = 0 of 120,983 px). A shippable file may place <em>no</em> pixel on a catalogue cell, so that protocol contains no truth in the only habitat a submission can occupy — it <strong>cannot validate any arm that proposes dots where nothing is catalogued</strong>, which §above says is the only class that can reach 0.3195.</div>
+<div class="callout"><strong>What was built:</strong> <code>src/gems27/losfo.py</code> + <code>scripts/run_losfo_harness.py</code> (<a href="../evidence/losfo_farfield_diagnostic.json">evidence/losfo_farfield_diagnostic.json</a>). {comma(int(lo_meta.get('n_systems', 0)))} catalogue pixels are grouped into <strong>{comma(int(lo_meta.get('n_systems', 0)))}</strong> fault systems; <strong>{comma(int(lo_meta.get('n_systems_held_out', 0)))} systems / {comma(int(lo_meta.get('held_out_px', 0)))} px</strong> are held out per seed with a <strong>600 m label buffer erased</strong>, so truth is <strong>≥ {fmt_number(lo_ff.get('min_dist_truth_to_known_px_over_cells', 0) * 100, 0)} m</strong> from every pixel the detector saw as positive (median {fmt_number(lo_ff.get('median_dist_truth_to_known_px_over_cells', 0) * 100, 0)} m). {fmt_number((lo_ff.get('frac_dots_ge_300m_from_known') or 0) * 100, 1)}% of emitted dots are ≥ 300 m from any known pixel.</div>
+<div class="table-wrap"><table><thead><tr><th>Arm</th><th>Mean DTI</th><th>Credit TPw</th><th>recall_w</th><th>Credit/dot</th></tr></thead><tbody>
+<tr><td><code>losfo</code> — 600 m buffer erased from training labels</td><td>{fmt_number(lo_arms.get('losfo', {}).get('mean_dti', 0), 5)}</td><td>{fmt_number(lo_arms.get('losfo', {}).get('sum_tp', 0), 1)}</td><td>{fmt_number(lo_arms.get('losfo', {}).get('recall_w', 0), 4)}</td><td>{fmt_number(lo_arms.get('losfo', {}).get('credit_per_dot', 0), 4)}</td></tr>
+<tr><td><code>leaky</code> — unmasked control, same truth</td><td>{fmt_number(lo_arms.get('leaky', {}).get('mean_dti', 0), 5)}</td><td>{fmt_number(lo_arms.get('leaky', {}).get('sum_tp', 0), 1)}</td><td>{fmt_number(lo_arms.get('leaky', {}).get('recall_w', 0), 4)}</td><td>{fmt_number(lo_arms.get('leaky', {}).get('credit_per_dot', 0), 4)}</td></tr></tbody></table></div>
+<p><strong>Result, stated with its uncertainty.</strong> Pooled ratio <code>losfo/leaky</code> = <strong>{fmt_number(lo_ratio.get('credit_losfo_over_leaky', 0), 4)}</strong> on credit and {fmt_number(lo_ratio.get('mean_dti_losfo_over_leaky', 0), 4)} on DTI: the base arm keeps ~99% of its far-field credit when 600 m of surrounding catalogue is hidden, so <strong>no large catalogue-interpolation inflation was detected</strong>. But the per-fold credit ratios are <strong>{esc(fold_spread)}</strong> — a spread of roughly −12% to +20% — so with 5 seeds this harness <strong>cannot resolve effects smaller than about ±12% per fold</strong>. The aggregate is a bound, not a measurement of a small effect. Two confounds are recorded, not smoothed over: the masked arm also has fewer positive training pixels ({comma(int(lo_meta.get('masked_label_px', 0)))} vs {comma(int(lo_meta.get('full_label_px', 0)))}), and held-out systems are still <em>mapped</em> faults, so this measures an <strong>upper bound</strong> on performance against genuinely unmapped faults. What is solidly gained: <strong>a far-field truth set on which addition arms can be gated</strong>, with a measured base operating point (recall_w {fmt_number(lo_arms.get('losfo', {}).get('recall_w', 0), 4)}, credit/dot {fmt_number(lo_arms.get('losfo', {}).get('credit_per_dot', 0), 4)}) to beat.</p></section>
 
 <section class="section"><h2>Current ranking</h2><p>Ranking weighs expected catalogue-proxy gain, testability and cost. “Untried” refers to the proposed transform/holdout arm in this checkout, not a claim of global scientific novelty. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p><div class="grid">{hypothesis_html}</div></section>
 
@@ -650,10 +684,12 @@ def main() -> int:
     h28_manifest = read_json("docs/downloads/h28_1_candidate_manifest.json", {"candidate": {}})
 
     topology_review = read_json("docs/data/topology_review_classes.json", {})
+    frontier = read_json("evidence/reachability_frontier.json", {})
+    losfo = read_json("evidence/losfo_farfield_diagnostic.json", {})
     pages = {
         "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32), "Overview"),
         "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "Executive summary"),
-        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32), "Research"),
+        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
     }

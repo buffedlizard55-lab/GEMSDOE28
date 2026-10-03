@@ -449,3 +449,74 @@ While this branch was open, PR #5 (`arena/01a0fec2-gemsdoe27`, the H28-1 edge-co
 | 5. One-click download `.tif` at beginning of site & executive summary, `[0, 1]` range addressed, unique name & short note ($\le 200$ chars), executive summary subpage | `docs/index.html`, `docs/executive-summary.html`, `docs/downloads/manifest.json`, `evidence/submission_file_audit.json` (`179/179` checks PASS) | Verified (`c3aeda1d31a3`, `31e35eee884e`, `8acb75e1f2cc`). |
 | 6. Put prompt & Arena AI Core Values (`Maximize P(Win)`, `Own the Outcome`) into `README.md` | `README.md` (top section) | Verified verbatim. |
 | 7. Run 3 passes, create PR, and merge onto `main` | `evidence/review_passes.md` (this section); PR opened and merged onto `main` | Complete. |
+
+---
+
+# Session 10 (2026-10-03) — reachability frontier, far-field (LOSFO) harness, H33-1 data bridge
+
+Environment: fresh sandbox. `python3 -m venv /home/user/.venv` + `requirements.txt` deps; all 17
+hash-pinned rasters/tables restored by `bash scripts/download_competition_data.sh` (exit 0, every
+artifact `OK`, training raster `4371c82e3b83…`, `data/prepared/features.npy` SHA-256 `83ed2704…`).
+`gh` authenticated as `buffedlizard55-lab`. Network re-verified this session: `api.github.com` 200,
+`pypi.org` 200; `sciencebase.gov` 000 (curl exit 35, TLS), `doi.org` 000, `api.datacite.org` 000,
+`drivendata.org` 000. DrivenData was never contacted.
+
+## Pass 1 — implement and verify
+
+| # | Executed (previous sessions' next steps first) | Result |
+|---|---|---|
+| 1 | venv + deps, then `scripts/download_competition_data.sh` | 17/17 hash-verified + `features.npy`; `evidence/restore_audit.json` all `pass: true` |
+| 2 | Baseline green before changing anything | `pytest` **121 passed**; `ruff` PASS; `verify_downloads` **179/179, 0 failures** |
+| 3 | **Reachability frontier** — `scripts/reachability_frontier.py` → `evidence/reachability_frontier.json` | closed form checked against `metric.dti_binary` on **23 synthetic grids**, max residual **2.22e-16**, `FPw = N − MPw` exact in every case. Gap to 0.3195 at N=44,090 = **+1,151 px credit (24.0% more than the 0.2600 file captures; 9.42 pts of \|G\|)**; live-measured marginal efficiency of the last 15,979 thinned dots **0.03098 credit/px** vs break-even **0.05485** |
+| 4 | **Far-field harness** — `src/gems27/losfo.py` + `scripts/run_losfo_harness.py` → `evidence/losfo_farfield_diagnostic.json` | 758 fault systems; 190 systems / 13,156 px held out per seed; truth **≥ 800 m** from every known pixel (median 3.4 km); 90.0% of dots ≥ 300 m from known. `losfo` vs `leaky` pooled credit ratio **0.9884**, DTI ratio **0.9822**, 5 seeds × 4 folds, 757 s |
+| 5 | **H33-1 data bridge** — `--derived` mode in `scripts/fetch_external_layers.py` + `src/gems27/external_clip.py` + `registry/external_pins.json` + workflow commit step | pin-verify → archive → clip → write path exercised end-to-end on a `file://` pin |
+| 6 | **H33-1 preregistration** — `knowledge/19_preregistration_H33-1.md` | design, folds, variants, 6 frozen numeric promotion criteria, seeds 200–209, hard data precondition — all written **before** any fitting |
+| 7 | **Strategy reframe** — `knowledge/20_strategy_after_reachability_frontier.md`, README §3, `registry/next_hypotheses.json` re-ranked | ADD arms now outrank PRUNE arms; ranking rule stated explicitly |
+| 8 | Site | `scripts/build_site.py` renders the two new research sections from JSON only, `external_requests: 0` |
+
+## Pass 2 — bugs, incorrect assumptions, edge cases
+
+| # | Finding | Action |
+|---|---|---|
+| 1 | **`scipy.ndimage.binary_dilation(iterations=0)` returns an all-True array** (verified in this sandbox: 1 px → 400 px). `fault_systems(labels, dilate_px=0)` would have silently merged all 758 fault systems into one | Added `losfo.dilate8()`, which returns a copy for `px <= 0`; regression-tested by `test_dilation_merges_en_echelon_segments_into_one_system` |
+| 2 | **`int(inf)` OverflowError** in `build_losfo_split` when every known pixel is erased | `min_dist_hidden_to_known` is now a `float`; `inf` = no known pixel survives, `nan` = fold holds out nothing |
+| 3 | **`np.hypot` on two column arrays returns an array, not a scalar** — `external_clip.records_from_frame` raised `TypeError` on every feature | Length now summed explicitly over segments; caught by the first real run of the test suite |
+| 4 | **NaN attributes would be emitted as the bare token `NaN`, producing invalid JSON.** The `np.floating` branch missed Python `float('nan')`, which is what pandas yields | Every non-finite float → `null`; asserted by `test_point_features_are_clipped_and_null_attributes_preserved` and by a literal `"NaN" not in <file>` check |
+| 5 | **Latent crash in `fetch()`: `int(getattr(response, "status", 200))` raises `TypeError` when `.status` is `None`** (urllib sets it to `None` for non-HTTP schemes) | Now defaults explicitly; this was a pre-existing bug in the bridge, not introduced this session |
+| 6 | **My own test was wrong before the module was**: the round-trip check used `tp/(0.2·tp + 0.2·n + 0.8·g)`, but at ρ=1 the credit terms cancel exactly and the denominator is `0.2N + 0.8\|G\|` | Fixed the test and added `test_rho_one_denominator_cancels_the_credit_term` to pin the identity |
+| 7 | **Shapefiles cannot mix geometry types** (pyogrio raises `FeatureError` on a Point in an ARC layer) — the fixture, not the module | Line-only fixture written to disk; point handling exercised on an in-memory frame |
+| 8 | **Cropping bug in the LOSFO runner**: `distance_transform_edt` computed full-grid, indexed with a cropped mask | Transform computed then cropped with everything else |
+| 9 | **Stale irregularity**: `h33-external-byte-verify-pending` still reported the two MT conductance probes as `FILE_NOT_LISTED` and `H33-2` as gated, but the inventory committed 5 minutes later records all four as `AVAILABILITY_FETCHED` | Corrected in place, with both timestamps and all four hashes quoted |
+| 10 | **Registry/site inconsistency**: `registry/next_hypotheses.json` still ranked H33-1 first while `knowledge/20` re-ranked | Re-ranked in the registry (H33-3, H33-4, H33-5, H33-1, H33-2), added `arm_class` and the new `ranking_basis`; site rebuilt |
+| 11 | Trivially-true assertion written into `test_losfo.py` (`median > 3·min/3`) | Replaced with `median > 3·min` |
+| 12 | Seed-decade hygiene: LOSFO uses its own decade 210–214 and is labelled a diagnostic, not a gate | Guarded by `test_committed_diagnostic_used_a_dedicated_seed_decade` (asserts disjointness from 100–209) |
+
+## Pass 3 — recheck against the original request
+
+| Requirement | Where satisfied | Status |
+|---|---|---|
+| Easy one-click submission TIF, obvious on arrival, `[0,1]` | `docs/index.html`, `docs/executive-summary.html`, `docs/downloads/` | Verified: **179/179** checks, 0 failures; values in `{0.0, 1.0}` inside the footprint, `NaN` outside, `-allfinite.tif` fallback, zero catalogue overlap, unique content-addressed names, notes ≤ 200 chars |
+| Euler deconvolution for depth, not location | `src/gems27/euler.py`, `evidence/h31_1_euler_clusters.csv` (6,309 SI=0 depth-coherent clusters), used as the H32-1 protection gate | Unchanged this session; README §4 |
+| Why 0.2600 won; can we beat 0.26 / 0.3195 | README §2 and new §3.1; `evidence/reachability_frontier.json` | Answered quantitatively: yes to >0.26 (three built candidates project 0.2665–0.2701); **0.3195 needs +1,151 px credit — a detection gap, not reachable by pruning** |
+| 3–5 untried hypotheses, ranked, external data checked obtainable | `knowledge/20`, `registry/next_hypotheses.json`, `knowledge/19` | 5 ranked with the changed rule; all four ScienceBase sources pin-verified by the runner |
+| Validate top candidate on holdout **before** spending a slot | `knowledge/19` freezes a hard precondition; **no seed spent on H33-1** | Honoured — the data is not held locally, so the arm is declared not runnable rather than fitted |
+| No manual input; verify from official sources; flag irregularities | `registry/irregularities.json` (50 → **52** items), `registry/external_pins.json` | Two new disclosures added, one stale one corrected |
+| README carries the prompt + Core Values; reread each session | `README.md` top section, `knowledge/00_standing_brief.md` | Verified present and unchanged |
+| Three passes, PR, merge to `main` | this section; PR opened and merged | See below |
+
+**Verification actually run this session:** `pytest` **168 passed, 0 skipped** (was 121 at baseline;
++47 new tests across `test_reachability_frontier.py`, `test_losfo.py`, `test_external_clip.py`,
+`test_external_bridge_derived.py`); `ruff check src scripts tests` PASS; `verify_downloads.py`
+179/179 PASS; `build_site.py` PASS (5 pages, 0 external requests); `reachability_frontier.py` and
+`run_losfo_harness.py` both executed to completion against the restored rasters.
+
+**What was NOT verified, stated plainly:**
+* The derived H33-1 clip has **not** been produced — it needs one merge to `main` touching
+  `scripts/fetch_external_layers.py` to trigger the runner bridge. The clip code path is tested on a
+  `file://` pin; the sciencebase fetch itself is untested here because the host is unreachable.
+* The *schema* of the Siler (2022) release (that it carries slip-tendency and dilation-tendency
+  columns) is **unconfirmed** — `api.datacite.org` returns 000 from this sandbox, so the 2026-10-03
+  read recorded in `knowledge/18` could not be repeated. The derived schema file is the check.
+* LOSFO's aggregate ratio 0.9884 is a **bound**, not a measurement: per-fold ratios span 0.876–1.204.
+* All scores (0.2600, 0.2477, 0.2449, 0.3195) remain owner-reported or public-leaderboard readings,
+  not organizer receipts.

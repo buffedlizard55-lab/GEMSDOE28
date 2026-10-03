@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-03T18:01:14Z",
+  "checked_utc": "2026-10-03T18:46:18Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
