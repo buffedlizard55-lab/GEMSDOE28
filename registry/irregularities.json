@@ -270,6 +270,18 @@
       "severity": "medium",
       "issue": "Following merges to main at d32b72dc96e8ce01dd2c785be0045fadbd1ed4ef and e586197b470ca2a32937bad02e88ceed5d4d66dd, push-triggered GitHub Actions runs 37131538412 and 37131889724 for fetch-gdr-external-layers.yml both concluded failure immediately, with no job records/logs and zero artifacts. The cause is unknown and no external-layer inventory/artifact was produced by either run. This is separate from the successful Pages deployment/build checks and H31 proxy screen.",
       "action": "Do not describe the GDR/USGS raw layers as fetched or verified on the strength of either run. Inspect the GitHub Actions start/workflow failure before retrying; verify any future files against official source, pinned hashes, schema, coverage and licence. No DrivenData contact is involved."
+    },
+    {
+      "id": "session8-restored-missing-scripts-and-test-path-mismatch",
+      "severity": "medium",
+      "issue": "In GEMSDOE28 base commit 867d638, four scripts referenced by tests and knowledge docs (scripts/fetch_scored_corpus.py, scripts/invert_live_scores.py, scripts/optimize_budget.py, scripts/fetch_vector_faults.py) were absent, and tests/test_inversion.py checked guessed filenames in data_cache/ instead of the paths.DATA filenames used by src/gems27/layers.py.",
+      "action": "Restored the four scripts from buffedlizard55-lab/GEMSDOE27, added the 8 public/reference rasters and CSVs to registry/data_manifest.json (17 hash-verified files total), aligned test_inversion.py with src/gems27/layers.py, and verified 101 passed, 0 skipped in pytest."
+    },
+    {
+      "id": "session8-live-score-resolution-d28-and-tv2",
+      "severity": "high",
+      "issue": "Three new owner-reported live scores (25GEMSDOE dotted-h19-5-d2-8 e56ea318af89 = 0.2600; 27GEMSDOE topo-gap-closure-t-v2-on-d1-5 5512495c6bd1 = 0.2449; 26GEMSDOE dilcond-oof-v1 47629f496133 = 0.1223) resolved the #1 open question from Sessions 2-5. T-v2 gap closure reduced live DTI by -0.0028 (earning +2.65 px of credit across 1,259 dots, or 0.0021 credit/dot vs 0.0495 break-even), proving that catalogue-internal holdout overstated T-v2 by ~100x because hidden organizer faults do not lie along straight 1-4 km interpolations between published Qfaults tips. Conversely, d=2.8 (0.2600) outperformed the 2D isotropic geometric retention model (0.2550) by +0.0050 because 1D fault crests spaced at 2.83-3.0 px overlap at 1.41-1.50 px midpoints (k >= 0.50), retaining 90.63% of d=1.5 live credit vs 88.96% predicted by 2D uniform-area geometry.",
+      "action": "Updated registry/live_scores.json, evidence/scored_corpus.json (24 matched rasters), evidence/live_inversion.json, and evidence/budget_optimum.json. Removed T-v2 gap-closure dots from all new GEMSDOE28 d=2.8 submission candidates (primary c3aeda1d31a3, secondary 31e35eee884e, tertiary 8acb75e1f2cc)."
     }
   ]
 }

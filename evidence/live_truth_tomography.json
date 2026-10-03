@@ -1,8 +1,9 @@
 {
  "method": "non-negative mass-constrained NNLS of 20 live scores on interpretable habitat bases",
  "G_used": 12225.896194356133,
- "fitted_truth_mass_px": 6209.453983676315,
+ "fitted_truth_mass_px": 5744.159207351553,
  "basis_sizes": {
+  "background_uniform": 5106385,
   "catring_100_200m": 176003,
   "catring_200_300m": 169333,
   "catring_300_500m": 240798,
@@ -40,76 +41,87 @@
    "pixels": 5867,
    "lambda_px_per_px": 0.35,
    "truth_px_estimated": 2053.45,
-   "share_of_estimated_truth": 0.33069735364787295
+   "share_of_estimated_truth": 0.357484868694435
   },
   {
    "habitat": "catring_100_200m",
    "pixels": 176003,
-   "lambda_px_per_px": 0.014409315964730302,
-   "truth_px_estimated": 2536.0828377404273,
-   "share_of_estimated_truth": 0.40842284110767113
+   "lambda_px_per_px": 0.018608527881874542,
+   "truth_px_estimated": 3275.156732793565,
+   "share_of_estimated_truth": 0.5701716499434621
   },
   {
    "habitat": "catring_200_300m",
    "pixels": 169333,
-   "lambda_px_per_px": 0.009566482291909359,
-   "truth_px_estimated": 1619.9211459358876,
-   "share_of_estimated_truth": 0.26087980524445586
+   "lambda_px_per_px": 0.002454054877418977,
+   "truth_px_estimated": 415.55247455798764,
+   "share_of_estimated_truth": 0.0723434813621027
   }
  ],
  "fit": {
   "tp_observed": [
-   5398.501849873612,
-   6536.129438844199,
-   6541.216311368843,
-   6412.459895242451,
-   4198.053928113674,
-   3940.245134039747,
-   5382.901370302068,
-   4865.640592789349,
-   4698.422433271861,
-   3338.3803748553273,
-   3546.96597160016,
-   4581.609132775836,
-   3385.1481073052473,
-   2309.08310591892,
-   3065.0560916478544,
-   2980.107413577902,
-   1339.0240025007952,
-   522.2894470675678,
-   835.9815514236885,
-   66.04903391096983
+   4791.0488856019765,
+   5286.130270299154,
+   5289.104788589089,
+   6188.804163187549,
+   6205.503972519991,
+   6099.621803202793,
+   4184.934055503006,
+   3913.235289446509,
+   5217.499140170622,
+   2605.527466854058,
+   4860.670525232235,
+   4513.224124172748,
+   3235.9346383415495,
+   3433.185724793314,
+   4582.399628564519,
+   3382.7287430083657,
+   2306.169568038109,
+   2960.097337012455,
+   758.6850923924743,
+   2924.259385366456,
+   1320.8688679036957,
+   514.3380743918128,
+   412.23926994444525,
+   65.9184111492652
   ],
   "tp_fitted": [
-   1053.0943256323485,
-   1242.4443166250928,
-   1258.646568902558,
-   1280.9980087697118,
-   1739.9954122753852,
-   2132.5406807524596,
-   2323.1813530030095,
-   1716.4086932047467,
-   1258.9094368969832,
-   1239.7012223684305,
-   1709.7748271978103,
-   2319.6712228520028,
-   1699.82719202856,
-   1131.1659939746053,
-   2274.66850462665,
-   2869.6119925701064,
-   3005.7726797143237,
-   964.1792782364428,
-   615.2168011877699,
-   954.3374368097523
+   880.3847321440214,
+   996.3298473930331,
+   1013.1459649887979,
+   1177.2182056857355,
+   1191.2455246189525,
+   1211.5967222906233,
+   1654.5823009449357,
+   1974.7294213454688,
+   2198.6070135841123,
+   738.9611963381674,
+   1604.085834443128,
+   1194.99283630035,
+   1150.9029679022467,
+   1597.295189609884,
+   2145.100894004807,
+   1558.3933870842407,
+   1052.8170120113336,
+   2093.426899981911,
+   47.91968966150548,
+   2909.2509209470763,
+   2925.825663763507,
+   907.4216133107843,
+   588.902226334546,
+   858.509829648485
   ],
   "labels": [
+   "25GEMSDOE dotted-h19-5-d2-8 (e56ea318af89)",
    "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
+   "27GEMSDOE topo-gap-closure-t-v2-on-d1-5 (5512495c6bd1)",
    "19GEMSDOE h19-5",
    "19GEMSDOE h19-4",
    "16GEMSDOE h16-1 topo-geophys-baseline-ridges",
    "GEMSDOE10 h28-dotted-ridge",
    "12GEMSDOE r7-nms3-dem10-scarp",
    "GEMSDOE10 H25-ctx-ridge",
+   "26GEMSDOE dilcond-oof-v1 (47629f496133)",
    "GEMSDOE3 pindrop-v4-nodes",
    "GEMSDOE3 pindrop-v4-ridge",
    "16GEMSDOE h18-3a complexity-prior",
@@ -118,143 +130,168 @@
    "GEMSDOE3 pindrop-v4-discovery",
    "15GEMSDOE conj_alteration_mag",
    "GEMSDOE10 h16-continuation",
+   "16GEMSDOE h18-4 usgs-geologic-map-faults-gap (aef8f42c)",
    "18GEMSDOE H19-C",
    "11GEMSDOE structural-area06-v1",
    "17GEMSDOE F-ensemble-2pct",
    "GEMSDOE9 placeholder (2314b599)",
    "14GEMSDOE geom-horse-ensemble"
   ],
-  "rmse_credit_px": 2855.999602335166,
-  "r2_credit": -1.2402860356153305
+  "rmse_credit_px": 2840.9876080986687,
+  "r2_credit": -1.350848231496919
  },
  "loo_validation": {
   "rows": [
    {
+    "label": "25GEMSDOE dotted-h19-5-d2-8 (e56ea318af89)",
+    "score_actual": 0.26,
+    "score_predicted": 0.048761424143481676,
+    "error": -0.21123857585651834
+   },
+   {
     "label": "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
     "score_actual": 0.2477,
-    "score_predicted": 0.050223790476976234,
-    "error": -0.19747620952302378
+    "score_predicted": 0.047503072206265214,
+    "error": -0.2001969277937348
+   },
+   {
+    "label": "27GEMSDOE topo-gap-closure-t-v2-on-d1-5 (5512495c6bd1)",
+    "score_actual": 0.2449,
+    "score_predicted": 0.04743983983293692,
+    "error": -0.19746016016706308
    },
    {
     "label": "19GEMSDOE h19-5",
     "score_actual": 0.1922,
-    "score_predicted": 0.038880333186823414,
-    "error": -0.1533196668131766
+    "score_predicted": 0.03670188753067272,
+    "error": -0.1554981124693273
    },
    {
     "label": "19GEMSDOE h19-4",
     "score_actual": 0.1894,
-    "score_predicted": 0.03867191868192006,
-    "error": -0.15072808131807997
+    "score_predicted": 0.03647829491511131,
+    "error": -0.1529217050848887
    },
    {
     "label": "16GEMSDOE h16-1 topo-geophys-baseline-ridges",
     "score_actual": 0.1855,
-    "score_predicted": 0.03955611506236974,
-    "error": -0.14594388493763027
+    "score_predicted": 0.037281817733601334,
+    "error": -0.14821818226639866
    },
    {
     "label": "GEMSDOE10 h28-dotted-ridge",
     "score_actual": 0.1839,
-    "score_predicted": 0.07362100867888433,
-    "error": -0.11027899132111568
+    "score_predicted": 0.0698824043282034,
+    "error": -0.1140175956717966
+   },
+   {
+    "label": "26GEMSDOE dilcond-oof-v1 (47629f496133)",
+    "score_actual": 0.1223,
+    "score_predicted": 0.03466954010742018,
+    "error": -0.08763045989257982
    },
    {
     "label": "GEMSDOE3 pindrop-v4-ridge",
     "score_actual": 0.1152,
-    "score_predicted": 0.029064428103639177,
-    "error": -0.08613557189636081
+    "score_predicted": 0.02760945136948305,
+    "error": -0.08759054863051695
    },
    {
     "label": "GEMSDOE10 H25-ctx-ridge",
     "score_actual": 0.128,
-    "score_predicted": 0.04935124268685129,
-    "error": -0.07864875731314871
+    "score_predicted": 0.04680530061994052,
+    "error": -0.08119469938005949
    },
    {
     "label": "GEMSDOE3 pindrop-v4-nodes",
     "score_actual": 0.1193,
-    "score_predicted": 0.042721641890868384,
-    "error": -0.07657835810913162
+    "score_predicted": 0.039944814341514805,
+    "error": -0.0793551856584852
    },
    {
     "label": "16GEMSDOE h18-3a complexity-prior",
     "score_actual": 0.0976,
-    "score_predicted": 0.03298840425717152,
-    "error": -0.06461159574282849
+    "score_predicted": 0.03127775923419558,
+    "error": -0.06632224076580442
    },
    {
     "label": "12GEMSDOE r7-nms3-dem10-scarp",
     "score_actual": 0.1294,
-    "score_predicted": 0.06878792727770758,
-    "error": -0.06061207272229241
+    "score_predicted": 0.06355348679865741,
+    "error": -0.06584651320134258
    },
    {
     "label": "GEMSDOE10 h20-dem10-scarp-thin",
     "score_actual": 0.0921,
-    "score_predicted": 0.03910908499503589,
-    "error": -0.05299091500496411
-   },
-   {
-    "label": "11GEMSDOE structural-area06-v1",
-    "score_actual": 0.0202,
-    "score_predicted": 0.06727150001483473,
-    "error": 0.04707150001483473
+    "score_predicted": 0.037529882299706635,
+    "error": -0.054570117700293366
    },
    {
     "label": "13GEMSDOE r13-lattice-s5 (nan-outside)",
     "score_actual": 0.0904,
-    "score_predicted": 0.045767000023520577,
-    "error": -0.04463299997647942
+    "score_predicted": 0.042322346731210714,
+    "error": -0.04807765326878928
+   },
+   {
+    "label": "11GEMSDOE structural-area06-v1",
+    "score_actual": 0.0202,
+    "score_predicted": 0.06574592943425947,
+    "error": 0.045545929434259474
    },
    {
     "label": "GEMSDOE3 pindrop-v4-discovery",
     "score_actual": 0.083,
-    "score_predicted": 0.04169214134737879,
-    "error": -0.04130785865262122
+    "score_predicted": 0.038222635238988195,
+    "error": -0.04477736476101181
    },
    {
     "label": "15GEMSDOE conj_alteration_mag",
     "score_actual": 0.0782,
-    "score_predicted": 0.03827308144213143,
-    "error": -0.039926918557868576
+    "score_predicted": 0.03560816248675605,
+    "error": -0.042591837513243955
+   },
+   {
+    "label": "16GEMSDOE h18-4 usgs-geologic-map-faults-gap (aef8f42c)",
+    "score_actual": 0.036,
+    "score_predicted": 0.0019442375997659348,
+    "error": -0.034055762400234064
    },
    {
     "label": "14GEMSDOE geom-horse-ensemble",
     "score_actual": 0.002,
-    "score_predicted": 0.03238641765242814,
-    "error": 0.030386417652428138
+    "score_predicted": 0.02923741983007513,
+    "error": 0.027237419830075132
    },
    {
     "label": "GEMSDOE10 h16-continuation",
     "score_actual": 0.0461,
-    "score_predicted": 0.029083223810142663,
-    "error": -0.01701677618985734
+    "score_predicted": 0.028508935698116744,
+    "error": -0.017591064301883258
    },
    {
     "label": "17GEMSDOE F-ensemble-2pct",
     "score_actual": 0.0187,
-    "score_predicted": 0.035690203712557884,
-    "error": 0.016990203712557883
+    "score_predicted": 0.033559730934948385,
+    "error": 0.014859730934948384
    },
    {
     "label": "18GEMSDOE H19-C",
     "score_actual": 0.0297,
-    "score_predicted": 0.04251421071287107,
-    "error": 0.01281421071287107
+    "score_predicted": 0.03912518223215387,
+    "error": 0.009425182232153866
    },
    {
     "label": "GEMSDOE9 placeholder (2314b599)",
     "score_actual": 0.0107,
-    "score_predicted": 0.00763823770414606,
-    "error": -0.0030617622958539394
+    "score_predicted": 0.014751285882804775,
+    "error": 0.004051285882804775
    }
   ],
-  "rmse_score": 0.08887997756644307,
-  "max_abs_error": 0.19747620952302378,
-  "score_spread_sd": 0.06857918981002911,
-  "signal_ratio_sd_over_rmse": 0.7715932394195542,
-  "verdict": "in-sample R2(credit)=-1.240; LOO score RMSE=0.0889 vs score spread 0.0686 (signal ratio 0.77). WEAK: LOO error is not clearly below the score spread; treat habitat weights as hypothesis-generating only."
+  "rmse_score": 0.10346494693589084,
+  "max_abs_error": 0.21123857585651834,
+  "score_spread_sd": 0.07667399500754259,
+  "signal_ratio_sd_over_rmse": 0.7410625267613724,
+  "verdict": "in-sample R2(credit)=-1.351; LOO score RMSE=0.1035 vs score spread 0.0767 (signal ratio 0.74). WEAK: LOO error is not clearly below the score spread; treat habitat weights as hypothesis-generating only."
  },
  "caveat": "lam is a habitat intensity, not a fault map: 20 measurements cannot resolve 5.2 M pixels. Bases overlap, so shares are indicative, not a partition of the truth."
 }

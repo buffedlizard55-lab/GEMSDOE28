@@ -1,0 +1,1 @@
+28GEMSDOE H27-4 d2.8 solo | OOF ΔDTI +0.00177 (10/10 seeds, 4/4 folds) 1px flank prune on 0.2600 d2.8; no T-v2 | id 8acb75e1f2cc | UNSCORED, not slot-approved

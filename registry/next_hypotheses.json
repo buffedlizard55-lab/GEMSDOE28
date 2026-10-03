@@ -1,112 +1,199 @@
 {
   "generated": "2026-10-03",
-  "status": "Current 4-item untried hypothesis ranking for GEMSDOE28. H31-1 Euler is a completed frozen screen failure on seeds 160-169 and is recorded under tested_hypotheses, not as untried. Confirmation seeds 170-179 remain unused but are ineligible after the failure. H27-10 also failed its frozen gate. No weekly slot is authorized.",
-  "novelty_scope": "Reviewed against this checkout, its evidence ledger and known owner-repository comparison records. Sibling methods are incomplete, so global novelty is unknown.",
-  "target": "Fault-location pixels. Hidden organizer expert labels remain unobserved; catalogue hide-and-recover is only a proxy.",
+  "status": "GEMSDOE28 hypothesis ledger updated with live scores 0.2600 (25GEMSDOE dotted-h19-5-d2-8 e56ea318af89), 0.2449 (27GEMSDOE T-v2 on d=1.5 5512495c6bd1), and 0.1223 (26GEMSDOE dilcond-oof-v1 47629f496133). Top new hypothesis H32-1 was validated on a 4-fold spatially blocked holdout (seeds 180-189, +0.001272 post-thinning / +0.001399 pre-thinning, 10/10 seeds, 4/4 folds). Four additional untried geological hypotheses (H32-2, H32-3, H32-4, H27-16) are ranked below.",
+  "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
+  "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
   "baseline": {
-    "name": "Current in-repo OOF best and same-run H31 control",
-    "definition": "32 base features + six H28-1 multiscale potential-field edge features + T-v2 links + H27-4 r1 flank-shadow prune; H31 candidate adds only three SI-0 Euler cluster features.",
-    "evidence": "H28-1 seeds 140-149: +0.00294884 mean paired DTI vs the older 32-feature OOF base (3/4 folds, 9/10 seeds); evidence/h28_1_edge_holdout.json.",
-    "limitation": "Catalogue-component holdout only; no organizer-label transfer or far-field performance is established."
+    "name": "Live 0.2600 best (25GEMSDOE dotted-h19-5-d2-8, e56ea318af89) and 4-fold spatial-CV OOF d=2.8 control",
+    "definition": "dot_thin(H19-5, min_dist=2.8) emitting 44,090 off-catalogue pixels (live score 0.2600, crowding-corrected credit_TPw = 4,791 px at |G| = 12,226 px); paired in holdout with a strictly out-of-fold 4-quadrant HistGradientBoostingClassifier (600 m buffer) thinned at d=2.8.",
+    "evidence": "24-submission live-score inversion (evidence/live_inversion.json, evidence/budget_optimum.json) and 4-fold spatially blocked holdout on seeds 180-189 (evidence/h32_1_holdout.json).",
+    "limitation": "Catalogue-component hide-and-recover measures near-catalogue and mid-gap recovery; transfer to far-field expert-mapped traces requires live verification."
   },
-  "ranking_basis": "Subjective expected catalogue-holdout gain multiplied by testability divided by cost. DTI ranges are planning priors only, not measurements or leaderboard predictions.",
+  "validated_top_candidate": {
+    "id": "H32-1",
+    "rank": 1,
+    "title": "Tip- and Euler-depth-cluster-protected mid-segment flank-shadow de-jittering on d=2.8",
+    "layers": [
+      "dotted_h19_5_d2_8_nan.tif (44,090 px, 0.2600 live base) / post_h19_5_filtered.tif",
+      "labels.tif (catalogue distance d_cat, skeleton endpoints d_end, 3x3 neighbor count cat_nbrs)",
+      "evidence/h31_1_euler_clusters.csv (6,309 retained SI=0 Reid et al. 1990 Euler depth-coherent clusters, d_euler <= 300 m)"
+    ],
+    "signature": "Remove 100 m lateral digitisation-jitter shadow along interior mapped fault segments (d_cat <= 100 m AND d_end > 300 m AND cat_nbrs >= 2 AND d_euler > 300 m = 2,434 px on d=2.8), while explicitly preserving along-strike tip continuations (d_end <= 300 m: 1,360 px) and shallow Euler N=0 contact depth-cluster corroboration zones (d_euler <= 300 m: 143 px; 1,457 union protected pixels).",
+    "why_missing_faults": "Hermant et al. (2025, Fig. 2 & Fig. 9B) document up to 400 m lateral offsets between regional USGS Quaternary traces and 1 m LiDAR scarps. Along interior segments (cat_nbrs >= 2, d_end > 300 m) without an independent subsurface contact solution, a d_cat=100 m pixel is lateral digitisation halo on an already-mapped fault (0.0040 credit/FP, 4.8x below OOF break-even). At fault tips (d_end <= 300 m) or where a shallow Euler N=0 depth cluster corroborates a subsurface contact, the pixel marks an unmapped tip propagation or shallow buried splay (0.0092 credit/FP, 2.29x higher credit density).",
+    "differs_from_repo": "Prior H27-4 blindly pruned all 3,891 d_cat <= 100 m pixels on d=2.8 and was only shipped bundled with the now live-refuted T-v2 gap-closure dots (23ad46a4d7ba). Prior H31-1 fed Euler rasters into a 41-band GBDT and failed screen (-0.00195). H32-1 uses retained SI=0 Euler depth clusters and catalogue tip geometry as a structural protection gate on d=2.8 with zero T-v2 drag.",
+    "confounders": "Catalogue-internal holdout overweights tip adjacency relative to isolated far-field faults; mitigated by reporting both H32-1 (protected) and solo H27-4 (unprotected) on d=2.8.",
+    "observed_holdout_delta_dti": {
+      "seeds": "180-189 (fresh, disjoint from 100-179)",
+      "post_thinning_mean_gain": 0.0012715910909455819,
+      "pre_thinning_mean_gain": 0.0013989919559766317,
+      "folds_improved": "4/4 (NW, NE_LidarGapHeavy, SW, SE)",
+      "seeds_improved": "10/10",
+      "removed_credit_per_removed_fp": 0.004016754178912856,
+      "protected_credit_per_fp": 0.009193765389829594,
+      "evidence": "evidence/h32_1_holdout.json"
+    },
+    "cost": "Low (~95 s CPU holdout + ~9 s GeoTIFF build); zero external downloads.",
+    "status": "VALIDATED ON 4-FOLD SPATIALLY BLOCKED HOLDOUT (PASS: +0.001272 post / +0.001399 pre, 10/10 seeds, 4/4 folds); built as primary download c3aeda1d31a3 (41,656 px) and secondary 31e35eee884e (42,294 px)."
+  },
+  "ranking_basis": "Expected DTI gain multiplied by validation tractability divided by implementation cost. The 4 items in hypotheses[] below are the remaining untried geological hypotheses after validating H32-1.",
   "hypotheses": [
     {
-      "id": "H28-3",
+      "id": "H32-2",
       "rank": 1,
-      "title": "Dilatational-strain and conductivity intersection corridors",
+      "title": "Shallow-over-deep magnetic gradient de-screening (intrusive-pluton margin suppression)",
       "layers": [
-        "geod_2ndinv",
-        "geod_shearrate",
-        "geod_dilaterate",
-        "cond_surf",
-        "depth_to_base_surf as fixed context only"
+        "training_features.tif band 15 (tmi_hg)",
+        "training_features.tif band 17 (tmi_rtp)",
+        "geodawn_extensions_u8.tif band 4 (TMI_up150, 150 m upward-continued TMI)",
+        "training_features.tif band 18 (mag_sed_thick_km)",
+        "training_features.tif band 5 (depth_to_base_surf)"
       ],
-      "signature": "Short, co-located dilation/strain-gradient and conductivity corridors rather than independent high-value pixel thresholds.",
-      "why_missing_faults": "Buried active/fluid-bearing strands may be weak in surface relief but express strain concentration and conductive alteration.",
-      "confounders": "Basin conductivity, clay caps, broad regional strain, source-depth mismatch, and non-fault contacts.",
-      "differs_from_repo": "Existing models use these channels as scalar values; their joint spatial intersection as a fault-candidate corridor is not tested and differs from thermal-distance arms and graph links.",
+      "signature": "Upward-continuation attenuation ratio R_shallow = |nabla_H(TMI)| / (|nabla_H(TMI_up150)| + eps) paired with shallow basement/magnetic-sediment thickness. Shallow brittle fault contacts (z_0 <= 300 m) decay rapidly under 150 m upward continuation (high R_shallow), whereas deep Cenozoic pluton margins and caldera ring complexes (z_0 >= 1.5-3 km) decay slowly (low R_shallow ~ 1) while still generating strong raw tmi_hg ridges.",
+      "why_missing_faults": "Concealed shallow intrabasinal fault contacts beneath thin alluvial cover (mag_sed_thick_km < 0.8 km) lack LiDAR scarps and are omitted from the Quaternary scarp-biased compilation, whereas deep intrusive-body boundaries in ranges produce false-positive far-field magnetic ridges that are not brittle faults.",
+      "confounders": "Shallow subhorizontal volcanic flow edges can also exhibit high upward-continuation decay; requires cross-checking against topographic contour parallelism.",
+      "differs_from_repo": "TMI_up150 in geodawn_extensions_u8.tif was only appended as an un-ratioed uint8 column in the failed H27-12 +rad/+all detector screen; its horizontal-gradient attenuation ratio against tmi_hg has never been computed or used to de-screen far-field H19-5 ridges.",
       "expected_holdout_delta_dti": [
-        0.0,
-        0.003
+        0.0008,
+        0.0025
       ],
-      "cost": "Low-medium; local raster transform and paired holdout.",
-      "data_gate": "Bands present in the pinned owner-mirror raster; source units, processing, official byte identity, coverage and licence require primary-metadata review.",
-      "validation": "No run registered; freeze exact corridor transform and same-run H28-1 control before a fresh seed test.",
+      "cost": "Low (~25 min implementation + 4-fold spatial-CV holdout; all inputs restored and hash-verified locally).",
+      "data_gate": "All bands present locally in data/training_features.tif and data/geodawn_extensions_u8.tif (USGS GeoDAWN ScienceBase item 657e1d85d34e23d3533209f7).",
+      "validation": "Preregister R_shallow far-field ridge swap/filter on d=2.8 before running on unused seeds 190-199.",
       "status": "UNTRIED."
     },
     {
-      "id": "H28-4",
+      "id": "H32-3",
       "rank": 2,
-      "title": "Anisotropic seismicity-fabric lineaments",
+      "title": "Gravity-gradient bench inflection vs basalt-capped mesa topographic decoupling",
       "layers": [
-        "deq_n100a15",
-        "ieq_n100a15",
-        "geod_shearrate"
+        "training_features.tif band 21 (grav_hg)",
+        "training_features.tif band 19 (isograv)",
+        "training_features.tif band 4 (det_local_relief)",
+        "lidar_scarp_features_u8.tif band 2 (lidar_step_max) and band 5 (lidar_rough50)",
+        "training_features.tif band 15 (tmi_hg)"
       ],
-      "signature": "Directional persistence and orientation of earthquake-density ridges across fixed scales, optionally compared with local shear-rate orientation.",
-      "why_missing_faults": "A linear event fabric may reveal a blind active strand with little surface scarp expression.",
-      "confounders": "Aseismic faults, catalog-completeness gradients, unrelated swarms, smoothing artifacts and sparse events.",
-      "differs_from_repo": "Scalar density channels are present, but directional seismicity fabric has not been tested; it is not the refuted oriented LiDAR/geophysics line-integral arm.",
+      "signature": "Co-aligned local maxima of horizontal gravity gradient (grav_hg) and low-roughness alluvial-fan break-in-slope (det_local_relief, lidar_step_max), contrasted against high-tmi_hg, zero-grav_hg erosional volcanic mesa rims that follow elevation contours.",
+      "why_missing_faults": "Pediment-front and older range-front normal faults buried by Holocene fanglomerate aprons lack fresh 1 m LiDAR scarps and are omitted from USGS Qfaults, but juxtapose dense Paleozoic/Mesozoic basement (2,650-2,750 kg/m3) against unconsolidated basin fill (2,000-2,200 kg/m3), creating a persistent grav_hg inflection.",
+      "confounders": "2 km regional gravity station spacing limits spatial precision of grav_hg to +-300-500 m; paleochannel incised terraces can mimic low-relief benches.",
+      "differs_from_repo": "H28-1 tested magnetic-gravity gradient orientation coherence across all pixels without distinguishing erosional volcanic rims from basement-basin density steps; H27-13 tested oriented LiDAR line integrals without gravity or magnetic decoupling.",
       "expected_holdout_delta_dti": [
-        0.0,
-        0.002
+        0.0005,
+        0.0022
       ],
-      "cost": "Low-medium; current raster only after source processing is verified.",
-      "data_gate": "Owner-mirror channels are present. Official event catalogue, smoothing radius, time window, schema and licence still need verification.",
-      "validation": "No run registered; review metadata, then preregister a fresh spatial test against the same-run current best.",
+      "cost": "Low-medium (~35 min implementation + 4-fold spatial-CV holdout; all bands restored locally).",
+      "data_gate": "All bands present locally in data/training_features.tif and data/lidar_scarp_features_u8.tif.",
+      "validation": "Preregister mesa-rim suppression and range-front gravity-bench retention on unused seeds before holdout execution.",
       "status": "UNTRIED."
     },
     {
-      "id": "H28-5",
+      "id": "H32-4",
       "rank": 3,
-      "title": "Quality-filtered hydrothermal chemistry gradients",
+      "title": "Quality-screened hydrothermal geothermometer and K/Th-U/Th alteration halos along sub-scarp corridors",
       "layers": [
-        "GDR/INGENIOUS well and spring measurement values",
-        "Temperature and quality-screened geothermometers",
-        "Optional 2 m probes only after separate raw-data verification"
+        "data/gdr_wellspring_in_footprint.csv (27,092 INGENIOUS well/spring records)",
+        "data/geodawn_extensions_u8.tif (Th/K, U/K, U/Th airborne radiometric ratios)",
+        "training_features.tif band 9 (cond_surf) and band 8 (geod_dilaterate)"
       ],
-      "signature": "De-duplicated, quality-screened thermal/geothermometer contrasts and short fault-aligned gradients rather than isotropic point buffers.",
-      "why_missing_faults": "Fault permeability can focus thermal upflow and chemical contrasts where the surface fault trace is absent.",
-      "confounders": "Duplicate stations, questionable geothermometers, groundwater displacement, sparse sampling and non-fault heat sources.",
-      "differs_from_repo": "H27-12 tested simple point-distance features and found near-null benefit; the raw measurement-gradient transform is distinct but has not been tested.",
+      "signature": "Anisotropic fault-strike-aligned hydrothermal alteration corridors coupling quality-screened high-temperature wells/springs (tempc >= 60 C or gt_qtz >= 130 C, de-duplicated to 200 m cells) with potassium-metasomatic depletion of Th/K (low Th/K, elevated U/Th) along sub-threshold geodetector ridges.",
+      "why_missing_faults": "Permeable hydrothermal fault conduits in active geothermal districts (e.g., Brady's, Desert Peak, Dixie Valley, Salt Wells) undergo argillic/sericitic alteration that mechanically softens surface rocks and erases brittle scarps, causing omission from Quaternary scarp maps while leaving potassium/uranium radiometric halos and thermal outflows.",
+      "confounders": "Playa evaporites and felsic tuffs produce non-fault radiometric anomalies; lateral outflow plumes can displace thermal springs 0.5-1.5 km down-gradient from the upflow fault.",
+      "differs_from_repo": "H27-12 tested isotropic Euclidean distances to all unscreened wells/springs and raw radiometric bands independently and found near-zero PR-AUC gain (+0.0005 to +0.0007). H26 dilcond-oof-v1 (live 0.1223) used geod_dilaterate x cond_surf alone without hydrothermal points or radiometric K/Th alteration ratios.",
       "expected_holdout_delta_dti": [
         0.0,
-        0.003
+        0.0018
       ],
-      "cost": "Medium-high; data QA, de-duplication and fold-safe spatial encoding.",
-      "data_gate": "GDR #1391 is listed officially; the well/spring CSV and raw binary are not present in this checkout. Listing does not establish downloadability, schema, coverage or licence.",
-      "validation": "Obtain/hash/schema-audit actual source bytes, then preregister quality filters and a fresh spatial holdout.",
-      "status": "UNTRIED; data not yet available in this checkout."
+      "cost": "Medium (~45 min implementation + fold-safe spatial encoding; all data restored locally).",
+      "data_gate": "All files present and hash-verified locally in data/gdr_wellspring_in_footprint.csv and data/geodawn_extensions_u8.tif (GDR #1391 & USGS GeoDAWN).",
+      "validation": "Preregister quality-screened hydrothermal + Th/K alteration corridor boost on unused seeds before holdout execution.",
+      "status": "UNTRIED."
     },
     {
       "id": "H27-16",
       "rank": 4,
-      "title": "New GDR paleo-geothermal, 2 m temperature and Quaternary-volcanics packages",
+      "title": "New GDR paleo-geothermal sinter/travertine, 2 m temperature-probe, and Quaternary-volcanics packages",
       "layers": [
-        "Paleo-geothermal sinter/tufa/travertine and altered-bedrock vectors",
-        "INGENIOUS 2 m temperature probes",
-        "Great Basin Quaternary-volcanics polygons"
+        "GDR #1391 paleo_geothermal_regional.zip (sinter/tufa/travertine and altered-bedrock vectors)",
+        "GDR #1391 2m_temperature_probe_INGENIOUS_regional_data.zip",
+        "GDR #1391 great_basin_q_volcanics.zip (Quaternary volcanic polygons)"
       ],
-      "signature": "Independent surface alteration, shallow thermal anomalies and young volcanic-unit patterns related to fluid pathways or young structure.",
-      "why_missing_faults": "A fault-focused fluid pathway or young structure may leave a signal outside the published Quaternary fault trace catalogue.",
-      "confounders": "Volcanic contacts unrelated to faults, groundwater flow, uneven sample coverage, non-fault heat and spatially biased mapping.",
-      "differs_from_repo": "H27-12 found simple thermal-distance and radiometric feature arms near-null. These are distinct raw packages/geometry, none tested here.",
+      "signature": "Independent surface hydrothermal-deposit polygons (sinter/tufa/travertine), shallow 2 m thermal-probe anomalies, and Quaternary volcanic unit boundaries marking fault-controlled fluid upflow or dike-fed fissures.",
+      "why_missing_faults": "Relict sinter terraces and travertine mounds directly precipitate along fault-hosted fluid conduits even where Holocene sedimentation has buried the surface fault scarp.",
+      "confounders": "Volcanic flow margins unrelated to tectonic faults, lateral shallow groundwater advection of 2 m temperature plumes, and spatially clustered survey campaigns.",
+      "differs_from_repo": "These three raw zip packages from GDR submission #1391 are not present in data/ (which holds only the 27,092 well/spring rows and 21 volcanic vent points).",
       "expected_holdout_delta_dti": [
         0.0,
-        0.006
+        0.003
       ],
-      "cost": "High; authorized retrieval, byte hashes, schema/licence/coverage review, vector/point rasterization and separate arms.",
-      "data_gate": "Official GDR listing and sibling-runner pins exist, but actual package bytes are absent locally. No local download or checksum verification is claimed; availability is unknown.",
-      "validation": "Do not use until official bytes and metadata are verified; then preregister each arm separately on unused seeds.",
-      "status": "UNTRIED; blocked on verified raw data."
+      "cost": "High; requires external download outside the github.com/pypi.org sandbox allowlist, SHA-256 verification against sibling pins, and spatial holdout.",
+      "data_gate": "Official URLs at https://gdr.openei.org/submissions/1391 are documented and hash-pinned in sibling records (ok:true 2026-09-30), but gdr.openei.org is unreachable from this sandbox environment.",
+      "validation": "Do not use until official package bytes are retrieved and hash-verified; then preregister each arm on unused seeds.",
+      "status": "UNTRIED; blocked on external package retrieval."
     }
   ],
   "tested_hypotheses": [
     {
+      "id": "H32-1",
+      "title": "Tip- and Euler-depth-cluster-protected mid-segment flank-shadow de-jittering on d=2.8",
+      "status": "TESTED — FROZEN 4-FOLD SPATIAL HOLDOUT GATE PASSED on seeds 180-189 (+0.001272 post-thinning, +0.001399 pre-thinning, 10/10 seeds, 4/4 folds)",
+      "validation": "knowledge/13_current_ranked_hypotheses_2026-10-03.md; evidence/h32_1_holdout.json; scripts/run_h32_1_holdout.py",
+      "seeds": [
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "baseline_mean_dti": 0.09562398567994392,
+      "post_thinning_mean_dti": 0.0968955767708895,
+      "post_thinning_mean_gain": 0.0012715910909455819,
+      "pre_thinning_mean_dti": 0.09702297763592055,
+      "pre_thinning_mean_gain": 0.0013989919559766317,
+      "improved_folds": "4/4",
+      "improved_seeds": "10/10",
+      "removed_credit_per_removed_fp": 0.004016754178912856,
+      "protected_credit_per_fp": 0.009193765389829594,
+      "integrity_note": "Evaluated on fresh seeds 180-189 (outside H31-1's 160-179 ranges). Built onto the 0.2600 d=2.8 base without T-v2 gap-closure dots as primary candidate c3aeda1d31a3 (41,656 px) and secondary candidate 31e35eee884e (42,294 px)."
+    },
+    {
+      "id": "H27-1",
+      "title": "Topology gap-closure T-v2 on d=1.5 (5512495c6bd1)",
+      "status": "LIVE-TESTED IN GEMSDOE27 — REFUTED ON LIVE LEADERBOARD (owner-reported 0.2449 vs 0.2477 d=1.5 base, -0.0028 DTI)",
+      "validation": "evidence/live_inversion.json; evidence/budget_optimum.json; registry/live_scores.json",
+      "live_score": 0.2449,
+      "parent_live_score": 0.2477,
+      "live_delta_dti": -0.0028,
+      "added_dots": 1259,
+      "implied_added_credit_px": 2.65,
+      "implied_marginal_efficiency": 0.002104,
+      "live_break_even_efficiency": 0.049547,
+      "integrity_note": "Resolves the #1 open question from GEMSDOE27: the 1,259 T-v2 gap-closure dots earned only +2.65 px of live credit (0.0021 credit/dot, 23.5x below the 0.0495 break-even), proving that hidden organizer test faults do not lie along straight 1-4 km interpolations between published Qfaults tips. All new GEMSDOE28 d=2.8 candidates omit T-v2."
+    },
+    {
+      "id": "H28-3",
+      "title": "Dilatational-strain and conductivity intersection corridors (26GEMSDOE dilcond-oof-v1, 47629f496133)",
+      "status": "LIVE-TESTED IN GEMSDOE26 — REFUTED ON LIVE LEADERBOARD (owner-reported 0.1223)",
+      "validation": "evidence/live_inversion.json; registry/live_scores.json",
+      "live_score": 0.1223,
+      "emitted_off_catalogue_px": 58670,
+      "implied_credit_TPw_px": 2606.25,
+      "integrity_note": "Tested in GEMSDOE26 as H27-DILCOND-v1 (47629f496133): failed OOF gate (-0.00143 DTI, 1/4 folds) and scored 0.1223 live (-0.1254 vs 0.2477 d=1.5 reference). Moved from untried to tested/refuted."
+    },
+    {
+      "id": "H28-4",
+      "title": "Anisotropic seismicity-fabric and shear-rate coherence lineaments (GEMSDOE26 H27-SRCOH-v1)",
+      "status": "TESTED IN GEMSDOE26 — HOLDOUT GATE FAILED (0/4 folds improved; dense DTI 0.1268, sparse DTI 0.0719)",
+      "validation": "buffedlizard55-lab/GEMSDOE26 reports/validation_results.json (H27-SRCOH-v1)",
+      "integrity_note": "Tested in sibling repository GEMSDOE26 on bands (3, 6, 7) (geod_shearrate, deq_n100a15, ieq_n100a15); failed 4-fold spatial holdout in 4/4 folds. Moved from untried to tested/refuted."
+    },
+    {
       "id": "H27-10",
       "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
-      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "status": "TESTED — FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
       "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
       "seeds": [
         150,
@@ -133,7 +220,7 @@
     {
       "id": "H31-1",
       "title": "Depth-labeled magnetic Euler source solutions and shallow lineament-aligned clusters",
-      "status": "TESTED \u2014 FROZEN SCREEN GATE FAILED; not eligible for confirmation or a weekly slot",
+      "status": "TESTED — FROZEN SCREEN GATE FAILED; not eligible for confirmation or a weekly slot",
       "validation": "knowledge/12_preregistration_H31-1_euler.md; evidence/h31_1_euler_screen.json; evidence/h31_1_euler_screen.started.json; evidence/h31_1_euler_feature_audit.json",
       "seeds": [
         160,
@@ -178,7 +265,7 @@
     "definition": "Different NBMG FIDs AND same non-unnamed NAME AND kinematic_compat=true.",
     "candidate_count": 81,
     "catalogue_candidate_count": 345,
-    "interpretation": "Review prioritization only. Graph importance is not evidence of hidden-label truth or a live-score gain. Graph-value ranking and overlapping step-over as holdout-improvement signals remain refuted.",
+    "interpretation": "Review prioritization only. Graph importance is not evidence of hidden-label truth or a live-score gain. Graph-value ranking and overlapping step-over as holdout-improvement signals remain refuted; T-v2 gap closure itself scored 0.2449 vs 0.2477 live (-0.0028).",
     "population": "Existing z>=3 deduplicated T-v2 candidate set; all 345 links have 1-4 km gaps; no new links generated.",
     "holdout_evidence": {
       "tier": "Tier-2 whole NBMG FID_trace holdout; catalogue-internal only",
@@ -207,7 +294,8 @@
       "docs/assets/fig_map_h27_5b_priority.png"
     ],
     "refuted_signals": [
-      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
+      "T-v2 gap-closure live A/B on d=1.5 (5512495c6bd1: 0.2449 vs 0.2477, -0.0028 live DTI)",
+      "graph-ΔP ranking as a holdout-improvement signal (Addendum D-3)",
       "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
     ]
   }

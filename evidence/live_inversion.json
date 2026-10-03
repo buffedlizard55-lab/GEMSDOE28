@@ -1,6 +1,6 @@
 {
  "method": "DTI inversion with closure FPw = N - TPw over the hash-authenticated scored corpus",
- "n_corpus": 20,
+ "n_corpus": 24,
  "grid": {
   "shape": [
    3730,
@@ -21,6 +21,25 @@
  "G_used": 12225.896194356133,
  "submissions": [
   {
+   "label": "25GEMSDOE dotted-h19-5-d2-8 (e56ea318af89)",
+   "repo": "buffedlizard55-lab/GEMSDOE25",
+   "score": 0.26,
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "n_positive_in_footprint": 44090,
+   "n_scored": 44090,
+   "n_on_catalogue": 0,
+   "n_positive_outside_footprint": 0,
+   "c_blind_credit_per_truth": 0.06787970273473934,
+   "rho_matched_over_TP": 1.1790900709983112,
+   "crowding_dots_in_kernel": 0.3662508428096771,
+   "credit_TPw": 4791.0488856019765,
+   "credit_TPw_naive_closure": 4835.6664084260765,
+   "credit_fraction_of_G": 0.39187711145573756,
+   "credit_per_emitted_px": 0.10866520493540432,
+   "fp_mass": 38440.92182931919,
+   "vs_random_blind_level": 4.850363360578974
+  },
+  {
    "label": "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
    "repo": "buffedlizard55-lab/GEMSDOE24",
    "score": 0.2477,
@@ -38,6 +57,25 @@
    "credit_per_emitted_px": 0.08800097005608808,
    "fp_mass": 52514.56977866213,
    "vs_random_blind_level": 3.9279977533672232
+  },
+  {
+   "label": "27GEMSDOE topo-gap-closure-t-v2-on-d1-5 (5512495c6bd1)",
+   "repo": "buffedlizard55-lab/GEMSDOE27",
+   "score": 0.2449,
+   "sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+   "n_positive_in_footprint": 61328,
+   "n_scored": 61328,
+   "n_on_catalogue": 0,
+   "n_positive_outside_footprint": 0,
+   "c_blind_credit_per_truth": 0.07813834121257959,
+   "rho_matched_over_TP": 1.4247590676385378,
+   "crowding_dots_in_kernel": 1.4762914180755615,
+   "credit_TPw": 5289.104788589089,
+   "credit_TPw_naive_closure": 5399.143022398254,
+   "credit_fraction_of_G": 0.432614894197344,
+   "credit_per_emitted_px": 0.08624290354469556,
+   "fp_mass": 53792.299992767286,
+   "vs_random_blind_level": 3.8495249671852236
   },
   {
    "label": "19GEMSDOE h19-5",
@@ -152,6 +190,25 @@
    "credit_per_emitted_px": 0.03233332387349641,
    "fp_mass": 149687.4762453198,
    "vs_random_blind_level": 1.4432252673242236
+  },
+  {
+   "label": "26GEMSDOE dilcond-oof-v1 (47629f496133)",
+   "repo": "buffedlizard55-lab/GEMSDOE26",
+   "score": 0.1223,
+   "sha256": "d54cf7edc6ec57c29b88dec81fe3fb101efa4fe31fc9c1088664a0c2e5190887",
+   "n_positive_in_footprint": 60068,
+   "n_scored": 58670,
+   "n_on_catalogue": 1398,
+   "n_positive_outside_footprint": 0,
+   "c_blind_credit_per_truth": 0.0758782136753946,
+   "rho_matched_over_TP": 1.4036079041256295,
+   "crowding_dots_in_kernel": 1.3550975322723389,
+   "credit_TPw": 2605.527466854058,
+   "credit_TPw_naive_closure": 2631.2498836558048,
+   "credit_fraction_of_G": 0.213115457994552,
+   "credit_per_emitted_px": 0.044409876714744466,
+   "fp_mass": 55012.86105310722,
+   "vs_random_blind_level": 1.982272420993198
   },
   {
    "label": "GEMSDOE3 pindrop-v4-nodes",
@@ -306,6 +363,25 @@
    "vs_random_blind_level": 0.46600189426537764
   },
   {
+   "label": "16GEMSDOE h18-4 usgs-geologic-map-faults-gap (aef8f42c)",
+   "repo": "buffedlizard55-lab/16GEMSDOE",
+   "score": 0.036,
+   "sha256": "736f62c2da585677ef472cab0f9bc63bd15c50c340beb4a0f4627fafd3d1c853",
+   "n_positive_in_footprint": 57783,
+   "n_scored": 57783,
+   "n_on_catalogue": 0,
+   "n_positive_outside_footprint": 0,
+   "c_blind_credit_per_truth": 0.038401427099129,
+   "rho_matched_over_TP": 2.7314895094712006,
+   "crowding_dots_in_kernel": 4.314902305603027,
+   "credit_TPw": 758.6850923924743,
+   "credit_TPw_naive_closure": 768.1434103974566,
+   "credit_fraction_of_G": 0.06205558106592691,
+   "credit_per_emitted_px": 0.013129901396474297,
+   "fp_mass": 55710.659629137765,
+   "vs_random_blind_level": 0.5860642576373077
+  },
+  {
    "label": "18GEMSDOE H19-C",
    "repo": "buffedlizard55-lab/18GEMSDOE",
    "score": 0.0297,
@@ -452,6 +528,55 @@
    "credit_per_emitted_px": 0.06954052496779199
   },
   {
+   "target": 0.26,
+   "emitted_px": 20000,
+   "credit_TPw_required": 3582.986408426076,
+   "credit_fraction_required": 0.29306533864405765,
+   "credit_per_emitted_px": 0.1791493204213038
+  },
+  {
+   "target": 0.26,
+   "emitted_px": 30000,
+   "credit_TPw_required": 4102.986408426076,
+   "credit_fraction_required": 0.33559800796608646,
+   "credit_per_emitted_px": 0.13676621361420255
+  },
+  {
+   "target": 0.26,
+   "emitted_px": 40000,
+   "credit_TPw_required": 4622.986408426077,
+   "credit_fraction_required": 0.3781306772881154,
+   "credit_per_emitted_px": 0.11557466021065192
+  },
+  {
+   "target": 0.26,
+   "emitted_px": 44090,
+   "credit_TPw_required": 4835.6664084260765,
+   "credit_fraction_required": 0.39552653904082513,
+   "credit_per_emitted_px": 0.10967716961728456
+  },
+  {
+   "target": 0.26,
+   "emitted_px": 60069,
+   "credit_TPw_required": 5666.574408426077,
+   "credit_fraction_required": 0.463489491350495,
+   "credit_per_emitted_px": 0.0943344222215465
+  },
+  {
+   "target": 0.26,
+   "emitted_px": 80000,
+   "credit_TPw_required": 6702.986408426077,
+   "credit_fraction_required": 0.5482613545762307,
+   "credit_per_emitted_px": 0.08378733010532596
+  },
+  {
+   "target": 0.26,
+   "emitted_px": 121131,
+   "credit_TPw_required": 8841.798408426075,
+   "credit_fraction_required": 0.7232024767646672,
+   "credit_per_emitted_px": 0.07299368789513894
+  },
+  {
    "target": 0.2941,
    "emitted_px": 20000,
    "credit_TPw_required": 4052.908856608111,
@@ -559,11 +684,27 @@
   },
   "near_nested_pairs": [
    {
+    "a": "25GEMSDOE dotted-h19-5-d2-8 (e56ea318af89)",
+    "b": "19GEMSDOE h19-5",
+    "overlap_frac_of_a": 1.0,
+    "overlap_frac_of_b": 0.36398609769588297,
+    "n_a": 44090,
+    "n_b": 121131
+   },
+   {
     "a": "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
     "b": "19GEMSDOE h19-5",
     "overlap_frac_of_a": 1.0,
     "overlap_frac_of_b": 0.4959011318324789,
     "n_a": 60069,
+    "n_b": 121131
+   },
+   {
+    "a": "27GEMSDOE topo-gap-closure-t-v2-on-d1-5 (5512495c6bd1)",
+    "b": "19GEMSDOE h19-5",
+    "overlap_frac_of_a": 0.9794710409600835,
+    "overlap_frac_of_b": 0.4959011318324789,
+    "n_a": 61328,
     "n_b": 121131
    }
   ]

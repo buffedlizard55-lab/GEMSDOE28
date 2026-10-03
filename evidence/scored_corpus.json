@@ -1,8 +1,18 @@
 {
  "note": "Scored submission rasters recovered from sibling repos and authenticated by SHA-256 against registry/live_scores.json. Scores are owner-reported, not DrivenData receipts.",
- "n_wanted": 26,
- "n_matched": 21,
+ "n_wanted": 29,
+ "n_matched": 24,
  "matched": [
+  {
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "label": "25GEMSDOE dotted-h19-5-d2-8 (e56ea318af89)",
+   "repo": "buffedlizard55-lab/GEMSDOE25",
+   "score": 0.26,
+   "corroboration": "task_statement_only",
+   "registry": "GEMSDOE27/registry/live_scores.json",
+   "path": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "local": "scored_corpus/GEMSDOE25/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif"
+  },
   {
    "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
    "label": "24GEMSDOE h25-1 dotted-h19-5-d1-5 (989f59505db1)",
@@ -12,6 +22,16 @@
    "registry": "GEMSDOE27/registry/live_scores.json",
    "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
    "local": "scored_corpus/GEMSDOE24/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif"
+  },
+  {
+   "sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+   "label": "27GEMSDOE topo-gap-closure-t-v2-on-d1-5 (5512495c6bd1)",
+   "repo": "buffedlizard55-lab/GEMSDOE27",
+   "score": 0.2449,
+   "corroboration": "task_statement_only",
+   "registry": "GEMSDOE27/registry/live_scores.json",
+   "path": "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+   "local": "scored_corpus/GEMSDOE27/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif"
   },
   {
    "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
@@ -72,6 +92,16 @@
    "registry": "GEMSDOE27/registry/live_scores.json",
    "path": "docs/downloads/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
    "local": "scored_corpus/GEMSDOE10/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif"
+  },
+  {
+   "sha256": "d54cf7edc6ec57c29b88dec81fe3fb101efa4fe31fc9c1088664a0c2e5190887",
+   "label": "26GEMSDOE dilcond-oof-v1 (47629f496133)",
+   "repo": "buffedlizard55-lab/GEMSDOE26",
+   "score": 0.1223,
+   "corroboration": "task_statement_only",
+   "registry": "GEMSDOE27/registry/live_scores.json",
+   "path": "docs/downloads/gems26-dilcond-oof-v1-20261003-47629f496133-nan.tif",
+   "local": "scored_corpus/GEMSDOE26/gems26-dilcond-oof-v1-20261003-47629f496133-nan.tif"
   },
   {
    "sha256": "f347b70daa95170bfc967b1c0b6bbf951496c2b74764a7102848ad6178829aca",

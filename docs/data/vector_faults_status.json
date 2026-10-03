@@ -1,7 +1,7 @@
 {
-  "verified_utc": "2026-10-02T20:51:27Z",
+  "verified_utc": "2026-10-03T16:38:36Z",
   "source_endpoint": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0",
-  "local_file": "data_cache/qfaults_v2_in_footprint.json",
+  "local_file": "data/qfaults_v2_in_footprint.json",
   "bytes": 1252341,
   "sha256": "4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c",
   "feature_count": 1179,
