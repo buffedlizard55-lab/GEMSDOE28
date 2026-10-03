@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-03T19:35:00Z",
-  "status": "GEMSDOE28 hypothesis ledger: H32-1 validated PASS (seeds 180-189) remains the holdout best (+0.001272 post-thinning). H32-2 closed as a negative result. H33-1..H33-5 ranked as the remaining untried candidates; next arm runs on seeds 200-209.",
+  "generated": "2026-10-03T22:35:00Z",
+  "status": "GEMSDOE28 hypothesis ledger: H37-1 (metric-aware packing) VALIDATED PASS on fresh seeds 250-259 (+0.007289 vs the d=2.8 reference, +0.004614 over the H36-1 incumbent, 10/10 seeds, 4/4 folds, content-blind matched-N control -0.044684) and promoted to the one-click slot. H37-2..H37-5 are the new ranked geological candidates, none run.",
   "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
   "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
   "baseline": {
@@ -513,5 +513,68 @@
       ],
       "note": "The ten-seed decade 240-249 was consumed by H36-1. Seed 240 had previously been declared a throwaway pipeline smoke-test seed in knowledge/23 section 5 and is recorded as spent here as well; no other record mentions it."
     }
+  },
+  "session13_addendum": {
+    "generated": "2026-10-03",
+    "one_click_primary_content_id": "0bbddf41eb6d",
+    "one_click_primary_note": "H37-1 metric-aware packing of the H19-5 surface: lazy-greedy maximum expected coverage of the detector probability field under the official 300 m kernel, at the rung-3.0 budget (41,333 px pre-prune) with the unchanged H27-4 blind 1-px catalogue-flank prune.",
+    "h37_1": {
+      "preregistration": "knowledge/29_preregistration_H37-1.md",
+      "result": "knowledge/30_h37_1_result.md",
+      "evidence": "evidence/h37_1_holdout.json",
+      "artifact_evidence": "evidence/h37_1_artifact.json",
+      "runner": "scripts/run_h37_1_holdout.py",
+      "builder": "scripts/build_h37_1_submissions.py",
+      "module": "src/gems27/packing.py",
+      "seeds": [
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259
+      ],
+      "gate_passed": true,
+      "primary_mean_gain_vs_base": 0.007289,
+      "primary_mean_gain_vs_incumbent": 0.004614,
+      "seeds_won_vs_incumbent": "10/10",
+      "folds_improved": "4/4",
+      "content_control_gain": -0.044684,
+      "incumbent_replication": "+0.002675 here vs +0.002599 on seeds 240-249",
+      "pool_transfer_probe_gain": 0.004661,
+      "live_projection_range": [
+        0.278,
+        0.286
+      ],
+      "artifacts": [
+        "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif (37,447 px, primary)",
+        "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif (38,545 px, NOT promoted)"
+      ]
+    },
+    "next_ranked": [
+      "LOSFO far-field re-run of the H37-1 rule. Highest value next action: the only instrument whose truth is >= 800 m from anything the detector saw, and the only falsification test for the proxy-preference explanation registered as h37-1-is-proxy-favoured-by-construction.",
+      "H37-3 Euler SI-0 depth-coherence as a POSITIVE emission licence (knowledge/31). Data in hand (evidence/h31_1_euler_clusters.csv); low cost; the novel statistic is within-cluster depth dispersion, not edge amplitude.",
+      "H37-2 concealed-fault conjunction (potential-field lineament x smooth low-relief fill). Measured motivation: emitted dots carry median LiDAR relief rank 60/255 against 32/255 footprint-wide, so the surface is blind to basin-fill faults. Must be gated on LOSFO; the interleaved proxy cannot see that population.",
+      "H37-5 artifact-morphology suppression with reallocation (roads/canals/shoreline benches). PRUNE class, so it inherits the pruning ceiling, but it frees dots at the measured tau_live = 0.0548.",
+      "H37-4 offset geomorphic datum (pluvial shoreline / fan piercing lines). Needs absolute elevation: USGS 3DEP 1 m DEM tiles via data/dem_links.json through the Actions bridge (bridge verified working this session; sandbox egress cannot reach prd-tnm.s3.amazonaws.com). Not runnable until a DEM clip is committed."
+    ],
+    "seed_ledger": {
+      "spent_contiguous": [
+        "100-214",
+        "220-239",
+        "240-249",
+        "250-259"
+      ],
+      "free": [
+        "215-219",
+        "260+"
+      ],
+      "note": "Seeds 250-259 were consumed by the H37-1 gate; 215-219 remain free (exploration for H37-1 deliberately used spent seeds 181/185 instead). The next arm takes 260-269."
+    },
+    "infrastructure_finding": "GitHub Pages for this repository reports status 'errored' and the legacy page build for the current main head is stuck/failed, so the published site may be stale. Registered as github-pages-legacy-build-errored in registry/irregularities.json with the reversible fix (switch the Pages source to GitHub Actions so the workflow that already succeeds deploys)."
   }
 }
