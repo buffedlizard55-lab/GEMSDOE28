@@ -174,13 +174,17 @@ def test_front_page_has_download_and_exact_note():
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
     research = (DOCS / "research.html").read_text()
     registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
-    assert len(registry["hypotheses"]) == 4
-    assert "4 currently ranked untried geological hypotheses" in research
-    assert "the current GEMSDOE28 ranking above also contains four untried hypotheses" in research
-    assert "not part of the current four-item untried list" in research
-    assert "contains five hypotheses" not in research
-    assert "current five-item untried list" not in research
+    assert len(registry["hypotheses"]) == 5
+    assert "5 currently ranked untried geological hypotheses" in research
+    assert "the current GEMSDOE28 session-9 ranking above contains the five untried H33-series hypotheses" in research
+    assert "not part of the current untried list" in research
+    assert "four-item untried list" not in research
+    assert {h["id"] for h in registry["hypotheses"]} == {"H33-1", "H33-2", "H33-3", "H33-4", "H33-5"}
     assert "H31-1" not in {hypothesis["id"] for hypothesis in registry["hypotheses"]}
+    h32_2 = next(item for item in registry["tested_hypotheses"] if item["id"] == "H32-2")
+    assert "FROZEN GATE FAILED" in h32_2["status"]
+    assert "H32-2" in research and "evidence/h32_2_holdout.json" in research
+    assert "knowledge/16_preregistration_H32-2.md" in research and "knowledge/17_h32_2_result.md" in research
     h31 = next(item for item in registry["tested_hypotheses"] if item["id"] == "H31-1")
     assert "FROZEN SCREEN GATE FAILED" in h31["status"]
     for hypothesis in registry["hypotheses"]:

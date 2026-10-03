@@ -5,29 +5,26 @@
 - **Core Value 1 — Maximize P(Win):** Prioritize the highest-leverage geological and mathematical actions that measurably increase expected Distance-Tolerant IoU (DTI) on the hidden test set; never spend a weekly submission slot on an idea that has not beaten the current holdout best on a spatially-blocked holdout set.
 - **Core Value 2 — Own the Outcome:** Work autonomously end-to-end with zero manual input required, verify every claim line by line from official verified trusted sources with links for manual review, flag any irregularities in `registry/irregularities.json`, and run three full verification passes (Pass 1, Pass 2, Pass 3) before opening and merging a pull request onto `main`.
 
-### Verbatim Task Prompt
-> Review the `GEMSDOE28` repo and read the entire prompt:
+### Verbatim Task Prompt (Session 9, 2026-10-03 — read first every session)
+> **Euler deconvolution for depth, not just location.** Gradient and tilt-derivative features mark where a potential-field anomaly changes, but not how deep the source sits. Euler deconvolution (Reid, Allsop, Granser, Millett, and Somerton, *Geophysics*, 1990, DOI `10.1190/1.1442774`) solves Euler's homogeneity equation across a moving window of the field and its gradients to jointly estimate a source's location and depth. Run it with the structural index appropriate to a fault contact, cluster the depth-labeled solutions, and treat a cluster with shallow estimated depth aligned to a candidate lineament as corroboration distinct from a gradient peak alone — two unrelated methods agreeing is stronger evidence than either one.
 >
-> **Euler deconvolution for depth, not just location.**
-> Reid, Allsop, Granser, Millett, and Somerton (*Geophysics*, 1990) is the standard formulation: it solves Euler's homogeneity equation across a moving window of the field and its gradients to jointly estimate source location and depth. Run it with a structural index appropriate to a fault contact, cluster the resulting depth-labeled solutions, and treat a cluster with a shallow estimated depth aligned to a candidate lineament as corroboration distinct from a gradient peak alone.
+> **Scorecard (owner sites → reported live scores).** GEMSDOE `0.1563` · 6GEMSDOE `0.0286` · GEMSDOE3 nodes `0.1193` / discovery `0.0830` / ridge `0.1152` · GEMSDOE2 `0.1560` · GEMSDOE4 `0.0343` · 5GEMSDOE `0.1563` · 7GEMSDOE `0.1461` · 8GEMSDOE `0.1563` · GEMSDOE9 `0.0107` · 11GEMSDOE `0.0202` · 12GEMSDOE `0.1294` · 15GEMSDOE `0.0782` · 14GEMSDOE `0.0020` · 17GEMSDOE `0.0187` · 18GEMSDOE `0.0297` · 19GEMSDOE `0.1894`/`0.1922` · GEMSDOE10 `0.0461`/`0.0921`/`0.1280`/`0.1839` · 13GEMSDOE `0.0904` · 16GEMSDOE `0.1855`/`0.0976`/`0.0360` · GEMSDOE21 `0.1894` · 20GEMSDOE `0.1890`/`0.1859` · GEMSDOE22 `0.1002`/`0.0748` · GEMSDOE23 `0.1352` · GEMSDOE24 `0.2477` · **GEMSDOE25 `dotted-h19-5-d2-8` = `0.2600` (our best)** · GEMSDOE26 `0.1223` · GEMSDOE27 `0.2449` · 28–33GEMSDOE: no score yet.
 >
-> Study, analyze, and understand the highest score (`0.2600`):
-> - Site: `https://buffedlizard55-lab.github.io/GEMSDOE25/`
-> - Submission: `dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600`
-> - Also newly reported scores:
->   - `GEMSDOE26`: `dilcond-oof-v1-20261003-47629f496133-nan: 0.1223`
->   - `GEMSDOE27`: `topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan: 0.2449`
+> **Study the highest score.** Site `https://buffedlizard55-lab.github.io/GEMSDOE25/`, submission `dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600`. Why and how did it get the highest score, and can we generate a submission scoring higher than `0.26`? Answer with PhD-level experience, knowledge, and judgement. Official public leaderboard: `https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/` — `0.3195` is the current #1, so design a new strategy that can score higher than `0.3195`.
 >
-> Answer with PhD experience, knowledge, and judgement: Why and how did that submission get the highest score? Are we able to generate a submission that scores higher than `0.26`?
+> **Generate 3–5 candidate geological hypotheses we haven't tried yet**, each naming: the specific layer(s) involved, the physical signature targeted, why it catches a fault missing from the USGS/INGENIOUS catalogue, and how it differs from anything already implemented here. Rank by expected DTI improvement and implementation cost. **Validate the top candidate on the spatially-blocked holdout set before touching a weekly submission slot** — never spend a slot on an idea that hasn't beaten the current holdout best. If a candidate needs new external data, name the specific free official source and check it's obtainable first.
 >
-> What else could we do to improve our score and beat the highest score on the leaderboard (`0.3195`)?
-> Generate 3–5 candidate geological hypotheses we haven't tried yet, each naming: the specific layer(s) involved, the physical signature being targeted, why it catches a fault missing from the USGS/INGENIOUS catalogue rather than one already in it, and how it differs from anything already implemented in this repo. Rank them by expected DTI improvement and implementation cost. Validate the top candidate on a spatially-blocked holdout set before touching a weekly submission slot.
-> Note: if we need any external data, name the specific free, official source and check whether it's actually obtainable.
+> **Deep research mandate.** Research the science of geothermal-vent/fault discovery heavily; store all knowledge from official verified sources as a starting point for future projects. Be contrarian but grounded; find overlooked data sources and angles. Official anchors: competition `https://www.drivendata.org/competitions/306/competition-doe-gems/` · problem `…/page/967/` · about `…/page/968/` · data tab (login-walled) · reference solution `https://github.com/drivendataorg/gems-prize-reference-solution` · official rules `https://docs.nlr.gov/docs/fy26osti/96647.pdf` · GDR `https://gdr.openei.org/submissions/1391`.
 >
-> Work on next steps from previous sessions first.
-> Make sure we have an easy one-click download submission `.tif` file in the executive summary or very beginning of the site. In a past submission I got an error `"Predicted values must be in range [0, 1]"` — address that. Also give a unique name and a short comment/note so we can identify which submission is what. Have a subpage with an executive summary and explaining how to submit.
-> Put the prompt and Arena AI Core Values (`"Maximize P(Win)"` and `"Own the Outcome"`) into the repo `README` and read it every time as a starting point.
-> Run 3 passes (Pass 1, Pass 2, Pass 3), create a pull request and merge onto `main`.
+> **Submission mechanics.** The site must make it easy to download the submission `.tif` — one-click, in the executive summary / very beginning of the site, obvious on arrival. A past upload failed with `"Predicted values must be in range [0, 1]"` — address it. Give each submission a unique name and a short note (≤ 200 chars) to tell submissions apart. Provide an executive-summary subpage explaining exactly how to submit. Single-band GeoTIFF (or zip of one), matching the submission format's CRS, shape, and geotransform, values in `[0, 1]`.
+>
+> **Known limitation.** No DrivenData auth → cannot auto-download `training_features.tif`, `labels.tif`, `sample_submission.tif`, `1m_DEM_links.csv` (login-walled). Workaround in use: hash-pinned public owner mirrors restored by `scripts/restore_data.py` (never contacts DrivenData). Find free, public, official, verified sources for any external data.
+>
+> **Process.** Work line by line verifying from official verified trusted sources with links for manual review; no manual input; flag irregularities in `registry/irregularities.json`; no hallucinations; verify no hallucinations. Run three passes (Pass 1 implement & verify; Pass 2 review for bugs/missing requirements/wrong assumptions/edge cases and fix; Pass 3 re-check against the original request and improve). Then create a pull request and merge it onto `main`, with suggestions for remaining work and limitations.
+>
+> **Arena AI Core Values (focal points for all building, developing, researching, suggesting, and implementing).**
+> - **Maximize P(Win):** in every decision, weigh tradeoffs, assess risk, and choose the path that maximizes the probability of winning; set aside emotions; prioritize the project's success above all else.
+> - **Own the Outcome:** own results end to end, not just our slice; when problems arise and we can act, act without waiting for permission; treat failure and success as signals and improve; stay accountable to the final outcome.
 
 ---
 
@@ -94,13 +91,19 @@ Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `eviden
 
 ---
 
-## 4. Candidate Geological Hypotheses (`knowledge/13_current_ranked_hypotheses_2026-10-03.md`)
+## 4. Candidate Geological Hypotheses (Session 9 state)
 
-1. **`H32-1-dejitter` (Top Candidate — Validated on 4-Fold Spatially-Blocked Holdout, Seeds `180–189`, PASS):** *Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering on `d=2.8`* (`+0.001272` post-thinning / `+0.001399` pre-thinning, `10/10` seeds, `4/4` folds; `evidence/h32_1_holdout.json`).
-2. **`H32-2` (Rank 1 Remaining Untried):** *Shallow-Over-Deep Magnetic Gradient De-Screening (Intrusive-Pluton Margin Suppression)* using `tmi_hg`, `tmi_rtp`, `TMI_up150` (`geodawn_extensions_u8.tif` band 4), `mag_sed_thick_km`, and `depth_to_base_surf`. Expected holdout ΔDTI: `+0.0008` to `+0.0025`; low cost (~25 min; all layers restored locally).
-3. **`H32-3` (Rank 2 Remaining Untried):** *Gravity-Gradient Bench Inflection vs Basalt-Capped Mesa Topographic Decoupling* using `grav_hg`, `isograv`, `det_local_relief`, `lidar_step_max`, `lidar_rough50`, and `tmi_hg`. Expected holdout ΔDTI: `+0.0005` to `+0.0022`; low-medium cost (~35 min; all layers restored locally).
-4. **`H32-4` (Rank 3 Remaining Untried):** *Quality-Screened Hydrothermal Geothermometer & K/Th–U/Th Alteration Halos Along Sub-Scarp Corridors* using `gdr_wellspring_in_footprint.csv` (`27,092` rows), `geodawn_extensions_u8.tif` (`Th/K`, `U/K`, `U/Th`), `cond_surf`, and `geod_dilaterate`. Expected holdout ΔDTI: `+0.0000` to `+0.0018`; medium cost (~45 min; all layers restored locally).
-5. **`H27-16` (Rank 4 Remaining Untried — External Archives Byte-Verified):** *Independent GDR #1391 Paleo-Geothermal Sinter/Travertine (`paleo_geothermal_regional.zip`), 2 m Temperature Probes (`2m_temperature_probe_INGENIOUS_regional_data.zip`), & Quaternary-Volcanics Polygons (`great_basin_q_volcanics.zip`)*. Official source: OpenEI GDR `#1391` (`https://gdr.openei.org/submissions/1391`), byte-verified via runner (`evidence/external_layer_inventory.json`).
+Ledger: `knowledge/18_new_hypotheses_H33_series_2026-10-03.md` (current) supersedes the session-8 ranking in `knowledge/13_current_ranked_hypotheses_2026-10-03.md`.
+
+- **`H32-1-dejitter` — VALIDATED PASS (seeds `180–189`):** Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering on `d=2.8` (`+0.001272` post-thinning / `+0.001399` pre-thinning, `10/10` seeds, `4/4` folds; `evidence/h32_1_holdout.json`). Remains the holdout best and the primary download.
+- **`H32-2` — EXECUTED THIS SESSION, FROZEN GATE FAILED (seeds `190–199`, CLOSED):** shallow-over-deep magnetic de-screening scored `−0.003767` mean paired ΔDTI (`0/10` seeds, `0/4` folds; `evidence/h32_2_holdout.json`, `knowledge/17_h32_2_result.md`). Run-1 sentinel defect disclosed and repaired (`evidence/h32_2_holdout_run1_invalid_2026-10-03.json`). The direction control supported the physics (shallow dots carry more credit/FP: `0.0383` vs `0.0343`) but the deep class sits far above the OOF inclusion threshold (`0.0193`), so pruning it loses. No confirmation, no retuning, no slot.
+- **New untried H33 series (ranked, all externally sourced claims verified live 2026-10-03):**
+  1. **`H33-1` Kinematic reactivation favourability gate** — USGS slip/dilation tendency shapefile (DOI `10.5066/P9YL58W6`, ScienceBase `6296974dd34ec53d276bb33d`, `Shapefile_Full Study.zip` 34.25 MB listed) × geodetic strain bands; expected `+0.0005` to `+0.0030`; seeds `200–209` reserved.
+  2. **`H33-3` Heat-flow residual × 2 m probe conjunction** — DOI `10.5066/P9BZPVUC` (ScienceBase `6297d2fad34ec53d276c5b28`, 124.12 MB zip listed; well **residual** attribute = hydrothermal departure from background) × byte-verified GDR 2 m probes; expected `+0.0000` to `+0.0025`.
+  3. **`H33-5` Phase-2 discovery budget** — bounded (≤ ~600 px) multi-corroborated off-catalogue emission exploiting the official Phase-2 expert-expanded-label rescoring rule; Phase-1 cost capped at ≈ `0.2 × budget`; the only structural path to leapfrog the `0.30+` cluster.
+  4. **`H33-2` Multi-depth MT conductance alignment** — DOI `10.5066/P9TWT2LU`, five `3.94 MB` GeoTIFF slices (2–200 km) listed on ScienceBase `62979746d34ec53d276c113b`; shallow-aligned/deep-decoupled conductance corridors; expected `+0.0000` to `+0.0022`.
+  5. **`H33-4` Drainage-network neotectonics from 1 m DEMs** — competition `dem_links.json` → USGS 3DEP tiles; channel offsets/knickpoint alignments; expected `+0.0005` to `+0.0035`, high data-volume cost (scope first).
+- Byte-level obtainability of the three ScienceBase sources is queued on the merge-triggered runner bridge (`scripts/fetch_external_layers.py`, `SCIENCEBASE_CHECKS`); **no seed may be spent on those arms until the probes report `AVAILABILITY_FETCHED`** (`registry/irregularities.json` → `h33-external-byte-verify-pending`).
 
 ---
 
@@ -115,8 +118,11 @@ PYTHON=.venv/bin/python bash scripts/download_competition_data.sh
 .venv/bin/python scripts/invert_live_scores.py --tomo
 .venv/bin/python scripts/optimize_budget.py
 
-# 3. Run the 4-fold spatially-blocked holdout validation on seeds 180-189
+# 3. Run the 4-fold spatially-blocked holdout validation on seeds 180-189 (H32-1 PASS)
 .venv/bin/python scripts/run_h32_1_holdout.py --seeds 180-189
+
+# 3b. H32-2 frozen screen on seeds 190-199 (executed session 9: GATE FAILED, arm closed)
+.venv/bin/python scripts/run_h32_2_holdout.py --seeds 190-199
 
 # 4. Build and audit all submission GeoTIFFs, seed ledgers, and static GitHub Pages HTML
 .venv/bin/python scripts/build_h32_1_submissions.py

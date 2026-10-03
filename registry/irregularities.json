@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03 | Session 7: H31-1 protocol chronology correction, seed ledger and runner integrity review.",
+  "generated": "2026-10-03 | Session 9: H32-2 runner sentinel defect disclosed and repaired; H32-2 frozen gate FAILED and the arm is closed; H33-series external byte-verification queued on the runner bridge.",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -282,6 +282,24 @@
       "severity": "high",
       "issue": "Three new owner-reported live scores (25GEMSDOE dotted-h19-5-d2-8 e56ea318af89 = 0.2600; 27GEMSDOE topo-gap-closure-t-v2-on-d1-5 5512495c6bd1 = 0.2449; 26GEMSDOE dilcond-oof-v1 47629f496133 = 0.1223) resolved the #1 open question from Sessions 2-5. T-v2 gap closure reduced live DTI by -0.0028 (earning +2.65 px of credit across 1,259 dots, or 0.0021 credit/dot vs 0.0495 break-even), proving that catalogue-internal holdout overstated T-v2 by ~100x because hidden organizer faults do not lie along straight 1-4 km interpolations between published Qfaults tips. Conversely, d=2.8 (0.2600) outperformed the 2D isotropic geometric retention model (0.2550) by +0.0050 because 1D fault crests spaced at 2.83-3.0 px overlap at 1.41-1.50 px midpoints (k >= 0.50), retaining 90.63% of d=1.5 live credit vs 88.96% predicted by 2D uniform-area geometry.",
       "action": "Updated registry/live_scores.json, evidence/scored_corpus.json (24 matched rasters), evidence/live_inversion.json, and evidence/budget_optimum.json. Removed T-v2 gap-closure dots from all new GEMSDOE28 d=2.8 submission candidates (primary c3aeda1d31a3, secondary 31e35eee884e, tertiary 8acb75e1f2cc)."
+    },
+    {
+      "id": "h32-2-run1-sentinel-defect",
+      "severity": "medium",
+      "issue": "The first H32-2 holdout run ingested the float32 nodata sentinel (|v| >= 1e30, 7,113,308 cells of training_features.tif) into the P99 robust scaling of tmi_hg (P99 = 3.403e38), collapsing the attenuation ratio R to ~1e-37 and making the percentile prune rank-degenerate.",
+      "action": "Run invalidated before any evidence status was assigned; preserved as evidence/h32_2_holdout_run1_invalid_2026-10-03.json. Runner repaired to apply the repository's frozen validity rule |value| < 1e30 (knowledge/14 precedent); repaired run on the same seeds 190-199 produced evidence/h32_2_holdout.json. No gate threshold was altered. Disclosure: knowledge/16 (run-1 integrity correction), knowledge/17."
+    },
+    {
+      "id": "h33-external-byte-verify-pending",
+      "severity": "low",
+      "issue": "H33-1 (slip/dilation tendency shapefile), H33-2 (five MT conductance GeoTIFFs) and H33-3 (heat-flow zip) depend on USGS ScienceBase files that are LISTED on official item pages (verified 2026-10-03 with file names and sizes) but not yet byte-downloaded, because this sandbox cannot reach sciencebase.gov.",
+      "action": "Byte-level availability probes added to scripts/fetch_external_layers.py (SCIENCEBASE_CHECKS); the push-triggered runner workflow will record results in evidence/external_layer_inventory.json after merge. No holdout seed may be spent on these arms until the probes report AVAILABILITY_FETCHED."
+    },
+    {
+      "id": "source-feed-legacy-history-shape",
+      "severity": "low",
+      "issue": "Every 'feed' CI job on arena/** pushes has failed since the legacy docs/data/feed_history.json landed: the file is a flat list of change events, while scripts/refresh_source_feed.py expected a {'runs': [...]} dict (AttributeError: 'list' object has no attribute 'setdefault'). Verified by reproducing locally and by the identical failures on the three prior session branches.",
+      "action": "Fixed in session 9: the script now migrates the legacy list to {'legacy_events': [...], 'runs': [...]} preserving all prior events. The push-triggered source-feed workflow will regenerate the feed on the runner after this lands."
     }
   ]
 }

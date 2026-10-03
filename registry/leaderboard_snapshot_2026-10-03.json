@@ -3,8 +3,156 @@
   "method": "one-off manual public-page read; no scheduled fetch, API, automation, or monitoring",
   "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
   "observations": [
-    {"rank": 1, "participant_label": "DARD", "public_score": 0.3195},
-    {"rank": 15, "participant_label": "wbg1", "public_score": 0.2600}
+    {
+      "rank": 1,
+      "participant_label": "DARD",
+      "public_score": 0.3195,
+      "submissions": 12
+    },
+    {
+      "rank": 2,
+      "participant_label": "nchuzhoy",
+      "public_score": 0.3128,
+      "submissions": 2
+    },
+    {
+      "rank": 3,
+      "participant_label": "alexoktaba",
+      "public_score": 0.3042,
+      "submissions": 20
+    },
+    {
+      "rank": 4,
+      "participant_label": "Batik Shirt Brothers",
+      "public_score": 0.2998,
+      "submissions": 18
+    },
+    {
+      "rank": 5,
+      "participant_label": "xiaofanhu",
+      "public_score": 0.2941,
+      "submissions": 8
+    },
+    {
+      "rank": 6,
+      "participant_label": "joeyfezster",
+      "public_score": 0.2919,
+      "submissions": 19
+    },
+    {
+      "rank": 7,
+      "participant_label": "ndavis7",
+      "public_score": 0.2888,
+      "submissions": 7
+    },
+    {
+      "rank": 8,
+      "participant_label": "mzoorob",
+      "public_score": 0.2884,
+      "submissions": 22
+    },
+    {
+      "rank": 9,
+      "participant_label": "GrigorSargsyan",
+      "public_score": 0.2876,
+      "submissions": 9
+    },
+    {
+      "rank": 10,
+      "participant_label": "HardcoreTechGod",
+      "public_score": 0.2854,
+      "submissions": 6
+    },
+    {
+      "rank": 11,
+      "participant_label": "op01",
+      "public_score": 0.271,
+      "submissions": 5
+    },
+    {
+      "rank": 12,
+      "participant_label": "kinghorton42",
+      "public_score": 0.2635,
+      "submissions": 5
+    },
+    {
+      "rank": 13,
+      "participant_label": "ad3002",
+      "public_score": 0.2627,
+      "submissions": 19
+    },
+    {
+      "rank": 14,
+      "participant_label": "No Fault of Our Own",
+      "public_score": 0.2624,
+      "submissions": 19
+    },
+    {
+      "rank": 15,
+      "participant_label": "wbg1",
+      "public_score": 0.26,
+      "submissions": 9
+    },
+    {
+      "rank": 16,
+      "participant_label": "tchu",
+      "public_score": 0.2511,
+      "submissions": 17
+    },
+    {
+      "rank": 17,
+      "participant_label": "moongrega",
+      "public_score": 0.2474,
+      "submissions": 17
+    },
+    {
+      "rank": 18,
+      "participant_label": "BrandenKMurray",
+      "public_score": 0.2469,
+      "submissions": 9
+    },
+    {
+      "rank": 19,
+      "participant_label": "extradr19",
+      "public_score": 0.2449,
+      "submissions": 7
+    },
+    {
+      "rank": 20,
+      "participant_label": "hiii12345",
+      "public_score": 0.2326,
+      "submissions": 10
+    },
+    {
+      "rank": 21,
+      "participant_label": "Ndabenhle",
+      "public_score": 0.2304,
+      "submissions": 7
+    },
+    {
+      "rank": 22,
+      "participant_label": "jgaines",
+      "public_score": 0.226,
+      "submissions": 19
+    },
+    {
+      "rank": 23,
+      "participant_label": "kpomazi",
+      "public_score": 0.2245,
+      "submissions": 9
+    },
+    {
+      "rank": 24,
+      "participant_label": "oshbocker",
+      "public_score": 0.2228,
+      "submissions": 22
+    },
+    {
+      "rank": 25,
+      "participant_label": "nsabaj",
+      "public_score": null,
+      "submissions": null
+    }
   ],
   "claims": {
     "0.2477": "Owner-reported figure for 24GEMSDOE dotted-h19-5-d1-5 (989f59505db1); no organizer receipt is stored in this checkout.",
@@ -14,5 +162,6 @@
     "0.3195": "A public leaderboard row was observed for DARD. That row alone does not establish that DARD is the repository owner or link the score to any local TIFF."
   },
   "competition_artifacts": "All GEMSDOE28 GeoTIFFs in docs/downloads remain unscored unless an organizer receipt is manually recorded by the human owner. No upload was made by this agent.",
-  "manual_review": "Use the official URL above for a human spot-check. Do not automate access or monitoring."
+  "manual_review": "Use the official URL above for a human spot-check. Do not automate access or monitoring.",
+  "session9_note": "2026-10-03 session 9 re-read (one-off, agent acting as manual reader): full top-25 rows added. Cross-checks with the owner scorecard: 0.2600 appears at rank 15 (wbg1) and 0.2449 at rank 19 (extradr19), consistent with the owner-reported d2-8 and T-v2 scores. Rank association for other owner repos is not claimed. No identity inference; rows are public-page observations only."
 }

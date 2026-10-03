@@ -37,6 +37,47 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 USER_AGENT = "GEMSDOE28-external-layer-bridge/1.0 (+https://github.com/buffedlizard55-lab/GEMSDOE28)"
+
+# Additive (session 9, 2026-10-03): availability checks for the official USGS ScienceBase releases
+# named by the H33-series hypotheses (knowledge/18_new_hypotheses_H33_series_2026-10-03.md). These
+# are UNPINNED availability probes (filename + byte count + sha256 recorded live); they never fail
+# the job and never override the pinned GDR flow above. Items and file names were read manually on
+# 2026-10-03 from the ScienceBase item pages listed in registry/sources.json.
+SCIENCEBASE_CHECKS = [
+    {
+        "label": "sb_slip_tendency_shapefile_full",
+        "item": "6296974dd34ec53d276bb33d",
+        "filename": "Shapefile_Full Study.zip",
+        "doi": "10.5066/P9YL58W6",
+        "page": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+        "hypothesis": "H33-1 kinematic reactivation favourability gate",
+    },
+    {
+        "label": "sb_mt_conductance_surface",
+        "item": "62979746d34ec53d276c113b",
+        "filename": "gb_conductance_surface_tp.tif",
+        "doi": "10.5066/P9TWT2LU",
+        "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+        "hypothesis": "H33-2 multi-depth MT conductance alignment",
+    },
+    {
+        "label": "sb_mt_conductance_middle_crust",
+        "item": "62979746d34ec53d276c113b",
+        "filename": "gb_conductance_middle_crust_tp.tif",
+        "doi": "10.5066/P9TWT2LU",
+        "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+        "hypothesis": "H33-2 multi-depth MT conductance alignment",
+    },
+    {
+        "label": "sb_heat_flow_zip",
+        "item": "6297d2fad34ec53d276c5b28",
+        "filename": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA.zip",
+        "doi": "10.5066/P9BZPVUC",
+        "page": "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+        "hypothesis": "H33-3 heat-flow residual + 2 m probe conjunction",
+    },
+]
+
 DATASET_ALIASES = {
     "paleo": ["gdr_paleo"],
     "probes": ["gdr_2m_probes"],
@@ -111,12 +152,50 @@ def fetch(url: str, keep: bool, out_dir: Path, label: str) -> dict:
     return record
 
 
+def sciencebase_item_json(item_id: str) -> dict | None:
+    url = f"https://www.sciencebase.gov/catalog/item/{item_id}?format=json"
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(request, timeout=120) as response:  # noqa: S310 - fixed https host
+            return json.loads(response.read().decode("utf-8"))
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError, json.JSONDecodeError) as error:
+        print(f"sciencebase item {item_id}: {type(error).__name__}: {error}", file=sys.stderr)
+        return None
+
+
+def run_sciencebase_availability(out_dir: Path) -> dict:
+    """Unpinned availability probes for the H33-series ScienceBase releases (never raises)."""
+    results: dict[str, dict] = {}
+    for check in SCIENCEBASE_CHECKS:
+        label = check["label"]
+        record: dict = {"doi": check["doi"], "page": check["page"], "filename": check["filename"],
+                        "hypothesis": check["hypothesis"]}
+        item = sciencebase_item_json(check["item"])
+        files = (item or {}).get("files", []) if isinstance(item, dict) else []
+        match = next((f for f in files if f.get("name") == check["filename"]), None)
+        if match is None:
+            record["status"] = "FILE_NOT_LISTED"
+            record["listed_files"] = [f.get("name") for f in files][:20]
+            results[label] = record
+            continue
+        record["listed_bytes"] = match.get("size")
+        record["download_url"] = match.get("url")
+        got = fetch(match["url"], keep=False, out_dir=out_dir, label=label)
+        record.update({k: got.get(k) for k in ("http_status", "bytes", "sha256", "status", "error")})
+        record["status"] = "AVAILABILITY_" + str(record.get("status", "UNKNOWN"))
+        results[label] = record
+        print(json.dumps({label: {k: record.get(k) for k in ("status", "bytes", "sha256")}}))
+    return results
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--datasets", default="paleo,probes,volcanics")
     parser.add_argument("--availability-only", default="true")
     parser.add_argument("--out", default="/tmp/gdr/out")
     parser.add_argument("--pins", default="/tmp/gdr/pins.json")
+    parser.add_argument("--skip-sciencebase", default="false",
+                        help="skip the unpinned H33 ScienceBase availability probes")
     args = parser.parse_args()
 
     out_dir = Path(args.out)
@@ -166,6 +245,13 @@ def main() -> int:
         "unpinned": sorted(k for k, v in inventory["rows"].items()
                            if isinstance(v, dict) and v.get("pin_match") is None),
     }
+
+    if str(args.skip_sciencebase).lower() not in {"1", "true", "yes"}:
+        sb = run_sciencebase_availability(out_dir)
+        inventory["sciencebase_availability"] = sb
+        inventory["summary"]["sciencebase_reachable"] = sum(
+            1 for row in sb.values() if str(row.get("status", "")).startswith("AVAILABILITY_FETCHED"))
+        inventory["summary"]["sciencebase_checked"] = len(sb)
     (out_dir / "inventory.json").write_text(json.dumps(inventory, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(inventory["summary"], indent=2))
     if mismatch:

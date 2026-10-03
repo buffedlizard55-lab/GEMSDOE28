@@ -95,6 +95,12 @@ def main() -> int:
         OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
         OUT_PATH.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         history = json.loads(HISTORY_PATH.read_text(encoding="utf-8")) if HISTORY_PATH.exists() else {"runs": []}
+        if isinstance(history, list):
+            # Legacy shape: a flat list of per-source change events written by an earlier
+            # feed implementation. Preserve those events under "legacy_events" and migrate
+            # to the current {"runs": [...]} record. This was the actual cause of every
+            # red `feed` job since the legacy file landed (AttributeError on list.setdefault).
+            history = {"legacy_events": history, "runs": []}
         history.setdefault("runs", []).append({"checked_at_utc": checked_at, "source_count": len(rows), "status_counts": {
             status: sum(row.get("status") == status for row in rows) for status in sorted({row.get("status") for row in rows})
         }})
