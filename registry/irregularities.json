@@ -250,14 +250,20 @@
     {
       "id": "h31-prereg-commit-chronology-not-proven",
       "severity": "high",
-      "issue": "The prior session memory cited protocol/runner commits c217d4c, 4e519f1 and 83805d8, but the checkout initially contained only base 7d4498d; after fetching the full remote main history those hashes were absent. Later working-copy evidence also cited d700cfe and 9eef66b, but those commit objects are absent from the current checkout's Git history. The preserved initial Euler feature audit matches earlier protocol bytes, but byte equality does not prove those bytes were committed before that earlier solve. Current protocol revision 2 was actually committed at 524bf27 before any classifier fit or H31 holdout.",
-      "action": "Withdraw the claim that earlier protocol bytes were committed before the initial label-free solve. Keep the chronology and missing-object disclosures in evidence/h31_1_prereg_history_audit.json and README.md. Protocol revision 2 is committed at 524bf27 before any model fit, and the runner refuses Euler solves/fits unless working bytes exactly match the last committed blob. Refresh the feature build and local seed audit under the current protocol and implementation before fitting; no classifier fit has occurred."
+      "issue": "The prior session memory cited protocol/runner commits c217d4c, 4e519f1 and 83805d8, but the checkout initially contained only base 7d4498d; after fetching the full remote main history those hashes were absent. Later working-copy evidence also cited d700cfe and 9eef66b, but those commit objects are absent from the current checkout's Git history. The preserved initial Euler feature audit matches earlier protocol bytes, but byte equality does not prove those bytes were committed before that earlier solve. Current protocol revision 2 was actually committed at 524bf27 before the H31 screen fit/holdout, which was later run once on seeds 160-169 and failed its frozen gate.",
+      "action": "Withdraw the claim that earlier protocol bytes were committed before the initial label-free solve. Keep the chronology and missing-object disclosures in evidence/h31_1_prereg_history_audit.json and README.md. Protocol revision 2 is committed at 524bf27 and its exact-byte runner guard was satisfied for the one frozen screen. The result is preserved in evidence/h31_1_euler_screen.json; no confirmation or rerun is permitted after the frozen failure."
     },
     {
       "id": "h31-seed-audit-local-scope-and-single-use",
       "severity": "medium",
-      "issue": "The recursive seed ledger finds prior local holdout ranges 100-159 and no local evidence collisions in the reserved H31-1 ranges 160-179. This does not establish that seeds were never used in undocumented external or sibling workspaces.",
-      "action": "Preserve evidence/h31_1_seed_reuse_audit.json with hashes of scanned evidence, refresh it after feature-build evidence and before each holdout stage, and do not represent it as a global audit. The runner writes an atomic single-use claim before model fitting; a claim without a final result means the seed range is consumed and must not be rerun."
+      "issue": "The recursive local seed audit finds prior holdout ranges 100-159, records H31 screen seeds 160-169 as consumed by the completed one-use screen, and records confirmation seeds 170-179 as unused locally. The failed screen makes confirmation ineligible. The local scan cannot establish that seeds were never used in undocumented external or sibling workspaces.",
+      "action": "Preserve evidence/h31_1_seed_reuse_audit.json with hashes of scanned evidence. Refresh it after every eligible stage; the current audit reports 36 evidence JSON files, screen CONSUMED, confirmation UNUSED. The runner's atomic single-use claim remains the record that an interrupted range cannot be rerun. No confirmation is allowed after the screen failure."
+    },
+    {
+      "id": "h31-1-screen-frozen-gate-failed",
+      "severity": "high",
+      "issue": "The one preregistered H31-1 screen on seeds 160-169 failed: mean paired catalogue-proxy \u0394DTI -0.00194719, positive in 1/4 folds and 2/10 seed means. The frozen integrity gate also failed minimum spacing in all 40 paired cells (control 40/40; candidate 39/40). Probability, fold containment, known-catalogue overlap and nonempty-truth checks passed. The screen artifact is self-hashed; the cause of the spacing defect is not isolated by the stored report.",
+      "action": "Treat H31-1 as rejected for this submission workflow. Keep evidence/h31_1_euler_screen.json and its single-use claim; do not retune, rerun, confirm on 170-179, create a candidate TIFF, or spend a weekly slot. Report these catalogue-proxy results as neither organizer-label performance nor competition score. Investigate implementation spacing only as a separately preregistered future study with new seeds, not by reusing this failed screen."
     }
   ]
 }

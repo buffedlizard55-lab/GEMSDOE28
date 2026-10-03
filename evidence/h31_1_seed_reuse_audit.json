@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checked_utc": "2026-10-03T14:17:48Z",
+  "checked_utc": "2026-10-03T14:54:23Z",
   "status": "PASS",
   "scope": "local repository evidence only; cannot rule out undocumented seed use in unsearched external/sibling workspaces",
   "network_access": "none",
@@ -14,11 +14,11 @@
   "git_history_review": {
     "shallow": true,
     "recent_commits": [
+      "2df569c8492ede6a93b6a56b66e64ac3bea0991c Record pre-fit CI and refresh H31 seed audit",
       "92d2e53076144fe74d6ac87171abb98f75b78993 Validate H31 evidence before rendering status",
       "d811897f8fd42381c0a2e6a1bd281f237af4f251 Keep Pages evidence and workflow status current",
       "cf698719fe6777e034469c8d44ce091c93dba010 Build auditable GEMS research and submission workflow",
-      "524bf277e7b5487bfea1982d2a352c9f0802c0e0 protocol: preregister H31-1 Euler holdout",
-      "7d4498dd0d892bd44c9062705d2e90ebedfebbba Initial commit"
+      "524bf277e7b5487bfea1982d2a352c9f0802c0e0 protocol: preregister H31-1 Euler holdout"
     ]
   },
   "planned_ranges": {
@@ -48,7 +48,7 @@
     ]
   },
   "range_status": {
-    "screen": "UNUSED",
+    "screen": "CONSUMED",
     "confirmation": "UNUSED"
   },
   "previously_used_holdout_seeds": [
@@ -186,6 +186,30 @@
       148,
       149
     ],
+    "h31_1_euler_screen.json": [
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169
+    ],
+    "h31_1_euler_screen.started.json": [
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169
+    ],
     "oof_hypothesis_gates.json": [
       130,
       131,
@@ -264,6 +288,8 @@
     "h31_1_euler_feature_audit.json": "bf6c3193bb0aae951abb3eb5149413338e0ca8fafd669bd4fb9e3ca490552e2d",
     "h31_1_euler_feature_audit_initial.json": "c65f38fd3b51fae7f134d9a875639b5b30ee659317041ab5d535327b10915819",
     "h31_1_euler_feature_audit_revision1.json": "3c52e205a8312f11d730dc40996ca0bbe6e0449332f8dfaa36bf7edb9ed495f4",
+    "h31_1_euler_screen.json": "ef18f530020217a423d2cdf3682b14e29b821b7b40dd64a21abe2ae68c2486cc",
+    "h31_1_euler_screen.started.json": "269201d6e9a6cfb749ecbfcf06d770a87707483560c7d9eaf1078965335a64f9",
     "h31_1_prereg_history_audit.json": "11b7fb942f45265ccc88996536f74f26170f3d5afd7d94de10a87c66dc4c1b51",
     "link_graph_value.json": "ebdd46df9d61979584860a5b8d16645e6b686a7f61d039c8b529954e5b34cbdd",
     "live_inversion.json": "0634d7117ce57d47fb91c5b1629be0ace1f0141e19070b5e176fb571bb3ec282",
@@ -277,7 +303,7 @@
     "sgmc_gap_inversion.json": "8315884ec7980587b8d06fb5fa478f8ae61d9acf7ef1fb0bbb4911a15fb7b76f",
     "sgmc_lidar_response.json": "475bf680b434f1efeee5775951295a084d392a5b236975928cafba32b0564acb",
     "structural_relay_classes.json": "41a77500968a7190f4c97f39f3b321ab29bcaf6b52985f5f5e6c6c954e417666",
-    "submission_file_audit.json": "a2f10f7d1b97357d3cc21728c01425922e2b86bb8369281c90031b63aac9f7c3",
+    "submission_file_audit.json": "f73437794939a8eba7a174bc257ac6ce61823cae0fa3893feb5dedd97dd4e3b0",
     "topology_confirmation_v2.json": "f0223a202dfe40e903367333d5bb406406f028fbaf477357165f080b91f381db",
     "topology_link_feature_analysis.json": "7f0ca61c6107852dad6d36c980531ad54fd8fd34d08a01764c73309c0312eca7",
     "topology_validation.json": "fa4f3c0e9f2f0ba3d638582b7180701677565c9bcf8ee393ae910659e150133d",
@@ -287,5 +313,5 @@
   "unreadable_evidence_json": [],
   "invalid_stage_records": [],
   "decision": "Seeds 160-169 are reserved for one frozen screen; 170-179 are confirmation-only after an unchanged passing screen.",
-  "sha256": "fb8386edcd42b38256df4486bac0bbb72da3422b70aef0be6e92bd246e7f5c9d"
+  "sha256": "e3fb3d15ee6d997d092d494dc0bba2773586827db78949e6e52995d6e92316dc"
 }

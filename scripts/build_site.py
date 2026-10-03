@@ -105,9 +105,57 @@ def h31_stage_failed(report: dict, stage: str) -> bool:
     return h31_report_integrity(report, stage) and report.get("gate", {}).get("passed") is False
 
 
+def h31_integrity_summary(report: dict) -> str:
+    checks = report.get("data_integrity_checks", {})
+    if not isinstance(checks, dict):
+        return ""
+    failures = [name for name, passed in checks.items() if passed is False]
+    if not failures:
+        return ""
+    details = []
+    if "minimum_spacing_at_least_1_5_px" in failures:
+        cells = report.get("cells", [])
+        summary = report.get("summary", {})
+        total = len(cells) if isinstance(cells, list) else 0
+        if not total and isinstance(summary, dict):
+            try:
+                total = int(summary.get("cells", 0))
+            except (TypeError, ValueError):
+                total = 0
+        count = report.get("minimum_spacing_failures", total)
+        try:
+            count = int(count)
+        except (TypeError, ValueError):
+            count = total
+        counts = {}
+        for group in ("control", "candidate"):
+            misses = 0
+            observed = 0
+            for cell in cells if isinstance(cells, list) else []:
+                spacing = cell.get("minimum_spacing_px", {}) if isinstance(cell, dict) else {}
+                try:
+                    misses += float(spacing[group]) < 1.5
+                    observed += 1
+                except (KeyError, TypeError, ValueError):
+                    continue
+            if observed:
+                counts[group] = f"{misses}/{observed}"
+        detail = f"minimum spacing below 1.5 px in {count}/{total or 'unknown'} cells"
+        if len(counts) == 2:
+            detail += f" (control {counts['control']}; candidate {counts['candidate']})"
+        details.append(detail)
+    other_failures = [name for name in failures if name != "minimum_spacing_at_least_1_5_px"]
+    if other_failures:
+        details.append("other failed checks: " + ", ".join(other_failures))
+    elif details:
+        details.append("all other listed integrity checks passed")
+    return "Integrity gate: " + "; ".join(details) + "."
+
+
 def h31_stage_line(name: str, report: dict) -> str:
     stage = "screen" if name.lower() == "screen" else "confirmation"
-    outcome = report.get("gate", {}).get("passed") if h31_report_integrity(report, stage) else None
+    verified = h31_report_integrity(report, stage)
+    outcome = report.get("gate", {}).get("passed") if verified else None
     label = "PASS" if outcome is True else "FAIL" if outcome is False else "UNVERIFIED"
     summary = report.get("summary", {})
     if not isinstance(summary, dict):
@@ -118,8 +166,11 @@ def h31_stage_line(name: str, report: dict) -> str:
         gain = "not recorded"
     folds = summary.get("positive_fold_count", "not recorded")
     seeds = summary.get("positive_seed_count", "not recorded")
-    return (f"{name} frozen gate {label}; mean paired catalogue-proxy ΔDTI {gain}; "
+    line = (f"{name} frozen gate {label}; mean paired catalogue-proxy ΔDTI {gain}; "
             f"positive folds {folds}/4; positive seed means {seeds}/10.")
+    if verified:
+        line += " " + h31_integrity_summary(report)
+    return line
 
 
 def h31_result_summary(screen: dict, confirmation: dict, seed_audit: dict) -> str:
@@ -441,7 +492,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
     candidate = h28.get("candidate", {})
     return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Research</div>
 <section class="hero"><div class="hero-content"><div class="eyebrow">Hypotheses, evidence and preregistration</div><h1>Test the geology.<br>Respect the proxy.</h1>
-<p class="lead">Five currently ranked geological hypotheses, reviewed against in-repository experiments and evidence. Planning ranges are subjective, uncertain catalogue-holdout priors—not observed gains or competition-score predictions.</p>
+<p class="lead">{len(hypotheses)} currently ranked untried geological hypotheses, reviewed against in-repository experiments and evidence. Planning ranges are subjective, uncertain catalogue-holdout priors—not observed gains or competition-score predictions.</p>
 <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status proxy">PROXY ≠ COMPETITION</span></div></div></section>
 
 <section class="section"><h2>Current ranking</h2><p>Ranking weighs expected catalogue-proxy gain, testability and cost. “Untried” refers to the proposed transform/holdout arm in this checkout, not a claim of global scientific novelty. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))}</p><div class="grid">{hypothesis_html}</div></section>
@@ -451,7 +502,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 <article class="card span-6"><h3>Structural-index instability</h3><p>SI-1 retains {comma(h1.get('sensitivity_clusters', 5665))} clusters; {fmt_number(h1.get('matched_primary_share_within_600m', 0)*100, 1)}% of SI-0 centroids match within 600 m and median nearest-centroid distance is {fmt_number(h1.get('median_nearest_centroid_distance_m', 0), 0)} m.</p><p>SI-2 retains {comma(h2.get('sensitivity_clusters', 4661))} clusters; {fmt_number(h2.get('matched_primary_share_within_600m', 0)*100, 1)}% match within 600 m and median distance is {fmt_number(h2.get('median_nearest_centroid_distance_m', 0), 0)} m. SI=1/2 are descriptive sensitivity checks, not alternative indices to select after seeing a favorable holdout.</p></article></div>
 <p>SI=0 approximates an idealized contact with effectively infinite depth extent. Real faults may be finite, dipping, intersecting or have mixed geometry and may require higher indices. Euler does not estimate dip; the structural index is a geological model choice, not an automatically “correct” value. Candidate gradient ridges are used only to test alignment with Euler-derived source solutions, never as the inferred source locations.</p>
 <p>Official USGS GeoDAWN metadata reports nominal magnetic flight-line spacing of 200 m in Area 1 and 400 m in Area 2, with variable terrain clearance. The 100 m output grid is not independent 100 m survey resolution. The exact pinned mirror is not organizer-authenticated, and derivative units/conventions have not been calibrated against survey units.</p>
-<p><a href="../knowledge/12_preregistration_H31-1_euler.md">Frozen H31-1 protocol</a> · <a href="../evidence/euler_input_audit.json">Input/convention audit</a> · <a href="../evidence/h31_1_euler_feature_audit.json">Label-free feature/depth audit</a> · <a href="../evidence/h31_1_prereg_history_audit.json">Protocol-history disclosure</a> · <a href="../evidence/h31_1_seed_reuse_audit.json">Local seed-reuse audit</a> · <a href="../evidence/h31_1_euler_clusters.csv">Depth-labeled cluster table</a> · <a href="https://doi.org/10.1190/1.1442774">Reid et al. (1990), DOI</a></p></section>
+<p><a href="../knowledge/12_preregistration_H31-1_euler.md">Frozen H31-1 protocol</a> · <a href="../evidence/euler_input_audit.json">Input/convention audit</a> · <a href="../evidence/h31_1_euler_feature_audit.json">Label-free feature/depth audit</a> · <a href="../evidence/h31_1_prereg_history_audit.json">Protocol-history disclosure</a> · <a href="../evidence/h31_1_seed_reuse_audit.json">Local seed-reuse audit</a> · <a href="../evidence/h31_1_euler_clusters.csv">Depth-labeled cluster table</a> · {h31_evidence_links(screen, confirmation)} · <a href="https://doi.org/10.1190/1.1442774">Reid et al. (1990), DOI</a></p></section>
 
 <section class="section"><h2>H28-1 benchmark and candidate file</h2><p>The paired hide-and-recover screen compared H28-1 multiscale magnetic/gravity edge-coherence features against the best comparable same-run control, across spatially blocked folds and seeds 140–149. The mean paired catalogue proxy ΔDTI was {fmt_number(candidate.get('holdout_mean_gain', 0.002948838794400959), 6)}, with 3/4 folds and 9/10 seed means positive; the frozen screen gate passed. This is not a leaderboard score and does not establish transfer to expert-created faults outside the catalogue habitat.</p><p>Candidate filename: <code>{esc(candidate.get('nan', ''))}</code>. Its full-map construction is separate from the holdout-only fit and no current GEMSDOE28 upload exists. It is not one of the four weekly slots inherited from the predecessor project. The file is an auditable research reference, not a submission recommendation.</p><p>Local manual downloads: <a href="downloads/{esc(candidate.get('nan', ''))}" download>{esc(candidate.get('nan', ''))}</a> · <a href="downloads/{esc(candidate.get('allfinite', ''))}" download>{esc(candidate.get('allfinite', ''))}</a> · <a href="downloads/{esc(candidate.get('zip', ''))}" download>{esc(candidate.get('zip', ''))}</a>.</p><p><a href="../evidence/h28_1_edge_holdout.json">Holdout evidence</a> · <a href="../knowledge/08_preregistration_H28-1.md">H28-1 preregistration</a> · <a href="../knowledge/09_preregistration_H28-1_candidate.md">Full-map candidate construction record</a></p>
 <p>Historical hypothesis register: <a href="../knowledge/07_untried_hypotheses.md">knowledge/07_untried_hypotheses.md</a>. Historical H28 preregistration: <a href="../knowledge/08_preregistration_H28-1.md">knowledge/08_preregistration_H28-1.md</a>. Current hypothesis ranking: <a href="../knowledge/13_current_ranked_hypotheses_2026-10-03.md">knowledge/13_current_ranked_hypotheses_2026-10-03.md</a>.</p></section>

@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-03",
-  "status": "Current 5-item hypothesis screen for GEMSDOE28. H31-1 Euler feature build is label-free only; no Euler classifier fit/holdout yet. H27-10 failed its frozen gate on seeds 150-159 and is not untried. No weekly slot is authorized.",
+  "status": "Current 4-item untried hypothesis ranking for GEMSDOE28. H31-1 Euler is a completed frozen screen failure on seeds 160-169 and is recorded under tested_hypotheses, not as untried. Confirmation seeds 170-179 remain unused but are ineligible after the failure. H27-10 also failed its frozen gate. No weekly slot is authorized.",
   "novelty_scope": "Reviewed against this checkout, its evidence ledger and known owner-repository comparison records. Sibling methods are incomplete, so global novelty is unknown.",
   "target": "Fault-location pixels. Hidden organizer expert labels remain unobserved; catalogue hide-and-recover is only a proxy.",
   "baseline": {
@@ -12,31 +12,8 @@
   "ranking_basis": "Subjective expected catalogue-holdout gain multiplied by testability divided by cost. DTI ranges are planning priors only, not measurements or leaderboard predictions.",
   "hypotheses": [
     {
-      "id": "H31-1",
-      "rank": 1,
-      "title": "Depth-labeled magnetic Euler source solutions and shallow lineament-aligned clusters",
-      "layers": [
-        "Owner-mirror training_features.tif band 14 tmi",
-        "TMI-derived east/north and positive-down Fourier vertical derivatives",
-        "Euler SI=0 solutions and SI=1/2 sensitivity clusters",
-        "TMI horizontal-gradient ridge used only for alignment, never for source location"
-      ],
-      "signature": "Four-unknown Euler source position/depth/offset solutions in 10x10 windows; depth-coherent SI=0 clusters aligned within 200 m of a candidate magnetic lineament.",
-      "why_missing_faults": "A buried susceptibility boundary or fault-related alteration may leave a magnetic source edge where no Quaternary surface trace is mapped.",
-      "confounders": "Lithologic/intrusive contacts, remanent magnetization, survey seams, interpolation, source interference, SI errors, finite/dipping faults, and derivative-unit uncertainty.",
-      "differs_from_repo": "H28-1 added multiscale magnetic/gravity edge covariates; no existing in-repo experiment solves and clusters depth-labeled Euler source coordinates. Gradient ridges only test alignment.",
-      "expected_holdout_delta_dti": [
-        0.0,
-        0.006
-      ],
-      "cost": "Medium-high; local FFT tiles, hundreds of thousands of moving windows, SI sensitivity, clustering, feature build and paired OOF screen; CPU-only.",
-      "data_gate": "Current input bytes are hash-pinned owner mirrors, not organizer-authenticated. Four-patch input audit showed tmi_vg scale ratios 1.38-1.90 and no unit metadata; all solver gradients are derived from band 14 tmi. Official USGS page verifies survey specs, not local byte identity.",
-      "validation": "Protocol revision 2 is committed at 524bf27 and the runner requires exact equality with the committed protocol blob. Earlier artifact-cited commits d700cfe/9eef66b are absent from this checkout; the initial label-free build chronology is not established. The current label-free build passes all three pre-fit sufficiency gates (80.265% vertical coverage, 118,089 accepted SI-0 solutions, 6,309 retained clusters); physical field units remain unauthenticated and source depths are not geological validation. The paired control is fixed as H28-1/T-v2/H27-4 with four spatial folds and 600 m buffers. Screen seeds 160\u2013169 and confirmation-only seeds 170\u2013179 are preregistered. Current stage outcomes and local seed-use status are rendered from the corresponding evidence JSON; catalogue hide-and-recover results are proxy evidence only and do not authorize a weekly slot or establish competition performance.",
-      "status": "PREREGISTERED; LABEL-FREE BUILD PASSED"
-    },
-    {
       "id": "H28-3",
-      "rank": 2,
+      "rank": 1,
       "title": "Dilatational-strain and conductivity intersection corridors",
       "layers": [
         "geod_2ndinv",
@@ -60,7 +37,7 @@
     },
     {
       "id": "H28-4",
-      "rank": 3,
+      "rank": 2,
       "title": "Anisotropic seismicity-fabric lineaments",
       "layers": [
         "deq_n100a15",
@@ -82,7 +59,7 @@
     },
     {
       "id": "H28-5",
-      "rank": 4,
+      "rank": 3,
       "title": "Quality-filtered hydrothermal chemistry gradients",
       "layers": [
         "GDR/INGENIOUS well and spring measurement values",
@@ -104,7 +81,7 @@
     },
     {
       "id": "H27-16",
-      "rank": 5,
+      "rank": 4,
       "title": "New GDR paleo-geothermal, 2 m temperature and Quaternary-volcanics packages",
       "layers": [
         "Paleo-geothermal sinter/tufa/travertine and altered-bedrock vectors",
@@ -152,6 +129,47 @@
       "live_break_even_efficiency": 0.052122130336889505,
       "removed_farfield_efficiency": 0.033406434892356694,
       "integrity_note": "The first-run self-distance spacing check produced a false negative. It was corrected and rerun on the same used seeds solely as an integrity check; data checks then passed, numerical results and the frozen FAIL outcome were unchanged. Not fresh confirmation."
+    },
+    {
+      "id": "H31-1",
+      "title": "Depth-labeled magnetic Euler source solutions and shallow lineament-aligned clusters",
+      "status": "TESTED \u2014 FROZEN SCREEN GATE FAILED; not eligible for confirmation or a weekly slot",
+      "validation": "knowledge/12_preregistration_H31-1_euler.md; evidence/h31_1_euler_screen.json; evidence/h31_1_euler_screen.started.json; evidence/h31_1_euler_feature_audit.json",
+      "seeds": [
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "control_mean_dti": 0.106303876070961,
+      "candidate_mean_dti": 0.10435668924503971,
+      "mean_paired_delta_dti": -0.001947186825921305,
+      "improved_folds": "1/4",
+      "improved_seeds": "2/10",
+      "minimum_spacing_check_failures": 40,
+      "control_spacing_failures": 40,
+      "candidate_spacing_failures": 39,
+      "other_data_checks": "PASS: finite probabilities, active-fold containment, no known-catalogue overlap, nonempty hidden truth",
+      "confirmation_seeds": [
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179
+      ],
+      "confirmation_status": "UNUSED; ineligible after frozen screen failure",
+      "integrity_note": "No refit, retuning, rerun, candidate TIFF or upload. Catalogue proxy only; not organizer-label or competition performance."
     }
   ],
   "separate_review_class": {

@@ -98,7 +98,14 @@ def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp
     assert "weekly slot" in screen_text
     assert build_site.h31_hypothesis_status(screen_pass, {}, consumed) == "SCREEN PASSED — unchanged confirmation required; not slot-approved"
     research = (DOCS / "research.html").read_text()
-    assert "SCREEN PENDING — label-free feature build only" in research
+    assert "Screen frozen gate FAIL" in research
+    assert "minimum spacing below 1.5 px in 40/40 cells" in research
+    assert "control 40/40; candidate 39/40" in research
+    assert "all other listed integrity checks passed" in research
+    assert "screen evidence" in research
+    assert "screen seeds 160–169 are consumed locally" in research
+    assert "confirmation seeds 170–179 are unused locally" in research
+    assert "SCREEN PENDING — label-free feature build only" not in research
     assert "UNTRIED HOLDOUT: feature build only; no model fit or candidate TIFF." not in research
     confirm_fail = report("confirmation", False, -0.0001, 1, 4)
     both_consumed = {"status": "PASS", "range_status": {"screen": "CONSUMED", "confirmation": "CONSUMED"}}
@@ -157,6 +164,11 @@ def test_front_page_has_download_and_exact_note():
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
     research = (DOCS / "research.html").read_text()
     registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
+    assert len(registry["hypotheses"]) == 4
+    assert "4 currently ranked untried geological hypotheses" in research
+    assert "H31-1" not in {hypothesis["id"] for hypothesis in registry["hypotheses"]}
+    h31 = next(item for item in registry["tested_hypotheses"] if item["id"] == "H31-1")
+    assert "FROZEN SCREEN GATE FAILED" in h31["status"]
     for hypothesis in registry["hypotheses"]:
         assert hypothesis["id"] in research
     assert "knowledge/07_untried_hypotheses.md" in research
