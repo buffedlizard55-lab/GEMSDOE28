@@ -73,9 +73,15 @@ def main() -> int:
         "purpose": ("Live-anchored operating-point fit of the H19-5 detector surface: which packing "
                     "rung maximises DTI, and what removal efficiency the submission can afford."),
         "method": {
-            "metric_closure": "DTI = A / (0.8|G| + 0.2N)  with A = kernel credit, N = emitted px, "
-                              "|G| = hidden truth px; follows from the official definition with the "
-                              "inversion's closure FP = N - A.",
+            "metric_closure": ("DTI = A / (0.8|G| + 0.2(1-gamma)N + 0.2A) with A = kernel credit, "
+                               "N = emitted px, |G| = hidden truth px and gamma = Atilde/N. Follows "
+                               "from the official definition with FP = (1-gamma)N, i.e. the "
+                               "emission-side credit Atilde = N - FP. gamma is MEASURED on the three "
+                               "anchors (0.1257/0.1258/0.1281), not fitted."),
+            "credit_model": ("A(rung) = credit_solid * (1 - s*(1 - r(rung))) where r is the retention "
+                             "measured on the catalogue stand-in and s is the density scale - the one "
+                             "free parameter, correcting the stand-in's 1:1 dot-to-truth density to "
+                             "the surface's ~10:1."),
             "threshold": "tau = 0.2*DTI/(1-0.2*DTI); a pixel class with efficiency e=|dA/dFP| is "
                          "worth removing iff e < tau (identical to metric.inclusion_threshold).",
             "retention": "r(rung) = TPw(dotted)/TPw(solid), measured with the official kernel on the "
@@ -98,35 +104,33 @@ def main() -> int:
     }
     print("  rungs:", len(ladder.points), flush=True)
 
-    print("fitting the live operating point ...", flush=True)
-    op = opmod.fit_operating_point(ANCHORS, ladder)
-    report["fit"] = {
-        "credit_solid": op.credit_solid,
-        "truth_px": op.truth_px,
-        "anchors": op.anchors,
-        "residuals": op.residuals,
-        "max_abs_residual": max(abs(r) for r in op.residuals),
-        "leave_one_out": op.leave_one_out,
-        "max_abs_loo_error": max(abs(e["error"]) for e in op.leave_one_out),
-        "external_check": {
-            "blind_lattice_truth_px": BLIND_LATTICE_TRUTH_PX,
-            "fitted_truth_px": op.truth_px,
-            "relative_difference": (op.truth_px - BLIND_LATTICE_TRUTH_PX) / BLIND_LATTICE_TRUTH_PX,
-            "source": "evidence/live_inversion.json (13GEMSDOE r13-lattice-s5, owner-reported 0.0904)",
-        },
-    }
-    print(f"  L={op.credit_solid:.1f}  |G|={op.truth_px:.1f}  max|residual|="
-          f"{max(abs(r) for r in op.residuals):.2e}", flush=True)
+    # ---- Model A (PRIMARY): every input measured, one free parameter ----------------------------
+    # credit_solid = inverted credit of a hash-authenticated 0.1922 score, truth_px = the blind
+    # lattice calibration, gamma = Atilde/N measured per anchor. Only the density scale s is fitted,
+    # so three anchors leave two degrees of freedom.
+    print("fitting the density scale (measured L, |G|, gamma; one free parameter) ...", flush=True)
+    ds = opmod.fit_density_scale(ANCHORS, ladder)
+    report["density_scale_fit"] = ds
+    s_fit = ds["density_scale"]
+    print(f"  s={s_fit:.4f}  max|residual|={ds['max_abs_residual']:.2e}  "
+          f"implied-s spread={ds['implied_scale_spread']:.4f}", flush=True)
 
-    ladder = opmod.predict_ladder(ladder, op)
-    best = ladder.best()
-    current = None
-    for p in ladder.points:
-        if p.n_emitted == 44090:
-            current = p
-            break
+    def _effective(lad, scale: float):
+        """Copy the ladder with the stand-in retention rescaled to the surface's dot density."""
+        out = opmod.Ladder(surface=lad.surface, stand_in=lad.stand_in)
+        for p in lad.points:
+            out.points.append(opmod.LadderPoint(p.rung, p.n_emitted,
+                                                1.0 - scale * (1.0 - p.retention),
+                                                p.n_stand))
+        return out
+
+    op_p = opmod.OperatingPoint(opmod.MEASURED_CREDIT_SOLID, opmod.MEASURED_TRUTH_PX)
+    ladder_p = opmod.predict_ladder(_effective(ladder, s_fit), op_p)
+    best = ladder_p.best()
+    current = next(p for p in ladder_p.points if p.n_emitted == 44090)
     report["ladder_prediction"] = {
-        "points": ladder.as_dict()["points"],
+        "model": "A - measured L/|G|/gamma, fitted density scale",
+        "points": ladder_p.as_dict()["points"],
         "best_rung": best.rung if best else None,
         "best_dti": best.dti if best else None,
         "best_n_emitted": best.n_emitted if best else None,
@@ -134,10 +138,49 @@ def main() -> int:
         "current_dti": current.dti if current else None,
         "delta_dti_best_minus_current": (best.dti - current.dti) if (best and current) else None,
     }
+    # The rung decision must survive the whole plausible range of s, not just the fitted value.
+    s_sens = []
+    for sv in (0.79, 0.81, s_fit, 0.85, 0.87):
+        lad_s = opmod.predict_ladder(_effective(ladder, sv), op_p)
+        b, c = lad_s.best(), next(p for p in lad_s.points if p.n_emitted == 44090)
+        s_sens.append({"density_scale": sv, "best_rung": b.rung, "best_n_emitted": b.n_emitted,
+                       "best_dti": b.dti, "dti_at_current_rung": c.dti,
+                       "delta_dti": b.dti - c.dti})
+    report["density_scale_sensitivity"] = {"rows": s_sens}
+
+    # ---- Model B (REJECTED): the two-parameter fit ---------------------------------------------
+    # Kept only to document why it is not used: with (L, |G|) free it fits the anchors well but
+    # recovers a truth size 21 % below the independent blind-lattice calibration, because it is
+    # absorbing both the crowding term and the stand-in density mismatch into two numbers.
+    print("fitting the two-parameter operating point (comparison only) ...", flush=True)
+    op_b = opmod.fit_operating_point(ANCHORS, ladder)
+    report["two_parameter_fit"] = {
+        "credit_solid": op_b.credit_solid, "truth_px": op_b.truth_px,
+        "anchors": op_b.anchors, "residuals": op_b.residuals,
+        "max_abs_residual": max(abs(r) for r in op_b.residuals),
+        "leave_one_out": op_b.leave_one_out,
+        "max_abs_loo_error": max(abs(e["error"]) for e in op_b.leave_one_out),
+        "external_check": {
+            "blind_lattice_truth_px": BLIND_LATTICE_TRUTH_PX,
+            "fitted_truth_px": op_b.truth_px,
+            "relative_difference": (op_b.truth_px - BLIND_LATTICE_TRUTH_PX) / BLIND_LATTICE_TRUTH_PX,
+            "source": "evidence/live_inversion.json (13GEMSDOE r13-lattice-s5, owner-reported 0.0904)",
+        },
+        "rejected_because": ("recovers a truth size 20.7 % below the blind-lattice calibration while "
+                             "model A needs no such distortion; two free parameters cannot separate "
+                             "the crowding term from the stand-in density mismatch"),
+    }
+    print(f"  L={op_b.credit_solid:.1f}  |G|={op_b.truth_px:.1f}  max|residual|="
+          f"{max(abs(r) for r in op_b.residuals):.2e}  external |G| check "
+          f"{100*(op_b.truth_px-BLIND_LATTICE_TRUTH_PX)/BLIND_LATTICE_TRUTH_PX:+.1f} %", flush=True)
+
+    op = op_p
+    ladder = ladder_p
 
     # Q2 - the threshold arithmetic. tau for the two artifacts we actually compare against.
     proxy_state = {"dti": 0.094506, "label": "H32-2 base control, catalogue-holdout OOF (seeds 190-199)"}
-    live_state = op.state(current.retention, current.n_emitted)
+    live_state = op.state(current.retention, current.n_emitted,
+                          gamma=opmod.ANCHOR_GAMMA.get(current.n_emitted, opmod.GAMMA))
     report["threshold_arithmetic"] = {
         "proxy": {"label": proxy_state["label"], "dti": proxy_state["dti"],
                   "tau": metric.inclusion_threshold(proxy_state["dti"]),
@@ -158,7 +201,7 @@ def main() -> int:
     for a, b in zip(rungs[:-1], rungs[1:]):
         if ladder.points[rungs.index(a)].n_emitted == ladder.points[rungs.index(b)].n_emitted:
             continue  # identical kept sets - not a real step
-        step_rows.append(opmod.rung_efficiency(ladder, op, a, b))
+        step_rows.append(opmod.rung_efficiency(ladder, op, a, b, gamma=opmod.GAMMA))
     report["rung_efficiencies"] = step_rows
 
     # Archived arm efficiencies, re-judged against the live threshold.
@@ -207,19 +250,26 @@ def main() -> int:
                 row["dti_after"] = g["dti_after"]
     report["archived_arms_rejudged"] = archived
 
-    # Sensitivity: |G| is the least certain quantity in the fit (one blind-lattice anchor). Refit L
-    # alone at each candidate |G| and ask whether the optimal rung moves.
+    # Sensitivity. Two measured inputs are uncertain: |G| (one blind-lattice anchor) and gamma
+    # (three anchors, spread 1.9 %). Refit L alone at each candidate and ask whether the *optimal
+    # rung* moves - the rung is the decision, the level is not.
     sens = []
     for mult in (0.75, 0.90, 1.00, 1.10, 1.25):
         g_fixed = BLIND_LATTICE_TRUTH_PX * mult
-        num = sum(pt.retention * s * (BETA * g_fixed + ALPHA * pt.n_emitted) for pt, s, _ in
-                  [(p, a["score"], a) for p, a in zip([_pts(a["min_dist"], ladder) for a in ANCHORS], ANCHORS)])
-        den = sum(pt.retention ** 2 for pt in (_pts(a["min_dist"], ladder) for a in ANCHORS))
-        l_fit = num / den
-        preds = [(p.rung, p.n_emitted, l_fit * p.retention / (BETA * g_fixed + ALPHA * p.n_emitted))
+        ests = []
+        for a in ANCHORS:
+            pt = _pts(a["min_dist"], ladder)
+            gam = opmod.ANCHOR_GAMMA.get(pt.n_emitted, opmod.GAMMA)
+            ests.append(a["score"] * (BETA * g_fixed + ALPHA * (1.0 - gam) * pt.n_emitted)
+                        / (pt.retention * (1.0 - ALPHA * a["score"])))
+        l_fit = sum(ests) / len(ests)
+        preds = [(p.rung, p.n_emitted,
+                  l_fit * p.retention / (BETA * g_fixed + ALPHA * (1.0 - opmod.GAMMA) * p.n_emitted
+                                         + ALPHA * l_fit * p.retention))
                  for p in ladder.points if p.n_emitted]
         best_r = max(preds, key=lambda t: t[2])
         sens.append({"truth_px": g_fixed, "multiplier": mult, "credit_solid": l_fit,
+                     "credit_solid_spread": max(ests) - min(ests),
                      "best_rung": best_r[0], "best_n_emitted": best_r[1], "best_dti": best_r[2],
                      "dti_at_current_rung": next(t[2] for t in preds if t[1] == 44090)})
     report["truth_size_sensitivity"] = {
@@ -228,16 +278,43 @@ def main() -> int:
                     "predicted level, not which rung wins."),
     }
 
+    gamma_sens = []
+    for mult in (0.90, 0.95, 1.00, 1.05, 1.10):
+        gam = opmod.GAMMA * mult
+        op_g = opmod.fit_operating_point(ANCHORS, ladder, gamma=gam)
+        lad_g = opmod.predict_ladder(ladder, op_g, gamma=gam)
+        b = lad_g.best()
+        cur = next(p for p in lad_g.points if p.n_emitted == 44090)
+        gamma_sens.append({"gamma": gam, "multiplier": mult,
+                           "credit_solid": op_g.credit_solid, "truth_px": op_g.truth_px,
+                           "max_abs_residual": max(abs(r) for r in op_g.residuals),
+                           "best_rung": b.rung, "best_n_emitted": b.n_emitted, "best_dti": b.dti,
+                           "dti_at_current_rung": cur.dti,
+                           "delta_dti": (b.dti - cur.dti) if b.dti and cur.dti else None})
+    report["gamma_sensitivity"] = {
+        "rows": gamma_sens,
+        "basis": ("gamma = Atilde/N is measured on the three live anchors as 0.12569 / 0.12576 / "
+                  "0.12811 (evidence/live_inversion.json); this sweeps it +/-10 % around the mean to "
+                  "test the rung-invariance assumption that lets Eq. 1 be extrapolated off the "
+                  "anchors."),
+    }
+
     report["runtime_s"] = round(time.time() - t0, 1)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(report, indent=2, default=str) + "\n", encoding="utf-8")
 
-    print("\n--- H34 operating point ---")
-    print(f"credit_solid L = {op.credit_solid:.1f} px-credit;  |G| = {op.truth_px:.1f} px")
-    print(f"max |residual| on 3 anchors = {max(abs(r) for r in op.residuals):.2e}; "
-          f"max |leave-one-out error| = {max(abs(e['error']) for e in op.leave_one_out):.2e}")
-    print(f"external |G| check: fitted {op.truth_px:.0f} vs blind-lattice {BLIND_LATTICE_TRUTH_PX:.0f} "
-          f"({100*(op.truth_px-BLIND_LATTICE_TRUTH_PX)/BLIND_LATTICE_TRUTH_PX:+.1f} %)")
+    print("\n--- H34 operating point (model A: measured L/|G|/gamma, one fitted scale) ---")
+    print(f"credit_solid L = {op.credit_solid:.1f} px-credit (measured);  "
+          f"|G| = {op.truth_px:.1f} px (blind lattice)")
+    print(f"density scale s = {s_fit:.4f};  max|residual| on 3 anchors = {ds['max_abs_residual']:.2e}")
+    print(f"two-parameter fit (rejected): |G| = {op_b.truth_px:.0f} vs blind lattice "
+          f"{BLIND_LATTICE_TRUTH_PX:.0f} ({100*(op_b.truth_px-BLIND_LATTICE_TRUTH_PX)/BLIND_LATTICE_TRUTH_PX:+.1f} %)")
+    print(f"gamma (Atilde/N, measured on the anchors) = {opmod.GAMMA:.5f} "
+          f"[{min(opmod.ANCHOR_GAMMA.values()):.5f}..{max(opmod.ANCHOR_GAMMA.values()):.5f}]")
+    print("  density-scale sweep (best rung must not move):")
+    for r in report["density_scale_sensitivity"]["rows"]:
+        print(f"    s={r['density_scale']:.4f}  best rung {r['best_rung']:.4f} "
+              f"(N={r['best_n_emitted']})  dDTI {r['delta_dti']:+.5f}")
     print(f"best rung {best.rung:.4f} -> N={best.n_emitted}, DTI {best.dti:.5f} "
           f"(current {current.dti:.5f}, delta {best.dti-current.dti:+.5f})")
     print(f"tau: proxy {metric.inclusion_threshold(proxy_state['dti']):.5f} vs live "

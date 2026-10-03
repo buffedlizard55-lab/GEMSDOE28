@@ -1,9 +1,10 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T19:20:46Z",
+  "generated_utc": "2026-10-03T19:40:29Z",
   "purpose": "Live-anchored operating-point fit of the H19-5 detector surface: which packing rung maximises DTI, and what removal efficiency the submission can afford.",
   "method": {
-    "metric_closure": "DTI = A / (0.8|G| + 0.2N)  with A = kernel credit, N = emitted px, |G| = hidden truth px; follows from the official definition with the inversion's closure FP = N - A.",
+    "metric_closure": "DTI = A / (0.8|G| + 0.2(1-gamma)N + 0.2A) with A = kernel credit, N = emitted px, |G| = hidden truth px and gamma = Atilde/N. Follows from the official definition with FP = (1-gamma)N, i.e. the emission-side credit Atilde = N - FP. gamma is MEASURED on the three anchors (0.1257/0.1258/0.1281), not fitted.",
+    "credit_model": "A(rung) = credit_solid * (1 - s*(1 - r(rung))) where r is the retention measured on the catalogue stand-in and s is the density scale - the one free parameter, correcting the stand-in's 1:1 dot-to-truth density to the surface's ~10:1.",
     "threshold": "tau = 0.2*DTI/(1-0.2*DTI); a pixel class with efficiency e=|dA/dFP| is worth removing iff e < tau (identical to metric.inclusion_threshold).",
     "retention": "r(rung) = TPw(dotted)/TPw(solid), measured with the official kernel on the published catalogue, used purely as a 1-D curvilinear geometry stand-in for the hidden fault network.",
     "anchors": "three owner-reported live scores of one surface; scores are not organizer receipts and the fit inherits that uncertainty."
@@ -219,9 +220,313 @@
       }
     ]
   },
-  "fit": {
-    "credit_solid": 6456.933201257696,
-    "truth_px": 11721.80551638017,
+  "density_scale_fit": {
+    "density_scale": 0.8367818277370481,
+    "credit_solid": 6188.804163187549,
+    "truth_px": 12225.896194356133,
+    "max_abs_residual": 0.0010822624531822422,
+    "per_anchor": [
+      {
+        "label": "h19-5 solid (GEMSDOE19, 0.1922)",
+        "rung": 1.0,
+        "n_emitted": 121131,
+        "retention_stand_in": 1.0,
+        "gamma": 0.12569,
+        "score": 0.1922,
+        "fitted": 0.19220075707264608,
+        "residual": 7.570726460737198e-07
+      },
+      {
+        "label": "dotted-h19-5-d1-5 (GEMSDOE24, 0.2477)",
+        "rung": 2.0,
+        "n_emitted": 60069,
+        "retention_stand_in": 0.821004410415532,
+        "gamma": 0.12576,
+        "score": 0.2477,
+        "fitted": 0.24661773754681776,
+        "residual": -0.0010822624531822422
+      },
+      {
+        "label": "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)",
+        "rung": 2.8284271247461903,
+        "n_emitted": 44090,
+        "retention_stand_in": 0.7324567460458623,
+        "gamma": 0.12811,
+        "score": 0.26,
+        "fitted": 0.26062733798960813,
+        "residual": 0.0006273379896081233
+      }
+    ],
+    "implied_scale_spread": 0.02929689003141478,
+    "implied_scale_values": [
+      0.8148505823750756,
+      0.8441474724064904
+    ],
+    "free_parameters": 1,
+    "n_anchors": 3,
+    "degrees_of_freedom": 2
+  },
+  "ladder_prediction": {
+    "model": "A - measured L/|G|/gamma, fitted density scale",
+    "points": [
+      {
+        "rung": 1.0,
+        "n_emitted": 121131,
+        "retention": 1.0,
+        "n_stand": 60988,
+        "dti": 0.19232230360979943
+      },
+      {
+        "rung": 1.4142135623730951,
+        "n_emitted": 73771,
+        "retention": 0.8916680267505769,
+        "n_stand": 37301,
+        "dti": 0.23213945824678764
+      },
+      {
+        "rung": 2.0,
+        "n_emitted": 60069,
+        "retention": 0.8502197433906383,
+        "n_stand": 30335,
+        "dti": 0.2467247095559221
+      },
+      {
+        "rung": 2.23606797749979,
+        "n_emitted": 52969,
+        "retention": 0.8240952722185811,
+        "n_stand": 26186,
+        "dti": 0.2543200696235744
+      },
+      {
+        "rung": 2.8284271247461903,
+        "n_emitted": 44090,
+        "retention": 0.7761246669575395,
+        "n_stand": 21100,
+        "dti": 0.2604304583986791
+      },
+      {
+        "rung": 3.0,
+        "n_emitted": 41333,
+        "retention": 0.7640246902547572,
+        "n_stand": 19883,
+        "dti": 0.2634642496543158
+      },
+      {
+        "rung": 3.1622776601683795,
+        "n_emitted": 38661,
+        "retention": 0.735564356840291,
+        "n_stand": 18412,
+        "dti": 0.2609492683134831
+      },
+      {
+        "rung": 3.605551275463989,
+        "n_emitted": 34817,
+        "retention": 0.6952238231549495,
+        "n_stand": 16386,
+        "dti": 0.2572780201764717
+      },
+      {
+        "rung": 4.0,
+        "n_emitted": 31930,
+        "retention": 0.6636975570466428,
+        "n_stand": 14931,
+        "dti": 0.25385937247568524
+      },
+      {
+        "rung": 4.123105625617661,
+        "n_emitted": 30802,
+        "retention": 0.6493224371589172,
+        "n_stand": 14285,
+        "dti": 0.25170322296345143
+      },
+      {
+        "rung": 4.242640687119285,
+        "n_emitted": 28832,
+        "retention": 0.6267046196856637,
+        "n_stand": 13357,
+        "dti": 0.24873348425157815
+      },
+      {
+        "rung": 4.47213595499958,
+        "n_emitted": 27813,
+        "retention": 0.6137502622945414,
+        "n_stand": 12857,
+        "dti": 0.24666156243903836
+      },
+      {
+        "rung": 5.0,
+        "n_emitted": 26192,
+        "retention": 0.5925038165369796,
+        "n_stand": 12049,
+        "dti": 0.24300648077606435
+      },
+      {
+        "rung": 5.0990195135927845,
+        "n_emitted": 24347,
+        "retention": 0.5627162978742516,
+        "n_stand": 11175,
+        "dti": 0.23641702418843094
+      },
+      {
+        "rung": 5.385164807134504,
+        "n_emitted": 23229,
+        "retention": 0.5422990115527248,
+        "n_stand": 10637,
+        "dti": 0.2313026052304054
+      },
+      {
+        "rung": 5.656854249492381,
+        "n_emitted": 22243,
+        "retention": 0.5236020437132547,
+        "n_stand": 10132,
+        "dti": 0.2263763166591414
+      },
+      {
+        "rung": 5.830951894845301,
+        "n_emitted": 21804,
+        "retention": 0.51851401663724,
+        "n_stand": 9955,
+        "dti": 0.22548377884040344
+      },
+      {
+        "rung": 6.0,
+        "n_emitted": 21017,
+        "retention": 0.505150862743719,
+        "n_stand": 9597,
+        "dti": 0.22207608257087444
+      },
+      {
+        "rung": 6.082762530298219,
+        "n_emitted": 20669,
+        "retention": 0.4979343982710339,
+        "n_stand": 9412,
+        "dti": 0.21999318028790787
+      },
+      {
+        "rung": 6.324555320336759,
+        "n_emitted": 19938,
+        "retention": 0.4849444618924167,
+        "n_stand": 9074,
+        "dti": 0.21647604462273998
+      },
+      {
+        "rung": 6.4031242374328485,
+        "n_emitted": 19340,
+        "retention": 0.4746214432226292,
+        "n_stand": 8791,
+        "dti": 0.21367491116638485
+      },
+      {
+        "rung": 6.708203932499369,
+        "n_emitted": 18714,
+        "retention": 0.46593066621598866,
+        "n_stand": 8515,
+        "dti": 0.2116113199297284
+      },
+      {
+        "rung": 7.0,
+        "n_emitted": 18123,
+        "retention": 0.4562773453325074,
+        "n_stand": 8280,
+        "dti": 0.20899380515372065
+      },
+      {
+        "rung": 7.0710678118654755,
+        "n_emitted": 17946,
+        "retention": 0.4520190289336288,
+        "n_stand": 8158,
+        "dti": 0.2075993939728266
+      },
+      {
+        "rung": 7.211102550927978,
+        "n_emitted": 17240,
+        "retention": 0.44093515096484215,
+        "n_stand": 7846,
+        "dti": 0.20458971073659438
+      },
+      {
+        "rung": 7.280109889280518,
+        "n_emitted": 16807,
+        "retention": 0.4338961135584253,
+        "n_stand": 7647,
+        "dti": 0.20260500351583463
+      },
+      {
+        "rung": 7.615773105863909,
+        "n_emitted": 16382,
+        "retention": 0.4269519441909525,
+        "n_stand": 7467,
+        "dti": 0.20061637437011023
+      },
+      {
+        "rung": 7.810249675906654,
+        "n_emitted": 16024,
+        "retention": 0.4198859966655284,
+        "n_stand": 7280,
+        "dti": 0.19836987457812022
+      },
+      {
+        "rung": 8.0,
+        "n_emitted": 15656,
+        "retention": 0.41483198263833265,
+        "n_stand": 7130,
+        "dti": 0.19704326195825622
+      }
+    ],
+    "best_rung": 3.0,
+    "best_dti": 0.2634642496543158,
+    "best_n_emitted": 41333,
+    "current_rung": 2.8284271247461903,
+    "current_dti": 0.2604304583986791,
+    "delta_dti_best_minus_current": 0.0030337912556366864
+  },
+  "density_scale_sensitivity": {
+    "rows": [
+      {
+        "density_scale": 0.79,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.267769928724594,
+        "dti_at_current_rung": 0.26440819237880414,
+        "delta_dti": 0.0033617363457898453
+      },
+      {
+        "density_scale": 0.81,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.26593013849065356,
+        "dti_at_current_rung": 0.2627084630895223,
+        "delta_dti": 0.0032216754011312743
+      },
+      {
+        "density_scale": 0.8367818277370481,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.2634642496543158,
+        "dti_at_current_rung": 0.2604304583986791,
+        "delta_dti": 0.0030337912556366864
+      },
+      {
+        "density_scale": 0.85,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.26224626305570625,
+        "dti_at_current_rung": 0.25930534141430855,
+        "delta_dti": 0.002940921641397698
+      },
+      {
+        "density_scale": 0.87,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.2604021745112165,
+        "dti_at_current_rung": 0.2576019463959774,
+        "delta_dti": 0.0028002281152391117
+      }
+    ]
+  },
+  "two_parameter_fit": {
+    "credit_solid": 5788.794214323542,
+    "truth_px": 9698.011126336458,
     "anchors": [
       {
         "label": "h19-5 solid (GEMSDOE19, 0.1922)",
@@ -229,9 +534,10 @@
         "rung": 1.0,
         "n_emitted": 121131,
         "retention": 1.0,
+        "gamma": 0.12569,
         "score": 0.1922,
-        "fitted": 0.1921497895252022,
-        "residual": -5.021047479780716e-05
+        "fitted": 0.19233550746220576,
+        "residual": 0.00013550746220575283
       },
       {
         "label": "dotted-h19-5-d1-5 (GEMSDOE24, 0.2477)",
@@ -239,9 +545,10 @@
         "rung": 2.0,
         "n_emitted": 60069,
         "retention": 0.821004410415532,
+        "gamma": 0.12576,
         "score": 0.2477,
-        "fitted": 0.2478196468431535,
-        "residual": 0.0001196468431534925
+        "fitted": 0.24737953520315803,
+        "residual": -0.0003204647968419738
       },
       {
         "label": "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)",
@@ -249,17 +556,18 @@
         "rung": 2.8284271247461903,
         "n_emitted": 44090,
         "retention": 0.7324567460458623,
+        "gamma": 0.12811,
         "score": 0.26,
-        "fitted": 0.25992353770829757,
-        "residual": -7.646229170243934e-05
+        "fitted": 0.26020915597125177,
+        "residual": 0.0002091559712517621
       }
     ],
     "residuals": [
-      -5.021047479780716e-05,
-      0.0001196468431534925,
-      -7.646229170243934e-05
+      0.00013550746220575283,
+      -0.0003204647968419738,
+      0.0002091559712517621
     ],
-    "max_abs_residual": 0.0001196468431534925,
+    "max_abs_residual": 0.0003204647968419738,
     "leave_one_out": [
       {
         "held_out": "h19-5 solid (GEMSDOE19, 0.1922)",
@@ -268,10 +576,10 @@
           "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)"
         ],
         "score": 0.1922,
-        "predicted": 0.19174883807456702,
-        "error": -0.0004511619254329857,
-        "credit_solid": 6425.400003997381,
-        "truth_px": 11604.074898898998
+        "predicted": 0.19342084734954784,
+        "error": 0.0012208473495478323,
+        "credit_solid": 5867.941556124071,
+        "truth_px": 9978.614987116645
       },
       {
         "held_out": "dotted-h19-5-d1-5 (GEMSDOE24, 0.2477)",
@@ -280,10 +588,10 @@
           "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)"
         ],
         "score": 0.2477,
-        "predicted": 0.24788989491805824,
-        "error": 0.00018989491805823655,
-        "credit_solid": 6458.369893705303,
-        "truth_px": 11720.175947615135
+        "predicted": 0.24718910773032424,
+        "error": -0.0005108922696757667,
+        "credit_solid": 5785.316296720728,
+        "truth_px": 9702.786052721009
       },
       {
         "held_out": "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)",
@@ -292,232 +600,20 @@
           "dotted-h19-5-d1-5 (GEMSDOE24, 0.2477)"
         ],
         "score": 0.26,
-        "predicted": 0.25970467784696893,
-        "error": -0.00029532215303107456,
-        "credit_solid": 6467.053544566652,
-        "truth_px": 11776.651304413703
+        "predicted": 0.26080135467265014,
+        "error": 0.0008013546726501342,
+        "credit_solid": 5763.923668518248,
+        "truth_px": 9569.004213657683
       }
     ],
-    "max_abs_loo_error": 0.0004511619254329857,
+    "max_abs_loo_error": 0.0012208473495478323,
     "external_check": {
       "blind_lattice_truth_px": 12225.896,
-      "fitted_truth_px": 11721.80551638017,
-      "relative_difference": -0.04123137344042772,
+      "fitted_truth_px": 9698.011126336458,
+      "relative_difference": -0.20676479447097723,
       "source": "evidence/live_inversion.json (13GEMSDOE r13-lattice-s5, owner-reported 0.0904)"
-    }
-  },
-  "ladder_prediction": {
-    "points": [
-      {
-        "rung": 1.0,
-        "n_emitted": 121131,
-        "retention": 1.0,
-        "n_stand": 60988,
-        "dti": 0.1921497895252022
-      },
-      {
-        "rung": 1.4142135623730951,
-        "n_emitted": 73771,
-        "retention": 0.8705373734723771,
-        "n_stand": 37301,
-        "dti": 0.23293073499198036
-      },
-      {
-        "rung": 2.0,
-        "n_emitted": 60069,
-        "retention": 0.821004410415532,
-        "n_stand": 30335,
-        "dti": 0.2478196468431535
-      },
-      {
-        "rung": 2.23606797749979,
-        "n_emitted": 52969,
-        "retention": 0.789784240108169,
-        "n_stand": 26186,
-        "dti": 0.255346335776574
-      },
-      {
-        "rung": 2.8284271247461903,
-        "n_emitted": 44090,
-        "retention": 0.7324567460458623,
-        "n_stand": 21100,
-        "dti": 0.25992353770829757
-      },
-      {
-        "rung": 3.0,
-        "n_emitted": 41333,
-        "retention": 0.7179966128286953,
-        "n_stand": 19883,
-        "dti": 0.262754732374228
-      },
-      {
-        "rung": 3.1622776601683795,
-        "n_emitted": 38661,
-        "retention": 0.6839849595266237,
-        "n_stand": 18412,
-        "dti": 0.25812606549238626
-      },
-      {
-        "rung": 3.605551275463989,
-        "n_emitted": 34817,
-        "retention": 0.6357758178505474,
-        "n_stand": 16386,
-        "dti": 0.25122092121163164
-      },
-      {
-        "rung": 4.0,
-        "n_emitted": 31930,
-        "retention": 0.5981002074784092,
-        "n_stand": 14931,
-        "dti": 0.244990433952117
-      },
-      {
-        "rung": 4.123105625617661,
-        "n_emitted": 30802,
-        "retention": 0.580921153857466,
-        "n_stand": 14285,
-        "dti": 0.2414085883426501
-      },
-      {
-        "rung": 4.242640687119285,
-        "n_emitted": 28832,
-        "retention": 0.5538916262989864,
-        "n_stand": 13357,
-        "dti": 0.23616468409130056
-      },
-      {
-        "rung": 4.47213595499958,
-        "n_emitted": 27813,
-        "retention": 0.5384104614819213,
-        "n_stand": 12857,
-        "dti": 0.23269545180185827
-      },
-      {
-        "rung": 5.0,
-        "n_emitted": 26192,
-        "retention": 0.5130197980457665,
-        "n_stand": 12049,
-        "dti": 0.2266399718879264
-      },
-      {
-        "rung": 5.0990195135927845,
-        "n_emitted": 24347,
-        "retention": 0.47742208586398543,
-        "n_stand": 11175,
-        "dti": 0.2163765131311073
-      },
-      {
-        "rung": 5.385164807134504,
-        "n_emitted": 23229,
-        "retention": 0.45302231325331316,
-        "n_stand": 10637,
-        "dti": 0.2085918728352524
-      },
-      {
-        "rung": 5.656854249492381,
-        "n_emitted": 22243,
-        "retention": 0.43067841521476075,
-        "n_stand": 10132,
-        "dti": 0.20113212970946148
-      },
-      {
-        "rung": 5.830951894845301,
-        "n_emitted": 21804,
-        "retention": 0.424597944885028,
-        "n_stand": 9955,
-        "dti": 0.1995597461418625
-      },
-      {
-        "rung": 6.0,
-        "n_emitted": 21017,
-        "retention": 0.4086282459138402,
-        "n_stand": 9597,
-        "dti": 0.1942799142494335
-      },
-      {
-        "rung": 6.082762530298219,
-        "n_emitted": 20669,
-        "retention": 0.40000417661228643,
-        "n_stand": 9412,
-        "dti": 0.19115931661369706
-      },
-      {
-        "rung": 6.324555320336759,
-        "n_emitted": 19938,
-        "retention": 0.38448049296138,
-        "n_stand": 9074,
-        "dti": 0.18575058813902326
-      },
-      {
-        "rung": 6.4031242374328485,
-        "n_emitted": 19340,
-        "retention": 0.37214392167408944,
-        "n_stand": 8791,
-        "dti": 0.1814139540026606
-      },
-      {
-        "rung": 6.708203932499369,
-        "n_emitted": 18714,
-        "retention": 0.3617579683484255,
-        "n_stand": 8515,
-        "dti": 0.17803380509554378
-      },
-      {
-        "rung": 7.0,
-        "n_emitted": 18123,
-        "retention": 0.3502217225033321,
-        "n_stand": 8280,
-        "dti": 0.17392328436859592
-      },
-      {
-        "rung": 7.0710678118654755,
-        "n_emitted": 17946,
-        "retention": 0.34513280176231337,
-        "n_stand": 8158,
-        "dti": 0.1718640054854934
-      },
-      {
-        "rung": 7.211102550927978,
-        "n_emitted": 17240,
-        "retention": 0.33188696204473567,
-        "n_stand": 7846,
-        "dti": 0.16708753905647655
-      },
-      {
-        "rung": 7.280109889280518,
-        "n_emitted": 16807,
-        "retention": 0.32347492778073533,
-        "n_stand": 7647,
-        "dti": 0.16395961307238485
-      },
-      {
-        "rung": 7.615773105863909,
-        "n_emitted": 16382,
-        "retention": 0.3151762660061934,
-        "n_stand": 7467,
-        "dti": 0.16082638839120914
-      },
-      {
-        "rung": 7.810249675906654,
-        "n_emitted": 16024,
-        "retention": 0.3067320726798005,
-        "n_stand": 7280,
-        "dti": 0.15740820468517477
-      },
-      {
-        "rung": 8.0,
-        "n_emitted": 15656,
-        "retention": 0.3006922498016393,
-        "n_stand": 7130,
-        "dti": 0.15521664114706926
-      }
-    ],
-    "best_rung": 3.0,
-    "best_dti": 0.262754732374228,
-    "best_n_emitted": 41333,
-    "current_rung": 2.8284271247461903,
-    "current_dti": 0.25992353770829757,
-    "delta_dti_best_minus_current": 0.0028311946659304033
+    },
+    "rejected_because": "recovers a truth size 20.7 % below the blind-lattice calibration while model A needs no such distortion; two free parameters cannot separate the crowding term from the stand-in density mismatch"
   },
   "threshold_arithmetic": {
     "proxy": {
@@ -528,352 +624,352 @@
     },
     "live_submission": {
       "label": "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)",
-      "dti": 0.25992353770829757,
-      "tau": 0.0548353048259967,
-      "credit_A": 4729.424282028705,
-      "fp": 39360.5757179713,
-      "truth_G": 11721.80551638017,
-      "weighted_recall": 0.4034723384055264
+      "dti": 0.2606273379896082,
+      "tau": 0.054991948634622215,
+      "credit_A": 4803.28357001937,
+      "fp": 38441.6301,
+      "truth_G": 12225.896194356133,
+      "weighted_recall": 0.39287783027609213
     },
-    "ratio_live_over_proxy": 2.8463193745592643,
+    "ratio_live_over_proxy": 2.854450236762189,
     "reading": "The proxy gates pruning at tau=0.019; the submission it is meant to inform gates at tau=0.055. Any arm whose measured removal efficiency lies between the two was rejected by a threshold that does not apply to the artifact."
   },
   "rung_efficiencies": [
     {
       "rung_from": 1.0,
       "rung_to": 1.4142135623730951,
-      "d_credit": -835.9315315482334,
+      "d_credit": -670.445367052352,
       "d_emitted": -47360,
-      "efficiency": 0.017650581324920468,
-      "breakeven_tau": 0.03996584359191726,
+      "efficiency": 0.014156363324585136,
+      "breakeven_tau": 0.040003160726477735,
       "worth_it": true,
-      "delta_dti": 0.03024184150713972,
-      "dti_from": 0.1921497895252022,
-      "dti_to": 0.2223916310323419
+      "delta_dti": 0.03657688233670901,
+      "dti_from": 0.19232230360979943,
+      "dti_to": 0.22889918594650843
     },
     {
       "rung_from": 1.4142135623730951,
       "rung_to": 2.0,
-      "d_credit": -319.8310337184146,
+      "d_credit": -256.51530861496497,
       "d_emitted": -13702,
-      "efficiency": 0.023341923348300583,
-      "breakeven_tau": 0.048862460778947486,
+      "efficiency": 0.01872101215990111,
+      "breakeven_tau": 0.048688390990862876,
       "worth_it": true,
-      "delta_dti": 0.013815554476843793,
-      "dti_from": 0.23293073499198036,
-      "dti_to": 0.24674628946882415
+      "delta_dti": 0.016471201990240405,
+      "dti_from": 0.23213945824678767,
+      "dti_to": 0.24861066023702807
     },
     {
       "rung_from": 2.0,
       "rung_to": 2.23606797749979,
-      "d_credit": -201.58655420653196,
+      "d_credit": -161.67923595070062,
       "d_emitted": -7100,
-      "efficiency": 0.028392472423455207,
-      "breakeven_tau": 0.05214861988108855,
+      "efficiency": 0.022771723373338115,
+      "breakeven_tau": 0.051906252947716766,
       "worth_it": true,
-      "delta_dti": 0.007494129979034791,
-      "dti_from": 0.2478196468431535,
-      "dti_to": 0.2553137768221883
+      "delta_dti": 0.00922070318987615,
+      "dti_from": 0.24672470955592216,
+      "dti_to": 0.2559454127457983
     },
     {
       "rung_from": 2.23606797749979,
       "rung_to": 2.8284271247461903,
-      "d_credit": -370.15979975581115,
+      "d_credit": -296.88068155016134,
       "d_emitted": -8879,
-      "efficiency": 0.04168935688206005,
-      "breakeven_tau": 0.0538176975280592,
+      "efficiency": 0.03343627452980756,
+      "breakeven_tau": 0.05358980659350996,
       "worth_it": true,
-      "delta_dti": 0.005116757419135373,
-      "dti_from": 0.25534633577657406,
-      "dti_to": 0.2604630931957094
+      "delta_dti": 0.00846915609426208,
+      "dti_from": 0.25432006962357445,
+      "dti_to": 0.2627892257178365
     },
     {
       "rung_from": 2.8284271247461903,
       "rung_to": 3.0,
-      "d_credit": -93.36811426453482,
+      "d_credit": -74.88438619265139,
       "d_emitted": -2757,
-      "efficiency": 0.03386583760048416,
-      "breakeven_tau": 0.0548353048259967,
+      "efficiency": 0.02716154740393594,
+      "breakeven_tau": 0.05494812474271441,
       "worth_it": true,
-      "delta_dti": 0.0030121516846330436,
-      "dti_from": 0.25992353770829757,
-      "dti_to": 0.2629356893929306
+      "delta_dti": 0.0039372615471378,
+      "dti_from": 0.2604304583986791,
+      "dti_to": 0.2643677199458169
     },
     {
       "rung_from": 3.0,
       "rung_to": 3.1622776601683795,
-      "d_credit": -219.61097343581184,
+      "d_credit": -176.13542992115407,
       "d_emitted": -2672,
-      "efficiency": 0.08218973556729485,
-      "breakeven_tau": 0.055465722699622064,
+      "efficiency": 0.06591894832378521,
+      "breakeven_tau": 0.05562382794959112,
       "worth_it": false,
-      "delta_dti": -0.0038343861736407784,
-      "dti_from": 0.262754732374228,
-      "dti_to": 0.2589203462005872
+      "delta_dti": -0.0014519987984131962,
+      "dti_from": 0.2634642496543158,
+      "dti_to": 0.26201225085590263
     },
     {
       "rung_from": 3.1622776601683795,
       "rung_to": 3.605551275463989,
-      "d_credit": -311.2832074923936,
+      "d_credit": -249.65966281704917,
       "d_emitted": -3844,
-      "efficiency": 0.08097898217804204,
-      "breakeven_tau": 0.054435455066392344,
+      "efficiency": 0.0649478831469951,
+      "breakeven_tau": 0.055063615708671125,
       "worth_it": false,
-      "delta_dti": -0.005655630478618396,
-      "dti_from": 0.25812606549238626,
-      "dti_to": 0.25247043501376787
+      "delta_dti": -0.0020643241192521596,
+      "dti_from": 0.2609492683134831,
+      "dti_to": 0.2588849441942309
     },
     {
       "rung_from": 3.605551275463989,
       "rung_to": 4.0,
-      "d_credit": -243.26889948950785,
+      "d_credit": -195.10988694084685,
       "d_emitted": -2887,
-      "efficiency": 0.0842635606129227,
-      "breakeven_tau": 0.05290221276744035,
+      "efficiency": 0.06758222616586312,
+      "breakeven_tau": 0.054246911640822106,
       "worth_it": false,
-      "delta_dti": -0.0052623407947373,
-      "dti_from": 0.25122092121163164,
-      "dti_to": 0.24595858041689433
+      "delta_dti": -0.002183629782612048,
+      "dti_from": 0.2572780201764718,
+      "dti_to": 0.2550943903938597
     },
     {
       "rung_from": 4.0,
       "rung_to": 4.123105625617661,
-      "d_credit": -110.9240016912543,
+      "d_credit": -88.96480180747604,
       "d_emitted": -1128,
-      "efficiency": 0.09833688093196304,
-      "breakeven_tau": 0.05152259539106256,
+      "efficiency": 0.07886950514847166,
+      "breakeven_tau": 0.05348753701133033,
       "worth_it": false,
-      "delta_dti": -0.0031857945899121175,
-      "dti_from": 0.24499043395211703,
-      "dti_to": 0.24180463936220492
+      "delta_dti": -0.001679659439319051,
+      "dti_from": 0.2538593724756853,
+      "dti_to": 0.25217971303636627
     },
     {
       "rung_from": 4.123105625617661,
       "rung_to": 4.242640687119285,
-      "d_credit": -174.52785390665713,
+      "d_credit": -139.97724294068755,
       "d_emitted": -1970,
-      "efficiency": 0.08859281924195793,
-      "breakeven_tau": 0.050731102433224234,
+      "efficiency": 0.07105443804095815,
+      "breakeven_tau": 0.0530091598698558,
       "worth_it": false,
-      "delta_dti": -0.004568610911830833,
-      "dti_from": 0.2414085883426501,
-      "dti_to": 0.23683997743081928
+      "delta_dti": -0.0021145564552197595,
+      "dti_from": 0.25170322296345143,
+      "dti_to": 0.24958866650823167
     },
     {
       "rung_from": 4.242640687119285,
       "rung_to": 4.47213595499958,
-      "d_credit": -99.96084710145,
+      "d_credit": -80.17198095359693,
       "d_emitted": -1019,
-      "efficiency": 0.09809700402497547,
-      "breakeven_tau": 0.04957448535272305,
+      "efficiency": 0.07867711575426588,
+      "breakeven_tau": 0.05235098545348546,
       "worth_it": false,
-      "delta_dti": -0.0031107715335107655,
-      "dti_from": 0.23616468409130056,
-      "dti_to": 0.2330539125577898
+      "delta_dti": -0.0016348022080948396,
+      "dti_from": 0.24873348425157818,
+      "dti_to": 0.24709868204348334
     },
     {
       "rung_from": 4.47213595499958,
       "rung_to": 5.0,
-      "d_credit": -163.94581774286783,
+      "d_credit": -131.49009195733723,
       "d_emitted": -1621,
-      "efficiency": 0.10113869077289811,
-      "breakeven_tau": 0.04881069573996656,
+      "efficiency": 0.0811166514234036,
+      "breakeven_tau": 0.05189227859096135,
       "worth_it": false,
-      "delta_dti": -0.005413375007883339,
-      "dti_from": 0.23269545180185827,
-      "dti_to": 0.22728207679397494
+      "delta_dti": -0.002924556356277908,
+      "dti_from": 0.24666156243903836,
+      "dti_to": 0.24373700608276044
     },
     {
       "rung_from": 5.0,
       "rung_to": 5.0990195135927845,
-      "d_credit": -229.85204967535753,
+      "d_credit": -184.34911951091786,
       "d_emitted": -1845,
-      "efficiency": 0.12458105673461113,
-      "breakeven_tau": 0.04748017550596649,
+      "efficiency": 0.09991822195713705,
+      "breakeven_tau": 0.05108404705493669,
       "worth_it": false,
-      "delta_dti": -0.00929150337093042,
-      "dti_from": 0.2266399718879264,
-      "dti_to": 0.21734846851699596
+      "delta_dti": -0.005680711631859976,
+      "dti_from": 0.24300648077606438,
+      "dti_to": 0.2373257691442044
     },
     {
       "rung_from": 5.0990195135927845,
       "rung_to": 5.385164807134504,
-      "d_credit": -157.547701872988,
+      "d_credit": -126.35858658765751,
       "d_emitted": -1118,
-      "efficiency": 0.14091923244453308,
-      "breakeven_tau": 0.04523276418494549,
+      "efficiency": 0.11302199158108901,
+      "breakeven_tau": 0.04963008420109502,
       "worth_it": false,
-      "delta_dti": -0.007183905859610166,
-      "dti_from": 0.2163765131311073,
-      "dti_to": 0.20919260727149713
+      "delta_dti": -0.00458375994885404,
+      "dti_from": 0.23641702418843094,
+      "dti_to": 0.2318332642395769
     },
     {
       "rung_from": 5.385164807134504,
       "rung_to": 5.656854249492381,
-      "d_credit": -144.27305709064578,
+      "d_credit": -115.71187240389601,
       "d_emitted": -986,
-      "efficiency": 0.14632155891546225,
-      "breakeven_tau": 0.043534565893614235,
+      "efficiency": 0.11735484016622313,
+      "breakeven_tau": 0.04850435791629448,
       "worth_it": false,
-      "delta_dti": -0.006925637140085678,
-      "dti_from": 0.20859187283525246,
-      "dti_to": 0.20166623569516678
+      "delta_dti": -0.0044621959010333915,
+      "dti_from": 0.23130260523040544,
+      "dti_to": 0.22684040932937205
     },
     {
       "rung_from": 5.656854249492381,
       "rung_to": 5.830951894845301,
-      "d_credit": -39.2611907513137,
+      "d_credit": -31.488803150451027,
       "d_emitted": -439,
-      "efficiency": 0.0894332363355665,
-      "breakeven_tau": 0.04191241249934317,
+      "efficiency": 0.07172848098052625,
+      "breakeven_tau": 0.047422321422016696,
       "worth_it": false,
-      "delta_dti": -0.0014481692509028643,
-      "dti_from": 0.20113212970946148,
-      "dti_to": 0.19968396045855863
+      "delta_dti": -0.0007116754030550412,
+      "dti_from": 0.22637631665914143,
+      "dti_to": 0.2256646412560864
     },
     {
       "rung_from": 5.830951894845301,
       "rung_to": 6.0,
-      "d_credit": -103.11527950115321,
+      "d_credit": -82.70194244953831,
       "d_emitted": -787,
-      "efficiency": 0.13102322681213877,
-      "breakeven_tau": 0.04157113422700665,
+      "efficiency": 0.1050850602916624,
+      "breakeven_tau": 0.04722651854047734,
       "worth_it": false,
-      "delta_dti": -0.0049197729801513206,
-      "dti_from": 0.1995597461418625,
-      "dti_to": 0.1946399731617112
+      "delta_dti": -0.003055270369347317,
+      "dti_from": 0.22548377884040346,
+      "dti_to": 0.22242850847105614
     },
     {
       "rung_from": 6.0,
       "rung_to": 6.082762530298219,
-      "d_credit": -55.685039403149965,
+      "d_credit": -44.66128537204854,
       "d_emitted": -348,
-      "efficiency": 0.16001448104353438,
-      "breakeven_tau": 0.04042680613577403,
+      "efficiency": 0.12833702693117396,
+      "breakeven_tau": 0.04647961884884257,
       "worth_it": false,
-      "delta_dti": -0.0029452852281224807,
-      "dti_from": 0.1942799142494335,
-      "dti_to": 0.19133462902131101
+      "delta_dti": -0.0019336613078914729,
+      "dti_from": 0.2220760825708745,
+      "dti_to": 0.22014242126298303
     },
     {
       "rung_from": 6.082762530298219,
       "rung_to": 6.324555320336759,
-      "d_credit": -100.23538837135915,
+      "d_credit": -80.3921723395277,
       "d_emitted": -731,
-      "efficiency": 0.13712091432470472,
-      "breakeven_tau": 0.03975164269303387,
+      "efficiency": 0.10997561195557826,
+      "breakeven_tau": 0.04602361222178308,
       "worth_it": false,
-      "delta_dti": -0.005066573331152834,
-      "dti_from": 0.1911593166136971,
-      "dti_to": 0.18609274328254424
+      "delta_dti": -0.00319051188371891,
+      "dti_from": 0.2199931802879079,
+      "dti_to": 0.216802668404189
     },
     {
       "rung_from": 6.324555320336759,
       "rung_to": 6.4031242374328485,
-      "d_credit": -79.6564167345887,
+      "d_credit": -63.88714092024346,
       "d_emitted": -598,
-      "efficiency": 0.13320471025850952,
-      "breakeven_tau": 0.03858349916009446,
+      "efficiency": 0.10683468381311616,
+      "breakeven_tau": 0.0452545124979242,
       "worth_it": false,
-      "delta_dti": -0.0040764100333437175,
-      "dti_from": 0.18575058813902326,
-      "dti_to": 0.18167417810567954
+      "delta_dti": -0.002541154820984047,
+      "dti_from": 0.21647604462274,
+      "dti_to": 0.21393488980175596
     },
     {
       "rung_from": 6.4031242374328485,
       "rung_to": 6.708203932499369,
-      "d_credit": -67.0614068551923,
+      "d_credit": -53.785516920031725,
       "d_emitted": -626,
-      "efficiency": 0.1071268480114893,
-      "breakeven_tau": 0.03764879412153612,
+      "efficiency": 0.0859193561022871,
+      "breakeven_tau": 0.044642791118573104,
       "worth_it": false,
-      "delta_dti": -0.003164499695976591,
-      "dti_from": 0.1814139540026606,
-      "dti_to": 0.178249454306684
+      "delta_dti": -0.0017993245528218184,
+      "dti_from": 0.2136749111663849,
+      "dti_to": 0.2118755866135631
     },
     {
       "rung_from": 6.708203932499369,
       "rung_to": 7.0,
-      "d_credit": -74.48876881505463,
+      "d_credit": -59.74251247227409,
       "d_emitted": -591,
-      "efficiency": 0.12603852591379802,
-      "breakeven_tau": 0.03692141294637828,
+      "efficiency": 0.10108716154361098,
+      "breakeven_tau": 0.04419259464263518,
       "worth_it": false,
-      "delta_dti": -0.0038713355989180775,
-      "dti_from": 0.1780338050955438,
-      "dti_to": 0.17416246949662573
+      "delta_dti": -0.002363134977031784,
+      "dti_from": 0.2116113199297284,
+      "dti_to": 0.20924818495269662
     },
     {
       "rung_from": 7.0,
       "rung_to": 7.0710678118654755,
-      "d_credit": -32.85882129125284,
+      "d_credit": -26.35388625754992,
       "d_emitted": -177,
-      "efficiency": 0.1856430581426714,
-      "breakeven_tau": 0.03603823449496104,
+      "efficiency": 0.14889201275451933,
+      "breakeven_tau": 0.043622111233865,
       "worth_it": false,
-      "delta_dti": -0.001965764258961753,
-      "dti_from": 0.17392328436859592,
-      "dti_to": 0.17195752010963417
+      "delta_dti": -0.001321392927535102,
+      "dti_from": 0.20899380515372068,
+      "dti_to": 0.20767241222618557
     },
     {
       "rung_from": 7.0710678118654755,
       "rung_to": 7.211102550927978,
-      "d_credit": -85.52750225096533,
+      "d_credit": -68.59595011748944,
       "d_emitted": -706,
-      "efficiency": 0.1211437708937186,
-      "breakeven_tau": 0.03559634726129442,
+      "efficiency": 0.09716140243270459,
+      "breakeven_tau": 0.04331845583020309,
       "worth_it": false,
-      "delta_dti": -0.004497731486665176,
-      "dti_from": 0.17186400548549344,
-      "dti_to": 0.16736627399882825
+      "delta_dti": -0.0027038291965224832,
+      "dti_from": 0.20759939397282662,
+      "dti_to": 0.20489556477630413
     },
     {
       "rung_from": 7.211102550927978,
       "rung_to": 7.280109889280518,
-      "d_credit": -54.3159433293411,
+      "d_credit": -43.56322400566562,
       "d_emitted": -433,
-      "efficiency": 0.12544097766591478,
-      "breakeven_tau": 0.03457284616817915,
+      "efficiency": 0.10060790763433168,
+      "breakeven_tau": 0.04266365094862827,
       "worth_it": false,
-      "delta_dti": -0.0029652819630723,
-      "dti_from": 0.16708753905647655,
-      "dti_to": 0.16412225709340425
+      "delta_dti": -0.0018040824642663637,
+      "dti_from": 0.20458971073659443,
+      "dti_to": 0.20278562827232807
     },
     {
       "rung_from": 7.280109889280518,
       "rung_to": 7.615773105863909,
-      "d_credit": -53.583904738047806,
+      "d_credit": -42.97610429129496,
       "d_emitted": -425,
-      "efficiency": 0.12607977585423014,
-      "breakeven_tau": 0.03390368978629437,
+      "efficiency": 0.10112024539128225,
+      "breakeven_tau": 0.04223229558214748,
       "worth_it": false,
-      "delta_dti": -0.0029743842644287884,
-      "dti_from": 0.16395961307238485,
-      "dti_to": 0.16098522880795607
+      "delta_dti": -0.0018117926947705985,
+      "dti_from": 0.20260500351583463,
+      "dti_to": 0.20079321082106402
     },
     {
       "rung_from": 7.615773105863909,
       "rung_to": 7.810249675906654,
-      "d_credit": -54.52359224702499,
+      "d_credit": -43.72976546220949,
       "d_emitted": -358,
-      "efficiency": 0.1523005370028631,
-      "breakeven_tau": 0.03323426710821027,
+      "efficiency": 0.12215018285533377,
+      "breakeven_tau": 0.04180044564447181,
       "worth_it": false,
-      "delta_dti": -0.0032602468472625523,
-      "dti_from": 0.16082638839120914,
-      "dti_to": 0.15756614154394658
+      "delta_dti": -0.002096349021660649,
+      "dti_from": 0.20061637437011023,
+      "dti_to": 0.1985200253484496
     },
     {
       "rung_from": 7.810249675906654,
       "rung_to": 8.0,
-      "d_credit": -38.99873287171512,
+      "d_credit": -31.278303052317277,
       "d_emitted": -368,
-      "efficiency": 0.1059748175861824,
-      "breakeven_tau": 0.032504950104914096,
+      "efficiency": 0.08499538872912303,
+      "breakeven_tau": 0.04131302690889609,
       "worth_it": false,
-      "delta_dti": -0.002081166447088541,
-      "dti_from": 0.15740820468517477,
-      "dti_to": 0.15532703823808625
+      "delta_dti": -0.0011784474377794904,
+      "dti_from": 0.19836987457812025,
+      "dti_to": 0.19719142714034077
     }
   ],
   "archived_arms_rejudged": [
@@ -885,13 +981,13 @@
       "evidence": "evidence/h32_1_holdout.json",
       "proxy_gate_verdict": "PASS",
       "note": "protected class (tips / shallow Euler clusters) at 0.0092",
-      "live_tau": 0.0548353048259967,
+      "live_tau": 0.054991948634622215,
       "proxy_tau": 0.01926533800673286,
       "direction": "remove",
       "live_verdict": "PRUNE",
       "proxy_verdict": "PRUNE",
-      "live_delta_dti": 0.006446718123825882,
-      "dti_after": 0.2663702558321234
+      "live_delta_dti": 0.006373400668143185,
+      "dti_after": 0.2668038590668223
     },
     {
       "arm": "H32-2 deep magnetic-gradient de-screening (p10)",
@@ -901,13 +997,13 @@
       "evidence": "evidence/h32_2_holdout.json",
       "proxy_gate_verdict": "FAIL",
       "note": "0/10 seeds against tau_proxy=0.0193; direction control 0.0383 supported the physics",
-      "live_tau": 0.0548353048259967,
+      "live_tau": 0.054991948634622215,
       "proxy_tau": 0.01926533800673286,
       "direction": "remove",
       "live_verdict": "PRUNE",
       "proxy_verdict": "KEEP",
-      "live_delta_dti": 0.004705818850991846,
-      "dti_after": 0.26462935655928943
+      "live_delta_dti": 0.004667563412850368,
+      "dti_after": 0.26509802181152947
     },
     {
       "arm": "H27-4 d_cat <= 200 m flank shadow",
@@ -917,7 +1013,7 @@
       "evidence": "evidence/oof_hypothesis_gates.json",
       "proxy_gate_verdict": "PASS",
       "note": "+0.0025 solo, 4/4 folds",
-      "live_tau": 0.0548353048259967,
+      "live_tau": 0.054991948634622215,
       "proxy_tau": 0.01926533800673286,
       "direction": "remove",
       "live_verdict": "PRUNE",
@@ -932,11 +1028,11 @@
       "evidence": "evidence/live_inversion.json",
       "proxy_gate_verdict": "LIVE-REFUTED",
       "note": "addition inequality is the mirror of pruning; 0.0021 << tau 0.0549 reproduces the measured -0.0028 live loss",
-      "live_tau": 0.0548353048259967,
+      "live_tau": 0.054991948634622215,
       "proxy_tau": 0.01926533800673286,
       "live_verdict": "DO_NOT_ADD",
       "proxy_verdict": "DO_NOT_ADD",
-      "reason": "e=0.0021 vs tau_live=0.0548: an addition must EARN more than tau, a removal must COST less than tau"
+      "reason": "e=0.0021 vs tau_live=0.0550: an addition must EARN more than tau, a removal must COST less than tau"
     },
     {
       "arm": "LOSFO far-field base additions",
@@ -947,11 +1043,11 @@
       "evidence": "evidence/losfo_farfield_diagnostic.json",
       "proxy_gate_verdict": "n/a (measured at cell DTI ~0.10)",
       "note": "the parallel Session-10 harness measures far-field credit/dot 0.0465 and proposes gating additions against the CELL threshold; at the live submission the threshold is 0.0548, so base-quality far-field dots do not pay for themselves there",
-      "live_tau": 0.0548353048259967,
+      "live_tau": 0.054991948634622215,
       "proxy_tau": 0.01926533800673286,
       "live_verdict": "DO_NOT_ADD",
       "proxy_verdict": "ADD",
-      "reason": "e=0.0465 vs tau_live=0.0548: an addition must EARN more than tau, a removal must COST less than tau"
+      "reason": "e=0.0465 vs tau_live=0.0550: an addition must EARN more than tau, a removal must COST less than tau"
     }
   ],
   "truth_size_sensitivity": {
@@ -959,50 +1055,120 @@
       {
         "truth_px": 9169.422,
         "multiplier": 0.75,
-        "credit_solid": 5915.909325476382,
+        "credit_solid": 5492.312065963459,
+        "credit_solid_spread": 390.99802557331986,
         "best_rung": 3.0,
         "best_n_emitted": 41333,
-        "best_dti": 0.27224492991868837,
-        "dti_at_current_rung": 0.26824760010716187
+        "best_dti": 0.27256566001536364,
+        "dti_at_current_rung": 0.2682585090936695
       },
       {
         "truth_px": 11003.306400000001,
         "multiplier": 0.9,
-        "credit_solid": 6304.8309633044255,
+        "credit_solid": 5912.774409235186,
+        "credit_solid_spread": 165.81226730272192,
         "best_rung": 3.0,
         "best_n_emitted": 41333,
-        "best_dti": 0.26520489009827153,
-        "dti_at_current_rung": 0.26207984669696127
+        "best_dti": 0.26688522043367874,
+        "dti_at_current_rung": 0.2633946798498252
       },
       {
         "truth_px": 12225.896,
         "multiplier": 1.0,
-        "credit_solid": 6564.112055189787,
+        "credit_solid": 6193.082638083001,
+        "credit_solid_spread": 44.2884309369274,
         "best_rung": 3.0,
         "best_n_emitted": 41333,
-        "best_dti": 0.2611474200892995,
-        "dti_at_current_rung": 0.2585085954222782
+        "best_dti": 0.26363678762454107,
+        "dti_at_current_rung": 0.26060111884273635
       },
       {
         "truth_px": 13448.485600000002,
         "multiplier": 1.1,
-        "credit_solid": 6823.3931470751495,
+        "credit_solid": 6473.390866930818,
+        "credit_solid_spread": 134.43541039140837,
         "best_rung": 3.0,
         "best_n_emitted": 41333,
-        "best_dti": 0.25750712910533374,
-        "dti_at_current_rung": 0.25529418916714475
+        "best_dti": 0.26073802129343765,
+        "dti_at_current_rung": 0.2581007737867437
       },
       {
         "truth_px": 15282.37,
         "multiplier": 1.25,
-        "credit_solid": 7212.314784903193,
+        "credit_solid": 6893.853210202543,
+        "credit_solid_spread": 359.6211686620072,
         "best_rung": 3.0,
         "best_n_emitted": 41333,
-        "best_dti": 0.2526982357939615,
-        "dti_at_current_rung": 0.25103282295296725
+        "best_dti": 0.25693122025532644,
+        "dti_at_current_rung": 0.2548064207308963
       }
     ],
     "reading": "The optimal rung is the stability question that matters; |G| mainly rescales the predicted level, not which rung wins."
   },
-  "runtime_s": 34.8
+  "gamma_sensitivity": {
+    "rows": [
+      {
+        "gamma": 0.113877,
+        "multiplier": 0.9,
+        "credit_solid": 6290.481551151531,
+        "truth_px": 12434.099262454512,
+        "max_abs_residual": 0.0008099136668114626,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.2635821489661188,
+        "dti_at_current_rung": 0.26055687541989875,
+        "delta_dti": 0.003025273546220064
+      },
+      {
+        "gamma": 0.12020349999999999,
+        "multiplier": 0.95,
+        "credit_solid": 6245.570468206609,
+        "truth_px": 12345.32560284853,
+        "max_abs_residual": 0.0008099136315337374,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.26358214911510675,
+        "dti_at_current_rung": 0.26055687554846113,
+        "delta_dti": 0.0030252735666456143
+      },
+      {
+        "gamma": 0.12653,
+        "multiplier": 1.0,
+        "credit_solid": 6200.659398760723,
+        "truth_px": 12256.552008214865,
+        "max_abs_residual": 0.0008099136857726841,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.2635821490475665,
+        "dti_at_current_rung": 0.2605568754833136,
+        "delta_dti": 0.003025273564252917
+      },
+      {
+        "gamma": 0.13285650000000002,
+        "multiplier": 1.05,
+        "credit_solid": 6155.748340612057,
+        "truth_px": 12167.778449727988,
+        "max_abs_residual": 0.0008099136468625867,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.26358214901010135,
+        "dti_at_current_rung": 0.26055687545956324,
+        "delta_dti": 0.00302527355053811
+      },
+      {
+        "gamma": 0.13918300000000003,
+        "multiplier": 1.1,
+        "credit_solid": 6110.837271223623,
+        "truth_px": 12079.004850334928,
+        "max_abs_residual": 0.0008099136551347197,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.26358214899980253,
+        "dti_at_current_rung": 0.260556875449629,
+        "delta_dti": 0.003025273550173513
+      }
+    ],
+    "basis": "gamma = Atilde/N is measured on the three live anchors as 0.12569 / 0.12576 / 0.12811 (evidence/live_inversion.json); this sweeps it +/-10 % around the mean to test the rung-invariance assumption that lets Eq. 1 be extrapolated off the anchors."
+  },
+  "runtime_s": 34.9
 }
