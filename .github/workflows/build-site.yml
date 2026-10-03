@@ -30,6 +30,8 @@ on:
       - 'evidence/submission_file_audit.json'
       - 'evidence/reachability_frontier.json'
       - 'evidence/losfo_farfield_diagnostic.json'
+      - 'evidence/h34_operating_point.json'
+      - 'evidence/h34_holdout.json'
       - 'scripts/build_site.py'
       - 'docs/assets/**'
   pull_request:
@@ -60,6 +62,8 @@ on:
       - 'evidence/submission_file_audit.json'
       - 'evidence/reachability_frontier.json'
       - 'evidence/losfo_farfield_diagnostic.json'
+      - 'evidence/h34_operating_point.json'
+      - 'evidence/h34_holdout.json'
       - 'scripts/build_site.py'
       - 'docs/assets/**'
   workflow_dispatch:
