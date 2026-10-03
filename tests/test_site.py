@@ -173,6 +173,10 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
     registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
     assert len(registry["hypotheses"]) == 4
     assert "4 currently ranked untried geological hypotheses" in research
+    assert "the current GEMSDOE28 ranking above also contains four untried hypotheses" in research
+    assert "not part of the current four-item untried list" in research
+    assert "contains five hypotheses" not in research
+    assert "current five-item untried list" not in research
     assert "H31-1" not in {hypothesis["id"] for hypothesis in registry["hypotheses"]}
     h31 = next(item for item in registry["tested_hypotheses"] if item["id"] == "H31-1")
     assert "FROZEN SCREEN GATE FAILED" in h31["status"]

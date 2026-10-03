@@ -268,8 +268,8 @@
     {
       "id": "main-push-gdr-fetch-workflow-failed-before-job-2026-10-03",
       "severity": "medium",
-      "issue": "Following merge commit d32b72dc96e8ce01dd2c785be0045fadbd1ed4ef, push-triggered GitHub Actions run 37131538412 for fetch-gdr-external-layers.yml concluded failure at 2026-10-03T14:58:04Z. The run exposes no job records or job logs; the cause is unknown and no external-layer inventory/artifact was produced by this run. This is separate from the successful Pages deployment/build checks and H31 proxy screen.",
-      "action": "Do not describe the GDR/USGS raw layers as fetched or verified on the strength of this run. Inspect the GitHub Actions run/workflow start failure before retrying; verify any future files against official source, pinned hashes, schema, coverage and licence. No DrivenData contact is involved."
+      "issue": "Following merges to main at d32b72dc96e8ce01dd2c785be0045fadbd1ed4ef and e586197b470ca2a32937bad02e88ceed5d4d66dd, push-triggered GitHub Actions runs 37131538412 and 37131889724 for fetch-gdr-external-layers.yml both concluded failure immediately, with no job records/logs and zero artifacts. The cause is unknown and no external-layer inventory/artifact was produced by either run. This is separate from the successful Pages deployment/build checks and H31 proxy screen.",
+      "action": "Do not describe the GDR/USGS raw layers as fetched or verified on the strength of either run. Inspect the GitHub Actions start/workflow failure before retrying; verify any future files against official source, pinned hashes, schema, coverage and licence. No DrivenData contact is involved."
     }
   ]
 }
