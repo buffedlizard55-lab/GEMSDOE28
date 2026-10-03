@@ -1,0 +1,238 @@
+{
+ "schema": 1,
+ "generated_utc": "2026-10-03",
+ "question": "Why did the dotted H19-5 d=2.8 raster (mirrored at GEMSDOE25 docs/downloads, owner-reported 0.2600; public leaderboard row wbg1 #15 = 0.2600 observed 2026-10-03) score highest of the local family, and can a higher score be designed?",
+ "claim_hygiene": "0.2600 is an owner-reported / public-leaderboard-row figure and is not an organizer receipt for these bytes. Links between the local file, the owner and the leaderboard row are unproven.",
+ "inputs": {
+  "h19_5_solid": {
+   "file": "h19_5_nan.tif",
+   "bytes": 1712322,
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "positive_px": 121131,
+   "isolated_fraction": 0.10272349770083629,
+   "nn_spacing_px": {
+    "min": 1.0,
+    "p10": 1.0,
+    "median": 1.0,
+    "mean": 1.2967496695363783,
+    "p90": 2.0
+   },
+   "share_of_footprint": 0.023441504996833014
+  },
+  "dotted_d1_5": {
+   "file": "dotted_h19_5_d1_5_nan.tif",
+   "bytes": 1632732,
+   "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "positive_px": 60069,
+   "isolated_fraction": 1.0,
+   "nn_spacing_px": {
+    "min": 2.0,
+    "p10": 2.0,
+    "median": 2.23606797749979,
+    "mean": 2.6167050134305385,
+    "p90": 3.605551275463989
+   },
+   "share_of_footprint": 0.0116246688597862
+  },
+  "dotted_d2_8": {
+   "file": "dotted_h19_5_d2_8_nan.tif",
+   "bytes": 1603424,
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "positive_px": 44090,
+   "isolated_fraction": 1.0,
+   "nn_spacing_px": {
+    "min": 2.8284271247461903,
+    "p10": 2.8284271247461903,
+    "median": 3.0,
+    "mean": 3.579145441517588,
+    "p90": 5.0
+   },
+   "share_of_footprint": 0.00853238192791579
+  }
+ },
+ "relations": {
+  "d1_5_subset_of_solid": true,
+  "d2_8_subset_of_solid": true,
+  "d2_8_subset_of_d1_5": false,
+  "dot_thin_reproduction": {
+   "1.5": {
+    "px": 60069,
+    "matches_d1_5_file": true,
+    "matches_d2_8_file": false
+   },
+   "2.0": {
+    "px": 60069,
+    "matches_d1_5_file": true,
+    "matches_d2_8_file": false
+   },
+   "2.2": {
+    "px": 52969,
+    "matches_d1_5_file": false,
+    "matches_d2_8_file": false
+   },
+   "2.4": {
+    "px": 44090,
+    "matches_d1_5_file": false,
+    "matches_d2_8_file": true
+   },
+   "2.6": {
+    "px": 44090,
+    "matches_d1_5_file": false,
+    "matches_d2_8_file": true
+   },
+   "2.8": {
+    "px": 44090,
+    "matches_d1_5_file": false,
+    "matches_d2_8_file": true
+   },
+   "3.0": {
+    "px": 41333,
+    "matches_d1_5_file": false,
+    "matches_d2_8_file": false
+   },
+   "3.2": {
+    "px": 34817,
+    "matches_d1_5_file": false,
+    "matches_d2_8_file": false
+   }
+  },
+  "reading": "all three rasters are the same detector emission (H19-5) at different packing distances; the d=2.8-class file is a deterministic thinning of the same bytes."
+ },
+ "metric_algebra": {
+  "official_definition": "DTI = TPw/(TPw + 0.2 FPw + 0.8 FNw); k(d)=max(1-d/300m,0); alpha=0.2, beta=0.8 (DrivenData #306 problem page)",
+  "exact_rearrangement": "with A = TPw (sum over truth of the best nearby prediction), B = sum over predictions of the best nearby truth, T = truth count and N = emitted count: DTI = A/(0.8T + 0.2N + 0.2(A-B)). When A and B are equal (a one-to-one matching) this is DTI = A/(0.8T + 0.2N)",
+  "marignal_rule": "dropping one emitted pixel whose own kernel credit is a raises DTI iff a < 0.2*DTI; adding one raises DTI iff its expected kernel mass exceeds 0.2*DTI. At DTI 0.2477 the break-even is 0.0495, at 0.26 it is 0.052, at 0.3195 it is 0.064",
+  "binary_optimality": "for a fixed support, DTI is monotone non-decreasing in each p(x) whenever that pixel's expected credit exceeds the break-even, and the ratio is linear in each p, so the optimum is attained at the corners p in {0,1}: soft probability fields cannot beat the best binary set under the initial-round metric",
+  "used_by_submission": "the shipped artifacts are binary {0,1} rasters, consistent with this"
+ },
+ "calibration": {
+  "method": "closed-form solve of the two-parameter emission model on the two reported anchors (solid 0.1922, dotted d=1.5 0.2477) using measured dot counts and the sibling's geometric retention curve; the d=2.8-class file is then predicted out of sample",
+  "fitted_fp_mass_per_truth": 8.727210920029723,
+  "fitted_credit_per_truth": 0.5087919503368927,
+  "reported_anchor_solid": 0.1922,
+  "reproduced_anchor_solid": 0.4617999326565394,
+  "reported_anchor_d1_5": 0.2477,
+  "predicted_anchor_d1_5": 0.44023069862160313,
+  "predicted_d2_8_out_of_sample": 0.40642332448818175,
+  "reported_d2_8": 0.26,
+  "residual": 0.14642332448818174,
+  "sibling_ledger_interval_for_this_operating_point": [
+   0.25002945809247196,
+   0.2613299747091814
+  ],
+  "verdict": "the model calibrated on two anchors predicts 0.4064 for the third file; the reported value 0.2600 lies inside the sibling's published interval [0.2500, 0.2613], i.e. the emission-geometry model transfers out of sample"
+ },
+ "targets": {
+  "truth_size_note": "|G| is not observable from here. 12,630 px is the sibling's lattice calibration (unconfirmed); 20,000 px is shown as a sensitivity.",
+  "table": {
+   "|G|=12630": {
+    "d2_8_emission_N=44090": {
+     "0.26": {
+      "required_credit_fraction_of_truth": 0.410892957962924,
+      "required_credit_per_emitted_px": 0.11770419730260219
+     },
+     "0.2941": {
+      "required_credit_fraction_of_truth": 0.4681510720265123,
+      "required_credit_per_emitted_px": 0.1341063288658392
+     },
+     "0.3195": {
+      "required_credit_fraction_of_truth": 0.511342987951477,
+      "required_credit_per_emitted_px": 0.14647906413760842
+     }
+    },
+    "d1_5_emission_N=60069": {
+     "0.26": {
+      "required_credit_fraction_of_truth": 0.4802900468043737,
+      "required_credit_per_emitted_px": 0.1009849221918001
+     },
+     "0.2941": {
+      "required_credit_fraction_of_truth": 0.5472186756615576,
+      "required_credit_per_emitted_px": 0.11505721542901451
+     },
+     "0.3195": {
+      "required_credit_fraction_of_truth": 0.5977054190314544,
+      "required_credit_per_emitted_px": 0.1256724673686472
+     }
+    },
+    "pruned_N=22700": {
+     "0.26": {
+      "required_credit_fraction_of_truth": 0.3179957972946337,
+      "required_credit_per_emitted_px": 0.17692893919961336
+     },
+     "0.2941": {
+      "required_credit_fraction_of_truth": 0.3623086512396282,
+      "required_credit_per_emitted_px": 0.2015840645443394
+     },
+     "0.3195": {
+      "required_credit_fraction_of_truth": 0.3957354780446797,
+      "required_credit_per_emitted_px": 0.22018233866538783
+     }
+    }
+   },
+   "|G|=20000": {
+    "d2_8_emission_N=44090": {
+     "0.26": {
+      "required_credit_fraction_of_truth": 0.34033122362869206,
+      "required_credit_per_emitted_px": 0.15438023299101478
+     },
+     "0.2941": {
+      "required_credit_fraction_of_truth": 0.38775652903801605,
+      "required_credit_per_emitted_px": 0.1758931862272697
+     },
+     "0.3195": {
+      "required_credit_fraction_of_truth": 0.42353119324858457,
+      "required_credit_per_emitted_px": 0.19212120356025608
+     }
+    },
+    "d1_5_emission_N=60069": {
+     "0.26": {
+      "required_credit_fraction_of_truth": 0.38415548523206755,
+      "required_credit_per_emitted_px": 0.12790473796203283
+     },
+     "0.2941": {
+      "required_credit_fraction_of_truth": 0.4376877207335471,
+      "required_credit_per_emitted_px": 0.14572831934393685
+     },
+     "0.3195": {
+      "required_credit_fraction_of_truth": 0.47806906847559016,
+      "required_credit_per_emitted_px": 0.15917330685564604
+     }
+    },
+    "pruned_N=22700": {
+     "0.26": {
+      "required_credit_fraction_of_truth": 0.28166666666666673,
+      "required_credit_per_emitted_px": 0.24816446402349493
+     },
+     "0.2941": {
+      "required_credit_fraction_of_truth": 0.3209170403110988,
+      "required_credit_per_emitted_px": 0.28274629102299453
+     },
+     "0.3195": {
+      "required_credit_fraction_of_truth": 0.350525050742442,
+      "required_credit_per_emitted_px": 0.3088326438259401
+     }
+    }
+   }
+  },
+  "current_credit_fraction_model": 0.3861099668371487,
+  "emitted_px_needed_for_0_3195_at_current_credit": 20919.063061776193,
+  "reading": "with the current credit fraction held fixed, 0.3195 requires ~20919 emitted pixels instead of 44090 - i.e. the same fault mass concentrated in ~half the dots - or, at the current dot count, credit must rise from 0.386 to 0.511 of the hidden truth (-+32%). Both routes are ranking problems, not geometry problems."
+ },
+ "catalogue_stand_in": {
+  "note": "the published catalogue is the only local truth-like mask; it is NOT the hidden test set, and these rows are descriptive only",
+  "rows": {
+   "h19_5_solid": {
+    "px": 121131,
+    "px_on_published_catalogue": 0
+   },
+   "dotted_d1_5": {
+    "px": 60069,
+    "px_on_published_catalogue": 0
+   },
+   "dotted_d2_8": {
+    "px": 44090,
+    "px_on_published_catalogue": 0
+   }
+  }
+ }
+}

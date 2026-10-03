@@ -1,24 +1,21 @@
 {
   "schema": 1,
-  "checked_utc": "2026-10-03T14:55:44Z",
+  "checked_utc": "2026-10-03T16:18:35Z",
   "status": "PASS",
   "scope": "local repository evidence only; cannot rule out undocumented seed use in unsearched external/sibling workspaces",
   "network_access": "none",
-  "audit_script_sha256": "473fa96988844a3e914a376a4d5c64aad1b66b4b1433bcdf847ccb295b02bcb9",
+  "audit_script_sha256": "9c0d6f79d2e06465d5dc00afafd962d4f5543be61a60eda111877eb8eb8f6391",
   "protocol": {
     "path": "knowledge/12_preregistration_H31-1_euler.md",
     "sha256": "71af9f419606c4b2d54e0561c3bdd33199b58c36b9e2e6a40b331109a78bae01",
-    "last_modifying_commit": "524bf277e7b5487bfea1982d2a352c9f0802c0e0",
+    "last_modifying_commit": "867d63860f633693b9f68d0ca225aafc1b6322b9",
     "matches_committed_bytes": true
   },
   "git_history_review": {
     "shallow": true,
     "recent_commits": [
-      "a39087b8bc8e9841e5ffd250c9e5abb3b59f78ec Record failed H31-1 Euler screen and stop arm",
-      "2df569c8492ede6a93b6a56b66e64ac3bea0991c Record pre-fit CI and refresh H31 seed audit",
-      "92d2e53076144fe74d6ac87171abb98f75b78993 Validate H31 evidence before rendering status",
-      "d811897f8fd42381c0a2e6a1bd281f237af4f251 Keep Pages evidence and workflow status current",
-      "cf698719fe6777e034469c8d44ce091c93dba010 Build auditable GEMS research and submission workflow"
+      "df5e5d05cd613304e298585314c545dc4aaafd00 H32-1 preregistration, structural-step transform, and pinned-mirror restore path",
+      "867d63860f633693b9f68d0ca225aafc1b6322b9 Merge pull request #3 from buffedlizard55-lab/arena/01a10074-gemsdoe28"
     ]
   },
   "planned_ranges": {
@@ -47,9 +44,49 @@
       179
     ]
   },
+  "preregistered_ranges": {
+    "screen": {
+      "range": [
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "owner": "H31-1 Euler depth clusters",
+      "protocol": "knowledge/12_preregistration_H31-1_euler.md",
+      "evidence": "h31_1_euler_screen.json",
+      "claim_file": "h31_1_euler_screen.started.json",
+      "eligible": true
+    },
+    "h32_1_screen": {
+      "range": [
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179
+      ],
+      "owner": "H32-1 structural-step coherence",
+      "protocol": "knowledge/14_preregistration_H32-1.md",
+      "evidence": "h32_1_structural_step_holdout.json",
+      "claim_file": null,
+      "eligible": true
+    }
+  },
   "range_status": {
     "screen": "CONSUMED",
-    "confirmation": "UNUSED"
+    "h32_1_screen": "CONSUMED"
   },
   "previously_used_holdout_seeds": [
     100,
@@ -210,6 +247,18 @@
       168,
       169
     ],
+    "h32_1_structural_step_holdout.json": [
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179
+    ],
     "oof_hypothesis_gates.json": [
       130,
       131,
@@ -291,6 +340,7 @@
     "h31_1_euler_screen.json": "ef18f530020217a423d2cdf3682b14e29b821b7b40dd64a21abe2ae68c2486cc",
     "h31_1_euler_screen.started.json": "269201d6e9a6cfb749ecbfcf06d770a87707483560c7d9eaf1078965335a64f9",
     "h31_1_prereg_history_audit.json": "11b7fb942f45265ccc88996536f74f26170f3d5afd7d94de10a87c66dc4c1b51",
+    "h32_1_structural_step_holdout.json": "f636d04570b881b51e2226d88de0370fa2df9d087b663758ae992b28876fc76a",
     "link_graph_value.json": "ebdd46df9d61979584860a5b8d16645e6b686a7f61d039c8b529954e5b34cbdd",
     "live_inversion.json": "0634d7117ce57d47fb91c5b1629be0ace1f0141e19070b5e176fb571bb3ec282",
     "live_truth_partition_radial.json": "11746ee4f0c1034bf20db6938adac4d8ef44ffa04390c557f7f43a786fda38fd",
@@ -299,6 +349,7 @@
     "operating_point_model.json": "a7be720d3e549b1588e64a5365675f84eda4ed31561c70077b840ab38b37e393",
     "range_validator_forensics_2026-10-03.json": "3e0f852f5638557e58c8b9888c7241e838670f0a221c9e0f04d9fc7f0830c7f7",
     "restore_audit.json": "62055a428ed130ffe4b5ca5528fc7dd3ca36758d943ad5a97a7443bc55fe21fa",
+    "restore_audit_checkout.json": "cc9b5387437f8eb910112ffd138dd47e8faac8a2fc7eaaa8a68d0edfd8343ed0",
     "scored_corpus.json": "6f542941f983e137e5c086f1b9a8e9b03a58c2893a844ae91073f3cd143c98de",
     "sgmc_gap_inversion.json": "8315884ec7980587b8d06fb5fa478f8ae61d9acf7ef1fb0bbb4911a15fb7b76f",
     "sgmc_lidar_response.json": "475bf680b434f1efeee5775951295a084d392a5b236975928cafba32b0564acb",
@@ -307,11 +358,12 @@
     "topology_confirmation_v2.json": "f0223a202dfe40e903367333d5bb406406f028fbaf477357165f080b91f381db",
     "topology_link_feature_analysis.json": "7f0ca61c6107852dad6d36c980531ad54fd8fd34d08a01764c73309c0312eca7",
     "topology_validation.json": "fa4f3c0e9f2f0ba3d638582b7180701677565c9bcf8ee393ae910659e150133d",
-    "vector_topology_validation.json": "6c5e4530b5c8a6ff1601f78ed7f0723c0470ad543663447671dafa72acd9a476"
+    "vector_topology_validation.json": "6c5e4530b5c8a6ff1601f78ed7f0723c0470ad543663447671dafa72acd9a476",
+    "why_026_won.json": "a205aad54a3638170fa29251817d8a993dd9b83363ca1108e22596af4f387006"
   },
   "unexpected_collisions": {},
   "unreadable_evidence_json": [],
   "invalid_stage_records": [],
-  "decision": "Seeds 160-169 are reserved for one frozen screen; 170-179 are confirmation-only after an unchanged passing screen.",
-  "sha256": "289d0e5fa590638cac3c52729d468d303a426690362c6b35735437dddd49692c"
+  "decision": "Seeds 160-169 were consumed by the H31-1 screen, which FAILED its frozen gate, so its confirmation decade is ineligible. Seeds 170-179 were reassigned to the preregistered H32-1 screen (knowledge/14) and are consumed by that single run. The next new hypothesis must preregister a fresh decade (180-189).",
+  "sha256": "6bb8f706d84d752b39d220cd278cd6eef4bcaa218e459dd7937229b51733589a"
 }
