@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T18:49:01Z",
+  "generated_utc": "2026-10-03T18:54:08Z",
   "pins_file": "/tmp/gdr/pins.json",
   "pins_file_loaded": true,
   "availability_only": true,
@@ -45,7 +45,7 @@
     "reachable": 3,
     "pin_mismatches": [],
     "unpinned": [],
-    "sciencebase_derived_written": 1,
+    "sciencebase_derived_written": 0,
     "sciencebase_reachable": 4,
     "sciencebase_checked": 4
   },
@@ -58,9 +58,17 @@
       "sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
       "error": null,
       "pin_match": true,
-      "status": "DERIVED_WRITTEN",
+      "payload_format": "zip",
+      "payload_used": "sb_slip_tendency_shapefile_full.zip",
+      "status": "LAYER_UNREADABLE",
+      "unreadable_layers": [
+        "GB_Quaternary_faults_TD_TS.shp"
+      ],
+      "errors": {
+        "GB_Quaternary_faults_TD_TS.shp": "ImportError: geopandas is required to use pyogrio.read_dataframe()"
+      },
       "layers_found": [
-        "sb_slip_tendency_shapefile_full.bin"
+        "GB_Quaternary_faults_TD_TS.shp"
       ],
       "derived": {
         "csv_path": "/tmp/gdr/out/commit/sb_slip_tendency_in_footprint.csv",

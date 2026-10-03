@@ -1,1 +1,1 @@
-{"schema": {"layers": {"sb_slip_tendency_shapefile_full.bin": {"status": "LAYER_UNREADABLE", "error": "DataSourceError: '/tmp/gdr/out/sb_slip_tendency_shapefile_full.bin' not recognized as being in a supported file format.; It might help to specify the correct driver explicitly by prefixing the file path with '<DRIVER>:', e.g. 'CSV:path'."}}}, "records": []}
+{"schema": {"layers": {"GB_Quaternary_faults_TD_TS.shp": {"status": "LAYER_UNREADABLE", "error": "ImportError: geopandas is required to use pyogrio.read_dataframe()"}}}, "records": []}
