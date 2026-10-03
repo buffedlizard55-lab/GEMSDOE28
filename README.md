@@ -100,6 +100,19 @@ All submission artifacts in `docs/downloads/` are verified by `scripts/verify_do
 | **Conservative alternative (kept audited)** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
 | **Reference** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130–139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference | OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed | id 450eb6859636 | research only` |
 
+**One-click route that does not depend on GitHub Pages.** GitHub Pages for this repository reports
+`status: errored` (legacy build; see `registry/irregularities.json` → `github-pages-legacy-build-errored`),
+and the sandbox token cannot change the Pages source (`403 Resource not accessible by integration`).
+The primary file is therefore also reachable directly from the repository, which is a normal one-click
+download for a browser:
+
+```
+https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif
+```
+
+Verify the SHA-256 `4557311baedb4e661363bc1d3e6c959a1d8f9999f8bfc5fabb85fd8c338850c6` after
+downloading. The site carries the same fallback link under the main download button.
+
 ---
 
 ## 2. PhD-Level Analysis of the `0.2600`, `0.2449`, and `0.1223` Live Scores

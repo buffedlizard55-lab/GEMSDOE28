@@ -336,6 +336,17 @@ def file_links(item: dict, prefix: str = "downloads/") -> str:
     return '<div class="download-actions">' + "".join(links) + "</div>"
 
 
+def mirror_line(item: dict) -> str:
+    """A download route that does not depend on GitHub Pages being healthy."""
+    raw = f"https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/{item['nan']}"
+    return (
+        '<p class="meta"><strong>GitHub Pages fallback:</strong> if the button above returns a stale '
+        'page or an error, this direct file route from the repository downloads the identical '
+        f'bytes &mdash; <a href="{esc(raw)}" download>raw mirror of {esc(item["nan"])}</a> '
+        "(the SHA-256 printed below is the check).</p>"
+    )
+
+
 def candidate_card(slot: str, item: dict, *, featured: bool = False) -> str:
     title = item.get("hypothesis", item.get("slug", slot))
     status = item.get("status", "UNSCORED research artifact")
@@ -419,6 +430,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
   <h2 id="download-heading">One-click GeoTIFF — {esc(primary.get('hypothesis', 'H32-1 reference'))}</h2>
   <p><span class="status unscored">UNSCORED · RESEARCH ONLY · NOT SLOT-APPROVED</span></p>
   {file_links(primary)}
+  {mirror_line(primary)}
   <p><strong>Exact filename</strong></p><code class="file-name">{esc(primary['nan'])}</code>
   <p class="meta">SHA-256 <code>{esc(primary.get('sha256_nan', ''))}</code> · {esc(primary.get('bytes_nan'))} bytes · single-band float32 · {esc(primary.get('emitted_px'))} cells equal to 1 · CRS EPSG:32611 · 100 m grid · template footprint {comma(restore.get('grid', {}).get('footprint_pixels', 5167373))} cells.</p>
   <p><strong>Exact short note ({len(str(primary.get('note', '')))} / 200 characters):</strong></p>
@@ -495,7 +507,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
 </div></section>
 
 <section class="download-panel"><div class="eyebrow">Prominent single-band GeoTIFF · manual download</div><h2>{esc(p.get('hypothesis'))}</h2><p><span class="status unscored">UNSCORED · NOT SLOT-APPROVED</span></p>
-{file_links(p)}<p><strong>Primary exact filename:</strong></p><code class="file-name">{esc(p['nan'])}</code><p class="meta">SHA-256 <code>{esc(p.get('sha256_nan'))}</code> · {esc(p.get('bytes_nan'))} bytes · {comma(p.get('emitted_px'))} emitted cells · EPSG:32611 · 3730 × 3292 · 100 m grid.</p><p><strong>Copy this exact short note ({len(str(p.get('note','')))} / 200 characters):</strong></p>{note_box(str(p.get('note','')))}
+{file_links(p)}{mirror_line(p)}<p><strong>Primary exact filename:</strong></p><code class="file-name">{esc(p['nan'])}</code><p class="meta">SHA-256 <code>{esc(p.get('sha256_nan'))}</code> · {esc(p.get('bytes_nan'))} bytes · {comma(p.get('emitted_px'))} emitted cells · EPSG:32611 · 3730 × 3292 · 100 m grid.</p><p><strong>Copy this exact short note ({len(str(p.get('note','')))} / 200 characters):</strong></p>{note_box(str(p.get('note','')))}
 <p>Alternative package: <a href="downloads/{esc(p['zip'])}" download>{esc(p['zip'])}</a>. The separately named all-finite TIFF uses zero outside the template footprint as a manual fallback; it is not claimed to solve the old portal error. Do not use the predecessor all-finite file with out-of-footprint positives.</p></section>
 
 <section class="section"><h2>Human submission checklist</h2><ol>

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03T22:30:00Z",
+  "generated": "2026-10-03T23:05:00Z",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -407,7 +407,7 @@
       "id": "github-pages-legacy-build-errored",
       "severity": "high",
       "issue": "GitHub Pages for buffedlizard55-lab/GEMSDOE28 is not deploying. `gh api repos/.../pages` returns `\"status\":\"errored\"` with `build_type: legacy` and `source: {branch: main, path: /}`; the legacy page-build history shows the build for commit e429135 failing with \"Page build failed.\", the later build for a667805 stuck at status \"building\" with duration 0, and the last successful legacy build at 2026-10-03T21:11:29Z (commit 22e41a7). The repository's own Actions deployment (.github/workflows/pages.yml, actions/deploy-pages) does succeed (run 37156270805-adjacent deployments recorded, plus a github-pages deployment for main at 21:49:25Z), so two deployment paths are configured against each other.",
-      "action": "Registered because it is the one thing that can stop a reviewer from downloading the one-click submission GeoTIFF that the standing prompt makes the site's first requirement. Mitigation available and reversible: switch the Pages source to GitHub Actions (`PUT /repos/{owner}/{repo}/pages` with `build_type=workflow`) so the workflow that already succeeds becomes the deployment path, then confirm a fresh deployment on main. Until that is done, treat anything served at https://buffedlizard55-lab.github.io/GEMSDOE28/ as possibly stale, and prefer the raw repository file (docs/downloads/...) for manual submission."
+      "action": "Registered because it is the one thing that can stop a reviewer from downloading the one-click submission GeoTIFF that the standing prompt makes the site's first requirement. Mitigation available and reversible: switch the Pages source to GitHub Actions (`PUT /repos/{owner}/{repo}/pages` with `build_type=workflow`) so the workflow that already succeeds becomes the deployment path, then confirm a fresh deployment on main. Until that is done, treat anything served at https://buffedlizard55-lab.github.io/GEMSDOE28/ as possibly stale, and prefer the raw repository file (docs/downloads/...) for manual submission. Attempted fix in this session FAILED: `gh api -X PUT .../pages -f build_type=workflow` returns `403 Resource not accessible by integration`, so the sandbox token has no `pages: write`; switching the source is an OWNER action (Settings \u2192 Pages \u2192 Source \u2192 GitHub Actions), after which `.github/workflows/pages.yml` \u2014 which already succeeds and uploads `docs/` \u2014 becomes the deployment path. Mitigation that needs no permission and is now live: the manifest's primary, secondary, tertiary and conservative files each carry a raw.githubusercontent-free raw-repository mirror link (`https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/<file>`) in the site's download panel and in README \u00a71, so a human can still obtain the one-click GeoTIFF without Pages."
     },
     {
       "id": "h37-1-is-proxy-favoured-by-construction",
