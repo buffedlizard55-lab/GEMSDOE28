@@ -559,3 +559,32 @@ still reported success, so an empty table looked like a result.
 satisfied**: the committed clip is empty and must not be used. Recorded as
 `sciencebase-url-has-no-file-suffix-derived-clip-empty` (severity high) in
 `registry/irregularities.json`. No seed was spent.
+
+## Second post-merge finding (2026-10-03, same session) — geopandas missing on the runner
+
+The magic-byte fix landed (PR #12, merged `67f4c18`) and re-triggered run `37145919044`. It **failed
+loudly and correctly** — the new guard worked — and the committed inventory shows the fix doing its
+job plus one further defect:
+
+| Check | Value |
+|---|---|
+| `payload_format` / `payload_used` | **`zip`** / `sb_slip_tendency_shapefile_full.zip` ← magic-byte fix worked |
+| Download / pin | HTTP 200, `35,912,323` B, `pin_match: true` |
+| `layers_found` | **`GB_Quaternary_faults_TD_TS.shp`** ← the archive opened; name indicates TD/TS attributes |
+| read error | `ImportError: geopandas is required to use pyogrio.read_dataframe()` |
+| aggregate status | **`LAYER_UNREADABLE`** ← correct, no longer masquerading as success |
+| `sciencebase_derived_written` | **0**; job exited non-zero ← correct |
+
+**Root cause.** The workflow installed `pyogrio shapely pyproj pandas` but not `geopandas`, which
+`pyogrio.read_dataframe()` requires. It ran locally in this session only because `geopandas` was
+installed to run the clip tests — the sandbox environment masked a runner-environment gap.
+
+**Fix.** The workflow now installs `geopandas` and runs an explicit import-assert step naming
+`pyogrio`/`shapely`/`pyproj`/`pandas`/`geopandas` before any fetch, so a dependency regression fails
+in seconds with a legible message instead of after a 35 MB download. Guarded by
+`test_runner_installs_geopandas_for_read_dataframe` and
+`test_workflow_fails_the_job_on_every_unusable_clip_status`. **175 passed, 0 skipped**; `ruff` PASS.
+
+**H33-1 status unchanged: precondition UNSATISFIED.** No clip has been produced, no seed spent. The
+layer name `GB_Quaternary_faults_TD_TS.shp` is evidence toward the expected slip/dilation-tendency
+schema but is not proof of the field names; the derived schema file remains the check.

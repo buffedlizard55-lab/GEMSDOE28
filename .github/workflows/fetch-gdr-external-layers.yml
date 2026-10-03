@@ -76,8 +76,22 @@ jobs:
       - name: Install geospatial readers
         run: |
           python -m pip install --upgrade pip
-          # pyogrio ships GDAL wheels, so FileGDB and shapefile both read without apt packages
-          python -m pip install pyogrio shapely pyproj pandas
+          # pyogrio ships GDAL wheels, so FileGDB and shapefile both read without apt packages.
+          # geopandas is NOT optional: pyogrio.read_dataframe() raises
+          # "ImportError: geopandas is required to use pyogrio.read_dataframe()" without it, which is
+          # exactly what the 2026-10-03T18:54:08Z run hit after the magic-byte fix started opening the
+          # archive. tests/test_external_bridge_derived.py asserts this line names geopandas.
+          python -m pip install pyogrio shapely pyproj pandas geopandas
+
+      - name: Assert the readers this job depends on actually import
+        run: |
+          python - <<'PYCHECK'
+          import importlib
+          for mod in ("pyogrio", "shapely", "pyproj", "pandas", "geopandas"):
+              m = importlib.import_module(mod)
+              print(f"{mod} {getattr(m, '__version__', '?')}")
+          import pyogrio, geopandas  # noqa: F401  - the combination read_dataframe needs
+          PYCHECK
 
       - name: Fetch the independent pin record (2026-09-30 runner)
         run: |
