@@ -106,21 +106,39 @@
   "used_by_submission": "the shipped artifacts are binary {0,1} rasters, consistent with this"
  },
  "calibration": {
-  "method": "closed-form solve of the two-parameter emission model on the two reported anchors (solid 0.1922, dotted d=1.5 0.2477) using measured dot counts and the sibling's geometric retention curve; the d=2.8-class file is then predicted out of sample",
-  "fitted_fp_mass_per_truth": 8.727210920029723,
-  "fitted_credit_per_truth": 0.5087919503368927,
+  "method": "corrected naive closure DTI = a/(0.8 + 0.2*N/|G|), evaluated with the sibling's pinned credit_per_truth c = 0.508792, its geometric retention curve and the measured dot counts at the sibling lattice calibration |G| = 12,225.896 px; the d=2.8-class file is predicted out of sample (no parameter is re-fit here)",
+  "closure": "DTI = a / (0.8 + 0.2 * N/|G|), a = c * retention",
+  "sibling_credit_per_truth": 0.508792,
+  "truth_mass_calibration_px": 12225.896,
+  "measured_n_over_t": {
+   "solid": 9.907740095286266,
+   "d1_5": 4.9132595271544925,
+   "d2_8": 3.6062796542682842
+  },
+  "retention": {
+   "d1_5": 0.8531275643256233,
+   "d2_8": 0.7588759346162787
+  },
   "reported_anchor_solid": 0.1922,
-  "reproduced_anchor_solid": 0.4617999326565394,
+  "reproduced_anchor_solid": 0.18291684936377414,
   "reported_anchor_d1_5": 0.2477,
-  "predicted_anchor_d1_5": 0.44023069862160313,
-  "predicted_d2_8_out_of_sample": 0.40642332448818175,
+  "predicted_anchor_d1_5": 0.2434936839805758,
+  "predicted_d2_8_out_of_sample": 0.2538100241348732,
   "reported_d2_8": 0.26,
-  "residual": 0.14642332448818174,
+  "residuals": {
+   "solid": -0.009283150636225868,
+   "d1_5": -0.0042063160194242,
+   "d2_8": -0.006189975865126818
+  },
+  "hand_check_expected": {
+   "d1_5": 0.24349,
+   "d2_8": 0.25382
+  },
   "sibling_ledger_interval_for_this_operating_point": [
    0.25002945809247196,
    0.2613299747091814
   ],
-  "verdict": "the model calibrated on two anchors predicts 0.4064 for the third file; the reported value 0.2600 lies inside the sibling's published interval [0.2500, 0.2613], i.e. the emission-geometry model transfers out of sample"
+  "verdict": "under the corrected closure the pinned sibling constants predict 0.2435 for d1.5 and 0.2538 for the d=2.8-class file against reported 0.2477 and 0.2600, i.e. residuals of -0.0042 and -0.0062; the reported d=2.8 value stays inside the sibling's published interval [0.2500, 0.2613] and the ordering solid < d1.5 < d2.8 is reproduced, so the emission-geometry explanation survives, while the two constants were themselves solved under the older closure and are not re-fit here"
  },
  "targets": {
   "truth_size_note": "|G| is not observable from here. 12,630 px is the sibling's lattice calibration (unconfirmed); 20,000 px is shown as a sensitivity.",
@@ -128,95 +146,95 @@
    "|G|=12630": {
     "d2_8_emission_N=44090": {
      "0.26": {
-      "required_credit_fraction_of_truth": 0.410892957962924,
-      "required_credit_per_emitted_px": 0.11770419730260219
+      "required_credit_fraction_of_truth": 0.3895265241488519,
+      "required_credit_per_emitted_px": 0.11158357904286685
      },
      "0.2941": {
-      "required_credit_fraction_of_truth": 0.4681510720265123,
-      "required_credit_per_emitted_px": 0.1341063288658392
+      "required_credit_fraction_of_truth": 0.44061442596991285,
+      "required_credit_per_emitted_px": 0.12621819460195055
      },
      "0.3195": {
-      "required_credit_fraction_of_truth": 0.511342987951477,
-      "required_credit_per_emitted_px": 0.14647906413760842
+      "required_credit_fraction_of_truth": 0.4786681710213777,
+      "required_credit_per_emitted_px": 0.13711905193921525
      }
     },
     "d1_5_emission_N=60069": {
      "0.26": {
-      "required_credit_fraction_of_truth": 0.4802900468043737,
-      "required_credit_per_emitted_px": 0.1009849221918001
+      "required_credit_fraction_of_truth": 0.4553149643705463,
+      "required_credit_per_emitted_px": 0.0957337062378265
      },
      "0.2941": {
-      "required_credit_fraction_of_truth": 0.5472186756615576,
-      "required_credit_per_emitted_px": 0.11505721542901451
+      "required_credit_fraction_of_truth": 0.5150312731591449,
+      "required_credit_per_emitted_px": 0.10828955001747989
      },
      "0.3195": {
-      "required_credit_fraction_of_truth": 0.5977054190314544,
-      "required_credit_per_emitted_px": 0.1256724673686472
+      "required_credit_fraction_of_truth": 0.5595120427553444,
+      "required_credit_per_emitted_px": 0.11764199670379064
      }
     },
     "pruned_N=22700": {
      "0.26": {
-      "required_credit_fraction_of_truth": 0.3179957972946337,
-      "required_credit_per_emitted_px": 0.17692893919961336
+      "required_credit_fraction_of_truth": 0.3014600158353128,
+      "required_credit_per_emitted_px": 0.1677286343612335
      },
      "0.2941": {
-      "required_credit_fraction_of_truth": 0.3623086512396282,
-      "required_credit_per_emitted_px": 0.2015840645443394
+      "required_credit_fraction_of_truth": 0.3409976563737134,
+      "required_credit_per_emitted_px": 0.18972688986784142
      },
      "0.3195": {
-      "required_credit_fraction_of_truth": 0.3957354780446797,
-      "required_credit_per_emitted_px": 0.22018233866538783
+      "required_credit_fraction_of_truth": 0.37044798099762466,
+      "required_credit_per_emitted_px": 0.2061126872246696
      }
     }
    },
    "|G|=20000": {
     "d2_8_emission_N=44090": {
      "0.26": {
-      "required_credit_fraction_of_truth": 0.34033122362869206,
-      "required_credit_per_emitted_px": 0.15438023299101478
+      "required_credit_fraction_of_truth": 0.322634,
+      "required_credit_per_emitted_px": 0.14635246087548195
      },
      "0.2941": {
-      "required_credit_fraction_of_truth": 0.38775652903801605,
-      "required_credit_per_emitted_px": 0.1758931862272697
+      "required_credit_fraction_of_truth": 0.36494868999999996,
+      "required_credit_per_emitted_px": 0.1655471490133817
      },
      "0.3195": {
-      "required_credit_fraction_of_truth": 0.42353119324858457,
-      "required_credit_per_emitted_px": 0.19212120356025608
+      "required_credit_fraction_of_truth": 0.39646755,
+      "required_credit_per_emitted_px": 0.17984465865275573
      }
     },
     "d1_5_emission_N=60069": {
      "0.26": {
-      "required_credit_fraction_of_truth": 0.38415548523206755,
-      "required_credit_per_emitted_px": 0.12790473796203283
+      "required_credit_fraction_of_truth": 0.36417939999999993,
+      "required_credit_per_emitted_px": 0.12125369158800711
      },
      "0.2941": {
-      "required_credit_fraction_of_truth": 0.4376877207335471,
-      "required_credit_per_emitted_px": 0.14572831934393685
+      "required_credit_fraction_of_truth": 0.41194292899999996,
+      "required_credit_per_emitted_px": 0.1371565796001265
      },
      "0.3195": {
-      "required_credit_fraction_of_truth": 0.47806906847559016,
-      "required_credit_per_emitted_px": 0.15917330685564604
+      "required_credit_fraction_of_truth": 0.44752045499999993,
+      "required_credit_per_emitted_px": 0.14900213254757028
      }
     },
     "pruned_N=22700": {
      "0.26": {
-      "required_credit_fraction_of_truth": 0.28166666666666673,
-      "required_credit_per_emitted_px": 0.24816446402349493
+      "required_credit_fraction_of_truth": 0.26702000000000004,
+      "required_credit_per_emitted_px": 0.23525991189427314
      },
      "0.2941": {
-      "required_credit_fraction_of_truth": 0.3209170403110988,
-      "required_credit_per_emitted_px": 0.28274629102299453
+      "required_credit_fraction_of_truth": 0.30204069999999994,
+      "required_credit_per_emitted_px": 0.26611515418502196
      },
      "0.3195": {
-      "required_credit_fraction_of_truth": 0.350525050742442,
-      "required_credit_per_emitted_px": 0.3088326438259401
+      "required_credit_fraction_of_truth": 0.3281265,
+      "required_credit_per_emitted_px": 0.2890982378854625
      }
     }
    }
   },
-  "current_credit_fraction_model": 0.3861099668371487,
-  "emitted_px_needed_for_0_3195_at_current_credit": 20919.063061776193,
-  "reading": "with the current credit fraction held fixed, 0.3195 requires ~20919 emitted pixels instead of 44090 - i.e. the same fault mass concentrated in ~half the dots - or, at the current dot count, credit must rise from 0.386 to 0.511 of the hidden truth (-+32%). Both routes are ranking problems, not geometry problems."
+  "current_credit_fraction_model": 0.38611000452528565,
+  "emitted_px_needed_for_0_3195_at_current_credit": 24970.29330650504,
+  "reading": "with the current credit fraction held fixed, 0.3195 requires ~24970 emitted pixels instead of 44090 - i.e. the same fault mass concentrated in ~half the dots - or, at the current dot count, credit must rise from 0.386 to 0.479 of the hidden truth (-+23%). Both routes are ranking problems, not geometry problems."
  },
  "catalogue_stand_in": {
   "note": "the published catalogue is the only local truth-like mask; it is NOT the hidden test set, and these rows are descriptive only",
