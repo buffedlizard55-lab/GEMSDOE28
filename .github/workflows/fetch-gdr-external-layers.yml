@@ -34,7 +34,9 @@ on:
   # is path-filtered to this workflow and its script, so merging a change to either runs the fetch
   # without anyone needing dispatch permission - and it still runs on demand for anyone who has it.
   push:
-    branches: [main]
+    # Session 10: `arena/**` added so the bridge can be re-armed from the fixed session branch
+    # without touching main first. Everything else about the trigger is unchanged.
+    branches: [main, "arena/**"]
     paths:
       - ".github/workflows/fetch-gdr-external-layers.yml"
       - "scripts/fetch_external_layers.py"
@@ -43,7 +45,7 @@ on:
       datasets:
         description: "Comma-separated dataset keys to fetch (all | paleo,probes,volcanics)"
         required: true
-        default: "paleo,probes,volcanics"
+        default: "paleo,probes,volcanics,slip"
       availability_only:
         description: "Also HEAD-check (no download) the larger sources and record status"
         required: false
@@ -67,7 +69,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           # pyogrio ships GDAL wheels, so FileGDB and shapefile both read without apt packages
-          python -m pip install pyogrio shapely pyproj pandas
+          python -m pip install pyogrio shapely pyproj pandas numpy scipy rasterio
 
       - name: Fetch the independent pin record (2026-09-30 runner)
         run: |
@@ -78,7 +80,7 @@ jobs:
 
       - name: Download, hash-verify, inventory and clip
         env:
-          DATASETS: ${{ github.event.inputs.datasets || 'paleo,probes,volcanics' }}
+          DATASETS: ${{ github.event.inputs.datasets || 'paleo,probes,volcanics,slip' }}
           AVAIL_ONLY: ${{ github.event.inputs.availability_only || 'true' }}
         run: |
           set -o pipefail   # a verification failure must fail the job, not be swallowed by tee
@@ -106,6 +108,21 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add evidence/external_layer_inventory.json
+          # Session 10: the derived H33-1 grids are the point of the bridge, so they come back too.
+          # Size-capped so a runaway raster can never bloat the repository history.
+          MAX_BYTES=$((25 * 1024 * 1024))
+          for f in /tmp/gdr/out/slip_tendency_grids.tar.gz /tmp/gdr/out/slip_tendency_sidecar.json; do
+            if [ -f "$f" ]; then
+              sz=$(stat -c%s "$f")
+              if [ "$sz" -le "$MAX_BYTES" ]; then
+                cp "$f" "evidence/$(basename "$f")"
+                git add "evidence/$(basename "$f")"
+                echo "committing $(basename "$f") ($sz bytes)"
+              else
+                echo "$(basename "$f") is $sz bytes > $MAX_BYTES; not committed"
+              fi
+            fi
+          done
           if git diff --cached --quiet; then
             echo "inventory unchanged; nothing to commit"
           else
@@ -126,6 +143,8 @@ jobs:
           path: |
             /tmp/gdr/out/inventory.json
             /tmp/gdr/out/*.csv
+            /tmp/gdr/out/slip_tendency_grids.tar.gz
+            /tmp/gdr/out/slip_tendency_sidecar.json
             /tmp/gdr/log.txt
           if-no-files-found: warn
           retention-days: 90
