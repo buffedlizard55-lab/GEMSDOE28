@@ -1,0 +1,401 @@
+#!/usr/bin/env python3
+"""Build the static, source-linked manual-only Pages site from repository JSON records.
+
+The build is deterministic apart from the data's checked-in observation dates. It reads no rasters,
+performs no external requests, and never contacts DrivenData. Review the original standing brief in
+README.md before changing the submission path or the claims rendered here.
+"""
+from __future__ import annotations
+
+import html
+import json
+import re
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+DOCS = ROOT / "docs"
+REPOSITORY_SOURCE_BASE = "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/"
+SOURCE_PATH_ROOTS = {"evidence", "knowledge", "registry", "scripts", "src", "tests", ".github"}
+SOURCE_PATH_FILES = {"README.md", "AI_DISCLOSURE.md", "pyproject.toml", "requirements.txt"}
+
+
+def read_json(path: str, default: Any = None) -> Any:
+    target = ROOT / path
+    if not target.exists():
+        if default is not None:
+            return default
+        raise FileNotFoundError(target)
+    return json.loads(target.read_text(encoding="utf-8"))
+
+
+def esc(value: Any) -> str:
+    return html.escape(str(value), quote=True)
+
+
+def fmt_number(value: Any, digits: int = 4) -> str:
+    try:
+        return f"{float(value):.{digits}f}"
+    except (TypeError, ValueError):
+        return "not recorded"
+
+
+def comma(value: Any) -> str:
+    try:
+        return f"{int(value):,}"
+    except (TypeError, ValueError):
+        return esc(value)
+
+
+def range_summary(record: dict) -> str:
+    return str(record.get("conclusion", {}).get(
+        "most_plausible_explanation", record.get("summary", "Historical validator cause remains unconfirmed.")))
+
+
+def nav() -> str:
+    links = [
+        ("Overview", "index.html"),
+        ("Executive summary", "executive-summary.html"),
+        ("Research", "research.html"),
+        ("Topology", "topology.html"),
+        ("Sources", "sources.html"),
+    ]
+    return "<nav aria-label=\"Main navigation\">" + "".join(
+        f'<a href="{href}">{label}</a>' for label, href in links
+    ) + "</nav>"
+
+
+def layout(title: str, body: str, active: str = "") -> str:
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GEMSDOE28 auditable geoscience research, manual-only submission path, and source-linked evidence.">
+  <title>{esc(title)} | GEMSDOE28</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <script defer src="assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
+  {nav()}
+</div></header>
+<main>{body}</main>
+<footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
+</body>
+</html>
+"""
+
+
+def publish_source_links(page: str) -> str:
+    """Turn docs-relative links to repository files into durable public GitHub source links."""
+    def replace(match: re.Match[str]) -> str:
+        attr, url = match.group(1), match.group(2)
+        if not url.startswith("../"):
+            return match.group(0)
+        path = url[3:]
+        root = path.split("/", 1)[0]
+        if root in SOURCE_PATH_ROOTS or path in SOURCE_PATH_FILES:
+            return attr + REPOSITORY_SOURCE_BASE + path
+        return match.group(0)
+    return re.sub(r'((?:href|src)=\")([^\"]+)', replace, page)
+
+
+def note_box(note: str) -> str:
+    return (f'<div class="note-box"><code>{esc(note)}</code>'
+            f'<button class="copy-note" type="button" data-copy-note="{esc(note)}" aria-label="Copy the exact submission note">Copy note</button></div>')
+
+
+def file_links(item: dict, prefix: str = "downloads/") -> str:
+    links = [f'<a class="button" href="{prefix}{esc(item["nan"])}" download>Download single-band GeoTIFF</a>']
+    if item.get("zip"):
+        links.append(f'<a class="button quiet" href="{prefix}{esc(item["zip"])}" download>Download ZIP</a>')
+    if item.get("allfinite"):
+        links.append(f'<a class="button secondary" href="{prefix}{esc(item["allfinite"])}" download>All-finite fallback</a>')
+    return '<div class="download-actions">' + "".join(links) + "</div>"
+
+
+def candidate_card(slot: str, item: dict, *, featured: bool = False) -> str:
+    title = item.get("hypothesis", item.get("slug", slot))
+    status = item.get("status", "UNSCORED research artifact")
+    css = "card span-12" if featured else "card span-6"
+    return f"""<article class="{css}">
+  <div class="rank">{esc(slot)} · {esc(item.get('content_id', 'no id'))}</div>
+  <h3>{esc(title)}</h3><p><span class="status unscored">UNSCORED</span></p>
+  <p>{esc(status)}</p>
+  {file_links(item)}
+  <p><strong>NaN GeoTIFF:</strong> <code class="file-name">{esc(item['nan'])}</code></p>
+  <p class="meta">SHA-256 <code>{esc(item.get('sha256_nan', 'not recorded'))}</code> · {esc(item.get('bytes_nan', 'n/a'))} bytes · {esc(item.get('emitted_px', 'n/a'))} positive cells</p>
+  <p><strong>Manual note ({len(str(item.get('note', '')))} / 200 characters):</strong></p>{note_box(str(item.get('note', '')))}
+</article>"""
+
+
+def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, restore: dict) -> str:
+    primary = manifest["primary"]
+    q = manifest.get("quaternary", {})
+    observations = board.get("observations", [])
+    board_lines = "".join(
+        f"<li>Public row: rank {esc(row.get('rank'))}, {esc(row.get('participant_label'))}, {fmt_number(row.get('public_score'))}.</li>"
+        for row in observations
+    )
+    euler_ready = euler.get("status", "label-free transform only")
+    range_claim = range_summary(range_audit)
+    restore_status = restore.get("status", "local restore audit exists; consult its JSON record")
+    return f"""<section class="hero"><div class="hero-content">
+  <div class="eyebrow">GEMS DOE · Great Basin · 2026</div>
+  <h1>Evidence before<br>emission.</h1>
+  <p class="lead">An auditable geoscience research workflow aimed at better fault mapping—not a submission bot. Every idea must earn its way through a spatially blocked holdout, independent confirmation, and an exact-file audit before it can approach a weekly slot.</p>
+  <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO GEMSDOE28 SCORE</span></div>
+  <p><strong>Current status:</strong> the best available file below is an inherited H28-1 full-map research raster with catalogue-proxy holdout evidence. It is locally format-audited, <strong>unscored</strong>, and not slot-approved. The separate H31-1 Euler source/depth build is label-free only: no H31 classifier fit or holdout has been run.</p>
+</div></section>
+
+<section class="download-panel" id="download" aria-labelledby="download-heading">
+  <div class="eyebrow">Manual research download · no upload made</div>
+  <h2 id="download-heading">One-click GeoTIFF — {esc(primary.get('hypothesis', 'H28-1 reference'))}</h2>
+  <p><span class="status unscored">UNSCORED · RESEARCH ONLY · NOT SLOT-APPROVED</span></p>
+  {file_links(primary)}
+  <p><strong>Exact filename</strong></p><code class="file-name">{esc(primary['nan'])}</code>
+  <p class="meta">SHA-256 <code>{esc(primary.get('sha256_nan', ''))}</code> · {esc(primary.get('bytes_nan'))} bytes · single-band float32 · {esc(primary.get('emitted_px'))} cells equal to 1 · CRS EPSG:32611 · 100 m grid · template footprint {comma(restore.get('grid', {}).get('footprint_pixels', 5167373))} cells.</p>
+  <p><strong>Exact short note ({len(str(primary.get('note', '')))} / 200 characters):</strong></p>
+  {note_box(str(primary.get('note', '')))}
+  <p class="small">The note's +0.00295 is a preregistered catalogue hide-and-recover proxy ΔDTI on seeds 140–149; it is not a leaderboard score and not confirmation on hidden expert labels. This file is a research/reference artifact, not one of the four weekly slots inherited from the predecessor campaign.</p>
+</section>
+
+<div class="callout"><strong>Manual-only boundary:</strong> no login, download, upload, scrape, poll, or monitoring of DrivenData occurs in this repository. Review the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a> and <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules</a> yourself before deciding whether to submit. A local audit does not guarantee portal acceptance.</div>
+
+<section class="section"><div class="grid">
+  <article class="card span-4"><div class="metric">{comma(restore.get('grid', {}).get('footprint_pixels', 5167373))}</div><div class="metric-caption">template-footprint cells on the verified local grid</div><p>Restoration status: <strong>{esc(restore_status)}</strong>. The nine pinned files are owner-repository mirrors, not organizer-authenticated bytes.</p><a href="../evidence/restore_audit.json">Open the local restoration audit →</a></article>
+  <article class="card span-4"><div class="metric">+{fmt_number(0.002948838794400959, 5)}</div><div class="metric-caption">H28-1 paired mean proxy ΔDTI · seeds 140–149</div><p>3/4 spatial folds and 9/10 seeds improved. A proxy result—not a competition result.</p><a href="../evidence/h28_1_edge_holdout.json">Open paired holdout evidence →</a></article>
+  <article class="card span-4"><div class="metric">{comma(euler.get('structural_indices', {}).get('0', {}).get('lineament_cluster_stats', {}).get('retained_cluster_count', 6309))}</div><div class="metric-caption">SI-0 Euler depth-labeled clusters in label-free build</div><p>{esc(euler_ready)}. No model fit, holdout score, confirmation, or promotion decision.</p><a href="../evidence/h31_1_euler_feature_audit.json">Open Euler audit →</a></article>
+</div></section>
+
+<section class="section">
+  <div class="eyebrow">Historical comparator library</div><h2>Every file stays explicitly unscored.</h2>
+  <p>These research artifacts preserve comparable model families for review. None is a recommendation or authorized weekly submission; the primary H28-1 file above is the only prominent one-click research reference.</p>
+  <div class="grid">{candidate_card('secondary', manifest.get('secondary', {}))}{candidate_card('tertiary', manifest.get('tertiary', {}))}{candidate_card('quaternary', q)}</div>
+</section>
+
+<section class="section"><div class="eyebrow">Claim discipline</div><h2>Public rows are not file receipts.</h2>
+  <p>A one-off manual leaderboard observation on {esc(board.get('snapshot_date', 'not recorded'))} showed:</p><ul>{board_lines}</ul>
+  <p>That observation does not identify this repository's owner or associate a score with any local GeoTIFF. The reported 0.2477 is owner-reported and unverified. Current GEMSDOE28 files remain unscored.</p>
+  <p><strong>Historical range error:</strong> {esc(range_claim)} The predecessor all-finite raster had positives outside the footprint, so it is not a valid shortcut. See the <a href="../evidence/range_validator_forensics_2026-10-03.json">hash-pinned forensic record</a>.</p>
+  <p>For exact file/grid/range/mask/hash checks, see <a href="downloads/manifest.json">the download manifest</a> and <a href="../evidence/submission_file_audit.json">the current local file audit</a>.</p>
+</section>
+
+<section class="section"><div class="grid">
+  <article class="card span-6"><div class="eyebrow">What is next</div><h3>One frozen test at a time</h3><p>H31-1's fresh label-free source/depth build cleared pre-fit sufficiency, and the local seed-reuse audit passes. Implementation/source, bug/leakage, and full acceptance reviews must be recorded before one frozen screen on seeds 160–169 against the same-run best control. Confirmation seeds 170–179 remain gated on an unchanged screen pass.</p><a href="research.html">See ranked hypotheses and limitations →</a></article>
+  <article class="card span-6"><div class="eyebrow">Manual review</div><h3>Read the original sources</h3><p>Open the dated <a href="sources.html">source ledger</a>, <a href="topology.html">topology review</a>, and <a href="executive-summary.html">submission instructions</a>. Every external-data status distinguishes a listing from actual byte/schema/coverage/licence verification.</p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official public leaderboard — human spot-check only</a></article>
+</div></section>
+"""
+
+
+def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit: dict) -> str:
+    p = manifest["primary"]
+    candidate = read_json("docs/downloads/h28_1_candidate_manifest.json", {"candidate": {}}).get("candidate", {})
+    audit_status = file_audit.get("status", "not yet recorded")
+    check_count = file_audit.get("check_count", "not recorded")
+    return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Executive summary</div>
+<section class="hero"><div class="hero-content">
+  <div class="eyebrow">Submission executive summary · manual operator checklist</div>
+  <h1>Research file,<br>not a score claim.</h1>
+  <p class="lead">A concise decision brief for a human owner reviewing whether any local raster is appropriate for a future GEMS submission. The current first-screen download is intentionally labeled UNSCORED and NOT SLOT-APPROVED.</p>
+  <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO UPLOAD / NO RECEIPT</span></div>
+</div></section>
+
+<section class="section"><div class="grid">
+  <article class="card span-8"><h2>Candidate in one paragraph</h2><p><strong>{esc(p.get('hypothesis'))}.</strong> Filename <code class="file-name">{esc(p['nan'])}</code>. This is an inherited H28-1 full-map research artifact from the predecessor project, with local single-band GeoTIFF/grid/range/mask checks. Its paired catalogue hide-and-recover evidence reports a mean ΔDTI of +0.00294884, three of four spatial folds and nine of ten seeds improving over the same-run control. It is a proxy experiment, not evidence of competition performance on new expert labels. The file has not been uploaded or organizer-scored.</p><p><strong>Disposition:</strong> do not consume a weekly submission slot on the basis of this page. It is a research reference and is not one of the four weekly slots inherited from the predecessor campaign.</p></article>
+  <article class="card span-4"><div class="metric">{comma(p.get('emitted_px'))}</div><div class="metric-caption">binary positive cells</div><hr><div class="metric">{fmt_number(candidate.get('holdout_mean_gain', 0.002948838794400959), 5)}</div><div class="metric-caption">catalogue proxy mean gain, not score</div></article>
+</div></section>
+
+<section class="download-panel"><div class="eyebrow">Prominent single-band GeoTIFF · manual download</div><h2>{esc(p.get('hypothesis'))}</h2><p><span class="status unscored">UNSCORED · NOT SLOT-APPROVED</span></p>
+{file_links(p)}<p><strong>Primary exact filename:</strong></p><code class="file-name">{esc(p['nan'])}</code><p class="meta">SHA-256 <code>{esc(p.get('sha256_nan'))}</code> · {esc(p.get('bytes_nan'))} bytes · {comma(p.get('emitted_px'))} emitted cells · EPSG:32611 · 3730 × 3292 · 100 m grid.</p><p><strong>Copy this exact short note ({len(str(p.get('note','')))} / 200 characters):</strong></p>{note_box(str(p.get('note','')))}
+<p>Alternative package: <a href="downloads/{esc(p['zip'])}" download>{esc(p['zip'])}</a>. The separately named all-finite TIFF uses zero outside the template footprint as a manual fallback; it is not claimed to solve the old portal error. Do not use the predecessor all-finite file with out-of-footprint positives.</p></section>
+
+<section class="section"><h2>Human submission checklist</h2><ol>
+<li><strong>Re-evaluate evidence, not just the file.</strong> Read <a href="../evidence/h28_1_edge_holdout.json">the exact paired holdout</a> and <a href="research.html">current limits/ranking</a>. A proxy pass does not authorize a weekly slot; the outstanding Euler holdout has not been run.</li>
+<li><strong>Review the official rules and data terms manually.</strong> Check the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a>, <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules</a>, current deadline and submission cap. This site does not log in or automate any interaction.</li>
+<li><strong>Choose the exact local file yourself.</strong> The suggested `.tif` above is a single-band float32 GeoTIFF with values 0/1 within the sample-template footprint and nodata outside. Use the exact filename and SHA-256 in the local audit; do not rename it in a way that loses its content ID.</li>
+<li><strong>Paste the registered note manually.</strong> Copy the exact short note above. Include no unsupported score claim. Keep a screenshot or receipt that identifies the selected filename and the organizer's returned score.</li>
+<li><strong>Preserve the outcome.</strong> If a portal error appears, save its exact text, time, filename and organizer response. Do not infer that the cause is NaN or range until the actual returned message and payload are re-audited.</li>
+</ol></section>
+
+<section class="section"><div class="callout"><strong>What has been locally audited:</strong> current submission-file audit status <strong>{esc(audit_status)}</strong> ({esc(check_count)} checks). The local checker reports only file format, grid, `[0,1]`/finiteness, footprint, catalogue overlap, hashes, ZIP membership and note length. It does not authenticate input bytes with the organizer and does not guarantee portal acceptance.</div>
+<div class="callout callout-danger"><strong>Historical range-validator error remains unconfirmed.</strong> Exact predecessor files were hash-pinned; the old NaN variant contains internal NaNs, and the old all-finite variant contains 625,805 positive cells outside the mask. Internal NaNs are a plausible local explanation, not proof of the portal validator's root cause. <a href="../evidence/range_validator_forensics_2026-10-03.json">Read exact file forensics</a> (summary: {esc(range_summary(range_audit))}).</div></section>
+
+<section class="section"><h2>Score and ownership claims</h2><p>Reported 0.2477 remains owner-reported without an organizer receipt or authoritative association to a local TIFF. A one-off manual official leaderboard read on {esc(board.get('snapshot_date', 'not recorded'))} recorded rows for DARD (rank 1, 0.3195) and wbg1 (rank 15, 0.2600). Public rows do not identify the repository owner or bind a score to a file. No GEMSDOE28 candidate has an organizer score.</p><p><a href="{esc(board.get('url', 'https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'))}">Official public leaderboard — manual review only</a> · no automated access or monitoring.</p></section>
+"""
+
+
+def render_hypothesis_card(h: dict) -> str:
+    lo_hi = h.get("expected_holdout_delta_dti", [None, None])
+    if isinstance(lo_hi, list) and len(lo_hi) == 2:
+        range_text = f"{fmt_number(lo_hi[0], 3)} to +{fmt_number(lo_hi[1], 3)}"
+    else:
+        range_text = "not stated"
+    layer_tags = "".join(f"<li>{esc(layer)}</li>" for layer in h.get("layers", []))
+    return f"""<article class="card span-6"><div class="rank">Rank {esc(h.get('rank'))} · {esc(h.get('id'))}</div><h3>{esc(h.get('title'))}</h3><p><span class="status blocked">{esc(h.get('status', 'UNTRIED'))}</span></p>
+<p><strong>Layers:</strong></p><ul class="tag-list">{layer_tags}</ul>
+<p><strong>Physical signature:</strong> {esc(h.get('signature', 'not recorded'))}</p>
+<p><strong>Why it might find faults missing from the catalogue:</strong> {esc(h.get('why_missing_faults', 'not recorded'))}</p>
+<p><strong>Different from prior work:</strong> {esc(h.get('differs_from_repo', 'not recorded'))}</p>
+<p><strong>Confounders:</strong> {esc(h.get('confounders', 'not recorded'))}</p>
+<p><strong>Planning-only ΔDTI range:</strong> {esc(range_text)}. This is an uncertain prior, not an observed holdout result or leaderboard prediction.</p>
+<p><strong>Cost:</strong> {esc(h.get('cost', 'not recorded'))}</p>
+<p><strong>Data/access gate:</strong> {esc(h.get('data_gate', 'not recorded'))}</p>
+<p><strong>Validation:</strong> {esc(h.get('validation', 'not recorded'))}</p></article>"""
+
+
+def render_research(registry: dict, h28: dict, euler: dict, board: dict) -> str:
+    hypotheses = sorted(registry.get("hypotheses", []), key=lambda item: item.get("rank", 999))
+    hypothesis_html = "".join(render_hypothesis_card(h) for h in hypotheses)
+    si0 = euler.get("structural_indices", {}).get("0", {})
+    summary = si0.get("solution_summary", {})
+    clusters = si0.get("lineament_cluster_stats", {})
+    stability = euler.get("si_cluster_centroid_stability", {})
+    h1 = stability.get("si1_vs_si0", {})
+    h2 = stability.get("si2_vs_si0", {})
+    candidate = h28.get("candidate", {})
+    return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Research</div>
+<section class="hero"><div class="hero-content"><div class="eyebrow">Hypotheses, evidence and preregistration</div><h1>Test the geology.<br>Respect the proxy.</h1>
+<p class="lead">Five currently ranked geological hypotheses, reviewed against in-repository experiments and evidence. Planning ranges are subjective, uncertain catalogue-holdout priors—not observed gains or competition-score predictions.</p>
+<div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status proxy">PROXY ≠ COMPETITION</span></div></div></section>
+
+<section class="section"><h2>Current ranking</h2><p>Ranking weighs expected catalogue-proxy gain, testability and cost. “Untried” refers to the proposed transform/holdout arm in this checkout, not a claim of global scientific novelty. The H31-1 Euler feature build is complete and label-free, but the classifier and holdout remain unrun.</p><div class="grid">{hypothesis_html}</div></section>
+
+<section class="section"><h2>H31-1: depth-labeled Euler source solutions, not gradient peaks</h2><div class="callout"><strong>State:</strong> protocol revision 2 is committed at 524bf27 before any classifier fit or holdout; the current label-free feature build is bound to it and passes all three pre-fit data-sufficiency checks. Earlier protocol commit hashes cited by prior working-copy artifacts are absent from this checkout's Git history; the initial build's commit chronology is not proven and is disclosed in the history audit. Magnetic field units remain unauthenticated. No classifier fit, holdout result, confirmation, promotion decision, or submission candidate exists. The local seed-reuse audit passes with 34 evidence JSON files scanned; reserved screen seeds 160–169 and confirmation seeds 170–179 are unused locally, but undocumented external seed use cannot be ruled out. Screen 160–169; confirmation 170–179 only after a screen pass.</div>
+<div class="grid"><article class="card span-6"><h3>What was built</h3><ul><li>Source field: owner-mirror band 14 <code>tmi</code>; embedded unit tags are absent.</li><li>Euler system solves for source coordinates, depth and base-level offset in 10 × 10 windows; source windows are screened and solutions clustered.</li><li>SI-0 primary: {comma(summary.get('n', 0))} accepted source solutions; {comma(clusters.get('aligned_solution_count', 0))} aligned to gradient ridges within 200 m; {comma(clusters.get('retained_cluster_count', 0))} retained depth-coherent clusters.</li><li>Median SI-0 depth {fmt_number(summary.get('depth_m_median'), 1)} m (P10 {fmt_number(summary.get('depth_m_p10'), 1)}, P90 {fmt_number(summary.get('depth_m_p90'), 1)}); output estimates are not verified geological depths.</li><li>Vertical-derivative coverage: {fmt_number(euler.get('derivative', {}).get('vertical_coverage_share_of_valid_field', 0) * 100, 1)}% of valid TMI cells.</li></ul></article>
+<article class="card span-6"><h3>Structural-index instability</h3><p>SI-1 retains {comma(h1.get('sensitivity_clusters', 5665))} clusters; {fmt_number(h1.get('matched_primary_share_within_600m', 0)*100, 1)}% of SI-0 centroids match within 600 m and median nearest-centroid distance is {fmt_number(h1.get('median_nearest_centroid_distance_m', 0), 0)} m.</p><p>SI-2 retains {comma(h2.get('sensitivity_clusters', 4661))} clusters; {fmt_number(h2.get('matched_primary_share_within_600m', 0)*100, 1)}% match within 600 m and median distance is {fmt_number(h2.get('median_nearest_centroid_distance_m', 0), 0)} m. SI=1/2 are descriptive sensitivity checks, not alternative indices to select after seeing a favorable holdout.</p></article></div>
+<p>SI=0 approximates an idealized contact with effectively infinite depth extent. Real faults may be finite, dipping, intersecting or have mixed geometry and may require higher indices. Euler does not estimate dip; the structural index is a geological model choice, not an automatically “correct” value. Candidate gradient ridges are used only to test alignment with Euler-derived source solutions, never as the inferred source locations.</p>
+<p>Official USGS GeoDAWN metadata reports nominal magnetic flight-line spacing of 200 m in Area 1 and 400 m in Area 2, with variable terrain clearance. The 100 m output grid is not independent 100 m survey resolution. The exact pinned mirror is not organizer-authenticated, and derivative units/conventions have not been calibrated against survey units.</p>
+<p><a href="../knowledge/12_preregistration_H31-1_euler.md">Frozen H31-1 protocol</a> · <a href="../evidence/euler_input_audit.json">Input/convention audit</a> · <a href="../evidence/h31_1_euler_feature_audit.json">Label-free feature/depth audit</a> · <a href="../evidence/h31_1_prereg_history_audit.json">Protocol-history disclosure</a> · <a href="../evidence/h31_1_seed_reuse_audit.json">Local seed-reuse audit</a> · <a href="../evidence/h31_1_euler_clusters.csv">Depth-labeled cluster table</a> · <a href="https://doi.org/10.1190/1.1442774">Reid et al. (1990), DOI</a></p></section>
+
+<section class="section"><h2>H28-1 benchmark and candidate file</h2><p>The paired hide-and-recover screen compared H28-1 multiscale magnetic/gravity edge-coherence features against the best comparable same-run control, across spatially blocked folds and seeds 140–149. The mean paired catalogue proxy ΔDTI was {fmt_number(candidate.get('holdout_mean_gain', 0.002948838794400959), 6)}, with 3/4 folds and 9/10 seed means positive; the frozen screen gate passed. This is not a leaderboard score and does not establish transfer to expert-created faults outside the catalogue habitat.</p><p>Candidate filename: <code>{esc(candidate.get('nan', ''))}</code>. Its full-map construction is separate from the holdout-only fit and no current GEMSDOE28 upload exists. It is not one of the four weekly slots inherited from the predecessor project. The file is an auditable research reference, not a submission recommendation.</p><p>Local manual downloads: <a href="downloads/{esc(candidate.get('nan', ''))}" download>{esc(candidate.get('nan', ''))}</a> · <a href="downloads/{esc(candidate.get('allfinite', ''))}" download>{esc(candidate.get('allfinite', ''))}</a> · <a href="downloads/{esc(candidate.get('zip', ''))}" download>{esc(candidate.get('zip', ''))}</a>.</p><p><a href="../evidence/h28_1_edge_holdout.json">Holdout evidence</a> · <a href="../knowledge/08_preregistration_H28-1.md">H28-1 preregistration</a> · <a href="../knowledge/09_preregistration_H28-1_candidate.md">Full-map candidate construction record</a></p>
+<p>Historical hypothesis register: <a href="../knowledge/07_untried_hypotheses.md">knowledge/07_untried_hypotheses.md</a>. Historical H28 preregistration: <a href="../knowledge/08_preregistration_H28-1.md">knowledge/08_preregistration_H28-1.md</a>. Current hypothesis ranking: <a href="../knowledge/13_current_ranked_hypotheses_2026-10-03.md">knowledge/13_current_ranked_hypotheses_2026-10-03.md</a>.</p></section>
+
+<section class="section"><h2>Promotion gate and what counts</h2><div class="table-wrap"><table><thead><tr><th>Stage</th><th>Required evidence</th><th>What it is not</th></tr></thead><tbody>
+<tr><td>Pre-fit</td><td>Freeze transform, data and provenance, folds/draws, response, model, metrics, seeds, analysis and gate; run label-free sufficiency only.</td><td>Not permission to tune thresholds on a held-out seed.</td></tr>
+<tr><td>Screen</td><td>Paired spatial hide-and-recover against the best same-run control; frozen gate on all seeds/folds and integrity checks.</td><td>Not a public/private leaderboard result.</td></tr>
+<tr><td>Confirmation</td><td>One unchanged independent seed range and exact code/data/evidence hashes.</td><td>Not a second chance to adjust the candidate.</td></tr>
+<tr><td>Promotion</td><td>Reproducible superiority, confirmation, separate proxy-transfer assessment and exact-file audit.</td><td>Not automatic approval to consume a weekly slot.</td></tr>
+</tbody></table></div><p>A candidate must not spend a weekly slot until every predeclared gate is met. The catalogue hide-and-recover task is necessarily a proxy: labels are mostly faults already represented in a published catalogue and do not provide an independent sample of hidden expert-created, far-field faults.</p></section>
+
+<section class="section"><h2>Live score and leaderboard boundaries</h2><p>A one-off manual public-page observation on {esc(board.get('snapshot_date', 'not recorded'))} records DARD #1 at 0.3195 and wbg1 #15 at 0.2600. A public leaderboard row alone does not link a score to the repository owner or a local TIFF. The owner-reported 0.2477 is likewise unverified without an organizer receipt. No row is treated as a score claim for this project. <a href="{esc(board.get('url', 'https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'))}">Manual-review link</a>; automated access and monitoring are prohibited by project policy.</p></section>
+<section class="section"><h2>Historical screen archive (superseded)</h2><div class="callout"><strong>Archive marker:</strong> the predecessor project used the heading “Current Session 5 untried screen (4 hypotheses).” That was a dated four-item view and is not the current GEMSDOE28 ranking above, which contains five hypotheses.</div>
+<h3>H27-10 annulus result — REJECTED; no weekly slot.</h3><p>The frozen 100–300 m annulus/reallocation gate on seeds 150–159 failed: mean paired ΔDTI +0.000846, 4/4 fold means but only 7/10 seed means improved, and annulus gross efficiency 0.03357 was below the 0.05212 live break-even estimate. A spacing-check bug in the first diagnostic was corrected for an integrity rerun on the same seeds; values and the frozen FAIL did not change. This is not fresh confirmation.</p><p>Evidence: <a href="../evidence/h27_10_annulus_holdout_initial.json">h27_10_annulus_holdout_initial.json</a> · <a href="../evidence/h27_10_annulus_holdout.json">corrected integrity rerun</a> · <a href="../knowledge/07_untried_hypotheses.md">historical disclosure</a>. The rejected H27-10 arm is not part of the current five-item untried list and is not eligible to justify a weekly slot.</p></section>
+"""
+
+
+def render_topology(manifest: dict, irregularities: dict, sources: dict, review: dict) -> str:
+    selected = manifest.get("primary", {})
+    count = int(review.get("candidate_count", 345))
+    priority = int(review.get("priority_candidate_count", 81))
+    counts = review.get("counts_by_exclusive_review_class", {})
+    same_fid = int(counts.get("same-FID_multipart-continuity", 230))
+    same_name = int(counts.get("H27-5b_inter-FID_same-name-kinematic-compatible", 81))
+    other_name = int(counts.get("inter-FID_other-name_kinematic-compatible", 22))
+    conflict = int(counts.get("inter-FID_kinematic-conflict-or-unknown", 12))
+    priority_csv = review.get("files", {}).get("priority_csv", "docs/data/topology_priority_h27_5b.csv")
+    priority_geojson = review.get("files", {}).get("priority_geojson", "docs/data/topology_priority_h27_5b.geojson")
+    priority_csv_page = priority_csv.removeprefix("docs/")
+    priority_geojson_page = priority_geojson.removeprefix("docs/")
+    preview = "assets/fig_map_h27_5b_priority.png"
+    official = review.get("official_sources", {})
+    basis = review.get("priority_basis", {})
+    return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Topology review</div>
+<section class="hero"><div class="hero-content"><div class="eyebrow">Prior research · continuity, not automatic interpolation</div><h1>Map structures.<br>Do not bridge blindly.</h1><p class="lead">The topology work is retained as a comparator and a geologist-review queue. Fault-link candidates are local geological hypotheses, not facts about subsurface continuity.</p><div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status proxy">REVIEW ONLY</span></div></div></section>
+<section class="section"><h2>What the earlier tests found</h2><div class="grid">
+<article class="card span-6"><h3>Topology gate</h3><p>Earlier in-repository T-v2 candidate arms proposed 1–4 km connections between named/categorized fault traces with structural and spatial controls. The historical catalogue-component and whole-feature hide-and-recover metrics are proxy results; they do not demonstrate a connection at a particular hidden fault or transfer to the competition's expert labels.</p><p>Every link is an explicit, reviewable geologic claim, with endpoint attributes, spacing, orientation, kinematic compatibility, third-system proximity, alternative interpretations and limitations. A graph must not bridge broad basins merely because an algorithm finds nearby endpoints.</p><p><a href="../knowledge/03_preregistration_topology_gate.md">Frozen historical topology gate</a> · <a href="../knowledge/04_topology_graph_argument.md">Topology/graph rationale</a> · <a href="../evidence/vector_topology_validation.json">Vector topology evidence</a></p></article>
+<article class="card span-6"><h3>Current file is not a graph-proof</h3><p>The prominent file is {esc(selected.get('hypothesis', 'an H28-1 research reference'))}. It contains a historical T-v2 component among other transformations, but its holdout evidence is for a paired catalogue proxy. The primary download is <strong>UNSCORED</strong>, and no GEMSDOE28 score or submission receipt is recorded.</p><p><code class="file-name">{esc(selected.get('nan', ''))}</code></p><p><a href="index.html#download">Return to the one-click download and exact note</a></p></article>
+</div></section>
+<section class="section"><h2>H27-5b geologist-review queue</h2>
+<div class="callout"><strong>Geologist-review priority class: H27-5b ({priority} / {count} links)</strong><br>These are the {priority} same-name, cross-FID, permissively kinematic-compatible links drawn from the existing 345 shipped T-v2 links. All 345 have a 1–4 km gap. This is a review-priority class, not a prediction rank, new candidate generation, validated subsurface connection, score, or proof of transfer.</div>
+<p>Exclusive review-class counts for the existing population: {same_fid} same-FID · {same_name} H27-5b · {other_name} other-name compatible · {conflict} conflict/unknown. The H27-5b class is defined by different NBMG FID, same non-unnamed NAME, and a permissive kinematic-compatibility screen. Blank/unspecified source attributes may pass; compatibility is not a verified slip history.</p>
+<figure class="card"><img src="{preview}" alt="Map-view schematic of 81 H27-5b endpoint connector segments. Fault traces are not plotted; connectors are for geologist review only." style="width:100%;height:auto;border-radius:10px"><figcaption class="small">Connector-only map-view schematic. It does not plot the catalogue fault traces and does not establish geological continuity. Review endpoints in the official NBMG layer.</figcaption></figure>
+<p>Download the sorted, source-linked review rows: <a href="{esc(priority_csv_page)}">{esc(priority_csv_page)}</a> · <a href="{esc(priority_geojson_page)}">{esc(priority_geojson_page)}</a> · <a href="{preview}">{preview}</a>.</p>
+<div class="table-wrap"><table><thead><tr><th>review class</th><th>Count</th><th>Interpretation / boundary</th></tr></thead><tbody>
+<tr><td>same-FID multipart continuity</td><td>{same_fid}</td><td>Records share an NBMG FID; not an independent survey.</td></tr>
+<tr><td>H27-5b inter-FID, same-name, compatible</td><td>{same_name}</td><td>Priority for map review only; source attributes and line geometry need geologist review.</td></tr>
+<tr><td>inter-FID other-name compatible</td><td>{other_name}</td><td>Not prioritized by same-name rule.</td></tr>
+<tr><td>inter-FID conflict or unknown</td><td>{conflict}</td><td>Kinematic conflict or uncertain fields; not removed from catalogue or deemed invalid.</td></tr>
+</tbody></table></div>
+<p>Whole-FID holdout context (seeds 120–129): H27-5b catalogue-proxy efficiency {fmt_number(basis.get('h27_5b_efficiency'), 6)} versus rotated-control {fmt_number(basis.get('rotated_control_efficiency'), 6)} ({fmt_number(basis.get('enrichment_over_control'), 2)}×). This is internal holdout enrichment only, not a score or proof of transfer; the candidate review class was not selected by graph ΔP.</p>
+<p>Manual source links: <a href="{esc(official.get('nbmg_qfaults_layer', 'https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0'))}" target="_blank" rel="noopener noreferrer">NBMG Qfaults official layer</a> · <a href="{esc(official.get('faulds_hinz_2015_context', 'https://www.osti.gov/servlets/purl/1724082'))}" target="_blank" rel="noopener noreferrer">Faulds &amp; Hinz (2015) setting context</a> · <a href="{esc(official.get('berkowitz_2000_publisher', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/1999GL011241'))}" target="_blank" rel="noopener noreferrer">Berkowitz et al. (2000) publisher record</a>.</p>
+</section>
+<section class="section"><h2>How to review a proposed connection</h2><ol><li>Verify source geometry and official vector attribute definitions rather than relying on raster connectivity alone.</li><li>Record endpoint spacing, orientation/kinematic compatibility, mapped-name relationship, third-system proximity and alternative interpretations.</li><li>Compare against spatially blocked controls that preserve the same density, length scale and data-quality context.</li><li>Freeze candidate generation and scoring before the holdout. Use an independent confirmation seed set unchanged.</li><li>Separate catalogue hide-and-recover performance from live competition performance and local-file audit.</li></ol></section>
+<section class="section"><div class="callout"><strong>Do not revive refuted signals:</strong> the graph-ΔP ranking and overlapping en-echelon step-over test were refuted as holdout-improvement signals in Addendum D. An individual “tip-to-tip oblique” cue is not evidence of an overlapping step-over, a favorable relay, or a productive geothermal setting. H27-5b is a geologist-review label, not a way to re-rank by graph value.</div>
+<div class="callout"><strong>Geologic caution:</strong> the Qfaults catalogue primarily documents Quaternary surface-deformation evidence. Older bedrock faults, concealed structures, faults without mapped surficial expression and hydrothermal pathways can be absent for different reasons. The prior H27-10 100–300 m annulus screen failed its frozen gate; its spacing-check implementation was repaired only for deterministic integrity rerun, not for confirmatory evidence. See <a href="../evidence/h27_10_annulus_holdout.json">the preserved gate record</a> and <a href="../knowledge/07_untried_hypotheses.md">historical disclosure</a>.</div></section>
+<section class="section"><h2>Evidence and provenance</h2><p>The source ledger distinguishes official publication from owner-mirror bytes. A GDR or ScienceBase listing is not evidence that a package was downloaded, parsed, covered the study area, or carried a compatible licence. <a href="sources.html">Review source-by-source access and verification status</a>.</p><p>Known repository irregularities: {sum(1 for x in irregularities.get('items', []))} disclosures in <a href="../registry/irregularities.json">the irregularities ledger</a>. Full existing candidate output: <a href="data/topology_links.csv">docs/data/topology_links.csv</a> · <a href="data/topology_links.geojson">docs/data/topology_links.geojson</a> · priority-class summary <a href="data/topology_review_classes.json">docs/data/topology_review_classes.json</a>.</p></section>
+"""
+
+def render_sources(sources_registry: dict, board: dict) -> str:
+    sources = sources_registry.get("sources", [])
+    items = []
+    for source in sources:
+        url = source.get("url", "")
+        title = source.get("title", source.get("id", "Source"))
+        status = source.get("status", "not verified")
+        items.append(f"""<article class="source-row" id="{esc(source.get('id', 'source'))}">
+<h3><a href="{esc(url)}" target="_blank" rel="noopener noreferrer">{esc(title)}</a></h3>
+<p class="source-meta">{esc(source.get('publisher', ''))} · {esc(source.get('category', ''))} · accessed {esc(source.get('accessed', 'date not recorded'))}</p>
+<p><strong>Verification status:</strong> {esc(status)}</p>
+<p><strong>Use:</strong> {esc(source.get('used_for', 'not stated'))}</p>
+<p><strong>Evidence/limitation:</strong> {esc(source.get('evidence', 'No evidence note recorded.'))}</p>
+</article>""")
+    return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Sources</div>
+<section class="hero"><div class="hero-content"><div class="eyebrow">Manual source review ledger</div><h1>Claims tied<br>to their sources.</h1><p class="lead">Each entry says what was reviewed, how it was accessed, and what remains unknown. A repository mirror or catalog listing does not establish official byte identity, schema, coverage, downloadability, or licence.</p><div class="value-line"><span class="value-pill">Primary/official first</span><span class="value-pill">No invented provenance</span><span class="status blocked">NO DD AUTOMATION</span></div></div></section>
+<section class="section"><div class="callout"><strong>Competition-page policy:</strong> no automated DrivenData fetch, browser bot, API, scraping, upload, scheduled job or monitoring. The leaderboard snapshot dated {esc(board.get('snapshot_date', 'not recorded'))} was read once manually. <a href="{esc(board.get('url', 'https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'))}">Manual human-review link</a>. Public scores shown there are not linked to the repository owner or local files.</div>
+<p>Registry note: {esc(sources_registry.get('note', 'Verification status varies by source.'))}</p>
+<p>The site generator reads the local JSON registry only; it makes no external request. The separately invoked <code>scripts/refresh_source_feed.py</code> has an explicit forbidden-host guard for <code>drivendata.org</code> and is not part of site build or CI.</p>
+</section>
+<section class="section"><h2>{len(sources)} registered source records</h2>{''.join(items)}
+<p><a href="../registry/sources.json">Download the machine-readable source ledger</a> · <a href="../registry/irregularities.json">Review disclosed irregularities</a> · <a href="../registry/data_manifest.json">Review input hashes and provenance labels</a>.</p></section>
+"""
+
+
+def root_relative_links(page: str) -> str:
+    """Rebase docs-relative internal URLs for the repository-root convenience page."""
+    def replace(match: re.Match[str]) -> str:
+        attr, url = match.group(1), match.group(2)
+        if url.startswith(("https://", "http://", "mailto:", "#", "data:")):
+            return match.group(0)
+        if url.startswith("../"):
+            return attr + url[3:]
+        return attr + "docs/" + url
+    return re.sub(r'((?:href|src)=")([^"]+)', replace, page)
+
+
+def main() -> int:
+    manifest = read_json("docs/downloads/manifest.json")
+    board = read_json("registry/leaderboard_snapshot_2026-10-03.json")
+    hypotheses = read_json("registry/next_hypotheses.json")
+    sources = read_json("registry/sources.json")
+    irregularities = read_json("registry/irregularities.json")
+    euler = read_json("evidence/h31_1_euler_feature_audit.json", {})
+    range_audit = read_json("evidence/range_validator_forensics_2026-10-03.json", {})
+    restore = read_json("evidence/restore_audit.json", {})
+    file_audit = read_json("evidence/submission_file_audit.json", {})
+    h28_manifest = read_json("docs/downloads/h28_1_candidate_manifest.json", {"candidate": {}})
+
+    topology_review = read_json("docs/data/topology_review_classes.json", {})
+    pages = {
+        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore), "Overview"),
+        "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit), "Executive summary"),
+        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board), "Research"),
+        "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
+        "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
+    }
+    DOCS.mkdir(parents=True, exist_ok=True)
+    for name, content in pages.items():
+        (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    (ROOT / "index.html").write_text(root_relative_links(pages["index.html"]), encoding="utf-8")
+    print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
+                      "hypotheses": len(hypotheses.get("hypotheses", [])),
+                      "generated_from_json_only": True, "external_requests": 0,
+                      "primary_download": manifest["primary"]["nan"]}, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    import json
+    raise SystemExit(main())

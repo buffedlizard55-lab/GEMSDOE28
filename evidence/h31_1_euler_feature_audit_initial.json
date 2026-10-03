@@ -1,0 +1,256 @@
+{
+  "schema": 1,
+  "status": "label-free Euler source/depth transform; owner-mirror input",
+  "checked_utc": "2026-10-03T07:09:11Z",
+  "protocol_path": "knowledge/12_preregistration_H31-1_euler.md",
+  "protocol_sha256": "048a059b2d24d6cd22def6d84134d3c3b8187dd307e2e04b2a15eee6262bf61c",
+  "implementation": {
+    "runner_sha256": "82c390395ab4e446baf8960d601672734ce3f3b64feb7bfdfe1a4a6dc8249a96",
+    "euler_module_sha256": "37d9d07ea4cfdc7226c36f82ad3271f08264dd2e2e5b032b34e6a52f3fe180e8"
+  },
+  "input_hashes": {
+    "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "transform_code": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1"
+  },
+  "grid": {
+    "shape": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "footprint_cells": 5167373,
+    "valid_tmi_cells": 5164312
+  },
+  "magnetic_band": {
+    "band_1based": 14,
+    "name": "tmi",
+    "tag_name": "tmi",
+    "units": "not present in embedded owner-mirror tags"
+  },
+  "derivative": {
+    "tile_size_px": 128,
+    "core_size_px": 64,
+    "core_stride_px": 64,
+    "pixel_size_m": 100.0,
+    "tukey_alpha": 0.25,
+    "minimum_tile_valid_fraction": 0.999,
+    "tile_count": 2850,
+    "accepted_tiles": 1012,
+    "valid_field_cells": 5164312,
+    "valid_vertical_derivative_cells": 4145143,
+    "vertical_coverage_share_of_valid_field": 0.8026515439036216,
+    "sign_convention": "positive downward; gz = |k|T in nT/m multiplied by 100 m/cell"
+  },
+  "lineament_ridge_pixels": 582515,
+  "euler_parameters": {
+    "window_size_px": 10,
+    "stride_px": 4,
+    "source_tolerance_px": 2.0,
+    "max_condition_number": 100000.0,
+    "max_relative_depth_se": 0.15,
+    "depth_m": [
+      100.0,
+      3000.0
+    ],
+    "candidate_lineament_alignment_m": 200.0,
+    "dbscan_eps_m": 600.0,
+    "dbscan_min_samples": 4,
+    "max_cluster_depth_mad_m": 500.0
+  },
+  "structural_indices": {
+    "0": {
+      "solution_summary": {
+        "n": 118089,
+        "depth_m_p10": 154.5182060253602,
+        "depth_m_median": 296.3609695669267,
+        "depth_m_p90": 614.208303908666,
+        "depth_se_m_median": 21.440369777265307,
+        "relative_depth_se_median": 0.07869160627116484,
+        "condition_number_median": 7.298469606661844
+      },
+      "solver_filters": {
+        "structural_index": 0.0,
+        "window_count": 764351,
+        "fully_valid_windows": 254637,
+        "condition_pass_windows": 254637,
+        "depth_pass_windows": 180369,
+        "relative_se_pass_windows_after_depth": 133053,
+        "source_window_pass_windows_after_previous": 118089,
+        "accepted_solutions": 118089,
+        "window_size_px": 10,
+        "stride_px": 4,
+        "max_condition_number": 100000.0,
+        "max_relative_depth_se": 0.15,
+        "depth_range_m": [
+          100.0,
+          3000.0
+        ],
+        "source_tolerance_px": 2.0
+      },
+      "lineament_cluster_stats": {
+        "solution_count": 118089,
+        "lineament_pixels": 582515,
+        "alignment_tolerance_m": 200.0,
+        "aligned_solution_count": 76916,
+        "dbscan_cluster_count": 6309,
+        "retained_cluster_count": 6309,
+        "cluster_eps_m": 600.0,
+        "min_samples": 4,
+        "max_depth_mad_m": 500.0
+      }
+    },
+    "1": {
+      "solution_summary": {
+        "n": 145683,
+        "depth_m_p10": 232.48732749834429,
+        "depth_m_median": 437.2073396125504,
+        "depth_m_p90": 888.565179140666,
+        "depth_se_m_median": 27.6796503274482,
+        "relative_depth_se_median": 0.06683328361586909,
+        "condition_number_median": 4.740448790525192
+      },
+      "solver_filters": {
+        "structural_index": 1.0,
+        "window_count": 764351,
+        "fully_valid_windows": 254637,
+        "condition_pass_windows": 254637,
+        "depth_pass_windows": 236530,
+        "relative_se_pass_windows_after_depth": 190285,
+        "source_window_pass_windows_after_previous": 145683,
+        "accepted_solutions": 145683,
+        "window_size_px": 10,
+        "stride_px": 4,
+        "max_condition_number": 100000.0,
+        "max_relative_depth_se": 0.15,
+        "depth_range_m": [
+          100.0,
+          3000.0
+        ],
+        "source_tolerance_px": 2.0
+      },
+      "lineament_cluster_stats": {
+        "solution_count": 145683,
+        "lineament_pixels": 582515,
+        "alignment_tolerance_m": 200.0,
+        "aligned_solution_count": 111327,
+        "dbscan_cluster_count": 5666,
+        "retained_cluster_count": 5665,
+        "cluster_eps_m": 600.0,
+        "min_samples": 4,
+        "max_depth_mad_m": 500.0
+      }
+    },
+    "2": {
+      "solution_summary": {
+        "n": 131100,
+        "depth_m_p10": 346.60916171249556,
+        "depth_m_median": 609.9513992809774,
+        "depth_m_p90": 1163.1877082879994,
+        "depth_se_m_median": 34.8700365992844,
+        "relative_depth_se_median": 0.0585850091157262,
+        "condition_number_median": 4.030116006570306
+      },
+      "solver_filters": {
+        "structural_index": 2.0,
+        "window_count": 764351,
+        "fully_valid_windows": 254637,
+        "condition_pass_windows": 254637,
+        "depth_pass_windows": 240401,
+        "relative_se_pass_windows_after_depth": 202549,
+        "source_window_pass_windows_after_previous": 131100,
+        "accepted_solutions": 131100,
+        "window_size_px": 10,
+        "stride_px": 4,
+        "max_condition_number": 100000.0,
+        "max_relative_depth_se": 0.15,
+        "depth_range_m": [
+          100.0,
+          3000.0
+        ],
+        "source_tolerance_px": 2.0
+      },
+      "lineament_cluster_stats": {
+        "solution_count": 131100,
+        "lineament_pixels": 582515,
+        "alignment_tolerance_m": 200.0,
+        "aligned_solution_count": 103223,
+        "dbscan_cluster_count": 4666,
+        "retained_cluster_count": 4661,
+        "cluster_eps_m": 600.0,
+        "min_samples": 4,
+        "max_depth_mad_m": 500.0
+      }
+    }
+  },
+  "si_cluster_centroid_stability": {
+    "si1_vs_si0": {
+      "primary_clusters": 6309,
+      "sensitivity_clusters": 5665,
+      "matched_primary_share_within_600m": 0.4098906324298621,
+      "median_nearest_centroid_distance_m": 855.4821078357213
+    },
+    "si2_vs_si0": {
+      "primary_clusters": 6309,
+      "sensitivity_clusters": 4661,
+      "matched_primary_share_within_600m": 0.3021080995403392,
+      "median_nearest_centroid_distance_m": 1153.854976440268
+    }
+  },
+  "si0_cluster_feature_description": {
+    "feature_names": [
+      "euler_si0_cluster_support",
+      "euler_si0_shallow_support",
+      "euler_si0_median_depth_norm"
+    ],
+    "shape": [
+      3730,
+      3292,
+      3
+    ],
+    "dtype": "float32",
+    "sigma_px": 2.0,
+    "max_depth_m": 3000.0,
+    "retained_member_solutions": 59220,
+    "cluster_count": 6309,
+    "values": "finite [0,1]; outside/invalid zero",
+    "sha256": null
+  },
+  "data_sufficiency_gate": {
+    "vertical_derivative_coverage_at_least_0_50": true,
+    "accepted_si0_solutions_at_least_100": true,
+    "retained_si0_clusters_at_least_10": true,
+    "passed": true
+  },
+  "feature_matrix": {
+    "path": "data/prepared/h31_1_euler_features.npy",
+    "shape": [
+      5167373,
+      3
+    ],
+    "dtype": "float32",
+    "feature_names": [
+      "euler_si0_cluster_support",
+      "euler_si0_shallow_support",
+      "euler_si0_median_depth_norm"
+    ],
+    "sha256": "5a4bb5723891982fb29fcab873fd317730ffdfb1b317d89e34d85b93771f766c"
+  },
+  "interpretation_limits": [
+    "The owner-mirror feature grid is 100 m, but USGS GeoDAWN metadata describes flight-line spacing of 200 m in Area 1 and 400 m in Area 2.",
+    "No unit metadata was present for embedded TMI/derivative bands; Euler gradients here are all derived from one TMI band to avoid mixing uncalibrated component magnitudes.",
+    "Euler SI=0 approximates a contact of effectively infinite depth extent; real faults may need SI=1/2 or a different source model. Euler does not estimate dip.",
+    "Gradient ridges are used only as a lineament alignment mask. Euler least-squares source coordinates and clusters define the depth-labeled source hypotheses.",
+    "Owner-mirror integrity and local grid agreement do not authenticate the bytes as the organizer's official files or prove licensing/coverage."
+  ],
+  "sha256": "f238f18a7ea8badb99380a9365f1964a6b7e3a03e7bd817f3f3e3478dd570e02"
+}

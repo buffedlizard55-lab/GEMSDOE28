@@ -1,0 +1,16 @@
+{
+  "snapshot_date": "2026-10-03",
+  "method": "one-off manual public-page read; no scheduled fetch, API, automation, or monitoring",
+  "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "observations": [
+    {"rank": 1, "participant_label": "DARD", "public_score": 0.3195},
+    {"rank": 15, "participant_label": "wbg1", "public_score": 0.2600}
+  ],
+  "claims": {
+    "0.2477": "Owner-reported figure; no organizer receipt or authoritative link to the owner/local TIFF is available in this checkout.",
+    "0.3195": "A public leaderboard row was observed for DARD. That row alone does not establish that DARD is the repository owner or link the score to any local TIFF.",
+    "0.2600": "A public leaderboard row was observed for wbg1. No owner identity or local-file association is established."
+  },
+  "competition_artifacts": "All GEMSDOE28 GeoTIFFs in docs/downloads remain unscored unless an organizer receipt is manually recorded by the human owner. No upload was made by this agent.",
+  "manual_review": "Use the official URL above for a human spot-check. Do not automate access or monitoring."
+}

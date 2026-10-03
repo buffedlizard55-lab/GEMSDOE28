@@ -1,0 +1,139 @@
+{
+  "checked_utc": "2026-10-03T13:58:20Z",
+  "status": "owner-mirror input audit only; no DrivenData download or organizer authentication",
+  "runtime_versions": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "rasterio": "1.4.4"
+  },
+  "implementation": {
+    "audit_script_sha256": "2b9ed689fe5b7f8870b7be9328228a4c7841edd822a4926171f9d1118d669366"
+  },
+  "inputs": {
+    "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "training_features_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "training_features_bytes": 418912844
+  },
+  "grid": {
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "footprint_pixels": 5167373,
+    "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+  },
+  "magnetic_bands": {
+    "tmi_band_1based": 14,
+    "tmi_description": "tmi - Total magnetic intensity - total strength of magnetic field",
+    "tmi_vg_band_1based": 9,
+    "tmi_vg_description": "tmi_vg - Total magnetic intensity vertical gradient - rate of change in vertical direction",
+    "tmi_hg_band_1based": 3,
+    "tmi_hg_description": "tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction",
+    "valid_footprint_cells": 5164312,
+    "template_footprint_cells_with_any_magnetic_nodata": 3061,
+    "finite_magnetic_values_outside_template_footprint": 0,
+    "outside_nodata": -3.4028234663852886e+38,
+    "unit_metadata_present": false,
+    "explicit_magnetic_source_depth_band_found_in_embedded_band_names": false,
+    "embedded_band_names": [
+      "mag_anom",
+      "rtp",
+      "tmi_hg",
+      "geod_2ndinv",
+      "iso_grav_anom_slope",
+      "tc",
+      "geod_shearrate",
+      "geod_dilaterate",
+      "tmi_vg",
+      "deq_n100a15",
+      "iso_grav_anom_vg",
+      "det_elev",
+      "iso_grav_anom",
+      "tmi",
+      "depth_to_base_surf",
+      "ieq_n100a15",
+      "cond_surf",
+      "iso_grav_anom_hg",
+      "det_elev_slope"
+    ]
+  },
+  "patch_convention_checks": [
+    {
+      "window_row": 0,
+      "window_col": 640,
+      "window_size": 256,
+      "tmi_vg_vs_fft_downward_derivative": {
+        "pearson_r": 0.6087031191180732,
+        "spearman_r": 0.854935697752538,
+        "least_squares_scale_tmi_vg_per_fft_downward_derivative": 1.7034533689691713,
+        "negative_sign_pearson_r": -0.6087031191180732
+      },
+      "tmi_hg_vs_finite_difference_horizontal_gradient": {
+        "median_ratio_mirror_to_tmi_gradient_magnitude": 200.1275348725357,
+        "pearson_r": 0.9999999999999611
+      }
+    },
+    {
+      "window_row": 0,
+      "window_col": 1646,
+      "window_size": 256,
+      "tmi_vg_vs_fft_downward_derivative": {
+        "pearson_r": 0.7321972422445032,
+        "spearman_r": 0.8073798359808269,
+        "least_squares_scale_tmi_vg_per_fft_downward_derivative": 1.9028235131756839,
+        "negative_sign_pearson_r": -0.7321972422445032
+      },
+      "tmi_hg_vs_finite_difference_horizontal_gradient": {
+        "median_ratio_mirror_to_tmi_gradient_magnitude": 200.0875967679922,
+        "pearson_r": 0.999999990082196
+      }
+    },
+    {
+      "window_row": 1865,
+      "window_col": 1056,
+      "window_size": 256,
+      "tmi_vg_vs_fft_downward_derivative": {
+        "pearson_r": 0.7444953293895569,
+        "spearman_r": 0.8954396377063517,
+        "least_squares_scale_tmi_vg_per_fft_downward_derivative": 1.3838651078071513,
+        "negative_sign_pearson_r": -0.7444953293895569
+      },
+      "tmi_hg_vs_finite_difference_horizontal_gradient": {
+        "median_ratio_mirror_to_tmi_gradient_magnitude": 199.9938341868719,
+        "pearson_r": 0.9999999999999866
+      }
+    },
+    {
+      "window_row": 2217,
+      "window_col": 1646,
+      "window_size": 256,
+      "tmi_vg_vs_fft_downward_derivative": {
+        "pearson_r": 0.6688186167454173,
+        "spearman_r": 0.8524952597911045,
+        "least_squares_scale_tmi_vg_per_fft_downward_derivative": 1.764173954898365,
+        "negative_sign_pearson_r": -0.6688186167454173
+      },
+      "tmi_hg_vs_finite_difference_horizontal_gradient": {
+        "median_ratio_mirror_to_tmi_gradient_magnitude": 199.99347454598563,
+        "pearson_r": 0.9999999999999897
+      }
+    }
+  ],
+  "interpretation": "On the selected fully valid 256x256 owner-mirror patches, the raw tmi_vg sign/scale is compared with |k| times the Hann-tapered TMI FFT, where positive is downward. Band-unit metadata is absent; the derivative is expressed relative to the source field's unverified units. This is a convention check, not a calibration of the original processing or a fault-depth estimate. Publish any patch-to-patch variation and do not infer physical units from correlation alone.",
+  "source_limits": [
+    "USGS ScienceBase GeoDAWN release describes magnetic survey line spacing as 200 m in Area 1 and 400 m in Area 2, with variable terrain clearance; the competition mirror is 100 m gridded and may be interpolated between lines.",
+    "The USGS catalog record is a source/metadata verification, not an independent byte-for-byte authentication of the owner mirror.",
+    "No explicit magnetic-source-depth band was identified among the owner's embedded band_name tags; this does not prove the organizer's original file has identical metadata."
+  ],
+  "sha256": "59d5c8e18ff14392adf0c5dc1ccae08f0dcde83de24388b4ac1875b3f1bff758"
+}

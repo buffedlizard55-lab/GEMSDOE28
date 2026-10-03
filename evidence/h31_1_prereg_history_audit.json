@@ -1,0 +1,112 @@
+{
+  "checked_utc": "2026-10-03T14:03:19Z",
+  "status": "DISCLOSED; current H31-1 protocol revision 2 is committed before any classifier fit or holdout; current label-free build refreshed",
+  "scope": "Protocol/Git chronology audit. The present checkout is the source of truth; prior working-copy hashes are not presumed to exist in this Git object database.",
+  "initial_checkout_history": {
+    "branch": "arena/01a10074-gemsdoe28",
+    "base_commit": "7d4498dd0d892bd44c9062705d2e90ebedfebbba",
+    "was_shallow_before_fetch": true,
+    "history_contains_only_base_before_this_protocol_commit": true,
+    "session_memory_commit_hashes_not_found_in_checked_out_or_fetched_history": [
+      "c217d4c",
+      "4e519f1",
+      "83805d8"
+    ],
+    "remote_main_history_after_unshallow_fetch": [
+      {
+        "commit": "7d4498dd0d892bd44c9062705d2e90ebedfebbba",
+        "subject": "Initial commit"
+      }
+    ]
+  },
+  "prior_working_copy_commits_not_in_current_history": [
+    {
+      "commit": "d700cfe13e7794ba41a8d437a24b70bd0d904070",
+      "subject": "protocol: freeze H31-1 Euler holdout",
+      "verification": "object absent from current checkout and fetched history; cited only by preserved earlier working-copy artifacts"
+    },
+    {
+      "commit": "9eef66b2d544faa9bad65e544ac29c2f1c22e89e",
+      "subject": "protocol: clarify unverified Euler field units",
+      "verification": "object absent from current checkout and fetched history; cited only by preserved earlier working-copy artifacts"
+    }
+  ],
+  "initial_label_free_run": {
+    "audit_file": "evidence/h31_1_euler_feature_audit_initial.json",
+    "audit_sha256": "c65f38fd3b51fae7f134d9a875639b5b30ee659317041ab5d535327b10915819",
+    "protocol_sha256_recorded_by_run": "048a059b2d24d6cd22def6d84134d3c3b8187dd307e2e04b2a15eee6262bf61c",
+    "feature_matrix_sha256": "5a4bb5723891982fb29fcab873fd317730ffdfb1b317d89e34d85b93771f766c",
+    "interpretation": "The saved run is a label-free feature build and has no classifier-fit or holdout evidence. The matching revision-1 protocol digest shows byte equality, but because the checked-out Git history had no protocol commit at that time, the claim that it was committed before the feature build is not proven by Git and is withdrawn.",
+    "protocol_sha256_at_run": "048a059b2d24d6cd22def6d84134d3c3b8187dd307e2e04b2a15eee6262bf61c"
+  },
+  "protocol_revision_history": [
+    {
+      "revision": 1,
+      "protocol_sha256": "048a059b2d24d6cd22def6d84134d3c3b8187dd307e2e04b2a15eee6262bf61c",
+      "commit_verification": "no revision-1 protocol commit can be established from the current checkout/fetched history",
+      "note": "Earlier protocol bytes are preserved in the initial and revision-1 feature audits; byte equality does not prove prior commitment."
+    },
+    {
+      "revision": 2,
+      "commit": "524bf277e7b5487bfea1982d2a352c9f0802c0e0",
+      "protocol_sha256": "71af9f419606c4b2d54e0561c3bdd33199b58c36b9e2e6a40b331109a78bae01",
+      "classifier_fit_or_holdout_before_this_commit": false,
+      "note": "Current preregistered revision; clarifies unauthenticated field units without changing analysis parameters or gates."
+    }
+  ],
+  "current_protocol_commit_before_any_fit": {
+    "commit": "524bf27",
+    "commit_full": "524bf277e7b5487bfea1982d2a352c9f0802c0e0",
+    "protocol_sha256": "71af9f419606c4b2d54e0561c3bdd33199b58c36b9e2e6a40b331109a78bae01",
+    "classifier_fit_or_holdout_before_this_commit": false,
+    "revision": 2
+  },
+  "revision1_label_free_run": {
+    "audit_file": "evidence/h31_1_euler_feature_audit_revision1.json",
+    "audit_file_sha256": "3c52e205a8312f11d730dc40996ca0bbe6e0449332f8dfaa36bf7edb9ed495f4",
+    "audit_self_sha256": "80c1d18cfc5a0227081ead5f2319e02f91efa3e1c7a7369831b5b434ccc8342e",
+    "checked_utc": "2026-10-03T08:36:02Z",
+    "protocol_commit": "d700cfe13e7794ba41a8d437a24b70bd0d904070",
+    "protocol_sha256": "048a059b2d24d6cd22def6d84134d3c3b8187dd307e2e04b2a15eee6262bf61c",
+    "runner_sha256": "b95e178d843004ce7ff68425b2791666dee2d5b3e407a7568262627e81a98b39",
+    "euler_module_sha256": "8bd1c53a42e4cb932fc09d2ca7b270041524105a9591baf35384c624ed0bcbc6",
+    "feature_matrix_sha256": "cd6677f53a3ed64561803a82dc10a8a9de948df6870475198a2957d222d28cbe",
+    "interpretation": "Preserved label-free build using protocol revision-1 bytes. No classifier fit or holdout was run. Its protocol-commit field cannot be independently verified in the current checkout; retained for chronology only.",
+    "commit_verification": "The preserved audit reports d700cfe, but that commit object is absent from the current Git history; treat the recorded commit field as an unverified historical claim."
+  },
+  "current_label_free_run": {
+    "audit_file": "evidence/h31_1_euler_feature_audit.json",
+    "audit_file_sha256": "bf6c3193bb0aae951abb3eb5149413338e0ca8fafd669bd4fb9e3ca490552e2d",
+    "audit_self_sha256": "307ae202cf62a06029dec8ed56d09ea0fe641f07ee900ec5fd116acf10c6b713",
+    "checked_utc": "2026-10-03T14:03:06Z",
+    "protocol_commit": "524bf277e7b5487bfea1982d2a352c9f0802c0e0",
+    "protocol_sha256": "71af9f419606c4b2d54e0561c3bdd33199b58c36b9e2e6a40b331109a78bae01",
+    "implementation": {
+      "runner": "0980b22520c2313a4e4b8e4a399f13288705487daa97a913b6b8fbf78e846b8f",
+      "euler_module": "4a9fe98f30edf9a35857a0ed540df3ae4a3d62b35fb86c7395827f67b176e460",
+      "oof_detector": "6c041479cf92d28d7a084f5d69407963bde45b7463e0fea624673efa3506b235",
+      "grid": "614af3d608681336df0b58bae5bff453aa8816f2c52b62beb4fff23fb9a927c2",
+      "paths": "1db32dfcc194224066b6f3fb9da72f86d5f7786a0e90cbd62dd55bf2ed15b4c3",
+      "h28_evaluation_helpers": "989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd"
+    },
+    "feature_matrix_sha256": "57efbcf2ad32a537c24acd15f6c54fa33fff67979f302cd34f0d5a845caf107c",
+    "cluster_csv_sha256": "cdd07d53de2c64bebbaffa6e083a7fd2d242e45b88f41b35417e8d0c782c8da1",
+    "interpretation": "Current label-free feature build against actual protocol revision 2 commit 524bf27 and all implementation dependencies recorded in the audit. All three pre-fit sufficiency gates pass. Not a classifier fit, holdout score, geological validation, competition score, or submission candidate."
+  },
+  "superseded_build_review_finding": {
+    "prior_revision2_feature_hash": "cd6677f53a3ed64561803a82dc10a8a9de948df6870475198a2957d222d28cbe",
+    "finding": "Before any classifier fit or holdout, implementation review found that the shallow-support feature used each cluster median depth for every member rather than each member solution depth, contrary to the frozen feature definition. The code was corrected, an explicit regression test was added, and the current label-free feature build was regenerated. The earlier intermediate build is not treated as current evidence.",
+    "fit_or_holdout_occurred": false
+  },
+  "actions": [
+    "Do not cite prior-session or prior-working-copy hashes as current checked-in commits unless the objects are present in this repository history.",
+    "Keep H31-1 unfit until implementation/source review, bug/leakage review, full acceptance review, and a fresh seed-reuse audit pass.",
+    "Protocol revision 2 is committed at the actual current commit before any H31 classifier fit or holdout; any later protocol change requires a new preregistration and stops this workflow before fitting."
+  ],
+  "limitation": "The repository evidence and fetched main history cannot disprove undocumented runs in external/sibling workspaces. The seed-reuse audit is local-only and records that boundary.",
+  "current_history_after_protocol_commit": [
+    "524bf277e7b5487bfea1982d2a352c9f0802c0e0\tprotocol: preregister H31-1 Euler holdout",
+    "7d4498dd0d892bd44c9062705d2e90ebedfebbba\tInitial commit"
+  ],
+  "sha256": "c9f3d201a6b9121ce5e22cef4b9dbc37b5977447707e259b4d203c680d85d14b"
+}

@@ -1,0 +1,106 @@
+{
+  "status": "PASS: local hashes, grid, band order, and prepared matrix verified",
+  "provenance_warning": "All competition rasters listed here are owner-supplied public GitHub mirrors, integrity-pinned but NOT organizer-authenticated. Public mirror/hash availability is not proof of original downloadability, coverage, schema or license. Do not contact DrivenData automatically.",
+  "data_dir": "/home/user/GEMSDOE28/data",
+  "files_verified": [
+    {
+      "id": "training_features",
+      "path": "training_features.tif",
+      "bytes": 418912844,
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "pass": true,
+      "provenance": "Owner-supplied mirror of the login-walled competition training_features.tif; 19 float32 bands; not organizer-authenticated."
+    },
+    {
+      "id": "labels",
+      "path": "labels.tif",
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "pass": true,
+      "provenance": "Owner-supplied mirror of the competition catalogue raster; not organizer-authenticated."
+    },
+    {
+      "id": "existing_faults",
+      "path": "existing_faults.tif",
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "pass": true,
+      "provenance": "Owner-supplied mirror; hash-identical to labels.tif in the pinned mirror."
+    },
+    {
+      "id": "sample_submission",
+      "path": "sample_submission.tif",
+      "bytes": 1599597,
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "pass": true,
+      "provenance": "Owner-supplied mirror of the sample GeoTIFF; used only for grid/footprint integrity checks, not as truth. Not organizer-authenticated."
+    },
+    {
+      "id": "h19_5",
+      "path": "h19_5_nan.tif",
+      "bytes": 1712322,
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+      "pass": true,
+      "provenance": "Owner-supplied, historical H19-5 emission mirror; reported DTI is not independently organizer-verified."
+    },
+    {
+      "id": "dotted_h19_5_d1_5",
+      "path": "dotted_h19_5_d1_5_nan.tif",
+      "bytes": 1632732,
+      "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+      "pass": true,
+      "provenance": "Owner-supplied historical d=1.5 thinning artifact; 0.2477 association is a reported claim, not independently linked to an organizer receipt."
+    },
+    {
+      "id": "dotted_h19_5_d2_8",
+      "path": "dotted_h19_5_d2_8_nan.tif",
+      "bytes": 1603424,
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "pass": true,
+      "provenance": "Owner-supplied D2.8 research artifact; unscored and not slot-approved in its source ledger."
+    },
+    {
+      "id": "lidar_scarp_features",
+      "path": "lidar_scarp_features_u8.tif",
+      "bytes": 36943606,
+      "sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+      "pass": true,
+      "provenance": "Owner-mirrored 12-band 100 m terrain-descriptor raster, derived from 706 of 716 1 m DEM tiles. This does not authenticate the original tile list, complete challenge coverage or official source bytes."
+    },
+    {
+      "id": "lidar_scarp_features_metadata",
+      "path": "lidar_scarp_features.json",
+      "bytes": 3531,
+      "sha256": "9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41",
+      "pass": true,
+      "provenance": "Owner-repository band/quantization metadata for the derived LiDAR descriptor raster, not an official USGS metadata file."
+    }
+  ],
+  "grid": {
+    "shape": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "footprint_pixels": 5167373
+  },
+  "prepared_features": {
+    "path": "prepared/features.npy",
+    "shape": [
+      5167373,
+      32
+    ],
+    "dtype": "float32",
+    "sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc"
+  },
+  "network_access": "none",
+  "scope": "integrity-only local audit; not proof of organizer authenticity, coverage, licensing, or portal acceptance"
+}
