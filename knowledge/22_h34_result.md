@@ -153,6 +153,16 @@ promoted (see §4):
   flips to `PRUNE`, worth **+0.0047** modelled DTI at a 10 % prune. Its archived proxy ΔDTI of
   −0.003767 with 0/10 seeds is exactly what `e >> tau_proxy` predicts, so the sign is not in dispute —
   only the threshold is.
+* **H33-1 (checked after the fact, and it does not survive either).** The parallel session ran the
+  preregistered H33-1 prune on seeds 200–209 (`evidence/h33_1_holdout.json`) and refuted it: 0 of 6
+  criteria, mean ΔDTI `−0.003014`, 0/10 seeds, 0/4 folds. Its measured removal efficiency is
+  **`e = 0.12855`** — not merely above `tau_proxy = 0.0193`, but **2.3× above `tau_live = 0.0548`**.
+  So the threshold correction does **not** rescue H33-1, and its refutation is stronger than it
+  looked: it fails at the proxy threshold and at the live threshold. Two of its criteria are
+  independently damning — the direction control went the *wrong* way (the naive `control_top_p10`
+  prune has `e = 0.10104`, i.e. removing the top 10 % by probability destroys **less** credit per
+  unit of mass than the kinematically-targeted prune does), and kinematic favourability covers only
+  **11.95 %** of the emission against a required 60 %. H33-1 is closed on its own evidence.
 * **LOSFO far-field additions** (`evidence/losfo_farfield_diagnostic.json`): measured far-field
   credit/dot **0.0465**. Against the cell threshold (0.0204) that clears; against `tau_live = 0.0548`
   it does **not**. Base-quality far-field dots therefore do not pay for themselves on the live
@@ -193,11 +203,14 @@ promoted (see §4):
 2. **Re-gate the LOSFO addition arms against `tau_live`, not the cell threshold** (§3). This is a
    one-line change to the gate definition and it changes the admission decision at the measured
    far-field quality of 0.0465.
-3. **Run H33-1** (`knowledge/19`, seeds 200–209). Its data gate is now satisfied — the bridge landed
-   `docs/data/sb_slip_tendency_in_footprint.{csv,json}`, 84,484 records, SHA-256 matched on the
-   runner, 322,344 source features clipped to the footprint, and the schema does list `TS`, `TD`,
-   `TS_norm`, `TD_TS` (the unconfirmed interpretation flagged in `knowledge/19` §0 is thereby
-   confirmed). It is a pruning arm, so §3's threshold correction applies to its gate too.
+3. **H33-1 is already run and refuted — do not re-spend its decade.** The parallel session executed
+   it on seeds 200–209 (`evidence/h33_1_holdout.json`, `knowledge/21_result_H33-1_refuted_2026-10-03.md`):
+   0 of 6 criteria, and §3 records that its efficiency `0.12855` fails the *live* threshold by 2.3×,
+   not just the proxy one. Its data precondition is satisfied (84,484 records, SHA-256 matched) — the
+   hypothesis itself is what failed, not the data. **The pruning family is now exhausted**: H32-2,
+   H33-1 and H34 have all been measured and all fail, and `knowledge/20` §1 shows the gap to 0.3195
+   is a detection gap no prune can close. Future effort belongs on addition arms (H33-3, H33-4,
+   H33-5), gated against `tau_live` on the LOSFO far-field truth set.
 4. **Keep taking free pruning gains** while the addition arms are built: H32-1's de-jitter remains
    the holdout-best and the primary download.
 5. **Re-verify any future use of `OperatingPoint` against `tests/test_operating_point.py`.** The

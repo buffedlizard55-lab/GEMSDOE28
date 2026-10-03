@@ -42,6 +42,25 @@ def ridge_nms(score: np.ndarray, valid: np.ndarray, sigma: float = 1.0) -> np.nd
     return ridge & valid & (sm > 0)
 
 
+def ridge_strike_degrees(score: np.ndarray, valid: np.ndarray, sigma: float = 1.0) -> np.ndarray:
+    """Per-pixel ridge strike in [0, 180), NaN off-ridge, using `ridge_nms`'s own sectorisation.
+
+    `ridge_nms` quantises the gradient *normal* into 4 axes. The strike is perpendicular to that
+    normal, so sector 0 (E-W normal) is an N-S ridge, sector 2 (N-S normal) is an E-W ridge, and
+    sectors 1 and 3 give the two diagonals. Only four strikes are ever emitted - 0, 45, 90, 135 -
+    which is the +/-22.5 deg resolution limit disclosed as limitation 4 of the H33-1
+    preregistration; a 20 deg strike-matching tolerance sits inside that uncertainty.
+    """
+    s = np.where(valid & np.isfinite(score), score, 0.0).astype(np.float32)
+    sm = gaussian_filter(s, sigma=sigma) if sigma > 0 else s
+    gy, gx = np.gradient(sm)
+    theta = np.mod(np.arctan2(gy, gx), np.pi)
+    sector = np.floor(((theta + np.pi / 8.0) % np.pi) / (np.pi / 4.0)).astype(int)
+    # normal axis -> perpendicular strike, in the array convention where +col is east
+    strike = np.where(sector == 0, 90.0, np.where(sector == 2, 0.0, np.where(sector == 1, 135.0, 45.0)))
+    return np.where(ridge_nms(score, valid, sigma), strike.astype(np.float32), np.float32("nan"))
+
+
 def fit_predict_oof_probabilities(
     foot: np.ndarray,
     labels: np.ndarray,

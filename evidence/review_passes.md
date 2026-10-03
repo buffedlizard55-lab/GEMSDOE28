@@ -588,3 +588,67 @@ in seconds with a legible message instead of after a 35 MB download. Guarded by
 **H33-1 status unchanged: precondition UNSATISFIED.** No clip has been produced, no seed spent. The
 layer name `GB_Quaternary_faults_TD_TS.shp` is evidence toward the expected slip/dilation-tendency
 schema but is not proof of the field names; the derived schema file remains the check.
+
+## Third post-merge finding (2026-10-03, same session) — the bridge worked, and H33-1 was run and refuted
+
+Run `37146168753` succeeded: **`DERIVED_WRITTEN`, 84,484 records**. The clip satisfies every part of
+the frozen precondition in `knowledge/19` §0, verified from the bytes rather than from a listing:
+
+| Precondition | Value |
+|---|---|
+| File exists | `docs/data/sb_slip_tendency_in_footprint.json`, sha256 `2cc92e1d526636fc…` |
+| Slip / dilation-tendency fields | **`TS`, `TD`** present, plus `TS_norm`, `TD_TS`, `ShearStres`, `NormalStre`, `Dip`, `DipAz`, `Strike`, `Shmin_Mag`, `SHmax_Mag`, `ShminAZ`, `SHmaxAz`, `APhi` |
+| `n_features_in_bbox > 0` | **84,484** ✓ |
+| Geometry / trace | LineString, 473,916 densified trace points, **17,369 km**, median segment 189 m |
+| CRS | NAD83 Albers Equal Area Conic → **EPSG:32611**, bbox `(243350, 4135550, 572550, 4508550)` |
+| `Strike` convention | geographic azimuth; median abs. difference **4.27°** vs geometric azimuth on 4,000 segments |
+
+This also **confirms from the data** the Siler (2022) interpretation that `knowledge/19` had to record
+as unconfirmed because `api.datacite.org` returns 000 from the sandbox.
+
+**H33-1 was then executed as preregistered** (`scripts/run_h33_1_holdout.py`, seeds 200–209, 40 paired
+cells, 152 s, exit 0) → `evidence/h33_1_holdout.json`, `knowledge/21_result_H33-1_refuted_2026-10-03.md`.
+
+| Variant | mean DTI | ΔDTI | seeds won | folds | credit per removed FP |
+|---|---:|---:|---:|---:|---:|
+| `base_oof_d28` | 0.094633 | — | — | — | — |
+| `h33_1_prune_p10` | 0.091618 | −0.003014 | 0/10 | 0/4 | 0.12855 |
+| `h33_1_prune_p05` | 0.093018 | −0.001615 | 0/10 | 0/4 | 0.14020 |
+| `control_top_p10` | 0.092426 | −0.002207 | 0/10 | 0/4 | 0.10104 |
+
+**All six frozen criteria failed** (`gate_passed: false`), including the two that are informative on
+their own: the direction control was *better* than the primary (sign inverted), and `fav` coverage
+was `11.95%` against a `60%` precondition. Recorded, not retuned, not re-run, no candidate TIFF,
+**no slot spent**.
+
+**Four implementation defects found and fixed before the result was trusted** — each caught by an
+assertion or an obviously-wrong intermediate, never by inspecting the score:
+
+| Defect | Consequence if missed | How caught |
+|---|---|---|
+| **Metre/pixel confusion.** The clipped trace is EPSG:32611 metres; the frozen radii are grid pixels | `fav` coverage **0.0** — the arm would have been "run" against an empty score — and a 34,864,713-point / ~557 MB trace from densifying at 0.5 *metres* | coverage printed 0.0; trace count absurd |
+| `np.column_stack(np.flatnonzero(m))` returns shape **(1, 2)**, not N `(row, col)` pairs | exactly **one** dot scored instead of 10,757 | added `len(dot_rc) == base.sum()` assertion, which fired |
+| `fav` is a per-dot vector but was reshaped as a grid; `prune_by_quantile` mixed flat indices with 2-D indexing | `ValueError` on reshape, then `IndexError` on subscript | raised on the first cell |
+| `dot_rc` kept float for the KD-tree but used to index an array | `IndexError: arrays used as indices must be of integer type` | raised on the first cell |
+
+Two further fixes outside the runner: `grid.xy_to_rc()` added as the exact inverse of `rc_to_xy`
+(round-trip error `0.0` on 5 test pixels), and the archive paragraph on `docs/research.html` still
+claimed "the five untried H33-series hypotheses" while the registry had moved H33-1 to tested — the
+registry/site drift hazard again, now pinned by `tests/test_site.py`.
+
+**Seed disclosure.** Seed 200 was invoked four times during that debugging. The harness is
+deterministic and no frozen constant was changed at any point (none in response to an observed
+score; the preregistration was never edited and its SHA-256 is recorded in the evidence file), so
+those invocations returned the recorded numbers. Seeds 201–209 were used exactly once. Disclosed in
+`knowledge/21` §3 and as `h33-1-seed-200-exercised-during-debugging`.
+
+**Verification actually run:** `pytest` **194 passed, 0 skipped** (was 121 at session baseline;
++73 new tests); `ruff check src scripts tests` PASS; `verify_downloads.py` 179/179 PASS;
+`build_site.py` PASS (5 pages, 0 external requests); `reachability_frontier.py`,
+`run_losfo_harness.py` and `run_h33_1_holdout.py` all executed to completion against the restored
+rasters and the runner-produced clip.
+
+**What remains unverified:** H33-3, H33-4, H33-5 and H33-2 are still untried — H33-3's heat-flow zip
+(`130,154,244` B, `e7fd62c6…`) has only an availability pin, not a derived clip, so it would need the
+same bridge treatment. All live scores remain owner-reported or public-leaderboard readings, not
+organizer receipts.
