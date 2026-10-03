@@ -217,6 +217,35 @@ DERIVED_SPECS = [
 ]
 
 
+def resolve_payload_format(payload: Path, pin_filename: str) -> tuple[Path, str]:
+    """Return a path whose extension matches the payload's real format, plus the format name.
+
+    ScienceBase download URLs carry no file suffix (``.../file/get/<item>?f=__disk__33%2Fb0%2F91%2F...``),
+    so `fetch()` names the payload ``.bin`` and GDAL then refuses to open it ("not recognized as
+    being in a supported file format"). That is exactly what the 2026-10-03T18:49:01Z runner run hit:
+    the pin matched, the bytes were correct, and the clip silently produced 0 records.
+
+    The format is decided by **magic bytes first**, then the pinned filename, then left alone. The
+    payload is only ever *copied* to a correctly-suffixed name, never mutated in place, so the hash
+    that was verified still refers to the original file on disk.
+    """
+    with payload.open("rb") as handle:
+        head = handle.read(4)
+    if head == b"PK\x03\x04":
+        fmt, suffix = "zip", ".zip"
+    elif head[:4] == b"\x1f\x8b\x08\x00"[:4] or head[:2] == b"\x1f\x8b":
+        fmt, suffix = "gzip", ".gz"
+    else:
+        suffix = Path(pin_filename or "").suffix.lower()
+        fmt = suffix.lstrip(".").lower() or "unknown"
+    if payload.suffix.lower() == suffix:
+        return payload, fmt
+    target = payload.with_name(payload.stem + suffix)
+    if not target.exists():
+        target.write_bytes(payload.read_bytes())
+    return target, fmt
+
+
 def _zip_vector_layers(zip_path: Path, work_dir: Path) -> list[Path]:
     """Extract a zip and return every shapefile (.shp) or GeoPackage (.gpkg) layer inside it."""
     import zipfile
@@ -275,8 +304,11 @@ def build_sciencebase_derived(out_dir: Path, pins: dict[str, dict], only: str | 
         work = out_dir / f"_work_{label}"
         work.mkdir(parents=True, exist_ok=True)
         payload = Path(got["path"])
+        usable, fmt = resolve_payload_format(payload, pin.get("filename", ""))
+        record["payload_format"] = fmt
+        record["payload_used"] = usable.name
         try:
-            layers = _zip_vector_layers(payload, work) if payload.suffix.lower() == ".zip" else [payload]
+            layers = _zip_vector_layers(usable, work) if fmt == "zip" else [usable]
         except Exception as error:  # noqa: BLE001 - record and continue, never fail the whole job
             record["status"] = "ARCHIVE_UNREADABLE"
             record["error"] = f"{type(error).__name__}: {error}"
@@ -303,12 +335,26 @@ def build_sciencebase_derived(out_dir: Path, pins: dict[str, dict], only: str | 
             str(commit_dir / f"{spec['stem']}.csv"),
             str(commit_dir / f"{spec['stem']}.json"),
         )
-        record["status"] = "DERIVED_WRITTEN"
+        unreadable = [name for name, s in all_schemas.items()
+                      if isinstance(s, dict) and s.get("status") == "LAYER_UNREADABLE"]
+        if unreadable:
+            # GDAL could not open the layer: the derived table is empty because of a format
+            # problem, not because the footprint is empty. That must not look like success.
+            record["status"] = "LAYER_UNREADABLE"
+            record["unreadable_layers"] = unreadable
+            record["errors"] = {n: all_schemas[n].get("error") for n in unreadable}
+        elif not all_records:
+            record["status"] = "DERIVED_EMPTY"
+            record["note"] = ("the release parsed but no feature intersects the competition bbox; "
+                              "check the source CRS and the extent before trusting an empty clip")
+        else:
+            record["status"] = "DERIVED_WRITTEN"
         record["layers_found"] = [str(x.name) for x in layers]
         record["derived"] = report
         record["committed_files"] = [f"docs/data/{spec['stem']}.csv", f"docs/data/{spec['stem']}.json"]
         results[label] = record
-        print(json.dumps({label: {k: record.get(k) for k in ("status", "pin_match", "derived")}}))
+        print(json.dumps({label: {k: record.get(k)
+                                  for k in ("status", "pin_match", "payload_format", "derived")}}))
     return results
 
 

@@ -106,10 +106,17 @@ jobs:
             --out /tmp/gdr/out \
             --pins /tmp/gdr/pins.json \
             2>&1 | tee /tmp/gdr/log.txt
-          # a broken pin is a changed official release: fail loudly instead of committing it
-          if grep -q '"status": "PIN_MISMATCH"' /tmp/gdr/out/inventory.json; then
-            echo "::error::ScienceBase pin mismatch - the official release changed" && exit 1
-          fi
+          # Fail loudly rather than committing an unusable derived table. Each of these is a real
+          # defect, not an empty footprint: PIN_MISMATCH = the official release changed;
+          # LAYER_UNREADABLE = GDAL could not open the layer (the 2026-10-03T18:49:01Z run hit this
+          # because a ScienceBase URL has no file suffix, so the payload landed as .bin);
+          # DERIVED_EMPTY = parsed but nothing intersects the bbox; NO_VECTOR_LAYER / ARCHIVE_UNREADABLE
+          # = the archive is not what the pin says it is.
+          for bad in PIN_MISMATCH LAYER_UNREADABLE DERIVED_EMPTY NO_VECTOR_LAYER ARCHIVE_UNREADABLE; do
+            if grep -q "\"status\": \"$bad\"" /tmp/gdr/out/inventory.json; then
+              echo "::error::derived-clip defect: $bad" && exit 1
+            fi
+          done
 
       - name: Show inventory in the run log
         if: always()

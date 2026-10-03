@@ -520,3 +520,42 @@ artifact `OK`, training raster `4371c82e3b83…`, `data/prepared/features.npy` S
 * LOSFO's aggregate ratio 0.9884 is a **bound**, not a measurement: per-fold ratios span 0.876–1.204.
 * All scores (0.2600, 0.2477, 0.2449, 0.3195) remain owner-reported or public-leaderboard readings,
   not organizer receipts.
+
+## Post-merge finding (2026-10-03, same session) — the derived H33-1 clip came back empty
+
+Merging PR #11 triggered `fetch-gdr-external-layers.yml` (run `37145601551`, **succeeded, with a job
+record this time** — the earlier no-job failures did not repeat). It downloaded the H33-1 release
+correctly: HTTP 200, `35,912,323` bytes, SHA-256 `5d6213f7…`, **`pin_match: true`**. But the committed
+`docs/data/sb_slip_tendency_in_footprint.{csv,json}` has **`n_records: 0`**.
+
+| Check | Value |
+|---|---|
+| Download / pin | HTTP 200, `35,912,323` B, `pin_match: true` — the bytes are the right file |
+| `layers_found` | `["sb_slip_tendency_shapefile_full.bin"]` |
+| per-layer status | `LAYER_UNREADABLE` — `DataSourceError: … not recognized as being in a supported file format` |
+| overall row status | `DERIVED_WRITTEN` ← **wrong** |
+| job exit | `0` ← **wrong** |
+
+**Root cause.** ScienceBase download URLs carry no file suffix
+(`…/catalog/file/get/<item>?f=__disk__33%2Fb0%2F91%2F…`), so `fetch()` named the payload `.bin`. The
+derived step then treated `.bin` as a direct vector layer instead of an archive, and GDAL refused to
+open a zip wearing a `.bin` extension. The per-layer failure *was* recorded, but the aggregate row
+still reported success, so an empty table looked like a result.
+
+**Fix (same session, verified locally before re-merging).**
+* `resolve_payload_format()` decides the format from **magic bytes first** (`PK\x03\x04` → zip), then
+  the pinned filename, and copies the payload to a correctly-suffixed name **without mutating the
+  hashed original**, so the verified SHA-256 still refers to a real file.
+* `build_sciencebase_derived` now reports `LAYER_UNREADABLE` / `DERIVED_EMPTY` / `NO_VECTOR_LAYER` /
+  `ARCHIVE_UNREADABLE` as distinct non-success statuses.
+* The workflow **fails the job** on any of those plus `PIN_MISMATCH`, so an unusable clip can no
+  longer be committed silently.
+* Three regression tests added (`test_payload_without_a_zip_suffix_is_still_recognised_as_a_zip`,
+  `test_derived_run_on_a_dot_bin_payload_produces_records`,
+  `test_unreadable_layer_is_not_reported_as_written`) — the second reproduces the exact defect
+  end-to-end on a `.bin`-named zip and asserts a non-empty clip.
+
+**Consequence for H33-1.** The precondition in `knowledge/19_preregistration_H33-1.md` is **still not
+satisfied**: the committed clip is empty and must not be used. Recorded as
+`sciencebase-url-has-no-file-suffix-derived-clip-empty` (severity high) in
+`registry/irregularities.json`. No seed was spent.
