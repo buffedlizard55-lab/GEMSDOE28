@@ -364,5 +364,5 @@ While this branch was open, PR #5 (`arena/01a0fec2-gemsdoe27`, the H28-1 edge-co
 - `.venv/bin/ruff check .`: PASS. Python compileall: PASS. Full tests: **98 passed, 3 skipped**; site tests: **10 passed**.
 - Static site build: PASS (five pages, 24 source records, five hypotheses; zero external requests). Current generated page reflects the no-fit state and source links resolve to public `blob/main` paths.
 - `scripts/verify_downloads.py`: **121 checks, 0 failures** for existing manual research artifacts. This does not authorize an H31 submission or weekly slot.
-- Seed ledger `--check`: PASS with screen/confirmation ranges still unused. `git diff --check`: PASS after LF normalization.
+- Seed ledger `--check`: PASS with screen/confirmation ranges still unused. `git diff --check`: PASS after LF normalization. GitHub PR #1 CI on head `92d2e53` passed: Pages `build` run `37129049027` and `test` run `37129048986`.
 - **Decision remains pre-fit only:** implementation/source, bug/leakage, and acceptance review records are complete. The single-use screen may proceed only after the current evidence/code commit is pushed, PR checks are reviewed, and the seed ledger is refreshed/checked immediately before launch. A screen pass earns only one unchanged confirmation; neither result establishes organizer-label performance or authorizes an upload.
