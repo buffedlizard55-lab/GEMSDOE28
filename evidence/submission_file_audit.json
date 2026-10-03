@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-03T22:45:21Z",
+  "checked_utc": "2026-10-03T23:06:25Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "26f3eca531a634460094d210588b4f638d32880777798cf2ff7407723e78936f",
+  "manifest_sha256": "dd05ccb96fa66fa7d804bbbc6a36e3bbf7e94029f8d5ccb81e0ba547d7b4d93a",
   "checks": [
     {
       "check": "labels_grid_matches_template",

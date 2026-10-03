@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-03T23:25:00Z",
-  "status": "GEMSDOE28 hypothesis ledger: H37-1 (metric-aware packing) passed its interleaved gate then FAILED its preregistered far-field falsification test (LOSFO seeds 210-214, -0.000037 +/-0.000832 vs the raster cascade); it is demoted, the one-click slot returned to H36-1, and the 0.278-0.286 projection is withdrawn. H37-2..H37-5 remain unrun.",
+  "generated": "2026-10-04T00:05:00Z",
+  "status": "GEMSDOE28 hypothesis ledger: two preregistered far-field tests closed. H37-1 passed its interleaved gate then FAILED its far-field falsification (demoted; one-click slot returned to H36-1). H37-3 (Euler SI-0 emission licence) is REFUTED as promotable: its licence beat a same-count random control 1.65x but earned 0.031157 credit/dot against the 0.0548 live bar. Next arm: H37-2.",
   "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
   "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
   "baseline": {
@@ -575,24 +575,46 @@
       }
     },
     "next_ranked": [
-      "LOSFO far-field test of the H36-1 DOSE change (rung 2.828 -> 3.0, fewer dots), the same harness in one run. Now the top measurement: it is the file that just returned to the one-click slot, its projection is live-anchored rather than proxy-derived, and its far-field behaviour is unmeasured.",
-      "H37-3 Euler SI-0 depth-coherence as a POSITIVE emission licence (knowledge/31). Data in hand (evidence/h31_1_euler_clusters.csv); the novel statistic is within-cluster depth dispersion, not edge amplitude. Preregister before touching a fresh decade (260-269 free).",
-      "H37-2 concealed-fault conjunction (potential-field lineament x smooth low-relief fill). Measured motivation: emitted dots carry median LiDAR relief rank 60/255 against 32/255 footprint-wide. Must be gated on LOSFO; the interleaved proxy cannot see that population (knowledge/33 section 5).",
-      "H37-5 artifact-morphology suppression with reallocation (roads/canals/shoreline benches). PRUNE class, inherits the pruning ceiling, but frees dots at tau_live = 0.0548.",
-      "H37-4 offset geomorphic datum (pluvial shoreline / fan piercing lines). Needs absolute elevation: USGS 3DEP 1 m DEM tiles via data/dem_links.json through the Actions bridge. Note det_elev is a DETRENDED elevation surface, so this arm needs the external DEM."
+      "H37-2 concealed-fault conjunction (potential-field lineament x smooth low-relief fill). Rank 3 of knowledge/31, now the next arm after H37-3 was refuted (knowledge/35). Must be evaluated on the LOSFO harness from the start and sized so its credit per dot clears 0.0548.",
+      "LOSFO far-field test of the H36-1 DOSE change (rung 2.828 -> 3.0) - the same harness in one run; the one-click slot's file has never been measured far field.",
+      "H37-5 artifact-morphology suppression with reallocation (PRUNE class; inherits the pruning ceiling).",
+      "H37-4 offset geomorphic datum (pluvial shoreline / fan piercing lines) - needs absolute elevation; USGS 3DEP 1 m DEM tiles via data/dem_links.json through the Actions bridge."
     ],
     "seed_ledger": {
       "spent_contiguous": [
         "100-214",
+        "210-214 (LOSFO diagnostic decade)",
         "220-259",
-        "210-214 (LOSFO diagnostic decade, re-used)"
+        "250-259 (H37-1 gate)",
+        "260-264 (H37-3 licence)"
       ],
       "free": [
         "215-219",
         "260+"
       ],
-      "note": "Seeds 250-259 were consumed by the H37-1 interleaved gate; 210-214 are the harness's dedicated LOSFO decade and were re-used (with packing variants) for the far-field falsification test, so no free seed was consumed. 215-219 remain free; the next arm takes 260-269."
+      "note": "Free: 215-219 and 265+. The next arm takes 265-269."
     },
-    "infrastructure_finding": "GitHub Pages for this repository reports status 'errored' and the legacy page build for the current main head is stuck/failed, so the published site may be stale. Registered as github-pages-legacy-build-errored in registry/irregularities.json with the reversible fix (switch the Pages source to GitHub Actions so the workflow that already succeeds deploys)."
+    "infrastructure_finding": "GitHub Pages for this repository reports status 'errored' and the legacy page build for the current main head is stuck/failed, so the published site may be stale. Registered as github-pages-legacy-build-errored in registry/irregularities.json with the reversible fix (switch the Pages source to GitHub Actions so the workflow that already succeeds deploys).",
+    "h37_3": {
+      "preregistration": "knowledge/34_preregistration_H37-3_licence.md (freeze commit 0788eec)",
+      "result": "knowledge/35_h37_3_result.md",
+      "evidence": "evidence/losfo_h37_3_licence.json",
+      "integrity": "evidence/h37_3_licence_integrity.json",
+      "seeds": [
+        260,
+        261,
+        262,
+        263,
+        264
+      ],
+      "criteria": {
+        "C1_transfer": "FAIL (mean +0.000576 +/-0.000451, 13/20 cells, 5/5 seeds)",
+        "C2_live_bar": "FAIL (0.031157 credit per added dot vs 0.0548)",
+        "C3_vs_random_control": "PASS (+0.000699, 16/20 cells; credit ratio 1.65x)",
+        "C4_integrity": "PASS (same-seed base arms bit-identical to the pre-patch harness)"
+      },
+      "verdict": "REFUTED as a promotable arm; mechanism real but the rate is 57% of the live break-even",
+      "live_projection_of_the_licence_dots": "negative at every scale tested (296 dots: 0.260627 -> 0.260294)"
+    }
   }
 }

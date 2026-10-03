@@ -642,6 +642,35 @@ comparison is F1, which failed. The artifact is demoted to secondary by the pre-
 numbers are printed on its card, and `knowledge/33` withdraws the live projection. Registered as
 `h37-1-farfield-effect-is-zero` and `ordering-packers-are-capacity-limited`.
 
+#### 3.9b H37-3 Euler SI-0 depth-coherence licence — REFUTED as a promotable arm (mechanism positive)
+
+Rank-2 of `knowledge/31` was preregistered at `knowledge/34` (freeze commit `0788eec`) and run on its own
+LOSFO decade, seeds `260–264` (20 paired cells, exit 0, ≈13 min; `evidence/losfo_h37_3_licence.json`,
+analysis `scripts/analyze_h37_3.py`, integrity `evidence/h37_3_licence_integrity.json`). The licence rule
+was frozen in advance: the 1,435 of 6,309 SI-0 Euler clusters with `depth_mad_m ≤ 60` **and**
+`median_depth_m ≤ 400` **and** `n_solutions ≥ 8`, mapped one dot per cluster, excluding catalogue and
+already-emitted pixels, at the shipped 2.8 px spacing; 296 dots added per cell on average. Three arms
+were scored on the identical far-field truth, cell by cell: `base`, `base+licence`, and
+`base+same-count random control` drawn from the same off-catalogue eligible region.
+
+| criterion | result | verdict |
+|---|---|---|
+| **C1** mean ΔDTI(licence − base) > 0, ≥15/20 cells, ≥4/5 seeds | **+0.000576** ±0.000451, 13/20 cells, 5/5 seeds | **FAIL** (spread) |
+| **C2** pooled credit per added dot ≥ `τ_live` 0.0548 | **0.031157** (57 % of the bar) | **FAIL** |
+| **C3** mean ΔDTI(licence − random control) > 0, ≥15/20 cells | **+0.000699** ±0.000452, 16/20 cells | **PASS** |
+| **C4** integrity | same-seed base arms bit-identical to the pre-patch harness; fresh-decade base arms inside the documented LOSFO spread | **PASS** |
+
+**Verdict by the pre-committed rule: refuted as a promotable arm**, with the mechanism recorded as real and
+this session's second honest negative. The licence's dots earn **1.65×** what the same number of random
+dots earn in the same region — the depth-dispersion statistic does carry off-catalogue information — but
+0.0312 < 0.0548, so adding dots at this rate *lowers* the live score (296 dots: `0.260627 → 0.260294`;
+the arm's full 5,916-dot scale: `→ 0.254356`). One of four folds is negative (`NE_LidarGapHeavy`
+−0.000390 against `NW` +0.001186, `SE` +0.000893, `SW` +0.000617), which is why C1's spread rule exists.
+Seed ledger: **260–264 spent; 265–269 free.** `knowledge/31`'s ledger now puts **H37-2** (concealed-fault
+conjunction) next, with the H37-3 lesson attached: *a licence that clears 1.65× random can still lose if
+its rate is below the bar*. Registered as `h37-3-licence-real-but-below-the-live-rate` and
+`cross-seed-baseline-comparison-is-not-an-integrity-check` in `registry/irregularities.json`.
+
 **Answer to the standing question.** Why did `0.2600` win, and can we beat it? `0.2600` won because
 Poisson-disk thinning at `d = 2.8` cut 63 % of the H19-5 pixels while retaining 90.6 % of the `d=1.5`
 credit (`knowledge/01`). Session 13 tested the cheapest remaining candidate — the **selection rule** rather than new
@@ -788,6 +817,13 @@ GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/build_h37_1_submissions.py
 #     is demoted and the 0.278-0.286 projection withdrawn (knowledge/33).
 GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_harness.py --seeds 210-214 --packing-variants \
     --out evidence/losfo_packing_farfield.json
+
+# 3l. Session 13c: H37-3 Euler SI-0 depth-coherence licence, far-field test (LOSFO decade 260-264, ~13 min).
+#     Preregistration knowledge/34 froze the rule, the arm and the criteria at commit 0788eec BEFORE the run.
+#     Result: C1 FAIL (13/20 cells), C2 FAIL (0.031157 credit/dot vs the 0.0548 live bar), C3 PASS (1.65x its
+#     matched random control), C4 PASS -> refuted as promotable, mechanism real (knowledge/35).
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_harness.py --seeds 260-264 \
+    --euler-licence evidence/h31_1_euler_clusters.csv --out evidence/losfo_h37_3_licence.json
 
 # 3h. Session 12: H36-1 packing-rung re-pack + flank prune, frozen 10-seed gate (seeds 240-249, ~105 s)
 #     Preregistration knowledge/26 was committed (aaa659c) BEFORE the run; runner frozen at that commit.

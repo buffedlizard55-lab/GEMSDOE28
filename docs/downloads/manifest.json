@@ -213,5 +213,5 @@
     "holdout_seeds_improved": "n/a",
     "holdout_folds_improved": "n/a"
   },
-  "promotion_rule": "The one-click primary is the file that won a frozen fresh-seed gate whose criteria were written to knowledge/ before the seeds were spent. H37-1: knowledge/29_preregistration_H37-1.md, seeds 250-259."
+  "promotion_rule": "The one-click primary is the file that won a frozen fresh-seed gate whose criteria were written to knowledge/ before the seeds were spent (H36-1: knowledge/26, seeds 240-249; H37-1: knowledge/29, seeds 250-259). Promotion is provisional: when a promotion rests on a proxy that can be falsified off-catalogue, the arm must also survive its preregistered far-field test on the LOSFO harness. H37-1 passed its gate (+0.007289) and then FAILED that test (F1/F3, -0.000037 +/-0.000832, seeds 210-214; knowledge/32-33), so it was demoted by the pre-committed rule and the slot returned to the file whose projection rests on a live-anchored measurement. Any future arm that claims a catalogue-adjacent gain must carry its own far-field number before it can hold this slot."
 }
