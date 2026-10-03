@@ -5,6 +5,37 @@
   "provenance_warning": "All inputs and historical model artifacts are owner-repository mirrors; local SHA-256 integrity does not prove organizer authenticity or score association.",
   "manual_policy": "No upload, portal call, scheduled check, scraping, API monitoring or other automated DrivenData access. All site links are downloads/manual-review links only.",
   "primary": {
+    "slug": "h36-1-rung30-blind-r1",
+    "hypothesis": "H36-1: re-pack the H19-5 surface from packing rung 2.828 to rung 3.0 (a 41,333-px re-layout, not a thinning) and apply the H27-4 blind 1-px catalogue-flank prune",
+    "content_id": "b531dae0a36f",
+    "nan": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+    "allfinite": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+    "zip": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.zip",
+    "sha256_nan": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+    "sha256_allfinite": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32",
+    "sha256_zip": "ed6984577aa6fd1522371a618d6bcd69119ee1bd2f13d40cee40bba8d30649ed",
+    "bytes_nan": 1590848,
+    "bytes_allfinite": 825430,
+    "bytes_zip": 294505,
+    "emitted_px": 37660,
+    "format_verified": true,
+    "status": "UNSCORED; won the frozen H36-1 gate on fresh seeds 240-249: +0.002599 mean OOF delta DTI, 10/10 seeds, 4/4 folds, promotion margin +0.000884 over the incumbent, removal efficiency 0.00984 < tau_live 0.054852. Anti-budget control (random drop to the same N) scored -0.001657; anti-selective control +0.001352.",
+    "note": "28GEMSDOE H36-1 rung3.0+r1 | OOF dDTI +0.00260, 10/10 seeds, 4/4 folds (seeds 240-249); re-pack beats matched-N random drop by +0.00261; no T-v2 | id b531dae0a36f | UNSCORED, not slot-approved",
+    "note_file": "note-gemsdoe28-h36-1-rung30-blind-r1-b531dae0a36f.txt",
+    "holdout_mean_gain": 0.002599291301795735,
+    "holdout_folds_improved": "4/4",
+    "holdout_seeds_improved": "10/10",
+    "holdout_evidence": "evidence/h36_1_holdout.json",
+    "holdout_preregistration": "knowledge/26_preregistration_H36-1.md",
+    "holdout_seeds": "240-249",
+    "base_reference_id": "e56ea318af89",
+    "base_reference_live_score": 0.26,
+    "rung30_px_before_prune": 41333,
+    "prune_px_removed": 3673,
+    "measured_prune_efficiency": 0.009844673368221007,
+    "projection_note": "Live-anchored hybrid projection 0.2717-0.2727 (H34 ladder for the re-pack, +0.00283; the gate's measured prune efficiency for the flank prune, +0.0089-0.0098). A MODEL, not a score; the 0.2600 anchor is owner-reported."
+  },
+  "secondary": {
     "slug": "h27-4-r1-solo-d2-8",
     "hypothesis": "H27-4 solo 1-pixel (100 m) catalogue-flank prune on d=2.8 (0.2600 base, no T-v2)",
     "content_id": "8acb75e1f2cc",
@@ -19,7 +50,7 @@
     "bytes_zip": 302687,
     "emitted_px": 40199,
     "format_verified": true,
-    "status": "UNSCORED; won the fresh-seed adjudication (seeds 235-239: +0.001761 mean \u0394DTI, 5/5 seeds, 4/4 folds, beating the H32-1 post variant +0.001251 and the anti-selective control +0.000490). Originally validated on seeds 180-189 (+0.001766, 10/10 seeds, 4/4 folds).",
+    "status": "UNSCORED; previous one-click primary (won the H35-6 fresh-seed adjudication, seeds 235-239). Demoted by H36-1 on a fresh decade: +0.001715 vs +0.002599 on seeds 240-249. Still a validated, fully audited file and the conservative choice if the re-pack is judged too aggressive.",
     "note": "28GEMSDOE H27-4 d2.8 solo | \u0394DTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc",
     "note_file": "note-gemsdoe28-h27-4-r1-solo-d2-8-8acb75e1f2cc.txt",
     "holdout_mean_gain": 0.0017660520700670697,
@@ -34,7 +65,7 @@
     "adjudication_seeds": "235-239",
     "adjudication_mean_gain": 0.0017607840722626026
   },
-  "secondary": {
+  "tertiary": {
     "slug": "h32-1-prethin-tip-euler-d2-8",
     "hypothesis": "H32-1 pre-thinning tip- & Euler-protected mid-segment de-jittering before dot_thin(2.8)",
     "content_id": "31e35eee884e",
@@ -60,7 +91,7 @@
     "base_reference_live_score": 0.26,
     "model_score_hybrid": 0.2669
   },
-  "tertiary": {
+  "quaternary": {
     "slug": "h32-1-tip-euler-dejitter-d2-8",
     "hypothesis": "H32-1 tip- & Euler-depth-cluster-protected mid-segment flank-shadow de-jittering on d=2.8",
     "content_id": "c3aeda1d31a3",
@@ -75,7 +106,7 @@
     "bytes_zip": 311745,
     "emitted_px": 41656,
     "format_verified": true,
-    "status": "UNSCORED; was the one-click primary until Session 11 review found it strictly dominated on every published statistic by the H27-4 solo file now promoted above. Lost the fresh-seed adjudication (seeds 235-239: +0.001251 vs +0.001761) while remaining a validated, fully audited file. Retained as the conservative alternative: it protects fault tips and shallow Euler depth clusters.",
+    "status": "UNSCORED; the original preregistered H32-1 file. Dominated on every published statistic by the files above; retained because it is the only variant that protects fault tips and shallow Euler depth clusters.",
     "note": "28GEMSDOE H32-1 d2.8 post | OOF \u0394DTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved",
     "note_file": "note-gemsdoe28-h32-1-tip-euler-dejitter-d2-8-c3aeda1d31a3.txt",
     "holdout_mean_gain": 0.0012715910909455819,
@@ -86,28 +117,6 @@
     "base_reference_live_score": 0.26,
     "model_score_hybrid": 0.2663,
     "adjudication_evidence": "evidence/h35_6_candidate_headtohead.json"
-  },
-  "quaternary": {
-    "slug": "h27-4-r1-pruned-d1-5",
-    "hypothesis": "H27-4 one-pixel catalogue-flank prune reference",
-    "content_id": "450eb6859636",
-    "nan": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif",
-    "allfinite": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-allfinite.tif",
-    "zip": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.zip",
-    "sha256_nan": "17c67554a1fde7607e9ffe9846433162035364eb4ef5ec3d2ab65778fe3bbdd2",
-    "sha256_allfinite": "7ae6f90df568a2578294968ec5e4a8a088653b569e5ab3c149afbe132ba29238",
-    "sha256_zip": "7a44371dbff63363526be03f57b8fac1730a9ebb85576dcabb2aa2b76daca6d5",
-    "bytes_nan": 1622840,
-    "bytes_allfinite": 854790,
-    "bytes_zip": 353966,
-    "emitted_px": 54714,
-    "format_verified": true,
-    "status": "UNSCORED; catalogue-proxy holdout only; not confirmed or slot-approved",
-    "note": "28GEMSDOE H27-4 r1 reference | OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed | id 450eb6859636 | research only",
-    "note_file": "note-gemsdoe28-h27-4-r1-450eb6859636.txt",
-    "holdout_mean_gain": 0.0022,
-    "holdout_folds_improved": "4/4",
-    "holdout_evidence": "evidence/oof_hypothesis_gates.json"
   },
   "quinary_probe": {
     "slug": "t-v2-topology-d1-5",
@@ -147,5 +156,5 @@
     "bytes_allfinite": 863814,
     "note_file": "note-gemsdoe28-h28-1-1113fba5f6cb.txt"
   },
-  "promotion_rule": "The one-click primary is the file that won the frozen fresh-seed adjudication in knowledge/25_preregistration_H35-6_candidate_adjudication.md. Promotion required the largest mean gain AND >=4/5 seeds AND >=3/4 folds on unused seeds 235-239 with the frozen runner unmodified."
+  "promotion_rule": "The one-click primary is the file that won a frozen fresh-seed gate whose criteria were written to knowledge/ before the seeds were spent. H36-1: knowledge/26_preregistration_H36-1.md, seeds 240-249. H35-6 (the previous promotion) remains the record for the superseded slot."
 }

@@ -34,10 +34,11 @@ All submission artifacts in `docs/downloads/` are verified by `scripts/verify_do
 
 | Slot | Filename (`docs/downloads/`) | Content ID | Emitted px | 4-Fold Spatial-CV Holdout | Hybrid Model vs `0.2600` Anchor | Registered Note ($\le 200$ chars) |
 |---|---|---|---:|---|---:|---|
-| **Primary (One-Click) — PROMOTED Session 11** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) — **replicated `+0.001761` on fresh seeds 235–239, `5/5` seeds, `4/4` folds** | `0.2686` | `28GEMSDOE H27-4 d2.8 solo | ΔDTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc` |
-| **Secondary** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre | OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved` |
-| **Tertiary — demoted Session 11** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
-| **Quaternary (Ref)** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130–139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference | OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed | id 450eb6859636 | research only` |
+| **Primary (One-Click) — PROMOTED Session 12** | `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` | `b531dae0a36f` | `37,660` | **`+0.002599` (`10/10` seeds, `4/4` folds) on fresh seeds `240–249`**; the matched-`N` random-drop control scored `−0.001657` (`0/10` seeds, `0/4` folds), so the gain is the layout, not the budget | `0.2717–0.2727` |
+| **Secondary — demoted Session 12** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) — replicated `+0.001761` on fresh seeds 235–239 (`5/5` seeds, `4/4` folds) | `0.2686` | `28GEMSDOE H27-4 d2.8 solo | ΔDTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc` |
+| **Tertiary — demoted Session 12** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre | OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved` |
+| **Quaternary — demoted Session 12** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
+| **Reference** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130–139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference | OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed | id 450eb6859636 | research only` |
 
 ---
 
@@ -436,6 +437,72 @@ Ranked next: (1) a rung-`3.0` re-thin combined with the flank prune, validated o
 
 ---
 
+### 3.8 Session 12 — the data blocker is closed, and the packing rung was re-measured
+
+**Blocker closed.** `bash scripts/download_competition_data.sh` now runs end to end in this sandbox:
+`17/17` pins restored and hash-verified (`evidence/restore_audit.json`, `data/restore_receipt.json`),
+`data/prepared/features.npy` rebuilt at shape `(5,167,373, 32)` `float32`
+(`83ed2704…`), and `evidence/submission_file_audit.json` re-audited. The earlier
+"cannot download the competition data" note was an environment artefact, not a repository one:
+`.venv` + `pip install -r requirements.txt` plus `gh api` (which *is* reachable) is sufficient.
+**Egress from the sandbox is GitHub-only** — `raw.githubusercontent.com`, `sciencebase.gov`,
+`prd-tnm.s3.amazonaws.com`, `api.datacite.org`, `drivendata.org` and `doi.org` all fail at the TLS
+handshake, so any external layer still has to arrive through the Actions bridge (§3.4).
+
+**A measurement that changed the arm before it ran.** The rung ladder had been described as a
+"re-thin". It is not a thinning. On the full footprint the shipped `0.2600` file is *exactly*
+`thinning.dot_thin(h19_5_surface, 2.8)` (44,090 px, 0 px symmetric difference — an independent
+confirmation that the published artifact's construction is what the repo says it is), but
+`dot_thin(surface, 3.0)` shares only 30,666 px with it, **adds 10,667 px and drops 13,424 px**. Because
+`dot_thin` is a greedy lowest-raster-index cascade, raising `min_dist` *re-seeds* the packing instead
+of deleting dots; 24,091 px change hands. The ladder is therefore a **layout** choice, not a budget
+cut, and that is falsifiable — which is what the new control is for.
+
+**H36-1, gate frozen in `knowledge/26_preregistration_H36-1.md` (commit `aaa659c`) before seeds
+`240–249` were touched** (`evidence/h36_1_holdout.json`, `knowledge/27_h36_1_result.md`):
+
+| Variant (vs the same-run rung-2.828 control, OOF DTI 0.094132) | ΔDTI | seeds | folds |
+|---|---:|---:|---:|
+| `rung30_unpruned` — the H34 claim in isolation | +0.000956 | 10/10 | 4/4 |
+| **`rung30_blind_r1` — re-pack + H27-4 blind flank prune** | **+0.002599** | **10/10** | **4/4** |
+| `rung30_flank_mid` — re-pack + H32-1 mid-segment prune | +0.002188 | 10/10 | 4/4 |
+| `h27_4_blind_r1_d280` — the Session-11 incumbent | +0.001715 | 10/10 | 4/4 |
+| `control_random_drop_matched_n` — **delete the same 2,649 dots at random** | **−0.001657** | **0/10** | **0/4** |
+| `control_rung30_protected_only` — anti-selective control | +0.001352 | 10/10 | 4/4 |
+
+All five frozen criteria pass: the rung effect is positive in every seed and fold (G1); the re-pack
+beats the matched-`N` random drop by **+0.002613**, so the effect is layout and not budget (G2); every
+prune's removal efficiency (0.0096–0.0098) is far below `tau_live = 0.054852` (G3); the winner beats
+the incumbent by +0.000884 ≥ the pre-declared +0.0005 margin (G4); and the anti-selective control sits
+below the winner, so the prunes are still selective (G5).
+
+**The anti-budget control is the load-bearing result.** A coin-flip deletion of exactly the 2,649 dots
+the rung removes *loses* 0.001657 — in `0/10` seeds and `0/4` folds — while the re-pack at the same
+count gains 0.000956. That also falsifies the natural reading of H34: under its `gamma`-invariance
+assumption removal is non-selective and a random deletion to the same `N` should have matched. It does
+not. `gamma`-invariance held to 1.9 % across the three live anchors of one surface and does not survive
+this test, because `dot_thin` re-seeds.
+
+**Promoted artifact.** `docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif`
+(content id `b531dae0a36f`, 37,660 px, SHA-256 `5556aa14…`). `scripts/verify_downloads.py` → **PASS,
+179 checks, 0 failures**. Live-anchored hybrid projection **0.2717–0.2727** (H34's ladder for the
+re-pack, +0.002834; the gate's measured prune efficiency for the flank prune, 3,673 px at 0.0098447).
+The range, not a point value, is deliberate — `operating_point.prune_gain` is a first-order expansion
+and over-states a 9 %-of-`N` prune by ~0.001, now registered as
+`prune-gain-linearisation-overstates-large-prunes`. **No weekly slot is used by this arm; a gate is not
+a submission.** Do not preregister further rung arms: `3.1623` removes a further 6,516 px for no
+measured retention gain and H34 rates it worse, so the family is bounded on both sides.
+
+**Also fixed this session (defect review, `registry/irregularities.json`).** The first H36-1 build
+shipped a submission note reading `28GEMSDOE 28GEMSDOE H36-1 … re-pack beats matched-N random d | …` —
+a duplicated family token (the caller passed it *and* `make_note` prepends it) and a mid-word
+truncation (the summary exceeded the 200-character budget and `make_note` slices silently). The note is
+the text a human pastes into the organiser's Note field, so it is human-facing even though every raster
+check passed. Rebuilt at 192/200 with an assertion in the builder that fails the build rather than
+truncating, and the builder is now idempotent (re-running it previously demoted its own output into the
+secondary rank). The site's above-the-fold paragraph was also split — it had become a single run-on
+`<p>` concatenating historical H31/H32-structural/H35-1 failures onto the current status.
+
 ## 4. Euler Deconvolution for Depth (Reid et al., *Geophysics*, 1990) & Screen Ledger
 
 Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `evidence/h31_1_euler_feature_audit.json`, `evidence/h31_1_euler_clusters.csv`):
@@ -472,6 +539,8 @@ individual expected ΔDTI** — the ordering below differs from `knowledge/18` f
   3. **`H33-5` Phase-2 discovery budget — bounded ADD arm.** ≤ ~600 px of multi-corroborated off-catalogue emission exploiting the official Phase-2 expert-expanded-label rescoring rule; Phase-1 cost capped at ≈ `0.2 × budget`. Contrarian by design: it buys Phase-2 optionality with a bounded Phase-1 cost.
   4. **`H33-2` Multi-depth MT conductance alignment — PRUNE/score arm.** DOI `10.5066/P9TWT2LU` (ScienceBase `62979746d34ec53d276c113b`); both probed GeoTIFFs runner byte-verified (`4,132,337` B `8cc1a224…`, `4,132,325` B `e8cfd731…`). Ranked last of the survivors because it is a pruning arm and pruning is now exhausted as a family (§3.5).
 - **`H35-1` — EXECUTED Session 11, FROZEN GATE FAILED (seeds `230–234`, CLOSED).** Hydrothermal-discharge conjunction; credit/dot `0.013195` against `tau_live = 0.054852`, `1/5` seeds, mean ΔDTI `−0.001805`, and **below its own matched-count random control** (`0.023781`). Every pre-declared dose variant was at or below the control, so no tighter subset rescues it. Closed with no candidate TIFF and no weekly slot (§3.7.1, `knowledge/24_h35_1_result.md`, `evidence/h35_1_thermal_farfield.json`). **Do not re-run on a fresh decade and do not add another point-process layer without a new instrument.**
+- **`H36-1` — EXECUTED Session 12, FROZEN GATE PASSED, PROMOTED (seeds `240–249`, CLOSED for screening).** Re-pack the H19-5 surface from packing rung `2.828` to rung `3.0` (41,333 px) and apply the `H27-4` blind 1-px catalogue-flank prune. `+0.002599` mean OOF ΔDTI, `10/10` seeds, `4/4` folds, promotion margin `+0.000884`; the matched-`N` random-drop control scored `−0.001657` (`0/10`, `0/4`), which is what makes this a *layout* result rather than a budget result. Live projection `0.2717–0.2727`. `knowledge/26_preregistration_H36-1.md`, `knowledge/27_h36_1_result.md`, `evidence/h36_1_holdout.json`, artifact `b531dae0a36f`. **Do not preregister further rung arms** — the family is bounded on both sides.
+- **`H33-3` / `H35-2` — QUEUED, data gate now openable.** Heat-flow residual × 2 m temperature probe. The Actions bridge (`scripts/fetch_external_layers.py`, spec `sb_heat_flow_zip`) now enumerates mixed archives and Esri FileGDB layers and commits an in-footprint clip, because the release is a *mixed* raster/point archive rather than a shapefile. This is the top entry of `registry/next_hypotheses.json:session12_addendum.next_ranked` and the only queued arm that observes a field the surface-rupture catalogue cannot contain.
 - **`H35-6` — ADJUDICATION, COMPLETED (seeds `235–239`).** Not a geological arm: a fresh-seed tie-break of the four candidate files under a frozen promotion rule. Promoted `8acb75e1f2cc` to the one-click slot (`+0.001761`, `5/5` seeds, `4/4` folds) after review found the previous primary dominated (§3.7.2, `knowledge/25_preregistration_H35-6_candidate_adjudication.md`, `evidence/h35_6_candidate_headtohead.json`).
 - **`H33-1` — EXECUTED IN SESSION 10, FROZEN GATE FAILED (seeds `200–209`, CLOSED).** The only preregistered arm whose data had actually landed, so it was run first (§3.5). Mean paired ΔDTI `−0.003014`, `0/10` seeds, `0/4` folds, `fav` coverage `11.95%` against a `60%` precondition — **`0` of `6` criteria** (`evidence/h33_1_holdout.json`, `knowledge/21_result_H33-1_refuted_2026-10-03.md`). Do not re-run on a fresh decade, do not widen its radii, do not substitute another tendency field.
 - **Standing consequence — pruning is closed as a family.** H31-1, H32-2 and H33-1 have now all failed the same way: the pixels they removed were worth `0.101–0.140` credit per FP against a `0.019292` break-even. **No further pruning arm should be preregistered.** The remaining budget goes to *addition* arms, validated on LOSFO (§3.2), never on the interleaved holdout.
@@ -529,8 +598,16 @@ python scripts/fetch_external_layers.py --derived all --external-pins registry/e
 #     exit 2 if the clip schema lacks TS/TD. ~152 s for 10 seeds x 4 folds.
 python scripts/run_h33_1_holdout.py --seeds 200-209 --out evidence/h33_1_holdout.json
 
+# 3h. Session 12: H36-1 packing-rung re-pack + flank prune, frozen 10-seed gate (seeds 240-249, ~105 s)
+#     Preregistration knowledge/26 was committed (aaa659c) BEFORE the run; runner frozen at that commit.
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_h36_1_holdout.py \
+    --seeds 240-249 --out evidence/h36_1_holdout.json
+#     Executed: GATE PASSED -> rung30_blind_r1 +0.002599 (10/10 seeds, 4/4 folds), PROMOTE.
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/build_h36_1_submissions.py
+
 # 4. Build and audit all submission GeoTIFFs, seed ledgers, and static GitHub Pages HTML
 .venv/bin/python scripts/build_h32_1_submissions.py
+.venv/bin/python scripts/build_h36_1_submissions.py
 .venv/bin/python scripts/verify_downloads.py
 .venv/bin/python scripts/audit_euler_seed_reuse.py
 .venv/bin/python scripts/build_site.py

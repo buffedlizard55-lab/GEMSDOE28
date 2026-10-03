@@ -457,5 +457,61 @@
       "H33-3 / H35-2 heat-flow residual via the GitHub Actions bridge (ScienceBase is unreachable in-sandbox).",
       "H33-4 / H35-3 drainage-network neotectonics (716 1 m DEM tiles, runner only)."
     ]
+  },
+  "session12_addendum": {
+    "generated": "2026-10-03",
+    "one_click_primary_content_id": "b531dae0a36f",
+    "one_click_primary_note": "H36-1 rung-3.0 re-pack (41,333 px layout, not a thinning) + the H27-4 blind 1-px catalogue-flank prune. Promoted by a frozen 10-seed gate on seeds 240-249, not by re-ranking the run that selected it.",
+    "h36_1": {
+      "preregistration": "knowledge/26_preregistration_H36-1.md",
+      "result": "knowledge/27_h36_1_result.md",
+      "evidence": "evidence/h36_1_holdout.json",
+      "runner": "scripts/run_h36_1_holdout.py",
+      "seeds": [
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249
+      ],
+      "gate_passed": true,
+      "winner": "rung30_blind_r1",
+      "winner_mean_gain": 0.002599291301795735,
+      "seeds_won": "10/10",
+      "folds_improved": "4/4",
+      "anti_budget_control_gain": -0.0016567351046094107,
+      "repack_minus_matched_n_budget": 0.002612532210811185,
+      "promotion_margin_over_incumbent": 0.000884,
+      "live_projection_range": [
+        0.2717,
+        0.2727
+      ],
+      "key_measurement": "dot_thin is NOT nested: rung 3.0 shares 30,666 px with the shipped rung, adds 10,667 and drops 13,424 (24,091 px change hands), so the ladder is a re-layout, not a budget cut. This is why it is not reproducible by random deletion - and it was not (0/10 seeds)."
+    },
+    "rung_family_status": {
+      "verdict": "Bounded in both directions and now closed for screening. 2.828 -> 3.0 improves (+0.000956 OOF, 10/10 seeds). 3.1623 removes a further 6,516 px for no measured retention gain and H34 rates it worse. Do not preregister further rung arms without a new surface."
+    },
+    "next_ranked": [
+      "H33-3 / H35-2 heat-flow residual x 2 m probe through the GitHub Actions bridge. The preregistered gate is unchanged and still unrun; the bridge now enumerates mixed archives and FileGDB layers and commits an in-footprint point clip (scripts/fetch_external_layers.py, DERIVED_SPECS 'sb_heat_flow_zip'). This is the only queued arm that observes a physical field the surface-rupture catalogue cannot contain, i.e. the only one that can move the detection gap rather than the packing.",
+      "H33-4 / H35-3 drainage-network neotectonics (716 1 m DEM tiles, runner only, GB scale). Unchanged and unstarted.",
+      "H33-5 bounded Phase-2 discovery budget (policy only; cannot be validated on the public leaderboard). Unchanged."
+    ],
+    "seed_ledger": {
+      "spent_contiguous": [
+        "100-214",
+        "220-239",
+        "240-249"
+      ],
+      "free": [
+        "215-219",
+        "250+"
+      ],
+      "note": "The ten-seed decade 240-249 was consumed by H36-1. Seed 240 had previously been declared a throwaway pipeline smoke-test seed in knowledge/23 section 5 and is recorded as spent here as well; no other record mentions it."
+    }
   }
 }

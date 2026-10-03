@@ -213,8 +213,50 @@ DERIVED_SPECS = [
         "label": "sb_slip_tendency_shapefile_full",
         "hypothesis": "H33-1 kinematic reactivation favourability gate",
         "stem": "sb_slip_tendency_in_footprint",
+        "keep_fields": None,
+        "archive_inventory": False,
+    },
+    {
+        # Session 12 (2026-10-03): H33-3 / H35-2 (heat-flow residual x 2 m temperature probe).
+        # This release is a *mixed* archive, not a shapefile: the USGS Great Basin heat-flow product
+        # ships gridded maps together with its supporting well/point data. Guessing the member names
+        # in a session is exactly the failure mode the 2026-10-03T18:49:01Z run hit (a suffix-less
+        # ScienceBase URL landed as .bin and GDAL refused it), so the bridge now (a) enumerates the
+        # archive and commits the member list, and (b) clips every vector/point layer it can open.
+        # The well table is what H33-3 needs: residual heat flow is a *point* attribute, and a point
+        # table is both smaller and more faithful than the interpolated grid.
+        "label": "sb_heat_flow_zip",
+        "hypothesis": "H33-3 heat-flow residual x 2 m probe conjunction",
+        "stem": "sb_heat_flow_in_footprint",
+        # Nothing is dropped: the reader needs the RESIDUAL column under whatever name it ships as,
+        # and dropping fields here would hide the very schema the hypothesis depends on.
+        "keep_fields": None,
+        "archive_inventory": True,
     },
 ]
+
+
+def archive_members(archive_path: Path) -> list[dict]:
+    """Name / size / compression for every member of a zip, sorted by name.
+
+    Committed verbatim as ``docs/data/<stem>_members.json``. It exists so a later session can see
+    what an official release actually shipped without a second 130 MB fetch, and so a schema
+    surprise (no point layer, a raster-only release, an unexpected FileGDB) is visible in the repo
+    rather than hidden in an unreadable run artifact.
+    """
+    import zipfile
+
+    with zipfile.ZipFile(archive_path) as archive:
+        rows = [
+            {
+                "name": info.filename,
+                "bytes": int(info.file_size),
+                "compressed_bytes": int(info.compress_size),
+                "method": int(info.compress_type),
+            }
+            for info in archive.infolist()
+        ]
+    return sorted(rows, key=lambda r: r["name"])
 
 
 def resolve_payload_format(payload: Path, pin_filename: str) -> tuple[Path, str]:
@@ -247,23 +289,50 @@ def resolve_payload_format(payload: Path, pin_filename: str) -> tuple[Path, str]
 
 
 def _zip_vector_layers(zip_path: Path, work_dir: Path) -> list[Path]:
-    """Extract a zip and return every shapefile (.shp) or GeoPackage (.gpkg) layer inside it."""
+    """Extract a zip and return every spatial layer inside it.
+
+    Three shapes are handled, because an official release can be any of them and the bridge must not
+    silently return "empty" for a format it simply did not look for:
+
+    * shapefile  (``.shp`` plus its ``.dbf`` / ``.shx`` / ``.prj`` siblings),
+    * GeoPackage (``.gpkg``),
+    * Esri File Geodatabase (a **directory** ``Name.gdb/`` of ``a00000001.*`` members) - the format
+      the USGS heat-flow supporting data ships in, and the one the pre-Session-12 reader could not
+      see at all, since a FileGDB has no single member that ends in a layer suffix.
+
+    ``extractall`` is only ever given members of the pinned, SHA-256-verified archive.
+    """
     import zipfile
 
     with zipfile.ZipFile(zip_path) as archive:
         names = archive.namelist()
-        targets = [n for n in names if n.lower().endswith((".shp", ".gpkg"))]
-        if not targets:
+        wanted: set[str] = set()
+        targets: list[str] = []
+
+        # shapefile + geopackage
+        for n in names:
+            if n.lower().endswith((".shp", ".gpkg")):
+                targets.append(n)
+                stem = n.rsplit(".", 1)[0].lower()
+                wanted.update(m for m in names if m.rsplit(".", 1)[0].lower() == stem)
+
+        # FileGDB: every member under a `*.gdb/` directory, returned as the directory itself
+        gdb_roots = sorted({m.split("/")[0] for m in names
+                            if m.lower().endswith(".gdb/") or ".gdb/" in m.lower()})
+        for root in gdb_roots:
+            prefix = root + "/"
+            members = [m for m in names if m.startswith(prefix) and not m.endswith("/")]
+            if members:
+                wanted.update(members)
+                targets.append(prefix)  # marker; expanded to the directory path below
+
+        if not wanted:
             return []
-        # a .shp needs its siblings (.dbf/.shx/.prj); extract everything next to them
-        wanted = set()
-        for n in targets:
-            stem = n.rsplit(".", 1)[0].lower()
-            wanted.update(m for m in names if m.rsplit(".", 1)[0].lower() == stem)
         archive.extractall(work_dir, members=sorted(wanted))  # noqa: S202 - pinned official zip
+
     out: list[Path] = []
-    for n in sorted(targets):
-        candidate = work_dir / n
+    for n in sorted(set(targets)):
+        candidate = work_dir / n.rstrip("/")
         if candidate.exists():
             out.append(candidate)
     return out
@@ -307,6 +376,33 @@ def build_sciencebase_derived(out_dir: Path, pins: dict[str, dict], only: str | 
         usable, fmt = resolve_payload_format(payload, pin.get("filename", ""))
         record["payload_format"] = fmt
         record["payload_used"] = usable.name
+        if spec.get("archive_inventory") and fmt == "zip":
+            # Enumeration *before* reading: if the release turns out to be raster-only, or to ship a
+            # FileGDB rather than a shapefile, that fact must survive into the repository rather than
+            # being reported as a generic empty clip.
+            try:
+                members = archive_members(usable)
+            except Exception as error:  # noqa: BLE001 - never fail the whole job on a listing
+                members = [{"error": f"{type(error).__name__}: {error}"}]
+            inv = {
+                "label": label, "filename": pin.get("filename"), "bytes": got.get("bytes"),
+                "sha256": got.get("sha256"), "n_members": len(members),
+                "vector_members": [m.get("name") for m in members
+                                   if str(m.get("name", "")).lower().endswith((".shp", ".gpkg", ".gdb"))],
+                "filegdb_roots": sorted({str(m.get("name", "")).split("/")[0] for m in members
+                                         if ".gdb/" in str(m.get("name", "")).lower()}),
+                "raster_members": [m.get("name") for m in members
+                                   if str(m.get("name", "")).lower().endswith((".tif", ".tiff", ".img"))],
+                "tabular_members": [m.get("name") for m in members
+                                    if str(m.get("name", "")).lower().endswith((".csv", ".txt", ".tsv"))],
+                "members": members,
+            }
+            inv_path = commit_dir / f"{spec['stem']}_members.json"
+            inv_path.write_text(json.dumps(inv, indent=2) + "\n", encoding="utf-8")
+            record["archive_inventory"] = {k: inv[k] for k in
+                                           ("n_members", "vector_members", "filegdb_roots",
+                                            "raster_members", "tabular_members")}
+            record.setdefault("committed_files", []).append(f"docs/data/{inv_path.name}")
         try:
             layers = _zip_vector_layers(usable, work) if fmt == "zip" else [usable]
         except Exception as error:  # noqa: BLE001 - record and continue, never fail the whole job
@@ -315,13 +411,31 @@ def build_sciencebase_derived(out_dir: Path, pins: dict[str, dict], only: str | 
             results[label] = record
             continue
         if not layers:
-            record["status"] = "NO_VECTOR_LAYER"
+            # The archive was readable and hash-verified but held no spatial layer the reader
+            # understands. Three distinct outcomes, deliberately not conflated:
+            #   DERIVED_EMPTY     - a layer parsed, nothing intersects the bbox;
+            #   LAYER_UNREADABLE  - a layer was found and GDAL refused to open it;
+            #   NO_VECTOR_LAYER   - no layer was found. This is a DEFECT for a release that is
+            #                       supposed to be a shapefile, and the workflow fails the job on it.
+            # For a *mixed* release with `archive_inventory` on - where the point of the fetch is to
+            # learn what the archive contains - a verified, committed member listing is a successful
+            # result even when it holds no vector layer. Reporting it as a defect would suppress the
+            # very evidence the fetch exists to produce, so it is reported as ARCHIVE_INVENTORIED
+            # and the workflow's NO_VECTOR_LAYER grep does not fire. An inventory that *failed* to
+            # list (`n_members == 1` with an `error` key) keeps the hard failure.
+            listed = int(record.get("archive_inventory", {}).get("n_members") or 0)
+            if spec.get("archive_inventory") and listed > 1 and members and "error" not in members[0]:
+                record["status"] = "ARCHIVE_INVENTORIED"
+                record["vector_layer_found"] = False
+            else:
+                record["status"] = "NO_VECTOR_LAYER"
             results[label] = record
             continue
         all_records, all_schemas = [], {}
         for layer in layers:
             try:
-                recs, schema = external_clip.clip_and_clip_report(str(layer), vertex_step_m=200.0)
+                recs, schema = external_clip.clip_and_clip_report(
+                    str(layer), vertex_step_m=200.0, keep_fields=spec.get("keep_fields"))
             except Exception as error:  # noqa: BLE001 - one unreadable layer must not sink the job
                 all_schemas[layer.name] = {"status": "LAYER_UNREADABLE",
                                            "error": f"{type(error).__name__}: {error}"}
@@ -351,7 +465,10 @@ def build_sciencebase_derived(out_dir: Path, pins: dict[str, dict], only: str | 
             record["status"] = "DERIVED_WRITTEN"
         record["layers_found"] = [str(x.name) for x in layers]
         record["derived"] = report
-        record["committed_files"] = [f"docs/data/{spec['stem']}.csv", f"docs/data/{spec['stem']}.json"]
+        # Extend, never clobber: the archive member listing (if this spec asked for one) is already
+        # in `committed_files` and must stay listed alongside the clipped table.
+        record.setdefault("committed_files", []).extend(
+            [f"docs/data/{spec['stem']}.csv", f"docs/data/{spec['stem']}.json"])
         results[label] = record
         print(json.dumps({label: {k: record.get(k)
                                   for k in ("status", "pin_match", "payload_format", "derived")}}))
