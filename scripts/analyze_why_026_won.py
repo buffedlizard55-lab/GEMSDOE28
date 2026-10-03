@@ -89,12 +89,21 @@ def kernel_terms(pred: np.ndarray, truth: np.ndarray) -> dict[str, float]:
 
 
 def dti_from_model(a: float, n_over_t: float) -> float:
-    """The sibling two-parameter emission model, in closed form (credit fraction a = A/T)."""
-    return a / (a + 0.2 * n_over_t + 0.8 * (1.0 - a))
+    """Naive closure of the official DTI for credit fraction a = A/T and n_over_t = N/T.
+
+    Derivation from the competition metric (known-catalogue pixels masked, so B = A):
+        DTI = A / (A + 0.2*(N - A) + 0.8*(T - A)) = A / (0.2*N + 0.8*T)
+            = a / (0.8 + 0.2*n_over_t).
+    An earlier revision of this script used a/(a + 0.2*n_over_t + 0.8*(1-a)), which double-counts
+    0.2*a in the denominator and inflates every prediction (sibling's c/f were themselves solved
+    under that older closure, so with the corrected denominator they slightly under-predict the
+    two reported anchors; the residuals are recorded, not hidden).
+    """
+    return a / (0.8 + 0.2 * n_over_t)
 
 
 def solve_credit_fraction(target: float, n_over_t: float) -> float:
-    """Invert DTI = a/(a + 0.2 N/T + 0.8(1-a)) for the credit fraction a."""
+    """Invert DTI = a/(0.8 + 0.2*n_over_t) for the credit fraction a."""
     lo, hi = 1e-12, 1.0
     for _ in range(300):
         mid = 0.5 * (lo + hi)
@@ -175,31 +184,41 @@ def main() -> int:
     n_28 = int(d28.sum())
     y1, y2, y3 = 0.1922, 0.2477, 0.2600          # reported: solid, d1.5, d2.8-class
     r15, r28 = 0.8531275643256233, 0.7588759346162787   # geometric retentions (sibling ledger)
-    rho15, rho28 = n_15 / n_solid, n_28 / n_solid
-    k = r15 * (1.0 - 0.2 * y2) / (1.0 - 0.2 * y1)
-    f = 4.0 * (y2 - y1 * k) / (y1 * k - y2 * rho15)
-    c = y1 * (0.2 * f + 0.8) / (1.0 - 0.2 * y1)
-    pred_d15 = dti_from_model(c * r15, rho15)
-    pred_d28 = dti_from_model(c * r28, rho28)
+    c = 0.508792            # sibling emission_model.json credit_per_truth (pinned owner record)
+    g = 12225.896           # sibling lattice calibration of the hidden truth mass |G|, px
+    # n_over_t is measured directly: N(d) / |G| (no re-fit of c under the corrected closure).
+    n_over_t_solid = n_solid / g
+    n_over_t_15 = n_15 / g
+    n_over_t_28 = n_28 / g
+    pred_d15 = dti_from_model(c * r15, n_over_t_15)
+    pred_d28 = dti_from_model(c * r28, n_over_t_28)
     out["calibration"] = {
-        "method": ("closed-form solve of the two-parameter emission model on the two reported "
-                   "anchors (solid 0.1922, dotted d=1.5 0.2477) using measured dot counts and the "
-                   "sibling's geometric retention curve; the d=2.8-class file is then predicted "
-                   "out of sample"),
-        "fitted_fp_mass_per_truth": f,
-        "fitted_credit_per_truth": c,
+        "method": ("corrected naive closure DTI = a/(0.8 + 0.2*N/|G|), evaluated with the sibling's "
+                   "pinned credit_per_truth c = 0.508792, its geometric retention curve and the "
+                   "measured dot counts at the sibling lattice calibration |G| = 12,225.896 px; the "
+                   "d=2.8-class file is predicted out of sample (no parameter is re-fit here)"),
+        "closure": "DTI = a / (0.8 + 0.2 * N/|G|), a = c * retention",
+        "sibling_credit_per_truth": c,
+        "truth_mass_calibration_px": g,
+        "measured_n_over_t": {"solid": n_over_t_solid, "d1_5": n_over_t_15, "d2_8": n_over_t_28},
+        "retention": {"d1_5": r15, "d2_8": r28},
         "reported_anchor_solid": y1,
-        "reproduced_anchor_solid": dti_from_model(c, 1.0),
+        "reproduced_anchor_solid": dti_from_model(c, n_over_t_solid),
         "reported_anchor_d1_5": y2,
         "predicted_anchor_d1_5": pred_d15,
         "predicted_d2_8_out_of_sample": pred_d28,
         "reported_d2_8": y3,
-        "residual": pred_d28 - y3,
+        "residuals": {"solid": dti_from_model(c, n_over_t_solid) - y1,
+                      "d1_5": pred_d15 - y2, "d2_8": pred_d28 - y3},
+        "hand_check_expected": {"d1_5": 0.24349, "d2_8": 0.25382},
         "sibling_ledger_interval_for_this_operating_point": [0.25002945809247196, 0.2613299747091814],
-        "verdict": ("the model calibrated on two anchors predicts %.4f for the third file; the "
-                    "reported value %.4f lies inside the sibling's published interval [0.2500, "
-                    "0.2613], i.e. the emission-geometry model transfers out of sample"
-                    % (pred_d28, y3)),
+        "verdict": ("under the corrected closure the pinned sibling constants predict %.4f for d1.5 "
+                    "and %.4f for the d=2.8-class file against reported 0.2477 and 0.2600, i.e. "
+                    "residuals of %.4f and %.4f; the reported d=2.8 value stays inside the sibling's "
+                    "published interval [0.2500, 0.2613] and the ordering solid < d1.5 < d2.8 is "
+                    "reproduced, so the emission-geometry explanation survives, while the two "
+                    "constants were themselves solved under the older closure and are not re-fit here"
+                    % (pred_d15, pred_d28, pred_d15 - y2, pred_d28 - y3)),
     }
 
     # --- target inversion -------------------------------------------------------------------------
@@ -218,7 +237,7 @@ def main() -> int:
         targets["|G|=%d" % T] = rows
     # the same inversion at the *measured* credit of the current best file
     a_cur = c * r28
-    n_req = (a_cur * (1.0 / 0.3195 - 1.0) - 0.8 * (1.0 - a_cur)) / 0.2 * 12630.0
+    n_req = (a_cur / 0.3195 - 0.8) / 0.2 * g
     out["targets"] = {
         "truth_size_note": ("|G| is not observable from here. 12,630 px is the sibling's lattice "
                             "calibration (unconfirmed); 20,000 px is shown as a sensitivity."),
