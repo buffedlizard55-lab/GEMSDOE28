@@ -55,9 +55,9 @@
         0.003
       ],
       "cost": "Medium (~1 session: shapefile ingest/reprojection + transform + frozen 4-fold holdout).",
-      "data_gate": "ScienceBase item listed 2026-10-03 with file sizes; byte-level fetch queued on the runner bridge (scripts/fetch_external_layers.py ScienceBase availability section). Sandbox cannot reach sciencebase.gov directly.",
+      "data_gate": "ScienceBase item listed 2026-10-03 with file sizes; byte-level fetch COMPLETED on the runner bridge (AVAILABILITY_FETCHED) (scripts/fetch_external_layers.py ScienceBase availability section). Sandbox cannot reach sciencebase.gov directly.",
       "validation": "Preregistration required before any run; seeds 200-209 reserved for the next arm (190-199 consumed by the H32-2 closed screen). Never a weekly slot without a PASS on the frozen 4-fold spatially-blocked holdout.",
-      "status": "UNTRIED (external byte-verify queued on runner)"
+      "status": "UNTRIED \u2014 data gate OPEN: Shapefile_Full Study.zip byte-verified on the runner 2026-10-03T17:58:38Z (35,912,323 B, sha256 5d6213f7763002d3\u2026; evidence/external_layer_inventory.json sb_slip_tendency_shapefile_full AVAILABILITY_FETCHED)."
     },
     {
       "id": "H33-3",
@@ -79,7 +79,7 @@
       "cost": "Medium (124 MB zip ingest + probe raster already byte-verified locally).",
       "data_gate": "Zip listed on ScienceBase 2026-10-03; byte-verify queued on the runner bridge. Probes already byte-verified (evidence/external_layer_inventory.json).",
       "validation": "Preregistration required before any run; seeds 200-209 reserved for the next arm (190-199 consumed by the H32-2 closed screen). Never a weekly slot without a PASS on the frozen 4-fold spatially-blocked holdout. Add-emission variants screened by bounded-cost arithmetic (alpha=0.2) first.",
-      "status": "UNTRIED (external byte-verify queued on runner)"
+      "status": "UNTRIED \u2014 data gate OPEN: heat_flow zip byte-verified on the runner 2026-10-03T17:58:38Z (130,154,244 B, sha256 e7fd62c6963ab390\u2026; evidence/external_layer_inventory.json sb_heat_flow_zip AVAILABILITY_FETCHED); 2 m probes already byte-verified."
     },
     {
       "id": "H33-5",
@@ -121,7 +121,7 @@
       "cost": "Medium-high (5 GeoTIFF reprojections + alignment transform + label-free audit before seed spend).",
       "data_gate": "All five GeoTIFFs listed on ScienceBase 2026-10-03; byte-verify queued on the runner bridge.",
       "validation": "Preregistration required before any run; seeds 200-209 reserved for the next arm (190-199 consumed by the H32-2 closed screen). Never a weekly slot without a PASS on the frozen 4-fold spatially-blocked holdout.",
-      "status": "UNTRIED (external byte-verify queued on runner)"
+      "status": "UNTRIED \u2014 data gate PENDING: the five GeoTIFFs are nested in ScienceBase facet extensions, so the first probe returned FILE_NOT_LISTED; the facet-aware probe (fetch_external_layers.py fix) runs on the next merge to main."
     },
     {
       "id": "H33-4",

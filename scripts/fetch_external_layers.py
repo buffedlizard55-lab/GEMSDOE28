@@ -171,7 +171,11 @@ def run_sciencebase_availability(out_dir: Path) -> dict:
         record: dict = {"doi": check["doi"], "page": check["page"], "filename": check["filename"],
                         "hypothesis": check["hypothesis"]}
         item = sciencebase_item_json(check["item"])
-        files = (item or {}).get("files", []) if isinstance(item, dict) else []
+        files = list((item or {}).get("files", [])) if isinstance(item, dict) else []
+        # ScienceBase nests some payloads (e.g. the five MT conductance GeoTIFFs) inside
+        # facet extensions rather than the top-level files array; search both.
+        for facet in (item or {}).get("facets", []) if isinstance(item, dict) else []:
+            files.extend(facet.get("files", []) or [])
         match = next((f for f in files if f.get("name") == check["filename"]), None)
         if match is None:
             record["status"] = "FILE_NOT_LISTED"
