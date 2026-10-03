@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checked_utc": "2026-10-03T17:18:30Z",
+  "checked_utc": "2026-10-03T23:59:00Z",
   "status": "PASS",
   "scope": "local repository evidence only; cannot rule out undocumented seed use in unsearched external/sibling workspaces",
   "network_access": "none",
@@ -85,11 +85,48 @@
       "evidence": "h32_1_structural_step_holdout.json",
       "claim_file": null,
       "eligible": true
+    },
+    "h33_1_kinematic_reactivation": {
+      "range": [
+        200,
+        209
+      ],
+      "owner": "H33-1 kinematic reactivation gate",
+      "protocol": "knowledge/19_preregistration_H33-1.md",
+      "evidence": "(pending - data gate opened by the sb_slip_tendency bridge)",
+      "claim_file": null,
+      "eligible": true
+    },
+    "losfo_far_field": {
+      "range": [
+        210,
+        214
+      ],
+      "owner": "LOSFO far-field harness",
+      "protocol": "src/gems27/losfo.py + scripts/run_losfo_harness.py",
+      "evidence": "evidence/losfo_farfield_diagnostic.json",
+      "claim_file": null,
+      "eligible": true
+    },
+    "h34_packing_ladder": {
+      "range": [
+        220,
+        229
+      ],
+      "owner": "H34 packing-ladder rung selection",
+      "protocol": "knowledge/21_preregistration_H34.md",
+      "evidence": "evidence/h34_holdout.json",
+      "claim_file": null,
+      "eligible": false,
+      "note": "CONSUMED - gate FAIL on criterion 2 (direction control); arm closed, not rerunnable"
     }
   },
   "range_status": {
     "screen": "CONSUMED",
-    "h32_1_screen": "CONSUMED"
+    "h32_1_screen": "CONSUMED",
+    "h33_1_kinematic_reactivation": "RESERVED",
+    "losfo_far_field": "CONSUMED",
+    "h34_packing_ladder": "CONSUMED"
   },
   "previously_used_holdout_seeds": [
     100,
@@ -370,5 +407,6 @@
   "unreadable_evidence_json": [],
   "invalid_stage_records": [],
   "decision": "Seeds 160-169 were consumed by the H31-1 screen, which FAILED its frozen gate, so its confirmation decade is ineligible. Seeds 170-179 were reassigned to the preregistered H32-1 screen (knowledge/14) and are consumed by that single run. The next new hypothesis must preregister a fresh decade (180-189).",
-  "sha256": "1550888208360e45686c8a7e03df1e7c2bb7b2d1397afaeadfe69b6e8067369b"
+  "sha256": "1550888208360e45686c8a7e03df1e7c2bb7b2d1397afaeadfe69b6e8067369b",
+  "next_free_decade": "230-239"
 }

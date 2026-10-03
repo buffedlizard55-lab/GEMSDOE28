@@ -252,6 +252,98 @@ numbers; disclosed in `knowledge/21` §3 and `registry/irregularities.json`.
 
 ---
 
+### 3.5 H34 — the packing ladder, and a threshold every arm was judged against
+
+`scripts/analyze_operating_point_h34.py` → `evidence/h34_operating_point.json`;
+`scripts/run_h34_holdout.py` → `evidence/h34_holdout.json` (seeds `220–229`, 40 cells).
+Preregistration `knowledge/21_preregistration_H34.md`, result `knowledge/22_h34_result.md`.
+
+**The ladder is finite.** `thinning.dot_thin` keeps a pixel iff no already-kept pixel is strictly
+closer than `min_dist`, so its output changes only when `min_dist` crosses a distance two integer
+cells can actually realise ($\sqrt{a^2+b^2}$). There is no continuum to search — only 29 rungs below
+8 px. The current file sits at rung `2.828` ($N = 44{,}090$).
+
+**The gate FAILED and the arm is closed.** Preregistered on four criteria; three passed, one did not:
+
+| # | Criterion | Observed | Verdict |
+|---|---|---:|---|
+| 1 | `e(2.828→3.000) < tau_live` | **0.01914** (10/10 seeds, 4/4 folds) | PASS |
+| 2 | direction control: `e(3.000→3.162) > tau_live` | **0.02814** | **FAIL** |
+| 3 | seed/fold consistency | 10/10 and 4/4 | PASS |
+| 4 | monotone emission, probabilities in `[0,1]`, grid pinned | 40/40 | PASS |
+
+Criterion 2 says the proxy cannot locate a *stopping* rung — it rates both steps profitable, and it
+would keep thinning forever. **Cause quantified:** removal efficiency scales with credit per dot, and
+the proxy earns `0.0393` credit/dot against the surface's `0.1087` (`2.77×`), which flattens its
+efficiency ladder by `1.4×`–`2.3×`. Per the preregistration: no confirmation run, no retuning on
+`220–229`, **no candidate TIFF, no weekly slot, and rung 3.0 is not promoted.** The primary download
+is unchanged.
+
+**What did survive is bigger than the arm: the threshold was wrong.** Differentiating the metric, a
+pixel class with removal efficiency $e = |d\text{TP}_w/d\text{FP}_w|$ is worth dropping iff
+$e < \tau = 0.2\,\text{DTI}/(1-0.2\,\text{DTI})$, which **rises with DTI**. The catalogue-holdout
+proxy scores `0.095` → $\tau = 0.0193$. The `0.2600` submission those harnesses inform scores `0.26`
+→ $\tau = 0.0548$, i.e. **2.85× more permissive**. Every pruning arm in this repository has been
+gated against the proxy's threshold, so **any arm whose efficiency lies in `(0.019, 0.055)` was
+rejected by a threshold that does not apply to it.**
+
+The rule itself is now confirmed empirically to ~1 %: on 40 independent holdout cells the proxy's
+ΔDTI crosses zero at measured $e = 0.01914$ against a predicted $\tau_{\text{proxy}} = 0.019265$
+(ΔDTI `−0.000031`), and the next step at $e = 0.0281 > \tau$ gives ΔDTI `−0.00227` — right sign, right
+magnitude, on data the framework never saw.
+
+**A modelling error found and fixed while building the test for this.** `src/gems27/operating_point.py`
+closed the metric as $\text{FP} = N - A$, charging every emitted pixel full false-positive mass and
+ignoring the crowding excess $\tilde{A} - A$ — which the inversion measures as `0.18×`, `0.43×` and
+`1.46×` of $A$ on the three anchors, so no fitting can absorb it. Corrected to
+$\text{FP} = (1-\gamma)N$ with $\gamma = \tilde{A}/N$ **measured** on the anchors as
+`0.12569 / 0.12576 / 0.12811` — constant to `1.9 %`, exactly what non-selective thinning predicts (and
+what H32-1's own evidence showed: `11.6 %` on-catalogue before thinning, `11.7 %` after). A second
+error: the retention curve is measured on a network with `1:1` dot-to-truth density while the H19-5
+surface runs `~10:1`, so a single fitted **density scale** $s$ rescales the loss. With $L$, $|G|$ and
+$\gamma$ all measured, the model has **one** free parameter and reproduces three hash-authenticated
+live scores to $\le 1.08\times10^{-3}$:
+
+| anchor | $N$ | live score | model | residual |
+|---|---:|---:|---:|---:|
+| h19-5 solid | 121,131 | 0.1922 | 0.192201 | `+7.6e-07` |
+| dotted-h19-5-d1-5 | 60,069 | 0.2477 | 0.246618 | `−1.08e-03` |
+| dotted-h19-5-d2-8 | 44,090 | 0.2600 | 0.260627 | `+6.3e-04` |
+
+The old two-parameter fit is **rejected**: it fits to `3.2e-04` but recovers $|G| = 9{,}698$,
+**20.7 % below** the blind lattice, because two free parameters cannot separate the crowding term from
+the density mismatch. The corrected model agrees that rung 3.0 is optimal (`+0.00303`, stable for
+$s \in [0.79, 0.87]$) and *does* satisfy the direction control ($e(3.0\!\to\!3.162) = 0.0659 > \tau =
+0.0556$) — but a model projection is not a validated result, so the arm stays closed.
+
+> **Consistency note.** The corrected closure is algebraically identical to the one
+> §3.1's reachability frontier already used, $\text{DTI}=\text{TP}_w/(0.2\,\text{TP}_w(1-\rho)+0.2N+0.8|G|)$:
+> substituting $\rho = \gamma N/A$ makes the denominators equal term for term, and the frontier's own
+> $\rho = 1.17909$ at this anchor reproduces $\gamma = 1.17909 \times 4791.05 / 44090 = 0.12811$. The
+> two sessions' arithmetic agrees; only the new module had the bug.
+
+**Cross-check against the H33-1 result merged from `main`.** The parallel session ran the
+preregistered H33-1 prune on seeds `200–209` and refuted it — 0 of 6 criteria, mean ΔDTI `−0.003014`,
+`0/10` seeds, `0/4` folds. Its measured removal efficiency is **`0.12855`**, which is not merely above
+$\tau_{\text{proxy}} = 0.0193$ but **2.3× above $\tau_{\text{live}} = 0.0548$** — so the threshold
+correction does **not** rescue it, and its refutation is stronger than it looked. Two of its criteria
+are independently damning: the direction control went the *wrong* way (a naive top-10 % prune destroys
+less credit per unit of mass, $e = 0.10104$, than the kinematically-targeted prune does), and kinematic
+favourability covers only `11.95 %` of the emission against a required `60 %`.
+
+> **The pruning family is now exhausted.** H32-2 (`e = 0.0344`), H33-1 (`e = 0.1286`) and H34
+> (criterion 2 failed) have all been measured and all fail, and §3.1 shows the gap to `0.3195` is a
+> detection gap no prune can close. Future effort belongs on **addition** arms (H33-3, H33-4, H33-5),
+> gated against $\tau_{\text{live}}$ on the LOSFO far-field truth set.
+
+**Two re-readings follow, recorded as re-readings and not promoted.** `H32-2` (archived $e = 0.0344$)
+flips from FAIL to profitable at the live threshold, worth `+0.0047` modelled — it stays closed
+because it needs its own fresh decade, not a re-reading. The `LOSFO` far-field **addition** gate
+(`knowledge/20` §3) is the one that changes a plan: measured far-field credit/dot is `0.0465`, which
+clears the cell threshold `0.0204` but **not** $\tau_{\text{live}} = 0.0548$, so base-quality
+far-field dots would *lower* the live score. That gate must be restated against the live threshold.
+
+
 ## 4. Euler Deconvolution for Depth (Reid et al., *Geophysics*, 1990) & Screen Ledger
 
 Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `evidence/h31_1_euler_feature_audit.json`, `evidence/h31_1_euler_clusters.csv`):
@@ -315,6 +407,11 @@ PYTHON=.venv/bin/python bash scripts/download_competition_data.sh
 #     Measurement instrument, NOT a promotion gate. Trains 2 detectors per seed (40 GBDT fits).
 .venv/bin/python scripts/run_losfo_harness.py --seeds 210-214
 
+# 3f. H34 live-anchored operating point (ladder, threshold, gamma closure) - ~35 s
+.venv/bin/python scripts/analyze_operating_point_h34.py
+# 3g. H34 preregistered holdout on seeds 220-229 - ~200 s. Result: GATE FAIL (direction
+#     control). Arm closed; nothing is promoted from it.
+.venv/bin/python scripts/run_h34_holdout.py --seeds 220-229
 # 3e. Runner-bridge only: pin-verify and clip an official release to the footprint.
 #     Cannot run in the agent sandbox (sciencebase.gov returns HTTP 000); runs on GitHub Actions.
 python scripts/fetch_external_layers.py --derived all --external-pins registry/external_pins.json \
