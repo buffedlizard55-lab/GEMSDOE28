@@ -174,13 +174,27 @@ def test_front_page_has_download_and_exact_note():
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
     research = (DOCS / "research.html").read_text()
     registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
-    assert len(registry["hypotheses"]) == 5
-    assert "5 currently ranked untried geological hypotheses" in research
-    assert "the current GEMSDOE28 session-9 ranking above contains the five untried H33-series hypotheses" in research
+    # H33-1 was RUN and refuted in session 10 (knowledge/21), so it moved from the untried list to
+    # tested_hypotheses. The count and the site wording must both track that, not a hardcoded 5.
+    untried_ids = {h["id"] for h in registry["hypotheses"]}
+    assert untried_ids == {"H33-2", "H33-3", "H33-4", "H33-5"}
+    assert len(registry["hypotheses"]) == 4
+    assert f"{len(registry['hypotheses'])} currently ranked untried geological hypotheses" in research
+    assert "session-10 ranking above contains the four H33-series hypotheses that remain untried" in research
+    assert "H33-1 was run on its reserved seeds 200\u2013209 and refuted" in research
     assert "not part of the current untried list" in research
     assert "four-item untried list" not in research
-    assert {h["id"] for h in registry["hypotheses"]} == {"H33-1", "H33-2", "H33-3", "H33-4", "H33-5"}
-    assert "H31-1" not in {hypothesis["id"] for hypothesis in registry["hypotheses"]}
+    # the site must never still claim H33-1 is untried
+    assert "the five untried H33-series hypotheses" not in research
+    assert "H31-1" not in untried_ids
+    assert "H33-1" not in untried_ids
+    h33_1 = next(item for item in registry["tested_hypotheses"] if item["id"] == "H33-1")
+    assert h33_1["outcome"] == "REFUTED"
+    assert h33_1["seeds"] == "200-209"
+    assert h33_1["criteria_failed"] == "6 of 6"
+    # the result section must render the measured numbers, not placeholders
+    assert "0.12855" in research and "0.10104" in research and "-0.003014" in research
+    assert "Pruning is exhausted as a family" in research
     h32_2 = next(item for item in registry["tested_hypotheses"] if item["id"] == "H32-2")
     assert "FROZEN GATE FAILED" in h32_2["status"]
     assert "H32-2" in research and "evidence/h32_2_holdout.json" in research

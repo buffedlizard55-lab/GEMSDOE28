@@ -503,9 +503,21 @@ def render_hypothesis_card(h: dict, screen: dict, confirmation: dict, seed_audit
 <p><strong>Validation:</strong> {esc(validation)} {stage_links}</p></article>"""
 
 
+H33_RESULT_SECTION = """
+<section class="section"><h2>Session 10 — the first preregistered arm with its data in hand: H33-1, refuted</h2>
+<div class="callout"><strong>H33-1 (kinematic reactivation favourability gate) ran on its reserved seeds 200–209 and failed all {n_crit} frozen promotion criteria.</strong> It was executed before any new arm was designed because it was the only preregistered hypothesis whose external data had actually landed. The data precondition was verified from the bytes first — <a href="data/sb_slip_tendency_in_footprint.json">{n_seg} fault segments</a> clipped to the footprint from Siler (2022), DOI 10.5066/P9YL58W6, carrying <code>TS</code>, <code>TD</code>, <code>TS_norm</code>, <code>TD_TS</code>, <code>ShearStres</code>, <code>NormalStre</code> and stress-orientation fields, reprojected from NAD83 Albers to EPSG:32611. Mean paired ΔDTI <strong>{gain:+.6f}</strong>, {won}/{nseeds} seeds, {folds}/4 folds. <code>gate_passed: {gate}</code>.</div>
+<table class="table"><thead><tr><th>variant</th><th>mean DTI</th><th>ΔDTI</th><th>seeds won</th><th>folds</th><th>Δdots/seed</th><th>credit per removed FP</th></tr></thead><tbody>{rows}</tbody></table>
+<table class="table"><thead><tr><th>promotion criterion</th><th>value</th><th>threshold</th><th></th></tr></thead><tbody>{crits}</tbody></table>
+<div class="grid"><article class="card span-4"><h3>1. A hard coverage ceiling of ~12%</h3><p>Only <strong>{cov:.2f}%</strong> of emitted dots (worst fold {covmin:.2f}%) had a catalogued segment within 1 km whose strike agreed within 20°. The other 88% are neutral by construction and can never be pruned. The 60% coverage precondition existed to catch exactly this. The cause is structural, not tunable: <strong>candidate dots are emitted off-catalogue by design</strong>, so most have no similarly oriented mapped segment nearby. Any arm that transfers an attribute <em>from</em> mapped faults <em>to</em> off-catalogue candidates inherits that ceiling.</p></article>
+<article class="card span-4"><h3>2. The sign of the physics is inverted</h3><p>The direction control was <em>better</em> than the primary arm, not worse: removing the bottom decile by favourability discarded <strong>{effp:.5f}</strong> credit per removed FP while removing the <em>top</em> decile discarded only <strong>{effc:.5f}</strong>. The dots this score called unfavourably oriented were carrying <em>more</em> DTI credit than the ones it called favourable.</p></article>
+<article class="card span-4"><h3>3. Pruning is exhausted as a family</h3><p>All three arms removed pixels at <strong>0.101–0.140 credit per FP</strong> against a break-even inclusion threshold of <strong>{thr:.5f}</strong> — the discarded pixels were worth <strong>5–7× break-even</strong>. With H31-1 and H32-2 that is three independent pruning arms failing the same way, reaching the same conclusion as the frontier from a completely different direction: at this density, pruning destroys credit whatever physical rationale selects the pixels.</p></article></div>
+<p><strong>Standing effect.</strong> Per the preregistration the result was recorded and nothing else: no retuning, no re-run on a fresh decade, no candidate TIFF, no submission slot. Seeds 200–209 are spent; the next arm takes 220–229. Attribute transfer from mapped to off-catalogue structure is closed as a pruning signal. <a href="../knowledge/21_result_H33-1_refuted_2026-10-03.md">Full result record</a> · <a href="../knowledge/19_preregistration_H33-1.md">frozen preregistration</a> · <a href="../evidence/h33_1_holdout.json">evidence JSON</a> · <a href="../src/gems27/kinematics.py">score source</a>.</p></section>
+"""
+
+
 def render_research(registry: dict, h28: dict, euler: dict, board: dict,
                     screen: dict, confirmation: dict, seed_audit: dict, h32: dict,
-                    frontier: dict, losfo: dict) -> str:
+                    frontier: dict, losfo: dict, h33: dict) -> str:
     hypotheses = sorted(registry.get("hypotheses", []), key=lambda item: item.get("rank", 999))
     hypothesis_html = "".join(render_hypothesis_card(h, screen, confirmation, seed_audit) for h in hypotheses)
     si0 = euler.get("structural_indices", {}).get("0", {})
@@ -527,6 +539,33 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
     lo_ff = losfo.get("far_field_check", {})
     lo_meta = losfo.get("meta", {})
     lo_fold = losfo.get("per_fold", {})
+    h33_v = h33.get("variants", {})
+    h33_p = h33_v.get("h33_1_prune_p10", {})
+    h33_c = h33_v.get("control_top_p10", {})
+    h33_d = h33.get("data_precondition", {})
+    h33_crit = h33.get("promotion_criteria", {})
+    h33_rows = "".join(
+        f"<tr><td><code>{esc(k)}</code></td><td>{fmt_number(v.get('mean_dti', 0), 6)}</td>"
+        f"<td>{v.get('mean_dti_gain', 0):+.6f}</td><td>{v.get('seeds_won', 0)}/{v.get('n_seeds', 10)}</td>"
+        f"<td>{v.get('folds_improved', 0)}/4</td><td>{fmt_number(v.get('delta_dots_per_seed', 0), 1)}</td>"
+        f"<td>{fmt_number(v.get('removed_credit_per_removed_fp', 0), 5)}</td></tr>"
+        for k, v in h33_v.items())
+    h33_crit_rows = "".join(
+        f"<tr><td>{esc(k)}</td><td>{fmt_number(v.get('value', 0), 6)}</td>"
+        f"<td>{fmt_number(v.get('threshold', 0), 6)}</td>"
+        f"<td>{'PASS' if v.get('passed') else '<strong>FAIL</strong>'}</td></tr>"
+        for k, v in h33_crit.items())
+    untried = [h["id"] for h in hypotheses if h["id"].startswith("H33")]
+    n_untried = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}.get(len(untried), str(len(untried)))
+    h33_section = H33_RESULT_SECTION.format(
+        n_crit=len(h33_crit), n_seg=comma(int(h33_d.get("n_segments", 0))),
+        gain=h33_p.get("mean_dti_gain", 0.0), won=h33_p.get("seeds_won", 0),
+        nseeds=h33_p.get("n_seeds", 10), folds=h33_p.get("folds_improved", 0),
+        gate=str(h33.get("gate_passed")).lower(), rows=h33_rows, crits=h33_crit_rows,
+        cov=(h33.get("fav_coverage_mean") or 0.0) * 100, covmin=(h33.get("fav_coverage_min") or 0.0) * 100,
+        effp=h33_p.get("removed_credit_per_removed_fp", 0.0),
+        effc=h33_c.get("removed_credit_per_removed_fp", 0.0),
+        thr=h33.get("inclusion_threshold_oof", 0.0))
     fold_spread = ", ".join(
         f"{k} {(v['losfo_tp'] / v['leaky_tp']):.3f}" for k, v in lo_fold.items() if v.get("leaky_tp")
     )
@@ -557,6 +596,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 <tr><td><code>leaky</code> — unmasked control, same truth</td><td>{fmt_number(lo_arms.get('leaky', {}).get('mean_dti', 0), 5)}</td><td>{fmt_number(lo_arms.get('leaky', {}).get('sum_tp', 0), 1)}</td><td>{fmt_number(lo_arms.get('leaky', {}).get('recall_w', 0), 4)}</td><td>{fmt_number(lo_arms.get('leaky', {}).get('credit_per_dot', 0), 4)}</td></tr></tbody></table></div>
 <p><strong>Result, stated with its uncertainty.</strong> Pooled ratio <code>losfo/leaky</code> = <strong>{fmt_number(lo_ratio.get('credit_losfo_over_leaky', 0), 4)}</strong> on credit and {fmt_number(lo_ratio.get('mean_dti_losfo_over_leaky', 0), 4)} on DTI: the base arm keeps ~99% of its far-field credit when 600 m of surrounding catalogue is hidden, so <strong>no large catalogue-interpolation inflation was detected</strong>. But the per-fold credit ratios are <strong>{esc(fold_spread)}</strong> — a spread of roughly −12% to +20% — so with 5 seeds this harness <strong>cannot resolve effects smaller than about ±12% per fold</strong>. The aggregate is a bound, not a measurement of a small effect. Two confounds are recorded, not smoothed over: the masked arm also has fewer positive training pixels ({comma(int(lo_meta.get('masked_label_px', 0)))} vs {comma(int(lo_meta.get('full_label_px', 0)))}), and held-out systems are still <em>mapped</em> faults, so this measures an <strong>upper bound</strong> on performance against genuinely unmapped faults. What is solidly gained: <strong>a far-field truth set on which addition arms can be gated</strong>, with a measured base operating point (recall_w {fmt_number(lo_arms.get('losfo', {}).get('recall_w', 0), 4)}, credit/dot {fmt_number(lo_arms.get('losfo', {}).get('credit_per_dot', 0), 4)}) to beat.</p></section>
 
+{h33_section}
 <section class="section"><h2>Current ranking</h2><p>Ranking weighs expected catalogue-proxy gain, testability and cost. “Untried” refers to the proposed transform/holdout arm in this checkout, not a claim of global scientific novelty. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p><div class="grid">{hypothesis_html}</div></section>
 
 <section class="section"><h2>H31-1: depth-labeled Euler source solutions, not gradient peaks</h2><div class="callout"><strong>State:</strong> protocol revision 2 is committed at 524bf27 before any classifier fit or holdout; the current label-free feature build is bound to it and passes all three pre-fit data-sufficiency checks. Earlier protocol commit hashes cited by prior working-copy artifacts are absent from this checkout's Git history; the initial build's commit chronology is not proven and is disclosed in the history audit. Magnetic field units remain unauthenticated. H31 current outcome: {esc(h31_result_summary(screen, confirmation, seed_audit))} No H31 submission candidate has been created. Local seed audit status {esc(seed_audit.get('status', 'not recorded'))} covers {comma(len(seed_audit.get('evidence_json_sha256_scanned', {})))} evidence JSON files; screen seeds 160–169 are {esc(seed_range_label(seed_audit, 'screen'))} by the failed H31-1 screen, and seeds 170–179 are {esc(seed_range_label(seed_audit, 'h32_1_screen'))} by the single H32-1 screen, so the H31-1 confirmation decade no longer exists. External/sibling-workspace seed use remains unknowable. {esc(h31_next_step(screen, confirmation, seed_audit))}</div>
@@ -583,7 +623,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 </tbody></table></div><p>A candidate must not spend a weekly slot until every predeclared gate is met. The catalogue hide-and-recover task is necessarily a proxy: labels are mostly faults already represented in a published catalogue and do not provide an independent sample of hidden expert-created, far-field faults.</p></section>
 
 <section class="section"><h2>Live score and leaderboard boundaries</h2><p>A one-off manual public-page observation on {esc(board.get('snapshot_date', 'not recorded'))} records DARD #1 at 0.3195 and wbg1 #15 at 0.2600. A public leaderboard row alone does not link a score to the repository owner or a local TIFF. The owner-reported 0.2477 is likewise unverified without an organizer receipt. No row is treated as a score claim for this project. <a href="{esc(board.get('url', 'https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'))}">Manual-review link</a>; automated access and monitoring are prohibited by project policy.</p></section>
-<section class="section"><h2>Historical screen archive (superseded)</h2><div class="callout"><strong>Archive marker:</strong> the predecessor project used the heading “Current Session 5 untried screen (4 hypotheses).” That was a dated four-item view; the current GEMSDOE28 session-9 ranking above contains the five untried H33-series hypotheses and is maintained separately.</div>
+<section class="section"><h2>Historical screen archive (superseded)</h2><div class="callout"><strong>Archive marker:</strong> the predecessor project used the heading “Current Session 5 untried screen (4 hypotheses).” That was a dated four-item view. The current GEMSDOE28 session-10 ranking above contains the {n_untried} H33-series hypotheses that remain untried ({", ".join(untried)}); H33-1 was run on its reserved seeds 200–209 and refuted, so it now appears in the tested list rather than the untried one. Nothing in this archive section is part of the current untried list.</div>
 <h3>H27-10 annulus result — REJECTED; no weekly slot.</h3><p>The frozen 100–300 m annulus/reallocation gate on seeds 150–159 failed: mean paired ΔDTI +0.000846, 4/4 fold means but only 7/10 seed means improved, and annulus gross efficiency 0.03357 was below the 0.05212 live break-even estimate. A spacing-check bug in the first diagnostic was corrected for an integrity rerun on the same seeds; values and the frozen FAIL did not change. This is not fresh confirmation.</p><p>Evidence: <a href="../evidence/h27_10_annulus_holdout_initial.json">h27_10_annulus_holdout_initial.json</a> · <a href="../evidence/h27_10_annulus_holdout.json">corrected integrity rerun</a> · <a href="../knowledge/07_untried_hypotheses.md">historical disclosure</a>. The rejected H27-10 arm is not part of the current untried list and is not eligible to justify a weekly slot.</p></section>
 """
 
@@ -686,10 +726,11 @@ def main() -> int:
     topology_review = read_json("docs/data/topology_review_classes.json", {})
     frontier = read_json("evidence/reachability_frontier.json", {})
     losfo = read_json("evidence/losfo_farfield_diagnostic.json", {})
+    h33 = read_json("evidence/h33_1_holdout.json", {})
     pages = {
         "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32), "Overview"),
         "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "Executive summary"),
-        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo), "Research"),
+        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
     }
