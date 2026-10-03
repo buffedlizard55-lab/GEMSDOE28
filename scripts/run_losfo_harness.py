@@ -39,6 +39,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import sys
@@ -48,6 +49,7 @@ from pathlib import Path
 
 import numpy as np
 from scipy.ndimage import distance_transform_edt
+from scipy.spatial import cKDTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gems27 import (  # noqa: E402
@@ -115,6 +117,79 @@ def eval_set(pred: np.ndarray, truth: np.ndarray, active: np.ndarray) -> dict:
     return {"tp": tp, "fp": fp, "dti": dti, "dots": int(p.sum()), "n_truth": n_g}
 
 
+def load_licence_mask(csv_path, shape, mad_max=60.0, depth_max=400.0, n_min=8):
+    """H37-3 licence: SI-0 depth-coherent clusters -> one candidate pixel each, on the full grid.
+
+    Thresholds are frozen in knowledge/34_preregistration_H37-3_licence.md; changing them is a
+    preregistration deviation and must be declared in the result write-up.
+    """
+    mask = np.zeros(shape, dtype=bool)
+    rows, cols, kept = [], [], 0
+    with open(csv_path, newline="") as fh:
+        for r in csv.DictReader(fh):
+            if float(r["depth_mad_m"]) > mad_max:
+                continue
+            if float(r["median_depth_m"]) > depth_max:
+                continue
+            if int(r["n_solutions"]) < n_min:
+                continue
+            y, x = int(round(float(r["row"]))), int(round(float(r["col"])))
+            if 0 <= y < shape[0] and 0 <= x < shape[1]:
+                rows.append(y)
+                cols.append(x)
+                kept += 1
+    mask[rows, cols] = True
+    return mask, kept
+
+
+def pack_licence_dots(candidates, base, min_dist):
+    """Greedy independent set over `candidates` (raster order), spacing `min_dist` from `base`."""
+    bys, bxs = np.nonzero(base)
+    base_tree = cKDTree(np.column_stack([bys, bxs])) if bys.size else None
+    ys, xs = np.nonzero(candidates)
+    kept = []
+    kept_tree = None
+    for y, x in zip(ys, xs):
+        if base_tree is not None and base_tree.query([y, x])[0] < min_dist:
+            continue
+        if kept_tree is not None and kept_tree.query([y, x])[0] < min_dist:
+            continue
+        kept.append((y, x))
+        kept_tree = cKDTree(np.array(kept, dtype=float))
+    out = np.zeros_like(candidates)
+    if kept:
+        ky, kx = np.array(kept).T
+        out[ky, kx] = True
+    return out
+
+
+def random_matched_dots(pool, base, n_keep, min_dist, seed):
+    """Same count, same spacing, same eligibility pool -- only the choosing rule is content-blind."""
+    out = np.zeros_like(pool)
+    if n_keep <= 0:
+        return out
+    ys, xs = np.nonzero(pool)
+    rng = np.random.default_rng(seed)
+    order = rng.permutation(len(ys))
+    bys, bxs = np.nonzero(base)
+    base_tree = cKDTree(np.column_stack([bys, bxs])) if bys.size else None
+    kept = []
+    for i in order:
+        y, x = ys[i], xs[i]
+        if base_tree is not None and base_tree.query([y, x])[0] < min_dist:
+            continue
+        if kept:
+            ktree = cKDTree(np.array(kept, dtype=float))
+            if ktree.query([y, x])[0] < min_dist:
+                continue
+        kept.append((y, x))
+        if len(kept) >= n_keep:
+            break
+    if kept:
+        out[tuple(np.array(kept).T)] = True
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seeds", default="210-214")
@@ -122,6 +197,9 @@ def main() -> int:
     ap.add_argument("--buffer-px", type=int, default=losfo.DEFAULT_BUFFER_PX)
     ap.add_argument("--thin-d", type=float, default=2.8, help="dot spacing of the evaluated arm")
     ap.add_argument("--out", default=str(paths.EVIDENCE / "losfo_farfield_diagnostic.json"))
+    ap.add_argument("--euler-licence", default=None,
+                    help="CSV of SI-0 Euler clusters; enables the H37-3 positive emission licence "
+                         "arm (knowledge/34_preregistration_H37-3_licence.md)")
     ap.add_argument("--packing-variants", action="store_true",
                     help="also pack the same candidate pool by evidence / at random / by max "
                          "coverage at matched N, and score each on the identical far-field truth")
@@ -134,6 +212,19 @@ def main() -> int:
     foot = grid.load_footprint(paths.TEMPLATE)
     labels = grid.load_labels(paths.LABELS)
     fold = holdout.make_quadrant_folds(foot)
+
+    licence_mask = None
+    licence_meta = None
+    if args.euler_licence:
+        licence_mask, n_cand = load_licence_mask(args.euler_licence, foot.shape)
+        licence_meta = {
+            "csv": str(args.euler_licence),
+            "csv_sha256": hashlib.sha256(Path(args.euler_licence).read_bytes()).hexdigest(),
+            "rule": "depth_mad_m <= 60 and median_depth_m <= 400 and n_solutions >= 8",
+            "n_candidate_clusters": int(n_cand),
+            "thin_d_px": args.thin_d,
+        }
+        print(f"H37-3 licence: {n_cand} candidate clusters from {args.euler_licence}", flush=True)
 
     sys_grid, n_sys = losfo.fault_systems(labels, args.dilate_px)
     tab = losfo.system_table(sys_grid, n_sys, foot)
@@ -195,6 +286,28 @@ def main() -> int:
                 var_k = packing_arms(prob_leaky[sl], ridge_leaky[sl], fm, sp.known[sl], base_k,
                                      active, hidden, n_k, args.thin_d, seed * 4 + f)
 
+            euler_block = None
+            if licence_mask is not None:
+                elig = licence_mask[sl] & active & ~base_l & ~sp.known[sl]
+                lic = pack_licence_dots(elig, base_l, args.thin_d)
+                rng_seed = seed * 4 + f + 1000
+                rand = random_matched_dots(active & ~base_l & ~sp.known[sl], base_l,
+                                           int(lic.sum()), args.thin_d, rng_seed)
+                assert not (lic & base_l).any(), "licence overlaps the base emission"
+                assert not (lic & sp.known[sl]).any(), "licence overlaps the catalogue"
+                assert not (rand & base_l).any(), "random control overlaps the base emission"
+                rl = eval_set(base_l | lic, hidden, active)
+                rr = eval_set(base_l | rand, hidden, active)
+                euler_block = {
+                    "added_dots": int(lic.sum()), "control_dots": int(rand.sum()),
+                    "eligible_px": int(elig.sum()),
+                    "licence": rl, "random_control": rr,
+                    "delta_tp_licence": float(rl["tp"] - r_l["tp"]),
+                    "delta_tp_random": float(rr["tp"] - r_l["tp"]),
+                    "delta_dti_licence": float(rl["dti"] - r_l["dti"]),
+                    "delta_dti_random": float(rr["dti"] - r_l["dti"]),
+                }
+
             # habitat check: is the truth actually far from what the detector could see?
             # (distance transform on the full grid, then cropped with everything else)
             d_known = distance_transform_edt(~sp.known)[sl]
@@ -211,6 +324,7 @@ def main() -> int:
                 "frac_dots_ge_3px_from_known": (
                     float((dot_dist_l >= 3).mean()) if dot_dist_l.size else None),
                 "packing": ({"losfo": var_l, "leaky": var_k} if var_l is not None else None),
+                "euler": euler_block,
             }
             cells.append(row)
             per_fold_summary[sp.name].append(row)
@@ -237,6 +351,37 @@ def main() -> int:
             "credit_per_dot": float(tp / max(1, sum(get(c, key)["dots"] for c in cells))),
             "mean_dots": float(np.mean([get(c, key)["dots"] for c in cells])),
             "recall_w": float(tp / ng) if ng else 0.0,
+        }
+
+    euler_block_out = None
+    if licence_mask is not None:
+        rows = [c for c in cells if c.get("euler")]
+        added = sum(c["euler"]["added_dots"] for c in rows)
+        ctrl = sum(c["euler"]["control_dots"] for c in rows)
+        d_lic = [c["euler"]["delta_dti_licence"] for c in rows]
+        d_ran = [c["euler"]["delta_dti_random"] for c in rows]
+        d_pp = [c["euler"]["delta_dti_licence"] - c["euler"]["delta_dti_random"] for c in rows]
+        tp_lic = sum(c["euler"]["delta_tp_licence"] for c in rows)
+        dti_base = float(np.mean([c["losfo"]["dti"] for c in rows]))
+        euler_block_out = {
+            "preregistration": "knowledge/34_preregistration_H37-3_licence.md",
+            "input": licence_meta,
+            "n_cells": len(rows),
+            "added_dots_total": int(added),
+            "control_dots_total": int(ctrl),
+            "mean_added_per_cell": float(added / max(1, len(rows))),
+            "credit_per_added_dot": float(tp_lic / max(1, added)),
+            "tau_live_bar": 0.0548,
+            "tau_farfield_bar": float(0.2 * dti_base / (1.0 - 0.2 * dti_base)),
+            "mean_delta_dti_licence_vs_base": float(np.mean(d_lic)),
+            "mean_delta_dti_random_vs_base": float(np.mean(d_ran)),
+            "mean_delta_dti_licence_vs_random": float(np.mean(d_pp)),
+            "cells_licence_improved_vs_base": int(sum(1 for v in d_lic if v > 0)),
+            "cells_licence_improved_vs_random": int(sum(1 for v in d_pp if v > 0)),
+            "seeds_licence_improved": int(len({c["seed"] for c in rows if c["euler"]["delta_dti_licence"] > 0})),
+            "per_seed_delta_licence": {str(s): float(np.mean([c["euler"]["delta_dti_licence"]
+                                                              for c in rows if c["seed"] == s]))
+                                       for s in sorted({c["seed"] for c in rows})},
         }
 
     los, leak = agg("losfo"), agg("leaky")
@@ -311,6 +456,7 @@ def main() -> int:
         "per_fold": per_fold,
         "ratios": ratios,
         "packing_variants": packing_block,
+        "euler_licence": euler_block_out,
         "far_field_check": {
             "min_dist_truth_to_known_px_over_cells": float(
                 min(c["min_dist_truth_to_known_px"] for c in cells)),

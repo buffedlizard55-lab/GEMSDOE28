@@ -1,0 +1,42 @@
+{
+  "kind": "C4 integrity record for the preregistered H37-3 far-field licence test (knowledge/34_preregistration_H37-3_licence.md).",
+  "same_seed_reproduction": {
+    "why": "The preregistered C4 asks that the added arm not perturb the base arms. The strongest available same-seed check is the spent-seed smoke panel: the patched harness (licence enabled) re-ran the identical 4 cells of seed 181 that the pre-patch harness ran, and the base arms are identical to the last bit.",
+    "panel": "seed 181, 4 quadrant folds, thin_d 2.8, dilate 3 px, buffer 6 px",
+    "hours_ahead": {
+      "file": "evidence/_scratch/losfo_licence_smoke.json (git-ignored scratch)",
+      "sha256": "e630231a21c9a29a71e9a0a4cf5ec43f73729d322790347fabde3a258fbfe417"
+    },
+    "pre_patch": {
+      "file": "evidence/_scratch/losfo_packing_smoke.json (git-ignored scratch)",
+      "sha256": "7d4e96e149d68810c153d50333fb3e070d74002c6cbdcb9e345a3b321d82286a"
+    },
+    "aggregate_stats_equal": {
+      "losfo.mean_dti": true,
+      "losfo.sum_tp": true,
+      "losfo.credit_per_dot": true,
+      "losfo.mean_dots": true,
+      "leaky.mean_dti": true,
+      "leaky.sum_tp": true,
+      "leaky.credit_per_dot": true,
+      "leaky.mean_dots": true
+    },
+    "per_cell_dti_equal": true
+  },
+  "fresh_decade_base_arms_within_documented_spread": {
+    "note": "The 260-264 base arms are NOT expected to equal the stored 210-214 diagnostic: the seeds differ. They are checked against the repository's documented LOSFO seed-to-seed spread of -12 %..+20 % (README instrument block; knowledge/29).",
+    "arms": {
+      "losfo": {
+        "fresh_decade_260_264": 0.10325422150854469,
+        "stored_210_214": 0.0997362699451009,
+        "relative": 0.035272539923342006
+      },
+      "leaky": {
+        "fresh_decade_260_264": 0.10862839759456237,
+        "stored_210_214": 0.1015475579207599,
+        "relative": 0.0697292955023876
+      }
+    },
+    "within_spread": true
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03T23:20:00Z",
+  "generated": "2026-10-04T00:20:00Z",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -407,7 +407,7 @@
       "id": "github-pages-legacy-build-errored",
       "severity": "high",
       "issue": "GitHub Pages for buffedlizard55-lab/GEMSDOE28 is not deploying. `gh api repos/.../pages` returns `\"status\":\"errored\"` with `build_type: legacy` and `source: {branch: main, path: /}`; the legacy page-build history shows the build for commit e429135 failing with \"Page build failed.\", the later build for a667805 stuck at status \"building\" with duration 0, and the last successful legacy build at 2026-10-03T21:11:29Z (commit 22e41a7). The repository's own Actions deployment (.github/workflows/pages.yml, actions/deploy-pages) does succeed (run 37156270805-adjacent deployments recorded, plus a github-pages deployment for main at 21:49:25Z), so two deployment paths are configured against each other.",
-      "action": "Registered because it is the one thing that can stop a reviewer from downloading the one-click submission GeoTIFF that the standing prompt makes the site's first requirement. Mitigation available and reversible: switch the Pages source to GitHub Actions (`PUT /repos/{owner}/{repo}/pages` with `build_type=workflow`) so the workflow that already succeeds becomes the deployment path, then confirm a fresh deployment on main. Until that is done, treat anything served at https://buffedlizard55-lab.github.io/GEMSDOE28/ as possibly stale, and prefer the raw repository file (docs/downloads/...) for manual submission. Attempted fix in this session FAILED: `gh api -X PUT .../pages -f build_type=workflow` returns `403 Resource not accessible by integration`, so the sandbox token has no `pages: write`; switching the source is an OWNER action (Settings \u2192 Pages \u2192 Source \u2192 GitHub Actions), after which `.github/workflows/pages.yml` \u2014 which already succeeds and uploads `docs/` \u2014 becomes the deployment path. Mitigation that needs no permission and is now live: the manifest's primary, secondary, tertiary and conservative files each carry a raw.githubusercontent-free raw-repository mirror link (`https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/<file>`) in the site's download panel and in README \u00a71, so a human can still obtain the one-click GeoTIFF without Pages."
+      "action": "Registered because it is the one thing that can stop a reviewer from downloading the one-click submission GeoTIFF that the standing prompt makes the site's first requirement. Mitigation available and reversible: switch the Pages source to GitHub Actions (`PUT /repos/{owner}/{repo}/pages` with `build_type=workflow`) so the workflow that already succeeds becomes the deployment path, then confirm a fresh deployment on main. Until that is done, treat anything served at https://buffedlizard55-lab.github.io/GEMSDOE28/ as possibly stale, and prefer the raw repository file (docs/downloads/...) for manual submission. Attempted fix in this session FAILED: `gh api -X PUT .../pages -f build_type=workflow` returns `403 Resource not accessible by integration`, so the sandbox token has no `pages: write`; switching the source is an OWNER action (Settings \u2192 Pages \u2192 Source \u2192 GitHub Actions), after which `.github/workflows/pages.yml` \u2014 which already succeeds and uploads `docs/` \u2014 becomes the deployment path. Mitigation that needs no permission and is now live: the manifest's primary, secondary, tertiary and conservative files each carry a raw.githubusercontent-free raw-repository mirror link (`https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/<file>`) in the site's download panel and in README \u00a71, so a human can still obtain the one-click GeoTIFF without Pages. Re-checked 2026-10-03T23:00Z: the successful legacy builds resumed after the 21:49Z failure (the builds for f91e3c2, 8408037 and the latest main commit are all 'built'), so the failure is transient; the raw-repository mirror remains as insurance."
     },
     {
       "id": "h37-1-is-proxy-favoured-by-construction",
@@ -444,6 +444,24 @@
       "severity": "low",
       "issue": "The preregistered demotion of H37-1 is a demotion of the CLAIM, not evidence that the file is worse than its replacement. The far-field point estimate is -0.000037 against a +0.007289 interleaved gain, i.e. a measured tie, and H36-1's own far-field behaviour has never been measured (it is a dose change, supported by the live-anchored ladder).",
       "action": "Recorded so an owner who judges the live scoring population to be substantially catalogue-adjacent can knowingly prefer the H37-1 file; both remain audited and downloadable. The remedy is one more LOSFO run on H36-1's dose change, queued in registry/next_hypotheses.json."
+    },
+    {
+      "id": "h37-3-licence-real-but-below-the-live-rate",
+      "severity": "low",
+      "issue": "The H37-3 Euler SI-0 depth-coherence licence carries a real far-field signal - its dots earn 1.65x the credit of the same number of dots placed at random inside the same off-catalogue region, and all five seeds improve - but the rate is 0.031157 credit per added dot against the 0.0548 live break-even. Adding dots at that rate LOWERS the live score at every scale tested (296 dots: 0.260627 -> 0.260294).",
+      "action": "Recorded so the positive mechanism is not lost when the arm is described as refuted: the statistic (within-cluster depth dispersion) is informative about off-catalogue structure, and a future arm may reuse it at a lower rate. Any such reuse is a NEW preregistration. Registered together with knowledge/35."
+    },
+    {
+      "id": "cross-seed-baseline-comparison-is-not-an-integrity-check",
+      "severity": "low",
+      "issue": "The first cut of scripts/analyze_h37_3.py implemented the preregistered C4 integrity check by comparing the fresh-decade (260-264) base arms against the stored 210-214 diagnostic. Those are DIFFERENT SEEDS, so the comparison reports a spurious 3.5e-3 'failure' that is pure LOSFO seed-to-seed variation.",
+      "action": "Analyzer corrected: C4 now uses a same-seed reproduction (the patched harness re-ran the spent seed-181 smoke panel and reproduces the pre-patch base arms to the last bit), plus a check that the fresh-decade base arms sit inside the documented -12%..+20% LOSFO spread. The record is evidence/h37_3_licence_integrity.json. Never compare arms across seed sets and call it integrity."
+    },
+    {
+      "id": "parallel-session-arm-naming-collision",
+      "severity": "low",
+      "issue": "A parallel session's commit 9d764cd added thinning.directional_dot_thin and its docstring history calls it 'the candidate H37-1 (directional / anisotropic Poisson-disk ...)'. H37-1 is already taken: knowledge/29-35, the README and registry/next_hypotheses.json define H37-1 as the metric-aware (maximum expected coverage) packing arm, which this session gated, far-field falsified and demoted. The directional thinning is otherwise undocumented in the ledger.",
+      "action": "Flagged for the owner so the two arms cannot be confused in the record. Neither arm's results are affected (directional_dot_thin only ADDS a function; dot_thin is unchanged, so every measured result still refers to the same code). When the directional arm is formally proposed it needs its own ID (e.g. H38-1), its own preregistration, and a corrected docstring history line."
     }
   ]
 }

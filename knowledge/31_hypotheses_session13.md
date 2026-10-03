@@ -12,7 +12,7 @@ an arm that has never been measured is ranked below one that has. Cost is the se
 | Rank | ID | Class | Measured / prior expected ΔDTI | Cost | Data gate (checked this session) |
 |---:|---|---|---|---|---|
 | 1 | **H37-1** metric-aware packing (VALIDATED) | EMISSION | **+0.007289** OOF vs `d=2.8`, **+0.004614** vs the H36-1 incumbent, 10/10 seeds, 4/4 folds | low (done) | local; shipped |
-| 2 | **H37-3** Euler SI-0 depth-coherence as an emission licence | ADD | prior `+0.0005…+0.0100` (untested) | low | local (`evidence/h31_1_euler_clusters.csv`, 6,309 clusters) |
+| ~~2~~ | **H37-3** Euler SI-0 depth-coherence as an emission licence — **TESTED, REFUTED as a promotable arm** (C1 13/20 cells, C2 0.031157 credit/dot vs the 0.0548 live bar; C3 PASS: 1.65× its matched random control, so the mechanism is real but the rate is too small) — `knowledge/35` | ADD | prior `+0.0005…+0.0100` → **measured `+0.000576 ±0.000451` far field** | low | local (`evidence/h31_1_euler_clusters.csv`, 6,309 clusters) |
 | 3 | **H37-2** concealed-fault conjunction (potential-field lineament × smooth, low-relief fill) | ADD | prior `+0.001…+0.008` on LOSFO; **cannot be tested on the interleaved proxy** | medium | local bands 1–19 + `lidar_scarf_features_u8.tif` |
 | 4 | **H37-5** artifact-morphology suppression with reallocation | PRUNE→reallocate | prior `+0.000…+0.004` | low | local (descriptor bands 1–9) |
 | 5 | **H37-4** offset geomorphic datum (pluvial shoreline / fan piercing lines) | ADD | prior `+0.001…+0.010` (highest novelty, highest variance) | high | **needs absolute elevation**: USGS 3DEP 1 m DEM tiles via `data/dem_links.json` (716 links) — free, official, public domain; obtainable through the GitHub Actions bridge (see §6) |
@@ -56,6 +56,8 @@ an arm that has never been measured is ranked below one that has. Cost is the se
 * **Risk, stated in advance.** H35-1 (a point-process licence) failed at `0.0132` credit/dot against
   `τ_live = 0.0549`, and the base emission already fires along the magnetic ridges that host most
   catalogue faults. The expected value is low-to-moderate; the cost is low, which is why it is rank 2.
+
+> **Ledger update (Session 13b).** H37-3 was run on the LOSFO decade 260–264 after the freeze commit `0788eec`. Verdict: refuted as promotable — see `knowledge/35_h37_3_result.md`. **Next arm: H37-2 (rank 3)**, evaluated on the LOSFO harness from the start, with the H37-3 lesson applied: a licence that clears ~1.65× random can still lose if its rate is below the live bar.
 
 ## H37-2 — concealed-fault conjunction: potential-field lineament × smooth, low-relief fill (ADD)
 
