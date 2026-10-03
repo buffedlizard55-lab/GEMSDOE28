@@ -652,3 +652,92 @@ rasters and the runner-produced clip.
 (`130,154,244` B, `e7fd62c6…`) has only an availability pin, not a derived clip, so it would need the
 same bridge treatment. All live scores remain owner-reported or public-leaderboard readings, not
 organizer receipts.
+
+---
+
+# Session 14 (2026-10-03) — far-field attribution, a new-information arm, and three passes
+
+**Scope.** Attribute the H37-1 far-field falsification to a construction, freeze and gate a
+new-information hypothesis (GeoDAWN radiometrics, H38-1) on a fresh decade, test it far field, and
+either ship or refuse it. Nothing external was contacted; every input is a hash-pinned local raster.
+
+## Pass 1 — implement and verify
+
+| Run | Seeds | Result | Artifact |
+|---|---|---|---|
+| LOSFO cover probe (pre-session, completed here) | 215–219 | `cover_n − thin_d30 = +0.005275` (5/5 seeds) | `evidence/losfo_cover_probe.json` |
+| LOSFO cover variants (four combinations, one ladder) | 215–219 | candidate set, not budget, decides: `+0.005450` / `+0.004923`; pool-restricted arm `+0.000819` | `evidence/losfo_cover_variants.json` + `_analysis.json` |
+| H38-1 gate, run 1 (pilot) | 260–269 | **void** (G5(b) harness defect) | `evidence/h38_1_holdout_pilot_void.json` |
+| H38-1 gate, run 2 (pilot) | 270–279 | void for gating (G2 statistic defect); disclosed numbers only | `evidence/h38_1_holdout_run2_g5fixed_g2defect.json` |
+| **H38-1 gate, gated run** | **280–289** | **PASS** G1 `+0.002869` (9/10 seeds, 4/4 folds), G3 `+0.006282`, G4 `+0.054841`, G5 clean | `evidence/h38_1_holdout.json` (+ `_analysis.json`) |
+| H38-1 far-field transfer | 220–224 | **no licence**: F1 `+0.000959 ± 0.004469`, 2/5 seeds, 4/20 cells < −0.005; F4 void (miscalibrated band) | `evidence/losfo_rad_farfield.json` |
+
+**Independently verified, not taken on trust.** `scripts/analyze_h38_1.py` recomputed every gated
+statistic from the stored per-cell `tp`/`fp`/`n_truth`/`dots` records — max DTI recompute error `0.0`,
+all count identities hold, all six stored gate statistics match. `scripts/analyze_cover_variants.py`
+recomputed every paired contrast of the attribution run from its per-cell records (max error `0.0`) and
+confirmed the arm-matched reproduction between two independent runs (`all_cover_npre` vs the probe's
+`cover_n`: max |Δ| `0.0`; `base_d28` vs `thin_d28`: max |Δ| `0.0`). Both runs assert emitted counts
+against requested counts before any metric is read.
+
+**Decision.** No file was built, no slot was written, `docs/downloads/manifest.json` is unchanged and
+the one-click primary is still H36-1. The builder `scripts/build_h38_1_submissions.py` exists and is
+deliberately unexecuted.
+
+## Pass 2 — review for bugs, wrong assumptions, edge cases; fix and disclose
+
+Five defects were found this session. Two were in the H38-1 harness, one in the variants runner's
+reporting, one was a mis-calibrated tolerance in a preregistration, and one was a numbering collision
+created by a parallel session's merge.
+
+| # | Defect | How it was caught | Fix | Cost |
+|---|---|---|---|---|
+| 1 | G5(b) compared the **post-prune** emission to the **pre-prune** request in `run_h38_1_holdout.py` | the pilot run failed G5 on all 40 cells with a constant-magnitude shortfall; the H37-1 runner checks the packer's own output instead | check `primary_pre`/`incumbent_pre`; store packer, prune and post-prune counts per cell | decade 260–269 |
+| 2 | `G2_promotion` used the fold split **vs the base rule** instead of **vs the incumbent** | `scripts/analyze_h38_1.py` recomputed the incumbent-relative split (3/4, `NW −0.000703`) and it did not match the stored statistic | store both splits; G2 uses the incumbent-relative one as §4 specifies | decade 270–279 |
+| 3 | The variants runner's `reproduction_check` compared `base_d28` (d=2.8) against the probe's `thin_d30` (d=3.0) and printed it as a reproduction error | reading the block while writing the attribution; the two arms are deliberately different | arm-matched pairs (`all_cover_npre`↔`cover_n`, `base_d28`↔`thin_d28`) plus a separately labelled dose diagnostic | none (reporting only) |
+| 4 | `knowledge/39` §3 F4 anchored the instrument to five-seed means with a ±0.004 band | the far-field run landed 0.0059–0.0066 below and voided itself; the probe's own seed-level SD is 0.0080–0.0100, so the difference of two five-seed means has SD ≈ 0.0058 | recorded, not re-run; future freezes must derive the tolerance from the observed seed-level SD (≈ 1.96·s/√n) | decade 220–224 void as a licence |
+| 5 | `knowledge/34`/`35` collided with a parallel session's H37-3 files of the same numbers after the merge | `git diff`/`ls-tree` after merging `origin/main` (`4d5c810`) | renamed to `knowledge/36`–`38` and rewrote all internal cross-references | none |
+
+Edge cases exercised: matched-count vs unmatched-count arms (both stored and differenced), post-prune
+count matching between detectors (max per-cell gap `0.222 %`), determinism (a repeated
+`coverage_greedy` build compared bitwise), NaN/zero structure of the six extras (finite on `99.975 %` of
+in-footprint cells, `NaN` everywhere outside), and a fresh decade for every re-run after a rule change.
+
+## Pass 3 — re-check against the original request; improve accuracy, reliability, completeness
+
+* **"3–5 new hypotheses, ranked, each naming layers/signature/off-catalogue rationale/difference, with
+  obtainability checked."** `knowledge/36` (five arms, per-arm data gate checked against official
+  sources; H38-5's USGS ANSS FDSN endpoint is free, no-auth, public domain but unreachable from the
+  sandbox, so it is recorded bridge-gated rather than claimed as available).
+* **"Validate the top candidate on the spatially-blocked holdout before spending a weekly slot."**
+  Done, twice over: an interleaved gate on fresh seeds 280–289 and a far-field LOSFO test on fresh
+  seeds 220–224. The candidate did not clear the far-field bar, so **no slot was spent** and no file was
+  shipped — the standing rule is honoured in the direction that costs the project nothing.
+* **"Euler with the fault-contact structural index; shallow aligned clusters as corroboration."** The
+  deliverable is unchanged (`src/gems27/euler.py`, `evidence/h31_1_euler_clusters.csv`); H37-3's SI-0
+  licence was already refuted (`knowledge/35`). Session 14 ranks the joint magnetic∧gravity extension
+  (H38-3) third and records that it stays blocked by the open depth-unit irregularity — no silent
+  retry of a refuted arm.
+* **"Site: one-click download obvious at the top, executive summary, feed/current state."** The site was
+  rebuilt from JSON (`scripts/build_site.py`, 0 external requests) with the irregularity count updated;
+  the one-click file, its SHA-256 and its note are unchanged, and the verification suite still passes
+  `208/208` (`evidence/submission_file_audit.json`).
+* **"Knowledge from official verified sources stored for reuse."** `knowledge/36`–`41`; the band-identity
+  audit is stored as a measurement (Spearman `1.0000` in-footprint, `0.999` over the full extent) with
+  its trend-confound caveat for the other bands.
+* **"Flag irregularities."** Six new/updated entries this session (83 total).
+* **Verification suite actually run at the end of the session:** `pytest` **233 passed, 2 skipped**;
+  `ruff check src scripts tests` **PASS**; `scripts/verify_downloads.py` **208 checks, 0 failures**;
+  `scripts/build_site.py` PASS (JSON-only, no external requests).
+
+**What remains unverified / limitations carried forward.**
+1. H38-1's far-field effect is unresolved, not refuted: a ≥ 10-seed decade with a properly calibrated
+   reproduction band is the only measurement that would settle it.
+2. The all-ridge coverage construction's far-field gain is twice replicated but has never been gated on
+   the interleaved proxy, and its far-field credit density (`0.0499–0.0506`) is still below the live
+   break-even `0.054852`.
+3. The shipped H19-5-surface packing construction (the lineage of every one-click file) still has no
+   far-field number of its own, because the surface is catalogue-derived.
+4. All GeoDAWN channel *identities* rest on the owner mirror's labels plus the rank-identity of
+   `rad_TC` with the competition's own band 6; the physical names (K/Th/U) are not organizer-verified.
+5. Every live score remains owner-reported or a public-leaderboard reading, not an organizer receipt.
