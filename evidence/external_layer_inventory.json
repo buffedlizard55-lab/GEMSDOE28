@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "generated_utc": "2026-10-03T16:25:32Z",
+  "pins_file": "/tmp/gdr/pins.json",
+  "pins_file_loaded": true,
+  "availability_only": true,
+  "drivendata_access": false,
+  "rows": {
+    "gdr_2m_probes": {
+      "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "bytes": 1080530,
+      "sha256": "1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3",
+      "status": "FETCHED",
+      "pinned_bytes": 1080530,
+      "pinned_sha256": "1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3",
+      "pin_match": true
+    },
+    "gdr_paleo": {
+      "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "bytes": 84008,
+      "sha256": "faffcf697f32dbbf6cbb317cd1effb3e305538ce38eb239d72d0c6fa071e91ca",
+      "status": "FETCHED",
+      "pinned_bytes": 84008,
+      "pinned_sha256": "faffcf697f32dbbf6cbb317cd1effb3e305538ce38eb239d72d0c6fa071e91ca",
+      "pin_match": true
+    },
+    "gdr_volcanics": {
+      "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "bytes": 9898770,
+      "sha256": "c4a2d2dfd5c44f42e0aba37290948881631aff312b8b9ca7934b6dc1e451e5be",
+      "status": "FETCHED",
+      "pinned_bytes": 9898770,
+      "pinned_sha256": "c4a2d2dfd5c44f42e0aba37290948881631aff312b8b9ca7934b6dc1e451e5be",
+      "pin_match": true
+    }
+  },
+  "summary": {
+    "labels": 3,
+    "reachable": 3,
+    "pin_mismatches": [],
+    "unpinned": []
+  }
+}
