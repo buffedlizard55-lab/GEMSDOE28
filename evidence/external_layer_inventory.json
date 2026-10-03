@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T17:58:38Z",
+  "generated_utc": "2026-10-03T18:03:14Z",
   "pins_file": "/tmp/gdr/pins.json",
   "pins_file_loaded": true,
   "availability_only": true,
@@ -45,7 +45,7 @@
     "reachable": 3,
     "pin_mismatches": [],
     "unpinned": [],
-    "sciencebase_reachable": 2,
+    "sciencebase_reachable": 4,
     "sciencebase_checked": 4
   },
   "sciencebase_availability": {
@@ -67,20 +67,26 @@
       "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
       "filename": "gb_conductance_surface_tp.tif",
       "hypothesis": "H33-2 multi-depth MT conductance alignment",
-      "status": "FILE_NOT_LISTED",
-      "listed_files": [
-        "Electrical_Conductance_Maps_of_the_Great_Basin_USA_02.xml"
-      ]
+      "listed_bytes": 4132337,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__b5%2F9b%2F17%2Fb59b17d7b8d2b1e9bb9028da2c5934a9c8ac38b8",
+      "http_status": 200,
+      "bytes": 4132337,
+      "sha256": "8cc1a22404108a9fb81574e37b14a5078331181ee1c0527b6240c2dee888338e",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
     },
     "sb_mt_conductance_middle_crust": {
       "doi": "10.5066/P9TWT2LU",
       "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
       "filename": "gb_conductance_middle_crust_tp.tif",
       "hypothesis": "H33-2 multi-depth MT conductance alignment",
-      "status": "FILE_NOT_LISTED",
-      "listed_files": [
-        "Electrical_Conductance_Maps_of_the_Great_Basin_USA_02.xml"
-      ]
+      "listed_bytes": 4132325,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__1c%2F80%2F77%2F1c807764c8f55b789a09b42dbfddac23b00f1549",
+      "http_status": 200,
+      "bytes": 4132325,
+      "sha256": "e8cfd731f58a64a50115de76fda1329b6f688440ff6f9e6fd3261634fa943a60",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
     },
     "sb_heat_flow_zip": {
       "doi": "10.5066/P9BZPVUC",
