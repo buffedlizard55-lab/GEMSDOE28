@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T21:10:45Z",
+  "generated_utc": "2026-10-03T21:47:18Z",
   "pins_file": "/tmp/gdr/pins.json",
   "pins_file_loaded": true,
   "availability_only": true,
@@ -46,8 +46,8 @@
     "pin_mismatches": [],
     "unpinned": [],
     "sciencebase_derived_written": 2,
-    "sciencebase_reachable": 4,
-    "sciencebase_checked": 4
+    "sciencebase_reachable": 7,
+    "sciencebase_checked": 7
   },
   "sciencebase_derived": {
     "sb_slip_tendency_shapefile_full": {
@@ -162,6 +162,45 @@
       "http_status": 200,
       "bytes": 4132325,
       "sha256": "e8cfd731f58a64a50115de76fda1329b6f688440ff6f9e6fd3261634fa943a60",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_lower_crust": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_lower_crust_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "listed_bytes": 4132325,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__d4%2F9d%2F3b%2Fd49d3b3cc2059b147a5d3b1eb0c6b907748c0a30",
+      "http_status": 200,
+      "bytes": 4132325,
+      "sha256": "4af622f1b53fbe9a9db98f77301e1dd99f83e6700110362d272d95b9ae7199b9",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_upper_mantle": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_upper_mantle_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "listed_bytes": 4132325,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__22%2F5d%2F9d%2F225d9d5330cc74f6ed44ca54b707458ef21a799b",
+      "http_status": 200,
+      "bytes": 4132325,
+      "sha256": "6fcba6300bff85497c200e1689fd763d2f77d5ba675ee0f7672870d4cca6d70e",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_mantle": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_mantle_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "listed_bytes": 4132325,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__ab%2F59%2F5a%2Fab595a5641b7856a44816c5d6b61bbf932919a5e",
+      "http_status": 200,
+      "bytes": 4132325,
+      "sha256": "3af6b918ddf8a6f43b4158737c6722a5ff9a1597005111be0a8157b8ef09c15c",
       "status": "AVAILABILITY_FETCHED",
       "error": null
     },
