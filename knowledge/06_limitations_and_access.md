@@ -112,3 +112,42 @@ This H28 run used seeds 140–149. At the time, H27-10 was reserved for seeds **
 3. **Do not spend a weekly slot on a candidate until it beats the current holdout best under its frozen gate.** Even a catalogue-internal pass does not prove transfer to organizer labels. Request a human score only through the owner; the agent must never access or upload to DrivenData.
 4. **Use the H27-5b files for geologist review if an expert is available.** Record any manual map interpretation with provenance; do not promote a link from graph importance, a setting hint, or the Tier-2 enrichment alone.
 5. **Keep the existing limitations visible:** no hidden-label or live-score evidence; NBMG FIDs are records in one compilation; compatibility can pass with missing kinematic fields; geometry cues are not field verification; the portal validator's historical error cause remains unknown; raster-dependent CI requires the restored local cache.
+
+
+---
+
+## Session 11 addendum — limitations and required access (2026-10-03)
+
+1. **H35-1 is refuted, and the refutation has a mechanism, but its scope is bounded.** The
+   hydrothermal-discharge conjunction failed 3 of 4 frozen criteria on seeds 230–234 and lost to its own
+   matched-count random control (`0.013195` vs `0.023781` credit/dot). Because LOSFO truth is *mapped*
+   fault geometry, the arm's stronger claim — that a concealed, unmapped permeable structure is marked
+   by a spring — remains **untested, not refuted**. What is established is that thermal dots cannot
+   even clear the *upper bound*, which is enough to close the arm as constructed.
+2. **The promotion of `8acb75e1f2cc` is a decision under uncertainty, not a measurement.** It replicated
+   its seeds-180–189 gain almost exactly on fresh seeds 235–239 (`+0.001766` → `+0.001761`, `5/5` seeds,
+   `4/4` folds) and again beat the anti-selective control (`0.000490`), which is why it is now the
+   one-click file. But five seeds cannot resolve a `+0.0005` gap, and the holdout remains a *catalogue*
+   proxy: `registry/irregularities.json` carries `proxy-blind-to-far-field` at **high** severity for
+   exactly this reason.
+3. **The only external sources verified byte-for-byte this session were already in hand.** The GDR #1391
+   well/spring table was used because its bytes and hash pin were already restored; it was independently
+   re-registered onto the competition grid (max `1 px` residual) before use. No new external data was
+   fetched. `sciencebase.gov`, `prd-tnm.s3.amazonaws.com` and every other non-GitHub host still return
+   HTTP `000` from the agent sandbox, so `H33-3`/`H35-2` (heat flow) and `H33-4`/`H35-3` (1 m DEMs)
+   remain **GitHub-Actions-only**, which is an access requirement on the owner, not something the agent
+   can grant itself. Official competition pages were read through the separate page-fetch service, which
+   is *not* the sandbox network; that is why the source ledger quotes them rather than paraphrasing.
+4. **No submission was made and no score was observed.** Three submissions per week are available
+   (Official Rules §3.2) and none was used by this session. Every file remains `UNSCORED`. A score still
+   requires the human owner to download a file, paste the registered note, upload it, and return the
+   exact value.
+5. **Data hygiene to respect on reuse.** `data/gdr_wellspring_in_footprint.csv` spells `Hot` two ways
+   (`Hot` and `Hot ` with a trailing space) and carries a catalogue-derived `dist_known_fault_px`
+   column; the volcanic-vent table stores the *string* `'nan'` in text columns. `src/gems27/thermal.py`
+   uses an explicit allow-list and never reads the derived column, and `tests/test_thermal.py` asserts
+   it. Any future reuse must do the same or the result is self-fulfilling.
+6. **CI is green but does not exercise raster-dependent tests.** `tests/conftest.py` skips them when the
+   restored cache is absent, so a green CI badge is **not** evidence the raster checks ran; they must be
+   re-run locally before any release. Current local state: `190 passed, 2 skipped`, and
+   `scripts/verify_downloads.py` `179/179` checks with `0` failures.

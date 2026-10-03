@@ -1,0 +1,139 @@
+{
+  "hypothesis": "H36-1: packing-rung re-pack at rung 3.0 (N=41,333), with and without the H27-4 / H32-1 catalogue-flank prunes, on fresh seeds 240-249",
+  "preregistration": "knowledge/26_preregistration_H36-1.md",
+  "seeds": [
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249
+  ],
+  "n_cells": 40,
+  "base_oof_d280_mean_dti": 0.09413240509639507,
+  "base_oof_d280_dots_per_seed": 48929.2,
+  "tau_live_0_2600": 0.054852320675105495,
+  "variants": {
+    "rung30_unpruned": {
+      "mean_dti": 0.09508820686065143,
+      "mean_dti_gain": 0.0009558017642563588,
+      "min_seed_gain": 0.00013919144331507247,
+      "max_seed_gain": 0.001712729030292199,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.001022766099271989,
+        "NE_LidarGapHeavy": 0.0016451247833607226,
+        "SW": 0.0007008851682373987,
+        "SE": 0.00045443100615532445
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -2649.4,
+      "removed_credit_per_removed_fp": 0.012305219260117756
+    },
+    "rung30_blind_r1": {
+      "mean_dti": 0.09673095468704938,
+      "mean_dti_gain": 0.0025985495906543027,
+      "min_seed_gain": 0.001848439238444086,
+      "max_seed_gain": 0.003351913538807868,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.0024711307187049005,
+        "NE_LidarGapHeavy": 0.0048139944129213675,
+        "SW": 0.0010979868855840972,
+        "SE": 0.0020110863454068455
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -4953.6,
+      "removed_credit_per_removed_fp": 0.009844673368221007
+    },
+    "rung30_flank_mid": {
+      "mean_dti": 0.0963208906852256,
+      "mean_dti_gain": 0.002188485588830536,
+      "min_seed_gain": 0.001326022844655916,
+      "max_seed_gain": 0.0029374522502746414,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.0020395632875862837,
+        "NE_LidarGapHeavy": 0.004004386905763812,
+        "SW": 0.0008719034427089045,
+        "SE": 0.0018380887192631437
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -4085.4,
+      "removed_credit_per_removed_fp": 0.00957797790343993
+    },
+    "h27_4_blind_r1_d280": {
+      "mean_dti": 0.09584726165924198,
+      "mean_dti_gain": 0.0017148565628469024,
+      "min_seed_gain": 0.0013950900271857327,
+      "max_seed_gain": 0.0019747786815147404,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.0015698751806241292,
+        "NE_LidarGapHeavy": 0.003292666950566682,
+        "SW": 0.0003109920961716202,
+        "SE": 0.001685892024025179
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -2417.5,
+      "removed_credit_per_removed_fp": 0.006627401216268811
+    },
+    "control_random_drop_matched_n": {
+      "mean_dti": 0.09247567464984024,
+      "mean_dti_gain": -0.001656730446554826,
+      "min_seed_gain": -0.0025308849272246883,
+      "max_seed_gain": -0.0004996585390654416,
+      "seeds_won": 0,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": -0.001173394606981501,
+        "NE_LidarGapHeavy": -0.001559729004122043,
+        "SW": -0.001240254125107424,
+        "SE": -0.002653544050008337
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -2649.4,
+      "removed_credit_per_removed_fp": 0.03163190280477938
+    },
+    "control_rung30_protected_only": {
+      "mean_dti": 0.09548423397297048,
+      "mean_dti_gain": 0.001351828876575405,
+      "min_seed_gain": 0.0006578191677684246,
+      "max_seed_gain": 0.0021087378393898695,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.0014377670981266257,
+        "NE_LidarGapHeavy": 0.0024119591509069588,
+        "SW": 0.0009234499520683219,
+        "SE": 0.000634139305199713
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -3517.6,
+      "removed_credit_per_removed_fp": 0.011976958587839759
+    }
+  },
+  "gate": {
+    "G1_rung_effect_passed": true,
+    "G2_repack_vs_budget": "repack",
+    "G2_delta_vs_matched_n_control": 0.002612532210811185,
+    "G3_prune_variants_passed": {
+      "rung30_blind_r1": true,
+      "rung30_flank_mid": true,
+      "h27_4_blind_r1_d280": true
+    },
+    "G4_winner": "rung30_blind_r1",
+    "G4_promotion": "PROMOTE",
+    "G4_promotion_margin": 0.0005,
+    "G5_antiselective_control_unsupported": false
+  },
+  "runtime_s": 105.0
+}

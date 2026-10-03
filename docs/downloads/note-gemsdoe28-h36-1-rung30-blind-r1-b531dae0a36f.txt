@@ -1,0 +1,1 @@
+28GEMSDOE H36-1 rung3.0+r1 | OOF dDTI +0.00260, 10/10 seeds, 4/4 folds (seeds 240-249); re-pack beats matched-N random drop by +0.00261; no T-v2 | id b531dae0a36f | UNSCORED, not slot-approved

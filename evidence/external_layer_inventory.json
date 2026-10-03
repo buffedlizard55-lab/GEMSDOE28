@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T18:58:17Z",
+  "generated_utc": "2026-10-03T21:10:45Z",
   "pins_file": "/tmp/gdr/pins.json",
   "pins_file_loaded": true,
   "availability_only": true,
@@ -45,7 +45,7 @@
     "reachable": 3,
     "pin_mismatches": [],
     "unpinned": [],
-    "sciencebase_derived_written": 1,
+    "sciencebase_derived_written": 2,
     "sciencebase_reachable": 4,
     "sciencebase_checked": 4
   },
@@ -74,6 +74,55 @@
         "docs/data/sb_slip_tendency_in_footprint.csv",
         "docs/data/sb_slip_tendency_in_footprint.json"
       ]
+    },
+    "sb_heat_flow_zip": {
+      "hypothesis": "H33-3 heat-flow residual x 2 m probe conjunction",
+      "url": "https://www.sciencebase.gov/catalog/file/get/6297d2fad34ec53d276c5b28?f=__disk__03%2Fac%2F86%2F03ac865d4a5a3c5c52d8ca92bc170105c6fe508a",
+      "http_status": 200,
+      "bytes": 130154244,
+      "sha256": "e7fd62c6963ab390963b3f19adf4dd14bf616e7267f2ae38ad6af1005c106918",
+      "error": null,
+      "pin_match": true,
+      "payload_format": "zip",
+      "payload_used": "sb_heat_flow_zip.zip",
+      "archive_inventory": {
+        "n_members": 51,
+        "vector_members": [
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowStudyArea.shp",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/USGS_gbHeatFlowWells.shp",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowWells_wEstimates.shp"
+        ],
+        "filegdb_roots": [],
+        "raster_members": [
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_equalWts.tif",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_qcWts.tif",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/USGS_gbHeatFlowMap_tcWts.tif"
+        ],
+        "tabular_members": [
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/documentation_doi_10_5066_P9BZPVUC.txt",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/documentation/readme.txt",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/inputs/readme.txt",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/outputs/readme.txt",
+          "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA/readme.txt"
+        ]
+      },
+      "committed_files": [
+        "docs/data/sb_heat_flow_in_footprint_members.json",
+        "docs/data/sb_heat_flow_in_footprint.csv",
+        "docs/data/sb_heat_flow_in_footprint.json"
+      ],
+      "status": "DERIVED_WRITTEN",
+      "layers_found": [
+        "USGS_gbHeatFlowStudyArea.shp",
+        "USGS_gbHeatFlowWells.shp",
+        "USGS_gbHeatFlowWells_wEstimates.shp"
+      ],
+      "derived": {
+        "csv_path": "/tmp/gdr/out/commit/sb_heat_flow_in_footprint.csv",
+        "json_path": "/tmp/gdr/out/commit/sb_heat_flow_in_footprint.json",
+        "n_records": 4217,
+        "n_parts": 4217
+      }
     }
   },
   "sciencebase_availability": {

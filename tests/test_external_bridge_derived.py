@@ -154,6 +154,91 @@ def test_zip_extraction_only_pulls_the_siblings_of_a_shapefile(tmp_path):
     assert {"seg.shp", "seg.dbf", "seg.shx"} <= extracted
 
 
+# --------------------------------------------------------------------------------------------
+# Session 12: mixed releases - archive enumeration and Esri File Geodatabase discovery
+# --------------------------------------------------------------------------------------------
+def test_archive_members_lists_every_member_with_sizes(tmp_path):
+    """The member listing is what a later session reads instead of re-fetching 130 MB."""
+    zip_path = make_zip(tmp_path)
+    members = fel.archive_members(zip_path)
+    names = [m["name"] for m in members]
+    assert "seg.shp" in names and "readme.txt" in names
+    assert all(m["bytes"] > 0 and "compressed_bytes" in m for m in members)
+    assert names == sorted(names)
+
+
+def make_gdb_zip(tmp_path: Path, name: str = "hf") -> Path:
+    """A zip shaped like a FileGDB release: a `Name.gdb/` directory of members, no .shp anywhere."""
+    zip_path = tmp_path / f"{name}.zip"
+    with zipfile.ZipFile(zip_path, "w") as archive:
+        archive.writestr(f"{name}.gdb/a00000001.gdbtable", b"\x00" * 32)
+        archive.writestr(f"{name}.gdb/a00000001.gdbtablx", b"\x00" * 8)
+        archive.writestr(f"{name}.gdb/gdb", b"\x00" * 4)
+        archive.writestr("readme.txt", "supporting data\n")
+    return zip_path
+
+
+def test_filegdb_inside_a_zip_is_discovered(tmp_path):
+    """A FileGDB has no member ending in a layer suffix, so the old reader returned nothing at all."""
+    zip_path = make_gdb_zip(tmp_path)
+    work = tmp_path / "work"
+    work.mkdir()
+    layers = fel._zip_vector_layers(zip_path, work)
+    assert len(layers) == 1
+    assert layers[0].name == "hf.gdb"
+    assert layers[0].is_dir()
+    assert (layers[0] / "a00000001.gdbtable").exists()
+    assert not (work / "readme.txt").exists(), "unrelated members must not be extracted"
+
+
+def test_raster_only_archive_with_inventory_on_is_a_success_not_a_defect(tmp_path):
+    """The heat-flow release is a *mixed* archive.
+
+    If it ships no openable spatial layer, a verified member listing is still the deliverable -
+    reporting NO_VECTOR_LAYER would fail the workflow and suppress the evidence the fetch exists to
+    produce. The listing must be committed and the status must not trip the defect grep.
+    """
+    zip_path = tmp_path / "mixed.zip"
+    with zipfile.ZipFile(zip_path, "w") as archive:
+        archive.writestr("HeatFlow_GreatBasin.tif", b"\x00" * 64)
+        archive.writestr("supporting_wells.csv", "x,y,hf\n")
+    out = tmp_path / "out"
+    out.mkdir()
+    pins = pins_for(zip_path, label="sb_heat_flow_zip")
+    saved = fel.DERIVED_SPECS
+    fel.DERIVED_SPECS = [{"label": "sb_heat_flow_zip", "hypothesis": "H33-3", "stem": "hf",
+                          "keep_fields": None, "archive_inventory": True}]
+    try:
+        res = fel.build_sciencebase_derived(out, pins, None)
+    finally:
+        fel.DERIVED_SPECS = saved
+    row = res["sb_heat_flow_zip"]
+    assert row["status"] == "ARCHIVE_INVENTORIED", row
+    assert row["archive_inventory"]["raster_members"] == ["HeatFlow_GreatBasin.tif"]
+    assert row["archive_inventory"]["tabular_members"] == ["supporting_wells.csv"]
+    listing = out / "commit" / "hf_members.json"
+    assert listing.exists()
+    assert "docs/data/hf_members.json" in row["committed_files"]
+    # the workflow's defect loop greps for the exact token below; it must NOT appear
+    assert '"status": "NO_VECTOR_LAYER"' not in json.dumps(res)
+
+
+def test_archive_inventory_off_keeps_the_hard_failure(tmp_path):
+    """Without `archive_inventory` a vector-less archive is still a defect - the check stays strict."""
+    zip_path = make_zip(tmp_path, name="novector", include_vector=False)
+    res = run_derived(tmp_path, pins_for(zip_path), "sb_slip_tendency_shapefile_full")
+    assert res["sb_slip_tendency_shapefile_full"]["status"] == "NO_VECTOR_LAYER"
+
+
+def test_heat_flow_pin_matches_the_repository_record():
+    """The bridge can only verify what the pins file records; the heat-flow pin must be present."""
+    pins = json.loads((ROOT / "registry" / "external_pins.json").read_text())["downloads"]
+    row = pins["sb_heat_flow_zip"]
+    assert row["bytes"] == 130154244
+    assert row["sha256"].startswith("e7fd62c6")
+    assert row["doi"] == "10.5066/P9BZPVUC"
+
+
 def test_repository_pin_file_covers_the_h33_1_release():
     """The committed pins must carry the runner-recorded hash, or the bridge has nothing to check."""
     pins_path = ROOT / "registry" / "external_pins.json"
