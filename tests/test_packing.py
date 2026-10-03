@@ -82,3 +82,60 @@ def test_spacing_emerges_from_the_objective():
     out = packing.coverage_greedy(cand, weight, 2)
     assert out.sum() == 2
     assert packing.coverage_of(out, weight) == _brute_force_best(cand, weight, 2)
+
+
+# --- evidence-ordered and control packers (added with the H37-1 far-field test) -----------------
+
+
+def _min_pairwise(sel: np.ndarray) -> float:
+    """Smallest distance between any two selected pixels (inf for fewer than two)."""
+    from scipy.spatial import cKDTree
+
+    ys, xs = np.nonzero(sel)
+    if ys.size < 2:
+        return float("inf")
+    d, _ = cKDTree(np.c_[ys, xs]).query(np.c_[ys, xs], k=2)
+    return float(d[:, 1].min())
+
+
+def test_prob_order_is_subset_spaced_and_matched():
+    rng = np.random.default_rng(0)
+    cand = rng.random((60, 70)) < 0.2
+    score = rng.random((60, 70)).astype(np.float32)
+    sel = packing.prob_order_pack(score, cand, n_target=40, min_dist=2.8)
+    assert sel.dtype == bool
+    assert np.all(sel <= cand)
+    assert int(sel.sum()) == 40
+    assert _min_pairwise(sel) >= 2.8 - 1e-9
+
+
+def test_prob_order_is_deterministic_and_evidence_preferring():
+    rng = np.random.default_rng(1)
+    cand = rng.random((50, 50)) < 0.25
+    score = rng.random((50, 50)).astype(np.float32)
+    a = packing.prob_order_pack(score, cand, n_target=30, min_dist=2.8)
+    b = packing.prob_order_pack(score, cand, n_target=30, min_dist=2.8)
+    assert np.array_equal(a, b)
+    r = packing.random_order_pack(cand, n_target=30, min_dist=2.8, seed=7)
+    assert not np.array_equal(a, r)
+    assert float(score[a].sum()) > float(score[r].sum())
+    assert _min_pairwise(r) >= 2.8 - 1e-9
+
+
+def test_prob_order_no_spacing_and_no_target():
+    cand = np.zeros((5, 5), bool)
+    cand[2, 2] = True
+    score = np.ones((5, 5), np.float32)
+    assert packing.prob_order_pack(score, cand, n_target=None, min_dist=1.0).sum() == 1
+    assert packing.prob_order_pack(score, cand, n_target=0).sum() == 0
+    empty = np.zeros((5, 5), bool)
+    assert packing.prob_order_pack(score, empty).sum() == 0
+    assert packing.random_order_pack(empty, n_target=3, seed=0).sum() == 0
+
+
+def test_border_pixels_do_not_wrap():
+    cand = np.zeros((12, 12), bool)
+    for y, x in ((0, 0), (0, 11), (11, 0), (11, 11)):
+        cand[y, x] = True
+    sel = packing.prob_order_pack(np.ones_like(cand, np.float32), cand, min_dist=2.8)
+    assert int(sel.sum()) == 4  # corners are far apart; nothing may bleed across the edge
