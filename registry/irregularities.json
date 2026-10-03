@@ -264,6 +264,12 @@
       "severity": "high",
       "issue": "The one preregistered H31-1 screen on seeds 160-169 failed: mean paired catalogue-proxy \u0394DTI -0.00194719, positive in 1/4 folds and 2/10 seed means. The frozen integrity gate also failed minimum spacing in all 40 paired cells (control 40/40; candidate 39/40). Probability, fold containment, known-catalogue overlap and nonempty-truth checks passed. The screen artifact is self-hashed; the cause of the spacing defect is not isolated by the stored report.",
       "action": "Treat H31-1 as rejected for this submission workflow. Keep evidence/h31_1_euler_screen.json and its single-use claim; do not retune, rerun, confirm on 170-179, create a candidate TIFF, or spend a weekly slot. Report these catalogue-proxy results as neither organizer-label performance nor competition score. Investigate implementation spacing only as a separately preregistered future study with new seeds, not by reusing this failed screen."
+    },
+    {
+      "id": "main-push-gdr-fetch-workflow-failed-before-job-2026-10-03",
+      "severity": "medium",
+      "issue": "Following merge commit d32b72dc96e8ce01dd2c785be0045fadbd1ed4ef, push-triggered GitHub Actions run 37131538412 for fetch-gdr-external-layers.yml concluded failure at 2026-10-03T14:58:04Z. The run exposes no job records or job logs; the cause is unknown and no external-layer inventory/artifact was produced by this run. This is separate from the successful Pages deployment/build checks and H31 proxy screen.",
+      "action": "Do not describe the GDR/USGS raw layers as fetched or verified on the strength of this run. Inspect the GitHub Actions run/workflow start failure before retrying; verify any future files against official source, pinned hashes, schema, coverage and licence. No DrivenData contact is involved."
     }
   ]
 }

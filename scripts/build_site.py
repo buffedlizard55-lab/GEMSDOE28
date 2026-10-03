@@ -241,8 +241,10 @@ def h31_evidence_links(screen: dict, confirmation: dict) -> str:
     links = []
     if screen:
         links.append('<a href="../evidence/h31_1_euler_screen.json">screen evidence</a>')
+        links.append('<a href="../evidence/h31_1_euler_screen.started.json">single-use screen claim</a>')
     if confirmation:
         links.append('<a href="../evidence/h31_1_euler_confirm.json">confirmation evidence</a>')
+        links.append('<a href="../evidence/h31_1_euler_confirm.started.json">single-use confirmation claim</a>')
     return " · ".join(links)
 
 
@@ -371,7 +373,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
 <section class="section"><div class="grid">
   <article class="card span-4"><div class="metric">{comma(restore.get('grid', {}).get('footprint_pixels', 5167373))}</div><div class="metric-caption">template-footprint cells on the verified local grid</div><p>Restoration status: <strong>{esc(restore_status)}</strong>. The nine pinned files are owner-repository mirrors, not organizer-authenticated bytes.</p><a href="../evidence/restore_audit.json">Open the local restoration audit →</a></article>
   <article class="card span-4"><div class="metric">+{fmt_number(0.002948838794400959, 5)}</div><div class="metric-caption">H28-1 paired mean proxy ΔDTI · seeds 140–149</div><p>3/4 spatial folds and 9/10 seeds improved. A proxy result—not a competition result.</p><a href="../evidence/h28_1_edge_holdout.json">Open paired holdout evidence →</a></article>
-  <article class="card span-4"><div class="metric">{comma(euler.get('structural_indices', {}).get('0', {}).get('lineament_cluster_stats', {}).get('retained_cluster_count', 6309))}</div><div class="metric-caption">SI-0 Euler depth-labeled clusters in label-free build</div><p>{esc(euler_ready)}. No model fit, holdout score, confirmation, or promotion decision.</p><a href="../evidence/h31_1_euler_feature_audit.json">Open Euler audit →</a></article>
+  <article class="card span-4"><div class="metric">{comma(euler.get('structural_indices', {}).get('0', {}).get('lineament_cluster_stats', {}).get('retained_cluster_count', 6309))}</div><div class="metric-caption">SI-0 Euler depth-labeled clusters in label-free build</div><p>{esc(euler_ready)}. The feature build is label-free; H31 screen outcome is shown above. No H31 submission TIFF exists.</p><a href="../evidence/h31_1_euler_feature_audit.json">Open Euler audit →</a> {h31_evidence_links(screen, confirmation)}</article>
 </div></section>
 
 <section class="section">
