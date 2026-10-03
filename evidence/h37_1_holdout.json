@@ -1,0 +1,151 @@
+{
+  "hypothesis": "H37-1: directional (anisotropic) Poisson-disk re-pack of the H19-5 ridge, (a_along, a_across) = (3.5, 2.0), with and without the H27-4 blind 1-px catalogue-flank prune, on fresh seeds 250-254",
+  "preregistration": "knowledge/28_preregistration_H37-1.md",
+  "seeds": [
+    250,
+    251,
+    252,
+    253,
+    254
+  ],
+  "n_cells": 20,
+  "base_oof_d280_mean_dti": 0.06978404666046847,
+  "tau_live_0_2600": 0.054852320675105495,
+  "variants": {
+    "rung30_unpruned": {
+      "mean_dti": 0.06983798952777344,
+      "mean_dti_gain": 5.394286730495933e-05,
+      "min_seed_gain": -0.0007632765539707011,
+      "max_seed_gain": 0.000677443703777994,
+      "seeds_won": 2,
+      "n_seeds": 5,
+      "fold_gains": {
+        "NW": 0.0008280711966904955,
+        "NE_LidarGapHeavy": -0.0017107202429548524,
+        "SW": 0.0010274224539422755,
+        "SE": 7.099806154191868e-05
+      },
+      "folds_improved": 3,
+      "delta_dots_per_seed": -2024.0,
+      "removed_credit_per_removed_fp": 0.01133310986668785
+    },
+    "dir_3p5_2p0_unpruned": {
+      "mean_dti": 0.06593809110559043,
+      "mean_dti_gain": -0.0038459555548780457,
+      "min_seed_gain": -0.004768312124414061,
+      "max_seed_gain": -0.0016813319995959627,
+      "seeds_won": 0,
+      "n_seeds": 5,
+      "fold_gains": {
+        "NW": -0.0020648450784710366,
+        "NE_LidarGapHeavy": -0.007051750394652388,
+        "SW": -0.0019051908776260256,
+        "SE": -0.004362035868762734
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -6140.0,
+      "removed_credit_per_removed_fp": 0.02178184191371151
+    },
+    "dir_3p5_2p0_blind_r1": {
+      "mean_dti": 0.06680239235244369,
+      "mean_dti_gain": -0.0029816543080247843,
+      "min_seed_gain": -0.00374955544584726,
+      "max_seed_gain": -0.0011790102829822603,
+      "seeds_won": 0,
+      "n_seeds": 5,
+      "fold_gains": {
+        "NW": -0.0013715147912911493,
+        "NE_LidarGapHeavy": -0.005704125211669096,
+        "SW": -0.0014984129489528223,
+        "SE": -0.00335256428018607
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -7490.0,
+      "removed_credit_per_removed_fp": 0.018718180926922182
+    },
+    "dir_4p0_2p0_unpruned": {
+      "mean_dti": 0.06167041646077226,
+      "mean_dti_gain": -0.008113630199696215,
+      "min_seed_gain": -0.009485421764085398,
+      "max_seed_gain": -0.005662820673027752,
+      "seeds_won": 0,
+      "n_seeds": 5,
+      "fold_gains": {
+        "NW": -0.006383727522891058,
+        "NE_LidarGapHeavy": -0.014073746803815854,
+        "SW": -0.005820546407701767,
+        "SE": -0.006176500064376178
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -8755.0,
+      "removed_credit_per_removed_fp": 0.025428395840221718
+    },
+    "dir_3p0_2p0_unpruned": {
+      "mean_dti": 0.06983798952777344,
+      "mean_dti_gain": 5.394286730495933e-05,
+      "min_seed_gain": -0.0007632765539707011,
+      "max_seed_gain": 0.000677443703777994,
+      "seeds_won": 2,
+      "n_seeds": 5,
+      "fold_gains": {
+        "NW": 0.0008280711966904955,
+        "NE_LidarGapHeavy": -0.0017107202429548524,
+        "SW": 0.0010274224539422755,
+        "SE": 7.099806154191868e-05
+      },
+      "folds_improved": 3,
+      "delta_dots_per_seed": -2024.0,
+      "removed_credit_per_removed_fp": 0.01133310986668785
+    },
+    "control_random_drop_matched_n": {
+      "mean_dti": 0.06277019565458263,
+      "mean_dti_gain": -0.0070138510058858445,
+      "min_seed_gain": -0.00832427483329907,
+      "max_seed_gain": -0.0043045201744246284,
+      "seeds_won": 0,
+      "n_seeds": 5,
+      "fold_gains": {
+        "NW": -0.00657754061016533,
+        "NE_LidarGapHeavy": -0.008262720969528573,
+        "SW": -0.005154710583671077,
+        "SE": -0.008060431860178404
+      },
+      "folds_improved": 0,
+      "delta_dots_per_seed": -6140.0,
+      "removed_credit_per_removed_fp": 0.029532729225456723
+    },
+    "control_iso_rung30_then_blind_r1": {
+      "mean_dti": 0.07103695805889583,
+      "mean_dti_gain": 0.0012529113984273495,
+      "min_seed_gain": 0.0005956627444330936,
+      "max_seed_gain": 0.002103165790505339,
+      "seeds_won": 5,
+      "n_seeds": 5,
+      "fold_gains": {
+        "NW": 0.0018155287379966953,
+        "NE_LidarGapHeavy": 0.00013887641067244493,
+        "SW": 0.001546465424099533,
+        "SE": 0.0015107750209407244
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -3627.4,
+      "removed_credit_per_removed_fp": 0.008022061292447457
+    }
+  },
+  "gate": {
+    "G1_profitability_passed": false,
+    "G2_anisotropy_vs_budget_delta": 0.003167895451007799,
+    "G2_anisotropy_vs_budget": "anisotropic",
+    "G3_anisotropy_vs_isotropic_delta": -0.005098866953305395,
+    "G3_anisotropy_vs_isotropic": "worse-than-isotropic",
+    "G4_live_breakeven_passed": false,
+    "G4_efficiency": 0.018718180926922182,
+    "gate_passed": false
+  },
+  "disclosures": {
+    "matched_n_rng_namespace": 937000,
+    "tied_to_h36_1_instrument": true,
+    "no_external_data": true
+  },
+  "runtime_s": 104.6
+}

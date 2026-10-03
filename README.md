@@ -503,6 +503,81 @@ truncating, and the builder is now idempotent (re-running it previously demoted 
 secondary rank). The site's above-the-fold paragraph was also split — it had become a single run-on
 `<p>` concatenating historical H31/H32-structural/H35-1 failures onto the current status.
 
+### 3.9 Session 13 — three new local-only candidates, H37-1 measured to a verdict
+
+The standing instruction asks for **3–5 untried hypotheses per session**, each naming its layer(s),
+its physical signature, why it should catch a catalogue-missing fault, and how it differs from
+anything in the repo, ranked by expected ΔDTI × cost, with **the top candidate validated on the
+spatially-blocked holdout BEFORE any weekly slot is touched**. Three new local-only candidates
+were designed and the top one was run.
+
+**H37-1 (Directional / anisotropic Poisson-disk re-pack of the H19-5 ridge)** was preregistered in
+`knowledge/28_preregistration_H37-1.md` before any seed in `250–254` was touched. The implementation
+added `src/gems27/thinning.py::directional_dot_thin` (anisotropic Poisson-disk ellipse oriented
+with the local strike vector; 7/7 unit tests in `tests/test_directional_thinning.py`), the runner
+`scripts/run_h37_1_holdout.py` (5 seeds × 4 spatial folds = 20 cells, ~106 s on this CPU, frozen
+instrument unchanged from `scripts/run_h36_1_holdout.py` so every variant is comparable to H36-1
+on the same OOF probability surface), and a 4-criterion frozen gate.
+
+**H37-1 FROZEN GATE FAILED**, arm closed. `evidence/h37_1_holdout.json` /
+`knowledge/29_h37_1_result.md` / `registry/irregularities.json::h37-1-directional-re-pack-refuted`:
+
+| Variant | mean ΔDTI | seeds | folds | Δdots/seed | efficiency |
+|---|---:|---:|---:|---:|---:|
+| `rung30_unpruned` | +0.000054 | 2/5 | 3/4 | -2,024 | 0.01133 |
+| `dir_3p5_2p0_unpruned` | **-0.003846** | **0/5** | **0/4** | -6,140 | 0.02178 |
+| **`dir_3p5_2p0_blind_r1`** (primary) | **-0.002982** | **0/5** | **0/4** | -7,490 | 0.01872 |
+| `dir_4p0_2p0_unpruned` | -0.008114 | 0/5 | 0/4 | -8,755 | 0.02543 |
+| `dir_3p0_2p0_unpruned` | +0.000054 | 2/5 | 3/4 | -2,024 | 0.01133 |
+| `control_random_drop_matched_n` | -0.007014 | 0/5 | 0/4 | -6,140 | 0.02953 |
+| **`control_iso_rung30_then_blind_r1`** (H36-1 incumbent) | **+0.001253** | **5/5** | **4/4** | -3,627 | 0.00802 |
+
+Frozen-gate criteria:
+
+| # | Criterion | Result |
+|---|---|---|
+| G1 | Profitability | **FAIL** (-0.0030; 0/5 seeds; 0/4 folds) |
+| G2 | Anisotropy matters | PASS (+0.003168 vs matched-N random drop) |
+| G3 | Anisotropy beats isotropic at same N | **FAIL** (-0.005099) |
+| G4 | Live break-even (eff > tau_live = 0.054852) | **FAIL** (eff = 0.0187) |
+| **Gate** | | **FAILED — arm CLOSED** |
+
+The H36-1 incumbent (`control_iso_rung30_then_blind_r1`) **reproduced +0.00125 mean DTI on the
+same decade, 5/5 seeds, 4/4 folds** — its 12-promotion vintage on `240–249` is robust on the next
+fresh decade. **No candidate GeoTIFF, no weekly slot, no confirmation, no retuning.** The
+one-click primary stays at `b531dae0a36f`.
+
+**Why anisotropy lost.** The OOF detector emits a 1-px ridge with `ridge_nms` strike quantised to
+**four directions** (0°, 45°, 90°, 135°). On the 26,645 ridge components (median 4 px, 95% below
+50 px) the ±22.5° precision is too noisy: ~half of the short components have an anisotropic
+ellipse misaligned with the true strike, and the ellipse projected onto the shorter axis removes
+interior dots that were carrying credit. The matched-N random drop (`-0.0070`) *beat* the
+anisotropic pack (`-0.0038`) by 0.0032 because random selection preserves ridge coverage while
+anisotropic thinning removes interior dots. The directional code path is correct (7/7 unit tests
+pass) and remains available for higher-precision strike fields, but no H37-2/H37-3 arm will use it
+on the 4-sector OOF strike without first upgrading to an 8-sector or per-pixel vector field.
+
+**The two queued untried local-only arms** (each designed to use only bytes already restored into
+`data/`, since `sciencebase.gov` and `prd-tnm.s3.amazonaws.com` return TLS handshake failures from
+this sandbox per `evidence/session9_external_verification.json`):
+
+| Rank | ID | Hypothesis | Data gate | Seeds |
+|---:|---|---|---|---|
+| 2 | **H37-2** | LiDAR parallel-scarp "multi-strand" addition on the H19-5 ridge (`lidar_step_max` secondary crests within 100–200 m of the H19-5 line) | In hand (`data/lidar_scarp_features_u8.tif`, 12 bands, hash-pinned) | 255–259 |
+| 3 | **H37-3** | Quaternary volcanics polygon-edge directional addition (`qfaults_v2_in_footprint.json` polygon edges within `≤ 300 m` of an H19-5 ridge) | In hand (`qfaults_v2_in_footprint.json` + `geodawn_extensions_u8.tif::TMI_up150`) | 260–264 |
+
+The only queued **addition arm** that observes a physical field the surface-rupture catalogue
+cannot contain remains **H33-3 / H35-2 heat-flow residual × 2 m probe** through the GitHub Actions
+runner bridge; the bytes (`registry/external_pins.json::sb_heat_flow_zip`, 130,154,244 B,
+SHA-256 `e7fd62c6…`) are pinned and have not been fetched into this sandbox.
+
+**Why the README sits at the current best.** After Session 12 the validated one-click primary
+`b531dae0a36f` (H36-1 rung 3.0 + H27-4 blind r1) projects live to `0.2717–0.2727` (the 0.2600
+anchor `e56ea318af89` is owner-reported; `0.3195` is the public #1). The H34 ladder study and
+H36-1 itself agree that the *isotropic* rung space is bounded; H37-1 was the only remaining
+untried local-only layout arm and was the natural next test. It closes that family too. The next
+step is the heat-flow addition arm (queued, external bytes required).
+
 ## 4. Euler Deconvolution for Depth (Reid et al., *Geophysics*, 1990) & Screen Ledger
 
 Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `evidence/h31_1_euler_feature_audit.json`, `evidence/h31_1_euler_clusters.csv`):

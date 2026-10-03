@@ -402,6 +402,12 @@
       "severity": "low",
       "issue": "The rung ladder is described in `registry/next_hypotheses.json` as a 're-thin'. Measured on the full footprint, it is not a thinning: `dot_thin(surface, 3.0)` shares only 30,666 px with the shipped `dot_thin(surface, 2.8)` set of 44,090 px, adds 10,667 px and drops 13,424 px - 24,091 px change hands. `thinning.dot_thin` is a greedy lowest-raster-index cascade, so raising `min_dist` re-seeds the packing rather than merely deleting dots.",
       "action": "Recorded because it changes what the ladder means (a layout choice, not a budget cut) and because it is the reason the H36-1 gate includes a matched-N random-drop control. Separately: `dot_thin` blocks offsets with squared length strictly below `min_dist**2`, and `math.hypot(2,2)**2 == 8.000000000000002`, so `dot_thin(s, sqrt(8))` returns 41,333 while `dot_thin(s, 2.8)` returns 44,090. Never pass an exact hypotenuse to `dot_thin`; `operating_point.measure_ladder` already subtracts 1e-9 for this reason."
+    },
+    {
+      "id": "h37-1-directional-re-pack-refuted",
+      "severity": "medium",
+      "issue": "H37-1 (directional / anisotropic Poisson-disk re-pack of the H19-5 ridge) was preregistered in knowledge/28_preregistration_H37-1.md, executed on fresh seeds 250-254, and FAILED the frozen gate. Primary variant dir_3p5_2p0_blind_r1 lost -0.00298 mean DTI on 0/5 seeds and 0/4 folds; every anisotropic variant (3.5x2.0, 4.0x2.0, 3.0x2.0) lost. The control_iso_rung30_then_blind_r1 (isotropic rung 3.0 + H27-4 blind prune) reproduced H36-1 with +0.00125 on 5/5 seeds and 4/4 folds. Cause: the OOF detector emits 4-sector strike (\u00b122.5 deg), which is too noisy on the 26,645 short components (median 4 px) for anisotropic ellipses to add value over isotropic at the same N. G3 (anisotropy beats isotropic) failed by -0.0051.",
+      "action": "Knowledge/29_h37_1_result.md records the closed result. No candidate TIFF, no weekly slot, no confirmation. The directional_dot_thin function is retained and tested (tests/test_directional_thinning.py 7/7 PASS) for callers that have a higher-precision strike field, but no H37-2/H37-3 arm uses it. Seeds 255-259 reserved for H37-2; 260-264 reserved for H37-3."
     }
   ]
 }

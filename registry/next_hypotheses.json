@@ -340,6 +340,34 @@
         "added_dots_per_seed": 6856.8
       },
       "standing_effect": "No candidate TIFF, no weekly slot, no confirmation, no retuning. The arm lost to its own matched-count random control, and every pre-declared dose variant was at or below that control, so no tighter subset rescues it."
+    },
+    {
+      "id": "H37-1",
+      "rank": 999,
+      "title": "Directional (anisotropic) Poisson-disk re-pack of the H19-5 ridge",
+      "layers": [
+        "data/h19_5_nan.tif (121,131 px ridge skeleton)",
+        "local strike from oof_detector.ridge_nms",
+        "data/labels.tif for the catalogue mask"
+      ],
+      "signature": "Anisotropic ellipse (a_along >= a_across) oriented with the local strike; tested at (3.5, 2.0), (4.0, 2.0), (3.0, 2.0) against isotropic rung-3.0 (H36-1).",
+      "why": "Linear DTI kernel saturates along strike; anisotropic pack should keep more on-line credit per dot than isotropic. Closed: the 4-sector strike (ridge_nms) has +/-22.5 deg precision, too noisy on the 26,645 short components (median 4 px) for anisotropy to help.",
+      "differs": "Every prior rung arm is isotropic (thinning.dot_thin, oof_detector.build_oof_dotted_base). H37-1 was the first to add an oriented-ellipse variant.",
+      "status": "REFUTED on fresh seeds 250-254. Primary dir_3p5_2p0_blind_r1 lost -0.00298 mean DTI on 0/5 seeds and 0/4 folds. Anisotropic at (3.5, 2.0) lost to isotropic rung 3.0 by -0.00510. control_iso_rung30_then_blind_r1 (isotropic rung 3.0 + H27-4 blind r1) reproduced H36-1 with +0.00125 on 5/5 seeds and 4/4 folds. No candidate TIFF, no weekly slot.",
+      "gain": "Closed: -0.00298 mean paired DTI; control_iso_rung30_then_blind_r1 (H36-1 incumbent) +0.00125 on the same decade.",
+      "cost": "Low: one new module src/gems27/thinning.py (directional_dot_thin, 7/7 unit tests pass); one runner; one holdout (~106 s on this CPU).",
+      "evidence": "evidence/h37_1_holdout.json",
+      "result": "knowledge/29_h37_1_result.md",
+      "runner": "scripts/run_h37_1_holdout.py",
+      "preregistration": "knowledge/28_preregistration_H37-1.md",
+      "seeds": "250-254",
+      "gate_passed": false,
+      "gate_detail": {
+        "G1_profitability": "FAIL (-0.00298; 0/5 seeds, 0/4 folds)",
+        "G2_anisotropy_vs_budget": "PASS (anisotropy beats matched-N random drop by +0.003168)",
+        "G3_anisotropy_vs_isotropic": "FAIL (anisotropy loses to isotropic at same N by -0.005099)",
+        "G4_live_breakeven": "FAIL (eff 0.01872 < tau_live 0.054852)"
+      }
     }
   ],
   "separate_review_class": {
@@ -513,5 +541,31 @@
       ],
       "note": "The ten-seed decade 240-249 was consumed by H36-1. Seed 240 had previously been declared a throwaway pipeline smoke-test seed in knowledge/23 section 5 and is recorded as spent here as well; no other record mentions it."
     }
+  },
+  "session13_addendum": {
+    "generated": "2026-10-03",
+    "h37_1": {
+      "preregistration": "knowledge/28_preregistration_H37-1.md",
+      "result": "knowledge/29_h37_1_result.md",
+      "evidence": "evidence/h37_1_holdout.json",
+      "runner": "scripts/run_h37_1_holdout.py",
+      "seeds": "250-254",
+      "gate_passed": false,
+      "gate_detail": {
+        "G1_profitability": "FAIL",
+        "G2_anisotropy_vs_budget": "PASS",
+        "G3_anisotropy_vs_isotropic": "FAIL",
+        "G4_live_breakeven": "FAIL"
+      },
+      "key_measurement": "H36-1 incumbent (control_iso_rung30_then_blind_r1) reproduces +0.00125 on the same decade; H37-1 loses -0.003 because 4-sector strike is too noisy on the 26,645 short ridge components. The directional_dot_thin function (7/7 unit tests pass) remains available for callers with higher-precision strike fields."
+    },
+    "rung_family_status": {
+      "verdict": "Directional rung space is bounded by G3: anisotropy loses to isotropic at the same N. Closing this arm. The directional_dot_thin function is preserved and tested for future use with 8-sector / per-pixel vector fields. The one-click primary stays at b531dae0a36f (H36-1)."
+    },
+    "next_ranked": [
+      "H37-2 LiDAR parallel-scarp multi-strand addition (12 lidar_scarp_features bands in hand, seeds 255-259 reserved).",
+      "H37-3 Quaternary volcanics polygon-edge directional addition (qfaults_v2 + geodawn_extensions_u8.tif in hand, seeds 260-264 reserved).",
+      "H33-3 / H35-2 heat-flow residual x 2 m probe through the GitHub Actions bridge. Preregistered gate unchanged; only arm that observes a physical field the surface-rupture catalogue cannot contain."
+    ]
   }
 }
