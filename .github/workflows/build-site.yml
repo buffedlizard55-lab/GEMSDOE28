@@ -28,6 +28,8 @@ on:
       - 'evidence/range_validator_forensics_2026-10-03.json'
       - 'evidence/restore_audit.json'
       - 'evidence/submission_file_audit.json'
+      - 'evidence/reachability_frontier.json'
+      - 'evidence/losfo_farfield_diagnostic.json'
       - 'scripts/build_site.py'
       - 'docs/assets/**'
   pull_request:
@@ -56,6 +58,8 @@ on:
       - 'evidence/range_validator_forensics_2026-10-03.json'
       - 'evidence/restore_audit.json'
       - 'evidence/submission_file_audit.json'
+      - 'evidence/reachability_frontier.json'
+      - 'evidence/losfo_farfield_diagnostic.json'
       - 'scripts/build_site.py'
       - 'docs/assets/**'
   workflow_dispatch:

@@ -23,6 +23,11 @@ Behaviour
 * Labels without a pin are recorded as ``unpinned`` and are never treated as verified.
 * With ``--availability-only true`` the bytes are streamed but discarded after hashing, and a
   HEAD/GET status is recorded; nothing is written to ``--out`` except ``inventory.json``.
+* ``--derived <label>`` additionally keeps the bytes of one pinned ScienceBase release, verifies it
+  against ``registry/external_pins.json``, opens the vector layer(s) inside it, clips them to the
+  competition footprint and writes a small derived table plus a schema file under ``--out/commit/``.
+  The workflow copies that directory into ``docs/data/`` and commits it, which is how a session that
+  cannot reach sciencebase.gov still gets the release's in-footprint content.
 * This script never contacts drivendata.org; the competition Terms of Use prohibit automated access.
 """
 from __future__ import annotations
@@ -123,7 +128,10 @@ def fetch(url: str, keep: bool, out_dir: Path, label: str) -> dict:
     record: dict = {"url": url}
     try:
         with urllib.request.urlopen(request, timeout=300) as response:  # noqa: S310 - fixed https pins
-            record["http_status"] = int(getattr(response, "status", 200))
+            # urllib sets .status to None for non-HTTP schemes (file://, used by the tests) and
+            # older response objects omit it entirely; int(None) would raise, so default explicitly.
+            status = getattr(response, "status", None)
+            record["http_status"] = int(status) if isinstance(status, int) else 200
             record["content_type"] = response.headers.get("Content-Type", "")
             target = out_dir / f"{label}{Path(url).suffix or '.bin'}" if keep else None
             sink = target.open("wb") if target else None
@@ -192,6 +200,118 @@ def run_sciencebase_availability(out_dir: Path) -> dict:
     return results
 
 
+# ---------------------------------------------------------------------------------------------
+# Session 10 (2026-10-03): derived in-footprint clips of the pinned official vector releases.
+#
+# The availability probes above prove the bytes exist and hash them, but `--availability-only`
+# discards them, so no session could ever *use* the release. This step keeps one pinned release,
+# re-verifies it against registry/external_pins.json (the runner-recorded hashes), opens the vector
+# layers inside and writes a compact in-footprint table the repository can commit. Everything the
+# clipping does is covered by tests/test_external_clip.py.
+DERIVED_SPECS = [
+    {
+        "label": "sb_slip_tendency_shapefile_full",
+        "hypothesis": "H33-1 kinematic reactivation favourability gate",
+        "stem": "sb_slip_tendency_in_footprint",
+    },
+]
+
+
+def _zip_vector_layers(zip_path: Path, work_dir: Path) -> list[Path]:
+    """Extract a zip and return every shapefile (.shp) or GeoPackage (.gpkg) layer inside it."""
+    import zipfile
+
+    with zipfile.ZipFile(zip_path) as archive:
+        names = archive.namelist()
+        targets = [n for n in names if n.lower().endswith((".shp", ".gpkg"))]
+        if not targets:
+            return []
+        # a .shp needs its siblings (.dbf/.shx/.prj); extract everything next to them
+        wanted = set()
+        for n in targets:
+            stem = n.rsplit(".", 1)[0].lower()
+            wanted.update(m for m in names if m.rsplit(".", 1)[0].lower() == stem)
+        archive.extractall(work_dir, members=sorted(wanted))  # noqa: S202 - pinned official zip
+    out: list[Path] = []
+    for n in sorted(targets):
+        candidate = work_dir / n
+        if candidate.exists():
+            out.append(candidate)
+    return out
+
+
+def build_sciencebase_derived(out_dir: Path, pins: dict[str, dict], only: str | None) -> dict:
+    """Download, hash-verify, clip and write derived in-footprint tables for the pinned releases."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+    from gems27 import external_clip  # noqa: PLC0415 - runner-only dependency (pyogrio)
+
+    commit_dir = out_dir / "commit"
+    commit_dir.mkdir(parents=True, exist_ok=True)
+    results: dict[str, dict] = {}
+    for spec in DERIVED_SPECS:
+        label = spec["label"]
+        if only and only != label:
+            continue
+        pin = pins.get(label)
+        record: dict = {"hypothesis": spec["hypothesis"]}
+        if not pin:
+            record["status"] = "NO_PIN"
+            results[label] = record
+            continue
+        got = fetch(pin["url"], keep=True, out_dir=out_dir, label=label)
+        record.update({k: got.get(k) for k in ("url", "http_status", "bytes", "sha256", "error")})
+        if got.get("status") != "FETCHED":
+            record["status"] = "UNREACHABLE"
+            results[label] = record
+            continue
+        if got["sha256"] != pin["sha256"]:
+            # a broken pin must be loud: the release changed, or the URL no longer points at it
+            record["status"] = "PIN_MISMATCH"
+            record["pinned_sha256"] = pin["sha256"]
+            record["pinned_bytes"] = pin["bytes"]
+            results[label] = record
+            continue
+        record["pin_match"] = True
+        work = out_dir / f"_work_{label}"
+        work.mkdir(parents=True, exist_ok=True)
+        payload = Path(got["path"])
+        try:
+            layers = _zip_vector_layers(payload, work) if payload.suffix.lower() == ".zip" else [payload]
+        except Exception as error:  # noqa: BLE001 - record and continue, never fail the whole job
+            record["status"] = "ARCHIVE_UNREADABLE"
+            record["error"] = f"{type(error).__name__}: {error}"
+            results[label] = record
+            continue
+        if not layers:
+            record["status"] = "NO_VECTOR_LAYER"
+            results[label] = record
+            continue
+        all_records, all_schemas = [], {}
+        for layer in layers:
+            try:
+                recs, schema = external_clip.clip_and_clip_report(str(layer), vertex_step_m=200.0)
+            except Exception as error:  # noqa: BLE001 - one unreadable layer must not sink the job
+                all_schemas[layer.name] = {"status": "LAYER_UNREADABLE",
+                                           "error": f"{type(error).__name__}: {error}"}
+                continue
+            for r in recs:
+                r["source_layer"] = layer.name
+            all_records.extend(recs)
+            all_schemas[layer.name] = schema
+        report = external_clip.write_derived(
+            all_records, {"layers": all_schemas},
+            str(commit_dir / f"{spec['stem']}.csv"),
+            str(commit_dir / f"{spec['stem']}.json"),
+        )
+        record["status"] = "DERIVED_WRITTEN"
+        record["layers_found"] = [str(x.name) for x in layers]
+        record["derived"] = report
+        record["committed_files"] = [f"docs/data/{spec['stem']}.csv", f"docs/data/{spec['stem']}.json"]
+        results[label] = record
+        print(json.dumps({label: {k: record.get(k) for k in ("status", "pin_match", "derived")}}))
+    return results
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--datasets", default="paleo,probes,volcanics")
@@ -200,6 +320,11 @@ def main() -> int:
     parser.add_argument("--pins", default="/tmp/gdr/pins.json")
     parser.add_argument("--skip-sciencebase", default="false",
                         help="skip the unpinned H33 ScienceBase availability probes")
+    parser.add_argument("--derived", default="",
+                        help="also download, hash-verify and clip one pinned release to the "
+                             "footprint ('all' or a single label from DERIVED_SPECS)")
+    parser.add_argument("--external-pins", default="",
+                        help="registry/external_pins.json with the runner-recorded ScienceBase hashes")
     args = parser.parse_args()
 
     out_dir = Path(args.out)
@@ -249,6 +374,15 @@ def main() -> int:
         "unpinned": sorted(k for k, v in inventory["rows"].items()
                            if isinstance(v, dict) and v.get("pin_match") is None),
     }
+
+    if args.derived:
+        ext_pins = load_pins(Path(args.external_pins)) if args.external_pins else {}
+        inventory["sciencebase_derived"] = build_sciencebase_derived(
+            out_dir, ext_pins, None if args.derived.strip().lower() == "all" else args.derived.strip()
+        )
+        inventory["summary"]["sciencebase_derived_written"] = sum(
+            1 for row in inventory["sciencebase_derived"].values()
+            if row.get("status") == "DERIVED_WRITTEN")
 
     if str(args.skip_sciencebase).lower() not in {"1", "true", "yes"}:
         sb = run_sciencebase_availability(out_dir)

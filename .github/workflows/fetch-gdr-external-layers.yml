@@ -11,13 +11,19 @@ name: fetch-gdr-external-layers
 # evidence/ci/external_verification.json), inventories them, clips them to the competition footprint
 # and uploads the result as a run artifact.
 #
-# It commits exactly ONE small file back to the repository - evidence/external_layer_inventory.json -
-# because the agent sandbox cannot read run logs or download artifacts (both live on hosts outside its
-# allowlist: results-receiver.actions.githubusercontent.com and *.blob.core.windows.net). Committing the
-# inventory is what makes the result verifiable from a session with `gh api`. That path is not in the
+# It commits small files back to the repository - evidence/external_layer_inventory.json plus any
+# derived in-footprint clip under docs/data/ - because the agent sandbox cannot read run logs or
+# download artifacts (both live on hosts outside its allowlist:
+# results-receiver.actions.githubusercontent.com and *.blob.core.windows.net). Committing them is what
+# makes the result verifiable AND usable from a session with `gh api`. None of those paths is in the
 # push trigger's `paths:` filter, so the commit cannot re-trigger this workflow. It never contacts
-# drivendata.org
-# (the competition Terms of Use prohibit robots/automatic access; see scripts/refresh_source_feed.py).
+# drivendata.org (the competition Terms of Use prohibit robots/automatic access; see
+# scripts/refresh_source_feed.py).
+#
+# Session 10 addition: with DERIVED=all the job also downloads the pinned USGS slip/dilation-tendency
+# release (H33-1, DOI 10.5066/P9YL58W6), re-verifies its SHA-256 against registry/external_pins.json,
+# clips the vector layer to the competition footprint and commits docs/data/sb_slip_tendency_in_footprint
+# .{csv,json}. A pin mismatch makes the job fail rather than commit a changed release silently.
 #
 # Retrieve the artifact from a session with:
 #   gh run list --workflow=fetch-gdr-external-layers.yml
@@ -48,6 +54,10 @@ on:
         description: "Also HEAD-check (no download) the larger sources and record status"
         required: false
         default: "true"
+      derived:
+        description: "Pin-verify and clip an official release to the footprint (all | one label | none)"
+        required: false
+        default: "all"
 
 permissions:
   contents: write   # needed only to commit evidence/external_layer_inventory.json back to main:
@@ -76,19 +86,30 @@ jobs:
             https://raw.githubusercontent.com/buffedlizard55-lab/16GEMSDOE/main/evidence/ci/external_verification.json
           python -c "import json;d=json.load(open('/tmp/gdr/pins.json'));print('pins:',len(d.get('downloads',d)))"
 
+      - name: Show this repository's own ScienceBase pins (runner-recorded 2026-10-03)
+        run: |
+          python -c "import json;d=json.load(open('registry/external_pins.json'));[print(k, v['bytes'], v['sha256'][:16]) for k,v in d['downloads'].items()]"
+
       - name: Download, hash-verify, inventory and clip
         env:
           DATASETS: ${{ github.event.inputs.datasets || 'paleo,probes,volcanics' }}
           AVAIL_ONLY: ${{ github.event.inputs.availability_only || 'true' }}
+          DERIVED: ${{ github.event.inputs.derived || 'all' }}
         run: |
           set -o pipefail   # a verification failure must fail the job, not be swallowed by tee
           mkdir -p /tmp/gdr/out
           python scripts/fetch_external_layers.py \
             --datasets "$DATASETS" \
             --availability-only "$AVAIL_ONLY" \
+            --derived "$DERIVED" \
+            --external-pins registry/external_pins.json \
             --out /tmp/gdr/out \
             --pins /tmp/gdr/pins.json \
             2>&1 | tee /tmp/gdr/log.txt
+          # a broken pin is a changed official release: fail loudly instead of committing it
+          if grep -q '"status": "PIN_MISMATCH"' /tmp/gdr/out/inventory.json; then
+            echo "::error::ScienceBase pin mismatch - the official release changed" && exit 1
+          fi
 
       - name: Show inventory in the run log
         if: always()
@@ -103,18 +124,25 @@ jobs:
             echo "no inventory produced; nothing to commit"; exit 0
           fi
           cp /tmp/gdr/out/inventory.json evidence/external_layer_inventory.json
+          if [ -d /tmp/gdr/out/commit ]; then
+            mkdir -p docs/data
+            cp -f /tmp/gdr/out/commit/* docs/data/
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add evidence/external_layer_inventory.json
+          git add evidence/external_layer_inventory.json docs/data
           if git diff --cached --quiet; then
             echo "inventory unchanged; nothing to commit"
           else
             git commit -F - <<'COMMIT_MSG'
-          evidence: external-layer fetch inventory (hashes, layer schemas, in-footprint counts)
+          evidence: external-layer inventory + derived in-footprint clips
 
           Written by .github/workflows/fetch-gdr-external-layers.yml on the runner, because run logs
           and artifacts are hosted outside the agent sandbox's allowlist and cannot be read from a
           session. Every dataset row carries the pin it was checked against and whether it matched.
+          docs/data/sb_slip_tendency_in_footprint.{csv,json} are the pin-verified USGS
+          slip/dilation-tendency release (DOI 10.5066/P9YL58W6) clipped to the competition footprint
+          for H33-1; attributes are copied verbatim from the release and no field is derived.
           COMMIT_MSG
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
@@ -126,6 +154,7 @@ jobs:
           path: |
             /tmp/gdr/out/inventory.json
             /tmp/gdr/out/*.csv
+            /tmp/gdr/out/commit/*
             /tmp/gdr/log.txt
           if-no-files-found: warn
           retention-days: 90

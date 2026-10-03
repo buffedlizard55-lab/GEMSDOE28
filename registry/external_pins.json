@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "generated_utc": "2026-10-03T18:03:14Z",
+  "provenance": "SHA-256 pins recorded by the GitHub Actions runner bridge (.github/workflows/fetch-gdr-external-layers.yml) on 2026-10-03 and committed as evidence/external_layer_inventory.json. The agent sandbox cannot reach sciencebase.gov, so these runner-recorded hashes are the pin of record. A listing on an official item page does not by itself establish downloadability; these rows do, because the bytes were streamed and hashed.",
+  "drivendata_access": false,
+  "downloads": {
+    "sb_slip_tendency_shapefile_full": {
+      "url": "https://www.sciencebase.gov/catalog/file/get/6296974dd34ec53d276bb33d?f=__disk__33%2Fb0%2F91%2F33b091fae2403dcf2f1dd2f698f7368ffdcf000d",
+      "bytes": 35912323,
+      "sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
+      "filename": "Shapefile_Full Study.zip",
+      "doi": "10.5066/P9YL58W6",
+      "item_page": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+      "hypothesis": "H33-1 kinematic reactivation favourability gate"
+    },
+    "sb_mt_conductance_surface": {
+      "url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__b5%2F9b%2F17%2Fb59b17d7b8d2b1e9bb9028da2c5934a9c8ac38b8",
+      "bytes": 4132337,
+      "sha256": "8cc1a22404108a9fb81574e37b14a5078331181ee1c0527b6240c2dee888338e",
+      "filename": "gb_conductance_surface_tp.tif",
+      "doi": "10.5066/P9TWT2LU",
+      "item_page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment"
+    },
+    "sb_mt_conductance_middle_crust": {
+      "url": "https://www.sciencebase.gov/catalog/file/get/62979746d34ec53d276c113b?f=__disk__1c%2F80%2F77%2F1c807764c8f55b789a09b42dbfddac23b00f1549",
+      "bytes": 4132325,
+      "sha256": "e8cfd731f58a64a50115de76fda1329b6f688440ff6f9e6fd3261634fa943a60",
+      "filename": "gb_conductance_middle_crust_tp.tif",
+      "doi": "10.5066/P9TWT2LU",
+      "item_page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment"
+    },
+    "sb_heat_flow_zip": {
+      "url": "https://www.sciencebase.gov/catalog/file/get/6297d2fad34ec53d276c5b28?f=__disk__03%2Fac%2F86%2F03ac865d4a5a3c5c52d8ca92bc170105c6fe508a",
+      "bytes": 130154244,
+      "sha256": "e7fd62c6963ab390963b3f19adf4dd14bf616e7267f2ae38ad6af1005c106918",
+      "filename": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA.zip",
+      "doi": "10.5066/P9BZPVUC",
+      "item_page": "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+      "hypothesis": "H33-3 heat-flow residual + 2 m probe conjunction"
+    }
+  }
+}

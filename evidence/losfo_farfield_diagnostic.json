@@ -1,0 +1,555 @@
+{
+ "generated_utc": "2026-10-03T18:38:20Z",
+ "kind": "DIAGNOSTIC, NOT A PROMOTION GATE. It measures how much of the interleaved protocol's credit is catalogue interpolation. It approves nothing and spends no slot.",
+ "protocol": "src/gems27/losfo.py (leave-fault-system-out with a 600 m label buffer)",
+ "code_sha256": {
+  "losfo": "cba280e138ca540dc6549ef56d4c0f88062dfb457118d757b896a864fa2b9738",
+  "oof_detector": "6c041479cf92d28d7a084f5d69407963bde45b7463e0fea624673efa3506b235",
+  "runner": "c1691e63a59e61792a0bb548c0c5bf203e4c590707bf389da0e6bafc257af688"
+ },
+ "seeds": [
+  210,
+  211,
+  212,
+  213,
+  214
+ ],
+ "cells": [
+  {
+   "seed": 210,
+   "fold": "NW",
+   "n_truth": 1962,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 30.083217912982647,
+   "losfo": {
+    "tp": 351.75374312086655,
+    "fp": 10409.545591457349,
+    "dti": 0.09451020610373456,
+    "dots": 10572,
+    "n_truth": 1962
+   },
+   "leaky": {
+    "tp": 352.5832156505419,
+    "fp": 10589.785627177193,
+    "dti": 0.09382019549226157,
+    "dots": 10753,
+    "n_truth": 1962
+   },
+   "dots_median_dist_to_known_px": 31.144823004794873,
+   "frac_dots_ge_3px_from_known": 0.9149640559969732
+  },
+  {
+   "seed": 210,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 3264,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 33.61547262794322,
+   "losfo": {
+    "tp": 691.8399709574146,
+    "fp": 12308.373387241234,
+    "dti": 0.13275911611432395,
+    "dots": 12619,
+    "n_truth": 3264
+   },
+   "leaky": {
+    "tp": 827.3373728354773,
+    "fp": 13029.99162656231,
+    "dti": 0.15370402019731919,
+    "dots": 13399,
+    "n_truth": 3264
+   },
+   "dots_median_dist_to_known_px": 21.633307652783937,
+   "frac_dots_ge_3px_from_known": 0.9073619145732625
+  },
+  {
+   "seed": 210,
+   "fold": "SW",
+   "n_truth": 6793,
+   "min_dist_truth_to_known_px": 8.94427190999916,
+   "median_dist_truth_to_known_px": 38.600518131237564,
+   "losfo": {
+    "tp": 507.45621616256,
+    "fp": 12775.738345329879,
+    "dti": 0.06271830127833743,
+    "dots": 12990,
+    "n_truth": 6793
+   },
+   "leaky": {
+    "tp": 480.83222546116514,
+    "fp": 13384.145254748424,
+    "dti": 0.0585852388479624,
+    "dots": 13590,
+    "n_truth": 6793
+   },
+   "dots_median_dist_to_known_px": 23.430749027719962,
+   "frac_dots_ge_3px_from_known": 0.914626635873749
+  },
+  {
+   "seed": 210,
+   "fold": "SE",
+   "n_truth": 5032,
+   "min_dist_truth_to_known_px": 8.94427190999916,
+   "median_dist_truth_to_known_px": 38.30795761581345,
+   "losfo": {
+    "tp": 832.9616707087545,
+    "fp": 10592.84875950437,
+    "dti": 0.13199066282942254,
+    "dots": 10933,
+    "n_truth": 5032
+   },
+   "leaky": {
+    "tp": 725.883909604407,
+    "fp": 10859.155798599806,
+    "dti": 0.1144456533135761,
+    "dots": 11155,
+    "n_truth": 5032
+   },
+   "dots_median_dist_to_known_px": 19.4164878389476,
+   "frac_dots_ge_3px_from_known": 0.877618220067685
+  },
+  {
+   "seed": 211,
+   "fold": "NW",
+   "n_truth": 1715,
+   "min_dist_truth_to_known_px": 8.246211251235321,
+   "median_dist_truth_to_known_px": 26.0,
+   "losfo": {
+    "tp": 204.75330856728345,
+    "fp": 10651.443430137686,
+    "dti": 0.057787038488395094,
+    "dots": 10740,
+    "n_truth": 1715
+   },
+   "leaky": {
+    "tp": 238.2436064882145,
+    "fp": 10663.48934920993,
+    "dti": 0.06706654330288107,
+    "dots": 10766,
+    "n_truth": 1715
+   },
+   "dots_median_dist_to_known_px": 28.635642126552707,
+   "frac_dots_ge_3px_from_known": 0.903538175046555
+  },
+  {
+   "seed": 211,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 3802,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 34.90701273908539,
+   "losfo": {
+    "tp": 798.1936605593049,
+    "fp": 12888.341979762718,
+    "dti": 0.13812190486141984,
+    "dots": 13233,
+    "n_truth": 3802
+   },
+   "leaky": {
+    "tp": 801.4733566124958,
+    "fp": 13055.407616963821,
+    "dti": 0.13787659363328367,
+    "dots": 13404,
+    "n_truth": 3802
+   },
+   "dots_median_dist_to_known_px": 25.019992006393608,
+   "frac_dots_ge_3px_from_known": 0.8966220811607345
+  },
+  {
+   "seed": 211,
+   "fold": "SW",
+   "n_truth": 6099,
+   "min_dist_truth_to_known_px": 8.06225774829855,
+   "median_dist_truth_to_known_px": 40.22437072223753,
+   "losfo": {
+    "tp": 772.0479815485555,
+    "fp": 13531.946849588923,
+    "dti": 0.0997478145549262,
+    "dots": 13865,
+    "n_truth": 6099
+   },
+   "leaky": {
+    "tp": 574.5773846663877,
+    "fp": 13330.73697915539,
+    "dti": 0.07500752835803655,
+    "dots": 13582,
+    "n_truth": 6099
+   },
+   "dots_median_dist_to_known_px": 22.47220505424423,
+   "frac_dots_ge_3px_from_known": 0.9116480346195456
+  },
+  {
+   "seed": 211,
+   "fold": "SE",
+   "n_truth": 5049,
+   "min_dist_truth_to_known_px": 8.06225774829855,
+   "median_dist_truth_to_known_px": 35.84689665786984,
+   "losfo": {
+    "tp": 605.1553562021887,
+    "fp": 10251.534830329176,
+    "dti": 0.09744008531262804,
+    "dots": 10512,
+    "n_truth": 5049
+   },
+   "leaky": {
+    "tp": 771.240321357016,
+    "fp": 10816.48818322214,
+    "dti": 0.12132628197377299,
+    "dots": 11140,
+    "n_truth": 5049
+   },
+   "dots_median_dist_to_known_px": 20.248456731316587,
+   "frac_dots_ge_3px_from_known": 0.8748097412480974
+  },
+  {
+   "seed": 212,
+   "fold": "NW",
+   "n_truth": 2929,
+   "min_dist_truth_to_known_px": 8.246211251235321,
+   "median_dist_truth_to_known_px": 35.0,
+   "losfo": {
+    "tp": 485.61953958240485,
+    "fp": 10284.41409297951,
+    "dti": 0.1079824809272684,
+    "dots": 10504,
+    "n_truth": 2929
+   },
+   "leaky": {
+    "tp": 603.7283907951312,
+    "fp": 10461.092448995838,
+    "dti": 0.13250804152924897,
+    "dots": 10734,
+    "n_truth": 2929
+   },
+   "dots_median_dist_to_known_px": 30.0,
+   "frac_dots_ge_3px_from_known": 0.9158415841584159
+  },
+  {
+   "seed": 212,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 2899,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 34.0,
+   "losfo": {
+    "tp": 521.8923387569981,
+    "fp": 13287.12886962163,
+    "dti": 0.10271440721620131,
+    "dots": 13522,
+    "n_truth": 2899
+   },
+   "leaky": {
+    "tp": 696.5412848101546,
+    "fp": 13109.033477798863,
+    "dti": 0.1371059257754659,
+    "dots": 13419,
+    "n_truth": 2899
+   },
+   "dots_median_dist_to_known_px": 23.4839768097998,
+   "frac_dots_ge_3px_from_known": 0.9101464280431889
+  },
+  {
+   "seed": 212,
+   "fold": "SW",
+   "n_truth": 4960,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 33.0,
+   "losfo": {
+    "tp": 516.0720711925701,
+    "fp": 13130.45207316765,
+    "dti": 0.0770566794212622,
+    "dots": 13360,
+    "n_truth": 4960
+   },
+   "leaky": {
+    "tp": 437.5224813051054,
+    "fp": 13394.788646208537,
+    "dti": 0.06496769402637008,
+    "dots": 13586,
+    "n_truth": 4960
+   },
+   "dots_median_dist_to_known_px": 21.2602916254693,
+   "frac_dots_ge_3px_from_known": 0.9142964071856288
+  },
+  {
+   "seed": 212,
+   "fold": "SE",
+   "n_truth": 3449,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 30.4138126514911,
+   "losfo": {
+    "tp": 572.7150383903576,
+    "fp": 10642.864413196956,
+    "dti": 0.11448997842928355,
+    "dots": 10876,
+    "n_truth": 3449
+   },
+   "leaky": {
+    "tp": 409.2496855299313,
+    "fp": 10979.466902131517,
+    "dti": 0.08124961106814814,
+    "dots": 11155,
+    "n_truth": 3449
+   },
+   "dots_median_dist_to_known_px": 16.76305461424021,
+   "frac_dots_ge_3px_from_known": 0.8552776756160353
+  },
+  {
+   "seed": 213,
+   "fold": "NW",
+   "n_truth": 3021,
+   "min_dist_truth_to_known_px": 9.219544457292887,
+   "median_dist_truth_to_known_px": 40.11234224026316,
+   "losfo": {
+    "tp": 390.53907001801474,
+    "fp": 10429.255254858846,
+    "dti": 0.08525641307940551,
+    "dots": 10610,
+    "n_truth": 3021
+   },
+   "leaky": {
+    "tp": 428.0071415367411,
+    "fp": 10558.469507098791,
+    "dti": 0.0927607929489352,
+    "dots": 10752,
+    "n_truth": 3021
+   },
+   "dots_median_dist_to_known_px": 36.76955262170047,
+   "frac_dots_ge_3px_from_known": 0.9236569274269557
+  },
+  {
+   "seed": 213,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 2696,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 31.38470965295043,
+   "losfo": {
+    "tp": 509.43043268266075,
+    "fp": 12702.221021736841,
+    "dti": 0.10615057349864514,
+    "dots": 12924,
+    "n_truth": 2696
+   },
+   "leaky": {
+    "tp": 583.526459245707,
+    "fp": 13192.250555682294,
+    "dti": 0.1187971818472021,
+    "dots": 13448,
+    "n_truth": 2696
+   },
+   "dots_median_dist_to_known_px": 21.400934559032695,
+   "frac_dots_ge_3px_from_known": 0.9016558341070876
+  },
+  {
+   "seed": 213,
+   "fold": "SW",
+   "n_truth": 4954,
+   "min_dist_truth_to_known_px": 8.06225774829855,
+   "median_dist_truth_to_known_px": 31.400636936215164,
+   "losfo": {
+    "tp": 509.8776371748321,
+    "fp": 13524.464393858168,
+    "dti": 0.07531351333169098,
+    "dots": 13745,
+    "n_truth": 4954
+   },
+   "leaky": {
+    "tp": 487.82784705417123,
+    "fp": 13351.052371199003,
+    "dti": 0.07247505322903271,
+    "dots": 13571,
+    "n_truth": 4954
+   },
+   "dots_median_dist_to_known_px": 20.0,
+   "frac_dots_ge_3px_from_known": 0.9066569661695162
+  },
+  {
+   "seed": 213,
+   "fold": "SE",
+   "n_truth": 5796,
+   "min_dist_truth_to_known_px": 8.06225774829855,
+   "median_dist_truth_to_known_px": 33.52610922848042,
+   "losfo": {
+    "tp": 861.2665189009842,
+    "fp": 10495.67363295084,
+    "dti": 0.12467328843716233,
+    "dots": 10859,
+    "n_truth": 5796
+   },
+   "leaky": {
+    "tp": 1021.8815390040184,
+    "fp": 10709.044118344174,
+    "dti": 0.14633878201804496,
+    "dots": 11128,
+    "n_truth": 5796
+   },
+   "dots_median_dist_to_known_px": 24.73863375370596,
+   "frac_dots_ge_3px_from_known": 0.8972281057187587
+  },
+  {
+   "seed": 214,
+   "fold": "NW",
+   "n_truth": 2098,
+   "min_dist_truth_to_known_px": 8.246211251235321,
+   "median_dist_truth_to_known_px": 29.732137494637012,
+   "losfo": {
+    "tp": 293.96434838802594,
+    "fp": 10481.35283758482,
+    "dti": 0.07668374909439296,
+    "dots": 10619,
+    "n_truth": 2098
+   },
+   "leaky": {
+    "tp": 312.53927020471116,
+    "fp": 10607.317144993816,
+    "dti": 0.08091901251674834,
+    "dots": 10749,
+    "n_truth": 2098
+   },
+   "dots_median_dist_to_known_px": 29.017236257093817,
+   "frac_dots_ge_3px_from_known": 0.9106318862416424
+  },
+  {
+   "seed": 214,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 2090,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 28.0,
+   "losfo": {
+    "tp": 421.49440333623284,
+    "fp": 12941.236992799568,
+    "dti": 0.09701689802266525,
+    "dots": 13127,
+    "n_truth": 2090
+   },
+   "leaky": {
+    "tp": 449.23861383045545,
+    "fp": 13240.490908772277,
+    "dti": 0.10186941598529883,
+    "dots": 13442,
+    "n_truth": 2090
+   },
+   "dots_median_dist_to_known_px": 19.72308292331602,
+   "frac_dots_ge_3px_from_known": 0.8763616972651787
+  },
+  {
+   "seed": 214,
+   "fold": "SW",
+   "n_truth": 5837,
+   "min_dist_truth_to_known_px": 8.06225774829855,
+   "median_dist_truth_to_known_px": 34.92849839314596,
+   "losfo": {
+    "tp": 842.2701760720269,
+    "fp": 13149.235823412355,
+    "dti": 0.11278539358185125,
+    "dots": 13519,
+    "n_truth": 5837
+   },
+   "leaky": {
+    "tp": 633.8294271060317,
+    "fp": 13297.214228351011,
+    "dti": 0.08501149237565651,
+    "dots": 13582,
+    "n_truth": 5837
+   },
+   "dots_median_dist_to_known_px": 23.021728866442675,
+   "frac_dots_ge_3px_from_known": 0.9190768547969524
+  },
+  {
+   "seed": 214,
+   "fold": "SE",
+   "n_truth": 3131,
+   "min_dist_truth_to_known_px": 8.0,
+   "median_dist_truth_to_known_px": 32.202484376209235,
+   "losfo": {
+    "tp": 471.25051365806894,
+    "fp": 10679.280720968605,
+    "dti": 0.09952689431900116,
+    "dots": 10888,
+    "n_truth": 3131
+   },
+   "leaky": {
+    "tp": 455.2394590486882,
+    "fp": 10951.486209595725,
+    "dti": 0.09511609997595284,
+    "dots": 11155,
+    "n_truth": 3131
+   },
+   "dots_median_dist_to_known_px": 23.08679276123039,
+   "frac_dots_ge_3px_from_known": 0.8746326230712711
+  }
+ ],
+ "meta": {
+  "n_systems": 758,
+  "n_systems_held_out": 190,
+  "held_out_px": 13156,
+  "masked_label_px": 47832,
+  "full_label_px": 60988,
+  "dilate_px": 3,
+  "buffer_px": 6
+ },
+ "thin_d_px": 2.8,
+ "arms": {
+  "losfo": {
+   "description": "trained with held-out systems + 600 m buffer erased",
+   "mean_dti": 0.0997362699451009,
+   "sum_tp": 11160.553995980108,
+   "sum_fp": 235157.35330048716,
+   "sum_n_truth": 77576,
+   "pooled_dti": 0.10025255788239901,
+   "credit_per_dot": 0.04649901463638037,
+   "mean_dots": 12000.85,
+   "recall_w": 0.14386606677297242
+  },
+  "leaky": {
+   "description": "trained on the unmasked catalogue (control)",
+   "mean_dti": 0.1015475579207599,
+   "sum_tp": 11291.302992146553,
+   "sum_fp": 239580.90695481084,
+   "sum_n_truth": 77576,
+   "pooled_dti": 0.10060389938129907,
+   "credit_per_dot": 0.046179309607568414,
+   "mean_dots": 12225.5,
+   "recall_w": 0.14555149778470858
+  }
+ },
+ "per_fold": {
+  "NW": {
+   "n_cells": 5,
+   "losfo_mean_dti": 0.0844439775386393,
+   "leaky_mean_dti": 0.09341491715801502,
+   "losfo_tp": 1726.6300096765954,
+   "leaky_tp": 1935.1016246753397
+  },
+  "NE_LidarGapHeavy": {
+   "n_cells": 5,
+   "losfo_mean_dti": 0.1153525799426511,
+   "leaky_mean_dti": 0.12987062748771394,
+   "losfo_tp": 2942.850806292611,
+   "leaky_tp": 3358.11708733429
+  },
+  "SW": {
+   "n_cells": 5,
+   "losfo_mean_dti": 0.08552434043361361,
+   "leaky_mean_dti": 0.07120940136741165,
+   "losfo_tp": 3147.7240821505447,
+   "leaky_tp": 2614.589365592861
+  },
+  "SE": {
+   "n_cells": 5,
+   "losfo_mean_dti": 0.11362418186549952,
+   "leaky_mean_dti": 0.11169528566989902,
+   "losfo_tp": 3343.3490978603536,
+   "leaky_tp": 3383.4949145440614
+  }
+ },
+ "ratios": {
+  "mean_dti_losfo_over_leaky": 0.9821631557395759,
+  "credit_losfo_over_leaky": 0.9884203801583055,
+  "recall_w_losfo_over_leaky": 0.9884203801583056
+ },
+ "far_field_check": {
+  "min_dist_truth_to_known_px_over_cells": 8.0,
+  "median_dist_truth_to_known_px_over_cells": 33.57079092821182,
+  "frac_dots_ge_300m_from_known": 0.9003325924193616,
+  "reading": "truth sits >= buffer_px from every pixel the losfo detector saw as positive, which the interleaved protocol cannot achieve (0 px by construction)"
+ },
+ "seconds": 756.7381343841553
+}
