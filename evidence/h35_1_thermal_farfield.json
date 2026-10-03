@@ -1,0 +1,358 @@
+{
+ "generated_utc": "2026-10-03T20:16:41Z",
+ "hypothesis": "H35-1 hydrothermal-discharge conjunction (ADDITION arm)",
+ "instrument": "leave-fault-system-out (LOSFO), 600 m label buffer, 4 quadrant folds",
+ "status": "CLOSED_ON_OWN_EVIDENCE",
+ "gate_passed": false,
+ "criteria": {
+  "G1_profitability": {
+   "required": ">= tau_live = 0.054852 credit per added dot",
+   "observed": 0.013195375530844664,
+   "pass": false
+  },
+  "G2_differential": {
+   "required": "thermal credit/dot > matched-count random control, pooled, and >= 4/5 seeds",
+   "observed_pooled_thermal": 0.013195375530844664,
+   "observed_pooled_control": 0.023780770353129418,
+   "seeds_won": 1,
+   "seeds_total": 5,
+   "pass": false
+  },
+  "G3_support": {
+   "required": ">= 200 thermal-added dots per seed on average",
+   "observed": 6856.8,
+   "pass": true
+  },
+  "G4_end_to_end": {
+   "required": "pooled mean delta DTI > 0 when adding the thermal dots to the emission",
+   "observed": -0.0018045526901340424,
+   "pass": false
+  }
+ },
+ "auroc_context": {
+  "tau_live_anchor_dti": 0.26,
+  "tau_live": 0.054852320675105495
+ },
+ "layer": {
+  "file": "data/gdr_wellspring_in_footprint.csv",
+  "provenance": "GDR submission 1391 (INGENIOUS), hash-pinned public mirror; integrity-pinned, not organizer-authenticated",
+  "audit": {
+   "n_records_raw": 27092,
+   "max_abs_row_residual_px": 1.0,
+   "max_abs_col_residual_px": 1.0,
+   "registration_ok": true,
+   "n_unique_locations": 15168
+  },
+  "cells": {
+   "primary_temp_ge20c": 1991,
+   "dose_temp_ge50c": 590,
+   "dose_geotherm_ge100c": 358
+  },
+  "catalogue_derived_columns_used": [],
+  "excluded_columns": [
+   "dist_known_fault_px"
+  ]
+ },
+ "summary": {
+  "thermal": {
+   "cells": 20,
+   "adds": 34284,
+   "marginal_credit": 452.3902546994785,
+   "credit_per_added_dot": 0.013195375530844664,
+   "mean_base_dti": 0.10667742949279957,
+   "mean_add_dti": 0.10487287680266552,
+   "mean_delta_dti": -0.0018045526901340424,
+   "mean_added_dots_per_cell": 1714.2
+  },
+  "control": {
+   "cells": 20,
+   "adds": 34284,
+   "marginal_credit": 815.299930786689,
+   "credit_per_added_dot": 0.023780770353129418,
+   "mean_base_dti": 0.10667742949279957,
+   "mean_add_dti": 0.10703099608932351,
+   "mean_delta_dti": 0.0003535665965239465,
+   "mean_added_dots_per_cell": 1714.2
+  },
+  "dose_temp_ge50c": {
+   "cells": 20,
+   "adds": 8049,
+   "marginal_credit": 127.2731233435714,
+   "credit_per_added_dot": 0.015812290140833817,
+   "mean_base_dti": 0.10667742949279957,
+   "mean_add_dti": 0.10645073983885242,
+   "mean_delta_dti": -0.00022668965394714302,
+   "mean_added_dots_per_cell": 402.45
+  },
+  "dose_geotherm_ge100c": {
+   "cells": 20,
+   "adds": 7065,
+   "marginal_credit": 82.7798063912958,
+   "credit_per_added_dot": 0.011716886962674566,
+   "mean_base_dti": 0.10667742949279957,
+   "mean_add_dti": 0.10630180368564794,
+   "mean_delta_dti": -0.000375625807151625,
+   "mean_added_dots_per_cell": 353.25
+  },
+  "dose_radius_1px": {
+   "cells": 20,
+   "adds": 7100,
+   "marginal_credit": 148.73775836746537,
+   "credit_per_added_dot": 0.020948980051755686,
+   "mean_base_dti": 0.10667742949279957,
+   "mean_add_dti": 0.10680145278655775,
+   "mean_delta_dti": 0.00012402329375817977,
+   "mean_added_dots_per_cell": 355.0
+  },
+  "dose_radius_6px": {
+   "cells": 20,
+   "adds": 106584,
+   "marginal_credit": 1134.0812624671416,
+   "credit_per_added_dot": 0.010640258035607048,
+   "mean_base_dti": 0.10667742949279957,
+   "mean_add_dti": 0.09930415259574613,
+   "mean_delta_dti": -0.007373276897053438,
+   "mean_added_dots_per_cell": 5329.2
+  }
+ },
+ "per_seed": [
+  {
+   "seed": 230,
+   "thermal_credit_per_dot": 0.008255751463281492,
+   "control_credit_per_dot": 0.016712150676821715,
+   "thermal_wins": false
+  },
+  {
+   "seed": 231,
+   "thermal_credit_per_dot": 0.0184661524414397,
+   "control_credit_per_dot": 0.030413547551271035,
+   "thermal_wins": false
+  },
+  {
+   "seed": 232,
+   "thermal_credit_per_dot": 0.006507786763328546,
+   "control_credit_per_dot": 0.023927356737395065,
+   "thermal_wins": false
+  },
+  {
+   "seed": 233,
+   "thermal_credit_per_dot": 0.01309982087039182,
+   "control_credit_per_dot": 0.028610874920410673,
+   "thermal_wins": false
+  },
+  {
+   "seed": 234,
+   "thermal_credit_per_dot": 0.01983957874077518,
+   "control_credit_per_dot": 0.01954554454411157,
+   "thermal_wins": true
+  }
+ ],
+ "threshold_stability": {
+  "measured_efficiency": 0.013195375530844664,
+  "tau_at_losfo_base_dti": 0.021800612560422785,
+  "dti_at_which_e_becomes_profitable": 0.02,
+  "note": "the arm is judged at the LIVE anchor 0.2600 (tau=0.0548) because that is the shippable file the added dots would go into; the LOSFO scale DTI is a proxy and is reported for context only"
+ },
+ "cells": [
+  {
+   "seed": 230,
+   "fold": "NW",
+   "n_truth": 1804,
+   "n_base_dots": 10734,
+   "n_candidates": 178092,
+   "n_thermal_adds": 1511,
+   "base_dti": 0.05785753787201936
+  },
+  {
+   "seed": 230,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 3450,
+   "n_base_dots": 13480,
+   "n_candidates": 212375,
+   "n_thermal_adds": 1306,
+   "base_dti": 0.1565870197381707
+  },
+  {
+   "seed": 230,
+   "fold": "SW",
+   "n_truth": 4693,
+   "n_base_dots": 13449,
+   "n_candidates": 222653,
+   "n_thermal_adds": 2995,
+   "base_dti": 0.0956594713138153
+  },
+  {
+   "seed": 230,
+   "fold": "SE",
+   "n_truth": 3790,
+   "n_base_dots": 11009,
+   "n_candidates": 174031,
+   "n_thermal_adds": 1139,
+   "base_dti": 0.16175105834600223
+  },
+  {
+   "seed": 231,
+   "fold": "NW",
+   "n_truth": 2835,
+   "n_base_dots": 10846,
+   "n_candidates": 178090,
+   "n_thermal_adds": 1447,
+   "base_dti": 0.09633749750758042
+  },
+  {
+   "seed": 231,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 2918,
+   "n_base_dots": 12749,
+   "n_candidates": 212927,
+   "n_thermal_adds": 1247,
+   "base_dti": 0.11970747277830708
+  },
+  {
+   "seed": 231,
+   "fold": "SW",
+   "n_truth": 7568,
+   "n_base_dots": 13376,
+   "n_candidates": 221910,
+   "n_thermal_adds": 2782,
+   "base_dti": 0.1032535418803645
+  },
+  {
+   "seed": 231,
+   "fold": "SE",
+   "n_truth": 4072,
+   "n_base_dots": 10889,
+   "n_candidates": 173756,
+   "n_thermal_adds": 1098,
+   "base_dti": 0.11877968179981567
+  },
+  {
+   "seed": 232,
+   "fold": "NW",
+   "n_truth": 1940,
+   "n_base_dots": 10778,
+   "n_candidates": 176738,
+   "n_thermal_adds": 1505,
+   "base_dti": 0.07844841577222854
+  },
+  {
+   "seed": 232,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 2784,
+   "n_base_dots": 13614,
+   "n_candidates": 212758,
+   "n_thermal_adds": 1306,
+   "base_dti": 0.1284140285129504
+  },
+  {
+   "seed": 232,
+   "fold": "SW",
+   "n_truth": 5436,
+   "n_base_dots": 13366,
+   "n_candidates": 220858,
+   "n_thermal_adds": 2838,
+   "base_dti": 0.08059292512663947
+  },
+  {
+   "seed": 232,
+   "fold": "SE",
+   "n_truth": 4098,
+   "n_base_dots": 10939,
+   "n_candidates": 175090,
+   "n_thermal_adds": 1177,
+   "base_dti": 0.0840168466252202
+  },
+  {
+   "seed": 233,
+   "fold": "NW",
+   "n_truth": 2707,
+   "n_base_dots": 10844,
+   "n_candidates": 179314,
+   "n_thermal_adds": 1500,
+   "base_dti": 0.07708167390994478
+  },
+  {
+   "seed": 233,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 2859,
+   "n_base_dots": 13292,
+   "n_candidates": 210995,
+   "n_thermal_adds": 1372,
+   "base_dti": 0.12595479379927166
+  },
+  {
+   "seed": 233,
+   "fold": "SW",
+   "n_truth": 5425,
+   "n_base_dots": 13327,
+   "n_candidates": 222501,
+   "n_thermal_adds": 2930,
+   "base_dti": 0.07228515405621028
+  },
+  {
+   "seed": 233,
+   "fold": "SE",
+   "n_truth": 5487,
+   "n_base_dots": 11149,
+   "n_candidates": 175444,
+   "n_thermal_adds": 1207,
+   "base_dti": 0.1478911746910046
+  },
+  {
+   "seed": 234,
+   "fold": "NW",
+   "n_truth": 2512,
+   "n_base_dots": 10620,
+   "n_candidates": 177417,
+   "n_thermal_adds": 1567,
+   "base_dti": 0.10649440462617873
+  },
+  {
+   "seed": 234,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 2587,
+   "n_base_dots": 13205,
+   "n_candidates": 212616,
+   "n_thermal_adds": 1354,
+   "base_dti": 0.09815600182829448
+  },
+  {
+   "seed": 234,
+   "fold": "SW",
+   "n_truth": 4488,
+   "n_base_dots": 13469,
+   "n_candidates": 219903,
+   "n_thermal_adds": 2889,
+   "base_dti": 0.08450208724428894
+  },
+  {
+   "seed": 234,
+   "fold": "SE",
+   "n_truth": 5697,
+   "n_base_dots": 10774,
+   "n_candidates": 173245,
+   "n_thermal_adds": 1114,
+   "base_dti": 0.1397778024276838
+  }
+ ],
+ "seeds": [
+  230,
+  231,
+  232,
+  233,
+  234
+ ],
+ "thin_d_px": 2.8,
+ "code_sha256": {
+  "thermal": "37b026e0cbfd5b189828df4fe53cd174138c6c107488d6ee8dde58c041dca8fa",
+  "losfo": "cba280e138ca540dc6549ef56d4c0f88062dfb457118d757b896a864fa2b9738",
+  "oof_detector": "6e30410e17c3b6d226ff3a343662417cd2c847711d0e3242658fc5b304c2023e",
+  "runner": "17092483439797eb2fd75f3c4c14fb4e7a6a778d247f64daac01a8fc8c251fde"
+ },
+ "disclosure": [
+  "Held-out systems are still *mapped* faults, so the measured credit/dot is an UPPER BOUND on performance against genuinely unmapped faults (losfo.py 'Known limits').",
+  "The 32-band feature rasters are not re-derived with held-out systems removed; the thermal layer is not catalogue-derived, so it is admissible, but the magnetic/gravity bands may carry a catalogue imprint that this protocol cannot remove.",
+  "No seed in 210-214 (the Session-10 diagnostic decade) or 180-229 (consumed by H32/H33/H34) is reused: this run takes the next free decade 230-234."
+ ],
+ "seconds": 450.07697105407715
+}

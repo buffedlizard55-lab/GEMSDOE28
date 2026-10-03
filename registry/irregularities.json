@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03T23:59:00Z",
+  "generated": "2026-10-03T20:17:23Z",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -360,6 +360,30 @@
       "severity": "low",
       "issue": "docs/data/sb_slip_tendency_in_footprint.csv (25.6 MB) and .json (62.0 MB) are committed and sit under the GitHub Pages root. Measured .git pack impact is 6.23 MiB and both are under the 100 MB per-file Pages limit, so this is a weight warning, not a breakage.",
       "action": "Flagged, not changed: H33-1 depends on these files and no test reads them, so they could be regenerated on demand. Left in place to avoid blocking a preregistered run."
+    },
+    {
+      "id": "one-click-primary-dominated-by-tertiary",
+      "severity": "high",
+      "issue": "The site's advertised one-click primary (`c3aeda1d31a3`, H32-1 post-thinning) is dominated on every published statistic by the file sitting in its own tertiary slot (`8acb75e1f2cc`, H27-4 solo r=1): mean OOF delta DTI +0.001272 vs +0.001766, worst-seed gain +0.000907 vs +0.001370, all four folds lower (NW +0.001023/+0.001600, NE +0.002293/+0.003190, SW +0.000272/+0.000487, SE +0.001498/+0.001787), removed credit per removed FP 0.00402 vs 0.00598, and hybrid projection 0.26650 vs 0.27013. The independent H34 operating-point study agrees: it re-judged the archived pruning arms against the live threshold tau=0.05499 and returned live_verdict=PRUNE for H32-1 (e=0.004), H32-2 (e=0.03435) and H27-4 (e=0.008). Root cause of the mismatch: the primary is the output of a PREREGISTERED gate, while the tertiary is the maximum of four correlated variants scored on a single holdout run, so promoting it on that evidence would be a multiple-comparison error. The site was therefore advertising the defensible file rather than the best-supported one.",
+      "action": "Adjudicated on fresh seeds instead of re-ranked on the old ones. `knowledge/25_preregistration_H35-6_candidate_adjudication.md` was frozen before the run, with a promotion rule (largest mean gain, and >=4/5 seeds, >=3/4 folds, else no change), a demotion check against the anti-selective control, and an explicit statement that five seeds cannot resolve a +0.0005 gap. Executed with `scripts/run_h32_1_holdout.py` UNMODIFIED so the new decade is directly comparable with seeds 180-189 -> `evidence/h35_6_candidate_headtohead.json`. The site re-renders from whatever that file says; if it is inconclusive the current primary stays and the site says so."
+    },
+    {
+      "id": "h35-1-thermal-below-its-own-control",
+      "severity": "medium",
+      "issue": "The first addition arm measured end to end (H35-1, hydrothermal-discharge conjunction, seeds 230-234) failed 3 of 4 frozen criteria: credit per added dot 0.013195 against tau_live 0.054852, 1/5 seeds won, and mean delta DTI -0.001805. Critically it also lost to its own matched-count random control (0.023781, +0.000354), so thermal sites are a mild NEGATIVE indicator for the credit a new dot can still earn near them. The dose-response was flat-to-wrong in every pre-declared variant (>=50 C 0.015812, geothermometry >=100 C 0.011717, radius 1 px 0.020949, radius 6 px 0.010640), so no tighter subset rescues the arm. Mechanism: Great Basin hydrothermal discharge is basin-margin and fault-controlled, so the base emission has already spent its budget on the structure those springs mark, and what remains in the candidate pool is redundant neighbouring slop. Scope limit recorded: LOSFO truth is MAPPED geometry, so the stronger claim (a concealed unmapped permeable structure is marked by this spring) is untested, not refuted; but because LOSFO is an upper bound, failing it closes the arm as constructed.",
+      "action": "Closed on its own evidence per the frozen reading rule: no candidate TIFF, no weekly slot, no confirmation decade, no retuning. Seeds 230-234 spent. Recorded in `knowledge/24_h35_1_result.md`. Also used as the reason the follow-on arm this session is an adjudication of the pruning ladder rather than another speculative physical layer, since the calibration effort belongs on the axis that is measurably profitable."
+    },
+    {
+      "id": "gdr-wellspring-thermalclass-trailing-space",
+      "severity": "low",
+      "issue": "`data/gdr_wellspring_in_footprint.csv` spells one class two ways: `Hot` (878 rows) and `Hot ` with a trailing space (100 rows). A naive `value_counts()` or `== 'Hot'` comparison silently drops those 100 records. Second defect in the same family: the volcanic-vent table writes the STRING 'nan' into `name`, `age` and `rock_type` rather than leaving the field empty, so a truthiness test passes on a missing value.",
+      "action": "Guarded, not patched - the upstream table is an owner-mirror of GDR submission 1391 and rewriting it would break its hash pin. `src/gems27/thermal.py` uses an explicit column allow-list, thresholds on the numeric `temp_c` field only, and never reads the catalogue-derived `dist_known_fault_px` column (asserted in `tests/test_thermal.py`). Anyone reusing this table must do the same."
+    },
+    {
+      "id": "h35-1-throwaway-seed-disclosure",
+      "severity": "low",
+      "issue": "One seed outside every reserved decade (240) was spent on a pipeline smoke test of `scripts/run_h35_1_thermal_farfield.py` before the frozen five-seed run, to avoid burning a reserved decade on a crash. Its result (credit/dot 0.01736, control 0.02380) is directionally identical to the frozen run and was never used to change a threshold.",
+      "action": "Disclosed in the preregistration (`knowledge/23_h35_hypotheses.md` section 5) and retained at `evidence/_scratch/h35_1_smoke_seed240.json`. Recorded here so the seed ledger stays auditable."
     }
   ]
 }
