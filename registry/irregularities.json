@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03T23:05:00Z",
+  "generated": "2026-10-03T23:20:00Z",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -411,9 +411,9 @@
     },
     {
       "id": "h37-1-is-proxy-favoured-by-construction",
-      "severity": "high",
+      "severity": "medium",
       "issue": "H37-1 replaces a content-blind packing rule with greedy maximum coverage of the detector probability field. The standing holdout hides catalogue components interleaved with the known catalogue, so 100% of its truth lies at distance 0 from the published catalogue (evidence/arm_habitat_decomposition.json). An objective that maximises coverage of a field the detector was trained on is therefore a priori favoured by that protocol, and the measured +0.007289 could be a proxy artefact.",
-      "action": "Preregistered in knowledge/29 section 5 before the gate ran, and restated in knowledge/30 section 5. The gate was still run because it is the repository's only standing instrument and it carries a content-blind control at matched N (control_random_matched_n = -0.044684, 0/10 seeds), which no proxy artefact can explain. The falsification test is the LOSFO far-field harness, which this session did NOT run on H37-1; that is the top queued measurement (knowledge/31 section 7). No weekly slot is spent by an unscored artifact, and the artifact is explicitly labelled UNSCORED, not slot-approved."
+      "action": "Preregistered in knowledge/29 section 5 before the gate ran, and restated in knowledge/30 section 5. The gate was still run because it is the repository's only standing instrument and it carries a content-blind control at matched N (control_random_matched_n = -0.044684, 0/10 seeds), which no proxy artefact can explain. The falsification test is the LOSFO far-field harness, which this session did NOT run on H37-1; that is the top queued measurement (knowledge/31 section 7). No weekly slot is spent by an unscored artifact, and the artifact is explicitly labelled UNSCORED, not slot-approved. RESOLVED, CONFIRMED 2026-10-03: the LOSFO far-field test was run on its dedicated decade (seeds 210-214) after the freeze commit 7e637c9. The interleaved +0.007289 gain does NOT transfer: mean paired dDTI(max_coverage - raster cascade) = -0.000037 with a 95% interval of +/-0.000832 on 20 cells, 9/20 cells improved. The base arms reproduced the stored diagnostic exactly, so the null is the rule's, not the instrument's. The artifact was demoted to the secondary slot by the pre-committed rule; the live projection 0.278-0.286 is withdrawn. See knowledge/33."
     },
     {
       "id": "citation-dois-not-re-verified-this-session",
@@ -432,6 +432,18 @@
       "severity": "low",
       "issue": "H37-1 opened a new arm family (emission geometry) that is orthogonal to the detector. Only three points on it have been measured: the raster cascade, greedy coverage at matched N, and greedy coverage at 1.5x N. The dose variant gains more on the proxy (+0.010440) but fails 4/4 folds (3/4), and the live anchors themselves show the optimum moving DOWN in N (121,131 -> 60,069 -> 44,090 -> 41,333), so the proxy and the live curve disagree about the direction of the optimal budget.",
       "action": "The dose variant is recorded and not shipped. No further packing arm should be preregistered without first restating the budget question against the live-anchored operating point (knowledge/22 section 3), and the family must not be tuned on seeds 250-259."
+    },
+    {
+      "id": "ordering-packers-are-capacity-limited",
+      "severity": "medium",
+      "issue": "The far-field run compared three packing orders on one candidate pool, but only the coverage-greedy arm is exactly count-matched to the raster cascade. Visiting the same pool in probability order or random order caps the maximal independent set under distance < 2.8 px at 10,975 / 10,992 dots, while row-major raster order reaches the requested 12,001. The reported F2 statistic (max_coverage - random_order = +0.002091) therefore mixes an ordering effect with an 8.4% dot-count difference and must not be quoted as a clean ordering result.",
+      "action": "Registered so the F2 pass in knowledge/33 is never cited as evidence that evidence-ordered packing beats the cascade: it does not (that comparison is F1, which failed). Any future ordering comparison must either match counts exactly or report the count difference as part of the effect. The capacity difference is itself a finding: row-major visiting is space-filling, which is why the shipped cascade is hard to beat at a fixed pool."
+    },
+    {
+      "id": "h37-1-farfield-effect-is-zero",
+      "severity": "low",
+      "issue": "The preregistered demotion of H37-1 is a demotion of the CLAIM, not evidence that the file is worse than its replacement. The far-field point estimate is -0.000037 against a +0.007289 interleaved gain, i.e. a measured tie, and H36-1's own far-field behaviour has never been measured (it is a dose change, supported by the live-anchored ladder).",
+      "action": "Recorded so an owner who judges the live scoring population to be substantially catalogue-adjacent can knowingly prefer the H37-1 file; both remain audited and downloadable. The remedy is one more LOSFO run on H36-1's dose change, queued in registry/next_hypotheses.json."
     }
   ]
 }
