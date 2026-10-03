@@ -358,6 +358,26 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
     q = manifest.get("quaternary", {})
     h35 = h35 or {}
     h35_6 = h35_6 or {}
+    # Everything the page says about the advertised file is read from the manifest, so the slot can be
+    # re-pointed without leaving another file's numbers attached to it (that bug was found twice).
+    _pe = str(primary.get("holdout_evidence", "evidence/h32_1_holdout.json"))
+    primary_holdout_clause = (
+        f"validated on a 4-fold spatially blocked holdout "
+        f"(<a href=\"../{esc(_pe)}\">{esc(_pe)}</a>): <strong>{fmt_number(primary.get('holdout_mean_gain', 0), 6)}</strong> "
+        f"mean &Delta;DTI, <strong>{esc(primary.get('holdout_seeds_improved', 'n/a'))}</strong> seeds and "
+        f"<strong>{esc(primary.get('holdout_folds_improved', 'n/a'))}</strong> spatial folds improving over the "
+        f"same-run <code>d=2.8</code> control"
+    )
+    primary_evidence_note = primary_holdout_clause + "."
+    if primary.get("adjudication_evidence"):
+        _ae = str(primary["adjudication_evidence"])
+        primary_evidence_note += (
+            f" It then won the frozen fresh-seed adjudication on seeds "
+            f"{esc(str(primary.get('adjudication_seeds', '')))} "
+            f"(<a href=\"../{esc(_ae)}\">{esc(_ae)}</a>), run with the frozen harness unmodified so the "
+            f"decade is directly comparable, which is why it is the one-click file rather than the "
+            f"preregistered H32-1 arm."
+        )
     h35_g1 = h35.get("criteria", {}).get("G1_profitability", {}).get("observed", 0.0)
     # G1's `required` is a human-readable string; the numeric threshold is recorded separately.
     h35_tau = h35.get("auroc_context", {}).get("tau_live", 0.0)
@@ -390,7 +410,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
   <h1>Evidence before<br>emission.</h1>
   <p class="lead">An auditable geoscience research workflow aimed at better fault mapping—not a submission bot. Every idea must earn its way through a spatially blocked holdout, independent confirmation, and an exact-file audit before it can approach a weekly slot.</p>
   <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO GEMSDOE28 SCORE</span></div>
-  <p><strong>Session 11 update (2026-10-03):</strong> the H35 addition series was executed. <strong>H35-1 (hydrothermal-discharge conjunction) is closed on its own evidence</strong> — 3 of 4 frozen criteria failed on seeds 230–234: it earned {fmt_number(h35_g1, 5)} credit per added dot against a {fmt_number(h35_tau, 5)} threshold and <em>lost to its own matched-count random control</em> ({fmt_number(h35_ctrl, 5)}), which is the same conclusion the reachability frontier reached from the pruning side: at this operating point new dots are expensive and a layer must be very specific to pay for itself. The profitable axis remains <strong>removal</strong>: the live-anchored threshold study rates every archived pruning arm <code>PRUNE</code> (efficiency 0.004–0.034 against tau 0.055). Accordingly, this session's follow-on arm was not another speculative physical layer but an <strong>adjudication of the candidate ladder on fresh seeds</strong>, because review found the one-click primary strictly dominated by the file in its own tertiary slot on every published statistic. {h35_6_index} <strong>Current status:</strong> the prominent one-click file below is <strong>{esc(primary.get('hypothesis', 'H32-1 reference'))}</strong> (<code>{esc(primary['nan'])}</code>, {comma(primary.get('emitted_px'))} px), built on the newly reported <strong>0.2600</strong> live base (<code>dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code>, 44,090 px) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (−0.0028 vs 0.2477) and validated on a 4-fold spatially blocked holdout on fresh seeds 180–189 (+0.001272 mean ΔDTI, 10/10 seeds, 4/4 folds). It is locally format-audited, <strong>unscored</strong>, and not slot-approved. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p>
+  <p><strong>Session 11 update (2026-10-03):</strong> the H35 addition series was executed. <strong>H35-1 (hydrothermal-discharge conjunction) is closed on its own evidence</strong> — 3 of 4 frozen criteria failed on seeds 230–234: it earned {fmt_number(h35_g1, 5)} credit per added dot against a {fmt_number(h35_tau, 5)} threshold and <em>lost to its own matched-count random control</em> ({fmt_number(h35_ctrl, 5)}), which is the same conclusion the reachability frontier reached from the pruning side: at this operating point new dots are expensive and a layer must be very specific to pay for itself. The profitable axis remains <strong>removal</strong>: the live-anchored threshold study rates every archived pruning arm <code>PRUNE</code> (efficiency 0.004–0.034 against tau 0.055). Accordingly, this session's follow-on arm was not another speculative physical layer but an <strong>adjudication of the candidate ladder on fresh seeds</strong>, because review found the one-click primary strictly dominated by the file in its own tertiary slot on every published statistic. {h35_6_index} <strong>Current status:</strong> the prominent one-click file below is <strong>{esc(primary.get('hypothesis', 'H32-1 reference'))}</strong> (<code>{esc(primary['nan'])}</code>, {comma(primary.get('emitted_px'))} px), built on the newly reported <strong>0.2600</strong> live base (<code>dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code>, 44,090 px) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (−0.0028 vs 0.2477) and {primary_holdout_clause}. It is locally format-audited, <strong>unscored</strong>, and not slot-approved. {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p>
 </div></section>
 
 <section class="download-panel" id="download" aria-labelledby="download-heading">
@@ -402,7 +422,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
   <p class="meta">SHA-256 <code>{esc(primary.get('sha256_nan', ''))}</code> · {esc(primary.get('bytes_nan'))} bytes · single-band float32 · {esc(primary.get('emitted_px'))} cells equal to 1 · CRS EPSG:32611 · 100 m grid · template footprint {comma(restore.get('grid', {}).get('footprint_pixels', 5167373))} cells.</p>
   <p><strong>Exact short note ({len(str(primary.get('note', '')))} / 200 characters):</strong></p>
   {note_box(str(primary.get('note', '')))}
-  <p class="small">Validated on 4-fold spatially blocked holdout (seeds 180–189, <a href="../evidence/h32_1_holdout.json">evidence/h32_1_holdout.json</a>): +0.001272 mean ΔDTI (10/10 seeds, 4/4 folds) post-thinning and +0.001399 pre-thinning; protected tip/Euler pixels carry 2.29× higher hidden-fault credit density than pruned mid-segment flank-shadow pixels (0.00919 vs 0.00402 credit/FP). Built on the owner-reported 0.2600 <code>d=2.8</code> base without T-v2 gap closure. This file is a research/reference artifact, not one of the four weekly slots inherited from the predecessor campaign.</p>
+  <p class="small">{primary_evidence_note} Built on the owner-reported <strong>{fmt_number(primary.get('base_reference_live_score', 0.26), 4)}</strong> <code>d=2.8</code> base (<code>{esc(str(primary.get('base_reference_id', '')))}</code>) without T-v2 gap closure. This file is a research/reference artifact, not one of the four weekly slots inherited from the predecessor campaign.</p>
 </section>
 
 <div class="callout"><strong>Manual-only boundary:</strong> no login, download, upload, scrape, poll, or monitoring of DrivenData occurs in this repository. Review the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a> and <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules</a> yourself before deciding whether to submit. A local audit does not guarantee portal acceptance.</div>
