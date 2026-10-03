@@ -52,6 +52,70 @@ def disc_rel(min_dist: float) -> tuple[int, np.ndarray]:
     return r, (dy * dy + dx * dx) < min_dist * min_dist
 
 
+def prob_order_pack(score: np.ndarray, candidates: np.ndarray, *, n_target: int | None = None,
+                    min_dist: float = 2.8) -> np.ndarray:
+    """Maximal independent set under `min_dist`, visiting candidates by descending `score`.
+
+    The same spacing rule as :func:`gems27.thinning.dot_thin`, but the visiting order is the evidence
+    field instead of the raster index. `score` is read only at candidate pixels; `n_target` truncates
+    the accepted set so two arms can be compared at a matched dot count. Deterministic: ties break on
+    flat index, and the scan is a pure Python loop over a sorted candidate list.
+    """
+    score = np.asarray(score, np.float32)
+    candidates = np.asarray(candidates, bool)
+    if score.shape != candidates.shape or candidates.ndim != 2:
+        raise ValueError("score and candidates must be equal-shaped 2-D arrays")
+    out = np.zeros_like(candidates)
+    if n_target is not None and n_target <= 0:
+        return out
+    r, disc = disc_rel(min_dist)
+    ys, xs = np.nonzero(candidates)
+    if ys.size == 0:
+        return out
+    flat = ys.astype(np.int64) * candidates.shape[1] + xs
+    order = np.lexsort((flat, -score[ys, xs]))
+    H, W = candidates.shape
+    blocked = np.zeros((H + 2 * r, W + 2 * r), bool)
+    n_kept = 0
+    for i in order:
+        y, x = int(ys[i]), int(xs[i])
+        if blocked[y + r, x + r]:
+            continue
+        out[y, x] = True
+        blocked[y:y + disc.shape[0], x:x + disc.shape[1]] |= disc
+        n_kept += 1
+        if n_target is not None and n_kept >= n_target:
+            break
+    return out
+
+
+def random_order_pack(candidates: np.ndarray, *, n_target: int | None = None,
+                      min_dist: float = 2.8, seed: int = 0) -> np.ndarray:
+    """The content-blind control: `prob_order_pack`'s rule with a seeded random visiting order."""
+    candidates = np.asarray(candidates, bool)
+    out = np.zeros_like(candidates)
+    if n_target is not None and n_target <= 0:
+        return out
+    r, disc = disc_rel(min_dist)
+    ys, xs = np.nonzero(candidates)
+    if ys.size == 0:
+        return out
+    order = np.random.default_rng(seed).permutation(ys.size)
+    H, W = candidates.shape
+    blocked = np.zeros((H + 2 * r, W + 2 * r), bool)
+    n_kept = 0
+    for i in order:
+        y, x = int(ys[i]), int(xs[i])
+        if blocked[y + r, x + r]:
+            continue
+        out[y, x] = True
+        blocked[y:y + disc.shape[0], x:x + disc.shape[1]] |= disc
+        n_kept += 1
+        if n_target is not None and n_kept >= n_target:
+            break
+    return out
+
+
 def kernel_patch(radius_px: float = RADIUS_PX) -> np.ndarray:
     """The official triangular kernel evaluated on the (2r+1)^2 integer offsets."""
     r = int(radius_px)

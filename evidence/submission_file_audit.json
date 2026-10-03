@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-03T22:17:02Z",
+  "checked_utc": "2026-10-03T22:45:21Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "6c4c4b7799f63d11e617843835c79af0f4e5ade7b9bcb909def1b2f9154e2ea8",
+  "manifest_sha256": "26f3eca531a634460094d210588b4f638d32880777798cf2ff7407723e78936f",
   "checks": [
     {
       "check": "labels_grid_matches_template",
@@ -41,22 +41,22 @@
     {
       "check": "primary_content_addressed_name",
       "pass": true,
-      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif"
+      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif"
     },
     {
       "check": "primary_nan_file_exists",
       "pass": true,
-      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif"
+      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif"
     },
     {
       "check": "primary_nan_byte_count",
       "pass": true,
-      "detail": "1590628 bytes"
+      "detail": "1590848 bytes"
     },
     {
       "check": "primary_nan_sha256",
       "pass": true,
-      "detail": "4557311baedb4e661363bc1d3e6c959a1d8f9999f8bfc5fabb85fd8c338850c6"
+      "detail": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641"
     },
     {
       "check": "primary_nan_grid",
@@ -91,7 +91,7 @@
     {
       "check": "primary_nan_emitted_count",
       "pass": true,
-      "detail": "37447 cells equal 1.0"
+      "detail": "37660 cells equal 1.0"
     },
     {
       "check": "primary_nan_no_catalogue_overlap",
@@ -106,22 +106,22 @@
     {
       "check": "primary_allfinite_file_exists",
       "pass": true,
-      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif"
+      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif"
     },
     {
       "check": "primary_allfinite_content_addressed_name",
       "pass": true,
-      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif"
+      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif"
     },
     {
       "check": "primary_allfinite_byte_count",
       "pass": true,
-      "detail": "825296 bytes"
+      "detail": "825430 bytes"
     },
     {
       "check": "primary_allfinite_sha256",
       "pass": true,
-      "detail": "b733cfdbf0d479e1c0eea06f75ef61ba55f14409f2fa9a5876ef7234f294e7df"
+      "detail": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32"
     },
     {
       "check": "primary_allfinite_grid_and_type",
@@ -141,7 +141,7 @@
     {
       "check": "primary_allfinite_emitted_count",
       "pass": true,
-      "detail": "37447 cells equal 1.0"
+      "detail": "37660 cells equal 1.0"
     },
     {
       "check": "primary_allfinite_no_catalogue_overlap",
@@ -151,22 +151,22 @@
     {
       "check": "primary_zip_exists",
       "pass": true,
-      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.zip"
+      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.zip"
     },
     {
       "check": "primary_zip_byte_count",
       "pass": true,
-      "detail": "297120 bytes"
+      "detail": "294505 bytes"
     },
     {
       "check": "primary_zip_sha256",
       "pass": true,
-      "detail": "9360a2058aeb1736f3340cb6239ff47001543295f63137b3f57d196af6a67a4b"
+      "detail": "ed6984577aa6fd1522371a618d6bcd69119ee1bd2f13d40cee40bba8d30649ed"
     },
     {
       "check": "primary_zip_single_tif",
       "pass": true,
-      "detail": "members=['gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif']"
+      "detail": "members=['gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif']"
     },
     {
       "check": "primary_zip_byte_identical",
@@ -176,32 +176,32 @@
     {
       "check": "primary_note_length",
       "pass": true,
-      "detail": "171 chars; max 200"
+      "detail": "192 chars; max 200"
     },
     {
       "check": "primary_note_file_matches",
       "pass": true,
-      "detail": "note-gemsdoe28-h37-1-coverprob-h19-5-r1-0bbddf41eb6d.txt"
+      "detail": "note-gemsdoe28-h36-1-rung30-blind-r1-b531dae0a36f.txt"
     },
     {
       "check": "secondary_content_addressed_name",
       "pass": true,
-      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif"
+      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif"
     },
     {
       "check": "secondary_nan_file_exists",
       "pass": true,
-      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif"
+      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif"
     },
     {
       "check": "secondary_nan_byte_count",
       "pass": true,
-      "detail": "1590848 bytes"
+      "detail": "1590628 bytes"
     },
     {
       "check": "secondary_nan_sha256",
       "pass": true,
-      "detail": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641"
+      "detail": "4557311baedb4e661363bc1d3e6c959a1d8f9999f8bfc5fabb85fd8c338850c6"
     },
     {
       "check": "secondary_nan_grid",
@@ -236,7 +236,7 @@
     {
       "check": "secondary_nan_emitted_count",
       "pass": true,
-      "detail": "37660 cells equal 1.0"
+      "detail": "37447 cells equal 1.0"
     },
     {
       "check": "secondary_nan_no_catalogue_overlap",
@@ -251,22 +251,22 @@
     {
       "check": "secondary_allfinite_file_exists",
       "pass": true,
-      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif"
+      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif"
     },
     {
       "check": "secondary_allfinite_content_addressed_name",
       "pass": true,
-      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif"
+      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif"
     },
     {
       "check": "secondary_allfinite_byte_count",
       "pass": true,
-      "detail": "825430 bytes"
+      "detail": "825296 bytes"
     },
     {
       "check": "secondary_allfinite_sha256",
       "pass": true,
-      "detail": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32"
+      "detail": "b733cfdbf0d479e1c0eea06f75ef61ba55f14409f2fa9a5876ef7234f294e7df"
     },
     {
       "check": "secondary_allfinite_grid_and_type",
@@ -286,7 +286,7 @@
     {
       "check": "secondary_allfinite_emitted_count",
       "pass": true,
-      "detail": "37660 cells equal 1.0"
+      "detail": "37447 cells equal 1.0"
     },
     {
       "check": "secondary_allfinite_no_catalogue_overlap",
@@ -296,22 +296,22 @@
     {
       "check": "secondary_zip_exists",
       "pass": true,
-      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.zip"
+      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.zip"
     },
     {
       "check": "secondary_zip_byte_count",
       "pass": true,
-      "detail": "294505 bytes"
+      "detail": "297120 bytes"
     },
     {
       "check": "secondary_zip_sha256",
       "pass": true,
-      "detail": "ed6984577aa6fd1522371a618d6bcd69119ee1bd2f13d40cee40bba8d30649ed"
+      "detail": "9360a2058aeb1736f3340cb6239ff47001543295f63137b3f57d196af6a67a4b"
     },
     {
       "check": "secondary_zip_single_tif",
       "pass": true,
-      "detail": "members=['gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif']"
+      "detail": "members=['gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif']"
     },
     {
       "check": "secondary_zip_byte_identical",
@@ -321,12 +321,12 @@
     {
       "check": "secondary_note_length",
       "pass": true,
-      "detail": "192 chars; max 200"
+      "detail": "171 chars; max 200"
     },
     {
       "check": "secondary_note_file_matches",
       "pass": true,
-      "detail": "note-gemsdoe28-h36-1-rung30-blind-r1-b531dae0a36f.txt"
+      "detail": "note-gemsdoe28-h37-1-coverprob-h19-5-r1-0bbddf41eb6d.txt"
     },
     {
       "check": "tertiary_content_addressed_name",

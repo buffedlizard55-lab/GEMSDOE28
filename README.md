@@ -93,8 +93,8 @@ All submission artifacts in `docs/downloads/` are verified by `scripts/verify_do
 
 | Slot | Filename (`docs/downloads/`) | Content ID | Emitted px | 4-Fold Spatial-CV Holdout | Hybrid Model vs `0.2600` Anchor | Registered Note ($\le 200$ chars) |
 |---|---|---|---:|---|---:|---|
-| **Primary (One-Click) — PROMOTED Session 13** | `gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif` | `0bbddf41eb6d` | `37,447` | **`+0.007289` vs the same-run `d=2.8` reference and `+0.004614` over the H36-1 incumbent, `10/10` seeds, `4/4` folds on fresh seeds `250–259`**; the content-blind matched-`N` control scored `−0.044684` (`0/10` seeds, `0/4` folds), so the gain is placement, not budget | `0.278–0.286` (modelled range) | `28GEMSDOE H37-1 cover+h19 | OOF dDTI +0.00729 vs d2.8, +0.00461 over H36-1; 10/10 seeds, 4/4 folds (seeds 250-259); no T-v2 | id 0bbddf41eb6d | UNSCORED, not slot-approved` |
-| **Secondary — demoted Session 13** | `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` | `b531dae0a36f` | `37,660` | **`+0.002599` (`10/10` seeds, `4/4` folds) on fresh seeds `240–249`, replicated `+0.002675` on the independent decade `250–259`** | `0.2717–0.2727` | `28GEMSDOE H36-1 rung3.0+r1 | …` |
+| **Primary (One-Click) — RESTORED 2026-10-03 by the pre-committed far-field rule** | `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` | `b531dae0a36f` | `37,660` | **`+0.002599` (`10/10` seeds, `4/4` folds) on fresh seeds `240–249`, replicated `+0.002675` on the independent decade `250–259`**; matched-`N` random-drop control `−0.001657` | `0.2717–0.2727` (live-anchored dose ladder) | `28GEMSDOE H36-1 rung3.0+r1 | …` |
+| **Secondary — far-field falsification FAILED (F1)** | `gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif` | `0bbddf41eb6d` | `37,447` | **`+0.007289` interleaved (`10/10` seeds, `4/4` folds; control `−0.044684`) but `−0.000037 ± 0.000832` far field (LOSFO seeds `210–214`, 9/20 cells)** — the interleaved gain is catalogue adjacency; projection withdrawn | withdrawn (was `0.278–0.286`) | `28GEMSDOE H37-1 cover+h19 | … | UNSCORED, not slot-approved` |
 | **Tertiary** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) — replicated `+0.001761` on fresh seeds 235–239 (`5/5` seeds, `4/4` folds) | `0.2686` | `28GEMSDOE H27-4 d2.8 solo | ΔDTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc` |
 | **Quaternary** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre | OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved` |
 | **Conservative alternative (kept audited)** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
@@ -107,10 +107,10 @@ The primary file is therefore also reachable directly from the repository, which
 download for a browser:
 
 ```
-https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif
+https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif
 ```
 
-Verify the SHA-256 `4557311baedb4e661363bc1d3e6c959a1d8f9999f8bfc5fabb85fd8c338850c6` after
+Verify the SHA-256 `5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641` after
 downloading. The site carries the same fallback link under the main download button.
 
 ---
@@ -628,11 +628,28 @@ probe (`…-probe-union-pool-r1-…`, 38,545 px) records the union-pool emission
 own ridges) because the live record already punishes that content: 26GEMSDOE `dilcond-oof-v1`, a pure
 detector-product emission, scored `0.1223`.
 
+**Far-field falsification: F1 FAILED.** The test frozen in `knowledge/32` ran on its dedicated LOSFO
+decade (seeds `210–214`, whole fault systems removed with a 600 m buffer) after freeze commit `7e637c9`.
+The unmodified base arms reproduced the stored diagnostic to eight decimals, so the instrument is stable;
+the new rule then earned `−0.000037` against the raster cascade (95 % interval `±0.000832`, 9/20 cells,
+3/5 seeds) while the field coverage it achieved rose slightly (`15,570.2 → 15,670.8`). The interleaved
+`+0.007289` therefore does not transfer off the catalogue: habitat decomposition
+(`evidence/arm_habitat_decomposition.json`) had already shown that 100 % of interleaved truth is
+catalogue pixels, and the LOSFO truth lies ≥ 8 px from anything the detector saw. F2's pass
+(`+0.002091` vs a random order) is **not** cited as an ordering result — the two ordering arms are
+capacity limited (10,975 / 10,992 dots against the requested 12,001), so the only exactly matched
+comparison is F1, which failed. The artifact is demoted to secondary by the pre-committed rule, both
+numbers are printed on its card, and `knowledge/33` withdraws the live projection. Registered as
+`h37-1-farfield-effect-is-zero` and `ordering-packers-are-capacity-limited`.
+
 **Answer to the standing question.** Why did `0.2600` win, and can we beat it? `0.2600` won because
 Poisson-disk thinning at `d = 2.8` cut 63 % of the H19-5 pixels while retaining 90.6 % of the `d=1.5`
-credit (`knowledge/01`). It can be beaten — and Session 13 shows the cheapest remaining win was not new
-geology but the **selection rule**: `+0.0073` OOF at a matched budget, projecting to a modelled
-`0.278–0.286` against the incumbent's modelled `0.2717–0.2727`. Beating `0.3195` still needs
+credit (`knowledge/01`). Session 13 tested the cheapest remaining candidate — the **selection rule** rather than new
+geology: `+0.0073` interleaved at a matched budget, and its far-field falsification test then
+**failed** (`−0.000037 ± 0.000832` on the LOSFO decade; F1/F3 FAIL, F2 passes only against a
+capacity-limited random control — `knowledge/33`). The honest conclusion is that the interleaved
+gain is earned beside the published catalogue, the `0.278–0.286` projection is withdrawn, and the
+one-click slot returned to H36-1's live-anchored `0.2717–0.2727`. Beating `0.3195` still needs
 `+1,151 px` of credit (`knowledge/20` §3.1) and remains a **detection** problem; the ranked geological
 candidates for that are in `knowledge/31_hypotheses_session13.md`.
 
@@ -764,6 +781,13 @@ GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_h37_1_holdout.py --seeds 25
 #     Executed: ALL FIVE CRITERIA PASSED -> cover_prob_r1 +0.007289 vs d=2.8 (+0.004614 over H36-1),
 #     10/10 seeds, 4/4 folds, content-blind matched-N control -0.044684, integrity clean.
 GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/build_h37_1_submissions.py
+
+# 3k. Session 13b: H37-1 far-field falsification test (LOSFO decade 210-214, ~12.6 min). The preregistration
+#     knowledge/32 is committed at the freeze commit 7e637c9 BEFORE the run; base arms reproduce the stored
+#     diagnostic exactly. Result: F1 FAIL, F3 FAIL -> the interleaved gain does not transfer; the artifact
+#     is demoted and the 0.278-0.286 projection withdrawn (knowledge/33).
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_harness.py --seeds 210-214 --packing-variants \
+    --out evidence/losfo_packing_farfield.json
 
 # 3h. Session 12: H36-1 packing-rung re-pack + flank prune, frozen 10-seed gate (seeds 240-249, ~105 s)
 #     Preregistration knowledge/26 was committed (aaa659c) BEFORE the run; runner frozen at that commit.

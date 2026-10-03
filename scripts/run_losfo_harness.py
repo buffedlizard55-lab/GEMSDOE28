@@ -50,9 +50,57 @@ import numpy as np
 from scipy.ndimage import distance_transform_edt
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gems27 import grid, holdout, losfo, metric, oof_detector, paths  # noqa: E402
+from gems27 import (  # noqa: E402
+    grid,
+    holdout,
+    losfo,
+    metric,
+    oof_detector,
+    packing,
+    paths,
+    thinning,
+)
 
 FOLD_NAMES = holdout.FOLD_NAMES
+
+
+def ridge_candidate_pool(prob: np.ndarray, ridge: np.ndarray, fold_mask: np.ndarray,
+                         known: np.ndarray, budget_frac: float) -> np.ndarray:
+    """The exact candidate pool ``build_oof_dotted_base`` packs: top-budget ridge pixels."""
+    active = fold_mask & ~known
+    cand = ridge & active
+    k = int(round(budget_frac * int(fold_mask.sum())))
+    ys, xs = np.nonzero(cand)
+    pool = np.zeros_like(cand)
+    if len(ys) == 0 or k <= 0:
+        return pool
+    if len(ys) > k:
+        sc = prob[ys, xs]
+        top = np.argpartition(-sc, k - 1)[:k]
+        ys, xs = ys[top], xs[top]
+    pool[ys, xs] = True
+    return pool
+
+
+def packing_arms(prob: np.ndarray, ridge: np.ndarray, fold_mask: np.ndarray, known: np.ndarray,
+                 base: np.ndarray, active: np.ndarray, hidden: np.ndarray, n_target: int,
+                 thin_d: float, seed: int) -> dict:
+    """Pack the same candidate pool by evidence, at random, and by max coverage, at matched N."""
+    pool = ridge_candidate_pool(prob, ridge, fold_mask, known, oof_detector.PRE_THIN_FRAC)
+    if not np.array_equal(thinning.dot_thin(pool, thin_d) & active, base & active):
+        raise SystemExit("pool equivalence check failed: the replica does not reproduce the base arm")
+    weight = np.where(active, prob, 0.0).astype(np.float32)
+    out = {"base": {"coverage": packing.coverage_of(base & active, weight),
+                    "requested_n": int(n_target), "n_candidates": int(pool.sum())}}
+    for name, sel in (
+        ("prob_order", packing.prob_order_pack(prob, pool, n_target=n_target, min_dist=thin_d)),
+        ("random_order", packing.random_order_pack(pool, n_target=n_target, min_dist=thin_d,
+                                                   seed=seed)),
+        ("max_coverage", packing.coverage_greedy(pool, prob, n_target)),
+    ):
+        s = sel & active
+        out[name] = {"coverage": packing.coverage_of(s, weight), **eval_set(s, hidden, active)}
+    return out
 
 
 def eval_set(pred: np.ndarray, truth: np.ndarray, active: np.ndarray) -> dict:
@@ -74,6 +122,9 @@ def main() -> int:
     ap.add_argument("--buffer-px", type=int, default=losfo.DEFAULT_BUFFER_PX)
     ap.add_argument("--thin-d", type=float, default=2.8, help="dot spacing of the evaluated arm")
     ap.add_argument("--out", default=str(paths.EVIDENCE / "losfo_farfield_diagnostic.json"))
+    ap.add_argument("--packing-variants", action="store_true",
+                    help="also pack the same candidate pool by evidence / at random / by max "
+                         "coverage at matched N, and score each on the identical far-field truth")
     args = ap.parse_args()
 
     a, _, b = args.seeds.partition("-")
@@ -135,6 +186,15 @@ def main() -> int:
             r_l = eval_set(base_l, hidden, active)
             r_k = eval_set(base_k, hidden, active)
 
+            var_l = var_k = None
+            if args.packing_variants:
+                n_l = int(base_l.sum())
+                n_k = int(base_k.sum())
+                var_l = packing_arms(prob_losfo[sl], ridge_losfo[sl], fm, sp.known[sl], base_l,
+                                     active, hidden, n_l, args.thin_d, seed * 4 + f)
+                var_k = packing_arms(prob_leaky[sl], ridge_leaky[sl], fm, sp.known[sl], base_k,
+                                     active, hidden, n_k, args.thin_d, seed * 4 + f)
+
             # habitat check: is the truth actually far from what the detector could see?
             # (distance transform on the full grid, then cropped with everything else)
             d_known = distance_transform_edt(~sp.known)[sl]
@@ -150,6 +210,7 @@ def main() -> int:
                                                  if dot_dist_l.size else None),
                 "frac_dots_ge_3px_from_known": (
                     float((dot_dist_l >= 3).mean()) if dot_dist_l.size else None),
+                "packing": ({"losfo": var_l, "leaky": var_k} if var_l is not None else None),
             }
             cells.append(row)
             per_fold_summary[sp.name].append(row)
@@ -159,20 +220,61 @@ def main() -> int:
         raise SystemExit("no evaluation cells produced")
 
     def agg(key: str) -> dict:
-        tp = sum(c[key]["tp"] for c in cells)
-        fp = sum(c[key]["fp"] for c in cells)
-        ng = sum(c[key]["n_truth"] for c in cells)
-        dtis = [c[key]["dti"] for c in cells]
+        def get(c: dict, k: str) -> dict:
+            if c.get("packing") and key.startswith(("losfo__", "leaky__")):
+                arm, name = key.split("__", 1)
+                return c["packing"][arm][name]
+            return c[k]
+
+        tp = sum(get(c, key)["tp"] for c in cells)
+        fp = sum(get(c, key)["fp"] for c in cells)
+        ng = sum(get(c, key)["n_truth"] for c in cells)
+        dtis = [get(c, key)["dti"] for c in cells]
         return {
             "mean_dti": float(np.mean(dtis)), "sum_tp": float(tp), "sum_fp": float(fp),
             "sum_n_truth": int(ng), "pooled_dti": float(
                 tp / (tp + metric.ALPHA * fp + metric.BETA * (ng - tp) + metric.EPS)),
-            "credit_per_dot": float(tp / max(1, sum(c[key]["dots"] for c in cells))),
-            "mean_dots": float(np.mean([c[key]["dots"] for c in cells])),
+            "credit_per_dot": float(tp / max(1, sum(get(c, key)["dots"] for c in cells))),
+            "mean_dots": float(np.mean([get(c, key)["dots"] for c in cells])),
             "recall_w": float(tp / ng) if ng else 0.0,
         }
 
     los, leak = agg("losfo"), agg("leaky")
+
+    packing_block = None
+    if args.packing_variants:
+        arms = {}
+        for det in ("losfo", "leaky"):
+            arms[det] = {"base": agg(det)}
+            for name in ("prob_order", "random_order", "max_coverage"):
+                arms[det][name] = agg(f"{det}__{name}")
+        paired = {}
+        for det in ("losfo", "leaky"):
+            rows = [c for c in cells if c.get("packing")]
+            entry = {"base_coverage": float(np.mean(
+                [c["packing"][det]["base"]["coverage"] for c in rows]))}
+            for name in ("prob_order", "random_order", "max_coverage"):
+                d_dti = [c["packing"][det][name]["dti"] - c[det]["dti"] for c in rows]
+                d_pp = [c["packing"][det][name]["dti"] - c["packing"][det]["prob_order"]["dti"]
+                        for c in rows] if name != "prob_order" else [0.0] * len(rows)
+                entry[name] = {
+                    "mean_delta_dti_vs_base": float(np.mean(d_dti)),
+                    "mean_delta_dti_vs_prob_order": float(np.mean(d_pp)),
+                    "cells_improved_vs_base": int(sum(1 for v in d_dti if v > 0)),
+                    "n_cells": len(rows),
+                    "mean_coverage": float(np.mean([c["packing"][det][name]["coverage"]
+                                                    for c in rows])),
+                }
+            paired[det] = entry
+        packing_block = {
+            "description": "Same candidate pool, same matched dot count, same far-field truth. "
+                           "prob_order = evidence-ordered spacing cascade; random_order = the "
+                           "content-blind control with the identical rule; max_coverage = greedy "
+                           "maximum expected coverage of the detector field.",
+            "thin_d_px": args.thin_d,
+            "arms": arms,
+            "paired_vs_base": paired,
+        }
     per_fold = {
         fn: {
             "n_cells": len(v),
@@ -208,6 +310,7 @@ def main() -> int:
         },
         "per_fold": per_fold,
         "ratios": ratios,
+        "packing_variants": packing_block,
         "far_field_check": {
             "min_dist_truth_to_known_px_over_cells": float(
                 min(c["min_dist_truth_to_known_px"] for c in cells)),
@@ -233,6 +336,14 @@ def main() -> int:
     print(f"truth is >= {out['far_field_check']['min_dist_truth_to_known_px_over_cells']:.0f} px "
           f"({100 * out['far_field_check']['min_dist_truth_to_known_px_over_cells']:.0f} m) from "
           f"every known pixel")
+    if packing_block:
+        for det in ("losfo", "leaky"):
+            for name in ("prob_order", "random_order", "max_coverage"):
+                e = packing_block["paired_vs_base"][det][name]
+                print(f"  {det:5s} {name:13s} dDTI(vs base) {e['mean_delta_dti_vs_base']:+.5f} "
+                      f"({e['cells_improved_vs_base']}/{e['n_cells']} up) "
+                      f"coverage {e['mean_coverage']:.1f} vs base "
+                      f"{packing_block['paired_vs_base'][det]['base_coverage']:.1f}")
     print(f"written {args.out}")
     return 0
 
