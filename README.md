@@ -5,7 +5,7 @@
 - **Core Value 1 — Maximize P(Win):** Prioritize the highest-leverage geological and mathematical actions that measurably increase expected Distance-Tolerant IoU (DTI) on the hidden test set; never spend a weekly submission slot on an idea that has not beaten the current holdout best on a spatially-blocked holdout set.
 - **Core Value 2 — Own the Outcome:** Work autonomously end-to-end with zero manual input required, verify every claim line by line from official verified trusted sources with links for manual review, flag any irregularities in `registry/irregularities.json`, and run three full verification passes (Pass 1, Pass 2, Pass 3) before opening and merging a pull request onto `main`.
 
-### Verbatim Task Prompt (Session 13, 2026-10-03 — read first every session)
+### Verbatim Task Prompt (Session 14, 2026-10-03 — read first every session)
 
 > **Read this first, every session.** It is the owner's standing brief, reproduced word-for-word at the
 > top of the repository so that every session starts from the same base instead of re-deriving it.
@@ -99,6 +99,8 @@ All submission artifacts in `docs/downloads/` are verified by `scripts/verify_do
 | **Quaternary** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre | OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved` |
 | **Conservative alternative (kept audited)** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
 | **Reference** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130–139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference | OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed | id 450eb6859636 | research only` |
+
+**Session 14 left the slot order unchanged.** The radiometric arm (H38-1) passed its frozen gate and then failed to earn a far-field transfer licence, so no file was built and this table, the manifest and every SHA-256 below are unchanged; the session's result is the attribution of the H37-1 falsification plus a twice-replicated far-field signal for a construction that is not yet gated (§3.10, `knowledge/39`, `knowledge/42`).
 
 **One-click route that does not depend on GitHub Pages.** GitHub Pages for this repository reports
 `status: errored` (legacy build; see `registry/irregularities.json` → `github-pages-legacy-build-errored`),
@@ -700,6 +702,93 @@ source is switched to **GitHub Actions**.
 
 ---
 
+### 3.10 Session 14 — the far-field attribution, a new-information arm, and a slot that stayed closed
+
+**Why the session started where it did.** Session 13 ended with H37-1 demoted by its own far-field rule
+(§3.9). Session 14 began by asking *which* construction that rule had actually falsified, because the
+F1 arm `packing_arms` in `scripts/run_losfo_harness.py` packs the **top-k ridge pool** at the `d=2.8`
+count, while the H37-1 gate and the shipped file pack **all ridge pixels** at the rung-3.0 count.
+
+**Finding 1 — the falsification was construction-specific (`knowledge/39`).**
+`scripts/run_losfo_cover_variants.py` crossed both factors on one detector, one truth set and one count
+ladder (`evidence/losfo_cover_variants.json`, seeds `215–219`, 20 cells, `integrity_violations: []`,
+and an independent re-reading in `evidence/losfo_cover_variants_analysis.json`):
+
+| arm (vs `base_d28` = 0.106476) | candidates | target | mean DTI | ΔDTI | cells / seeds / folds up |
+|---|---|---|---:|---:|---|
+| `pool_cover_nbase` — the arm `knowledge/33` tested | top-k pool | `d=2.8` count | 0.10730 | **+0.000819** | 12/20, 3/5, 2/4 |
+| `pool_cover_npre` | top-k pool | rung-3.0 count | 0.10671 | +0.000235 | 9/20, 2/5, 2/4 |
+| `all_cover_nbase` | all ridges | `d=2.8` count | 0.11274 | **+0.006269** | 16/20, 5/5, 3/4 |
+| `all_cover_npre` | all ridges | rung-3.0 count | 0.11163 | **+0.005158** | 16/20, 5/5, 3/4 |
+
+The head-to-head contrasts isolate one factor at a time: **+0.005450** (candidate set at the `d=2.8`
+count, 5/5 seeds) and **+0.004923** (at the rung-3.0 count, 5/5 seeds). `all_cover_npre` reproduces the
+independent probe's `cover_n` to `0.0` on all 20 cells and `base_d28` reproduces its `thin_d28` to
+`0.0` — the two runs agree exactly on their shared arms. The same run measured the H36-1 **dose** axis
+far field for the first time: raster-order `d=3.0` minus `d=2.8` is `−0.000116` while emitting 677
+fewer dots, i.e. the restored one-click primary's re-layout is far-field **neutral**, which discharges
+the remedy queued in `h37-1-farfield-effect-is-zero`.
+
+**Finding 2 — the detector had never seen a radiometric measurement, and the organisers shipped one.**
+A band-identity audit of the whole stack against every owner-mirrored GeoDAWN channel found that
+`training_features.tif` band 6 (`"tc - Tilt angle or total curvature - magnetic field derivative"`) is
+**rank-identical to the GeoDAWN radiometric total count** (Spearman `1.0000` on the in-footprint
+overlap, `0.999` over the full training extent), and that `scripts/prepare_data.py` **excludes** that
+band as mislabelled. Every other training band sits at the trend background (`0.90–0.93`) against every
+GeoDAWN channel, so nothing else is a hidden duplicate. The detector was therefore blind to
+radiometrics, including the one radiometric channel the organisers put in the stack.
+
+**Finding 3 — a new-information arm was frozen, gated, and then refused by its transfer test.**
+`H38-1` adds six channels (`geodawn_rad` K, Th, U; `geodawn_extensions` Th/K, U/K, U/Th; `TMI_up150` and
+`rad_TC` excluded with measured reasons) to the frozen 32-band matrix. Two harness defects were found
+and disclosed before any re-run (`knowledge/38` §§7–8): the pilot decade `260–269` voided because the
+G5(b) check compared the **post-prune** emission to the **pre-prune** request, and `270–279` was void
+for gating because `G2_promotion` used the fold split against the wrong reference. The gated third
+decade `280–289` passed every criterion:
+
+| arm (seeds 280–289, 40 cells) | detector | emission | mean DTI | mean dots |
+|---|---|---|---:|---:|
+| `base_d280` | D0 (32 bands) | raster `d=2.8` reference rule | 0.09552 | 12,231.2 |
+| `cover_r1` (incumbent) | D0 | coverage packing + blind `r1` prune | 0.10513 | 11,335.0 |
+| `rad_base_d280` | D1 (+6 radiometrics) | raster `d=2.8` | 0.10180 | 12,203.9 |
+| **`rad_cover_r1`** | D1 | coverage packing + prune, count-matched | **0.10800** | 11,328.7 |
+| `control_random_matched_n` | D0 | content-blind draw at the same count | 0.05316 | 11,320.3 |
+
+`G1 = +0.002869` (9/10 seeds, 4/4 folds), `G2` pass, `G3` do-no-harm `+0.006282` (10/10, 4/4),
+`G4` content-control margin `+0.054841`, `G5` clean, `passed: true`. `scripts/analyze_h38_1.py`
+re-derived every gated statistic from the stored per-cell records (max DTI recompute error `0.0`, all
+count identities hold). **Then the transfer test refused it** (`knowledge/42`, seeds `220–224`): the
+count-matched far-field effect is `+0.000959` with a 95 % interval of `±0.004469`, `2/5` seeds, `2/4`
+folds and `4/20` cells worse than the incumbent by more than `0.005` — unresolved at best, and the
+run's reproduction guard-rail F4 fired because the tolerance in the preregistration was mis-calibrated
+(the probe's own seed-level SD is `0.0080–0.0100`, so five-seed means differ by ~`0.006` at random;
+registered as `h38-1-farfield-f4-band-miscalibrated`).
+
+**Outcome: nothing was promoted.** No H38-1 file was built, `docs/downloads/manifest.json` is unchanged,
+the one-click primary is still H36-1 (`b531dae0a36f`), and no weekly slot was spent. The arm's status is
+*interleaved gate passed, far-field unresolved* — the honest next move is a properly powered far-field
+decade (≥ 10 seeds), not another interleaved re-run.
+
+**What the session hands forward.** The far-field run did replicate one thing twice: the **all-ridge
+coverage packing construction with the frozen D0 detector** scored `+0.005881` with `5/5` seeds and
+`4/4` folds against the raster cascade (seeds `220–224`), on top of `+0.005275` on seeds `215–219`. That
+is the strongest far-field signal the repository has, it belongs to a construction that has never been
+gated for promotion, and its credit density (`0.0499–0.0506`) is still below the live break-even
+`0.054852`. It is now the top-ranked next arm (`registry/next_hypotheses.json:session14_addendum`),
+together with a ≥ 10-seed continuation for H38-1 and the untouched H38-4/H38-3/H38-2/H38-5 set
+(`knowledge/37_hypotheses_session14.md`).
+
+**Three cross-cutting records.** (i) `knowledge/39` — the far-field attribution, with the H36-1 dose
+axis measured neutral. (ii) `knowledge/38` §§7–8 — both harness errata, each costing one gate decade,
+each disclosed before its re-run. (iii) The band-identity audit that shows the competition's own stack
+carries a mislabelled radiometric channel the detector was excluded from. Irregularities raised this
+session: `farfield-arm-did-not-match-gate-construction`, `h36-1-dose-change-is-far-field-neutral`,
+`h38-1-g5b-checked-post-prune-count`, `h38-1-g2-fold-statistic-used-base-not-incumbent`,
+`h38-1-farfield-f4-band-miscalibrated`, `cover-rule-far-field-gain-replicated-not-gated`, plus the
+`tc-band-mislabelled` re-confirmation.
+
+---
+
 ## 4. Euler Deconvolution for Depth (Reid et al., *Geophysics*, 1990) & Screen Ledger
 
 Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `evidence/h31_1_euler_feature_audit.json`, `evidence/h31_1_euler_clusters.csv`):
@@ -717,7 +806,7 @@ Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `eviden
 
 ## 5. Candidate Geological Hypotheses
 
-**Current ledger: `knowledge/31_hypotheses_session13.md` (Session 13)** — five ranked arms, each naming
+**Current ledger: `knowledge/37_hypotheses_session14.md` (Session 14)** — the five H38 arms, ranked by expected DTI gain x obtainability, with the far-field attribution (`knowledge/39`, `knowledge/42`) folded into the ranking: the top entry is now the twice-replicated all-ridge coverage construction, and H38-1's radiometric information sits second pending a >= 10-seed far-field decade. **Previous ledger: `knowledge/31_hypotheses_session13.md` (Session 13)** — five ranked arms, each naming
 - **Session 13 close-out (deliverables, three passes, limitations, AI-use disclosure):** `knowledge/36_session13_closeout.md`.
 its layers, physical signature, why it catches a fault *missing* from the catalogue rather than one
 already in it, and how it differs from everything already implemented, plus a per-claim obtainability
@@ -754,6 +843,16 @@ individual expected ΔDTI** — the ordering below differs from `knowledge/18` f
 ## 6. Reproducibility & Verification Commands
 
 ```bash
+# Session 14 (all local, no external requests; each writes JSON into evidence/):
+#   far-field attribution of the H37-1 rule (seeds 215-219, ~7 min)
+.venv/bin/python scripts/run_losfo_cover_variants.py --seeds 215-219 --out evidence/losfo_cover_variants.json
+.venv/bin/python scripts/analyze_cover_variants.py           # independent re-reading of both LOSFO files
+#   H38-1 radiometric gate (seeds 280-289, ~5 min) and its independent verification
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_h38_1_holdout.py --seeds 280-289 --out evidence/h38_1_holdout.json
+.venv/bin/python scripts/analyze_h38_1.py                    # max DTI recompute error must be 0.0
+#   H38-1 far-field transfer test (seeds 220-224, ~13 min)
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_rad_farfield.py --seeds 220-224 --out evidence/losfo_rad_farfield.json
+#   the H38-1 artifact builder exists but was NOT executed (no transfer licence was earned)
 # 1. Restore all 17 hash-pinned rasters/tables and build the 32-band prepared feature matrix
 PYTHON=.venv/bin/python bash scripts/download_competition_data.sh
 

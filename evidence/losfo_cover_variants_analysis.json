@@ -1,0 +1,135 @@
+{
+ "generated_utc": "2026-10-03T23:10:48Z",
+ "kind": "Pass-2 re-reading of the two stored LOSFO cover evidence files; pure arithmetic, no model was re-fitted and no measurement was repeated.",
+ "inputs": [
+  "evidence/losfo_cover_variants.json",
+  "evidence/losfo_cover_probe.json"
+ ],
+ "n_cells_matched": 20,
+ "arm_matched_reproduction": {
+  "all_cover_npre_vs_cover_n": {
+   "max_abs": 0.0,
+   "mean": 0.0,
+   "n": 20,
+   "same_construction": true
+  },
+  "base_d28_vs_thin_d28": {
+   "max_abs": 0.0,
+   "mean": 0.0,
+   "n": 20,
+   "same_construction": true
+  },
+  "pool_cover_nbase_vs_thin_d28": {
+   "max_abs": 0.006454538522612158,
+   "mean": 0.0008187438555494093,
+   "n": 20,
+   "same_construction": false
+  }
+ },
+ "dose_diagnostic": {
+  "comparison": "thin_d30 - thin_d28 (d=3.0 vs d=2.8, raster order, same pool)",
+  "count_matched": false,
+  "mean_delta_dots": -677.15,
+  "mean": -0.00011642629311015145,
+  "sd": 0.001380150164905343,
+  "sem": 0.0003086109587885891,
+  "cells_up": 9,
+  "n_cells": 20,
+  "per_seed": {
+   "215": -0.0003798658600985931,
+   "216": 0.0006310705881592132,
+   "217": -0.00022091922458574928,
+   "218": -0.00017265854989846965,
+   "219": -0.0004397584191271585
+  },
+  "seeds_up": 1
+ },
+ "paired_contrasts_recomputed": {
+  "pool_cover_nbase_minus_base_d28": {
+   "stored_mean": 0.0008187438555494093,
+   "recomputed_mean": 0.0008187438555494093,
+   "abs_error": 0.0,
+   "stored_cells_up": 12,
+   "recomputed_cells_up": 12
+  },
+  "all_cover_nbase_minus_base_d28": {
+   "stored_mean": 0.006268618315234969,
+   "recomputed_mean": 0.006268618315234969,
+   "abs_error": 0.0,
+   "stored_cells_up": 16,
+   "recomputed_cells_up": 16
+  },
+  "pool_cover_npre_minus_base_d28": {
+   "stored_mean": 0.00023495644245626195,
+   "recomputed_mean": 0.00023495644245626195,
+   "abs_error": 0.0,
+   "stored_cells_up": 9,
+   "recomputed_cells_up": 9
+  },
+  "all_cover_npre_minus_base_d28": {
+   "stored_mean": 0.005158422935245308,
+   "recomputed_mean": 0.005158422935245308,
+   "abs_error": 0.0,
+   "stored_cells_up": 16,
+   "recomputed_cells_up": 16
+  },
+  "base_d28_minus_pool_cover_nbase": {
+   "stored_mean": -0.0008187438555494093,
+   "recomputed_mean": -0.0008187438555494093,
+   "abs_error": 0.0,
+   "stored_cells_up": 8,
+   "recomputed_cells_up": 8
+  },
+  "all_cover_nbase_minus_pool_cover_nbase": {
+   "stored_mean": 0.005449874459685561,
+   "recomputed_mean": 0.005449874459685561,
+   "abs_error": 0.0,
+   "stored_cells_up": 14,
+   "recomputed_cells_up": 14
+  },
+  "pool_cover_npre_minus_pool_cover_nbase": {
+   "stored_mean": -0.0005837874130931474,
+   "recomputed_mean": -0.0005837874130931474,
+   "abs_error": 0.0,
+   "stored_cells_up": 5,
+   "recomputed_cells_up": 5
+  },
+  "all_cover_npre_minus_pool_cover_nbase": {
+   "stored_mean": 0.004339679079695898,
+   "recomputed_mean": 0.004339679079695898,
+   "abs_error": 0.0,
+   "stored_cells_up": 14,
+   "recomputed_cells_up": 14
+  },
+  "base_d28_minus_pool_cover_npre": {
+   "stored_mean": -0.00023495644245626195,
+   "recomputed_mean": -0.00023495644245626195,
+   "abs_error": 0.0,
+   "stored_cells_up": 11,
+   "recomputed_cells_up": 11
+  },
+  "pool_cover_nbase_minus_pool_cover_npre": {
+   "stored_mean": 0.0005837874130931474,
+   "recomputed_mean": 0.0005837874130931474,
+   "abs_error": 0.0,
+   "stored_cells_up": 15,
+   "recomputed_cells_up": 15
+  },
+  "all_cover_nbase_minus_pool_cover_npre": {
+   "stored_mean": 0.006033661872778708,
+   "recomputed_mean": 0.006033661872778708,
+   "abs_error": 0.0,
+   "stored_cells_up": 16,
+   "recomputed_cells_up": 16
+  },
+  "all_cover_npre_minus_pool_cover_npre": {
+   "stored_mean": 0.004923466492789045,
+   "recomputed_mean": 0.004923466492789045,
+   "abs_error": 0.0,
+   "stored_cells_up": 15,
+   "recomputed_cells_up": 15
+  }
+ },
+ "max_abs_error_across_paired_contrasts": 0.0,
+ "verdict": "arm-matched reproduction is exact (max |diff| 0.0); the dose ladder is far-field neutral while emitting fewer dots; every stored paired contrast recomputes from the per-cell records."
+}
