@@ -240,3 +240,23 @@ def test_unreadable_layer_is_not_reported_as_written(tmp_path):
     row = res["sb_slip_tendency_shapefile_full"]
     assert row["status"] in {"LAYER_UNREADABLE", "ARCHIVE_UNREADABLE", "NO_VECTOR_LAYER"}, row
     assert row["status"] != "DERIVED_WRITTEN"
+
+
+# --------------------------------------------------------------------------------------------
+# the runner must install what the clip path imports
+# --------------------------------------------------------------------------------------------
+def test_runner_installs_geopandas_for_read_dataframe():
+    """The 2026-10-03T18:54:08Z run failed with 'geopandas is required to use
+    pyogrio.read_dataframe()'. Guard the dependency so it cannot silently regress."""
+    wf = (ROOT / ".github" / "workflows" / "fetch-gdr-external-layers.yml").read_text()
+    install_line = next(line for line in wf.splitlines() if "pip install pyogrio" in line)
+    for mod in ("pyogrio", "shapely", "pyproj", "pandas", "geopandas"):
+        assert mod in install_line, f"{mod} missing from the runner install line"
+    assert "Assert the readers this job depends on actually import" in wf
+
+
+def test_workflow_fails_the_job_on_every_unusable_clip_status():
+    wf = (ROOT / ".github" / "workflows" / "fetch-gdr-external-layers.yml").read_text()
+    for status in ("PIN_MISMATCH", "LAYER_UNREADABLE", "DERIVED_EMPTY",
+                   "NO_VECTOR_LAYER", "ARCHIVE_UNREADABLE"):
+        assert status in wf, f"the job must fail loudly on {status}"
