@@ -10,7 +10,7 @@ Review prior repository history, code, and evidence before proposing work. Rank 
 
 Preregister design, folds/draws, model, response, analysis, and promotion gate before fitting. Compare on a spatially blocked hide-and-recover holdout with the best comparable same-run control; distinguish proxy evidence from competition performance. No idea gets a weekly submission slot without reproducible holdout superiority, confirmation, and exact-file audit.
 
-Build a manual-only submission path, source-linked Pages site, concise executive summary/instructions, prominent single-band GeoTIFF download, unique content-addressed filename, and short note/comment. Verify the competition grid and `[0,1]` constraints; investigate the prior range-validator error rather than assuming its cause. Run implementation/source review, bug/leakage review, then full acceptance review; record passes. The requested PR and merge to `main` have **not** yet occurred.
+Build a manual-only submission path, source-linked Pages site, concise executive summary/instructions, prominent single-band GeoTIFF download, unique content-addressed filename, and short note/comment. Verify the competition grid and `[0,1]` constraints; investigate the prior range-validator error rather than assuming its cause. Run implementation/source review, bug/leakage review, then full acceptance review; record passes. A PR is open as [#1](https://github.com/buffedlizard55-lab/GEMSDOE28/pull/1); merge to `main` and live Pages verification remain outstanding.
 
 ### Standing user constraints
 
@@ -23,4 +23,4 @@ Build a manual-only submission path, source-linked Pages site, concise executive
 - Do not present proxy or owner-reported metrics as organizer-verified results or a leaderboard win.
 - Euler research must target depth-labeled magnetic-source solutions/clusters, not use edge or gradient peaks as source locations; state structural-index caveats.
 - Keep large restored datasets/caches out of Git; use hash-pinned provenance and label owner mirrors as unauthenticated.
-- User requested a PR and merge onto `main`; neither has occurred. This session remains on its fixed Arena branch until the work is ready for a PR.
+- User requested a PR and merge onto `main`. PR #1 is open from this fixed Arena branch; merge and live Pages verification remain outstanding pending final H31 workflow execution and acceptance.

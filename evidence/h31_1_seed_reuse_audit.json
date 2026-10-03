@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checked_utc": "2026-10-03T14:03:45Z",
+  "checked_utc": "2026-10-03T14:10:47Z",
   "status": "PASS",
   "scope": "local repository evidence only; cannot rule out undocumented seed use in unsearched external/sibling workspaces",
   "network_access": "none",
@@ -14,6 +14,7 @@
   "git_history_review": {
     "shallow": true,
     "recent_commits": [
+      "cf698719fe6777e034469c8d44ce091c93dba010 Build auditable GEMS research and submission workflow",
       "524bf277e7b5487bfea1982d2a352c9f0802c0e0 protocol: preregister H31-1 Euler holdout",
       "7d4498dd0d892bd44c9062705d2e90ebedfebbba Initial commit"
     ]
@@ -274,7 +275,7 @@
     "sgmc_gap_inversion.json": "8315884ec7980587b8d06fb5fa478f8ae61d9acf7ef1fb0bbb4911a15fb7b76f",
     "sgmc_lidar_response.json": "475bf680b434f1efeee5775951295a084d392a5b236975928cafba32b0564acb",
     "structural_relay_classes.json": "41a77500968a7190f4c97f39f3b321ab29bcaf6b52985f5f5e6c6c954e417666",
-    "submission_file_audit.json": "be76de0f7ded25619ad92792a324d09f2652998de1cd38cad9446e38a34b8bd0",
+    "submission_file_audit.json": "9a8f4ba3eda059223b2349ac92893b0dcdb441f8eecde6a9bc9dbf63b2ee6b72",
     "topology_confirmation_v2.json": "f0223a202dfe40e903367333d5bb406406f028fbaf477357165f080b91f381db",
     "topology_link_feature_analysis.json": "7f0ca61c6107852dad6d36c980531ad54fd8fd34d08a01764c73309c0312eca7",
     "topology_validation.json": "fa4f3c0e9f2f0ba3d638582b7180701677565c9bcf8ee393ae910659e150133d",
@@ -284,5 +285,5 @@
   "unreadable_evidence_json": [],
   "invalid_stage_records": [],
   "decision": "Seeds 160-169 are reserved for one frozen screen; 170-179 are confirmation-only after an unchanged passing screen.",
-  "sha256": "60be4841fb6285385426976c68e054422721accae60a94916af040b73a5b09c5"
+  "sha256": "c5e6538ea83d15cc5d6e3bf7a216125fee36d451d8828902421f1de440bb1b2d"
 }

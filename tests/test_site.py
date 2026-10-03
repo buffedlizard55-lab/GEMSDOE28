@@ -31,6 +31,45 @@ def test_site_builds_from_json_only_and_pages_exist():
         assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
 
 
+def test_build_site_workflow_tracks_generator_inputs_and_outputs():
+    workflow = (ROOT / ".github" / "workflows" / "build-site.yml").read_text()
+    builder = (ROOT / "scripts" / "build_site.py").read_text()
+    inputs = {
+        line.split('read_json("', 1)[1].split('"', 1)[0]
+        for line in builder.splitlines()
+        if 'read_json("' in line
+    }
+    inputs.add("docs/downloads/h28_1_candidate_manifest.json")
+    for path in inputs | {
+        "docs/data/topology_review_classes.json",
+        "scripts/build_site.py",
+        ".github/workflows/build-site.yml",
+        "docs/assets/**",
+        "docs/*.html",
+        "index.html",
+    }:
+        assert workflow.count(f"'{path}'") == 2, f"missing push/pull_request trigger for {path}"
+
+
+def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results():
+    from scripts import build_site
+
+    assert build_site.h31_result_summary({}, {}) == "No H31 classifier fit or holdout has been run."
+    screen_pass = {"gate": {"passed": True}, "summary": {
+        "mean_paired_gain": 0.0012, "positive_fold_count": 3, "positive_seed_count": 8,
+    }}
+    screen_text = build_site.h31_result_summary(screen_pass, {})
+    assert "Screen frozen gate PASS" in screen_text
+    assert "catalogue-proxy" in screen_text and "Confirmation on seeds 170–179 remains required" in screen_text
+    assert "weekly slot" in screen_text
+    confirm_fail = {"gate": {"passed": False}, "summary": {
+        "mean_paired_gain": -0.0001, "positive_fold_count": 1, "positive_seed_count": 4,
+    }}
+    failed_text = build_site.h31_result_summary(screen_pass, confirm_fail)
+    assert "Confirmation frozen gate FAIL" in failed_text and "rejects the arm for submission" in failed_text
+    assert "weekly slot" in build_site.h31_next_step(screen_pass, confirm_fail)
+
+
 def test_all_internal_links_and_assets_resolve():
     for base, p in [(DOCS, q) for q in PAGES] + [(ROOT, "index.html")]:
         parser = Links()
