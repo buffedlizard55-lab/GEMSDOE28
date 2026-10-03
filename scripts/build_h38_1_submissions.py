@@ -138,21 +138,21 @@ def main() -> int:
             "base_reference_id": "e56ea318af89",
             "base_reference_live_score": 0.26,
             "holdout_evidence": "evidence/h38_1_holdout.json",
-            "holdout_preregistration": "knowledge/37_preregistration_H38-1.md",
+            "holdout_preregistration": "knowledge/38_preregistration_H38-1.md",
             "holdout_seeds": "280-289",
             "holdout_mean_gain": 0.002869,
             "holdout_mean_gain_vs_incumbent": 0.002869,
             "holdout_seeds_improved": "9/10",
             "holdout_folds_improved": "4/4",
             "far_field_evidence": "evidence/losfo_rad_farfield.json",
-            "far_field_preregistration": "knowledge/39_preregistration_H38-1_farfield.md",
+            "far_field_preregistration": "knowledge/40_preregistration_H38-1_farfield.md",
         })
         print(f"wrote {nan_name}: {emitted:,} px, sha256 {v_nan['sha256'][:16]}…", flush=True)
 
     evidence = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "hypothesis": "H38-1 artifact build (radiometric-augmented detector)",
-        "preregistration": "knowledge/37_preregistration_H38-1.md",
+        "preregistration": "knowledge/38_preregistration_H38-1.md",
         "gate": "evidence/h38_1_holdout.json",
         "far_field": "evidence/losfo_rad_farfield.json",
         "extra_bands": RAD_EXTRA_BANDS,
@@ -178,9 +178,9 @@ def main() -> int:
             "The two files differ from each other ONLY in the candidate pool (H19-5 surface vs the "
             "detector's own ridges); pool, budget, prune, detector and weight field are identical. "
             "Neither file's exact global packing has been far-field measured: the LOSFO test measures "
-            "the information at matched count on detector ridges, and knowledge/38 shows that "
+            "the information at matched count on detector ridges, and knowledge/39 shows that "
             "pool-restricted coverage packing is far-field neutral. The interleaved +0.002869 is NOT a "
-            "live projection (knowledge/38: no live range is quoted for packing arms)."
+            "live projection (knowledge/39: no live range is quoted for packing arms)."
         ),
     }
     submission.dump_json(evidence, paths.EVIDENCE / "h38_1_artifact.json")
@@ -194,7 +194,7 @@ def main() -> int:
             "UNSCORED one-click primary from 2026-10-03: won the frozen H38-1 gate on fresh seeds "
             "280-289 (G1-G5 all pass: +0.002869 mean ΔDTI vs the same-rule D0 detector, 9/10 seeds, "
             "4/4 folds, content control 0.054841 below it) and passed the frozen LOSFO transfer test "
-            "(knowledge/39, seeds 220-224). Same pool, budget and prune as H37-1; only the weight field "
+            "(knowledge/40, seeds 220-224). Same pool, budget and prune as H37-1; only the weight field "
             "changed, and that field now carries the GeoDAWN radiometric channels the detector never "
             "saw before (the competition's band 6 'tc' is rank-identical to GeoDAWN radiometric total "
             "count and was excluded as mislabelled). Not slot-approved; no live score."))
@@ -206,8 +206,8 @@ def main() -> int:
         new_manifest = dict(old)
         new_manifest["generated_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         new_manifest["status"] = (
-            "Slot order revised 2026-10-03 by the frozen H38-1 gate (knowledge/37, seeds 280-289) and "
-            "its LOSFO transfer test (knowledge/39, seeds 220-224): the primary is the H19-5-surface "
+            "Slot order revised 2026-10-03 by the frozen H38-1 gate (knowledge/38, seeds 280-289) and "
+            "its LOSFO transfer test (knowledge/40, seeds 220-224): the primary is the H19-5-surface "
             "packing re-ordered by the radiometric-augmented detector. H36-1 and H37-1 stay audited and "
             "listed; every older slot keeps its status.")
         new_manifest["primary"] = primary
@@ -227,8 +227,8 @@ def main() -> int:
         new_manifest["promotion_rule"] = (
             "The one-click primary is the file that won a frozen fresh-seed gate whose criteria were "
             "written to knowledge/ before the seeds were spent AND (since knowledge/32-33) that did not "
-            "fail the LASFO far-field transfer test. H38-1: knowledge/37_preregistration_H38-1.md, "
-            "seeds 280-289; transfer: knowledge/39_preregistration_H38-1_farfield.md, seeds 220-224.")
+            "fail the LASFO far-field transfer test. H38-1: knowledge/38_preregistration_H38-1.md, "
+            "seeds 280-289; transfer: knowledge/40_preregistration_H38-1_farfield.md, seeds 220-224.")
         manifest_path.write_text(json.dumps(new_manifest, indent=2) + "\n", encoding="utf-8")
         print("re-slotted docs/downloads/manifest.json")
     else:

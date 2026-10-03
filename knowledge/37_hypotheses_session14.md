@@ -1,10 +1,18 @@
 # Session 14 (2026-10-03) — H38 candidate set: five ranked arms, one gated this session
 
 Status: written **before** H38-2…H38-5 spends a seed. H38-1 is preregistered separately in
-`knowledge/37_preregistration_H38-1.md` and gated this session on the fresh hypothesis-gate decade
+`knowledge/38_preregistration_H38-1.md` and gated this session on the fresh hypothesis-gate decade
 `260–269`. The LOSFO measurement in `evidence/losfo_cover_probe.json` uses a **separate LOSFO decade
 (215–219)**, the convention established by `knowledge/32` §2 ("the harness's dedicated LOSFO decade …
 consumes no hypothesis-gate decade"); no hypothesis gate may later be run on `215–219`.
+
+> **Renumbering note (2026-10-03, merge with `main`).** This session's files were renumbered after a "
+> parallel session merged `knowledge/36_session13_closeout.md`: Session-14 hypotheses = `knowledge/37`,
+> H38-1 preregistration = `knowledge/38`, far-field attribution = `knowledge/39`, H38-1 far-field
+> preregistration = `knowledge/40`, H38-1 gate result = `knowledge/41`, H38-1 far-field result =
+> `knowledge/42`. The `evidence/*.json` records written before the renumber keep the original path
+> strings inside their provenance fields (`knowledge/36_...` → `knowledge/37_...` etc.); the records
+> themselves are intentionally unmodified.
 
 ## 0. What changed the ranking rule this session
 
@@ -83,7 +91,7 @@ Ranking rule for this session, in priority order:
   ThK `0.485`, UK `0.536`, UTh `0.541`, and near-fault corridor (0–600 m) vs far (>1200 m) gives the
   same ordering (UTh `0.5485`, UK `0.5362`). So the *a priori* expectation is small; the arm's value is
   that it is a decisive, cheap test of the one class the repository has never tested.
-* **Gate.** `knowledge/37_preregistration_H38-1.md`, runner `scripts/run_h38_1_holdout.py`, fresh decade
+* **Gate.** `knowledge/38_preregistration_H38-1.md`, runner `scripts/run_h38_1_holdout.py`, fresh decade
   `260–269`.
 
 ## H38-3 — Joint magnetic ∧ gravity Euler SI-0 depth concordance (carries H37-3 forward)
@@ -161,7 +169,7 @@ Ranking rule for this session, in priority order:
 ## 2. What is validated in this session
 
 * **H38-1** is gated on the spatially-blocked interleaved holdout, fresh decade `260–269`
-  (`knowledge/37`, `scripts/run_h38_1_holdout.py`, `evidence/h38_1_holdout.json`).
+  (`knowledge/38`, `scripts/run_h38_1_holdout.py`, `evidence/h38_1_holdout.json`).
 * **The dose/layout far-field question** raised by `knowledge/33` §3 ("the dose axis is deliberately
   not re-run here") is measured in `evidence/losfo_cover_probe.json` on LOSFO decade `215–219`:
   raster-order thinning at `d=2.8` and `d=3.0`, greedy maximum coverage at the same emitted count as
@@ -172,10 +180,10 @@ Ranking rule for this session, in priority order:
 ## 8. Addendum after the runs (2026-10-03, end of session) — statuses, not new claims
 
 * **H38-1** was gated on **seeds 280–289**, not 260–269: two harness errata voided the first two
-  decades (`knowledge/37` §§7–8, both disclosed before their re-run). The gate passed
+  decades (`knowledge/38` §§7–8, both disclosed before their re-run). The gate passed
   (`evidence/h38_1_holdout.json`, G1 `+0.002869`, 9/10 seeds, 4/4 folds) and the far-field transfer test
   (seeds 220–224) did **not** license a file: `+0.000959 ± 0.004469`, 2/5 seeds, 4/20 cells below
-  `−0.005` (`knowledge/41`). Status: **interleaved pass, far-field unresolved, no artifact.**
+  `−0.005` (`knowledge/42`). Status: **interleaved pass, far-field unresolved, no artifact.**
 * **Ranking update.** The twice-replicated far-field gain of the **all-ridge coverage packing
   construction with the frozen D0 detector** (`+0.005275` on 215–219 and `+0.005881`, 5/5 seeds, 4/4
   folds on 220–224) makes that construction the top-ranked unshipped arm; it still needs its own frozen

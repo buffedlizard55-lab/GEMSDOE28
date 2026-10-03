@@ -100,7 +100,7 @@ All submission artifacts in `docs/downloads/` are verified by `scripts/verify_do
 | **Conservative alternative (kept audited)** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
 | **Reference** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130–139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference | OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed | id 450eb6859636 | research only` |
 
-**Session 14 left the slot order unchanged.** The radiometric arm (H38-1) passed its frozen gate and then failed to earn a far-field transfer licence, so no file was built and this table, the manifest and every SHA-256 below are unchanged; the session's result is the attribution of the H37-1 falsification plus a twice-replicated far-field signal for a construction that is not yet gated (§3.10, `knowledge/38`, `knowledge/41`).
+**Session 14 left the slot order unchanged.** The radiometric arm (H38-1) passed its frozen gate and then failed to earn a far-field transfer licence, so no file was built and this table, the manifest and every SHA-256 below are unchanged; the session's result is the attribution of the H37-1 falsification plus a twice-replicated far-field signal for a construction that is not yet gated (§3.10, `knowledge/39`, `knowledge/42`).
 
 **One-click route that does not depend on GitHub Pages.** GitHub Pages for this repository reports
 `status: errored` (legacy build; see `registry/irregularities.json` → `github-pages-legacy-build-errored`),
@@ -709,7 +709,7 @@ source is switched to **GitHub Actions**.
 F1 arm `packing_arms` in `scripts/run_losfo_harness.py` packs the **top-k ridge pool** at the `d=2.8`
 count, while the H37-1 gate and the shipped file pack **all ridge pixels** at the rung-3.0 count.
 
-**Finding 1 — the falsification was construction-specific (`knowledge/38`).**
+**Finding 1 — the falsification was construction-specific (`knowledge/39`).**
 `scripts/run_losfo_cover_variants.py` crossed both factors on one detector, one truth set and one count
 ladder (`evidence/losfo_cover_variants.json`, seeds `215–219`, 20 cells, `integrity_violations: []`,
 and an independent re-reading in `evidence/losfo_cover_variants_analysis.json`):
@@ -741,7 +741,7 @@ radiometrics, including the one radiometric channel the organisers put in the st
 **Finding 3 — a new-information arm was frozen, gated, and then refused by its transfer test.**
 `H38-1` adds six channels (`geodawn_rad` K, Th, U; `geodawn_extensions` Th/K, U/K, U/Th; `TMI_up150` and
 `rad_TC` excluded with measured reasons) to the frozen 32-band matrix. Two harness defects were found
-and disclosed before any re-run (`knowledge/37` §§7–8): the pilot decade `260–269` voided because the
+and disclosed before any re-run (`knowledge/38` §§7–8): the pilot decade `260–269` voided because the
 G5(b) check compared the **post-prune** emission to the **pre-prune** request, and `270–279` was void
 for gating because `G2_promotion` used the fold split against the wrong reference. The gated third
 decade `280–289` passed every criterion:
@@ -757,7 +757,7 @@ decade `280–289` passed every criterion:
 `G1 = +0.002869` (9/10 seeds, 4/4 folds), `G2` pass, `G3` do-no-harm `+0.006282` (10/10, 4/4),
 `G4` content-control margin `+0.054841`, `G5` clean, `passed: true`. `scripts/analyze_h38_1.py`
 re-derived every gated statistic from the stored per-cell records (max DTI recompute error `0.0`, all
-count identities hold). **Then the transfer test refused it** (`knowledge/41`, seeds `220–224`): the
+count identities hold). **Then the transfer test refused it** (`knowledge/42`, seeds `220–224`): the
 count-matched far-field effect is `+0.000959` with a 95 % interval of `±0.004469`, `2/5` seeds, `2/4`
 folds and `4/20` cells worse than the incumbent by more than `0.005` — unresolved at best, and the
 run's reproduction guard-rail F4 fired because the tolerance in the preregistration was mis-calibrated
@@ -776,10 +776,10 @@ is the strongest far-field signal the repository has, it belongs to a constructi
 gated for promotion, and its credit density (`0.0499–0.0506`) is still below the live break-even
 `0.054852`. It is now the top-ranked next arm (`registry/next_hypotheses.json:session14_addendum`),
 together with a ≥ 10-seed continuation for H38-1 and the untouched H38-4/H38-3/H38-2/H38-5 set
-(`knowledge/36_hypotheses_session14.md`).
+(`knowledge/37_hypotheses_session14.md`).
 
-**Three cross-cutting records.** (i) `knowledge/38` — the far-field attribution, with the H36-1 dose
-axis measured neutral. (ii) `knowledge/37` §§7–8 — both harness errata, each costing one gate decade,
+**Three cross-cutting records.** (i) `knowledge/39` — the far-field attribution, with the H36-1 dose
+axis measured neutral. (ii) `knowledge/38` §§7–8 — both harness errata, each costing one gate decade,
 each disclosed before its re-run. (iii) The band-identity audit that shows the competition's own stack
 carries a mislabelled radiometric channel the detector was excluded from. Irregularities raised this
 session: `farfield-arm-did-not-match-gate-construction`, `h36-1-dose-change-is-far-field-neutral`,
@@ -806,7 +806,8 @@ Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `eviden
 
 ## 5. Candidate Geological Hypotheses
 
-**Current ledger: `knowledge/36_hypotheses_session14.md` (Session 14)** — the five H38 arms, ranked by expected DTI gain x obtainability, with the far-field attribution (`knowledge/38`, `knowledge/41`) folded into the ranking: the top entry is now the twice-replicated all-ridge coverage construction, and H38-1's radiometric information sits second pending a >= 10-seed far-field decade. **Previous ledger: `knowledge/31_hypotheses_session13.md` (Session 13)** — five ranked arms, each naming
+**Current ledger: `knowledge/37_hypotheses_session14.md` (Session 14)** — the five H38 arms, ranked by expected DTI gain x obtainability, with the far-field attribution (`knowledge/39`, `knowledge/42`) folded into the ranking: the top entry is now the twice-replicated all-ridge coverage construction, and H38-1's radiometric information sits second pending a >= 10-seed far-field decade. **Previous ledger: `knowledge/31_hypotheses_session13.md` (Session 13)** — five ranked arms, each naming
+- **Session 13 close-out (deliverables, three passes, limitations, AI-use disclosure):** `knowledge/36_session13_closeout.md`.
 its layers, physical signature, why it catches a fault *missing* from the catalogue rather than one
 already in it, and how it differs from everything already implemented, plus a per-claim obtainability
 ledger. It supersedes `knowledge/23_h35_hypotheses.md` (Session 11) for ranking; the H35 results

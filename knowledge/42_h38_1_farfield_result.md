@@ -9,7 +9,7 @@ interval is 1.5× the interleaved effect, so the honest reading is *unresolved, 
 frozen F1 rule ("≤ 2/20 cells below −0.005") fails on the heavy tail.
 
 **No H38-1 file was built.** `scripts/build_h38_1_submissions.py` exists and was written before the
-far-field result, but it was **not executed**: `knowledge/39` §4 makes F1 the licence, and the licence
+far-field result, but it was **not executed**: `knowledge/40` §4 makes F1 the licence, and the licence
 was not earned. The one-click primary stays with H36-1.
 
 ## 1. Numbers
@@ -31,7 +31,7 @@ was not earned. The one-click primary stays with H36-1.
 
 ## 2. The F4 failure is a mis-calibrated band in my own prereg, and it is disclosed as such
 
-`knowledge/39` §3 F4 anchored the instrument to the earlier probe's five-seed means with a ±0.004
+`knowledge/40` §3 F4 anchored the instrument to the earlier probe's five-seed means with a ±0.004
 tolerance. Two facts measured *after* the freeze show that band was naive:
 
 * the probe's own **seed-level** spread is SD `0.00999` (`thin_d28`) and `0.00802` (`cover_n`), so the
@@ -56,7 +56,7 @@ its guard-rail misfired — is worse than publishing it with its status attached
   thin_d28_D0` = **+0.005881** with **5/5 seeds and 4/4 folds** (15/20 cells) against the earlier
   probe's `+0.005275` on seeds `215-219`. This is now the most strongly replicated far-field result in
   the repository, and it belongs to the *all-ridge* coverage construction identified in
-  `knowledge/38` — not to the pool-restricted arm that `knowledge/33` falsified, and not to the packing
+  `knowledge/39` — not to the pool-restricted arm that `knowledge/33` falsified, and not to the packing
   used in the shipped H37-1 file.
 * **That replicated rule is still not promotable on today's evidence.** Its far-field credit density is
   `0.0499` (D0) / `0.0505` (D1) against the live break-even `τ = 0.054852` at the `0.26` anchor; the
@@ -73,15 +73,15 @@ its guard-rail misfired — is worse than publishing it with its status attached
 
 ## 4. Consequences
 
-1. No H38-1 TIFF, no manifest change, no site download change, no weekly slot. `knowledge/40` stands as
+1. No H38-1 TIFF, no manifest change, no site download change, no weekly slot. `knowledge/41` stands as
    the gate record with its verdict amended to "interleaved pass, far-field unresolved".
 2. H38-1 moves from "candidate" to "**open, far-field-unresolved**": the next measurement that would
    change its status is a properly powered far-field decade (≥ 10 seeds), not another interleaved gate.
 3. The top-ranked next arm is now the **all-ridge coverage packing construction with the frozen D0
    detector** (twice-replicated far-field gain, `5/5` seeds in both runs), which needs its own frozen
-   interleaved gate before any file is built. `knowledge/36` §ranking is updated accordingly in
+   interleaved gate before any file is built. `knowledge/37` §ranking is updated accordingly in
    `registry/next_hypotheses.json:session14_addendum`.
 4. The three cross-cutting findings of the session stand on their own: the far-field attribution
-   (`knowledge/38`), the two harness errata (`knowledge/37` §§7-8), and the confirmation that the
+   (`knowledge/39`), the two harness errata (`knowledge/38` §§7-8), and the confirmation that the
    competition's own band 6 is a radiometric total-count channel that the detector had been silently
    missing.

@@ -695,8 +695,8 @@ created by a parallel session's merge.
 | 1 | G5(b) compared the **post-prune** emission to the **pre-prune** request in `run_h38_1_holdout.py` | the pilot run failed G5 on all 40 cells with a constant-magnitude shortfall; the H37-1 runner checks the packer's own output instead | check `primary_pre`/`incumbent_pre`; store packer, prune and post-prune counts per cell | decade 260–269 |
 | 2 | `G2_promotion` used the fold split **vs the base rule** instead of **vs the incumbent** | `scripts/analyze_h38_1.py` recomputed the incumbent-relative split (3/4, `NW −0.000703`) and it did not match the stored statistic | store both splits; G2 uses the incumbent-relative one as §4 specifies | decade 270–279 |
 | 3 | The variants runner's `reproduction_check` compared `base_d28` (d=2.8) against the probe's `thin_d30` (d=3.0) and printed it as a reproduction error | reading the block while writing the attribution; the two arms are deliberately different | arm-matched pairs (`all_cover_npre`↔`cover_n`, `base_d28`↔`thin_d28`) plus a separately labelled dose diagnostic | none (reporting only) |
-| 4 | `knowledge/39` §3 F4 anchored the instrument to five-seed means with a ±0.004 band | the far-field run landed 0.0059–0.0066 below and voided itself; the probe's own seed-level SD is 0.0080–0.0100, so the difference of two five-seed means has SD ≈ 0.0058 | recorded, not re-run; future freezes must derive the tolerance from the observed seed-level SD (≈ 1.96·s/√n) | decade 220–224 void as a licence |
-| 5 | `knowledge/34`/`35` collided with a parallel session's H37-3 files of the same numbers after the merge | `git diff`/`ls-tree` after merging `origin/main` (`4d5c810`) | renamed to `knowledge/36`–`38` and rewrote all internal cross-references | none |
+| 4 | `knowledge/40` §3 F4 anchored the instrument to five-seed means with a ±0.004 band | the far-field run landed 0.0059–0.0066 below and voided itself; the probe's own seed-level SD is 0.0080–0.0100, so the difference of two five-seed means has SD ≈ 0.0058 | recorded, not re-run; future freezes must derive the tolerance from the observed seed-level SD (≈ 1.96·s/√n) | decade 220–224 void as a licence |
+| 5 | `knowledge/34`/`35` collided with a parallel session's H37-3 files of the same numbers after the merge | `git diff`/`ls-tree` after merging `origin/main` (`4d5c810`) | renamed to `knowledge/37`–`38` and rewrote all internal cross-references | none |
 
 Edge cases exercised: matched-count vs unmatched-count arms (both stored and differenced), post-prune
 count matching between detectors (max per-cell gap `0.222 %`), determinism (a repeated
@@ -706,7 +706,7 @@ in-footprint cells, `NaN` everywhere outside), and a fresh decade for every re-r
 ## Pass 3 — re-check against the original request; improve accuracy, reliability, completeness
 
 * **"3–5 new hypotheses, ranked, each naming layers/signature/off-catalogue rationale/difference, with
-  obtainability checked."** `knowledge/36` (five arms, per-arm data gate checked against official
+  obtainability checked."** `knowledge/37` (five arms, per-arm data gate checked against official
   sources; H38-5's USGS ANSS FDSN endpoint is free, no-auth, public domain but unreachable from the
   sandbox, so it is recorded bridge-gated rather than claimed as available).
 * **"Validate the top candidate on the spatially-blocked holdout before spending a weekly slot."**
@@ -722,7 +722,7 @@ in-footprint cells, `NaN` everywhere outside), and a fresh decade for every re-r
   rebuilt from JSON (`scripts/build_site.py`, 0 external requests) with the irregularity count updated;
   the one-click file, its SHA-256 and its note are unchanged, and the verification suite still passes
   `208/208` (`evidence/submission_file_audit.json`).
-* **"Knowledge from official verified sources stored for reuse."** `knowledge/36`–`41`; the band-identity
+* **"Knowledge from official verified sources stored for reuse."** `knowledge/37`–`41`; the band-identity
   audit is stored as a measurement (Spearman `1.0000` in-footprint, `0.999` over the full extent) with
   its trend-confound caveat for the other bands.
 * **"Flag irregularities."** Six new/updated entries this session (83 total).

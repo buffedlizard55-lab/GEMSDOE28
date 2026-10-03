@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """LOSFO far-field test of the H38-1 radiometric information (D1) against the frozen detector (D0).
 
-Protocol frozen in ``knowledge/39_preregistration_H38-1_farfield.md`` **before** this file was executed.
-It is the transfer test that ``knowledge/37`` section 5 requires before any H38-1 artifact may be built,
+Protocol frozen in ``knowledge/40_preregistration_H38-1_farfield.md`` **before** this file was executed.
+It is the transfer test that ``knowledge/38`` section 5 requires before any H38-1 artifact may be built,
 and it is the same instrument as ``scripts/run_losfo_cover_probe.py``: leave-fault-system-out folds, a
 600 m label buffer, per-cell crops, identical hyper-parameters.
 
@@ -50,7 +50,7 @@ THIN_D_REF = 2.8
 ARMS = ["thin_d28_D0", "cover_n_D0", "thin_d28_D1", "cover_matched_D1", "cover_n_D1"]
 PRIMARY = "cover_matched_D1"
 REFERENCE = "cover_n_D0"
-#: Probe means this run's D0 arms must reproduce within +/- 0.004 (knowledge/39 section 3, F4).
+#: Probe means this run's D0 arms must reproduce within +/- 0.004 (knowledge/40 section 3, F4).
 PROBE_COVER_N_MEAN = 0.11163472693767611
 PROBE_THIN_D28_MEAN = 0.10647630400243077
 F4_TOLERANCE = 0.004
@@ -250,8 +250,8 @@ def main() -> int:
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "kind": ("MEASUREMENT, NOT A SUBMISSION DECISION. Far-field (>= 600 m label-buffer) paired test "
                  "of the H38-1 radiometric information at matched dot count."),
-        "preregistration": "knowledge/39_preregistration_H38-1_farfield.md",
-        "hypothesis_set": "knowledge/36_hypotheses_session14.md",
+        "preregistration": "knowledge/40_preregistration_H38-1_farfield.md",
+        "hypothesis_set": "knowledge/37_hypotheses_session14.md",
         "gate": "evidence/h38_1_holdout.json",
         "protocol": "src/gems27/losfo.py (leave-fault-system-out, 600 m label buffer)",
         "seeds": seeds, "meta": meta, "extra_bands": RAD_EXTRA_BANDS,

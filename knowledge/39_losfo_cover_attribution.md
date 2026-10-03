@@ -126,5 +126,5 @@ The two facts this run establishes are independent and both matter:
 
 Together that says the far-field ceiling is set by the detector's *credit density per dot*, not by the
 packer — which is exactly the reason the session's forward work now moves to adding **new physical
-measurements** to the detector (see `knowledge/36_hypotheses_session14.md`) rather than to further
+measurements** to the detector (see `knowledge/37_hypotheses_session14.md`) rather than to further
 re-arranging the dots it already emits.

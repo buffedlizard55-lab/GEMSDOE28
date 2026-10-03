@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """H38-1 frozen gate: radiometric alteration information recovery (GeoDAWN K, Th, U + Th/K, U/K, U/Th).
 
-Protocol frozen in ``knowledge/37_preregistration_H38-1.md`` **before** this file was executed. Fresh
+Protocol frozen in ``knowledge/38_preregistration_H38-1.md`` **before** this file was executed. Fresh
 hypothesis-gate decade 260-269. Every other component - the HistGradientBoosting detector, the
 quadrant folds, the 600 m buffer, ``PRE_THIN_FRAC``, ``ridge_nms``, the rung-3.0 budget, the
 ``H27-4`` blind 1-px catalogue-flank prune and the coverage packing rule - is byte-identical to
@@ -48,7 +48,7 @@ PROMOTION_MARGIN = 0.0005
 CONTROL_SEED_BASE = 991_000
 THIN_D_REF = 2.8
 RUNG30 = 3.0
-#: (raster, 1-based band index, name) - exactly the six channels frozen in knowledge/37 section 2.
+#: (raster, 1-based band index, name) - exactly the six channels frozen in knowledge/38 section 2.
 RAD_EXTRA_BANDS = [
     ("rad", 1, "rad_K"), ("rad", 2, "rad_Th"), ("rad", 3, "rad_U"),
     ("ext", 1, "ext_ThK"), ("ext", 2, "ext_UK"), ("ext", 3, "ext_UTh"),
@@ -185,7 +185,7 @@ def main() -> int:
             variants = {k_: v & active for k_, v in variants.items()}
 
             # ---- G5 integrity, per cell, before any metric is read -------------------------------
-            # ERRATUM (2026-10-03, disclosed in knowledge/37 section 7): the pilot run tested the
+            # ERRATUM (2026-10-03, disclosed in knowledge/38 section 7): the pilot run tested the
             # POST-prune mask against n_pre0, which cannot hold because the arm definition applies the
             # H27-4 blind_r1 prune *after* packing. The check below mirrors the H37-1 gate
             # (run_h37_1_holdout.py line 146): the packer's own output must hit the requested count
@@ -263,8 +263,8 @@ def main() -> int:
     gate = {
         "G1_direction_vs_incumbent": bool(g1 > 0),
         "G1_observed": float(g1),
-        # G2 uses the incumbent-relative fold statistic, as knowledge/37 section 4 specifies. The
-        # 270-279 run used the base-relative one (erratum 2, knowledge/37 section 8); both are stored.
+        # G2 uses the incumbent-relative fold statistic, as knowledge/38 section 4 specifies. The
+        # 270-279 run used the base-relative one (erratum 2, knowledge/38 section 8); both are stored.
         "G2_promotion": bool(g1 >= PROMOTION_MARGIN
                              and summary[PRIMARY]["seeds_won_vs_incumbent"] >= 8
                              and summary[PRIMARY]["folds_improved_vs_incumbent"] == 4),
@@ -292,7 +292,7 @@ def main() -> int:
         "hypothesis": ("H38-1: adding the GeoDAWN radiometric channels K, Th, U and the Th/K, U/K, U/Th "
                        "ratio grids to the 32-band detector changes the emission - gate on the "
                        "spatially blocked interleaved holdout at matched dot count"),
-        "preregistration": "knowledge/37_preregistration_H38-1.md",
+        "preregistration": "knowledge/38_preregistration_H38-1.md",
         "seeds": seeds,
         "n_cells": len(cells),
         "base_d280_mean_dti": base_mean,

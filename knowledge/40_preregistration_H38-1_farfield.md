@@ -1,10 +1,10 @@
 # Preregistration — H38-1 far-field test (frozen before the run)
 
 **Written before `scripts/run_losfo_rad_farfield.py` is executed, and before `evidence/h38_1_holdout.json`
-(seeds `270-279`) has been read.** This is the transfer test that `knowledge/37` §5 makes mandatory before
+(seeds `270-279`) has been read.** This is the transfer test that `knowledge/38` §5 makes mandatory before
 any H38-1 artifact may be built, and it exists because of the standing lesson of this repository:
 `knowledge/33` showed that an interleaved-proxy gain of `+0.007289` collapsed to `-0.000037` far field.
-The hypothesis set and the gate live in `knowledge/36` and `knowledge/37`.
+The hypothesis set and the gate live in `knowledge/37` and `knowledge/38`.
 
 > **Question.** When the detector never sees a positive label within 600 m of the evaluated truth, does
 > adding the six GeoDAWN radiometric channels change the emission's DTI — and in which direction?
@@ -21,7 +21,7 @@ The hypothesis set and the gate live in `knowledge/36` and `knowledge/37`.
   * **D0** — the frozen 32-band matrix (`data/prepared/features.npy`).
   * **D1** — the same matrix plus the six channels `rad_K`, `rad_Th`, `rad_U`, `ext_ThK`, `ext_UK`,
     `ext_UTh`, gathered in row-major footprint order, `NaN` outside the footprint and where the u8
-    grids are 0 — byte-for-byte the loader frozen in `knowledge/37` §2.
+    grids are 0 — byte-for-byte the loader frozen in `knowledge/38` §2.
 * `ridge_nms(sigma=1.0)`, `PRE_THIN_FRAC=0.0245`, `RUNG30=3.0`, `THIN_D_REF=2.8`.
 
 ## 2. Arms (per cell; all masked to `active = fold_mask & ~known`)
@@ -36,7 +36,7 @@ The hypothesis set and the gate live in `knowledge/36` and `knowledge/37`.
 
 `n_pre_D0` / `n_pre_D1` are the `dot_thin(pool, 3.0)` counts of each detector's own top-k pool. The
 primary is **count-matched to the D0 arm** (`n_pre_D0`), so it isolates *information*, not budget —
-the same discipline that `knowledge/38` had to reconstruct for the H37-1 far-field arms.
+the same discipline that `knowledge/39` had to reconstruct for the H37-1 far-field arms.
 
 ## 3. Frozen criteria
 
@@ -62,7 +62,7 @@ the same discipline that `knowledge/38` had to reconstruct for the H37-1 far-fie
   rule is that a slot requires beating the current holdout best, and the owner chooses the week.
 * **F1 < 0** → the information is proxy-only. No D1-based file may be built or listed; the arm is
   recorded as a far-field regression of size `F1`, exactly as H37-1 was, and the hypotheses set returns
-  to `knowledge/36` with H38-4/H38-3 next in the ranking.
+  to `knowledge/37` with H38-4/H38-3 next in the ranking.
 * **F4 fails** → void run; fix and re-freeze on a fresh decade before reading any F1 value.
 * This run cannot show *why* the channels help or hurt: K, U and Th respond to bedrock-versus-alluvium
   as much as to hydrothermal alteration, and both detectors see the same catalogue. A non-negative F1

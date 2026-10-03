@@ -3,20 +3,20 @@
 **Verdict on the frozen gate.** On the gated fresh decade `280-289`,
 `evidence/h38_1_holdout.json`, the radiometric-augmented detector's coverage emission beats the frozen
 detector's at matched count by **+0.002869** mean ΔDTI, **9/10 seeds** and **4/4 folds** positive, with
-the content-blind control `0.054841` below it — every criterion of `knowledge/37` §4 passes, and both
-harness defects found on the way are disclosed and fixed (errata 1 and 2, `knowledge/37` §§7-8).
+the content-blind control `0.054841` below it — every criterion of `knowledge/38` §4 passes, and both
+harness defects found on the way are disclosed and fixed (errata 1 and 2, `knowledge/38` §§7-8).
 
 Independently re-read by `scripts/analyze_h38_1.py` →
 `evidence/h38_1_holdout_analysis.json`: every DTI recomputes from the stored `tp`/`fp`/`n_truth`
 with max error `0.0`, every count identity holds, and all six stored gate statistics match.
 
-> **This is a candidate, not a submission — and the far-field test has now run.** `knowledge/37` §5
-> makes a frozen LOSFO transfer test mandatory first; that test is `knowledge/39` /
+> **This is a candidate, not a submission — and the far-field test has now run.** `knowledge/38` §5
+> makes a frozen LOSFO transfer test mandatory first; that test is `knowledge/40` /
 > `scripts/run_losfo_rad_farfield.py`, seeds `220-224`. **Result: no transfer licence** — the
 > count-matched far-field effect is `+0.000959` with a 95 % interval of `±0.004469` (2/5 seeds, 2/4
 > folds, 4/20 cells below `−0.005`), i.e. unresolved and at best neutral, while the run's own
 > reproduction guard-rail F4 fired for a reason that turned out to be a mis-calibrated tolerance in the
-> preregistration (see `knowledge/41`). **No artifact was built, nothing was re-slotted, and no weekly
+> preregistration (see `knowledge/42`). **No artifact was built, nothing was re-slotted, and no weekly
 > slot was spent.**
 
 ## 1. What was added
@@ -29,7 +29,7 @@ unavailable to the detector:
 | `rad_K`, `rad_Th`, `rad_U` | `geodawn_rad_u8.tif` bands 1-3 | equivalent uranium/thorium and potassium concentrations, GeoDAWN (USGS + DOE/GTO) airborne survey |
 | `ext_ThK`, `ext_UK`, `ext_UTh` | `geodawn_extensions_u8.tif` bands 1-3 | the standard ratio grids used in alteration mapping |
 
-Excluded with measured reasons (frozen in `knowledge/37` §2, re-verified this session): `TMI_up150`
+Excluded with measured reasons (frozen in `knowledge/38` §2, re-verified this session): `TMI_up150`
 (rank `+0.984`–`+0.998` with in-stack `tmi`), `rad_TC` (rank `+1.000` with the mislabelled training
 band 6 `tc`, itself excluded). A full band-identity audit against all eight GeoDAWN channels found
 **no other** near-duplicate: every other training band sits at the trend background (`0.90-0.93`)
@@ -79,16 +79,16 @@ protocol exists to prevent.
 * **It does not say** the channels map *alteration*. K, U and Th respond to bedrock-versus-alluvium,
   elevation and survey-line geometry as much as to hydrothermal alteration; the detector is a
   tree ensemble over 38 bands and the gate cannot attribute the gain to the K-anomaly mechanism. This
-  is an information result, not a mechanism result (frozen in `knowledge/37` §6).
+  is an information result, not a mechanism result (frozen in `knowledge/38` §6).
 * **It does not say** anything about off-catalogue transfer, the live scoring population, or the weekly
-  slot. That is the pending LOSFO test (`knowledge/39`).
+  slot. That is the pending LOSFO test (`knowledge/40`).
 * It does not reopen the H37-1 question: the incumbent `cover_r1` here is the D0 detector's coverage
   emission, and its `+0.009610` over `base_d280` on this decade is the same proxy-favoured construction
-  `knowledge/38` dissects. The comparison that matters is D1-vs-D0 at matched count on the same rule.
+  `knowledge/39` dissects. The comparison that matters is D1-vs-D0 at matched count on the same rule.
 
 ## 5. Postscript — status after the far-field run (2026-10-03)
 
-`knowledge/41_h38_1_farfield_result.md` records the transfer test in full. The status of this arm is
+`knowledge/42_h38_1_farfield_result.md` records the transfer test in full. The status of this arm is
 therefore: **interleaved gate passed (G1-G5 on seeds 280-289), far-field transfer unresolved, no file
 built, no promotion, no slot.** The interleaved gain is real under its own protocol and the F1 interval
 is 1.5x its size, so the correct next move is a *larger* far-field decade (>= 10 seeds) if the owner
