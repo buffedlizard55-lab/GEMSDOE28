@@ -12,10 +12,10 @@ from pathlib import Path
 
 import numpy as np
 import pytest
-from scipy.ndimage import distance_transform_edt
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gems27 import metric, operating_point as op, thinning  # noqa: E402
+from gems27 import metric  # noqa: E402
+from gems27 import operating_point as op
 
 
 def _straight_ridge(length: int = 601, width: int = 41) -> np.ndarray:

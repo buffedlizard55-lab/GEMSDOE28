@@ -26,7 +26,8 @@ import numpy as np
 import rasterio
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gems27 import grid, metric, operating_point as opmod, paths, thinning  # noqa: E402
+from gems27 import grid, metric, paths  # noqa: E402
+from gems27 import operating_point as opmod
 
 BETA = 0.8   # false-negative weight in the official metric (src/gems27/metric.py)
 ALPHA = 0.2  # false-positive weight
