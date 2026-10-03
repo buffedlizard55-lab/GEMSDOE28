@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checked_utc": "2026-10-03T14:54:23Z",
+  "checked_utc": "2026-10-03T14:55:44Z",
   "status": "PASS",
   "scope": "local repository evidence only; cannot rule out undocumented seed use in unsearched external/sibling workspaces",
   "network_access": "none",
@@ -14,11 +14,11 @@
   "git_history_review": {
     "shallow": true,
     "recent_commits": [
+      "a39087b8bc8e9841e5ffd250c9e5abb3b59f78ec Record failed H31-1 Euler screen and stop arm",
       "2df569c8492ede6a93b6a56b66e64ac3bea0991c Record pre-fit CI and refresh H31 seed audit",
       "92d2e53076144fe74d6ac87171abb98f75b78993 Validate H31 evidence before rendering status",
       "d811897f8fd42381c0a2e6a1bd281f237af4f251 Keep Pages evidence and workflow status current",
-      "cf698719fe6777e034469c8d44ce091c93dba010 Build auditable GEMS research and submission workflow",
-      "524bf277e7b5487bfea1982d2a352c9f0802c0e0 protocol: preregister H31-1 Euler holdout"
+      "cf698719fe6777e034469c8d44ce091c93dba010 Build auditable GEMS research and submission workflow"
     ]
   },
   "planned_ranges": {
@@ -313,5 +313,5 @@
   "unreadable_evidence_json": [],
   "invalid_stage_records": [],
   "decision": "Seeds 160-169 are reserved for one frozen screen; 170-179 are confirmation-only after an unchanged passing screen.",
-  "sha256": "e3fb3d15ee6d997d092d494dc0bba2773586827db78949e6e52995d6e92316dc"
+  "sha256": "289d0e5fa590638cac3c52729d468d303a426690362c6b35735437dddd49692c"
 }
