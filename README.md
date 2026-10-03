@@ -718,6 +718,7 @@ Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `eviden
 ## 5. Candidate Geological Hypotheses
 
 **Current ledger: `knowledge/31_hypotheses_session13.md` (Session 13)** — five ranked arms, each naming
+- **Session 13 close-out (deliverables, three passes, limitations, AI-use disclosure):** `knowledge/36_session13_closeout.md`.
 its layers, physical signature, why it catches a fault *missing* from the catalogue rather than one
 already in it, and how it differs from everything already implemented, plus a per-claim obtainability
 ledger. It supersedes `knowledge/23_h35_hypotheses.md` (Session 11) for ranking; the H35 results
