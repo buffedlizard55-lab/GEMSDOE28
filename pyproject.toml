@@ -18,3 +18,7 @@ ignore = ["E741", "E501", "B905"]
 
 [tool.ruff.lint.per-file-ignores]
 "scripts/make_figures.py" = ["E702"]
+# Frozen evidence-producing runner. `evidence/h35_1_thermal_farfield.json` records this file's
+# SHA-256, so it must stay byte-identical to the version that produced the result; the B007 here is a
+# deliberately unused loop label, and editing the file to silence it would invalidate the provenance.
+"scripts/run_h35_1_thermal_farfield.py" = ["B007"]
