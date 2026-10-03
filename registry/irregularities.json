@@ -294,6 +294,12 @@
       "severity": "low",
       "issue": "H33-1 (slip/dilation tendency shapefile), H33-2 (five MT conductance GeoTIFFs) and H33-3 (heat-flow zip) depend on USGS ScienceBase files that are LISTED on official item pages (verified 2026-10-03 with file names and sizes) but not yet byte-downloaded, because this sandbox cannot reach sciencebase.gov.",
       "action": "Byte-level availability probes added to scripts/fetch_external_layers.py (SCIENCEBASE_CHECKS); the push-triggered runner workflow will record results in evidence/external_layer_inventory.json after merge. No holdout seed may be spent on these arms until the probes report AVAILABILITY_FETCHED."
+    },
+    {
+      "id": "source-feed-legacy-history-shape",
+      "severity": "low",
+      "issue": "Every 'feed' CI job on arena/** pushes has failed since the legacy docs/data/feed_history.json landed: the file is a flat list of change events, while scripts/refresh_source_feed.py expected a {'runs': [...]} dict (AttributeError: 'list' object has no attribute 'setdefault'). Verified by reproducing locally and by the identical failures on the three prior session branches.",
+      "action": "Fixed in session 9: the script now migrates the legacy list to {'legacy_events': [...], 'runs': [...]} preserving all prior events. The push-triggered source-feed workflow will regenerate the feed on the runner after this lands."
     }
   ]
 }
