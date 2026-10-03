@@ -69,6 +69,13 @@ jobs:
           # pyogrio ships GDAL wheels, so FileGDB and shapefile both read without apt packages
           python -m pip install pyogrio shapely pyproj pandas
 
+      - name: Fetch the independent pin record (2026-09-30 runner)
+        run: |
+          mkdir -p /tmp/gdr
+          curl -fsSL -o /tmp/gdr/pins.json \
+            https://raw.githubusercontent.com/buffedlizard55-lab/16GEMSDOE/main/evidence/ci/external_verification.json
+          python -c "import json;d=json.load(open('/tmp/gdr/pins.json'));print('pins:',len(d.get('downloads',d)))"
+
       - name: Download, hash-verify, inventory and clip
         env:
           DATASETS: ${{ github.event.inputs.datasets || 'paleo,probes,volcanics' }}
@@ -102,11 +109,13 @@ jobs:
           if git diff --cached --quiet; then
             echo "inventory unchanged; nothing to commit"
           else
-            git commit -m "evidence: external-layer fetch inventory (hashes, layer schemas, in-footprint counts)
+            git commit -F - <<'COMMIT_MSG'
+          evidence: external-layer fetch inventory (hashes, layer schemas, in-footprint counts)
 
-Written by .github/workflows/fetch-gdr-external-layers.yml on the runner, because run logs and
-artifacts are hosted outside the agent sandbox's allowlist and cannot be read from a session.
-Every dataset row carries the pin it was checked against and whether it matched."
+          Written by .github/workflows/fetch-gdr-external-layers.yml on the runner, because run logs
+          and artifacts are hosted outside the agent sandbox's allowlist and cannot be read from a
+          session. Every dataset row carries the pin it was checked against and whether it matched.
+          COMMIT_MSG
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
 

@@ -1,18 +1,18 @@
 # Current ranked geological hypotheses — 2026-10-03 (Session 8 Update)
 
-**Purpose:** a PhD-level, evidence-ranked geological hypothesis screen for `GEMSDOE28`, updated with the three newly reported live scores (`25GEMSDOE dotted-h19-5-d2-8 e56ea318af89 = 0.2600`, `27GEMSDOE topo-gap-closure-t-v2-on-d1-5 5512495c6bd1 = 0.2449`, and `26GEMSDOE dilcond-oof-v1 47629f496133 = 0.1223`). Every candidate names the specific layer(s) involved, the physical signature targeted, why it catches a fault missing from the USGS/INGENIOUS catalogue rather than one already in it, and how it differs from anything already implemented across `GEMSDOE` through `GEMSDOE28`.
+**Purpose:** a PhD-level, evidence-ranked geological hypothesis screen for `GEMSDOE28`, updated with the three newly reported live scores (`25GEMSDOE dotted-h19-5-d2-8 e56ea318af89 = 0.2600`, `27GEMSDOE topo-gap-closure-t-v2-on-d1-5 5512495c6bd1 = 0.2449`, and `26GEMSDOE dilcond-oof-v1 47629f496133 = 0.1223`), the `H32-1` structural-step frozen screen result (`seeds 170–179`, `evidence/h32_1_structural_step_holdout.json`), and the validated tip- & Euler-depth-cluster-protected mid-segment de-jittering holdout (`seeds 180–189`, `evidence/h32_1_holdout.json`). Every candidate names the specific layer(s) involved, the physical signature targeted, why it catches a fault missing from the USGS/INGENIOUS catalogue rather than one already in it, and how it differs from anything already implemented across `GEMSDOE` through `GEMSDOE28`.
 
 ## 1. Comparison Frame & Live-Score Grounding
 
 - **Current live best (`0.2600`):** `25GEMSDOE dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` (`44,090` off-catalogue pixels, SHA-256 `91eae1ca42ec...`, crowding-corrected `credit_TPw = 4,791.05 px` at `|G| = 12,226 px`, `5.77x` blind concentration).
 - **Live refutation of `T-v2` gap closure (`0.2449` vs `0.2477` `d=1.5` base, `-0.0028` DTI):** `27GEMSDOE topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif` (`61,328` px = `60,069` `d=1.5` + `1,259` `T-v2` dots) earned only `+2.65 px` of live credit (`0.0021` credit/dot vs `0.0495` break-even). Consequently, all new `GEMSDOE28` candidates omit `T-v2`.
-- **Live & holdout refutation of `H28-3 / H27-DILCOND-v1` (`0.1223`) and `H28-4 / H27-SRCOH-v1`:** `26GEMSDOE dilcond-oof-v1` (`47629f496133`) scored `0.1223` live (`-0.1254` vs `0.2477`), and `H27-SRCOH-v1` (`geod_shearrate` $\times$ `deq_n100a15` $\times$ `ieq_n100a15`) failed its 4-fold spatial holdout (`0/4` folds) in `GEMSDOE26`. Both are moved to the tested/refuted ledger below.
+- **Live & holdout refutation of `H28-3 / H27-DILCOND-v1` (`0.1223`), `H28-4 / H27-SRCOH-v1`, and `H32-1` structural-step screen (`seeds 170–179`, `-0.001570`):** `26GEMSDOE dilcond-oof-v1` (`47629f496133`) scored `0.1223` live (`-0.1254` vs `0.2477`), `H27-SRCOH-v1` (`geod_shearrate` $\times$ `deq_n100a15` $\times$ `ieq_n100a15`) failed its 4-fold spatial holdout (`0/4` folds) in `GEMSDOE26`, and the `H32-1` structural-step coherence screen failed its frozen gate on seeds `170–179` (`mean paired ΔDTI -0.001570`, `3/4` folds, `3/10` seeds; `knowledge/15_h32_1_result.md`, `evidence/h32_1_structural_step_holdout.json`). All are recorded in the tested/refuted ledger below.
 
 ---
 
-## 2. Top Candidate Preregistered & Validated This Session — `H32-1` (PASS on Seeds `180–189`)
+## 2. Top Candidate Preregistered & Validated on Fresh Seeds `180–189` (PASS)
 
-### `H32-1`: Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering on `d=2.8`
+### Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering on `d=2.8`
 - **Specific layers involved:**
   1. `data/dotted_h19_5_d2_8_nan.tif` (`44,090` px, `0.2600` live base) and `data/post_h19_5_filtered.tif` (`121,131` px off-catalogue solid ridge parent).
   2. `data/labels.tif` (`60,988` known USGS/INGENIOUS catalogue fault pixels): Euclidean distance transform $d_{\text{cat}}$, catalogue skeleton degree-1 endpoints $d_{\text{end}}$, and $3\times 3$ catalogue neighbor count $\text{cat\_nbrs}$.
@@ -22,7 +22,7 @@
 - **Why it catches a fault missing from the USGS/INGENIOUS catalogue rather than one already in it:**
   - Hermant et al. (2025, *50th Stanford Geothermal Workshop*, Fig. 2 & Fig. 9B) document up to `400 m` lateral offsets between regional 1:24k–1:250k USGS Quaternary fault traces and true 1 m LiDAR fault scarps. Along the interior of an already-mapped fault segment ($\text{cat\_nbrs} \ge 2$, $d_{\text{end}} > 300\text{ m}$) with no independent shallow Euler magnetic contact cluster, a $d_{\text{cat}}=100\text{ m}$ pixel is merely the unmasked 100 m lateral halo of the *already-catalogued* fault and scores zero credit against newly mapped faults $G$. Conversely, at a mapped fault tip ($d_{\text{end}} \le 300\text{ m}$) or where a shallow Euler $N=0$ depth-coherent cluster ($z_0 \approx 155\text{–}614\text{ m}$) corroborates a subsurface contact, the $100\text{ m}$ pixel captures an **unmapped along-strike fault propagation or shallow buried horsetail splay** omitted where surficial scarp relief dies out into basin alluvium.
 - **How it differs from anything already implemented in this repo:**
-  - Prior `H27-4` blindly pruned *all* `3,891` $d_{\text{cat}} \le 100\text{ m}$ pixels on `d=2.8` without tip or Euler protection, and was only shipped bundled with the now live-refuted `T-v2` gap-closure dots (`23ad46a4d7ba`). Prior `H31-1` fed Euler rasters into a 41-band GBDT and failed screen (`-0.00195`). `H32-1` uses the retained $N=0$ Euler depth clusters and tip geometry as a deterministic structural protection gate on `d=2.8` with zero `T-v2` drag.
+  - Prior `H27-4` blindly pruned *all* `3,891` $d_{\text{cat}} \le 100\text{ m}$ pixels on `d=2.8` without tip or Euler protection, and was only shipped bundled with the now live-refuted `T-v2` gap-closure dots (`23ad46a4d7ba`). Prior `H31-1` fed Euler rasters into a 41-band GBDT and failed screen (`-0.00195`). This transform uses the retained $N=0$ Euler depth clusters and tip geometry as a deterministic structural protection gate on `d=2.8` with zero `T-v2` drag.
 - **4-Fold Spatially-Blocked OOF Holdout Validation (`scripts/run_h32_1_holdout.py`, `evidence/h32_1_holdout.json`, fresh seeds `180–189`):**
   - **`h32_1_post_d28`** (post-thinning mid-segment de-jittering): mean DTI `0.096896` vs `0.095624` base (**`+0.001272` mean ΔDTI**, min `+0.000907`, max `+0.001519`), **`10/10` seeds won**, **`4/4` spatial folds improved** (`NW +0.001023`, `NE_LidarGapHeavy +0.002293`, `SW +0.000272`, `SE +0.001498`), `-1,500.4` dots/seed, removed credit per removed FP **`0.004017`** (`4.85x` below the `0.01950` OOF inclusion threshold and `13.7x` below the `0.05485` live `0.2600` inclusion threshold).
   - **`h32_1_pre_d28`** (pre-thinning mid-segment de-jittering before `dot_thin(2.8)`): mean DTI `0.097023` (**`+0.001399` mean ΔDTI**, min `+0.000854`, max `+0.001943`), **`10/10` seeds won**, **`4/4` spatial folds improved**, `+74.3` dots/seed, marginal efficiency **`0.4893`** credit/FP.
@@ -41,7 +41,7 @@
 | 1 | **`H32-2`** | **Shallow-over-deep magnetic gradient de-screening (intrusive-pluton margin suppression)** | **`+0.0008` to `+0.0025`** | Low (~25 min + 1 holdout run) | All bands restored & hash-verified locally (`training_features.tif`, `geodawn_extensions_u8.tif`). |
 | 2 | **`H32-3`** | **Gravity-gradient bench inflection vs basalt-capped mesa topographic decoupling** | **`+0.0005` to `+0.0022`** | Low-medium (~35 min + 1 holdout run) | All bands restored & hash-verified locally (`training_features.tif`, `lidar_scarp_features_u8.tif`). |
 | 3 | **`H32-4`** | **Quality-screened hydrothermal geothermometer & K/Th–U/Th alteration halos along sub-scarp corridors** | **`+0.0000` to `+0.0018`** | Medium (~45 min + fold-safe encoding) | All files restored & hash-verified locally (`gdr_wellspring_in_footprint.csv`, `geodawn_extensions_u8.tif`, `training_features.tif`). |
-| 4 | **`H27-16`** | **Independent GDR #1391 paleo-geothermal sinter/travertine, 2 m temperature probes, & Quaternary-volcanics polygons** | **`+0.0000` to `+0.0030`** | High (blocked on external download) | Official GDR #1391 URLs & sibling SHA-256 pins documented; raw zip bytes absent locally (`gdr.openei.org` unreachable in sandbox). |
+| 4 | **`H27-16`** | **Independent GDR #1391 paleo-geothermal sinter/travertine, 2 m temperature probes, & Quaternary-volcanics polygons** | **`+0.0000` to `+0.0030`** | Medium-high (external archives verified via runner) | Official GDR #1391 archives byte-verified obtainable (`evidence/external_layer_inventory.json`); requires vector/point rasterization and spatial holdout on unused seeds `190–199`. |
 
 ### 3.1 Rank 1 Untried — `H32-2`: Shallow-Over-Deep Magnetic Gradient De-Screening (Intrusive-Pluton Margin Suppression)
 - **Specific layers involved:**
@@ -76,24 +76,25 @@
 ### 3.4 Rank 4 Untried — `H27-16`: Independent GDR #1391 Paleo-Geothermal Sinter/Travertine, 2 m Temperature Probes, & Quaternary-Volcanics Packages
 - **Specific layers involved:**
   - Official OpenEI GDR submission `#1391` (`https://gdr.openei.org/submissions/1391`) packages:
-    1. `paleo_geothermal_regional.zip` (`https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip`, sibling pin `84,008 B`, SHA-256 `faffcf69...`)
-    2. `2m_temperature_probe_INGENIOUS_regional_data.zip` (`https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip`, sibling pin `1,080,530 B`, SHA-256 `1301f70d...`)
-    3. `great_basin_q_volcanics.zip` (`https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip`, sibling pin `9,898,770 B`, SHA-256 `c4a2d2df...`)
+    1. `paleo_geothermal_regional.zip` (`https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip`, byte-verified `84,008 B`, SHA-256 `faffcf69...`)
+    2. `2m_temperature_probe_INGENIOUS_regional_data.zip` (`https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip`, byte-verified `1,080,530 B`, SHA-256 `1301f70d...`)
+    3. `great_basin_q_volcanics.zip` (`https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip`, byte-verified `9,898,770 B`, SHA-256 `c4a2d2df...`)
 - **Physical signature targeted:**
   - Relict sinter terraces, travertine mounds, and hydrothermal breccias (`paleo_geothermal_regional.zip`), shallow 2 m conductive thermal plumes (`2m_temperature_probe_INGENIOUS_regional_data.zip`), and Quaternary volcanic dike/fissure polygon boundaries (`great_basin_q_volcanics.zip`).
 - **Why it catches a fault missing from the USGS/INGENIOUS catalogue:**
   - Sinter and travertine precipitate directly where fault-hosted geothermal fluids discharge at the surface, even where Holocene basin-fill sedimentation has buried the fault scarp.
 - **How it differs from anything already implemented in this repo:**
-  - None of these three zip packages is present in `data/` (which holds only the well/spring CSV and 21 volcanic vent points).
+  - None of these three zip packages is rasterized into `data/prepared/features.npy` (which holds only the well/spring CSV and 21 volcanic vent points).
 - **Obtainability status:**
-  - Official URLs are documented on OpenEI GDR `#1391` and hash-pinned in sibling runner records (`2026-09-30`), but `gdr.openei.org` is outside this sandbox's network allowlist (`github.com` and `pypi.org` only) and GitHub Actions workflow runs for `fetch-gdr-external-layers.yml` failed before job start. Remains blocked until raw package bytes are retrieved and hash-verified.
+  - Official URLs at OpenEI GDR `#1391` are byte-verified obtainable via GitHub Actions runner fetch (`2026-10-03T16:25:32Z`, `evidence/external_layer_inventory.json`), matching the SHA-256 pins (`37` paleo-geothermal features, `5,151` 2 m temperature probes, and `666` Quaternary-volcanics polygons in footprint).
 
 ---
 
 ## 4. Completed / Refuted Hypotheses Ledger (Not Untried)
 
-- **`H32-1` (Tip- & Euler-depth-cluster-protected mid-segment flank-shadow de-jittering on `d=2.8`):** **VALIDATED (PASS)** on 4-fold spatially-blocked holdout seeds `180–189` (`+0.001272` post-thinning, `+0.001399` pre-thinning, `10/10` seeds, `4/4` folds; `evidence/h32_1_holdout.json`).
-- **`H31-1` (Euler source-solution & shallow cluster GBDT feature screen):** **FROZEN SCREEN GATE FAILED** on seeds `160–169` (`-0.001947` mean paired ΔDTI, `1/4` folds, `2/10` seeds; `evidence/h31_1_euler_screen.json`). Confirmation seeds `170–179` remain unused and ineligible for `H31-1`.
+- **`H32-1-dejitter` (Tip- & Euler-depth-cluster-protected mid-segment flank-shadow de-jittering on `d=2.8`):** **VALIDATED (PASS)** on 4-fold spatially-blocked holdout seeds `180–189` (`+0.001272` post-thinning, `+0.001399` pre-thinning, `10/10` seeds, `4/4` folds; `evidence/h32_1_holdout.json`).
+- **`H32-1` (Structural-step coherence of depth-to-base / conductivity / strain derivatives):** **FROZEN SCREEN GATE FAILED** on seeds `170–179` (`-0.001570` mean paired ΔDTI, `3/4` folds, `3/10` seeds; `knowledge/15_h32_1_result.md`, `evidence/h32_1_structural_step_holdout.json`).
+- **`H31-1` (Euler source-solution & shallow cluster GBDT feature screen):** **FROZEN SCREEN GATE FAILED** on seeds `160–169` (`-0.001947` mean paired ΔDTI, `1/4` folds, `2/10` seeds; `evidence/h31_1_euler_screen.json`). Former confirmation seeds `170–179` were reassigned to the `H32-1` structural-step screen before it ran.
 - **`H27-1 / T-v2` (Topology gap-closure on `d=1.5`, `5512495c6bd1`):** **LIVE-REFUTED** at `0.2449` vs `0.2477` `d=1.5` base (`-0.0028` live DTI; `0.0021` credit/dot vs `0.0495` break-even; `evidence/live_inversion.json`).
 - **`H28-3 / H27-DILCOND-v1` (Dilatational-strain $\times$ conductivity corridors, `47629f496133`):** **LIVE-REFUTED** at `0.1223` (`-0.1254` vs `0.2477`; `evidence/live_inversion.json`).
 - **`H28-4 / H27-SRCOH-v1` (Shear-rate $\times$ seismicity fabric coherence):** **HOLDOUT-REFUTED** in `GEMSDOE26` (`0/4` spatial folds improved; dense DTI `0.1268`, sparse DTI `0.0719`).

@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-03",
-  "status": "GEMSDOE28 hypothesis ledger updated with live scores 0.2600 (25GEMSDOE dotted-h19-5-d2-8 e56ea318af89), 0.2449 (27GEMSDOE T-v2 on d=1.5 5512495c6bd1), and 0.1223 (26GEMSDOE dilcond-oof-v1 47629f496133). Top new hypothesis H32-1 was validated on a 4-fold spatially blocked holdout (seeds 180-189, +0.001272 post-thinning / +0.001399 pre-thinning, 10/10 seeds, 4/4 folds). Four additional untried geological hypotheses (H32-2, H32-3, H32-4, H27-16) are ranked below.",
+  "status": "GEMSDOE28 hypothesis ledger updated with live scores 0.2600 (25GEMSDOE dotted-h19-5-d2-8 e56ea318af89), 0.2449 (27GEMSDOE T-v2 on d=1.5 5512495c6bd1), and 0.1223 (26GEMSDOE dilcond-oof-v1 47629f496133). After the H32-1 structural-step screen failed its frozen gate on seeds 170-179 (evidence/h32_1_structural_step_holdout.json), our tip- & Euler-depth-cluster-protected mid-segment de-jittering candidate was validated on fresh seeds 180-189 (+0.001272 post-thinning / +0.001399 pre-thinning, 10/10 seeds, 4/4 folds; evidence/h32_1_holdout.json). Four additional untried geological hypotheses (H32-2, H32-3, H32-4, H27-16) are ranked below.",
   "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
   "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
   "baseline": {
@@ -20,7 +20,7 @@
     ],
     "signature": "Remove 100 m lateral digitisation-jitter shadow along interior mapped fault segments (d_cat <= 100 m AND d_end > 300 m AND cat_nbrs >= 2 AND d_euler > 300 m = 2,434 px on d=2.8), while explicitly preserving along-strike tip continuations (d_end <= 300 m: 1,360 px) and shallow Euler N=0 contact depth-cluster corroboration zones (d_euler <= 300 m: 143 px; 1,457 union protected pixels).",
     "why_missing_faults": "Hermant et al. (2025, Fig. 2 & Fig. 9B) document up to 400 m lateral offsets between regional USGS Quaternary traces and 1 m LiDAR scarps. Along interior segments (cat_nbrs >= 2, d_end > 300 m) without an independent subsurface contact solution, a d_cat=100 m pixel is lateral digitisation halo on an already-mapped fault (0.0040 credit/FP, 4.8x below OOF break-even). At fault tips (d_end <= 300 m) or where a shallow Euler N=0 depth cluster corroborates a subsurface contact, the pixel marks an unmapped tip propagation or shallow buried splay (0.0092 credit/FP, 2.29x higher credit density).",
-    "differs_from_repo": "Prior H27-4 blindly pruned all 3,891 d_cat <= 100 m pixels on d=2.8 and was only shipped bundled with the now live-refuted T-v2 gap-closure dots (23ad46a4d7ba). Prior H31-1 fed Euler rasters into a 41-band GBDT and failed screen (-0.00195). H32-1 uses retained SI=0 Euler depth clusters and catalogue tip geometry as a structural protection gate on d=2.8 with zero T-v2 drag.",
+    "differs_from_repo": "Prior H27-4 blindly pruned all 3,891 d_cat <= 100 m pixels on d=2.8 and was only shipped bundled with the now live-refuted T-v2 gap-closure dots (23ad46a4d7ba). Prior H31-1 fed Euler rasters into a 41-band GBDT and failed screen (-0.00195). This candidate uses retained SI=0 Euler depth clusters and catalogue tip geometry as a structural protection gate on d=2.8 with zero T-v2 drag.",
     "confounders": "Catalogue-internal holdout overweights tip adjacency relative to isolated far-field faults; mitigated by reporting both H32-1 (protected) and solo H27-4 (unprotected) on d=2.8.",
     "observed_holdout_delta_dti": {
       "seeds": "180-189 (fresh, disjoint from 100-179)",
@@ -35,7 +35,7 @@
     "cost": "Low (~95 s CPU holdout + ~9 s GeoTIFF build); zero external downloads.",
     "status": "VALIDATED ON 4-FOLD SPATIALLY BLOCKED HOLDOUT (PASS: +0.001272 post / +0.001399 pre, 10/10 seeds, 4/4 folds); built as primary download c3aeda1d31a3 (41,656 px) and secondary 31e35eee884e (42,294 px)."
   },
-  "ranking_basis": "Expected DTI gain multiplied by validation tractability divided by implementation cost. The 4 items in hypotheses[] below are the remaining untried geological hypotheses after validating H32-1.",
+  "ranking_basis": "Expected DTI gain multiplied by validation tractability divided by implementation cost. The 4 items in hypotheses[] below are the remaining untried geological hypotheses after validating our top candidate on seeds 180-189.",
   "hypotheses": [
     {
       "id": "H32-2",
@@ -124,15 +124,15 @@
         0.0,
         0.003
       ],
-      "cost": "High; requires external download outside the github.com/pypi.org sandbox allowlist, SHA-256 verification against sibling pins, and spatial holdout.",
-      "data_gate": "Official URLs at https://gdr.openei.org/submissions/1391 are documented and hash-pinned in sibling records (ok:true 2026-09-30), but gdr.openei.org is unreachable from this sandbox environment.",
-      "validation": "Do not use until official package bytes are retrieved and hash-verified; then preregister each arm on unused seeds.",
-      "status": "UNTRIED; blocked on external package retrieval."
+      "cost": "Medium-high; runner fetch verified SHA-256 hashes and in-footprint feature counts (evidence/external_layer_inventory.json); requires vector/point rasterization and spatial holdout.",
+      "data_gate": "Official URLs at https://gdr.openei.org/submissions/1391 are byte-verified obtainable via GitHub Actions runner fetch (evidence/external_layer_inventory.json: 84,008 B paleo-geothermal, 1,080,530 B 2 m probes, 9,898,770 B Quaternary volcanics).",
+      "validation": "Preregister each arm separately on unused seeds (190-199) after schema/licence review.",
+      "status": "UNTRIED; external archives byte-verified obtainable in evidence/external_layer_inventory.json."
     }
   ],
   "tested_hypotheses": [
     {
-      "id": "H32-1",
+      "id": "H32-1-dejitter",
       "title": "Tip- and Euler-depth-cluster-protected mid-segment flank-shadow de-jittering on d=2.8",
       "status": "TESTED — FROZEN 4-FOLD SPATIAL HOLDOUT GATE PASSED on seeds 180-189 (+0.001272 post-thinning, +0.001399 pre-thinning, 10/10 seeds, 4/4 folds)",
       "validation": "knowledge/13_current_ranked_hypotheses_2026-10-03.md; evidence/h32_1_holdout.json; scripts/run_h32_1_holdout.py",
@@ -157,7 +157,40 @@
       "improved_seeds": "10/10",
       "removed_credit_per_removed_fp": 0.004016754178912856,
       "protected_credit_per_fp": 0.009193765389829594,
-      "integrity_note": "Evaluated on fresh seeds 180-189 (outside H31-1's 160-179 ranges). Built onto the 0.2600 d=2.8 base without T-v2 gap-closure dots as primary candidate c3aeda1d31a3 (41,656 px) and secondary candidate 31e35eee884e (42,294 px)."
+      "integrity_note": "Evaluated on fresh seeds 180-189 (outside 160-179). Built onto the 0.2600 d=2.8 base without T-v2 gap-closure dots as primary candidate c3aeda1d31a3 (41,656 px) and secondary candidate 31e35eee884e (42,294 px)."
+    },
+    {
+      "id": "H32-1",
+      "title": "Structural-step coherence of depth-to-base / conductivity / strain derivatives",
+      "status": "TESTED — FROZEN SCREEN GATE FAILED; arm closed, no confirmation or weekly slot",
+      "validation": "knowledge/14_preregistration_H32-1.md; knowledge/15_h32_1_result.md; evidence/h32_1_structural_step_holdout.json",
+      "seeds": [
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179
+      ],
+      "control_mean_dti": 0.10677544593818802,
+      "candidate_mean_dti": 0.10520579151949945,
+      "mean_paired_delta_dti": -0.001569654418688561,
+      "improved_folds": "3/4",
+      "improved_seeds": "3/10",
+      "gate": {
+        "mean_gain_at_least_0_001": false,
+        "at_least_3_of_4_folds_improve": true,
+        "at_least_8_of_10_seeds_improve": false,
+        "exactly_preregistered_seeds": true,
+        "data_checks_passed": true,
+        "pass": false
+      },
+      "data_checks": "PASS: 5,167,373-cell footprint and 60,988 known-fault cells as pinned; structural cache valid in 5,164,312 cells (0.99941); all probabilities and all six structural values finite and in [0, 1]; source bands depth_to_base_surf(15) / cond_surf(17) / geod_2ndinv(4) match the prepared schema",
+      "integrity_note": "One preregistered run of 40 paired cells, 350 s, protocol bytes matched the committed blob. No refit, retuning, rerun, candidate TIFF or upload. Catalogue proxy only. The next new hypothesis requires a fresh seed decade (180-189)."
     },
     {
       "id": "H27-1",
@@ -243,19 +276,8 @@
       "control_spacing_failures": 40,
       "candidate_spacing_failures": 39,
       "other_data_checks": "PASS: finite probabilities, active-fold containment, no known-catalogue overlap, nonempty hidden truth",
-      "confirmation_seeds": [
-        170,
-        171,
-        172,
-        173,
-        174,
-        175,
-        176,
-        177,
-        178,
-        179
-      ],
-      "confirmation_status": "UNUSED; ineligible after frozen screen failure",
+      "confirmation_seeds": [],
+      "confirmation_status": "REASSIGNED — seeds 170-179 were reassigned to the preregistered H32-1 screen before that screen ran; H31-1 has no confirmation decade",
       "integrity_note": "No refit, retuning, rerun, candidate TIFF or upload. Catalogue proxy only; not organizer-label or competition performance."
     }
   ],
