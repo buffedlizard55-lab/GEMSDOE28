@@ -7,9 +7,11 @@
     {"rank": 15, "participant_label": "wbg1", "public_score": 0.2600}
   ],
   "claims": {
-    "0.2477": "Owner-reported figure; no organizer receipt or authoritative link to the owner/local TIFF is available in this checkout.",
-    "0.3195": "A public leaderboard row was observed for DARD. That row alone does not establish that DARD is the repository owner or link the score to any local TIFF.",
-    "0.2600": "A public leaderboard row was observed for wbg1. No owner identity or local-file association is established."
+    "0.2477": "Owner-reported figure for 24GEMSDOE dotted-h19-5-d1-5 (989f59505db1); no organizer receipt is stored in this checkout.",
+    "0.2600": "A public leaderboard row was observed for wbg1 (0.2600), and the owner separately reported 0.2600 for 25GEMSDOE dotted-h19-5-d2-8-20261002-e56ea318af89-nan; treated as owner-reported in the 24-submission live-score inversion.",
+    "0.2449": "Owner-reported figure for 27GEMSDOE topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan (-0.0028 vs 0.2477 d=1.5 base, refuting T-v2 gap closure).",
+    "0.1223": "Owner-reported figure for 26GEMSDOE dilcond-oof-v1-20261003-47629f496133-nan (refuting H27-DILCOND-v1 / H28-3).",
+    "0.3195": "A public leaderboard row was observed for DARD. That row alone does not establish that DARD is the repository owner or link the score to any local TIFF."
   },
   "competition_artifacts": "All GEMSDOE28 GeoTIFFs in docs/downloads remain unscored unless an organizer receipt is manually recorded by the human owner. No upload was made by this agent.",
   "manual_review": "Use the official URL above for a human spot-check. Do not automate access or monitoring."

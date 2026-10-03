@@ -19,7 +19,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = Path(os.environ.get("GEMS_DATA_DIR", str(ROOT / "data_cache")))
+DATA = Path(os.environ.get("GEMS_DATA_DIR", str(ROOT / "data")))
 
 REQUIRED_INPUTS = (
     "sample_submission.tif",

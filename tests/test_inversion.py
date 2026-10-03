@@ -135,3 +135,27 @@ def test_manifest_and_site_agree_on_four_slots():
         assert len(man[k]["note"]) <= 200
     idx = (ROOT / "docs" / "index.html").read_text()
     assert man["quaternary"]["nan"] in idx, "slot 4 is not on the first screen"
+
+
+def test_h32_1_holdout_and_new_live_scores_0_2600_0_2449_0_1223():
+    inv = json.loads((ROOT / "evidence" / "live_inversion.json").read_text())
+    assert inv["n_corpus"] == 24
+    by = {r["label"]: r for r in inv["submissions"]}
+    for lbl, live in [
+        ("25GEMSDOE dotted-h19-5-d2-8 (e56ea318af89)", 0.2600),
+        ("27GEMSDOE topo-gap-closure-t-v2-on-d1-5 (5512495c6bd1)", 0.2449),
+        ("26GEMSDOE dilcond-oof-v1 (47629f496133)", 0.1223),
+    ]:
+        r = by[lbl]
+        got = forward(r["credit_TPw"], r["n_scored"], r["rho_matched_over_TP"], inv["G_used"])
+        assert got == pytest.approx(live, abs=2e-4)
+
+    h32 = json.loads((ROOT / "evidence" / "h32_1_holdout.json").read_text())
+    assert h32["seeds"] == list(range(180, 190))
+    assert h32["gate_passed"] is True
+    post = h32["variants"]["h32_1_post_d28"]
+    pre = h32["variants"]["h32_1_pre_d28"]
+    ctrl = h32["variants"]["control_prune_protected_only_d28"]
+    assert post["seeds_won"] == 10 and post["folds_improved"] == 4 and post["mean_dti_gain"] > 0.001
+    assert pre["seeds_won"] == 10 and pre["folds_improved"] == 4 and pre["mean_dti_gain"] > 0.001
+    assert ctrl["removed_credit_per_removed_fp"] > 2.0 * post["removed_credit_per_removed_fp"]

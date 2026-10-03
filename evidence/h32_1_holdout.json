@@ -1,0 +1,100 @@
+{
+  "hypothesis": "H32-1: Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering at d=2.8",
+  "preregistration": "knowledge/13_current_ranked_hypotheses_2026-10-03.md",
+  "seeds": [
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189
+  ],
+  "base_oof_d28_mean_dti": 0.09562398567994392,
+  "base_oof_d28_dots_per_seed": 48922.7,
+  "inclusion_threshold_oof": 0.01949768643365353,
+  "inclusion_threshold_live_0_2600": 0.054852320675105495,
+  "variants": {
+    "h32_1_post_d28": {
+      "mean_dti": 0.0968955767708895,
+      "mean_dti_gain": 0.0012715910909455819,
+      "min_seed_gain": 0.0009069401002593201,
+      "max_seed_gain": 0.0015192605109322216,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.001023359000483301,
+        "NE_LidarGapHeavy": 0.0022925134079755686,
+        "SW": 0.00027209927278556354,
+        "SE": 0.0014983926825378941
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -1500.4,
+      "removed_credit_per_removed_fp": 0.004016754178912856
+    },
+    "h32_1_pre_d28": {
+      "mean_dti": 0.09702297763592055,
+      "mean_dti_gain": 0.0013989919559766317,
+      "min_seed_gain": 0.0008538956899699496,
+      "max_seed_gain": 0.0019434815802532972,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.0009558460951899925,
+        "NE_LidarGapHeavy": 0.002040939268119571,
+        "SW": 0.0005051885885581586,
+        "SE": 0.0020939938720388046
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": 74.3,
+      "removed_credit_per_removed_fp": 0.4892982832791186
+    },
+    "h27_4_blind_r1_d28": {
+      "mean_dti": 0.09739003775001098,
+      "mean_dti_gain": 0.0017660520700670697,
+      "min_seed_gain": 0.0013697363350381932,
+      "max_seed_gain": 0.0020682560537862264,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.0016002274404053635,
+        "NE_LidarGapHeavy": 0.0031902281900621997,
+        "SW": 0.0004871729312103973,
+        "SE": 0.0017865797185903185
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -2391.7,
+      "removed_credit_per_removed_fp": 0.005980954164910937
+    },
+    "control_prune_protected_only_d28": {
+      "mean_dti": 0.09610270948865962,
+      "mean_dti_gain": 0.00047872380871571036,
+      "min_seed_gain": 0.00031656889008049686,
+      "max_seed_gain": 0.0006618200104458911,
+      "seeds_won": 10,
+      "n_seeds": 10,
+      "fold_gains": {
+        "NW": 0.000559284091480737,
+        "NE_LidarGapHeavy": 0.0008552733767460755,
+        "SW": 0.00021092357820880065,
+        "SE": 0.00028941418842722835
+      },
+      "folds_improved": 4,
+      "delta_dots_per_seed": -891.3,
+      "removed_credit_per_removed_fp": 0.009193765389829594
+    }
+  },
+  "full_footprint_d28_audit": {
+    "d28_base_px": 44090,
+    "d28_r1_total_px": 3891,
+    "d28_mid_segment_flank_shadow_pruned_px": 2434,
+    "d28_protected_tip_or_euler_kept_px": 1457,
+    "d28_h32_1_post_px": 41656,
+    "d28_h32_1_pre_px": 42294
+  },
+  "gate_passed": true,
+  "seconds": 94.75504922866821
+}

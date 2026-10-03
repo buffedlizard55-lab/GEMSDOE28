@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checked_utc": "2026-10-03T16:18:35Z",
+  "checked_utc": "2026-10-03T17:18:30Z",
   "status": "PASS",
   "scope": "local repository evidence only; cannot rule out undocumented seed use in unsearched external/sibling workspaces",
   "network_access": "none",
@@ -14,8 +14,11 @@
   "git_history_review": {
     "shallow": true,
     "recent_commits": [
-      "df5e5d05cd613304e298585314c545dc4aaafd00 H32-1 preregistration, structural-step transform, and pinned-mirror restore path",
-      "867d63860f633693b9f68d0ca225aafc1b6322b9 Merge pull request #3 from buffedlizard55-lab/arena/01a10074-gemsdoe28"
+      "ae8124f5dc279740dcfeb934c58ffe673737ddf6 Invert 0.2600/0.2449/0.1223 live scores, validate H32-1 (seeds 180-189), and build T-v2-free d=2.8 GeoTIFFs",
+      "18dbd266f265f16bbace86ae9fea1eb5539c2449 Merge pull request #7 from buffedlizard55-lab/arena/01a10279-gemsdoe28",
+      "1a210460cfd9780384f8337005e5921546c7963a External-layer data gate: GDR 1391 paleo/probe/volcanics layers verified obtainable",
+      "daaee689829209bd03eed9372671b4ff3d712463 evidence: external-layer fetch inventory (hashes, layer schemas, in-footprint counts)",
+      "af3e328279a0890b15a93f12460b9c09f25f9b97 Merge pull request #6 from buffedlizard55-lab/arena/01a10279-gemsdoe28"
     ]
   },
   "planned_ranges": {
@@ -323,13 +326,14 @@
   "evidence_json_sha256_scanned": {
     "addendum_d_gates.json": "1a3199a17bea93229cc8bdf41afcca8bc7087577b0a5b692bc4246947bfd18dd",
     "arm_habitat_decomposition.json": "c807ee800df081c399e2874ab7682e7da5a8b9bd9017a5ff1880f35b15fbc9c3",
-    "budget_optimum.json": "9d338c5f3b7b13c8dda200e2d2fe26661d57865eae735e25bb3a60e57d281988",
-    "candidate_model_scores.json": "6c912ada2e59e489641611900db4aa9e4d1a176deb40b15b5c4567368118ff39",
+    "budget_optimum.json": "a798c70871cdd884f86b642f98b366ed029ebe59fd0ca80e750551c4a1b912d2",
+    "candidate_model_scores.json": "ef2550c6c8b9d1f49dfd3d1b6b15a7ce069901b5b66ddf03afbb341cfe66f755",
     "candidate_summary.json": "df82b595ea76394e56a0cdb739e98c1b934ce80761cd8b4561eda78400926398",
     "channel_auc.json": "619915ffbbae999287f51aaee639b5224c65e4c3e0216d50c80412dc7642acd9",
     "data_preparation.json": "ae2e5f0a6571b653f8a16f64610d2b24a16eee1b4f6d284ede59a12b455a4664",
     "euler_input_audit.json": "59c7ee6f46120510fd04095b3a9a5842e407fb16db961fcac7edf061f3899d25",
     "example_links.json": "0dd6d291d528565e63acc7c6715ff0e6bccf2cf913ddfc812e9aa5fd699b7742",
+    "external_layer_inventory.json": "a388d50360dd4a8b5ecfcad8cf41620665be410de5b8046790a346727417f1c1",
     "graph_report.json": "a349cb5ba5ff867ba3b552a012dfd5cb684d464953fa700e67810e8e987aa607",
     "h27_10_annulus_holdout.json": "4ef326051fb258e271c70f1c0f438e19a1ce08309a6d0104ddc13d2a1caf47b3",
     "h27_10_annulus_holdout_initial.json": "ee0f64dfe139cbfcfe7e276f449a2cebc92202c015cd1a524529fecb72a9f873",
@@ -340,30 +344,31 @@
     "h31_1_euler_screen.json": "ef18f530020217a423d2cdf3682b14e29b821b7b40dd64a21abe2ae68c2486cc",
     "h31_1_euler_screen.started.json": "269201d6e9a6cfb749ecbfcf06d770a87707483560c7d9eaf1078965335a64f9",
     "h31_1_prereg_history_audit.json": "11b7fb942f45265ccc88996536f74f26170f3d5afd7d94de10a87c66dc4c1b51",
+    "h32_1_holdout.json": "4bd7cde797e4c7f373d2f0dae0a0770c27555b472174a574e4a662e89c1d3290",
     "h32_1_structural_step_holdout.json": "f636d04570b881b51e2226d88de0370fa2df9d087b663758ae992b28876fc76a",
     "link_graph_value.json": "ebdd46df9d61979584860a5b8d16645e6b686a7f61d039c8b529954e5b34cbdd",
-    "live_inversion.json": "0634d7117ce57d47fb91c5b1629be0ace1f0141e19070b5e176fb571bb3ec282",
+    "live_inversion.json": "38bfdd7bcdebf9d7829e6ee49be3a26ad9e9510b757bfc1aad10daec4b7a463d",
     "live_truth_partition_radial.json": "11746ee4f0c1034bf20db6938adac4d8ef44ffa04390c557f7f43a786fda38fd",
-    "live_truth_tomography.json": "6950ff374230c5ee61601f76c0147d1b033b913a042efb86ee77668700ae230f",
+    "live_truth_tomography.json": "47ea446021a3d903c19a2c3aad8cc408d5ebc326af9a34d75666ccde116a6ecd",
     "oof_hypothesis_gates.json": "558c96441294b948681005004062ac665b496ba4a00ee6af91553a842fd3c8b4",
     "operating_point_model.json": "a7be720d3e549b1588e64a5365675f84eda4ed31561c70077b840ab38b37e393",
     "range_validator_forensics_2026-10-03.json": "3e0f852f5638557e58c8b9888c7241e838670f0a221c9e0f04d9fc7f0830c7f7",
-    "restore_audit.json": "62055a428ed130ffe4b5ca5528fc7dd3ca36758d943ad5a97a7443bc55fe21fa",
+    "restore_audit.json": "035445512d6fe793359f176443598f22db375f49b35bcfaf77784fb27d34a2e0",
     "restore_audit_checkout.json": "cc9b5387437f8eb910112ffd138dd47e8faac8a2fc7eaaa8a68d0edfd8343ed0",
-    "scored_corpus.json": "6f542941f983e137e5c086f1b9a8e9b03a58c2893a844ae91073f3cd143c98de",
+    "scored_corpus.json": "01a9a1990de4a6c8da4b76fcccc813d1841488deafebaea31f621f6ba98de125",
     "sgmc_gap_inversion.json": "8315884ec7980587b8d06fb5fa478f8ae61d9acf7ef1fb0bbb4911a15fb7b76f",
     "sgmc_lidar_response.json": "475bf680b434f1efeee5775951295a084d392a5b236975928cafba32b0564acb",
     "structural_relay_classes.json": "41a77500968a7190f4c97f39f3b321ab29bcaf6b52985f5f5e6c6c954e417666",
-    "submission_file_audit.json": "f73437794939a8eba7a174bc257ac6ce61823cae0fa3893feb5dedd97dd4e3b0",
+    "submission_file_audit.json": "2072e857eb21378b53866b98b3368139d046cbfb65fb5f3fa025e476e3b58521",
     "topology_confirmation_v2.json": "f0223a202dfe40e903367333d5bb406406f028fbaf477357165f080b91f381db",
     "topology_link_feature_analysis.json": "7f0ca61c6107852dad6d36c980531ad54fd8fd34d08a01764c73309c0312eca7",
     "topology_validation.json": "fa4f3c0e9f2f0ba3d638582b7180701677565c9bcf8ee393ae910659e150133d",
     "vector_topology_validation.json": "6c5e4530b5c8a6ff1601f78ed7f0723c0470ad543663447671dafa72acd9a476",
-    "why_026_won.json": "a205aad54a3638170fa29251817d8a993dd9b83363ca1108e22596af4f387006"
+    "why_026_won.json": "582ec6441fb3521d9ea128252f13a6f9852c436bffac120220d953c8a9eb2c5d"
   },
   "unexpected_collisions": {},
   "unreadable_evidence_json": [],
   "invalid_stage_records": [],
   "decision": "Seeds 160-169 were consumed by the H31-1 screen, which FAILED its frozen gate, so its confirmation decade is ineligible. Seeds 170-179 were reassigned to the preregistered H32-1 screen (knowledge/14) and are consumed by that single run. The next new hypothesis must preregister a fresh decade (180-189).",
-  "sha256": "6bb8f706d84d752b39d220cd278cd6eef4bcaa218e459dd7937229b51733589a"
+  "sha256": "1550888208360e45686c8a7e03df1e7c2bb7b2d1397afaeadfe69b6e8067369b"
 }
