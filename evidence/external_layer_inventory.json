@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T16:25:32Z",
+  "generated_utc": "2026-10-03T17:58:38Z",
   "pins_file": "/tmp/gdr/pins.json",
   "pins_file_loaded": true,
   "availability_only": true,
@@ -44,6 +44,56 @@
     "labels": 3,
     "reachable": 3,
     "pin_mismatches": [],
-    "unpinned": []
+    "unpinned": [],
+    "sciencebase_reachable": 2,
+    "sciencebase_checked": 4
+  },
+  "sciencebase_availability": {
+    "sb_slip_tendency_shapefile_full": {
+      "doi": "10.5066/P9YL58W6",
+      "page": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+      "filename": "Shapefile_Full Study.zip",
+      "hypothesis": "H33-1 kinematic reactivation favourability gate",
+      "listed_bytes": 35912323,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/6296974dd34ec53d276bb33d?f=__disk__33%2Fb0%2F91%2F33b091fae2403dcf2f1dd2f698f7368ffdcf000d",
+      "http_status": 200,
+      "bytes": 35912323,
+      "sha256": "5d6213f7763002d369c40b281c31d22113f9c48c482e10ca469e0f6f6b985163",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    },
+    "sb_mt_conductance_surface": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_surface_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "status": "FILE_NOT_LISTED",
+      "listed_files": [
+        "Electrical_Conductance_Maps_of_the_Great_Basin_USA_02.xml"
+      ]
+    },
+    "sb_mt_conductance_middle_crust": {
+      "doi": "10.5066/P9TWT2LU",
+      "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "filename": "gb_conductance_middle_crust_tp.tif",
+      "hypothesis": "H33-2 multi-depth MT conductance alignment",
+      "status": "FILE_NOT_LISTED",
+      "listed_files": [
+        "Electrical_Conductance_Maps_of_the_Great_Basin_USA_02.xml"
+      ]
+    },
+    "sb_heat_flow_zip": {
+      "doi": "10.5066/P9BZPVUC",
+      "page": "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+      "filename": "heat_flow_maps_and_supporting_data_for_the_Great_Basin_USA.zip",
+      "hypothesis": "H33-3 heat-flow residual + 2 m probe conjunction",
+      "listed_bytes": 130154244,
+      "download_url": "https://www.sciencebase.gov/catalog/file/get/6297d2fad34ec53d276c5b28?f=__disk__03%2Fac%2F86%2F03ac865d4a5a3c5c52d8ca92bc170105c6fe508a",
+      "http_status": 200,
+      "bytes": 130154244,
+      "sha256": "e7fd62c6963ab390963b3f19adf4dd14bf616e7267f2ae38ad6af1005c106918",
+      "status": "AVAILABILITY_FETCHED",
+      "error": null
+    }
   }
 }
