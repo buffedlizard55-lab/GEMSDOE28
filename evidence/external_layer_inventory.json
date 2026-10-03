@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T18:54:08Z",
+  "generated_utc": "2026-10-03T18:58:17Z",
   "pins_file": "/tmp/gdr/pins.json",
   "pins_file_loaded": true,
   "availability_only": true,
@@ -45,7 +45,7 @@
     "reachable": 3,
     "pin_mismatches": [],
     "unpinned": [],
-    "sciencebase_derived_written": 0,
+    "sciencebase_derived_written": 1,
     "sciencebase_reachable": 4,
     "sciencebase_checked": 4
   },
@@ -60,21 +60,15 @@
       "pin_match": true,
       "payload_format": "zip",
       "payload_used": "sb_slip_tendency_shapefile_full.zip",
-      "status": "LAYER_UNREADABLE",
-      "unreadable_layers": [
-        "GB_Quaternary_faults_TD_TS.shp"
-      ],
-      "errors": {
-        "GB_Quaternary_faults_TD_TS.shp": "ImportError: geopandas is required to use pyogrio.read_dataframe()"
-      },
+      "status": "DERIVED_WRITTEN",
       "layers_found": [
         "GB_Quaternary_faults_TD_TS.shp"
       ],
       "derived": {
         "csv_path": "/tmp/gdr/out/commit/sb_slip_tendency_in_footprint.csv",
         "json_path": "/tmp/gdr/out/commit/sb_slip_tendency_in_footprint.json",
-        "n_records": 0,
-        "n_parts": 0
+        "n_records": 84484,
+        "n_parts": 84484
       },
       "committed_files": [
         "docs/data/sb_slip_tendency_in_footprint.csv",
