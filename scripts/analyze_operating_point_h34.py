@@ -28,6 +28,9 @@ import rasterio
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gems27 import grid, metric, operating_point as opmod, paths, thinning  # noqa: E402
 
+BETA = 0.8   # false-negative weight in the official metric (src/gems27/metric.py)
+ALPHA = 0.2  # false-positive weight
+
 OUT = paths.EVIDENCE / "h34_operating_point.json"
 
 # Three live-scored submissions of ONE detector surface (H19-5), differing only in packing.
@@ -45,6 +48,14 @@ ANCHORS = [
 # Independent calibration of |G| from the blind spacing-5 lattice (13GEMSDOE, 0.0904), recorded in
 # evidence/live_inversion.json. Not used in the fit - only as an external consistency check.
 BLIND_LATTICE_TRUTH_PX = 12225.896
+
+
+def _pts(min_dist: float, ladder):
+    """The ladder point a submitted ``min_dist`` realises."""
+    for p in ladder.points:
+        if p.rung >= min_dist:
+            return p
+    return ladder.points[-1]
 
 
 def main() -> int:
@@ -162,22 +173,60 @@ def main() -> int:
         {"arm": "H27-4 d_cat <= 200 m flank shadow", "efficiency": 0.0080, "n_removed": None,
          "measured_on": "4-fold OOF holdout, seeds 130-139", "evidence": "evidence/oof_hypothesis_gates.json",
          "proxy_gate_verdict": "PASS", "note": "+0.0025 solo, 4/4 folds"},
-        {"arm": "T-v2 gap closure (ADDITION, not a prune)", "efficiency": 0.00210, "n_removed": None,
+        {"arm": "T-v2 gap closure", "direction": "add", "efficiency": 0.00210, "n_removed": None,
          "measured_on": "live inversion of 5512495c6bd1 (0.2449)", "evidence": "evidence/live_inversion.json",
          "proxy_gate_verdict": "LIVE-REFUTED",
-         "note": "additions obey the same tau; 0.0021 << 0.0549 so the live loss is confirmed"},
+         "note": "addition inequality is the mirror of pruning; 0.0021 << tau 0.0549 reproduces the measured -0.0028 live loss"},
+        {"arm": "LOSFO far-field base additions", "direction": "add", "efficiency": 0.0465,
+         "n_removed": None, "measured_on": "LOSFO far-field harness, seeds 210-214",
+         "evidence": "evidence/losfo_farfield_diagnostic.json",
+         "proxy_gate_verdict": "n/a (measured at cell DTI ~0.10)",
+         "note": ("the parallel Session-10 harness measures far-field credit/dot 0.0465 and proposes "
+                  "gating additions against the CELL threshold; at the live submission the threshold is "
+                  "0.0548, so base-quality far-field dots do not pay for themselves there")},
     ]
     for row in archived:
-        n = row.get("n_removed") or 0
-        if n:
-            g = op.prune_gain(current.retention, current.n_emitted, int(n), float(row["efficiency"]))
-            row["live_delta_dti"] = g["delta_dti"]
-            row["live_verdict"] = "PRUNE" if g["worth_it"] else "KEEP"
+        e = float(row["efficiency"])
         row["live_tau"] = live_state["tau"]
         row["proxy_tau"] = metric.inclusion_threshold(proxy_state["dti"])
-        row["live_verdict"] = row.get("live_verdict",
-                                      "PRUNE" if row["efficiency"] < live_state["tau"] else "KEEP")
+        if row.get("direction") == "add":
+            # Additions pay the SAME threshold but the inequality flips: a pixel set is worth
+            # ADDING iff its credit per unit of new mass EXCEEDS tau (metric.inclusion_threshold).
+            row["live_verdict"] = "ADD" if e > live_state["tau"] else "DO_NOT_ADD"
+            row["proxy_verdict"] = "ADD" if e > row["proxy_tau"] else "DO_NOT_ADD"
+            row["reason"] = (f"e={e:.4f} vs tau_live={live_state['tau']:.4f}: an addition must EARN "
+                             f"more than tau, a removal must COST less than tau")
+        else:
+            row["direction"] = "remove"
+            row["live_verdict"] = "PRUNE" if e < live_state["tau"] else "KEEP"
+            row["proxy_verdict"] = "PRUNE" if e < row["proxy_tau"] else "KEEP"
+            n = int(row.get("n_removed") or 0)
+            if n:
+                g = op.prune_gain(current.retention, current.n_emitted, n, e)
+                row["live_delta_dti"] = g["delta_dti"]
+                row["dti_after"] = g["dti_after"]
     report["archived_arms_rejudged"] = archived
+
+    # Sensitivity: |G| is the least certain quantity in the fit (one blind-lattice anchor). Refit L
+    # alone at each candidate |G| and ask whether the optimal rung moves.
+    sens = []
+    for mult in (0.75, 0.90, 1.00, 1.10, 1.25):
+        g_fixed = BLIND_LATTICE_TRUTH_PX * mult
+        num = sum(pt.retention * s * (BETA * g_fixed + ALPHA * pt.n_emitted) for pt, s, _ in
+                  [(p, a["score"], a) for p, a in zip([_pts(a["min_dist"], ladder) for a in ANCHORS], ANCHORS)])
+        den = sum(pt.retention ** 2 for pt in (_pts(a["min_dist"], ladder) for a in ANCHORS))
+        l_fit = num / den
+        preds = [(p.rung, p.n_emitted, l_fit * p.retention / (BETA * g_fixed + ALPHA * p.n_emitted))
+                 for p in ladder.points if p.n_emitted]
+        best_r = max(preds, key=lambda t: t[2])
+        sens.append({"truth_px": g_fixed, "multiplier": mult, "credit_solid": l_fit,
+                     "best_rung": best_r[0], "best_n_emitted": best_r[1], "best_dti": best_r[2],
+                     "dti_at_current_rung": next(t[2] for t in preds if t[1] == 44090)})
+    report["truth_size_sensitivity"] = {
+        "rows": sens,
+        "reading": ("The optimal rung is the stability question that matters; |G| mainly rescales the "
+                    "predicted level, not which rung wins."),
+    }
 
     report["runtime_s"] = round(time.time() - t0, 1)
     OUT.parent.mkdir(parents=True, exist_ok=True)

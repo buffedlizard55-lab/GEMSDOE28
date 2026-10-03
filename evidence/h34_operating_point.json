@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-03T19:13:30Z",
+  "generated_utc": "2026-10-03T19:20:46Z",
   "purpose": "Live-anchored operating-point fit of the H19-5 detector surface: which packing rung maximises DTI, and what removal efficiency the submission can afford.",
   "method": {
     "metric_closure": "DTI = A / (0.8|G| + 0.2N)  with A = kernel credit, N = emitted px, |G| = hidden truth px; follows from the official definition with the inversion's closure FP = N - A.",
@@ -263,30 +263,42 @@
     "leave_one_out": [
       {
         "held_out": "h19-5 solid (GEMSDOE19, 0.1922)",
+        "fitted_on": [
+          "dotted-h19-5-d1-5 (GEMSDOE24, 0.2477)",
+          "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)"
+        ],
         "score": 0.1922,
-        "predicted": 0.1921497895252022,
-        "error": -5.021047479780716e-05,
-        "credit_solid": 6456.933201257696,
-        "truth_px": 11721.80551638017
+        "predicted": 0.19174883807456702,
+        "error": -0.0004511619254329857,
+        "credit_solid": 6425.400003997381,
+        "truth_px": 11604.074898898998
       },
       {
         "held_out": "dotted-h19-5-d1-5 (GEMSDOE24, 0.2477)",
+        "fitted_on": [
+          "h19-5 solid (GEMSDOE19, 0.1922)",
+          "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)"
+        ],
         "score": 0.2477,
-        "predicted": 0.2478196468431535,
-        "error": 0.0001196468431534925,
-        "credit_solid": 6456.933201257696,
-        "truth_px": 11721.80551638017
+        "predicted": 0.24788989491805824,
+        "error": 0.00018989491805823655,
+        "credit_solid": 6458.369893705303,
+        "truth_px": 11720.175947615135
       },
       {
         "held_out": "dotted-h19-5-d2-8 (GEMSDOE25, 0.2600)",
+        "fitted_on": [
+          "h19-5 solid (GEMSDOE19, 0.1922)",
+          "dotted-h19-5-d1-5 (GEMSDOE24, 0.2477)"
+        ],
         "score": 0.26,
-        "predicted": 0.25992353770829757,
-        "error": -7.646229170243934e-05,
-        "credit_solid": 6456.933201257696,
-        "truth_px": 11721.80551638017
+        "predicted": 0.25970467784696893,
+        "error": -0.00029532215303107456,
+        "credit_solid": 6467.053544566652,
+        "truth_px": 11776.651304413703
       }
     ],
-    "max_abs_loo_error": 0.0001196468431534925,
+    "max_abs_loo_error": 0.0004511619254329857,
     "external_check": {
       "blind_lattice_truth_px": 12225.896,
       "fitted_truth_px": 11721.80551638017,
@@ -873,10 +885,13 @@
       "evidence": "evidence/h32_1_holdout.json",
       "proxy_gate_verdict": "PASS",
       "note": "protected class (tips / shallow Euler clusters) at 0.0092",
-      "live_delta_dti": 0.006446718123825882,
-      "live_verdict": "PRUNE",
       "live_tau": 0.0548353048259967,
-      "proxy_tau": 0.01926533800673286
+      "proxy_tau": 0.01926533800673286,
+      "direction": "remove",
+      "live_verdict": "PRUNE",
+      "proxy_verdict": "PRUNE",
+      "live_delta_dti": 0.006446718123825882,
+      "dti_after": 0.2663702558321234
     },
     {
       "arm": "H32-2 deep magnetic-gradient de-screening (p10)",
@@ -886,10 +901,13 @@
       "evidence": "evidence/h32_2_holdout.json",
       "proxy_gate_verdict": "FAIL",
       "note": "0/10 seeds against tau_proxy=0.0193; direction control 0.0383 supported the physics",
-      "live_delta_dti": 0.004705818850991846,
-      "live_verdict": "PRUNE",
       "live_tau": 0.0548353048259967,
-      "proxy_tau": 0.01926533800673286
+      "proxy_tau": 0.01926533800673286,
+      "direction": "remove",
+      "live_verdict": "PRUNE",
+      "proxy_verdict": "KEEP",
+      "live_delta_dti": 0.004705818850991846,
+      "dti_after": 0.26462935655928943
     },
     {
       "arm": "H27-4 d_cat <= 200 m flank shadow",
@@ -901,20 +919,90 @@
       "note": "+0.0025 solo, 4/4 folds",
       "live_tau": 0.0548353048259967,
       "proxy_tau": 0.01926533800673286,
-      "live_verdict": "PRUNE"
+      "direction": "remove",
+      "live_verdict": "PRUNE",
+      "proxy_verdict": "PRUNE"
     },
     {
-      "arm": "T-v2 gap closure (ADDITION, not a prune)",
+      "arm": "T-v2 gap closure",
+      "direction": "add",
       "efficiency": 0.0021,
       "n_removed": null,
       "measured_on": "live inversion of 5512495c6bd1 (0.2449)",
       "evidence": "evidence/live_inversion.json",
       "proxy_gate_verdict": "LIVE-REFUTED",
-      "note": "additions obey the same tau; 0.0021 << 0.0549 so the live loss is confirmed",
+      "note": "addition inequality is the mirror of pruning; 0.0021 << tau 0.0549 reproduces the measured -0.0028 live loss",
       "live_tau": 0.0548353048259967,
       "proxy_tau": 0.01926533800673286,
-      "live_verdict": "PRUNE"
+      "live_verdict": "DO_NOT_ADD",
+      "proxy_verdict": "DO_NOT_ADD",
+      "reason": "e=0.0021 vs tau_live=0.0548: an addition must EARN more than tau, a removal must COST less than tau"
+    },
+    {
+      "arm": "LOSFO far-field base additions",
+      "direction": "add",
+      "efficiency": 0.0465,
+      "n_removed": null,
+      "measured_on": "LOSFO far-field harness, seeds 210-214",
+      "evidence": "evidence/losfo_farfield_diagnostic.json",
+      "proxy_gate_verdict": "n/a (measured at cell DTI ~0.10)",
+      "note": "the parallel Session-10 harness measures far-field credit/dot 0.0465 and proposes gating additions against the CELL threshold; at the live submission the threshold is 0.0548, so base-quality far-field dots do not pay for themselves there",
+      "live_tau": 0.0548353048259967,
+      "proxy_tau": 0.01926533800673286,
+      "live_verdict": "DO_NOT_ADD",
+      "proxy_verdict": "ADD",
+      "reason": "e=0.0465 vs tau_live=0.0548: an addition must EARN more than tau, a removal must COST less than tau"
     }
   ],
-  "runtime_s": 33.9
+  "truth_size_sensitivity": {
+    "rows": [
+      {
+        "truth_px": 9169.422,
+        "multiplier": 0.75,
+        "credit_solid": 5915.909325476382,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.27224492991868837,
+        "dti_at_current_rung": 0.26824760010716187
+      },
+      {
+        "truth_px": 11003.306400000001,
+        "multiplier": 0.9,
+        "credit_solid": 6304.8309633044255,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.26520489009827153,
+        "dti_at_current_rung": 0.26207984669696127
+      },
+      {
+        "truth_px": 12225.896,
+        "multiplier": 1.0,
+        "credit_solid": 6564.112055189787,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.2611474200892995,
+        "dti_at_current_rung": 0.2585085954222782
+      },
+      {
+        "truth_px": 13448.485600000002,
+        "multiplier": 1.1,
+        "credit_solid": 6823.3931470751495,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.25750712910533374,
+        "dti_at_current_rung": 0.25529418916714475
+      },
+      {
+        "truth_px": 15282.37,
+        "multiplier": 1.25,
+        "credit_solid": 7212.314784903193,
+        "best_rung": 3.0,
+        "best_n_emitted": 41333,
+        "best_dti": 0.2526982357939615,
+        "dti_at_current_rung": 0.25103282295296725
+      }
+    ],
+    "reading": "The optimal rung is the stability question that matters; |G| mainly rescales the predicted level, not which rung wins."
+  },
+  "runtime_s": 34.8
 }

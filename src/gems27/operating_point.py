@@ -182,13 +182,32 @@ class OperatingPoint:
                 "breakeven_tau": st["tau"], "worth_it": bool(efficiency < st["tau"])}
 
 
+def _solve_pair(a1: float, n1: int, a2: float, n2: int) -> tuple[float, float]:
+    """Closed-form two-anchor solution of Eq. 1 for (credit_solid, truth_px).
+
+    With ``a = score / retention`` the two anchor equations are
+    ``L = a1 (BETA*G + ALPHA*n1) = a2 (BETA*G + ALPHA*n2)``, so ``L`` cancels and
+
+        G = (ALPHA/BETA) * (a2*n2 - a1*n1) / (a1 - a2)
+
+    which is exact and needs no optimiser. Used for the leave-one-out check so that the reported
+    stability of the fit cannot be an artefact of a solver that happened to stop early.
+    """
+    if abs(a1 - a2) < 1e-15:
+        raise ValueError("degenerate anchor pair: identical score/retention ratio")
+    G = (ALPHA / BETA) * (a2 * n2 - a1 * n1) / (a1 - a2)
+    L = a1 * (BETA * G + ALPHA * n1)
+    return float(L), float(G)
+
+
 def fit_operating_point(anchors: list[dict], ladder: Ladder) -> OperatingPoint:
     """Fit ``(credit_solid, truth_px)`` to live-scored submissions of one detector surface.
 
     ``anchors`` items: ``{"min_dist": float, "n_emitted": int, "score": float, "label": str}``.
     Each is mapped onto its real ladder rung, so the measured ``(N, r)`` pair is the same one the
-    live file actually realised. Two unknowns, so three anchors leave one degree of freedom; the
-    leave-one-out block reports whether that residual is small enough to trust the fit.
+    live file actually realised. With two unknowns and three anchors there is one degree of freedom;
+    ``leave_one_out`` refits each *pair* in closed form and predicts the held-out anchor, which is
+    the honest stability test.
     """
     index = {p.rung: p for p in ladder.points}
 
@@ -222,16 +241,17 @@ def fit_operating_point(anchors: list[dict], ladder: Ladder) -> OperatingPoint:
                                  for pt, s, a in used],
                         residuals=[float(r) for r in sol.fun])
 
-    # leave-one-out: refit on n-1 anchors and predict the held-out one
     for k in range(len(used)):
-        sub = [u for j, u in enumerate(used) if j != k]
-        s2 = least_squares(lambda p: [p[0] * pt.retention / (BETA * p[1] + ALPHA * pt.n_emitted) - s
-                                      for pt, s, _ in sub], [L, G])
-        L2, G2 = float(s2.x[0]), float(s2.x[1])
+        (p1, s1, a1), (p2, s2, _a2) = [u for j, u in enumerate(used) if j != k][:2]
+        try:
+            L2, G2 = _solve_pair(s1 / p1.retention, p1.n_emitted, s2 / p2.retention, p2.n_emitted)
+        except ValueError:
+            continue
         pt, s, a = used[k]
         pred = L2 * pt.retention / (BETA * G2 + ALPHA * pt.n_emitted)
-        op.leave_one_out.append({"held_out": a.get("label"), "score": s, "predicted": pred,
-                                 "error": pred - s, "credit_solid": L2, "truth_px": G2})
+        op.leave_one_out.append({"held_out": a.get("label"), "fitted_on": [a1.get("label"), _a2.get("label")],
+                                 "score": s, "predicted": pred, "error": pred - s,
+                                 "credit_solid": L2, "truth_px": G2})
     return op
 
 
