@@ -1,0 +1,121 @@
+{
+ "schema": 1,
+ "method": "local git checkout of the public owner mirror repositories",
+ "manifest": "registry/data_manifest.json",
+ "mirror_root": "/tmp/gems-mirrors",
+ "provenance_warning": "Owner-supplied public GitHub mirrors, integrity-pinned here but NOT organizer-authenticated. A hash match proves equality to the registered mirror.",
+ "files": [
+  {
+   "id": "training_features",
+   "dest": "training_features.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE",
+   "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0",
+   "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+   "expected_bytes": 418912844,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 418912844,
+   "got_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+   "status": "verified"
+  },
+  {
+   "id": "labels",
+   "dest": "labels.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "expected_bytes": 425830,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 425830,
+   "got_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "status": "verified"
+  },
+  {
+   "id": "existing_faults",
+   "dest": "existing_faults.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "expected_bytes": 425830,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 425830,
+   "got_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "status": "verified"
+  },
+  {
+   "id": "sample_submission",
+   "dest": "sample_submission.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "expected_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+   "expected_bytes": 1599597,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 1599597,
+   "got_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+   "status": "verified"
+  },
+  {
+   "id": "h19_5",
+   "dest": "h19_5_nan.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "expected_sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "expected_bytes": 1712322,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 1712322,
+   "got_sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "status": "verified"
+  },
+  {
+   "id": "dotted_h19_5_d1_5",
+   "dest": "dotted_h19_5_d1_5_nan.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "expected_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "expected_bytes": 1632732,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 1632732,
+   "got_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "status": "verified"
+  },
+  {
+   "id": "dotted_h19_5_d2_8",
+   "dest": "dotted_h19_5_d2_8_nan.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "expected_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "expected_bytes": 1603424,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 1603424,
+   "got_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "status": "verified"
+  },
+  {
+   "id": "lidar_scarp_features",
+   "dest": "lidar_scarp_features_u8.tif",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "expected_sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+   "expected_bytes": 36943606,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 36943606,
+   "got_sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+   "status": "verified"
+  },
+  {
+   "id": "lidar_scarp_features_metadata",
+   "dest": "lidar_scarp_features.json",
+   "repo": "buffedlizard55-lab/GEMSDOE24",
+   "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "expected_sha256": "9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41",
+   "expected_bytes": 3531,
+   "checkout_head": "ref: refs/heads/main",
+   "got_bytes": 3531,
+   "got_sha256": "9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41",
+   "status": "verified"
+  }
+ ],
+ "n_files": 9,
+ "n_verified": 9,
+ "failures": [],
+ "ok": true
+}

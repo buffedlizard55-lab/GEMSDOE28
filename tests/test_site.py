@@ -111,8 +111,11 @@ def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp
     assert "all other listed integrity checks passed" in research
     assert "screen evidence" in research
     assert "screen seeds 160–169 are consumed locally" in research
-    assert "confirmation seeds 170–179 are unused locally" in research
+    assert "seeds 170–179 are consumed locally by the single H32-1 screen" in research
+    assert "the H31-1 confirmation decade no longer exists" in research
     assert "SCREEN PENDING — label-free feature build only" not in research
+    assert "H32-1 structural-step frozen screen FAIL" in front_page
+    assert "H32-1 structural-step frozen screen FAIL" in research
     assert "UNTRIED HOLDOUT: feature build only; no model fit or candidate TIFF." not in research
     confirm_fail = report("confirmation", False, -0.0001, 1, 4)
     both_consumed = {"status": "PASS", "range_status": {"screen": "CONSUMED", "confirmation": "CONSUMED"}}
