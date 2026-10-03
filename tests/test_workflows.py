@@ -72,3 +72,107 @@ def test_fetch_external_layers_selection_and_pins(tmp_path):
     assert bridge.selected_labels("all", loaded) == sorted(pins)
     assert bridge.selected_labels("gdr_paleo", loaded) == ["gdr_paleo"]
     assert bridge.load_pins(tmp_path / "absent.json") == {}
+
+
+# --------------------------------------------------------------------------------------------
+# Session 11: the heat-flow derived clip, the five-slice MT probes, and DEM-tile volume scoping
+# --------------------------------------------------------------------------------------------
+
+def test_sciencebase_checks_cover_all_five_mt_conductance_slices():
+    """H33-2's column needs all five depth slices probed, not just the two pinned ones.
+
+    Filenames verified live on the official ScienceBase item page 2026-10-03 (facet Raster records).
+    """
+    from scripts import fetch_external_layers as bridge
+
+    by_label = {c["label"]: c for c in bridge.SCIENCEBASE_CHECKS}
+    expected = {
+        "sb_mt_conductance_surface": "gb_conductance_surface_tp.tif",
+        "sb_mt_conductance_middle_crust": "gb_conductance_middle_crust_tp.tif",
+        "sb_mt_conductance_lower_crust": "gb_conductance_lower_crust_tp.tif",
+        "sb_mt_conductance_upper_mantle": "gb_conductance_upper_mantle_tp.tif",
+        "sb_mt_conductance_mantle": "gb_conductance_mantle_tp.tif",
+    }
+    for label, filename in expected.items():
+        assert label in by_label, f"{label} is not probed; the MT column is incomplete"
+        assert by_label[label]["filename"] == filename
+        assert by_label[label]["item"] == "62979746d34ec53d276c113b"
+        assert by_label[label]["doi"] == "10.5066/P9TWT2LU"
+
+
+def test_derived_specs_cover_the_heat_flow_release_with_a_distinct_stem():
+    """DERIVED=all must clip the pin-verified heat-flow point coverage (H33-3/H35-2)."""
+    from scripts import fetch_external_layers as bridge
+
+    by_label = {s["label"]: s for s in bridge.DERIVED_SPECS}
+    assert "sb_heat_flow_zip" in by_label
+    assert by_label["sb_heat_flow_zip"]["stem"] == "sb_heat_flow_in_footprint"
+    stems = [s["stem"] for s in bridge.DERIVED_SPECS]
+    assert len(stems) == len(set(stems)), "two specs must never write the same derived files"
+    pins = json.loads((ROOT / "registry" / "external_pins.json").read_text())["downloads"]
+    assert pins["sb_heat_flow_zip"]["sha256"] == (
+        "e7fd62c6963ab390963b3f19adf4dd14bf616e7267f2ae38ad6af1005c106918")
+    assert pins["sb_heat_flow_zip"]["bytes"] == 130154244
+
+
+def _dem_links_file(tmp_path, records):
+    path = tmp_path / "dem_links.json"
+    path.write_text(json.dumps({"records": records}), encoding="utf-8")
+    return path
+
+
+def test_dem_sizes_mode_never_raises_and_records_unreachable_tiles(tmp_path):
+    """The H33-4/H35-3 volume scoping must be total: bad URLs are rows, not crashes."""
+    from scripts import fetch_external_layers as bridge
+
+    good = tmp_path / "tile.tif"
+    good.write_bytes(b"II*\x00" + b"\x00" * 100)
+    links = _dem_links_file(tmp_path, [
+        {"tile": "x00y000", "project": "TEST", "url": good.as_uri()},
+        {"tile": "x00y001", "project": "TEST", "url": "http://127.0.0.1:9/no_such_tile.tif"},
+        {"tile": "x00y002", "project": "TEST", "url": "not a url at all !!!"},
+    ])
+    out = bridge.run_dem_sizes(links)
+    assert out["status"] in {"SIZES_RECORDED", "SIZES_UNAVAILABLE"}
+    assert set(out["rows"]) == {"x00y000", "x00y001", "x00y002"}
+    assert out["rows"]["x00y001"]["status"] == "UNREACHABLE"
+    assert out["rows"]["x00y002"]["status"] == "UNREACHABLE"
+    assert out["summary"]["n_tiles"] == 3
+    assert isinstance(out["summary"]["total_bytes"], int)
+    assert isinstance(out["summary"]["exceeds_20gb_downrank_rule"], bool)
+
+
+def test_dem_sizes_mode_aggregates_bytes_and_applies_the_20gb_rule(tmp_path, monkeypatch):
+    from scripts import fetch_external_layers as bridge
+
+    links = _dem_links_file(tmp_path, [
+        {"tile": f"x{i:02d}", "project": "TEST", "url": f"https://example.invalid/{i}.tif"}
+        for i in range(3)
+    ])
+    monkeypatch.setattr(
+        bridge, "head_content_length",
+        lambda url, timeout=30: {"url": url, "status": "HEAD_OK", "http_status": 200,
+                                 "bytes": 10_000_000_000})
+    out = bridge.run_dem_sizes(links)
+    assert out["status"] == "SIZES_RECORDED"
+    assert out["summary"] == {
+        "n_tiles": 3, "n_sized": 3, "total_bytes": 30_000_000_000, "total_gb": 30.0,
+        "exceeds_20gb_downrank_rule": True,
+        "note": ("HEAD only; no tile bytes downloaded. knowledge/18 down-ranks H33-4/H35-3 if "
+                 "the in-footprint volume exceeds ~20 GB."),
+    }
+
+
+def test_dem_sizes_mode_reports_a_missing_links_file_without_raising(tmp_path):
+    from scripts import fetch_external_layers as bridge
+
+    out = bridge.run_dem_sizes(tmp_path / "absent.json")
+    assert out["status"] == "NO_DEM_LINKS"
+    assert "error" in out
+
+
+def test_fetch_workflow_passes_dem_sizes_and_mentions_the_heat_flow_clip():
+    wf = (ROOT / ".github" / "workflows" / "fetch-gdr-external-layers.yml").read_text()
+    assert "--dem-sizes data/dem_links.json" in wf
+    assert "sb_heat_flow_in_footprint" in wf
+    assert "10.5066/P9BZPVUC" in wf
