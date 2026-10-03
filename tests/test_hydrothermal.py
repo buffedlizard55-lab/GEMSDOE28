@@ -163,6 +163,32 @@ def test_select_control_excludes_thermal_and_scores_by_probability_only():
     assert prob[added].min() >= np.sort(prob[ys, xs])[-10:].min() - 1e-12
 
 
+def test_select_additions_honours_an_explicit_score_ranker():
+    """H35-4 ranks by gravity strength, not probability (holdout/full-map consistency)."""
+    shape = (50, 50)
+    rng = np.random.default_rng(5)
+    prob = rng.random(shape).astype(np.float64)
+    grav_rank = rng.random(shape).astype(np.float64)
+    sub = rng.random(shape) < 0.2
+    base = np.zeros(shape, bool)
+    known = np.zeros(shape, bool)
+    thermal = np.ones(shape, bool)
+    res = H.select_additions(prob=prob, subthreshold=sub, base=base, known=known,
+                             thermal=thermal, halo=np.zeros(shape, bool),
+                             euler=np.zeros(shape, bool), budget_dots=10, score=grav_rank)
+    added = res["added"]
+    assert added.sum() > 0
+    ys, xs = np.nonzero(sub)
+    assert grav_rank[added].min() >= np.sort(grav_rank[ys, xs])[-10:].min() - 1e-12
+    # NaN/inf scores sink to the bottom instead of crashing the ranking
+    grav_rank[sub] = np.nan
+    grav_rank[0, 0] = np.inf
+    res2 = H.select_additions(prob=prob, subthreshold=sub, base=base, known=known,
+                              thermal=thermal, halo=np.zeros(shape, bool),
+                              euler=np.zeros(shape, bool), budget_dots=10, score=grav_rank)
+    assert res2["info"]["n_added"] <= 10
+
+
 def test_frozen_defaults_match_the_preregistration():
     assert (H.TEMP_C_CUT, H.QTZ_C_CUT, H.DEDUP_PX, H.THERMAL_PX) == (60.0, 130.0, 2, 10.0)
     assert (H.THK_Q, H.UTH_Q, H.EULER_PX, H.FAR_PX) == (25.0, 75.0, 3.0, 3.0)

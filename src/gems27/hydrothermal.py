@@ -137,13 +137,16 @@ def select_additions(*, prob: np.ndarray, subthreshold: np.ndarray, base: np.nda
                      known: np.ndarray, thermal: np.ndarray, halo: np.ndarray,
                      euler: np.ndarray, budget_dots: int,
                      far_px: float = FAR_PX, thin_d: float = THIN_D,
-                     bonus: float = BONUS, require_thermal: bool = True) -> dict:
+                     bonus: float = BONUS, require_thermal: bool = True,
+                     score: np.ndarray | None = None) -> dict:
     """Select up to `budget_dots` addition dots from the sub-threshold ridge.
 
     Eligibility: sub-threshold & >= far_px from known & (>= thin_d from every base dot) &
-    (thermal if `require_thermal`, else non-thermal for the direction control). Score =
-    prob * (1 + bonus*halo + bonus*euler). Top-K by score with raster-order tie-break, then
-    `dot_thin(thin_d)` for mutual spacing. Returns the thinned set plus an audit trail.
+    (thermal if `require_thermal`, else non-thermal for the direction control). The `thermal`
+    argument is the conjunction leg of whichever arm calls this (H35-1 passes thermal proximity,
+    H35-4 passes its bench mask). Ranking: `score`, when given, is used verbatim; otherwise
+    score = prob * (1 + bonus*halo + bonus*euler). Top-K by score with raster-order tie-break,
+    then `dot_thin(thin_d)` for mutual spacing. Returns the thinned set plus an audit trail.
     """
     sub = np.asarray(subthreshold, bool)
     base = np.asarray(base, bool)
@@ -158,14 +161,18 @@ def select_additions(*, prob: np.ndarray, subthreshold: np.ndarray, base: np.nda
     if ys.size == 0 or budget_dots <= 0:
         info.update({"n_selected": 0, "n_added": 0})
         return {"added": np.zeros_like(sub, bool), "info": info}
-    p = np.asarray(prob, dtype=np.float64)[ys, xs]
-    h = np.asarray(halo, bool)[ys, xs].astype(np.float64)
-    e = np.asarray(euler, bool)[ys, xs].astype(np.float64)
-    score = p * (1.0 + bonus * h + bonus * e)
-    take = _rank_topk_flat(score, min(int(budget_dots), ys.size))
+    if score is None:
+        p = np.asarray(prob, dtype=np.float64)[ys, xs]
+        h = np.asarray(halo, bool)[ys, xs].astype(np.float64)
+        e = np.asarray(euler, bool)[ys, xs].astype(np.float64)
+        rank = p * (1.0 + bonus * h + bonus * e)
+    else:
+        rank = np.asarray(score, dtype=np.float64)[ys, xs]
+        rank = np.nan_to_num(rank, nan=-np.inf, posinf=-np.inf, neginf=-np.inf)
+    take = _rank_topk_flat(rank, min(int(budget_dots), ys.size))
     raw = np.zeros_like(sub, bool)
     raw[ys[take], xs[take]] = True
     added = thinning.dot_thin(raw, thin_d)
     info.update({"n_selected": int(raw.sum()), "n_added": int(added.sum()),
-                 "mean_score_selected": float(score[take].mean())})
+                 "mean_score_selected": float(rank[take].mean())})
     return {"added": added, "info": info}
