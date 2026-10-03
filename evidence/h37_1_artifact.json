@@ -1,0 +1,104 @@
+{
+  "hypothesis": "H37-1 artifact build (metric-aware packing of the scored H19-5 surface)",
+  "preregistration": "knowledge/29_preregistration_H37-1.md",
+  "gate": "evidence/h37_1_holdout.json",
+  "pool_h19_5_px": 121131,
+  "pool_h19_5_density_pct": 2.3442,
+  "pool_union_px": 908246,
+  "budget_pre_prune_px": 41333,
+  "blind_r1_removed_primary": 3886,
+  "blind_r1_removed_probe": 2788,
+  "primary": {
+    "slug": "h37-1-coverprob-h19-5-r1",
+    "hypothesis": "H37-1: metric-aware packing of the H19-5 surface - lazy-greedy maximum expected coverage of the detector probability field under the official 300 m kernel, at the rung-3.0 budget (41,333 px) with the unchanged H27-4 blind 1-px catalogue-flank prune",
+    "status": "UNSCORED; passed the frozen H37-1 gate on fresh seeds 250-259: +0.007289 mean OOF delta DTI vs the d=2.8 reference and +0.004614 over the H36-1 incumbent, 10/10 seeds, 4/4 folds, content-blind matched-N control -0.044684, integrity clean.",
+    "content_id": "0bbddf41eb6d",
+    "nan": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif",
+    "allfinite": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif",
+    "zip": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.zip",
+    "sha256_nan": "4557311baedb4e661363bc1d3e6c959a1d8f9999f8bfc5fabb85fd8c338850c6",
+    "sha256_allfinite": "b733cfdbf0d479e1c0eea06f75ef61ba55f14409f2fa9a5876ef7234f294e7df",
+    "sha256_zip": "9360a2058aeb1736f3340cb6239ff47001543295f63137b3f57d196af6a67a4b",
+    "bytes_nan": 1590628,
+    "bytes_allfinite": 825296,
+    "bytes_zip": 297120,
+    "emitted_px": 37447,
+    "format_verified": true,
+    "note": "28GEMSDOE H37-1 cover+h19 | OOF dDTI +0.00729 vs d2.8, +0.00461 over H36-1; 10/10 seeds, 4/4 folds (seeds 250-259); no T-v2 | id 0bbddf41eb6d | UNSCORED, not slot-approved",
+    "note_file": "note-gemsdoe28-h37-1-coverprob-h19-5-r1-0bbddf41eb6d.txt",
+    "pre_prune_px": 41333,
+    "prune_px_removed": 3886,
+    "base_reference_id": "e56ea318af89",
+    "base_reference_live_score": 0.26,
+    "holdout_evidence": "evidence/h37_1_holdout.json",
+    "holdout_preregistration": "knowledge/29_preregistration_H37-1.md",
+    "holdout_seeds": "250-259",
+    "holdout_mean_gain": 0.007289,
+    "holdout_mean_gain_vs_incumbent": 0.004614,
+    "holdout_seeds_improved": "10/10",
+    "holdout_folds_improved": "4/4"
+  },
+  "probe": {
+    "slug": "h37-1-probe-union-pool-r1",
+    "hypothesis": "H37-1 probe (NOT promoted): same rule over the union pool (H19-5 + the detector's own 1-px ridges) at the same budget and the same prune",
+    "status": "UNSCORED PROBE, not slot-approved; recorded because the union pool is the exact pool the gate's primary used, while the shipped H19-5 pool is the gate's pool3x probe.",
+    "content_id": "52a13184267e",
+    "nan": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+    "allfinite": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
+    "zip": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.zip",
+    "sha256_nan": "4d00b72c78fa21c258061079daad55c3a99b1bc91dc5d3e2516ad4c0e90ba334",
+    "sha256_allfinite": "8a59bc5ea68df8c64f2467fd5e8b3652a324fa3d5e364b9e974d993401c2ec1f",
+    "sha256_zip": "431b1a4279dfaef798b3ee7fcc219f851ab145035918dd30903fd44fe910e7f9",
+    "bytes_nan": 1592246,
+    "bytes_allfinite": 827730,
+    "bytes_zip": 297018,
+    "emitted_px": 38545,
+    "format_verified": true,
+    "note": "28GEMSDOE H37-1 probe union | same rule, union pool; NOT promoted - proxy-favoured, detector-content emission | id 52a13184267e | UNSCORED, not slot-approved",
+    "note_file": "note-gemsdoe28-h37-1-probe-union-pool-r1-52a13184267e.txt",
+    "pre_prune_px": 41333,
+    "prune_px_removed": 2788,
+    "base_reference_id": "e56ea318af89",
+    "base_reference_live_score": 0.26,
+    "holdout_evidence": "evidence/h37_1_holdout.json",
+    "holdout_preregistration": "knowledge/29_preregistration_H37-1.md",
+    "holdout_seeds": "250-259",
+    "holdout_mean_gain": null,
+    "holdout_mean_gain_vs_incumbent": null,
+    "holdout_seeds_improved": "n/a",
+    "holdout_folds_improved": "n/a"
+  },
+  "projection": {
+    "incumbent_live_range": [
+      0.2717,
+      0.2727
+    ],
+    "relative_transfer": {
+      "assumption": "same relative OOF DTI gain on the live anchor",
+      "relative_gain": 0.04581,
+      "range": [
+        0.2841,
+        0.2852
+      ]
+    },
+    "credit_transfer": {
+      "assumption": "live credit and live emission mass grow by the same fractions the gate measured on the proxy (+6.89 % credit, +3.05 % dots), evaluated with Eq. 1 at |G| = 12,225.896 and gamma = 0.12653",
+      "range": [
+        0.2757,
+        0.2895
+      ],
+      "point": 0.2895
+    },
+    "half_transfer_conservative": [
+      0.2779,
+      0.2789
+    ],
+    "verdict": "MODELLED 0.278-0.286 against the incumbent's modelled 0.2717-0.2727. This is not a score: the proxy hides catalogue components interleaved with the known catalogue, so a coverage objective aimed at the detector's own field is a priori favoured by it (registry/irregularities.json: interleaved-holdout-has-no-far-field-truth)."
+  },
+  "counts_asserted": {
+    "h19_5": 121131,
+    "d2_8": 44090,
+    "rung30": 41333,
+    "catalogue": 60988
+  }
+}
