@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "record_type": "single-use holdout seed claim; existence consumes this range even if process is interrupted",
+  "stage": "screen",
+  "seeds": [
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169
+  ],
+  "claimed_utc": "2026-10-03T14:19:20Z",
+  "protocol_commit": "524bf277e7b5487bfea1982d2a352c9f0802c0e0",
+  "protocol_sha256": "71af9f419606c4b2d54e0561c3bdd33199b58c36b9e2e6a40b331109a78bae01",
+  "seed_reuse_audit_sha256": "078dd46973c3aeaf487ee848318e6508fabeb605e1e8536bf427efc31fe6c1dd",
+  "input_hashes": {
+    "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "transform_code": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+  },
+  "feature_hashes": {
+    "h28_edge": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2",
+    "h28_edge_metadata": "03a531975f718d2b97643f2bde9f473138a7db651a49057b8dd84edd432e2a17",
+    "euler": "57efbcf2ad32a537c24acd15f6c54fa33fff67979f302cd34f0d5a845caf107c",
+    "euler_metadata": "bf6c3193bb0aae951abb3eb5149413338e0ca8fafd669bd4fb9e3ca490552e2d",
+    "combined": "ef409886f2bef0566e7bdc8f493035a8520b824b8cd0bd5cb0cc1a442831affd",
+    "combined_metadata": "a1d030170167c12b16808e0a69af50b7fbebc58810cbe4155211e58f01ae5789"
+  },
+  "code_hashes": {
+    "runner": "0980b22520c2313a4e4b8e4a399f13288705487daa97a913b6b8fbf78e846b8f",
+    "h28_evaluation_helpers": "989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd",
+    "euler_module": "4a9fe98f30edf9a35857a0ed540df3ae4a3d62b35fb86c7395827f67b176e460",
+    "oof_detector": "6c041479cf92d28d7a084f5d69407963bde45b7463e0fea624673efa3506b235",
+    "holdout": "f3b5e0271843471eb506f717c4cb53702dcea5dc4eafac9eea454f515a84e19b",
+    "metric": "4b0a600d7fa92e1338b3f8ffeed3df76031ab94725f8143df1fc194c40bfb101",
+    "grid": "614af3d608681336df0b58bae5bff453aa8816f2c52b62beb4fff23fb9a927c2",
+    "links": "12fb39db9c8e4f48b9dc5fed329aa5e7d40dbe766b264976603b3ffbb3a6c310",
+    "candidates": "a3c894574955bd4d47fd20ce53ee98a251905d4da9807270af0a4e5b1d791035",
+    "graph": "746d11ebd3ab9d22054d251e2776642eb1e947bf1c05f24789e882100f1fd613",
+    "paths": "1db32dfcc194224066b6f3fb9da72f86d5f7786a0e90cbd62dd55bf2ed15b4c3",
+    "thinning": "1f1b2817f120663584fd59514a2001a3d3836afe2fb6b9fb09e103c8da2f8918",
+    "potential_edges": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1"
+  },
+  "runtime_versions": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "rasterio": "1.4.4",
+    "scikit_learn": "1.9.1"
+  }
+}

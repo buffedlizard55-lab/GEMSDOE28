@@ -1,0 +1,1294 @@
+{
+  "schema": 1,
+  "hypothesis": "H31-1 depth-labeled magnetic Euler source solutions/clusters",
+  "status": "frozen gate failed; not promoted",
+  "checked_utc": "2026-10-03T14:22:56Z",
+  "protocol_path": "knowledge/12_preregistration_H31-1_euler.md",
+  "protocol_commit": "524bf277e7b5487bfea1982d2a352c9f0802c0e0",
+  "protocol_sha256": "71af9f419606c4b2d54e0561c3bdd33199b58c36b9e2e6a40b331109a78bae01",
+  "stage": "screen",
+  "seeds": [
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169
+  ],
+  "cells": [
+    {
+      "seed": 160,
+      "fold": "NW",
+      "n_truth": 2122,
+      "topology_dots": 347,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 375.25916688628985,
+        "fp": 14191.24074326512,
+        "dti": 0.08138523245800626,
+        "dots": 14410
+      },
+      "candidate": {
+        "tp": 380.08279814055425,
+        "fp": 14112.331118541195,
+        "dti": 0.0826971175345928,
+        "dots": 14333
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2819,
+      "topology_dots": 665,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 971.8723373451908,
+        "fp": 17605.46176500196,
+        "dti": 0.16277450518541947,
+        "dots": 18138
+      },
+      "candidate": {
+        "tp": 854.4494568639207,
+        "fp": 17253.74260655343,
+        "dti": 0.1453927089445402,
+        "dots": 17729
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "SW",
+      "n_truth": 4023,
+      "topology_dots": 680,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 651.7362329853097,
+        "fp": 18175.58043203128,
+        "dti": 0.09332030165826671,
+        "dots": 18503
+      },
+      "candidate": {
+        "tp": 642.0681034502259,
+        "fp": 18133.918878605236,
+        "dti": 0.09207128931352619,
+        "dots": 18460
+      }
+    },
+    {
+      "seed": 160,
+      "fold": "SE",
+      "n_truth": 3331,
+      "topology_dots": 573,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 685.7012752279347,
+        "fp": 14319.485674948792,
+        "dti": 0.1210238183718073,
+        "dots": 14675
+      },
+      "candidate": {
+        "tp": 655.8562423001841,
+        "fp": 14126.501328641378,
+        "dti": 0.11667400171528977,
+        "dots": 14468
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "NW",
+      "n_truth": 2094,
+      "topology_dots": 398,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 461.2160734575301,
+        "fp": 14249.664769244668,
+        "dti": 0.09988704766788203,
+        "dots": 14510
+      },
+      "candidate": {
+        "tp": 454.3104164759486,
+        "fp": 14180.868795003367,
+        "dti": 0.09871515325026034,
+        "dots": 14434
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2315,
+      "topology_dots": 597,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 658.5037049954093,
+        "fp": 17668.069584453937,
+        "dti": 0.11935221132291246,
+        "dots": 18025
+      },
+      "candidate": {
+        "tp": 576.2313096866275,
+        "fp": 17270.99194733187,
+        "dti": 0.10628740985611708,
+        "dots": 17601
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "SW",
+      "n_truth": 4072,
+      "topology_dots": 634,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 647.1697506124724,
+        "fp": 18150.080642462737,
+        "dti": 0.09222817898585979,
+        "dots": 18504
+      },
+      "candidate": {
+        "tp": 636.1059903438542,
+        "fp": 18114.893415894894,
+        "dti": 0.09077114088787554,
+        "dots": 18461
+      }
+    },
+    {
+      "seed": 161,
+      "fold": "SE",
+      "n_truth": 3297,
+      "topology_dots": 580,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 621.9333686642522,
+        "fp": 14341.005506815176,
+        "dti": 0.11046405439694483,
+        "dots": 14666
+      },
+      "candidate": {
+        "tp": 645.3374592381494,
+        "fp": 14121.945393519341,
+        "dti": 0.11542316753252801,
+        "dots": 14454
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "NW",
+      "n_truth": 1814,
+      "topology_dots": 374,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 420.6798564643534,
+        "fp": 14199.80544879882,
+        "dti": 0.09614886728480304,
+        "dots": 14446
+      },
+      "candidate": {
+        "tp": 415.3057172993959,
+        "fp": 14105.58690804697,
+        "dti": 0.09535467810648098,
+        "dots": 14352
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2371,
+      "topology_dots": 436,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 662.0726922421736,
+        "fp": 17548.147959809045,
+        "dti": 0.11953264555599309,
+        "dots": 17925
+      },
+      "candidate": {
+        "tp": 626.8807664977819,
+        "fp": 17156.459794774964,
+        "dti": 0.11495084478033639,
+        "dots": 17521
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "SW",
+      "n_truth": 4226,
+      "topology_dots": 572,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 525.2184748386899,
+        "fp": 18113.224872295745,
+        "dti": 0.07388609580123962,
+        "dots": 18398
+      },
+      "candidate": {
+        "tp": 500.30656591704775,
+        "fp": 18072.92723155341,
+        "dti": 0.07051093227365272,
+        "dots": 18354
+      }
+    },
+    {
+      "seed": 162,
+      "fold": "SE",
+      "n_truth": 3869,
+      "topology_dots": 476,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 724.952165370463,
+        "fp": 14265.309720267127,
+        "dti": 0.11897622492707621,
+        "dots": 14639
+      },
+      "candidate": {
+        "tp": 725.6852040718616,
+        "fp": 14070.486406383003,
+        "dti": 0.11986011664410147,
+        "dots": 14446
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "NW",
+      "n_truth": 2254,
+      "topology_dots": 326,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 456.2991445897764,
+        "fp": 14159.53806663731,
+        "dti": 0.09654330734034976,
+        "dots": 14421
+      },
+      "candidate": {
+        "tp": 461.18006009696865,
+        "fp": 14082.88528022351,
+        "dti": 0.09787325574558615,
+        "dots": 14355
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2600,
+      "topology_dots": 489,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 748.1571227500697,
+        "fp": 17540.468244417072,
+        "dti": 0.1303926404911096,
+        "dots": 17978
+      },
+      "candidate": {
+        "tp": 721.001621030889,
+        "fp": 17151.445697245304,
+        "dti": 0.12750958785093572,
+        "dots": 17572
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "SW",
+      "n_truth": 3948,
+      "topology_dots": 679,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 575.4136368912174,
+        "fp": 18173.61831552549,
+        "dti": 0.08329421623470465,
+        "dots": 18482
+      },
+      "candidate": {
+        "tp": 561.6930223731067,
+        "fp": 18127.870040594993,
+        "dti": 0.08144831215151598,
+        "dots": 18437
+      }
+    },
+    {
+      "seed": 163,
+      "fold": "SE",
+      "n_truth": 3320,
+      "topology_dots": 505,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 717.7821520575553,
+        "fp": 14285.411684799514,
+        "dti": 0.12689199037866308,
+        "dots": 14663
+      },
+      "candidate": {
+        "tp": 656.0591259600276,
+        "fp": 14109.334775712236,
+        "dti": 0.11696379238752863,
+        "dots": 14447
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "NW",
+      "n_truth": 1938,
+      "topology_dots": 347,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 333.3651992543685,
+        "fp": 14195.417746751134,
+        "dti": 0.07481002800816144,
+        "dots": 14390
+      },
+      "candidate": {
+        "tp": 354.5863381746533,
+        "fp": 14095.365669033337,
+        "dti": 0.07985476638530462,
+        "dots": 14296
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2840,
+      "topology_dots": 537,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 785.9551912006455,
+        "fp": 17565.898843106235,
+        "dti": 0.13226289922532494,
+        "dots": 18011
+      },
+      "candidate": {
+        "tp": 740.8616763103646,
+        "fp": 17209.502474139656,
+        "dti": 0.126382202639122,
+        "dots": 17626
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "SW",
+      "n_truth": 4364,
+      "topology_dots": 761,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 606.8842098844516,
+        "fp": 18264.44163280903,
+        "dti": 0.08352998683471237,
+        "dots": 18580
+      },
+      "candidate": {
+        "tp": 578.0536919498471,
+        "fp": 18224.025228343453,
+        "dti": 0.07971377816411898,
+        "dots": 18535
+      }
+    },
+    {
+      "seed": 164,
+      "fold": "SE",
+      "n_truth": 4225,
+      "topology_dots": 535,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 921.9180494319017,
+        "fp": 14244.08867464135,
+        "dti": 0.14375317409345598,
+        "dots": 14701
+      },
+      "candidate": {
+        "tp": 1004.7017131809371,
+        "fp": 14049.688655302565,
+        "dti": 0.15720871241470308,
+        "dots": 14560
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "NW",
+      "n_truth": 2416,
+      "topology_dots": 312,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 473.324614098955,
+        "fp": 14130.923795058578,
+        "dti": 0.097519319505275,
+        "dots": 14396
+      },
+      "candidate": {
+        "tp": 504.39380837775377,
+        "fp": 14049.328610267847,
+        "dti": 0.10413733373601627,
+        "dots": 14337
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2721,
+      "topology_dots": 555,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 703.531258515608,
+        "fp": 17620.65026105036,
+        "dti": 0.12043393698308183,
+        "dots": 17986
+      },
+      "candidate": {
+        "tp": 696.0026664358181,
+        "fp": 17266.018969604553,
+        "dti": 0.12064101511214369,
+        "dots": 17637
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "SW",
+      "n_truth": 4061,
+      "topology_dots": 746,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 609.90800604726,
+        "fp": 18209.83466197471,
+        "dti": 0.08697132131801737,
+        "dots": 18538
+      },
+      "candidate": {
+        "tp": 617.8686596846337,
+        "fp": 18161.435056699993,
+        "dti": 0.08820822054356356,
+        "dots": 18497
+      }
+    },
+    {
+      "seed": 165,
+      "fold": "SE",
+      "n_truth": 3529,
+      "topology_dots": 597,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 772.8257767338273,
+        "fp": 14325.33195006875,
+        "dti": 0.13226904981271634,
+        "dots": 14725
+      },
+      "candidate": {
+        "tp": 746.1299969846158,
+        "fp": 14136.397173205785,
+        "dti": 0.128649636685471,
+        "dots": 14530
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "NW",
+      "n_truth": 2071,
+      "topology_dots": 356,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 2.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 456.40266188567057,
+        "fp": 14177.249510277365,
+        "dti": 0.09957448050243196,
+        "dots": 14443
+      },
+      "candidate": {
+        "tp": 448.10534191289867,
+        "fp": 14123.179584564357,
+        "dti": 0.0980310119398199,
+        "dots": 14380
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2233,
+      "topology_dots": 531,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 523.0980343696515,
+        "fp": 17628.454584840416,
+        "dti": 0.09657116289628981,
+        "dots": 17917
+      },
+      "candidate": {
+        "tp": 488.2324551849047,
+        "fp": 17266.539753581354,
+        "dti": 0.09147461734157929,
+        "dots": 17528
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "SW",
+      "n_truth": 3679,
+      "topology_dots": 711,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 493.3660444726013,
+        "fp": 18240.803668560264,
+        "dti": 0.07374641873236913,
+        "dots": 18513
+      },
+      "candidate": {
+        "tp": 483.7489472503848,
+        "fp": 18188.343949989714,
+        "dti": 0.07244333312657215,
+        "dots": 18461
+      }
+    },
+    {
+      "seed": 166,
+      "fold": "SE",
+      "n_truth": 4222,
+      "topology_dots": 482,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 822.7816345007192,
+        "fp": 14217.00842915259,
+        "dti": 0.1288503890885469,
+        "dots": 14623
+      },
+      "candidate": {
+        "tp": 833.6017120767083,
+        "fp": 14053.327154198269,
+        "dti": 0.1311728683283305,
+        "dots": 14463
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "NW",
+      "n_truth": 2295,
+      "topology_dots": 394,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.4142135623730951
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 437.77930932397425,
+        "fp": 14209.936943877237,
+        "dti": 0.091863463678768,
+        "dots": 14456
+      },
+      "candidate": {
+        "tp": 436.86676226263353,
+        "fp": 14114.295425950191,
+        "dti": 0.09204495734103131,
+        "dots": 14360
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2115,
+      "topology_dots": 521,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 538.7847399347356,
+        "fp": 17630.79887268978,
+        "dti": 0.10116281721904076,
+        "dots": 17936
+      },
+      "candidate": {
+        "tp": 524.6131670594817,
+        "fp": 17218.610186652943,
+        "dti": 0.10010470085451244,
+        "dots": 17518
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "SW",
+      "n_truth": 3585,
+      "topology_dots": 656,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 449.5340602701605,
+        "fp": 18203.20400866861,
+        "dti": 0.06812621300542569,
+        "dots": 18454
+      },
+      "candidate": {
+        "tp": 442.8501803485625,
+        "fp": 18151.424102183963,
+        "dti": 0.06723241820098573,
+        "dots": 18396
+      }
+    },
+    {
+      "seed": 167,
+      "fold": "SE",
+      "n_truth": 3756,
+      "topology_dots": 567,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 770.9175113855513,
+        "fp": 14330.085341639286,
+        "dti": 0.12795310180283492,
+        "dots": 14726
+      },
+      "candidate": {
+        "tp": 709.3019805245192,
+        "fp": 14112.810976103508,
+        "dti": 0.11882652550826044,
+        "dots": 14476
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "NW",
+      "n_truth": 1894,
+      "topology_dots": 404,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 440.80884326942623,
+        "fp": 14202.069170389865,
+        "dti": 0.09919691781657801,
+        "dots": 14450
+      },
+      "candidate": {
+        "tp": 456.8605069231538,
+        "fp": 14125.213496916802,
+        "dti": 0.10309120432436311,
+        "dots": 14380
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2785,
+      "topology_dots": 613,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 888.5984859668301,
+        "fp": 17602.39352283358,
+        "dti": 0.14994410003011743,
+        "dots": 18082
+      },
+      "candidate": {
+        "tp": 824.5023627098547,
+        "fp": 17215.499141137592,
+        "dti": 0.14127867035699335,
+        "dots": 17679
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "SW",
+      "n_truth": 4046,
+      "topology_dots": 679,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 502.7302711270362,
+        "fp": 18189.935895072886,
+        "dti": 0.07207258123871953,
+        "dots": 18448
+      },
+      "candidate": {
+        "tp": 460.2137756621371,
+        "fp": 18149.61926763591,
+        "dti": 0.06613438868359597,
+        "dots": 18391
+      }
+    },
+    {
+      "seed": 168,
+      "fold": "SE",
+      "n_truth": 3584,
+      "topology_dots": 477,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 652.8812909464557,
+        "fp": 14260.539946969215,
+        "dti": 0.11160584779178007,
+        "dots": 14607
+      },
+      "candidate": {
+        "tp": 660.8671001222875,
+        "fp": 14060.022623376177,
+        "dti": 0.11371951822780067,
+        "dots": 14405
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "NW",
+      "n_truth": 2047,
+      "topology_dots": 406,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 483.57957547659487,
+        "fp": 14208.599639402142,
+        "dti": 0.10567652703339853,
+        "dots": 14479
+      },
+      "candidate": {
+        "tp": 466.07580796744685,
+        "fp": 14125.175202757944,
+        "dti": 0.10230270691028631,
+        "dots": 14388
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "NE_LidarGapHeavy",
+      "n_truth": 2870,
+      "topology_dots": 564,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 820.2076409055198,
+        "fp": 17590.595771753146,
+        "dti": 0.13720066830730357,
+        "dots": 18057
+      },
+      "candidate": {
+        "tp": 785.8000068516046,
+        "fp": 17232.98159686834,
+        "dti": 0.13319194287319178,
+        "dots": 17677
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "SW",
+      "n_truth": 3970,
+      "topology_dots": 614,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 517.1146367732368,
+        "fp": 18138.298762351675,
+        "dti": 0.07486730081807175,
+        "dots": 18417
+      },
+      "candidate": {
+        "tp": 480.9667565680239,
+        "fp": 18110.713293284185,
+        "dti": 0.06976259292635052,
+        "dots": 18371
+      }
+    },
+    {
+      "seed": 169,
+      "fold": "SE",
+      "n_truth": 3429,
+      "topology_dots": 502,
+      "minimum_spacing_px": {
+        "control": 1.0,
+        "candidate": 1.0
+      },
+      "checks": {
+        "mask_contained_in_active_fold": true,
+        "no_known_catalogue_overlap": true,
+        "minimum_spacing_at_least_1_5_px": false,
+        "nonempty_hidden_truth": true
+      },
+      "control": {
+        "tp": 666.0000580691237,
+        "fp": 14302.149736648184,
+        "dti": 0.11609199903498102,
+        "dots": 14646
+      },
+      "candidate": {
+        "tp": 661.5821975339653,
+        "fp": 14100.363578223478,
+        "dti": 0.11615693820260341,
+        "dots": 14444
+      }
+    }
+  ],
+  "summary": {
+    "mean_paired_gain": -0.001947186825921305,
+    "positive_seed_count": 2,
+    "positive_fold_count": 1,
+    "gain_by_seed": {
+      "160": -0.005417185041387693,
+      "161": -0.002683655211704536,
+      "162": -0.001966815441135101,
+      "163": -0.003331801577315153,
+      "164": 0.0022008428603984866,
+      "165": 0.001110644614525997,
+      "166": -0.0014051551208339903,
+      "167": -0.0027242484503198668,
+      "168": -0.0021489163211104827,
+      "169": -0.003105578570330711
+    },
+    "gain_by_fold": {
+      "NE_LidarGapHeavy": -0.006241388660712104,
+      "NW": 0.001149699397808776,
+      "SE": -0.0003224372052189672,
+      "SW": -0.0023746208355629253
+    },
+    "control_mean_dti": 0.106303876070961,
+    "candidate_mean_dti": 0.10435668924503971,
+    "control_mean_dots": 16399.1,
+    "candidate_mean_dots": 16218.975,
+    "cells": 40
+  },
+  "gate": {
+    "mean_gain_at_least_0_001": false,
+    "positive_fold_means_at_least_3_of_4": false,
+    "positive_seed_means_at_least_8_of_10": false,
+    "all_data_and_leakage_checks_pass": false,
+    "passed": false
+  },
+  "control": "H28-1 six potential-edge features + T-v2 + H27-4 r1; same-run paired baseline",
+  "candidate": "same recipe plus three SI-0 Euler cluster features; no new emission points",
+  "current_best_same_run_control": true,
+  "proxy_limit": "Catalogue-component hide-and-recover only; not organizer truth or competition performance.",
+  "input_hashes": {
+    "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "prepared_features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "transform_code": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+  },
+  "feature_hashes": {
+    "h28_edge": "04c5fb77f07dacf35e508ba8668848b4c593840b840a89175ef87644a68b12a2",
+    "h28_edge_metadata": "03a531975f718d2b97643f2bde9f473138a7db651a49057b8dd84edd432e2a17",
+    "euler": "57efbcf2ad32a537c24acd15f6c54fa33fff67979f302cd34f0d5a845caf107c",
+    "euler_metadata": "bf6c3193bb0aae951abb3eb5149413338e0ca8fafd669bd4fb9e3ca490552e2d",
+    "combined": "ef409886f2bef0566e7bdc8f493035a8520b824b8cd0bd5cb0cc1a442831affd",
+    "combined_metadata": "a1d030170167c12b16808e0a69af50b7fbebc58810cbe4155211e58f01ae5789"
+  },
+  "code_hashes": {
+    "runner": "0980b22520c2313a4e4b8e4a399f13288705487daa97a913b6b8fbf78e846b8f",
+    "h28_evaluation_helpers": "989dd1b03e448cc0ab84e1401dd197b4d25213b956163c2a3f33a8959d1e9bbd",
+    "euler_module": "4a9fe98f30edf9a35857a0ed540df3ae4a3d62b35fb86c7395827f67b176e460",
+    "oof_detector": "6c041479cf92d28d7a084f5d69407963bde45b7463e0fea624673efa3506b235",
+    "holdout": "f3b5e0271843471eb506f717c4cb53702dcea5dc4eafac9eea454f515a84e19b",
+    "metric": "4b0a600d7fa92e1338b3f8ffeed3df76031ab94725f8143df1fc194c40bfb101",
+    "grid": "614af3d608681336df0b58bae5bff453aa8816f2c52b62beb4fff23fb9a927c2",
+    "links": "12fb39db9c8e4f48b9dc5fed329aa5e7d40dbe766b264976603b3ffbb3a6c310",
+    "candidates": "a3c894574955bd4d47fd20ce53ee98a251905d4da9807270af0a4e5b1d791035",
+    "graph": "746d11ebd3ab9d22054d251e2776642eb1e947bf1c05f24789e882100f1fd613",
+    "paths": "1db32dfcc194224066b6f3fb9da72f86d5f7786a0e90cbd62dd55bf2ed15b4c3",
+    "thinning": "1f1b2817f120663584fd59514a2001a3d3836afe2fb6b9fb09e103c8da2f8918",
+    "potential_edges": "96dbe727891f06cd42e0f111df3696d8995cf2e62bd522c8781677365e024cf1"
+  },
+  "runtime_versions": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "rasterio": "1.4.4",
+    "scikit_learn": "1.9.1"
+  },
+  "seed_reuse_audit_sha256": "078dd46973c3aeaf487ee848318e6508fabeb605e1e8536bf427efc31fe6c1dd",
+  "single_use_seed_claim": {
+    "path": "evidence/h31_1_euler_screen.started.json",
+    "sha256": "269201d6e9a6cfb749ecbfcf06d770a87707483560c7d9eaf1078965335a64f9"
+  },
+  "probabilities_valid": true,
+  "known_catalogue_overlap_pixels": 0,
+  "grid_mask_violations": 0,
+  "minimum_spacing_failures": 40,
+  "empty_truth_cells": 0,
+  "data_integrity_checks": {
+    "probabilities_finite_in_0_1": true,
+    "candidate_and_control_inside_active_fold": true,
+    "zero_known_catalogue_overlap": true,
+    "minimum_spacing_at_least_1_5_px": false,
+    "nonempty_hidden_truth_every_cell": true
+  },
+  "feature_sufficiency": {
+    "vertical_derivative_coverage_at_least_0_50": true,
+    "accepted_si0_solutions_at_least_100": true,
+    "retained_si0_clusters_at_least_10": true,
+    "passed": true
+  },
+  "feature_filter_diagnostics": {
+    "derivative": {
+      "tile_size_px": 128,
+      "core_size_px": 64,
+      "core_stride_px": 64,
+      "pixel_size_m": 100.0,
+      "tukey_alpha": 0.25,
+      "minimum_tile_valid_fraction": 0.999,
+      "tile_count": 2850,
+      "accepted_tiles": 1012,
+      "valid_field_cells": 5164312,
+      "valid_horizontal_derivative_cells": 5149759,
+      "valid_vertical_derivative_cells": 4145143,
+      "vertical_coverage_share_of_valid_field": 0.8026515439036216,
+      "sign_convention": "positive north=-dT/drow; positive downward gz=|k|T in source-field units/m multiplied by 100 m/cell; source units unverified"
+    },
+    "si0_solver_filters": {
+      "structural_index": 0.0,
+      "window_count": 764351,
+      "fully_valid_windows": 254631,
+      "condition_pass_windows": 254631,
+      "depth_pass_windows": 180365,
+      "relative_se_pass_windows_after_depth": 133053,
+      "source_window_pass_windows_after_previous": 118089,
+      "accepted_solutions": 118089,
+      "window_size_px": 10,
+      "stride_px": 4,
+      "max_condition_number": 100000.0,
+      "max_relative_depth_se": 0.15,
+      "depth_range_m": [
+        100.0,
+        3000.0
+      ],
+      "source_tolerance_px": 2.0
+    },
+    "si0_cluster_stats": {
+      "solution_count": 118089,
+      "lineament_pixels": 582514,
+      "alignment_tolerance_m": 200.0,
+      "aligned_solution_count": 76915,
+      "dbscan_cluster_count": 6309,
+      "retained_cluster_count": 6309,
+      "cluster_eps_m": 600.0,
+      "min_samples": 4,
+      "max_depth_mad_m": 500.0
+    }
+  },
+  "runtime_seconds": 216.226,
+  "submission_raster_written": false,
+  "drivendata_access": false,
+  "sha256": "613823b31f5b10a82d5ac09d601e266809c280dec428578d00b3adab5046887e"
+}

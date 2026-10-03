@@ -1,0 +1,70 @@
+name: Verify static Pages build
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - 'registry/next_hypotheses.json'
+      - 'registry/leaderboard_snapshot_2026-10-03.json'
+      - 'registry/irregularities.json'
+      - 'registry/sources.json'
+      - 'docs/downloads/manifest.json'
+      - 'docs/downloads/h28_1_candidate_manifest.json'
+      - 'docs/data/topology_review_classes.json'
+      - 'docs/*.html'
+      - 'index.html'
+      - '.github/workflows/build-site.yml'
+      - 'evidence/h28_1_edge_holdout.json'
+      - 'evidence/h31_1_euler_feature_audit.json'
+      - 'evidence/h31_1_seed_reuse_audit.json'
+      - 'evidence/h31_1_prereg_history_audit.json'
+      - 'evidence/h31_1_euler_screen.json'
+      - 'evidence/h31_1_euler_confirm.json'
+      - 'knowledge/12_preregistration_H31-1_euler.md'
+      - 'evidence/range_validator_forensics_2026-10-03.json'
+      - 'evidence/restore_audit.json'
+      - 'evidence/submission_file_audit.json'
+      - 'scripts/build_site.py'
+      - 'docs/assets/**'
+  pull_request:
+    paths:
+      - 'registry/next_hypotheses.json'
+      - 'registry/leaderboard_snapshot_2026-10-03.json'
+      - 'registry/irregularities.json'
+      - 'registry/sources.json'
+      - 'docs/downloads/manifest.json'
+      - 'docs/downloads/h28_1_candidate_manifest.json'
+      - 'docs/data/topology_review_classes.json'
+      - 'docs/*.html'
+      - 'index.html'
+      - '.github/workflows/build-site.yml'
+      - 'evidence/h28_1_edge_holdout.json'
+      - 'evidence/h31_1_euler_feature_audit.json'
+      - 'evidence/h31_1_seed_reuse_audit.json'
+      - 'evidence/h31_1_prereg_history_audit.json'
+      - 'evidence/h31_1_euler_screen.json'
+      - 'evidence/h31_1_euler_confirm.json'
+      - 'knowledge/12_preregistration_H31-1_euler.md'
+      - 'evidence/range_validator_forensics_2026-10-03.json'
+      - 'evidence/restore_audit.json'
+      - 'evidence/submission_file_audit.json'
+      - 'scripts/build_site.py'
+      - 'docs/assets/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build pages without network access
+        run: python scripts/build_site.py
+      - name: Require generated pages to be current
+        run: git diff --exit-code -- docs/*.html index.html

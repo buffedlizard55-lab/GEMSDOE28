@@ -1,0 +1,61 @@
+{
+  "checked_utc": "2026-10-03T06:55:00Z",
+  "question": "What most likely caused the earlier portal value-range validator error?",
+  "scope": "Independent local inspection of the exact predecessor TIFFs; not an organizer validator replay and not proof of the portal's root cause.",
+  "template": {
+    "file": "data/sample_submission.tif",
+    "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "provenance": "hash-pinned owner mirror; not organizer-authenticated",
+    "crs": "EPSG:32611",
+    "shape": [3730, 3292],
+    "transform": [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0],
+    "footprint_pixels": 5167373
+  },
+  "artifacts": [
+    {
+      "file": "GEMSDOE25/docs/downloads/gems25-factorial-best-v1-nan.tif",
+      "source_commit": "9b01f27058fc4bf78d979fff63f2db689e6fe841",
+      "sha256": "fbef100fbadc57ec1c663d523101114ba312d81518ffd8fd21229d91dacf3835",
+      "local_hash_verified": true,
+      "grid_matches_owner_mirror_template": true,
+      "bands": 1,
+      "dtype": "float32",
+      "nodata": "NaN",
+      "nan_inside_template_footprint": 2344929,
+      "finite_outside_template_footprint": 2832257,
+      "finite_interior_min": 0.0,
+      "finite_interior_max": 0.9999998211860657,
+      "np_all_interior_values_satisfy_0_le_x_le_1": false
+    },
+    {
+      "file": "GEMSDOE25/docs/downloads/gems25-factorial-best-v1-allfinite.tif",
+      "source_commit": "9b01f27058fc4bf78d979fff63f2db689e6fe841",
+      "sha256": "1f729e73c8ff1d23b1bafe0bc6474198294863a40efd025a25152d4b22cf2325",
+      "local_hash_verified": true,
+      "grid_matches_owner_mirror_template": true,
+      "bands": 1,
+      "dtype": "float32",
+      "nan_count": 0,
+      "outside_footprint_finite_pixels": 7111787,
+      "outside_footprint_positive_pixels": 625805,
+      "whole_array_min": 0.0,
+      "whole_array_max": 0.9999998211860657,
+      "np_all_whole_array_values_satisfy_0_le_x_le_1": true,
+      "upload_recommendation": "No: although the strict numeric range passes, the predecessor file has 625,805 positive pixels outside the owner-mirror footprint, so it does not match the template mask."
+    }
+  ],
+  "conclusion": {
+    "most_plausible_explanation": "The exact earlier NaN TIFF contains 2,344,929 NaNs inside the owner-mirror template footprint. Ordinary elementwise range validation (0 <= x <= 1) rejects NaN, so this is a strong, directly measured candidate cause of a value-range error. The file's finite interior values are within [0,1]; the failure is not evidence of finite values exceeding 1.",
+    "confidence": "high that the old NaN file violates an all-finite/range contract; only moderate that this was the competition portal's exact root cause because the organizer validator and the user's exact response payload were not independently available.",
+    "not_supported": [
+      "Do not claim the portal was replayed or its internal implementation is known.",
+      "Do not switch to the predecessor allfinite file: it predicts outside the owner-mirror submission footprint.",
+      "Do not treat the owner-mirror template as organizer-authenticated solely because its hash is pinned."
+    ],
+    "current_action": "For each current candidate, audit one float32 band, exact grid, all footprint cells finite and within [0,1], no infinities, and outside-footprint mask separately. Keep the sample-matching NaN-outside TIFF as the primary format and an all-zero-outside fallback only for manual review; no portal automation or repeated upload attempts."
+  },
+  "manual_review": [
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://github.com/buffedlizard55-lab/GEMSDOE25/commit/9b01f27058fc4bf78d979fff63f2db689e6fe841"
+  ]
+}
