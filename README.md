@@ -181,10 +181,74 @@ opens the vector layer(s) inside, clips them to the competition footprint
 (`src/gems27/external_clip.py`) and writes `docs/data/sb_slip_tendency_in_footprint.{csv,json}`.
 The whole path — stream → hash → pin compare → archive → clip → write, plus pin-mismatch,
 no-vector-layer and no-pin failure modes — is covered by `tests/test_external_bridge_derived.py`
-(7 tests, exercised on a `file://` pin because `sciencebase.gov` is unreachable from the sandbox) and
-`tests/test_external_clip.py` (14 tests). `knowledge/19_preregistration_H33-1.md` freezes a hard
+(exercised on a `file://` pin because `sciencebase.gov` is unreachable from the sandbox) and
+`tests/test_external_clip.py`. `knowledge/19_preregistration_H33-1.md` freezes a hard
 precondition: **no seed is spent on H33-1 until that derived file exists and its schema lists
 slip/dilation-tendency fields.**
+
+**It landed, after three defects that each hid behind a green job.** Merging to `main` triggered the
+runner three times. Each failure was a real bug, and two of them would have committed an unusable
+table while reporting success:
+
+| Run | Outcome | Root cause |
+|---|---|---|
+| `37145601551` | HTTP 200, `35,912,323` B, **`pin_match: true`** — but **`n_records: 0`** and job exit 0 | ScienceBase URLs carry no file suffix (`…?f=__disk__33%2Fb0%2F91%2F…`), so `fetch()` named the payload `.bin` and GDAL refused to open a zip wearing that extension. The per-layer error *was* recorded as `LAYER_UNREADABLE`, but the aggregate row still said `DERIVED_WRITTEN`. |
+| `37145919044` | Failed loudly (**correct**) | `ImportError: geopandas is required to use pyogrio.read_dataframe()` — the workflow installed `pyogrio shapely pyproj pandas` but not `geopandas`. It ran locally only because `geopandas` was present in the sandbox; **the sandbox masked a runner-environment gap.** |
+| `37146168753` | **`DERIVED_WRITTEN`, 84,484 records** | — |
+
+Fixes now in place: `resolve_payload_format()` decides the archive type from **magic bytes first**
+(`PK\x03\x04` → zip) and copies to a correctly-suffixed name *without mutating the hashed original*;
+`build_sciencebase_derived` reports `LAYER_UNREADABLE` / `DERIVED_EMPTY` / `NO_VECTOR_LAYER` /
+`ARCHIVE_UNREADABLE` as distinct non-success statuses; the workflow **fails the job** on any of them
+plus `PIN_MISMATCH`, and asserts all five readers import *before* any fetch.
+
+### 3.5 H33-1 was run on its reserved seeds — and refuted, `0` of `6` criteria
+
+With the data in hand, H33-1 was executed before any new arm was designed, because it was the only
+preregistered hypothesis that was actually runnable. Full record:
+`knowledge/21_result_H33-1_refuted_2026-10-03.md`, `evidence/h33_1_holdout.json`.
+
+The precondition was verified **from the bytes** first: **84,484 fault segments** (17,369 km of
+trace, median segment 189 m) clipped from Siler (2022), DOI `10.5066/P9YL58W6`, carrying `TS`, `TD`,
+`TS_norm`, `TD_TS`, `ShearStres`, `NormalStre` and stress-orientation fields, reprojected from NAD83
+Albers Equal Area Conic to EPSG:32611. This **confirms from the data** the reading that
+`knowledge/19` had to treat as unconfirmed (the sandbox cannot reach `api.datacite.org`). The source
+`Strike` attribute was verified to be a geographic azimuth — median absolute difference `4.27°`
+against the geometric azimuth of the clipped vertices on 4,000 segments.
+
+| Variant | mean DTI | ΔDTI | seeds won | folds | Δdots/seed | credit per removed FP |
+|---|---:|---:|---:|---:|---:|---:|
+| `base_oof_d28` | 0.094633 | — | — | — | — | — |
+| **`h33_1_prune_p10`** (primary) | 0.091618 | **−0.003014** | **0/10** | **0/4** | −582.4 | **0.12855** |
+| `h33_1_prune_p05` (dose) | 0.093018 | −0.001615 | 0/10 | 0/4 | −290.0 | 0.14020 |
+| `control_top_p10` (direction) | 0.092426 | −0.002207 | 0/10 | 0/4 | −582.4 | 0.10104 |
+
+**All six frozen criteria failed** (`gate_passed: false`): ΔDTI `−0.003014` vs `+0.0010`; folds `0`
+vs `3`; seeds `0` vs `8`; removed credit/FP `0.12855` vs break-even `0.019292`; direction control
+`0.10104` — *better* than the primary, so the sign is inverted; `fav` coverage **`11.95%`** vs the
+`60%` precondition.
+
+Three things this teaches, in `knowledge/21` §2:
+
+1. **A hard coverage ceiling of ~12%.** Only `11.95%` of emitted dots (worst fold `9.61%`) had a
+   catalogued segment within 1 km whose strike agreed within 20°. The other 88% are neutral by
+   construction. The cause is structural, not tunable: **candidate dots are emitted off-catalogue by
+   design.** Any arm that transfers an attribute *from* mapped faults *to* off-catalogue candidates
+   inherits that ceiling. This closes a *class*, not a parameterisation.
+2. **The sign of the physics is inverted.** Dots the score called unfavourably oriented carried
+   *more* credit (`0.12855`) than the ones it called favourable (`0.10104`).
+3. **Pruning is exhausted as a family.** All three arms removed pixels at `0.101–0.140` credit per
+   FP against a break-even of `0.019292` — the discarded pixels were worth **5–7× break-even**.
+   With H31-1 and H32-2, that is three independent pruning arms failing the same way, reaching the
+   §3.1 frontier conclusion from a completely different direction.
+
+Per the preregistration: recorded, not retuned, not re-run on a fresh decade, no candidate TIFF,
+**no slot spent**. Seeds `200–209` are spent; the next arm takes `220–229`. **Seed disclosure:**
+seed `200` was invoked four times while fixing four implementation defects (metre/pixel unit
+confusion in the borrow radius, `np.column_stack(np.flatnonzero(...))` returning shape `(1, 2)`, a
+per-dot vector reshaped as a grid, float indices used to subscript an array). The harness is
+deterministic and no frozen constant was ever changed, so those invocations returned the recorded
+numbers; disclosed in `knowledge/21` §3 and `registry/irregularities.json`.
 
 ---
 
@@ -219,8 +283,9 @@ individual expected ΔDTI** — the ordering below differs from `knowledge/18` f
   1. **`H33-3` Heat-flow residual × 2 m probe conjunction — ADD arm.** DOI `10.5066/P9BZPVUC` (ScienceBase `6297d2fad34ec53d276c5b28`); runner byte-verified `sb_heat_flow_zip` = `130,154,244` B, SHA-256 `e7fd62c6…` (`registry/external_pins.json`) × already-verified GDR 2 m probes. The product carries a **residual** attribute (departure from de-convected background), which marks exactly the hydrothermal upflow the surface-rupture catalogue ignores.
   2. **`H33-4` Drainage-network neotectonics from 1 m DEMs — ADD arm.** Competition `dem_links.json` → USGS 3DEP/Theia tiles (free, official); channel offsets, beheaded streams, aligned knickpoints. Highest ceiling, highest cost; scope the in-footprint tile volume first.
   3. **`H33-5` Phase-2 discovery budget — bounded ADD arm.** ≤ ~600 px of multi-corroborated off-catalogue emission exploiting the official Phase-2 expert-expanded-label rescoring rule; Phase-1 cost capped at ≈ `0.2 × budget`. Contrarian by design: it buys Phase-2 optionality with a bounded Phase-1 cost.
-  4. **`H33-1` Kinematic reactivation favourability gate — PRUNE arm.** DOI `10.5066/P9YL58W6` (ScienceBase `6296974dd34ec53d276bb33d`); runner byte-verified `35,912,323` B, SHA-256 `5d6213f7…`. **Preregistered in `knowledge/19_preregistration_H33-1.md` with a frozen numeric promotion gate**; seeds `200–209` reserved; expected `+0.0005` to `+0.0030`. **Not runnable yet** — the availability probe discarded the bytes, so the derived clip must land first (§3.4).
-  5. **`H33-2` Multi-depth MT conductance alignment — PRUNE/score arm.** DOI `10.5066/P9TWT2LU` (ScienceBase `62979746d34ec53d276c113b`); both probed GeoTIFFs now runner byte-verified (`4,132,337` B `8cc1a224…`, `4,132,325` B `e8cfd731…`). Needs derived clips.
+  4. **`H33-2` Multi-depth MT conductance alignment — PRUNE/score arm.** DOI `10.5066/P9TWT2LU` (ScienceBase `62979746d34ec53d276c113b`); both probed GeoTIFFs runner byte-verified (`4,132,337` B `8cc1a224…`, `4,132,325` B `e8cfd731…`). Ranked last of the survivors because it is a pruning arm and pruning is now exhausted as a family (§3.5).
+- **`H33-1` — EXECUTED THIS SESSION, FROZEN GATE FAILED (seeds `200–209`, CLOSED).** The only preregistered arm whose data had actually landed, so it was run first (§3.5). Mean paired ΔDTI `−0.003014`, `0/10` seeds, `0/4` folds, `fav` coverage `11.95%` against a `60%` precondition — **`0` of `6` criteria** (`evidence/h33_1_holdout.json`, `knowledge/21_result_H33-1_refuted_2026-10-03.md`). Do not re-run on a fresh decade, do not widen its radii, do not substitute another tendency field.
+- **Standing consequence — pruning is closed as a family.** H31-1, H32-2 and H33-1 have now all failed the same way: the pixels they removed were worth `0.101–0.140` credit per FP against a `0.019292` break-even. **No further pruning arm should be preregistered.** The remaining budget goes to *addition* arms, validated on LOSFO (§3.2), never on the interleaved holdout.
 - **Data-gate status (corrected this session).** `registry/irregularities.json` → `h33-external-byte-verify-pending` previously reported the two MT conductance probes as `FILE_NOT_LISTED` and `H33-2` as still gated; that text was **stale**. The facet-aware probe re-ran and the inventory committed at `2026-10-03T18:03:14Z` records **all four sources as `AVAILABILITY_FETCHED`**. All four hashes were promoted to `registry/external_pins.json`, so a later fetch is pin-checked rather than merely re-listed.
 - **New this session — `interleaved-holdout-has-no-far-field-truth` (severity high).** The standing holdout cannot validate addition arms (§3.2). LOSFO is the instrument that fixes this; the first frozen addition-arm gate must run on LOSFO, requiring added dots to beat the measured base far-field credit/dot of `0.0465` and the inclusion threshold at the cell DTI, in `>= 3/4` folds and `>= 8/10` seeds.
 
@@ -254,6 +319,11 @@ PYTHON=.venv/bin/python bash scripts/download_competition_data.sh
 #     Cannot run in the agent sandbox (sciencebase.gov returns HTTP 000); runs on GitHub Actions.
 python scripts/fetch_external_layers.py --derived all --external-pins registry/external_pins.json \
     --datasets paleo,probes,volcanics --out /tmp/gdr/out --pins /tmp/gdr/pins.json
+
+# 3f. H33-1 frozen holdout (RUN 2026-10-03, seeds 200-209, REFUTED - do not re-run on a fresh
+#     decade). Requires docs/data/sb_slip_tendency_in_footprint.json from 3e first; it aborts with
+#     exit 2 if the clip schema lacks TS/TD. ~152 s for 10 seeds x 4 folds.
+python scripts/run_h33_1_holdout.py --seeds 200-209 --out evidence/h33_1_holdout.json
 
 # 4. Build and audit all submission GeoTIFFs, seed ledgers, and static GitHub Pages HTML
 .venv/bin/python scripts/build_h32_1_submissions.py

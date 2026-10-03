@@ -50,6 +50,16 @@ def rc_to_xy(rows: np.ndarray, cols: np.ndarray) -> tuple[np.ndarray, np.ndarray
     return x, y
 
 
+def xy_to_rc(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Inverse of `rc_to_xy`: UTM 11N metres to fractional (row, col) pixel coordinates.
+
+    Returned as floats so callers can keep sub-pixel geometry; round only when indexing.
+    """
+    cols = (np.asarray(x, float) - TRANSFORM[2]) / TRANSFORM[0] - 0.5
+    rows = (np.asarray(y, float) - TRANSFORM[5]) / TRANSFORM[4] - 0.5
+    return rows, cols
+
+
 def rc_to_lonlat(rows: np.ndarray, cols: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     from pyproj import Transformer
 
