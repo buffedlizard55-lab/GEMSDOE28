@@ -73,6 +73,33 @@ SCIENCEBASE_CHECKS = [
         "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
         "hypothesis": "H33-2 multi-depth MT conductance alignment",
     },
+    # Session 11 (2026-10-03): the three deeper MT slices, completing the five-slice column.
+    # Filenames re-verified live on the official item page (facet Raster records, native CRS
+    # EPSG:4269, 4,132,325 B each); the runner probes them the same availability-only way.
+    {
+        "label": "sb_mt_conductance_lower_crust",
+        "item": "62979746d34ec53d276c113b",
+        "filename": "gb_conductance_lower_crust_tp.tif",
+        "doi": "10.5066/P9TWT2LU",
+        "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+        "hypothesis": "H33-2 multi-depth MT conductance alignment",
+    },
+    {
+        "label": "sb_mt_conductance_upper_mantle",
+        "item": "62979746d34ec53d276c113b",
+        "filename": "gb_conductance_upper_mantle_tp.tif",
+        "doi": "10.5066/P9TWT2LU",
+        "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+        "hypothesis": "H33-2 multi-depth MT conductance alignment",
+    },
+    {
+        "label": "sb_mt_conductance_mantle",
+        "item": "62979746d34ec53d276c113b",
+        "filename": "gb_conductance_mantle_tp.tif",
+        "doi": "10.5066/P9TWT2LU",
+        "page": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+        "hypothesis": "H33-2 multi-depth MT conductance alignment",
+    },
     {
         "label": "sb_heat_flow_zip",
         "item": "6297d2fad34ec53d276c5b28",
@@ -225,6 +252,12 @@ DERIVED_SPECS = [
         # archive and commits the member list, and (b) clips every vector/point layer it can open.
         # The well table is what H33-3 needs: residual heat flow is a *point* attribute, and a point
         # table is both smaller and more faithful than the interpolated grid.
+        # Session 11 cross-check (FGDC metadata heat_flow_maps_and_supporting_data_for_the_
+        # Great_Basin_USA.xml, read 2026-10-03): the archive also ships three background
+        # GeoTIFFs (USGS_gbHeatFlowMap_{equalWts,qcWts,tcWts}.tif, left inside by design) plus
+        # the 7,279-point well coverage USGS_gbHeatFlowWells_wEstimates.shp (Albers NAD83)
+        # carrying hf_meas/qc_code/tc_code and hf_resid/hfqc_resid/hftc_resid. The H35-2
+        # preregistration requires the derived schema to list the residual fields.
         "label": "sb_heat_flow_zip",
         "hypothesis": "H33-3 heat-flow residual x 2 m probe conjunction",
         "stem": "sb_heat_flow_in_footprint",
@@ -475,12 +508,81 @@ def build_sciencebase_derived(out_dir: Path, pins: dict[str, dict], only: str | 
     return results
 
 
+# ---------------------------------------------------------------------------------------------
+# Session 11 (2026-10-03): H33-4/H35-3 DEM-tile download-volume scoping.
+#
+# data/dem_links.json carries 716 verbatim USGS 3DEP S3 tile keys but no byte sizes, so the
+# download volume for drainage neotectonics is unknown and knowledge/18 gates H33-4 on it
+# (down-rank if the in-footprint volume exceeds ~20 GB). The sandbox cannot reach S3, so the
+# runner HEADs every tile URL - no tile bytes are downloaded - and records the sizes. This mode
+# never raises and never affects the job exit code: per-tile unreachability is recorded, not fatal.
+def head_content_length(url: str, timeout: int = 30) -> dict:
+    """HEAD one URL and record its status and Content-Length. Never raises."""
+    record: dict = {"url": url}
+    try:
+        # NB: the Request constructor itself parses the URL and raises ValueError for an unknown
+        # url type, so it must live inside the try, not above it.
+        request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT}, method="HEAD")
+        with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310 - dem_links keys only
+            # urllib sets .status to None for non-HTTP schemes (file://, used by the tests).
+            status = getattr(response, "status", None)
+            code = int(status) if isinstance(status, int) else None
+            length = response.headers.get("Content-Length")
+            ok = (code is None) or (code < 400)
+            record["status"] = "HEAD_OK" if ok else f"HEAD_{code}"
+            record["http_status"] = code
+            record["bytes"] = int(length) if length is not None and str(length).isdigit() else None
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError, ValueError) as error:
+        record["status"] = "UNREACHABLE"
+        record["error"] = f"{type(error).__name__}: {error}"
+        record["bytes"] = None
+    return record
+
+
+def run_dem_sizes(dem_links: Path) -> dict:
+    """HEAD every tile URL in a dem_links.json and inventory the byte sizes. Never raises."""
+    out: dict = {"source": str(dem_links), "rows": {}, "summary": {}}
+    try:
+        payload = json.loads(dem_links.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        out["status"] = "NO_DEM_LINKS"
+        out["error"] = f"{type(error).__name__}: {error}"
+        return out
+    records = payload.get("records", [])
+    ok = 0
+    total = 0
+    for rec in records:
+        if not isinstance(rec, dict):
+            continue
+        url = rec.get("url", "")
+        key = rec.get("tile") or url
+        row = {"project": rec.get("project"), **head_content_length(url)}
+        out["rows"][str(key)] = row
+        if row["status"] == "HEAD_OK" and isinstance(row["bytes"], int):
+            ok += 1
+            total += row["bytes"]
+    out["summary"] = {
+        "n_tiles": len(records),
+        "n_sized": ok,
+        "total_bytes": total,
+        "total_gb": round(total / 1e9, 2),
+        "exceeds_20gb_downrank_rule": bool(total > 20e9),
+        "note": ("HEAD only; no tile bytes downloaded. knowledge/18 down-ranks H33-4/H35-3 if "
+                 "the in-footprint volume exceeds ~20 GB."),
+    }
+    out["status"] = "SIZES_RECORDED" if ok else "SIZES_UNAVAILABLE"
+    return out
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--datasets", default="paleo,probes,volcanics")
     parser.add_argument("--availability-only", default="true")
     parser.add_argument("--out", default="/tmp/gdr/out")
     parser.add_argument("--pins", default="/tmp/gdr/pins.json")
+    parser.add_argument("--dem-sizes", default="",
+                        help="HEAD every tile URL in this dem_links.json and inventory the byte "
+                             "sizes (H33-4/H35-3 download-volume scoping); empty skips")
     parser.add_argument("--skip-sciencebase", default="false",
                         help="skip the unpinned H33 ScienceBase availability probes")
     parser.add_argument("--derived", default="",

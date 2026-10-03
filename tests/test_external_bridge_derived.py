@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 gpd = pytest.importorskip("geopandas")
-from shapely.geometry import LineString  # noqa: E402
+from shapely.geometry import LineString, Point  # noqa: E402
 
 _spec = importlib.util.spec_from_file_location(
     "fetch_external_layers", ROOT / "scripts" / "fetch_external_layers.py"
@@ -315,6 +315,48 @@ def test_derived_run_on_a_dot_bin_payload_produces_records(tmp_path):
     assert row["payload_format"] == "zip"
     assert row["derived"]["n_records"] > 0, "the .bin regression must not produce an empty clip"
     assert (out / "commit" / "clip.json").exists()
+
+
+def test_heat_flow_shaped_zip_clips_points_and_ignores_rasters(tmp_path):
+    """The heat-flow release (Session 11) is a point shapefile plus grids and docs.
+
+    Zip contents are known before the runner ever sees them from the official FGDC metadata
+    (USGS_gbHeatFlowWells_wEstimates.shp + three USGS_gbHeatFlowMap_*.tif grids): the bridge must
+    extract and clip the point layer and leave the rasters inside the archive.
+    """
+    payload = tmp_path / "heat_payload"
+    payload.mkdir()
+    df = gpd.GeoDataFrame(
+        {"unique_id": ["in", "out"],
+         "hf_meas": [120.5, 45.0],
+         "hf_resid": [35.25, -12.0],
+         "geometry": [Point(BBOX[0] + 5000, BBOX[1] + 5000),
+                      Point(BBOX[0] - 40000, BBOX[1] + 5000)]},
+        crs="EPSG:32611",
+    )
+    df.to_file(payload / "USGS_gbHeatFlowWells_wEstimates.shp")
+    (payload / "USGS_gbHeatFlowMap_equalWts.tif").write_bytes(b"II*\x00" + b"\x00" * 64)
+    (payload / "readme.txt").write_text("official release readme\n")
+    zip_path = tmp_path / "heat.zip"
+    with zipfile.ZipFile(zip_path, "w") as archive:
+        for f in sorted(payload.iterdir()):
+            archive.write(f, arcname=f.name)
+
+    work = tmp_path / "work"
+    work.mkdir()
+    layers = fel._zip_vector_layers(zip_path, work)
+    assert [p.name for p in layers] == ["USGS_gbHeatFlowWells_wEstimates.shp"]
+    assert "USGS_gbHeatFlowMap_equalWts.tif" not in {p.name for p in work.iterdir()}
+
+    res = run_derived(tmp_path, pins_for(zip_path, label="sb_heat_flow_zip"), "sb_heat_flow_zip")
+    row = res["sb_heat_flow_zip"]
+    assert row["status"] == "DERIVED_WRITTEN", row
+    payload_json = json.loads((tmp_path / "out" / "commit" / "clip.json").read_text())
+    assert [r["unique_id"] for r in payload_json["records"]] == ["in"]
+    assert payload_json["records"][0]["hf_resid"] == 35.25
+    fields = payload_json["schema"]["layers"]["USGS_gbHeatFlowWells_wEstimates.shp"][
+        "attribute_fields"]
+    assert {"hf_meas", "hf_resid"} <= set(fields)
 
 
 def test_unreadable_layer_is_not_reported_as_written(tmp_path):

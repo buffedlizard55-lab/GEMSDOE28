@@ -25,6 +25,12 @@ name: fetch-gdr-external-layers
 # clips the vector layer to the competition footprint and commits docs/data/sb_slip_tendency_in_footprint
 # .{csv,json}. A pin mismatch makes the job fail rather than commit a changed release silently.
 #
+# Session 11 addition: DERIVED=all now also clips the pin-verified USGS heat-flow release
+# (H33-3/H35-2, DOI 10.5066/P9BZPVUC, 7,279-well point coverage with residual attributes) to
+# docs/data/sb_heat_flow_in_footprint.{csv,json}; the availability probes cover all five MT
+# conductance slices; and --dem-sizes HEADs the 716 USGS 3DEP 1 m tile URLs (sizes only, no tile
+# bytes) into inventory dem_tile_sizes for the H33-4/H35-3 volume scoping gate.
+#
 # Retrieve the artifact from a session with:
 #   gh run list --workflow=fetch-gdr-external-layers.yml
 #   gh run download <run-id> --name gdr-external-layers --dir /tmp/gdr
@@ -117,6 +123,7 @@ jobs:
             --availability-only "$AVAIL_ONLY" \
             --derived "$DERIVED" \
             --external-pins registry/external_pins.json \
+            --dem-sizes data/dem_links.json \
             --out /tmp/gdr/out \
             --pins /tmp/gdr/pins.json \
             2>&1 | tee /tmp/gdr/log.txt
@@ -161,9 +168,13 @@ jobs:
           Written by .github/workflows/fetch-gdr-external-layers.yml on the runner, because run logs
           and artifacts are hosted outside the agent sandbox's allowlist and cannot be read from a
           session. Every dataset row carries the pin it was checked against and whether it matched.
-          docs/data/sb_slip_tendency_in_footprint.{csv,json} are the pin-verified USGS
-          slip/dilation-tendency release (DOI 10.5066/P9YL58W6) clipped to the competition footprint
-          for H33-1; attributes are copied verbatim from the release and no field is derived.
+          Derived clips under docs/data/ (see inventory sciencebase_derived for per-label status):
+          sb_slip_tendency_in_footprint.{csv,json} from the pin-verified USGS
+          slip/dilation-tendency release (DOI 10.5066/P9YL58W6) for H33-1, and
+          sb_heat_flow_in_footprint.{csv,json} from the pin-verified USGS heat-flow release
+          (DOI 10.5066/P9BZPVUC) for H33-3/H35-2; attributes are copied verbatim from the
+          release and no field is derived. Inventory dem_tile_sizes HEADs the 716 USGS 3DEP
+          1 m tile URLs (no tile bytes downloaded) for the H33-4/H35-3 volume scoping gate.
           COMMIT_MSG
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
