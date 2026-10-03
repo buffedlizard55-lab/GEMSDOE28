@@ -352,9 +352,32 @@ def candidate_card(slot: str, item: dict, *, featured: bool = False) -> str:
 
 
 def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, restore: dict,
-                 screen: dict, confirmation: dict, seed_audit: dict, h32: dict) -> str:
+                 screen: dict, confirmation: dict, seed_audit: dict, h32: dict,
+                 h35: dict = None, h35_6: dict = None) -> str:
     primary = manifest["primary"]
     q = manifest.get("quaternary", {})
+    h35 = h35 or {}
+    h35_6 = h35_6 or {}
+    h35_g1 = h35.get("criteria", {}).get("G1_profitability", {}).get("observed", 0.0)
+    # G1's `required` is a human-readable string; the numeric threshold is recorded separately.
+    h35_tau = h35.get("auroc_context", {}).get("tau_live", 0.0)
+    h35_ctrl = h35.get("summary", {}).get("control", {}).get("credit_per_added_dot", 0.0)
+    _adj_v = h35_6.get("variants", {})
+    _order = ["h32_1_post_d28", "h32_1_pre_d28", "h27_4_blind_r1_d28",
+              "control_prune_protected_only_d28"]
+    if _adj_v:
+        _best = max(_order, key=lambda k: _adj_v.get(k, {}).get("mean_dti_gain", -9))
+        _bv = _adj_v.get(_best, {})
+        _ok = _bv.get("seeds_won", 0) >= 4 and _bv.get("folds_improved", 0) >= 3
+        h35_6_index = (
+            f"The adjudication ran on seeds {h35_6.get('seeds', [0])[0]}–{h35_6.get('seeds', [0])[-1]} "
+            f"with the frozen runner unmodified: the best variant is {esc(_best)} at "
+            f"{fmt_number(_bv.get('mean_dti_gain', 0), 6)} ({_bv.get('seeds_won', 0)}/"
+            f"{_bv.get('n_seeds', 5)} seeds, {_bv.get('folds_improved', 0)}/4 folds), so the frozen promotion "
+            f"rule {'IS met and the primary below is the promoted file' if _ok else 'is NOT met and the primary is unchanged'}."
+        )
+    else:
+        h35_6_index = "The fresh-seed adjudication of the candidate ladder had not reported when this page was built."
     observations = board.get("observations", [])
     board_lines = "".join(
         f"<li>Public row: rank {esc(row.get('rank'))}, {esc(row.get('participant_label'))}, {fmt_number(row.get('public_score'))}.</li>"
@@ -367,7 +390,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
   <h1>Evidence before<br>emission.</h1>
   <p class="lead">An auditable geoscience research workflow aimed at better fault mapping—not a submission bot. Every idea must earn its way through a spatially blocked holdout, independent confirmation, and an exact-file audit before it can approach a weekly slot.</p>
   <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO GEMSDOE28 SCORE</span></div>
-  <p><strong>Current status:</strong> the prominent one-click file below is <strong>{esc(primary.get('hypothesis', 'H32-1 reference'))}</strong> (<code>{esc(primary['nan'])}</code>, {comma(primary.get('emitted_px'))} px), built on the newly reported <strong>0.2600</strong> live base (<code>dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code>, 44,090 px) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (−0.0028 vs 0.2477) and validated on a 4-fold spatially blocked holdout on fresh seeds 180–189 (+0.001272 mean ΔDTI, 10/10 seeds, 4/4 folds). It is locally format-audited, <strong>unscored</strong>, and not slot-approved. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p>
+  <p><strong>Session 11 update (2026-10-03):</strong> the H35 addition series was executed. <strong>H35-1 (hydrothermal-discharge conjunction) is closed on its own evidence</strong> — 3 of 4 frozen criteria failed on seeds 230–234: it earned {fmt_number(h35_g1, 5)} credit per added dot against a {fmt_number(h35_tau, 5)} threshold and <em>lost to its own matched-count random control</em> ({fmt_number(h35_ctrl, 5)}), which is the same conclusion the reachability frontier reached from the pruning side: at this operating point new dots are expensive and a layer must be very specific to pay for itself. The profitable axis remains <strong>removal</strong>: the live-anchored threshold study rates every archived pruning arm <code>PRUNE</code> (efficiency 0.004–0.034 against tau 0.055). Accordingly, this session's follow-on arm was not another speculative physical layer but an <strong>adjudication of the candidate ladder on fresh seeds</strong>, because review found the one-click primary strictly dominated by the file in its own tertiary slot on every published statistic. {h35_6_index} <strong>Current status:</strong> the prominent one-click file below is <strong>{esc(primary.get('hypothesis', 'H32-1 reference'))}</strong> (<code>{esc(primary['nan'])}</code>, {comma(primary.get('emitted_px'))} px), built on the newly reported <strong>0.2600</strong> live base (<code>dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code>, 44,090 px) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (−0.0028 vs 0.2477) and validated on a 4-fold spatially blocked holdout on fresh seeds 180–189 (+0.001272 mean ΔDTI, 10/10 seeds, 4/4 folds). It is locally format-audited, <strong>unscored</strong>, and not slot-approved. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p>
 </div></section>
 
 <section class="download-panel" id="download" aria-labelledby="download-heading">
@@ -400,7 +423,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
 
 <section class="section">
   <div class="eyebrow">Comparator library · T-v2-free d=2.8 &amp; historical references</div><h2>Every file stays explicitly unscored.</h2>
-  <p>These research artifacts preserve comparable model families for review. None is an authorized weekly submission; the primary H32-1 file above is the prominent one-click research reference.</p>
+  <p>These research artifacts preserve comparable model families for review. None is an authorized weekly submission; the one-click file in the download panel above won the frozen fresh-seed adjudication and is the prominent research reference, while these remain the conservative and historical comparators.</p>
   <div class="grid">{candidate_card('secondary', manifest.get('secondary', {}))}{candidate_card('tertiary', manifest.get('tertiary', {}))}{candidate_card('quaternary', q)}</div>
 </section>
 
@@ -423,6 +446,18 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
     p = manifest["primary"]
     candidate = read_json("docs/downloads/h28_1_candidate_manifest.json", {"candidate": {}}).get("candidate", {})
     audit_status = file_audit.get("status", "not yet recorded")
+    if p.get("adjudication_evidence"):
+        adj_sentence = (
+            " That promotion came from the frozen fresh-seed adjudication "
+            "<a href=\"../knowledge/25_preregistration_H35-6_candidate_adjudication.md\">"
+            "knowledge/25_preregistration_H35-6_candidate_adjudication.md</a>, run on seeds "
+            f"{esc(str(p.get('adjudication_seeds', '')))} with the frozen runner unmodified, because "
+            "review found the file previously advertised in this slot dominated on every published "
+            "statistic. The defect is registered against this project itself in "
+            "<a href=\"../registry/irregularities.json\">registry/irregularities.json</a>."
+        )
+    else:
+        adj_sentence = ""
     check_count = file_audit.get("check_count", "not recorded")
     return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Executive summary</div>
 <section class="hero"><div class="hero-content">
@@ -433,8 +468,8 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
 </div></section>
 
 <section class="section"><div class="grid">
-  <article class="card span-8"><h2>Candidate in one paragraph</h2><p><strong>{esc(p.get('hypothesis'))}.</strong> Filename <code class="file-name">{esc(p['nan'])}</code>. Built on the owner-reported <strong>0.2600</strong> live base (<code>dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code>, 44,090 px) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (−0.0028 vs 0.2477). Its 4-fold spatially blocked holdout on fresh seeds 180–189 (<a href="../evidence/h32_1_holdout.json">evidence/h32_1_holdout.json</a>) reports a mean ΔDTI of +0.00127159 (+0.00139899 pre-thinning), with 4/4 spatial folds and 10/10 seeds improving over the same-run d=2.8 control. The inherited H28-1 full-map reference <code class="file-name">{esc(candidate.get('nan', ''))}</code> (+0.00294884 on seeds 140–149) is retained for comparison and is not one of the four weekly slots inherited from the predecessor campaign.</p><p><strong>Disposition:</strong> all local rasters pass 179/179 format, grid, <code>[0,1]</code> range, footprint, and SHA-256 checks (<a href="../evidence/submission_file_audit.json">evidence/submission_file_audit.json</a>), and remain unscored until manually submitted by the human operator.</p></article>
-  <article class="card span-4"><div class="metric">{comma(p.get('emitted_px'))}</div><div class="metric-caption">binary positive cells (d=2.8 H32-1)</div><hr><div class="metric">+{fmt_number(p.get('holdout_mean_gain', 0.0012715910909455819), 5)}</div><div class="metric-caption">4-fold spatial OOF ΔDTI (10/10 seeds)</div></article>
+  <article class="card span-8"><h2>Candidate in one paragraph</h2><p><strong>{esc(p.get('hypothesis'))}.</strong> Filename <code class="file-name">{esc(p['nan'])}</code>. {esc(str(p.get('status', '')))} Built on the owner-reported <strong>{fmt_number(p.get('base_reference_live_score', 0.26), 4)}</strong> live base (<code>{esc(str(p.get('base_reference_id', '')))}</code>) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (&minus;0.0028 vs 0.2477). Its holdout evidence (<a href="../{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}">{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}</a>) records a mean &Delta;DTI of <strong>{fmt_number(p.get('holdout_mean_gain', 0), 6)}</strong> with <strong>{esc(p.get('holdout_folds_improved', 'n/a'))}</strong> spatial folds and <strong>{esc(p.get('holdout_seeds_improved', 'n/a'))}</strong> seeds improving over the same-run control.{adj_sentence} The inherited H28-1 full-map reference <code class="file-name">{esc(candidate.get('nan', ''))}</code> (+0.00294884 on seeds 140–149) is retained for comparison and is not one of the four weekly slots inherited from the predecessor campaign.</p><p><strong>Disposition:</strong> all local rasters pass 179/179 format, grid, <code>[0,1]</code> range, footprint, and SHA-256 checks (<a href="../evidence/submission_file_audit.json">evidence/submission_file_audit.json</a>), and remain unscored until manually submitted by the human operator.</p></article>
+  <article class="card span-4"><div class="metric">{comma(p.get('emitted_px'))}</div><div class="metric-caption">binary positive cells emitted</div><hr><div class="metric">+{fmt_number(p.get('holdout_mean_gain', 0), 5)}</div><div class="metric-caption">4-fold spatial OOF &Delta;DTI ({esc(p.get('holdout_seeds_improved', 'n/a'))} seeds)</div></article>
 </div></section>
 
 <section class="download-panel"><div class="eyebrow">Prominent single-band GeoTIFF · manual download</div><h2>{esc(p.get('hypothesis'))}</h2><p><span class="status unscored">UNSCORED · NOT SLOT-APPROVED</span></p>
@@ -442,7 +477,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
 <p>Alternative package: <a href="downloads/{esc(p['zip'])}" download>{esc(p['zip'])}</a>. The separately named all-finite TIFF uses zero outside the template footprint as a manual fallback; it is not claimed to solve the old portal error. Do not use the predecessor all-finite file with out-of-footprint positives.</p></section>
 
 <section class="section"><h2>Human submission checklist</h2><ol>
-<li><strong>Re-evaluate evidence, not just the file.</strong> Read <a href="../evidence/h28_1_edge_holdout.json">the exact paired holdout</a> and <a href="research.html">current limits/ranking</a>. {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))} {h31_evidence_links(screen, confirmation)}</li>
+<li><strong>Re-evaluate evidence, not just the file.</strong> Read the exact paired holdout behind the advertised file: <a href="../{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}">{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}</a>, then <a href="research.html">current limits and ranking</a>. <strong>Session 11 state:</strong> H35-1 (hydrothermal-discharge conjunction) is closed on its own evidence — 3 of 4 frozen criteria failed on seeds 230–234, earning 0.013195 credit per added dot against a 0.054852 threshold and losing to its own matched-count random control (0.023781) — and the candidate ladder was adjudicated on fresh seeds so that the advertised file is not simply the unblinded maximum of four variants scored on one run. Earlier closures stand: H31-1 screen FAIL (-0.001947), H32-1 structural-step screen FAIL (-0.001570), H33-1 refuted (0/6 criteria), H34 gate FAIL on the direction control. <a href="../knowledge/24_h35_1_result.md">H35-1 result</a> · <a href="../knowledge/25_preregistration_H35-6_candidate_adjudication.md">adjudication protocol</a></li>
 <li><strong>Review the official rules and data terms manually.</strong> Check the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a>, <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules</a>, current deadline and submission cap. This site does not log in or automate any interaction.</li>
 <li><strong>Choose the exact local file yourself.</strong> The suggested `.tif` above is a single-band float32 GeoTIFF with values 0/1 within the sample-template footprint and nodata outside. Use the exact filename and SHA-256 in the local audit; do not rename it in a way that loses its content ID.</li>
 <li><strong>Paste the registered note manually.</strong> Copy the exact short note above. Include no unsupported score claim. Keep a screenshot or receipt that identifies the selected filename and the organizer's returned score.</li>
@@ -515,9 +550,105 @@ H33_RESULT_SECTION = """
 """
 
 
+def session11_section(h35: dict, h35_6: dict) -> str:
+    """Session 11: the H35 hypothesis ledger, the H35-1 refutation, and the slot adjudication.
+
+    Everything rendered here is read from a committed evidence JSON. Nothing is recomputed and no
+    claim is made that is not present in `evidence/h35_1_thermal_farfield.json` or
+    `evidence/h35_6_candidate_headtohead.json`.
+    """
+    crit = h35.get("criteria", {})
+    g1, g2, g3, g4 = (crit.get(k, {}) for k in
+                      ("G1_profitability", "G2_differential", "G3_support", "G4_end_to_end"))
+    summ = h35.get("summary", {})
+    layer = h35.get("layer", {})
+    dose = summ
+
+    def dose_row(key: str, label: str) -> str:
+        row = dose.get(key, {})
+        if not row:
+            return ""
+        return (f"<tr><td>{label}</td><td>{comma(int(row.get('adds', 0)))}</td>"
+                f"<td>{fmt_number(row.get('credit_per_added_dot', 0), 6)}</td>"
+                f"<td>{fmt_number(row.get('mean_delta_dti', 0), 6)}</td></tr>")
+
+    dose_rows = "".join([
+        dose_row("thermal", "temp &ge; 20 &deg;C, radius 6 px (primary)"),
+        dose_row("dose_temp_ge50c", "temp &ge; 50 &deg;C"),
+        dose_row("dose_geotherm_ge100c", "geothermometry &ge; 100 &deg;C"),
+        dose_row("dose_radius_1px", "radius 1 px"),
+        dose_row("dose_radius_6px", "radius 6 px"),
+        dose_row("control", "<strong>matched-count random control</strong>"),
+    ])
+
+    status = str(h35.get("status", "NOT RUN"))
+    gate_passed = h35.get("gate_passed")
+
+    # --- H35-6 adjudication -------------------------------------------------
+    adj = ""
+    if h35_6:
+        seeds = h35_6.get("seeds", [])
+        variants = h35_6.get("variants", {})
+        order = ["h32_1_post_d28", "h32_1_pre_d28", "h27_4_blind_r1_d28",
+                 "control_prune_protected_only_d28"]
+        # Labels name the hypothesis and its PRE-adjudication slot, so the table stays readable after
+        # the promotion below moves the winning file to the one-click slot.
+        slot_of = {
+            "h32_1_post_d28": "H32-1 post-thinning <code>c3aeda1d31a3</code> <span class=\"meta\">(was primary)</span>",
+            "h32_1_pre_d28": "H32-1 pre-thinning <code>31e35eee884e</code> <span class=\"meta\">(was secondary)</span>",
+            "h27_4_blind_r1_d28": "H27-4 solo r=1 <code>8acb75e1f2cc</code> <span class=\"meta\">(was tertiary &rarr; promoted)</span>",
+            "control_prune_protected_only_d28": "anti-selective control",
+        }
+        rows = "".join(
+            f"<tr><td>{slot_of.get(k, esc(k))}</td>"
+            f"<td>{fmt_number(variants.get(k, {}).get('mean_dti_gain', 0), 6)}</td>"
+            f"<td>{variants.get(k, {}).get('seeds_won', 0)}/{variants.get(k, {}).get('n_seeds', 5)}</td>"
+            f"<td>{variants.get(k, {}).get('folds_improved', 0)}/4</td></tr>"
+            for k in order)
+        best = max(order, key=lambda k: variants.get(k, {}).get("mean_dti_gain", -9))
+        bv = variants.get(best, {})
+        passed = (bv.get("seeds_won", 0) >= 4 and bv.get("folds_improved", 0) >= 3)
+        ctrl = variants.get("control_prune_protected_only_d28", {}).get("mean_dti_gain", 0)
+        demo = bv.get("mean_dti_gain", 0) <= ctrl
+        adj = f"""
+<section class="section"><h2>Session 11b — adjudicating the candidate ladder on fresh seeds {esc(seeds[0] if seeds else '')}–{esc(seeds[-1] if seeds else '')}</h2>
+<div class="callout"><strong>Why a fresh decade was spent on a choice rather than a hypothesis.</strong> Review found the one-click primary strictly dominated by the file in its own tertiary slot on every published statistic. The primary is the output of a <em>preregistered</em> gate; the tertiary is the maximum of four correlated variants scored on <em>one</em> holdout run, so re-ranking on that same run would be a multiple-comparison error. The tie was therefore broken on unused seeds with the frozen runner, unmodified, so the new numbers are directly comparable with seeds 180–189. <a href="../knowledge/25_preregistration_H35-6_candidate_adjudication.md">Frozen adjudication protocol</a></div>
+<div class="table-wrap"><table><thead><tr><th>Slot</th><th>Mean &Delta;DTI</th><th>Seeds won</th><th>Folds</th></tr></thead><tbody>{rows}</tbody></table></div>
+<div class="callout"><strong>Outcome:</strong> the best variant is {slot_of.get(best, esc(best))} at {fmt_number(bv.get('mean_dti_gain', 0), 6)} ({bv.get('seeds_won', 0)}/{bv.get('n_seeds', 5)} seeds, {bv.get('folds_improved', 0)}/4 folds). The frozen rule promotes it only with &ge;4/5 seeds and &ge;3/4 folds, which <strong>{'is met' if passed else 'is NOT met — the primary is unchanged'}</strong>. {'The control which removes the <em>most protective</em> pixels also gains (' + fmt_number(ctrl, 6) + '), so the family gain is largely generic prune-harder mass removal and the site does not claim selectivity.' if demo else 'The anti-selective control (' + fmt_number(ctrl, 6) + ') stays below the best variant, so a selective prune is supported rather than a generic prune-harder effect.'} Five seeds cannot resolve a +0.0005 gap; this is a decision under uncertainty, not a measurement. <a href="../evidence/h35_6_candidate_headtohead.json">Adjudication evidence JSON</a></div></section>
+"""
+    else:
+        adj = ""
+
+    return f"""
+<section class="section"><h2>Session 11 — five addition hypotheses, and the first one measured to a verdict</h2>
+<div class="callout"><strong>The standing problem, restated in one line.</strong> The reachability frontier says beating 0.3195 from the 0.2600 emission needs <strong>+1,151 px of credit (+24.0 %)</strong>, which is more credit than the whole submission captures; thinning efficiency (0.03098) is below break-even (0.05485), so <strong>no reallocation of the existing dots reaches it</strong>. That is a detection gap, and the only class of move that can close a detection gap is new dots that land on structure the detector does not yet cover. Every arm in the H35 series is therefore an <em>addition</em> arm.</div>
+<div class="table-wrap"><table><thead><tr><th>Rank</th><th>Hypothesis</th><th>Class</th><th>Physical signature</th><th>Cost</th><th>Data obtainable in-sandbox?</th></tr></thead><tbody>
+<tr><td>1</td><td><code>H35-1</code> hydrothermal-discharge conjunction</td><td>ADD</td><td>point process of thermal discharge; not a derivative field</td><td>low</td><td><strong>yes</strong> — hash-verified, in hand</td></tr>
+<tr><td>2</td><td><code>H35-4</code> bounded Phase-2 discovery budget</td><td>ADD (bounded)</td><td>budget rule, not a transform</td><td>low</td><td>yes — nothing to fetch</td></tr>
+<tr><td>3</td><td><code>H35-2</code> heat-flow residual &times; 2 m probe</td><td>ADD</td><td>conductive residual, a genuinely different field</td><td>high</td><td>no — Actions bridge only (ScienceBase)</td></tr>
+<tr><td>4</td><td><code>H35-3</code> drainage-network neotectonics</td><td>ADD</td><td>channel offsets / knickpoints from 716 1 m DEM tiles</td><td>very high</td><td>no — Actions only (3DEP S3)</td></tr>
+<tr><td>5</td><td><code>H35-5</code> vent-corridor control</td><td>CONFIRM</td><td>vent alignment — only 21 points, re-ranking only</td><td>low</td><td>yes — in hand</td></tr>
+</tbody></table></div>
+<p><strong>Why these and not more re-weighting of the catalogue.</strong> The official material settles it: the label set is the USGS Quaternary Fault and Fold Database <em>plus</em> faults newly labelled by experts, and the prize is rescored in a second round against that expanded set. The catalogue is therefore the thing the test set is <em>not</em>. The thermal layer was chosen first because it was the only unused layer whose bytes were already in hand, hash-pinned, and independently re-registered onto the competition grid. <a href="../knowledge/23_h35_hypotheses.md">Full ledger with sources and obtainability checks</a></p>
+</section>
+
+<section class="section"><h2>H35-1 — hydrothermal-discharge conjunction: <span class="status blocked">{esc(status)}</span></h2>
+<div class="callout"><strong>Verdict: {esc('FAILED' if gate_passed is False else str(gate_passed))} — 3 of 4 frozen criteria failed, arm closed with no candidate TIFF and no weekly slot.</strong> Instrument: leave-fault-system-out, 600 m label buffer, 4 quadrant folds, seeds 230–234. Dataset: GDR submission 1391 (INGENIOUS) — {comma(int(layer.get('audit', {}).get('n_records_raw', 0)))} raw rows, <strong>{comma(int(layer.get('audit', {}).get('n_unique_locations', 0)))} unique sites</strong>, re-registered from <code>utm_x</code>/<code>utm_y</code> through the template geotransform to a max residual of {fmt_number(layer.get('audit', {}).get('max_abs_row_residual_px', 0), 1)} px. The catalogue-derived <code>dist_known_fault_px</code> column was excluded by an explicit allow-list and never read. <a href="../knowledge/24_h35_1_result.md">Result record</a> · <a href="../evidence/h35_1_thermal_farfield.json">Evidence JSON</a></p></div>
+<div class="grid"><article class="card span-6"><h3>Every dose variant is at or below the control</h3>
+<div class="table-wrap"><table><thead><tr><th>Variant</th><th>Added dots</th><th>Credit / dot</th><th>Mean &Delta;DTI</th></tr></thead><tbody>{dose_rows}</tbody></table></div>
+<p>All dose variants were reported and none was allowed to gate. Tightening from every warm site to only the &ge;50 &deg;C sites moves credit/dot the wrong way — and the <em>quartz geothermometer</em>, which samples deeper and hotter fluid, is worse still. If the physics were merely noisy, a harder filter would sharpen it.</p></article>
+<article class="card span-6"><h3>Why it fails, mechanistically</h3>
+<p>Great Basin hydrothermal discharge is overwhelmingly <strong>basin-margin and fault-controlled</strong> — which is exactly why those faults are already in the catalogue and why the blended detector already fires along those margins. The base emission has therefore already spent its budget on the structure the springs mark, and the candidate pool (<code>ridge AND active AND NOT base</code>) is left with redundant neighbouring slop that earns almost nothing ({fmt_number(g1.get('observed', 0), 5)} credit/dot against a {fmt_number(g1.get('required', 0), 5)} threshold). The matched-count random control draws candidates <strong>&gt; 6 px from any thermal site</strong> and beats the arm ({fmt_number(g2.get('observed_pooled_control', 0), 5)} vs {fmt_number(g2.get('observed_pooled_thermal', 0), 5)}), winning {g2.get('seeds_won', 0)} of {g2.get('seeds_total', 0)} seeds.</p>
+<p><strong>Radius confirms the reading.</strong> At 1 px the arm reaches its best value ({fmt_number(summ.get('dose_radius_1px', {}).get('credit_per_added_dot', 0), 5)}) and at 6 px it degrades to {fmt_number(summ.get('dose_radius_6px', {}).get('credit_per_added_dot', 0), 5)}: the association is a sub-pixel coincidence that dissolves as the aperture widens, which is the opposite of a geological control. Mean &Delta;DTI was {fmt_number(g4.get('observed', 0), 6)} (control {fmt_number(summ.get('control', {}).get('mean_delta_dti', 0), 6)}).</p></article></div>
+<div class="callout"><strong>Scope, stated so the record is not over-read.</strong> LOSFO truth is <em>mapped</em> fault geometry held out by system, so the stronger claim — a concealed unmapped permeable structure is marked by a spring — is <strong>untested, not refuted</strong>. But because LOSFO is an upper bound, failing it is decisive for the arm as constructed: a dot that cannot earn credit against geometry we can see will not earn credit against geometry we cannot. The layer itself is not impugned; only this conjunction as an addition licence.</div>
+</section>
+{adj}"""
+
+
 def render_research(registry: dict, h28: dict, euler: dict, board: dict,
                     screen: dict, confirmation: dict, seed_audit: dict, h32: dict,
-                    frontier: dict, losfo: dict, h33: dict, h34: dict, h34_hold: dict) -> str:
+                    frontier: dict, losfo: dict, h33: dict, h34: dict, h34_hold: dict,
+                    h35: dict = None, h35_6: dict = None) -> str:
     hypotheses = sorted(registry.get("hypotheses", []), key=lambda item: item.get("rank", 999))
     hypothesis_html = "".join(render_hypothesis_card(h, screen, confirmation, seed_audit) for h in hypotheses)
     si0 = euler.get("structural_indices", {}).get("0", {})
@@ -613,6 +744,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 <div class="grid"><article class="card span-6"><h3>A modelling error found and fixed</h3><p>The new module closed the metric as <code>FP = N − A</code>, charging every emitted pixel full false-positive mass. That is not the metric: it ignores the crowding excess <code>Ã − A</code>, which the inversion measures as <strong>0.18×, 0.43× and 1.46× of A</strong> on the three anchors — a factor-of-eight range no fit can absorb. Corrected to <code>FP = (1−γ)N</code> with γ = Ã/N <strong>measured</strong> at <code>0.12569 / 0.12576 / 0.12811</code> — constant to 1.9 %, exactly what non-selective thinning predicts. A second error: the retention curve is measured on a network with 1:1 dot-to-truth density while the surface runs ~10:1, so one fitted <strong>density scale</strong> rescales the loss.</p><p>With L, |G| and γ all measured the model has <strong>one</strong> free parameter (s = {fmt_number(h34_fit.get('density_scale', 0), 4)}) and reproduces three hash-authenticated live scores to ≤ {h34_fit.get('max_abs_residual', float('nan')):.2e}. The old two-parameter fit is <strong>rejected</strong>: it fits to 3.2e-04 but recovers |G| = {comma(int(h34.get('two_parameter_fit', {}).get('truth_px', 0)))}, <strong>{fmt_number(abs(h34.get('two_parameter_fit', {}).get('external_check', {}).get('relative_difference', 0)) * 100, 1)} % below</strong> the blind lattice.</p></article>
 <article class="card span-6"><h3>What the corrected model says</h3><p>Best rung is <strong>{fmt_number(h34_lad.get('best_rung', 0), 4)} → N = {comma(int(h34_lad.get('best_n_emitted', 0)))}</strong>, DTI {fmt_number(h34_lad.get('best_dti', 0), 5)} against {fmt_number(h34_lad.get('current_dti', 0), 5)} at the shipped rung, i.e. <strong>+{fmt_number(h34_lad.get('delta_dti_best_minus_current', 0), 5)}</strong> — stable across the whole plausible range of s. And it <em>does</em> satisfy the direction control the proxy missed: <code>e(3.000→3.162) = {fmt_number(h34_steps.get(3.0, {}).get('efficiency', 0), 5)}</code> &gt; τ = {fmt_number(h34_steps.get(3.0, {}).get('breakeven_tau', 0), 5)}, so the next rung is correctly judged unprofitable.</p><p><strong>This does not reopen the arm.</strong> A model projection is not a validated result, and the preregistration is binding. The corrected closure is algebraically identical to the one the reachability frontier above already uses — substituting ρ = γN/A makes the denominators equal term for term — so the two sessions' arithmetic agrees; only the new module had the bug. It is now guarded by <code>tests/test_operating_point.py</code>.</p></article></div>
 <p><a href="../knowledge/21_preregistration_H34.md">Frozen H34 protocol</a> · <a href="../knowledge/22_h34_result.md">H34 result record</a> · <a href="../evidence/h34_holdout.json">Holdout evidence JSON</a> · <a href="../evidence/h34_operating_point.json">Operating-point evidence JSON</a> · <a href="../scripts/run_h34_holdout.py">Holdout runner source</a> · <a href="../src/gems27/operating_point.py">Operating-point module</a></p></section>
+{session11_section(h35 or {}, h35_6 or {})}
 {h33_section}
 <section class="section"><h2>Current ranking</h2><p>Ranking weighs expected catalogue-proxy gain, testability and cost. “Untried” refers to the proposed transform/holdout arm in this checkout, not a claim of global scientific novelty. H31-1 status: {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p><div class="grid">{hypothesis_html}</div></section>
 
@@ -746,10 +878,12 @@ def main() -> int:
     h33 = read_json("evidence/h33_1_holdout.json", {})
     h34 = read_json("evidence/h34_operating_point.json", {})
     h34_hold = read_json("evidence/h34_holdout.json", {})
+    h35 = read_json("evidence/h35_1_thermal_farfield.json", {})
+    h35_6 = read_json("evidence/h35_6_candidate_headtohead.json", {})
     pages = {
-        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32), "Overview"),
+        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6), "Overview"),
         "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "Executive summary"),
-        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold), "Research"),
+        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
     }

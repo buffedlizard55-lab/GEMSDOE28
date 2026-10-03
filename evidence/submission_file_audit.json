@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-03T19:56:58Z",
+  "checked_utc": "2026-10-03T20:25:15Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "55dcc14243b45ba771f07f6eb4d2da7f9baa6c73500c63cfc569b7e494955f62",
+  "manifest_sha256": "143ca0ec4d102b596ed1b23c228558d9c6f652143a255d31baa5dc9560735b2b",
   "checks": [
     {
       "check": "labels_grid_matches_template",
@@ -41,22 +41,22 @@
     {
       "check": "primary_content_addressed_name",
       "pass": true,
-      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif"
+      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif"
     },
     {
       "check": "primary_nan_file_exists",
       "pass": true,
-      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif"
+      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif"
     },
     {
       "check": "primary_nan_byte_count",
       "pass": true,
-      "detail": "1598722 bytes"
+      "detail": "1595850 bytes"
     },
     {
       "check": "primary_nan_sha256",
       "pass": true,
-      "detail": "8a954440f358a55e06c0c41b1032dded8626b2130e022091996d28380d340e17"
+      "detail": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73"
     },
     {
       "check": "primary_nan_grid",
@@ -91,7 +91,7 @@
     {
       "check": "primary_nan_emitted_count",
       "pass": true,
-      "detail": "41656 cells equal 1.0"
+      "detail": "40199 cells equal 1.0"
     },
     {
       "check": "primary_nan_no_catalogue_overlap",
@@ -106,22 +106,22 @@
     {
       "check": "primary_allfinite_file_exists",
       "pass": true,
-      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif"
+      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif"
     },
     {
       "check": "primary_allfinite_content_addressed_name",
       "pass": true,
-      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif"
+      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif"
     },
     {
       "check": "primary_allfinite_byte_count",
       "pass": true,
-      "detail": "832622 bytes"
+      "detail": "830036 bytes"
     },
     {
       "check": "primary_allfinite_sha256",
       "pass": true,
-      "detail": "8aaa2a9b6a78419b4366935f74d731d6f1e669ca866b73280c91420bb60dd675"
+      "detail": "2fc94a38d77f74d4f4ed1a97a83e7bb71a1ceea090515ec641e6681cc47c44c8"
     },
     {
       "check": "primary_allfinite_grid_and_type",
@@ -141,7 +141,7 @@
     {
       "check": "primary_allfinite_emitted_count",
       "pass": true,
-      "detail": "41656 cells equal 1.0"
+      "detail": "40199 cells equal 1.0"
     },
     {
       "check": "primary_allfinite_no_catalogue_overlap",
@@ -151,22 +151,22 @@
     {
       "check": "primary_zip_exists",
       "pass": true,
-      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.zip"
+      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.zip"
     },
     {
       "check": "primary_zip_byte_count",
       "pass": true,
-      "detail": "311745 bytes"
+      "detail": "302687 bytes"
     },
     {
       "check": "primary_zip_sha256",
       "pass": true,
-      "detail": "10fa3aa94528ddc9ff2ac35a587a69a24966948c40f7972e734d27bae85a1fa1"
+      "detail": "69d7a37a4cc8985e16d257549dfcf8c52a8d606f9a0a95fd29520913c7e9b4d9"
     },
     {
       "check": "primary_zip_single_tif",
       "pass": true,
-      "detail": "members=['gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif']"
+      "detail": "members=['gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif']"
     },
     {
       "check": "primary_zip_byte_identical",
@@ -176,12 +176,12 @@
     {
       "check": "primary_note_length",
       "pass": true,
-      "detail": "162 chars; max 200"
+      "detail": "169 chars; max 200"
     },
     {
       "check": "primary_note_file_matches",
       "pass": true,
-      "detail": "note-gemsdoe28-h32-1-tip-euler-dejitter-d2-8-c3aeda1d31a3.txt"
+      "detail": "note-gemsdoe28-h27-4-r1-solo-d2-8-8acb75e1f2cc.txt"
     },
     {
       "check": "secondary_content_addressed_name",
@@ -331,22 +331,22 @@
     {
       "check": "tertiary_content_addressed_name",
       "pass": true,
-      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif"
+      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif"
     },
     {
       "check": "tertiary_nan_file_exists",
       "pass": true,
-      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif"
+      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif"
     },
     {
       "check": "tertiary_nan_byte_count",
       "pass": true,
-      "detail": "1595850 bytes"
+      "detail": "1598722 bytes"
     },
     {
       "check": "tertiary_nan_sha256",
       "pass": true,
-      "detail": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73"
+      "detail": "8a954440f358a55e06c0c41b1032dded8626b2130e022091996d28380d340e17"
     },
     {
       "check": "tertiary_nan_grid",
@@ -381,7 +381,7 @@
     {
       "check": "tertiary_nan_emitted_count",
       "pass": true,
-      "detail": "40199 cells equal 1.0"
+      "detail": "41656 cells equal 1.0"
     },
     {
       "check": "tertiary_nan_no_catalogue_overlap",
@@ -396,22 +396,22 @@
     {
       "check": "tertiary_allfinite_file_exists",
       "pass": true,
-      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif"
+      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif"
     },
     {
       "check": "tertiary_allfinite_content_addressed_name",
       "pass": true,
-      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif"
+      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif"
     },
     {
       "check": "tertiary_allfinite_byte_count",
       "pass": true,
-      "detail": "830036 bytes"
+      "detail": "832622 bytes"
     },
     {
       "check": "tertiary_allfinite_sha256",
       "pass": true,
-      "detail": "2fc94a38d77f74d4f4ed1a97a83e7bb71a1ceea090515ec641e6681cc47c44c8"
+      "detail": "8aaa2a9b6a78419b4366935f74d731d6f1e669ca866b73280c91420bb60dd675"
     },
     {
       "check": "tertiary_allfinite_grid_and_type",
@@ -431,7 +431,7 @@
     {
       "check": "tertiary_allfinite_emitted_count",
       "pass": true,
-      "detail": "40199 cells equal 1.0"
+      "detail": "41656 cells equal 1.0"
     },
     {
       "check": "tertiary_allfinite_no_catalogue_overlap",
@@ -441,22 +441,22 @@
     {
       "check": "tertiary_zip_exists",
       "pass": true,
-      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.zip"
+      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.zip"
     },
     {
       "check": "tertiary_zip_byte_count",
       "pass": true,
-      "detail": "302687 bytes"
+      "detail": "311745 bytes"
     },
     {
       "check": "tertiary_zip_sha256",
       "pass": true,
-      "detail": "69d7a37a4cc8985e16d257549dfcf8c52a8d606f9a0a95fd29520913c7e9b4d9"
+      "detail": "10fa3aa94528ddc9ff2ac35a587a69a24966948c40f7972e734d27bae85a1fa1"
     },
     {
       "check": "tertiary_zip_single_tif",
       "pass": true,
-      "detail": "members=['gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif']"
+      "detail": "members=['gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif']"
     },
     {
       "check": "tertiary_zip_byte_identical",
@@ -466,12 +466,12 @@
     {
       "check": "tertiary_note_length",
       "pass": true,
-      "detail": "158 chars; max 200"
+      "detail": "162 chars; max 200"
     },
     {
       "check": "tertiary_note_file_matches",
       "pass": true,
-      "detail": "note-gemsdoe28-h27-4-r1-solo-d2-8-8acb75e1f2cc.txt"
+      "detail": "note-gemsdoe28-h32-1-tip-euler-dejitter-d2-8-c3aeda1d31a3.txt"
     },
     {
       "check": "quaternary_content_addressed_name",
