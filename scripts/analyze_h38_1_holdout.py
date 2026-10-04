@@ -64,6 +64,15 @@ def _finite(value) -> bool:
         return False
 
 
+def _json_default(value):
+    """Serialize NumPy scalar/array values without silently stringifying evidence."""
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    raise TypeError(f"Object of type {type(value).__name__} is not JSON serializable")
+
+
 def _dti_matches_arm_metrics(metrics: dict, truth_count: int) -> bool:
     try:
         tp = float(metrics["tp"])
@@ -369,7 +378,7 @@ def evaluate(raw: dict, claim: dict, sufficiency_audit: dict, benchmark: dict) -
 def atomic_json(path: Path, record: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_suffix(path.suffix + ".tmp")
-    temp.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    temp.write_text(json.dumps(record, indent=2, sort_keys=True, default=_json_default) + "\n", encoding="utf-8")
     os.replace(temp, path)
 
 
@@ -428,7 +437,9 @@ def main() -> int:
         "baseline": str(args.benchmark.relative_to(ROOT)) if args.benchmark.is_relative_to(ROOT) else str(args.benchmark),
     }
     result["sha256"] = None
-    result["sha256"] = hashlib.sha256(json.dumps(result, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    result["sha256"] = hashlib.sha256(json.dumps(
+        result, sort_keys=True, separators=(",", ":"), default=_json_default,
+    ).encode()).hexdigest()
     atomic_json(args.out, result)
     print(json.dumps({
         "status": result["status"],

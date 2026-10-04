@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-04T01:45:09Z",
+  "generated": "2026-10-04T02:08:17Z",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -17,7 +17,7 @@
       "id": "ai-use-disclosure",
       "severity": "high",
       "issue": "The Official Rules require generative-AI use to be stated in the narrative (Sept 2026 rules, verified in full across all 7 chunks).",
-      "action": "This work is agent-assisted; see AI_DISCLOSURE.md. Include a statement in the final-round narrative."
+      "action": "Disclosure text is now present in AI_DISCLOSURE.md and linked from the source ledger; the earlier file reference was missing. Include an AI-use statement in the final-round narrative as required by the rules; the file is an aid, not a substitute. No final-round narrative or submission has been made."
     },
     {
       "id": "hermant-2025-lidar-catalogue-offset",
@@ -467,7 +467,7 @@
       "id": "h38-1-candidate-support-is-not-validation",
       "severity": "medium",
       "issue": "H38-1's 140-centroid count is a deterministic, label-free support screen on local hash-pinned owner mirrors (training_features band 18, LiDAR relief/validity, and prior SI-0 Euler clusters). It does not establish organizer provenance, fault identity, catalogue omission, LOSFO benefit, or hidden-score transfer. The Euler SI-0 contact assumption and gravity/relief conjunction can select lithologic contacts or basin boundaries.",
-      "action": "Keep the frozen 265–269 LOSFO panel and all C1–C5 gates unchanged. The post-freeze local seed audit returned PASS_LOCAL_SCAN over 61 evidence JSON files with zero local references/collisions and zero unreadable files (evidence/h38_1_seed_audit_pre_run.json; SHA-256 413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e). The exact-range claim is RESERVED (evidence/h38_1_holdout.started.json; SHA-256 acb5a8daf9bf067d5acbdb5edda73a0cc51a7cc9abf159338c8aceeda39248ad); no holdout has started. The repository is shallow and the scan cannot establish availability in owner workspaces, other repositories, or unpublished runs. Preserve that scope; commit the reservation before the wrapper, and once RUNNING treat the seeds as burned."
+      "action": "The label-free screen remained support only. Before the run, the local seed audit returned PASS_LOCAL_SCAN over 61 evidence JSON files with zero local references/collisions and zero unreadable files (evidence/h38_1_seed_audit_pre_run.json; SHA-256 413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e). H38-1 was then invoked once on 265–269; all 20 cells completed, but the frozen analyzer failed during JSON serialization, so there is no C1–C5 decision. The run is not a geological pass or fail. Preserve the raw/claim failure, do not rerun or repair on this range, and do not promote or spend a slot. The checkout is shallow and the pre-run scan never established global seed availability."
     },
     {
       "id": "session14-official-source-listing-not-local-coverage",
@@ -480,6 +480,12 @@
       "severity": "low",
       "issue": "At an earlier observed shell clock of 2026-10-03T23:39:48Z, registry/next_hypotheses.json generated=2026-10-04T00:05:00Z, registry/irregularities.json generated=2026-10-04T00:20:00Z, and evidence/h31_1_seed_reuse_audit.json checked_utc=2026-10-03T23:59:00Z were future-dated. Their chronology has not been independently reconciled.",
       "action": "Preserved the historical timestamp fields rather than silently rewriting them. Session 14 records use date-only metadata where exact clock time is not needed; reconcile the authoring clock before asserting a more precise chronology."
+    },
+    {
+      "id": "h38-1-frozen-analyzer-json-serialization-failure",
+      "severity": "high",
+      "issue": "The single-use H38-1 LOSFO runner completed all 20 cells for seeds 265–269 and wrote evidence/losfo_h38_1_raw.json (SHA-256 0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba). The frozen analyzer then exited 1 at report serialization with TypeError: Object of type int64 is not JSON serializable. No evidence/h38_1_holdout.json or C1–C5 gate decision was written; the single-use claim is FAILED and records the range as burned. This is an analysis-infrastructure failure, not a scientific finding about the H38-1 hypothesis.",
+      "action": "Preserve the raw JSON and failed claim; do not rerun, re-analyze for a gate decision, or repair the result on seeds 265–269. No candidate TIFF, upload, promotion, or weekly slot. A generic NumPy-scalar JSON serialization guard may be added and tested for future preregistered experiments only; it must not be used to create an H38-1 result from this spent decade. Any future scientific test needs a new protocol, fresh seed range, and separate claim."
     }
   ]
 }

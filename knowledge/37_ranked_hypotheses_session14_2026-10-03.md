@@ -67,3 +67,7 @@ Use USGS conductance layers at 2–12, 12–20, 20–50, 50–90 and 90–200 km
 ## No-slot rule
 
 H38-1 may be run only on the fresh, reconciled LOSFO seed range `265–269` under `knowledge/38_preregistration_H38-1.md`. It is not a submission candidate. It may approach a weekly slot only after it clears the frozen far-field/live-value gates, beats the measured far-field add-arm benchmark, then survives independent confirmation and exact-file audit. A positive mechanism, a pass against random, or a model projection alone is insufficient.
+
+## Post-run status addendum — 2026-10-04 UTC
+
+The no-slot section above records the pre-run plan. Session 14 subsequently invoked H38-1 once on seeds 265–269. The runner completed all 20 cells and wrote `evidence/losfo_h38_1_raw.json`, but the frozen analyzer failed during JSON serialization (`TypeError: Object of type int64 is not JSON serializable`). The claim is `FAILED`; the decade is burned; there is no saved C1–C5 decision and no scientific pass/fail conclusion. Do not rerun or repair the result on that range. H38-1 is not promoted, no TIFF or organizer upload was made, and no weekly slot was used. See the audited run record at [`knowledge/39_session14_closeout_2026-10-03.md`](39_session14_closeout_2026-10-03.md), the final claim at `evidence/h38_1_holdout.started.json`, and the preserved raw artifact at `evidence/losfo_h38_1_raw.json`.

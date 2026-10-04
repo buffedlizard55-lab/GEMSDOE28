@@ -1,6 +1,8 @@
 import copy
+import json
 
-from scripts.analyze_h38_1_holdout import BEST_FARFIELD_ADD_ARM, evaluate
+import numpy as np
+from scripts.analyze_h38_1_holdout import BEST_FARFIELD_ADD_ARM, atomic_json, evaluate
 
 SEEDS = list(range(265, 270))
 FOLDS = ["NW", "NE_LidarGapHeavy", "SW", "SE"]
@@ -170,6 +172,19 @@ def test_integrity_gate_recomputes_dti_from_weighted_tp_fp_and_truth():
     checks = result["gates"]["C4_support_and_integrity"]["integrity_checks"]
     assert checks["per_cell_derived_metrics_match_reported_arms"] is False
     assert result["gates"]["C4_support_and_integrity"]["passed"] is False
+
+
+def test_analyzer_json_writer_serializes_numpy_scalar_and_array_values(tmp_path):
+    destination = tmp_path / "result.json"
+    atomic_json(destination, {
+        "count": np.int64(3),
+        "score": np.float64(0.5),
+        "ok": np.bool_(True),
+        "values": np.array([1, 2], dtype=np.int64),
+    })
+    assert json.loads(destination.read_text()) == {
+        "count": 3, "score": 0.5, "ok": True, "values": [1, 2],
+    }
 
 
 def test_analyzer_rejects_changed_seed_set_and_unmatched_control_counts():

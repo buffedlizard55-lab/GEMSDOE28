@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-04T01:44:41Z",
-  "status": "Current Session 14 ranking: H38-1 is frozen for one label-free-candidate addition test on LOSFO seeds 265–269. The checkout-local seed audit PASS_LOCAL_SCAN found zero references among 61 evidence JSON files, and the exact-range claim is RESERVED; the LOSFO holdout is NOT RUN. The scan cannot rule out owner-workspace, other-repository, unpublished, or pre-checkout use. H37-1 failed far-field transfer and H37-3 missed the live-value bar. No candidate is approved for a weekly slot; the H33/H37 records below remain historical evidence.",
+  "generated": "2026-10-04T02:08:17Z",
+  "status": "Current Session 14 ranking: H38-1 was frozen and its 140-candidate label-free support screen was READY. A single LOSFO attempt on seeds 265–269 completed 20 cells, but the frozen analyzer failed during JSON serialization (numpy.int64); no C1–C5 summary/gate decision exists. The range is burned; no rerun, candidate TIFF, promotion, or weekly slot. The raw artifact and failed claim are preserved. The pre-run seed scan was checkout-local only and cannot establish global seed availability. H37-1 failed far-field transfer and H37-3 missed the live-value bar; H33/H37 remain historical evidence.",
   "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
   "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
   "baseline": {
@@ -35,7 +35,7 @@
     "cost": "Low (~95 s CPU holdout + ~9 s GeoTIFF build); zero external downloads.",
     "status": "VALIDATED ON 4-FOLD SPATIALLY BLOCKED HOLDOUT (PASS: +0.001272 post / +0.001399 pre, 10/10 seeds, 4/4 folds); built as primary download c3aeda1d31a3 (41,656 px) and secondary 31e35eee884e (42,294 px)."
   },
-  "ranking_basis": "Re-ranked after H33-1 was RUN and REFUTED (knowledge/21). H33-1 was the only preregistered arm with its data in hand, so it was executed on its reserved seeds 200-209 before any new arm was designed: all six frozen promotion criteria failed (mean dDTI -0.003014, 0/10 seeds, 0/4 folds, fav coverage 11.95% vs a 60% precondition). Its third finding is the important one: all three arms removed pixels at 0.101-0.140 credit per removed FP against a break-even of 0.019292, so the discarded pixels were worth 5-7x break-even. Together with H31-1 and H32-2 this makes three independent pruning arms that failed the same way - PRUNING IS EXHAUSTED AS A FAMILY at this operating point, which independently corroborates the reachability frontier. Remaining arms are therefore ranked ADD-first, and an ADD arm is validated on the far-field LOSFO harness (evidence/losfo_farfield_diagnostic.json), never on the interleaved holdout, which by construction holds out no off-catalogue habitat. Attribute transfer FROM mapped faults TO off-catalogue candidates is now on the do-not-revive list: only ~12% of emitted dots have a similarly oriented mapped segment within 1 km, a coverage ceiling no radius widening fixes. Session 14 (knowledge/37) ranks five distinct candidate rules; H38-1 combines shallow SI-0 Euler depth coherence, an independent gravity-gradient corridor, and low LiDAR relief. It has only a label-free 140-candidate support count, not a performance result; the frozen LOSFO test uses local seeds 265–269 after a repository-only collision scan.",
+  "ranking_basis": "Re-ranked after H33-1 was RUN and REFUTED (knowledge/21). H33-1 was the only preregistered arm with its data in hand, so it was executed on its reserved seeds 200-209 before any new arm was designed: all six frozen promotion criteria failed (mean dDTI -0.003014, 0/10 seeds, 0/4 folds, fav coverage 11.95% vs a 60% precondition). Its third finding is the important one: all three arms removed pixels at 0.101-0.140 credit per removed FP against a break-even of 0.019292, so the discarded pixels were worth 5-7x break-even. Together with H31-1 and H32-2 this makes three independent pruning arms that failed the same way - PRUNING IS EXHAUSTED AS A FAMILY at this operating point, which independently corroborates the reachability frontier. Remaining arms are therefore ranked ADD-first, and an ADD arm is validated on the far-field LOSFO harness (evidence/losfo_farfield_diagnostic.json), never on the interleaved holdout, which by construction holds out no off-catalogue habitat. Attribute transfer FROM mapped faults TO off-catalogue candidates is now on the do-not-revive list: only ~12% of emitted dots have a similarly oriented mapped segment within 1 km, a coverage ceiling no radius widening fixes. Session 14 (knowledge/37) ranked five distinct candidate rules; H38-1 combines shallow SI-0 Euler depth coherence, an independent gravity-gradient corridor, and low LiDAR relief. The label-free support screen found 140 candidates. Its single-use LOSFO runner completed 20 cells on seeds 265–269, but the frozen analyzer failed on NumPy int64 JSON serialization; no C1–C5 decision or performance conclusion exists and the range is burned. See session14_addendum.holdout_attempt and knowledge/39.",
   "hypotheses": [
     {
       "id": "H33-3",
@@ -592,7 +592,7 @@
         "215-219",
         "260+"
       ],
-      "note": "Free: 215-219 and 265+. The next arm takes 265-269."
+      "note": "Historical Session 13 snapshot: 215-219 and 265+ were free at that time, and H38-1 was planned for 265-269. Session 14 subsequently reserved and ran 265-269 once; the analyzer failed, the range is burned, and no gate decision exists. See session14_addendum.holdout_attempt and evidence/h38_1_holdout.started.json."
     },
     "infrastructure_finding": "GitHub Pages for this repository reports status 'errored' and the legacy page build for the current main head is stuck/failed, so the published site may be stale. Registered as github-pages-legacy-build-errored in registry/irregularities.json with the reversible fix (switch the Pages source to GitHub Actions so the workflow that already succeeds deploys).",
     "h37_3": {
@@ -620,7 +620,7 @@
   "session14_addendum": {
     "generated": "2026-10-03",
     "ranking_record": "knowledge/37_ranked_hypotheses_session14_2026-10-03.md",
-    "status": "H38-1 FROZEN; local seed audit PASS_LOCAL_SCAN (61 evidence JSON files, zero local references/collisions, zero unreadable files); exact-range claim RESERVED for 265–269; no holdout has started. This checkout-local scan does not establish global seed availability.",
+    "status": "H38-1 holdout RUNNER COMPLETED on seeds 265–269 (20 cells), but the frozen analyzer exited 1 during JSON serialization: TypeError, numpy.int64 not serializable. Claim status FAILED; no summary or C1–C5 decision. Seeds are burned; no rerun, promotion, TIFF, upload, or weekly slot. Raw output is preserved.",
     "score_context": {
       "owner_reported_base": {
         "score": 0.26,
@@ -669,7 +669,7 @@
           0.001
         ],
         "cost": "Low–medium; local hash-pinned owner-mirror layers, no new external data",
-        "status": "Label-free support READY (140); seeds 265–269 locally audited and reserved; holdout NOT RUN",
+        "status": "Support screen READY at 140; one LOSFO run completed but analyzer failed; no evaluable holdout decision, no promotion",
         "record": "knowledge/38_preregistration_H38-1.md",
         "layers": [
           "evidence/h31_1_euler_clusters.csv: SI-0 Euler solutions from training tmi, fixed depth_mad_m <= 60, median_depth_m <= 400, n_solutions >= 8",
@@ -679,7 +679,7 @@
         "physical_signature": "A shallow, depth-coherent contact-like magnetic Euler cluster is corroborated by a nearby strong independently measured gravity gradient and subdued local relief; a buried density/magnetic contact under a surface without a strong scarp is the target, not proof of faulting or geothermal activity.",
         "why_missing_catalogue": "A buried or subdued structure can lack a mappable Quaternary surface trace while retaining subsurface magnetic and gravity contrasts. The relief condition targets that gap rather than high-relief mapped scarps; the competition statement says public fault labels are incomplete and experts added faults, but LOSFO is not organizer truth.",
         "differs_from_repo": "H37-3 emitted on shallow SI-0 Euler depth coherence alone and missed the 0.0548 live-value bar. H37-2 proposed potential-field lineaments × low relief. H38-1 tests a narrower three-way Euler-depth, independent-gravity-gradient, low-relief conjunction; no score-guided threshold tuning.",
-        "data_gate": "Label-free support READY at 140 unique centroids; local seed scan PASS_LOCAL_SCAN and exact-range claim RESERVED. This is not holdout validation; no fit has started.",
+        "data_gate": "Label-free support READY at 140 unique centroids; the 265–269 runner completed 20 cells but its frozen analyzer failed to serialize the report. This does not validate or refute the geological rule.",
         "main_confounder": "SI-0 is an idealized contact geometry, gravity edges include lithologic contacts and basin margins, and relief is a quantized local descriptor; the conjunction can still select non-fault contacts."
       },
       {
@@ -783,15 +783,18 @@
         269
       ],
       "seed_scope": "local evidence/*.json scan only (61 files, zero local references); repository is shallow and external/undocumented use cannot be excluded",
-      "holdout_status": "NOT RUN; exact-range claim RESERVED after PASS_LOCAL_SCAN; no LOSFO fit has started",
+      "holdout_status": "RUNNER COMPLETED 20/20 cells on 265–269; analyzer failed JSON serialization (numpy.int64); no gate report; seeds burned, no rerun",
       "weekly_slot_used": false,
       "promotion_rule": "C1–C5 all pass only permits a separate fresh-seed confirmation and exact-file review; no weekly slot without further confirmation and beating the current blocked-holdout best.",
       "seed_audit": "evidence/h38_1_seed_audit_pre_run.json",
       "seed_audit_sha256": "413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e",
       "local_seed_audit_status": "PASS_LOCAL_SCAN",
       "claim": "evidence/h38_1_holdout.started.json",
-      "claim_sha256": "acb5a8daf9bf067d5acbdb5edda73a0cc51a7cc9abf159338c8aceeda39248ad",
-      "claim_status": "RESERVED"
+      "claim_sha256": "1bd9bd5e3e4c2c4861a34f4b1714e7b89e36f73b8dd6f3bb8e819768163a3791",
+      "claim_status": "FAILED",
+      "raw_result": "evidence/losfo_h38_1_raw.json",
+      "raw_result_sha256": "0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba",
+      "summary_result": "NOT WRITTEN"
     },
     "historical_scope": "The top-level H33 hypothesis list and session11–session13 addenda are retained unchanged as historical records. Session14 is the current ranked list.",
     "seed_audit": {
@@ -805,6 +808,27 @@
       "unreadable_count": 0,
       "repository_shallow": true,
       "scope": "local evidence/*.json only; owner workspaces, other repositories and unpublished runs are not covered"
+    },
+    "holdout_attempt": {
+      "status": "FAILED_ANALYSIS_NO_GATE_DECISION",
+      "seeds": [
+        265,
+        266,
+        267,
+        268,
+        269
+      ],
+      "cells_completed": 20,
+      "runner_completed": true,
+      "analyzer_exit_code": 1,
+      "error": "TypeError: Object of type int64 is not JSON serializable",
+      "raw_result": "evidence/losfo_h38_1_raw.json",
+      "raw_result_sha256": "0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba",
+      "summary_result_written": false,
+      "gate_decision": "NONE; do not infer a scientific pass or fail",
+      "seed_range_burned": true,
+      "rerun_permitted": false,
+      "weekly_slot_used": false
     }
   }
 }

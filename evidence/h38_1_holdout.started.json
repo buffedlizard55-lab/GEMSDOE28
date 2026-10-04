@@ -1,4 +1,5 @@
 {
+  "analyzer_exit_code": 1,
   "arm_name": "H38-1 shallow Euler \u00d7 gravity \u00d7 low-relief licence",
   "baseline": {
     "live_bar": 0.0548,
@@ -30,7 +31,11 @@
     "tests/test_h38_1_holdout.py": "df8d60937b82e6d42b578239eb35701ace06b819fca651788f59b28de231bd12",
     "tests/test_seed_range_audit.py": "bedcf347ca426cd61f5548196207459a3fa07f1bce11b22ac5fbd22e462300a6"
   },
-  "holdout_started": false,
+  "decision": "UNASSESSED_ANALYZER_FAILURE; no C1\u2013C5 decision, TIFF promotion, upload, or slot use",
+  "failure_detail": "The frozen runner completed all 20 seed/fold cells and wrote evidence/losfo_h38_1_raw.json. The frozen analyzer exited 1 while JSON-serializing its report: TypeError: Object of type int64 is not JSON serializable. No summary/gate report was written. The single-use range is burned; do not rerun or repair the result on seeds 265\u2013269.",
+  "failure_stage": "analyzer",
+  "finished_utc": "2026-10-04T01:59:45Z",
+  "holdout_started": true,
   "input_sha256": {
     "data/labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
     "data/lidar_scarp_features_u8.tif": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
@@ -49,11 +54,15 @@
   "preregistration_sha256": "4dbb633ee8ed6fb59c244abc1e8ade571e53e565f3c91f216c72d6bd40856d37",
   "protocol_branch": "arena/01a10412-gemsdoe28",
   "protocol_commit": "cf1d03627ad3f863d10ff34e5195f126efad51f5",
+  "raw_result_sha256": "0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba",
   "reserved_utc": "2026-10-04T01:43:57Z",
   "result_paths": {
     "raw": "evidence/losfo_h38_1_raw.json",
     "summary": "evidence/h38_1_holdout.json"
   },
+  "run_branch": "arena/01a10412-gemsdoe28",
+  "run_commit": "9880ca6d84a3527b2baeaa28b8d2a00be13edcde",
+  "runner_exit_code": 0,
   "runtime_versions": {
     "numpy": "2.4.6",
     "python": "3.11.2",
@@ -63,6 +72,7 @@
   },
   "schema": 1,
   "scope": "repository-local single-use claim; external/unpublished seed use remains unknown",
+  "seed_range_burned": true,
   "seeds": [
     265,
     266,
@@ -70,7 +80,8 @@
     268,
     269
   ],
-  "status": "RESERVED",
+  "started_utc": "2026-10-04T01:46:40Z",
+  "status": "FAILED",
   "submission_slot_used": false,
   "sufficiency_audit": "evidence/h38_1_sufficiency_audit.json",
   "sufficiency_audit_sha256": "91d86b012fcbfa472ff79859623743e1292a077d591427e78bf8627a92250b60"

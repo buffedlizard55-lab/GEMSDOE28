@@ -205,7 +205,7 @@ def h38_status_html(report: dict, claim: dict) -> str:
         explanations = {
             "RESERVED": "The local claim is reserved, but the holdout has not started.",
             "RUNNING": "The holdout is in progress; seeds 265–269 are burned even if execution fails.",
-            "FAILED": "Execution or analysis failed after the holdout started; seeds 265–269 are burned and must not be rerun.",
+            "FAILED": "Execution or analysis failed after the holdout started; no frozen-gate decision is available, and seeds 265–269 are burned and must not be rerun.",
             "CONSUMED": "A consumed claim exists, but the summary/result integrity checks do not pass; treat the outcome as unverified.",
         }
         claim_link = (
@@ -218,10 +218,16 @@ def h38_status_html(report: dict, claim: dict) -> str:
             if (ROOT / "evidence" / "h38_1_seed_audit_pre_run.json").is_file() else
             "; the local seed audit file is missing"
         )
+        raw_link = (
+            ' · <a href="../evidence/losfo_h38_1_raw.json">raw run (unverified; no gate summary)</a>'
+            if status == "FAILED" and (ROOT / "evidence" / "losfo_h38_1_raw.json").is_file() else ""
+        )
+        failure_detail = claim.get("failure_detail") if status == "FAILED" else None
+        failure_note = f" Failure detail: {esc(failure_detail)}" if failure_detail else ""
         return (
             f"<strong>H38-1 claim state: {esc(status)}.</strong> {esc(explanations[status])} "
             "The 140 candidate centroids come from a label-free support screen only, not validation. "
-            f"{claim_link}{audit_link}; this is not an organizer score."
+            f"{failure_note} {claim_link}{audit_link}{raw_link}; this is not an organizer score."
         )
     if report:
         return (
@@ -628,14 +634,14 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
 
 <section class="section" id="decision-context"><div class="eyebrow">Latest research decision</div><h2>Why the download is not slot-approved</h2>
   <p>H37-1 passed the interleaved gate (+0.007289) but tied the raster cascade in the LOSFO far-field test (−0.000037 ± 0.000832); its live projection was withdrawn. H37-3 Euler-only emission was better than same-count random but earned 0.031157 credit per dot, below the fixed 0.0548 live bar, and improved only 13/20 cells. H35-1 also fell below its live bar and its own random control ({fmt_number(h35_g1, 5)} vs {fmt_number(h35_ctrl, 5)} credit/dot; threshold {fmt_number(h35_tau, 5)}). {esc(h35_6_index)}</p>
-  <p>{h38_status_html(h38_result or {}, h38_claim or {})} The H38-1 candidate conjunction is a shallow SI-0 Euler cluster near a strong gravity-gradient cell and in low valid LiDAR relief—not proof of faulting. See <a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">the ranked hypothesis record</a> and <a href="../knowledge/38_preregistration_H38-1.md">the frozen protocol</a>.</p>
+  <p>{h38_status_html(h38_result or {}, h38_claim or {})} The H38-1 candidate conjunction is a shallow SI-0 Euler cluster near a strong gravity-gradient cell and in low valid LiDAR relief—not proof of faulting. See <a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">the ranked hypothesis record</a>, <a href="../knowledge/38_preregistration_H38-1.md">the frozen protocol</a>, and <a href="../knowledge/39_session14_closeout_2026-10-03.md">the single-use run close-out</a>.</p>
   <p>{esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p>
 </section>
 
 <section class="section" id="score-context"><div class="eyebrow">Score context · repository analysis, not organizer verification</div><h2>Why the reported 0.2600 was strong—and what beating 0.3195 would require</h2>
   <p>Repository analysis attributes the owner-reported <strong>0.2600</strong> to an H19-5 scarp/geophysics ridge surface thinned to 44,090 dots at <code>d=2.8</code> (versus 60,069 at <code>d=1.5</code>). Under the official 300 m distance-weighted kernel, the approximately one-dimensional fault-trace layout retains more credit than uniform 2-D thinning predicts while removing redundant dots. The inversion estimates about 4,791 weighted true-positive pixels and 90.63% of the denser file's credit; those are calculations conditioned on the owner-reported score/raster association, not an independently authenticated organizer receipt.</p>
   <p>A one-off manual snapshot of the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">official public leaderboard</a> recorded <strong>0.3195</strong> at rank 1 (DARD); the public row does not establish owner identity or bind the score to a local GeoTIFF. Reaching that value at today's 44,090-dot budget would require roughly 1,151 more weighted-credit pixels (about 24%). It is mathematically plausible only through substantially better, high-specificity off-catalogue discoveries—not further pruning of the same ridge family. Current repository evidence does <strong>not</strong> show that any candidate can beat 0.3195, and no GEMSDOE28 artifact has an organizer score.</p>
-  <p><a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">Read the ranked hypotheses and calculations →</a></p>
+  <p><a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">Read the ranked hypotheses and calculations →</a> · <a href="../knowledge/39_session14_closeout_2026-10-03.md">read the H38-1 close-out →</a></p>
 </section>
 
 <div class="callout"><strong>Manual-only boundary:</strong> no login, download, upload, scrape, poll, or monitoring of DrivenData occurs in this repository. Review the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a> and <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules</a> yourself before deciding whether to submit. The current file is not slot-approved; a local audit does not guarantee portal acceptance.</div>
@@ -920,7 +926,7 @@ def render_session14_section(record: dict, h38_result: dict, h38_claim: dict) ->
     availability = record.get("official_source_checks_2026_10_03", {})
     return f"""<section class="section" id="session14-ranking"><div class="eyebrow">Current hypothesis ranking · Session 14</div>
 <h2>Five ranked geological hypotheses and their current status</h2>
-<div class="callout">{result_line} H38-1's protocol is <a href="../knowledge/38_preregistration_H38-1.md">frozen here</a>; the full layers, mechanisms, novelty boundaries, risks and source checks are in <a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">the dated ranking record</a>. Every ΔDTI interval is a planning prior that includes zero—not an observed holdout gain or competition-score prediction.</div>
+<div class="callout">{result_line} H38-1's protocol is <a href="../knowledge/38_preregistration_H38-1.md">frozen here</a>; the full layers, mechanisms, novelty boundaries, risks and source checks are in <a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">the dated ranking record</a>, and the single-use run/analyzer failure is documented in the <a href="../knowledge/39_session14_closeout_2026-10-03.md">close-out</a>. Every ΔDTI interval is a planning prior that includes zero—not an observed holdout gain or competition-score prediction.</div>
 <div class="table-wrap"><table class="table"><thead><tr><th>Rank</th><th>Hypothesis</th><th>Planning-only ΔDTI</th><th>Cost / data gate</th><th>Current state</th></tr></thead><tbody>{ranking_rows}</tbody></table></div>
 <p><strong>Official-source availability check (page listings, not new local clips):</strong> {esc(availability.get('heat_flow', 'Heat-flow release not recorded'))} {esc(availability.get('ingenious_gdr', 'GDR resource listing not recorded'))} {esc(availability.get('conductance', 'Conductance listing not recorded'))} {esc(availability.get('three_dep', '3DEP listing not recorded'))}</p>
 <p><a href="sources.html">Open official-source register →</a> · <a href="../registry/next_hypotheses.json">Registry JSON →</a></p></section>"""
@@ -1048,7 +1054,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 <p><a href="../knowledge/16_preregistration_H32-2.md">Frozen H32-2 protocol + run-1 integrity correction</a> · <a href="../knowledge/17_h32_2_result.md">H32-2 result record</a> · <a href="../evidence/h32_2_holdout.json">Valid screen evidence JSON</a> · <a href="../evidence/h32_2_holdout_run1_invalid_2026-10-03.json">Preserved invalid run 1</a> · <a href="../scripts/run_h32_2_holdout.py">Runner source</a></p></section>
 
 <section class="section"><h2>H28-1 benchmark and candidate file</h2><p>The paired hide-and-recover screen compared H28-1 multiscale magnetic/gravity edge-coherence features against the best comparable same-run control, across spatially blocked folds and seeds 140–149. The mean paired catalogue proxy ΔDTI was {fmt_number(candidate.get('holdout_mean_gain', 0.002948838794400959), 6)}, with 3/4 folds and 9/10 seed means positive; the frozen screen gate passed. This is not a leaderboard score and does not establish transfer to expert-created faults outside the catalogue habitat.</p><p>Candidate filename: <code>{esc(candidate.get('nan', ''))}</code>. Its full-map construction is separate from the holdout-only fit and no current GEMSDOE28 upload exists. It is not one of the four weekly slots inherited from the predecessor project. The file is an auditable research reference, not a submission recommendation.</p><p>Local manual downloads: <a href="downloads/{esc(candidate.get('nan', ''))}" download>{esc(candidate.get('nan', ''))}</a> · <a href="downloads/{esc(candidate.get('allfinite', ''))}" download>{esc(candidate.get('allfinite', ''))}</a> · <a href="downloads/{esc(candidate.get('zip', ''))}" download>{esc(candidate.get('zip', ''))}</a>.</p><p><a href="../evidence/h28_1_edge_holdout.json">Holdout evidence</a> · <a href="../knowledge/08_preregistration_H28-1.md">H28-1 preregistration</a> · <a href="../knowledge/09_preregistration_H28-1_candidate.md">Full-map candidate construction record</a></p>
-<p>Current Session 14 ranking and source checks: <a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">knowledge/37</a>. H38-1 frozen protocol: <a href="../knowledge/38_preregistration_H38-1.md">knowledge/38</a>. Earlier hypothesis queues: <a href="../knowledge/18_new_hypotheses_H33_series_2026-10-03.md">knowledge/18</a> and <a href="../knowledge/13_current_ranked_hypotheses_2026-10-03.md">knowledge/13</a>.</p></section>
+<p>Current Session 14 ranking and source checks: <a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">knowledge/37</a>. H38-1 frozen protocol: <a href="../knowledge/38_preregistration_H38-1.md">knowledge/38</a>. Single-use run close-out: <a href="../knowledge/39_session14_closeout_2026-10-03.md">knowledge/39</a>. Earlier hypothesis queues: <a href="../knowledge/18_new_hypotheses_H33_series_2026-10-03.md">knowledge/18</a> and <a href="../knowledge/13_current_ranked_hypotheses_2026-10-03.md">knowledge/13</a>.</p></section>
 
 <section class="section"><h2>Promotion gate and what counts</h2><div class="table-wrap"><table><thead><tr><th>Stage</th><th>Required evidence</th><th>What it is not</th></tr></thead><tbody>
 <tr><td>Pre-fit</td><td>Freeze transform, data and provenance, folds/draws, response, model, metrics, seeds, analysis and gate; run label-free sufficiency only.</td><td>Not permission to tune thresholds on a held-out seed.</td></tr>
@@ -1126,7 +1132,7 @@ def render_sources(sources_registry: dict, board: dict) -> str:
 <p>The site generator reads the local JSON registry only; it makes no external request. The separately invoked <code>scripts/refresh_source_feed.py</code> has an explicit forbidden-host guard for <code>drivendata.org</code> and is not part of site build or CI.</p>
 </section>
 <section class="section"><h2>{len(sources)} registered source records</h2>{''.join(items)}
-<p><a href="../registry/sources.json">Download the machine-readable source ledger</a> · <a href="../registry/irregularities.json">Review disclosed irregularities</a> · <a href="../registry/data_manifest.json">Review input hashes and provenance labels</a>.</p></section>
+<p><a href="../registry/sources.json">Download the machine-readable source ledger</a> · <a href="../registry/irregularities.json">Review disclosed irregularities</a> · <a href="../registry/data_manifest.json">Review input hashes and provenance labels</a> · <a href="../AI_DISCLOSURE.md">Generative-AI use disclosure</a>.</p></section>
 """
 
 

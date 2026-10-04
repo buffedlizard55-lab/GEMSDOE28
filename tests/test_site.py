@@ -46,6 +46,8 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
         "docs/data/topology_review_classes.json",
         "evidence/losfo_h38_1_raw.json",
         "evidence/h38_1_seed_audit_pre_run.json",
+        "knowledge/39_session14_closeout_2026-10-03.md",
+        "AI_DISCLOSURE.md",
         "scripts/build_site.py",
         ".github/workflows/build-site.yml",
         "docs/assets/**",
@@ -214,6 +216,25 @@ def test_h38_result_requires_consumed_claim_raw_hash_and_frozen_gate_integrity(t
     assert "H38-1 claim state: RUNNING" in build_site.h38_status_html({}, {"status": "RUNNING"})
     assert "report artifact exists but its consumed-claim/hash chain is missing or invalid" in build_site.h38_status_html({"schema": 1}, {})
     assert not build_site.h38_result_integrity({"gates": None}, {"code_sha256": None})
+
+
+def test_failed_h38_claim_discloses_missing_gate_and_links_raw_artifact(tmp_path, monkeypatch):
+    from scripts import build_site
+
+    evidence = tmp_path / "evidence"
+    evidence.mkdir()
+    for name in ("h38_1_holdout.started.json", "h38_1_seed_audit_pre_run.json", "losfo_h38_1_raw.json"):
+        (evidence / name).write_text("{}")
+    monkeypatch.setattr(build_site, "ROOT", tmp_path)
+    html = build_site.h38_status_html({}, {
+        "status": "FAILED",
+        "failure_detail": "TypeError: Object of type int64 is not JSON serializable",
+    })
+    assert "no frozen-gate decision is available" in html
+    assert "not validation" in html
+    assert "TypeError: Object of type int64 is not JSON serializable" in html
+    assert "../evidence/losfo_h38_1_raw.json" in html
+    assert "raw run (unverified; no gate summary)" in html
 
 
 def test_all_internal_links_and_assets_resolve():
