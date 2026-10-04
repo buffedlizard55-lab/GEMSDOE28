@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-04T00:05:00Z",
-  "status": "Current Session 14 ranking: H38-1 is frozen for one label-free-candidate addition test on LOSFO seeds 265–269; the claim/audit and holdout are NOT prepared or run yet. H37-1 failed far-field transfer and H37-3 missed the live-value bar. No candidate is approved for a weekly slot; the H33/H37 records below remain historical evidence.",
+  "generated": "2026-10-04T01:44:41Z",
+  "status": "Current Session 14 ranking: H38-1 is frozen for one label-free-candidate addition test on LOSFO seeds 265–269. The checkout-local seed audit PASS_LOCAL_SCAN found zero references among 61 evidence JSON files, and the exact-range claim is RESERVED; the LOSFO holdout is NOT RUN. The scan cannot rule out owner-workspace, other-repository, unpublished, or pre-checkout use. H37-1 failed far-field transfer and H37-3 missed the live-value bar. No candidate is approved for a weekly slot; the H33/H37 records below remain historical evidence.",
   "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
   "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
   "baseline": {
@@ -620,7 +620,7 @@
   "session14_addendum": {
     "generated": "2026-10-03",
     "ranking_record": "knowledge/37_ranked_hypotheses_session14_2026-10-03.md",
-    "status": "H38-1 FROZEN PLAN ONLY. No seed claim or audit has been prepared and no holdout has started.",
+    "status": "H38-1 FROZEN; local seed audit PASS_LOCAL_SCAN (61 evidence JSON files, zero local references/collisions, zero unreadable files); exact-range claim RESERVED for 265–269; no holdout has started. This checkout-local scan does not establish global seed availability.",
     "score_context": {
       "owner_reported_base": {
         "score": 0.26,
@@ -669,7 +669,7 @@
           0.001
         ],
         "cost": "Low–medium; local hash-pinned owner-mirror layers, no new external data",
-        "status": "Leading candidate frozen for LOSFO test; not a holdout result",
+        "status": "Label-free support READY (140); seeds 265–269 locally audited and reserved; holdout NOT RUN",
         "record": "knowledge/38_preregistration_H38-1.md",
         "layers": [
           "evidence/h31_1_euler_clusters.csv: SI-0 Euler solutions from training tmi, fixed depth_mad_m <= 60, median_depth_m <= 400, n_solutions >= 8",
@@ -679,7 +679,7 @@
         "physical_signature": "A shallow, depth-coherent contact-like magnetic Euler cluster is corroborated by a nearby strong independently measured gravity gradient and subdued local relief; a buried density/magnetic contact under a surface without a strong scarp is the target, not proof of faulting or geothermal activity.",
         "why_missing_catalogue": "A buried or subdued structure can lack a mappable Quaternary surface trace while retaining subsurface magnetic and gravity contrasts. The relief condition targets that gap rather than high-relief mapped scarps; the competition statement says public fault labels are incomplete and experts added faults, but LOSFO is not organizer truth.",
         "differs_from_repo": "H37-3 emitted on shallow SI-0 Euler depth coherence alone and missed the 0.0548 live-value bar. H37-2 proposed potential-field lineaments × low relief. H38-1 tests a narrower three-way Euler-depth, independent-gravity-gradient, low-relief conjunction; no score-guided threshold tuning.",
-        "data_gate": "Label-free candidate support READY at 140 unique centroids. The local owner-mirror rasters and Euler table are hash-pinned; this is support only, not validation. One frozen LOSFO test is pending.",
+        "data_gate": "Label-free support READY at 140 unique centroids; local seed scan PASS_LOCAL_SCAN and exact-range claim RESERVED. This is not holdout validation; no fit has started.",
         "main_confounder": "SI-0 is an idealized contact geometry, gravity edges include lithologic contacts and basin margins, and relief is a quantized local descriptor; the conjunction can still select non-fault contacts."
       },
       {
@@ -782,11 +782,29 @@
         268,
         269
       ],
-      "seed_scope": "local evidence/*.json collision scan only; external/undocumented use cannot be excluded",
-      "holdout_status": "NOT RUN; seed claim and local audit not prepared",
+      "seed_scope": "local evidence/*.json scan only (61 files, zero local references); repository is shallow and external/undocumented use cannot be excluded",
+      "holdout_status": "NOT RUN; exact-range claim RESERVED after PASS_LOCAL_SCAN; no LOSFO fit has started",
       "weekly_slot_used": false,
-      "promotion_rule": "C1–C5 all pass only permits a separate fresh-seed confirmation and exact-file review; no weekly slot without further confirmation and beating the current blocked-holdout best."
+      "promotion_rule": "C1–C5 all pass only permits a separate fresh-seed confirmation and exact-file review; no weekly slot without further confirmation and beating the current blocked-holdout best.",
+      "seed_audit": "evidence/h38_1_seed_audit_pre_run.json",
+      "seed_audit_sha256": "413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e",
+      "local_seed_audit_status": "PASS_LOCAL_SCAN",
+      "claim": "evidence/h38_1_holdout.started.json",
+      "claim_sha256": "acb5a8daf9bf067d5acbdb5edda73a0cc51a7cc9abf159338c8aceeda39248ad",
+      "claim_status": "RESERVED"
     },
-    "historical_scope": "The top-level H33 hypothesis list and session11–session13 addenda are retained unchanged as historical records. Session14 is the current ranked list."
+    "historical_scope": "The top-level H33 hypothesis list and session11–session13 addenda are retained unchanged as historical records. Session14 is the current ranked list.",
+    "seed_audit": {
+      "path": "evidence/h38_1_seed_audit_pre_run.json",
+      "sha256": "413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e",
+      "status": "PASS_LOCAL_SCAN",
+      "checked_utc": "2026-10-04T01:43:57Z",
+      "scanned_evidence_json_count": 61,
+      "local_reference_count": 0,
+      "collision_count": 0,
+      "unreadable_count": 0,
+      "repository_shallow": true,
+      "scope": "local evidence/*.json only; owner workspaces, other repositories and unpublished runs are not covered"
+    }
   }
 }

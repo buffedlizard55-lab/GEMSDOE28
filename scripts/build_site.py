@@ -220,6 +220,7 @@ def h38_status_html(report: dict, claim: dict) -> str:
         )
         return (
             f"<strong>H38-1 claim state: {esc(status)}.</strong> {esc(explanations[status])} "
+            "The 140 candidate centroids come from a label-free support screen only, not validation. "
             f"{claim_link}{audit_link}; this is not an organizer score."
         )
     if report:

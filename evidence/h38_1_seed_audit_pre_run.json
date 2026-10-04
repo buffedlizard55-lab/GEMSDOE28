@@ -1,0 +1,179 @@
+{
+  "checked_utc": "2026-10-04T01:43:57Z",
+  "claim": {
+    "path": "evidence/h38_1_holdout.started.json",
+    "seeds": [
+      265,
+      266,
+      267,
+      268,
+      269
+    ],
+    "status": "RESERVED",
+    "valid_for_exact_range": true
+  },
+  "collisions_excluding_exact_claim": [],
+  "interpretation": "The local range is collision-free in this scan. Reserve/use only with the limitation above; do not describe it as comprehensively free.",
+  "legacy_audit_scope": {
+    "checked_utc": "2026-10-03T23:59:00Z",
+    "covers_target_range": false,
+    "limitation": "historical H31 audit only; not an authority for seeds outside its declared ranges",
+    "path": "evidence/h31_1_seed_reuse_audit.json",
+    "preregistered_ranges": {
+      "h32_1_screen": {
+        "claim_file": null,
+        "eligible": true,
+        "evidence": "h32_1_structural_step_holdout.json",
+        "owner": "H32-1 structural-step coherence",
+        "protocol": "knowledge/14_preregistration_H32-1.md",
+        "range": [
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179
+        ]
+      },
+      "h33_1_kinematic_reactivation": {
+        "claim_file": null,
+        "eligible": true,
+        "evidence": "(pending - data gate opened by the sb_slip_tendency bridge)",
+        "owner": "H33-1 kinematic reactivation gate",
+        "protocol": "knowledge/19_preregistration_H33-1.md",
+        "range": [
+          200,
+          209
+        ]
+      },
+      "h34_packing_ladder": {
+        "claim_file": null,
+        "eligible": false,
+        "evidence": "evidence/h34_holdout.json",
+        "note": "CONSUMED - gate FAIL on criterion 2 (direction control); arm closed, not rerunnable",
+        "owner": "H34 packing-ladder rung selection",
+        "protocol": "knowledge/21_preregistration_H34.md",
+        "range": [
+          220,
+          229
+        ]
+      },
+      "losfo_far_field": {
+        "claim_file": null,
+        "eligible": true,
+        "evidence": "evidence/losfo_farfield_diagnostic.json",
+        "owner": "LOSFO far-field harness",
+        "protocol": "src/gems27/losfo.py + scripts/run_losfo_harness.py",
+        "range": [
+          210,
+          214
+        ]
+      },
+      "screen": {
+        "claim_file": "h31_1_euler_screen.started.json",
+        "eligible": true,
+        "evidence": "h31_1_euler_screen.json",
+        "owner": "H31-1 Euler depth clusters",
+        "protocol": "knowledge/12_preregistration_H31-1_euler.md",
+        "range": [
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169
+        ]
+      }
+    }
+  },
+  "local_seed_references": [],
+  "network_access": "none",
+  "repository": {
+    "branch": "arena/01a10412-gemsdoe28",
+    "head": "cf1d03627ad3f863d10ff34e5195f126efad51f5",
+    "shallow": true
+  },
+  "scanned_evidence_sha256": {
+    "addendum_d_gates.json": "1a3199a17bea93229cc8bdf41afcca8bc7087577b0a5b692bc4246947bfd18dd",
+    "arm_habitat_decomposition.json": "c807ee800df081c399e2874ab7682e7da5a8b9bd9017a5ff1880f35b15fbc9c3",
+    "budget_optimum.json": "a798c70871cdd884f86b642f98b366ed029ebe59fd0ca80e750551c4a1b912d2",
+    "candidate_model_scores.json": "ef2550c6c8b9d1f49dfd3d1b6b15a7ce069901b5b66ddf03afbb341cfe66f755",
+    "candidate_summary.json": "df82b595ea76394e56a0cdb739e98c1b934ce80761cd8b4561eda78400926398",
+    "channel_auc.json": "619915ffbbae999287f51aaee639b5224c65e4c3e0216d50c80412dc7642acd9",
+    "data_preparation.json": "ae2e5f0a6571b653f8a16f64610d2b24a16eee1b4f6d284ede59a12b455a4664",
+    "euler_input_audit.json": "59c7ee6f46120510fd04095b3a9a5842e407fb16db961fcac7edf061f3899d25",
+    "example_links.json": "0dd6d291d528565e63acc7c6715ff0e6bccf2cf913ddfc812e9aa5fd699b7742",
+    "external_layer_inventory.json": "4f1fa066c718f060b6e6052245cd926bba32dc22e116636e48b63ca41e4e1d46",
+    "graph_report.json": "a349cb5ba5ff867ba3b552a012dfd5cb684d464953fa700e67810e8e987aa607",
+    "h27_10_annulus_holdout.json": "4ef326051fb258e271c70f1c0f438e19a1ce08309a6d0104ddc13d2a1caf47b3",
+    "h27_10_annulus_holdout_initial.json": "ee0f64dfe139cbfcfe7e276f449a2cebc92202c015cd1a524529fecb72a9f873",
+    "h28_1_edge_holdout.json": "97c285a8c127e8e338a88b1d5a403669bc90f8dd462f754fc53ecd64f67491e3",
+    "h31_1_euler_feature_audit.json": "bf6c3193bb0aae951abb3eb5149413338e0ca8fafd669bd4fb9e3ca490552e2d",
+    "h31_1_euler_feature_audit_initial.json": "c65f38fd3b51fae7f134d9a875639b5b30ee659317041ab5d535327b10915819",
+    "h31_1_euler_feature_audit_revision1.json": "3c52e205a8312f11d730dc40996ca0bbe6e0449332f8dfaa36bf7edb9ed495f4",
+    "h31_1_euler_screen.json": "ef18f530020217a423d2cdf3682b14e29b821b7b40dd64a21abe2ae68c2486cc",
+    "h31_1_euler_screen.started.json": "269201d6e9a6cfb749ecbfcf06d770a87707483560c7d9eaf1078965335a64f9",
+    "h31_1_prereg_history_audit.json": "11b7fb942f45265ccc88996536f74f26170f3d5afd7d94de10a87c66dc4c1b51",
+    "h31_1_seed_reuse_audit.json": "50b02f5ef87432baf2ba4a3c650ca51acc1d35f239e210fa800c8b3510e5bfcf",
+    "h32_1_holdout.json": "4bd7cde797e4c7f373d2f0dae0a0770c27555b472174a574e4a662e89c1d3290",
+    "h32_1_structural_step_holdout.json": "f636d04570b881b51e2226d88de0370fa2df9d087b663758ae992b28876fc76a",
+    "h32_2_holdout.json": "b2cd9dc46baf0b995b4bc10f5ca38e97fd1d55e0579f052dc8a814a9a433e2e5",
+    "h32_2_holdout_run1_invalid_2026-10-03.json": "50f631691e32832f6262fcbf61865064b4ef592396cafc53aba3a3c8932e331f",
+    "h33_1_holdout.json": "ae356d55e0212a7aacfce60df7c2ec99bce15ca64047e670d365198f480bc5fc",
+    "h34_holdout.json": "78d57db07798db20a04d84ac2991da3b549771e42daed53184443dbfbfcda685",
+    "h34_operating_point.json": "cfbbe6e12a01359bb4179f594a4dd0057fe57ad7c7438e704445c781a9e4ddb6",
+    "h35_1_holdout.json": "4349de916eb6dd9e005c9b3438faecc69ad7b9fe63a682de4280025a8110be35",
+    "h35_1_thermal_farfield.json": "c4466f9d1bdb43f6a4ee416a53641825dc8691939c435043101c97f676e10337",
+    "h35_4_holdout.json": "841f8bdce6e514e80ec7368d4870b4448df5df2af342c04c94598aca4dda2145",
+    "h35_6_candidate_headtohead.json": "907270e55c379981ad27a249e59871aedca3e80ab3b8cf43b639b90be1f7314f",
+    "h36_1_holdout.json": "46bc43534c7c9e8fe374f3de6401a13e0a9e6e64f556207571d80597f7dff631",
+    "h37_1_artifact.json": "415453e275fb973688eec4bf75b815b5823c68d4535147e49dc27e4e828c7a37",
+    "h37_1_holdout.json": "8069afe176416d800c763b16d513f5f888ee699c6bba6c19412b39841ef35faa",
+    "h37_3_licence_integrity.json": "0f692f7bdb3a7cc05ecc56f92d3416450381874b4df4e59665fee2c1ccc5a613",
+    "h38_1_sufficiency_audit.json": "91d86b012fcbfa472ff79859623743e1292a077d591427e78bf8627a92250b60",
+    "link_graph_value.json": "ebdd46df9d61979584860a5b8d16645e6b686a7f61d039c8b529954e5b34cbdd",
+    "live_inversion.json": "38bfdd7bcdebf9d7829e6ee49be3a26ad9e9510b757bfc1aad10daec4b7a463d",
+    "live_truth_partition_radial.json": "11746ee4f0c1034bf20db6938adac4d8ef44ffa04390c557f7f43a786fda38fd",
+    "live_truth_tomography.json": "47ea446021a3d903c19a2c3aad8cc408d5ebc326af9a34d75666ccde116a6ecd",
+    "losfo_farfield_diagnostic.json": "86f9a2f249f467b83bba3a63b6edf67fb8a082328d865f218a11cbb55219cb66",
+    "losfo_h37_3_licence.json": "d963ec8b5aafce1b3705c7af62d0573b8fe2b36838c69b4b05e1418db158fba6",
+    "losfo_packing_farfield.json": "72a264dfc49f2c6948dc9f87554d1950aadc716a3860b457215be7b806b9689e",
+    "oof_hypothesis_gates.json": "558c96441294b948681005004062ac665b496ba4a00ee6af91553a842fd3c8b4",
+    "operating_point_model.json": "a7be720d3e549b1588e64a5365675f84eda4ed31561c70077b840ab38b37e393",
+    "range_validator_forensics_2026-10-03.json": "3e0f852f5638557e58c8b9888c7241e838670f0a221c9e0f04d9fc7f0830c7f7",
+    "reachability_frontier.json": "faab6efa463b3c5a7517aee50d879a58a82adc21702bf591913c1c290f7c4417",
+    "restore_audit.json": "035445512d6fe793359f176443598f22db375f49b35bcfaf77784fb27d34a2e0",
+    "restore_audit_checkout.json": "cc9b5387437f8eb910112ffd138dd47e8faac8a2fc7eaaa8a68d0edfd8343ed0",
+    "scored_corpus.json": "01a9a1990de4a6c8da4b76fcccc813d1841488deafebaea31f621f6ba98de125",
+    "session9_external_verification.json": "ead4fe741dd127094e95f50a56d86ef41cc56d0d893cd4cc276b539eb8a9b2ad",
+    "sgmc_gap_inversion.json": "8315884ec7980587b8d06fb5fa478f8ae61d9acf7ef1fb0bbb4911a15fb7b76f",
+    "sgmc_lidar_response.json": "475bf680b434f1efeee5775951295a084d392a5b236975928cafba32b0564acb",
+    "structural_relay_classes.json": "41a77500968a7190f4c97f39f3b321ab29bcaf6b52985f5f5e6c6c954e417666",
+    "submission_file_audit.json": "be01ac7fab5680c6f4b56bf8b4fefcb899c384c1455b9ec4c5dc18ad1b714476",
+    "topology_confirmation_v2.json": "f0223a202dfe40e903367333d5bb406406f028fbaf477357165f080b91f381db",
+    "topology_link_feature_analysis.json": "7f0ca61c6107852dad6d36c980531ad54fd8fd34d08a01764c73309c0312eca7",
+    "topology_validation.json": "fa4f3c0e9f2f0ba3d638582b7180701677565c9bcf8ee393ae910659e150133d",
+    "vector_topology_validation.json": "6c5e4530b5c8a6ff1601f78ed7f0723c0470ad543663447671dafa72acd9a476",
+    "why_026_won.json": "582ec6441fb3521d9ea128252f13a6f9852c436bffac120220d953c8a9eb2c5d"
+  },
+  "schema": 1,
+  "scope": "local evidence/*.json only; an empty scan cannot establish availability in owner workspaces, other repositories, or unpublished runs",
+  "sha256": "34ce54241f24d1acc02ca47ea36216f114ae7ecc44ef798ac765df8a6815cfb6",
+  "status": "PASS_LOCAL_SCAN",
+  "target_range": [
+    265,
+    266,
+    267,
+    268,
+    269
+  ],
+  "unreadable_json": []
+}
