@@ -461,7 +461,25 @@
       "id": "parallel-session-arm-naming-collision",
       "severity": "low",
       "issue": "A parallel session's commit 9d764cd added thinning.directional_dot_thin and its docstring history calls it 'the candidate H37-1 (directional / anisotropic Poisson-disk ...)'. H37-1 is already taken: knowledge/29-35, the README and registry/next_hypotheses.json define H37-1 as the metric-aware (maximum expected coverage) packing arm, which this session gated, far-field falsified and demoted. The directional thinning is otherwise undocumented in the ledger.",
-      "action": "Flagged for the owner so the two arms cannot be confused in the record. Neither arm's results are affected (directional_dot_thin only ADDS a function; dot_thin is unchanged, so every measured result still refers to the same code). When the directional arm is formally proposed it needs its own ID (e.g. H38-1), its own preregistration, and a corrected docstring history line."
+      "action": "RESOLVED in Session 14. H38-1 is now allocated to the shallow SI-0 Euler × gravity-gradient × low-relief conjunction, with its own preregistration in knowledge/38_preregistration_H38-1.md; it is not the directional_dot_thin experiment. The directional arm remains a separate parallel-workstream result whose reused H37-1 label was a collision; any future revival must use a new ID after H38-1 (H39 or later), a distinct preregistration, and an untouched seed range. The thinning.py history now describes the collision explicitly. No H38-1 code or result uses directional_dot_thin."
+    },
+    {
+      "id": "h38-1-candidate-support-is-not-validation",
+      "severity": "medium",
+      "issue": "H38-1's 140-centroid count is a deterministic, label-free support screen on local hash-pinned owner mirrors (training_features band 18, LiDAR relief/validity, and prior SI-0 Euler clusters). It does not establish organizer provenance, fault identity, catalogue omission, LOSFO benefit, or hidden-score transfer. The Euler SI-0 contact assumption and gravity/relief conjunction can select lithologic contacts or basin boundaries.",
+      "action": "Keep the frozen 265-269 LOSFO panel and all C1-C5 gates unchanged. Preserve source/input hashes and the provenance caveat; any pass permits only fresh-seed confirmation and exact-file review, never immediate slot use."
+    },
+    {
+      "id": "session14-official-source-listing-not-local-coverage",
+      "severity": "medium",
+      "issue": "Session 14 rechecked official listings for the USGS heat-flow release (124.12 MB), GDR #1391 probe/paleogeothermal resources, five USGS MT conductance maps, and USGS 3DEP 1 m DEMs. Page listings and prior runner byte pins do not prove locally clipped coverage/schema; notably, the 716 challenge DEM URLs and tile datum/coverage remain unverified in this checkout.",
+      "action": "Registry/sources.json and knowledge/37 distinguish page listing, runner byte availability, and local clip status. Do not spend seeds on H38-2 through H38-5 until the exact required bytes, hashes, footprint coverage, CRS/datum, and schema are audited. H38-1 needs no new external data."
+    },
+    {
+      "id": "session14-metadata-timestamps-future-dated",
+      "severity": "low",
+      "issue": "At an earlier observed shell clock of 2026-10-03T23:39:48Z, registry/next_hypotheses.json generated=2026-10-04T00:05:00Z, registry/irregularities.json generated=2026-10-04T00:20:00Z, and evidence/h31_1_seed_reuse_audit.json checked_utc=2026-10-03T23:59:00Z were future-dated. Their chronology has not been independently reconciled.",
+      "action": "Preserved the historical timestamp fields rather than silently rewriting them. Session 14 records use date-only metadata where exact clock time is not needed; reconcile the authoring clock before asserting a more precise chronology."
     }
   ]
 }

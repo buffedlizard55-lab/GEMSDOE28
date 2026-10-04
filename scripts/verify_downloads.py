@@ -83,8 +83,16 @@ def main() -> int:
         if isinstance(item, dict) and item.get("nan"):
             candidates.append((slot, item))
     check(bool(candidates), "manifest_candidates_present", f"{len(candidates)} candidate(s) listed")
+    submission_names = [str(item.get("submission_name", "")).strip() for _, item in candidates]
+    check(all(submission_names), "submission_names_present", f"{len(submission_names)} artifact(s) have a registered portal name")
+    check(len(submission_names) == len(set(submission_names)), "submission_names_unique",
+          f"{len(submission_names)} registered name(s), all distinct")
 
     for slot, item in candidates:
+        submission_name = str(item.get("submission_name", "")).strip()
+        content_token = str(item.get("content_id", ""))
+        check(bool(submission_name and content_token and content_token in submission_name),
+              f"{slot}_submission_name_content_id", submission_name)
         content_id = str(item.get("content_id", ""))
         nan_name = str(item["nan"])
         nan_path = downloads_dir / nan_name

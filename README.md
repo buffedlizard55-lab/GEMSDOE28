@@ -89,7 +89,7 @@
 
 ## 1. Executive Summary & One-Click Verified Submission GeoTIFFs (`docs/downloads/`)
 
-All submission artifacts in `docs/downloads/` are verified by `scripts/verify_downloads.py` (**`208/208` checks PASS, `0` failures**, `evidence/submission_file_audit.json`; the count grew from `179` because Session 13 added an audited `conservative_alternative` slot instead of dropping the file the re-slot displaced): single-band `float32`, exact template grid (`EPSG:32611`, `3730 × 3292`, `100 m` pixels, `5,167,373` inside-footprint cells), values strictly in `{0.0, 1.0} ⊂ [0, 1]` inside the footprint, zero internal `NaN`s, `NaN` outside the footprint (`-nan.tif`, with an `-allfinite.tif` fallback having `0.0` outside and no `NaN` anywhere), zero overlap with the `60,988` known catalogue pixels, content-addressed 12-hex ID, single-member `.zip`, and a registered note $\le 200$ characters.
+All submission artifacts in `docs/downloads/` are verified by `scripts/verify_downloads.py` (**`217/217` checks PASS, `0` failures**, `evidence/submission_file_audit.json`; this adds nine checks for registered submission-name presence, uniqueness, and content-ID linkage to the previous 208-check inventory; Session 13's conservative alternative remains audited): single-band `float32`, exact template grid (`EPSG:32611`, `3730 × 3292`, `100 m` pixels, `5,167,373` inside-footprint cells), values strictly in `{0.0, 1.0} ⊂ [0, 1]` inside the footprint, zero internal `NaN`s, `NaN` outside the footprint (`-nan.tif`, with an `-allfinite.tif` fallback having `0.0` outside and no `NaN` anywhere), zero overlap with the `60,988` known catalogue pixels, content-addressed 12-hex ID, single-member `.zip`, and a registered note $\le 200$ characters.
 
 | Slot | Filename (`docs/downloads/`) | Content ID | Emitted px | 4-Fold Spatial-CV Holdout | Hybrid Model vs `0.2600` Anchor | Registered Note ($\le 200$ chars) |
 |---|---|---|---:|---|---:|---|
@@ -116,6 +116,8 @@ downloading. The site carries the same fallback link under the main download but
 ---
 
 ## 2. PhD-Level Analysis of the `0.2600`, `0.2449`, and `0.1223` Live Scores
+
+**Evidence boundary — do not conflate these numbers.** The `0.2600` (and other GEMSDOE-series) values are owner-reported score/file associations preserved in the owner-controlled repository corpus. Local SHA-256 checks authenticate the bytes present here, not the organizer's receipt, scoring, or account attribution; the `0.2600` inversion is therefore conditional on that reported association. `0.3195` is the repository's prior observation of a row on DrivenData's organizer-hosted public leaderboard, but it was not re-fetched for Session 14 and this checkout has no verified link from that row to an identity or submission artifact. It is an external benchmark observation, not proof that our `0.2600` submission is directly comparable or that any local file earned either score. All reverse-engineered credit values below depend on the stated truth-size/metric assumptions; local blocked-holdout DTI is research evidence, not an organizer score.
 
 We restored the missing inversion scripts (`scripts/fetch_scored_corpus.py`, `scripts/invert_live_scores.py`, `scripts/optimize_budget.py`) and inverted all **24 SHA-256-authenticated scored submissions** (`evidence/scored_corpus.json`, `evidence/live_inversion.json`, `evidence/budget_optimum.json`, plus `evidence/why_026_won.json`) at the blind-lattice-calibrated truth size $|G| = 12{,}226\text{ px}$:
 
@@ -670,6 +672,24 @@ Seed ledger: **260–264 spent; 265–269 free.** `knowledge/31`'s ledger now pu
 conjunction) next, with the H37-3 lesson attached: *a licence that clears 1.65× random can still lose if
 its rate is below the bar*. Registered as `h37-3-licence-real-but-below-the-live-rate` and
 `cross-seed-baseline-comparison-is-not-an-integrity-check` in `registry/irregularities.json`.
+
+#### 3.9c Session 14 — five ranked hypotheses; H38-1 support screen only
+
+Full scientific record: [`knowledge/37_ranked_hypotheses_session14_2026-10-03.md`](knowledge/37_ranked_hypotheses_session14_2026-10-03.md); frozen H38-1 protocol: [`knowledge/38_preregistration_H38-1.md`](knowledge/38_preregistration_H38-1.md). These are risk-adjusted planning intervals, all including zero—not observed holdout gains or leaderboard predictions.
+
+| Rank | Hypothesis / layers | Planning-only ΔDTI | Cost / data gate |
+|---:|---|---:|---|
+| 1 | **H38-1:** SI-0 Euler depth-coherent cluster × independent gravity-gradient edge × low valid LiDAR relief | `0.0000…+0.0010` | Low–medium; local hash-pinned owner mirrors; no new official data required |
+| 2 | **H38-2:** USGS heat-flow well residual × GDR #1391 2 m temperature probe anomaly × potential-field corridor | `0.0000…+0.0025` | Medium–high; USGS 124 MB archive is listed, but a local clip/schema/coverage audit is still required |
+| 3 | **H38-3:** GDR paleogeothermal deposits (sinter/tufa/travertine) × subsurface contact corridor × low relief | `0.0000…+0.0015` | Low–medium; official resource is listed, but this checkout has no audited local clip |
+| 4 | **H38-4:** USGS 3DEP 1 m drainage offsets/knickpoints/beheaded channels × potential-field lineaments | `0.0000…+0.0035` | Very high; product is official/public-domain, but 716 owner-mirrored tile URLs, footprint, bytes, CRS/datum and total volume are not verified |
+| 5 | **H38-5:** five-depth USGS MT conductance boundary coherence (2–200 km) × gravity/magnetic edge | `0.0000…+0.0015` | Medium–high; ScienceBase lists five layers, but a five-layer local clip/schema audit is still required |
+
+**H38-1 label-free sufficiency result, not validation.** The frozen conjunction retains SI-0 clusters with `depth_mad_m ≤ 60 m`, median depth `≤ 400 m`, and at least 8 solutions; requires band-18 `iso_grav_anom_hg` at/above its in-footprint P80 within 200 m; and requires valid LiDAR band-9 `relief` at/below its valid-footprint median. It selected 140 of 1,435 depth-eligible clusters (9.76%; thresholds `1.460558295249939` and `44.0`; candidate CSV SHA-256 `2e5c607affa635418c90a520ef843494a4fb00fb7e7d69f63fb317c73849d369`; support-audit SHA-256 `91d86b012fcbfa472ff79859623743e1292a077d591427e78bf8627a92250b60`). This count is a label-free feasibility screen only. Euler SI=0 is an idealized contact geometry, gravity edges may be lithologic/basin boundaries, and subdued relief is not evidence of faulting, activity, permeability, or geothermal favorability.
+
+**Pre-run state at the Session 14 freeze review:** seeds `265–269` remain provisional. Neither `scripts/audit_holdout_seed_range.py` nor `scripts/prepare_h38_1_seed_claim.py` has been invoked; no claim exists and no LOSFO holdout has started. The local audit can only scan this checkout's `evidence/*.json`; it cannot establish that seeds are unused in other repos or unpublished owner work. The next lawful sequence is: commit the complete tested protocol freeze on `arena/01a10412-gemsdoe28`, run and inspect the local audit/one-time reservation, commit those reservation artifacts so the tree is clean, then invoke the H38-1 wrapper at most once. Frozen gates require positive repeatable ΔDTI, at least `0.0548` credit per added dot, superiority to same-count random, ≥200 additions with clean integrity, and a mean gain above H37-3's `+0.0005763894914862378`; even a pass permits only independent confirmation and exact-file review, **not** a weekly slot.
+
+Official-source checks are links, not claims of local acquisition: [DrivenData problem statement](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) says public labels are incomplete and experts added faults; [USGS heat-flow ScienceBase record](https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28); [DOE GDR #1391 INGENIOUS listing](https://gdr.openei.org/submissions/1391); [USGS five-depth MT conductance release](https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b); and [USGS 3DEP one-meter DEM catalog](https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e). Listings and product-level availability do not establish local coverage, schema, byte integrity or suitability. No DrivenData login is assumed.
 
 **Answer to the standing question.** Why did `0.2600` win, and can we beat it? `0.2600` won because
 Poisson-disk thinning at `d = 2.8` cut 63 % of the H19-5 pixels while retaining 90.6 % of the `d=1.5`

@@ -1,0 +1,81 @@
+{
+  "clusters": {
+    "depth_eligible_clusters": 1435,
+    "input_cluster_rows": 6309,
+    "minimum_candidates_for_holdout": 100,
+    "selected_clusters": 140,
+    "sufficiency": "READY"
+  },
+  "data_authentication": "input rasters restored from hash-pinned owner mirrors; hashes establish byte integrity only, not organizer provenance",
+  "generated_utc": "2026-10-04T01:31:29Z",
+  "grid": {
+    "crs": "EPSG:32611",
+    "footprint_cells": 5167373,
+    "pixel_size_m": 100,
+    "shape": [
+      3730,
+      3292
+    ]
+  },
+  "holdout_seeds_allocated": false,
+  "hypothesis": "H38-1: shallow SI-0 Euler contact candidate within 200 m of a high gravity-gradient cell and in low local relief",
+  "inputs": {
+    "euler_clusters": {
+      "path": "evidence/h31_1_euler_clusters.csv",
+      "sha256": "cdd07d53de2c64bebbaffa6e083a7fd2d242e45b88f41b35417e8d0c782c8da1"
+    },
+    "lidar_descriptors": {
+      "path": "data/lidar_scarp_features_u8.tif",
+      "sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568"
+    },
+    "template": {
+      "path": "data/sample_submission.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+    },
+    "training_features": {
+      "path": "data/training_features.tif",
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
+    }
+  },
+  "interpretation": "label-free data-support audit only; not a holdout result, fault identification, or score estimate",
+  "labels_read": false,
+  "network_access": "none",
+  "outputs": {
+    "builder_sha256": "a40d4f052f9971922ae4ef0800cc95ce312a30c0b66939323dd2b06db5518d88",
+    "candidate_csv": {
+      "path": "evidence/h38_1_candidate_clusters.csv",
+      "row_count": 140,
+      "sha256": "2e5c607affa635418c90a520ef843494a4fb00fb7e7d69f63fb317c73849d369"
+    },
+    "module_sha256": "d7673945e384a901952aec0ec92412ac6a3a4b56ee90372beaffa1b0535d9c00"
+  },
+  "rule": {
+    "euler": "SI-0 cluster row and col rounded to nearest grid cell; depth_mad_m <= 60 m; median_depth_m <= 400 m; n_solutions >= 8",
+    "gravity": "training_features band 18 (iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change); threshold is the 80% linear quantile of finite in-footprint values; candidate centroid within 2 pixels (200 m) of any threshold-exceeding cell",
+    "minimum_candidate_count_for_holdout": 100,
+    "relief": "LiDAR band 9 (relief); value <= 50% linear quantile over valid in-footprint cells; validity band 12 (valid) > 0"
+  },
+  "schema": 1,
+  "score_or_labels_used_to_choose_thresholds": false,
+  "status": "READY",
+  "support": {
+    "cells_low_relief": 1968178,
+    "cells_near_gravity": 1165674,
+    "gravity_band_1based": 18,
+    "gravity_corridor_radius_m": 200.0,
+    "gravity_corridor_radius_px": 2.0,
+    "gravity_feature": "iso_grav_anom_hg",
+    "gravity_high_cells": 1032863,
+    "gravity_population": "finite (abs < 1e30) cells inside the finite template footprint",
+    "gravity_quantile": 0.8,
+    "gravity_threshold": 1.460558295249939,
+    "gravity_valid_cells": 5164312,
+    "joint_support_cells": 569931,
+    "relief_band_1based": 9,
+    "relief_feature": "relief",
+    "relief_population": "finite LiDAR-valid cells inside the finite template footprint",
+    "relief_quantile": 0.5,
+    "relief_threshold": 44.0,
+    "relief_valid_cells": 3894460
+  }
+}

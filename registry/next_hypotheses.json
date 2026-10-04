@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-04T00:05:00Z",
-  "status": "GEMSDOE28 hypothesis ledger: two preregistered far-field tests closed. H37-1 passed its interleaved gate then FAILED its far-field falsification (demoted; one-click slot returned to H36-1). H37-3 (Euler SI-0 emission licence) is REFUTED as promotable: its licence beat a same-count random control 1.65x but earned 0.031157 credit/dot against the 0.0548 live bar. Next arm: H37-2.",
+  "status": "Current Session 14 ranking: H38-1 is frozen for one label-free-candidate addition test on LOSFO seeds 265–269; the claim/audit and holdout are NOT prepared or run yet. H37-1 failed far-field transfer and H37-3 missed the live-value bar. No candidate is approved for a weekly slot; the H33/H37 records below remain historical evidence.",
   "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
   "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
   "baseline": {
@@ -35,7 +35,7 @@
     "cost": "Low (~95 s CPU holdout + ~9 s GeoTIFF build); zero external downloads.",
     "status": "VALIDATED ON 4-FOLD SPATIALLY BLOCKED HOLDOUT (PASS: +0.001272 post / +0.001399 pre, 10/10 seeds, 4/4 folds); built as primary download c3aeda1d31a3 (41,656 px) and secondary 31e35eee884e (42,294 px)."
   },
-  "ranking_basis": "Re-ranked after H33-1 was RUN and REFUTED (knowledge/21). H33-1 was the only preregistered arm with its data in hand, so it was executed on its reserved seeds 200-209 before any new arm was designed: all six frozen promotion criteria failed (mean dDTI -0.003014, 0/10 seeds, 0/4 folds, fav coverage 11.95% vs a 60% precondition). Its third finding is the important one: all three arms removed pixels at 0.101-0.140 credit per removed FP against a break-even of 0.019292, so the discarded pixels were worth 5-7x break-even. Together with H31-1 and H32-2 this makes three independent pruning arms that failed the same way - PRUNING IS EXHAUSTED AS A FAMILY at this operating point, which independently corroborates the reachability frontier. Remaining arms are therefore ranked ADD-first, and an ADD arm is validated on the far-field LOSFO harness (evidence/losfo_farfield_diagnostic.json), never on the interleaved holdout, which by construction holds out no off-catalogue habitat. Attribute transfer FROM mapped faults TO off-catalogue candidates is now on the do-not-revive list: only ~12% of emitted dots have a similarly oriented mapped segment within 1 km, a coverage ceiling no radius widening fixes.",
+  "ranking_basis": "Re-ranked after H33-1 was RUN and REFUTED (knowledge/21). H33-1 was the only preregistered arm with its data in hand, so it was executed on its reserved seeds 200-209 before any new arm was designed: all six frozen promotion criteria failed (mean dDTI -0.003014, 0/10 seeds, 0/4 folds, fav coverage 11.95% vs a 60% precondition). Its third finding is the important one: all three arms removed pixels at 0.101-0.140 credit per removed FP against a break-even of 0.019292, so the discarded pixels were worth 5-7x break-even. Together with H31-1 and H32-2 this makes three independent pruning arms that failed the same way - PRUNING IS EXHAUSTED AS A FAMILY at this operating point, which independently corroborates the reachability frontier. Remaining arms are therefore ranked ADD-first, and an ADD arm is validated on the far-field LOSFO harness (evidence/losfo_farfield_diagnostic.json), never on the interleaved holdout, which by construction holds out no off-catalogue habitat. Attribute transfer FROM mapped faults TO off-catalogue candidates is now on the do-not-revive list: only ~12% of emitted dots have a similarly oriented mapped segment within 1 km, a coverage ceiling no radius widening fixes. Session 14 (knowledge/37) ranks five distinct candidate rules; H38-1 combines shallow SI-0 Euler depth coherence, an independent gravity-gradient corridor, and low LiDAR relief. It has only a label-free 140-candidate support count, not a performance result; the frozen LOSFO test uses local seeds 265–269 after a repository-only collision scan.",
   "hypotheses": [
     {
       "id": "H33-3",
@@ -57,7 +57,7 @@
       "cost": "Medium (124 MB zip ingest + probe raster already byte-verified locally).",
       "data_gate": "Zip listed on ScienceBase 2026-10-03; byte-verify queued on the runner bridge. Probes already byte-verified (evidence/external_layer_inventory.json).",
       "validation": "Preregistration required before any run; seeds 200-209 reserved for the next arm (190-199 consumed by the H32-2 closed screen). Never a weekly slot without a PASS on the frozen 4-fold spatially-blocked holdout. Add-emission variants screened by bounded-cost arithmetic (alpha=0.2) first.",
-      "status": "UNTRIED \u2014 data gate OPEN: heat_flow zip byte-verified on the runner 2026-10-03T17:58:38Z (130,154,244 B, sha256 e7fd62c6963ab390\u2026; evidence/external_layer_inventory.json sb_heat_flow_zip AVAILABILITY_FETCHED); 2 m probes already byte-verified.",
+      "status": "UNTRIED — data gate OPEN: heat_flow zip byte-verified on the runner 2026-10-03T17:58:38Z (130,154,244 B, sha256 e7fd62c6963ab390…; evidence/external_layer_inventory.json sb_heat_flow_zip AVAILABILITY_FETCHED); 2 m probes already byte-verified.",
       "arm_class": "ADD"
     },
     {
@@ -68,7 +68,7 @@
         "Competition 1m_DEM_links.csv (owner mirror data/dem_links.json) -> USGS 3DEP/Theia 1 m tiles (free, official)",
         "Derived flow-direction/accumulation networks; lidar_scarp_features_u8.tif for contrast"
       ],
-      "signature": "Linear drainage anomalies: right-angle channel offsets at lineament intersections, beheaded channels, aligned knickpoint trains, wind gaps \u2014 scored along candidate lineaments from flow routing on 1 m DEMs.",
+      "signature": "Linear drainage anomalies: right-angle channel offsets at lineament intersections, beheaded channels, aligned knickpoint trains, wind gaps — scored along candidate lineaments from flow routing on 1 m DEMs.",
       "why_missing_faults": "Channels integrate the most recent deformation and record faulting after scarp relief diffuses below LiDAR-amplitude detection; alluvial-basin faults erase scarps fastest but keep offsetting active channels.",
       "confounders": "Lithologic controls (bedrock reach, lithology contacts) also create knickpoints; require the lineament-coincidence leg and multi-metric consensus.",
       "differs_from_repo": "All prior LiDAR work used amplitude features (step max, roughness, openness); no arm has touched flow-network topology.",
@@ -91,8 +91,8 @@
         "Official rules: Phase-2 rescoring against the expert-expanded label set (docs.nlr.gov/docs/fy26osti/96647.pdf; DrivenData page 967)"
       ],
       "signature": "Budget policy, not a feature: emit <= ~600 px (<=2% of dots) of maximally corroborated novel segments (>=3 independent indicators and >300 m from any catalogue pixel). Bounded Phase-1 cost: alpha=0.2 caps each false dot at 0.2 kernel units (~<=0.002 DTI at current operating points); Phase-2 upside is asymmetric because the expert panel mines submissions for verifiable new faults.",
-      "why_missing_faults": "By construction: emission restricted to off-catalogue, multi-method-corroborated pixels \u2014 precisely what experts can verify against GeoDAWN imagery in the Phase-2 label expansion.",
-      "confounders": "Phase-2 gain is not holdout-testable on the catalogue proxy; treat the range as scenario arithmetic. Over-spending the budget is the main failure mode \u2014 cap is frozen before emission.",
+      "why_missing_faults": "By construction: emission restricted to off-catalogue, multi-method-corroborated pixels — precisely what experts can verify against GeoDAWN imagery in the Phase-2 label expansion.",
+      "confounders": "Phase-2 gain is not holdout-testable on the catalogue proxy; treat the range as scenario arithmetic. Over-spending the budget is the main failure mode — cap is frozen before emission.",
       "differs_from_repo": "Every prior arm optimised a Phase-1-style proxy; none priced the Phase-2 rescoring rule. Contrarian path to leapfrog the 0.30+ cluster that likely shares the H19-5 surface family.",
       "expected_holdout_delta_dti": [
         0.0,
@@ -123,7 +123,7 @@
       "cost": "Medium-high (5 GeoTIFF reprojections + alignment transform + label-free audit before seed spend).",
       "data_gate": "All five GeoTIFFs listed on ScienceBase 2026-10-03; byte-verify queued on the runner bridge.",
       "validation": "Preregistration required before any run; seeds 200-209 reserved for the next arm (190-199 consumed by the H32-2 closed screen). Never a weekly slot without a PASS on the frozen 4-fold spatially-blocked holdout.",
-      "status": "UNTRIED \u2014 data gate OPEN (CORRECTED). The earlier PENDING text was stale: the latest runner inventory (evidence/external_layer_inventory.json, 2026-10-03T18:58:17Z) records gb_conductance_surface_tp.tif (4,132,337 B, sha256 8cc1a22404108a9f...) and gb_conductance_middle_crust_tp.tif (4,132,325 B, sha256 e8cfd731f58a64a5...) both as AVAILABILITY_FETCHED with pin_match true, so the facet-aware probe did work. Ranked last of the surviving arms because it is a PRUNE/score arm and pruning is now exhausted as a family (see ranking_basis).",
+      "status": "UNTRIED — data gate OPEN (CORRECTED). The earlier PENDING text was stale: the latest runner inventory (evidence/external_layer_inventory.json, 2026-10-03T18:58:17Z) records gb_conductance_surface_tp.tif (4,132,337 B, sha256 8cc1a22404108a9f...) and gb_conductance_middle_crust_tp.tif (4,132,325 B, sha256 e8cfd731f58a64a5...) both as AVAILABILITY_FETCHED with pin_match true, so the facet-aware probe did work. Ranked last of the surviving arms because it is a PRUNE/score arm and pruning is now exhausted as a family (see ranking_basis).",
       "arm_class": "PRUNE/score"
     }
   ],
@@ -131,7 +131,7 @@
     {
       "id": "H32-1-dejitter",
       "title": "Tip- and Euler-depth-cluster-protected mid-segment flank-shadow de-jittering on d=2.8",
-      "status": "TESTED \u2014 FROZEN 4-FOLD SPATIAL HOLDOUT GATE PASSED on seeds 180-189 (+0.001272 post-thinning, +0.001399 pre-thinning, 10/10 seeds, 4/4 folds)",
+      "status": "TESTED — FROZEN 4-FOLD SPATIAL HOLDOUT GATE PASSED on seeds 180-189 (+0.001272 post-thinning, +0.001399 pre-thinning, 10/10 seeds, 4/4 folds)",
       "validation": "knowledge/13_current_ranked_hypotheses_2026-10-03.md; evidence/h32_1_holdout.json; scripts/run_h32_1_holdout.py",
       "seeds": [
         180,
@@ -159,7 +159,7 @@
     {
       "id": "H32-1",
       "title": "Structural-step coherence of depth-to-base / conductivity / strain derivatives",
-      "status": "TESTED \u2014 FROZEN SCREEN GATE FAILED; arm closed, no confirmation or weekly slot",
+      "status": "TESTED — FROZEN SCREEN GATE FAILED; arm closed, no confirmation or weekly slot",
       "validation": "knowledge/14_preregistration_H32-1.md; knowledge/15_h32_1_result.md; evidence/h32_1_structural_step_holdout.json",
       "seeds": [
         170,
@@ -192,7 +192,7 @@
     {
       "id": "H27-1",
       "title": "Topology gap-closure T-v2 on d=1.5 (5512495c6bd1)",
-      "status": "LIVE-TESTED IN GEMSDOE27 \u2014 REFUTED ON LIVE LEADERBOARD (owner-reported 0.2449 vs 0.2477 d=1.5 base, -0.0028 DTI)",
+      "status": "LIVE-TESTED IN GEMSDOE27 — REFUTED ON LIVE LEADERBOARD (owner-reported 0.2449 vs 0.2477 d=1.5 base, -0.0028 DTI)",
       "validation": "evidence/live_inversion.json; evidence/budget_optimum.json; registry/live_scores.json",
       "live_score": 0.2449,
       "parent_live_score": 0.2477,
@@ -206,7 +206,7 @@
     {
       "id": "H28-3",
       "title": "Dilatational-strain and conductivity intersection corridors (26GEMSDOE dilcond-oof-v1, 47629f496133)",
-      "status": "LIVE-TESTED IN GEMSDOE26 \u2014 REFUTED ON LIVE LEADERBOARD (owner-reported 0.1223)",
+      "status": "LIVE-TESTED IN GEMSDOE26 — REFUTED ON LIVE LEADERBOARD (owner-reported 0.1223)",
       "validation": "evidence/live_inversion.json; registry/live_scores.json",
       "live_score": 0.1223,
       "emitted_off_catalogue_px": 58670,
@@ -216,14 +216,14 @@
     {
       "id": "H28-4",
       "title": "Anisotropic seismicity-fabric and shear-rate coherence lineaments (GEMSDOE26 H27-SRCOH-v1)",
-      "status": "TESTED IN GEMSDOE26 \u2014 HOLDOUT GATE FAILED (0/4 folds improved; dense DTI 0.1268, sparse DTI 0.0719)",
+      "status": "TESTED IN GEMSDOE26 — HOLDOUT GATE FAILED (0/4 folds improved; dense DTI 0.1268, sparse DTI 0.0719)",
       "validation": "buffedlizard55-lab/GEMSDOE26 reports/validation_results.json (H27-SRCOH-v1)",
       "integrity_note": "Tested in sibling repository GEMSDOE26 on bands (3, 6, 7) (geod_shearrate, deq_n100a15, ieq_n100a15); failed 4-fold spatial holdout in 4/4 folds. Moved from untried to tested/refuted."
     },
     {
       "id": "H27-10",
       "title": "Model-ranked 100-300 m offset-scarp annulus substitution",
-      "status": "TESTED \u2014 FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
+      "status": "TESTED — FROZEN GATE FAILED; not untried and not eligible to justify a weekly slot",
       "validation": "knowledge/03_preregistration_topology_gate.md#addendum-f-h27-10; evidence/h27_10_annulus_holdout.json; initial diagnostic output preserved at evidence/h27_10_annulus_holdout_initial.json",
       "seeds": [
         150,
@@ -250,7 +250,7 @@
     {
       "id": "H31-1",
       "title": "Depth-labeled magnetic Euler source solutions and shallow lineament-aligned clusters",
-      "status": "TESTED \u2014 FROZEN SCREEN GATE FAILED; not eligible for confirmation or a weekly slot",
+      "status": "TESTED — FROZEN SCREEN GATE FAILED; not eligible for confirmation or a weekly slot",
       "validation": "knowledge/12_preregistration_H31-1_euler.md; evidence/h31_1_euler_screen.json; evidence/h31_1_euler_screen.started.json; evidence/h31_1_euler_feature_audit.json",
       "seeds": [
         160,
@@ -274,13 +274,13 @@
       "candidate_spacing_failures": 39,
       "other_data_checks": "PASS: finite probabilities, active-fold containment, no known-catalogue overlap, nonempty hidden truth",
       "confirmation_seeds": [],
-      "confirmation_status": "REASSIGNED \u2014 seeds 170-179 were reassigned to the preregistered H32-1 screen before that screen ran; H31-1 has no confirmation decade",
+      "confirmation_status": "REASSIGNED — seeds 170-179 were reassigned to the preregistered H32-1 screen before that screen ran; H31-1 has no confirmation decade",
       "integrity_note": "No refit, retuning, rerun, candidate TIFF or upload. Catalogue proxy only; not organizer-label or competition performance."
     },
     {
       "id": "H32-2",
       "title": "Shallow-over-deep magnetic gradient de-screening (upward-continuation attenuation ratio) at d=2.8",
-      "status": "TESTED \u2014 FROZEN GATE FAILED on seeds 190-199 (mean paired \u0394DTI -0.003767, 0/10 seeds, 0/4 folds; direction control supported the physics but deep dots still above inclusion threshold). Closed negative result; no confirmation, no retuning, no slot.",
+      "status": "TESTED — FROZEN GATE FAILED on seeds 190-199 (mean paired ΔDTI -0.003767, 0/10 seeds, 0/4 folds; direction control supported the physics but deep dots still above inclusion threshold). Closed negative result; no confirmation, no retuning, no slot.",
       "validation": "knowledge/16_preregistration_H32-2.md; knowledge/17_h32_2_result.md; evidence/h32_2_holdout.json; run-1 sentinel defect preserved at evidence/h32_2_holdout_run1_invalid_2026-10-03.json",
       "seeds": [
         190,
@@ -378,7 +378,7 @@
     ],
     "refuted_signals": [
       "T-v2 gap-closure live A/B on d=1.5 (5512495c6bd1: 0.2449 vs 0.2477, -0.0028 live DTI)",
-      "graph-\u0394P ranking as a holdout-improvement signal (Addendum D-3)",
+      "graph-ΔP ranking as a holdout-improvement signal (Addendum D-3)",
       "overlapping en-echelon step-over as a holdout-improvement signal (Addendum D-4)"
     ]
   },
@@ -616,5 +616,177 @@
       "verdict": "REFUTED as a promotable arm; mechanism real but the rate is 57% of the live break-even",
       "live_projection_of_the_licence_dots": "negative at every scale tested (296 dots: 0.260627 -> 0.260294)"
     }
+  },
+  "session14_addendum": {
+    "generated": "2026-10-03",
+    "ranking_record": "knowledge/37_ranked_hypotheses_session14_2026-10-03.md",
+    "status": "H38-1 FROZEN PLAN ONLY. No seed claim or audit has been prepared and no holdout has started.",
+    "score_context": {
+      "owner_reported_base": {
+        "score": 0.26,
+        "submission": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan",
+        "content_id": "e56ea318af89",
+        "verification": "owner-reported; repository has no organizer receipt or authoritative score-to-raster association"
+      },
+      "repository_mechanism": {
+        "dots_d1_5": 60069,
+        "dots_d2_8": 44090,
+        "credit_d1_5_px": 5286.1,
+        "credit_d2_8_px": 4791.0,
+        "credit_retention_percent": 90.63,
+        "uniform_2d_projection_score": 0.255,
+        "observed_owner_score": 0.26,
+        "caveat": "Inversion conditioned on owner-reported scores, score/raster matching and a blind-lattice truth-size estimate; the one-dimensional trace/kernel account is a repository-supported mechanism, not an organizer-verified causal explanation."
+      },
+      "public_leaderboard_snapshot": {
+        "date": "2026-10-03",
+        "rank": 1,
+        "public_label": "DARD",
+        "score": 0.3195,
+        "verification": "one-off manual public-row observation in registry/leaderboard_snapshot_2026-10-03.json; not owner identity evidence and not associated with any local TIFF"
+      },
+      "reachability_arithmetic": {
+        "target_score": 0.3195,
+        "estimated_extra_weighted_credit_px": 1151,
+        "relative_to_0_2600_credit_percent": 24,
+        "interpretation": "mathematically plausible only with substantially better off-catalogue discovery; no current evidence demonstrates that this repository can beat the public-row value"
+      }
+    },
+    "official_source_checks_2026_10_03": {
+      "drivendata_problem": "Official problem page says public fault data are incomplete and experts manually labelled additional faults for the initial private test; submissions are reviewed for new faults and rescored against expanded labels in the final round. This motivates additions but does not make LOSFO labels organizer truth.",
+      "heat_flow": "USGS ScienceBase lists a 124.12 MB Great Basin heat-flow ZIP and describes a well residual attribute. Listing/availability only; this checkout does not contain an audited H38-2 clip.",
+      "ingenious_gdr": "GDR #1391 page lists 2 m probes (1.03 MB) and paleo-geothermal features (82.04 kB) under CC BY 4.0. Listing/availability only; no new package was downloaded or clipped in this check.",
+      "conductance": "USGS ScienceBase lists five conductance rasters spanning 2–200 km; listing only, no five-layer local clip/schema audit.",
+      "three_dep": "USGS catalog describes public-domain 1 m lidar-derived bare-earth DEMs. Product-level availability only; the 716 owner-mirrored tile links, bytes, datum and footprint coverage remain unverified here."
+    },
+    "ranked_hypotheses": [
+      {
+        "rank": 1,
+        "id": "H38-1",
+        "title": "Shallow SI-0 Euler contact × independent gravity edge × low LiDAR relief",
+        "expected_delta_dti": [
+          0.0,
+          0.001
+        ],
+        "cost": "Low–medium; local hash-pinned owner-mirror layers, no new external data",
+        "status": "Leading candidate frozen for LOSFO test; not a holdout result",
+        "record": "knowledge/38_preregistration_H38-1.md",
+        "layers": [
+          "evidence/h31_1_euler_clusters.csv: SI-0 Euler solutions from training tmi, fixed depth_mad_m <= 60, median_depth_m <= 400, n_solutions >= 8",
+          "data/training_features.tif band 18 iso_grav_anom_hg: independent gravity field/gradient",
+          "data/lidar_scarp_features_u8.tif bands 9 relief and 12 valid; catalogue only for exclusion/leakage controls"
+        ],
+        "physical_signature": "A shallow, depth-coherent contact-like magnetic Euler cluster is corroborated by a nearby strong independently measured gravity gradient and subdued local relief; a buried density/magnetic contact under a surface without a strong scarp is the target, not proof of faulting or geothermal activity.",
+        "why_missing_catalogue": "A buried or subdued structure can lack a mappable Quaternary surface trace while retaining subsurface magnetic and gravity contrasts. The relief condition targets that gap rather than high-relief mapped scarps; the competition statement says public fault labels are incomplete and experts added faults, but LOSFO is not organizer truth.",
+        "differs_from_repo": "H37-3 emitted on shallow SI-0 Euler depth coherence alone and missed the 0.0548 live-value bar. H37-2 proposed potential-field lineaments × low relief. H38-1 tests a narrower three-way Euler-depth, independent-gravity-gradient, low-relief conjunction; no score-guided threshold tuning.",
+        "data_gate": "Label-free candidate support READY at 140 unique centroids. The local owner-mirror rasters and Euler table are hash-pinned; this is support only, not validation. One frozen LOSFO test is pending.",
+        "main_confounder": "SI-0 is an idealized contact geometry, gravity edges include lithologic contacts and basin margins, and relief is a quantized local descriptor; the conjunction can still select non-fault contacts."
+      },
+      {
+        "rank": 2,
+        "id": "H38-2",
+        "title": "Heat-flow residual × 2 m temperature anomaly × potential-field corridor",
+        "expected_delta_dti": [
+          0.0,
+          0.0025
+        ],
+        "cost": "Medium–high; USGS archive plus GDR probe data; fetch/clip/schema audit first",
+        "status": "Queued; official source listing checked, not locally audited",
+        "layers": [
+          "USGS ScienceBase DOI 10.5066/P9BZPVUC Great Basin heat-flow release: well residual (measured less de-convected background)",
+          "GDR #1391 INGENIOUS 2 m temperature probes",
+          "An independent potential-field corridor derived from the competition feature grid"
+        ],
+        "physical_signature": "A spatially supported thermal residual/probe anomaly aligned with a potential-field structural corridor, not merely proximity to a spring or warm well.",
+        "why_missing_catalogue": "Buried alluvium-mantled faults can channel upflow and warm shallow ground without a preserved surface rupture; surface-fault compilations do not map a thermal residual.",
+        "differs_from_repo": "Distinct from failed H35-1 spring/well discharge-point proximity and from the earlier still-untested H33-3/H35-2 residual/probe concept; that older work means the broad idea is not globally new within this repository history.",
+        "data_gate": "Official 124 MB heat-flow archive and GDR probe package are listed, but no local H38 clip/schema/coverage audit exists. Fetch, pin, inspect, clip, and freeze one rule before any seed use.",
+        "main_confounder": "Sparse wells, hydrologic discharge unrelated to faults, and uncertain residual semantics can create apparent anomalies."
+      },
+      {
+        "rank": 3,
+        "id": "H38-3",
+        "title": "Paleogeothermal deposits × subsurface contact corridor",
+        "expected_delta_dti": [
+          0.0,
+          0.0015
+        ],
+        "cost": "Low–medium; small GDR package; clip and coverage/schema audit required",
+        "status": "Queued; official source listing checked, not locally audited",
+        "layers": [
+          "GDR #1391 paleogeothermal features: sinter, tufa/travertine and mapped spring-deposit features",
+          "Independent gravity/magnetic contact corridor",
+          "Low-relief context layer"
+        ],
+        "physical_signature": "A paleo-fluid spring deposit spatially associated with a subsurface contact corridor and terrain consistent with partial burial or subdued expression.",
+        "why_missing_catalogue": "Old or partly buried fluid pathways may leave deposits after current surface scarps become muted, so a Quaternary surface-rupture catalogue can omit the structure.",
+        "differs_from_repo": "Targets mapped paleo-deposits rather than H35-1 present-temperature/well discharge points; no deposit-by-contact conjunction has been tested here.",
+        "data_gate": "GDR lists a small resource under CC BY 4.0; a listing/previous byte availability is not a local clip. Coverage, schema, coordinates and exclusions need audit.",
+        "main_confounder": "Deposits are sparse and exposure-biased; age, preservation and non-tectonic spring pathways may dominate."
+      },
+      {
+        "rank": 4,
+        "id": "H38-4",
+        "title": "Drainage offsets, knickpoints and beheaded channels × potential-field lineaments",
+        "expected_delta_dti": [
+          0.0,
+          0.0035
+        ],
+        "cost": "Very high; 1 m DEM tile preflight and hydrologic processing required",
+        "status": "Queued; product is official/public-domain, actual 716-tile coverage is unverified",
+        "layers": [
+          "USGS 3DEP one-meter bare-earth DEM tiles linked by data/dem_links.json",
+          "Derived channel network, flow routing and geomorphic metrics",
+          "Independent potential-field lineaments and lidar_scarp_features_u8.tif for contrast"
+        ],
+        "physical_signature": "Channel offsets, aligned knickpoint trains, beheaded channels, wind gaps or right-angle drainage deflections crossing an independently derived potential-field lineament.",
+        "why_missing_catalogue": "Drainage can preserve young displacement after scarp relief is softened or buried; alluvial-basin faults may still perturb channel courses despite weak surface morphology.",
+        "differs_from_repo": "Prior LiDAR work uses amplitude/roughness/openness descriptors; no repository arm has tested flow-network topology or channel displacement metrics.",
+        "data_gate": "The official public-domain 1 m product exists, but all 716 owner-mirrored tile URLs, coverage, CRS/datum, bytes and total volume remain unchecked. No seed until a complete tile preflight.",
+        "main_confounder": "Lithology, drainage engineering, climate and DEM artifacts also create knickpoints and offsets; requires lineament concurrence and blinded geomorphic review."
+      },
+      {
+        "rank": 5,
+        "id": "H38-5",
+        "title": "Shallow/deep MT conductance boundary coherence × gravity/magnetic edge",
+        "expected_delta_dti": [
+          0.0,
+          0.0015
+        ],
+        "cost": "Medium–high; five regional depth layers need local clip/schema audit",
+        "status": "Queued; official source listing checked, not locally audited",
+        "layers": [
+          "USGS MT conductance GeoTIFFs at 2–12, 12–20, 20–50, 50–90 and 90–200 km depth",
+          "Independent gravity/magnetic contact corridor"
+        ],
+        "physical_signature": "A shallow upper-crustal conductance boundary aligned with a candidate corridor while deeper conductance changes or decouples, rather than a blanket conductance threshold.",
+        "why_missing_catalogue": "Fluid alteration or conductive fault-zone structure can be buried and lack a surface rupture or recognizable Quaternary scarp.",
+        "differs_from_repo": "Not the live-refuted single cond_surf × dilatation feature and not H32-2 magnetic spectral-depth screening; it tests five MT depth slices and cross-depth decoupling.",
+        "data_gate": "ScienceBase lists five layers, but the checkout has no audited five-layer clip with byte hashes, aligned grids or in-footprint coverage.",
+        "main_confounder": "Regional MT pixels are coarse relative to 100 m output and may reflect lithology, fluids or terrane boundaries unrelated to a fault."
+      }
+    ],
+    "h38_1": {
+      "arm": "H38-1 shallow Euler × gravity × low-relief licence",
+      "preregistration": "knowledge/38_preregistration_H38-1.md",
+      "builder": "scripts/build_h38_1_candidate_clusters.py",
+      "module": "src/gems27/h38_1.py",
+      "candidate_csv": "evidence/h38_1_candidate_clusters.csv",
+      "sufficiency_audit": "evidence/h38_1_sufficiency_audit.json",
+      "candidate_clusters": 140,
+      "support_status": "label-free sufficiency only; gravity P80=1.460558295249939, relief P50=44.0; no labels or holdout scores used",
+      "seeds": [
+        265,
+        266,
+        267,
+        268,
+        269
+      ],
+      "seed_scope": "local evidence/*.json collision scan only; external/undocumented use cannot be excluded",
+      "holdout_status": "NOT RUN; seed claim and local audit not prepared",
+      "weekly_slot_used": false,
+      "promotion_rule": "C1–C5 all pass only permits a separate fresh-seed confirmation and exact-file review; no weekly slot without further confirmation and beating the current blocked-holdout best."
+    },
+    "historical_scope": "The top-level H33 hypothesis list and session11–session13 addenda are retained unchanged as historical records. Session14 is the current ranked list."
   }
 }

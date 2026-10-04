@@ -45,6 +45,7 @@ import json
 import sys
 import time
 from datetime import datetime, timezone
+from importlib import metadata
 from pathlib import Path
 
 import numpy as np
@@ -64,6 +65,11 @@ from gems27 import (  # noqa: E402
 )
 
 FOLD_NAMES = holdout.FOLD_NAMES
+
+
+def runtime_versions() -> dict[str, str]:
+    packages = {"numpy": "numpy", "scipy": "scipy", "scikit_learn": "scikit-learn", "rasterio": "rasterio"}
+    return {"python": sys.version.split()[0], **{key: metadata.version(name) for key, name in packages.items()}}
 
 
 def ridge_candidate_pool(prob: np.ndarray, ridge: np.ndarray, fold_mask: np.ndarray,
@@ -198,8 +204,12 @@ def main() -> int:
     ap.add_argument("--thin-d", type=float, default=2.8, help="dot spacing of the evaluated arm")
     ap.add_argument("--out", default=str(paths.EVIDENCE / "losfo_farfield_diagnostic.json"))
     ap.add_argument("--euler-licence", default=None,
-                    help="CSV of SI-0 Euler clusters; enables the H37-3 positive emission licence "
-                         "arm (knowledge/34_preregistration_H37-3_licence.md)")
+                    help="CSV of SI-0 Euler clusters; enables a positive emission licence arm")
+    ap.add_argument("--licence-name", default="H37-3 Euler SI-0 depth-coherence licence",
+                    help="display name for the candidate licence arm")
+    ap.add_argument("--licence-preregistration",
+                    default="knowledge/34_preregistration_H37-3_licence.md",
+                    help="repository-relative protocol path recorded in the result")
     ap.add_argument("--packing-variants", action="store_true",
                     help="also pack the same candidate pool by evidence / at random / by max "
                          "coverage at matched N, and score each on the identical far-field truth")
@@ -218,13 +228,15 @@ def main() -> int:
     if args.euler_licence:
         licence_mask, n_cand = load_licence_mask(args.euler_licence, foot.shape)
         licence_meta = {
+            "name": args.licence_name,
+            "preregistration": args.licence_preregistration,
             "csv": str(args.euler_licence),
             "csv_sha256": hashlib.sha256(Path(args.euler_licence).read_bytes()).hexdigest(),
-            "rule": "depth_mad_m <= 60 and median_depth_m <= 400 and n_solutions >= 8",
+            "base_euler_rule": "depth_mad_m <= 60 and median_depth_m <= 400 and n_solutions >= 8",
             "n_candidate_clusters": int(n_cand),
             "thin_d_px": args.thin_d,
         }
-        print(f"H37-3 licence: {n_cand} candidate clusters from {args.euler_licence}", flush=True)
+        print(f"{args.licence_name}: {n_cand} candidate clusters from {args.euler_licence}", flush=True)
 
     sys_grid, n_sys = losfo.fault_systems(labels, args.dilate_px)
     tab = losfo.system_table(sys_grid, n_sys, foot)
@@ -293,14 +305,25 @@ def main() -> int:
                 rng_seed = seed * 4 + f + 1000
                 rand = random_matched_dots(active & ~base_l & ~sp.known[sl], base_l,
                                            int(lic.sum()), args.thin_d, rng_seed)
-                assert not (lic & base_l).any(), "licence overlaps the base emission"
-                assert not (lic & sp.known[sl]).any(), "licence overlaps the catalogue"
-                assert not (rand & base_l).any(), "random control overlaps the base emission"
+                licence_base_overlap = int((lic & base_l).sum())
+                licence_known_overlap = int((lic & sp.known[sl]).sum())
+                random_base_overlap = int((rand & base_l).sum())
+                random_known_overlap = int((rand & sp.known[sl]).sum())
+                if licence_base_overlap or licence_known_overlap or random_base_overlap or random_known_overlap:
+                    raise RuntimeError("candidate or random additions overlap the base/visible catalogue")
+                if int(rand.sum()) != int(lic.sum()):
+                    raise RuntimeError("matched-random control could not match candidate addition count")
                 rl = eval_set(base_l | lic, hidden, active)
                 rr = eval_set(base_l | rand, hidden, active)
                 euler_block = {
                     "added_dots": int(lic.sum()), "control_dots": int(rand.sum()),
                     "eligible_px": int(elig.sum()),
+                    "integrity": {
+                        "licence_base_overlap_px": licence_base_overlap,
+                        "licence_visible_catalogue_overlap_px": licence_known_overlap,
+                        "random_base_overlap_px": random_base_overlap,
+                        "random_visible_catalogue_overlap_px": random_known_overlap,
+                    },
                     "licence": rl, "random_control": rr,
                     "delta_tp_licence": float(rl["tp"] - r_l["tp"]),
                     "delta_tp_random": float(rr["tp"] - r_l["tp"]),
@@ -364,7 +387,8 @@ def main() -> int:
         tp_lic = sum(c["euler"]["delta_tp_licence"] for c in rows)
         dti_base = float(np.mean([c["losfo"]["dti"] for c in rows]))
         euler_block_out = {
-            "preregistration": "knowledge/34_preregistration_H37-3_licence.md",
+            "arm_name": args.licence_name,
+            "preregistration": args.licence_preregistration,
             "input": licence_meta,
             "n_cells": len(rows),
             "added_dots_total": int(added),
@@ -445,8 +469,15 @@ def main() -> int:
             "losfo": hashlib.sha256((paths.REPO / "src" / "gems27" / "losfo.py").read_bytes()).hexdigest(),
             "oof_detector": hashlib.sha256(
                 (paths.REPO / "src" / "gems27" / "oof_detector.py").read_bytes()).hexdigest(),
+            "metric": hashlib.sha256((paths.REPO / "src" / "gems27" / "metric.py").read_bytes()).hexdigest(),
+            "thinning": hashlib.sha256((paths.REPO / "src" / "gems27" / "thinning.py").read_bytes()).hexdigest(),
+            "holdout": hashlib.sha256((paths.REPO / "src" / "gems27" / "holdout.py").read_bytes()).hexdigest(),
+            "grid": hashlib.sha256((paths.REPO / "src" / "gems27" / "grid.py").read_bytes()).hexdigest(),
+            "paths": hashlib.sha256((paths.REPO / "src" / "gems27" / "paths.py").read_bytes()).hexdigest(),
+            "packing": hashlib.sha256((paths.REPO / "src" / "gems27" / "packing.py").read_bytes()).hexdigest(),
             "runner": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         },
+        "runtime_versions": runtime_versions(),
         "seeds": seeds, "cells": cells, "meta": diag_meta,
         "thin_d_px": args.thin_d,
         "arms": {

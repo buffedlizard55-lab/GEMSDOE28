@@ -115,10 +115,12 @@ def directional_dot_thin(
 
     History
     -------
-    Added in Session 13 (2026-10-03) as the candidate H37-1 (directional / anisotropic Poisson-disk
-    re-pack). Preregistered at ``knowledge/28_preregistration_H37-1.md``; the frozen 4-criterion
-    gate on fresh seeds 250-254 closed the arm (mean paired ΔDTI -0.00298, 0/5 seeds, 0/4 folds;
-    primary lost to the isotropic rung-3.0 by -0.00510). The function is preserved and tested for
+    Added in Session 13 (2026-10-03) as a directional / anisotropic Poisson-disk re-pack experiment
+    in a parallel workstream. That work labeled it H37-1, colliding with this repository's distinct
+    metric-aware H37-1; the collision is recorded in ``registry/irregularities.json``. Its
+    preregistered four-criterion gate on fresh seeds 250-254 closed the directional arm (mean paired
+    ΔDTI -0.00298, 0/5 seeds, 0/4 folds; primary lost to the isotropic rung-3.0 by -0.00510). The
+    function is preserved and tested for
     callers with a higher-precision strike field than the OOF detector's 4-sector quantization
     (±22.5 deg; too noisy on the 26,645 short ridge components for anisotropy to help).
     """
