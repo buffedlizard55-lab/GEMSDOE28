@@ -28,7 +28,8 @@ class Links(HTMLParser):
 def test_site_builds_from_json_only_and_pages_exist():
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_site.py")], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
-    assert json.loads(r.stdout)["hypotheses"] == 5
+    # The registry retains four untried entries in the historical Session 10 H33 queue.
+    assert json.loads(r.stdout)["hypotheses"] == 4
     for p in PAGES:
         assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
 
@@ -135,106 +136,40 @@ def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp
     assert "without a screen report" in build_site.h31_next_step({}, {}, stray_confirmation)
 
 
-def test_h38_result_requires_consumed_claim_raw_hash_and_frozen_gate_integrity(tmp_path, monkeypatch):
+def test_branch_local_h38_attempt_discloses_failure_and_seed_reuse_without_promoting_main_result():
     from scripts import build_site
 
-    monkeypatch.setattr(build_site, "ROOT", tmp_path)
-    evidence = tmp_path / "evidence"
-    evidence.mkdir()
-    raw_path = evidence / "losfo_h38_1_raw.json"
-    raw_path.write_text('{"fixture": true}\n')
-    raw_hash = hashlib.sha256(raw_path.read_bytes()).hexdigest()
-    code = {
-        "knowledge/38_preregistration_H38-1.md": "a" * 64,
-        "scripts/run_losfo_harness.py": "b" * 64,
-        "src/gems27/losfo.py": "c" * 64,
-        "src/gems27/oof_detector.py": "d" * 64,
-        "src/gems27/metric.py": "e" * 64,
-        "src/gems27/thinning.py": "f" * 64,
-        "src/gems27/holdout.py": "1" * 64,
-        "src/gems27/grid.py": "2" * 64,
-        "src/gems27/paths.py": "3" * 64,
-        "src/gems27/packing.py": "4" * 64,
-    }
-    runtime = {"python": "3.12.0", "numpy": "2.0.0", "scipy": "1.14.0", "scikit_learn": "1.5.0", "rasterio": "1.4.0"}
-    claim = {
-        "schema": 1, "status": "CONSUMED", "arm_name": "H38-1 shallow Euler × gravity × low-relief licence",
-        "seeds": list(range(265, 270)), "reserved_utc": "2026-10-03T00:00:00Z",
-        "protocol_commit": "freeze", "protocol_branch": "arena/01a10412-gemsdoe28",
-        "run_commit": "reservation", "run_branch": "arena/01a10412-gemsdoe28",
-        "preregistration": "knowledge/38_preregistration_H38-1.md", "preregistration_sha256": code["knowledge/38_preregistration_H38-1.md"],
-        "candidate_csv": "evidence/h38_1_candidate_clusters.csv", "candidate_csv_sha256": "5" * 64,
-        "candidate_count": 140, "sufficiency_audit": "evidence/h38_1_sufficiency_audit.json",
-        "sufficiency_audit_sha256": "6" * 64, "pre_run_seed_audit": "evidence/h38_1_seed_audit_pre_run.json",
-        "input_sha256": {"evidence/h38_1_candidate_clusters.csv": "5" * 64}, "code_sha256": code,
-        "runtime_versions": runtime, "baseline": {"path": "evidence/losfo_h37_3_licence.json", "sha256": "7" * 64},
-        "result_paths": {"raw": "evidence/losfo_h38_1_raw.json", "summary": "evidence/h38_1_holdout.json"},
-        "raw_result_sha256": raw_hash, "seed_range_burned": True, "holdout_started": True,
-        "submission_slot_used": False, "promotable": True,
-        "summary_result_path": "evidence/h38_1_holdout.json",
-    }
-    code_map = {
-        "runner": "scripts/run_losfo_harness.py", "losfo": "src/gems27/losfo.py",
-        "oof_detector": "src/gems27/oof_detector.py", "metric": "src/gems27/metric.py",
-        "thinning": "src/gems27/thinning.py", "holdout": "src/gems27/holdout.py",
-        "grid": "src/gems27/grid.py", "paths": "src/gems27/paths.py", "packing": "src/gems27/packing.py",
-    }
-    runner_recorded = {key: code[path] for key, path in code_map.items()}
-    gate_names = {
-        "C1_positive_and_spatially_repeatable", "C2_live_economic_bar",
-        "C3_candidate_beats_matched_random", "C4_support_and_integrity",
-        "C5_beats_previous_farfield_add_arm_best",
-    }
-    report = {
-        "schema": 1, "seeds": list(range(265, 270)),
-        "folds": ["NW", "NE_LidarGapHeavy", "SW", "SE"],
-        "protocol_freeze_commit": "freeze", "reservation_commit": "reservation",
-        "claim_fingerprint": build_site.h38_claim_fingerprint(claim),
-        "raw_result": {"path": "evidence/losfo_h38_1_raw.json", "sha256": raw_hash},
-        "source_records": {"candidate_sufficiency": claim["sufficiency_audit"], "baseline": claim["baseline"]["path"]},
-        "candidate": {"csv": claim["candidate_csv"], "csv_sha256": claim["candidate_csv_sha256"],
-                      "count": 140, "sufficiency_audit_sha256": claim["sufficiency_audit_sha256"]},
-        "benchmark": {"sha256": claim["baseline"]["sha256"]}, "runtime_versions": runtime,
-        "code_sha256": {**code, "runner_recorded": runner_recorded},
-        "preregistration": {"path": claim["preregistration"], "sha256": claim["preregistration_sha256"]},
-        "gates": {name: {"passed": True} for name in gate_names},
-        "promotable": True, "status": "PASS",
-        "summary": {"mean_delta_dti_licence_vs_base": 0.001, "credit_per_added_dot": 0.06,
-                    "positive_cells": 18, "positive_seed_means": 5, "positive_fold_means": 4},
-        "sha256": None,
-    }
-    report["sha256"] = hashlib.sha256(json.dumps(report, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
-    result_path = evidence / "h38_1_holdout.json"
-    result_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
-    claim["summary_result_sha256"] = hashlib.sha256(result_path.read_bytes()).hexdigest()
-
-    assert build_site.h38_result_integrity(report, claim)
-    assert "frozen LOSFO gate PASS" in build_site.h38_status_html(report, claim)
-    tampered = json.loads(json.dumps(report))
-    tampered["summary"]["mean_delta_dti_licence_vs_base"] = 0.9
-    assert not build_site.h38_result_integrity(tampered, claim)
-    assert "H38-1 claim state: RUNNING" in build_site.h38_status_html({}, {"status": "RUNNING"})
-    assert "report artifact exists but its consumed-claim/hash chain is missing or invalid" in build_site.h38_status_html({"schema": 1}, {})
-    assert not build_site.h38_result_integrity({"gates": None}, {"code_sha256": None})
-
-
-def test_failed_h38_claim_discloses_missing_gate_and_links_raw_artifact(tmp_path, monkeypatch):
-    from scripts import build_site
-
-    evidence = tmp_path / "evidence"
-    evidence.mkdir()
-    for name in ("h38_1_holdout.started.json", "h38_1_seed_audit_pre_run.json", "losfo_h38_1_raw.json"):
-        (evidence / name).write_text("{}")
-    monkeypatch.setattr(build_site, "ROOT", tmp_path)
-    html = build_site.h38_status_html({}, {
-        "status": "FAILED",
-        "failure_detail": "TypeError: Object of type int64 is not JSON serializable",
-    })
-    assert "no frozen-gate decision is available" in html
-    assert "not validation" in html
-    assert "TypeError: Object of type int64 is not JSON serializable" in html
+    claim = json.loads((ROOT / "evidence" / "h38_1_holdout.started.json").read_text())
+    html = build_site.local_h38_branch_attempt_html(claim)
+    assert "FAILED / not evaluable" in html
+    assert "seeds 265, 266, 267, 268, 269" in html
+    assert "not an independent fresh holdout" in html
+    assert "This run wrote no summary and has no C1–C5 decision" in html
+    assert "separate mainline heat-flow/Euler and GeoDAWN-radiometric work" in html
     assert "../evidence/losfo_h38_1_raw.json" in html
-    assert "raw run (unverified; no gate summary)" in html
+    assert "../knowledge/39_session14_closeout_2026-10-03.md" in html
+    assert "../evidence/h38_1_holdout.json" not in html
+    assert "seeds not recorded" in build_site.local_h38_branch_attempt_html({"status": "FAILED", "seeds": None, "seed_independence_review": None})
+    assert build_site.local_h38_branch_attempt_html({"status": "RUNNING"}) == ""
+
+
+def test_local_failure_claim_and_registry_disambiguate_summary_path_collision():
+    claim_path = ROOT / "evidence" / "h38_1_holdout.started.json"
+    claim = json.loads(claim_path.read_text())
+    registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
+    attempt = registry["session14_local_branch_attempt"]
+    collision = attempt["summary_path_collision"]
+    mainline_report = ROOT / collision["frozen_branch_expected_summary_path"]
+    assert claim["summary_result_written"] is False
+    assert claim["summary_result_artifact"] is None
+    assert "seeds 280–289" in claim["summary_result_disambiguation"]
+    claim_sha = hashlib.sha256(claim_path.read_bytes()).hexdigest()
+    assert claim_sha == attempt["artifacts"]["claim"]["sha256"]
+    irregularities = json.loads((ROOT / "registry" / "irregularities.json").read_text())
+    irregularity = next(item for item in irregularities["items"] if item["id"] == "session14-local-h38-euler-gravity-seed-reuse")
+    assert claim_sha in irregularity["issue"]
+    assert hashlib.sha256(mainline_report.read_bytes()).hexdigest() == collision["current_mainline_path_sha256"]
+    assert "GeoDAWN-radiometric" in collision["current_mainline_path_belongs_to"]
 
 
 def test_all_internal_links_and_assets_resolve():
@@ -275,28 +210,32 @@ def test_front_page_has_download_and_exact_note():
     assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
     assert P["note"] in idx.replace("&#x27;", "'") or P["note"].replace("|", "|") in idx
     assert len(P["note"]) <= 200
+    assert P["submission_name"] in idx and P["content_id"] in P["submission_name"]
     assert "UNSCORED" in idx
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
     research = (DOCS / "research.html").read_text()
     registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
-    # Session 10's H33 queue is historical; Session 14 is the current five-item ranked research set.
+    # The mainline registry preserves the four-item Session 10 H33 queue; the separate five-item
+    # branch-local H38 ranking is historical and linked from the failure/reconciliation notice.
     historical_ids = {h["id"] for h in registry["hypotheses"]}
     assert historical_ids == {"H33-2", "H33-3", "H33-4", "H33-5"}
     assert len(registry["hypotheses"]) == 4
-    session14 = registry["session14_addendum"]
-    assert [h["id"] for h in session14["ranked_hypotheses"]] == ["H38-1", "H38-2", "H38-3", "H38-4", "H38-5"]
-    assert "The current Session 14 record ranks 5 candidate fault-discovery rules" in research
-    assert "Five ranked geological hypotheses and their current status" in research
-    assert "Historical Session 10 H33 queue" in research
+    assert "Archived branch-local H38-1 attempt — FAILED / not evaluable" in research
+    assert "knowledge/37_ranked_hypotheses_session14_2026-10-03.md" in research
+    assert "H38-1" in research and "do not combine their results" in research
+    assert "owner-reported, not independently organizer-verified" in research
+    assert "SHA-256 verifies local bytes, not a DrivenData receipt" in research
+    assert "one-off manual public-page observation" in research
     assert "H33-1 was run on its reserved seeds 200\u2013209 and refuted" in research
-    assert "Layers, physical signature, novelty &amp; data limits" in research
-    assert "Why it may find faults absent from the public catalogue" in research
-    assert "USGS 3DEP one-meter bare-earth DEM tiles" in research
-    assert "not an observed holdout gain or competition-score prediction" in research
-    assert "140 candidate centroids" in research
-    assert "not part of the current untried list" in research
+    ranking = (ROOT / "knowledge" / "37_ranked_hypotheses_session14_2026-10-03.md").read_text()
+    assert all(f"H38-{i}" in ranking for i in range(1, 6))
+    assert "**Layers:**" in ranking
+    assert "Physical signature" in ranking
+    assert "USGS 3DEP" in ranking
+    assert "not holdout results, organizer results" in ranking
+    assert "FAILED / NOT EVALUABLE" in ranking
     assert "four-item untried list" not in research
     # the site must never still claim H33-1 is untried
     assert "the five untried H33-series hypotheses" not in research
@@ -334,6 +273,15 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
         summary = (DOCS / "executive-summary.html").read_text()
         assert candidate["nan"] in summary
         assert "not one of the four weekly slots" in summary
+
+
+def test_ai_use_disclosure_is_present_and_linked_from_source_ledger():
+    disclosure = (ROOT / "AI_DISCLOSURE.md").read_text()
+    sources = (DOCS / "sources.html").read_text()
+    assert "Arena.ai Agent Mode" in disclosure
+    assert "not a substitute for the required narrative statement" in disclosure
+    assert "AI_DISCLOSURE.md" in sources
+    assert "required final-round narrative" in sources
 
 
 def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():

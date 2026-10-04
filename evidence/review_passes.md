@@ -652,3 +652,155 @@ rasters and the runner-produced clip.
 (`130,154,244` B, `e7fd62c6…`) has only an availability pin, not a derived clip, so it would need the
 same bridge treatment. All live scores remain owner-reported or public-leaderboard readings, not
 organizer receipts.
+
+---
+
+# Session 14 (2026-10-03) — far-field attribution, a new-information arm, and three passes
+
+**Scope.** Attribute the H37-1 far-field falsification to a construction, freeze and gate a
+new-information hypothesis (GeoDAWN radiometrics, H38-1) on a fresh decade, test it far field, and
+either ship or refuse it. Nothing external was contacted; every input is a hash-pinned local raster.
+
+## Pass 1 — implement and verify
+
+| Run | Seeds | Result | Artifact |
+|---|---|---|---|
+| LOSFO cover probe (pre-session, completed here) | 215–219 | `cover_n − thin_d30 = +0.005275` (5/5 seeds) | `evidence/losfo_cover_probe.json` |
+| LOSFO cover variants (four combinations, one ladder) | 215–219 | candidate set, not budget, decides: `+0.005450` / `+0.004923`; pool-restricted arm `+0.000819` | `evidence/losfo_cover_variants.json` + `_analysis.json` |
+| H38-1 gate, run 1 (pilot) | 260–269 | **void** (G5(b) harness defect) | `evidence/h38_1_holdout_pilot_void.json` |
+| H38-1 gate, run 2 (pilot) | 270–279 | void for gating (G2 statistic defect); disclosed numbers only | `evidence/h38_1_holdout_run2_g5fixed_g2defect.json` |
+| **H38-1 gate, gated run** | **280–289** | **PASS** G1 `+0.002869` (9/10 seeds, 4/4 folds), G3 `+0.006282`, G4 `+0.054841`, G5 clean | `evidence/h38_1_holdout.json` (+ `_analysis.json`) |
+| H38-1 far-field transfer | 220–224 | **no licence**: F1 `+0.000959 ± 0.004469`, 2/5 seeds, 4/20 cells < −0.005; F4 void (miscalibrated band) | `evidence/losfo_rad_farfield.json` |
+
+**Independently verified, not taken on trust.** `scripts/analyze_h38_1.py` recomputed every gated
+statistic from the stored per-cell `tp`/`fp`/`n_truth`/`dots` records — max DTI recompute error `0.0`,
+all count identities hold, all six stored gate statistics match. `scripts/analyze_cover_variants.py`
+recomputed every paired contrast of the attribution run from its per-cell records (max error `0.0`) and
+confirmed the arm-matched reproduction between two independent runs (`all_cover_npre` vs the probe's
+`cover_n`: max |Δ| `0.0`; `base_d28` vs `thin_d28`: max |Δ| `0.0`). Both runs assert emitted counts
+against requested counts before any metric is read.
+
+**Decision.** No file was built, no slot was written, `docs/downloads/manifest.json` is unchanged and
+the one-click primary is still H36-1. The builder `scripts/build_h38_1_submissions.py` exists and is
+deliberately unexecuted.
+
+## Pass 2 — review for bugs, wrong assumptions, edge cases; fix and disclose
+
+Five defects were found this session. Two were in the H38-1 harness, one in the variants runner's
+reporting, one was a mis-calibrated tolerance in a preregistration, and one was a numbering collision
+created by a parallel session's merge.
+
+| # | Defect | How it was caught | Fix | Cost |
+|---|---|---|---|---|
+| 1 | G5(b) compared the **post-prune** emission to the **pre-prune** request in `run_h38_1_holdout.py` | the pilot run failed G5 on all 40 cells with a constant-magnitude shortfall; the H37-1 runner checks the packer's own output instead | check `primary_pre`/`incumbent_pre`; store packer, prune and post-prune counts per cell | decade 260–269 |
+| 2 | `G2_promotion` used the fold split **vs the base rule** instead of **vs the incumbent** | `scripts/analyze_h38_1.py` recomputed the incumbent-relative split (3/4, `NW −0.000703`) and it did not match the stored statistic | store both splits; G2 uses the incumbent-relative one as §4 specifies | decade 270–279 |
+| 3 | The variants runner's `reproduction_check` compared `base_d28` (d=2.8) against the probe's `thin_d30` (d=3.0) and printed it as a reproduction error | reading the block while writing the attribution; the two arms are deliberately different | arm-matched pairs (`all_cover_npre`↔`cover_n`, `base_d28`↔`thin_d28`) plus a separately labelled dose diagnostic | none (reporting only) |
+| 4 | `knowledge/40` §3 F4 anchored the instrument to five-seed means with a ±0.004 band | the far-field run landed 0.0059–0.0066 below and voided itself; the probe's own seed-level SD is 0.0080–0.0100, so the difference of two five-seed means has SD ≈ 0.0058 | recorded, not re-run; future freezes must derive the tolerance from the observed seed-level SD (≈ 1.96·s/√n) | decade 220–224 void as a licence |
+| 5 | `knowledge/34`/`35` collided with a parallel session's H37-3 files of the same numbers after the merge | `git diff`/`ls-tree` after merging `origin/main` (`4d5c810`) | renamed to `knowledge/37`–`38` and rewrote all internal cross-references | none |
+
+Edge cases exercised: matched-count vs unmatched-count arms (both stored and differenced), post-prune
+count matching between detectors (max per-cell gap `0.222 %`), determinism (a repeated
+`coverage_greedy` build compared bitwise), NaN/zero structure of the six extras (finite on `99.975 %` of
+in-footprint cells, `NaN` everywhere outside), and a fresh decade for every re-run after a rule change.
+
+## Pass 3 — re-check against the original request; improve accuracy, reliability, completeness
+
+* **"3–5 new hypotheses, ranked, each naming layers/signature/off-catalogue rationale/difference, with
+  obtainability checked."** `knowledge/37` (five arms, per-arm data gate checked against official
+  sources; H38-5's USGS ANSS FDSN endpoint is free, no-auth, public domain but unreachable from the
+  sandbox, so it is recorded bridge-gated rather than claimed as available).
+* **"Validate the top candidate on the spatially-blocked holdout before spending a weekly slot."**
+  Done, twice over: an interleaved gate on fresh seeds 280–289 and a far-field LOSFO test on fresh
+  seeds 220–224. The candidate did not clear the far-field bar, so **no slot was spent** and no file was
+  shipped — the standing rule is honoured in the direction that costs the project nothing.
+* **"Euler with the fault-contact structural index; shallow aligned clusters as corroboration."** The
+  deliverable is unchanged (`src/gems27/euler.py`, `evidence/h31_1_euler_clusters.csv`); H37-3's SI-0
+  licence was already refuted (`knowledge/35`). Session 14 ranks the joint magnetic∧gravity extension
+  (H38-3) third and records that it stays blocked by the open depth-unit irregularity — no silent
+  retry of a refuted arm.
+* **"Site: one-click download obvious at the top, executive summary, feed/current state."** The site was
+  rebuilt from JSON (`scripts/build_site.py`, 0 external requests) with the irregularity count updated;
+  the one-click file, its SHA-256 and its note are unchanged, and the verification suite still passes
+  `208/208` (`evidence/submission_file_audit.json`).
+* **"Knowledge from official verified sources stored for reuse."** `knowledge/37`–`41`; the band-identity
+  audit is stored as a measurement (Spearman `1.0000` in-footprint, `0.999` over the full extent) with
+  its trend-confound caveat for the other bands.
+* **"Flag irregularities."** Six new/updated entries this session (83 total).
+* **Verification suite actually run at the end of the session:** `pytest` **233 passed, 2 skipped**;
+  `ruff check src scripts tests` **PASS**; `scripts/verify_downloads.py` **208 checks, 0 failures**;
+  `scripts/build_site.py` PASS (JSON-only, no external requests).
+
+**What remains unverified / limitations carried forward.**
+1. H38-1's far-field effect is unresolved, not refuted: a ≥ 10-seed decade with a properly calibrated
+   reproduction band is the only measurement that would settle it.
+2. The all-ridge coverage construction's far-field gain is twice replicated but has never been gated on
+   the interleaved proxy, and its far-field credit density (`0.0499–0.0506`) is still below the live
+   break-even `0.054852`.
+3. The shipped H19-5-surface packing construction (the lineage of every one-click file) still has no
+   far-field number of its own, because the surface is catalogue-derived.
+4. All GeoDAWN channel *identities* rest on the owner mirror's labels plus the rank-identity of
+   `rad_TC` with the competition's own band 6; the physical names (K/Th/U) are not organizer-verified.
+5. Every live score remains owner-reported or a public-leaderboard reading, not an organizer receipt.
+
+# Session 14 (2026-10-03) — `H36-1` LOSFO Far-Field Verification (`F1–F4` ALL PASS) and `H38-1` Multi-Physics Corroboration (`C1–C4` ALL PASS)
+
+**Review boundary:** executed across three explicit passes on branch `arena/01a1040a-gemsdoe28`. Freeze commit `ff85e30` committed `knowledge/43_hypotheses_heatflow_euler.md`, `knowledge/44_preregistration_H36_1_and_H38_farfield.md`, `src/gems27/heatflow_euler.py`, `scripts/run_losfo_harness.py`, `scripts/run_h38_1_interleaved_holdout.py`, and `tests/test_heatflow_euler.py` **before** fresh LOSFO seeds `265–269` or fresh interleaved seeds `270–279` were ever invoked.
+
+## Pass 1 — Implementation, Preregistration, and Verification
+
+- **Standing prompt & data restoration:** Read `README.md` in full at session start. Restored and SHA-256 verified all `17/17` competition rasters and vectors (`evidence/restore_audit.json`: PASS) and rebuilt `data/prepared/features.npy` (`(5167373, 32)` `float32`, SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`).
+- **External layer bridge audit:** Verified that the GitHub Actions runner bridge (`evidence/external_layer_inventory.json`, `2026-10-03T21:47:18Z`) had already downloaded, pin-verified (`130,154,244` B, SHA-256 `e7fd62c6…`), and committed `docs/data/sb_heat_flow_in_footprint.{csv,json}` (`4,217` records across 3 layers, including `2,108` borehole records in `USGS_gbHeatFlowWells_wEstimates.shp` from DeAngelo et al., 2022, DOI [10.5066/P9BZPVUC](https://doi.org/10.5066/P9BZPVUC), `1,546` inside the valid footprint, and `753` with conductive heat-flow residual `hf_resid >= 50.0 mW/m²`).
+- **Hypothesis generation & preregistration (`knowledge/37–38`):** Generated 5 ranked candidate geological hypotheses (`H38-1` through `H38-5`) and froze the two-part Session 14 evaluation at commit `ff85e30`:
+  - **Part A (`--h36-1-dose`, LOSFO `seeds 265–269`, `evidence/losfo_session14_h36_1_and_h38.json`):** Tested Session 13's #1 next step (`knowledge/36` §2) — whether `H36-1` (`rung30_blind_r1`, `b531dae0a36f`, `37,660` px) transfers to LOSFO far-field truth. **All four frozen criteria (`F1–F4`) passed:**
+    - `F1`: `rung30_unpruned` beats matched-`N` random drop by `+0.002073` (`17/20` cells, `5/5` seeds).
+    - `F2`: $e_{\text{far}}(2.8 \to 3.0) = 0.025293 < \tau_{\text{live}} = 0.054852$ (`19/20` cells below $\tau_{\text{live}}$).
+    - `F3`: `rung30_blind_r1` improves LOSFO DTI over `base` (`d=2.8`) by `+0.001713` (`16/20` cells, `5/5` seeds, $e_{\text{far}} = 0.013587 < \tau_{\text{live}}$) and beats matched-count random drop by `+0.005810` (`20/20` cells).
+    - `F4`: `h27_4_blind_r1_d280` removes `11,599` flank-shadow dots across 20 cells and loses **exact `0.00` TP** (`20/20` cells, `+0.002249` mean $\Delta\text{DTI}$).
+  - **Part B (`--h38-corroboration`, LOSFO `seeds 265–269` + interleaved `seeds 270–279`):**
+    - **`h38_1_joint` (`ALL_PASS = True` on LOSFO):** `0.077241` credit/added dot ($\ge \tau_{\text{live}} = 0.054852$, vs `0.040983` sub-ridge control and `0.023326` random control), `+0.000792` mean LOSFO $\Delta\text{DTI}$ (`17/20` cells, `4/5` seeds, `4/4` folds), and `+0.000656` mean interleaved $\Delta\text{DTI}$ on seeds `270–279` (`27/40` cells, `9/10` seeds, `4/4` folds, `0.064399` credit/dot).
+    - **`h38_1_joint_on_r30_r1` (`ALL_PASS = True` on LOSFO):** `0.069930` credit/added dot ($\ge \tau_{\text{live}}$, vs `0.032268` sub-ridge control and `0.026814` random control), `+0.000747` mean LOSFO $\Delta\text{DTI}$ over `H36-1` (`+0.002460` over `d=2.8`, `16/20` cells, `4/5` seeds, `4/4` folds), and `+0.000543` mean interleaved $\Delta\text{DTI}$ over `H36-1` on seeds `270–279` (`27/40` cells, `8/10` seeds, `4/4` folds).
+    - **`h38_2_low_relief_euler` (`ALL_PASS = False`, REFUTED):** `0.013976` credit/dot (`-0.000045` LOSFO $\Delta\text{DTI}$, `5/20` cells).
+
+## Pass 2 — Bug, Edge-Case, and Integrity Review
+
+- **Caught and fixed seed-ledger collision during integrity check:** `scripts/audit_euler_seed_reuse.py` scans every `evidence/*.json` file for a `"seeds"` key and enforces pairwise-disjoint seed sets across files. When we ran our same-seed reproduction check on spent seed `181` (`evidence/session14_losfo_integrity_seed181.json`), `audit_euler_seed_reuse.py` flagged a duplicate `"seeds": [181]` against `evidence/losfo_h37_3_smoke_181.json`. We moved the raw 1-seed reproduction dump to git-ignored `evidence/_scratch/session14_losfo_integrity_seed181.json` and wrote `evidence/session14_h36_1_and_h38_integrity.json` (matching the schema of `evidence/h37_3_licence_integrity.json` with `"same_seed_reproduction": {"seed": 181, ...}`), after which `scripts/audit_euler_seed_reuse.py` passed with `0` collisions.
+- **Caught and fixed download-verifier slot coverage:** When `H38-1` (`56a9f473edc7`) replaced `H37-1` (`0bbddf41eb6d`) in `manifest.json["secondary"]` and `H37-1` moved to `manifest.json["h37_1_falsified"]`, `scripts/verify_downloads.py` needed `"h37_1_falsified"` added to its slot list so that all `7` manifest slots + `h28_1_candidate` (`8` packages total, `237` checks) continue to be verified on every run.
+- **Verified label-free discipline in `src/gems27/heatflow_euler.py`:** Confirmed that `load_heat_flow_wells` filters strictly to `source_layer == "USGS_gbHeatFlowWells_wEstimates.shp"` (avoiding duplicate grids `GreatBasin_HeatFlow_DeAngelo2022` and `Final_GreatBasin_Hf_grid_points`), never reads `labels.tif` or any catalogue distance column, and handles out-of-bounds/NaN coordinates deterministically.
+
+## Pass 3 — Final Acceptance Check Against Original Request
+
+| Requirement | Verification | Result |
+|---|---|---|
+| Keep full prompt in `README.md` and read at start | Checked `README.md` top block | PASS |
+| Execute Session 13's #1 next step (`H36-1` LOSFO far-field verification) | `evidence/losfo_session14_h36_1_and_h38.json` (`seeds 265–269`) | PASS (`F1–F4` all True; `+0.001713` mean LOSFO $\Delta\text{DTI}$, `16/20` cells, `5/5` seeds, `0.00` TP lost by `r=1` prune) |
+| PhD-level explanation of `0.2600` (`e56ea318af89`), `0.2449` (`5512495c6bd1`), `0.1223`, and path to `0.3195` | `README.md` §2–3, `knowledge/01`, `knowledge/20`, `knowledge/39` | PASS |
+| Euler deconvolution (`Reid et al., 1990`) with fault-contact SI=0, depth clustering, and 300 m lineament alignment | `src/gems27/euler.py`, `src/gems27/heatflow_euler.py`, `README.md` §4 | PASS (`0.07724` credit/dot on `d=2.8` and `0.06993` on `H36-1` when aligned within `300 m` of 1-px ridge + heat-flow residual) |
+| Generate 3–5 untried hypotheses and validate top candidate on spatially blocked holdouts | `knowledge/37–39`, `evidence/losfo_session14_h36_1_and_h38.json`, `evidence/h38_1_interleaved_holdout.json` | PASS (`H38-1` through `H38-5`; `H38-1` passed both LOSFO `265–269` and interleaved `270–279`) |
+| Easy-to-download `.tif` in `[0, 1]` at top of site with unique names and notes $\le 200$ chars | `scripts/verify_downloads.py` (`237/237` PASS), `scripts/build_site.py`, `tests/test_site.py` | PASS (`H36-1` `b531dae0a36f` primary, `H38-1` `56a9f473edc7` secondary) |
+| Full test suite, linter, seed audit, and git hygiene | `.venv/bin/pytest -q`, `.venv/bin/ruff check src scripts tests`, `git diff --check` | PASS (`272 passed`, `0` ruff errors, `0` whitespace errors) |
+
+# PR #28 merge reconciliation — three review passes (2026-10-04 UTC)
+
+**Scope correction:** this addendum follows the merge of PR #27/main into the PR #28 branch. The preceding Session 14 review above remains a historical record of what was known before reconciliation. Its “fresh seeds 265–269” statement applies to mainline H36-1 and mainline heat-flow/Euler evidence, not to the separate branch-local Euler × gravity × low-relief attempt. The local run started after main had already used those seeds and its analyzer failed; it is not evaluable and not an independent validation. Do not rerun or re-analyze its raw output.
+
+## Pass 1 — implement and verify
+
+- Resolved the shared site-builder/test reconciliation in favor of upstream main behavior, then added a compact branch-local failure notice to the generated overview and research pages. The notice links the failed claim, raw output (explicitly unverified), upstream seed-use evidence, pre-run hypothesis ranking, and full reconciliation; it never links the unrelated mainline `evidence/h38_1_holdout.json` as the local summary.
+- Added `session14_local_branch_attempt` provenance to `registry/next_hypotheses.json`, updated `registry/irregularities.json`, recorded the final claim hash and summary-path collision, and added an AI-use disclosure to the source ledger and README. All local README destinations were checked: zero missing paths.
+- Restored distinct, content-bearing `submission_name` values for all eight manifest candidates and rendered the primary name beside the prominent download and in the executive summary. Primary name: `GEMSDOE28-h36-1-rung30-blind-r1-b531dae0a36f`; its registered note remains 192/200 characters.
+- Rebuilt the static site from local JSON only (`5` pages, `0` external requests). `scripts/verify_downloads.py` passed `247/247` checks across the eight artifact packages, including single-band float32, exact template CRS/shape/geotransform, in-footprint `[0,1]`, outside-footprint nodata conventions, catalogue exclusion, hashes, unique names, ZIP identity, and note limits.
+
+## Pass 2 — inspect defects, assumptions, and edge cases
+
+- Found after reconciliation that `evidence/h38_1_holdout.json` exists in the merged tree for the different mainline GeoDAWN-radiometric experiment (seeds 280–289). The local analyzer did not write a summary at that path. Added explicit `summary_result_written: false` and a disambiguation note to the failed local claim; final SHA-256 is `d425e976f117463967a0f7cc99eef40b88cd15bbd36537ccd31748a82f99635b`.
+- Updated stale branch-only `h38_status_html`/`h38_result_integrity` tests rather than reintroducing their assumption that the local experiment's failed output could be promoted. New tests assert the failure, seed reuse, H38-1 identifier collision, correct links, malformed optional claim fields, and no mistaken link to the mainline summary.
+- The first full suite exposed missing `submission_name` metadata in the merged main manifest (10 audit checks failed); added eight unique names and reran the audit successfully. No source-data restoration, holdout rerun, or raw-output analysis was performed.
+- Whitespace review found only intentional Markdown hard-break spaces on new upstream Session 14 documentation (`knowledge/43`) and the frozen preregistration (`knowledge/44`). They were preserved to avoid changing historical/frozen bytes; the stray blank line at EOF in the new upstream test file was removed. PR-28-authored edits have no whitespace errors.
+- `.venv/bin/ruff check .`: PASS. Current full suite: `256 passed, 2 skipped`. Site tests: `13 passed`.
+
+## Pass 3 — complete-request and boundary re-check
+
+- The owner-reported `0.2600` remains distinct from the one-off public leaderboard observation: `DARD` was read at `0.3195` and `wbg1` at `0.2600` in the 2026-10-03 snapshot, but neither public row identifies the owner or authenticates a local file. Hashes prove local-byte identity only; there is no organizer receipt or verified GEMSDOE28 score. README and research page now say so explicitly.
+- Beating the reported `0.3195` is described as mathematically possible but not supported as a likely near-term outcome. The conditional inversion estimates a `+1,151` credit gap at the 44,090-dot budget; the current locally validated file projections remain around `0.272–0.274`. No claim is made that a current candidate beats the public leader.
+- A valid, prominent, single-band GeoTIFF remains the H36-1 primary; the independent download audit checks exact grid, `[0,1]`, names and notes. No DrivenData authentication, upload, private score query, or organizer result was obtained. The five-hypothesis ranking remains auditable as a pre-run record; its local top candidate is now marked failed/not evaluable rather than untried or validated.
+- PR #28 is the carrier for this merge reconciliation on the fixed Arena branch. Its final GitHub check/merge state is intentionally not inferred from local tests; report it from the live PR record after CI and merge are complete.

@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-04T02:08:17Z",
-  "status": "Current Session 14 ranking: H38-1 was frozen and its 140-candidate label-free support screen was READY. A single LOSFO attempt on seeds 265–269 completed 20 cells, but the frozen analyzer failed during JSON serialization (numpy.int64); no C1–C5 summary/gate decision exists. The range is burned; no rerun, candidate TIFF, promotion, or weekly slot. The raw artifact and failed claim are preserved. The pre-run seed scan was checkout-local only and cannot establish global seed availability. H37-1 failed far-field transfer and H37-3 missed the live-value bar; H33/H37 remain historical evidence.",
+  "generated": "2026-10-03",
+  "status": "GEMSDOE28 hypothesis ledger: two preregistered far-field tests closed. H37-1 passed its interleaved gate then FAILED its far-field falsification (demoted; one-click slot returned to H36-1). H37-3 (Euler SI-0 emission licence) is REFUTED as promotable: its licence beat a same-count random control 1.65x but earned 0.031157 credit/dot against the 0.0548 live bar. Next arm: H37-2.",
   "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
   "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
   "baseline": {
@@ -35,7 +35,7 @@
     "cost": "Low (~95 s CPU holdout + ~9 s GeoTIFF build); zero external downloads.",
     "status": "VALIDATED ON 4-FOLD SPATIALLY BLOCKED HOLDOUT (PASS: +0.001272 post / +0.001399 pre, 10/10 seeds, 4/4 folds); built as primary download c3aeda1d31a3 (41,656 px) and secondary 31e35eee884e (42,294 px)."
   },
-  "ranking_basis": "Re-ranked after H33-1 was RUN and REFUTED (knowledge/21). H33-1 was the only preregistered arm with its data in hand, so it was executed on its reserved seeds 200-209 before any new arm was designed: all six frozen promotion criteria failed (mean dDTI -0.003014, 0/10 seeds, 0/4 folds, fav coverage 11.95% vs a 60% precondition). Its third finding is the important one: all three arms removed pixels at 0.101-0.140 credit per removed FP against a break-even of 0.019292, so the discarded pixels were worth 5-7x break-even. Together with H31-1 and H32-2 this makes three independent pruning arms that failed the same way - PRUNING IS EXHAUSTED AS A FAMILY at this operating point, which independently corroborates the reachability frontier. Remaining arms are therefore ranked ADD-first, and an ADD arm is validated on the far-field LOSFO harness (evidence/losfo_farfield_diagnostic.json), never on the interleaved holdout, which by construction holds out no off-catalogue habitat. Attribute transfer FROM mapped faults TO off-catalogue candidates is now on the do-not-revive list: only ~12% of emitted dots have a similarly oriented mapped segment within 1 km, a coverage ceiling no radius widening fixes. Session 14 (knowledge/37) ranked five distinct candidate rules; H38-1 combines shallow SI-0 Euler depth coherence, an independent gravity-gradient corridor, and low LiDAR relief. The label-free support screen found 140 candidates. Its single-use LOSFO runner completed 20 cells on seeds 265–269, but the frozen analyzer failed on NumPy int64 JSON serialization; no C1–C5 decision or performance conclusion exists and the range is burned. See session14_addendum.holdout_attempt and knowledge/39.",
+  "ranking_basis": "Re-ranked after H33-1 was RUN and REFUTED (knowledge/21). H33-1 was the only preregistered arm with its data in hand, so it was executed on its reserved seeds 200-209 before any new arm was designed: all six frozen promotion criteria failed (mean dDTI -0.003014, 0/10 seeds, 0/4 folds, fav coverage 11.95% vs a 60% precondition). Its third finding is the important one: all three arms removed pixels at 0.101-0.140 credit per removed FP against a break-even of 0.019292, so the discarded pixels were worth 5-7x break-even. Together with H31-1 and H32-2 this makes three independent pruning arms that failed the same way - PRUNING IS EXHAUSTED AS A FAMILY at this operating point, which independently corroborates the reachability frontier. Remaining arms are therefore ranked ADD-first, and an ADD arm is validated on the far-field LOSFO harness (evidence/losfo_farfield_diagnostic.json), never on the interleaved holdout, which by construction holds out no off-catalogue habitat. Attribute transfer FROM mapped faults TO off-catalogue candidates is now on the do-not-revive list: only ~12% of emitted dots have a similarly oriented mapped segment within 1 km, a coverage ceiling no radius widening fixes.",
   "hypotheses": [
     {
       "id": "H33-3",
@@ -592,7 +592,7 @@
         "215-219",
         "260+"
       ],
-      "note": "Historical Session 13 snapshot: 215-219 and 265+ were free at that time, and H38-1 was planned for 265-269. Session 14 subsequently reserved and ran 265-269 once; the analyzer failed, the range is burned, and no gate decision exists. See session14_addendum.holdout_attempt and evidence/h38_1_holdout.started.json."
+      "note": "Free: 215-219 and 265+. The next arm takes 265-269."
     },
     "infrastructure_finding": "GitHub Pages for this repository reports status 'errored' and the legacy page build for the current main head is stuck/failed, so the published site may be stale. Registered as github-pages-legacy-build-errored in registry/irregularities.json with the reversible fix (switch the Pages source to GitHub Actions so the workflow that already succeeds deploys).",
     "h37_3": {
@@ -618,217 +618,202 @@
     }
   },
   "session14_addendum": {
-    "generated": "2026-10-03",
-    "ranking_record": "knowledge/37_ranked_hypotheses_session14_2026-10-03.md",
-    "status": "H38-1 holdout RUNNER COMPLETED on seeds 265–269 (20 cells), but the frozen analyzer exited 1 during JSON serialization: TypeError, numpy.int64 not serializable. Claim status FAILED; no summary or C1–C5 decision. Seeds are burned; no rerun, promotion, TIFF, upload, or weekly slot. Raw output is preserved.",
-    "score_context": {
-      "owner_reported_base": {
-        "score": 0.26,
-        "submission": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan",
-        "content_id": "e56ea318af89",
-        "verification": "owner-reported; repository has no organizer receipt or authoritative score-to-raster association"
-      },
-      "repository_mechanism": {
-        "dots_d1_5": 60069,
-        "dots_d2_8": 44090,
-        "credit_d1_5_px": 5286.1,
-        "credit_d2_8_px": 4791.0,
-        "credit_retention_percent": 90.63,
-        "uniform_2d_projection_score": 0.255,
-        "observed_owner_score": 0.26,
-        "caveat": "Inversion conditioned on owner-reported scores, score/raster matching and a blind-lattice truth-size estimate; the one-dimensional trace/kernel account is a repository-supported mechanism, not an organizer-verified causal explanation."
-      },
-      "public_leaderboard_snapshot": {
-        "date": "2026-10-03",
-        "rank": 1,
-        "public_label": "DARD",
-        "score": 0.3195,
-        "verification": "one-off manual public-row observation in registry/leaderboard_snapshot_2026-10-03.json; not owner identity evidence and not associated with any local TIFF"
-      },
-      "reachability_arithmetic": {
-        "target_score": 0.3195,
-        "estimated_extra_weighted_credit_px": 1151,
-        "relative_to_0_2600_credit_percent": 24,
-        "interpretation": "mathematically plausible only with substantially better off-catalogue discovery; no current evidence demonstrates that this repository can beat the public-row value"
-      }
+    "what_changed": "Session 14 measured the far-field value of the H37-1 coverage packing rule in the construction the artifact build actually uses, gated a new-information arm (H38-1, GeoDAWN radiometrics) on fresh seeds, and tested that arm far field. Two harness errata and three cross-cutting findings are recorded; nothing was promoted and no weekly slot was spent.",
+    "findings": {
+      "farfield_arm_attribution": "knowledge/33's F1 arm (top-k pool, coverage at n_base) was NOT the construction the H37-1 gate or the shipped file used (all ridges, coverage at n_pre). Crossing both factors on one detector, one truth set and one count ladder (evidence/losfo_cover_variants.json, seeds 215-219, integrity_violations []): all_cover_nbase - pool_cover_nbase = +0.005450 (5/5 seeds), all_cover_npre - pool_cover_npre = +0.004923 (5/5 seeds), while pool_cover_nbase - base_d28 = +0.000819 reproduces the frozen result. all_cover_npre reproduces the independent probe's cover_n to 0.0 on all 20 cells. So 'coverage packing has no far-field value' is construction-specific.",
+      "shipped_construction_still_unmeasured": "The shipped H37-1/H38-1-style build packs the catalogue-derived H19-5 surface (121,131 px) with a full-fit detector weight - a third construction no LOSFO run has measured. The remedy is to re-derive the candidate surface under LOSFO and give it its own far-field number.",
+      "H38_1": "Gate PASSED on the gated decade 280-289 (evidence/h38_1_holdout.json: G1 +0.002869, 9/10 seeds, 4/4 folds; G3 do-no-harm +0.006282; G4 content control margin +0.054841; G5 clean; independently re-read by scripts/analyze_h38_1.py with max DTI recompute error 0.0). Far field (seeds 220-224, evidence/losfo_rad_farfield.json): F1 +0.000959, 95% CI +/-0.004469, 2/5 seeds, 2/4 folds, 4/20 cells below -0.005 -> heavy-tail criterion fails, and the run's F4 reproduction band was miscalibrated (see irregularity h38-1-farfield-f4-band-miscalibrated). NO FILE BUILT, NO PROMOTION, NO SLOT. knowledge/41, knowledge/42.",
+      "band_6_is_radiometric": "training_features.tif band 6 'tc' is rank-identical to the owner-mirrored GeoDAWN radiometric total count (Spearman 1.0000 on the in-footprint overlap, 0.999 over the full training extent) and the prepared 32-band matrix excludes it (irregularity tc-band-mislabelled). The detector therefore received no radiometric information at all before H38-1, which re-admits K, Th, U and the ratio grids explicitly.",
+      "cover_rule_far_field_replicated": "cover_n_D0 - thin_d28_D0 = +0.005881 with 5/5 seeds and 4/4 folds on LOSFO seeds 220-224, against +0.005275 on seeds 215-219. Twice replicated, still below the live break-even credit density tau = 0.054852 (0.0499-0.0506)."
     },
-    "official_source_checks_2026_10_03": {
-      "drivendata_problem": "Official problem page says public fault data are incomplete and experts manually labelled additional faults for the initial private test; submissions are reviewed for new faults and rescored against expanded labels in the final round. This motivates additions but does not make LOSFO labels organizer truth.",
-      "heat_flow": "USGS ScienceBase lists a 124.12 MB Great Basin heat-flow ZIP and describes a well residual attribute. Listing/availability only; this checkout does not contain an audited H38-2 clip.",
-      "ingenious_gdr": "GDR #1391 page lists 2 m probes (1.03 MB) and paleo-geothermal features (82.04 kB) under CC BY 4.0. Listing/availability only; no new package was downloaded or clipped in this check.",
-      "conductance": "USGS ScienceBase lists five conductance rasters spanning 2–200 km; listing only, no five-layer local clip/schema audit.",
-      "three_dep": "USGS catalog describes public-domain 1 m lidar-derived bare-earth DEMs. Product-level availability only; the 716 owner-mirrored tile links, bytes, datum and footprint coverage remain unverified here."
-    },
-    "ranked_hypotheses": [
-      {
-        "rank": 1,
-        "id": "H38-1",
-        "title": "Shallow SI-0 Euler contact × independent gravity edge × low LiDAR relief",
-        "expected_delta_dti": [
-          0.0,
-          0.001
-        ],
-        "cost": "Low–medium; local hash-pinned owner-mirror layers, no new external data",
-        "status": "Support screen READY at 140; one LOSFO run completed but analyzer failed; no evaluable holdout decision, no promotion",
-        "record": "knowledge/38_preregistration_H38-1.md",
-        "layers": [
-          "evidence/h31_1_euler_clusters.csv: SI-0 Euler solutions from training tmi, fixed depth_mad_m <= 60, median_depth_m <= 400, n_solutions >= 8",
-          "data/training_features.tif band 18 iso_grav_anom_hg: independent gravity field/gradient",
-          "data/lidar_scarp_features_u8.tif bands 9 relief and 12 valid; catalogue only for exclusion/leakage controls"
-        ],
-        "physical_signature": "A shallow, depth-coherent contact-like magnetic Euler cluster is corroborated by a nearby strong independently measured gravity gradient and subdued local relief; a buried density/magnetic contact under a surface without a strong scarp is the target, not proof of faulting or geothermal activity.",
-        "why_missing_catalogue": "A buried or subdued structure can lack a mappable Quaternary surface trace while retaining subsurface magnetic and gravity contrasts. The relief condition targets that gap rather than high-relief mapped scarps; the competition statement says public fault labels are incomplete and experts added faults, but LOSFO is not organizer truth.",
-        "differs_from_repo": "H37-3 emitted on shallow SI-0 Euler depth coherence alone and missed the 0.0548 live-value bar. H37-2 proposed potential-field lineaments × low relief. H38-1 tests a narrower three-way Euler-depth, independent-gravity-gradient, low-relief conjunction; no score-guided threshold tuning.",
-        "data_gate": "Label-free support READY at 140 unique centroids; the 265–269 runner completed 20 cells but its frozen analyzer failed to serialize the report. This does not validate or refute the geological rule.",
-        "main_confounder": "SI-0 is an idealized contact geometry, gravity edges include lithologic contacts and basin margins, and relief is a quantized local descriptor; the conjunction can still select non-fault contacts."
-      },
-      {
-        "rank": 2,
-        "id": "H38-2",
-        "title": "Heat-flow residual × 2 m temperature anomaly × potential-field corridor",
-        "expected_delta_dti": [
-          0.0,
-          0.0025
-        ],
-        "cost": "Medium–high; USGS archive plus GDR probe data; fetch/clip/schema audit first",
-        "status": "Queued; official source listing checked, not locally audited",
-        "layers": [
-          "USGS ScienceBase DOI 10.5066/P9BZPVUC Great Basin heat-flow release: well residual (measured less de-convected background)",
-          "GDR #1391 INGENIOUS 2 m temperature probes",
-          "An independent potential-field corridor derived from the competition feature grid"
-        ],
-        "physical_signature": "A spatially supported thermal residual/probe anomaly aligned with a potential-field structural corridor, not merely proximity to a spring or warm well.",
-        "why_missing_catalogue": "Buried alluvium-mantled faults can channel upflow and warm shallow ground without a preserved surface rupture; surface-fault compilations do not map a thermal residual.",
-        "differs_from_repo": "Distinct from failed H35-1 spring/well discharge-point proximity and from the earlier still-untested H33-3/H35-2 residual/probe concept; that older work means the broad idea is not globally new within this repository history.",
-        "data_gate": "Official 124 MB heat-flow archive and GDR probe package are listed, but no local H38 clip/schema/coverage audit exists. Fetch, pin, inspect, clip, and freeze one rule before any seed use.",
-        "main_confounder": "Sparse wells, hydrologic discharge unrelated to faults, and uncertain residual semantics can create apparent anomalies."
-      },
-      {
-        "rank": 3,
-        "id": "H38-3",
-        "title": "Paleogeothermal deposits × subsurface contact corridor",
-        "expected_delta_dti": [
-          0.0,
-          0.0015
-        ],
-        "cost": "Low–medium; small GDR package; clip and coverage/schema audit required",
-        "status": "Queued; official source listing checked, not locally audited",
-        "layers": [
-          "GDR #1391 paleogeothermal features: sinter, tufa/travertine and mapped spring-deposit features",
-          "Independent gravity/magnetic contact corridor",
-          "Low-relief context layer"
-        ],
-        "physical_signature": "A paleo-fluid spring deposit spatially associated with a subsurface contact corridor and terrain consistent with partial burial or subdued expression.",
-        "why_missing_catalogue": "Old or partly buried fluid pathways may leave deposits after current surface scarps become muted, so a Quaternary surface-rupture catalogue can omit the structure.",
-        "differs_from_repo": "Targets mapped paleo-deposits rather than H35-1 present-temperature/well discharge points; no deposit-by-contact conjunction has been tested here.",
-        "data_gate": "GDR lists a small resource under CC BY 4.0; a listing/previous byte availability is not a local clip. Coverage, schema, coordinates and exclusions need audit.",
-        "main_confounder": "Deposits are sparse and exposure-biased; age, preservation and non-tectonic spring pathways may dominate."
-      },
-      {
-        "rank": 4,
-        "id": "H38-4",
-        "title": "Drainage offsets, knickpoints and beheaded channels × potential-field lineaments",
-        "expected_delta_dti": [
-          0.0,
-          0.0035
-        ],
-        "cost": "Very high; 1 m DEM tile preflight and hydrologic processing required",
-        "status": "Queued; product is official/public-domain, actual 716-tile coverage is unverified",
-        "layers": [
-          "USGS 3DEP one-meter bare-earth DEM tiles linked by data/dem_links.json",
-          "Derived channel network, flow routing and geomorphic metrics",
-          "Independent potential-field lineaments and lidar_scarp_features_u8.tif for contrast"
-        ],
-        "physical_signature": "Channel offsets, aligned knickpoint trains, beheaded channels, wind gaps or right-angle drainage deflections crossing an independently derived potential-field lineament.",
-        "why_missing_catalogue": "Drainage can preserve young displacement after scarp relief is softened or buried; alluvial-basin faults may still perturb channel courses despite weak surface morphology.",
-        "differs_from_repo": "Prior LiDAR work uses amplitude/roughness/openness descriptors; no repository arm has tested flow-network topology or channel displacement metrics.",
-        "data_gate": "The official public-domain 1 m product exists, but all 716 owner-mirrored tile URLs, coverage, CRS/datum, bytes and total volume remain unchecked. No seed until a complete tile preflight.",
-        "main_confounder": "Lithology, drainage engineering, climate and DEM artifacts also create knickpoints and offsets; requires lineament concurrence and blinded geomorphic review."
-      },
-      {
-        "rank": 5,
-        "id": "H38-5",
-        "title": "Shallow/deep MT conductance boundary coherence × gravity/magnetic edge",
-        "expected_delta_dti": [
-          0.0,
-          0.0015
-        ],
-        "cost": "Medium–high; five regional depth layers need local clip/schema audit",
-        "status": "Queued; official source listing checked, not locally audited",
-        "layers": [
-          "USGS MT conductance GeoTIFFs at 2–12, 12–20, 20–50, 50–90 and 90–200 km depth",
-          "Independent gravity/magnetic contact corridor"
-        ],
-        "physical_signature": "A shallow upper-crustal conductance boundary aligned with a candidate corridor while deeper conductance changes or decouples, rather than a blanket conductance threshold.",
-        "why_missing_catalogue": "Fluid alteration or conductive fault-zone structure can be buried and lack a surface rupture or recognizable Quaternary scarp.",
-        "differs_from_repo": "Not the live-refuted single cond_surf × dilatation feature and not H32-2 magnetic spectral-depth screening; it tests five MT depth slices and cross-depth decoupling.",
-        "data_gate": "ScienceBase lists five layers, but the checkout has no audited five-layer clip with byte hashes, aligned grids or in-footprint coverage.",
-        "main_confounder": "Regional MT pixels are coarse relative to 100 m output and may reflect lithology, fluids or terrane boundaries unrelated to a fault."
-      }
+    "next_ranked": [
+      "All-ridge coverage packing of the FROZEN D0 detector's ridge field (the H37-1 rule in the construction knowledge/39 identified). Twice-replicated far-field gain, never gated on the interleaved proxy. Needs: (1) a frozen fresh-seed interleaved gate written to knowledge/ first; (2) a pre-declared second far-field decade with >= 10 seeds, because the instrument resolves only ~+/-0.0045 on five seeds. Only then may a file be built.",
+      "H38-1 radiometric information, far-field-unresolved: a >= 10-seed LOSFO decade would settle whether the +0.001 far-field effect is real. Frozen F4 must be calibrated from the observed seed-level SD. No interleaved re-run.",
+      "H38-4 lineament-support licence: object-level (Hough/tensor-voting) corroboration of emitted dots by at least two independent lineament families across scales - an emission-rule arm on existing information, cheap, ranked below the two above because rearranging existing information has repeatedly failed far field.",
+      "H38-3 joint magnetic-and-gravity Euler SI-0 depth concordance: two independent potential fields, concordant shallow clusters as corroboration. Blocked until the euler-magnetic-units-depth-band irregularity is resolved; must be sized so its credit per dot clears 0.0548.",
+      "H38-2 depth-sliced magnetic lineaments under cover (upward continuation to ~1 km, lineament extraction, conjunction with low relief). New processing of existing information; medium cost.",
+      "H38-5 ComCat microseismicity lineaments: the competition's own bands 10/16 are 100 km-smoothed earthquake density, so a sharp local catalogue (USGS ANSS FDSN, free, no auth) is genuinely new information. Bridge-gated (the sandbox cannot reach earthquake.usgs.gov) and needs declustering plus depth-consistent clustering. Lowest priority this session on cost, not on promise."
     ],
+    "seed_ledger": {
+      "260-269": "H38-1 gate run 1 - VOID (G5 harness defect), disclosed",
+      "270-279": "H38-1 gate run 2 - void for gating (G2 statistic defect), pilot only",
+      "280-289": "H38-1 gate run 3 - GATED RUN, passed",
+      "215-219": "LOSFO cover probe + variants reconciliation (spent)",
+      "220-224": "LOSFO radiometric far-field test (spent; F4 void, F1 provisional)",
+      "210-214": "H37-1 far-field falsification (spent earlier)",
+      "240-249 / 250-259": "H36-1 / H37-1 gates (spent earlier)",
+      "290+": "free"
+    },
+    "no_promotion_statement": "docs/downloads/manifest.json is unchanged this session: the one-click primary remains H36-1 (b531dae0a36f). Nothing in this session earned a slot, and the standing rule stands - a slot requires beating the current holdout best on a frozen fresh-seed gate AND (since knowledge/32-33) not failing the far-field transfer test."
+  },
+  "session14b_addendum": {
+    "generated": "2026-10-03",
+    "one_click_primary_content_id": "b531dae0a36f",
+    "secondary_corroborated_content_id": "56a9f473edc7",
+    "h36_1_far_field": {
+      "preregistration": "knowledge/44_preregistration_H36_1_and_H38_farfield.md (freeze commit ff85e30)",
+      "result": "knowledge/45_h36_1_and_h38_1_result.md",
+      "evidence": "evidence/losfo_session14_h36_1_and_h38.json",
+      "integrity": "evidence/session14_h36_1_and_h38_integrity.json",
+      "seeds": [
+        265,
+        266,
+        267,
+        268,
+        269
+      ],
+      "criteria": {
+        "F1_rung30_vs_matched_random": "PASS (+0.002073 mean dDTI, 17/20 cells, 5/5 seeds)",
+        "F2_rung30_removal_efficiency": "PASS (pooled e_far = 0.025293 < tau_live 0.054852; 19/20 cells below tau_live)",
+        "F3_rung30_blind_r1_vs_base": "PASS (+0.001713 mean dDTI, 16/20 cells, 5/5 seeds, pooled e_far = 0.013587 < tau_live 0.054852; +0.005810 vs matched-N random drop in 20/20 cells)",
+        "F4_h27_4_blind_r1_zero_loss": "PASS (+0.002249 mean dDTI, 20/20 cells, exact 0.00 TP removed across 20/20 cells)"
+      },
+      "verdict": "ALL 4 CRITERIA PASS - H36-1 (b531dae0a36f, 37,660 px) is now verified on BOTH interleaved spatial CV (+0.002599, seeds 240-249) and LOSFO far-field truth (+0.001713, seeds 265-269)"
+    },
     "h38_1": {
-      "arm": "H38-1 shallow Euler × gravity × low-relief licence",
-      "preregistration": "knowledge/38_preregistration_H38-1.md",
-      "builder": "scripts/build_h38_1_candidate_clusters.py",
-      "module": "src/gems27/h38_1.py",
-      "candidate_csv": "evidence/h38_1_candidate_clusters.csv",
-      "sufficiency_audit": "evidence/h38_1_sufficiency_audit.json",
-      "candidate_clusters": 140,
-      "support_status": "label-free sufficiency only; gravity P80=1.460558295249939, relief P50=44.0; no labels or holdout scores used",
-      "seeds": [
+      "preregistration": "knowledge/44_preregistration_H36_1_and_H38_farfield.md (freeze commit ff85e30)",
+      "result": "knowledge/45_h36_1_and_h38_1_result.md",
+      "losfo_evidence": "evidence/losfo_session14_h36_1_and_h38.json",
+      "interleaved_evidence": "evidence/h38_1_interleaved_holdout.json",
+      "module": "src/gems27/heatflow_euler.py",
+      "builder": "scripts/build_h38_1_hf_euler_submissions.py",
+      "losfo_seeds": [
         265,
         266,
         267,
         268,
         269
       ],
-      "seed_scope": "local evidence/*.json scan only (61 files, zero local references); repository is shallow and external/undocumented use cannot be excluded",
-      "holdout_status": "RUNNER COMPLETED 20/20 cells on 265–269; analyzer failed JSON serialization (numpy.int64); no gate report; seeds burned, no rerun",
-      "weekly_slot_used": false,
-      "promotion_rule": "C1–C5 all pass only permits a separate fresh-seed confirmation and exact-file review; no weekly slot without further confirmation and beating the current blocked-holdout best.",
-      "seed_audit": "evidence/h38_1_seed_audit_pre_run.json",
-      "seed_audit_sha256": "413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e",
-      "local_seed_audit_status": "PASS_LOCAL_SCAN",
-      "claim": "evidence/h38_1_holdout.started.json",
-      "claim_sha256": "1bd9bd5e3e4c2c4861a34f4b1714e7b89e36f73b8dd6f3bb8e819768163a3791",
-      "claim_status": "FAILED",
-      "raw_result": "evidence/losfo_h38_1_raw.json",
-      "raw_result_sha256": "0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba",
-      "summary_result": "NOT WRITTEN"
+      "interleaved_seeds": [
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279
+      ],
+      "h38_1_joint_on_base": {
+        "losfo_mean_delta_dti": 0.000791809196456296,
+        "losfo_credit_per_added_dot": 0.07724129932637987,
+        "losfo_sub_ridge_ctrl_credit_per_dot": 0.04098268325430367,
+        "losfo_random_ctrl_credit_per_dot": 0.023326197523099928,
+        "losfo_cells_improved": "17/20",
+        "losfo_seeds_improved": "4/5",
+        "losfo_folds_improved": "4/4",
+        "losfo_all_pass": true,
+        "interleaved_mean_delta_dti": 0.0006560637417711835,
+        "interleaved_credit_per_added_dot": 0.06439883344006817,
+        "interleaved_cells_improved": "27/40",
+        "interleaved_seeds_improved": "9/10",
+        "interleaved_folds_improved": "4/4"
+      },
+      "h38_1_joint_on_r30_r1": {
+        "losfo_mean_delta_dti_vs_h36_1": 0.0007474376185384414,
+        "losfo_mean_delta_dti_vs_d28": 0.0024600196843243835,
+        "losfo_credit_per_added_dot": 0.06992977854336586,
+        "losfo_sub_ridge_ctrl_credit_per_dot": 0.032267635716439015,
+        "losfo_random_ctrl_credit_per_dot": 0.026813585290034265,
+        "losfo_cells_improved": "16/20",
+        "losfo_seeds_improved": "4/5",
+        "losfo_folds_improved": "4/4",
+        "losfo_all_pass": true,
+        "interleaved_mean_delta_dti_vs_h36_1": 0.0005429581100109074,
+        "interleaved_credit_per_added_dot": 0.0526949658525996,
+        "interleaved_cells_improved": "27/40",
+        "interleaved_seeds_improved": "8/10",
+        "interleaved_folds_improved": "4/4"
+      },
+      "artifact": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif (37,860 px = 37,660 H36-1 + 200 corroborated dots; slotted at secondary)"
     },
-    "historical_scope": "The top-level H33 hypothesis list and session11–session13 addenda are retained unchanged as historical records. Session14 is the current ranked list.",
-    "seed_audit": {
-      "path": "evidence/h38_1_seed_audit_pre_run.json",
-      "sha256": "413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e",
-      "status": "PASS_LOCAL_SCAN",
-      "checked_utc": "2026-10-04T01:43:57Z",
-      "scanned_evidence_json_count": 61,
-      "local_reference_count": 0,
-      "collision_count": 0,
-      "unreadable_count": 0,
-      "repository_shallow": true,
-      "scope": "local evidence/*.json only; owner workspaces, other repositories and unpublished runs are not covered"
-    },
-    "holdout_attempt": {
-      "status": "FAILED_ANALYSIS_NO_GATE_DECISION",
-      "seeds": [
+    "h38_2": {
+      "title": "Concealed basin-fill conjunction (low-relief smooth basin fill <= P35 x shallow SI=0 Euler cluster on 1-px ridge)",
+      "losfo_seeds": [
         265,
         266,
         267,
         268,
         269
       ],
-      "cells_completed": 20,
-      "runner_completed": true,
-      "analyzer_exit_code": 1,
-      "error": "TypeError: Object of type int64 is not JSON serializable",
-      "raw_result": "evidence/losfo_h38_1_raw.json",
-      "raw_result_sha256": "0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba",
-      "summary_result_written": false,
-      "gate_decision": "NONE; do not infer a scientific pass or fail",
-      "seed_range_burned": true,
-      "rerun_permitted": false,
-      "weekly_slot_used": false
+      "losfo_mean_delta_dti": -4.525152080347428e-05,
+      "losfo_credit_per_added_dot": 0.013976355221436216,
+      "losfo_cells_improved": "5/20",
+      "verdict": "REFUTED - hidden USGS truth in labels.tif is itself scarp-biased, so forcing dots into the lowest-relief tercile starves them of catalogued hidden truth."
+    },
+    "next_ranked": [
+      "H38-3: Multi-depth MT crustal conductance pipe alignment (Bedrosian et al. 2022, DOI 10.5066/P9TWT2LU, surface vs middle/lower crust conductance ratio) via Actions raster-clip step.",
+      "H38-4 (= H37-5): Cultural & constructional shoreline artifact-morphology suppression coupled with budget-neutral H38-1 reallocation at fixed N = 37,660 px.",
+      "H38-5 (= H37-4 / H35-3): 1 m 3DEP bare-earth DEM piercing-line and drainage-deflection neotectonics via Actions streaming bridge."
+    ],
+    "seed_ledger": {
+      "spent_contiguous": [
+        "100-214",
+        "220-264",
+        "265-269 (Session 14 LOSFO H36-1 & H38 gate)",
+        "270-279 (Session 14 interleaved H38-1 gate)"
+      ],
+      "free": [
+        "215-219",
+        "280+"
+      ]
     }
+  },
+  "session14_local_branch_attempt": {
+    "generated": "2026-10-04T02:20:05Z",
+    "hypothesis_label_in_frozen_branch": "H38-1 branch-local shallow SI-0 Euler contact × gravity-gradient corridor × low-valid-LiDAR-relief rule",
+    "freeze_commit": "cf1d036",
+    "run_commit": "9880ca6",
+    "status": "FAILED_NOT_EVALUABLE; NOT AN INDEPENDENT FRESH HOLDOUT",
+    "seeds": [
+      265,
+      266,
+      267,
+      268,
+      269
+    ],
+    "candidate_count_label_free": 140,
+    "runner_cells_completed": 20,
+    "analyzer_exit_code": 1,
+    "failure": "TypeError: Object of type int64 is not JSON serializable",
+    "no_scientific_gate_decision": true,
+    "weekly_submission_slot_used": false,
+    "artifacts": {
+      "claim": {
+        "path": "evidence/h38_1_holdout.started.json",
+        "sha256": "d425e976f117463967a0f7cc99eef40b88cd15bbd36537ccd31748a82f99635b"
+      },
+      "raw_unverified": {
+        "path": "evidence/losfo_h38_1_raw.json",
+        "sha256": "0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba"
+      },
+      "pre_run_seed_audit": {
+        "path": "evidence/h38_1_seed_audit_pre_run.json",
+        "sha256": "413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e"
+      }
+    },
+    "seed_reuse": {
+      "upstream_artifact": "evidence/losfo_session14_h36_1_and_h38.json",
+      "upstream_sha256": "b72cc58341554fa1592ddea30efd8c48faae55d380a2cc1903809283a612e21b",
+      "upstream_used_seeds": [
+        265,
+        266,
+        267,
+        268,
+        269
+      ],
+      "upstream_generated_utc": "2026-10-04T00:29:52Z",
+      "local_started_utc": "2026-10-04T01:46:40Z",
+      "seed_scan_scope": "The local pre-run scan covered the branch checkout and did not include later mainline evidence."
+    },
+    "summary_path_collision": {
+      "frozen_branch_expected_summary_path": "evidence/h38_1_holdout.json",
+      "local_analyzer_wrote_summary": false,
+      "current_mainline_path_sha256": "e5fb050cc2988bdb7300c1846f4ca90a2af683e491a3d3037c9a69dfea6494bf",
+      "current_mainline_path_belongs_to": "Separate GeoDAWN-radiometric H38-1 experiment on seeds 280–289; not the summary for this branch-local run."
+    },
+    "reconciliation": "Do not rerun or re-analyze the raw output; seeds were already used upstream. Keep the failed local experiment distinct from mainline heat-flow/Euler and radiometric H38-1 work; see knowledge/39_session14_closeout_2026-10-03.md."
   }
 }

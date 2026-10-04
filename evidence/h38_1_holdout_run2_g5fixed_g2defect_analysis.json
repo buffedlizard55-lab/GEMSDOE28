@@ -1,0 +1,150 @@
+{
+ "generated_utc": "2026-10-03T23:21:32Z",
+ "kind": "Pass-2 verification of evidence/h38_1_holdout.json; pure re-arithmetic on the stored per-cell records, no model re-fit.",
+ "input": "evidence/h38_1_holdout.json",
+ "n_cells": 40,
+ "seeds": [
+  270,
+  271,
+  272,
+  273,
+  274,
+  275,
+  276,
+  277,
+  278,
+  279
+ ],
+ "max_abs_dti_recompute_error": 0.0,
+ "count_identity_violations": [],
+ "count_identity_ok": true,
+ "postprune_count_match": {
+  "primary_mean_dots": 11331.75,
+  "incumbent_mean_dots": 11337.575,
+  "max_relative_gap": 0.002218348914593567,
+  "mean_relative_gap": 0.000727483142735026,
+  "note": "the gated comparison is matched to within this gap; both arms apply the same blind_r1 prune, so the residual difference is the prune's interaction with each detector's ridge field, not a budget difference"
+ },
+ "arm_means": {
+  "base_d280": 0.09482604943160511,
+  "cover_r1": 0.10370156285316053,
+  "rad_base_d280": 0.10153558645699894,
+  "rad_cover_r1": 0.10739879184762706,
+  "control_random_matched_n": 0.05414156858061479
+ },
+ "recomputed": {
+  "G1_primary_vs_incumbent": {
+   "mean": 0.003697228994466545,
+   "sem": 0.0008410606129802939,
+   "cells_up": 29,
+   "n_cells": 40,
+   "per_seed": {
+    "270": 0.0035419176277933576,
+    "271": 0.002883220218511815,
+    "272": 0.0017059245422519943,
+    "273": 0.0020035115479668415,
+    "274": 0.003225931646214996,
+    "275": 0.005992526672147766,
+    "276": 0.006561973383867874,
+    "277": 0.0011687957190752198,
+    "278": 0.0037865459789621254,
+    "279": 0.0061019426078734625
+   },
+   "seeds_up": 10,
+   "per_fold": {
+    "NE_LidarGapHeavy": 0.006923610486153068,
+    "NW": -0.0007025435133677496,
+    "SE": 0.004173297827886191,
+    "SW": 0.004394551177194672
+   },
+   "folds_up": 3
+  },
+  "G3_rad_base_vs_base": {
+   "mean": 0.00670953702539383,
+   "sem": 0.0011294651802948663,
+   "cells_up": 33,
+   "n_cells": 40,
+   "per_seed": {
+    "270": 0.010264833091649217,
+    "271": 0.005574103563902871,
+    "272": 0.004148846914682286,
+    "273": 0.004009392113587425,
+    "274": 0.00645245695664598,
+    "275": 0.010277930316054215,
+    "276": 0.010229526786098564,
+    "277": 0.00559642006575525,
+    "278": 0.004021347862970967,
+    "279": 0.006520512582591523
+   },
+   "seeds_up": 10,
+   "per_fold": {
+    "NE_LidarGapHeavy": 0.004047648007962289,
+    "NW": 0.0012941911792577587,
+    "SE": 0.008529960978012433,
+    "SW": 0.012966347936342836
+   },
+   "folds_up": 4
+  },
+  "G4_primary_vs_control": {
+   "mean": 0.05325722326701225,
+   "sem": 0.002571399158383365,
+   "cells_up": 40,
+   "n_cells": 40,
+   "per_seed": {
+    "270": 0.05492070932220619,
+    "271": 0.056771376893413314,
+    "272": 0.05068330954379008,
+    "273": 0.0521105639975315,
+    "274": 0.05569419202796137,
+    "275": 0.05471584763679203,
+    "276": 0.05435987784436943,
+    "277": 0.04655100745083368,
+    "278": 0.053349641712365094,
+    "279": 0.05341570624085992
+   },
+   "seeds_up": 10,
+   "per_fold": {
+    "NE_LidarGapHeavy": 0.07330586289996102,
+    "NW": 0.045971837163587145,
+    "SE": 0.05631742509765101,
+    "SW": 0.03743376790684985
+   },
+   "folds_up": 4
+  },
+  "report_only_incumbent_vs_base": {
+   "mean": 0.008875513421555402,
+   "sem": 0.0013813220712335882,
+   "cells_up": 32,
+   "n_cells": 40,
+   "per_seed": {
+    "270": 0.010985276697364182,
+    "271": 0.013008554418569665,
+    "272": 0.009827292950267921,
+    "273": 0.0018787249672448207,
+    "274": 0.009587842052673236,
+    "275": 0.008345330692478687,
+    "276": 0.008600765946778097,
+    "277": 0.009575086801714143,
+    "278": 0.004591252381461016,
+    "279": 0.012355007307002251
+   },
+   "seeds_up": 10,
+   "per_fold": {
+    "NE_LidarGapHeavy": 0.0005612692897499771,
+    "NW": 0.006174925423101574,
+    "SE": 0.009045479756756524,
+    "SW": 0.019720379216613536
+   },
+   "folds_up": 4
+  }
+ },
+ "stored_gate_matches": {
+  "G1_mean_matches": true,
+  "G2_seeds_match": true,
+  "G2_folds_match": false,
+  "G3_mean_matches": true,
+  "G4_margin_matches": true,
+  "arm_means_match_variants": true
+ },
+ "verdict": "MISMATCH - see stored_gate_matches / count_identity_violations"
+}

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-04T02:08:17Z",
+  "generated": "2026-10-04T02:17:53Z",
   "items": [
     {
       "id": "prompt-verbatim-unavailable",
@@ -17,7 +17,7 @@
       "id": "ai-use-disclosure",
       "severity": "high",
       "issue": "The Official Rules require generative-AI use to be stated in the narrative (Sept 2026 rules, verified in full across all 7 chunks).",
-      "action": "Disclosure text is now present in AI_DISCLOSURE.md and linked from the source ledger; the earlier file reference was missing. Include an AI-use statement in the final-round narrative as required by the rules; the file is an aid, not a substitute. No final-round narrative or submission has been made."
+      "action": "A disclosure aid is now present in AI_DISCLOSURE.md and linked from the site source ledger; the earlier referenced file was absent. Include a statement in the final-round narrative as required by the rules. The file is an aid, not a substitute. No final-round narrative or submission has been made."
     },
     {
       "id": "hermant-2025-lidar-catalogue-offset",
@@ -52,8 +52,8 @@
     {
       "id": "tc-band-mislabelled",
       "severity": "medium",
-      "issue": "The training band 'tc' is described as 'Tilt angle or total curvature - magnetic field derivative for edge detection', but it is rank-identical (Spearman 1.0000, n=299,822) to the GeoDAWN radiometric total-count grid and only -0.15 correlated with the magnetic horizontal gradient (tmi_hg). Verified from the pinned rasters.",
-      "action": "Do not use 'tc' as a magnetic edge transform; excluded by scripts/prepare_data.py when building the 32-band label-free feature matrix (data_cache/prepared/features.npy)."
+      "issue": "The training band 'tc' is described as 'Tilt angle or total curvature - magnetic field derivative for edge detection', but it is rank-identical (Spearman 1.0000, n=299,822) to the GeoDAWN radiometric total-count grid and only -0.15 correlated with the magnetic horizontal gradient (tmi_hg). Verified from the pinned rasters. Re-confirmed this session on the full training extent (n = 12,279,160 finite cells): Spearman(training band 6, geodawn_rad band 4 TC) = 0.999, and the higher values of every other training band against every GeoDAWN channel are trend-level (0.90-0.93) - i.e. no other competition band hides a GeoDAWN identity.",
+      "action": "Do not use 'tc' as a magnetic edge transform; excluded by scripts/prepare_data.py when building the 32-band label-free feature matrix (data_cache/prepared/features.npy). Consequence measured in Session 14: because band 6 is excluded from the prepared matrix, the detector received NO radiometric information at all. H38-1 (knowledge/37, knowledge/38) re-admits the same physical measurements explicitly as geodawn_rad K/Th/U and the GeoDAWN ratio grids, and gates them on a fresh decade."
     },
     {
       "id": "berkowitz-scope",
@@ -443,7 +443,7 @@
       "id": "h37-1-farfield-effect-is-zero",
       "severity": "low",
       "issue": "The preregistered demotion of H37-1 is a demotion of the CLAIM, not evidence that the file is worse than its replacement. The far-field point estimate is -0.000037 against a +0.007289 interleaved gain, i.e. a measured tie, and H36-1's own far-field behaviour has never been measured (it is a dose change, supported by the live-anchored ladder).",
-      "action": "Recorded so an owner who judges the live scoring population to be substantially catalogue-adjacent can knowingly prefer the H37-1 file; both remain audited and downloadable. The remedy is one more LOSFO run on H36-1's dose change, queued in registry/next_hypotheses.json."
+      "action": "Recorded so an owner who judges the live scoring population to be substantially catalogue-adjacent can knowingly prefer the H37-1 file; both remain audited and downloadable. RESOLVED 2026-10-03 in Session 14 (knowledge/44-45, evidence/losfo_session14_h36_1_and_h38.json): H36-1 was tested on fresh LOSFO seeds 265-269 (20 paired cells) and PASSED all four frozen far-field criteria: F1 rung30 vs matched-N random drop +0.002073 (17/20 cells, 5/5 seeds); F2 e_far(2.8->3.0) = 0.02529 < tau_live 0.054852 (19/20 cells); F3 rung30_blind_r1 vs base +0.001713 (16/20 cells, 5/5 seeds, e_far = 0.01359); F4 blind_r1 loses 0.00 TP across 20/20 cells."
     },
     {
       "id": "h37-3-licence-real-but-below-the-live-rate",
@@ -461,31 +461,67 @@
       "id": "parallel-session-arm-naming-collision",
       "severity": "low",
       "issue": "A parallel session's commit 9d764cd added thinning.directional_dot_thin and its docstring history calls it 'the candidate H37-1 (directional / anisotropic Poisson-disk ...)'. H37-1 is already taken: knowledge/29-35, the README and registry/next_hypotheses.json define H37-1 as the metric-aware (maximum expected coverage) packing arm, which this session gated, far-field falsified and demoted. The directional thinning is otherwise undocumented in the ledger.",
-      "action": "RESOLVED in Session 14. H38-1 is now allocated to the shallow SI-0 Euler × gravity-gradient × low-relief conjunction, with its own preregistration in knowledge/38_preregistration_H38-1.md; it is not the directional_dot_thin experiment. The directional arm remains a separate parallel-workstream result whose reused H37-1 label was a collision; any future revival must use a new ID after H38-1 (H39 or later), a distinct preregistration, and an untouched seed range. The thinning.py history now describes the collision explicitly. No H38-1 code or result uses directional_dot_thin."
+      "action": "Flagged for the owner so the two arms cannot be confused in the record. Neither arm's results are affected (directional_dot_thin only ADDS a function; dot_thin is unchanged, so every measured result still refers to the same code). When the directional arm is formally proposed it needs its own ID (e.g. H38-1), its own preregistration, and a corrected docstring history line."
     },
     {
-      "id": "h38-1-candidate-support-is-not-validation",
-      "severity": "medium",
-      "issue": "H38-1's 140-centroid count is a deterministic, label-free support screen on local hash-pinned owner mirrors (training_features band 18, LiDAR relief/validity, and prior SI-0 Euler clusters). It does not establish organizer provenance, fault identity, catalogue omission, LOSFO benefit, or hidden-score transfer. The Euler SI-0 contact assumption and gravity/relief conjunction can select lithologic contacts or basin boundaries.",
-      "action": "The label-free screen remained support only. Before the run, the local seed audit returned PASS_LOCAL_SCAN over 61 evidence JSON files with zero local references/collisions and zero unreadable files (evidence/h38_1_seed_audit_pre_run.json; SHA-256 413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e). H38-1 was then invoked once on 265–269; all 20 cells completed, but the frozen analyzer failed during JSON serialization, so there is no C1–C5 decision. The run is not a geological pass or fail. Preserve the raw/claim failure, do not rerun or repair on this range, and do not promote or spend a slot. The checkout is shallow and the pre-run scan never established global seed availability."
+      "id": "farfield-arm-did-not-match-gate-construction",
+      "severity": "medium-high",
+      "issue": "knowledge/33's far-field FAIL for H37-1 (F1 max_coverage_vs_base = -0.000037, 9/20 cells) was measured on an arm that the H37-1 artifact build never used. The F1 arm packed the top-k ridge pool (k = round(PRE_THIN_FRAC * fold px)) with coverage_greedy(pool, prob, n_base=12,001). The gate's primary and the shipped build pack ALL ridge pixels with coverage_greedy(ridges, prob, n_pre), the dot_thin(pool, 3.0) count. evidence/losfo_cover_variants.json (seeds 215-219, 20 cells, 420.4 s, integrity_violations []) crosses both factors on one detector, one truth set and one count ladder: all_cover_nbase - pool_cover_nbase = +0.005450 (14/20 cells, 5/5 seeds, 3/4 folds) and all_cover_npre - pool_cover_npre = +0.004923 (15/20, 5/5, 3/4), while pool_cover_nbase - base_d28 = +0.000819 (12/20, 3/5, 2/4) reproduces the frozen result. all_cover_npre also reproduces the independent probe's cover_n to 0.0 on all 20 cells, and base_d28 reproduces its thin_d28 to 0.0.",
+      "action": "Recorded so the demotion premise in docs/downloads/manifest.json is not read as 'coverage packing has no far-field value'. It does not apply to the shipped file either: scripts/build_h37_1_submissions.py packs the H19-5 surface (121,131 px) with a full-fit detector weight, a third construction that no LOSFO run has measured and that LOSFO cannot measure as written (the surface is catalogue-derived). Slot order is left unchanged this session; the named remedy is to rebuild the candidate surface under LOSFO and give the shipped construction its own far-field number. Any future far-field claim must state candidates, weight and target count together, not just the packer's name."
     },
     {
-      "id": "session14-official-source-listing-not-local-coverage",
-      "severity": "medium",
-      "issue": "Session 14 rechecked official listings for the USGS heat-flow release (124.12 MB), GDR #1391 probe/paleogeothermal resources, five USGS MT conductance maps, and USGS 3DEP 1 m DEMs. Page listings and prior runner byte pins do not prove locally clipped coverage/schema; notably, the 716 challenge DEM URLs and tile datum/coverage remain unverified in this checkout.",
-      "action": "Registry/sources.json and knowledge/37 distinguish page listing, runner byte availability, and local clip status. Do not spend seeds on H38-2 through H38-5 until the exact required bytes, hashes, footprint coverage, CRS/datum, and schema are audited. H38-1 needs no new external data."
-    },
-    {
-      "id": "session14-metadata-timestamps-future-dated",
+      "id": "h36-1-dose-change-is-far-field-neutral",
       "severity": "low",
-      "issue": "At an earlier observed shell clock of 2026-10-03T23:39:48Z, registry/next_hypotheses.json generated=2026-10-04T00:05:00Z, registry/irregularities.json generated=2026-10-04T00:20:00Z, and evidence/h31_1_seed_reuse_audit.json checked_utc=2026-10-03T23:59:00Z were future-dated. Their chronology has not been independently reconciled.",
-      "action": "Preserved the historical timestamp fields rather than silently rewriting them. Session 14 records use date-only metadata where exact clock time is not needed; reconcile the authoring clock before asserting a more precise chronology."
+      "issue": "The remedy queued in h37-1-farfield-effect-is-zero (one more LOSFO run on H36-1's d=2.8 -> d=3.0 dose change) is now discharged: on the same ridge pool, same folds and same far-field truth, raster-order dot_thin(pool, 3.0) scores 0.106360 against dot_thin(pool, 2.8) 0.106476, i.e. -0.000116 (1/5 seeds up, 2/4 folds), while emitting 677 fewer dots (11,338.9 vs 12,016). evidence/losfo_cover_probe.json, seeds 215-219, 20 cells.",
+      "action": "Read as: the H36-1 re-layout is far-field neutral, so restoring it as the one-click primary costs nothing off-catalogue and its support remains the live-anchored ladder, not a far-field gain. Replacement of variants with all_cover_* is a separate decision and is NOT discharged by this: all_cover arms reach credit/dot 0.0520-0.0531, still below the 0.054852 break-even at the 0.26 anchor."
     },
     {
-      "id": "h38-1-frozen-analyzer-json-serialization-failure",
+      "id": "h38-1-g5b-checked-post-prune-count",
+      "severity": "low",
+      "issue": "The first H38-1 gate execution (seeds 260-269, evidence/h38_1_holdout_pilot_void.json, 304.7 s) failed its own G5(b) integrity criterion on all 40 cells because the runner compared the POST-prune mask (`coverage_greedy(...) & ~blind_r1`) to the PRE-prune request n_pre0, while the preregistered arm definition in knowledge/38 section 3 applies the H27-4 blind_r1 prune after packing. The H37-1 gate never had this problem: run_h37_1_holdout.py checks the packer's own output against the requested count. Pure harness defect - no modelled quantity was wrong, and the pilot's DTI matrix is arithmetically consistent (verified by scripts/analyze_h38_1.py on the corrected run).",
+      "action": "Disclosed as erratum 1 in knowledge/38 section 7 before any re-run. The runner now checks both packers' own output and additionally stores the packer count, the prune-removed count and the post-prune count per cell for the primary and the incumbent. The pilot decade 260-269 is spent and its metrics are void for gating; the file is kept on disk unmodified."
+    },
+    {
+      "id": "h38-1-g2-fold-statistic-used-base-not-incumbent",
+      "severity": "medium",
+      "issue": "The second H38-1 gate execution (seeds 270-279, evidence/h38_1_holdout_run2_g5fixed_g2defect.json, 297.8 s) reported G2_promotion = true using summary[PRIMARY]['folds_improved_vs_base'] (the fold split of rad_cover_r1 against the D0 reference rule, 4/4) whereas knowledge/38 section 4 G2 specifies the fold split against the INCUMBENT (rad_cover_r1 - cover_r1), which is 3/4 (NW -0.000703). The seed criterion and the mean were unaffected (10/10 seeds, +0.003697). Found by the independent re-reading scripts/analyze_h38_1.py, not by the runner.",
+      "action": "Disclosed as erratum 2 in knowledge/38 section 8. The runner now stores both fold splits and G2 uses the incumbent-relative one as specified. The gated run moved to a third fresh decade 280-289; 270-279 is spent and may be cited only as a pilot. Both errata were harness-only: no DTI value changed between runs and the same-arm replication across them is consistent."
+    },
+    {
+      "id": "h38-1-farfield-f4-band-miscalibrated",
+      "severity": "medium",
+      "issue": "knowledge/40 section 3 F4 anchored the LOSFO instrument to an earlier probe's five-seed means with a fixed +/-0.004 tolerance. The H38-1 far-field run (seeds 220-224, evidence/losfo_rad_farfield.json) landed 0.0059-0.0066 below those means and was voided by its own rule. Measured afterwards: the probe's own seed-level SD is 0.00999 (thin_d28) and 0.00802 (cover_n), so a five-seed mean has standard error 0.0036-0.0045 and the difference of two independent five-seed means has SD ~0.0058. The band was smaller than the noise of the quantity it compares. On the per-cell test instead of the mean test the new decade sits inside the probe's range (cover_n 20/20 cells, thin_d28 19/20) and the geometry matches (hidden truth 75,223 vs 76,356 px; n_pre 11,436.0 vs 11,338.9).",
+      "action": "Disclosed in knowledge/42 section 2. The run is void as a transfer licence but its F1 is recorded as provisional (+0.000959, 95% CI +/-0.004469, 2/5 seeds, 4/20 cells below -0.005). Any future freeze must derive its reproduction tolerance from the observed seed-level SD (approx 1.96*s/sqrt(n) per arm), and must not re-run a seen decade to chase a pass. The primary is unchanged."
+    },
+    {
+      "id": "cover-rule-far-field-gain-replicated-not-gated",
+      "severity": "medium",
+      "issue": "The all-ridge coverage packing rule (coverage_greedy over the detector's own ridge field at the rung-3.0-emission count) now has a twice-replicated far-field gain: +0.005275 on LOSFO seeds 215-219 (evidence/losfo_cover_probe.json) and +0.005881 with 5/5 seeds and 4/4 folds on seeds 220-224 (evidence/losfo_rad_farfield.json, cover_n_D0 - thin_d28_D0). This is far stronger evidence than the pool-restricted arm knowledge/33 falsified, or than the shipped H37-1 file, and the two are different constructions (knowledge/39). At the same time its far-field credit density is 0.0499 (D0) / 0.0505 (D1) against the live break-even tau = 0.054852 at the 0.26 anchor.",
+      "action": "Recorded as the repository's top-ranked next arm (registry/next_hypotheses.json session14_addendum) but NOT promoted: promotion requires a frozen fresh-seed interleaved gate for this exact construction AND a pre-declared second far-field decade with >= 10 seeds, because the current instrument resolves only ~+/-0.0045 on a five-seed decade. No file was built and no slot was spent."
+    },
+    {
+      "id": "sb-heat-flow-clip-landed-but-marked-queued",
+      "severity": "low",
+      "issue": "README.md section 5 and registry/next_hypotheses.json (H33-3 / H35-2) still described the USGS Great Basin heat-flow release (sb_heat_flow_zip, DeAngelo et al. 2022, DOI 10.5066/P9BZPVUC) as waiting on the GitHub Actions runner bridge even after the runner had already downloaded, pin-verified (130,154,244 B, SHA-256 e7fd62c6...), and committed docs/data/sb_heat_flow_in_footprint.json (4,217 records, including 1,546 in-footprint borehole records in USGS_gbHeatFlowWells_wEstimates.shp with conductive residual hf_resid).",
+      "action": "Audited in Session 14 (knowledge/43-45), implemented in src/gems27/heatflow_euler.py, and validated on fresh LOSFO seeds 265-269 (evidence/losfo_session14_h36_1_and_h38.json) and fresh interleaved seeds 270-279 (evidence/h38_1_interleaved_holdout.json)."
+    },
+    {
+      "id": "h38-1-added-dots-use-detector-ridge-not-pure-h19-5",
+      "severity": "low",
+      "issue": "While H36-1 (37,660 px) draws 100% of its pixels from the live-scored H19-5 (0.2600) surface, H38-1 (37,860 px, content ID 56a9f473edc7) adds 200 corroborated dots from the 32-band detector's sub-threshold 1-px ridge (ridge_nms(prob_full)). Although H38-1 passed all four frozen LOSFO far-field criteria (C1-C4, +0.000747 over H36-1, 0.06993 credit/dot > tau_live 0.054852) and the 10-seed interleaved gate (+0.000543 over H36-1), those 200 dots have not yet been live-scored.",
+      "action": "Disclosed in knowledge/45-46, docs/downloads/manifest.json, and README.md. H36-1 (b531dae0a36f, 37,660 px, now LOSFO far-field verified) remains in the primary slot, while H38-1 (56a9f473edc7, 37,860 px) is placed in the secondary slot so the human operator can choose between the pure H19-5 surface and the +200-dot multi-physics corroborated package."
+    },
+    {
+      "id": "session14-local-h38-euler-gravity-seed-reuse",
       "severity": "high",
-      "issue": "The single-use H38-1 LOSFO runner completed all 20 cells for seeds 265–269 and wrote evidence/losfo_h38_1_raw.json (SHA-256 0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba). The frozen analyzer then exited 1 at report serialization with TypeError: Object of type int64 is not JSON serializable. No evidence/h38_1_holdout.json or C1–C5 gate decision was written; the single-use claim is FAILED and records the range as burned. This is an analysis-infrastructure failure, not a scientific finding about the H38-1 hypothesis.",
-      "action": "Preserve the raw JSON and failed claim; do not rerun, re-analyze for a gate decision, or repair the result on seeds 265–269. No candidate TIFF, upload, promotion, or weekly slot. A generic NumPy-scalar JSON serialization guard may be added and tested for future preregistered experiments only; it must not be used to create an H38-1 result from this spent decade. Any future scientific test needs a new protocol, fresh seed range, and separate claim."
+      "issue": "A separate branch froze a 140-candidate SI-0 Euler × gravity-gradient × low-valid-relief rule under the short label H38-1 and invoked a LOSFO holdout once on seeds 265–269. The runner completed 20 cells, but its analyzer exited 1 on NumPy int64 JSON serialization; no summary or C1–C5 decision was written (raw SHA-256 0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba). During PR #28 reconciliation, the branch was found to have started at 2026-10-04T01:46:40Z after PR #27/main had already used the same seeds for H36-1 LOSFO (and a distinct heat-flow/Euler arm): evidence/losfo_session14_h36_1_and_h38.json, generated 2026-10-04T00:29:52Z, SHA-256 b72cc58341554fa1592ddea30efd8c48faae55d380a2cc1903809283a612e21b; main merge 68b9f0a at 2026-10-04T01:04:41Z. The pre-run scan covered only the branch checkout. The local attempt is therefore both analyzer-failed and not an independent fresh holdout. Final failed-claim SHA-256: d425e976f117463967a0f7cc99eef40b88cd15bbd36537ccd31748a82f99635b.",
+      "action": "Preserve evidence/h38_1_holdout.started.json and evidence/losfo_h38_1_raw.json as failure/provenance only. Do not rerun, repair, or re-analyze this decade for C1–C5. Do not use the mainline evidence/h38_1_holdout.json as this branch attempt’s summary: it is a separate 280–289 GeoDAWN-radiometric experiment. No promotion, candidate TIFF, upload, or weekly slot. Any future experiment needs a fresh reconciled seed range, unique ID, and separately frozen protocol."
+    },
+    {
+      "id": "session14-h38-1-id-collision-across-parallel-experiments",
+      "severity": "high",
+      "issue": "Parallel Session 14 work assigned the short label H38-1 to different hypotheses: this branch’s shallow SI-0 Euler × gravity-gradient × low-valid-relief rule (frozen at cf1d036, run from 9880ca6), main’s GeoDAWN radiometric detector extension on seeds 280–289 (knowledge/38_preregistration_H38-1.md and knowledge/41_h38_1_result.md), and main’s conductive heat-flow residual × Euler ridge arm in knowledge/43–45. The experiments and their evidence are distinct; the canonical path knowledge/38_preregistration_H38-1.md now contains the mainline protocol, not this branch’s preregistration.",
+      "action": "Keep all historical files/results under their recorded commit/path and do not combine their metrics. Refer to the failed local attempt by its full Euler × gravity × low-relief rule and freeze/run commits; use a distinct, globally unique ID for future hypotheses. The branch’s original protocol/code remain accessible at cf1d036/9880ca6 in Git history; the full reconciliation is in knowledge/39_session14_closeout_2026-10-03.md."
     }
   ]
 }

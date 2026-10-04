@@ -31,8 +31,8 @@
     "tests/test_h38_1_holdout.py": "df8d60937b82e6d42b578239eb35701ace06b819fca651788f59b28de231bd12",
     "tests/test_seed_range_audit.py": "bedcf347ca426cd61f5548196207459a3fa07f1bce11b22ac5fbd22e462300a6"
   },
-  "decision": "UNASSESSED_ANALYZER_FAILURE; no C1\u2013C5 decision, TIFF promotion, upload, or slot use",
-  "failure_detail": "The frozen runner completed all 20 seed/fold cells and wrote evidence/losfo_h38_1_raw.json. The frozen analyzer exited 1 while JSON-serializing its report: TypeError: Object of type int64 is not JSON serializable. No summary/gate report was written. The single-use range is burned; do not rerun or repair the result on seeds 265\u2013269.",
+  "decision": "UNASSESSED_ANALYZER_FAILURE_AND_PRIOR_SEED_REUSE; no C1\u2013C5 decision, independent validation, TIFF promotion, upload, or slot use",
+  "failure_detail": "The frozen runner completed all 20 seed/fold cells and wrote evidence/losfo_h38_1_raw.json. The frozen analyzer exited 1 while JSON-serializing its report: TypeError: Object of type int64 is not JSON serializable. Post-run reconciliation also found that seeds 265\u2013269 had already been used on origin/main for the H36-1 LOSFO far-field test before this wrapper started, so this branch attempt was not an independent fresh holdout. No summary/gate report was written. The single-use range is burned; do not rerun or repair it.",
   "failure_stage": "analyzer",
   "finished_utc": "2026-10-04T01:59:45Z",
   "holdout_started": true,
@@ -48,6 +48,15 @@
     "evidence/h38_1_seed_audit_pre_run.json": "413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e",
     "evidence/h38_1_sufficiency_audit.json": "91d86b012fcbfa472ff79859623743e1292a077d591427e78bf8627a92250b60",
     "evidence/losfo_h37_3_licence.json": "d963ec8b5aafce1b3705c7af62d0573b8fe2b36838c69b4b05e1418db158fba6"
+  },
+  "parallel_hypothesis_id_review": {
+    "consequence": "Do not combine these metrics or refer to them simply as the same H38-1. Preserve the frozen branch-local name in historical evidence; use distinct IDs for future work.",
+    "main_pr27_definitions": [
+      "GeoDAWN radiometric K/Th/U and ratio-channel detector extension, gated on seeds 280\u2013289 (knowledge/38 and knowledge/41)",
+      "USGS conductive heat-flow residual \u00d7 shallow SI-0 Euler ridge corroboration, evaluated in the Session 14 far-field record (knowledge/43\u201345)"
+    ],
+    "status": "DUPLICATE_H38_1_LABELS_ACROSS_DISTINCT_EXPERIMENTS",
+    "this_branch_definition": "Shallow SI-0 Euler depth coherence \u00d7 gravity-gradient corridor \u00d7 low valid LiDAR relief (frozen in cf1d036 and run from commit 9880ca6)"
   },
   "pre_run_seed_audit": "evidence/h38_1_seed_audit_pre_run.json",
   "preregistration": "knowledge/38_preregistration_H38-1.md",
@@ -72,6 +81,26 @@
   },
   "schema": 1,
   "scope": "repository-local single-use claim; external/unpublished seed use remains unknown",
+  "seed_independence_review": {
+    "discovered_during": "PR #28 merge reconciliation",
+    "impact": "The same LOSFO seed/fold truth decade had already been used on main for H36-1 before this wrapper began. The local pre-run evidence scan did not include the merged-main artifact. This branch attempt cannot be represented as an independent/fresh validation even apart from the analyzer failure.",
+    "status": "INVALID_AS_INDEPENDENT_FRESH_HOLDOUT",
+    "this_run_started_utc": "2026-10-04T01:46:40Z",
+    "upstream_arm": "H36-1 LOSFO far-field verification",
+    "upstream_artifact": "evidence/losfo_session14_h36_1_and_h38.json",
+    "upstream_artifact_generated_utc": "2026-10-04T00:29:52Z",
+    "upstream_artifact_sha256": "b72cc58341554fa1592ddea30efd8c48faae55d380a2cc1903809283a612e21b",
+    "upstream_merge_commit": "68b9f0ab671b8b536bfcbed0ea0e8f880e0e6383",
+    "upstream_merged_utc": "2026-10-04T01:04:41Z",
+    "upstream_pr": 27,
+    "upstream_seeds": [
+      265,
+      266,
+      267,
+      268,
+      269
+    ]
+  },
   "seed_range_burned": true,
   "seeds": [
     265,
@@ -84,5 +113,8 @@
   "status": "FAILED",
   "submission_slot_used": false,
   "sufficiency_audit": "evidence/h38_1_sufficiency_audit.json",
-  "sufficiency_audit_sha256": "91d86b012fcbfa472ff79859623743e1292a077d591427e78bf8627a92250b60"
+  "sufficiency_audit_sha256": "91d86b012fcbfa472ff79859623743e1292a077d591427e78bf8627a92250b60",
+  "summary_result_artifact": null,
+  "summary_result_disambiguation": "This local analyzer did not write a summary. After the merge, evidence/h38_1_holdout.json exists for the separate mainline GeoDAWN-radiometric H38-1 experiment on seeds 280\u2013289; it is not a summary for this branch-local Euler \u00d7 gravity \u00d7 low-relief run.",
+  "summary_result_written": false
 }

@@ -1,0 +1,1 @@
+28GEMSDOE H38-1 hf+euler+r3.0 | H36-1+H38-1 hf_resid+SI0 Euler ridge: LOSFO +0.00075 (16/20, c/d 0.0699, 265-269), OOF +0.00054 (8/10, 4/4, 270-279) | id 56a9f473edc7 | UNSCORED, not slot-approved

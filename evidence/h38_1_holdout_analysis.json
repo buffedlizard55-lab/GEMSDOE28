@@ -1,0 +1,150 @@
+{
+ "generated_utc": "2026-10-03T23:28:14Z",
+ "kind": "Pass-2 verification of evidence/h38_1_holdout.json; pure re-arithmetic on the stored per-cell records, no model re-fit.",
+ "input": "evidence/h38_1_holdout.json",
+ "n_cells": 40,
+ "seeds": [
+  280,
+  281,
+  282,
+  283,
+  284,
+  285,
+  286,
+  287,
+  288,
+  289
+ ],
+ "max_abs_dti_recompute_error": 0.0,
+ "count_identity_violations": [],
+ "count_identity_ok": true,
+ "postprune_count_match": {
+  "primary_mean_dots": 11328.7,
+  "incumbent_mean_dots": 11334.975,
+  "max_relative_gap": 0.002216592780240659,
+  "mean_relative_gap": 0.0007533729904076233,
+  "note": "the gated comparison is matched to within this gap; both arms apply the same blind_r1 prune, so the residual difference is the prune's interaction with each detector's ridge field, not a budget difference"
+ },
+ "arm_means": {
+  "base_d280": 0.09552170693710081,
+  "cover_r1": 0.1051313823436312,
+  "rad_base_d280": 0.10180372760947791,
+  "rad_cover_r1": 0.10799999550022284,
+  "control_random_matched_n": 0.05315888326514551
+ },
+ "recomputed": {
+  "G1_primary_vs_incumbent": {
+   "mean": 0.002868613156591632,
+   "sem": 0.0009636223866998561,
+   "cells_up": 29,
+   "n_cells": 40,
+   "per_seed": {
+    "280": 0.0003959959729105157,
+    "281": 0.0065693797003804205,
+    "282": 0.0002956007694550865,
+    "283": 0.0012937342166479023,
+    "284": 0.0034867085929293808,
+    "285": 0.00722089337944146,
+    "286": -0.000689223452495849,
+    "287": 0.0029510617242629357,
+    "288": 0.0028177529992388095,
+    "289": 0.0043442276631456556
+   },
+   "seeds_up": 9,
+   "per_fold": {
+    "NE_LidarGapHeavy": 0.001617631245741763,
+    "NW": 0.0005420180076064693,
+    "SE": 0.006149040130801512,
+    "SW": 0.0031657632422167833
+   },
+   "folds_up": 4
+  },
+  "G3_rad_base_vs_base": {
+   "mean": 0.0062820206723771,
+   "sem": 0.0014259727368939002,
+   "cells_up": 32,
+   "n_cells": 40,
+   "per_seed": {
+    "280": 0.0023041861959500476,
+    "281": 0.01149786697731576,
+    "282": 0.004700039593164573,
+    "283": 0.009278101464568554,
+    "284": 0.005950379168341652,
+    "285": 0.009207035224451907,
+    "286": 0.0053805319573502295,
+    "287": 0.008749881757184299,
+    "288": 0.0022513443294488317,
+    "289": 0.0035008400559951493
+   },
+   "seeds_up": 10,
+   "per_fold": {
+    "NE_LidarGapHeavy": 0.001942373146585362,
+    "NW": 0.0008181331188784086,
+    "SE": 0.00995456491332769,
+    "SW": 0.012413011510716939
+   },
+   "folds_up": 4
+  },
+  "G4_primary_vs_control": {
+   "mean": 0.05484111223507733,
+   "sem": 0.0030655760498222613,
+   "cells_up": 40,
+   "n_cells": 40,
+   "per_seed": {
+    "280": 0.06256678506197727,
+    "281": 0.053683108488165154,
+    "282": 0.05056531237779078,
+    "283": 0.06433838371953847,
+    "284": 0.048045398687538814,
+    "285": 0.05230799666730354,
+    "286": 0.04938172860575778,
+    "287": 0.05214014263092588,
+    "288": 0.057387565424983425,
+    "289": 0.05799470068679215
+   },
+   "seeds_up": 10,
+   "per_fold": {
+    "NE_LidarGapHeavy": 0.07255614427971528,
+    "NW": 0.04579024091698407,
+    "SE": 0.0673163798087513,
+    "SW": 0.033701683934858645
+   },
+   "folds_up": 4
+  },
+  "report_only_incumbent_vs_base": {
+   "mean": 0.00960967540653039,
+   "sem": 0.0014687965399275622,
+   "cells_up": 33,
+   "n_cells": 40,
+   "per_seed": {
+    "280": 0.005493400900948877,
+    "281": 0.01094999767456206,
+    "282": 0.013728185141835634,
+    "283": 0.011014425811021869,
+    "284": 0.006340262525840731,
+    "285": 0.009743818810389347,
+    "286": 0.008452932872364418,
+    "287": 0.013737548982019183,
+    "288": 0.007269918400867364,
+    "289": 0.009366262945454425
+   },
+   "seeds_up": 10,
+   "per_fold": {
+    "NE_LidarGapHeavy": 0.0023332547203286534,
+    "NW": 0.004289717249361058,
+    "SE": 0.010556365517552981,
+    "SW": 0.02125936413887887
+   },
+   "folds_up": 4
+  }
+ },
+ "stored_gate_matches": {
+  "G1_mean_matches": true,
+  "G2_seeds_match": true,
+  "G2_folds_match": true,
+  "G3_mean_matches": true,
+  "G4_margin_matches": true,
+  "arm_means_match_variants": true
+ },
+ "verdict": "independent recomputation reproduces every gated statistic"
+}
