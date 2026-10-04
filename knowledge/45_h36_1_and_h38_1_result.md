@@ -1,7 +1,7 @@
 # 39 — Session 14 Results: `H36-1` Far-Field Verification (`F1–F4` PASS) & `H38-1` Multi-Physics Corroboration (`C1–C4` PASS)
 
 **Date:** 2026-10-03 (UTC)
-**Preregistration:** `knowledge/38_preregistration_H36_1_and_H38_farfield.md` (frozen in commit `ff85e30` before any seed in `265–279` was touched)
+**Preregistration:** `knowledge/44_preregistration_H36_1_and_H38_farfield.md` (frozen in commit `ff85e30` before any seed in `265–279` was touched)
 **Evidence artifacts:**
 - `evidence/losfo_session14_h36_1_and_h38.json` (LOSFO far-field evaluation on fresh seeds `265–269`, `20` paired cells)
 - `evidence/h38_1_interleaved_holdout.json` (4-fold interleaved spatial-CV evaluation on fresh seeds `270–279`, `40` paired cells)
@@ -88,6 +88,6 @@ On fresh, untouched LOSFO seeds `265–269` (`20` paired cells; every hidden tru
 
 ## 4. Full-Map Submission Package & Slot Disposition
 
-Per `knowledge/38` §4.3, `scripts/build_h38_1_submissions.py` built and verified the full-map `H38-1` package on top of `H36-1` (`37,660` px + `200` globally `2.8 px`-thinned corroborated ridge dots = `37,860` px):
+Per `knowledge/38` §4.3, `scripts/build_h38_1_hf_euler_submissions.py` built and verified the full-map `H38-1` package on top of `H36-1` (`37,660` px + `200` globally `2.8 px`-thinned corroborated ridge dots = `37,860` px):
 - **Primary (`docs/downloads/manifest.json` `"primary"`):** `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` (`37,660` px, SHA-256 `5556aa14…`), now carrying its verified LOSFO far-field record (`F1–F4` ALL PASS on `seeds 265–269`, `+0.001713` far-field ΔDTI, $e_{\text{far}} = 0.01359 < 0.054852$) alongside its interleaved record (`+0.002599` on `seeds 240–249`). Kept at `"primary"` because all `37,660` pixels come strictly from the live-scored `H19-5` (`0.2600`) surface.
 - **Secondary (`docs/downloads/manifest.json` `"secondary"`):** `gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif` (`37,860` px, SHA-256 `81d5b87b…`), `-allfinite.tif` (`529d9e1b…`), `.zip` (`681f0e67…`), and `note-gemsdoe28-h38-1-hf-euler-r30-r1-56a9f473edc7.txt` (`196` chars), which passed **both** the LOSFO far-field gate (`C1–C4` ALL PASS, `+0.000747` over `H36-1`, `0.06993` credit/dot) **and** the 10-seed interleaved gate (`+0.000543` over `H36-1`, `8/10` seeds, `4/4` folds).

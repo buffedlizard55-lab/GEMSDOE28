@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-04T00:05:00Z",
+  "generated": "2026-10-03",
   "status": "GEMSDOE28 hypothesis ledger: two preregistered far-field tests closed. H37-1 passed its interleaved gate then FAILED its far-field falsification (demoted; one-click slot returned to H36-1). H37-3 (Euler SI-0 emission licence) is REFUTED as promotable: its licence beat a same-count random control 1.65x but earned 0.031157 credit/dot against the 0.0548 live bar. Next arm: H37-2.",
   "novelty_scope": "Reviewed against GEMSDOE28, GEMSDOE27, GEMSDOE26, and GEMSDOE25 evidence ledgers and hash-authenticated scored corpus (24 matched rasters).",
   "target": "Fault-location pixels scored by Distance-Tolerant IoU (DTI, alpha=0.2, beta=0.8) against hidden organizer expert fault traces.",
@@ -618,12 +618,41 @@
     }
   },
   "session14_addendum": {
+    "what_changed": "Session 14 measured the far-field value of the H37-1 coverage packing rule in the construction the artifact build actually uses, gated a new-information arm (H38-1, GeoDAWN radiometrics) on fresh seeds, and tested that arm far field. Two harness errata and three cross-cutting findings are recorded; nothing was promoted and no weekly slot was spent.",
+    "findings": {
+      "farfield_arm_attribution": "knowledge/33's F1 arm (top-k pool, coverage at n_base) was NOT the construction the H37-1 gate or the shipped file used (all ridges, coverage at n_pre). Crossing both factors on one detector, one truth set and one count ladder (evidence/losfo_cover_variants.json, seeds 215-219, integrity_violations []): all_cover_nbase - pool_cover_nbase = +0.005450 (5/5 seeds), all_cover_npre - pool_cover_npre = +0.004923 (5/5 seeds), while pool_cover_nbase - base_d28 = +0.000819 reproduces the frozen result. all_cover_npre reproduces the independent probe's cover_n to 0.0 on all 20 cells. So 'coverage packing has no far-field value' is construction-specific.",
+      "shipped_construction_still_unmeasured": "The shipped H37-1/H38-1-style build packs the catalogue-derived H19-5 surface (121,131 px) with a full-fit detector weight - a third construction no LOSFO run has measured. The remedy is to re-derive the candidate surface under LOSFO and give it its own far-field number.",
+      "H38_1": "Gate PASSED on the gated decade 280-289 (evidence/h38_1_holdout.json: G1 +0.002869, 9/10 seeds, 4/4 folds; G3 do-no-harm +0.006282; G4 content control margin +0.054841; G5 clean; independently re-read by scripts/analyze_h38_1.py with max DTI recompute error 0.0). Far field (seeds 220-224, evidence/losfo_rad_farfield.json): F1 +0.000959, 95% CI +/-0.004469, 2/5 seeds, 2/4 folds, 4/20 cells below -0.005 -> heavy-tail criterion fails, and the run's F4 reproduction band was miscalibrated (see irregularity h38-1-farfield-f4-band-miscalibrated). NO FILE BUILT, NO PROMOTION, NO SLOT. knowledge/41, knowledge/42.",
+      "band_6_is_radiometric": "training_features.tif band 6 'tc' is rank-identical to the owner-mirrored GeoDAWN radiometric total count (Spearman 1.0000 on the in-footprint overlap, 0.999 over the full training extent) and the prepared 32-band matrix excludes it (irregularity tc-band-mislabelled). The detector therefore received no radiometric information at all before H38-1, which re-admits K, Th, U and the ratio grids explicitly.",
+      "cover_rule_far_field_replicated": "cover_n_D0 - thin_d28_D0 = +0.005881 with 5/5 seeds and 4/4 folds on LOSFO seeds 220-224, against +0.005275 on seeds 215-219. Twice replicated, still below the live break-even credit density tau = 0.054852 (0.0499-0.0506)."
+    },
+    "next_ranked": [
+      "All-ridge coverage packing of the FROZEN D0 detector's ridge field (the H37-1 rule in the construction knowledge/39 identified). Twice-replicated far-field gain, never gated on the interleaved proxy. Needs: (1) a frozen fresh-seed interleaved gate written to knowledge/ first; (2) a pre-declared second far-field decade with >= 10 seeds, because the instrument resolves only ~+/-0.0045 on five seeds. Only then may a file be built.",
+      "H38-1 radiometric information, far-field-unresolved: a >= 10-seed LOSFO decade would settle whether the +0.001 far-field effect is real. Frozen F4 must be calibrated from the observed seed-level SD. No interleaved re-run.",
+      "H38-4 lineament-support licence: object-level (Hough/tensor-voting) corroboration of emitted dots by at least two independent lineament families across scales - an emission-rule arm on existing information, cheap, ranked below the two above because rearranging existing information has repeatedly failed far field.",
+      "H38-3 joint magnetic-and-gravity Euler SI-0 depth concordance: two independent potential fields, concordant shallow clusters as corroboration. Blocked until the euler-magnetic-units-depth-band irregularity is resolved; must be sized so its credit per dot clears 0.0548.",
+      "H38-2 depth-sliced magnetic lineaments under cover (upward continuation to ~1 km, lineament extraction, conjunction with low relief). New processing of existing information; medium cost.",
+      "H38-5 ComCat microseismicity lineaments: the competition's own bands 10/16 are 100 km-smoothed earthquake density, so a sharp local catalogue (USGS ANSS FDSN, free, no auth) is genuinely new information. Bridge-gated (the sandbox cannot reach earthquake.usgs.gov) and needs declustering plus depth-consistent clustering. Lowest priority this session on cost, not on promise."
+    ],
+    "seed_ledger": {
+      "260-269": "H38-1 gate run 1 - VOID (G5 harness defect), disclosed",
+      "270-279": "H38-1 gate run 2 - void for gating (G2 statistic defect), pilot only",
+      "280-289": "H38-1 gate run 3 - GATED RUN, passed",
+      "215-219": "LOSFO cover probe + variants reconciliation (spent)",
+      "220-224": "LOSFO radiometric far-field test (spent; F4 void, F1 provisional)",
+      "210-214": "H37-1 far-field falsification (spent earlier)",
+      "240-249 / 250-259": "H36-1 / H37-1 gates (spent earlier)",
+      "290+": "free"
+    },
+    "no_promotion_statement": "docs/downloads/manifest.json is unchanged this session: the one-click primary remains H36-1 (b531dae0a36f). Nothing in this session earned a slot, and the standing rule stands - a slot requires beating the current holdout best on a frozen fresh-seed gate AND (since knowledge/32-33) not failing the far-field transfer test."
+  },
+  "session14b_addendum": {
     "generated": "2026-10-03",
     "one_click_primary_content_id": "b531dae0a36f",
     "secondary_corroborated_content_id": "56a9f473edc7",
     "h36_1_far_field": {
-      "preregistration": "knowledge/38_preregistration_H36_1_and_H38_farfield.md (freeze commit ff85e30)",
-      "result": "knowledge/39_h36_1_and_h38_1_result.md",
+      "preregistration": "knowledge/44_preregistration_H36_1_and_H38_farfield.md (freeze commit ff85e30)",
+      "result": "knowledge/45_h36_1_and_h38_1_result.md",
       "evidence": "evidence/losfo_session14_h36_1_and_h38.json",
       "integrity": "evidence/session14_h36_1_and_h38_integrity.json",
       "seeds": [
@@ -642,12 +671,12 @@
       "verdict": "ALL 4 CRITERIA PASS - H36-1 (b531dae0a36f, 37,660 px) is now verified on BOTH interleaved spatial CV (+0.002599, seeds 240-249) and LOSFO far-field truth (+0.001713, seeds 265-269)"
     },
     "h38_1": {
-      "preregistration": "knowledge/38_preregistration_H36_1_and_H38_farfield.md (freeze commit ff85e30)",
-      "result": "knowledge/39_h36_1_and_h38_1_result.md",
+      "preregistration": "knowledge/44_preregistration_H36_1_and_H38_farfield.md (freeze commit ff85e30)",
+      "result": "knowledge/45_h36_1_and_h38_1_result.md",
       "losfo_evidence": "evidence/losfo_session14_h36_1_and_h38.json",
       "interleaved_evidence": "evidence/h38_1_interleaved_holdout.json",
       "module": "src/gems27/heatflow_euler.py",
-      "builder": "scripts/build_h38_1_submissions.py",
+      "builder": "scripts/build_h38_1_hf_euler_submissions.py",
       "losfo_seeds": [
         265,
         266,
@@ -684,7 +713,7 @@
       },
       "h38_1_joint_on_r30_r1": {
         "losfo_mean_delta_dti_vs_h36_1": 0.0007474376185384414,
-        "losfo_mean_delta_dti_vs_d28": 0.0024600196843243834,
+        "losfo_mean_delta_dti_vs_d28": 0.0024600196843243835,
         "losfo_credit_per_added_dot": 0.06992977854336586,
         "losfo_sub_ridge_ctrl_credit_per_dot": 0.032267635716439015,
         "losfo_random_ctrl_credit_per_dot": 0.026813585290034265,

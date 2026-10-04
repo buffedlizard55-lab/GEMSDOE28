@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checked_utc": "2026-10-04T00:58:28Z",
+  "checked_utc": "2026-10-04T01:03:44Z",
   "status": "PASS",
   "scope": "local repository evidence only; cannot rule out undocumented seed use in unsearched external/sibling workspaces",
   "network_access": "none",
@@ -14,8 +14,11 @@
   "git_history_review": {
     "shallow": true,
     "recent_commits": [
+      "2d4a67b14b7ba40b4438b7d68eb72a3a535ceec5 Rename Session 14b knowledge notes (43-46) and builder script to avoid path collision with PR #26",
+      "b978e19c5e2fd35eb813033424c0c17a4bf55c39 Complete Session 14: verify H36-1 on LOSFO far-field (F1-F4 PASS) and validate H38-1 heat-flow + Euler corroboration (C1-C4 PASS)",
       "ff85e304e415f54c7ea2ecf4c9fb9ed4607ac38a Preregister Session 14 H36-1 far-field & H38 heat-flow/Euler lineament gate (knowledge/37-38)",
-      "310694dfd823678f08f45f6eb50b7435a61de0bc Merge pull request #25 from buffedlizard55-lab/arena/01a103bf-gemsdoe28"
+      "e1b155cad9436cab93b0ea4a9a373843a0634376 Merge pull request #26 from buffedlizard55-lab/arena/01a103f2-gemsdoe28",
+      "15b16271323d98a0396440c8053d7daa58a22b47 Merge origin/main (Session 13 close-out) into the Session 14 branch"
     ]
   },
   "planned_ranges": {
@@ -356,14 +359,23 @@
     "h37_1_artifact.json": "415453e275fb973688eec4bf75b815b5823c68d4535147e49dc27e4e828c7a37",
     "h37_1_holdout.json": "8069afe176416d800c763b16d513f5f888ee699c6bba6c19412b39841ef35faa",
     "h37_3_licence_integrity.json": "0f692f7bdb3a7cc05ecc56f92d3416450381874b4df4e59665fee2c1ccc5a613",
+    "h38_1_holdout.json": "e5fb050cc2988bdb7300c1846f4ca90a2af683e491a3d3037c9a69dfea6494bf",
+    "h38_1_holdout_analysis.json": "94eedd4ae3e099eb345fc6909dbd7c428b3994866a1d3011ea80ac3239e3bed4",
+    "h38_1_holdout_pilot_void.json": "550ebce1c359e37210618a835c6e8cd4fe23f7d825d98f763131d3a8740a24a0",
+    "h38_1_holdout_run2_g5fixed_g2defect.json": "7af60e87ed4286c3e41f85469e43d981cee7fbb8d45c1c534902396803bdfbef",
+    "h38_1_holdout_run2_g5fixed_g2defect_analysis.json": "2d2e6c8c0cd09e73d51a3c3d19ee7e246af5ee356f49df74926251f63fd87b2f",
     "h38_1_interleaved_holdout.json": "6acf5889d3b249147b079c972e00f1edf8d40edc2e9363ebe55e1f231c8040fe",
     "link_graph_value.json": "ebdd46df9d61979584860a5b8d16645e6b686a7f61d039c8b529954e5b34cbdd",
     "live_inversion.json": "38bfdd7bcdebf9d7829e6ee49be3a26ad9e9510b757bfc1aad10daec4b7a463d",
     "live_truth_partition_radial.json": "11746ee4f0c1034bf20db6938adac4d8ef44ffa04390c557f7f43a786fda38fd",
     "live_truth_tomography.json": "47ea446021a3d903c19a2c3aad8cc408d5ebc326af9a34d75666ccde116a6ecd",
+    "losfo_cover_probe.json": "cd59e84e17e6fc916d3b43d50b821e460172fce18e4d40d61b77c03d690937b1",
+    "losfo_cover_variants.json": "5c003c70e5343eee201847fc130cde437ca3b884ba79c75a9ab1c22cfb355c06",
+    "losfo_cover_variants_analysis.json": "93836ae109ef6104d026a8349206a0e81288a425227a905275ac726ec225d661",
     "losfo_farfield_diagnostic.json": "86f9a2f249f467b83bba3a63b6edf67fb8a082328d865f218a11cbb55219cb66",
     "losfo_h37_3_licence.json": "d963ec8b5aafce1b3705c7af62d0573b8fe2b36838c69b4b05e1418db158fba6",
     "losfo_packing_farfield.json": "72a264dfc49f2c6948dc9f87554d1950aadc716a3860b457215be7b806b9689e",
+    "losfo_rad_farfield.json": "9f044d452229b7df81e7fa38685245c3312a4b9d8c2b91397554df181fa0a632",
     "losfo_session14_h36_1_and_h38.json": "b72cc58341554fa1592ddea30efd8c48faae55d380a2cc1903809283a612e21b",
     "oof_hypothesis_gates.json": "558c96441294b948681005004062ac665b496ba4a00ee6af91553a842fd3c8b4",
     "operating_point_model.json": "a7be720d3e549b1588e64a5365675f84eda4ed31561c70077b840ab38b37e393",
@@ -377,7 +389,7 @@
     "sgmc_gap_inversion.json": "8315884ec7980587b8d06fb5fa478f8ae61d9acf7ef1fb0bbb4911a15fb7b76f",
     "sgmc_lidar_response.json": "475bf680b434f1efeee5775951295a084d392a5b236975928cafba32b0564acb",
     "structural_relay_classes.json": "41a77500968a7190f4c97f39f3b321ab29bcaf6b52985f5f5e6c6c954e417666",
-    "submission_file_audit.json": "a01db9e010c5fd2fcdda7484b87e64a9ac9df640da3ab9516a7814204f80dba8",
+    "submission_file_audit.json": "72ff29adc2c7d181ad4d9a9148e381a824d4a2544076bc3671ea3d2cff6d3ca8",
     "topology_confirmation_v2.json": "f0223a202dfe40e903367333d5bb406406f028fbaf477357165f080b91f381db",
     "topology_link_feature_analysis.json": "7f0ca61c6107852dad6d36c980531ad54fd8fd34d08a01764c73309c0312eca7",
     "topology_validation.json": "fa4f3c0e9f2f0ba3d638582b7180701677565c9bcf8ee393ae910659e150133d",
@@ -388,5 +400,5 @@
   "unreadable_evidence_json": [],
   "invalid_stage_records": [],
   "decision": "Seeds 160-169 were consumed by the H31-1 screen, which FAILED its frozen gate, so its confirmation decade is ineligible. Seeds 170-179 were reassigned to the preregistered H32-1 screen (knowledge/14) and are consumed by that single run. The next new hypothesis must preregister a fresh decade (180-189).",
-  "sha256": "906a855bffe70ebc119d47f579ee45558bf3310898a5a8eea2358830663ec339"
+  "sha256": "c9737ab689bb405b74aa758dcd7098feabbc6fb053285c3bcf2f239cacc46e9c"
 }

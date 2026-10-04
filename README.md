@@ -5,7 +5,7 @@
 - **Core Value 1 — Maximize P(Win):** Prioritize the highest-leverage geological and mathematical actions that measurably increase expected Distance-Tolerant IoU (DTI) on the hidden test set; never spend a weekly submission slot on an idea that has not beaten the current holdout best on a spatially-blocked holdout set.
 - **Core Value 2 — Own the Outcome:** Work autonomously end-to-end with zero manual input required, verify every claim line by line from official verified trusted sources with links for manual review, flag any irregularities in `registry/irregularities.json`, and run three full verification passes (Pass 1, Pass 2, Pass 3) before opening and merging a pull request onto `main`.
 
-### Verbatim Task Prompt (Session 13, 2026-10-03 — read first every session)
+### Verbatim Task Prompt (Session 14, 2026-10-03 — read first every session)
 
 > **Read this first, every session.** It is the owner's standing brief, reproduced word-for-word at the
 > top of the repository so that every session starts from the same base instead of re-deriving it.
@@ -667,9 +667,96 @@ the arm's full 5,916-dot scale: `→ 0.254356`). One of four folds is negative (
 Seed ledger: **260–264 spent by H37-3; 265–269 spent by Session 14 LOSFO (`H36-1` + `H38`); 270–279 spent by Session 14 interleaved (`H38-1`); 215–219 and 280+ free.** Registered as `h37-3-licence-real-but-below-the-live-rate` and
 `cross-seed-baseline-comparison-is-not-an-integrity-check` in `registry/irregularities.json`.
 
-#### 3.10 Session 14 — `H36-1` LOSFO Far-Field Verification (`F1–F4` ALL PASS) & `H38-1` Multi-Physics Corroboration (`C1–C4` ALL PASS)
+#### 3.10a Session 14a (parallel branch) — the far-field attribution, a new-information arm, and a slot that stayed closed
 
-Full write-up: `knowledge/37_hypotheses_session14.md` (5 ranked hypotheses), `knowledge/38_preregistration_H36_1_and_H38_farfield.md` (frozen at commit `ff85e30`), `knowledge/39_h36_1_and_h38_1_result.md` (results), and `knowledge/40_session14_closeout.md` (closeout).
+**Why the session started where it did.** Session 13 ended with H37-1 demoted by its own far-field rule
+(§3.9). Session 14 began by asking *which* construction that rule had actually falsified, because the
+F1 arm `packing_arms` in `scripts/run_losfo_harness.py` packs the **top-k ridge pool** at the `d=2.8`
+count, while the H37-1 gate and the shipped file pack **all ridge pixels** at the rung-3.0 count.
+
+**Finding 1 — the falsification was construction-specific (`knowledge/39`).**
+`scripts/run_losfo_cover_variants.py` crossed both factors on one detector, one truth set and one count
+ladder (`evidence/losfo_cover_variants.json`, seeds `215–219`, 20 cells, `integrity_violations: []`,
+and an independent re-reading in `evidence/losfo_cover_variants_analysis.json`):
+
+| arm (vs `base_d28` = 0.106476) | candidates | target | mean DTI | ΔDTI | cells / seeds / folds up |
+|---|---|---|---:|---:|---|
+| `pool_cover_nbase` — the arm `knowledge/33` tested | top-k pool | `d=2.8` count | 0.10730 | **+0.000819** | 12/20, 3/5, 2/4 |
+| `pool_cover_npre` | top-k pool | rung-3.0 count | 0.10671 | +0.000235 | 9/20, 2/5, 2/4 |
+| `all_cover_nbase` | all ridges | `d=2.8` count | 0.11274 | **+0.006269** | 16/20, 5/5, 3/4 |
+| `all_cover_npre` | all ridges | rung-3.0 count | 0.11163 | **+0.005158** | 16/20, 5/5, 3/4 |
+
+The head-to-head contrasts isolate one factor at a time: **+0.005450** (candidate set at the `d=2.8`
+count, 5/5 seeds) and **+0.004923** (at the rung-3.0 count, 5/5 seeds). `all_cover_npre` reproduces the
+independent probe's `cover_n` to `0.0` on all 20 cells and `base_d28` reproduces its `thin_d28` to
+`0.0` — the two runs agree exactly on their shared arms. The same run measured the H36-1 **dose** axis
+far field for the first time: raster-order `d=3.0` minus `d=2.8` is `−0.000116` while emitting 677
+fewer dots, i.e. the restored one-click primary's re-layout is far-field **neutral**, which discharges
+the remedy queued in `h37-1-farfield-effect-is-zero`.
+
+**Finding 2 — the detector had never seen a radiometric measurement, and the organisers shipped one.**
+A band-identity audit of the whole stack against every owner-mirrored GeoDAWN channel found that
+`training_features.tif` band 6 (`"tc - Tilt angle or total curvature - magnetic field derivative"`) is
+**rank-identical to the GeoDAWN radiometric total count** (Spearman `1.0000` on the in-footprint
+overlap, `0.999` over the full training extent), and that `scripts/prepare_data.py` **excludes** that
+band as mislabelled. Every other training band sits at the trend background (`0.90–0.93`) against every
+GeoDAWN channel, so nothing else is a hidden duplicate. The detector was therefore blind to
+radiometrics, including the one radiometric channel the organisers put in the stack.
+
+**Finding 3 — a new-information arm was frozen, gated, and then refused by its transfer test.**
+`H38-1` adds six channels (`geodawn_rad` K, Th, U; `geodawn_extensions` Th/K, U/K, U/Th; `TMI_up150` and
+`rad_TC` excluded with measured reasons) to the frozen 32-band matrix. Two harness defects were found
+and disclosed before any re-run (`knowledge/38` §§7–8): the pilot decade `260–269` voided because the
+G5(b) check compared the **post-prune** emission to the **pre-prune** request, and `270–279` was void
+for gating because `G2_promotion` used the fold split against the wrong reference. The gated third
+decade `280–289` passed every criterion:
+
+| arm (seeds 280–289, 40 cells) | detector | emission | mean DTI | mean dots |
+|---|---|---|---:|---:|
+| `base_d280` | D0 (32 bands) | raster `d=2.8` reference rule | 0.09552 | 12,231.2 |
+| `cover_r1` (incumbent) | D0 | coverage packing + blind `r1` prune | 0.10513 | 11,335.0 |
+| `rad_base_d280` | D1 (+6 radiometrics) | raster `d=2.8` | 0.10180 | 12,203.9 |
+| **`rad_cover_r1`** | D1 | coverage packing + prune, count-matched | **0.10800** | 11,328.7 |
+| `control_random_matched_n` | D0 | content-blind draw at the same count | 0.05316 | 11,320.3 |
+
+`G1 = +0.002869` (9/10 seeds, 4/4 folds), `G2` pass, `G3` do-no-harm `+0.006282` (10/10, 4/4),
+`G4` content-control margin `+0.054841`, `G5` clean, `passed: true`. `scripts/analyze_h38_1.py`
+re-derived every gated statistic from the stored per-cell records (max DTI recompute error `0.0`, all
+count identities hold). **Then the transfer test refused it** (`knowledge/42`, seeds `220–224`): the
+count-matched far-field effect is `+0.000959` with a 95 % interval of `±0.004469`, `2/5` seeds, `2/4`
+folds and `4/20` cells worse than the incumbent by more than `0.005` — unresolved at best, and the
+run's reproduction guard-rail F4 fired because the tolerance in the preregistration was mis-calibrated
+(the probe's own seed-level SD is `0.0080–0.0100`, so five-seed means differ by ~`0.006` at random;
+registered as `h38-1-farfield-f4-band-miscalibrated`).
+
+**Outcome: nothing was promoted.** No H38-1 file was built, `docs/downloads/manifest.json` is unchanged,
+the one-click primary is still H36-1 (`b531dae0a36f`), and no weekly slot was spent. The arm's status is
+*interleaved gate passed, far-field unresolved* — the honest next move is a properly powered far-field
+decade (≥ 10 seeds), not another interleaved re-run.
+
+**What the session hands forward.** The far-field run did replicate one thing twice: the **all-ridge
+coverage packing construction with the frozen D0 detector** scored `+0.005881` with `5/5` seeds and
+`4/4` folds against the raster cascade (seeds `220–224`), on top of `+0.005275` on seeds `215–219`. That
+is the strongest far-field signal the repository has, it belongs to a construction that has never been
+gated for promotion, and its credit density (`0.0499–0.0506`) is still below the live break-even
+`0.054852`. It is now the top-ranked next arm (`registry/next_hypotheses.json:session14_addendum`),
+together with a ≥ 10-seed continuation for H38-1 and the untouched H38-4/H38-3/H38-2/H38-5 set
+(`knowledge/37_hypotheses_session14.md`).
+
+**Three cross-cutting records.** (i) `knowledge/39` — the far-field attribution, with the H36-1 dose
+axis measured neutral. (ii) `knowledge/38` §§7–8 — both harness errata, each costing one gate decade,
+each disclosed before its re-run. (iii) The band-identity audit that shows the competition's own stack
+carries a mislabelled radiometric channel the detector was excluded from. Irregularities raised this
+session: `farfield-arm-did-not-match-gate-construction`, `h36-1-dose-change-is-far-field-neutral`,
+`h38-1-g5b-checked-post-prune-count`, `h38-1-g2-fold-statistic-used-base-not-incumbent`,
+`h38-1-farfield-f4-band-miscalibrated`, `cover-rule-far-field-gain-replicated-not-gated`, plus the
+`tc-band-mislabelled` re-confirmation.
+
+---
+
+#### 3.10b Session 14b — `H36-1` LOSFO Far-Field Verification (`F1–F4` ALL PASS) & `H38-1` Multi-Physics Corroboration (`C1–C4` ALL PASS)
+
+Full write-up: `knowledge/43_hypotheses_heatflow_euler.md` (5 ranked hypotheses), `knowledge/44_preregistration_H36_1_and_H38_farfield.md` (frozen at commit `ff85e30`), `knowledge/45_h36_1_and_h38_1_result.md` (results), and `knowledge/46_session14b_closeout.md` (closeout).
 
 1. **Part A — `H36-1` (`b531dae0a36f`, `37,660` px) verified on LOSFO far-field truth (`seeds 265–269`, 20 paired cells, `evidence/losfo_session14_h36_1_and_h38.json`):**
    - **F1 (`rung30_unpruned` vs matched-N random drop): PASS** — `+0.002073` mean DTI (`17/20` cells, `5/5` seeds).
@@ -693,7 +780,7 @@ and prunes the `100 m` catalogue flank shadow, passing both the 10-seed interlea
 (`56a9f473edc7`, `37,860` px) is the first addition arm in the repository to clear $\tau_{\text{live}} = 0.05485$
 on LOSFO far-field truth (`0.06993–0.07724` credit/dot, `C1–C4` ALL PASS). Beating `0.3195` still needs
 `+1,151 px` of credit (`knowledge/20` §3.1) and remains a **detection** problem; the ranked geological
-candidates for Session 15 are in `knowledge/37_hypotheses_session14.md` and `knowledge/40_session14_closeout.md`.
+candidates for Session 15 are in `knowledge/43_hypotheses_heatflow_euler.md` and `knowledge/46_session14b_closeout.md`.
 
 **Infrastructure irregularity found and reported this session.** GitHub Pages for this repository is
 **not deploying**: the Pages API reports `status: errored`, the last successful legacy build was at
@@ -724,12 +811,12 @@ Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `eviden
 
 ## 5. Candidate Geological Hypotheses
 
-**Current ledger: `knowledge/37_hypotheses_session14.md` (Session 14)** — five ranked arms (`H38-1` through `H38-5`), each naming
+**Current ledger: `knowledge/43_hypotheses_heatflow_euler.md` (Session 14)** — five ranked arms (`H38-1` through `H38-5`), each naming
 its layers, physical signature, why it catches a fault *missing* from the catalogue rather than one
 already in it, and how it differs from everything already implemented, plus a per-claim obtainability
 ledger:
-- **Session 14 close-out (deliverables, three passes, limitations, queued next steps):** `knowledge/40_session14_closeout.md`.
-- **Session 14 preregistration & results:** `knowledge/38_preregistration_H36_1_and_H38_farfield.md`, `knowledge/39_h36_1_and_h38_1_result.md`.
+- **Session 14 close-out (deliverables, three passes, limitations, queued next steps):** `knowledge/46_session14b_closeout.md`.
+- **Session 14 preregistration & results:** `knowledge/44_preregistration_H36_1_and_H38_farfield.md`, `knowledge/45_h36_1_and_h38_1_result.md`.
 - **Session 13 ledger & close-out:** `knowledge/31_hypotheses_session13.md`, `knowledge/36_session13_closeout.md`.
 - **Session 11 ledger:** `knowledge/23_h35_hypotheses.md`.
 - **Session 10 ledger:** `knowledge/20_strategy_after_reachability_frontier.md` (re-ranks `knowledge/18_new_hypotheses_H33_series_2026-10-03.md`).
@@ -743,7 +830,7 @@ individual expected ΔDTI** — the ordering below differs from `knowledge/18` f
 - **`H38-2` — EXECUTED Session 14, FROZEN GATE FAILED (`seeds 265–269`, CLOSED):** Concealed basin-fill conjunction (`relief <= P35` × shallow SI=0 Euler cluster on 1-px ridge) earned `0.01398` credit/dot (`-0.000045` LOSFO $\Delta\text{DTI}$, `5/20` cells) because hidden truth in `labels.tif` is itself scarp-biased (`knowledge/39`).
 - **`H32-1-dejitter` — VALIDATED PASS (seeds `180–189`):** Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering on `d=2.8` (`+0.001272` post-thinning / `+0.001399` pre-thinning, `10/10` seeds, `4/4` folds; `evidence/h32_1_holdout.json`). Retained as `quaternary` (`31e35eee884e`) and `conservative_alternative` (`c3aeda1d31a3`).
 - **`H32-2` — EXECUTED Session 9, FROZEN GATE FAILED (seeds `190–199`, CLOSED):** shallow-over-deep magnetic de-screening scored `−0.003767` mean paired ΔDTI (`0/10` seeds, `0/4` folds; `evidence/h32_2_holdout.json`, `knowledge/17_h32_2_result.md`). Run-1 sentinel defect disclosed and repaired (`evidence/h32_2_holdout_run1_invalid_2026-10-03.json`). The direction control supported the physics (shallow dots carry more credit/FP: `0.0383` vs `0.0343`) but the deep class sits far above the OOF inclusion threshold (`0.0193`), so pruning it loses. No confirmation, no retuning, no slot.
-- **Queued Session 15 candidates (`knowledge/37_hypotheses_session14.md` & `knowledge/40_session14_closeout.md`):**
+- **Queued Session 15 candidates (`knowledge/43_hypotheses_heatflow_euler.md` & `knowledge/46_session14b_closeout.md`):**
   1. **`H38-3` (`= H33-2`) Multi-depth MT crustal conductance pipe alignment — ADD/corroboration arm.** DOI `10.5066/P9TWT2LU` (`Bedrosian et al., 2022`; ScienceBase `62979746d34ec53d276c113b`); all 5 GeoTIFFs runner byte-verified (`registry/external_pins.json`). Next step: add raster-clip step to `scripts/fetch_external_layers.py`.
   2. **`H38-4` (`= H37-5`) Cultural & constructional shoreline artifact-morphology suppression with budget-neutral `H38-1` reallocation.** Prunes zero-potential-field, ultra-linear 1 m LiDAR steps along constant `det_elev` contours and replaces them 1-for-1 with `H38-1` corroborated dots at fixed $N = 37{,}660\text{ px}$.
   3. **`H38-5` (`= H37-4 / H35-3`) 1 m 3DEP bare-earth DEM piercing-line and drainage-deflection neotectonics.** Competition `data/dem_links.json` (`716` USGS 3DEP tiles, free/public on `prd-tnm.s3.amazonaws.com`); requires Actions streaming bridge.
@@ -760,6 +847,16 @@ individual expected ΔDTI** — the ordering below differs from `knowledge/18` f
 ## 6. Reproducibility & Verification Commands
 
 ```bash
+# Session 14 (all local, no external requests; each writes JSON into evidence/):
+#   far-field attribution of the H37-1 rule (seeds 215-219, ~7 min)
+.venv/bin/python scripts/run_losfo_cover_variants.py --seeds 215-219 --out evidence/losfo_cover_variants.json
+.venv/bin/python scripts/analyze_cover_variants.py           # independent re-reading of both LOSFO files
+#   H38-1 radiometric gate (seeds 280-289, ~5 min) and its independent verification
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_h38_1_holdout.py --seeds 280-289 --out evidence/h38_1_holdout.json
+.venv/bin/python scripts/analyze_h38_1.py                    # max DTI recompute error must be 0.0
+#   H38-1 far-field transfer test (seeds 220-224, ~13 min)
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_rad_farfield.py --seeds 220-224 --out evidence/losfo_rad_farfield.json
+#   the H38-1 artifact builder exists but was NOT executed (no transfer licence was earned)
 # 1. Restore all 17 hash-pinned rasters/tables and build the 32-band prepared feature matrix
 PYTHON=.venv/bin/python bash scripts/download_competition_data.sh
 
@@ -842,7 +939,7 @@ GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_harness.py --seeds 26
 #     and companion submission builder (37,860 px, content ID 56a9f473edc7).
 GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_h38_1_interleaved_holdout.py \
     --seeds 270-279 --out evidence/h38_1_interleaved_holdout.json
-GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/build_h38_1_submissions.py
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/build_h38_1_hf_euler_submissions.py
 
 # 3h. Session 12: H36-1 packing-rung re-pack + flank prune, frozen 10-seed gate (seeds 240-249, ~105 s)
 #     Preregistration knowledge/26 was committed (aaa659c) BEFORE the run; runner frozen at that commit.

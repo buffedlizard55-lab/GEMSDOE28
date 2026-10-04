@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the H38-1 multi-physics corroborated submission package and update docs/downloads/manifest.json.
 
-Protocol: ``knowledge/38_preregistration_H36_1_and_H38_farfield.md``.
+Protocol: ``knowledge/44_preregistration_H36_1_and_H38_farfield.md``.
 Evidence:
   * LOSFO far-field (seeds 265-269, 20 cells): ``evidence/losfo_session14_h36_1_and_h38.json``
     - H36-1 (rung30_blind_r1) passes F1-F4 (+0.001713 mean LOSFO dDTI vs d=2.8, 16/20 cells, 5/5
@@ -143,7 +143,7 @@ def main() -> int:
     primary = dict(man["primary"])
     primary["far_field"] = {
         "evidence": "evidence/losfo_session14_h36_1_and_h38.json",
-        "preregistration": "knowledge/38_preregistration_H36_1_and_H38_farfield.md",
+        "preregistration": "knowledge/44_preregistration_H36_1_and_H38_farfield.md",
         "seeds": [265, 266, 267, 268, 269],
         "F1_rung30_vs_matched_random_dti": 0.002072843520463665,
         "F1_cells_improved": "17/20",
@@ -204,7 +204,7 @@ def main() -> int:
         "holdout_folds_improved": "4/4",
         "holdout_seeds_improved": "8/10",
         "holdout_evidence": "evidence/h38_1_interleaved_holdout.json",
-        "holdout_preregistration": "knowledge/38_preregistration_H36_1_and_H38_farfield.md",
+        "holdout_preregistration": "knowledge/44_preregistration_H36_1_and_H38_farfield.md",
         "holdout_seeds": "270-279",
         "far_field": {
             "evidence": "evidence/losfo_session14_h36_1_and_h38.json",

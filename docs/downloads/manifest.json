@@ -37,7 +37,7 @@
     "note_far_field": "FAR-FIELD VERIFIED 2026-10-03 (LOSFO seeds 265-269, knowledge/38 & knowledge/39): passes all four frozen criteria (F1 rung30 vs matched-N random drop +0.002073, 17/20 cells, 5/5 seeds; F2 e_far = 0.02529 < tau_live 0.054852; F3 rung30_blind_r1 vs d=2.8 base +0.001713, 16/20 cells, 5/5 seeds, e_far = 0.01359; F4 blind_r1 loses 0.00 TP across 20/20 cells).",
     "far_field": {
       "evidence": "evidence/losfo_session14_h36_1_and_h38.json",
-      "preregistration": "knowledge/38_preregistration_H36_1_and_H38_farfield.md",
+      "preregistration": "knowledge/44_preregistration_H36_1_and_H38_farfield.md",
       "seeds": [
         265,
         266,
@@ -89,7 +89,7 @@
     "holdout_folds_improved": "4/4",
     "holdout_seeds_improved": "8/10",
     "holdout_evidence": "evidence/h38_1_interleaved_holdout.json",
-    "holdout_preregistration": "knowledge/38_preregistration_H36_1_and_H38_farfield.md",
+    "holdout_preregistration": "knowledge/44_preregistration_H36_1_and_H38_farfield.md",
     "holdout_seeds": "270-279",
     "far_field": {
       "evidence": "evidence/losfo_session14_h36_1_and_h38.json",
