@@ -652,3 +652,40 @@ rasters and the runner-produced clip.
 (`130,154,244` B, `e7fd62c6…`) has only an availability pin, not a derived clip, so it would need the
 same bridge treatment. All live scores remain owner-reported or public-leaderboard readings, not
 organizer receipts.
+
+# Session 14 (2026-10-03) — `H36-1` LOSFO Far-Field Verification (`F1–F4` ALL PASS) and `H38-1` Multi-Physics Corroboration (`C1–C4` ALL PASS)
+
+**Review boundary:** executed across three explicit passes on branch `arena/01a1040a-gemsdoe28`. Freeze commit `ff85e30` committed `knowledge/37_hypotheses_session14.md`, `knowledge/38_preregistration_H36_1_and_H38_farfield.md`, `src/gems27/heatflow_euler.py`, `scripts/run_losfo_harness.py`, `scripts/run_h38_1_interleaved_holdout.py`, and `tests/test_heatflow_euler.py` **before** fresh LOSFO seeds `265–269` or fresh interleaved seeds `270–279` were ever invoked.
+
+## Pass 1 — Implementation, Preregistration, and Verification
+
+- **Standing prompt & data restoration:** Read `README.md` in full at session start. Restored and SHA-256 verified all `17/17` competition rasters and vectors (`evidence/restore_audit.json`: PASS) and rebuilt `data/prepared/features.npy` (`(5167373, 32)` `float32`, SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`).
+- **External layer bridge audit:** Verified that the GitHub Actions runner bridge (`evidence/external_layer_inventory.json`, `2026-10-03T21:47:18Z`) had already downloaded, pin-verified (`130,154,244` B, SHA-256 `e7fd62c6…`), and committed `docs/data/sb_heat_flow_in_footprint.{csv,json}` (`4,217` records across 3 layers, including `2,108` borehole records in `USGS_gbHeatFlowWells_wEstimates.shp` from DeAngelo et al., 2022, DOI [10.5066/P9BZPVUC](https://doi.org/10.5066/P9BZPVUC), `1,546` inside the valid footprint, and `753` with conductive heat-flow residual `hf_resid >= 50.0 mW/m²`).
+- **Hypothesis generation & preregistration (`knowledge/37–38`):** Generated 5 ranked candidate geological hypotheses (`H38-1` through `H38-5`) and froze the two-part Session 14 evaluation at commit `ff85e30`:
+  - **Part A (`--h36-1-dose`, LOSFO `seeds 265–269`, `evidence/losfo_session14_h36_1_and_h38.json`):** Tested Session 13's #1 next step (`knowledge/36` §2) — whether `H36-1` (`rung30_blind_r1`, `b531dae0a36f`, `37,660` px) transfers to LOSFO far-field truth. **All four frozen criteria (`F1–F4`) passed:**
+    - `F1`: `rung30_unpruned` beats matched-`N` random drop by `+0.002073` (`17/20` cells, `5/5` seeds).
+    - `F2`: $e_{\text{far}}(2.8 \to 3.0) = 0.025293 < \tau_{\text{live}} = 0.054852$ (`19/20` cells below $\tau_{\text{live}}$).
+    - `F3`: `rung30_blind_r1` improves LOSFO DTI over `base` (`d=2.8`) by `+0.001713` (`16/20` cells, `5/5` seeds, $e_{\text{far}} = 0.013587 < \tau_{\text{live}}$) and beats matched-count random drop by `+0.005810` (`20/20` cells).
+    - `F4`: `h27_4_blind_r1_d280` removes `11,599` flank-shadow dots across 20 cells and loses **exact `0.00` TP** (`20/20` cells, `+0.002249` mean $\Delta\text{DTI}$).
+  - **Part B (`--h38-corroboration`, LOSFO `seeds 265–269` + interleaved `seeds 270–279`):**
+    - **`h38_1_joint` (`ALL_PASS = True` on LOSFO):** `0.077241` credit/added dot ($\ge \tau_{\text{live}} = 0.054852$, vs `0.040983` sub-ridge control and `0.023326` random control), `+0.000792` mean LOSFO $\Delta\text{DTI}$ (`17/20` cells, `4/5` seeds, `4/4` folds), and `+0.000656` mean interleaved $\Delta\text{DTI}$ on seeds `270–279` (`27/40` cells, `9/10` seeds, `4/4` folds, `0.064399` credit/dot).
+    - **`h38_1_joint_on_r30_r1` (`ALL_PASS = True` on LOSFO):** `0.069930` credit/added dot ($\ge \tau_{\text{live}}$, vs `0.032268` sub-ridge control and `0.026814` random control), `+0.000747` mean LOSFO $\Delta\text{DTI}$ over `H36-1` (`+0.002460` over `d=2.8`, `16/20` cells, `4/5` seeds, `4/4` folds), and `+0.000543` mean interleaved $\Delta\text{DTI}$ over `H36-1` on seeds `270–279` (`27/40` cells, `8/10` seeds, `4/4` folds).
+    - **`h38_2_low_relief_euler` (`ALL_PASS = False`, REFUTED):** `0.013976` credit/dot (`-0.000045` LOSFO $\Delta\text{DTI}$, `5/20` cells).
+
+## Pass 2 — Bug, Edge-Case, and Integrity Review
+
+- **Caught and fixed seed-ledger collision during integrity check:** `scripts/audit_euler_seed_reuse.py` scans every `evidence/*.json` file for a `"seeds"` key and enforces pairwise-disjoint seed sets across files. When we ran our same-seed reproduction check on spent seed `181` (`evidence/session14_losfo_integrity_seed181.json`), `audit_euler_seed_reuse.py` flagged a duplicate `"seeds": [181]` against `evidence/losfo_h37_3_smoke_181.json`. We moved the raw 1-seed reproduction dump to git-ignored `evidence/_scratch/session14_losfo_integrity_seed181.json` and wrote `evidence/session14_h36_1_and_h38_integrity.json` (matching the schema of `evidence/h37_3_licence_integrity.json` with `"same_seed_reproduction": {"seed": 181, ...}`), after which `scripts/audit_euler_seed_reuse.py` passed with `0` collisions.
+- **Caught and fixed download-verifier slot coverage:** When `H38-1` (`56a9f473edc7`) replaced `H37-1` (`0bbddf41eb6d`) in `manifest.json["secondary"]` and `H37-1` moved to `manifest.json["h37_1_falsified"]`, `scripts/verify_downloads.py` needed `"h37_1_falsified"` added to its slot list so that all `7` manifest slots + `h28_1_candidate` (`8` packages total, `237` checks) continue to be verified on every run.
+- **Verified label-free discipline in `src/gems27/heatflow_euler.py`:** Confirmed that `load_heat_flow_wells` filters strictly to `source_layer == "USGS_gbHeatFlowWells_wEstimates.shp"` (avoiding duplicate grids `GreatBasin_HeatFlow_DeAngelo2022` and `Final_GreatBasin_Hf_grid_points`), never reads `labels.tif` or any catalogue distance column, and handles out-of-bounds/NaN coordinates deterministically.
+
+## Pass 3 — Final Acceptance Check Against Original Request
+
+| Requirement | Verification | Result |
+|---|---|---|
+| Keep full prompt in `README.md` and read at start | Checked `README.md` top block | PASS |
+| Execute Session 13's #1 next step (`H36-1` LOSFO far-field verification) | `evidence/losfo_session14_h36_1_and_h38.json` (`seeds 265–269`) | PASS (`F1–F4` all True; `+0.001713` mean LOSFO $\Delta\text{DTI}$, `16/20` cells, `5/5` seeds, `0.00` TP lost by `r=1` prune) |
+| PhD-level explanation of `0.2600` (`e56ea318af89`), `0.2449` (`5512495c6bd1`), `0.1223`, and path to `0.3195` | `README.md` §2–3, `knowledge/01`, `knowledge/20`, `knowledge/39` | PASS |
+| Euler deconvolution (`Reid et al., 1990`) with fault-contact SI=0, depth clustering, and 300 m lineament alignment | `src/gems27/euler.py`, `src/gems27/heatflow_euler.py`, `README.md` §4 | PASS (`0.07724` credit/dot on `d=2.8` and `0.06993` on `H36-1` when aligned within `300 m` of 1-px ridge + heat-flow residual) |
+| Generate 3–5 untried hypotheses and validate top candidate on spatially blocked holdouts | `knowledge/37–39`, `evidence/losfo_session14_h36_1_and_h38.json`, `evidence/h38_1_interleaved_holdout.json` | PASS (`H38-1` through `H38-5`; `H38-1` passed both LOSFO `265–269` and interleaved `270–279`) |
+| Easy-to-download `.tif` in `[0, 1]` at top of site with unique names and notes $\le 200$ chars | `scripts/verify_downloads.py` (`237/237` PASS), `scripts/build_site.py`, `tests/test_site.py` | PASS (`H36-1` `b531dae0a36f` primary, `H38-1` `56a9f473edc7` secondary) |
+| Full test suite, linter, seed audit, and git hygiene | `.venv/bin/pytest -q`, `.venv/bin/ruff check src scripts tests`, `git diff --check` | PASS (`272 passed`, `0` ruff errors, `0` whitespace errors) |

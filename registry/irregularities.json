@@ -443,7 +443,7 @@
       "id": "h37-1-farfield-effect-is-zero",
       "severity": "low",
       "issue": "The preregistered demotion of H37-1 is a demotion of the CLAIM, not evidence that the file is worse than its replacement. The far-field point estimate is -0.000037 against a +0.007289 interleaved gain, i.e. a measured tie, and H36-1's own far-field behaviour has never been measured (it is a dose change, supported by the live-anchored ladder).",
-      "action": "Recorded so an owner who judges the live scoring population to be substantially catalogue-adjacent can knowingly prefer the H37-1 file; both remain audited and downloadable. The remedy is one more LOSFO run on H36-1's dose change, queued in registry/next_hypotheses.json."
+      "action": "Recorded so an owner who judges the live scoring population to be substantially catalogue-adjacent can knowingly prefer the H37-1 file; both remain audited and downloadable. RESOLVED 2026-10-03 in Session 14 (knowledge/38-39, evidence/losfo_session14_h36_1_and_h38.json): H36-1 was tested on fresh LOSFO seeds 265-269 (20 paired cells) and PASSED all four frozen far-field criteria: F1 rung30 vs matched-N random drop +0.002073 (17/20 cells, 5/5 seeds); F2 e_far(2.8->3.0) = 0.02529 < tau_live 0.054852 (19/20 cells); F3 rung30_blind_r1 vs base +0.001713 (16/20 cells, 5/5 seeds, e_far = 0.01359); F4 blind_r1 loses 0.00 TP across 20/20 cells."
     },
     {
       "id": "h37-3-licence-real-but-below-the-live-rate",
@@ -462,6 +462,18 @@
       "severity": "low",
       "issue": "A parallel session's commit 9d764cd added thinning.directional_dot_thin and its docstring history calls it 'the candidate H37-1 (directional / anisotropic Poisson-disk ...)'. H37-1 is already taken: knowledge/29-35, the README and registry/next_hypotheses.json define H37-1 as the metric-aware (maximum expected coverage) packing arm, which this session gated, far-field falsified and demoted. The directional thinning is otherwise undocumented in the ledger.",
       "action": "Flagged for the owner so the two arms cannot be confused in the record. Neither arm's results are affected (directional_dot_thin only ADDS a function; dot_thin is unchanged, so every measured result still refers to the same code). When the directional arm is formally proposed it needs its own ID (e.g. H38-1), its own preregistration, and a corrected docstring history line."
+    },
+    {
+      "id": "sb-heat-flow-clip-landed-but-marked-queued",
+      "severity": "low",
+      "issue": "README.md section 5 and registry/next_hypotheses.json (H33-3 / H35-2) still described the USGS Great Basin heat-flow release (sb_heat_flow_zip, DeAngelo et al. 2022, DOI 10.5066/P9BZPVUC) as waiting on the GitHub Actions runner bridge even after the runner had already downloaded, pin-verified (130,154,244 B, SHA-256 e7fd62c6...), and committed docs/data/sb_heat_flow_in_footprint.json (4,217 records, including 1,546 in-footprint borehole records in USGS_gbHeatFlowWells_wEstimates.shp with conductive residual hf_resid).",
+      "action": "Audited in Session 14 (knowledge/37-39), implemented in src/gems27/heatflow_euler.py, and validated on fresh LOSFO seeds 265-269 (evidence/losfo_session14_h36_1_and_h38.json) and fresh interleaved seeds 270-279 (evidence/h38_1_interleaved_holdout.json)."
+    },
+    {
+      "id": "h38-1-added-dots-use-detector-ridge-not-pure-h19-5",
+      "severity": "low",
+      "issue": "While H36-1 (37,660 px) draws 100% of its pixels from the live-scored H19-5 (0.2600) surface, H38-1 (37,860 px, content ID 56a9f473edc7) adds 200 corroborated dots from the 32-band detector's sub-threshold 1-px ridge (ridge_nms(prob_full)). Although H38-1 passed all four frozen LOSFO far-field criteria (C1-C4, +0.000747 over H36-1, 0.06993 credit/dot > tau_live 0.054852) and the 10-seed interleaved gate (+0.000543 over H36-1), those 200 dots have not yet been live-scored.",
+      "action": "Disclosed in knowledge/39-40, docs/downloads/manifest.json, and README.md. H36-1 (b531dae0a36f, 37,660 px, now LOSFO far-field verified) remains in the primary slot, while H38-1 (56a9f473edc7, 37,860 px) is placed in the secondary slot so the human operator can choose between the pure H19-5 surface and the +200-dot multi-physics corroborated package."
     }
   ]
 }

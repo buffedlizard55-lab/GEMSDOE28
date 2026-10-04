@@ -589,15 +589,17 @@ def summarize_h38_corroboration(
         dti_ref = float(np.mean([c["h38"][name]["ref"]["dti"] for c in rows]))
         tau_far = float(0.2 * dti_ref / (1.0 - 0.2 * dti_ref))
 
+        req_cells = int(np.ceil(0.75 * len(rows)))
+        req_seeds = int(np.ceil(0.80 * len(seeds_set)))
         c1_pass = (
             float(np.mean(d_arm)) > 0.0
-            and sum(1 for v in d_arm if v > 0) >= 15
-            and sum(1 for v in per_seed.values() if v > 0) >= 4
+            and sum(1 for v in d_arm if v > 0) >= req_cells
+            and sum(1 for v in per_seed.values() if v > 0) >= req_seeds
         )
         c2_pass = c_per_dot_arm >= tau_live
         c3a_pass = c_per_dot_arm > c_per_dot_sub and float(np.mean(d_vs_sub)) > 0.0
         c3b_pass = (
-            float(np.mean(d_vs_ran)) > 0.0 and sum(1 for v in d_vs_ran if v > 0) >= 15
+            float(np.mean(d_vs_ran)) > 0.0 and sum(1 for v in d_vs_ran if v > 0) >= req_cells
         )
 
         arms_out[name] = {

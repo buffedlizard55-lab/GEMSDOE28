@@ -616,5 +616,120 @@
       "verdict": "REFUTED as a promotable arm; mechanism real but the rate is 57% of the live break-even",
       "live_projection_of_the_licence_dots": "negative at every scale tested (296 dots: 0.260627 -> 0.260294)"
     }
+  },
+  "session14_addendum": {
+    "generated": "2026-10-03",
+    "one_click_primary_content_id": "b531dae0a36f",
+    "secondary_corroborated_content_id": "56a9f473edc7",
+    "h36_1_far_field": {
+      "preregistration": "knowledge/38_preregistration_H36_1_and_H38_farfield.md (freeze commit ff85e30)",
+      "result": "knowledge/39_h36_1_and_h38_1_result.md",
+      "evidence": "evidence/losfo_session14_h36_1_and_h38.json",
+      "integrity": "evidence/session14_h36_1_and_h38_integrity.json",
+      "seeds": [
+        265,
+        266,
+        267,
+        268,
+        269
+      ],
+      "criteria": {
+        "F1_rung30_vs_matched_random": "PASS (+0.002073 mean dDTI, 17/20 cells, 5/5 seeds)",
+        "F2_rung30_removal_efficiency": "PASS (pooled e_far = 0.025293 < tau_live 0.054852; 19/20 cells below tau_live)",
+        "F3_rung30_blind_r1_vs_base": "PASS (+0.001713 mean dDTI, 16/20 cells, 5/5 seeds, pooled e_far = 0.013587 < tau_live 0.054852; +0.005810 vs matched-N random drop in 20/20 cells)",
+        "F4_h27_4_blind_r1_zero_loss": "PASS (+0.002249 mean dDTI, 20/20 cells, exact 0.00 TP removed across 20/20 cells)"
+      },
+      "verdict": "ALL 4 CRITERIA PASS - H36-1 (b531dae0a36f, 37,660 px) is now verified on BOTH interleaved spatial CV (+0.002599, seeds 240-249) and LOSFO far-field truth (+0.001713, seeds 265-269)"
+    },
+    "h38_1": {
+      "preregistration": "knowledge/38_preregistration_H36_1_and_H38_farfield.md (freeze commit ff85e30)",
+      "result": "knowledge/39_h36_1_and_h38_1_result.md",
+      "losfo_evidence": "evidence/losfo_session14_h36_1_and_h38.json",
+      "interleaved_evidence": "evidence/h38_1_interleaved_holdout.json",
+      "module": "src/gems27/heatflow_euler.py",
+      "builder": "scripts/build_h38_1_submissions.py",
+      "losfo_seeds": [
+        265,
+        266,
+        267,
+        268,
+        269
+      ],
+      "interleaved_seeds": [
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279
+      ],
+      "h38_1_joint_on_base": {
+        "losfo_mean_delta_dti": 0.000791809196456296,
+        "losfo_credit_per_added_dot": 0.07724129932637987,
+        "losfo_sub_ridge_ctrl_credit_per_dot": 0.04098268325430367,
+        "losfo_random_ctrl_credit_per_dot": 0.023326197523099928,
+        "losfo_cells_improved": "17/20",
+        "losfo_seeds_improved": "4/5",
+        "losfo_folds_improved": "4/4",
+        "losfo_all_pass": true,
+        "interleaved_mean_delta_dti": 0.0006560637417711835,
+        "interleaved_credit_per_added_dot": 0.06439883344006817,
+        "interleaved_cells_improved": "27/40",
+        "interleaved_seeds_improved": "9/10",
+        "interleaved_folds_improved": "4/4"
+      },
+      "h38_1_joint_on_r30_r1": {
+        "losfo_mean_delta_dti_vs_h36_1": 0.0007474376185384414,
+        "losfo_mean_delta_dti_vs_d28": 0.0024600196843243834,
+        "losfo_credit_per_added_dot": 0.06992977854336586,
+        "losfo_sub_ridge_ctrl_credit_per_dot": 0.032267635716439015,
+        "losfo_random_ctrl_credit_per_dot": 0.026813585290034265,
+        "losfo_cells_improved": "16/20",
+        "losfo_seeds_improved": "4/5",
+        "losfo_folds_improved": "4/4",
+        "losfo_all_pass": true,
+        "interleaved_mean_delta_dti_vs_h36_1": 0.0005429581100109074,
+        "interleaved_credit_per_added_dot": 0.0526949658525996,
+        "interleaved_cells_improved": "27/40",
+        "interleaved_seeds_improved": "8/10",
+        "interleaved_folds_improved": "4/4"
+      },
+      "artifact": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif (37,860 px = 37,660 H36-1 + 200 corroborated dots; slotted at secondary)"
+    },
+    "h38_2": {
+      "title": "Concealed basin-fill conjunction (low-relief smooth basin fill <= P35 x shallow SI=0 Euler cluster on 1-px ridge)",
+      "losfo_seeds": [
+        265,
+        266,
+        267,
+        268,
+        269
+      ],
+      "losfo_mean_delta_dti": -4.525152080347428e-05,
+      "losfo_credit_per_added_dot": 0.013976355221436216,
+      "losfo_cells_improved": "5/20",
+      "verdict": "REFUTED - hidden USGS truth in labels.tif is itself scarp-biased, so forcing dots into the lowest-relief tercile starves them of catalogued hidden truth."
+    },
+    "next_ranked": [
+      "H38-3: Multi-depth MT crustal conductance pipe alignment (Bedrosian et al. 2022, DOI 10.5066/P9TWT2LU, surface vs middle/lower crust conductance ratio) via Actions raster-clip step.",
+      "H38-4 (= H37-5): Cultural & constructional shoreline artifact-morphology suppression coupled with budget-neutral H38-1 reallocation at fixed N = 37,660 px.",
+      "H38-5 (= H37-4 / H35-3): 1 m 3DEP bare-earth DEM piercing-line and drainage-deflection neotectonics via Actions streaming bridge."
+    ],
+    "seed_ledger": {
+      "spent_contiguous": [
+        "100-214",
+        "220-264",
+        "265-269 (Session 14 LOSFO H36-1 & H38 gate)",
+        "270-279 (Session 14 interleaved H38-1 gate)"
+      ],
+      "free": [
+        "215-219",
+        "280+"
+      ]
+    }
   }
 }
