@@ -1,0 +1,120 @@
+{
+  "analyzer_exit_code": 1,
+  "arm_name": "H38-1 shallow Euler \u00d7 gravity \u00d7 low-relief licence",
+  "baseline": {
+    "live_bar": 0.0548,
+    "mean_delta_dti_licence_vs_base": 0.0005763894914862378,
+    "path": "evidence/losfo_h37_3_licence.json",
+    "sha256": "d963ec8b5aafce1b3705c7af62d0573b8fe2b36838c69b4b05e1418db158fba6"
+  },
+  "candidate_count": 140,
+  "candidate_csv": "evidence/h38_1_candidate_clusters.csv",
+  "candidate_csv_sha256": "2e5c607affa635418c90a520ef843494a4fb00fb7e7d69f63fb317c73849d369",
+  "code_sha256": {
+    "knowledge/38_preregistration_H38-1.md": "4dbb633ee8ed6fb59c244abc1e8ade571e53e565f3c91f216c72d6bd40856d37",
+    "scripts/analyze_h38_1_holdout.py": "f0f713eb0369f94f0408877ebf5468bdc2b8dba27d14984657b2b050689dcd55",
+    "scripts/audit_holdout_seed_range.py": "e03e7a7effb5b49d43bc61e04ee0b913c5e2978d5b480b5fb8bc8017600a1ae0",
+    "scripts/build_h38_1_candidate_clusters.py": "a40d4f052f9971922ae4ef0800cc95ce312a30c0b66939323dd2b06db5518d88",
+    "scripts/prepare_h38_1_seed_claim.py": "f80128d5de478eb17d1f6dcd979598d552833cc409cc5dce81609edbe6a38827",
+    "scripts/run_h38_1_holdout.py": "c77804395943ce4aa129bed808c165067fd39c098b9c56ea395cffdb1a94a0ed",
+    "scripts/run_losfo_harness.py": "39494dc118f77cc0b9569c08f543bc50bff4604fcca77fe2681b1ae909bcfa32",
+    "src/gems27/grid.py": "16a6c35e1d0c5048b0aaeeeb47c8ffa9b71c5e7f7da8ebdce58ed7d174986b5c",
+    "src/gems27/h38_1.py": "d7673945e384a901952aec0ec92412ac6a3a4b56ee90372beaffa1b0535d9c00",
+    "src/gems27/holdout.py": "f3b5e0271843471eb506f717c4cb53702dcea5dc4eafac9eea454f515a84e19b",
+    "src/gems27/losfo.py": "cba280e138ca540dc6549ef56d4c0f88062dfb457118d757b896a864fa2b9738",
+    "src/gems27/metric.py": "4b0a600d7fa92e1338b3f8ffeed3df76031ab94725f8143df1fc194c40bfb101",
+    "src/gems27/oof_detector.py": "6e30410e17c3b6d226ff3a343662417cd2c847711d0e3242658fc5b304c2023e",
+    "src/gems27/packing.py": "39cce1812fadfcad1b46cd532a9d4d74b255c5eaca6fcc6663699423a9c47d1d",
+    "src/gems27/paths.py": "1db32dfcc194224066b6f3fb9da72f86d5f7786a0e90cbd62dd55bf2ed15b4c3",
+    "src/gems27/thinning.py": "ff7738bd6f0f3b59096cd5ecbd72fef0269fe15351f529a14f78a8dda06df036",
+    "tests/test_h38_1.py": "625d1ee9e2bda7d3c4633dc110df7297b26aed7272feb520efb1ce3adc7ea1f0",
+    "tests/test_h38_1_holdout.py": "df8d60937b82e6d42b578239eb35701ace06b819fca651788f59b28de231bd12",
+    "tests/test_seed_range_audit.py": "bedcf347ca426cd61f5548196207459a3fa07f1bce11b22ac5fbd22e462300a6"
+  },
+  "decision": "UNASSESSED_ANALYZER_FAILURE_AND_PRIOR_SEED_REUSE; no C1\u2013C5 decision, independent validation, TIFF promotion, upload, or slot use",
+  "failure_detail": "The frozen runner completed all 20 seed/fold cells and wrote evidence/losfo_h38_1_raw.json. The frozen analyzer exited 1 while JSON-serializing its report: TypeError: Object of type int64 is not JSON serializable. Post-run reconciliation also found that seeds 265\u2013269 had already been used on origin/main for the H36-1 LOSFO far-field test before this wrapper started, so this branch attempt was not an independent fresh holdout. No summary/gate report was written. The single-use range is burned; do not rerun or repair it.",
+  "failure_stage": "analyzer",
+  "finished_utc": "2026-10-04T01:59:45Z",
+  "holdout_started": true,
+  "input_sha256": {
+    "data/labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "data/lidar_scarp_features_u8.tif": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+    "data/prepared/features.json": "ae2e5f0a6571b653f8a16f64610d2b24a16eee1b4f6d284ede59a12b455a4664",
+    "data/prepared/features.npy": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "data/sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "data/training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "evidence/h31_1_euler_clusters.csv": "cdd07d53de2c64bebbaffa6e083a7fd2d242e45b88f41b35417e8d0c782c8da1",
+    "evidence/h38_1_candidate_clusters.csv": "2e5c607affa635418c90a520ef843494a4fb00fb7e7d69f63fb317c73849d369",
+    "evidence/h38_1_seed_audit_pre_run.json": "413cc522519a394e06d826eacccc11262c0653890659d9e94c550f5c0e91394e",
+    "evidence/h38_1_sufficiency_audit.json": "91d86b012fcbfa472ff79859623743e1292a077d591427e78bf8627a92250b60",
+    "evidence/losfo_h37_3_licence.json": "d963ec8b5aafce1b3705c7af62d0573b8fe2b36838c69b4b05e1418db158fba6"
+  },
+  "parallel_hypothesis_id_review": {
+    "consequence": "Do not combine these metrics or refer to them simply as the same H38-1. Preserve the frozen branch-local name in historical evidence; use distinct IDs for future work.",
+    "main_pr27_definitions": [
+      "GeoDAWN radiometric K/Th/U and ratio-channel detector extension, gated on seeds 280\u2013289 (knowledge/38 and knowledge/41)",
+      "USGS conductive heat-flow residual \u00d7 shallow SI-0 Euler ridge corroboration, evaluated in the Session 14 far-field record (knowledge/43\u201345)"
+    ],
+    "status": "DUPLICATE_H38_1_LABELS_ACROSS_DISTINCT_EXPERIMENTS",
+    "this_branch_definition": "Shallow SI-0 Euler depth coherence \u00d7 gravity-gradient corridor \u00d7 low valid LiDAR relief (frozen in cf1d036 and run from commit 9880ca6)"
+  },
+  "pre_run_seed_audit": "evidence/h38_1_seed_audit_pre_run.json",
+  "preregistration": "knowledge/38_preregistration_H38-1.md",
+  "preregistration_sha256": "4dbb633ee8ed6fb59c244abc1e8ade571e53e565f3c91f216c72d6bd40856d37",
+  "protocol_branch": "arena/01a10412-gemsdoe28",
+  "protocol_commit": "cf1d03627ad3f863d10ff34e5195f126efad51f5",
+  "raw_result_sha256": "0375a9e58ed9dc43f6dddecb431644a18e10b39e42219ed491ede530dbf5a4ba",
+  "reserved_utc": "2026-10-04T01:43:57Z",
+  "result_paths": {
+    "raw": "evidence/losfo_h38_1_raw.json",
+    "summary": "evidence/h38_1_holdout.json"
+  },
+  "run_branch": "arena/01a10412-gemsdoe28",
+  "run_commit": "9880ca6d84a3527b2baeaa28b8d2a00be13edcde",
+  "runner_exit_code": 0,
+  "runtime_versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.2",
+    "rasterio": "1.4.4",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.17.1"
+  },
+  "schema": 1,
+  "scope": "repository-local single-use claim; external/unpublished seed use remains unknown",
+  "seed_independence_review": {
+    "discovered_during": "PR #28 merge reconciliation",
+    "impact": "The same LOSFO seed/fold truth decade had already been used on main for H36-1 before this wrapper began. The local pre-run evidence scan did not include the merged-main artifact. This branch attempt cannot be represented as an independent/fresh validation even apart from the analyzer failure.",
+    "status": "INVALID_AS_INDEPENDENT_FRESH_HOLDOUT",
+    "this_run_started_utc": "2026-10-04T01:46:40Z",
+    "upstream_arm": "H36-1 LOSFO far-field verification",
+    "upstream_artifact": "evidence/losfo_session14_h36_1_and_h38.json",
+    "upstream_artifact_generated_utc": "2026-10-04T00:29:52Z",
+    "upstream_artifact_sha256": "b72cc58341554fa1592ddea30efd8c48faae55d380a2cc1903809283a612e21b",
+    "upstream_merge_commit": "68b9f0ab671b8b536bfcbed0ea0e8f880e0e6383",
+    "upstream_merged_utc": "2026-10-04T01:04:41Z",
+    "upstream_pr": 27,
+    "upstream_seeds": [
+      265,
+      266,
+      267,
+      268,
+      269
+    ]
+  },
+  "seed_range_burned": true,
+  "seeds": [
+    265,
+    266,
+    267,
+    268,
+    269
+  ],
+  "started_utc": "2026-10-04T01:46:40Z",
+  "status": "FAILED",
+  "submission_slot_used": false,
+  "sufficiency_audit": "evidence/h38_1_sufficiency_audit.json",
+  "sufficiency_audit_sha256": "91d86b012fcbfa472ff79859623743e1292a077d591427e78bf8627a92250b60",
+  "summary_result_artifact": null,
+  "summary_result_disambiguation": "This local analyzer did not write a summary. After the merge, evidence/h38_1_holdout.json exists for the separate mainline GeoDAWN-radiometric H38-1 experiment on seeds 280\u2013289; it is not a summary for this branch-local Euler \u00d7 gravity \u00d7 low-relief run.",
+  "summary_result_written": false
+}

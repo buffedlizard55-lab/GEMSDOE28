@@ -40,7 +40,7 @@ reason recorded:
 4. **A cross-session naming collision**: `thinning.directional_dot_thin` (added by a parallel session)
    calls itself "the candidate H37-1" in its docstring while H37-1 is the metric-aware packing arm.
    Flagged in the registry; no measured result is affected because the function is additive and
-   `dot_thin` is untouched.
+   `dot_thin` is untouched. **Session 14 resolution:** H38-1 is now reserved for the shallow SI-0 Euler × gravity-gradient × low-relief test; the parallel directional experiment remains distinct and must use H39 or later if revived (`registry/irregularities.json`).
 
 **Pass 3 — re-check against the original request and improve.** Re-verified every standing requirement
 (slot order, note length, range/format audit, exec-summary subpage, feed freshness, sources table,

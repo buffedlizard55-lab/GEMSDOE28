@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-04T01:04:00Z",
+  "checked_utc": "2026-10-04T02:30:28Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "66bd9d94db975c491d39633da79e3af7691d1a1d54b4de131540310dc05a6153",
+  "manifest_sha256": "94ceae60132e92c17aba7743445aa378df4048f801cf805fff542e1192a95462",
   "checks": [
     {
       "check": "labels_grid_matches_template",
@@ -37,6 +37,21 @@
       "check": "manifest_candidates_present",
       "pass": true,
       "detail": "8 candidate(s) listed"
+    },
+    {
+      "check": "submission_names_present",
+      "pass": true,
+      "detail": "8 artifact(s) have a registered portal name"
+    },
+    {
+      "check": "submission_names_unique",
+      "pass": true,
+      "detail": "8 registered name(s), all distinct"
+    },
+    {
+      "check": "primary_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-h36-1-rung30-blind-r1-b531dae0a36f"
     },
     {
       "check": "primary_content_addressed_name",
@@ -184,6 +199,11 @@
       "detail": "note-gemsdoe28-h36-1-rung30-blind-r1-b531dae0a36f.txt"
     },
     {
+      "check": "secondary_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-h38-1-hf-euler-r30-r1-56a9f473edc7"
+    },
+    {
       "check": "secondary_content_addressed_name",
       "pass": true,
       "detail": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif"
@@ -327,6 +347,11 @@
       "check": "secondary_note_file_matches",
       "pass": true,
       "detail": "note-gemsdoe28-h38-1-hf-euler-r30-r1-56a9f473edc7.txt"
+    },
+    {
+      "check": "tertiary_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-h27-4-r1-solo-d2-8-8acb75e1f2cc"
     },
     {
       "check": "tertiary_content_addressed_name",
@@ -474,6 +499,11 @@
       "detail": "note-gemsdoe28-h27-4-r1-solo-d2-8-8acb75e1f2cc.txt"
     },
     {
+      "check": "quaternary_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-h32-1-prethin-tip-euler-d2-8-31e35eee884e"
+    },
+    {
       "check": "quaternary_content_addressed_name",
       "pass": true,
       "detail": "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif"
@@ -617,6 +647,11 @@
       "check": "quaternary_note_file_matches",
       "pass": true,
       "detail": "note-gemsdoe28-h32-1-prethin-tip-euler-d2-8-31e35eee884e.txt"
+    },
+    {
+      "check": "quinary_probe_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-t-v2-topology-d1-5-5512495c6bd1"
     },
     {
       "check": "quinary_probe_content_addressed_name",
@@ -764,6 +799,11 @@
       "detail": "note-gemsdoe28-t-v2-5512495c6bd1.txt"
     },
     {
+      "check": "conservative_alternative_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-h32-1-tip-euler-dejitter-d2-8-c3aeda1d31a3"
+    },
+    {
       "check": "conservative_alternative_content_addressed_name",
       "pass": true,
       "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif"
@@ -909,6 +949,11 @@
       "detail": "note-gemsdoe28-h32-1-tip-euler-dejitter-d2-8-c3aeda1d31a3.txt"
     },
     {
+      "check": "research_candidate_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-h37-1-probe-union-pool-r1-52a13184267e"
+    },
+    {
       "check": "research_candidate_content_addressed_name",
       "pass": true,
       "detail": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif"
@@ -1052,6 +1097,11 @@
       "check": "research_candidate_note_file_matches",
       "pass": true,
       "detail": "note-gemsdoe28-h37-1-probe-union-pool-r1-52a13184267e.txt"
+    },
+    {
+      "check": "h37_1_falsified_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-h37-1-coverprob-h19-5-r1-0bbddf41eb6d"
     },
     {
       "check": "h37_1_falsified_content_addressed_name",
@@ -1210,5 +1260,5 @@
     }
   ],
   "failures": [],
-  "check_count": 237
+  "check_count": 247
 }

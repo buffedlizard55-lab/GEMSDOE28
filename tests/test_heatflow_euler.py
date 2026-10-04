@@ -213,4 +213,3 @@ def test_harness_h36_1_and_h38_synthetic() -> None:
     s38 = mod.summarize_h38_corroboration(cells, fields["meta"])
     assert s36["detectors"]["losfo"]["F4_h27_4_blind_r1_vs_base"]["exact_zero_tp_loss_all_cells"]
     assert "h38_1_joint" in s38["arms"]
-

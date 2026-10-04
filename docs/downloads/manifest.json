@@ -57,7 +57,8 @@
       "F4_h27_4_blind_r1_vs_base_dti": 0.0022486716567998973,
       "F4_tp_removed": 0.0,
       "verdict": "F1-F4 ALL PASS - H36-1 spacing re-pack and blind_r1 flank prune both transfer to far-field truth on seeds 265-269"
-    }
+    },
+    "submission_name": "GEMSDOE28-h36-1-rung30-blind-r1-b531dae0a36f"
   },
   "secondary": {
     "slug": "h38-1-hf-euler-r30-r1",
@@ -111,7 +112,8 @@
       "verdict": "C1-C4 ALL PASS - first addition arm to clear tau_live (0.054852) and both sub-ridge and random controls on LOSFO far-field truth"
     },
     "base_reference_id": "b531dae0a36f",
-    "base_reference_live_score": 0.26
+    "base_reference_live_score": 0.26,
+    "submission_name": "GEMSDOE28-h38-1-hf-euler-r30-r1-56a9f473edc7"
   },
   "tertiary": {
     "slug": "h27-4-r1-solo-d2-8",
@@ -129,7 +131,7 @@
     "emitted_px": 40199,
     "format_verified": true,
     "status": "UNSCORED; previous one-click primary (won the H35-6 fresh-seed adjudication, seeds 235-239). Demoted by H36-1 on a fresh decade: +0.001715 vs +0.002599 on seeds 240-249. Still a validated, fully audited file and the conservative choice if the re-pack is judged too aggressive.",
-    "note": "28GEMSDOE H27-4 d2.8 solo | \u0394DTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc",
+    "note": "28GEMSDOE H27-4 d2.8 solo | ΔDTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc",
     "note_file": "note-gemsdoe28-h27-4-r1-solo-d2-8-8acb75e1f2cc.txt",
     "holdout_mean_gain": 0.0017660520700670697,
     "holdout_folds_improved": "4/4",
@@ -141,7 +143,8 @@
     "adjudication_evidence": "evidence/h35_6_candidate_headtohead.json",
     "adjudication_preregistration": "knowledge/25_preregistration_H35-6_candidate_adjudication.md",
     "adjudication_seeds": "235-239",
-    "adjudication_mean_gain": 0.0017607840722626026
+    "adjudication_mean_gain": 0.0017607840722626026,
+    "submission_name": "GEMSDOE28-h27-4-r1-solo-d2-8-8acb75e1f2cc"
   },
   "quaternary": {
     "slug": "h32-1-prethin-tip-euler-d2-8",
@@ -158,8 +161,8 @@
     "bytes_zip": 315780,
     "emitted_px": 42294,
     "format_verified": true,
-    "status": "UNSCORED; 4-fold spatially blocked holdout PASS (+0.001399 mean \u0394DTI, 10/10 seeds, 4/4 folds on seeds 180-189); re-emits 638 interior ridge dots blocked by flank shadow",
-    "note": "28GEMSDOE H32-1 d2.8 pre | OOF \u0394DTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved",
+    "status": "UNSCORED; 4-fold spatially blocked holdout PASS (+0.001399 mean ΔDTI, 10/10 seeds, 4/4 folds on seeds 180-189); re-emits 638 interior ridge dots blocked by flank shadow",
+    "note": "28GEMSDOE H32-1 d2.8 pre | OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved",
     "note_file": "note-gemsdoe28-h32-1-prethin-tip-euler-d2-8-31e35eee884e.txt",
     "holdout_mean_gain": 0.0013989919559766317,
     "holdout_folds_improved": "4/4",
@@ -167,7 +170,8 @@
     "holdout_evidence": "evidence/h32_1_holdout.json",
     "base_reference_id": "e56ea318af89",
     "base_reference_live_score": 0.26,
-    "model_score_hybrid": 0.2669
+    "model_score_hybrid": 0.2669,
+    "submission_name": "GEMSDOE28-h32-1-prethin-tip-euler-d2-8-31e35eee884e"
   },
   "quinary_probe": {
     "slug": "t-v2-topology-d1-5",
@@ -186,7 +190,8 @@
     "note": "28GEMSDOE T-v2 reference | 345 graph links; no organizer score or local-file association | id 5512495c6bd1 | research only",
     "bytes_zip": 378425,
     "bytes_allfinite": 866160,
-    "note_file": "note-gemsdoe28-t-v2-5512495c6bd1.txt"
+    "note_file": "note-gemsdoe28-t-v2-5512495c6bd1.txt",
+    "submission_name": "GEMSDOE28-t-v2-topology-d1-5-5512495c6bd1"
   },
   "conservative_alternative": {
     "slug": "h32-1-tip-euler-dejitter-d2-8",
@@ -204,7 +209,7 @@
     "emitted_px": 41656,
     "format_verified": true,
     "status": "UNSCORED; the original preregistered H32-1 file (conservative alternative: it is the only variant that protects fault tips and shallow SI-0 Euler depth clusters). Kept listed and audited after H37-1 re-slotted the ladder.",
-    "note": "28GEMSDOE H32-1 d2.8 post | OOF \u0394DTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved",
+    "note": "28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved",
     "note_file": "note-gemsdoe28-h32-1-tip-euler-dejitter-d2-8-c3aeda1d31a3.txt",
     "holdout_mean_gain": 0.0012715910909455819,
     "holdout_folds_improved": "4/4",
@@ -213,7 +218,8 @@
     "base_reference_id": "e56ea318af89",
     "base_reference_live_score": 0.26,
     "model_score_hybrid": 0.2663,
-    "adjudication_evidence": "evidence/h35_6_candidate_headtohead.json"
+    "adjudication_evidence": "evidence/h35_6_candidate_headtohead.json",
+    "submission_name": "GEMSDOE28-h32-1-tip-euler-dejitter-d2-8-c3aeda1d31a3"
   },
   "research_candidate": {
     "slug": "h37-1-probe-union-pool-r1",
@@ -243,7 +249,8 @@
     "holdout_mean_gain": null,
     "holdout_mean_gain_vs_incumbent": null,
     "holdout_seeds_improved": "n/a",
-    "holdout_folds_improved": "n/a"
+    "holdout_folds_improved": "n/a",
+    "submission_name": "GEMSDOE28-h37-1-probe-union-pool-r1-52a13184267e"
   },
   "promotion_rule": "The one-click primary is the file that won a frozen fresh-seed gate whose criteria were written to knowledge/ before the seeds were spent (H36-1: knowledge/26, seeds 240-249; H37-1: knowledge/29, seeds 250-259). Promotion is provisional: when a promotion rests on a proxy that can be falsified off-catalogue, the arm must also survive its preregistered far-field test on the LOSFO harness. H37-1 passed its gate (+0.007289) and then FAILED that test (F1/F3, -0.000037 +/-0.000832, seeds 210-214; knowledge/32-33), so it was demoted by the pre-committed rule and the slot returned to the file whose projection rests on a live-anchored measurement. Any future arm that claims a catalogue-adjacent gain must carry its own far-field number before it can hold this slot.",
   "h37_1_falsified": {
@@ -289,6 +296,7 @@
       "cells_improved": "9/20",
       "verdict": "F1 FAIL - interleaved gain does not transfer; promotion demoted per knowledge/32"
     },
-    "note_far_field": "FAR-FIELD TEST 2026-10-03: ties the raster cascade off-catalogue (-0.000037 +/-0.000832, seeds 210-214); the +0.0073 interleaved gain is a catalogue-adjacency effect, projection withdrawn; demoted by the preregistered rule."
+    "note_far_field": "FAR-FIELD TEST 2026-10-03: ties the raster cascade off-catalogue (-0.000037 +/-0.000832, seeds 210-214); the +0.0073 interleaved gain is a catalogue-adjacency effect, projection withdrawn; demoted by the preregistered rule.",
+    "submission_name": "GEMSDOE28-h37-1-coverprob-h19-5-r1-0bbddf41eb6d"
   }
 }

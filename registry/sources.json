@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-03 | Session 6: owner-mirror restoration, range-validator forensics, H31-1 feature audit, and one-off manual public leaderboard snapshot.",
-  "note": "Verification status is stated per row. DrivenData is accessed manually only; there is no scraper, API poll, scheduled fetch, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer 'hash-pinned, raw bytes NOT downloaded': the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json).",
+  "note": "Verification status is stated per row. DrivenData is accessed manually only; there is no scraper, API poll, scheduled fetch, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer 'hash-pinned, raw bytes NOT downloaded': the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json). | 2026-10-03 Session 14: official DrivenData problem, ScienceBase heat-flow/conductance, GDR #1391, and USGS 3DEP pages were rechecked. These checks establish that the pages/resources are listed, not that the contest owner mirrors are organizer-authenticated or that new layers are locally clipped/schema-audited.",
   "sources": [
     {
       "id": "dd-problem",
@@ -9,9 +9,9 @@
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
       "category": "competition",
       "used_for": "Metric (kernel, TPw/FPw/FNw, alpha 0.2 / beta 0.8), submission format, rounds and prizes, training layers",
-      "status": "read-in-full (agent, one-off human-style read before the no-automation decision)",
-      "accessed": "2026-10-02",
-      "evidence": "Metric: DTI = TPw/(TPw + 0.2 FPw + 0.8 FNw + eps), k(d)=max(1-d/300 m,0); float32 single band in [0,1], NaN/null outside bounds; worked example 3.00/1.89/2.00 -> 0.60.",
+      "status": "Problem page re-fetched 2026-10-03; official content confirms public faults are incomplete, experts labelled additional faults for initial private scoring, and final scoring uses an expanded expert-reviewed label set.",
+      "accessed": "2026-10-03",
+      "evidence": "The problem page states public fault labels are incomplete; experts manually identified faults absent from the public USGS database for the initial private test, and submissions are reviewed to update labels for final-round rescoring. It describes DTI and the 300 m distance-weighted tolerance. This source motivates ADD candidates but does not authenticate local labels or any repository score.",
       "feed": false
     },
     {
@@ -123,9 +123,9 @@
       "url": "https://gdr.openei.org/submissions/1391",
       "category": "data",
       "used_for": "Origin of the catalogue labels (doi 10.15121/1881483 per the Official Rules)",
-      "status": "GDR #1391 page fetched 2026-10-02; public CC BY 4.0 listing and named resources verified. Local vectors/points are owner-repository mirrors; this turn did not download or re-hash the GDR packages.",
-      "accessed": "2026-10-02",
-      "evidence": "DOI 10.15121/1881483 (CC-BY-4.0); 9 downloadable zip packages totaling 116.98 MB including qfaults_ingenious_nad83conus117_2023-06-27.zip (v2), vents, and wellspring compilations.",
+      "status": "GDR #1391 page re-fetched 2026-10-03; public CC BY 4.0 listing and named resources confirmed. Page listing does not prove local package bytes or a clipped/schema-audited layer.",
+      "accessed": "2026-10-03",
+      "evidence": "DOI 10.15121/1881483. The public page lists nine archives totaling 116.98 MB, including 2 m temperature probes (1.03 MB), paleogeothermal features (82.04 kB), MT and heat-flow companion items. No package download or new clip was performed by this source-page check; see individual entries and evidence/external_layer_inventory.json for prior runner byte checks.",
       "feed": true,
       "feed_kind": "http"
     },
@@ -240,9 +240,9 @@
       "url": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
       "category": "candidate-data-and-provenance",
       "used_for": "Official provenance/context for the owner-mirrored LiDAR-derived terrain descriptors and H28-2 multi-scale scarp hypothesis",
-      "status": "official catalog page read 2026-10-02; public-domain description and 1-m bare-earth DEM coverage verified; tile binary not retrieved from this sandbox",
-      "accessed": "2026-10-02",
-      "evidence": "USGS record states 1-m 3DEP DEMs are a tiled bare-earth elevation collection produced from high-resolution lidar and identifies 3DEP products as public domain. Repository lidar_scarp_features_u8.tif is a hash-pinned owner mirror/derivative, not a direct USGS download in this session. The local DEM inventory has 716 confirmed links, 706 successful derived tiles, 10 failed tiles (see data_cache/dem_links.json and pinned sibling metadata).",
+      "status": "Official USGS catalog page fetched 2026-10-03: public 1 m lidar-derived bare-earth DEM product. Product-level availability only; the challenge mirror\u2019s 716 tile links, bytes, datum consistency and footprint coverage have not been validated in this checkout.",
+      "accessed": "2026-10-03",
+      "evidence": "The catalog describes standard one-meter DEM tiles as lidar-derived bare-earth elevations, public domain, in UTM/NAD83 with NAVD88 elevations. The owner-mirrored 1m_DEM_links list is not a retrieval audit; actual tile availability and compatibility remain a pre-run data gate for H38-4.",
       "feed": false
     },
     {
@@ -307,6 +307,30 @@
       "status": "Full author-hosted PDF fetched and read through page service on 2026-10-03; DOI resolves the primary article.",
       "accessed": "2026-10-03",
       "evidence": "The paper describes SI-dependent source clustering and the empirical nature of solution rejection thresholds. SI 0 approximates contacts with effectively infinite depth extent; finite/complex faults may require higher indices. Incorrect SI can bias depth. Multiple sources, poor gridding, noise and gradients can yield rejected or spurious solutions; window size trades shallow resolution against representation of deeper sources. Euler supplies source position/depth estimates, not fault dip.",
+      "feed": false
+    },
+    {
+      "id": "usgs-great-basin-heat-flow-2022",
+      "title": "DeAngelo et al. (2022) Heat flow maps and supporting data for the Great Basin, USA",
+      "publisher": "U.S. Geological Survey ScienceBase",
+      "url": "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+      "category": "candidate-external-data",
+      "used_for": "H38-2 queued hypothesis: measured geothermal-well heat-flow residual \u00d7 2 m temperature \u00d7 potential-field corridor.",
+      "status": "Official ScienceBase item page fetched 2026-10-03. It lists the Great Basin ZIP (124.12 MB) and describes a well residual. Listing/availability evidence only; no H38-2 layer was newly fetched, clipped, or schema-audited by this page check.",
+      "accessed": "2026-10-03",
+      "evidence": "DOI 10.5066/P9BZPVUC. ScienceBase describes the point residual as departure from estimated background conductive heat flow, potentially useful for hydrothermal or groundwater influence. evidence/external_layer_inventory.json separately records a runner HTTP 200 / pinned-byte match; this does not establish a local clip or footprint coverage.",
+      "feed": false
+    },
+    {
+      "id": "usgs-great-basin-mt-conductance-2022",
+      "title": "Peacock & Bedrosian (2022) Electrical Conductance Maps of the Great Basin, USA",
+      "publisher": "U.S. Geological Survey ScienceBase",
+      "url": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "category": "candidate-external-data",
+      "used_for": "H38-5 queued coarse-context hypothesis: depth-boundary coherence across five magnetotelluric conductance layers.",
+      "status": "Official ScienceBase item page fetched 2026-10-03. Five 2\u2013200 km depth-slice GeoTIFFs are listed; listing and local runner availability do not establish that this checkout has five audited clips.",
+      "accessed": "2026-10-03",
+      "evidence": "DOI 10.5066/P9TWT2LU. The release describes conductivity/conductance estimated from 800+ MT transfer functions and lists surface (2\u201312 km), middle crust (12\u201320 km), lower crust (20\u201350 km), upper mantle (50\u201390 km), and mantle (90\u2013200 km) rasters. Scale is regional and must not be interpreted as 100 m fault geometry.",
       "feed": false
     }
   ]

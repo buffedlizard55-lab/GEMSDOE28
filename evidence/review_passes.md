@@ -778,3 +778,29 @@ in-footprint cells, `NaN` everywhere outside), and a fresh decade for every re-r
 | Generate 3–5 untried hypotheses and validate top candidate on spatially blocked holdouts | `knowledge/37–39`, `evidence/losfo_session14_h36_1_and_h38.json`, `evidence/h38_1_interleaved_holdout.json` | PASS (`H38-1` through `H38-5`; `H38-1` passed both LOSFO `265–269` and interleaved `270–279`) |
 | Easy-to-download `.tif` in `[0, 1]` at top of site with unique names and notes $\le 200$ chars | `scripts/verify_downloads.py` (`237/237` PASS), `scripts/build_site.py`, `tests/test_site.py` | PASS (`H36-1` `b531dae0a36f` primary, `H38-1` `56a9f473edc7` secondary) |
 | Full test suite, linter, seed audit, and git hygiene | `.venv/bin/pytest -q`, `.venv/bin/ruff check src scripts tests`, `git diff --check` | PASS (`272 passed`, `0` ruff errors, `0` whitespace errors) |
+
+# PR #28 merge reconciliation — three review passes (2026-10-04 UTC)
+
+**Scope correction:** this addendum follows the merge of PR #27/main into the PR #28 branch. The preceding Session 14 review above remains a historical record of what was known before reconciliation. Its “fresh seeds 265–269” statement applies to mainline H36-1 and mainline heat-flow/Euler evidence, not to the separate branch-local Euler × gravity × low-relief attempt. The local run started after main had already used those seeds and its analyzer failed; it is not evaluable and not an independent validation. Do not rerun or re-analyze its raw output.
+
+## Pass 1 — implement and verify
+
+- Resolved the shared site-builder/test reconciliation in favor of upstream main behavior, then added a compact branch-local failure notice to the generated overview and research pages. The notice links the failed claim, raw output (explicitly unverified), upstream seed-use evidence, pre-run hypothesis ranking, and full reconciliation; it never links the unrelated mainline `evidence/h38_1_holdout.json` as the local summary.
+- Added `session14_local_branch_attempt` provenance to `registry/next_hypotheses.json`, updated `registry/irregularities.json`, recorded the final claim hash and summary-path collision, and added an AI-use disclosure to the source ledger and README. All local README destinations were checked: zero missing paths.
+- Restored distinct, content-bearing `submission_name` values for all eight manifest candidates and rendered the primary name beside the prominent download and in the executive summary. Primary name: `GEMSDOE28-h36-1-rung30-blind-r1-b531dae0a36f`; its registered note remains 192/200 characters.
+- Rebuilt the static site from local JSON only (`5` pages, `0` external requests). `scripts/verify_downloads.py` passed `247/247` checks across the eight artifact packages, including single-band float32, exact template CRS/shape/geotransform, in-footprint `[0,1]`, outside-footprint nodata conventions, catalogue exclusion, hashes, unique names, ZIP identity, and note limits.
+
+## Pass 2 — inspect defects, assumptions, and edge cases
+
+- Found after reconciliation that `evidence/h38_1_holdout.json` exists in the merged tree for the different mainline GeoDAWN-radiometric experiment (seeds 280–289). The local analyzer did not write a summary at that path. Added explicit `summary_result_written: false` and a disambiguation note to the failed local claim; final SHA-256 is `d425e976f117463967a0f7cc99eef40b88cd15bbd36537ccd31748a82f99635b`.
+- Updated stale branch-only `h38_status_html`/`h38_result_integrity` tests rather than reintroducing their assumption that the local experiment's failed output could be promoted. New tests assert the failure, seed reuse, H38-1 identifier collision, correct links, malformed optional claim fields, and no mistaken link to the mainline summary.
+- The first full suite exposed missing `submission_name` metadata in the merged main manifest (10 audit checks failed); added eight unique names and reran the audit successfully. No source-data restoration, holdout rerun, or raw-output analysis was performed.
+- Whitespace review found only intentional Markdown hard-break spaces on new upstream Session 14 documentation (`knowledge/43`) and the frozen preregistration (`knowledge/44`). They were preserved to avoid changing historical/frozen bytes; the stray blank line at EOF in the new upstream test file was removed. PR-28-authored edits have no whitespace errors.
+- `.venv/bin/ruff check .`: PASS. Current full suite: `256 passed, 2 skipped`. Site tests: `13 passed`.
+
+## Pass 3 — complete-request and boundary re-check
+
+- The owner-reported `0.2600` remains distinct from the one-off public leaderboard observation: `DARD` was read at `0.3195` and `wbg1` at `0.2600` in the 2026-10-03 snapshot, but neither public row identifies the owner or authenticates a local file. Hashes prove local-byte identity only; there is no organizer receipt or verified GEMSDOE28 score. README and research page now say so explicitly.
+- Beating the reported `0.3195` is described as mathematically possible but not supported as a likely near-term outcome. The conditional inversion estimates a `+1,151` credit gap at the 44,090-dot budget; the current locally validated file projections remain around `0.272–0.274`. No claim is made that a current candidate beats the public leader.
+- A valid, prominent, single-band GeoTIFF remains the H36-1 primary; the independent download audit checks exact grid, `[0,1]`, names and notes. No DrivenData authentication, upload, private score query, or organizer result was obtained. The five-hypothesis ranking remains auditable as a pre-run record; its local top candidate is now marked failed/not evaluable rather than untried or validated.
+- PR #28 is the carrier for this merge reconciliation on the fixed Arena branch. Its final GitHub check/merge state is intentionally not inferred from local tests; report it from the live PR record after CI and merge are complete.

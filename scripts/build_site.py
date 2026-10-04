@@ -359,18 +359,41 @@ def candidate_card(slot: str, item: dict, *, featured: bool = False) -> str:
   <p>{esc(status)}</p>{far_html}
   {file_links(item)}
   <p><strong>NaN GeoTIFF:</strong> <code class="file-name">{esc(item['nan'])}</code></p>
+  <p><strong>Unique submission name:</strong> <code>{esc(item.get('submission_name', 'not registered'))}</code></p>
   <p class="meta">SHA-256 <code>{esc(item.get('sha256_nan', 'not recorded'))}</code> · {esc(item.get('bytes_nan', 'n/a'))} bytes · {esc(item.get('emitted_px', 'n/a'))} positive cells</p>
   <p><strong>Manual note ({len(str(item.get('note', '')))} / 200 characters):</strong></p>{note_box(str(item.get('note', '')))}
 </article>"""
 
 
+def local_h38_branch_attempt_html(claim: dict) -> str:
+    """Describe the archived branch-local H38 experiment without confusing mainline results."""
+    if not isinstance(claim, dict) or claim.get("status") != "FAILED":
+        return ""
+    seeds = claim.get("seeds", [])
+    if not isinstance(seeds, (list, tuple)):
+        seeds = []
+    seed_label = ", ".join(str(seed) for seed in seeds) if seeds else "not recorded"
+    review = claim.get("seed_independence_review", {})
+    if not isinstance(review, dict):
+        review = {}
+    reused_seeds = review.get("upstream_seeds", [])
+    if not isinstance(reused_seeds, (list, tuple)):
+        reused_seeds = []
+    reused_label = ", ".join(str(seed) for seed in reused_seeds) if reused_seeds else "265–269"
+    return f"""<section class="section" id="parallel-h38-attempt"><div class="callout">
+<strong>Archived branch-local H38-1 attempt — FAILED / not evaluable.</strong> This distinct Euler × gravity-gradient × low-valid-relief rule ran once on seeds {esc(seed_label)}; its runner completed 20 cells, but the analyzer failed on NumPy <code>int64</code> JSON serialization. This run wrote no summary and has no C1–C5 decision. Reconciliation found that main had already used seeds {esc(reused_label)} for its H36-1 LOSFO run before this branch started, so this attempt was not an independent fresh holdout. Do not rerun or infer a scientific pass/fail. The same short H38-1 label is also used by separate mainline heat-flow/Euler and GeoDAWN-radiometric work; do not combine their results.
+<p><a href="../evidence/h38_1_holdout.started.json">Branch-local claim</a> · <a href="../evidence/losfo_h38_1_raw.json">raw output (unverified)</a> · <a href="../evidence/losfo_session14_h36_1_and_h38.json">mainline seed-use evidence</a> · <a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">pre-run five-hypothesis ranking</a> · <a href="../knowledge/39_session14_closeout_2026-10-03.md">full reconciliation</a>.</p>
+</div></section>"""
+
+
 def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, restore: dict,
                  screen: dict, confirmation: dict, seed_audit: dict, h32: dict,
-                 h35: dict = None, h35_6: dict = None) -> str:
+                 h35: dict = None, h35_6: dict = None, local_h38_claim: dict = None) -> str:
     primary = manifest["primary"]
     q = manifest.get("quaternary", {})
     h35 = h35 or {}
     h35_6 = h35_6 or {}
+    local_h38_branch_note = local_h38_branch_attempt_html(local_h38_claim or {})
     # Everything the page says about the advertised file is read from the manifest, so the slot can be
     # re-pointed without leaving another file's numbers attached to it (that bug was found twice).
     _pe = str(primary.get("holdout_evidence", "evidence/h32_1_holdout.json"))
@@ -434,11 +457,14 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
   {file_links(primary)}
   {mirror_line(primary)}
   <p><strong>Exact filename</strong></p><code class="file-name">{esc(primary['nan'])}</code>
+  <p><strong>Unique submission name:</strong> <code>{esc(primary.get('submission_name', 'not registered'))}</code></p>
   <p class="meta">SHA-256 <code>{esc(primary.get('sha256_nan', ''))}</code> · {esc(primary.get('bytes_nan'))} bytes · single-band float32 · {esc(primary.get('emitted_px'))} cells equal to 1 · CRS EPSG:32611 · 100 m grid · template footprint {comma(restore.get('grid', {}).get('footprint_pixels', 5167373))} cells.</p>
   <p><strong>Exact short note ({len(str(primary.get('note', '')))} / 200 characters):</strong></p>
   {note_box(str(primary.get('note', '')))}
   <p class="small">{primary_evidence_note} Built on the owner-reported <strong>{fmt_number(primary.get('base_reference_live_score', 0.26), 4)}</strong> <code>d=2.8</code> base (<code>{esc(str(primary.get('base_reference_id', '')))}</code>) without T-v2 gap closure. This file is a research/reference artifact, not one of the four weekly slots inherited from the predecessor campaign.</p>
 </section>
+
+{local_h38_branch_note}
 
 <div class="callout"><strong>Manual-only boundary:</strong> no login, download, upload, scrape, poll, or monitoring of DrivenData occurs in this repository. Review the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a> and <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules</a> yourself before deciding whether to submit. A local audit does not guarantee portal acceptance.</div>
 
@@ -686,7 +712,8 @@ def session11_section(h35: dict, h35_6: dict) -> str:
 def render_research(registry: dict, h28: dict, euler: dict, board: dict,
                     screen: dict, confirmation: dict, seed_audit: dict, h32: dict,
                     frontier: dict, losfo: dict, h33: dict, h34: dict, h34_hold: dict,
-                    h35: dict = None, h35_6: dict = None) -> str:
+                    h35: dict = None, h35_6: dict = None, local_h38_claim: dict = None) -> str:
+    local_h38_branch_note = local_h38_branch_attempt_html(local_h38_claim or {})
     hypotheses = sorted(registry.get("hypotheses", []), key=lambda item: item.get("rank", 999))
     hypothesis_html = "".join(render_hypothesis_card(h, screen, confirmation, seed_audit) for h in hypotheses)
     si0 = euler.get("structural_indices", {}).get("0", {})
@@ -750,7 +777,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
     )
     return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Research</div>
 <section class="hero"><div class="hero-content"><div class="eyebrow">Hypotheses, evidence and preregistration</div><h1>Test the geology.<br>Respect the proxy.</h1>
-<p class="lead">{len(hypotheses)} currently ranked untried geological hypotheses, reviewed against in-repository experiments and evidence, plus top candidate <strong>H32-1</strong> validated on a 4-fold spatially blocked holdout (seeds 180–189). Planning ranges are subjective, uncertain catalogue-holdout priors—not observed gains or competition-score predictions.</p>
+<p class="lead">{len(hypotheses)} untried entries remain in the historical Session 10 H33 queue. The <a href="../knowledge/43_hypotheses_heatflow_euler.md">Session 14 five-hypothesis synthesis and subsequent status</a> are recorded separately; the archived branch-local H38-1 attempt is disclosed below. The top candidate <strong>H32-1</strong> was validated on a 4-fold spatially blocked holdout (seeds 180–189). Planning ranges are subjective, uncertain catalogue-holdout priors—not observed gains or competition-score predictions.</p>
 <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status proxy">PROXY ≠ COMPETITION</span></div></div></section>
 
 <section class="section"><h2>Session 14 — H36-1 LOSFO far-field verification (ALL 4 PASS) &amp; H38-1 multi-physics corroboration (ALL 4 PASS)</h2>
@@ -769,8 +796,10 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 </ul>
 <p>Companion artifact: <code>gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif</code> (37,860 px = 37,660 H36-1 + 200 corroborated dots), slotted at secondary. <a href="../knowledge/43_hypotheses_heatflow_euler.md">Session 14 hypotheses (H38-1..H38-5)</a> · <a href="../knowledge/44_preregistration_H36_1_and_H38_farfield.md">Frozen preregistration</a> · <a href="../knowledge/45_h36_1_and_h38_1_result.md">Full result record</a> · <a href="../evidence/losfo_session14_h36_1_and_h38.json">LOSFO evidence JSON</a> · <a href="../evidence/h38_1_interleaved_holdout.json">Interleaved evidence JSON</a></p></div></section>
 
+{local_h38_branch_note}
+
 <section class="section"><h2>Validated top candidate — H32-1 de-jittering (PASS on 4-fold spatially blocked holdout, seeds 180–189)</h2>
-<div class="callout"><strong>Why tip- &amp; Euler-protected mid-segment de-jittering was designed and validated before touching a weekly slot:</strong> Live score inversion of all 24 SHA-256-authenticated submissions (<a href="../evidence/live_inversion.json">evidence/live_inversion.json</a>) proved that <code>25GEMSDOE dotted-h19-5-d2-8</code> (<code>e56ea318af89</code>, 44,090 px) scored <strong>0.2600</strong> (+0.0123 over 0.2477 <code>d=1.5</code>), whereas <code>27GEMSDOE topo-gap-closure-t-v2-on-d1-5</code> (<code>5512495c6bd1</code>, 61,328 px) scored <strong>0.2449</strong> (−0.0028 vs 0.2477, 0.00210 credit/dot vs 0.0495 break-even) and <code>26GEMSDOE dilcond-oof-v1</code> (<code>47629f496133</code>) scored <strong>0.1223</strong>. In the 0.2600 <code>d=2.8</code> emission, 3,891 pixels (8.83%) lie at <em>d</em><sub>cat</sub> = 100 m beside masked known catalogue faults. <strong>{esc(top_val.get('title', 'H32-1'))}</strong> prunes the 2,434 mid-segment lateral flank-shadow pixels (<em>d</em><sub>cat</sub> ≤ 100 m AND <em>d</em><sub>end</sub> &gt; 300 m AND cat_nbrs ≥ 2 AND <em>d</em><sub>Euler</sub> &gt; 300 m) while protecting the 1,457 pixels within 300 m of a catalogue fault tip or a retained Reid et al. (1990) SI=0 Euler depth-coherent contact cluster (<a href="../evidence/h31_1_euler_clusters.csv">evidence/h31_1_euler_clusters.csv</a>). On fresh seeds 180–189 (<a href="../evidence/h32_1_holdout.json">evidence/h32_1_holdout.json</a>), <code>h32_1_post_d28</code> gained <strong>+0.001272</strong> mean ΔDTI (10/10 seeds, 4/4 spatial folds) and <code>h32_1_pre_d28</code> gained <strong>+0.001399</strong> (10/10 seeds, 4/4 folds), with protected tip/Euler pixels carrying <strong>2.29× higher credit density</strong> than mid-segment flank shadow (0.00919 vs 0.00402 credit/FP).</div></section>
+<div class="callout"><strong>Why tip- &amp; Euler-protected mid-segment de-jittering was designed and validated before touching a weekly slot:</strong> Local inversion of 24 hash-matched raster/score records (<a href="../evidence/live_inversion.json">evidence/live_inversion.json</a>) is conditional on owner-reported score-to-file pairings: SHA-256 verifies local bytes, not a DrivenData receipt or upload association. On that basis, the repository attributes <strong>0.2600</strong> to <code>25GEMSDOE dotted-h19-5-d2-8</code> (<code>e56ea318af89</code>, 44,090 px; owner-reported, not independently organizer-verified), +0.0123 over 0.2477 <code>d=1.5</code>; it records <strong>0.2449</strong> for <code>27GEMSDOE topo-gap-closure-t-v2-on-d1-5</code> (<code>5512495c6bd1</code>, −0.0028 vs 0.2477, 0.00210 credit/dot vs 0.0495 break-even) and <strong>0.1223</strong> for <code>26GEMSDOE dilcond-oof-v1</code> (<code>47629f496133</code>). In the 0.2600 <code>d=2.8</code> emission, 3,891 pixels (8.83%) lie at <em>d</em><sub>cat</sub> = 100 m beside masked known catalogue faults. <strong>{esc(top_val.get('title', 'H32-1'))}</strong> prunes the 2,434 mid-segment lateral flank-shadow pixels (<em>d</em><sub>cat</sub> ≤ 100 m AND <em>d</em><sub>end</sub> &gt; 300 m AND cat_nbrs ≥ 2 AND <em>d</em><sub>Euler</sub> &gt; 300 m) while protecting the 1,457 pixels within 300 m of a catalogue fault tip or a retained Reid et al. (1990) SI=0 Euler depth-coherent contact cluster (<a href="../evidence/h31_1_euler_clusters.csv">evidence/h31_1_euler_clusters.csv</a>). On fresh seeds 180–189 (<a href="../evidence/h32_1_holdout.json">evidence/h32_1_holdout.json</a>), <code>h32_1_post_d28</code> gained <strong>+0.001272</strong> mean ΔDTI (10/10 seeds, 4/4 spatial folds) and <code>h32_1_pre_d28</code> gained <strong>+0.001399</strong> (10/10 seeds, 4/4 folds), with protected tip/Euler pixels carrying <strong>2.29× higher credit density</strong> than mid-segment flank shadow (0.00919 vs 0.00402 credit/FP).</div></section>
 
 <section class="section"><h2>Session 10 — what beating 0.3195 costs, in pixels of credit</h2>
 <div class="callout"><strong>The gap is a detection gap, not a budget gap.</strong> <code>scripts/reachability_frontier.py</code> (<a href="../evidence/reachability_frontier.json">evidence/reachability_frontier.json</a>) inverts the official metric. The closed form <code>DTI = TPw / (0.2·TPw·(1−ρ) + 0.2·N + 0.8·|G|)</code> is <strong>checked numerically against <code>metric.dti_binary</code> on {esc(fr_ident.get('n_cases', 0))} synthetic grids</strong> before use — max absolute residual <code>{fr_ident.get('max_abs_residual', float('nan')):.2e}</code>, and the substitution <code>FPw = N − MPw</code> holds in every case. At the calibrated |G| = {comma(int(frontier.get('inputs', {}).get('G_used_px', 0)))} px, the best owner-anchored submission earns <strong>{comma(int(fr_cur.get('credit_TPw', 0)))} px of credit ({fmt_number(fr_cur.get('credit_fraction_of_G', 0) * 100, 1)}% of |G|)</strong> at N = {comma(int(fr_cur.get('emitted_px', 0)))}. Reaching <strong>0.3195</strong> at that same budget needs <strong>{comma(int(fr_lead.get('credit_required_at_current_budget', 0)))} px</strong> — a gap of <strong>+{comma(int(fr_conc.get('credit_gap_to_leader_at_current_budget_px', 0)))} px, {fmt_number(fr_conc.get('relative_credit_increase_needed', 0) * 100, 1)}% more credit than the entire 0.2600 submission captures</strong>.</div>
@@ -851,7 +880,7 @@ def render_topology(manifest: dict, irregularities: dict, sources: dict, review:
 <section class="hero"><div class="hero-content"><div class="eyebrow">Prior research · continuity, not automatic interpolation</div><h1>Map structures.<br>Do not bridge blindly.</h1><p class="lead">The topology work is retained as a comparator and a geologist-review queue. Fault-link candidates are local geological hypotheses, not facts about subsurface continuity.</p><div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status proxy">REVIEW ONLY</span></div></div></section>
 <section class="section"><h2>What the earlier tests found</h2><div class="grid">
 <article class="card span-6"><h3>Topology gate</h3><p>Earlier in-repository T-v2 candidate arms proposed 1–4 km connections between named/categorized fault traces with structural and spatial controls. The historical catalogue-component and whole-feature hide-and-recover metrics are proxy results; they do not demonstrate a connection at a particular hidden fault or transfer to the competition's expert labels.</p><p>Every link is an explicit, reviewable geologic claim, with endpoint attributes, spacing, orientation, kinematic compatibility, third-system proximity, alternative interpretations and limitations. A graph must not bridge broad basins merely because an algorithm finds nearby endpoints.</p><p><a href="../knowledge/03_preregistration_topology_gate.md">Frozen historical topology gate</a> · <a href="../knowledge/04_topology_graph_argument.md">Topology/graph rationale</a> · <a href="../evidence/vector_topology_validation.json">Vector topology evidence</a></p></article>
-<article class="card span-6"><h3>Current file is not a graph-proof</h3><p>The prominent file is {esc(selected.get('hypothesis', 'an H28-1 research reference'))}. It contains a historical T-v2 component among other transformations, but its holdout evidence is for a paired catalogue proxy. The primary download is <strong>UNSCORED</strong>, and no GEMSDOE28 score or submission receipt is recorded.</p><p><code class="file-name">{esc(selected.get('nan', ''))}</code></p><p><a href="index.html#download">Return to the one-click download and exact note</a></p></article>
+<article class="card span-6"><h3>Current file is not a graph-proof</h3><p>The prominent file is {esc(selected.get('hypothesis', 'an H28-1 research reference'))}. It contains a historical T-v2 component among other transformations, but its holdout evidence is for a paired catalogue proxy. The primary download is <strong>UNSCORED</strong>, and no GEMSDOE28 score or submission receipt is recorded.</p><p><code class="file-name">{esc(selected.get('nan', ''))}</code></p><p><strong>Unique submission name:</strong> <code>{esc(selected.get('submission_name', 'not registered'))}</code></p><p><a href="index.html#download">Return to the one-click download and exact note</a></p></article>
 </div></section>
 <section class="section"><h2>H27-5b geologist-review queue</h2>
 <div class="callout"><strong>Geologist-review priority class: H27-5b ({priority} / {count} links)</strong><br>These are the {priority} same-name, cross-FID, permissively kinematic-compatible links drawn from the existing 345 shipped T-v2 links. All 345 have a 1–4 km gap. This is a review-priority class, not a prediction rank, new candidate generation, validated subsurface connection, score, or proof of transfer.</div>
@@ -891,6 +920,7 @@ def render_sources(sources_registry: dict, board: dict) -> str:
 <section class="hero"><div class="hero-content"><div class="eyebrow">Manual source review ledger</div><h1>Claims tied<br>to their sources.</h1><p class="lead">Each entry says what was reviewed, how it was accessed, and what remains unknown. A repository mirror or catalog listing does not establish official byte identity, schema, coverage, downloadability, or licence.</p><div class="value-line"><span class="value-pill">Primary/official first</span><span class="value-pill">No invented provenance</span><span class="status blocked">NO DD AUTOMATION</span></div></div></section>
 <section class="section"><div class="callout"><strong>Competition-page policy:</strong> no automated DrivenData fetch, browser bot, API, scraping, upload, scheduled job or monitoring. The leaderboard snapshot dated {esc(board.get('snapshot_date', 'not recorded'))} was read once manually. <a href="{esc(board.get('url', 'https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'))}">Manual human-review link</a>. Public scores shown there are not linked to the repository owner or local files.</div>
 <p>Registry note: {esc(sources_registry.get('note', 'Verification status varies by source.'))}</p>
+<p><strong>AI-use disclosure:</strong> <a href="../AI_DISCLOSURE.md">AI_DISCLOSURE.md</a> records the tools and review boundaries for this repository; the required final-round narrative must still disclose AI use in the organizer’s requested format.</p>
 <p>The site generator reads the local JSON registry only; it makes no external request. The separately invoked <code>scripts/refresh_source_feed.py</code> has an explicit forbidden-host guard for <code>drivendata.org</code> and is not part of site build or CI.</p>
 </section>
 <section class="section"><h2>{len(sources)} registered source records</h2>{''.join(items)}
@@ -934,10 +964,11 @@ def main() -> int:
     h34_hold = read_json("evidence/h34_holdout.json", {})
     h35 = read_json("evidence/h35_1_thermal_farfield.json", {})
     h35_6 = read_json("evidence/h35_6_candidate_headtohead.json", {})
+    local_h38_claim = read_json("evidence/h38_1_holdout.started.json", {})
     pages = {
-        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6), "Overview"),
+        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "Overview"),
         "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "Executive summary"),
-        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6), "Research"),
+        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
     }

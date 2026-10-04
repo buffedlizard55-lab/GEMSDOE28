@@ -28,6 +28,8 @@ class Links(HTMLParser):
 def test_site_builds_from_json_only_and_pages_exist():
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_site.py")], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
+    # The registry retains four untried entries in the historical Session 10 H33 queue.
+    assert json.loads(r.stdout)["hypotheses"] == 4
     for p in PAGES:
         assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
 
@@ -43,6 +45,10 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
     inputs.add("docs/downloads/h28_1_candidate_manifest.json")
     for path in inputs | {
         "docs/data/topology_review_classes.json",
+        "evidence/losfo_h38_1_raw.json",
+        "evidence/h38_1_seed_audit_pre_run.json",
+        "knowledge/39_session14_closeout_2026-10-03.md",
+        "AI_DISCLOSURE.md",
         "scripts/build_site.py",
         ".github/workflows/build-site.yml",
         "docs/assets/**",
@@ -130,6 +136,42 @@ def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp
     assert "without a screen report" in build_site.h31_next_step({}, {}, stray_confirmation)
 
 
+def test_branch_local_h38_attempt_discloses_failure_and_seed_reuse_without_promoting_main_result():
+    from scripts import build_site
+
+    claim = json.loads((ROOT / "evidence" / "h38_1_holdout.started.json").read_text())
+    html = build_site.local_h38_branch_attempt_html(claim)
+    assert "FAILED / not evaluable" in html
+    assert "seeds 265, 266, 267, 268, 269" in html
+    assert "not an independent fresh holdout" in html
+    assert "This run wrote no summary and has no C1–C5 decision" in html
+    assert "separate mainline heat-flow/Euler and GeoDAWN-radiometric work" in html
+    assert "../evidence/losfo_h38_1_raw.json" in html
+    assert "../knowledge/39_session14_closeout_2026-10-03.md" in html
+    assert "../evidence/h38_1_holdout.json" not in html
+    assert "seeds not recorded" in build_site.local_h38_branch_attempt_html({"status": "FAILED", "seeds": None, "seed_independence_review": None})
+    assert build_site.local_h38_branch_attempt_html({"status": "RUNNING"}) == ""
+
+
+def test_local_failure_claim_and_registry_disambiguate_summary_path_collision():
+    claim_path = ROOT / "evidence" / "h38_1_holdout.started.json"
+    claim = json.loads(claim_path.read_text())
+    registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
+    attempt = registry["session14_local_branch_attempt"]
+    collision = attempt["summary_path_collision"]
+    mainline_report = ROOT / collision["frozen_branch_expected_summary_path"]
+    assert claim["summary_result_written"] is False
+    assert claim["summary_result_artifact"] is None
+    assert "seeds 280–289" in claim["summary_result_disambiguation"]
+    claim_sha = hashlib.sha256(claim_path.read_bytes()).hexdigest()
+    assert claim_sha == attempt["artifacts"]["claim"]["sha256"]
+    irregularities = json.loads((ROOT / "registry" / "irregularities.json").read_text())
+    irregularity = next(item for item in irregularities["items"] if item["id"] == "session14-local-h38-euler-gravity-seed-reuse")
+    assert claim_sha in irregularity["issue"]
+    assert hashlib.sha256(mainline_report.read_bytes()).hexdigest() == collision["current_mainline_path_sha256"]
+    assert "GeoDAWN-radiometric" in collision["current_mainline_path_belongs_to"]
+
+
 def test_all_internal_links_and_assets_resolve():
     for base, p in [(DOCS, q) for q in PAGES] + [(ROOT, "index.html")]:
         parser = Links()
@@ -168,26 +210,37 @@ def test_front_page_has_download_and_exact_note():
     assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
     assert P["note"] in idx.replace("&#x27;", "'") or P["note"].replace("|", "|") in idx
     assert len(P["note"]) <= 200
+    assert P["submission_name"] in idx and P["content_id"] in P["submission_name"]
     assert "UNSCORED" in idx
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
     research = (DOCS / "research.html").read_text()
     registry = json.loads((ROOT / "registry" / "next_hypotheses.json").read_text())
-    # H33-1 was RUN and refuted in session 10 (knowledge/21), so it moved from the untried list to
-    # tested_hypotheses. The count and the site wording must both track that, not a hardcoded 5.
-    untried_ids = {h["id"] for h in registry["hypotheses"]}
-    assert untried_ids == {"H33-2", "H33-3", "H33-4", "H33-5"}
+    # The mainline registry preserves the four-item Session 10 H33 queue; the separate five-item
+    # branch-local H38 ranking is historical and linked from the failure/reconciliation notice.
+    historical_ids = {h["id"] for h in registry["hypotheses"]}
+    assert historical_ids == {"H33-2", "H33-3", "H33-4", "H33-5"}
     assert len(registry["hypotheses"]) == 4
-    assert f"{len(registry['hypotheses'])} currently ranked untried geological hypotheses" in research
-    assert "session-10 ranking above contains the four H33-series hypotheses that remain untried" in research
+    assert "Archived branch-local H38-1 attempt — FAILED / not evaluable" in research
+    assert "knowledge/37_ranked_hypotheses_session14_2026-10-03.md" in research
+    assert "H38-1" in research and "do not combine their results" in research
+    assert "owner-reported, not independently organizer-verified" in research
+    assert "SHA-256 verifies local bytes, not a DrivenData receipt" in research
+    assert "one-off manual public-page observation" in research
     assert "H33-1 was run on its reserved seeds 200\u2013209 and refuted" in research
-    assert "not part of the current untried list" in research
+    ranking = (ROOT / "knowledge" / "37_ranked_hypotheses_session14_2026-10-03.md").read_text()
+    assert all(f"H38-{i}" in ranking for i in range(1, 6))
+    assert "**Layers:**" in ranking
+    assert "Physical signature" in ranking
+    assert "USGS 3DEP" in ranking
+    assert "not holdout results, organizer results" in ranking
+    assert "FAILED / NOT EVALUABLE" in ranking
     assert "four-item untried list" not in research
     # the site must never still claim H33-1 is untried
     assert "the five untried H33-series hypotheses" not in research
-    assert "H31-1" not in untried_ids
-    assert "H33-1" not in untried_ids
+    assert "H31-1" not in historical_ids
+    assert "H33-1" not in historical_ids
     h33_1 = next(item for item in registry["tested_hypotheses"] if item["id"] == "H33-1")
     assert h33_1["outcome"] == "REFUTED"
     assert h33_1["seeds"] == "200-209"
@@ -220,6 +273,15 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
         summary = (DOCS / "executive-summary.html").read_text()
         assert candidate["nan"] in summary
         assert "not one of the four weekly slots" in summary
+
+
+def test_ai_use_disclosure_is_present_and_linked_from_source_ledger():
+    disclosure = (ROOT / "AI_DISCLOSURE.md").read_text()
+    sources = (DOCS / "sources.html").read_text()
+    assert "Arena.ai Agent Mode" in disclosure
+    assert "not a substitute for the required narrative statement" in disclosure
+    assert "AI_DISCLOSURE.md" in sources
+    assert "required final-round narrative" in sources
 
 
 def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
