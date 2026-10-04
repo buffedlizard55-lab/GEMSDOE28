@@ -89,31 +89,27 @@
 
 ## 1. Executive Summary & One-Click Verified Submission GeoTIFFs (`docs/downloads/`)
 
-All submission artifacts in `docs/downloads/` are verified by `scripts/verify_downloads.py` (**`208/208` checks PASS, `0` failures**, `evidence/submission_file_audit.json`; the count grew from `179` because Session 13 added an audited `conservative_alternative` slot instead of dropping the file the re-slot displaced): single-band `float32`, exact template grid (`EPSG:32611`, `3730 × 3292`, `100 m` pixels, `5,167,373` inside-footprint cells), values strictly in `{0.0, 1.0} ⊂ [0, 1]` inside the footprint, zero internal `NaN`s, `NaN` outside the footprint (`-nan.tif`, with an `-allfinite.tif` fallback having `0.0` outside and no `NaN` anywhere), zero overlap with the `60,988` known catalogue pixels, content-addressed 12-hex ID, single-member `.zip`, and a registered note $\le 200$ characters.
+All submission artifacts in `docs/downloads/` are verified by `scripts/verify_downloads.py` (**`237/237` checks PASS, `0` failures**, `evidence/submission_file_audit.json`; the count grew from `208` because Session 14 added the `H38-1` multi-physics corroborated package at `secondary` while retaining `H37-1` under `h37_1_falsified`): single-band `float32`, exact template grid (`EPSG:32611`, `3730 × 3292`, `100 m` pixels, `5,167,373` inside-footprint cells), values strictly in `{0.0, 1.0} ⊂ [0, 1]` inside the footprint, zero internal `NaN`s, `NaN` outside the footprint (`-nan.tif`, with an `-allfinite.tif` fallback having `0.0` outside and no `NaN` anywhere), zero overlap with the `60,988` known catalogue pixels, content-addressed 12-hex ID, single-member `.zip`, and a registered note $\le 200$ characters.
 
-| Slot | Filename (`docs/downloads/`) | Content ID | Emitted px | 4-Fold Spatial-CV Holdout | Hybrid Model vs `0.2600` Anchor | Registered Note ($\le 200$ chars) |
+| Slot | Filename (`docs/downloads/`) | Content ID | Emitted px | 4-Fold Spatial-CV & LOSFO Far-Field Holdout | Hybrid Model vs `0.2600` Anchor | Registered Note ($\le 200$ chars) |
 |---|---|---|---:|---|---:|---|
-| **Primary (One-Click) — RESTORED 2026-10-03 by the pre-committed far-field rule** | `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` | `b531dae0a36f` | `37,660` | **`+0.002599` (`10/10` seeds, `4/4` folds) on fresh seeds `240–249`, replicated `+0.002675` on the independent decade `250–259`**; matched-`N` random-drop control `−0.001657` | `0.2717–0.2727` (live-anchored dose ladder) | `28GEMSDOE H36-1 rung3.0+r1 | …` |
-| **Secondary — far-field falsification FAILED (F1)** | `gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif` | `0bbddf41eb6d` | `37,447` | **`+0.007289` interleaved (`10/10` seeds, `4/4` folds; control `−0.044684`) but `−0.000037 ± 0.000832` far field (LOSFO seeds `210–214`, 9/20 cells)** — the interleaved gain is catalogue adjacency; projection withdrawn | withdrawn (was `0.278–0.286`) | `28GEMSDOE H37-1 cover+h19 | … | UNSCORED, not slot-approved` |
-| **Tertiary** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) — replicated `+0.001761` on fresh seeds 235–239 (`5/5` seeds, `4/4` folds) | `0.2686` | `28GEMSDOE H27-4 d2.8 solo | ΔDTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) | 0.2600 d2.8 base, no T-v2 | id 8acb75e1f2cc` |
-| **Quaternary** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre | OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 | id 31e35eee884e | UNSCORED, not slot-approved` |
-| **Conservative alternative (kept audited)** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post | OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 | id c3aeda1d31a3 | UNSCORED, not slot-approved` |
-| **Reference** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130–139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference | OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed | id 450eb6859636 | research only` |
+| **Primary (One-Click) — Verified on Interleaved AND LOSFO Far-Field** | `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` | `b531dae0a36f` | `37,660` | **`+0.002599` interleaved (`10/10` seeds `240–249`, replicated `+0.002675` on `250–259` and `+0.002804` on `270–279`) AND `+0.001713` LOSFO far-field (`16/20` cells, `5/5` seeds `265–269`, `F1–F4` ALL PASS, $e_{\text{far}} = 0.01359 < \tau_{\text{live}} = 0.05485$)** | `0.2717–0.2727` (live-anchored dose ladder) | `28GEMSDOE H36-1 rung3.0+r1 \| …` |
+| **Secondary — H38-1 Multi-Physics Corroboration (`C1–C4` ALL PASS)** | `gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif` | `56a9f473edc7` | `37,860` | **`0.07724` LOSFO credit/dot (`+0.000792`, `17/20` cells, `4/5` seeds) on `d=2.8`; `0.06993` credit/dot (`+0.000747` over `H36-1`, `+0.002460` over `d=2.8`, `16/20` cells, `4/5` seeds) on `H36-1`; `+0.000543` interleaved over `H36-1` (`27/40` cells, `8/10` seeds `270–279`)** | `0.2722–0.2735` (adds `200` corroborated dots onto `H36-1`) | `28GEMSDOE H38-1 hf+euler+r30r1 \| … \| id 56a9f473edc7` |
+| **Tertiary** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) — replicated `+0.001761` on fresh seeds 235–239 (`5/5` seeds, `4/4` folds) AND `+0.002249` LOSFO far-field (`20/20` cells, exact `0.00` TP lost) | `0.2686` | `28GEMSDOE H27-4 d2.8 solo \| ΔDTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) \| 0.2600 d2.8 base, no T-v2 \| id 8acb75e1f2cc` |
+| **Quaternary** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre \| OOF ΔDTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 \| id 31e35eee884e \| UNSCORED, not slot-approved` |
+| **Conservative alternative (kept audited)** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) — conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post \| OOF ΔDTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 \| id c3aeda1d31a3 \| UNSCORED, not slot-approved` |
+| **Falsified packing comparator (kept audited)** | `gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif` | `0bbddf41eb6d` | `37,447` | `+0.007289` interleaved (`10/10` seeds, `4/4` folds) but `−0.000037 ± 0.000832` far field (LOSFO seeds `210–214`, `9/20` cells) — demoted per pre-committed rule | withdrawn (was `0.278–0.286`) | `28GEMSDOE H37-1 cover+h19 \| … \| UNSCORED, not slot-approved` |
+| **Reference** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130–139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference \| OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed \| id 450eb6859636 \| research only` |
 
-**Session 14 left the slot order unchanged.** The radiometric arm (H38-1) passed its frozen gate and then failed to earn a far-field transfer licence, so no file was built and this table, the manifest and every SHA-256 below are unchanged; the session's result is the attribution of the H37-1 falsification plus a twice-replicated far-field signal for a construction that is not yet gated (§3.10, `knowledge/39`, `knowledge/42`).
-
-**One-click route that does not depend on GitHub Pages.** GitHub Pages for this repository reports
-`status: errored` (legacy build; see `registry/irregularities.json` → `github-pages-legacy-build-errored`),
-and the sandbox token cannot change the Pages source (`403 Resource not accessible by integration`).
-The primary file is therefore also reachable directly from the repository, which is a normal one-click
-download for a browser:
+**One-click routes that do not depend on GitHub Pages.** The primary (`H36-1`, `37,660` px) and secondary (`H38-1`, `37,860` px) files are reachable directly from the repository:
 
 ```
+# Primary (H36-1, 37,660 px, SHA-256 5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641)
 https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif
-```
 
-Verify the SHA-256 `5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641` after
-downloading. The site carries the same fallback link under the main download button.
+# Secondary (H38-1, 37,860 px, SHA-256 81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783)
+https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif
+```
 
 ---
 
@@ -668,41 +664,10 @@ dots earn in the same region — the depth-dispersion statistic does carry off-c
 0.0312 < 0.0548, so adding dots at this rate *lowers* the live score (296 dots: `0.260627 → 0.260294`;
 the arm's full 5,916-dot scale: `→ 0.254356`). One of four folds is negative (`NE_LidarGapHeavy`
 −0.000390 against `NW` +0.001186, `SE` +0.000893, `SW` +0.000617), which is why C1's spread rule exists.
-Seed ledger: **260–264 spent; 265–269 free.** `knowledge/31`'s ledger now puts **H37-2** (concealed-fault
-conjunction) next, with the H37-3 lesson attached: *a licence that clears 1.65× random can still lose if
-its rate is below the bar*. Registered as `h37-3-licence-real-but-below-the-live-rate` and
+Seed ledger: **260–264 spent by H37-3; 265–269 spent by Session 14 LOSFO (`H36-1` + `H38`); 270–279 spent by Session 14 interleaved (`H38-1`); 215–219 and 280+ free.** Registered as `h37-3-licence-real-but-below-the-live-rate` and
 `cross-seed-baseline-comparison-is-not-an-integrity-check` in `registry/irregularities.json`.
 
-**Answer to the standing question.** Why did `0.2600` win, and can we beat it? `0.2600` won because
-Poisson-disk thinning at `d = 2.8` cut 63 % of the H19-5 pixels while retaining 90.6 % of the `d=1.5`
-credit (`knowledge/01`). Session 13 tested the cheapest remaining candidate — the **selection rule** rather than new
-geology: `+0.0073` interleaved at a matched budget, and its far-field falsification test then
-**failed** (`−0.000037 ± 0.000832` on the LOSFO decade; F1/F3 FAIL, F2 passes only against a
-capacity-limited random control — `knowledge/33`). The honest conclusion is that the interleaved
-gain is earned beside the published catalogue, the `0.278–0.286` projection is withdrawn, and the
-one-click slot returned to H36-1's live-anchored `0.2717–0.2727`. Beating `0.3195` still needs
-`+1,151 px` of credit (`knowledge/20` §3.1) and remains a **detection** problem; the ranked geological
-candidates for that are in `knowledge/31_hypotheses_session13.md`.
-
-**Stated plainly, in the same breath.** The standing holdout hides catalogue components interleaved
-with the known catalogue, so 100 % of its truth lies at distance 0 from the published catalogue. A
-coverage objective aimed at a field trained on that catalogue is *a priori* favoured by the protocol.
-The gate is therefore necessary and passed with a devastating content-blind control, **but this session
-did not run the LOSFO far-field instrument on it**, and that is the highest-value next measurement.
-
-**Infrastructure irregularity found and reported this session.** GitHub Pages for this repository is
-**not deploying**: the Pages API reports `status: errored`, the last successful legacy build was at
-`2026-10-03T21:11Z`, and the runs after it (`e429135` → `"Page build failed."`; `a667805` → stuck
-`building`) leave the published site stale. The repository's own Actions deployment
-(`.github/workflows/pages.yml`, `actions/deploy-pages`) succeeds and the two paths are configured
-against each other (`build_type: legacy`, source `main:/`). Registered in
-`registry/irregularities.json: github-pages-legacy-build-errored`; whatever is published at
-`https://buffedlizard55-lab.github.io/GEMSDOE28/` should be treated as possibly stale until the Pages
-source is switched to **GitHub Actions**.
-
----
-
-### 3.10 Session 14 — the far-field attribution, a new-information arm, and a slot that stayed closed
+#### 3.10a Session 14a (parallel branch) — the far-field attribution, a new-information arm, and a slot that stayed closed
 
 **Why the session started where it did.** Session 13 ended with H37-1 demoted by its own far-field rule
 (§3.9). Session 14 began by asking *which* construction that rule had actually falsified, because the
@@ -789,6 +754,46 @@ session: `farfield-arm-did-not-match-gate-construction`, `h36-1-dose-change-is-f
 
 ---
 
+#### 3.10b Session 14b — `H36-1` LOSFO Far-Field Verification (`F1–F4` ALL PASS) & `H38-1` Multi-Physics Corroboration (`C1–C4` ALL PASS)
+
+Full write-up: `knowledge/43_hypotheses_heatflow_euler.md` (5 ranked hypotheses), `knowledge/44_preregistration_H36_1_and_H38_farfield.md` (frozen at commit `ff85e30`), `knowledge/45_h36_1_and_h38_1_result.md` (results), and `knowledge/46_session14b_closeout.md` (closeout).
+
+1. **Part A — `H36-1` (`b531dae0a36f`, `37,660` px) verified on LOSFO far-field truth (`seeds 265–269`, 20 paired cells, `evidence/losfo_session14_h36_1_and_h38.json`):**
+   - **F1 (`rung30_unpruned` vs matched-N random drop): PASS** — `+0.002073` mean DTI (`17/20` cells, `5/5` seeds).
+   - **F2 (`2.828 -> 3.0` far-field removal efficiency): PASS** — pooled $e_{\text{far}} = 0.025293 < \tau_{\text{live}} = 0.054852$ (`19/20` cells below $\tau_{\text{live}}$).
+   - **F3 (`rung30_blind_r1` vs `d=2.8` base): PASS** — **`+0.001713` mean LOSFO $\Delta\text{DTI}$** (`16/20` cells, `5/5` seeds, pooled $e_{\text{far}} = 0.013587 < \tau_{\text{live}}$) and **`+0.005810` over matched-count random drop in `20/20` cells**.
+   - **F4 (`h27_4_blind_r1_d280` zero-loss check): PASS** — removes `11,599` flank-shadow dots across 20 cells and loses **exact `0.00` TP** (`20/20` cells, `+0.002249` mean $\Delta\text{DTI}$).
+2. **Part B — `H38-1` Conductive Heat-Flow Residual (`DeAngelo et al., 2022`, DOI `10.5066/P9BZPVUC`) + Shallow SI=0 Euler Lineament Corroboration (`src/gems27/heatflow_euler.py`):**
+   - Uses the newly landed USGS Great Basin heat-flow borehole clip (`docs/data/sb_heat_flow_in_footprint.json`, `1,546` in-footprint wells, `753` with conductive heat-flow residual `hf_resid >= 50.0 mW/m²`) and shallow Reid et al. (1990) SI=0 Euler contact clusters aligned within `300 m` of the 1-px detector ridge (`score_mult = 1 + 0.5*hf + 0.5*eu`, capped at `75` dots/cell).
+   - **On `d=2.8` base (`h38_1_joint`): `ALL_PASS = True` (`C1–C4` all True).** Earns **`0.077241` credit/added dot** (`1.41x` $\tau_{\text{live}} = 0.054852$, vs `0.040983` uncorroborated sub-ridge control and `0.023326` random control), **`+0.000792` mean LOSFO $\Delta\text{DTI}$** (`17/20` cells, `4/5` seeds, `4/4` folds), and **`+0.000656` mean interleaved $\Delta\text{DTI}$** on fresh seeds `270–279` (`27/40` cells, `9/10` seeds, `4/4` folds, `0.064399` credit/dot, `evidence/h38_1_interleaved_holdout.json`).
+   - **On `H36-1` primary (`h38_1_joint_on_r30_r1`): `ALL_PASS = True` (`C1–C4` all True).** Earns **`0.069930` credit/added dot** (`1.28x` $\tau_{\text{live}}$, vs `0.032268` sub-ridge control and `0.026814` random control), **`+0.000747` mean LOSFO $\Delta\text{DTI}$ over `H36-1`** (**`+0.002460` over `d=2.8` base**, `16/20` cells, `4/5` seeds, `4/4` folds), and **`+0.000543` mean interleaved $\Delta\text{DTI}$ over `H36-1`** on fresh seeds `270–279` (`27/40` cells, `8/10` seeds, `4/4` folds).
+   - **Why `H38-1` succeeded where `H37-3` (`0.03116` credit/dot) failed:** `H37-3` emitted at the raw `1 km × 1 km` Euler window centroid $(x_0, y_0)$, which has `100–300 m` horizontal position uncertainty relative to the `100 m` surface trace; snapping shallow SI=0 Euler clusters within `300 m` to the `100 m` 1-px detector ridge crest (`ridge_nms`) and combining with conductive borehole heat-flow residual (`hf_resid >= 50 mW/m²`) lifts marginal efficiency by `2.48x` (`0.03116 -> 0.07724`).
+   - **Secondary arm `H38-2` (`h38_2_low_relief_euler`) REFUTED:** Restricting Euler ridge additions to flat basin interiors (`relief <= P35`) earned only `0.013976` credit/dot (`-0.000045` $\Delta\text{DTI}$, `5/20` cells) because hidden truth in `labels.tif` is itself scarp-biased.
+   - **Companion Artifact:** `docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif` (`37,860` px = `37,660` `H36-1` + `200` corroborated dots, SHA-256 `81d5b87bc8424f16…`), slotted at `secondary` (`237/237` checks PASS in `scripts/verify_downloads.py`).
+
+**Answer to the standing question.** Why did `0.2600` win, and can we beat it? `0.2600` won because
+Poisson-disk thinning at `d = 2.8` cut 63 % of the H19-5 pixels while retaining 90.6 % of the `d=1.5`
+credit (`knowledge/01`). `H36-1` (`b531dae0a36f`, `37,660` px) re-packs the `H19-5` surface at rung `3.0`
+and prunes the `100 m` catalogue flank shadow, passing both the 10-seed interleaved gate (`+0.002599` on
+`240–249`, `+0.002675` on `250–259`, `+0.002804` on `270–279`) and the 5-seed LOSFO far-field gate
+(`+0.001713` on `265–269`, `F1–F4` ALL PASS, projecting to `0.2717–0.2727` live). And `H38-1`
+(`56a9f473edc7`, `37,860` px) is the first addition arm in the repository to clear $\tau_{\text{live}} = 0.05485$
+on LOSFO far-field truth (`0.06993–0.07724` credit/dot, `C1–C4` ALL PASS). Beating `0.3195` still needs
+`+1,151 px` of credit (`knowledge/20` §3.1) and remains a **detection** problem; the ranked geological
+candidates for Session 15 are in `knowledge/43_hypotheses_heatflow_euler.md` and `knowledge/46_session14b_closeout.md`.
+
+**Infrastructure irregularity found and reported this session.** GitHub Pages for this repository is
+**not deploying**: the Pages API reports `status: errored`, the last successful legacy build was at
+`2026-10-03T21:11Z`, and the runs after it (`e429135` → `"Page build failed."`; `a667805` → stuck
+`building`) leave the published site stale. The repository's own Actions deployment
+(`.github/workflows/pages.yml`, `actions/deploy-pages`) succeeds and the two paths are configured
+against each other (`build_type: legacy`, source `main:/`). Registered in
+`registry/irregularities.json: github-pages-legacy-build-errored`; whatever is published at
+`https://buffedlizard55-lab.github.io/GEMSDOE28/` should be treated as possibly stale until the Pages
+source is switched to **GitHub Actions**.
+
+---
+
 ## 4. Euler Deconvolution for Depth (Reid et al., *Geophysics*, 1990) & Screen Ledger
 
 Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `evidence/h31_1_euler_feature_audit.json`, `evidence/h31_1_euler_clusters.csv`):
@@ -806,32 +811,31 @@ Implemented in `src/gems27/euler.py` (`scripts/build_euler_features.py`, `eviden
 
 ## 5. Candidate Geological Hypotheses
 
-**Current ledger: `knowledge/37_hypotheses_session14.md` (Session 14)** — the five H38 arms, ranked by expected DTI gain x obtainability, with the far-field attribution (`knowledge/39`, `knowledge/42`) folded into the ranking: the top entry is now the twice-replicated all-ridge coverage construction, and H38-1's radiometric information sits second pending a >= 10-seed far-field decade. **Previous ledger: `knowledge/31_hypotheses_session13.md` (Session 13)** — five ranked arms, each naming
-- **Session 13 close-out (deliverables, three passes, limitations, AI-use disclosure):** `knowledge/36_session13_closeout.md`.
+**Current ledger: `knowledge/43_hypotheses_heatflow_euler.md` (Session 14)** — five ranked arms (`H38-1` through `H38-5`), each naming
 its layers, physical signature, why it catches a fault *missing* from the catalogue rather than one
 already in it, and how it differs from everything already implemented, plus a per-claim obtainability
-ledger. It supersedes `knowledge/23_h35_hypotheses.md` (Session 11) for ranking; the H35 results
-themselves remain the record. **Previous ledger: `knowledge/23_h35_hypotheses.md` (Session 11).** It adds the five-hypothesis H35
-addition series on top of the H33 ranking below and is the file to read first; the H33 entries remain
-live for the two arms that still have no run. Session 10's ledger,
-`knowledge/20_strategy_after_reachability_frontier.md`, re-ranks
-`knowledge/18_new_hypotheses_H33_series_2026-10-03.md`, which superseded the session-8 ranking in
-`knowledge/13_current_ranked_hypotheses_2026-10-03.md`.
+ledger:
+- **Session 14 close-out (deliverables, three passes, limitations, queued next steps):** `knowledge/46_session14b_closeout.md`.
+- **Session 14 preregistration & results:** `knowledge/44_preregistration_H36_1_and_H38_farfield.md`, `knowledge/45_h36_1_and_h38_1_result.md`.
+- **Session 13 ledger & close-out:** `knowledge/31_hypotheses_session13.md`, `knowledge/36_session13_closeout.md`.
+- **Session 11 ledger:** `knowledge/23_h35_hypotheses.md`.
+- **Session 10 ledger:** `knowledge/20_strategy_after_reachability_frontier.md` (re-ranks `knowledge/18_new_hypotheses_H33_series_2026-10-03.md`).
 
 **Ranking rule changed in Session 10.** §3.1 shows the gap to `0.3195` is `+1,151` px of credit that
 only an *addition* arm can supply, so **addition arms now rank above pruning arms regardless of
 individual expected ΔDTI** — the ordering below differs from `knowledge/18` for that reason.
 
-- **`H32-1-dejitter` — VALIDATED PASS (seeds `180–189`):** Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering on `d=2.8` (`+0.001272` post-thinning / `+0.001399` pre-thinning, `10/10` seeds, `4/4` folds; `evidence/h32_1_holdout.json`). Remains the holdout best and the primary download.
-- **`H32-2` — EXECUTED THIS SESSION, FROZEN GATE FAILED (seeds `190–199`, CLOSED):** shallow-over-deep magnetic de-screening scored `−0.003767` mean paired ΔDTI (`0/10` seeds, `0/4` folds; `evidence/h32_2_holdout.json`, `knowledge/17_h32_2_result.md`). Run-1 sentinel defect disclosed and repaired (`evidence/h32_2_holdout_run1_invalid_2026-10-03.json`). The direction control supported the physics (shallow dots carry more credit/FP: `0.0383` vs `0.0343`) but the deep class sits far above the OOF inclusion threshold (`0.0193`), so pruning it loses. No confirmation, no retuning, no slot.
-- **Untried H33 series, re-ranked Session 10 (class now outranks expected ΔDTI):**
-  1. **`H33-3` Heat-flow residual × 2 m probe conjunction — ADD arm.** DOI `10.5066/P9BZPVUC` (ScienceBase `6297d2fad34ec53d276c5b28`); runner byte-verified `sb_heat_flow_zip` = `130,154,244` B, SHA-256 `e7fd62c6…` (`registry/external_pins.json`) × already-verified GDR 2 m probes. The product carries a **residual** attribute (departure from de-convected background), which marks exactly the hydrothermal upflow the surface-rupture catalogue ignores.
-  2. **`H33-4` Drainage-network neotectonics from 1 m DEMs — ADD arm.** Competition `dem_links.json` → USGS 3DEP/Theia tiles (free, official); channel offsets, beheaded streams, aligned knickpoints. Highest ceiling, highest cost; scope the in-footprint tile volume first.
-  3. **`H33-5` Phase-2 discovery budget — bounded ADD arm.** ≤ ~600 px of multi-corroborated off-catalogue emission exploiting the official Phase-2 expert-expanded-label rescoring rule; Phase-1 cost capped at ≈ `0.2 × budget`. Contrarian by design: it buys Phase-2 optionality with a bounded Phase-1 cost.
-  4. **`H33-2` Multi-depth MT conductance alignment — PRUNE/score arm.** DOI `10.5066/P9TWT2LU` (ScienceBase `62979746d34ec53d276c113b`); both probed GeoTIFFs runner byte-verified (`4,132,337` B `8cc1a224…`, `4,132,325` B `e8cfd731…`). Ranked last of the survivors because it is a pruning arm and pruning is now exhausted as a family (§3.5).
+- **`H36-1` — EXECUTED Session 12 (interleaved `seeds 240–249`) & VERIFIED Session 14 (LOSFO far-field `seeds 265–269`), PROMOTED PRIMARY (`b531dae0a36f`, `37,660` px):** Re-pack the H19-5 surface from packing rung `2.828` to rung `3.0` (`41,333` px) and apply the `H27-4` blind 1-px catalogue-flank prune (`37,660` px). Passed 10-seed interleaved gate (`+0.002599` on `240–249`, replicated `+0.002675` on `250–259` and `+0.002804` on `270–279`) AND passed all four frozen LOSFO far-field criteria `F1–F4` on `seeds 265–269` (`+0.001713` mean LOSFO $\Delta\text{DTI}$, `16/20` cells, `5/5` seeds, $e_{\text{far}} = 0.01359 < \tau_{\text{live}} = 0.054852$, and exact `0.00` TP lost by the blind `r=1` prune).
+- **`H38-1` — EXECUTED Session 14, FROZEN LOSFO (`seeds 265–269`) & INTERLEAVED (`seeds 270–279`) GATES PASSED, SECONDARY (`56a9f473edc7`, `37,860` px):** Conductive borehole heat-flow residual (`hf_resid >= 50 mW/m²`, `DeAngelo et al., 2022`, DOI `10.5066/P9BZPVUC`, `docs/data/sb_heat_flow_in_footprint.json`) + shallow Reid et al. (1990) SI=0 Euler clusters aligned within `300 m` of the 1-px detector ridge (`src/gems27/heatflow_euler.py`). Passed `C1–C4` on LOSFO `seeds 265–269` (`0.07724` credit/dot, `+0.000792`, `17/20` cells, `4/5` seeds on `d=2.8`; `0.06993` credit/dot, `+0.000747` over `H36-1`, `+0.002460` over `d=2.8`, `16/20` cells, `4/5` seeds on `H36-1`) and passed interleaved `seeds 270–279` (`+0.000656` on `d=2.8`, `9/10` seeds, `4/4` folds; `+0.000543` on `H36-1`, `8/10` seeds, `4/4` folds).
+- **`H38-2` — EXECUTED Session 14, FROZEN GATE FAILED (`seeds 265–269`, CLOSED):** Concealed basin-fill conjunction (`relief <= P35` × shallow SI=0 Euler cluster on 1-px ridge) earned `0.01398` credit/dot (`-0.000045` LOSFO $\Delta\text{DTI}$, `5/20` cells) because hidden truth in `labels.tif` is itself scarp-biased (`knowledge/39`).
+- **`H32-1-dejitter` — VALIDATED PASS (seeds `180–189`):** Tip- & Euler-Depth-Cluster-Protected Mid-Segment Flank-Shadow De-Jittering on `d=2.8` (`+0.001272` post-thinning / `+0.001399` pre-thinning, `10/10` seeds, `4/4` folds; `evidence/h32_1_holdout.json`). Retained as `quaternary` (`31e35eee884e`) and `conservative_alternative` (`c3aeda1d31a3`).
+- **`H32-2` — EXECUTED Session 9, FROZEN GATE FAILED (seeds `190–199`, CLOSED):** shallow-over-deep magnetic de-screening scored `−0.003767` mean paired ΔDTI (`0/10` seeds, `0/4` folds; `evidence/h32_2_holdout.json`, `knowledge/17_h32_2_result.md`). Run-1 sentinel defect disclosed and repaired (`evidence/h32_2_holdout_run1_invalid_2026-10-03.json`). The direction control supported the physics (shallow dots carry more credit/FP: `0.0383` vs `0.0343`) but the deep class sits far above the OOF inclusion threshold (`0.0193`), so pruning it loses. No confirmation, no retuning, no slot.
+- **Queued Session 15 candidates (`knowledge/43_hypotheses_heatflow_euler.md` & `knowledge/46_session14b_closeout.md`):**
+  1. **`H38-3` (`= H33-2`) Multi-depth MT crustal conductance pipe alignment — ADD/corroboration arm.** DOI `10.5066/P9TWT2LU` (`Bedrosian et al., 2022`; ScienceBase `62979746d34ec53d276c113b`); all 5 GeoTIFFs runner byte-verified (`registry/external_pins.json`). Next step: add raster-clip step to `scripts/fetch_external_layers.py`.
+  2. **`H38-4` (`= H37-5`) Cultural & constructional shoreline artifact-morphology suppression with budget-neutral `H38-1` reallocation.** Prunes zero-potential-field, ultra-linear 1 m LiDAR steps along constant `det_elev` contours and replaces them 1-for-1 with `H38-1` corroborated dots at fixed $N = 37{,}660\text{ px}$.
+  3. **`H38-5` (`= H37-4 / H35-3`) 1 m 3DEP bare-earth DEM piercing-line and drainage-deflection neotectonics.** Competition `data/dem_links.json` (`716` USGS 3DEP tiles, free/public on `prd-tnm.s3.amazonaws.com`); requires Actions streaming bridge.
+  4. **`H33-5` Phase-2 discovery budget — bounded ADD arm.** Policy-only Phase-2 optionality (`<= 600` px).
 - **`H35-1` — EXECUTED Session 11, FROZEN GATE FAILED (seeds `230–234`, CLOSED).** Hydrothermal-discharge conjunction; credit/dot `0.013195` against `tau_live = 0.054852`, `1/5` seeds, mean ΔDTI `−0.001805`, and **below its own matched-count random control** (`0.023781`). Every pre-declared dose variant was at or below the control, so no tighter subset rescues it. Closed with no candidate TIFF and no weekly slot (§3.7.1, `knowledge/24_h35_1_result.md`, `evidence/h35_1_thermal_farfield.json`). **Do not re-run on a fresh decade and do not add another point-process layer without a new instrument.**
-- **`H36-1` — EXECUTED Session 12, FROZEN GATE PASSED, PROMOTED (seeds `240–249`, CLOSED for screening).** Re-pack the H19-5 surface from packing rung `2.828` to rung `3.0` (41,333 px) and apply the `H27-4` blind 1-px catalogue-flank prune. `+0.002599` mean OOF ΔDTI, `10/10` seeds, `4/4` folds, promotion margin `+0.000884`; the matched-`N` random-drop control scored `−0.001657` (`0/10`, `0/4`), which is what makes this a *layout* result rather than a budget result. Live projection `0.2717–0.2727`. `knowledge/26_preregistration_H36-1.md`, `knowledge/27_h36_1_result.md`, `evidence/h36_1_holdout.json`, artifact `b531dae0a36f`. **Do not preregister further rung arms** — the family is bounded on both sides.
-- **`H33-3` / `H35-2` — QUEUED, data gate now openable.** Heat-flow residual × 2 m temperature probe. The Actions bridge (`scripts/fetch_external_layers.py`, spec `sb_heat_flow_zip`) now enumerates mixed archives and Esri FileGDB layers and commits an in-footprint clip, because the release is a *mixed* raster/point archive rather than a shapefile. This is the top entry of `registry/next_hypotheses.json:session12_addendum.next_ranked` and the only queued arm that observes a field the surface-rupture catalogue cannot contain.
 - **`H35-6` — ADJUDICATION, COMPLETED (seeds `235–239`).** Not a geological arm: a fresh-seed tie-break of the four candidate files under a frozen promotion rule. Promoted `8acb75e1f2cc` to the one-click slot (`+0.001761`, `5/5` seeds, `4/4` folds) after review found the previous primary dominated (§3.7.2, `knowledge/25_preregistration_H35-6_candidate_adjudication.md`, `evidence/h35_6_candidate_headtohead.json`).
 - **`H33-1` — EXECUTED IN SESSION 10, FROZEN GATE FAILED (seeds `200–209`, CLOSED).** The only preregistered arm whose data had actually landed, so it was run first (§3.5). Mean paired ΔDTI `−0.003014`, `0/10` seeds, `0/4` folds, `fav` coverage `11.95%` against a `60%` precondition — **`0` of `6` criteria** (`evidence/h33_1_holdout.json`, `knowledge/21_result_H33-1_refuted_2026-10-03.md`). Do not re-run on a fresh decade, do not widen its radii, do not substitute another tendency field.
 - **Standing consequence — pruning is closed as a family.** H31-1, H32-2 and H33-1 have now all failed the same way: the pixels they removed were worth `0.101–0.140` credit per FP against a `0.019292` break-even. **No further pruning arm should be preregistered.** The remaining budget goes to *addition* arms, validated on LOSFO (§3.2), never on the interleaved holdout.
@@ -924,6 +928,18 @@ GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_harness.py --seeds 21
 #     matched random control), C4 PASS -> refuted as promotable, mechanism real (knowledge/35).
 GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_harness.py --seeds 260-264 \
     --euler-licence evidence/h31_1_euler_clusters.csv --out evidence/losfo_h37_3_licence.json
+
+# 3m. Session 14a: H36-1 LOSFO far-field verification (F1-F4 ALL PASS) + H38-1/H38-2 multi-physics
+#     corroboration on LOSFO far-field seeds 265-269 (20 paired cells, ~8.8 min).
+#     Preregistration knowledge/38 was committed at ff85e30 BEFORE seeds 265-269 were touched.
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_losfo_harness.py --seeds 265-269 \
+    --h36-1-dose --h38-corroboration --out evidence/losfo_session14_h36_1_and_h38.json
+
+# 3n. Session 14b: H38-1 10-seed interleaved spatial-CV holdout on seeds 270-279 (40 paired cells, ~12.5 min)
+#     and companion submission builder (37,860 px, content ID 56a9f473edc7).
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/run_h38_1_interleaved_holdout.py \
+    --seeds 270-279 --out evidence/h38_1_interleaved_holdout.json
+GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/build_h38_1_hf_euler_submissions.py
 
 # 3h. Session 12: H36-1 packing-rung re-pack + flank prune, frozen 10-seed gate (seeds 240-249, ~105 s)
 #     Preregistration knowledge/26 was committed (aaa659c) BEFORE the run; runner frozen at that commit.
