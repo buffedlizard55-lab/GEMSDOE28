@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-10-21T11:49:28Z",
+  "checked_at_utc": "2026-10-22T11:53:01Z",
   "policy": "explicit manual invocation; DrivenData is forbidden and never requested",
   "source_count": 10,
   "sources": [
@@ -7,7 +7,7 @@
       "id": "rules",
       "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
       "status": "observed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
       "http_status": 200,
       "final_url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
       "content_type": "application/pdf",
@@ -20,7 +20,7 @@
       "id": "faulds-hinz-2015",
       "url": "https://www.osti.gov/servlets/purl/1724082",
       "status": "observed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
       "http_status": 200,
       "final_url": "https://www.osti.gov/servlets/purl/1724082",
       "content_type": "application/pdf",
@@ -32,21 +32,16 @@
     {
       "id": "siler-2022",
       "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d?format=json",
-      "status": "observed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
-      "http_status": 200,
-      "final_url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d?format=json",
-      "content_type": "application/json;charset=UTF-8",
-      "content_length_header": null,
-      "body_bytes": 14661,
-      "body_sha256": "722eacdb40a22e86cf98e11fc6d140af794cf70e835358b6856a6901db4767c7",
-      "preview": "{\"link\":{\"rel\":\"self\",\"url\":\"https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d\"},\"relatedItems\":{\"link\":{\"url\":\"https://www.sciencebase.gov/catalog/itemLinks?itemId=6296974dd34ec53d276bb33d\",\"rel\":\"related\"}},\"id\":\"6296974dd34ec53d276bb33d\",\"identifiers\":[{\"type\":\"DOI\",\"scheme\":\"https://www.sciencebase.gov/vocab/category/item/identifier\",\"key\":\"doi:10.5066/P9YL58W6\"}],\"title\":\"Shapefile for slip tendency and dilation tendency calculated for Quaternary faults in the Great Basin\",\"summary\":\"Th"
+      "status": "fetch-failed",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
+      "error_type": "TimeoutError",
+      "error": "The read operation timed out"
     },
     {
       "id": "geodawn",
       "url": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7?format=json",
       "status": "observed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
       "http_status": 200,
       "final_url": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7?format=json",
       "content_type": "application/json;charset=UTF-8",
@@ -59,20 +54,20 @@
       "id": "ingenious",
       "url": "https://gdr.openei.org/submissions/1391",
       "status": "observed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
       "http_status": 200,
       "final_url": "https://gdr.openei.org/submissions/1391",
       "content_type": "text/html; charset=UTF-8",
       "content_length_header": null,
       "body_bytes": 178482,
-      "body_sha256": "5af7ded93a5fe967331fcb087d99dc0cc34b7591d43ff1ba16e7af3acc713360",
+      "body_sha256": "98e4b9a80c1e8ee9aeff62eece822c0b9d4f94d575cbd1f2bff8f87cfcec5027",
       "preview": "<!DOCTYPE html>\n  <html lang=\"en\">\n    <head>\n      <title>GDR: INGENIOUS - Great Basin Regional Dataset Compilation</title>\n      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\" />\n      <meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />\n      <meta name=\"Keywords\" content=\"geothermal, energy, 2-meter probe, temperature, geochemistry, quaternary faluts, quaternary volcanics, geodetics, seismicity, paleogeothermal, wells, springs, slip and dilation, ingenious, play fairway a"
     },
     {
       "id": "nbmg-qfaults",
       "url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson",
       "status": "observed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
       "http_status": 200,
       "final_url": "https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson",
       "content_type": "text/plain; charset=UTF-8",
@@ -84,16 +79,21 @@
     {
       "id": "sibling24",
       "url": "https://api.github.com/repos/buffedlizard55-lab/GEMSDOE24/commits?per_page=1",
-      "status": "fetch-failed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
-      "error_type": "HTTPError",
-      "error": "HTTP Error 403: rate limit exceeded"
+      "status": "observed",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
+      "http_status": 200,
+      "final_url": "https://api.github.com/repos/buffedlizard55-lab/GEMSDOE24/commits?per_page=1",
+      "content_type": "application/json; charset=utf-8",
+      "content_length_header": "5165",
+      "body_bytes": 5165,
+      "body_sha256": "17c253b8aa0eea5810070ccfa02b7795b7cc02ec8eb6f7f5f804b2111232329f",
+      "preview": "[{\"sha\":\"07345ea0604953d7efb858d9cfbc21e20c7aca0b\",\"node_id\":\"C_kwDOU14cfdoAKDA3MzQ1ZWEwNjA0OTUzZDdlZmI4NThkOWNmYmMyMWUyMGM3YWNhMGI\",\"commit\":{\"author\":{\"name\":\"buffedlizard55-lab\",\"email\":\"buffedlizard55@gmail.com\",\"date\":\"2026-10-02T17:46:35Z\"},\"committer\":{\"name\":\"GitHub\",\"email\":\"noreply@github.com\",\"date\":\"2026-10-02T17:46:35Z\"},\"message\":\"Merge pull request #8 from buffedlizard55-lab/arena/01a0fc3e-gemsdoe24\\n\\nRecord parallel-session PR #7, cross-checks and the S1750 road-raster finding; add open-PR "
     },
     {
       "id": "hermant-2025",
       "url": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf",
       "status": "fetch-failed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
       "error_type": "ValueError",
       "error": "response exceeds configured 2000000-byte limit"
     },
@@ -101,17 +101,22 @@
       "id": "usgs-qfaults",
       "url": "https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip",
       "status": "fetch-failed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
       "error_type": "ValueError",
       "error": "response exceeds configured 2000000-byte limit"
     },
     {
       "id": "dd-ref-solution",
       "url": "https://api.github.com/repos/drivendataorg/gems-prize-reference-solution/commits?per_page=1",
-      "status": "fetch-failed",
-      "checked_at_utc": "2026-10-21T11:49:28Z",
-      "error_type": "HTTPError",
-      "error": "HTTP Error 403: rate limit exceeded"
+      "status": "observed",
+      "checked_at_utc": "2026-10-22T11:53:01Z",
+      "http_status": 200,
+      "final_url": "https://api.github.com/repos/drivendataorg/gems-prize-reference-solution/commits?per_page=1",
+      "content_type": "application/json; charset=utf-8",
+      "content_length_header": "3649",
+      "body_bytes": 3649,
+      "body_sha256": "baab8fa2b1bae2b1ecc9a06edaa26fb1f65e88fc9162f768914f61c385363e20",
+      "preview": "[{\"sha\":\"aebe92f7c8a990f0e3443451b7a825d9afd6336b\",\"node_id\":\"C_kwDOS8WyLdoAKGFlYmU5MmY3YzhhOTkwZjBlMzQ0MzQ1MWI3YTgyNWQ5YWZkNjMzNmI\",\"commit\":{\"author\":{\"name\":\"Chris Kucharczyk\",\"email\":\"chris@drivendata.org\",\"date\":\"2026-06-16T13:55:12Z\"},\"committer\":{\"name\":\"Chris Kucharczyk\",\"email\":\"chris@drivendata.org\",\"date\":\"2026-06-16T13:55:26Z\"},\"message\":\"initial commit\",\"tree\":{\"sha\":\"122a99ed5704f9d1c2d89c60d0b5bfe85eb8e283\",\"url\":\"https://api.github.com/repos/drivendataorg/gems-prize-reference-solution/git/tr"
     }
   ]
 }
