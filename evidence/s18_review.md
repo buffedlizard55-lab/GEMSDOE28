@@ -83,3 +83,9 @@ Final post-merge test/deployment results are recorded in the pull request and se
   not an authentication failure. Adopted the concurrently proposed PR42 root-route compatibility
   approach: root executive mirror and exact JSON bytes for legacy and Actions layouts, checked by CI.
   No Pages setting change is claimed. This is a publication fix, not another experiment.
+
+### Final PR42 compatibility merge
+Preserved the actual PR42 merge's deployment-verification record and follow-up root-route
+regression. Kept the scientific MXTP card canonical across root/docs aliases; historical PR39/42
+no-experiment evidence remains untouched. Refreshed source-feed bytes retained. Final suite:
+471 passed, zero skips. No TIFF/model/seed rerun.

@@ -76,7 +76,9 @@ and withdrawal of historical H38 uniqueness/promotion claims remain in force. S1
 data autonomously and discloses its lane interpretation; it is still rejected and not slot-approved.
 PR #39’s separate no-experiment audit, upstream tool pins, stronger validator/gate and publication
 checks are also retained. Its original hashed manifest is archived without changing its old card.
-Final local integration: **470 tests pass, zero skips; 317 independent file checks pass; Ruff clean**.
+PR #42’s root-route compatibility test and observed historic deployment evidence are retained
+([prior release proof](evidence/current_deployment_verification.json), not proof for the new TIFF).
+Final local integration: **471 tests pass, zero skips; 317 independent file checks pass; Ruff clean**.
 Do not combine these sessions' numbers or treat the blocked review's missing-data statement as
 current after this restoration.
 

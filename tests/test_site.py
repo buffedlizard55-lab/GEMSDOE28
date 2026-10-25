@@ -457,3 +457,22 @@ def test_current_public_card_aliases_use_restored_data_review_not_older_checkout
         DOCS / 'data/current_run_card_2026-10-25.json').read_bytes()
     root_summary = (ROOT / 'executive-summary.html').read_text()
     assert 'Submission download locked' in root_summary and 'docs/downloads/gems28-s18-mxtp-' in root_summary
+
+
+def test_legacy_main_root_routes_match_generated_pages_and_current_card():
+    from scripts.build_site import root_relative_links
+
+    for name in ('index.html', 'executive-summary.html'):
+        expected = root_relative_links((DOCS / name).read_text())
+        assert (ROOT / name).read_text() == expected
+        # All root-mirror relative links resolve through /docs/ and remain
+        # available when either the legacy or Actions publisher finishes last.
+        for url in re.findall(r'(?:href|src)="([^"]+)"', expected):
+            if url.startswith(('https://', 'http://', '#', 'mailto:')):
+                continue
+            path = url.split('#')[0]
+            if path:
+                assert (ROOT / path).is_file(), (name, url)
+    assert (ROOT / 'data/current_run_card_2026-10-25.json').read_bytes() == (
+        DOCS / 'data/current_run_card_2026-10-25.json'
+    ).read_bytes()
