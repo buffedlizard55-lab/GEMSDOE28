@@ -328,3 +328,29 @@ def test_current_run_notice_is_above_historical_body():
     assert re.fullmatch(r'[0-9a-f]{64}', card['raster_sha256'])
     assert card['slot_selected'] is False
     assert card['evidence_schema_gate']['verdict'] == 'negative'
+
+
+def test_download_manifest_marks_new_research_raster_not_approved():
+    manifest = json.loads((DOCS / 'downloads/manifest.json').read_text())
+    current = manifest['current_run']
+    assert current['status'] == 'NEGATIVE — NO FILE APPROVED'
+    assert current['new_tiff_generated'] is True
+    assert current['submission_ready'] is False and current['slot_selected'] is False
+    assert manifest['s18_candidate']['verdict'] == 'negative'
+
+
+def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(capsys):
+    from scripts import build_site
+
+    assert build_site.main() == 0
+    metadata = json.loads(capsys.readouterr().out)
+    assert metadata['submission_ready'] is False and metadata['slot_selected'] is False
+    assert 'primary_download' not in metadata
+    assert 's18-mxtp' in metadata['research_download']
+    assert metadata['inspection_artifacts']
+    current = json.loads((DOCS / 'data/current_run_card_2026-10-25.json').read_text())
+    exact = json.loads((ROOT / 'evidence/s18_mxtp_run_card.json').read_text())
+    assert current == exact and current['verdict'] == 'negative'
+    # The parallel blocked review is preserved, not overwritten with this experiment.
+    parallel = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
+    assert parallel['experiments_run'] == 0 and parallel['raster_sha256'] is None

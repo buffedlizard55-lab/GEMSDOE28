@@ -65,6 +65,16 @@ provenance-audited scarp-displacement hypothesis with road/shoreline controls.
 
 ---
 
+## Parallel review integration
+
+Parallel PRs #37/#38 ran no experiment because their checkouts lacked inputs and an explicit lane.
+Their [blocked review card](evidence/s18_run_card.json) is preserved, distinct from
+[this experiment's S18-MXTP card](evidence/s18_mxtp_run_card.json). Their schema-only readiness fix
+and withdrawal of historical H38 uniqueness/promotion claims remain in force. S18-MXTP restored
+data autonomously and discloses its lane interpretation; it is still rejected and not slot-approved.
+Do not combine the two sessions' numbers or treat the blocked review's missing-data statement as
+current after this restoration.
+
 ## Historical notices and prior standing briefs (superseded by current result above)
 
 # Current session safety notice — 2026-10-25 Session 16 (read first)

@@ -3662,11 +3662,12 @@
   "evidence": "evidence/s18_holdout.json",
   "evidence_schema_gate": {
     "verdict": "negative",
+    "evidence_schema_passed": false,
     "submission_ready": false,
     "failures": [
       "no positive paired gain CI over frozen current best"
     ],
     "slot_selected": false,
-    "scope": "Evidence schema gate only; promotion is not slot selection or organizer acceptance."
+    "scope": "Evidence schema gate only; no raster execution or selector approval. Not upload authorization."
   }
 }

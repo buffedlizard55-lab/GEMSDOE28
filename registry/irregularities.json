@@ -2,6 +2,12 @@
   "generated": "2026-10-25T00:00:00Z",
   "items": [
     {
+      "id": "s18-schema-is-not-upload-approval",
+      "severity": "high",
+      "issue": "Schema-only promotion_gate returned submission_ready=true for self-reported evidence without executing a raster validator or selector. Historical knowledge/51 also labels a reported near-duplicate unique/promote.",
+      "action": "Schema success now uses evidence_schema_passed; submission_ready is always false. Historical promotion/uniqueness claims explicitly withdrawn in a leading warning. No new TIFF or experiment; missing lane and inputs remain blockers."
+    },
+    {
       "id": "parallel-run-2026-10-25-blocked",
       "severity": "high",
       "issue": "Assigned method paragraph and shared template location absent; current holdout splits components at quadrant boundaries without buffer; no complete downloaded registry or organizer receipts.",

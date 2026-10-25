@@ -360,5 +360,14 @@
     "verdict": "negative",
     "status": "Unique and format-valid RESEARCH TIFF; failed frozen holdout superiority gate. DO NOT SUBMIT.",
     "run_card": "data/run_card_s18.json"
+  },
+  "current_run": {
+    "run_id": "S18-MXTP",
+    "status": "NEGATIVE \u2014 NO FILE APPROVED",
+    "submission_ready": false,
+    "slot_selected": false,
+    "new_tiff_generated": true,
+    "run_card": "data/current_run_card_2026-10-25.json",
+    "prior_parallel_review": "evidence/s18_run_card.json"
   }
 }

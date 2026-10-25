@@ -1,3 +1,14 @@
+> **SUPERSEDED SAFETY DISPOSITION — 2026-10-25 review**
+> This is a historical, internally inconsistent research note, not current authorization.
+> No TIFF below was newly generated in this review. The H38-1 file is historical;
+> its reported surface correlation of 0.9973 and dense-probe overlap violate the
+> strict duplicate-stop rule. Its “unique” and “promote” claims below are withdrawn.
+> No current file is approved for upload. The seed-1 negative result is not evidence
+> of superiority. Exact H33-2 construction claims below are disputed by the later
+> safety review: no organizer receipt or exact score-linked champion TIFF is available
+> in this checkout. Treat them as historical assertions, not independently verified facts.
+> See `evidence/review_s18_submission_gate_2026-10-25.md` and the README safety notice.
+
 # 51 — Session 17 (2026-10-25): unique TIF submission, the 0.2778 question, and ranked hypotheses
 
 **Status: written this session, not a submission receipt.** Every score below is either **HOLDOUT-DTI** (a local catalogue-internal proxy computed with the shared template tools) or **OWNER-REPORTED** (the task-statement site lists). No repository artifact has been uploaded to DrivenData, and no organizer submission-page receipt exists in any fetched repository — so nothing here is **ORGANIZER-CONFIRMED**, and no number is written as a competition score.
