@@ -879,5 +879,41 @@
     ],
     "gate": "No experiment or TIFF until lane is specified, exact data and cached stack are restored, shared buffered whole-segment holdout is verified, and candidate beats comparator with paired CI. Feature-only AUC/leakage and registry rank-correlation/3px-overlap checks are mandatory.",
     "next_action": "Resolve the lane and required input availability; then preregister exactly one selected proposal after checking cross-repository novelty."
+  },
+  "session15_addendum": {
+    "generated": "2026-10-25",
+    "lane": "H39-1 depth-persistence-weighted re-detection (knowledge/47 §3)",
+    "champion_forensic": "0.2778 champion (GEMSDOE32 e5eb6e7e) == solo 8acb75e1 minus d_cat<=2px ring, exact (evidence/s15_champion_forensic.json); rings 1-2 yield 2.776e-6 / 2.750e-6 owner-reported DTI per deleted dot; GEMSDOE36 = champion + 1200 dots scored owner-reported 0.2750 (-0.0028). All live scores OWNER-REPORTED, no organizer receipt.",
+    "gate": {
+      "seeds": "290-294 (SPENT)",
+      "evaluator": "LOSFO pooled DTI alpha=0.2 beta=0.8 300m kernel",
+      "pooled_delta_dti": -0.0015984542218491632,
+      "mean_paired_delta_dti": -0.002599167947501733,
+      "ci95": [
+        -0.007387944147376352,
+        0.002080983724642792
+      ],
+      "cells_positive": "9/20",
+      "gate_passed": false,
+      "evidence": "evidence/s15_h39_1_losfo_gate.json"
+    },
+    "candidate": {
+      "content_id": "a86b8ed33727",
+      "dots": 37695,
+      "validator": "PASS (all hard checks)",
+      "uniqueness": "FAIL strict reading (37.2% within3px of champion; 76.8%/79.9% vs dense probes 1113fba5f6cb/52a13184267e; Spearman D1-D0 0.977)",
+      "verdict": "negative",
+      "run_card": "evidence/s15_run_card.json"
+    },
+    "seed_ledger": {
+      "290-294": "H39-1 LOSFO gate (spent, FAILED - do not retune)",
+      "295+": "free"
+    },
+    "next_ranked": [
+      "H39-2 radiometric alteration lineaments (object-level)",
+      "H39-3 drainage-chain collinearity at 100 m",
+      "H39-4 artifact-swap (= queued H38-4)"
+    ],
+    "no_promotion_statement": "S15 promoted nothing and spent no slot; one-click primary remains H36-1 (b531dae0a36f). Candidate a86b8ed33727 is banner-marked DO NOT SUBMIT."
   }
 }

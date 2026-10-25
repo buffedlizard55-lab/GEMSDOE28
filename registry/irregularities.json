@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-04T02:17:53Z",
+  "generated": "2026-10-25T00:00:00Z",
   "items": [
     {
       "id": "parallel-run-2026-10-25-blocked",
@@ -546,6 +546,30 @@
       "severity": "high",
       "issue": "The current checkout contains the data manifest but no competition input TIFFs, labels, sample template, prepared feature cache, or local H33-2 raster. The Python environment cannot import rasterio or pytest. The shared holdout docstring describes random 20% catalogue-component hiding in quadrants; it does not implement the requested buffered whole-segment hide-and-recover protocol.",
       "action": "Do not produce a submission TIFF or claim validator/holdout results. Restore the exact pinned inputs and dependencies, audit/fix the shared harness (not a private fork), and run required feature-only leakage and registry uniqueness tests before any candidate can pass the gate."
+    },
+    {
+      "id": "s15-leaderboard-top-conflict",
+      "severity": "medium",
+      "issue": "The 2026-10-25 owner prompt states both 0.4413 and 0.3195 as the current competition leaderboard top score. Neither is verifiable from this sandbox (no DrivenData access by design).",
+      "action": "Recorded as conflicting owner snapshots in knowledge/47-48. No S15 number, gate or projection depends on either value. Do not quote a single 'current top' until a dated manual read is stored."
+    },
+    {
+      "id": "s15-champion-score-no-receipt",
+      "severity": "high",
+      "issue": "GEMSDOE32's own audit JSON for the 0.2778 champion file (e5eb6e7e zeros, sha256 c55bafc4...) records it as UNSCORED with projected live 0.2747 and receipt null in submissions_manifest.json; the 0.2778 score-to-file association exists only in owner task-statement lists.",
+      "action": "Labelled OWNER-REPORTED (never ORGANIZER-CONFIRMED) in knowledge/47-48, evidence/s15_champion_forensic.json and evidence/s15_run_card.json. The construction claim (solo 8acb75e1 minus d_cat<=2px ring) was verified byte-exact (0 px symmetric difference) independently of the score claim."
+    },
+    {
+      "id": "s15-uniqueness-dense-probes",
+      "severity": "medium",
+      "issue": "S15 candidate a86b8ed33727 has only 37.2% of dots within 3 px of the scored champion but 76.8%/79.9% within 3 px of two unscored dense detector-ridge research files in docs/downloads (1113fba5f6cb, 52a13184267e), so the strict any-registry-raster 70% rule fails it as a duplicate.",
+      "action": "Applied the strict reading (verdict negative) and recorded the full overlap table in evidence/s15_candidate_build.json. Selector may decide whether 'registry' should mean scored/shipped lanes only; until then pre-check overlap against the dense probes before spending seeds."
+    },
+    {
+      "id": "s15-shared-tool-extensions",
+      "severity": "low",
+      "issue": "Shared tools extended in-template for S15 (no private forks): scripts/run_losfo_harness.py gained --s15-depthslice (default behaviour unchanged; D0 arm verified identical to the untouched losfo arm on seeds 290-294) and scripts/verify_downloads.py slot list gained s15_candidate.",
+      "action": "Reported here per parallel-run protocol point 2. Both extensions are additive and covered by the existing test suite plus tests/test_depthslice.py."
     }
   ]
 }

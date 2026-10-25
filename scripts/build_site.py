@@ -439,6 +439,48 @@ def local_h38_branch_attempt_html(claim: dict) -> str:
 </div></section>"""
 
 
+def s15_panel_html(manifest: dict) -> str:
+    """Session-15 candidate panel: the submit / do-not-submit verdict is the headline.
+
+    Everything shown is read from the manifest slot written by scripts/finalize_s15.py, whose
+    verdict comes from the frozen LOSFO gate + uniqueness + validator (evidence/s15_run_card.json).
+    The panel never promotes: a green verdict still means only "eligible for the separate
+    selector step", and the one-click primary below it is unchanged either way.
+    """
+    item = manifest.get("s15_candidate")
+    if not isinstance(item, dict) or not item.get("nan"):
+        return ""
+    promote = item.get("verdict") == "promote"
+    banner = ("🟢 GATE PASS — ELIGIBLE FOR SELECTOR REVIEW · UNSCORED" if promote
+              else "🔴 DO NOT SUBMIT — HOLDOUT GATE FAILED · INSPECTION ONLY")
+    verdict_line = (
+        "This file passed its frozen LOSFO gate, the uniqueness check and the format validator. "
+        "It is still <strong>unscored</strong> and spends no slot by existing: promotion to a real "
+        "weekly slot is the separate selector step."
+        if promote else
+        "<strong>Do not download this file for the portal.</strong> It is published so the negative "
+        "result is inspectable byte-for-byte. It failed the frozen validation gates stated below; "
+        "submitting it would spend a weekly slot on an idea the holdout already rejected. "
+        "The one-click primary under it is unchanged.")
+    return f"""<section class="download-panel" id="s15-candidate" aria-labelledby="s15-heading">
+  <div class="eyebrow">Session 15 · 2026-10-25 · newest candidate · auto-validated, no human inspection</div>
+  <h2 id="s15-heading">{esc(banner)}</h2>
+  <p><strong>{esc(item.get('hypothesis', 'H39-1'))}</strong></p>
+  <p>{verdict_line}</p>
+  <p>{esc(item.get('status', ''))}</p>
+  {file_links(item)}
+  {mirror_line(item)}
+  <p><strong>Exact filename</strong></p><code class="file-name">{esc(item['nan'])}</code>
+  <p><strong>Unique submission name:</strong> <code>{esc(item.get('submission_name', 'not registered'))}</code></p>
+  <p class="meta">SHA-256 <code>{esc(item.get('sha256_nan', ''))}</code> · {esc(item.get('bytes_nan'))} bytes · single-band float32 · {esc(item.get('emitted_px'))} cells equal to 1 · values exactly in [0, 1] inside the footprint (use the all-finite variant if a validator reads NaN strictly) · CRS EPSG:32611 · 100 m grid.</p>
+  <p><strong>Exact short note ({len(str(item.get('note', '')))} / 140 characters):</strong></p>
+  {note_box(str(item.get('note', '')))}
+  <p class="small">Evidence: <a href="../evidence/s15_run_card.json">run card</a> · <a href="../evidence/s15_h39_1_losfo_gate.json">LOSFO gate (seeds 290–294)</a> · <a href="../evidence/s15_champion_forensic.json">why 0.2778 won (byte forensic)</a> · <a href="../knowledge/47_s15_hypotheses_and_preregistration_H39-1.md">preregistration (frozen before the seeds)</a> · <a href="../knowledge/48_s15_result.md">result</a>. HOLDOUT-DTI is a local proxy, never an organizer score; 0.2778 is owner-reported (no organizer receipt in any fetched repository).</p>
+</section>
+
+"""
+
+
 def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, restore: dict,
                  screen: dict, confirmation: dict, seed_audit: dict, h32: dict,
                  h35: dict = None, h35_6: dict = None, local_h38_claim: dict = None) -> str:
@@ -503,9 +545,9 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
   <p class="small"><strong>How it got here — and what is closed.</strong> The H35 addition series ran and <strong>H35-1 (hydrothermal-discharge conjunction) is closed on its own evidence</strong>: 3 of 4 frozen criteria failed on seeds 230–234 — it earned {fmt_number(h35_g1, 5)} credit per added dot against a {fmt_number(h35_tau, 5)} threshold and <em>lost to its own matched-count random control</em> ({fmt_number(h35_ctrl, 5)}). That agrees with the reachability frontier read from the pruning side: at this operating point new dots are expensive and a physical layer must be very specific to pay for itself, while the profitable axis remains <strong>removal</strong>. Review then found the one-click primary strictly dominated by the file in its own tertiary slot on every published statistic, so the arm that followed was an <strong>adjudication of the candidate ladder on fresh seeds</strong>. {h35_6_index} The H36-1 re-pack arm replaced it in turn. <strong>Session 13 then measured the emission rule itself</strong>: the packing step was content-blind (raster-index order), so H37-1 replaced it with lazy-greedy maximum expected coverage of the detector probability field under the official 300 m kernel at a matched dot count. It passed all five frozen criteria on fresh seeds 250–259 (+0.007289 vs the same-run d=2.8 reference, +0.004614 over the H36-1 incumbent, 10/10 seeds, 4/4 folds) while a content-blind matched-N random subset scored −0.044684 (0/10 seeds), and the H36-1 incumbent itself replicated at +0.002675 against its own +0.002599 on seeds 240–249. <strong>The far-field falsification test then failed F1:</strong> on the LOSFO decade (seeds 210–214, whole fault systems removed with a 600 m buffer) the same rule ties the raster cascade — mean paired ΔDTI −<strong>0.000037</strong> (95% interval ±0.000832, 9/20 cells, base arms reproducing the stored diagnostic exactly). The interleaved gain is therefore a catalogue-adjacency effect, the modelled 0.278–0.286 projection is withdrawn, and the pre-committed rule returned the one-click slot to <strong>H36-1</strong>; H37-1 stays fully audited (<a href="../knowledge/33_h37_1_farfield_result.md">knowledge/33</a>). <strong>Session 14 then verified H36-1 on LOSFO far-field truth and validated H38-1 multi-physics corroboration:</strong> on fresh LOSFO seeds 265–269 (<a href="../evidence/losfo_session14_h36_1_and_h38.json">evidence/losfo_session14_h36_1_and_h38.json</a>), <strong>H36-1</strong> passed all four frozen far-field criteria (<strong>+0.001713</strong> mean ΔDTI, 16/20 cells, 5/5 seeds, +0.005810 over matched-count random drop in 20/20 cells, far-field removal efficiency <em>e</em><sub>far</sub> = 0.01359 &lt; τ<sub>live</sub> = 0.05485, and exact 0.00 TP lost by the H27-4 blind r=1 prune). And <strong>H38-1</strong> (USGS conductive heat-flow residual &ge; 50 mW/m&sup2; from DeAngelo et al. 2022 + shallow Reid et al. 1990 SI=0 Euler clusters aligned within 300 m of the 1-px detector ridge) became the <strong>first addition arm to clear the live break-even efficiency on LOSFO far-field truth</strong>: <strong>0.07724 credit/dot</strong> (+0.000792 mean ΔDTI, 17/20 cells, 4/5 seeds, 4/4 folds) on the d=2.8 base, <strong>0.06993 credit/dot</strong> (+0.000747 over H36-1, +0.002460 over d=2.8, 16/20 cells, 4/5 seeds, 4/4 folds) on H36-1, and <strong>+0.000543</strong> over H36-1 on fresh interleaved seeds 270–279 (27/40 cells, 8/10 seeds, 4/4 folds, <a href="../knowledge/45_h36_1_and_h38_1_result.md">knowledge/39</a>). Its companion artifact (<code>gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif</code>, 37,860 px = 37,660 H36-1 + 200 corroborated dots) is slotted at secondary below. Independent of all of the above: {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p>
 </div></section>
 
-<section class="callout callout-danger"><strong>Session 15 review (2026-10-25):</strong> the GEMSDOE32 H33-2 <strong>0.2778</strong> figure is user-reported; the cross-site audit describes catalogue-proximity pruning but says the owner page disclaims an organizer score. Raw TIFF, full code and receipt are absent here. The prompt's <strong>0.4413</strong> and <strong>0.3195</strong> leaderboard maxima conflict. The required lane paragraph and cached input rasters are also missing, so no new unique TIFF was generated and no slot was used. <a href="session15-review.html">Read the full high-score audit, ranked hypotheses and negative run card →</a></section>
+<section class="callout callout-danger"><strong>Session 15 review (2026-10-25):</strong> the GEMSDOE32 H33-2 <strong>0.2778</strong> figure is user-reported; the cross-site audit describes catalogue-proximity pruning but says the owner page disclaims an organizer score. Raw TIFF, full code and receipt are absent here. The prompt's <strong>0.4413</strong> and <strong>0.3195</strong> leaderboard maxima conflict. The required lane paragraph and cached input rasters are also missing, so no new unique TIFF was generated and no slot was used in that review run. A sibling parallel Session-15 lane that restored the rasters did build one candidate; it failed its frozen gate and is banner-marked DO NOT SUBMIT immediately below. <a href="session15-review.html">Read the full high-score audit, ranked hypotheses and negative run card →</a></section>
 
-<section class="download-panel" id="download" aria-labelledby="download-heading">
+{s15_panel_html(manifest)}<section class="download-panel" id="download" aria-labelledby="download-heading">
   <div class="eyebrow">Manual research download · no upload made</div>
   <h2 id="download-heading">One-click GeoTIFF — {esc(primary.get('hypothesis', 'H32-1 reference'))}</h2>
   <p><span class="status unscored">UNSCORED · RESEARCH ONLY · NOT SLOT-APPROVED</span></p>
@@ -586,6 +628,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
   <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO UPLOAD / NO RECEIPT</span></div>
 </div></section>
 
+{s15_panel_html(manifest)}
 <section class="section"><div class="grid">
   <article class="card span-8"><h2>Candidate in one paragraph</h2><p><strong>{esc(p.get('hypothesis'))}.</strong> Filename <code class="file-name">{esc(p['nan'])}</code>. {esc(str(p.get('status', '')))} Built on the owner-reported <strong>{fmt_number(p.get('base_reference_live_score', 0.26), 4)}</strong> live base (<code>{esc(str(p.get('base_reference_id', '')))}</code>) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (&minus;0.0028 vs 0.2477). Its holdout evidence (<a href="../{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}">{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}</a>) records a mean &Delta;DTI of <strong>{fmt_number(p.get('holdout_mean_gain', 0), 6)}</strong> with <strong>{esc(p.get('holdout_folds_improved', 'n/a'))}</strong> spatial folds and <strong>{esc(p.get('holdout_seeds_improved', 'n/a'))}</strong> seeds improving over the same-run control.{adj_sentence} The inherited H28-1 full-map reference <code class="file-name">{esc(candidate.get('nan', ''))}</code> (+0.00294884 on seeds 140–149) is retained for comparison and is not one of the four weekly slots inherited from the predecessor campaign.</p><p><strong>Disposition:</strong> all local rasters pass {check_count} format, grid, <code>[0,1]</code> range, footprint, and SHA-256 checks (<a href="../evidence/submission_file_audit.json">evidence/submission_file_audit.json</a>), and remain unscored until manually submitted by the human operator.</p></article>
   <article class="card span-4"><div class="metric">{comma(p.get('emitted_px'))}</div><div class="metric-caption">binary positive cells emitted</div><hr><div class="metric">+{fmt_number(p.get('holdout_mean_gain', 0), 5)}</div><div class="metric-caption">4-fold spatial OOF &Delta;DTI ({esc(p.get('holdout_seeds_improved', 'n/a'))} seeds)</div></article>
