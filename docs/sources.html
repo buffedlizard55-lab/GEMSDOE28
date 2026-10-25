@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="GEMSDOE28 automated submission gates, fault-mapping research and source-linked evidence.">
+  <meta name="description" content="GEMSDOE28 auditable geoscience research, manual-only submission path, and source-linked evidence.">
   <title>Sources and verification | GEMSDOE28</title>
   <link rel="stylesheet" href="assets/site.css">
   <script defer src="assets/site.js"></script>
@@ -11,31 +11,36 @@
 <body>
 <header class="site-header"><div class="header-inner">
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
-  <nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="submission-review.html">Latest review</a><a href="archive.html">Archive</a><a href="topology.html">Topology</a><a href="sources.html">Sources</a></nav>
+  <nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session18-result.html">Latest result</a><a href="archive.html">Archive</a><a href="submission-review.html">Parallel review</a><a href="topology.html">Topology</a><a href="sources.html">Sources</a></nav>
 </div></header>
-<main><section class="readiness-banner" id="download" aria-label="Current submission readiness" data-submission-ready="false">
-  <div class="eyebrow">Automated submission safety · 2026-10-25</div>
-  <h2>Current run: BLOCKED — NO FILE APPROVED</h2>
-  <p><strong>No new TIFF is approved. Do not upload any file from this site at present.</strong> Evidence gates incomplete or failed. The advertised historical primary also fails the dot-overlap rule; a valid file format does not clear a duplicate lane.</p>
-  <div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button quiet" href="submission-review.html">See automated checks</a><a href="data/current_run_card_2026-10-25.json" download>Download JSON run card</a></div>
-  <p class="small">No human-inspector sign-off is required or substituted. No competition slot selected. Existing TIFFs are archived references, not new submission recommendations.</p>
+<main><section class="card callout-danger" aria-label="Current submission readiness" id="current-submission" data-submission-ready="false">
+<h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
+<p><strong>NEW UNIQUE TIFF GENERATED: S18-MXTP · 2026-10-25.</strong> Automated snapshot uniqueness and exact-file format checks passed, but the frozen holdout performance gate <strong>FAILED</strong>. <strong>Do not upload any file from this site.</strong> No human inspection is needed to discover this rejection; the pipeline has already computed it. No competition slot was selected or spent.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session18-result.html">Executive research result &amp; source audit</a></div>
+<p><strong>Submission name:</strong> <code>GEMSDOE28-S18-MXTP-3e95505c011a</code><br><strong>Research note (102/140):</strong> <code>S18 MXTP: extrapolated TMI/gravity ridges; 11082 dots; holdout rejected; research only; DO NOT SUBMIT.</code></p>
+<p class="meta">Exact SHA-256 <code>ce043566a96a1bf0abae366ba706ed6be5907297248b1d14deace8596500b186</code> · 11,082 dots · all-finite float32 · [0,1] · EPSG:32611 · 3730 × 3292 · template CRS/shape/transform PASS. Local file validity does not guarantee portal acceptance or scientific quality.</p>
+<p><strong>HOLDOUT-DTI:</strong> 0.02038 (95% CI 0.01644–0.02473); recomputed prior candidate 0.10824; paired gain -0.08785 (95% CI -0.11296 to -0.05964). Evaluator: shared eval_set v2 → metric.dti_binary; 76,869 pooled withheld positives, 45,155 unique, seeds 310–314, 20 cells; geographic-fold block bootstrap, only four blocks. Local recovery test, not an organizer score.</p>
+<p><strong>Uniqueness:</strong> 166 pinned valid-grid rasters across nine requested repositories plus local artifacts. Surface maximum correlation 0.0244, support overlap 37.3%; final dots 0.0057, overlap 38.7%. All below the 0.90 / 70% limits. This is the declared snapshot, not a synchronized global parallel registry.</p>
+<p><a href="data/run_card_2026-10-25.json">Current complete JSON run card + per-raster checks</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/54_s18_result.md">Scientific interpretation, ranked hypotheses and next steps</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s18_official_source_review.json">Dated official-source observations</a></p>
+<p><strong>Protocol limits:</strong> S18 used this repository’s existing shared harness/writer, not the subsequently restored upstream template APIs. Exact upstream-contract equivalence, an exclusive external lane assignment, global registry completeness and a certified global-best baseline are unestablished. This is not a fully protocol-certified submission.</p>
+<p><strong>Prior-run context:</strong> S16 failed its frozen LOSFO gate and uniqueness. H36/H38/S15/S16 downloads below are historical inspection-only references, not substitute approved submissions. The prior portal range-error cause remains unconfirmed. No human-inspector sign-off is substituted for automated evidence.</p>
 </section><div class="breadcrumb"><a href="index.html">Overview</a> / Sources</div>
 <section class="hero"><div class="hero-content"><div class="eyebrow">Manual source review ledger</div><h1>Claims tied<br>to their sources.</h1><p class="lead">Each entry says what was reviewed, how it was accessed, and what remains unknown. A repository mirror or catalog listing does not establish official byte identity, schema, coverage, downloadability, or licence.</p><div class="value-line"><span class="value-pill">Primary/official first</span><span class="value-pill">No invented provenance</span><span class="status blocked">NO DD AUTOMATION</span></div></div></section>
 <section class="section"><div class="callout"><strong>Competition-page policy:</strong> no automated DrivenData fetch, browser bot, API, scraping, upload, scheduled job or monitoring. The leaderboard snapshot dated 2026-10-03 was read once manually. <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Manual human-review link</a>. Public scores shown there are not linked to the repository owner or local files.</div>
-<p>Registry note: Verification status is stated per row. DrivenData is accessed manually only; there is no scraper, API poll, scheduled fetch, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer &#x27;hash-pinned, raw bytes NOT downloaded&#x27;: the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json). | 2026-10-03 Session 14: official DrivenData problem, ScienceBase heat-flow/conductance, GDR #1391, and USGS 3DEP pages were rechecked. These checks establish that the pages/resources are listed, not that the contest owner mirrors are organizer-authenticated or that new layers are locally clipped/schema-audited.</p>
+<p>Registry note: Verification status is stated per row. DrivenData is accessed manually only; there is no scraper, API poll, scheduled fetch, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer &#x27;hash-pinned, raw bytes NOT downloaded&#x27;: the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json). | 2026-10-03 Session 14: official DrivenData problem, ScienceBase heat-flow/conductance, GDR #1391, and USGS 3DEP pages were rechecked. These checks establish that the pages/resources are listed, not that the contest owner mirrors are organizer-authenticated or that new layers are locally clipped/schema-audited. | S18 2026-10-25: one-off research-tool official page/PDF review in evidence/s18_official_source_review.json. Static feed still never contacts DrivenData. No organizer receipt or login obtained.</p>
 <p><strong>AI-use disclosure:</strong> <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/AI_DISCLOSURE.md">AI_DISCLOSURE.md</a> records the tools and review boundaries for this repository; the required final-round narrative must still disclose AI use in the organizer’s requested format.</p>
 <p>The site generator reads the local JSON registry only; it makes no external request. The separately invoked <code>scripts/refresh_source_feed.py</code> has an explicit forbidden-host guard for <code>drivendata.org</code> and is not part of site build or CI.</p>
 </section>
-<section class="section"><h2>26 registered source records</h2><article class="source-row" id="dd-problem">
+<section class="section"><h2>32 registered source records</h2><article class="source-row" id="dd-problem">
 <h3><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/" target="_blank" rel="noopener noreferrer">DrivenData #306 DOE GEMS - Problem description</a></h3>
-<p class="source-meta">DrivenData (competition host) · competition · accessed 2026-10-03</p>
-<p><strong>Verification status:</strong> Problem page re-fetched 2026-10-03; official content confirms public faults are incomplete, experts labelled additional faults for initial private scoring, and final scoring uses an expanded expert-reviewed label set.</p>
+<p class="source-meta">DrivenData (competition host) · competition · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> Rechecked S18 via one-off source retrieval; not a submission receipt</p>
 <p><strong>Use:</strong> Metric (kernel, TPw/FPw/FNw, alpha 0.2 / beta 0.8), submission format, rounds and prizes, training layers</p>
-<p><strong>Evidence/limitation:</strong> The problem page states public fault labels are incomplete; experts manually identified faults absent from the public USGS database for the initial private test, and submissions are reviewed to update labels for final-round rescoring. It describes DTI and the 300 m distance-weighted tolerance. This source motivates ADD candidates but does not authenticate local labels or any repository score.</p>
+<p><strong>Evidence/limitation:</strong> Fault location is the target, not confirmed geothermal vents. DTI uses alpha=0.2, beta=0.8, triangular 300 m kernel. GeoTIFF: one float32 band, EPSG:32611, 100 m grid, matching bounds, confidence [0,1]; text says null/NaN outside bounds. Both chunks read via fetch_page. Not an authenticated download, portal test, or private scorer audit. Zeros outside the irregular footprint are a compatibility variant, not a guarantee of official acceptance.</p>
 </article><article class="source-row" id="dd-about">
 <h3><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/" target="_blank" rel="noopener noreferrer">DrivenData #306 - About</a></h3>
-<p class="source-meta">DrivenData · competition · accessed 2026-10-02</p>
-<p><strong>Verification status:</strong> read-in-full (agent, one-off)</p>
+<p class="source-meta">DrivenData · competition · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> Full one-chunk public description rechecked via research tool; no receipt</p>
 <p><strong>Use:</strong> Sponsor (DOE Geothermal), GeoDAWN data origin, cited literature</p>
 <p><strong>Evidence/limitation:</strong> Cites Matteo et al. 2021 (doi 10.1029/2020JB021269) and Hermant et al. 2025 (Stanford Geothermal Workshop).</p>
 </article><article class="source-row" id="dd-terms">
@@ -46,10 +51,10 @@
 <p><strong>Evidence/limitation:</strong> &quot;Use any robot, spider or other automatic device, process or means to access the Website for any purpose, including monitoring or copying any of the material on the Website.&quot;</p>
 </article><article class="source-row" id="rules">
 <h3><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf" target="_blank" rel="noopener noreferrer">Official Rules (NLR/DOE), Sept 2026</a></h3>
-<p class="source-meta">NLR / U.S. DOE (docs.nlr.gov) · competition · accessed 2026-10-02</p>
-<p><strong>Verification status:</strong> read-in-full (all 7 chunks 0-6 verified line-by-line)</p>
+<p class="source-meta">NLR / U.S. DOE (docs.nlr.gov) · competition · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> Rechecked S18 via one-off source retrieval; not a submission receipt</p>
 <p><strong>Use:</strong> Single GeoTIFF at 100 m, 3 submissions/week, one final submission, generative-AI disclosure, labels = INGENIOUS + expert-labelled new faults, $300k prize structure</p>
-<p><strong>Evidence/limitation:</strong> Confirms $300k prize pool ($50k Phase 1 split among top 5 on private test set; $250k Phase 2 = $100k/$70k/$40k/$25k/$15k on expert-updated full label set), 100 m GeoTIFF in [0, 1], 3 submissions/week, 1 chosen final submission across both phases, distance-weighted Tversky index penalizing FN more than FP, AI disclosure requirement in narrative (excluded from word count), and Appendix A legal terms.</p>
+<p><strong>Evidence/limitation:</strong> Three submissions per week stated in sections 3.2 and 3.4; one final submission across both rounds. AI use is allowed with disclosure in narrative. Finalists deliver reproducible code/assets/documentation; eligibility applies. All seven extracted chunks read. Current account-specific allowance, rules acceptance and eligibility not accessed or established. This is not a submission receipt.</p>
 </article><article class="source-row" id="berkowitz">
 <h3><a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/1999GL011241" target="_blank" rel="noopener noreferrer">Berkowitz, Bour, Davy &amp; Odling (2000) Scaling of fracture connectivity in geological formations. GRL 27(14), 2061-2064</a></h3>
 <p class="source-meta">AGU / Wiley · literature · accessed 2026-10-03</p>
@@ -82,10 +87,10 @@
 <p><strong>Evidence/limitation:</strong> DOI 10.5066/P93LGLVQ; 149,030 line-km over 51,857 sq km. The official item describes magnetic/radiometric grids and reports Area 1 nominal magnetic line spacing 200 m, Area 2 400 m, and variable terrain clearance. These are survey acquisition specifications, not proof that a 100 m competition grid has independent 100 m resolution or that the owner-mirror bytes match the release.</p>
 </article><article class="source-row" id="ingenious">
 <h3><a href="https://gdr.openei.org/submissions/1391" target="_blank" rel="noopener noreferrer">Ayling et al. (2022) INGENIOUS Great Basin regional dataset compilation (GDR submission 1391)</a></h3>
-<p class="source-meta">Geothermal Data Repository (OpenEI) · data · accessed 2026-10-03</p>
-<p><strong>Verification status:</strong> GDR #1391 page re-fetched 2026-10-03; public CC BY 4.0 listing and named resources confirmed. Page listing does not prove local package bytes or a clipped/schema-audited layer.</p>
+<p class="source-meta">Geothermal Data Repository (OpenEI) · data · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> Rechecked S18 via one-off source retrieval; not a submission receipt</p>
 <p><strong>Use:</strong> Origin of the catalogue labels (doi 10.15121/1881483 per the Official Rules)</p>
-<p><strong>Evidence/limitation:</strong> DOI 10.15121/1881483. The public page lists nine archives totaling 116.98 MB, including 2 m temperature probes (1.03 MB), paleogeothermal features (82.04 kB), MT and heat-flow companion items. No package download or new clip was performed by this source-page check; see individual entries and evidence/external_layer_inventory.json for prior runner byte checks.</p>
+<p><strong>Evidence/limitation:</strong> DOI 10.15121/1881483; publicly accessible, CC BY 4.0; lists faults, shear/dilation, magnetics/gravity, heat flow, MT, paleogeothermal features, well/spring chemistry and probe resources with official resource links. Resource listing/citation portion read. Listing obtainable does not mean binary bytes, schema, footprint coverage or local mirror transformation authenticated.</p>
 </article><article class="source-row" id="nbmg-qfaults">
 <h3><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0" target="_blank" rel="noopener noreferrer">NBMG Qfaults_INGENIOUS ArcGIS REST layer 0</a></h3>
 <p class="source-meta">Nevada Bureau of Mines and Geology · data · accessed 2026-10-03</p>
@@ -118,10 +123,10 @@
 <p><strong>Evidence/limitation:</strong> Glen et al. (2022) doi:10.5066/P9Z6SA1Z (isostatic gravity, magnetic, HGM, depth-to-basement grids); Peacock &amp; Bedrosian (2022) doi:10.5066/P9TWT2LU (ModEM 3D MT conductance grids); DeAngelo et al. (2022) doi:10.5066/P9BZPVUC (Great Basin heat flow &amp; thermal gradient points/grids).</p>
 </article><article class="source-row" id="dd-ref-solution">
 <h3><a href="https://github.com/drivendataorg/gems-prize-reference-solution" target="_blank" rel="noopener noreferrer">DrivenData GEMS Prize Reference Solution repository (drivendataorg/gems-prize-reference-solution)</a></h3>
-<p class="source-meta">DrivenData (GitHub) · competition · accessed 2026-10-02</p>
-<p><strong>Verification status:</strong> inspected and verified via GitHub API on 2026-10-02</p>
+<p class="source-meta">DrivenData (GitHub) · competition · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> Rechecked S18 via one-off source retrieval; not a submission receipt</p>
 <p><strong>Use:</strong> Official reference data-preparation and baseline pipeline (`src/prepare_data.py`, `scripts/download_competition_data.sh`) mirrored and extended in this repository</p>
-<p><strong>Evidence/limitation:</strong> Confirms official competition file list and baseline structure; our `scripts/prepare_data.py` and `scripts/download_competition_data.sh` implement the reference CLI while adding band-description assertions and excluding the mislabelled `tc` band.</p>
+<p><strong>Evidence/limitation:</strong> Official notebook implements U-Net with Monte Carlo patch splits and TverskyLoss alpha=0.2 beta=0.8. README supports CPU-only environments as well as GPU acceleration. README and notebook fetched at pinned GitHub commit; notebook does not establish this repository&#x27;s buffered whole-system validation or certify its results.</p>
 </article><article class="source-row" id="sibling-gemsdoe25-leaderboard-snapshot">
 <h3><a href="https://github.com/buffedlizard55-lab/GEMSDOE25/blob/main/registry/live_scores.json" target="_blank" rel="noopener noreferrer">GEMSDOE25 registry/live_scores.json - leaderboard snapshot rows 1-50 (owner-directed page read)</a></h3>
 <p class="source-meta">buffedlizard55-lab/GEMSDOE25 (owner repository; secondary quote of a DrivenData page) · owner repository (secondary) · accessed 2026-10-02</p>
@@ -182,6 +187,42 @@
 <p><strong>Verification status:</strong> Official ScienceBase item page fetched 2026-10-03. Five 2–200 km depth-slice GeoTIFFs are listed; listing and local runner availability do not establish that this checkout has five audited clips.</p>
 <p><strong>Use:</strong> H38-5 queued coarse-context hypothesis: depth-boundary coherence across five magnetotelluric conductance layers.</p>
 <p><strong>Evidence/limitation:</strong> DOI 10.5066/P9TWT2LU. The release describes conductivity/conductance estimated from 800+ MT transfer functions and lists surface (2–12 km), middle crust (12–20 km), lower crust (20–50 km), upper mantle (50–90 km), and mantle (90–200 km) rasters. Scale is regional and must not be interpreted as 100 m fault geometry.</p>
+</article><article class="source-row" id="dd-leaderboard-s18">
+<h3><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/" target="_blank" rel="noopener noreferrer">Official public leaderboard, dated source observation</a></h3>
+<p class="source-meta">Official source; see linked publisher · competition · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> One-off research-tool page observation; no receipt</p>
+<p><strong>Use:</strong> Dated S18 source verification</p>
+<p><strong>Evidence/limitation:</strong> First displayed public row: xiaofanhu, public DW-Tversky 0.4413. This supersedes treating 0.3195 as a current target. First page chunk observed 2026-10-25 via research fetch tool, not a submission-page receipt. Does not identify the owner, local raster, private performance or future leaderboard state. No recurring DrivenData monitoring added.</p>
+</article><article class="source-row" id="geodawn-official-s18">
+<h3><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and" target="_blank" rel="noopener noreferrer">USGS GeoDAWN release description</a></h3>
+<p class="source-meta">Official source; see linked publisher · data · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> One-off research-tool page observation; no receipt</p>
+<p><strong>Use:</strong> Dated S18 source verification</p>
+<p><strong>Evidence/limitation:</strong> Glen and Earney 2024 release, DOI 10.5066/P93LGLVQ, CC0. Magnetic data constrain subsurface structure; radiometrics surface geology/soil. Area 2 nominal flight-line spacing is 400 m and flight height varies with terrain; processed grid products include GeoTIFFs. Both page chunks read. Listing/license verified; original binary grids and processing histories not independently re-downloaded. A magnetic contact does not prove slip or a geothermal vent.</p>
+</article><article class="source-row" id="gauch-cordell-hg-offsets-s18">
+<h3><a href="https://www.usgs.gov/publications/limitations-determining-density-or-magnetic-boundaries-horizontal-gradient-gravity-or" target="_blank" rel="noopener noreferrer">Grauch &amp; Cordell (1987), HG contact-location limitations</a></h3>
+<p class="source-meta">USGS / Stanford-hosted proceedings, as linked · literature · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> One-off source review; scope explicitly limited</p>
+<p><strong>Use:</strong> S18 scientific limitations and falsification</p>
+<p><strong>Evidence/limitation:</strong> HG maxima can be offset when contacts are not near vertical or when sources are close together. DOI 10.1190/1.1442236. Official USGS publication abstract read in full. Supports ambiguity, not S18 linear-in-height extrapolation or verified fault displacement.</p>
+</article><article class="source-row" id="usgs-pymaxspots-s18">
+<h3><a href="https://www.usgs.gov/software/pymaxspots-computing-and-connecting-horizontal-gradient-maxima-potential-field-geophysics" target="_blank" rel="noopener noreferrer">USGS pymaxspots software release (2025)</a></h3>
+<p class="source-meta">USGS / Stanford-hosted proceedings, as linked · literature · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> One-off source review; scope explicitly limited</p>
+<p><strong>Use:</strong> S18 scientific limitations and falsification</p>
+<p><strong>Evidence/limitation:</strong> HG maxspots mark edges of contrasts associated with faults, intrusions OR lithologic contacts. DOI 10.5066/P13FSKEM; source page marks CC0. Software description and citation read. Software not installed/used; no claim it validates S18 candidates.</p>
+</article><article class="source-row" id="phillips-2002-s18">
+<h3><a href="https://pubs.usgs.gov/of/2002/0098/intro.htm" target="_blank" rel="noopener noreferrer">USGS OFR 02-98, Phillips: aeromagnetic processing and interpretation</a></h3>
+<p class="source-meta">USGS / Stanford-hosted proceedings, as linked · literature · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> One-off source review; scope explicitly limited</p>
+<p><strong>Use:</strong> S18 scientific limitations and falsification</p>
+<p><strong>Evidence/limitation:</strong> HG contact interpretation assumes vertical field/magnetizations, vertical isolated thick sources; violations shift peaks or add secondary peaks. Reduction to the pole is usually needed. Introduction/flight-line noise/HG assumptions portion read, not all five extracted chunks. S18 used raw TMI; these limitations are a caution, not a tuned correction.</p>
+</article><article class="source-row" id="hermant-2025-s18">
+<h3><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf" target="_blank" rel="noopener noreferrer">Hermant et al. 2025, Stanford geothermal workshop paper</a></h3>
+<p class="source-meta">USGS / Stanford-hosted proceedings, as linked · literature · accessed 2026-10-25</p>
+<p><strong>Verification status:</strong> One-off source review; scope explicitly limited</p>
+<p><strong>Use:</strong> S18 scientific limitations and falsification</p>
+<p><strong>Evidence/limitation:</strong> Figure 2 states USGS/TLS fault-label offsets can reach 400 m; introduction notes faults can be permeability conduits or barriers. Abstract, introduction and Figure 2 chunk read; not all eight chunks. Conference paper, not official competition truth or validation of the new heuristic.</p>
 </article>
 <p><a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/registry/sources.json">Download the machine-readable source ledger</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/registry/irregularities.json">Review disclosed irregularities</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/registry/data_manifest.json">Review input hashes and provenance labels</a>.</p></section>
 </main>

@@ -22,7 +22,7 @@ hide-and-recover proxy) or **OWNER-REPORTED**; nothing is ORGANIZER-CONFIRMED.
 
 After restoring all 17 hash-pinned inputs (prepared-feature SHA-256 `83ed2704…`
 reproduces Session 14 exactly), the focus-site rasters were fetched from GitHub and
-compared pixel-exactly (`evidence/s18_champion_forensic.json`): champion `e5eb6e7e`
+compared pixel-exactly (`evidence/s18b_champion_forensic.json`): champion `e5eb6e7e`
 (37,654 dots, SHA-256 `c55bafc4…`) = solo `8acb75e1` (40,199 dots; GEMSDOE28 and
 GEMSDOE31 copies dot-identical) minus the d(catalogue) ≤ 2 px ring (2,545 removed,
 0 added); solo = `dotted-h19-5-d2-8` (44,090 dots; GEMSDOE25/30 dot-identical) minus

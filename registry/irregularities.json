@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-25",
+  "generated": "2026-10-25T00:00:00Z",
   "items": [
     {
       "id": "s18-schema-is-not-upload-approval",
@@ -614,6 +614,54 @@
       "action": "Updated the shared site generator and README to state that no file is currently approved. Historical artifacts are labeled inspection-only; the all-finite variant is described as a format compatibility option only, not scientific approval. Added regression assertions for overview and executive-summary wording. No new raster was created because the authorized H40-1 lane already exhausted its three experiments and failed gates."
     },
     {
+      "id": "s18-missing-explicit-lane",
+      "severity": "medium",
+      "issue": "Current prompt omitted the promised single method paragraph. S18 autonomously adopted migration-extrapolated placement recommended in knowledge/50\u201351; exclusive external lane assignment is not confirmed.",
+      "action": "Used session-scoped S18-MXTP ID, frozen preregistration before outputs, no slot; future parallel sessions need explicit assignment."
+    },
+    {
+      "id": "s18-holdout-negative",
+      "severity": "high",
+      "issue": "New unique S18 TIFF passed scoped uniqueness and local format validation, but HOLDOUT-DTI paired gain was negative with a wholly negative CI against the recomputed registered H38-1 baseline.",
+      "action": "Verdict negative, first-screen DO NOT SUBMIT, no slot; 3/3 experiments spent, no threshold/budget retuning."
+    },
+    {
+      "id": "s18-evaluator-empty-edt",
+      "severity": "high",
+      "issue": "Shared run_losfo_harness.eval_set could award phantom edge credit to an empty prediction and counted truth outside active cells.",
+      "action": "Fixed once in shared template by delegation to existing metric.dti_binary; regression tests for empty predictions and masked truth. S18 uses v2 hash bundle. Historical evidence remains versioned/unmodified; impact on historical nonempty cases not claimed."
+    },
+    {
+      "id": "s18-conductive-base-not-basement",
+      "severity": "medium",
+      "issue": "Rank-2 preregistration proposal interpreted depth_to_base_surf as basement thickness, but the official supplied-layer description identifies conductive-base depth.",
+      "action": "Frozen document retained unchanged for audit; interpretation explicitly rejected in current report/UI. No rank-2 experiment executed."
+    },
+    {
+      "id": "s18-official-source-access-correction",
+      "severity": "low",
+      "issue": "Frozen preregistration overgeneralized sandbox HTTP host limits into inability to read public official pages. Research fetch_page successfully read problem description, leaderboard, USGS and rules PDF.",
+      "action": "Recorded dated official observations; source listings do not authenticate mirrored binary inputs. No account, upload or receipt obtained."
+    },
+    {
+      "id": "s18-weekly-cap-correction",
+      "severity": "medium",
+      "issue": "Historical UI mentioned four weekly slots; official September 2026 PDF \u00a7\u00a73.2/3.4 states three submissions/week.",
+      "action": "Active instructions corrected; authenticated account-specific remaining allowance still unverified. Historical audit documents are not rewritten."
+    },
+    {
+      "id": "s18-registry-scope",
+      "severity": "medium",
+      "issue": "S18 uniqueness covers 166 valid-grid unique-byte files from declared pinned directories in nine repositories and local pre-run downloads, not a synchronized global parallel-run registry.",
+      "action": "Full manifest aliases/hashes and one excluded 32x48 format fixture retained. No global uniqueness or selector approval asserted."
+    },
+    {
+      "id": "s18-normalized-prompt-not-transcript",
+      "severity": "low",
+      "issue": "Current README archives the operational requirements and links knowledge/53_current_request.md; this is not a byte-for-byte transcript of the lengthy chat and historical result list.",
+      "action": "Explicitly labeled normalized requirements, not verbatim; original chat remains authoritative. No false claim of complete transcript fidelity."
+    },
+    {
       "id": "g28-a51-no-lane-or-strict-baseline",
       "severity": "high",
       "issue": "The latest parallel-run request references an assigned single method paragraph, but none is identifiable. The complete parallel-run registry and frozen same-protocol incumbent are also missing.",
@@ -726,6 +774,12 @@
       "severity": "medium",
       "issue": "Two parallel 2026-10-25 runs both labeled themselves Session 18: main's safety review (0 experiments, evidence/s18_run_card.json run_id s18-safety-review-20261025, evidence/current_run_card.json) and the H39-5 experiment run (3 experiments, seeds 310-314). Evidence/s18_run_card.json collided add/add at merge time.",
       "action": "Main's card keeps evidence/s18_run_card.json; the H39-5 card moved to evidence/s18_h39_5_run_card.json with all references updated (manifest slot, finalize_s18.py, knowledge/53, site panel). Refer to 'S18 safety review (parallel main)' vs 'S18 H39-5 (this experiment)'; never combine their numbers. Same pattern as s16-h40-id-collision."
+    },
+    {
+      "id": "s18-mxtp-h39-5-concurrent-method-collision",
+      "severity": "high",
+      "issue": "Separate PR40 MXTP and PR41 H39-5 ran contemporaneous extrapolated-placement hypotheses with seeds310\u2013314; their pre-run registries do not certify one another. Generic finalizer/manifest names collided. PR41 also appended physical helpers to the source-frozen migration module.",
+      "action": "Both outcomes remain negative. Preserve separate cards and slots; namespace H39 finalizer; retain exact executed migration source bytes and verify current module preserves them as an unchanged prefix. No model rerun, combined estimate, independent-replication claim or global uniqueness certification."
     },
     {
       "id": "s18b-session-label-collision",

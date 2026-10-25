@@ -14,7 +14,7 @@ submission-page receipt exists in this checkout). A projection is never written 
 Education only; the construction is **not** reused as this session's candidate (see §1).
 Verified 2026-10-25 in this sandbox after restoring all 17 hash-pinned inputs
 (`evidence/restore_audit.json`; prepared-feature SHA-256 `83ed2704…` reproduces Session 14)
-and fetching the focus-site rasters from GitHub (`evidence/s18_champion_forensic.json`):
+and fetching the focus-site rasters from GitHub (`evidence/s18b_champion_forensic.json`):
 
 - Champion `gemsdoe32-h33-h33-2-b2-…-e5eb6e7e-zeros.tif` (SHA-256 `c55bafc4…`, the Session-16
   pin) holds 37,654 dots and equals the GEMSDOE28/31 solo file `8acb75e1` (40,199 dots;
