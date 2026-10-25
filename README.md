@@ -27,6 +27,22 @@ state **three submissions/week**; the authenticated account's remaining allowanc
 organizer receipt here. Fresh byte forensics confirm that the reported GEMSDOE32 champion is
 solo-r1 minus 2,545 catalogue-flank dots; its reported 0.2778 association remains unverified.
 
+**Parallel-run addendum (Session 18B, H42-1, same date):** another concurrent run executed
+the H42-1 migration-vector relocation lane
+([preregistration](knowledge/52_preregistration_H42-1_migration_relocation.md),
+[result](knowledge/54_s18b_h42_1_result.md), run card `evidence/s18b_run_card.json`). It
+generated a genuinely unique TIFF (`290553965159`, 34,492 dots) that passed binding
+scored-registry uniqueness and format validation but **failed its frozen LOSFO gate**
+(HOLDOUT-DTI Δ −0.004957, 95 % CI [−0.006577, −0.003294], 1/20 cells; anti/random controls
+equally negative). Verdict `negative`; 🔴 DO NOT SUBMIT. It independently reserved seeds
+310–314 and reproduced the identical pooled D0 of the parallel H39-5 gate (also negative,
+Δ −0.010731) — corroboration that migration-extrapolated placement is falsified, not one
+pooled experiment; never combine the parallel sessions' numbers
+(`s18b-session-label-collision` in `registry/irregularities.json`). One disclosed deviation:
+support-averaged (not coherence-weighted) vector combination
+(`s18b-vector-combination-deviation`); the falsification is direction-agnostic, so the lane
+stays closed and seeds 310–314 are spent for it. Still **no file approved**.
+
 ### Standing owner prompt — start here every session
 
 Read the [current normalized owner request](knowledge/53_current_request.md), the

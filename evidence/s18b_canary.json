@@ -1,0 +1,152 @@
+{
+  "experiment": "S18 Exp1 canary (knowledge/52); no detector trained",
+  "bands": [
+    "tmi_signed_migration_px",
+    "tmi_migration_coherence",
+    "grav_signed_migration_px",
+    "grav_migration_coherence",
+    "migvec_mag_px",
+    "migx_shift_mag_px"
+  ],
+  "valid_frac_in_footprint": {
+    "tmi": 0.9994076293698946,
+    "iso_grav_anom": 0.9994076293698946
+  },
+  "vectors_npz": "data/prepared/migration_vectors.npz",
+  "vectors_npz_sha256": "46093d961b6c40c5dc4b7e5941e462a4451e7420d47794020ae9cb8e5a00ee70",
+  "prepared_features_sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+  "losfo_assignment_seed": 310,
+  "n_systems": 758,
+  "n_hidden_px_seed310": 14681,
+  "n_neg_sampled": 250000,
+  "single_feature_auc_vs_hidden_systems": {
+    "tmi_signed_migration_px": {
+      "auc": 0.496830950616443,
+      "canary_max_auc_1mauc": 0.503169049383557
+    },
+    "tmi_migration_coherence": {
+      "auc": 0.5216919711191336,
+      "canary_max_auc_1mauc": 0.5216919711191336
+    },
+    "grav_signed_migration_px": {
+      "auc": 0.4731929021183843,
+      "canary_max_auc_1mauc": 0.5268070978816157
+    },
+    "grav_migration_coherence": {
+      "auc": 0.5249342649683264,
+      "canary_max_auc_1mauc": 0.5249342649683264
+    },
+    "migvec_mag_px": {
+      "auc": 0.47299342197398,
+      "canary_max_auc_1mauc": 0.52700657802602
+    },
+    "migx_shift_mag_px": {
+      "auc": 0.493926885498263,
+      "canary_max_auc_1mauc": 0.506073114501737
+    }
+  },
+  "canary_threshold": 0.9,
+  "canary_pass": true,
+  "spearman_vs_instack_sample200k": {
+    "tmi_signed_migration_px": {
+      "tmi_hg": -0.05619610654792163,
+      "tmi": -0.24744766854313163,
+      "iso_grav_anom_hg": -0.001695039414079745,
+      "iso_grav_anom": 0.00011855912678732821,
+      "rtp": -0.18342676857299098
+    },
+    "tmi_migration_coherence": {
+      "tmi_hg": 0.421106956769945,
+      "tmi": 0.07266789177391055,
+      "iso_grav_anom_hg": -0.025443215262616104,
+      "iso_grav_anom": 0.032162935544620866,
+      "rtp": 0.057003085096954315
+    },
+    "grav_signed_migration_px": {
+      "tmi_hg": -0.05522317489840265,
+      "tmi": -0.02725449730249373,
+      "iso_grav_anom_hg": 0.04823842942042874,
+      "iso_grav_anom": -0.22098682399044065,
+      "rtp": -0.02322389508400457
+    },
+    "grav_migration_coherence": {
+      "tmi_hg": 0.027547778214714876,
+      "tmi": -0.002285879552290926,
+      "iso_grav_anom_hg": 0.004399348098919923,
+      "iso_grav_anom": -0.019650702249199167,
+      "rtp": -0.007797991596078255
+    },
+    "migvec_mag_px": {
+      "tmi_hg": -0.11742227373899866,
+      "tmi": -0.037154365969078465,
+      "iso_grav_anom_hg": -0.0026880572325677647,
+      "iso_grav_anom": 0.01657522609029222,
+      "rtp": -0.028571057744795954
+    },
+    "migx_shift_mag_px": {
+      "tmi_hg": -0.021693903802025804,
+      "tmi": -0.11961464200081176,
+      "iso_grav_anom_hg": 0.042668838132090645,
+      "iso_grav_anom": -0.48633090303058607,
+      "rtp": -0.07429470343474925
+    }
+  },
+  "label_free_shift_inventory": {
+    "vector_support_frac_footprint": 0.9317421057082583,
+    "vmag_px_on_support": {
+      "p50": 5.1797685623168945,
+      "p90": 10.969510078430176,
+      "max": 12.0
+    },
+    "shift_mag_px_footprint": {
+      "frac_ge_0p5": 0.4965772743713295,
+      "frac_ge_1p5": 0.25601945127630615,
+      "frac_at_cap3": 0.12413212671119349,
+      "p99": 3.0
+    },
+    "depth_to_base_m_footprint": {
+      "p50": 316.0062255859375,
+      "p95": 1880.822998046875,
+      "frac_zero_invalid": 0.0005923706301054714
+    }
+  },
+  "band_stats_footprint": {
+    "tmi_signed_migration_px": {
+      "min": -12.0,
+      "p50": 0.0,
+      "max": 12.0,
+      "finite_frac": 1.0
+    },
+    "tmi_migration_coherence": {
+      "min": 1.624772085051518e-05,
+      "p50": 0.252107173204422,
+      "max": 1.0,
+      "finite_frac": 1.0
+    },
+    "grav_signed_migration_px": {
+      "min": -12.0,
+      "p50": 0.0,
+      "max": 12.0,
+      "finite_frac": 1.0
+    },
+    "grav_migration_coherence": {
+      "min": 2.965338899230119e-05,
+      "p50": 0.1641705483198166,
+      "max": 1.0,
+      "finite_frac": 1.0
+    },
+    "migvec_mag_px": {
+      "min": 0.0,
+      "p50": 4.8557209968566895,
+      "max": 12.0,
+      "finite_frac": 1.0
+    },
+    "migx_shift_mag_px": {
+      "min": 0.0,
+      "p50": 0.4915861189365387,
+      "max": 3.0,
+      "finite_frac": 1.0
+    }
+  },
+  "seconds": 75.6
+}

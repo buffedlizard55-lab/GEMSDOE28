@@ -506,3 +506,34 @@ def test_legacy_main_root_routes_match_generated_pages_and_current_card():
     assert (ROOT / 'data/current_run_card_2026-10-25.json').read_bytes() == (
         DOCS / 'data/current_run_card_2026-10-25.json'
     ).read_bytes()
+
+
+def test_session18b_h42_1_candidate_is_unique_valid_but_do_not_submit():
+    # Parallel Session 18B H42-1 experiment (knowledge/52 preregistration,
+    # knowledge/54 result): unique + format valid, frozen LOSFO gate FAILED.
+    # Renamed from s18 at merge; never combined with H39-5 / safety-review runs.
+    archive = (DOCS / 'archive.html').read_text()
+    assert '290553965159' in archive
+    assert 'DO NOT SUBMIT — FROZEN HOLDOUT GATE FAILED' in archive
+    card = json.loads((ROOT / 'evidence/s18b_run_card.json').read_text())
+    assert card == json.loads((DOCS / 'data/run_card_s18b.json').read_text())
+    assert card['verdict'] == 'negative'
+    assert card['submission_ready'] is False
+    assert card['slot_selected'] is False
+    assert card['experiments_run'] == 3
+    assert card['holdout']['label'] == 'HOLDOUT-DTI'
+    assert card['registry']['binding_pass'] is True
+    assert card['validator']['no_nan_inside'] is True
+    assert card['validator']['range_0_1'] is True
+    assert card['validator']['nan_variant_hard_pass'] is True
+    assert card['preregistration_deviations']  # coherence-vs-support deviation disclosed
+    assert len(card['note']) <= 140 and 'DO NOT SUBMIT' in card['note']
+    manifest = json.loads((DOCS / 'downloads/manifest.json').read_text())
+    slot = manifest['s18b_candidate']
+    assert slot['verdict'] == 'negative' and slot['content_id'] == '290553965159'
+    assert slot['run_card'] == 'evidence/s18b_run_card.json'
+    assert slot['sha256_allfinite'] == card['raster_sha256']
+    assert (DOCS / 'downloads' / slot['nan']).is_file()
+    assert (DOCS / 'downloads' / slot['allfinite']).is_file()
+    # The parallel Session 18 artifacts keep their own names/numbers.
+    assert manifest['s18_h39_5_candidate']['content_id'] == '719b83fb659b'

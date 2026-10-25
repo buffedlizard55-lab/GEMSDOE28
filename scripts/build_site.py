@@ -508,6 +508,53 @@ def local_h38_branch_attempt_html(claim: dict) -> str:
 
 
 
+def s18b_panel_html(manifest: dict) -> str:
+    """Parallel Session-18B (H42-1) candidate panel: verdict read from the manifest slot.
+
+    The slot is written by scripts/finalize_s18b.py from the frozen LOSFO gate + binding
+    scored-registry uniqueness + validator + promotion evidence schema (no human inspection).
+    A parallel Session 18 (H39-5, panel above) already owned the `s18_*` names on main, so
+    this third 2026-10-25 run is labeled 18B; the two sessions' numbers are never combined.
+    The download buttons are inspection downloads; the all-finite file is the file of record.
+    """
+    item = manifest.get("s18b_candidate")
+    if not isinstance(item, dict) or not item.get("nan"):
+        return ""
+    promote = item.get("verdict") == "promote"
+    banner = ("🟢 GATE PASS — ELIGIBLE FOR SELECTOR REVIEW · UNSCORED" if promote
+              else "🔴 DO NOT SUBMIT — FROZEN HOLDOUT GATE FAILED · UNIQUE TIF, INSPECTION ONLY")
+    verdict_line = (
+        "This unique file passed its frozen LOSFO gate, binding scored-registry uniqueness, "
+        "format validator and evidence schema. It is still <strong>unscored</strong> (no organizer "
+        "receipt) and spends no slot by existing: promotion to a weekly slot is the separate "
+        "selector step. The all-finite file below is the upload-safe record file."
+        if promote else
+        "<strong>Is it OK to download and submit this file? Download for inspection: yes. Submit: NO.</strong> "
+        "This is the parallel Session 18B run&#8217;s newly generated <em>unique</em> TIF (never a copy of a "
+        "previous submission), and every format check passes on the actual bytes — but its frozen holdout "
+        "gate falsified the lane (relocation in any direction loses DTI), so uploading it would spend a "
+        "weekly slot on a rejected idea. It is published byte-for-byte so the negative result is auditable. "
+        "The parallel H39-5 panel above reached the same verdict by an independent implementation.")
+    return f"""<section class="download-panel" id="s18b-candidate" aria-labelledby="s18b-heading">
+  <div class="eyebrow">Session 18B (parallel) · 2026-10-25 · unique TIF · auto-validated, no human inspection</div>
+  <h2 id="s18b-heading">{esc(banner)}</h2>
+  <p><strong>{esc(item.get('hypothesis', 'H42-1'))}</strong></p>
+  <p>{verdict_line}</p>
+  <p>{esc(item.get('status', ''))}</p>
+  <p><strong>Inspection downloads (do not upload):</strong></p>
+  {file_links(item)}
+  {mirror_line(item)}
+  <p><strong>Exact filenames</strong></p><code class="file-name">{esc(item['nan'])}</code><br><code class="file-name">{esc(item.get('allfinite', ''))}</code> (all-finite file of record: values exactly {{0,1}}, no NaN anywhere, strict whole-array [0, 1] PASS — the range-safe answer to the portal error)
+  <p><strong>Unique submission name:</strong> <code>{esc(item.get('submission_name', 'not registered'))}</code></p>
+  <p class="meta">SHA-256 (all-finite record) <code>{esc(item.get('sha256_allfinite', ''))}</code> · SHA-256 (NaN variant) <code>{esc(item.get('sha256_nan', ''))}</code> · single-band float32 · {esc(item.get('emitted_px'))} cells equal to 1 · CRS EPSG:32611 · 3730 &#215; 3292 · 100 m grid · 0 dots on the catalogue.</p>
+  <p><strong>Exact short note ({len(str(item.get('note', '')))} / 140 characters):</strong></p>
+  {note_box(str(item.get('note', '')))}
+  <p class="small">How to submit (only ever for a future promoted file): on DrivenData choose <em>New submission</em>, attach the single-band GeoTIFF above (or its single-member ZIP), paste the unique name/note, and keep the organizer receipt — see the <a href="executive-summary.html">executive summary</a>. Evidence: <a href="data/run_card_s18b.json">run card (JSON)</a> · <a href="../evidence/s18_h42_losfo_gate.json">LOSFO gate (seeds 310–314)</a> · <a href="../evidence/s18b_canary.json">leakage canary</a> · <a href="../evidence/s18b_champion_forensic.json">why 0.2778 won (byte forensic)</a> · <a href="../knowledge/52_preregistration_H42-1_migration_relocation.md">preregistration + 5 ranked hypotheses</a> · <a href="../knowledge/54_s18b_h42_1_result.md">result</a>. HOLDOUT-DTI is a local proxy, never an organizer score; 0.2778 is owner-reported (no organizer receipt in any fetched repository).</p>
+</section>
+
+"""
+
+
 def s16_panel_html(manifest: dict) -> str:
     """Session-16 candidate panel: verdict headline read from the manifest slot."""
     item = manifest.get("s16_candidate")
@@ -715,7 +762,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
 </div></section>
 
 <section class="callout callout-danger"><strong>Session 15 audit (historical, 2026-10-25):</strong> the GEMSDOE32 H33-2 <strong>0.2778</strong> value is owner-reported; the available cross-site audit describes catalogue-proximity pruning but no organizer receipt is present. Later byte forensics verified the construction but not the reported score attribution. The conflicting prompt maxima were superseded by a dated public-source observation in Session 18: the official leaderboard showed 0.4413. That observation is not a submission receipt. Session 15 was blocked because its assigned lane and data were absent at that point. Session 16 subsequently ran its explicitly preregistered H40-1 migration lane; it failed the holdout spread and uniqueness gates. <strong>No current candidate is approved for upload.</strong> <a href="session15-review.html">Read the high-score audit, hypotheses and Session 15 negative run card →</a> · <a href="../knowledge/50_s16_result.md">Session 16 result →</a></section>
-{s17_status_section_html(manifest)}{s18_panel_html(manifest)}{s16_panel_html(manifest)}{s15_panel_html(manifest)}<section class="download-panel" id="download" aria-labelledby="download-heading">
+{s17_status_section_html(manifest)}{s18_panel_html(manifest)}{s18b_panel_html(manifest)}{s16_panel_html(manifest)}{s15_panel_html(manifest)}<section class="download-panel" id="download" aria-labelledby="download-heading">
   <div class="eyebrow">Historical research artifacts — inspection/download only</div>
   <h2 id="download-heading">Historical GeoTIFF — NOT APPROVED FOR SUBMISSION</h2>
   <p><span class="status danger">DO NOT SUBMIT · UNSCORED · NOT SELECTOR-APPROVED</span></p>
@@ -798,7 +845,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
   <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO UPLOAD / NO RECEIPT</span></div>
 </div></section>
 
-{s17_one_click_html(manifest)}{s18_panel_html(manifest)}{s16_panel_html(manifest)}{s15_panel_html(manifest)}
+{s17_one_click_html(manifest)}{s18_panel_html(manifest)}{s18b_panel_html(manifest)}{s16_panel_html(manifest)}{s15_panel_html(manifest)}
 <section class="section"><div class="grid">
   <article class="card span-8"><h2>Historical candidate record</h2><p><strong>{esc(p.get('hypothesis'))}.</strong> Filename <code class="file-name">{esc(p['nan'])}</code>. {esc(str(p.get('status', '')))} Built on the owner-reported <strong>{fmt_number(p.get('base_reference_live_score', 0.26), 4)}</strong> live base (<code>{esc(str(p.get('base_reference_id', '')))}</code>) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (&minus;0.0028 vs 0.2477). Its holdout evidence (<a href="../{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}">{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}</a>) records a mean &Delta;DTI of <strong>{fmt_number(p.get('holdout_mean_gain', 0), 6)}</strong> with <strong>{esc(p.get('holdout_folds_improved', 'n/a'))}</strong> spatial folds and <strong>{esc(p.get('holdout_seeds_improved', 'n/a'))}</strong> seeds improving over the same-run control.{adj_sentence} The historical H28-1 full-map reference <code class="file-name">{esc(candidate.get('nan', ''))}</code> (+0.00294884 on seeds 140–149) is retained for comparison and is not an authorized weekly submission.</p><p><strong>Disposition:</strong> the historical files pass {check_count} reported format, grid, <code>[0,1]</code>, footprint, and SHA-256 checks (<a href="../evidence/submission_file_audit.json">evidence/submission_file_audit.json</a>); these technical checks do not establish current scientific merit, uniqueness, organizer provenance, or selector approval. No file is currently approved for submission.</p></article>
   <article class="card span-4"><div class="metric">{comma(p.get('emitted_px'))}</div><div class="metric-caption">binary positive cells emitted</div><hr><div class="metric">+{fmt_number(p.get('holdout_mean_gain', 0), 5)}</div><div class="metric-caption">4-fold spatial OOF &Delta;DTI ({esc(p.get('holdout_seeds_improved', 'n/a'))} seeds)</div></article>
