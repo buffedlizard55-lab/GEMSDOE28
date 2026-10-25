@@ -1,0 +1,39 @@
+{
+  "run_id": "s18-safety-review-20261025",
+  "hypothesis": null,
+  "mechanism": "No new scientific experiment; repair schema-only readiness misclassification.",
+  "non_fault_mimic": null,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "not_run",
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null
+  },
+  "registry": {
+    "status": "not_run",
+    "correlation": null,
+    "within_3px_fraction": null
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "not_run",
+    "no_nan_inside": null,
+    "range_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null
+  },
+  "submission_name": null,
+  "note": "Blocked: no assigned method paragraph or restored inputs. No new TIFF; no submission slot used.",
+  "experiments_run": 0,
+  "verdict": "negative",
+  "submission_ready": false,
+  "slot_selected": false,
+  "blockers": [
+    "No method paragraph supplied for this run; previous frozen lane exhausted.",
+    "Training rasters and cached feature stack absent.",
+    "No complete fresh registry comparison or holdout evidence for a new candidate."
+  ]
+}

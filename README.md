@@ -1,40 +1,20 @@
-# Latest review — 2026-10-25: no approved submission
+# Current review status — 2026-10-25 (read first)
 
-**DO NOT UPLOAD any current TIFF.** This review did not generate a new candidate.
-The prompt references a single method paragraph but does not supply one; the prior
-migration lane is exhausted. No lane switch or fourth experiment was performed.
-Training rasters and the feature cache are absent from this checkout.
+**NO FILE IS APPROVED FOR SUBMISSION.** The current review had no uniquely assigned method
+lane and no competition feature rasters or prepared shared cache; no experiment ran and no
+new TIFF was generated. Historical H39/H40/H38/H36 files are inspection artifacts only.
+Do not upload any file from this repository. Read the
+[current negative run card](evidence/s18_run_card.json), the
+[latest submission-safety review](evidence/review_s18_submission_gate_2026-10-25.md), and
+[this detailed repository review](evidence/review_2026-10-25_session18.md).
 
-Read [the latest three-pass review](evidence/review_s18_submission_gate_2026-10-25.md)
-before the historical notices below. The schema checker now reports
-`evidence_schema_passed` independently of `submission_ready` (always false for a
-schema-only check). A passing JSON schema is **not** exact-file validation or
-selector approval. The contradictory historical “unique/promote” claims in
-[knowledge/51](knowledge/51_session17_unique_submission.md) are explicitly withdrawn.
-The full task brief remains recorded below; this is an operational update, not a
-verbatim replacement of the supplied prompt. Core values: Maximize P(Win), Own the Outcome.
-
-# Current session safety notice — 2026-10-25 Session 16 (read first)
-
-**NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** The Session 16 H40-1 migration TIFF
-(`5f2efa891ce7`) failed both its frozen holdout-spread gate and the strict uniqueness
-gate; it is inspection-only. The older H36-1/H38-1 downloads are historical research
-artifacts, not unique candidates for this run and not approved by the separate selector.
-Do not upload any file from this repository unless a future candidate passes its frozen
-holdout, uniqueness, and exact-file gates and is separately approved by the selector.
-Read [the Session 16 result](knowledge/50_s16_result.md) and its
-[preregistration](knowledge/49_preregistration_H40-1_migration.md) before the historical
-standing prompt below. Session 16 re-verified why the OWNER-REPORTED 0.2778 champion won
-(emission hygiene: `solo-r1` minus the d_cat≤2 px ring; a ring-3 copy would be a >95 %
-duplicate and was not built), ran the leakage canary (PASS), the frozen LOSFO gate on
-seeds 300–304 (**G2 spread FAIL**: pooled HOLDOUT-DTI Δ +0.00126, 95 % CI
-[−0.0034, +0.0063], 9/20 cells), and the uniqueness check (**FAIL**: prediction-surface Spearman(prob_D1, prob_D0)
-0.990; 91.3 % of final dots within 3 px of a dense probe raster; 41.3 % vs the scored champion). The S16 run card does not retain a per-registry pre-placement surface-correlation table, so that subcheck is unverified; the final-dot overlap alone exceeds the duplicate-stop limit.
-The all-finite variant passes whole-array [0,1] format checks; that is not scientific or
-selector approval. It is only a possible file-format remedy for the prior portal range
-error, whose actual cause remains unconfirmed. No score here is ORGANIZER-CONFIRMED;
-projections are never scores. Negative results are deliverables. Do not copy an old
-submission.
+The current request references one exclusive method paragraph but does not specify it. The
+previous H40 migration lane is closed; do not infer a replacement lane or spend a fourth
+experiment. The checked-out competition rasters/cache are absent. The flawed historical
+“unique/promote” claims in [knowledge/51](knowledge/51_session17_unique_submission.md)
+were withdrawn on main. A schema pass is not raster validation, submission approval, or
+organizer confirmation. No cited high score is ORGANIZER-CONFIRMED here; projections are
+never scores.
 
 ## Current-session protocol (read before every run)
 
@@ -44,11 +24,9 @@ submission.
   organizer receipt in this checkout. Its byte-level forensic explanation is in
   [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md); do not claim it proves
   organizer score attribution.
-- **Lane and budget:** the authorized Session 16 method is the single H40-1 paragraph in
-  [`knowledge/49_preregistration_H40-1_migration.md`](knowledge/49_preregistration_H40-1_migration.md).
-  It is already executed (3/3 experiments) and failed. Do not switch lanes, rerun those
-  seeds, exceed the experiment/time cap, or create another variant under that frozen
-  preregistration. A new session needs its own explicit lane and fresh preregistration.
+- **Lane and budget:** the current request does not name one exclusive geological method
+  paragraph. Do not silently choose an older H39/H40/H38 method. H40-1 is closed after its
+  frozen budget; a new run needs an explicit lane and fresh preregistration.
 - **Holdout before any future slot:** hide whole fault segments with a buffer; compute
   catalogue-based features only from visible faults; pixel-exactly mask visible faults;
   score pooled DTI with α=0.2, β=0.8, and a 300 m triangular kernel. Test each feature
@@ -69,9 +47,9 @@ submission.
   valid deliverables.
 
 This is the current operational form of the owner's full project brief; the earlier
-verbatim task text below remains part of the audit trail. The Session 17 three-pass
-submission-safety review is in
-[`evidence/review_s17_submission_safety_2026-10-25.md`](evidence/review_s17_submission_safety_2026-10-25.md).
+verbatim task text below remains part of the audit trail. The current three-pass reviews
+are in [`evidence/review_s18_submission_gate_2026-10-25.md`](evidence/review_s18_submission_gate_2026-10-25.md)
+and [`evidence/review_2026-10-25_session18.md`](evidence/review_2026-10-25_session18.md).
 Primary manual-review links:
 [official competition](https://www.drivendata.org/competitions/306/competition-doe-gems/),
 [official rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf),

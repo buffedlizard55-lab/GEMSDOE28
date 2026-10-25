@@ -348,5 +348,12 @@
     "holdout_preregistration": "knowledge/49_preregistration_H40-1_migration.md",
     "holdout_seeds": "300-304",
     "verdict": "negative"
+  },
+  "current_run": {
+    "status": "BLOCKED \u2014 NO FILE APPROVED",
+    "submission_ready": false,
+    "slot_selected": false,
+    "new_tiff_generated": false,
+    "reason": "No assigned method lane or local competition feature/cache data; all listed artifacts are historical inspection-only files."
   }
 }

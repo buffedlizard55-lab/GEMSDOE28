@@ -295,6 +295,15 @@ def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
     assert 'FORBIDDEN = ("drivendata.org",)' in feed and "refusing to request" in feed
 
 
+def test_download_manifest_marks_all_current_slots_blocked():
+    manifest = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    current = manifest["current_run"]
+    assert current["status"] == "BLOCKED — NO FILE APPROVED"
+    assert current["submission_ready"] is False
+    assert current["slot_selected"] is False
+    assert current["new_tiff_generated"] is False
+
+
 def test_downloads_have_unique_names_and_zip_single_member():
     import zipfile
     names = [p.name for p in (DOCS / "downloads").glob("*.tif")]
@@ -304,27 +313,41 @@ def test_downloads_have_unique_names_and_zip_single_member():
             assert len(zf.namelist()) == 1 and zf.namelist()[0].endswith(".tif")
 
 
+def test_site_build_metadata_does_not_call_historical_raster_a_submission_download(capsys):
+    from scripts import build_site
+
+    assert build_site.main() == 0
+    build_result = json.loads(capsys.readouterr().out)
+    assert build_result["submission_ready"] is False
+    assert build_result["slot_selected"] is False
+    assert "primary_download" not in build_result
+    assert build_result["inspection_artifacts"]
+
+
 def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
-        assert 'Current run: NOT READY TO SUBMIT' in text
-        assert 'NO FILE APPROVED' in text
+        assert 'Current run: BLOCKED — NO FILE APPROVED' in text
         assert 'Do not upload any file from this site' in text
-        assert 'data/run_card_2026-10-25.json' in text
+        assert 'data/current_run_card_2026-10-25.json' in text
     overview = (DOCS / 'index.html').read_text()
     executive = (DOCS / 'executive-summary.html').read_text()
     assert 'failed its frozen LOSFO gate' in overview
     assert 'inspection-only' in overview
     assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in overview
-    assert 'NO FILE APPROVED' in executive
+    assert 'NO APPROVED TIFF — DO NOT SUBMIT' in executive
     assert 'Do not select a file from this page at present' in executive
     assert 'The suggested `.tif` above' not in executive
     assert 'If you submit anything, use the primary' not in overview + executive
-    card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
+    for page in (overview, executive):
+        assert 'Yes, to download.' not in page
+        assert 'OK TO DOWNLOAD' not in page
+        assert 'unique submission generated this session' not in page
+    card = json.loads((DOCS / 'data/current_run_card_2026-10-25.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
-    # Session 16: an inspection-only raster exists but is gate/uniqueness-failed,
-    # so a hash is recorded while submission_ready stays False (DO NOT SUBMIT).
-    assert card['raster_sha256'] is None or (
-        isinstance(card['raster_sha256'], dict) and card.get('slot_selected') is False
-    )
+    source_card = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
+    assert card == source_card
+    assert card['raster_sha256'] is None
+    assert card['hypothesis'] is None
+    assert card['experiments_run'] == 0
