@@ -594,6 +594,12 @@
       "severity": "high",
       "issue": "Parallel sessions assigned H40-1 to two different hypotheses on 2026-10-25: this branch's continuation-height ridge-migration lane (knowledge/49-50) and merged main's thermal-vent experiment (superseded by H41-1 thermal-spring, negative on its catalogue holdout). Results must not be combined.",
       "action": "Refer to this branch's arm as 'H40-1 migration (S16)' and main's as 'H40-1 thermal-vent / H41-1 thermal-spring (parallel)'. Run cards are session-scoped; docs/data/run_card_2026-10-25.json holds the S16 card, the parallel card remains in main history at 4da21f8."
+    },
+    {
+      "id": "submission-ui-mixed-disposition-2026-10-25",
+      "severity": "high",
+      "issue": "The prior first-screen notice correctly said the newest H40-1 migration candidate failed, but then directed users toward the historical H36-1 primary for a manual submission decision and suggested its all-finite variant. This could be misread as current submission approval even though the artifact is unscored, not unique to this run, and not selector-approved.",
+      "action": "Updated the shared site generator and README to state that no file is currently approved. Historical artifacts are labeled inspection-only; the all-finite variant is described as a format compatibility option only, not scientific approval. Added regression assertions for overview and executive-summary wording. No new raster was created because the authorized H40-1 lane already exhausted its three experiments and failed gates."
     }
   ]
 }

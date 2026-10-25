@@ -81,7 +81,6 @@ def poisson_disk_thin(
     """Greedy priority-ordered Poisson-disk thinning (no priority input -> spatial order)."""
     H, W = candidate_mask.shape
     ys, xs = np.nonzero(candidate_mask)
-    order = np.lexsort((xs, ys))  # raster order for determinism
     kept = np.zeros_like(candidate_mask, bool)
     d2 = min_dist * min_dist
     rng = np.random.default_rng(seed)
