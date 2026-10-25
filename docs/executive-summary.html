@@ -15,11 +15,11 @@
 </div></header>
 <main><section class="readiness-banner" id="download" aria-label="Current submission readiness" data-submission-ready="false">
   <div class="eyebrow">Automated submission safety · 2026-10-25</div>
-  <h2>Current run: NOT READY TO SUBMIT</h2>
-  <p><strong>No new TIFF is approved.</strong> Evidence gates incomplete or failed. The advertised historical primary also fails the dot-overlap rule; a valid file format does not clear a duplicate lane.</p>
+  <h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
+  <p><strong>No new TIFF is approved. Do not upload any file from this site at present.</strong> Evidence gates incomplete or failed. The advertised historical primary also fails the dot-overlap rule; a valid file format does not clear a duplicate lane.</p>
   <div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button quiet" href="submission-review.html">See automated checks</a><a href="data/run_card_2026-10-25.json" download>Download JSON run card</a></div>
   <p class="small">No human-inspector sign-off is required or substituted. No competition slot selected. Existing TIFFs are archived references, not new submission recommendations.</p>
-</section><section class="hero"><div class="hero-content"><div class="eyebrow">Executive summary · submission instructions</div><h1>Validate automatically.<br>Select a slot separately.</h1><p class="lead">There is currently no approved new submission TIFF. Do not upload an archived reference just because it opens correctly or contains only values in [0,1].</p></div></section>
+</section><section class="hero"><div class="hero-content"><div class="eyebrow">Executive summary · submission instructions</div><h1>Validate automatically.<br>Select a slot separately.</h1><p class="lead">There is currently no approved new submission TIFF. Do not select a file from this page at present. Do not upload an archived reference just because it opens correctly or contains only values in [0,1].</p></div></section>
 <section class="section"><h2>The exact path to an eligible submission</h2><ol class="submission-steps">
 <li><strong>Pass preflight before a scientific run.</strong> Configure the explicitly assigned lane, complete external registry and a frozen comparable holdout baseline. <code>python scripts/check_run_preflight.py</code> currently exits 1 with the real blockers. The existing data/cache and pinned shared tools now pass their local integrity checks.</li>
 <li><strong>Use the shared evaluation path.</strong> Load the existing feature cache and read-only pinned shared evaluator/writer. Withhold whole fault segments/components with a buffer; construct catalogue features from visible faults only; mask those faults pixel-exactly. Never score a final full-catalogue TIFF as if it were an independent out-of-fold model.</li>

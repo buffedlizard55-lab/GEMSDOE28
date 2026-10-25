@@ -77,28 +77,88 @@ The following is historical provenance, retained without silently rewriting old 
 
 # Current session safety notice — 2026-10-25 Session 16 (read first)
 
-**NOT READY TO SUBMIT: the new unique-lane TIFF (H40-1 migration, `5f2efa891ce7`) FAILED
-its frozen gate and is banner-marked 🔴 DO NOT SUBMIT on the site.** Read
-[the Session 16 result](knowledge/50_s16_result.md) and its
+**NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** The Session 16 H40-1 migration TIFF
+(`5f2efa891ce7`) failed both its frozen holdout-spread gate and the strict uniqueness
+gate; it is inspection-only. The older H36-1/H38-1 downloads are historical research
+artifacts, not unique candidates for this run and not approved by the separate selector.
+Do not upload any file from this repository unless a future candidate passes its frozen
+holdout, uniqueness, and exact-file gates and is separately approved by the selector.
+Read [the Session 16 result](knowledge/50_s16_result.md) and its
 [preregistration](knowledge/49_preregistration_H40-1_migration.md) before the historical
-standing prompt below. Session 16 restored all hash-pinned inputs, re-verified why the
-OWNER-REPORTED 0.2778 champion won (emission hygiene: `solo-r1` minus the d_cat≤2 px
-ring; a ring-3 copy would be a >95 % duplicate and was not built), ran the leakage
-canary (PASS), the frozen LOSFO gate on seeds 300–304 (**G2 spread FAIL**: pooled
-HOLDOUT-DTI Δ +0.00126, 95 % CI [−0.0034, +0.0063], 9/20 cells), and the uniqueness
-check (**FAIL**: surface Spearman 0.990; 91.3 % of dots within 3 px of a dense probe
-raster; 41.3 % vs the scored champion). The file is published inspection-only; the
-one-click primary (H36-1) is unchanged. **If a human submits anything, use the
-primary's all-finite variant** (values exactly 0/1, no NaN anywhere — strict whole-array
-[0,1] PASS), which addresses the owner's portal error "Predicted values must be in
-range [0, 1]". No score here is ORGANIZER-CONFIRMED; projections are never scores.
-Negative results are deliverables. Do not copy an old submission.
+standing prompt below. Session 16 re-verified why the OWNER-REPORTED 0.2778 champion won
+(emission hygiene: `solo-r1` minus the d_cat≤2 px ring; a ring-3 copy would be a >95 %
+duplicate and was not built), ran the leakage canary (PASS), the frozen LOSFO gate on
+seeds 300–304 (**G2 spread FAIL**: pooled HOLDOUT-DTI Δ +0.00126, 95 % CI
+[−0.0034, +0.0063], 9/20 cells), and the uniqueness check (**FAIL**: prediction-surface Spearman(prob_D1, prob_D0)
+0.990; 91.3 % of final dots within 3 px of a dense probe raster; 41.3 % vs the scored champion). The S16 run card does not retain a per-registry pre-placement surface-correlation table, so that subcheck is unverified; the final-dot overlap alone exceeds the duplicate-stop limit.
+The all-finite variant passes whole-array [0,1] format checks; that is not scientific or
+selector approval. It is only a possible file-format remedy for the prior portal range
+error, whose actual cause remains unconfirmed. No score here is ORGANIZER-CONFIRMED;
+projections are never scores. Negative results are deliverables. Do not copy an old
+submission.
+
+## Current-session protocol (read before every run)
+
+- **Objective:** maximize competition performance with auditable science; independently
+  verify official facts; clearly distinguish organizer receipts, owner-reported scores,
+  local HOLDOUT-DTI, and projections. The user-reported GEMSDOE32 value `0.2778` is not an
+  organizer receipt in this checkout. Its byte-level forensic explanation is in
+  [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md); do not claim it proves
+  organizer score attribution.
+- **Lane and budget:** the authorized Session 16 method is the single H40-1 paragraph in
+  [`knowledge/49_preregistration_H40-1_migration.md`](knowledge/49_preregistration_H40-1_migration.md).
+  It is already executed (3/3 experiments) and failed. Do not switch lanes, rerun those
+  seeds, exceed the experiment/time cap, or create another variant under that frozen
+  preregistration. A new session needs its own explicit lane and fresh preregistration.
+- **Holdout before any future slot:** hide whole fault segments with a buffer; compute
+  catalogue-based features only from visible faults; pixel-exactly mask visible faults;
+  score pooled DTI with α=0.2, β=0.8, and a 300 m triangular kernel. Test each feature
+  alone first; AUC >0.90 is leakage until proven otherwise. Report evaluator version,
+  withheld positives and 95% CI. Never call a projection a score.
+- **Uniqueness:** compare the pre-placement surface and final dots to every registry
+  raster. Spearman correlation >0.90 or >70% of dots within 3 px of any one registry
+  raster means duplicate: log it and stop. A format-valid TIFF is not necessarily unique,
+  scientifically validated, or approved.
+- **Submission artifact:** the current site must say plainly whether any TIFF is safe to
+  upload. Current answer: **NO**. Keep historical downloads inspection-only. A future
+  artifact must pass no-NaN-inside-footprint, [0,1] values, single-band, exact CRS/shape/
+  transform, content hash, registry uniqueness, and holdout superiority gates. Slot
+  promotion/selection is separate. Never upload automatically.
+- **End-of-run card:** include hypothesis, mechanism, named non-fault mimic, HOLDOUT-DTI +
+  CI, registry correlation/overlap, raster SHA-256, exact validator results, unique name,
+  note ≤140 characters, and `promote`/`negative` verdict. Failed and blocked runs are
+  valid deliverables.
+
+This is the current operational form of the owner's full project brief; the earlier
+verbatim task text below remains part of the audit trail. The Session 17 three-pass
+submission-safety review is in
+[`evidence/review_s17_submission_safety_2026-10-25.md`](evidence/review_s17_submission_safety_2026-10-25.md).
+Primary manual-review links:
+[official competition](https://www.drivendata.org/competitions/306/competition-doe-gems/),
+[official rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf),
+[USGS GeoDAWN data](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and),
+[DOE GDR submission 1391](https://gdr.openei.org/submissions/1391), and
+[DrivenData reference solution](https://github.com/drivendataorg/gems-prize-reference-solution).
 
 **Follow-up (parallel merged run):** [registry-coverage gate review and next steps](knowledge/48_gate_review_2026-10-25.md). Note the H40-1 label collision flagged in `registry/irregularities.json` (`s16-h40-id-collision`): main also carries a parallel H40-1 thermal-vent / H41-1 thermal-spring experiment — do not combine its numbers with Session 16 migration numbers.
 
 This is an operational summary of the 2026-10-25 request, **not a verbatim copy** of the full prompt.
 Historical verbatim prompts below remain historical. Core values remain Maximize P(Win) and Own
 the Outcome: fail closed rather than spending a slot on unverified evidence.
+
+## This session's operative requirements (2026-10-25 — read first every session; the full chat transcript is authoritative, see knowledge/48 §Pass 3)
+
+- **MUST generate a UNIQUE TIF submission.** Do not copy a previous submission unless it is for learning and education. It must be obvious whether it is OK to download and submit the generated TIF.
+- **Easy one-click download:** there must be an easy-to-download submission `.tif` as described by the prompt, obvious on arrival at the site (executive summary or the very beginning of the site).
+- **Inspection is automated through the project:** no human inspector; every number validated without human intervention before any file is offered for download.
+- **Evidence classes:** label every number HOLDOUT-DTI (evaluator version, withheld positives, 95% CI) or ORGANIZER-CONFIRMED (copied from a submission-page receipt). A projection is never written as a score.
+- **Leakage canary:** test each feature alone on the holdout; AUC above 0.90 means leakage until proven otherwise.
+- **Run card (JSON, end of session):** hypothesis; mechanism; named non-fault mimic; holdout DTI + 95% CI; correlation/overlap vs registry; raster sha256; validator output (no NaN inside the footprint, values in [0,1], CRS/shape/transform match); submission name + note ≤ 140 chars; verdict promote / negative. Negative results are deliverables.
+- **Budget:** stop after 3 experiments or 2 hours. Do not pick submissions — promotion to a real slot is a separate selector step within the weekly cap.
+- **Hypotheses:** generate 3–5 not-yet-tried candidates (layers, physical signature, why off-catalogue vs USGS/INGENIOUS, difference from repo); rank by expected DTI improvement × cost; validate the top candidate on the spatially-blocked holdout before touching a weekly submission slot.
+- **Submission mechanics:** single-band GeoTIFF (or zip of one), matching the submission format's CRS/shape/geotransform, values in [0,1] — this fixes the "<em>Predicted values must be in range [0, 1]</em>" portal error; unique name + short note (≤ 200 chars); executive-summary subpage explaining exactly how to submit.
+- **Data:** no DrivenData auth in this environment; inputs restored from hash-pinned public mirrors via `scripts/download_competition_data.sh` (never contacts DrivenData); external data only from free official verified sources.
+- **Process:** work line by line, verify from official verified trusted sources with links for manual review, no manual input, flag irregularities in `registry/irregularities.json`, no hallucinations. Run three passes (Pass 1 implement & verify; Pass 2 review & fix; Pass 3 re-check against the request), then open a pull request and merge onto `main`.
 
 ---
 
@@ -209,7 +269,7 @@ The four unrun research directions and their explicit source/data gates are rank
 
 ---
 
-## 1. Executive Summary & One-Click Verified Submission GeoTIFFs (`docs/downloads/`)
+## 1. Archived GeoTIFF research artifacts (`docs/downloads/`) — inspection-only, no current file approved
 
 All submission artifacts in `docs/downloads/` are verified by `scripts/verify_downloads.py` (**`247/247` checks PASS, `0` failures**, `evidence/submission_file_audit.json`; the count grew from `208` because Session 14 added the `H38-1` multi-physics corroborated package at `secondary` while retaining `H37-1` under `h37_1_falsified`): single-band `float32`, exact template grid (`EPSG:32611`, `3730 × 3292`, `100 m` pixels, `5,167,373` inside-footprint cells), values strictly in `{0.0, 1.0} ⊂ [0, 1]` inside the footprint, zero internal `NaN`s, `NaN` outside the footprint (`-nan.tif`, with an `-allfinite.tif` fallback having `0.0` outside and no `NaN` anywhere), zero overlap with the `60,988` known catalogue pixels, content-addressed 12-hex ID, single-member `.zip`, and a registered note $\le 200$ characters.
 

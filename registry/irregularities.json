@@ -596,6 +596,18 @@
       "action": "Refer to this branch's arm as 'H40-1 migration (S16)' and main's as 'H40-1 thermal-vent / H41-1 thermal-spring (parallel)'. Run cards are session-scoped; docs/data/run_card_2026-10-25.json holds the S16 card, the parallel card remains in main history at 4da21f8."
     },
     {
+      "id": "s17-h38-1-fresh-seed-neutral",
+      "severity": "low",
+      "issue": "Fresh independent seed-1 four-fold check of H38-1 vs H36-1 (scripts/holdout_compare_h381.py) is neutral: pooled ΔDTI −5.4e-5, 95% CI [−6.8e-5, −4.1e-5], credit/dot 0.0 vs tau_live 0.054852. The registered Session 14 gate passed (+0.000747 LOSFO over H36-1, credit/dot 0.06993; interleaved +0.000543, 8/10 seeds). Margin is small and partially seed-dependent.",
+      "action": "Disclosed in docs/data/run_card_gems28-h38-1-hf-euler-r30-r1_2026-10-25.json and knowledge/51_session17_unique_submission.md; verdict promote-to-selector only, no slot spent, UNSCORED."
+    },
+    {
+      "id": "submission-ui-mixed-disposition-2026-10-25",
+      "severity": "high",
+      "issue": "The prior first-screen notice correctly said the newest H40-1 migration candidate failed, but then directed users toward the historical H36-1 primary for a manual submission decision and suggested its all-finite variant. This could be misread as current submission approval even though the artifact is unscored, not unique to this run, and not selector-approved.",
+      "action": "Updated the shared site generator and README to state that no file is currently approved. Historical artifacts are labeled inspection-only; the all-finite variant is described as a format compatibility option only, not scientific approval. Added regression assertions for overview and executive-summary wording. No new raster was created because the authorized H40-1 lane already exhausted its three experiments and failed gates."
+    },
+    {
       "id": "g28-a51-no-lane-or-strict-baseline",
       "severity": "high",
       "issue": "The latest parallel-run request references an assigned single method paragraph, but none is identifiable. The complete parallel-run registry and frozen same-protocol incumbent are also missing.",

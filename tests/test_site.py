@@ -320,7 +320,21 @@ def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
         assert 'Current run: NOT READY TO SUBMIT' in text
+        assert 'NO FILE APPROVED' in text
+        assert 'Do not upload any file from this site' in text
         assert 'data/run_card_2026-10-25.json' in text
+    overview = (DOCS / 'index.html').read_text()
+    executive = (DOCS / 'executive-summary.html').read_text()
+    # Historical candidate details are in the clearly labeled archive, not a
+    # current-generation recommendation on the first screen.
+    archive = (DOCS / 'archive.html').read_text()
+    assert 'DO NOT SUBMIT' in archive and 'inspection-only' in archive
+    assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in archive
+    assert 'Submission download locked' in overview
+    assert 'NO FILE APPROVED' in executive
+    assert 'Do not select a file from this page at present' in executive
+    assert 'The suggested `.tif` above' not in executive
+    assert 'If you submit anything, use the primary' not in overview + executive
     card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
