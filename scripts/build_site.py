@@ -21,6 +21,19 @@ SOURCE_PATH_ROOTS = {"evidence", "knowledge", "registry", "scripts", "src", "tes
 SOURCE_PATH_FILES = {"README.md", "AI_DISCLOSURE.md", "pyproject.toml", "requirements.txt"}
 
 
+def namespace_anchors(text: str, prefix: str) -> str:
+    """Keep combined historical pages' IDs and accessible labels unambiguous."""
+    ids = set(re.findall(r'(?<![\w:-])id="([^"]+)"', text))
+    text = re.sub(r'(?<![\w:-])id="([^"]+)"', lambda m: f'id="{prefix}{m[1]}"', text)
+    for attribute in ("aria-labelledby", "aria-describedby", "for"):
+        text = re.sub(rf'{attribute}="([^"]+)"',
+                      lambda m, attr=attribute: attr + '="' + " ".join(
+                          prefix + value if value in ids else value for value in m[1].split()) + '"', text)
+    return re.sub(r'href="#([^"]+)"',
+                  lambda m: f'href="#{prefix}{m[1]}"' if m[1] in ids else m[0], text)
+
+
+
 def read_json(path: str, default: Any = None) -> Any:
     target = ROOT / path
     if not target.exists():
@@ -277,7 +290,9 @@ def nav() -> str:
         ("Overview", "index.html"),
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
-        ("Session 15 review", "session15-review.html"),
+        ("Latest result", "session18-result.html"),
+        ("Archive", "archive.html"),
+        ("Parallel review", "submission-review.html"),
         ("Topology", "topology.html"),
         ("Sources", "sources.html"),
     ]
@@ -343,10 +358,10 @@ def s18_status_html() -> str:
     if not card:
         return '<section class="card callout-danger"><h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2><p>Missing current evidence. Do not upload any file from this site.</p></section>'
     h, reg = card["holdout"], card["registry"]
-    return f"""<section class="card callout-danger" aria-label="Current submission readiness" id="current-submission">
+    return f"""<section class="card callout-danger" aria-label="Current submission readiness" id="current-submission" data-submission-ready="false">
 <h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
 <p><strong>NEW UNIQUE TIFF GENERATED: S18-MXTP · 2026-10-25.</strong> Automated snapshot uniqueness and exact-file format checks passed, but the frozen holdout performance gate <strong>FAILED</strong>. <strong>Do not upload any file from this site.</strong> No human inspection is needed to discover this rejection; the pipeline has already computed it. No competition slot was selected or spent.</p>
-<div class="download-actions"><a class="button" href="{esc(card['download'])}" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session18-result.html">Executive research result &amp; source audit</a></div>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="{esc(card['download'])}" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session18-result.html">Executive research result &amp; source audit</a></div>
 <p><strong>Submission name:</strong> <code>{esc(card['submission_name'])}</code><br><strong>Research note ({len(card['note'])}/140):</strong> <code>{esc(card['note'])}</code></p>
 <p class="meta">Exact SHA-256 <code>{esc(card['raster_sha256'])}</code> · {comma(card['dot_count'])} dots · all-finite float32 · [0,1] · EPSG:32611 · 3730 × 3292 · template CRS/shape/transform PASS. Local file validity does not guarantee portal acceptance or scientific quality.</p>
 <p><strong>HOLDOUT-DTI:</strong> {h['dti']:.5f} (95% CI {h['ci95'][0]:.5f}–{h['ci95'][1]:.5f}); recomputed prior candidate {h['baseline_dti']:.5f}; paired gain {h['paired_gain']:+.5f} (95% CI {h['paired_gain_ci95'][0]:+.5f} to {h['paired_gain_ci95'][1]:+.5f}). Evaluator: shared eval_set v2 → metric.dti_binary; {comma(h['withheld_positives'])} pooled withheld positives, {comma(h['unique_withheld_positive_pixels'])} unique, seeds 310–314, 20 cells; geographic-fold block bootstrap, only four blocks. Local recovery test, not an organizer score.</p>
@@ -369,6 +384,24 @@ def render_s18_result() -> str:
 <h2>Official facts rechecked in this session</h2><p>Fetched page text via the research tool; sandbox batch downloads remain restricted to allowlisted hosts. These are dated source observations, not organizer submission receipts or complete binary-data authentication.</p><div class="table-wrap"><table><thead><tr><th>Official source</th><th>Verified statement</th><th>Limits</th></tr></thead><tbody>{sources}</tbody></table></div>
 <h2>What is needed next</h2><ol><li>Keep S18 closed; do not increase dot budgets or change thresholds after viewing these seeds. All three experiments are spent.</li><li>Require a new physical observable that distinguishes displaced surface faults from lithologic contacts, not another re-layout of the same ridge family. A provenance-audited high-resolution scarp model with explicit shoreline/road controls is a better next research direction, not an approved submission.</li><li>Maintain one shared, timestamped parallel-run registry and one frozen current-best baseline. The prompt omitted its exclusive method paragraph and the current snapshot cannot prove global uniqueness.</li><li>For any future promoted file, preserve the authenticated organizer receipt, verify the account-specific weekly allowance, eligibility and data rights, and include the AI-use narrative. No DrivenData account was accessed here.</li></ol>
 <p><a href="executive-summary.html">Exact submission procedure (blocked today)</a> · <a href="../knowledge/54_s18_result.md">Full scientific report</a> · <a href="../evidence/s18_holdout.json">Versioned HOLDOUT-DTI cells and confidence intervals</a></p></section>"""
+
+
+def render_s18_executive() -> str:
+    return """<section class="section"><h1>Executive summary: a new file, not an approved submission</h1>
+<p>A new independent research TIFF is downloadable above. It is unique within the audited snapshot and locally format-valid, but <strong>failed scientific validation</strong>. Do not select a file from this page at present. No human geological inspection is needed to detect this rejection.</p>
+<h2>Exactly how a future approved submission works</h2><ol>
+<li>Preregister an explicit lane, reuse verified cached features/shared evaluator/writer, test feature-alone leakage, and pass pre-placement registry checks.</li>
+<li>Recover whole withheld fault systems with a buffer and visible-only catalogue features. Beat the frozen comparable best on pooled HOLDOUT-DTI with a positive paired spatial-block confidence interval. Check final-dot uniqueness.</li>
+<li>Serialize and independently re-read the exact file. Require single-band float32, sample CRS/shape/transform, no NaN inside footprint, values [0,1] and registered SHA-256. Local validation cannot guarantee portal acceptance.</li>
+<li>Only after those gates and a separate selector decision, download that exact approved TIFF. Check the authenticated competition page's cap and remaining allowance. The September rules state three submissions per week; current account allowance is not available here.</li>
+<li>At DrivenData choose <strong>New submission → File to submit</strong>, select the approved single-band .tif (or ZIP containing that one TIFF), paste its registered note of at most 140 characters, and submit. Preserve the organizer receipt and file hash.</li>
+<li>Do not perform those upload steps today: S18-MXTP's paired holdout result is negative. The disabled submission control does not prevent downloading a clearly rejected research artifact for reproducibility.</li></ol>
+<h2>Why the prior range error is not diagnosed by its text alone</h2><p>The new research raster has no NaN anywhere and only values 0 and 1. This removes local numeric range violations but does not establish what caused the earlier portal error or prove official acceptance of any footprint convention.</p>
+<p><a href="session18-result.html">Scientific result, nine-site audit and official sources</a> · <a href="data/current_run_card_2026-10-25.json">Complete automated run card</a> · <a href="archive.html">Historical files and instructions — superseded, DO NOT SUBMIT</a></p></section>"""
+
+
+def s18_feed_html(feed: dict) -> str:
+    return f"""<section class="section"><h2>Source metadata feed (not a score feed)</h2><p>Last recorded run: <time datetime="{esc(feed.get('checked_at_utc', ''))}" data-feed-time>{esc(feed.get('checked_at_utc', 'not recorded'))}</time>. <span data-feed-freshness>Observation time is not a guarantee of current availability.</span></p><p>Freshly observed: {esc(feed.get('freshly_observed_count', 'not recorded'))} of {esc(feed.get('source_count', 'not recorded'))}; {esc(feed.get('status', 'historical record'))}. This feed does not log into or monitor DrivenData. Dated one-off official research observations are separately recorded, not fabricated as feed successes.</p><p><a href="data/feed.json">Raw feed</a> · <a href="sources.html">Official source ledger</a></p></section>"""
 
 
 def layout(title: str, body: str, active: str = "") -> str:
@@ -1157,12 +1190,18 @@ def main() -> int:
     h35_6 = read_json("evidence/h35_6_candidate_headtohead.json", {})
     local_h38_claim = read_json("evidence/h38_1_holdout.started.json", {})
     session15_review = read_json("evidence/session15_review.json", {})
+    feed = read_json("docs/data/feed.json")
+    old_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
+    old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
+    archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
     pages = {
-        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "Overview"),
-        "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "Executive summary"),
+        "index.html": layout("Overview", render_s18_result() + s18_feed_html(feed), "Overview"),
+        "executive-summary.html": layout("Executive summary", render_s18_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
+        "archive.html": layout("Historical campaign archive", archive, "Archive"),
+        "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; current S18-MXTP evidence is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
         "session18-result.html": layout("S18 unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
@@ -1173,7 +1212,8 @@ def main() -> int:
     current_card_path = DOCS / "data" / "current_run_card_2026-10-25.json"
     current_card_path.parent.mkdir(parents=True, exist_ok=True)
     current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-    (ROOT / "index.html").write_text(root_relative_links(pages["index.html"]), encoding="utf-8")
+    (DOCS / "data/run_card_2026-10-25.json").write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,

@@ -67,3 +67,13 @@ Final post-merge test/deployment results are recorded in the pull request and se
 - Preview binds 0.0.0.0:8080 and serves docs, with no browser-to-localhost service calls.
 - No additional experiment/model fit was performed during integration; spent seed and method guards
   remain in place. PR merge and deployment are code-delivery steps only, not competition submission.
+
+### PR #39 integration — final audit
+- Preserved stronger local atomic writer/validator, schema canary inversion/correlation checks,
+  pinned upstream tool discovery, source-feed freshness/date handling and dual-route Pages checks.
+- Did not rerun or regenerate the experiment. Re-read same TIFF with the hardened validator.
+- Upstream API equivalence is unestablished: explicit scientific-card limitation, not a claim of
+  exact compliance. Historical review cards retained, with historical manifest bytes preserved.
+- Moved historical primary/secondary download narratives to a separate archive, using namespaced
+  anchors. Current pages offer the rejected NEW research file and a disabled submission control.
+- Integration regression run: 470 tests passed, no skips. Ruff and exact-file audits rechecked.

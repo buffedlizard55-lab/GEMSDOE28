@@ -116,9 +116,11 @@ def test_dot_thin_budget_is_monotone_in_distance():
 
 
 @pytest.mark.requires_rasters
-def test_verify_downloads_still_passes_with_four_slots():
-    # inherits GEMS_DATA_DIR from the caller, so it verifies the same cache the suite is using
-    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "verify_downloads.py")],
+def test_verify_downloads_still_passes_with_four_slots(tmp_path):
+    # Never rewrite a tracked historical evidence file as a side effect of testing.
+    # Inherits GEMS_DATA_DIR so it verifies the same cache the suite is using.
+    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "verify_downloads.py"),
+                        "--out", str(tmp_path / "archive-audit.json")],
                        capture_output=True, text=True)
     assert r.returncode == 0, r.stdout[-3000:]
     assert "0 failure(s)" in r.stdout
@@ -126,15 +128,19 @@ def test_verify_downloads_still_passes_with_four_slots():
         assert f"{slot}/nan" in r.stdout or slot in r.stdout, f"{slot} not verified"
 
 
-def test_manifest_and_site_agree_on_four_slots():
+def test_historical_manifest_slots_remain_only_in_archive():
     man = json.loads((ROOT / "docs" / "downloads" / "manifest.json").read_text())
     for k in ("primary", "secondary", "tertiary", "quaternary"):
         assert k in man and man[k]["emitted_px"] > 0
         assert (ROOT / "docs" / "downloads" / man[k]["nan"]).exists()
         assert (ROOT / "docs" / "downloads" / man[k]["zip"]).exists()
         assert len(man[k]["note"]) <= 200
-    idx = (ROOT / "docs" / "index.html").read_text()
-    assert man["quaternary"]["nan"] in idx, "slot 4 is not on the first screen"
+    archive = (ROOT / "docs" / "archive.html").read_text()
+    assert "DO NOT SUBMIT" in archive
+    assert man["quaternary"]["nan"] in archive
+    current = (ROOT / "docs" / "index.html").read_text()
+    assert "Submission download locked" in current
+    assert man["quaternary"]["nan"] not in current
 
 
 def test_h32_1_holdout_and_new_live_scores_0_2600_0_2449_0_1223():

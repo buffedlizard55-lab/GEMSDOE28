@@ -63,6 +63,13 @@ def main():
             "submission_ready": False, "slot_selected": False, "organizer_receipt": None,
             "disposition": "Unique and format-valid RESEARCH TIFF; failed frozen holdout superiority gate. DO NOT SUBMIT.",
             "evidence": "evidence/s18_holdout.json"}
+    card["strict_protocol_limitations"] = {
+        "upstream_template_api_equivalence_established": False,
+        "exclusive_external_lane_assignment_confirmed": False,
+        "global_parallel_registry_complete": False,
+        "certified_global_best_baseline": False,
+        "scope": "Repository-existing shared harness/writer; later upstream API pins were not executed by this experiment."
+    }
     gate = promotion.promotion_gate(card)
     card["evidence_schema_gate"] = gate
     # A schema pass cannot override a frozen scientific rejection or unknown lane/global registry.

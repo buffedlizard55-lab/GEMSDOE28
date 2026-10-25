@@ -660,6 +660,90 @@
       "severity": "low",
       "issue": "Current README archives the operational requirements and links knowledge/53_current_request.md; this is not a byte-for-byte transcript of the lengthy chat and historical result list.",
       "action": "Explicitly labeled normalized requirements, not verbatim; original chat remains authoritative. No false claim of complete transcript fidelity."
+    },
+    {
+      "id": "g28-a51-no-lane-or-strict-baseline",
+      "severity": "high",
+      "issue": "The latest parallel-run request references an assigned single method paragraph, but none is identifiable. The complete parallel-run registry and frozen same-protocol incumbent are also missing.",
+      "action": "Stop before scientific experiments; do not guess a lane or create a renamed TIFF. See registry/current_session.json and evidence/current_preflight.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-archive-primary-duplicate",
+      "severity": "high",
+      "issue": "The previously advertised H36-1 primary passes format checks but has final-dot overlap 1.0 with at least one other audited raster and max absolute rank correlation 0.9997727160804492. It is not a new lane.",
+      "action": "Current download locked; old files are educational only. See evidence/current_submission_audit.json and the separate website archive.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-shared-priority-predictions",
+      "severity": "high",
+      "issue": "Several of the nine priority sites distribute identical footprint predictions under different names or outside-footprint packaging. Byte uniqueness alone is insufficient.",
+      "action": "Read-only comparison and stop, not registry-driven dot perturbation. See evidence/priority_repository_audit.json and evidence/current_submission_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-gem31-allfinite-convention",
+      "severity": "medium",
+      "issue": "Three GEMSDOE31 allfinite-labeled variants fail the independent local outside/nodata convention checks. No organizer rejection or cause of the historical range error was established.",
+      "action": "Report the exact files and actual checks, not a speculative portal error diagnosis. See evidence/priority_repository_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-gem36-readme-sha",
+      "severity": "medium",
+      "issue": "The inspected GEMSDOE36 README NaN-variant SHA does not match the freshly fetched Git-blob-verified file. The zero-outside artifact identity matches the educational comparison.",
+      "action": "Use the inspected file SHA and Git blob; do not copy the README hash. See evidence/priority_repository_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-owner-score-not-receipt",
+      "severity": "high",
+      "issue": "Owner pages use contradictory stop/submit language and an ORGANIZER-CONFIRMED label for a claim without an independently inspected submission-page receipt. Supplied current leaderboard maxima conflict.",
+      "action": "Keep 0.2778 user/owner-reported and all current maxima/caps unverified. See evidence/current_review.json and knowledge/51_current_review_and_next_steps.md.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-depth-band-meaning",
+      "severity": "medium",
+      "issue": "Historical structural_step.py prose alternates basement and conductive-base interpretations of depth_to_base_surf. Official units/source metadata have not been authenticated here.",
+      "action": "Do not resolve physical meaning by guessing, or base a new hypothesis on that assumption. See knowledge/51_current_review_and_next_steps.md.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-data-cache-blocker-resolved",
+      "severity": "info",
+      "issue": "Earlier 2026-10-25 notes described absent inputs/cache/tools. This session restored all 17 pinned inputs and reproduced the existing 32-band cache; source integrity is not organizer authentication.",
+      "action": "Earlier absence statements are dated history. Use evidence/current_input_audit.json and registry/protocol_assets.json for current state; missing lane/registry/baseline still block science.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-latest-verbatim-prompt-unavailable",
+      "severity": "medium",
+      "issue": "The latest complete verbatim request is not present in retained conversation context. Existing README prompt blocks are historical summaries, not a recovered current original.",
+      "action": "Current README faithfully restates available requirements and labels them a summary; do not fabricate a full prompt or claim this part complete.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-concurrent-h38-promote-claim-rejected",
+      "severity": "high",
+      "issue": "Concurrent PR #36 claims a new unique H38-1 TIFF and promotion, but the same file already exists byte-identically at session base 22cd175; exact final-raster correlation and all-dot overlap breach the strict stop thresholds. The promoted run card contradicts its linked check\u2019s negative verdict.",
+      "action": "Keep original claimed card and result unchanged for provenance; current independent review is negative, no slot. See evidence/current_concurrent_claim_review.json. No registry threshold is waived for a dense reference."
+    },
+    {
+      "id": "g28-a51-pages-source-permission-limit",
+      "severity": "medium",
+      "issue": "Fresh direct Pages-source update with the Arena GitHub integration returned HTTP 403 Resource not accessible by integration. Authenticated GitHub reads and git operations work; this is Pages-write authorization, not missing repository credentials.",
+      "action": "Pages workflow will attempt the source change with its explicitly scoped built-in pages:write token, report any failure, then run the real deployment. Root and /docs/ compatibility are staged. Confirm actual GitHub deploy status; do not claim a configuration attempt succeeded."
     }
   ]
 }

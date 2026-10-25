@@ -1,0 +1,12 @@
+{
+  "session": "S18-MXTP",
+  "artifact_sha256": "ce043566a96a1bf0abae366ba706ed6be5907297248b1d14deace8596500b186",
+  "emission_writer": {
+    "path": "src/gems27/submission.py",
+    "commit": "a336764e0c8140559fdef53f6f245a059afb302f",
+    "sha256": "8f3388e00bd8d17fe892a1ccfa12fa52f47320f50f60fd810c77f84e6c3ab76f",
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/a336764e0c8140559fdef53f6f245a059afb302f/src/gems27/submission.py"
+  },
+  "post_merge_validator_sha256": "729b41b62992cdabcfea7af2fb8746832e056e3e191ea78d92a38cccc709f23e",
+  "note": "Used repository-existing shared writer/evaluator, not a private fork. Parallel PR39 later pinned GEMSDOE24 upstream evaluate_holdout.py/submission_writer.py APIs; S18 did not execute those restored APIs. Strict upstream-contract equivalence, explicit external lane assignment, complete global registry and certified current-best baseline are not established. The TIFF remains rejected; current hardened validator re-read the same bytes without re-emission."
+}

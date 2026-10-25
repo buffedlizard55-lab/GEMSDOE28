@@ -58,7 +58,9 @@ it is rejected as stated. No alternative experiment was run.
 **Limitations / next session:** explicit exclusive lane paragraph was absent; S18 followed the
 repo's recommended next step and discloses that interpretation. Registry is pinned, not synchronized
 across every parallel run. Owner-mirror bytes are hash-verified, not organizer-authenticated.
-No private labels, DrivenData login, account quota, eligibility verification or receipt. Restore the
+No private labels, DrivenData login, account quota, eligibility verification or receipt. S18 used the
+repository-existing harness/writer; equivalence to the later restored upstream template APIs is not
+established, so this is not a fully protocol-certified submission. Restore the
 17 pinned inputs via the existing tools to reproduce file checks; CPU classifier training worked.
 Keep S18 closed. Establish a synchronized registry and one frozen best baseline before a fresh,
 provenance-audited scarp-displacement hypothesis with road/shoreline controls.

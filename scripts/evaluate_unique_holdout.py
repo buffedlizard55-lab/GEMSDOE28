@@ -77,7 +77,7 @@ def main() -> int:
         folds.setdefault(r["fold"], {})[r["arm"]] = r
 
     deltas = []
-    for _fid, arms in folds.items():
+    for arms in folds.values():
         d = arms["cand_H40_1"]["dti"] - arms["base_H36_1"]["dti"]
         deltas.append(d)
 

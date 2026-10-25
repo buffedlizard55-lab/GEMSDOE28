@@ -237,7 +237,15 @@
       }
     },
     {
-      "checked_at_utc": "2026-10-25T23:10:10Z",
+      "checked_at_utc": "2026-10-25T22:23:36Z",
+      "source_count": 10,
+      "status_counts": {
+        "not-checked-network-policy": 8,
+        "observed": 2
+      }
+    },
+    {
+      "checked_at_utc": "2026-10-25T23:08:06Z",
       "source_count": 10,
       "status_counts": {
         "fetch-failed": 2,

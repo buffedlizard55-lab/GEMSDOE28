@@ -104,7 +104,7 @@ def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp
     assert "weekly slot" in screen_text
     assert build_site.h31_hypothesis_status(screen_pass, {}, consumed) == "SCREEN PASSED — unchanged confirmation required; not slot-approved"
     research = (DOCS / "research.html").read_text()
-    front_page = (DOCS / "index.html").read_text()
+    front_page = (DOCS / "archive.html").read_text()
     assert "No model fit, holdout score, confirmation, or promotion decision." not in front_page
     assert "The feature build is label-free; H31 screen outcome is shown above." in front_page
     assert "screen evidence" in front_page
@@ -195,23 +195,24 @@ def test_pages_source_links_resolve_to_public_repository_files():
 
 
 def test_repository_root_front_page_serves_the_one_click_download():
-    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    man = json.loads((DOCS / "downloads/manifest.json").read_text())
     root_idx = (ROOT / "index.html").read_text()
-    P = man["primary"]
-    assert f'href="docs/downloads/{P["nan"]}"' in root_idx and "download" in root_idx
+    candidate = man["s18_candidate"]
+    assert f'href="docs/downloads/{candidate["filename"]}"' in root_idx
+    assert "Download NEW unique research TIFF — DO NOT SUBMIT" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
 def test_front_page_has_download_and_exact_note():
-    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    man = json.loads((DOCS / "downloads/manifest.json").read_text())
     idx = (DOCS / "index.html").read_text()
-    P = man["primary"]
-    assert f'href="downloads/{P["nan"]}"' in idx and "download" in idx
-    assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
-    assert P["note"] in idx.replace("&#x27;", "'") or P["note"].replace("|", "|") in idx
-    assert len(P["note"]) <= 200
-    assert P["submission_name"] in idx and P["content_id"] in P["submission_name"]
-    assert "UNSCORED" in idx
+    candidate = man["s18_candidate"]
+    assert f'href="downloads/{candidate["filename"]}"' in idx
+    assert (DOCS / "downloads" / candidate["filename"]).is_file()
+    assert candidate["note"] in idx and len(candidate["note"]) <= 140
+    assert candidate["submission_name"] in idx and candidate["sha256"] in idx
+    assert "Submission download locked" in idx
+
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
@@ -270,7 +271,7 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
         assert candidate["nan"] in research and candidate["zip"] in research
         assert candidate["allfinite"] in research
         assert "not an authorized weekly submission" in research
-        summary = (DOCS / "executive-summary.html").read_text()
+        summary = (DOCS / "archive.html").read_text()
         assert candidate["nan"] in summary
         assert "not an authorized weekly submission" in summary
 
@@ -315,7 +316,7 @@ def test_current_run_notice_is_above_historical_body():
     executive = (DOCS / 'executive-summary.html').read_text()
     assert 'failed its frozen LOSFO gate' in overview
     assert 'inspection-only' in overview
-    assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in overview
+    assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in (DOCS / 'archive.html').read_text()
     assert 'NO FILE APPROVED' in executive
     assert 'Do not select a file from this page at present' in executive
     assert 'The suggested `.tif` above' not in executive
@@ -354,3 +355,95 @@ def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(ca
     # The parallel blocked review is preserved, not overwritten with this experiment.
     parallel = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
     assert parallel['experiments_run'] == 0 and parallel['raster_sha256'] is None
+
+
+def test_repository_root_front_page_locks_submission_download_and_preserves_archive():
+    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    root_idx = (ROOT / "index.html").read_text()
+    P = man["primary"]
+    assert f'href="docs/downloads/{P["nan"]}"' not in root_idx
+    assert 'href="docs/archive.html"' in root_idx
+    assert "Submission download locked" in root_idx
+    assert (ROOT / ".nojekyll").exists()
+
+
+
+def test_archive_preserves_exact_download_and_note_without_approval():
+    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    idx = (DOCS / "archive.html").read_text()
+    P = man["primary"]
+    assert f'href="downloads/{P["nan"]}"' in idx and "download" in idx
+    assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
+    assert P["note"] in idx.replace("&#x27;", "'") or P["note"].replace("|", "|") in idx
+    assert len(P["note"]) <= 200
+    assert P["submission_name"] in idx and P["content_id"] in P["submission_name"]
+    assert "UNSCORED" in idx
+
+
+
+def test_download_manifest_marks_all_current_slots_blocked():
+    manifest = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    current = manifest["current_run"]
+    assert current["status"] == "NEGATIVE — NO FILE APPROVED"
+    assert current["submission_ready"] is False
+    assert current["slot_selected"] is False
+    assert current["new_tiff_generated"] is True
+
+
+
+def test_site_build_metadata_does_not_call_historical_raster_a_submission_download(capsys):
+    from scripts import build_site
+
+    assert build_site.main() == 0
+    build_result = json.loads(capsys.readouterr().out)
+    assert build_result["submission_ready"] is False
+    assert build_result["slot_selected"] is False
+    assert "primary_download" not in build_result
+    assert build_result["inspection_artifacts"]
+
+
+
+def test_feed_refresh_rebuilds_and_deploys_without_requiring_a_branch_push_event():
+    feed = (ROOT / ".github/workflows/source-feed.yml").read_text()
+    pages = (ROOT / ".github/workflows/pages.yml").read_text()
+    assert "python scripts/build_site.py" in feed
+    assert "docs/*.html index.html" in feed
+    assert "branches: [main]" in feed and "branches: ['arena/**']" not in feed
+    assert "workflow_run:" in pages
+    assert "workflows: ['Source metadata feed (no competition requests)']" in pages
+    assert "github.event.workflow_run.conclusion == 'success'" in pages
+    assert "cp -a docs/. build/pages/docs/" in pages  # legacy /docs/ bookmarks remain valid
+    assert "path: build/pages" in pages
+
+
+
+def test_static_build_still_needs_no_third_party_dependencies():
+    result = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/build_site.py")],
+                            capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+
+
+
+def test_combined_archive_namespaces_ids_and_accessible_labels():
+    from scripts.build_site import namespace_anchors
+
+    html = '<h2 id="title">Old</h2><p id="body" data-id="cache" aria-labelledby="title outside"></p><a href="#title">Jump</a><a href="index.html#download">Current</a>'
+    result = namespace_anchors(html, "old-")
+    assert 'id="old-title"' in result and 'id="old-body"' in result
+    assert 'aria-labelledby="old-title outside"' in result
+    assert 'href="#old-title"' in result
+    assert 'href="index.html#download"' in result
+    assert 'data-id="cache"' in result
+
+
+
+def test_current_public_card_aliases_use_restored_data_review_not_older_checkout_state():
+    source = json.loads((ROOT / 'evidence/s18_mxtp_run_card.json').read_text())
+    for name in ('run_card_2026-10-25.json', 'current_run_card_2026-10-25.json'):
+        assert json.loads((DOCS / 'data' / name).read_text()) == source
+    # Keep the concurrent negative review intact as its own historical record.
+    historical = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
+    assert historical['run_id'] != source['session']
+    assert historical['submission_ready'] is False
+    workflow = (ROOT / '.github/workflows/pages.yml').read_text()
+    assert 'EXPECTED_CARD_SHA256' in workflow and 'hashlib.sha256(body)' in workflow

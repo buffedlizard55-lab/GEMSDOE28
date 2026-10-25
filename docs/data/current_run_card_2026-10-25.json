@@ -3619,6 +3619,11 @@
         "detail": "np.isinf(whole array) is empty",
         "hard": true
       },
+      "nodata_convention": {
+        "pass": true,
+        "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+        "hard": true
+      },
       "outside_footprint_is_zero_and_finite": {
         "pass": true,
         "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
@@ -3632,7 +3637,7 @@
       "profile_driver_gtiff": {
         "pass": true,
         "detail": "GTiff",
-        "hard": false
+        "hard": true
       },
       "compression_like_sample": {
         "pass": true,
@@ -3643,6 +3648,7 @@
     "hard_checks_passed": true,
     "hard_failures": [],
     "nonzero_inside_px": 11082,
+    "nonfinite_inside_px": 0,
     "value_set_inside": [
       0.0,
       1.0
@@ -3660,14 +3666,22 @@
   "organizer_receipt": null,
   "disposition": "Unique and format-valid RESEARCH TIFF; failed frozen holdout superiority gate. DO NOT SUBMIT.",
   "evidence": "evidence/s18_holdout.json",
+  "strict_protocol_limitations": {
+    "upstream_template_api_equivalence_established": false,
+    "exclusive_external_lane_assignment_confirmed": false,
+    "global_parallel_registry_complete": false,
+    "certified_global_best_baseline": false,
+    "scope": "Repository-existing shared harness/writer; later upstream API pins were not executed by this experiment."
+  },
   "evidence_schema_gate": {
     "verdict": "negative",
+    "promotion_eligible": false,
     "evidence_schema_passed": false,
     "submission_ready": false,
     "failures": [
       "no positive paired gain CI over frozen current best"
     ],
     "slot_selected": false,
-    "scope": "Evidence schema gate only; no raster execution or selector approval. Not upload authorization."
+    "scope": "Evidence schema eligibility only; no independent evidence authentication, slot selection, cap check or organizer acceptance."
   }
 }

@@ -193,3 +193,22 @@ seeds. Finalization requires restored template/labels but not the ignored S18 in
 published final TIFF and checked-in holdout cells are sufficient for format/result audits.
 Do not present recomputation on a changed environment as independent confirmation. Source hashes
 and package versions are recorded separately. See the three-pass review in `evidence/s18_review.md`.
+
+## Subsequent PR #39 integration (no new scientific experiment)
+
+PR #39 merged while this run was being delivered. Its upstream GEMSDOE24 tool pins, hardened
+atomic writer, stronger validator/promotion gate, source-feed freshness handling, archive separation
+and dual-route Pages deployment were retained. The exact S18 TIFF was **re-read**, not regenerated;
+its SHA-256 is unchanged. Historical no-experiment cards and source claims remain separate.
+
+**Strict protocol limitation:** S18 executed the repository-existing shared LOSFO evaluator/writer,
+not PR #39's subsequently restored upstream `evaluate_holdout.py` / `submission_writer.py` APIs.
+Equivalence to that upstream template contract is not established. It also lacks authenticated
+external exclusive-lane assignment, a synchronized global registry and a certified global-best
+baseline. These are additional reasons **not** to promote, even if local paired recovery had won.
+Do not retrospectively call this a fully protocol-certified submission. See
+`evidence/s18_writer_provenance.json` for the original writer source pin and current validator hash.
+
+The previous parallel review's hashed manifest is preserved byte-for-byte in
+`evidence/pr39_manifest_snapshot.json`; its historical evidence card was not silently rewritten
+when the current manifest and public card aliases advanced to this measured research result.
