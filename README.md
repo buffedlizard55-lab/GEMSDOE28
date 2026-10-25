@@ -1,23 +1,23 @@
-# Current session safety notice — 2026-10-25 (read first)
+# Current session safety notice — 2026-10-25 Session 16 (read first)
 
-**Follow-up:** [registry-coverage gate review and next steps](knowledge/48_gate_review_2026-10-25.md).
-Run `.venv/bin/python scripts/check_promotion.py docs/data/run_card_2026-10-25.json`
-for a machine-readable evidence-schema verdict (exit 1 is the expected current negative).
-This is not a TIFF validator or authorization to upload. The gate now requires a declared registry
-member inventory and exact comparison coverage at both stages; malformed evidence fails closed.
+**NOT READY TO SUBMIT: the new unique-lane TIFF (H40-1 migration, `5f2efa891ce7`) FAILED
+its frozen gate and is banner-marked 🔴 DO NOT SUBMIT on the site.** Read
+[the Session 16 result](knowledge/50_s16_result.md) and its
+[preregistration](knowledge/49_preregistration_H40-1_migration.md) before the historical
+standing prompt below. Session 16 restored all hash-pinned inputs, re-verified why the
+OWNER-REPORTED 0.2778 champion won (emission hygiene: `solo-r1` minus the d_cat≤2 px
+ring; a ring-3 copy would be a >95 % duplicate and was not built), ran the leakage
+canary (PASS), the frozen LOSFO gate on seeds 300–304 (**G2 spread FAIL**: pooled
+HOLDOUT-DTI Δ +0.00126, 95 % CI [−0.0034, +0.0063], 9/20 cells), and the uniqueness
+check (**FAIL**: surface Spearman 0.990; 91.3 % of dots within 3 px of a dense probe
+raster; 41.3 % vs the scored champion). The file is published inspection-only; the
+one-click primary (H36-1) is unchanged. **If a human submits anything, use the
+primary's all-finite variant** (values exactly 0/1, no NaN anywhere — strict whole-array
+[0,1] PASS), which addresses the owner's portal error "Predicted values must be in
+range [0, 1]". No score here is ORGANIZER-CONFIRMED; projections are never scores.
+Negative results are deliverables. Do not copy an old submission.
 
-**NOT READY TO SUBMIT: no new unique TIFF was generated this session.**
-Read [the current audit and ranked hypotheses](knowledge/47_parallel_run_audit_2026-10-25.md)
-before the historical standing prompt below. The current request overrides stale leaderboard and
-submission-readiness claims. It requires a unique scientific raster, buffered whole-segment
-hide-and-recover evaluation, visible-only catalogue features, feature-alone leakage canaries,
-pooled DTI with confidence intervals, complete surface and final-dot registry comparisons,
-and exact finite/range/grid checks. Promotion is separate from weekly slot selection.
-
-**Blocking irregularities:** the method paragraph assigning this session's lane and the shared
-template location were not supplied; training/cache files are absent in this checkout; current
-organizer receipts are unavailable. Stop after the specified experiment/time budget. Negative
-results are deliverables. Do not copy an old submission or claim a simulation is a score.
+**Follow-up (parallel merged run):** [registry-coverage gate review and next steps](knowledge/48_gate_review_2026-10-25.md). Note the H40-1 label collision flagged in `registry/irregularities.json` (`s16-h40-id-collision`): main also carries a parallel H40-1 thermal-vent / H41-1 thermal-spring experiment — do not combine its numbers with Session 16 migration numbers.
 
 This is an operational summary of the 2026-10-25 request, **not a verbatim copy** of the full prompt.
 Historical verbatim prompts below remain historical. Core values remain Maximize P(Win) and Own

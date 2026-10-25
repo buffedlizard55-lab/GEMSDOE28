@@ -354,7 +354,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main><section class="card" aria-label="Current submission readiness"><h2>Current run: NOT READY TO SUBMIT</h2><p>2026-10-25: This gate-review run generated no TIFF. A separate merged H39-1 run generated a rejected research TIFF (DO NOT SUBMIT); see README and its run card. For this gate-review run, the assigned method lane and shared template location are missing; holdout and registry gates remain unmeasured. Historical downloads below are not promoted by this run.</p><p><a href="data/run_card_2026-10-25.json">Download current machine-readable run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/47_parallel_run_audit_2026-10-25.md">Audit, ranked hypotheses, limitations and next steps</a></p><p><a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/48_gate_review_2026-10-25.md">Follow-up: registry coverage, automated evidence check and next steps</a>. Format validation is not performance validation. Promotion is not weekly slot selection. No human-inspector sign-off is substituted for automated evidence.</p></section>{body}</main>
+<main><section class="card" aria-label="Current submission readiness"><h2>Current run: NOT READY TO SUBMIT</h2><p>2026-10-25 (Session 16): a new unique-lane TIFF (H40-1 migration, 5f2efa891ce7) WAS generated and auto-validated, but it FAILED its frozen LOSFO gate (G2 spread) and the strict uniqueness check. It is banner-marked DO NOT SUBMIT below; the validated one-click primary further down is unchanged and remains the only download presented for a manual submission decision. If you submit anything, use the primary&#x27;s <strong>all-finite</strong> variant (values exactly 0/1, no NaN anywhere) to avoid the portal error &#8220;Predicted values must be in range [0, 1]&#8221;.</p><p><a href="data/run_card_2026-10-25.json">Download current machine-readable run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/50_s16_result.md">Session 16 audit, ranked hypotheses, limitations and next steps</a></p><p><a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/48_gate_review_2026-10-25.md">Follow-up: registry coverage, automated evidence check and next steps</a></p><p>Format validation is not performance validation. Promotion is not weekly slot selection. No human-inspector sign-off is substituted for automated evidence.</p></section>{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -438,6 +438,39 @@ def local_h38_branch_attempt_html(claim: dict) -> str:
 <p><a href="../evidence/h38_1_holdout.started.json">Branch-local claim</a> · <a href="../evidence/losfo_h38_1_raw.json">raw output (unverified)</a> · <a href="../evidence/losfo_session14_h36_1_and_h38.json">mainline seed-use evidence</a> · <a href="../knowledge/37_ranked_hypotheses_session14_2026-10-03.md">pre-run five-hypothesis ranking</a> · <a href="../knowledge/39_session14_closeout_2026-10-03.md">full reconciliation</a>.</p>
 </div></section>"""
 
+
+
+def s16_panel_html(manifest: dict) -> str:
+    """Session-16 candidate panel: verdict headline read from the manifest slot."""
+    item = manifest.get("s16_candidate")
+    if not isinstance(item, dict) or not item.get("nan"):
+        return ""
+    promote = item.get("verdict") == "promote"
+    banner = ("GREEN GATE PASS - ELIGIBLE FOR SELECTOR REVIEW - UNSCORED" if promote
+              else "RED DO NOT SUBMIT - HOLDOUT GATE FAILED (G2) + UNIQUENESS FAIL - INSPECTION ONLY")
+    verdict_line = (
+        "This file passed its frozen LOSFO gate, uniqueness check and format validator; still unscored."
+        if promote else
+        "<strong>Do not download this file for the portal.</strong> Published so the negative result is "
+        "inspectable byte-for-byte. Submitting it would spend a weekly slot on an idea the holdout rejected. "
+        "The one-click primary under it is unchanged.")
+    return f"""<section class="download-panel" id="s16-candidate" aria-labelledby="s16-heading">
+  <div class="eyebrow">Session 16 - 2026-10-25 - newest candidate - auto-validated, no human inspection</div>
+  <h2 id="s16-heading">{esc(banner)}</h2>
+  <p><strong>{esc(item.get('hypothesis', 'H40-1'))}</strong></p>
+  <p>{verdict_line}</p>
+  <p>{esc(item.get('status', ''))}</p>
+  {file_links(item)}
+  {mirror_line(item)}
+  <p><strong>Exact filename</strong></p><code class="file-name">{esc(item['nan'])}</code>
+  <p><strong>Unique submission name:</strong> <code>{esc(item.get('submission_name', 'not registered'))}</code></p>
+  <p class="meta">SHA-256 <code>{esc(item.get('sha256_nan', ''))}</code> - {esc(item.get('bytes_nan'))} bytes - single-band float32 - {esc(item.get('emitted_px'))} cells equal to 1 - values exactly in [0, 1] inside the footprint - CRS EPSG:32611 - 100 m grid. The all-finite variant has no NaN anywhere (strict whole-array range PASS).</p>
+  <p><strong>Exact short note ({len(str(item.get('note', '')))} / 140 characters):</strong></p>
+  {note_box(str(item.get('note', '')))}
+  <p class="small">Evidence: <a href="../evidence/s16_run_card.json">run card</a> - <a href="../evidence/s16_h40_losfo_gate.json">LOSFO gate (seeds 300-304)</a> - <a href="../evidence/s16_canary.json">leakage canary</a> - <a href="../knowledge/49_preregistration_H40-1_migration.md">preregistration (frozen before the seeds)</a> - <a href="../knowledge/50_s16_result.md">result</a>. HOLDOUT-DTI is a local proxy, never an organizer score; 0.2778 is owner-reported (no organizer receipt in any fetched repository).</p>
+</section>
+
+"""
 
 def s15_panel_html(manifest: dict) -> str:
     """Session-15 candidate panel: the submit / do-not-submit verdict is the headline.
@@ -547,7 +580,7 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
 
 <section class="callout callout-danger"><strong>Session 15 review (2026-10-25):</strong> the GEMSDOE32 H33-2 <strong>0.2778</strong> figure is user-reported; the cross-site audit describes catalogue-proximity pruning but says the owner page disclaims an organizer score. Raw TIFF, full code and receipt are absent here. The prompt's <strong>0.4413</strong> and <strong>0.3195</strong> leaderboard maxima conflict. The required lane paragraph and cached input rasters are also missing, so no new unique TIFF was generated and no slot was used in that review run. A sibling parallel Session-15 lane that restored the rasters did build one candidate; it failed its frozen gate and is banner-marked DO NOT SUBMIT immediately below. <a href="session15-review.html">Read the full high-score audit, ranked hypotheses and negative run card →</a></section>
 
-{s15_panel_html(manifest)}<section class="download-panel" id="download" aria-labelledby="download-heading">
+{s16_panel_html(manifest)}{s15_panel_html(manifest)}<section class="download-panel" id="download" aria-labelledby="download-heading">
   <div class="eyebrow">Manual research download · no upload made</div>
   <h2 id="download-heading">One-click GeoTIFF — {esc(primary.get('hypothesis', 'H32-1 reference'))}</h2>
   <p><span class="status unscored">UNSCORED · RESEARCH ONLY · NOT SLOT-APPROVED</span></p>
@@ -628,7 +661,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
   <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO UPLOAD / NO RECEIPT</span></div>
 </div></section>
 
-{s15_panel_html(manifest)}
+{s16_panel_html(manifest)}{s15_panel_html(manifest)}
 <section class="section"><div class="grid">
   <article class="card span-8"><h2>Candidate in one paragraph</h2><p><strong>{esc(p.get('hypothesis'))}.</strong> Filename <code class="file-name">{esc(p['nan'])}</code>. {esc(str(p.get('status', '')))} Built on the owner-reported <strong>{fmt_number(p.get('base_reference_live_score', 0.26), 4)}</strong> live base (<code>{esc(str(p.get('base_reference_id', '')))}</code>) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (&minus;0.0028 vs 0.2477). Its holdout evidence (<a href="../{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}">{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}</a>) records a mean &Delta;DTI of <strong>{fmt_number(p.get('holdout_mean_gain', 0), 6)}</strong> with <strong>{esc(p.get('holdout_folds_improved', 'n/a'))}</strong> spatial folds and <strong>{esc(p.get('holdout_seeds_improved', 'n/a'))}</strong> seeds improving over the same-run control.{adj_sentence} The inherited H28-1 full-map reference <code class="file-name">{esc(candidate.get('nan', ''))}</code> (+0.00294884 on seeds 140–149) is retained for comparison and is not one of the four weekly slots inherited from the predecessor campaign.</p><p><strong>Disposition:</strong> all local rasters pass {check_count} format, grid, <code>[0,1]</code> range, footprint, and SHA-256 checks (<a href="../evidence/submission_file_audit.json">evidence/submission_file_audit.json</a>), and remain unscored until manually submitted by the human operator.</p></article>
   <article class="card span-4"><div class="metric">{comma(p.get('emitted_px'))}</div><div class="metric-caption">binary positive cells emitted</div><hr><div class="metric">+{fmt_number(p.get('holdout_mean_gain', 0), 5)}</div><div class="metric-caption">4-fold spatial OOF &Delta;DTI ({esc(p.get('holdout_seeds_improved', 'n/a'))} seeds)</div></article>

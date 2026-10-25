@@ -1,0 +1,151 @@
+{
+  "session": "S16 (2026-10-25), branch arena/2164512d-gemsdoe28, lane H40-1 (knowledge/49)",
+  "hypothesis": "Continuation-height HG-ridge migration (signed lateral offset + 3-level coherence of TMI/gravity edges, 0/1/2 km) marks dipping buried faults the surface-scarp catalogue omits; appending these 4 label-free bands to the frozen 32-band detector raises far-field DTI at the champion's budget.",
+  "mechanism": "Upward continuation exp(-|k|h); ridge at each level via shared ridge_nms; signed migration = shallow->2km ridge offset projected on field-gradient normal; coherence = mean_l exp(-d_l/2). GBDT unchanged, prob-ranked, dot_thin(2.8), build-time d_cat>2px.",
+  "named_nonfault_mimic": "Dipping lithologic contact / mafic dike swarm (migrates identically, zero Quaternary slip); GeoDAWN flight-line striping.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI (not an organizer score)",
+    "evaluator": "scripts/run_losfo_harness.py eval_set imported; src/gems27/losfo.py + metric.py (alpha=0.2, beta=0.8, 300 m triangular kernel, pooled over cells)",
+    "seeds": "300-304 (20 paired cells)",
+    "n_withheld_positives_pooled_cell_truth_px": 81101,
+    "d0_pooled_dti": 0.0953871399036491,
+    "d1_pooled_dti": 0.09664823563077048,
+    "pooled_delta_dti": 0.0012610957271213807,
+    "mean_paired_delta_dti": 0.0011629644908050375,
+    "ci95_paired_bootstrap": [
+      -0.0033688389702162557,
+      0.006334405358596312
+    ],
+    "cells_positive": "9/20",
+    "per_seed_mean_delta": {
+      "300": 0.00020298171345046676,
+      "301": 0.0029600536030173555,
+      "302": 0.01248549841626346,
+      "303": -0.01074330732047318,
+      "304": 0.0009095960417670849
+    },
+    "per_fold_mean_delta": {
+      "NE_LidarGapHeavy": -0.0001931901900544569,
+      "NW": -0.0021930439329843785,
+      "SE": -0.002500636031854184,
+      "SW": 0.00953872811811317
+    },
+    "credit_per_dot_d0": 0.04544083172926717,
+    "credit_per_dot_d1": 0.046079345357715275,
+    "gate": {
+      "G1_pooled_gt0_and_mean_ge_0.001": true,
+      "G2_spread_14cells_4seeds_3folds": false,
+      "G3_credit_per_dot_not_worse": true,
+      "G4_integrity_onknown0_and_count_ratio_le_0.10": true,
+      "G5_canary_pass_from_evidence_s16_canary": true
+    },
+    "gate_passed": false,
+    "canary_single_feature_aucs": {
+      "tmi_signed_migration_px": 0.5102768681833616,
+      "tmi_migration_coherence": 0.5349315644142614,
+      "grav_signed_migration_px": 0.511507574736842,
+      "grav_migration_coherence": 0.5127980802716469
+    },
+    "canary_pass": true
+  },
+  "organizer_confirmed_scores": "none (no submission-page receipt exists for any file here; 0.2778/0.2750/0.2708/0.2600 are OWNER-REPORTED)",
+  "correlation_overlap_vs_registry": {
+    "spearman_probD1_vs_probD0_sample400k": 0.9902981372241659,
+    "worst_registry_raster_by_dot_overlap": {
+      "raster": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+      "frac_our_dots_within3px": 0.912665145646522,
+      "registry_dots": 38545
+    },
+    "vs_scored_champion_e5eb6e7e": {
+      "frac_our_dots_within3px": 0.41277126333103414,
+      "registry_dots": 37654
+    },
+    "uniqueness_pass_strict": false,
+    "full_table": {
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": {
+        "frac_our_dots_within3px": 0.43916803735342497,
+        "registry_dots": 41507
+      },
+      "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif": {
+        "frac_our_dots_within3px": 0.4446065686846713,
+        "registry_dots": 54714
+      },
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": {
+        "frac_our_dots_within3px": 0.8947577863851011,
+        "registry_dots": 59075
+      },
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": {
+        "frac_our_dots_within3px": 0.4647423993208468,
+        "registry_dots": 61328
+      },
+      "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif": {
+        "frac_our_dots_within3px": 0.4284236217965724,
+        "registry_dots": 40199
+      },
+      "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif": {
+        "frac_our_dots_within3px": 0.4364885658194938,
+        "registry_dots": 42294
+      },
+      "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif": {
+        "frac_our_dots_within3px": 0.433251976441874,
+        "registry_dots": 41656
+      },
+      "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif": {
+        "frac_our_dots_within3px": 0.4236483259935268,
+        "registry_dots": 37660
+      },
+      "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif": {
+        "frac_our_dots_within3px": 0.4508409826497586,
+        "registry_dots": 37447
+      },
+      "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif": {
+        "frac_our_dots_within3px": 0.912665145646522,
+        "registry_dots": 38545
+      },
+      "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif": {
+        "frac_our_dots_within3px": 0.43036026953891865,
+        "registry_dots": 37860
+      },
+      "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif": {
+        "frac_our_dots_within3px": 0.7255796678516475,
+        "registry_dots": 37695
+      },
+      "champion_e5eb6e7e_GEMSDOE32": {
+        "frac_our_dots_within3px": 0.41277126333103414,
+        "registry_dots": 37654
+      },
+      "gems36_9b9ea4e6_GEMSDOE36": {
+        "frac_our_dots_within3px": 0.41624661749880615,
+        "registry_dots": 38854
+      }
+    }
+  },
+  "raster_sha256": {
+    "nan": "2b32f81dcb734c51fe7b67da5b58123668ee6d614abe119a6d0dfbd23ccd7c0f",
+    "allfinite": "93abd1dbd2b06961eeafb25dbb428848d15d3c5e36ab9505d165f150fc9e9316"
+  },
+  "validator": {
+    "nan_hard_pass": true,
+    "allfinite_hard_pass": true,
+    "allfinite_value_set_inside": [
+      0.0,
+      1.0
+    ],
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_shape_transform_match": true,
+    "single_band": true
+  },
+  "submission_name": "GEMSDOE28-h40-1-migration-b1-5f2efa891ce7",
+  "note": "28GEMSDOE H40-1 migration B1 | LOSFO GATE FAIL dDTI +0.0013 CI[-0.0034,+0.0063] uniq FAIL DO NOT SUBMIT | id 5f2efa891ce7",
+  "note_chars": 121,
+  "experiments_run": 3,
+  "verdict": "negative",
+  "submission_ready": false,
+  "slot_selected": false,
+  "failures": [
+    "G2 spread: 9/20 cells, 1/4 folds, seed 303 -0.0107",
+    "uniqueness: surface Spearman 0.990 > 0.90; 91.3% dots within 3px of dense probe 52a13184267e (41.3% vs scored champion)"
+  ],
+  "scope": "Negative result is the deliverable; TIF published inspection-only, banner DO NOT SUBMIT. No slot spent."
+}

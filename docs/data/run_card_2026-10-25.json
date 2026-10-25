@@ -1,67 +1,151 @@
 {
-  "session": "2026-10-25, GEMSDOE28 branch arena/b760848a-gemsdoe28",
-  "generated_utc": "2026-10-25T20:50:08Z",
-  "purpose": "Unique TIF submission generation, validation, and executive summary for the GEMS DOE competition (DrivenData #306)",
-  "hypothesis": "Geothermal hot springs (>40 C) mark fluid upflow along concealed faults omitted from the USGS/INGENIOUS surface catalogue. Adding GDR hot-spring dots as independent emission pixels, buffered >=3 px from catalogue faults and the H36-1 base, thinned at min_dist=3.0 px (a rung unused by any in-repo submission), targets genuinely missing structure.",
-  "mechanism": "Start from validated H36-1 base (rung-3.0 re-pack + blind 1-px catalogue-flank prune, 37,660 px). Add dots at GDR hot-spring (>40 C) pixel locations eligible by distance filter (>=3 px from catalogue, >=3 px from base dots). Poisson-disk thin at min_dist=3.0 px. Combine by union. Output single-band float32 GeoTIFF, values exactly {0,1} inside footprint, NaN outside (sample-conformant), CRS EPSG:32611, 3730x3292, 100 m grid.",
-  "named_nonfault_mimic": "Paleoshoreline, alluvial-fan boundary, lithologic contact, road/earthwork, or fossil hydrothermal spring not associated with a Quaternary fault can create a thermal anomaly without a concealed fault.",
-  "layers_involved": ["gdr_wellspring_in_footprint.csv (GDR hot spring locations, temp_c)", "data/h36-1 base (rung-3.0 re-packed H19-5 surface + blind flank prune)", "data/existing_faults.tif (USGS/INGENIOUS catalogue mask)"],
-  "physical_signature": "Geothermal fluid upflow at spring locations; spatially localized thermal anomaly not explained by catalogue surface traces.",
-  "why_catch_missing_faults": "Hot springs are independent observations of subsurface fluid pathways. A concealed fault may have no young surface scarp (hence absent from USGS/INGENIOUS) but still channel geothermal fluids to the surface at a spring. This differs from scarp-ridge, topology-link, heat-flow-residual, and Euler-cluster approaches already in the repo.",
-  "how_differs_from_repo": "No existing in-repo submission uses GDR well/spring observations as dot sources. H36-1 uses packing re-layout + flank prune. H38-1 uses heat-flow residuals + Euler clusters. H41-1 uses thermal-spring pixel locations as an independent physical signal.",
+  "session": "S16 (2026-10-25), branch arena/2164512d-gemsdoe28, lane H40-1 (knowledge/49)",
+  "hypothesis": "Continuation-height HG-ridge migration (signed lateral offset + 3-level coherence of TMI/gravity edges, 0/1/2 km) marks dipping buried faults the surface-scarp catalogue omits; appending these 4 label-free bands to the frozen 32-band detector raises far-field DTI at the champion's budget.",
+  "mechanism": "Upward continuation exp(-|k|h); ridge at each level via shared ridge_nms; signed migration = shallow->2km ridge offset projected on field-gradient normal; coherence = mean_l exp(-d_l/2). GBDT unchanged, prob-ranked, dot_thin(2.8), build-time d_cat>2px.",
+  "named_nonfault_mimic": "Dipping lithologic contact / mafic dike swarm (migrates identically, zero Quaternary slip); GeoDAWN flight-line striping.",
   "holdout_dti": {
-    "label": "HOLDOUT-DTI (catalogue-internal proxy, NOT an organizer score)",
-    "evaluator": "4-quadrant component-hiding holdout (src/gems27/holdout.py), dti_binary (alpha=0.2, beta=0.8, 300 m triangular kernel), paired vs H36-1 base on same folds",
-    "seeds": "1 (4 folds: NW, NE_LidarGapHeavy, SW, SE)",
-    "n_withheld_positives": 12062,
-    "pooled_base_dti": 0.013502,
-    "pooled_cand_dti": 0.013404,
-    "pooled_delta_dti": -0.000098,
-    "mean_paired_delta_dti": -0.000099,
-    "ci95_approx": [-0.000124, -0.000075],
-    "positive_folds": 0,
-    "total_folds": 4,
-    "verdict": "negative on catalogue-internal holdout (spring dots do not align with hidden catalogue components)"
+    "label": "HOLDOUT-DTI (not an organizer score)",
+    "evaluator": "scripts/run_losfo_harness.py eval_set imported; src/gems27/losfo.py + metric.py (alpha=0.2, beta=0.8, 300 m triangular kernel, pooled over cells)",
+    "seeds": "300-304 (20 paired cells)",
+    "n_withheld_positives_pooled_cell_truth_px": 81101,
+    "d0_pooled_dti": 0.0953871399036491,
+    "d1_pooled_dti": 0.09664823563077048,
+    "pooled_delta_dti": 0.0012610957271213807,
+    "mean_paired_delta_dti": 0.0011629644908050375,
+    "ci95_paired_bootstrap": [
+      -0.0033688389702162557,
+      0.006334405358596312
+    ],
+    "cells_positive": "9/20",
+    "per_seed_mean_delta": {
+      "300": 0.00020298171345046676,
+      "301": 0.0029600536030173555,
+      "302": 0.01248549841626346,
+      "303": -0.01074330732047318,
+      "304": 0.0009095960417670849
+    },
+    "per_fold_mean_delta": {
+      "NE_LidarGapHeavy": -0.0001931901900544569,
+      "NW": -0.0021930439329843785,
+      "SE": -0.002500636031854184,
+      "SW": 0.00953872811811317
+    },
+    "credit_per_dot_d0": 0.04544083172926717,
+    "credit_per_dot_d1": 0.046079345357715275,
+    "gate": {
+      "G1_pooled_gt0_and_mean_ge_0.001": true,
+      "G2_spread_14cells_4seeds_3folds": false,
+      "G3_credit_per_dot_not_worse": true,
+      "G4_integrity_onknown0_and_count_ratio_le_0.10": true,
+      "G5_canary_pass_from_evidence_s16_canary": true
+    },
+    "gate_passed": false,
+    "canary_single_feature_aucs": {
+      "tmi_signed_migration_px": 0.5102768681833616,
+      "tmi_migration_coherence": 0.5349315644142614,
+      "grav_signed_migration_px": 0.511507574736842,
+      "grav_migration_coherence": 0.5127980802716469
+    },
+    "canary_pass": true
   },
-  "leakage_canary": {
-    "note": "Single-feature AUC not computed for this build; thermal-spring locations are derived from independent GDR observations, not from catalogue truth, so leakage via catalogue-derived features is not expected."
-  },
+  "organizer_confirmed_scores": "none (no submission-page receipt exists for any file here; 0.2778/0.2750/0.2708/0.2600 are OWNER-REPORTED)",
   "correlation_overlap_vs_registry": {
-    "spearman_vs_H36_1_base": "not computed",
-    "frac_dots_within3px_of_H36_1": 0.0,
-    "note": "New spring dots are explicitly excluded from within 3 px of H36-1 dots and catalogue faults by construction."
-  },
-  "raster_sha256": "4ff7626cc689d8c3a6f07d0b8512d76bc958c643d3efbeb49c01ffff09be1660",
-  "content_id": "73e2b0bd94a8",
-  "validator_output": {
-    "file": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif",
-    "bytes": 1615184,
-    "hard_checks_passed": true,
-    "all_checks_passed": true,
-    "summary": "no NaN inside footprint; values exactly {0,1} in [0,1]; CRS EPSG:32611, shape 3730x3292, transform = template; 0 dots on catalogue; 38,024 emitted px (37,660 H36-1 base + 364 hot-spring dots)",
-    "details": {
-      "values_in_0_1_inside": true,
-      "no_nan_inside": true,
-      "nan_outside": true,
-      "shape_matches": true,
-      "single_band": true
+    "spearman_probD1_vs_probD0_sample400k": 0.9902981372241659,
+    "worst_registry_raster_by_dot_overlap": {
+      "raster": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+      "frac_our_dots_within3px": 0.912665145646522,
+      "registry_dots": 38545
+    },
+    "vs_scored_champion_e5eb6e7e": {
+      "frac_our_dots_within3px": 0.41277126333103414,
+      "registry_dots": 37654
+    },
+    "uniqueness_pass_strict": false,
+    "full_table": {
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": {
+        "frac_our_dots_within3px": 0.43916803735342497,
+        "registry_dots": 41507
+      },
+      "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif": {
+        "frac_our_dots_within3px": 0.4446065686846713,
+        "registry_dots": 54714
+      },
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": {
+        "frac_our_dots_within3px": 0.8947577863851011,
+        "registry_dots": 59075
+      },
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": {
+        "frac_our_dots_within3px": 0.4647423993208468,
+        "registry_dots": 61328
+      },
+      "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif": {
+        "frac_our_dots_within3px": 0.4284236217965724,
+        "registry_dots": 40199
+      },
+      "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif": {
+        "frac_our_dots_within3px": 0.4364885658194938,
+        "registry_dots": 42294
+      },
+      "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif": {
+        "frac_our_dots_within3px": 0.433251976441874,
+        "registry_dots": 41656
+      },
+      "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif": {
+        "frac_our_dots_within3px": 0.4236483259935268,
+        "registry_dots": 37660
+      },
+      "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif": {
+        "frac_our_dots_within3px": 0.4508409826497586,
+        "registry_dots": 37447
+      },
+      "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif": {
+        "frac_our_dots_within3px": 0.912665145646522,
+        "registry_dots": 38545
+      },
+      "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif": {
+        "frac_our_dots_within3px": 0.43036026953891865,
+        "registry_dots": 37860
+      },
+      "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif": {
+        "frac_our_dots_within3px": 0.7255796678516475,
+        "registry_dots": 37695
+      },
+      "champion_e5eb6e7e_GEMSDOE32": {
+        "frac_our_dots_within3px": 0.41277126333103414,
+        "registry_dots": 37654
+      },
+      "gems36_9b9ea4e6_GEMSDOE36": {
+        "frac_our_dots_within3px": 0.41624661749880615,
+        "registry_dots": 38854
+      }
     }
   },
-  "submission_name": "GEMSDOE28-h41-1-thermal-spring-r30-73e2b0bd94a8",
-  "note_le200": "28GEMSDOE H41-1 thermal-spring r3.0 | H36-1 base 37,660px + 364 GDR hot-spring dots (>40C, >=3px from cat & base, min_dist=3.0px) | UNSCORED holdout-pending | id 73e2b0bd94a8",
-  "note_length_chars": 174,
-  "download_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif",
-  "zip_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.zip",
-  "allfinite_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif",
-  "check_json": "docs/downloads/checks-gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif.json",
-  "verdict": "negative holdout-DTI; format-perfect unique TIF ready for manual portal submission; UNSCORED, not slot-approved",
-  "experiments_used": "3 of 3",
-  "budget_status": "stopped at experiment budget",
-  "limitations": [
-    "No DrivenData auth; cannot verify organizer score or portal acceptance",
-    "Holdout is catalogue-internal (hidden components of known faults), not the organizer's omitted expert labels",
-    "0.2778 GEMSDOE32 figure is owner-reported, not organizer-confirmed; no raw H33-2 TIFF bytes available in this checkout",
-    "Two conflicting public leaderboard maxima reported (0.4413 and 0.3195); neither is organizer-verified for this repo",
-    "Thermal-spring dots did not improve catalogue-internal holdout DTI (negative result; valid deliverable)"
-  ]
+  "raster_sha256": {
+    "nan": "2b32f81dcb734c51fe7b67da5b58123668ee6d614abe119a6d0dfbd23ccd7c0f",
+    "allfinite": "93abd1dbd2b06961eeafb25dbb428848d15d3c5e36ab9505d165f150fc9e9316"
+  },
+  "validator": {
+    "nan_hard_pass": true,
+    "allfinite_hard_pass": true,
+    "allfinite_value_set_inside": [
+      0.0,
+      1.0
+    ],
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_shape_transform_match": true,
+    "single_band": true
+  },
+  "submission_name": "GEMSDOE28-h40-1-migration-b1-5f2efa891ce7",
+  "note": "28GEMSDOE H40-1 migration B1 | LOSFO GATE FAIL dDTI +0.0013 CI[-0.0034,+0.0063] uniq FAIL DO NOT SUBMIT | id 5f2efa891ce7",
+  "note_chars": 121,
+  "experiments_run": 3,
+  "verdict": "negative",
+  "submission_ready": false,
+  "slot_selected": false,
+  "failures": [
+    "G2 spread: 9/20 cells, 1/4 folds, seed 303 -0.0107",
+    "uniqueness: surface Spearman 0.990 > 0.90; 91.3% dots within 3px of dense probe 52a13184267e (41.3% vs scored champion)"
+  ],
+  "scope": "Negative result is the deliverable; TIF published inspection-only, banner DO NOT SUBMIT. No slot spent."
 }

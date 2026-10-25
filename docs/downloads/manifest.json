@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-04T00:45:47Z",
+  "generated_utc": "2026-10-25T00:00:00Z",
   "status": "Session 14 (2026-10-03): H36-1 (primary, b531dae0a36f, 37,660 px) is now verified on BOTH interleaved spatial CV (seeds 240-249, +0.002599) and LOSFO far-field truth (seeds 265-269, +0.001713, F1-F4 ALL PASS, e_far = 0.01359 < tau_live 0.054852). H38-1 (secondary, 56a9f473edc7, 37,860 px) adds 200 multi-physics corroborated lineament dots (DeAngelo et al. 2022 conductive heat-flow residual hf_resid >= 50 mW/m^2 + Reid et al. 1990 shallow SI=0 Euler contact cluster) and passed both LOSFO far-field C1-C4 (+0.000747 over H36-1, 0.06993 credit/dot) and interleaved spatial CV (seeds 270-279, +0.000543 over H36-1). All files UNSCORED / not slot-approved.",
   "provenance_warning": "All inputs and historical model artifacts are owner-repository mirrors; local SHA-256 integrity does not prove organizer authenticity or score association.",
   "manual_policy": "No upload, portal call, scheduled check, scraping, API monitoring or other automated DrivenData access. All site links are downloads/manual-review links only.",
@@ -322,6 +322,31 @@
     "holdout_evidence": "evidence/s15_h39_1_losfo_gate.json",
     "holdout_preregistration": "knowledge/47_s15_hypotheses_and_preregistration_H39-1.md",
     "holdout_seeds": "290-294",
+    "verdict": "negative"
+  },
+  "s16_candidate": {
+    "slug": "h40-1-migration-b1",
+    "hypothesis": "H40-1 continuation-height HG-ridge migration (signed offset + 3-level coherence, TMI+gravity) appended to the frozen 32-band detector; prob-ranked, dot_thin(2.8), d_cat>2px build hygiene",
+    "content_id": "5f2efa891ce7",
+    "nan": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif",
+    "allfinite": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-allfinite.tif",
+    "zip": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.zip",
+    "sha256_nan": "2b32f81dcb734c51fe7b67da5b58123668ee6d614abe119a6d0dfbd23ccd7c0f",
+    "sha256_allfinite": "93abd1dbd2b06961eeafb25dbb428848d15d3c5e36ab9505d165f150fc9e9316",
+    "sha256_zip": "2b7d6fa112fd09eca29d845e9fb5aa5b2e8f786ff12a879686df33fbab876191",
+    "bytes_nan": 1590584,
+    "bytes_allfinite": 826372,
+    "bytes_zip": 286466,
+    "emitted_px": 37694,
+    "format_verified": true,
+    "status": "DO NOT SUBMIT \u2014 HOLDOUT GATE FAILED; HOLDOUT-DTI LOSFO seeds 300-304 pooled dDTI +0.001261 (95% CI [-0.0034, +0.0063], 9/20 cells, G2 spread FAIL); uniqueness FAIL (surface Spearman 0.990 > 0.90; worst 91.3% dots within 3px of gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif; vs scored champion e5eb6e7e 41.3%); validator PASS (all-finite variant: values exactly {0,1}, no NaN anywhere); verdict negative; research/inspection only, no slot spent, selector step separate.",
+    "note": "28GEMSDOE H40-1 migration B1 | LOSFO GATE FAIL dDTI +0.0013 CI[-0.0034,+0.0063] uniq FAIL DO NOT SUBMIT | id 5f2efa891ce7",
+    "note_file": "note-gemsdoe28-h40-1-5f2efa891ce7.txt",
+    "submission_name": "GEMSDOE28-h40-1-migration-b1-5f2efa891ce7",
+    "run_card": "evidence/s16_run_card.json",
+    "holdout_evidence": "evidence/s16_h40_losfo_gate.json",
+    "holdout_preregistration": "knowledge/49_preregistration_H40-1_migration.md",
+    "holdout_seeds": "300-304",
     "verdict": "negative"
   }
 }

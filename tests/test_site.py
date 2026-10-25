@@ -312,4 +312,8 @@ def test_current_run_notice_is_above_historical_body():
     card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
-    assert card['raster_sha256'] is None
+    # Session 16: an inspection-only raster exists but is gate/uniqueness-failed,
+    # so a hash is recorded while submission_ready stays False (DO NOT SUBMIT).
+    assert card['raster_sha256'] is None or (
+        isinstance(card['raster_sha256'], dict) and card.get('slot_selected') is False
+    )

@@ -79,7 +79,7 @@ def main() -> int:
     candidates = []
     for slot in ("primary", "secondary", "tertiary", "quaternary", "quinary_probe",
                  "conservative_alternative", "research_candidate", "h37_1_falsified",
-                 "s15_candidate"):
+                 "s15_candidate", "s16_candidate"):
         item = manifest.get(slot)
         if isinstance(item, dict) and item.get("nan"):
             candidates.append((slot, item))
