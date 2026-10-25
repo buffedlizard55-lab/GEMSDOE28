@@ -354,7 +354,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main><section class="card callout-danger" aria-label="Current submission readiness"><h2>Current run: BLOCKED — NO FILE APPROVED</h2><p>There is no uniquely assigned method lane for this run, and this checkout contains no competition feature rasters or prepared shared cache. No experiment was executed and no new submission TIFF was generated. The historical H40-1 candidate failed its frozen holdout-spread and uniqueness gates; older H36-1/H38-1 files are inspection-only research artifacts. <strong>Do not upload any file from this site.</strong> A future candidate must pass the preregistered hide-and-recover holdout, feature-alone leakage canaries, full registry uniqueness checks, exact-file validation, and the separate selector step before any submission-ready label is shown.</p><p><a href="data/current_run_card_2026-10-25.json">Current negative run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/review_2026-10-25_session18.md">Current three-pass review and limitations</a></p><p>Format validation is not performance validation. Promotion is not weekly slot selection. No human-inspector sign-off is substituted for automated evidence.</p></section>{body}</main>
+<main><section class="card callout-danger" aria-label="Current submission readiness"><h2>Current run: BLOCKED — NO FILE APPROVED</h2><p>No exclusive method lane was assigned and the required competition feature/cache rasters are absent from this checkout. No experiment ran and no new TIFF was generated. Historical artifacts are for inspection only. <strong>Do not upload any file from this site.</strong> Before any future file is offered, the lane must be preregistered, the shared hide-and-recover evaluator and feature-alone leakage canaries must pass, the full registry uniqueness checks and exact-file validator must pass, and a separate selector must approve it.</p><p><a href="data/current_run_card_2026-10-25.json">Current negative run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/review_2026-10-25_session18.md">Detailed three-pass repository review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/review_s18_submission_gate_2026-10-25.md">Submission-safety review</a></p><p>Format validity is not scientific merit or upload approval. No DrivenData upload was attempted.</p></section>{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -515,7 +515,7 @@ def s15_panel_html(manifest: dict) -> str:
 
 
 def s17_status_section_html(manifest: dict) -> str:
-    """Report the blocked status without presenting historical files as submission choices."""
+    """Show the blocked state without presenting old files as submission choices."""
     return """<section class="section callout-danger" id="submission-status-at-a-glance" aria-labelledby="submission-status-heading">
   <div class="eyebrow">Current automated submission gate</div>
   <h2 id="submission-status-heading">No file is approved for download and submission</h2>
@@ -530,14 +530,10 @@ def s17_one_click_html(manifest: dict) -> str:
     return """<section class="download-panel callout-danger" id="submit-one-click" aria-labelledby="submit-heading">
   <div class="eyebrow">Submission download status</div>
   <h2 id="submit-heading">NO APPROVED TIFF — DO NOT SUBMIT</h2>
-  <p>No new submission TIFF was generated in this run. The run was blocked before experimentation: no method lane was assigned and the required shared template/cache is absent. Historical TIFFs are not substitutes, regardless of their format checks or past holdout results.</p>
-  <p><a href="data/current_run_card_2026-10-25.json">Current negative run card</a> · <a href="../evidence/review_2026-10-25_session18.md">Current three-pass review and limitations</a>.</p>
+  <p>No new submission TIFF was generated in this run. No method lane was assigned and the required shared template/cache is absent. Historical TIFFs are not substitutes, regardless of prior holdout or format checks.</p>
+  <p><a href="data/current_run_card_2026-10-25.json">Current negative run card</a> · <a href="../evidence/review_2026-10-25_session18.md">Current three-pass review</a>.</p>
 </section>
 """
-
-
-def s17_run_card_note(secondary: dict) -> str:
-    return "28GEMSDOE H38-1 hf+euler r3.0 | H36-1 + 200 heat-flow/Euler dots | UNSCORED, not slot-approved | id " + str(secondary.get("content_id", ""))
 
 
 def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, restore: dict,
@@ -680,7 +676,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
         adj_sentence = ""
     check_count = file_audit.get("check_count", "not recorded")
     return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Executive summary</div>
-<section class="card callout-danger" aria-label="Submission decision"><h2>Current run: BLOCKED — NO FILE APPROVED</h2><p>No method lane was assigned and required competition rasters/cache are absent, so no experiment or new TIFF was generated. All downloads below are historical inspection artifacts only. <strong>Do not upload any file from this site.</strong> A future file can be called submission-ready only after the preregistered holdout, leakage, uniqueness, exact-file and separate selector gates pass. This page explains the manual competition process; it does not recommend a current file or spend a weekly slot.</p></section>
+<section class="card callout-danger" aria-label="Submission decision"><h2>Current run: BLOCKED — NO FILE APPROVED</h2><p>No method lane was assigned and required competition rasters/cache are absent, so no experiment or new TIFF was generated. All downloads below are historical inspection artifacts only. <strong>Do not upload any file from this site.</strong> A future file can be called submission-ready only after the preregistered holdout, leakage, uniqueness, exact-file and separate selector gates pass.</p></section>
 <section class="hero"><div class="hero-content">
   <div class="eyebrow">Submission executive summary · manual operator checklist</div>
   <h1>Research file,<br>not a score claim.</h1>
@@ -1135,7 +1131,7 @@ def main() -> int:
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
-    current_card = read_json("evidence/run_card_2026-10-25.json")
+    current_card = read_json("evidence/s18_run_card.json")
     current_card_path = DOCS / "data" / "current_run_card_2026-10-25.json"
     current_card_path.parent.mkdir(parents=True, exist_ok=True)
     current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")

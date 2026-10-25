@@ -346,8 +346,8 @@ def test_current_run_notice_is_above_historical_body():
     card = json.loads((DOCS / 'data/current_run_card_2026-10-25.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
-    source_card = json.loads((ROOT / 'evidence/run_card_2026-10-25.json').read_text())
+    source_card = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
     assert card == source_card
     assert card['raster_sha256'] is None
-    assert card['lane'] is None
+    assert card['hypothesis'] is None
     assert card['experiments_run'] == 0

@@ -1,35 +1,32 @@
 # Current review status — 2026-10-25 (read first)
 
-**NO FILE IS APPROVED FOR SUBMISSION.** This review had no uniquely assigned method
-lane and no competition feature rasters or prepared shared cache in the checkout; it
-ran no experiment and generated no new TIFF. The H40-1 migration candidate from the
-historical Session 16 run failed its frozen holdout-spread and uniqueness gates. Older
-H36-1/H38-1 files are historical inspection artifacts only. Do not upload any file from
-this repository. Read [the current blocked run card](evidence/run_card_2026-10-25.json)
-and [this three-pass review](evidence/review_2026-10-25_session18.md).
+**NO FILE IS APPROVED FOR SUBMISSION.** The current review had no uniquely assigned method
+lane and no competition feature rasters or prepared shared cache; no experiment ran and no
+new TIFF was generated. Historical H39/H40/H38/H36 files are inspection artifacts only.
+Do not upload any file from this repository. Read the
+[current negative run card](evidence/s18_run_card.json), the
+[latest submission-safety review](evidence/review_s18_submission_gate_2026-10-25.md), and
+[this detailed repository review](evidence/review_2026-10-25_session18.md).
 
-Historical context only: Session 16's H40-1 lane is documented in
-[its result](knowledge/50_s16_result.md) and
-[preregistration](knowledge/49_preregistration_H40-1_migration.md). That lane is already
-closed; its LOSFO gate failed G2 spread (seeds 300–304; pooled HOLDOUT-DTI Δ +0.00126,
-95% CI [−0.0034, +0.0063], 9/20 cells), and its uniqueness check failed (91.3% of
-final dots within 3 px of a dense probe raster). The per-registry pre-placement surface
-comparison is missing, so that subcheck remains unverified. Its all-finite variant
-passes format range checks only; this neither establishes scientific merit nor selector
-approval. No cited score is ORGANIZER-CONFIRMED; projections are never scores.
+The current request references one exclusive method paragraph but does not specify it. The
+previous H40 migration lane is closed; do not infer a replacement lane or spend a fourth
+experiment. The checked-out competition rasters/cache are absent. The flawed historical
+“unique/promote” claims in [knowledge/51](knowledge/51_session17_unique_submission.md)
+were withdrawn on main. A schema pass is not raster validation, submission approval, or
+organizer confirmation. No cited high score is ORGANIZER-CONFIRMED here; projections are
+never scores.
 
 ## Current-session protocol (read before every run)
 
-- **Objective:** maximize competition performance with auditable science; distinguish
-  organizer receipts, owner-reported values, local HOLDOUT-DTI, and projections. The
-  `0.2778` H33-2 value is owner-reported here, not an organizer receipt. Its bounded
-  byte-level forensic analysis is in [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md).
-- **Lane and budget:** the current request does not identify one exclusive geological
-  method paragraph to authorize as the lane. Do not silently choose an older H39/H40 or
-  H38 method. The prior H40-1 lane is closed (3/3 experiments); a new experiment requires
-  an explicit lane, fresh preregistration and experiment/time budget. Current blockers
-  and the requested protocol are recorded in
-  [`evidence/review_2026-10-25_session18.md`](evidence/review_2026-10-25_session18.md).
+- **Objective:** maximize competition performance with auditable science; independently
+  verify official facts; clearly distinguish organizer receipts, owner-reported scores,
+  local HOLDOUT-DTI, and projections. The user-reported GEMSDOE32 value `0.2778` is not an
+  organizer receipt in this checkout. Its byte-level forensic explanation is in
+  [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md); do not claim it proves
+  organizer score attribution.
+- **Lane and budget:** the current request does not name one exclusive geological method
+  paragraph. Do not silently choose an older H39/H40/H38 method. H40-1 is closed after its
+  frozen budget; a new run needs an explicit lane and fresh preregistration.
 - **Holdout before any future slot:** hide whole fault segments with a buffer; compute
   catalogue-based features only from visible faults; pixel-exactly mask visible faults;
   score pooled DTI with α=0.2, β=0.8, and a 300 m triangular kernel. Test each feature
@@ -50,10 +47,9 @@ approval. No cited score is ORGANIZER-CONFIRMED; projections are never scores.
   valid deliverables.
 
 This is the current operational form of the owner's full project brief; the earlier
-verbatim task text below remains part of the audit trail. The current three-pass repository
-review is in [`evidence/review_2026-10-25_session18.md`](evidence/review_2026-10-25_session18.md).
-The prior Session 17 submission-safety review remains available at
-[`evidence/review_s17_submission_safety_2026-10-25.md`](evidence/review_s17_submission_safety_2026-10-25.md).
+verbatim task text below remains part of the audit trail. The current three-pass reviews
+are in [`evidence/review_s18_submission_gate_2026-10-25.md`](evidence/review_s18_submission_gate_2026-10-25.md)
+and [`evidence/review_2026-10-25_session18.md`](evidence/review_2026-10-25_session18.md).
 Primary manual-review links:
 [official competition](https://www.drivendata.org/competitions/306/competition-doe-gems/),
 [official rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf),

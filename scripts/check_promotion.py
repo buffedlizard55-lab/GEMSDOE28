@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check a run-card evidence schema without selecting or spending a submission slot.
 
-Exit 0: schema permits promotion; 1: negative; 2: unreadable/invalid JSON.
+Exit 0: evidence schema passes (NOT upload authorization); 1: negative; 2: unreadable/invalid JSON.
 This does not authenticate evidence or replace raster/evaluator execution.
 """
 from __future__ import annotations
@@ -36,7 +36,7 @@ def main(argv=None):
         card = json.loads(args.card.read_text(encoding="utf-8"),
                           parse_constant=reject_constant, object_pairs_hook=unique_keys)
     except (OSError, ValueError) as exc:
-        print(json.dumps({"verdict": "negative", "submission_ready": False,
+        print(json.dumps({"verdict": "negative", "evidence_schema_passed": False, "submission_ready": False,
                           "slot_selected": False, "failures": [str(exc)]}), file=sys.stdout)
         return 2
     result = promotion_gate(card)

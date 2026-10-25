@@ -1,53 +1,39 @@
 {
-  "hypothesis": "No assigned method lane; no experiment executed",
-  "mechanism": "Blocked protocol audit, not a geological model",
-  "non_fault_mimic": "Dipping lithological contact (proposed migration hypothesis confounder)",
-  "lane": null,
+  "run_id": "s18-safety-review-20261025",
+  "hypothesis": null,
+  "mechanism": "No new scientific experiment; repair schema-only readiness misclassification.",
+  "non_fault_mimic": null,
   "holdout": {
     "label": "HOLDOUT-DTI",
+    "status": "not_run",
     "evaluator_version": null,
     "withheld_positives": null,
     "dti": null,
     "ci95": null
   },
   "registry": {
-    "complete": false,
-    "surface": null,
-    "dots": null
+    "status": "not_run",
+    "correlation": null,
+    "within_3px_fraction": null
   },
   "raster_sha256": null,
-  "validator": null,
+  "validator": {
+    "status": "not_run",
+    "no_nan_inside": null,
+    "range_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null
+  },
   "submission_name": null,
-  "note": "Blocked: missing assigned lane and shared template; no new TIFF or slot selected.",
+  "note": "Blocked: no assigned method paragraph or restored inputs. No new TIFF; no submission slot used.",
   "experiments_run": 0,
   "verdict": "negative",
   "submission_ready": false,
-  "failures": [
-    "missing assigned method lane",
-    "missing raster SHA-256",
-    "missing submission name",
-    "missing versioned HOLDOUT-DTI",
-    "missing withheld positives",
-    "invalid holdout DTI",
-    "invalid holdout CI",
-    "no positive paired gain CI over frozen current best",
-    "holdout protocol missing: whole_segments",
-    "holdout protocol missing: buffered",
-    "holdout protocol missing: visible_only_features",
-    "holdout protocol missing: pixel_exact_visible_mask",
-    "holdout protocol missing: pooled",
-    "wrong metric protocol",
-    "no feature-alone canaries",
-    "registry incomplete",
-    "no surface registry comparisons",
-    "no dots registry comparisons",
-    "validator failed or absent: no_nan_inside",
-    "validator failed or absent: range_0_1",
-    "validator failed or absent: crs_match",
-    "validator failed or absent: shape_match",
-    "validator failed or absent: transform_match",
-    "validator failed or absent: single_band"
-  ],
   "slot_selected": false,
-  "scope": "Evidence schema gate only; promotion is not slot selection or organizer acceptance."
+  "blockers": [
+    "No method paragraph supplied for this run; previous frozen lane exhausted.",
+    "Training rasters and cached feature stack absent.",
+    "No complete fresh registry comparison or holdout evidence for a new candidate."
+  ]
 }
