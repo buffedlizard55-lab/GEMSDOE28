@@ -22,9 +22,10 @@ def promotion_gate(card: dict) -> dict:
     failures = []
 
     def result():
-        return {"verdict": "negative" if failures else "promote", "submission_ready": not failures,
-                "failures": failures, "slot_selected": False,
-                "scope": "Evidence schema gate only; promotion is not slot selection or organizer acceptance."}
+        return {"verdict": "negative" if failures else "promote", "promotion_eligible": not failures,
+                "evidence_schema_passed": not failures,
+                "submission_ready": False, "failures": failures, "slot_selected": False,
+                "scope": "Evidence schema eligibility only; no independent evidence authentication, slot selection, cap check or organizer acceptance."}
 
     # Evidence is untrusted JSON. Wrong container types must never crash or pass.
     if not isinstance(card, dict):
@@ -42,12 +43,15 @@ def promotion_gate(card: dict) -> dict:
         if not ok:
             failures.append(reason)
 
-    require(bool(card.get("lane")), "missing assigned method lane")
+    def nonempty_text(value):
+        return isinstance(value, str) and bool(value.strip())
+
+    require(nonempty_text(card.get("lane")), "missing assigned method lane")
     require(bool(re.fullmatch(r"[0-9a-f]{64}", str(card.get("raster_sha256", "")))), "missing raster SHA-256")
-    require(bool(card.get("submission_name")), "missing submission name")
+    require(nonempty_text(card.get("submission_name")), "missing submission name")
     note = card.get("note")
     require(isinstance(note, str) and 0 < len(note) <= 140, "note must contain 1–140 characters")
-    require(bool(card.get("hypothesis")) and bool(card.get("mechanism")) and bool(card.get("non_fault_mimic")),
+    require(all(nonempty_text(card.get(key)) for key in ("hypothesis", "mechanism", "non_fault_mimic")),
             "missing scientific hypothesis, mechanism, or named confounder")
     h = section("holdout")
     require(h.get("raster_sha256") == card.get("raster_sha256") and bool(h.get("raster_sha256")),
@@ -73,7 +77,9 @@ def promotion_gate(card: dict) -> dict:
     require(isinstance(features, dict) and bool(features), "no feature-alone canaries")
     if isinstance(features, dict):
         for name, auc in features.items():
-            require(finite_number(auc) and 0 <= auc <= 0.90, f"invalid or leaking feature: {name}")
+            # Inverting a near-perfect feature must not evade the leakage canary.
+            require(nonempty_text(name) and finite_number(auc) and 0.10 <= auc <= 0.90,
+                    f"invalid or leaking feature: {name}")
     registry = section("registry")
     require(registry.get("complete") is True and bool(re.fullmatch(r"[0-9a-f]{64}", str(registry.get("manifest_sha256", "")))), "registry incomplete")
     members = registry.get("members")
@@ -97,8 +103,13 @@ def promotion_gate(card: dict) -> dict:
                 require(bool(re.fullmatch(r"[0-9a-f]{64}", str(comparison.get("raster_sha256", "")))),
                         f"{stage} registry comparison missing raster identity")
                 corr, overlap = comparison.get("spearman"), comparison.get("within_3px_fraction")
-                require(finite_number(corr) and -1 <= corr <= 0.90, f"{stage} duplicate or undefined correlation")
-                require(finite_number(overlap) and 0 <= overlap <= 0.70, f"{stage} duplicate or undefined overlap")
+                require(finite_number(corr) and -0.90 <= corr <= 0.90,
+                        f"{stage} duplicate or undefined correlation")
+                # No dots exist at the pre-placement stage. Do not invent their
+                # overlap; if supplied it must pass, and it is mandatory on dots.
+                if stage == "dots" or overlap is not None:
+                    require(finite_number(overlap) and 0 <= overlap <= 0.70,
+                            f"{stage} duplicate or undefined overlap")
             require(set(identities) == expected and len(identities) == len(expected),
                     f"{stage} comparisons must cover every registry member exactly once")
     validator = section("validator")

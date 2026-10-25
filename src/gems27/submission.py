@@ -7,14 +7,17 @@ a .zip containing exactly one GeoTIFF, plus an optional Note.
 The cause of the portal message "Predicted values must be in range [0, 1]" that the owner saw is NOT
 established (the validator is not public). We therefore (a) copy the sample submission's own raster
 profile, including nodata = NaN, (b) write only exact 0.0/1.0 or sanitised probabilities, and (c) ship an
-`allfinite` fallback with zeros outside the footprint, which passes every plausible reading of the rule.
-The owner's sibling forensics (GEMSDOE24) found both outside-footprint conventions have scored live.
+`allfinite` variant with zeros outside the footprint, whose entire stored array is finite and in range.
+That numeric property does not prove portal acceptance or the cause of a prior rejection. Historical
+owner reports about outside-footprint conventions are not organizer receipts.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
+import os
+import tempfile
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -34,7 +37,13 @@ def sha256_file(path: Path | str) -> str:
 
 
 def check_probabilities(pred: np.ndarray, footprint: np.ndarray) -> None:
-    v = np.asarray(pred)[footprint]
+    pred, footprint = np.asarray(pred), np.asarray(footprint)
+    if (pred.ndim != 2 or footprint.shape != pred.shape or footprint.dtype != np.dtype(bool)
+            or not footprint.any()):
+        raise ValueError("prediction and nonempty boolean footprint must be aligned 2-D grids")
+    if pred.dtype.kind not in "buif":
+        raise ValueError("predictions must be real numeric probabilities")
+    v = pred[footprint]
     if not np.isfinite(v).all():
         raise ValueError("non-finite value inside the footprint")
     if v.min() < 0.0 or v.max() > 1.0:
@@ -45,6 +54,10 @@ def write_geotiff(pred: np.ndarray, template: Path | str, out: Path | str, *, ou
     if outside not in ("nan", "zero"):
         raise ValueError("outside must be 'nan' or 'zero'")
     out = Path(out)
+    if out.suffix.lower() != ".tif":
+        raise ValueError("submission output must have the .tif extension")
+    if out.resolve() == Path(template).resolve():
+        raise ValueError("submission output must not overwrite its template")
     out.parent.mkdir(parents=True, exist_ok=True)
     # Validate the actual template, not only its footprint pixel count.
     foot = grid.load_footprint(template)
@@ -61,9 +74,19 @@ def write_geotiff(pred: np.ndarray, template: Path | str, out: Path | str, *, ou
     arr[arr == 0] = 0.0  # canonicalise -0.0
     profile.update(driver="GTiff", dtype="float32", count=1,
                    nodata=(np.nan if outside == "nan" else None), compress="lzw")
-    with rasterio.open(out, "w", **profile) as dst:
-        dst.write(arr, 1)
-        dst.update_tags(AREA_OR_POINT="Area")
+    fd, temporary_name = tempfile.mkstemp(prefix=f".{out.stem}-", suffix=".tif", dir=out.parent)
+    os.close(fd)
+    temporary = Path(temporary_name)
+    try:
+        with rasterio.open(temporary, "w", **profile) as dst:
+            dst.write(arr, 1)
+            dst.update_tags(AREA_OR_POINT="Area")
+        verification = verify_geotiff(temporary, template)
+        if not verification["hard_checks_passed"]:
+            raise ValueError("serialized submission failed re-read: " + ", ".join(verification["hard_failures"]))
+        temporary.replace(out)
+    finally:
+        temporary.unlink(missing_ok=True)
     return out
 
 
@@ -72,14 +95,25 @@ def zip_single(tif: Path | str, zip_path: Path | str | None = None) -> Path:
     zip_path = Path(zip_path) if zip_path else tif.with_suffix(".zip")
     if tif.suffix.lower() != ".tif" or not tif.is_file():
         raise ValueError("ZIP input must be an existing .tif")
+    if (zip_path.suffix.lower() != ".zip" or zip_path.resolve() == tif.resolve()
+            or (zip_path.exists() and zip_path.samefile(tif))):
+        raise ValueError("ZIP output must be a distinct .zip, never its source TIFF")
+    zip_path.parent.mkdir(parents=True, exist_ok=True)
     info = zipfile.ZipInfo(tif.name, date_time=(2026, 10, 2, 0, 0, 0))
     info.compress_type = zipfile.ZIP_DEFLATED
     info.external_attr = 0o644 << 16
-    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
-        z.writestr(info, tif.read_bytes(), compresslevel=9)
-    with zipfile.ZipFile(zip_path) as z:
-        if z.namelist() != [tif.name] or z.read(tif.name) != tif.read_bytes():
-            raise ValueError("ZIP does not contain exactly the single GeoTIFF")
+    fd, name = tempfile.mkstemp(prefix=f".{zip_path.stem}-", suffix=".zip", dir=zip_path.parent)
+    os.close(fd)
+    temporary = Path(name)
+    try:
+        with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+            z.writestr(info, tif.read_bytes(), compresslevel=9)
+        with zipfile.ZipFile(temporary) as z:
+            if z.namelist() != [tif.name] or z.read(tif.name) != tif.read_bytes():
+                raise ValueError("ZIP does not contain exactly the single GeoTIFF")
+        temporary.replace(zip_path)
+    finally:
+        temporary.unlink(missing_ok=True)
     return zip_path
 
 
@@ -95,13 +129,27 @@ def verify_geotiff(path: Path | str, template: Path | str) -> dict[str, Any]:
         info = dict(crs=s.crs, shape=s.shape, transform=tuple(s.transform)[:6], count=s.count,
                     dtype=s.dtypes[0], nodata=s.nodata, bounds=tuple(s.bounds),
                     compress=str(s.compression), driver=s.driver)
-    inside, outside = a[foot], a[~foot]
     nodata_nan = info["nodata"] is not None and np.isnan(info["nodata"])
     checks: dict[str, dict[str, Any]] = {}
 
     def add(name: str, ok: bool, detail: str, hard: bool = True) -> None:
         checks[name] = {"pass": bool(ok), "detail": detail, "hard": hard}
 
+    # A wrong shape is a negative audit, not an indexing exception. Never compare
+    # mismatched grids by resizing or infer an alternative footprint from them.
+    if a.shape != foot.shape:
+        add("grid_matches_template", False, f"raster shape {a.shape} != template {foot.shape}")
+        return {"file": path.name, "bytes": path.stat().st_size, "sha256": sha256_file(path),
+                "variant": "unknown", "checks": checks, "hard_checks_passed": False,
+                "hard_failures": ["grid_matches_template"],
+                "nonzero_inside_px": None, "value_set_inside": []}
+    if a.dtype.kind not in "buif":
+        add("single_band_float32", False, f"unsupported non-real raster dtype {a.dtype}")
+        return {"file": path.name, "bytes": path.stat().st_size, "sha256": sha256_file(path),
+                "variant": "unknown", "checks": checks, "hard_checks_passed": False,
+                "hard_failures": ["single_band_float32"],
+                "nonzero_inside_px": None, "value_set_inside": []}
+    inside, outside = a[foot], a[~foot]
     add("grid_matches_template", info["crs"] is not None and info["crs"].to_epsg() == grid.CRS_EPSG
         and info["shape"] == grid.SHAPE and info["transform"] == grid.TRANSFORM
         and info["bounds"] == grid.BOUNDS, f"{info['crs']} {info['shape']} {info['transform']}")
@@ -112,6 +160,8 @@ def verify_geotiff(path: Path | str, template: Path | str) -> dict[str, Any]:
     add("inside_footprint_in_0_1", bool(inside.size and inside.min() >= 0.0 and inside.max() <= 1.0),
         f"min={float(inside.min()):.8g} max={float(inside.max()):.8g}")
     add("no_infinities_anywhere", not bool(np.isinf(a).any()), "np.isinf(whole array) is empty")
+    add("nodata_convention", info["nodata"] is None or nodata_nan,
+        "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved")
     n_out_nan = int(np.isnan(outside).sum())
     if nodata_nan:
         add("outside_footprint_is_nan", n_out_nan == outside.size,
@@ -131,14 +181,16 @@ def verify_geotiff(path: Path | str, template: Path | str) -> dict[str, Any]:
             "zeros outside the footprint, no NaN anywhere (fallback variant)")
         add("strict_whole_array_range", bool(np.isfinite(a).all() and a.min() >= 0 and a.max() <= 1),
             f"whole-array min={float(a.min()):g} max={float(a.max()):g}")
-    add("profile_driver_gtiff", info["driver"] == "GTiff", info["driver"], hard=False)
+    add("profile_driver_gtiff", info["driver"] == "GTiff", info["driver"])
     add("compression_like_sample", info["compress"].lower().endswith("lzw")
         or str(t_prof.get("compress", "")).lower() == "lzw", info["compress"], hard=False)
     hard_fail = [k for k, v in checks.items() if v["hard"] and not v["pass"]]
     return {"file": path.name, "bytes": path.stat().st_size, "sha256": sha256_file(path),
             "variant": "nan" if nodata_nan else "allfinite", "checks": checks,
             "hard_checks_passed": not hard_fail, "hard_failures": hard_fail,
-            "nonzero_inside_px": int((inside > 0).sum()), "value_set_inside": sorted(set(np.unique(inside).tolist()))[:6]}
+            "nonzero_inside_px": int((inside > 0).sum()),
+            "nonfinite_inside_px": int((~np.isfinite(inside)).sum()),
+            "value_set_inside": np.unique(inside[np.isfinite(inside)]).tolist()[:6]}
 
 
 def scored_content_id(pred: np.ndarray, footprint: np.ndarray, catalogue: np.ndarray) -> str:
@@ -156,13 +208,13 @@ def make_filename(family: str, slug: str, date: str, cid: str, outside: str) -> 
 
 def make_note(hyp: str, summary: str, cid: str, family: str = "27GEMSDOE", status: str = "not yet live-scored") -> str:
     prefix, suffix = f"{family} {hyp} | ", f" | id {cid} | {status}"
-    room = 200 - len(prefix) - len(suffix)
+    room = 140 - len(prefix) - len(suffix)
     if room < 1:
-        raise ValueError("identifiers too long for a 200-character note")
+        raise ValueError("identifiers too long for the protocol's 140-character note")
     note = f"{prefix}{summary[:room]}{suffix}"
-    assert len(note) <= 200
+    assert len(note) <= 140
     return note
 
 
 def dump_json(obj: Any, path: Path | str) -> None:
-    Path(path).write_text(json.dumps(obj, indent=2, default=float) + "\n")
+    Path(path).write_text(json.dumps(obj, indent=2, default=float, allow_nan=False) + "\n")

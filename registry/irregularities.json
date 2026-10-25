@@ -1,6 +1,12 @@
 {
-  "generated": "2026-10-25T00:00:00Z",
+  "generated": "2026-10-25",
   "items": [
+    {
+      "id": "s18-schema-is-not-upload-approval",
+      "severity": "high",
+      "issue": "Schema-only promotion_gate returned submission_ready=true for self-reported evidence without executing a raster validator or selector. Historical knowledge/51 also labels a reported near-duplicate unique/promote.",
+      "action": "Schema success now uses evidence_schema_passed; submission_ready is always false. Historical promotion/uniqueness claims explicitly withdrawn in a leading warning. No new TIFF or experiment; missing lane and inputs remain blockers."
+    },
     {
       "id": "parallel-run-2026-10-25-blocked",
       "severity": "high",
@@ -608,6 +614,90 @@
       "action": "Updated the shared site generator and README to state that no file is currently approved. Historical artifacts are labeled inspection-only; the all-finite variant is described as a format compatibility option only, not scientific approval. Added regression assertions for overview and executive-summary wording. No new raster was created because the authorized H40-1 lane already exhausted its three experiments and failed gates."
     },
     {
+      "id": "g28-a51-no-lane-or-strict-baseline",
+      "severity": "high",
+      "issue": "The latest parallel-run request references an assigned single method paragraph, but none is identifiable. The complete parallel-run registry and frozen same-protocol incumbent are also missing.",
+      "action": "Stop before scientific experiments; do not guess a lane or create a renamed TIFF. See registry/current_session.json and evidence/current_preflight.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-archive-primary-duplicate",
+      "severity": "high",
+      "issue": "The previously advertised H36-1 primary passes format checks but has final-dot overlap 1.0 with at least one other audited raster and max absolute rank correlation 0.9997727160804492. It is not a new lane.",
+      "action": "Current download locked; old files are educational only. See evidence/current_submission_audit.json and the separate website archive.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-shared-priority-predictions",
+      "severity": "high",
+      "issue": "Several of the nine priority sites distribute identical footprint predictions under different names or outside-footprint packaging. Byte uniqueness alone is insufficient.",
+      "action": "Read-only comparison and stop, not registry-driven dot perturbation. See evidence/priority_repository_audit.json and evidence/current_submission_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-gem31-allfinite-convention",
+      "severity": "medium",
+      "issue": "Three GEMSDOE31 allfinite-labeled variants fail the independent local outside/nodata convention checks. No organizer rejection or cause of the historical range error was established.",
+      "action": "Report the exact files and actual checks, not a speculative portal error diagnosis. See evidence/priority_repository_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-gem36-readme-sha",
+      "severity": "medium",
+      "issue": "The inspected GEMSDOE36 README NaN-variant SHA does not match the freshly fetched Git-blob-verified file. The zero-outside artifact identity matches the educational comparison.",
+      "action": "Use the inspected file SHA and Git blob; do not copy the README hash. See evidence/priority_repository_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-owner-score-not-receipt",
+      "severity": "high",
+      "issue": "Owner pages use contradictory stop/submit language and an ORGANIZER-CONFIRMED label for a claim without an independently inspected submission-page receipt. Supplied current leaderboard maxima conflict.",
+      "action": "Keep 0.2778 user/owner-reported and all current maxima/caps unverified. See evidence/current_review.json and knowledge/51_current_review_and_next_steps.md.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-depth-band-meaning",
+      "severity": "medium",
+      "issue": "Historical structural_step.py prose alternates basement and conductive-base interpretations of depth_to_base_surf. Official units/source metadata have not been authenticated here.",
+      "action": "Do not resolve physical meaning by guessing, or base a new hypothesis on that assumption. See knowledge/51_current_review_and_next_steps.md.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-data-cache-blocker-resolved",
+      "severity": "info",
+      "issue": "Earlier 2026-10-25 notes described absent inputs/cache/tools. This session restored all 17 pinned inputs and reproduced the existing 32-band cache; source integrity is not organizer authentication.",
+      "action": "Earlier absence statements are dated history. Use evidence/current_input_audit.json and registry/protocol_assets.json for current state; missing lane/registry/baseline still block science.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-latest-verbatim-prompt-unavailable",
+      "severity": "medium",
+      "issue": "The latest complete verbatim request is not present in retained conversation context. Existing README prompt blocks are historical summaries, not a recovered current original.",
+      "action": "Current README faithfully restates available requirements and labels them a summary; do not fabricate a full prompt or claim this part complete.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-concurrent-h38-promote-claim-rejected",
+      "severity": "high",
+      "issue": "Concurrent PR #36 claims a new unique H38-1 TIFF and promotion, but the same file already exists byte-identically at session base 22cd175; exact final-raster correlation and all-dot overlap breach the strict stop thresholds. The promoted run card contradicts its linked check\u2019s negative verdict.",
+      "action": "Keep original claimed card and result unchanged for provenance; current independent review is negative, no slot. See evidence/current_concurrent_claim_review.json. No registry threshold is waived for a dense reference."
+    },
+    {
+      "id": "g28-a51-pages-source-permission-limit",
+      "severity": "medium",
+      "issue": "Fresh direct Pages-source update with the Arena GitHub integration returned HTTP 403 Resource not accessible by integration. Authenticated GitHub reads and git operations work; this is Pages-write authorization, not missing repository credentials.",
+      "action": "Pages workflow will attempt the source change with its explicitly scoped built-in pages:write token, report any failure, then run the real deployment. Root and /docs/ compatibility are staged. Confirm actual GitHub deploy status; do not claim a configuration attempt succeeded."
+    },
+    {
       "id": "s18-exp1-rerun-nameerror",
       "severity": "low",
       "issue": "Session 18 Experiment 1 (scripts/build_s18_extra.py) crashed with NameError on a leftover '_ = thinning' line after writing evidence/s18_canary.json and data/prepared/extrap_surfaces.npz.",
@@ -630,6 +720,12 @@
       "severity": "medium",
       "issue": "scripts/verify_downloads.py enumerated candidate slots from a hardcoded tuple ending at s16_candidate, so its green audit (307 checks, status PASS) silently never inspected Session 18's s18_candidate files.",
       "action": "Fixed once in the shared tool: slots are now enumerated from the manifest (any dict with a 'nan' file). Re-audit reports 337 checks, 0 failures, including 30 s18_candidate checks (hashes, grid, [0,1], no-NaN-inside, catalogue overlap, ZIP, note). The pre-fix 307-check PASS must not be quoted as covering s18 bytes; evidence/submission_file_audit.json regenerated."
+    },
+    {
+      "id": "s18-session-label-collision",
+      "severity": "medium",
+      "issue": "Two parallel 2026-10-25 runs both labeled themselves Session 18: main's safety review (0 experiments, evidence/s18_run_card.json run_id s18-safety-review-20261025, evidence/current_run_card.json) and the H39-5 experiment run (3 experiments, seeds 310-314). Evidence/s18_run_card.json collided add/add at merge time.",
+      "action": "Main's card keeps evidence/s18_run_card.json; the H39-5 card moved to evidence/s18_h39_5_run_card.json with all references updated (manifest slot, finalize_s18.py, knowledge/53, site panel). Refer to 'S18 safety review (parallel main)' vs 'S18 H39-5 (this experiment)'; never combine their numbers. Same pattern as s16-h40-id-collision."
     }
   ]
 }

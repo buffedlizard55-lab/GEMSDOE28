@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-25. **Lane/preregistration:** `knowledge/52_preregistration_H39-5_extrapolated.md`
 (frozen before any fit). **Experiments used:** 3/3. **Slot spent:** none. **Verdict: `negative`.**
-Run card: `evidence/s18_run_card.json` (= `docs/data/run_card_s18_2026-10-25.json`).
+Run card: `evidence/s18_h39_5_run_card.json` (= `docs/data/run_card_s18_2026-10-25.json`).
 
 **Bottom line for the operator: NO FILE IS APPROVED TO SUBMIT.** This session generated a
 genuinely unique, format-valid TIF (`719b83fb659b`, first candidate in Sessions 15–18 to pass
@@ -158,3 +158,17 @@ https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html · CRS https://ep
 Tversky index https://en.wikipedia.org/wiki/Tversky_index · Blakely (1995) *Potential
 Theory in Gravity and Magnetic Applications*, Cambridge University Press (upward
 continuation exp(−|k|h)).
+
+## Merge reconciliation note (added before PR merge)
+
+`main` advanced in parallel with its own "Session 18" safety review (0 experiments;
+`evidence/current_run_card.json`), colliding on `evidence/s18_run_card.json`. Resolution:
+the safety review keeps that path; this experiment's card moved to
+`evidence/s18_h39_5_run_card.json` with references updated (`s18-session-label-collision`).
+The merged site keeps main's locked current pages and archive architecture; the H39-5
+panel renders in the archive with the same 🔴 DO NOT SUBMIT verdict. Adding the
+`s18_candidate` manifest slot changed `docs/downloads/manifest.json`, so the safety
+review's hash-bound card was re-pinned with its own recorder
+(`scripts/record_current_review.py`, semantics unchanged). Post-merge verification:
+424 tests passed, 2 skipped; ruff clean; downloads audit 337 checks PASS. No evidence
+from either run was recomputed or combined.

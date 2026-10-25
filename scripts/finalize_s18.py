@@ -2,7 +2,7 @@
 """S18 finalize: verdict from frozen gate + uniqueness + validator (knowledge/52).
 
 Writes docs/downloads/manifest.json slot `s18_candidate`, the portal note file,
-evidence/s18_run_card.json and docs/data/run_card_s18_2026-10-25.json.
+evidence/s18_h39_5_run_card.json and docs/data/run_card_s18_2026-10-25.json.
 Verdict `promote` (to the separate selector step only; never slot-approved)
 requires gate_passed AND uniqueness_pass_strict AND both validators pass;
 anything else is `negative` and the file is banner-marked DO NOT SUBMIT.
@@ -79,7 +79,7 @@ def main() -> int:
         "emitted_px": build["n_dots"], "format_verified": validators_ok,
         "status": status, "note": note, "note_file": note_file,
         "submission_name": f"GEMSDOE28-h39-5-extrap-swap35-{cid}",
-        "run_card": "evidence/s18_run_card.json",
+        "run_card": "evidence/s18_h39_5_run_card.json",
         "holdout_evidence": "evidence/s18_h39_5_losfo_gate.json",
         "holdout_preregistration": "knowledge/52_preregistration_H39-5_extrapolated.md",
         "holdout_seeds": "310-314", "verdict": verdict,
@@ -173,7 +173,7 @@ def main() -> int:
                   "the TIF is inspection-only. HOLDOUT-DTI is a local proxy, never an "
                   "organizer score; no projection is written as a score."),
     }
-    (ROOT / "evidence/s18_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
+    (ROOT / "evidence/s18_h39_5_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
     (ROOT / "docs/data/run_card_s18_2026-10-25.json").write_text(json.dumps(card, indent=2) + "\n")
     print(json.dumps({"verdict": verdict, "note": note, "note_chars": len(note),
                       "submission_name": slot["submission_name"], "failures": failures}, indent=2))

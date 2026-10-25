@@ -1,0 +1,175 @@
+{
+  "label": "SOFTWARE / INTEGRITY VERIFICATION; not HOLDOUT-DTI",
+  "checked_at_utc": "2026-10-25T23:06:35.070778+00:00",
+  "branch": "arena/a51a5f3f-gemsdoe28",
+  "session_base_commit": "22cd17590460d8e76e180957f31f75d85dd3ec17",
+  "concurrent_main_integrated": "f747c884369667ffc0daf3b780141918c57bce0b",
+  "passes": [
+    {
+      "pass": 1,
+      "scope": "Input/cache restoration; priority raster audit; exact shared-source pinning; synthetic contract checks; safe current/archive UI",
+      "baseline_pytest": "322 passed, 2 optional-library skips before those dependencies were installed"
+    },
+    {
+      "pass": 2,
+      "scope": "Malformed/inverted evidence; atomic publication and self-overwrite; source redirects and dated partial refresh; regression review",
+      "targeted_pytest": "152 passed before final additional regressions"
+    },
+    {
+      "pass": 3,
+      "scope": "Full suite, clean export, stdlib build, relative-link/fragment/ID/ARIA/HTTP byte checks; reconcile concurrent main claims and preserve their provenance",
+      "status": "PASS for software; scientific submission remains BLOCKED"
+    }
+  ],
+  "local_tests": {
+    "command": ".venv/bin/python -m pytest -q -rs",
+    "passed": 451,
+    "skipped": 0,
+    "stdout": "........................................................................ [ 15%]\n........................................................................ [ 31%]\n........................................................................ [ 47%]\n........................................................................ [ 63%]\n........................................................................ [ 79%]\n........................................................................ [ 95%]\n...................                                                      [100%]\n451 passed in 18.58s\n"
+  },
+  "clean_checkout_tests": {
+    "command": "python -m pytest -q -rs in tracked-file export without ignored data",
+    "passed": 446,
+    "skipped": 5,
+    "stdout": "........................................................................ [ 15%]\n.........................................s....................s......... [ 31%]\n..............................................s......................... [ 47%]\n........................................................................ [ 63%]\n........................................................................ [ 79%]\n....................................................s..................s [ 95%]\n...................                                                      [100%]\n=========================== short test summary info ============================\nSKIPPED [1] tests/test_heatflow_euler.py:125: Real footprint or sb_heat_flow_in_footprint.json unavailable\nSKIPPED [1] tests/test_inversion.py:118: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.\nSKIPPED [1] tests/test_newinfo.py:103: restored input rasters not present\nSKIPPED [1] tests/test_thermal.py:140: GDR well/spring table not restored in this checkout\nSKIPPED [1] tests/test_vector_and_oof.py:44: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.\n446 passed, 5 skipped in 10.27s\n",
+    "limitation": "These five data-dependent checks run locally with restored inputs, not in a data-free CI checkout."
+  },
+  "lint": {
+    "command": "ruff check src scripts tests",
+    "status": "PASS",
+    "stdout": "All checks passed!\n"
+  },
+  "syntax": {
+    "command": "python -m compileall -q src scripts",
+    "status": "PASS"
+  },
+  "site_build": {
+    "status": "built",
+    "pages": [
+      "archive.html",
+      "executive-summary.html",
+      "index.html",
+      "research.html",
+      "session15-review.html",
+      "sources.html",
+      "submission-review.html",
+      "topology.html"
+    ],
+    "sources": 26,
+    "hypotheses": 4,
+    "generated_from_json_only": true,
+    "external_requests": 0,
+    "historical_primary": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+    "submission_ready": false,
+    "slot_selected": false,
+    "inspection_artifacts": [
+      "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+      "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif"
+    ]
+  },
+  "stdlib_only_build": "python -S scripts/build_site.py: PASS; no third-party imports or network needed",
+  "http_smoke": {
+    "scope": "Local HTTP bytes, relative links/fragments/IDs/ARIA labels, strict current JSON and card hashes; not a real-browser visual test or portal acceptance check",
+    "pages": [
+      {
+        "page": "executive-summary.html",
+        "http_status": 200,
+        "relative_links_and_fragments_checked": 14
+      },
+      {
+        "page": "index.html",
+        "http_status": 200,
+        "relative_links_and_fragments_checked": 19
+      },
+      {
+        "page": "research.html",
+        "http_status": 200,
+        "relative_links_and_fragments_checked": 17
+      },
+      {
+        "page": "session15-review.html",
+        "http_status": 200,
+        "relative_links_and_fragments_checked": 13
+      },
+      {
+        "page": "sources.html",
+        "http_status": 200,
+        "relative_links_and_fragments_checked": 13
+      },
+      {
+        "page": "topology.html",
+        "http_status": 200,
+        "relative_links_and_fragments_checked": 22
+      },
+      {
+        "page": "submission-review.html",
+        "http_status": 200,
+        "relative_links_and_fragments_checked": 14
+      },
+      {
+        "page": "archive.html",
+        "http_status": 200,
+        "relative_links_and_fragments_checked": 51
+      }
+    ],
+    "passed": true,
+    "evidence_hashes_checked": 21,
+    "archived_transport": [
+      {
+        "file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+        "http_status": 200,
+        "content_type": "image/tiff",
+        "sha256": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32",
+        "role": "historical transport check only; DO NOT SUBMIT"
+      },
+      {
+        "file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.zip",
+        "http_status": 200,
+        "content_type": "application/zip",
+        "sha256": "ed6984577aa6fd1522371a618d6bcd69119ee1bd2f13d40cee40bba8d30649ed",
+        "role": "historical transport check only; DO NOT SUBMIT"
+      }
+    ]
+  },
+  "raster_changes_since_session_base": [],
+  "experiments_run": 0,
+  "new_competition_tiff_generated": false,
+  "slot_selected": false,
+  "run_card_sha256": "7fda77081b782493d1ffb7266d3050ccd1687d10c0a6c5d6e96302f98496f6c4",
+  "environment_sha256": "b0f204ad8ec6d1263851cf506f9660c6bf6bde9b640747f450e46212927e7c2f",
+  "original_request_fully_satisfied": false,
+  "unmet": [
+    "Genuinely new nonduplicate competition TIFF",
+    "Top authorized lane with strict paired holdout superiority",
+    "Complete parallel-run registry and comparable frozen best",
+    "Fresh current official leaderboard/cap/receipt and external-data authenticity",
+    "Latest full verbatim prompt unavailable; only a clearly labeled faithful requirements summary was archived"
+  ],
+  "limits": [
+    "No real-browser visual/mobile rendering test was performed; local HTTP and structural checks passed.",
+    "No portal upload, authenticated organizer data or organizer receipt.",
+    "This is pre-merge local evidence. CI, PR merge and Pages deployment must be confirmed from GitHub outcomes; they are not predicted here."
+  ],
+  "concurrent_safety_pull_requests_integrated": [
+    35,
+    36,
+    37,
+    38
+  ],
+  "deployment_artifact_staging": {
+    "status": "PASS",
+    "source_files_checked": 99,
+    "root_and_legacy_docs_copies_equal_source_bytes": true,
+    "scope": "Local staging, not proof of a completed remote deployment"
+  },
+  "pages_post_deploy_http_check": {
+    "python_syntax": "PASS",
+    "execution": "Pending main-branch deployment",
+    "scope": "Runner must verify root/executive and legacy routes plus both exact SHA-bound current-card URLs; not visual or portal QA"
+  },
+  "release": {
+    "pull_request": "https://github.com/buffedlizard55-lab/GEMSDOE28/pull/39",
+    "state_when_recorded": "OPEN; final merge-resolution head not yet pushed",
+    "scope": "Pre-merge local verification. Consult this PR and its closeout comment for actual CI/merge/deployment outcomes."
+  }
+}
