@@ -155,10 +155,27 @@ This section is finalized after implementation, review and full-suite re-check; 
 
 ### Final local verification notes
 
-- Installed the existing vector-test dependencies (`geopandas`, `pyogrio`) and included them in `requirements.txt`, so their regression modules are no longer silently skipped. The final local suite passed **441 tests, no skips**. This is software verification, not 441 geological experiments.
+- Installed the existing vector-test dependencies (`geopandas`, `pyogrio`) and included them in `requirements.txt`, so their regression modules are no longer silently skipped. The final local suite passed **443 tests, no skips**. This is software verification, not 441 geological experiments.
 - Full-repository Ruff passes. Three inherited unused-variable warnings in two legacy runners were removed without changing their numerical operations; those runners were not re-executed as science.
 - Fixed an inherited test side effect: the archived-download regression now writes its fresh audit to a temporary report rather than rewriting tracked historical `submission_file_audit.json`. The original historical evidence was preserved.
 - Edge-case regressions exercise missing/unlisted/tampered shared assets, stale bytecode, path/symlink escapes, expired/future/missing budget clocks, incomplete registry/baseline metadata, malformed text and inverted leakage, missing pre-placement/final-dot evidence, complex/NaN/wrong-shape rasters, nodata sentinels, failed atomic TIFF/ZIP publication and ZIP hardlinks to the source.
 - Restricted local source refresh observed **2 of 10** sources (GitHub); eight official/non-GitHub sources were **not attempted**, and their actual prior successful observation dates are retained. New per-source status/counts are visible. The redirect guard rejects DrivenData and hosts outside the runtime allowlist before contacting them.
 - Scheduled source refresh now rebuilds the dated HTML and triggers Pages through `workflow_run`; relying only on a `GITHUB_TOKEN` commit's push event would not deploy the refresh. It no longer races active research branches. Pages staging preserves both root and legacy `/docs/` URLs.
 - `evidence/current_verification.json` records the local/clean-checkout checks and their limits. PR, merge and deployment outcomes must be read from the actual GitHub results and the final report, not predicted from local tests.
+
+### Concurrent main changes reconciled before release
+
+During this work, PRs **#35** (submission safety) and **#36** (claimed Session 17 H38-1 unique submission) advanced `main` to `a336764e0c8140559fdef53f6f245a059afb302f`. Both were merged into this same Arena branch; their original records, corrections, manifest fields and source are retained. Generated-page conflicts were resolved by rebuilding the common generator, not by discarding parallel work.
+
+The new H38-1 claim was then independently checked, without training, placing dots or re-evaluating a geological holdout:
+
+- The claimed NaN TIFF SHA-256 equals the same file at this session's initial commit `22cd175` **byte-identically**. Regenerating existing bytes does not establish a new method.
+- The pinned shared comparator measures final-raster raw Spearman **0.9973357495083783** against H36-1 and **99.51928156%** of all H38 dots within 3 pixels of H36-1. Both exceed the stop thresholds. No dense-reference exemption was applied.
+- Its claimed card says `promote`, while its linked comparison report says `negative`. That runner scores fixed full-catalogue TIFFs with the legacy split; it is not a retrained buffered same-protocol baseline. Its result is **not** adopted as a new strict HOLDOUT-DTI here.
+- The original card/result are retained unchanged. [`current_concurrent_claim_review.json`](../evidence/current_concurrent_claim_review.json) is the later, hash-bound **negative claim/novelty audit**. It does not fabricate an unavailable pre-placement surface.
+
+This is a comparison-only duplicate stop, not an additional geological experiment or a selector decision. The current UI rejects H36/H38 as new submissions and never resurrects them as a fallback.
+
+The direct Pages configuration change was also attempted, not assumed: the Arena integration returned **HTTP 403** for Pages-write authorization, while authenticated repository access continued to work. The deployment workflow will try the same setting using its explicitly scoped built-in `pages: write` token, report any failure and still execute the real deployment. Configuration success and live deployment success must be verified separately from GitHub results.
+
+Final data-free tracked export: **438 passed, five data-dependent skips**; the same checks all pass locally with restored data. Link smoke found and repaired one legacy `index.html#download` anchor and duplicate IDs in combined archived panels; regression tests now check fragments, IDs and associated labels. Eight pages and the archived TIFF/ZIP transport bytes were verified over the live local preview. This does not count as a browser visual test or portal acceptance.

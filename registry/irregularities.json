@@ -678,6 +678,18 @@
       "action": "Current README faithfully restates available requirements and labels them a summary; do not fabricate a full prompt or claim this part complete.",
       "checked_at_utc": "2026-10-25",
       "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-concurrent-h38-promote-claim-rejected",
+      "severity": "high",
+      "issue": "Concurrent PR #36 claims a new unique H38-1 TIFF and promotion, but the same file already exists byte-identically at session base 22cd175; exact final-raster correlation and all-dot overlap breach the strict stop thresholds. The promoted run card contradicts its linked check’s negative verdict.",
+      "action": "Keep original claimed card and result unchanged for provenance; current independent review is negative, no slot. See evidence/current_concurrent_claim_review.json. No registry threshold is waived for a dense reference."
+    },
+    {
+      "id": "g28-a51-pages-source-permission-limit",
+      "severity": "medium",
+      "issue": "Fresh direct Pages-source update with the Arena GitHub integration returned HTTP 403 Resource not accessible by integration. Authenticated GitHub reads and git operations work; this is Pages-write authorization, not missing repository credentials.",
+      "action": "Pages workflow will attempt the source change with its explicitly scoped built-in pages:write token, report any failure, then run the real deployment. Root and /docs/ compatibility are staged. Confirm actual GitHub deploy status; do not claim a configuration attempt succeeded."
     }
   ]
 }

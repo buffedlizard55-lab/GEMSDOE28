@@ -15,6 +15,8 @@ from gems27.promotion import promotion_gate  # noqa: E402
 def main() -> int:
     evidence_files = ["registry/current_session.json", "registry/protocol_assets.json",
                       "evidence/current_archive_format_audit.json", "evidence/current_review.json",
+                      "evidence/current_concurrent_claim_review.json", "docs/downloads/manifest.json",
+                      "scripts/review_concurrent_h38_claim.py",
                       "evidence/current_input_audit.json", "evidence/current_preflight.json",
                       "evidence/priority_repository_audit.json", "evidence/current_submission_audit.json",
                       "evidence/shared_template_contract.json", "evidence/official_reference_audit.json",
@@ -27,6 +29,7 @@ def main() -> int:
     if session["lane"] is not None or session["experiments_run"] != 0:
         raise SystemExit("This recorder is only for the blocked no-experiment review, not a scientific runner")
     archive = json.loads((ROOT / "evidence/current_submission_audit.json").read_text())
+    concurrent = json.loads((ROOT / "evidence/current_concurrent_claim_review.json").read_text())
     card = {
         "schema_version": 2, "session_id": session["session_id"], "lane": None,
         "hypothesis": "No assigned method. G28-A51-A is a ranked proposal only, not an executed hypothesis.",
@@ -55,6 +58,12 @@ def main() -> int:
                           "max_within_3px_fraction": archive["final_dots"]["max_dot_overlap"],
                           "max_abs_rank_correlation": archive["final_dots"]["max_abs_rank_correlation"],
                           "new_surface_check": "NOT RUN"},
+        "concurrent_archive_claim_audit": {
+            "role": "H38-1 historical reference, not this run's candidate",
+            "byte_identical_to_session_base": concurrent["already_present_byte_identically_at_session_base"],
+            "raw_final_raster_spearman": concurrent["raw_final_raster_spearman"],
+            "within_3px_fraction": concurrent["dot_overlap"]["candidate_within_3px_of_reference"],
+            "verdict": "negative", "new_surface_check": "NOT RUN"},
         "evidence_sha256": evidence_hashes,
     }
     card.update(promotion_gate(card))

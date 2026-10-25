@@ -1,0 +1,43 @@
+{
+  "label": "BYTE / NOVELTY / CLAIM AUDIT, not HOLDOUT-DTI",
+  "observed_utc": "2026-10-25T22:50:17.946798+00:00",
+  "source_claim": "docs/data/run_card_gems28-h38-1-hf-euler-r30-r1_2026-10-25.json",
+  "source_claim_sha256": "776447d36fb352a29fc2b5a560a76e5687e1f22895d571e65f9ab65f819c5173",
+  "source_claim_verdict": "promote",
+  "candidate": "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+  "candidate_sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+  "session_base_commit": "22cd17590460d8e76e180957f31f75d85dd3ec17",
+  "candidate_sha256_at_session_base": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+  "already_present_byte_identically_at_session_base": true,
+  "reference": "docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+  "reference_sha256": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32",
+  "raw_final_raster_spearman": 0.9973357495083783,
+  "raw_rank_scope": "Every footprint cell of the final binary rasters; NOT a reconstructed pre-placement continuous surface",
+  "dot_overlap": {
+    "candidate_within_3px_of_reference": 0.9951928156365557,
+    "reference_within_3px_of_candidate": 1.0,
+    "radius_px": 3.0,
+    "candidate_dots": 37860,
+    "reference_dots": 37660
+  },
+  "duplicate": true,
+  "original_preplacement_surface": "unavailable; no check backdated or reconstructed",
+  "claimed_check_report": "evidence/holdout_compare_gems28-h38-1_vs_h36-1_2026-10-25.json",
+  "claimed_check_report_sha256": "31ff4109bb39f85fa4fc6f079158122680e68738312e021377f3a443c0370317",
+  "claimed_check_own_verdict": "negative",
+  "protocol_comparable_holdout": false,
+  "protocol_reason": "The inspected legacy runner scores fixed full-catalogue TIFFs with make_split; it does not retrain per fold or reconstruct visible-only catalogue features and is not the shared buffered evaluator.",
+  "verdict": "negative",
+  "promotion_eligible": false,
+  "submission_ready": false,
+  "experiments_run": 0,
+  "new_raster_generated": false,
+  "slot_selected": false,
+  "reasons": [
+    "Claimed new TIFF already exists byte-identically at this session's base commit",
+    "Final-raster rank and all-dot overlap exceed the registry stop thresholds against an existing reference",
+    "The claim's promote verdict contradicts its own linked check's negative verdict",
+    "Legacy fixed-TIFF diagnostic is not the strict buffered, retrained promotion baseline"
+  ],
+  "historical_evidence_policy": "Original claimed run card and result retained unchanged for provenance; this later review supersedes readiness, not the recorded historical measurements."
+}

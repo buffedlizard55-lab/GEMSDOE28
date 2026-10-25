@@ -259,3 +259,21 @@ def test_missing_priority_artifact_does_not_claim_inventory_complete(tmp_path, m
     report = json.loads(out.read_text())
     assert report["priority_inventory_retrieved"] is False
     assert report["errors"][0]["missing"] == ["missing"]
+
+
+def test_concurrent_h38_claim_is_rejected_without_rewriting_its_original_card():
+    report = json.loads((ROOT / "evidence/current_concurrent_claim_review.json").read_text())
+    assert report["already_present_byte_identically_at_session_base"] is True
+    assert report["candidate_sha256"] == report["candidate_sha256_at_session_base"]
+    assert report["candidate_sha256"] == hashlib.sha256((ROOT / report["candidate"]).read_bytes()).hexdigest()
+    assert abs(report["raw_final_raster_spearman"]) > 0.90
+    assert report["dot_overlap"]["candidate_within_3px_of_reference"] > 0.70
+    assert report["source_claim_verdict"] == "promote"  # Retained historical contradiction.
+    assert report["claimed_check_own_verdict"] == "negative"
+    assert report["protocol_comparable_holdout"] is False
+    assert report["verdict"] == "negative" and report["promotion_eligible"] is False
+    assert report["experiments_run"] == 0 and report["new_raster_generated"] is False
+    for path_key, hash_key in (("source_claim", "source_claim_sha256"),
+                               ("claimed_check_report", "claimed_check_report_sha256")):
+        assert hashlib.sha256((ROOT / report[path_key]).read_bytes()).hexdigest() == report[hash_key]
+    assert "Concurrent H38-1 claim: rejected" in (ROOT / "docs/submission-review.html").read_text()

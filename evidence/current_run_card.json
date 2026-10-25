@@ -49,13 +49,24 @@
     "max_abs_rank_correlation": 0.9997727160804492,
     "new_surface_check": "NOT RUN"
   },
+  "concurrent_archive_claim_audit": {
+    "role": "H38-1 historical reference, not this run's candidate",
+    "byte_identical_to_session_base": true,
+    "raw_final_raster_spearman": 0.9973357495083783,
+    "within_3px_fraction": 0.9951928156365557,
+    "verdict": "negative",
+    "new_surface_check": "NOT RUN"
+  },
   "evidence_sha256": {
     "registry/current_session.json": "5efbb0a7a0928633127cbf80c90358c2f103685cc030fc446f6e89e629e41aae",
     "registry/protocol_assets.json": "b4e23ba97cb72e89a78bcfda7d4b3076ea2076141ba1f648801083b79e500d79",
-    "evidence/current_archive_format_audit.json": "6af3c08d12bdbc5ba6a9c129732bd6f2507b4b524b726a50cc2423c52254644e",
-    "evidence/current_review.json": "dccf14181ac52a81c2196b0af6bd7b2d5c6905f87cc850489a64560dde94de2e",
+    "evidence/current_archive_format_audit.json": "47cfce21123cf7f8b6e5b52a221876214bc09f0e5f84836cc3be08ab76fdc526",
+    "evidence/current_review.json": "5c44ec3ac151919006ca79a5f75b85b08c793a8d88bd523e2613dbc987aec5ec",
+    "evidence/current_concurrent_claim_review.json": "a1331e4344bf56219a4e2f135f2ec4c62c161e51a2a50f07f062ed3164e0cb58",
+    "docs/downloads/manifest.json": "5da508791648db936664a020f66c9dd4b6243b2d9e95549325062bf89b445fa6",
+    "scripts/review_concurrent_h38_claim.py": "7405eadff2b2866ab66244a3acd0e86ef50367c9959ef093701ac6af6eb872d2",
     "evidence/current_input_audit.json": "035445512d6fe793359f176443598f22db375f49b35bcfaf77784fb27d34a2e0",
-    "evidence/current_preflight.json": "e0ea2b03491ec49c05566d63f34fffc9e6a928df27c051fc705c41085f0c51dd",
+    "evidence/current_preflight.json": "81db04c9d281f1c08eb16363197528a9eae979799430346161c88d21c942e1b0",
     "evidence/priority_repository_audit.json": "9b0ece7a29452ec5754cd0d095ffa144ba5b52708dd7897da74e04a95dbbbae8",
     "evidence/current_submission_audit.json": "f46a9f09924c249febb71a64de76ed2ffa4413d5f0276842822e31a4191638cf",
     "evidence/shared_template_contract.json": "b7933924e73a4bd7f6252909eccb813d5594dbe7dc1c3cd269a0d12695026788",
@@ -67,7 +78,7 @@
     "scripts/audit_existing_submissions.py": "334834dbd8b4fb45bbfe4a5d1e6757605ff76b8497d00dd203225a9e2fffdaea",
     "scripts/audit_shared_template.py": "07006dec6ff474ffcfe735ccfaad7992b588eacc949143cfbe1f2a6a69c07127",
     "scripts/check_run_preflight.py": "2041aae4e07988338bde4794c432df51b4f7ac02ade137101282e04b443feb1e",
-    "scripts/record_current_review.py": "737ca045c40a6263c245a1c93fa62ae3edcffdbe838771e3e49a69cdae8d1623"
+    "scripts/record_current_review.py": "a62f685e3132197eb36eb510f828ff50c9524b07d5dc89314cc849aa8b7f32b8"
   },
   "verdict": "negative",
   "promotion_eligible": false,

@@ -20,7 +20,8 @@
     "Located the shared GEMSDOE24 evaluator, writer and novelty library, pinned their source, and loaded them read-only rather than forking them.",
     "Tested the shared tools on synthetic software fixtures, including a cross-quadrant component, deliberate leakage and inverted leakage.",
     "Used the shared novelty comparator on the advertised historical primary: it violates the final-dot duplicate threshold.",
-    "Independently re-read the historical primary with both existing and pinned shared format validators; format validity did not override the duplicate failure."
+    "Independently re-read the historical primary with both existing and pinned shared format validators; format validity did not override the duplicate failure.",
+    "Integrated concurrent PRs #35/#36 without discarding their records; independently rejected the H38-1 new/unique/promote claim using byte history and the pinned shared duplicate rules."
   ],
   "scientific_interpretation": {
     "competition_target": "The official reference describes geological fault detection. Geothermal upflow motivates hypotheses but this is not a vent-localization score.",
@@ -101,5 +102,10 @@
     "shared_contract": "evidence/shared_template_contract.json",
     "official_reference": "evidence/official_reference_audit.json",
     "source_code_pins": "registry/protocol_assets.json"
+  },
+  "concurrent_claim_review": {
+    "path": "evidence/current_concurrent_claim_review.json",
+    "status": "negative",
+    "summary": "Concurrent PR #36 advertises H38-1 as new/unique, but its TIFF already matches this session's base bytes. BYTE/NOVELTY AUDIT: final-raster rho 0.997336, all H38 dots within 3 px of H36 99.52%. The claimed promote card also contradicts its linked check's negative verdict. No strict buffered/retrained improvement is established; stop, no promotion."
   }
 }

@@ -1,3 +1,5 @@
+> **Superseded readiness claim — DO NOT SUBMIT.** A later G28-A51 audit found the H38-1 TIFF already existed byte-identically at the session base and fails the strict registry duplicate stop. The claimed promote card contradicts its own linked check’s negative verdict. The record below is preserved as historical evidence, not current clearance. See [independent claim review](../evidence/current_concurrent_claim_review.json) and [current review](51_current_review_and_next_steps.md).
+
 # 51 — Session 17 (2026-10-25): unique TIF submission, the 0.2778 question, and ranked hypotheses
 
 **Status: written this session, not a submission receipt.** Every score below is either **HOLDOUT-DTI** (a local catalogue-internal proxy computed with the shared template tools) or **OWNER-REPORTED** (the task-statement site lists). No repository artifact has been uploaded to DrivenData, and no organizer submission-page receipt exists in any fetched repository — so nothing here is **ORGANIZER-CONFIRMED**, and no number is written as a competition score.

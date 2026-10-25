@@ -31,6 +31,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Prefer one Actions-based Pages deployment source
+        id: pages-source
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow
+      - name: Report source-configuration permission limit without hiding deployment
+        if: steps.pages-source.outcome == 'failure'
+        run: echo '::warning::Pages source could not be changed with the workflow token. Deployment still runs; inspect the actual deploy result, not this configuration attempt.'
       - uses: actions/configure-pages@v5
       - name: Stage the site and preserve legacy /docs/ URLs
         run: |
