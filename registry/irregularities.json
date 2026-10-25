@@ -570,6 +570,18 @@
       "severity": "low",
       "issue": "Shared tools extended in-template for S15 (no private forks): scripts/run_losfo_harness.py gained --s15-depthslice (default behaviour unchanged; D0 arm verified identical to the untouched losfo arm on seeds 290-294) and scripts/verify_downloads.py slot list gained s15_candidate.",
       "action": "Reported here per parallel-run protocol point 2. Both extensions are additive and covered by the existing test suite plus tests/test_depthslice.py."
+    },
+    {
+      "id": "s16-gate-spread-fail",
+      "severity": "medium",
+      "issue": "H40-1 migration bands raise pooled LOSFO DTI (+0.00126) but fail frozen G2 spread: 9/20 cells, 1/4 folds (only SW +0.0095), seed 303 -0.0107, 95% CI [-0.0034,+0.0063] crosses 0. Mean gain is not robust; arm closed on seeds 300-304 with no retuning.",
+      "action": "Verdict negative in evidence/s16_run_card.json; candidate banner-marked DO NOT SUBMIT; seeds 300-304 consumed for this arm."
+    },
+    {
+      "id": "s16-uniqueness-dense-probes-repeat",
+      "severity": "medium",
+      "issue": "H40-1 candidate surface Spearman vs D0 = 0.990 and 91.3% of dots lie within 3px of unscored dense probe 52a13184267e (41.3% vs the scored champion e5eb6e7e). Same binding constraint as s15-uniqueness-dense-probes: re-derived GBDT detectors re-emit the shared ridge network regardless of added bands.",
+      "action": "Logged as duplicate under the strict any-registry-raster rule; no slot. Recommended next lane (knowledge/50) emits on migration-extrapolated positions and pre-checks pool uniqueness before training."
     }
   ]
 }

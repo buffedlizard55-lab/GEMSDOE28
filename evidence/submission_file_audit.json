@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-25T20:42:53Z",
+  "checked_utc": "2026-10-25T21:11:30Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "2b52d670d7aa2e8e26be02ce0f616eac9f96b4434383a178442cc271ddb7916c",
+  "manifest_sha256": "b38912ec828197d94f0816a3523de22b8235070380a7f17650e39c1f5f7fcc5e",
   "checks": [
     {
       "check": "labels_grid_matches_template",
@@ -36,17 +36,17 @@
     {
       "check": "manifest_candidates_present",
       "pass": true,
-      "detail": "9 candidate(s) listed"
+      "detail": "10 candidate(s) listed"
     },
     {
       "check": "submission_names_present",
       "pass": true,
-      "detail": "9 artifact(s) have a registered portal name"
+      "detail": "10 artifact(s) have a registered portal name"
     },
     {
       "check": "submission_names_unique",
       "pass": true,
-      "detail": "9 registered name(s), all distinct"
+      "detail": "10 registered name(s), all distinct"
     },
     {
       "check": "primary_submission_name_content_id",
@@ -1399,9 +1399,159 @@
       "detail": "note-gemsdoe28-h39-1-a86b8ed33727.txt"
     },
     {
+      "check": "s16_candidate_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-h40-1-migration-b1-5f2efa891ce7"
+    },
+    {
+      "check": "s16_candidate_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif"
+    },
+    {
+      "check": "s16_candidate_nan_file_exists",
+      "pass": true,
+      "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif"
+    },
+    {
+      "check": "s16_candidate_nan_byte_count",
+      "pass": true,
+      "detail": "1590584 bytes"
+    },
+    {
+      "check": "s16_candidate_nan_sha256",
+      "pass": true,
+      "detail": "2b32f81dcb734c51fe7b67da5b58123668ee6d614abe119a6d0dfbd23ccd7c0f"
+    },
+    {
+      "check": "s16_candidate_nan_grid",
+      "pass": true,
+      "detail": "CRS/shape/transform equal the sample template"
+    },
+    {
+      "check": "s16_candidate_nan_single_band_float32",
+      "pass": true,
+      "detail": "count=1 dtype=float32"
+    },
+    {
+      "check": "s16_candidate_nan_inside_finite",
+      "pass": true,
+      "detail": "nonfinite inside=0"
+    },
+    {
+      "check": "s16_candidate_nan_inside_0_1",
+      "pass": true,
+      "detail": "finite inside range=[0, 1]"
+    },
+    {
+      "check": "s16_candidate_nan_exact_binary",
+      "pass": true,
+      "detail": "inside values are exactly 0.0 or 1.0"
+    },
+    {
+      "check": "s16_candidate_nan_outside_nan",
+      "pass": true,
+      "detail": "outside NaN count=7111787/7111787; nodata=NaN"
+    },
+    {
+      "check": "s16_candidate_nan_emitted_count",
+      "pass": true,
+      "detail": "37694 cells equal 1.0"
+    },
+    {
+      "check": "s16_candidate_nan_no_catalogue_overlap",
+      "pass": true,
+      "detail": "positive catalogue overlap=0"
+    },
+    {
+      "check": "s16_candidate_nan_no_infinities",
+      "pass": true,
+      "detail": "no infinity anywhere"
+    },
+    {
+      "check": "s16_candidate_allfinite_file_exists",
+      "pass": true,
+      "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-allfinite.tif"
+    },
+    {
+      "check": "s16_candidate_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-allfinite.tif"
+    },
+    {
+      "check": "s16_candidate_allfinite_byte_count",
+      "pass": true,
+      "detail": "826372 bytes"
+    },
+    {
+      "check": "s16_candidate_allfinite_sha256",
+      "pass": true,
+      "detail": "93abd1dbd2b06961eeafb25dbb428848d15d3c5e36ab9505d165f150fc9e9316"
+    },
+    {
+      "check": "s16_candidate_allfinite_grid_and_type",
+      "pass": true,
+      "detail": "single float32 band on exact template grid"
+    },
+    {
+      "check": "s16_candidate_allfinite_range",
+      "pass": true,
+      "detail": "whole array finite; inside range=[0,1]"
+    },
+    {
+      "check": "s16_candidate_allfinite_outside_zero",
+      "pass": true,
+      "detail": "outside zero; no nodata tag"
+    },
+    {
+      "check": "s16_candidate_allfinite_emitted_count",
+      "pass": true,
+      "detail": "37694 cells equal 1.0"
+    },
+    {
+      "check": "s16_candidate_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "no positive known-catalogue overlap"
+    },
+    {
+      "check": "s16_candidate_zip_exists",
+      "pass": true,
+      "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.zip"
+    },
+    {
+      "check": "s16_candidate_zip_byte_count",
+      "pass": true,
+      "detail": "286466 bytes"
+    },
+    {
+      "check": "s16_candidate_zip_sha256",
+      "pass": true,
+      "detail": "2b7d6fa112fd09eca29d845e9fb5aa5b2e8f786ff12a879686df33fbab876191"
+    },
+    {
+      "check": "s16_candidate_zip_single_tif",
+      "pass": true,
+      "detail": "members=['gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif']"
+    },
+    {
+      "check": "s16_candidate_zip_byte_identical",
+      "pass": true,
+      "detail": "single member matches the NaN TIFF byte-for-byte"
+    },
+    {
+      "check": "s16_candidate_note_length",
+      "pass": true,
+      "detail": "121 chars; max 200"
+    },
+    {
+      "check": "s16_candidate_note_file_matches",
+      "pass": true,
+      "detail": "note-gemsdoe28-h40-1-5f2efa891ce7.txt"
+    },
+    {
       "check": "all_tif_names_unique",
       "pass": true,
-      "detail": "24 unique GeoTIFF(s)"
+      "detail": "26 unique GeoTIFF(s)"
     },
     {
       "check": "all_tif_names_content_addressed",
@@ -1410,5 +1560,5 @@
     }
   ],
   "failures": [],
-  "check_count": 277
+  "check_count": 307
 }
