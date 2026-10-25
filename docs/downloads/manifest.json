@@ -354,6 +354,8 @@
     "submission_ready": false,
     "slot_selected": false,
     "new_tiff_generated": false,
-    "reason": "No assigned method lane or local competition feature/cache data; all listed artifacts are historical inspection-only files."
+    "reason": "Inputs and shared cache restored and verified. No assigned method lane, complete pinned registry or comparable frozen strict incumbent; all listed TIFFs are historical inspection-only files.",
+    "session_id": "G28-A51-20261025",
+    "source_card": "data/current_run_card_2026-10-25.json"
   }
 }

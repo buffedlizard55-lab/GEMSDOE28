@@ -1,0 +1,39 @@
+{
+  "repository": "drivendataorg/gems-prize-reference-solution",
+  "commit": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+  "file": "unet-mc-cv-reference-solution.ipynb",
+  "sha256": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0",
+  "source": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb",
+  "verified_claims": [
+    {
+      "cell": 0,
+      "claim": "The official reference implements a U-Net ensemble for geological fault detection, not a direct vent classifier."
+    },
+    {
+      "cell": 16,
+      "claim": "The reference uses a Tversky training loss with alpha 0.2 and beta 0.8; this notebook is not an organizer hidden-score receipt or a verification of this repository DTI implementation."
+    },
+    {
+      "file": "README.md",
+      "section": "Choosing GPU vs. CPU",
+      "claim": "The official reference supports a CPU-only environment. A GPU is faster, not an absolute prerequisite for all training."
+    }
+  ],
+  "external_hosts_not_retrieved": [
+    "www.drivendata.org",
+    "www.usgs.gov",
+    "gdr.openei.org",
+    "docs.nlr.gov"
+  ],
+  "limitations": "These hosts are outside this runtime allowed outbound hosts. No new current leaderboard, weekly cap or rules PDF was retrieved.",
+  "additional_verified_files": [
+    {
+      "path": "README.md",
+      "sha256": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239"
+    },
+    {
+      "path": "environment-cpu.yml",
+      "sha256": "76e03b116f74513a4b6298f863664c3ee5b8e40e33f7cb68c24f63ab307bb62d"
+    }
+  ]
+}

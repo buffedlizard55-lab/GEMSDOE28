@@ -1,3 +1,5 @@
+import zipfile
+
 import numpy as np
 import pytest
 import rasterio
@@ -96,3 +98,131 @@ def test_verifier_rejects_invalid_template(tiny_template, tmp_path):
         dst.crs = 'EPSG:4326'
     with pytest.raises(ValueError, match='CRS/shape'):
         submission.verify_geotiff(output, tpl)
+
+
+def test_new_notes_follow_stricter_parallel_protocol():
+    note = submission.make_note("new", "a" * 400, "abcdef123456", family="GEMSDOE28")
+    assert 0 < len(note) <= 140
+
+
+@pytest.mark.parametrize("pred", [np.zeros((40, 50), np.complex64),
+                                  np.full((40, 50), "0", dtype="U1")])
+def test_writer_rejects_non_real_or_text_predictions(tiny_template, tmp_path, pred):
+    template, _ = tiny_template
+    with pytest.raises(ValueError, match="real numeric"):
+        submission.write_geotiff(pred, template, tmp_path / "invalid.tif")
+
+
+def test_writer_never_overwrites_template(tiny_template):
+    template, footprint = tiny_template
+    before = template.read_bytes()
+    with pytest.raises(ValueError, match="overwrite"):
+        submission.write_geotiff(np.zeros(footprint.shape), template, template)
+    assert template.read_bytes() == before
+
+
+def test_writer_preserves_previous_output_if_disk_validation_fails(tiny_template, tmp_path, monkeypatch):
+    template, footprint = tiny_template
+    output = tmp_path / "existing.tif"
+    output.write_bytes(b"previous artifact must survive")
+    monkeypatch.setattr(submission, "verify_geotiff", lambda *args: {
+        "hard_checks_passed": False, "hard_failures": ["injected validation failure"]})
+    with pytest.raises(ValueError, match="serialized"):
+        submission.write_geotiff(np.zeros(footprint.shape), template, output)
+    assert output.read_bytes() == b"previous artifact must survive"
+    assert not list(tmp_path.glob(".existing-*.tif"))
+
+
+def test_verifier_returns_negative_for_wrong_shape_instead_of_crashing(tiny_template, tmp_path):
+    template, _ = tiny_template
+    with rasterio.open(template) as source:
+        profile = source.profile.copy()
+    profile.update(width=7, height=8)
+    output = tmp_path / "wrong-shape.tif"
+    with rasterio.open(output, "w", **profile) as dst:
+        dst.write(np.zeros((8, 7), np.float32), 1)
+    result = submission.verify_geotiff(output, template)
+    assert not result["hard_checks_passed"]
+    assert "grid_matches_template" in result["hard_failures"]
+
+
+def test_numeric_nodata_sentinel_does_not_pass_as_allfinite(tiny_template, tmp_path):
+    template, footprint = tiny_template
+    path = submission.write_geotiff(np.zeros(footprint.shape), template, tmp_path / "numeric-nodata.tif", outside="zero")
+    with rasterio.open(path, "r+") as dst:
+        dst.nodata = 0
+    result = submission.verify_geotiff(path, template)
+    assert not result["hard_checks_passed"]
+    assert "nodata_convention" in result["hard_failures"]
+
+
+def test_bad_nan_raster_report_can_be_strict_json(tiny_template, tmp_path):
+    import json
+
+    template, footprint = tiny_template
+    path = submission.write_geotiff(np.zeros(footprint.shape), template, tmp_path / "bad-interior.tif")
+    with rasterio.open(path, "r+") as dst:
+        values = dst.read(1)
+        values[10, 10] = np.nan
+        dst.write(values, 1)
+    result = submission.verify_geotiff(path, template)
+    assert not result["hard_checks_passed"]
+    assert result["nonfinite_inside_px"] == 1
+    json.dumps(result, allow_nan=False)
+
+
+def test_zip_cannot_destroy_source_tiff(tiny_template, tmp_path):
+    template, footprint = tiny_template
+    path = submission.write_geotiff(np.zeros(footprint.shape), template, tmp_path / "source.tif")
+    before = path.read_bytes()
+    with pytest.raises(ValueError, match="distinct"):
+        submission.zip_single(path, path)
+    assert path.read_bytes() == before
+
+
+def test_empty_footprint_and_shape_mismatch_fail_clearly():
+    with pytest.raises(ValueError, match="aligned"):
+        submission.check_probabilities(np.zeros((3, 3)), np.zeros((3, 3), bool))
+    with pytest.raises(ValueError, match="aligned"):
+        submission.check_probabilities(np.zeros((3, 3)), np.ones((2, 2), bool))
+
+
+def test_zip_cannot_destroy_hardlinked_source(tiny_template, tmp_path):
+    template, footprint = tiny_template
+    source = submission.write_geotiff(np.zeros(footprint.shape), template, tmp_path / "original.tif")
+    alias = tmp_path / "hardlink.zip"
+    alias.hardlink_to(source)
+    before = source.read_bytes()
+    with pytest.raises(ValueError, match="distinct"):
+        submission.zip_single(source, alias)
+    assert source.read_bytes() == before
+
+
+def test_zip_preserves_previous_output_on_packaging_failure(tiny_template, tmp_path, monkeypatch):
+    template, footprint = tiny_template
+    source = submission.write_geotiff(np.zeros(footprint.shape), template, tmp_path / "source.tif")
+    output = tmp_path / "existing.zip"
+    output.write_bytes(b"previous archive must survive")
+    def fail_write(*args, **kwargs):
+        raise OSError("injected packaging failure")
+    monkeypatch.setattr(zipfile.ZipFile, "writestr", fail_write)
+    with pytest.raises(OSError, match="injected"):
+        submission.zip_single(source, output)
+    assert output.read_bytes() == b"previous archive must survive"
+    assert not list(tmp_path.glob(".existing-*.zip"))
+
+
+def test_independent_verifier_rejects_complex_raster(tiny_template, tmp_path):
+    import json
+
+    template, footprint = tiny_template
+    with rasterio.open(template) as source:
+        profile = source.profile.copy()
+    profile.update(dtype="complex64", nodata=None)
+    path = tmp_path / "complex.tif"
+    with rasterio.open(path, "w", **profile) as dst:
+        dst.write(np.zeros(footprint.shape, np.complex64), 1)
+    result = submission.verify_geotiff(path, template)
+    assert not result["hard_checks_passed"]
+    assert "single_band_float32" in result["hard_failures"]
+    json.dumps(result, allow_nan=False)

@@ -112,3 +112,29 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
   .download-actions .button { flex: 1 1 100%; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* Current readiness is separate from the superseded campaign archive. */
+.readiness-banner {
+  margin: 0 0 28px;
+  padding: 26px 30px;
+  background: #fff8f3;
+  border: 1px solid #e6b59c;
+  border-left: 6px solid #a13f25;
+  border-radius: 14px;
+}
+.readiness-banner h2 { color: #7f2e1e; font-size: clamp(1.45rem, 3vw, 2.1rem); }
+.button:disabled, .button:disabled:hover {
+  background: #d8ddd8;
+  color: #43504a;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.historical-record { margin: 24px 0; padding: 18px; background: #f1f1e9; border: 1px solid var(--line); border-radius: 12px; }
+.historical-record > summary { cursor: pointer; font-weight: 800; color: #4e5b54; }
+.historical-record[open] > summary { margin-bottom: 24px; }
+.submission-steps li { margin: 0 0 18px; padding-left: 5px; max-width: 940px; }
+[data-feed-freshness] { font-weight: 700; }
+@media (max-width: 640px) {
+  .readiness-banner { padding: 20px 18px; }
+  .readiness-banner .download-actions { align-items: stretch; flex-direction: column; }
+}

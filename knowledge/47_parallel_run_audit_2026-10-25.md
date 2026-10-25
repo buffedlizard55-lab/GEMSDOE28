@@ -1,3 +1,5 @@
+> **Later same-date update:** data, the existing feature cache and pinned shared tools have now been restored and audited. Absence statements below record the earlier observation, not current blockers. No new TIFF, score or assigned lane was created. See [current review](51_current_review_and_next_steps.md).
+
 # Parallel-run audit — 2026-10-25
 
 ## Decision: NEGATIVE / NOT READY TO SUBMIT

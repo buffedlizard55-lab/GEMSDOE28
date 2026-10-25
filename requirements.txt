@@ -10,3 +10,7 @@ pyproj>=3.6
 pytest>=8
 pyyaml>=6
 ruff>=0.5
+
+# Exercise the existing official-vector clip/bridge regression tests in local runs and CI.
+geopandas>=1.0
+pyogrio>=0.9

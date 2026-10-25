@@ -36,7 +36,7 @@ def main(argv=None):
         card = json.loads(args.card.read_text(encoding="utf-8"),
                           parse_constant=reject_constant, object_pairs_hook=unique_keys)
     except (OSError, ValueError) as exc:
-        print(json.dumps({"verdict": "negative", "evidence_schema_passed": False, "submission_ready": False,
+        print(json.dumps({"verdict": "negative", "evidence_schema_passed": False, "promotion_eligible": False, "submission_ready": False,
                           "slot_selected": False, "failures": [str(exc)]}), file=sys.stdout)
         return 2
     result = promotion_gate(card)
