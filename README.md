@@ -1,3 +1,24 @@
+# Current session safety notice — 2026-10-25 (read first)
+
+**NOT READY TO SUBMIT: no new unique TIFF was generated this session.**
+Read [the current audit and ranked hypotheses](knowledge/47_parallel_run_audit_2026-10-25.md)
+before the historical standing prompt below. The current request overrides stale leaderboard and
+submission-readiness claims. It requires a unique scientific raster, buffered whole-segment
+hide-and-recover evaluation, visible-only catalogue features, feature-alone leakage canaries,
+pooled DTI with confidence intervals, complete surface and final-dot registry comparisons,
+and exact finite/range/grid checks. Promotion is separate from weekly slot selection.
+
+**Blocking irregularities:** the method paragraph assigning this session's lane and the shared
+template location were not supplied; training/cache files are absent in this checkout; current
+organizer receipts are unavailable. Stop after the specified experiment/time budget. Negative
+results are deliverables. Do not copy an old submission or claim a simulation is a score.
+
+This is an operational summary of the 2026-10-25 request, **not a verbatim copy** of the full prompt.
+Historical verbatim prompts below remain historical. Core values remain Maximize P(Win) and Own
+the Outcome: fail closed rather than spending a slot on unverified evidence.
+
+---
+
 # GEMSDOE28 — Fault Mapping for the Great Basin (`DrivenData #306`)
 
 ## Standing Prompt & Arena AI Core Values (Read First Every Session)
@@ -97,11 +118,11 @@ Generative AI (Arena.ai Agent Mode) assisted research synthesis, hypothesis plan
 
 Before every substantive session, reread this README and [`knowledge/00_standing_brief.md`](knowledge/00_standing_brief.md). For this research track, also read [`knowledge/47_session15_high-score-review_and_blocked-experiment.md`](knowledge/47_session15_high-score-review_and_blocked-experiment.md) and its structured card [`evidence/session15_review.json`](evidence/session15_review.json). The card is an explicit **negative/blocked result**, not a competition submission.
 
-The user-provided list reports `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` at `0.2778` as the highest score among the listed GEMSDOE24/25/27/28/30/31/32/33/36 sites. The checkout has no matching raster, receipt, code, or method manifest; its filename cannot establish why it scored. This is not organizer-confirmed. The prompt also gives two current-leaderboard maxima (`0.4413` and `0.3195`), which conflict; the dated 2026-10-03 repository snapshot is not a current refresh. Do not infer a score, artifact identity, or winning mechanism from any of these claims.
+The user-provided list reports `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` at `0.2778` as the highest score among the listed GEMSDOE24/25/27/28/30/31/32/33/36 sites. The cross-site audit identifies the owner-repository TIFF paths and summarizes the page's H33-2-B2 method as pruning an existing dotted base by excluding predictions close to the catalogue; it also reports that the owner page says no organizer score exists for those artifacts. The raw TIFF bytes, full method code, and submission receipt are not available here, so the user-supplied `0.2778` is not organizer-confirmed and cannot be causally explained. The prompt also gives two current-leaderboard maxima (`0.4413` and `0.3195`), which conflict; the dated 2026-10-03 repository snapshot is not a current refresh. Do not infer a score, artifact identity, or winning mechanism from any of these claims.
 
 **Critical experiment controls:** the current parallel-run prompt references a single method paragraph defining the authorized lane, but no such paragraph is included. Do not guess the lane, run a non-lane experiment, fabricate a TIFF, or place anything in a submission slot. The checkout has no cached input rasters/features/template/labels under `data/`, and `rasterio`/`pytest` are unavailable in the current Python environment. The existing shared `src/gems27/holdout.py` documents random component withholding in quadrants; do not assume it satisfies the newer buffered whole-segment hide-and-recover requirement without auditing/fixing it once in the shared template.
 
-The five unrun research directions and their explicit source/data gates are ranked in the session-15 review. Any eventual candidate must pass one-feature-at-a-time leakage checks (AUC >0.90 is a stop pending proof), buffered whole-segment holdout with alpha 0.2/beta 0.8 and a 300 m triangular kernel, a paired 95% CI, and pre-/post-placement registry correlation/3 px overlap gates. Do not write or present a new submission TIFF until it beats the frozen holdout comparator and passes the exact grid/range/hash/uniqueness validator. A failed or blocked experiment is a valid deliverable.
+The four unrun research directions and their explicit source/data gates are ranked in the session-15 review. Any eventual candidate must pass one-feature-at-a-time leakage checks (AUC >0.90 is a stop pending proof), buffered whole-segment holdout with alpha 0.2/beta 0.8 and a 300 m triangular kernel, a paired 95% CI, and pre-/post-placement registry correlation/3 px overlap gates. Do not write or present a new submission TIFF until it beats the frozen holdout comparator and passes the exact grid/range/hash/uniqueness validator. A failed or blocked experiment is a valid deliverable.
 
 ---
 

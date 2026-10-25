@@ -2,6 +2,12 @@
   "generated": "2026-10-04T02:17:53Z",
   "items": [
     {
+      "id": "parallel-run-2026-10-25-blocked",
+      "severity": "high",
+      "issue": "Assigned method paragraph and shared template location absent; current holdout splits components at quadrant boundaries without buffer; no complete downloaded registry or organizer receipts.",
+      "action": "No experiment or new TIFF. Fail-closed evidence schema gate added; see knowledge/47_parallel_run_audit_2026-10-25.md. No private evaluator created."
+    },
+    {
       "id": "prompt-verbatim-unavailable",
       "severity": "low",
       "issue": "In Session 1 the verbatim text of the task prompt was unavailable due to conversation condensation; in Session 2 the user provided the complete verbatim task prompt.",
@@ -532,13 +538,13 @@
     {
       "id": "IRR-2026-10-25-02",
       "severity": "high",
-      "issue": "The prompt gives incompatible current leaderboard maxima (0.4413 and 0.3195). The local leaderboard snapshot is dated 2026-10-03 and is stale; no current organizer page was read in this session. The cited 0.2778 H33-2 score has no matching TIFF, receipt, method manifest, or code in this checkout.",
-      "action": "Treat all three figures as unverified claims until matched to a current official leaderboard/receipt and exact raster. Do not infer the H33-2 method from its filename. See knowledge/47_session15_high-score-review_and_blocked-experiment.md."
+      "issue": "The prompt gives incompatible current leaderboard maxima (0.4413 and 0.3195). The local leaderboard snapshot is dated 2026-10-03 and is stale; no current organizer page was read in this session. The cited 0.2778 H33-2 score has no organizer receipt in this checkout.",
+      "action": "Treat all three figures as unverified claims until matched to a current official leaderboard/receipt and exact raster. The cross-site audit found the H33-2 artifact path and reports that the owner page states no organizer score; see evidence/cross_site_audit_2026-10-25.json and knowledge/47_session15_high-score-review_and_blocked-experiment.md."
     },
     {
       "id": "IRR-2026-10-25-03",
       "severity": "high",
-      "issue": "The current checkout contains the data manifest but no competition input TIFFs, labels, sample template, prepared feature cache, or candidate inputs for H33-2. The Python environment cannot import rasterio or pytest. The shared holdout docstring describes random 20% catalogue-component hiding in quadrants; the request now requires buffered whole-segment hide-and-recover, so compatibility is unproven.",
+      "issue": "The current checkout contains the data manifest but no competition input TIFFs, labels, sample template, prepared feature cache, or local H33-2 raster. The Python environment cannot import rasterio or pytest. The shared holdout docstring describes random 20% catalogue-component hiding in quadrants; it does not implement the requested buffered whole-segment hide-and-recover protocol.",
       "action": "Do not produce a submission TIFF or claim validator/holdout results. Restore the exact pinned inputs and dependencies, audit/fix the shared harness (not a private fork), and run required feature-only leakage and registry uniqueness tests before any candidate can pass the gate."
     }
   ]
