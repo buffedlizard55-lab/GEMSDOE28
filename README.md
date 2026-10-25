@@ -1,38 +1,35 @@
-# Current session safety notice — 2026-10-25 Session 16 (read first)
+# Current review status — 2026-10-25 (read first)
 
-**NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** The Session 16 H40-1 migration TIFF
-(`5f2efa891ce7`) failed both its frozen holdout-spread gate and the strict uniqueness
-gate; it is inspection-only. The older H36-1/H38-1 downloads are historical research
-artifacts, not unique candidates for this run and not approved by the separate selector.
-Do not upload any file from this repository unless a future candidate passes its frozen
-holdout, uniqueness, and exact-file gates and is separately approved by the selector.
-Read [the Session 16 result](knowledge/50_s16_result.md) and its
-[preregistration](knowledge/49_preregistration_H40-1_migration.md) before the historical
-standing prompt below. Session 16 re-verified why the OWNER-REPORTED 0.2778 champion won
-(emission hygiene: `solo-r1` minus the d_cat≤2 px ring; a ring-3 copy would be a >95 %
-duplicate and was not built), ran the leakage canary (PASS), the frozen LOSFO gate on
-seeds 300–304 (**G2 spread FAIL**: pooled HOLDOUT-DTI Δ +0.00126, 95 % CI
-[−0.0034, +0.0063], 9/20 cells), and the uniqueness check (**FAIL**: prediction-surface Spearman(prob_D1, prob_D0)
-0.990; 91.3 % of final dots within 3 px of a dense probe raster; 41.3 % vs the scored champion). The S16 run card does not retain a per-registry pre-placement surface-correlation table, so that subcheck is unverified; the final-dot overlap alone exceeds the duplicate-stop limit.
-The all-finite variant passes whole-array [0,1] format checks; that is not scientific or
-selector approval. It is only a possible file-format remedy for the prior portal range
-error, whose actual cause remains unconfirmed. No score here is ORGANIZER-CONFIRMED;
-projections are never scores. Negative results are deliverables. Do not copy an old
-submission.
+**NO FILE IS APPROVED FOR SUBMISSION.** This review had no uniquely assigned method
+lane and no competition feature rasters or prepared shared cache in the checkout; it
+ran no experiment and generated no new TIFF. The H40-1 migration candidate from the
+historical Session 16 run failed its frozen holdout-spread and uniqueness gates. Older
+H36-1/H38-1 files are historical inspection artifacts only. Do not upload any file from
+this repository. Read [the current blocked run card](evidence/run_card_2026-10-25.json)
+and [this three-pass review](evidence/review_2026-10-25_session18.md).
+
+Historical context only: Session 16's H40-1 lane is documented in
+[its result](knowledge/50_s16_result.md) and
+[preregistration](knowledge/49_preregistration_H40-1_migration.md). That lane is already
+closed; its LOSFO gate failed G2 spread (seeds 300–304; pooled HOLDOUT-DTI Δ +0.00126,
+95% CI [−0.0034, +0.0063], 9/20 cells), and its uniqueness check failed (91.3% of
+final dots within 3 px of a dense probe raster). The per-registry pre-placement surface
+comparison is missing, so that subcheck remains unverified. Its all-finite variant
+passes format range checks only; this neither establishes scientific merit nor selector
+approval. No cited score is ORGANIZER-CONFIRMED; projections are never scores.
 
 ## Current-session protocol (read before every run)
 
-- **Objective:** maximize competition performance with auditable science; independently
-  verify official facts; clearly distinguish organizer receipts, owner-reported scores,
-  local HOLDOUT-DTI, and projections. The user-reported GEMSDOE32 value `0.2778` is not an
-  organizer receipt in this checkout. Its byte-level forensic explanation is in
-  [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md); do not claim it proves
-  organizer score attribution.
-- **Lane and budget:** the authorized Session 16 method is the single H40-1 paragraph in
-  [`knowledge/49_preregistration_H40-1_migration.md`](knowledge/49_preregistration_H40-1_migration.md).
-  It is already executed (3/3 experiments) and failed. Do not switch lanes, rerun those
-  seeds, exceed the experiment/time cap, or create another variant under that frozen
-  preregistration. A new session needs its own explicit lane and fresh preregistration.
+- **Objective:** maximize competition performance with auditable science; distinguish
+  organizer receipts, owner-reported values, local HOLDOUT-DTI, and projections. The
+  `0.2778` H33-2 value is owner-reported here, not an organizer receipt. Its bounded
+  byte-level forensic analysis is in [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md).
+- **Lane and budget:** the current request does not identify one exclusive geological
+  method paragraph to authorize as the lane. Do not silently choose an older H39/H40 or
+  H38 method. The prior H40-1 lane is closed (3/3 experiments); a new experiment requires
+  an explicit lane, fresh preregistration and experiment/time budget. Current blockers
+  and the requested protocol are recorded in
+  [`evidence/review_2026-10-25_session18.md`](evidence/review_2026-10-25_session18.md).
 - **Holdout before any future slot:** hide whole fault segments with a buffer; compute
   catalogue-based features only from visible faults; pixel-exactly mask visible faults;
   score pooled DTI with α=0.2, β=0.8, and a 300 m triangular kernel. Test each feature
@@ -53,8 +50,9 @@ submission.
   valid deliverables.
 
 This is the current operational form of the owner's full project brief; the earlier
-verbatim task text below remains part of the audit trail. The Session 17 three-pass
-submission-safety review is in
+verbatim task text below remains part of the audit trail. The current three-pass repository
+review is in [`evidence/review_2026-10-25_session18.md`](evidence/review_2026-10-25_session18.md).
+The prior Session 17 submission-safety review remains available at
 [`evidence/review_s17_submission_safety_2026-10-25.md`](evidence/review_s17_submission_safety_2026-10-25.md).
 Primary manual-review links:
 [official competition](https://www.drivendata.org/competitions/306/competition-doe-gems/),

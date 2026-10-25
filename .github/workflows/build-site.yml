@@ -9,6 +9,8 @@ on:
       - 'registry/irregularities.json'
       - 'registry/sources.json'
       - 'docs/downloads/manifest.json'
+      - 'docs/data/current_run_card_2026-10-25.json'
+      - 'evidence/run_card_2026-10-25.json'
       - 'docs/downloads/h28_1_candidate_manifest.json'
       - 'docs/data/topology_review_classes.json'
       - 'docs/*.html'
@@ -54,6 +56,8 @@ on:
       - 'registry/irregularities.json'
       - 'registry/sources.json'
       - 'docs/downloads/manifest.json'
+      - 'docs/data/current_run_card_2026-10-25.json'
+      - 'evidence/run_card_2026-10-25.json'
       - 'docs/downloads/h28_1_candidate_manifest.json'
       - 'docs/data/topology_review_classes.json'
       - 'docs/*.html'
@@ -109,4 +113,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html index.html
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html
