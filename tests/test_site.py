@@ -5,16 +5,18 @@ import subprocess
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html",
+         "archive.html", "submission-review.html", "session15-review.html"]
 
 
 class Links(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.refs, self.ids = [], set()
+        self.refs, self.ids, self.duplicate_ids = [], set(), set()
 
     def handle_starttag(self, tag, attrs):
         d = dict(attrs)
@@ -22,6 +24,8 @@ class Links(HTMLParser):
             if k in d:
                 self.refs.append(d[k])
         if "id" in d:
+            if d["id"] in self.ids:
+                self.duplicate_ids.add(d["id"])
             self.ids.add(d["id"])
 
 
@@ -104,7 +108,7 @@ def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp
     assert "weekly slot" in screen_text
     assert build_site.h31_hypothesis_status(screen_pass, {}, consumed) == "SCREEN PASSED — unchanged confirmation required; not slot-approved"
     research = (DOCS / "research.html").read_text()
-    front_page = (DOCS / "index.html").read_text()
+    front_page = (DOCS / "archive.html").read_text()
     assert "No model fit, holdout score, confirmation, or promotion decision." not in front_page
     assert "The feature build is label-free; H31 screen outcome is shown above." in front_page
     assert "screen evidence" in front_page
@@ -176,11 +180,17 @@ def test_all_internal_links_and_assets_resolve():
     for base, p in [(DOCS, q) for q in PAGES] + [(ROOT, "index.html")]:
         parser = Links()
         parser.feed((base / p).read_text())
+        assert not parser.duplicate_ids, (p, parser.duplicate_ids)
         for ref in parser.refs:
-            if re.match(r"^(https?:|mailto:|#|data:)", ref):
+            url = urlsplit(ref)
+            if url.scheme or url.netloc:
                 continue
-            target = ref.split("#")[0]
-            assert (base / target).exists(), f"{base.name}/{p}: broken internal reference {ref}"
+            target = (base / unquote(url.path)).resolve() if url.path else base / p
+            assert target.exists(), f"{base.name}/{p}: broken internal reference {ref}"
+            if url.fragment and target.suffix == ".html":
+                destination = Links()
+                destination.feed(target.read_text())
+                assert unquote(url.fragment) in destination.ids, f"{p}: broken fragment {ref}"
 
 
 def test_pages_source_links_resolve_to_public_repository_files():
@@ -194,17 +204,19 @@ def test_pages_source_links_resolve_to_public_repository_files():
     assert "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/12_preregistration_H31-1_euler.md" in research
 
 
-def test_repository_root_front_page_serves_the_one_click_download():
+def test_repository_root_front_page_locks_submission_download_and_preserves_archive():
     man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
     root_idx = (ROOT / "index.html").read_text()
     P = man["primary"]
-    assert f'href="docs/downloads/{P["nan"]}"' in root_idx and "download" in root_idx
+    assert f'href="docs/downloads/{P["nan"]}"' not in root_idx
+    assert 'href="docs/archive.html"' in root_idx
+    assert "Submission download locked" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
-def test_front_page_has_download_and_exact_note():
+def test_archive_preserves_exact_download_and_note_without_approval():
     man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
-    idx = (DOCS / "index.html").read_text()
+    idx = (DOCS / "archive.html").read_text()
     P = man["primary"]
     assert f'href="downloads/{P["nan"]}"' in idx and "download" in idx
     assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
@@ -270,7 +282,7 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
         assert candidate["nan"] in research and candidate["zip"] in research
         assert candidate["allfinite"] in research
         assert "not one of the four weekly slots" in research
-        summary = (DOCS / "executive-summary.html").read_text()
+        summary = (DOCS / "archive.html").read_text()
         assert candidate["nan"] in summary
         assert "not one of the four weekly slots" in summary
 
@@ -295,6 +307,15 @@ def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
     assert 'FORBIDDEN = ("drivendata.org",)' in feed and "refusing to request" in feed
 
 
+def test_download_manifest_marks_all_current_slots_blocked():
+    manifest = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    current = manifest["current_run"]
+    assert current["status"] == "BLOCKED — NO FILE APPROVED"
+    assert current["submission_ready"] is False
+    assert current["slot_selected"] is False
+    assert current["new_tiff_generated"] is False
+
+
 def test_downloads_have_unique_names_and_zip_single_member():
     import zipfile
     names = [p.name for p in (DOCS / "downloads").glob("*.tif")]
@@ -304,53 +325,167 @@ def test_downloads_have_unique_names_and_zip_single_member():
             assert len(zf.namelist()) == 1 and zf.namelist()[0].endswith(".tif")
 
 
+def test_site_build_metadata_does_not_call_historical_raster_a_submission_download(capsys):
+    from scripts import build_site
+
+    assert build_site.main() == 0
+    build_result = json.loads(capsys.readouterr().out)
+    assert build_result["submission_ready"] is False
+    assert build_result["slot_selected"] is False
+    assert "primary_download" not in build_result
+    assert build_result["inspection_artifacts"]
+
+
 def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
-        assert 'Current run: NOT READY TO SUBMIT' in text
-        assert 'NO FILE APPROVED' in text
+        assert 'Current run: BLOCKED — NO FILE APPROVED' in text
         assert 'Do not upload any file from this site' in text
-        assert 'data/run_card_2026-10-25.json' in text
+        assert 'data/current_run_card_2026-10-25.json' in text
     overview = (DOCS / 'index.html').read_text()
     executive = (DOCS / 'executive-summary.html').read_text()
-    assert 'failed its frozen LOSFO gate' in overview
-    assert 'inspection-only' in overview
-    assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in overview
+    # Historical candidate details are in the clearly labeled archive, not a
+    # current-generation recommendation on the first screen.
+    archive = (DOCS / 'archive.html').read_text()
+    assert 'DO NOT SUBMIT' in archive and 'inspection-only' in archive
+    assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in archive
+    assert 'Submission download locked' in overview
     assert 'NO FILE APPROVED' in executive
     assert 'Do not select a file from this page at present' in executive
     assert 'The suggested `.tif` above' not in executive
     assert 'If you submit anything, use the primary' not in overview + executive
-    card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
+    for page in (overview, executive):
+        assert 'Yes, to download.' not in page
+        assert 'OK TO DOWNLOAD' not in page
+        assert 'unique submission generated this session' not in page
+    card = json.loads((DOCS / 'data/current_run_card_2026-10-25.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
-    # Session 16: an inspection-only raster exists but is gate/uniqueness-failed,
-    # so a hash is recorded while submission_ready stays False (DO NOT SUBMIT).
-    assert card['raster_sha256'] is None or (
-        isinstance(card['raster_sha256'], dict) and card.get('slot_selected') is False
-    )
+    source_card = json.loads((ROOT / 'evidence/current_run_card.json').read_text())
+    assert card == source_card
+    assert card['raster_sha256'] is None
+    assert card['lane'] is None
+    assert card['experiments_run'] == 0
 
 
-def test_session18_unique_tif_panel_is_prominent_and_negative():
-    for page in ('index.html', 'executive-summary.html'):
-        text = (DOCS / page).read_text()
-        assert 'Session 18' in text
-        assert '290553965159' in text
-        assert 'DO NOT SUBMIT' in text
-        assert 'data/run_card_s18.json' in text
-    overview = (DOCS / 'index.html').read_text()
-    # The S18 panel must appear before the historical one-click primary panel.
-    assert overview.index('id="s18-candidate"') < overview.index('id="download"')
-    assert 'gems28-h42-1-migx-reloc-b1-20261025-290553965159-allfinite.tif' in overview
-    assert 'GEMSDOE28-h42-1-migx-reloc-b1-290553965159' in overview
-    card = json.loads((DOCS / 'data/run_card_s18.json').read_text())
+def test_feed_refresh_rebuilds_and_deploys_without_requiring_a_branch_push_event():
+    feed = (ROOT / ".github/workflows/source-feed.yml").read_text()
+    pages = (ROOT / ".github/workflows/pages.yml").read_text()
+    assert "python scripts/build_site.py" in feed
+    assert "docs/*.html index.html" in feed
+    assert "branches: [main]" in feed and "branches: ['arena/**']" not in feed
+    assert "workflow_run:" in pages
+    assert "workflows: ['Source metadata feed (no competition requests)']" in pages
+    assert "github.event.workflow_run.conclusion == 'success'" in pages
+    assert "cp -a docs/. build/pages/docs/" in pages  # legacy /docs/ bookmarks remain valid
+    assert "path: build/pages" in pages
+
+
+def test_static_build_still_needs_no_third_party_dependencies():
+    result = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/build_site.py")],
+                            capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+
+
+def test_combined_archive_namespaces_ids_and_accessible_labels():
+    from scripts.build_site import namespace_anchors
+
+    html = '<h2 id="title">Old</h2><p id="body" data-id="cache" aria-labelledby="title outside"></p><a href="#title">Jump</a><a href="index.html#download">Current</a>'
+    result = namespace_anchors(html, "old-")
+    assert 'id="old-title"' in result and 'id="old-body"' in result
+    assert 'aria-labelledby="old-title outside"' in result
+    assert 'href="#old-title"' in result
+    assert 'href="index.html#download"' in result
+    assert 'data-id="cache"' in result
+
+
+def test_current_public_card_aliases_use_restored_data_review_not_older_checkout_state():
+    source = json.loads((ROOT / 'evidence/current_run_card.json').read_text())
+    for name in ('run_card_2026-10-25.json', 'current_run_card_2026-10-25.json'):
+        assert json.loads((DOCS / 'data' / name).read_text()) == source
+    # Keep the concurrent negative review intact as its own historical record.
+    historical = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
+    assert historical['run_id'] != source['session_id']
+    assert historical['submission_ready'] is False
+    workflow = (ROOT / '.github/workflows/pages.yml').read_text()
+    assert 'EXPECTED_CARD_SHA256' in workflow and 'hashlib.sha256(body)' in workflow
+
+
+def test_session18_h39_5_candidate_is_unique_valid_but_do_not_submit():
+    # Parallel Session 18 H39-5 experiment (knowledge/52-53): unique + format
+    # valid, frozen LOSFO gate FAILED -> DO NOT SUBMIT everywhere it appears.
+    archive = (DOCS / 'archive.html').read_text()
+    assert '719b83fb659b' in archive
+    assert 'RED DO NOT SUBMIT - HOLDOUT GATE FAILED - INSPECTION ONLY' in archive
+    card = json.loads((ROOT / 'evidence/s18_h39_5_run_card.json').read_text())
+    assert card == json.loads((DOCS / 'data/run_card_s18_2026-10-25.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
     assert card['slot_selected'] is False
+    assert card['selector_promotion'] is False
+    assert card['holdout_dti']['gate_passed'] is False
+    assert card['correlation_overlap_vs_registry']['uniqueness_pass_strict'] is True
+    assert card['validator']['nan_hard_pass'] is True
+    assert card['validator']['allfinite_hard_pass'] is True
+    assert card['validator']['no_nan_inside_footprint'] is True
+    assert card['validator']['values_in_0_1'] is True
+    assert len(card['note']) <= 140 and 'DO NOT SUBMIT' in card['note']
+    manifest = json.loads((DOCS / 'downloads/manifest.json').read_text())
+    slot = manifest['s18_candidate']
+    assert slot['verdict'] == 'negative' and slot['content_id'] == '719b83fb659b'
+    assert slot['run_card'] == 'evidence/s18_h39_5_run_card.json'
+    assert (DOCS / 'downloads' / slot['nan']).is_file()
+    assert (DOCS / 'downloads' / slot['allfinite']).is_file()
+    # The parallel safety review keeps its own card/path (label collision).
+    review = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
+    assert review['run_id'] == 's18-safety-review-20261025'
+    assert review['experiments_run'] == 0 and card['experiments_run'] == 3
+
+def test_legacy_main_root_routes_match_generated_pages_and_current_card():
+    from scripts.build_site import root_relative_links
+
+    for name in ('index.html', 'executive-summary.html'):
+        expected = root_relative_links((DOCS / name).read_text())
+        assert (ROOT / name).read_text() == expected
+        # All root-mirror relative links resolve through /docs/ and remain
+        # available when either the legacy or Actions publisher finishes last.
+        for url in re.findall(r'(?:href|src)="([^"]+)"', expected):
+            if url.startswith(('https://', 'http://', '#', 'mailto:')):
+                continue
+            path = url.split('#')[0]
+            if path:
+                assert (ROOT / path).is_file(), (name, url)
+    assert (ROOT / 'data/current_run_card_2026-10-25.json').read_bytes() == (
+        DOCS / 'data/current_run_card_2026-10-25.json'
+    ).read_bytes()
+
+
+def test_session18b_h42_1_candidate_is_unique_valid_but_do_not_submit():
+    # Parallel Session 18B H42-1 experiment (knowledge/52 preregistration,
+    # knowledge/54 result): unique + format valid, frozen LOSFO gate FAILED.
+    # Renamed from s18 at merge; never combined with H39-5 / safety-review runs.
+    archive = (DOCS / 'archive.html').read_text()
+    assert '290553965159' in archive
+    assert 'DO NOT SUBMIT — FROZEN HOLDOUT GATE FAILED' in archive
+    card = json.loads((ROOT / 'evidence/s18b_run_card.json').read_text())
+    assert card == json.loads((DOCS / 'data/run_card_s18b.json').read_text())
+    assert card['verdict'] == 'negative'
+    assert card['submission_ready'] is False
+    assert card['slot_selected'] is False
+    assert card['experiments_run'] == 3
     assert card['holdout']['label'] == 'HOLDOUT-DTI'
-    assert card['holdout']['paired_gain_ci95'][1] < 0  # falsified, CI entirely negative
     assert card['registry']['binding_pass'] is True
-    assert len(card['registry']['members']) == 10
-    assert len(card['note']) <= 140
-    man = json.loads((DOCS / 'downloads/manifest.json').read_text())
-    assert man['s18_candidate']['verdict'] == 'negative'
-    assert man['s18_candidate']['content_id'] == '290553965159'
+    assert card['validator']['no_nan_inside'] is True
+    assert card['validator']['range_0_1'] is True
+    assert card['validator']['nan_variant_hard_pass'] is True
+    assert card['preregistration_deviations']  # coherence-vs-support deviation disclosed
+    assert len(card['note']) <= 140 and 'DO NOT SUBMIT' in card['note']
+    manifest = json.loads((DOCS / 'downloads/manifest.json').read_text())
+    slot = manifest['s18b_candidate']
+    assert slot['verdict'] == 'negative' and slot['content_id'] == '290553965159'
+    assert slot['run_card'] == 'evidence/s18b_run_card.json'
+    assert slot['sha256_allfinite'] == card['raster_sha256']
+    assert (DOCS / 'downloads' / slot['nan']).is_file()
+    assert (DOCS / 'downloads' / slot['allfinite']).is_file()
+    # The parallel Session 18 artifacts keep their own names/numbers.
+    assert manifest['s18_candidate']['content_id'] == '719b83fb659b'

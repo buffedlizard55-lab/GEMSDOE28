@@ -7,7 +7,12 @@ venv/
 data_cache/
 data/*
 !data/manifest.json
+# Small generated Pages compatibility alias, never training data or model arrays.
+!data/current_run_card_2026-10-25.json
 *.egg-info/
 .DS_Store
 # large intermediate arrays are never committed; small derived evidence is
 evidence/_scratch/
+
+# Static Pages deployment staging (generated in CI).
+/build/

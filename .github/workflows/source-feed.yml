@@ -1,14 +1,14 @@
-name: Source feed (official sources only; never drivendata.org)
+name: Source metadata feed (no competition requests)
 
 # Runs on a GitHub-hosted runner because the build sandbox can reach only github.com.
-# Writes docs/data/feed.json + feed_history.json to the branch that triggered the run.
+# Writes feed data and rebuilt pages on the configured ref. No branch-push race with active research.
 # It never requests drivendata.org (hard guard in the script), uploads nothing, reads no scores.
 on:
   schedule:
     - cron: '17 6 * * *'
   workflow_dispatch:
   push:
-    branches: ['arena/**']
+    branches: [main]
     paths:
       - 'scripts/refresh_source_feed.py'
       - 'registry/sources.json'
@@ -33,9 +33,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install requests
-      - name: Refresh feed
-        run: python scripts/refresh_source_feed.py
+      - name: Refresh source metadata and rebuild dated pages (stdlib only)
+        run: |
+          python scripts/refresh_source_feed.py
+          python scripts/build_site.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit feed to this branch only
@@ -43,8 +44,9 @@ jobs:
           set -euo pipefail
           git config user.name 'GEMS source feed'
           git config user.email 'gems-feed@users.noreply.github.com'
-          git add docs/data/feed.json docs/data/feed_history.json
-          git commit -m "feed: refresh official-source checks" || exit 0
+          git add docs/data/feed.json docs/data/feed_history.json docs/*.html index.html executive-summary.html data/current_run_card_2026-10-25.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "feed: refresh source metadata and dated pages"
           for i in 1 2 3 4; do
             git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
             sleep $((i * 4))

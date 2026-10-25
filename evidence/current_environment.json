@@ -1,0 +1,21 @@
+{
+  "scope": "Software environment for integrity/contract tests; no geological experiment",
+  "python": "3.11.2",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "rasterio": "1.4.4",
+    "scikit-image": "0.26.0",
+    "scikit-learn": "1.9.1",
+    "networkx": "3.6.1",
+    "pandas": "3.1.0",
+    "matplotlib": "3.11.2",
+    "pyproj": "3.7.2",
+    "pytest": "9.1.1",
+    "pyyaml": "6.0.3",
+    "ruff": "0.17.2",
+    "geopandas": "1.2.0",
+    "pyogrio": "0.13.0",
+    "shapely": "2.2.0"
+  }
+}

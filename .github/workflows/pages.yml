@@ -6,9 +6,17 @@ on:
     paths:
       - 'docs/**'
       - 'index.html'
+      - 'executive-summary.html'
+      - 'data/current_run_card_2026-10-25.json'
       - '.nojekyll'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
+  workflow_run:
+    # GITHUB_TOKEN commits do not fire push workflows. Deploy after the scheduled
+    # feed finishes so generated observation dates cannot remain stale on Pages.
+    workflows: ['Source metadata feed (no competition requests)']
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -21,20 +29,86 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    outputs:
+      run_card_sha256: ${{ steps.release-proof.outputs.sha256 }}
     steps:
       - uses: actions/checkout@v4
+      - name: Bind the deployed run card to checked-out bytes
+        id: release-proof
+        run: echo "sha256=$(sha256sum docs/data/current_run_card_2026-10-25.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+      - name: Prefer one Actions-based Pages deployment source
+        id: pages-source
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow
+      - name: Report source-configuration permission limit without hiding deployment
+        if: steps.pages-source.outcome == 'failure'
+        run: echo '::warning::Pages source could not be changed with the workflow token. Deployment still runs; inspect the actual deploy result, not this configuration attempt.'
       - uses: actions/configure-pages@v5
+      - name: Stage the site and preserve legacy /docs/ URLs
+        run: |
+          mkdir -p build/pages/docs
+          cp -a docs/. build/pages/
+          cp -a docs/. build/pages/docs/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: build/pages
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 10
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published root and legacy routes and exact run-card bytes
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_CARD_SHA256: ${{ needs.build.outputs.run_card_sha256 }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import time
+          import urllib.request
+
+          base = os.environ['PAGE_URL'].rstrip('/') + '/'
+          expected = os.environ['EXPECTED_CARD_SHA256']
+          paths = ['', 'executive-summary.html', 'docs/', 'docs/executive-summary.html',
+                   'data/current_run_card_2026-10-25.json',
+                   'docs/data/current_run_card_2026-10-25.json']
+          # GitHub's deployment runner checks its own published website. This is
+          # not a browser visual test, a portal call, or external research access.
+          for attempt in range(12):
+              try:
+                  verified = []
+                  for path in paths:
+                      url = base + path + '?release=' + os.environ['GITHUB_SHA']
+                      request = urllib.request.Request(url, headers={'Cache-Control': 'no-cache'})
+                      with urllib.request.urlopen(request, timeout=20) as response:
+                          body = response.read()
+                          assert response.status == 200, url
+                      if path.endswith('.json'):
+                          assert hashlib.sha256(body).hexdigest() == expected, 'stale run-card bytes: ' + url
+                          card = json.loads(body)
+                          assert card['submission_ready'] is False and card['slot_selected'] is False
+                      else:
+                          assert b'data-submission-ready="false"' in body, 'missing locked-download marker: ' + url
+                          assert b'Submission download locked' in body, url
+                      verified.append(base + path)
+                  print(json.dumps({'verified_urls': verified, 'run_card_sha256': expected,
+                                    'submission_ready': False, 'visual_browser_test': False}, indent=2))
+                  break
+              except Exception as exc:
+                  print(f'Published-site check {attempt + 1}/12: {exc}', flush=True)
+                  if attempt == 11:
+                      raise
+                  time.sleep(10)
+          PY

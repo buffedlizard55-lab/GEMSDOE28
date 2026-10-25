@@ -21,13 +21,14 @@ def complete_card():
 
 
 def test_missing_evidence_fails_closed():
-    assert not promotion_gate({})["submission_ready"]
+    assert not promotion_gate({})["promotion_eligible"]
 
 
 def test_complete_schema_does_not_select_slot():
     result = promotion_gate(complete_card())
     assert result["verdict"] == "promote"
     assert result["slot_selected"] is False
+    assert result["submission_ready"] is False
 
 
 @pytest.mark.parametrize("stage", ["surface", "dots"])
@@ -36,14 +37,14 @@ def test_complete_schema_does_not_select_slot():
 def test_duplicate_or_unmeasured_fails(stage, field, value):
     card = complete_card()
     card["registry"][stage][0][field] = value
-    assert not promotion_gate(card)["submission_ready"]
+    assert not promotion_gate(card)["promotion_eligible"]
 
 
 @pytest.mark.parametrize("auc", [0.91, float("nan"), float("inf"), -1, True])
 def test_canaries(auc):
     card = complete_card()
     card["feature_canaries"]["f"] = auc
-    assert not promotion_gate(card)["submission_ready"]
+    assert not promotion_gate(card)["promotion_eligible"]
 
 
 def test_missing_each_required_field_fails():
@@ -51,16 +52,16 @@ def test_missing_each_required_field_fails():
     for field in card:
         changed = deepcopy(card)
         del changed[field]
-        assert not promotion_gate(changed)["submission_ready"], field
+        assert not promotion_gate(changed)["promotion_eligible"], field
 
 
 def test_exact_protocol_boundaries():
     card = complete_card()
     card["feature_canaries"]["f"] = 0.90
     card["registry"]["surface"][0].update(spearman=0.90, within_3px_fraction=0.70)
-    assert promotion_gate(card)["submission_ready"]
+    assert promotion_gate(card)["promotion_eligible"]
     card["holdout"]["paired_gain_ci95"] = [0, 0.01]
-    assert not promotion_gate(card)["submission_ready"]
+    assert not promotion_gate(card)["promotion_eligible"]
 
 
 @pytest.mark.parametrize("value", [None, [], "invalid", 1, True])
@@ -73,7 +74,7 @@ def test_malformed_card_fails_closed(value):
 def test_malformed_sections_fail_closed(section, value):
     card = complete_card()
     card[section] = value
-    assert not promotion_gate(card)["submission_ready"]
+    assert not promotion_gate(card)["promotion_eligible"]
 
 
 @pytest.mark.parametrize("stage", ["surface", "dots"])
@@ -81,7 +82,7 @@ def test_malformed_sections_fail_closed(section, value):
 def test_malformed_comparison_fails_closed(stage, value):
     card = complete_card()
     card["registry"][stage] = value
-    assert not promotion_gate(card)["submission_ready"]
+    assert not promotion_gate(card)["promotion_eligible"]
 
 
 @pytest.mark.parametrize("stage", ["surface", "dots"])
@@ -97,17 +98,66 @@ def test_missing_extra_and_repeated_registry_comparisons(stage):
             card["registry"][stage] *= 2
         else:
             card["registry"][stage][0]["raster_sha256"] = "e" * 64
-        assert not promotion_gate(card)["submission_ready"], mode
+        assert not promotion_gate(card)["promotion_eligible"], mode
 
 
 @pytest.mark.parametrize("members", [None, [], ["bad"], [None], ["d" * 64, "d" * 64]])
 def test_invalid_registry_inventory(members):
     card = complete_card()
     card["registry"]["members"] = members
-    assert not promotion_gate(card)["submission_ready"]
+    assert not promotion_gate(card)["promotion_eligible"]
 
 
 def test_extreme_json_integer_is_negative_not_exception():
     card = complete_card()
     card["holdout"]["dti"] = 10 ** 1000
-    assert not promotion_gate(card)["submission_ready"]
+    assert not promotion_gate(card)["promotion_eligible"]
+
+
+@pytest.mark.parametrize("auc", [0.0, 0.01, 0.099999])
+def test_inverted_leakage_does_not_evade_gate(auc):
+    card = complete_card()
+    card["feature_canaries"]["f"] = auc
+    assert promotion_gate(card)["verdict"] == "negative"
+
+
+def test_surface_does_not_require_impossible_preplacement_dot_overlap():
+    card = complete_card()
+    card["registry"]["surface"][0]["within_3px_fraction"] = None
+    assert promotion_gate(card)["promotion_eligible"]
+    card["registry"]["dots"][0]["within_3px_fraction"] = None
+    assert not promotion_gate(card)["promotion_eligible"]
+
+
+def test_negative_rank_duplicate_is_rejected_conservatively():
+    card = complete_card()
+    card["registry"]["surface"][0]["spearman"] = -0.90001
+    assert not promotion_gate(card)["promotion_eligible"]
+
+
+@pytest.mark.parametrize("field", ["lane", "submission_name", "hypothesis", "mechanism", "non_fault_mimic"])
+@pytest.mark.parametrize("value", [True, {"not": "text"}, ["not text"], " "])
+def test_required_text_cannot_be_replaced_by_truthy_containers(field, value):
+    card = complete_card()
+    card[field] = value
+    assert not promotion_gate(card)["promotion_eligible"]
+
+
+def test_schema_success_always_withholds_upload_authorization():
+    # This checker has no raster/template path and cannot verify bytes or select a slot.
+    card = complete_card()
+    for status in (None, True, False, "approved"):
+        card["submission_ready"] = status
+        card["selector_approved"] = status
+        result = promotion_gate(card)
+        assert result["evidence_schema_passed"] is True
+        assert result["submission_ready"] is False
+        assert result["slot_selected"] is False
+
+
+@pytest.mark.parametrize("card", [complete_card(), {}, []])
+def test_concurrent_schema_api_names_are_consistent_without_granting_a_slot(card):
+    result = promotion_gate(card)
+    assert result['evidence_schema_passed'] is result['promotion_eligible']
+    assert result['submission_ready'] is False
+    assert result['slot_selected'] is False

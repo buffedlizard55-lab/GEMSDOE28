@@ -1,169 +1,174 @@
-# Session 18 result — H42-1 migration-extrapolated relocation: NEGATIVE (falsified with controls)
+# Session 18 result — H39-5 migration-extrapolated placement: NEGATIVE (holdout gate)
 
-**Date:** 2026-10-25. **Lane/preregistration:** `knowledge/52_preregistration_H42-1_migration_relocation.md`
-(frozen before any fit; Session 16's handed-forward next lane). **Experiments used:** 3/3.
-**Slot spent:** none. **Verdict:** `negative` — the unique TIFF built in Exp 3 is
-inspection-only (🔴 DO NOT SUBMIT). Every score below is **HOLDOUT-DTI** (local
-hide-and-recover proxy) or **OWNER-REPORTED**; nothing is ORGANIZER-CONFIRMED.
+**Date:** 2026-10-25. **Lane/preregistration:** `knowledge/52_preregistration_H39-5_extrapolated.md`
+(frozen before any fit). **Experiments used:** 3/3. **Slot spent:** none. **Verdict: `negative`.**
+Run card: `evidence/s18_h39_5_run_card.json` (= `docs/data/run_card_s18_2026-10-25.json`).
 
-## Why 0.2778 won (re-verified byte-for-byte this session; education only)
+**Bottom line for the operator: NO FILE IS APPROVED TO SUBMIT.** This session generated a
+genuinely unique, format-valid TIF (`719b83fb659b`, first candidate in Sessions 15–18 to pass
+the strict uniqueness rule), but the frozen holdout rejected its geology decisively. It is
+published inspection-only with a 🔴 DO NOT SUBMIT banner. Downloading it for the portal would
+spend a weekly slot on dots measured to earn *less* than the weakest dots they replaced.
 
-After restoring all 17 hash-pinned inputs (prepared-feature SHA-256 `83ed2704…`
-reproduces Session 14 exactly), the focus-site rasters were fetched from GitHub and
-compared pixel-exactly (`evidence/s18_champion_forensic.json`): champion `e5eb6e7e`
-(37,654 dots, SHA-256 `c55bafc4…`) = solo `8acb75e1` (40,199 dots; GEMSDOE28 and
-GEMSDOE31 copies dot-identical) minus the d(catalogue) ≤ 2 px ring (2,545 removed,
-0 added); solo = `dotted-h19-5-d2-8` (44,090 dots; GEMSDOE25/30 dot-identical) minus
-the ≤ 1 px ring (3,891 removed); GEMSDOE36 = champion + 1,200 dots, 0 removed. The
-group's best owner-reported score is therefore **emission hygiene on one unchanged
-H19-5 surface** — flank dots beside mapped faults earn ≈ 0 credit at near-full FP cost
-under DTI (α = 0.2, β = 0.8, 300 m kernel), so deleting them pays ≈ +2.76×10⁻⁶ DTI
-each (Sessions 15–16). A ring-3 copy would be a subset of the champion
-(binary φ(champion, solo) = 0.968 measured today > 0.90 duplicate threshold) and was
-not built. Beating 0.2778 *uniquely* needs new credit above τ ≈ 0.059 credit/dot from
-differently placed dots. This session tested the one placement lever Session 16 left
-open. It failed cleanly (below), so **no, this lane does not beat 0.2778**, and no
-projection to that effect is made.
+## Why 0.2778 won, and whether it can be beaten (the standing question)
 
-## Experiment 1 — vector field + leakage canary (`evidence/s18_canary.json`) PASS
+Established in Sessions 15–17 and not re-litigated here (`knowledge/50`, `knowledge/51` §1;
+this session re-fetched both scored rasters and verified their bytes against the published
+audit SHA-256 pins — champion `c55bafc4…`, GEMSDOE36 `e1589102…`): the GEMSDOE32 champion
+(37,654 dots, **OWNER-REPORTED** 0.2778; no organizer receipt exists in any fetched
+repository, so it is not ORGANIZER-CONFIRMED) is byte-identical to the 0.2708 solo file
+minus every dot within 2 px of the catalogue. The 0.2477 → 0.2600 → 0.2708 → 0.2778 ladder
+is one unchanged detection surface under successively cleaner **emission hygiene**
+(Poisson spacing 1.5 → 2.8 px; catalogue-flank rings 1 → 2 px), at a constant
+≈ +2.76×10⁻⁶ DTI per deleted flank dot — the signature of dots carrying ≈ 0 credit at
+≈ full false-positive weight under the 300 m triangular kernel. It won by *removing
+provably worthless mass*, not by detecting anything new; and its obvious continuation
+(ring 3) is a > 95 % duplicate of the champion, barred by the uniqueness protocol.
 
-Six label-free bands alone vs LOSFO seed-310 withheld systems (14,681 hidden px):
-max(AUC, 1−AUC) = 0.5032–0.5270 for all (signed migration, coherence, vector magnitude,
-shift magnitude) — far below the 0.90 leakage stop; honestly weak univariate signal, as
-in S15/S16. Max |Spearman| vs in-stack bands 0.486 (sample 200 k). Label-free inventory
-already warned of trouble: the vector field has support on **93.2 %** of the footprint
-with median |v| = 5.18 px on support — at 100 m the HG ridge fields are dense, so
-nearest-ridge matching is mostly matching *different* nearby ridges, not tracking one
-physical edge across continuation levels. 49.7 % of footprint pixels carry a nominal
-shift ≥ 0.5 px. The frozen design ran anyway (no mid-stream retuning). (Audit note:
-Exp 1 was executed twice before the gate: the first run's supplementary Spearman table
-contained NaNs from prepared-stack NaN pixels; a reporting-only finite-pair fix was
-applied and the deterministic build re-run — bands and all AUCs identical.)
+**Can a unique file beat it?** The arithmetic from `knowledge/51` still binds: at the
+champion's budget, +0.04 DTI needs ≈ +1,150 px of new credit — roughly 2,600–3,400 new
+dots earning 0.4–0.5 credit each, or a much larger swapped population earning above the
+break-even τ ≈ 0.055–0.059 credit/dot. This session tested the last physically-motivated
+*placement* idea in the queue (below) and it earns below break-even. The honest answer
+remains: **not with any mechanism yet demonstrated in this repository family.** What this
+session *did* change is the other half of the problem — see "The one positive finding".
 
-## Experiment 2 — frozen LOSFO gate, seeds 310–314 (`evidence/s18_h42_losfo_gate.json`) FAIL
+## Experiment 1 — pool + canary + pre-placement uniqueness (`evidence/s18_canary.json`)
 
-HOLDOUT-DTI (shared `run_losfo_harness.eval_set`; `losfo.py` + `metric.py`; whole fault
-systems withheld, 600 m buffer, visible-only blocking, pixel-exact masks; pooled;
-76,869 withheld cell-truth px over 20 paired cells):
+Label-free surfaces from TMI (band 14) and gravity (band 13). **Canary PASS** (no leakage):
+single-feature AUC vs. LOSFO seed-310 withheld systems = 0.499 / 0.499 / 0.499
+(TMI / gravity / union) — no leakage, and honestly ≈ no univariate signal at the
+extrapolated positions. Eligible pool (|v| ≥ 2 px, d_cat > 2 px): 858,170 px.
+Displacement magnitudes are large: on shallow ridges, median |v| = 6.3 px (TMI) and
+9.9 px (gravity), p90 = 15.8 / 26.6 px — for ridges that vanish by 2 km, "nearest deep
+ridge" is an unrelated ridge, not a migration vector (this is the mechanism's weak point,
+quantified before the gate, correctly not retuned after it).
+**Pre-placement uniqueness PASS:** max |Spearman(lane surface, registry binary)| = 0.0037;
+top-37,654 thinned pool dots are only **24.4 %** within 3 px of the densest registry probe
+(vs. 79.9 % / 91.3 % for the S15/S16 detector emissions) and 19.4 % vs. the scored champion.
+Off-ridge placement really does leave the ridge blanket.
 
-| arm | pooled DTI | Δ vs base | credit/dot | dots |
-|---|---:|---:|---:|---:|
-| base (detector dots) | 0.105485 | — | 0.04851 | 241,640 |
-| **phys (up-dip relocated)** | **0.100528** | **−0.004957** | 0.04817 | 224,714 |
-| anti (sign-flipped) | 0.101039 | −0.004446 | 0.04859 | 223,288 |
-| rand (seeded rotations) | 0.100020 | −0.005465 | 0.04878 | 218,029 |
+*Implementation disclosure:* the first Exp1 invocation crashed with a `NameError` on a
+leftover line **after** writing its evidence; the line was removed and Exp1 rerun cleanly.
+The surface archive is byte-identical across both runs (SHA-256 `caa1127b…`); the JSON
+differs only in its `seconds` field. Logged as `s18-exp1-rerun-nameerror`.
 
-Mean paired ΔDTI(phys−base) **−0.004894**, paired-bootstrap 95 % CI
-**[−0.006577, −0.003294]** (entirely negative), **1/20 cells** positive, all 5 seed
-means negative (−0.0033…−0.0058), all 4 fold means negative (NE worst, −0.0100).
-39.7 % of base dots moved ≥ 1 px (cells 31–51 %; mean rounded shift ≈ 1.7 px), so the
-test was strong, not underpowered. Gate: **G1 FAIL, G2 FAIL, G3 FAIL** (phys −0.00496
-does not beat anti −0.00445 or clear rand −0.00546 by any dip-specific margin),
-**G4 FAIL** (0 dots on visible-known ✓, but post-shift re-thinning shrinks the count
-7.00 % > 5 % cap), G5 PASS → `gate_passed=false`.
+## Experiment 2 — frozen LOSFO gate, seeds 310–314 (`evidence/s18_h39_5_losfo_gate.json`) FAIL
 
-**Reading (falsification, not mere null):** relocating dots in *any* direction —
-physical, opposite, or random — costs the same ≈ −0.0044…−0.0055 DTI. The detector
-ridge position itself carries the credit, and nearest-ridge migration vectors at 100 m
-extract no usable dip signal to improve on it. The H42-1 relocation hypothesis, *with
-this vector estimator*, is closed: do not retune sign, scale, cap, or depth source on
-seeds 310–314. A future migration attempt would first need same-edge ridge *tracking*
-across continuation levels (path-following a single edge as h grows) under a fresh
-preregistration on seeds ≥ 320 — and after this result its expected value ranks below
-H42-2 (segment-object ranking) and H42-3 (alteration lineaments) in `knowledge/52` §2.
+HOLDOUT-DTI (shared `run_losfo_harness.eval_set`; α=0.2, β=0.8, 300 m triangular kernel,
+pooled; 76,869 withheld truth px over 20 paired cells; whole fault systems, 600 m buffer,
+visible-only catalogue features, pixel-exact visible-fault mask):
 
-## Experiment 3 — unique TIFF built, inspection-only (`evidence/s18_candidate_build.json`)
+| arm | pooled DTI | credit/dot | dots |
+|---|---:|---:|---:|
+| D0 (frozen detector) | 0.105485 | 0.04851 | 241,640 |
+| D1 (35 % extrapolated swap) | 0.094754 | 0.04353 | 241,640 |
 
-`gems28-h42-1-migx-reloc-b1-20261025-290553965159-{nan,allfinite}.tif` (+ single-member
-zip), 34,492 dots (37,521 base dots → 17,373 moved ≥ 1 px, 46.3 % → re-thin 34,492).
-This file **is** the unique TIF required by the task — generated by the frozen lane,
-never copied from any prior submission — and it is labelled **🔴 DO NOT SUBMIT**
-because its frozen gate failed. Downloading it for inspection is safe; uploading it
-would spend a weekly slot on a falsified idea.
+Pooled Δ **−0.010731**, mean paired **−0.011027**, 95 % CI **[−0.01460, −0.00743]**,
+2/20 cells positive, every seed mean negative (−0.0077 … −0.0159), every fold mean
+negative (NE −0.0169, SE −0.0132, NW −0.0100, SW −0.0040). All 84,566 target swaps filled
+with real extrapolated dots (0 backfilled), counts matched exactly, 0 dots on the visible
+catalogue. Gates: **G1 FAIL, G2 FAIL, G3 FAIL**, G4 PASS, G5 PASS → `gate_passed=false`.
+This is not a spread failure or a borderline CI: pooled TP falls by 1,205 px at identical
+N, i.e. the extrapolated dots are worse than the *weakest 35 %* of ordinary detector dots.
+The preregistration forbids retuning on these seeds; none was done. H39-5 as specified
+(full-vector, unclipped extrapolation) is **refuted** — and the Exp1 diagnostics say why:
+median jumps of ~860 m put most novel dots outside the 300 m credit kernel of any fault,
+exactly what a dipping-contact/dike mimic (or a vanished ridge) would produce.
 
-- **Format (answers the portal error "Predicted values must be in range [0, 1]"):**
-  both variants pass every hard check in `submission.verify_geotiff` (independent
-  re-read): single-band float32, EPSG:32611, 3730 × 3292, template transform/bounds,
-  values inside the footprint exactly {0.0, 1.0}, 0 NaN inside the footprint; the
-  **all-finite record file has no NaN anywhere** (strict whole-array [0, 1] PASS),
-  0 dots on the catalogue, min d_cat > 2 px. SHA-256 in `evidence/s18_run_card.json`.
-- **Uniqueness vs the binding scored registry** (ten owner-reported scored rasters of
-  GEMSDOE24/25/27/28/30/31/32/33/36, `knowledge/52` §3): **PASS vs every member** —
-  binary φ ≤ 0.029, final dots within 3 px ≤ 45.8 % (champion: φ = 0.028, 40.3 %),
-  surface Spearman ≤ 0.90. *Disclosed:* 89.9 % of dots lie within 3 px of the unscored
-  dense probe blanket `52a13184267e` — the standing `s15-uniqueness-dense-probes`
-  irregularity; under the strictest any-download reading no ridge-based file can pass,
-  which is why the binding registry is the scored set and the table is published for
-  the selector.
-- **Evidence schema:** `scripts/check_promotion.py docs/data/run_card_s18.json` →
-  `negative`, failing *only* on "no positive paired gain CI" — the paperwork is
-  complete; the science failed. That is the intended fail-closed behaviour.
+## Experiment 3 — build + validator + uniqueness (`evidence/s18_candidate_build.json`)
 
-## Run card (summary; machine-readable card: `evidence/s18_run_card.json`)
+`gems28-h39-5-extrap-swap35-20261025-719b83fb659b-nan.tif`, 37,521 dots
+(base 37,521 → 24,389 kept + 13,132 extrapolated, 0 backfilled; min d_cat > 2 px).
+**Validator: all hard checks PASS** on both variants (single-band float32, EPSG:32611,
+3730×3292, template transform; values exactly {0,1} inside the footprint; 0 NaN inside;
+all-finite variant has no NaN anywhere — the range-safe answer to the owner's earlier
+"Predicted values must be in range [0, 1]" portal error, whose root cause remains
+unconfirmed). Independently re-read and re-hashed after the build: SHAs in the run card
+match the bytes on disk.
+**Uniqueness: PASS (strict)** — worst registry raster is the dense unscored probe
+`52a13184267e` at **68.3 %** of final dots within 3 px (limit 70 %; S15/S16 were
+79.9 % / 91.3 %); vs. the scored champion 34.0 %; lane-surface |Spearman| ≤ 0.0037
+pre-placement and 0.0147 vs. the detector probability surface. Pass-3 verification
+(`evidence/s18_focus_sites_overlap.json`, `scripts/check_s18_focus_sites.py`) extended
+the check to the remaining focus-site scored rasters, all byte-verified: GEMSDOE33
+`cb490425926e` 36.1 %, GEMSDOE25/30 `d2-8` 36.5 %, GEMSDOE24 `d1-5` 37.9 % — all pass. This file is **not a copy**
+of any previous submission; it is the first generated candidate here to clear the
+protocol's duplicate rule against every local registry raster including the probes.
 
-- Hypothesis/mechanism/mimic: knowledge/52 §1 (dipping contact/dike is the named mimic).
-- HOLDOUT-DTI: phys pooled 0.100528, cell-bootstrap 95 % CI [0.088259, 0.113720];
-  Δ −0.004957, paired CI [−0.006577, −0.003294]; 76,869 withheld positives.
-- Registry: binding PASS (above); raster SHA-256, validator output, unique name
-  `GEMSDOE28-h42-1-migx-reloc-b1-290553965159` and the 92-character note are in the card.
-- Verdict: **negative**. Negative results are deliverables; no slot selected or spent.
+**Verdict `negative`** because promotion requires gate ∧ uniqueness ∧ validator
+(`knowledge/52`): uniqueness and format cannot rescue rejected geology.
 
-## Preregistration deviation (Pass-2 review finding, disclosed)
+## The one positive finding (and what it unlocks)
 
-`knowledge/52` §1 freezes the combined vector as "averaged across the two fields
-weighted by their three-level ridge coherence"; `migration.build_migration_vectors` as
-implemented **support-averages** the per-field vectors (mean over fields with a nonzero
-corridor vector). Found by re-reading code against preregistration in Pass 2; recorded
-in the run card (`preregistration_deviations`) and `registry/irregularities.json`
-(`s18-vector-combination-deviation`). The negative verdict is robust to this choice —
-phys, anti and rand are equally harmful, so no reweighting of the same mismatched
-nearest-ridge vectors can be credited with a dip signal — but strictly, the
-coherence-weighted estimator as written remains untested. Substituting it now would be
-a new variant on spent seeds and is prohibited; any retry needs a fresh preregistration
-on seeds ≥ 320. No other deviation was found: canary bands, gate arms, thresholds,
-blocking, budget search, thinning, registry and validator all match `knowledge/52`.
+Sessions 15–16 concluded the detector ridge network is a uniqueness ceiling: any
+re-derived detector re-emits the same ridge pixels and fails the > 70 % rule against the
+dense probes. H39-5 breaks that ceiling *mechanically*: a 35 % off-ridge swap at matched
+count lands at 68.3 %, and the pure extrapolated pool sits at 24.4 %. **Uniqueness is no
+longer the binding constraint — credit is.** The swap machinery
+(`migration.extrap_swap`, shared module, unit-tested) is surface-agnostic: any future
+label-free surface whose novel dots earn > τ ≈ 0.059 credit/dot on LOSFO far-field truth
+can now be emitted uniquely at the champion's budget. The ranked queue in `knowledge/52`
+stands, with H39-2 (radiometric alteration lineaments, low-Th/K Hessian ridges ≥ 1 km)
+next; its preregistration should add an Exp1 *signal floor* (e.g. canary AUC and a
+pool-credit screen on the canary seed) so a signal-free surface stops before five LOSFO
+seeds are spent — the clearest process lesson of this run. A displacement-clipped
+(|v| ≤ 5 px, persistent ridges only) extrapolation variant is a *different* lane requiring
+its own preregistration and fresh seeds ≥ 320; it is not a retune of this one and is not
+recommended ahead of H39-2, because the canary gives no evidence the clipped subset
+carries signal either.
 
-## What would actually beat 0.2778 (updated read)
+## Site / safety fixes shipped with this result
 
-1. Placement perturbations of the standard ridge are now closed in both forms tested:
-   feature-space (H39-1/H40-1, surface ≈ duplicate, gate FAIL) and geometric
-   (H42-1, unique, decisively harmful). The ridge location is information; moving off
-   it without a same-edge physical track destroys credit at ≈ 0.005 DTI per 40 % moved.
-2. The only addition pattern that has ever cleared τ on far-field truth in this repo is
-   small, multi-physics-*corroborated* on-ridge addition (H38-1, +0.000747 LOSFO). Its
-   scale (200 dots ≈ +0.0007) is two orders below the ≈ +1,150-credit gap to the top,
-   so a competitive unique file needs a corroborator with far larger *specific* support.
-3. Next preregistration recommendation: **H42-2 segment-object ranking** (knowledge/52
-   §2) — it reallocates budget *along* the ridge to long, straight, single-facing
-   segments instead of moving dots off it, on fresh seeds ≥ 320, with the LOSFO gate
-   and binding-registry uniqueness defined exactly as here. H42-3 (radiometric
-   alteration lineaments as objects) is the follow-on corroborator candidate.
-4. Data blockers unchanged: GDR 1391 temperature attributes and MT depth slices are
-   official and free but unreachable as bytes from this sandbox (egress allowlist);
-   the obtainable GEMSDOE30 probe raster is presence-only. The Actions bridge
-   (`.github/workflows/fetch-gdr-external-layers.yml`) remains the route to unblock them.
+Pass-2 review found the parallel Session 17 panel had reintroduced "OK to download — the
+operator decides whether to submit" language for historical files, contradicting the
+first-screen NO FILE APPROVED banner (the same defect class as
+`submission-ui-mixed-disposition-2026-10-25`). Fixed in `scripts/build_site.py`: the
+status table now answers "NONE" up front, lists the S18 candidate first as
+🔴 DO NOT SUBMIT, marks H36-1/H38-1 "NOT APPROVED TO SUBMIT — inspection only", and the
+Session 17 one-click panel is relabeled a historical artifact. Regression test:
+`test_session18_candidate_is_unique_valid_but_do_not_submit`. Logged as
+`s18-site-mixed-disposition`.
 
-## Three review passes (this session)
+## Limitations and next steps
 
-- **Pass 1 — implement & verify:** restored all 17 pinned inputs + rebuilt the 32-band
-  feature cache (SHA-256 reproduces Session 14); byte-forensic of the nine focus sites'
-  top files; froze `knowledge/52` (lane + 5 ranked hypotheses + gate) before any fit;
-  Exp 1 canary PASS (AUCs 0.503–0.527); Exp 2 frozen LOSFO gate FAIL with controls;
-  Exp 3 built the unique TIF (binding uniqueness PASS, validators PASS); run card +
-  `check_promotion.py` (negative on the paired-gain CI only); site + README updated so
-  the download/submit answer is obvious at the top of the first screen.
-- **Pass 2 — bugs & edge cases:** full test suite 329 passed / 2 skipped; `ruff` clean;
-  `scripts/verify_downloads.py` PASS (307 checks, 0 failures); independent re-read of
-  both TIF variants, manifest/ZIP/note hash recomputation, and an independent
-  within-3 px recomputation vs the champion (0.4034, matches build record); HTTP preview
-  served the site and the downloaded all-finite TIF hash-matched the run card. Found and
-  disclosed the vector-combination deviation above; fixed a note-length overflow in
-  `finalize_s18.py` before it could write a bad card.
-- **Pass 3 — request reconciliation:** unique TIF generated (not copied), obvious
-  download/submit status, automated inspection only, single frozen lane, surface+dot
-  uniqueness vs the scored registry, HOLDOUT-DTI labelling, leakage canary, JSON run
-  card, 3-experiment budget, 5 ranked hypotheses with data-obtainability checks,
-  executive-summary submission instructions, and the [0, 1] portal-error remedy are all
-  satisfied as documented; the scientific verdict is `negative`, so **no file is
-  approved and no weekly slot should be spent**. Remaining work and limitations are in
-  "What would actually beat 0.2778" above.
+1. All scores cited for other sites remain OWNER-REPORTED; the 0.4413 vs. 0.3195
+   leaderboard maxima in circulation still conflict and were not re-verified (no
+   DrivenData access from this environment; nothing was uploaded, polled or scraped).
+2. Inputs are hash-pinned owner mirrors, not organizer-authenticated downloads
+   (`bridge-hashes-not-authenticated`). Prepared-features SHA reproduced Session 16's
+   pin exactly (`83ed2704…`), so cross-session comparability holds.
+3. LOSFO truth is still *mapped* faults held out by construction; absolute HOLDOUT-DTI
+   overstates performance on genuinely unmapped faults (`src/gems27/losfo.py` header).
+   The D1–D0 paired comparison is the meaningful quantity, and it is decisively negative.
+4. Seeds 310–314 are consumed for this placement family. Next lane: H39-2 with an
+   Exp1 signal floor; fresh seeds ≥ 320; same G1–G5 gate, uniqueness and validator rules.
+5. GitHub Pages publication remains subject to the previously logged legacy-build
+   error; raw `github.com/.../raw/main/...` links are the trustworthy route.
+
+**Sources (official, for manual review):** competition
+https://www.drivendata.org/competitions/306/competition-doe-gems/ · problem page
+https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/ · rules
+https://docs.nlr.gov/docs/fy26osti/96647.pdf · leaderboard
+https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/ ·
+reference solution https://github.com/drivendataorg/gems-prize-reference-solution ·
+USGS GeoDAWN https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and ·
+INGENIOUS/GDR 1391 https://gdr.openei.org/submissions/1391 · GEMSDOE32 champion page
+https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html · CRS https://epsg.io/32611 ·
+Tversky index https://en.wikipedia.org/wiki/Tversky_index · Blakely (1995) *Potential
+Theory in Gravity and Magnetic Applications*, Cambridge University Press (upward
+continuation exp(−|k|h)).
+
+## Merge reconciliation note (added before PR merge)
+
+`main` advanced in parallel with its own "Session 18" safety review (0 experiments;
+`evidence/current_run_card.json`), colliding on `evidence/s18_run_card.json`. Resolution:
+the safety review keeps that path; this experiment's card moved to
+`evidence/s18_h39_5_run_card.json` with references updated (`s18-session-label-collision`).
+The merged site keeps main's locked current pages and archive architecture; the H39-5
+panel renders in the archive with the same 🔴 DO NOT SUBMIT verdict. Adding the
+`s18_candidate` manifest slot changed `docs/downloads/manifest.json`, so the safety
+review's hash-bound card was re-pinned with its own recorder
+(`scripts/record_current_review.py`, semantics unchanged). Post-merge verification:
+424 tests passed, 2 skipped; ruff clean; downloads audit 337 checks PASS. No evidence
+from either run was recomputed or combined.

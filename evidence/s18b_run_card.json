@@ -1,5 +1,5 @@
 {
-  "session": "S18 (2026-10-25), branch arena/384a5345-gemsdoe28, lane H42-1 (knowledge/52)",
+  "session": "S18B parallel run (2026-10-25), branch arena/384a5345-gemsdoe28, lane H42-1 (knowledge/52). Renamed from S18 at merge: a parallel Session 18 (H39-5) already owned s18_* names on main; never combine the two sessions' numbers.",
   "lane": "H42-1 migration-extrapolated relocation: TMI+gravity HG-ridge migration vector field (0/1/2 km upward continuations) x depth-to-basement-scaled up-dip relocation of frozen-detector dots; knowledge/52 \u00a71.",
   "hypothesis": "A dipping buried fault's potential-field ridge migrates down-dip with continuation height, so relocating detector dots up-dip by migration x depth/2000 m places them on the fault's surface trace - structure the scarp-biased USGS/INGENIOUS catalogue omits - and raises far-field DTI at the champion's budget.",
   "mechanism": "Upward continuation exp(-|k|h) (shared depthslice); HG ridges via shared ridge_nms; vector = shallow->2km nearest-ridge displacement, |v|<=12px, sigma=2 corridor-smoothed, TMI/gravity support-averaged; shift = -v*clip(depth_to_base_surf,0,2000)/2000, capped 3px, catalogue+2px-ring blocked, raster-order collisions, dot_thin(2.8). Detector unchanged.",
@@ -283,7 +283,7 @@
       "frac_our_dots_within3px": 0.899194016003711,
       "registry_dots": 38545
     },
-    "disclosed_note": "Unscored dense probe downloads blanket the detector ridge; overlap vs them is disclosed in evidence/s18_candidate_build.json for the selector to adjudicate (irregularity s15-uniqueness-dense-probes)."
+    "disclosed_note": "Unscored dense probe downloads blanket the detector ridge; overlap vs them is disclosed in evidence/s18b_candidate_build.json for the selector to adjudicate (irregularity s15-uniqueness-dense-probes)."
   },
   "validator": {
     "raster_sha256": "d62d5ed1852afd1eb5ce6f3fd4736c61d15434d366f2e008dafc0aaa4d04d22a",
@@ -356,19 +356,21 @@
     "nan_variant_hard_pass": true
   },
   "preregistration_deviations": [
-    "knowledge/52 \u00a71 says the two fields' vectors are 'averaged across the two fields weighted by their three-level ridge coherence'; build_migration_vectors instead support-averages them (mean over fields with a nonzero corridor vector). Found in Session 18 Pass-2 review. The falsification is direction-agnostic (phys ~= anti ~= rand, all harmful), so the deviation cannot manufacture the negative verdict, but the literally preregistered coherence-weighted estimator remains untested and may not be substituted on seeds 310-314."
+    "knowledge/52 \u00a71 says the two fields' vectors are 'averaged across the two fields weighted by their three-level ridge coherence'; build_migration_vectors instead support-averages them (mean over fields with a nonzero corridor vector). Found in Session 18B Pass-2 review. The falsification is direction-agnostic (phys ~= anti ~= rand, all harmful), so the deviation cannot manufacture the negative verdict, but the literally preregistered coherence-weighted estimator remains untested and may not be substituted on seeds 310-314."
   ],
   "organizer_confirmed_scores": "none (no submission-page receipt exists for any file here; 0.2778 etc. are OWNER-REPORTED)",
   "experiments_run": 3,
   "slot_selected": false,
   "promotion_schema": {
     "verdict": "negative",
+    "promotion_eligible": false,
+    "evidence_schema_passed": false,
     "submission_ready": false,
     "failures": [
       "no positive paired gain CI over frozen current best"
     ],
     "slot_selected": false,
-    "scope": "Evidence schema gate only; promotion is not slot selection or organizer acceptance."
+    "scope": "Evidence schema eligibility only; no independent evidence authentication, slot selection, cap check or organizer acceptance."
   },
   "verdict": "negative",
   "submission_ready": false,

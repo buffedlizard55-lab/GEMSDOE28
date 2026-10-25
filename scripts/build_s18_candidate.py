@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""S18 Experiment 3 (knowledge/52): build the H42-1 candidate GeoTIFF package.
+"""S18 Experiment 3 (knowledge/52): build the H39-5 candidate GeoTIFF package.
 
-Full-fit frozen 32-band detector -> ridge NMS -> probability-ranked top-budget pool
-(d_cat > 2 px build hygiene) -> dot_thin(2.8) at the champion's budget -> H42-1 up-dip
-relocation (phys) -> dot_thin(2.8). Writes nan + allfinite(zeros) + single-member zip via
-src/gems27/submission.py and evidence/s18_candidate_build.json with (a) binding uniqueness
-vs the ten owner-reported scored rasters of the nine focus sites (binary phi + within-3px +
-surface Spearman) and (b) a disclosed overlap table vs every other local download.
-Does NOT decide the verdict (scripts/finalize_s18.py does, from gate + uniqueness + validator).
+Full-fit 32-band detector -> ridge NMS -> prob-ranked pool -> dot_thin(2.8)
+with build-time d_cat > 2 px, budget-searched to within 5% of the champion's
+37,654 dots; then the frozen 35% migration-extrapolated swap
+(migration.extrap_swap, eligibility vs the full catalogue). Validates both
+NaN-outside and all-finite variants with the shared verify_geotiff and checks
+final dots vs every registry raster (docs/downloads/*-nan.tif + byte-verified
+/tmp/forensic champion/GEMSDOE36 education copies when present).
+Writes evidence/s18_candidate_build.json. Does NOT decide the verdict
+(finalize_s18 does, from gate + uniqueness + validator).
 """
 from __future__ import annotations
 
@@ -29,33 +31,25 @@ from gems27 import grid, migration, oof_detector, paths, submission, thinning  #
 
 TARGET_N = 37_654
 DATE = "20261025"
-DL = ROOT / "docs/downloads"
-SCORED_REGISTRY = [
-    ("champion_e5eb6e7e_GEMSDOE32_owner_reported_0.2778", Path("/tmp/forensic/champion_e5eb6e7e_zeros.tif")),
-    ("gems36_9b9ea4e6_GEMSDOE36_owner_reported_0.2750", Path("/tmp/forensic/gems36_9b9ea4e6_zeros.tif")),
-    ("solo_8acb75e1_GEMSDOE28_31_owner_reported_0.2708",
-     DL / "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif"),
-    ("rung30_b531dae0_GEMSDOE28_owner_reported_0.2710",
-     DL / "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif"),
-    ("hfeuler_56a9f473_GEMSDOE28_owner_reported_0.2707",
-     DL / "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif"),
-    ("prethin_31e35eee_GEMSDOE28_owner_reported_0.2649",
-     DL / "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif"),
-    ("analog_cb490425_GEMSDOE33_owner_reported_0.2632", Path("/tmp/forensic/gems33_analog_cb490425.tif")),
-    ("d28_e56ea318_GEMSDOE25_30_owner_reported_0.2600", paths.DOTTED_D2_8),
-    ("d15_989f5950_GEMSDOE24_owner_reported_0.2477", paths.DOTTED_0_2477),
-    ("tv2_5512495c_GEMSDOE27_owner_reported_0.2449",
-     DL / "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif"),
-]
+REGISTRY_EXTRA = {
+    "champion_e5eb6e7e_GEMSDOE32": Path("/tmp/forensic/champion_e5eb6e7e_zeros.tif"),
+    "gems36_9b9ea4e6_GEMSDOE36": Path("/tmp/forensic/gems36_9b9ea4e6_zeros.tif"),
+}
+EXTRA_SHA = {
+    "champion_e5eb6e7e_GEMSDOE32": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "gems36_9b9ea4e6_GEMSDOE36": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+}
 
 
-def load_dots(p: Path) -> np.ndarray:
-    with rasterio.open(p) as s:
-        a = s.read(1)
-    return np.isfinite(a) & (a > 0)
+def sha256_file(p: Path) -> str:
+    h = hashlib.sha256()
+    with p.open("rb") as f:
+        while c := f.read(1 << 20):
+            h.update(c)
+    return h.hexdigest()
 
 
-def within_frac(ours: np.ndarray, ref: np.ndarray, r: float = 3.0) -> float:
+def within_frac(ours, ref, r=3.0):
     y, x = np.nonzero(ours)
     yb, xb = np.nonzero(ref)
     if len(y) == 0 or len(yb) == 0:
@@ -64,16 +58,10 @@ def within_frac(ours: np.ndarray, ref: np.ndarray, r: float = 3.0) -> float:
     return float((d <= r).mean())
 
 
-def binary_phi(ours: np.ndarray, ref: np.ndarray, mask: np.ndarray) -> float:
-    """Pearson phi on binary rasters over the footprint (= Spearman for binary variables)."""
-    a = ours[mask]
-    b = ref[mask]
-    tp = float((a & b).sum())
-    fp = float((a & ~b).sum())
-    fn = float((~a & b).sum())
-    tn = float((~a & ~b).sum())
-    den = np.sqrt((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn))
-    return float((tp * tn - fp * fn) / den) if den > 0 else 0.0
+def load_dots(p):
+    with rasterio.open(p) as s:
+        a = s.read(1)
+    return np.isfinite(a) & (a > 0)
 
 
 def main() -> int:
@@ -81,22 +69,21 @@ def main() -> int:
     foot = grid.load_footprint(paths.TEMPLATE)
     labels = grid.load_labels(paths.LABELS) & foot
     d_cat = distance_transform_edt(~labels)
-    vec = np.load(paths.DATA / "prepared/migration_vectors.npz")
-    depth = migration.read_depth_to_base(paths.TRAINING, foot)
+    z = np.load(paths.DATA / "prepared/extrap_surfaces.npz")
+    surface, disp = z["extrap_surface_union"], z["disp_mag_union"]
 
-    print("full-fit frozen 32-band detector ...", flush=True)
+    print("full-fit detector (32 bands) ...", flush=True)
     prob = oof_detector.fit_predict_full_probabilities(foot, labels)
     print(f"detector done ({time.time()-t0:.0f}s)", flush=True)
 
     ridge = oof_detector.ridge_nms(prob, foot, sigma=1.0)
     pool_all = ridge & foot & ~labels & (d_cat > 2.0)
     ys, xs = np.nonzero(pool_all)
-    svals = prob[ys, xs]
-    order = np.argsort(-svals, kind="stable")
+    order = np.argsort(-prob[ys, xs].astype(np.float64), kind="stable")
     ys, xs = ys[order], xs[order]
     print(f"ridge pool (d_cat>2): {len(ys):,} px", flush=True)
 
-    def emit(k: int) -> np.ndarray:
+    def emit(k):
         raw = np.zeros(foot.shape, bool)
         raw[ys[:k], xs[:k]] = True
         return thinning.dot_thin(raw, 2.8)
@@ -115,101 +102,67 @@ def main() -> int:
             lo = k
         else:
             hi = k
-    base_dots = best
-    base_pred = np.where(base_dots, 1.0, 0.0).astype(np.float32)
-    v_base = base_pred[foot & ~labels].astype("<f4").copy()
-    v_base[v_base == 0] = 0
-    base_scored_sha256 = hashlib.sha256(v_base.tobytes()).hexdigest()
-
-    blocked = labels | (d_cat <= 2.0)
-    rel, rel_stats = migration.relocate_dots(base_dots, vec["vy"], vec["vx"], depth,
-                                              blocked, foot, mode="phys", seed=0)
-    dots = thinning.dot_thin(rel, 2.8) & foot & ~labels
-    rel_stats["n_after_final_thin"] = int(dots.sum())
-    print(f"relocation: {rel_stats}", flush=True)
+    base = best
+    elig = (foot & ~labels & (d_cat > 2.0) & (surface > 0)
+            & (disp >= migration.EXTRAP_MIN_DISP_PX))
+    dots, sinfo = migration.extrap_swap(base, prob, surface, elig)
+    n_final = int(dots.sum())
+    print(f"swap: {sinfo}", flush=True)
     assert not (dots & labels).any() and float(d_cat[dots].min()) > 2.0
 
     pred = np.where(dots, 1.0, 0.0).astype(np.float32)
     cid = submission.scored_content_id(pred, foot, labels)
-    slug = "h42-1-migx-reloc-b1"
+    slug = "h39-5-extrap-swap35"
     nan_name = submission.make_filename("gems28", slug, DATE, cid, "nan")
     af_name = submission.make_filename("gems28", slug, DATE, cid, "allfinite")
-    p_nan = submission.write_geotiff(pred, paths.TEMPLATE, DL / nan_name, outside="nan")
-    p_af = submission.write_geotiff(pred, paths.TEMPLATE, DL / af_name, outside="zero")
+    dl = ROOT / "docs/downloads"
+    p_nan = submission.write_geotiff(pred, paths.TEMPLATE, dl / nan_name, outside="nan")
+    p_af = submission.write_geotiff(pred, paths.TEMPLATE, dl / af_name, outside="zero")
     p_zip = submission.zip_single(p_nan)
     v_nan = submission.verify_geotiff(p_nan, paths.TEMPLATE)
     v_af = submission.verify_geotiff(p_af, paths.TEMPLATE)
 
+    registry = {p.name: p for p in sorted(dl.glob("*-nan.tif")) if p.name != nan_name}
+    for k_, v in REGISTRY_EXTRA.items():
+        if v.is_file() and sha256_file(v) == EXTRA_SHA[k_]:
+            registry[k_] = v
     rng = np.random.default_rng(18)
     foot_idx = np.flatnonzero(foot.ravel())
     sample = np.sort(rng.choice(foot_idx, size=400_000, replace=False))
-    s_prob = prob.ravel()[sample].astype(np.float64)
-
-    scored = {}
-    binding_files = set()
-    for name, p in SCORED_REGISTRY:
-        if not p.is_file():
-            scored[name] = {"missing": True, "path": str(p)}
-            continue
-        binding_files.add(p.name)
-        ref = load_dots(p) & foot
-        scored[name] = {
-            "file": p.name, "sha256": submission.sha256_file(p),
-            "registry_dots": int(ref.sum()),
-            "binary_phi_footprint": binary_phi(dots, ref, foot),
-            "frac_our_dots_within3px": within_frac(dots, ref),
-            "frac_base_dots_within3px_pre_relocation": within_frac(base_dots, ref),
-            "spearman_prob_vs_binary_sample400k": float(
-                spearmanr(s_prob, ref.ravel()[sample].astype(np.float64)).statistic),
-        }
-        print(f"  scored-uniq vs {name}: phi={scored[name]['binary_phi_footprint']:.3f} "
-              f"within3={scored[name]['frac_our_dots_within3px']:.3f}", flush=True)
-    binding_pass = all(
-        (not v.get("missing")) and abs(v["binary_phi_footprint"]) <= 0.90
-        and v["frac_our_dots_within3px"] <= 0.70
-        and abs(v["spearman_prob_vs_binary_sample400k"]) <= 0.90
-        for v in scored.values())
-
-    disclosed = {}
-    for p in sorted(DL.glob("*-nan.tif")):
-        if p.name in binding_files or p.name == nan_name:
-            continue
-        ref = load_dots(p) & foot
-        disclosed[p.name] = {"frac_our_dots_within3px": within_frac(dots, ref),
-                             "registry_dots": int(ref.sum())}
-    worst_disclosed = max(disclosed.items(), key=lambda kv: kv[1]["frac_our_dots_within3px"],
-                          default=(None, {"frac_our_dots_within3px": 0.0}))
-
+    spearman_lane_vs_prob = float(spearmanr(
+        surface.ravel()[sample].astype(np.float64),
+        prob.ravel()[sample].astype(np.float64)).statistic)
+    uniq = {}
+    for name, p in registry.items():
+        ref = load_dots(p)
+        uniq[name] = {"frac_our_dots_within3px": within_frac(dots, ref),
+                      "registry_dots": int(ref.sum())}
+    worst = max(uniq.items(), key=lambda kv: kv[1]["frac_our_dots_within3px"]) if uniq else (None, {})
+    canary = json.loads((ROOT / "evidence/s18_canary.json").read_text())
+    surf_pass = bool(canary["preplacement_uniqueness"]["surface_spearman_pass_le_0.90"])
     out = {
-        "experiment": "S18 Exp3 build (knowledge/52)",
-        "content_id": cid, "slug": slug, "date": DATE,
-        "nan_tif": nan_name, "allfinite_tif": af_name, "zip": p_zip.name,
-        "sha256_nan": submission.sha256_file(p_nan),
-        "sha256_allfinite": submission.sha256_file(p_af),
-        "sha256_zip": submission.sha256_file(p_zip),
-        "bytes_nan": p_nan.stat().st_size, "bytes_allfinite": p_af.stat().st_size,
-        "bytes_zip": p_zip.stat().st_size,
-        "emitted_px": int(dots.sum()), "base_px_pre_relocation": int(base_dots.sum()),
-        "target_px": TARGET_N,
-        "base_scored_sha256_full": base_scored_sha256,
-        "relocation": rel_stats,
-        "min_d_cat_of_dots_px": float(d_cat[dots].min()),
-        "on_catalogue_dots": int((dots & labels).sum()),
-        "verify_nan": v_nan, "verify_allfinite": v_af,
-        "uniqueness_scored_registry_binding": scored,
-        "uniqueness_binding_pass": bool(binding_pass),
-        "uniqueness_disclosed_other_downloads_within3px": disclosed,
-        "worst_disclosed_other_download": {"raster": worst_disclosed[0],
-                                           **worst_disclosed[1]},
-        "uniqueness_protocol": ("binding: vs every scored focus-site raster, binary phi <= 0.90 AND "
-                                "frac dots within 3px <= 0.70 AND surface Spearman <= 0.90 "
-                                "(knowledge/52); all other downloads disclosed, not binding"),
+        "candidate": nan_name, "content_id": cid, "n_dots": n_final, "target_n": TARGET_N,
+        "n_base_before_swap": int(base.sum()), "swap": sinfo,
+        "files": {"nan": nan_name, "allfinite": af_name, "zip": p_zip.name},
+        "sha256": {"nan": sha256_file(p_nan), "allfinite": sha256_file(p_af),
+                   "zip": sha256_file(p_zip)},
+        "validator_nan": v_nan, "validator_allfinite": v_af,
+        "spearman_lane_surface_vs_detector_prob_sample400k": spearman_lane_vs_prob,
+        "preplacement_surface_spearman_pass_from_exp1": surf_pass,
+        "worst_registry_raster_by_dot_overlap": {"raster": worst[0], **worst[1]} if worst[0] else None,
+        "uniqueness_table": uniq,
+        "uniqueness_pass_strict": bool(
+            surf_pass and worst[1].get("frac_our_dots_within3px", 1) <= 0.70),
         "seconds": round(time.time() - t0, 1),
-        "code_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     }
-    (ROOT / "evidence/s18_candidate_build.json").write_text(json.dumps(out, indent=2) + "\n")
-    print(json.dumps({k: out[k] for k in ("content_id", "nan_tif", "emitted_px",
-                                           "uniqueness_binding_pass", "relocation")}, indent=2))
+    outp = ROOT / "evidence/s18_candidate_build.json"
+    outp.write_text(json.dumps(out, indent=2) + "\n")
+    print(json.dumps({"candidate": nan_name, "n_dots": n_final, "swap": sinfo,
+                      "spearman_lane_vs_prob": spearman_lane_vs_prob,
+                      "worst": out["worst_registry_raster_by_dot_overlap"],
+                      "uniqueness_pass_strict": out["uniqueness_pass_strict"],
+                      "validator_nan_pass": v_nan["hard_checks_passed"],
+                      "validator_allfinite_pass": v_af["hard_checks_passed"]}, indent=2))
     return 0
 
 

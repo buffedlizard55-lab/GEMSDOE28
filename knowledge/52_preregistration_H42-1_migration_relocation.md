@@ -202,3 +202,15 @@ leakage-prone in LOSFO because geologic maps already contain held-out traces.
   `exp(−|k|h)`), as implemented in `src/gems27/depthslice.py`.
 - EPSG:32611 (WGS 84 / UTM 11N): https://epsg.io/32611 — grid constants are re-verified
   against the template on every load (`src/gems27/grid.py`).
+
+---
+
+**Post-merge addendum (does not alter the frozen text above):** this run is relabeled
+**Session 18B** — a parallel Session 18 (H39-5, `knowledge/52_preregistration_H39-5_extrapolated.md`)
+already owned the `s18_*` artifact names on `main`. Artifacts of this preregistration are
+`evidence/s18b_canary.json`, `evidence/s18_h42_losfo_gate.json`,
+`evidence/s18b_candidate_build.json`, `evidence/s18b_run_card.json` (manifest slot
+`s18b_candidate`); result: `knowledge/54_s18b_h42_1_result.md`; scripts renamed
+`build_s18b_extra.py` / `run_s18b_losfo_gate.py` / `build_s18b_candidate.py` /
+`finalize_s18b.py`. Both parallel lanes reserved seeds 310–314 and both failed their
+frozen gates; never combine their numbers (`s18b-session-label-collision`).
