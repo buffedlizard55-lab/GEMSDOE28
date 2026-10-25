@@ -277,12 +277,65 @@ def nav() -> str:
         ("Overview", "index.html"),
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
+        ("Session 15 review", "session15-review.html"),
         ("Topology", "topology.html"),
         ("Sources", "sources.html"),
     ]
     return "<nav aria-label=\"Main navigation\">" + "".join(
         f'<a href="{href}">{label}</a>' for label, href in links
     ) + "</nav>"
+
+
+def render_session15(review: dict) -> str:
+    scores = [
+        ("GEMSDOE24", "0.2477", "https://buffedlizard55-lab.github.io/GEMSDOE24/", "user-supplied site report"),
+        ("GEMSDOE25", "0.2600", "https://buffedlizard55-lab.github.io/GEMSDOE25/", "user-supplied site report"),
+        ("GEMSDOE27", "0.2449", "https://buffedlizard55-lab.github.io/GEMSDOE27/", "user-supplied site report"),
+        ("GEMSDOE28", "0.2710; 0.2708; 0.2649", "https://buffedlizard55-lab.github.io/GEMSDOE28/", "user-supplied; local manifest calls H36-1 unscored"),
+        ("GEMSDOE30", "0.2600", "https://buffedlizard55-lab.github.io/GEMSDOE30/", "user-supplied site report"),
+        ("GEMSDOE31", "0.2708", "https://buffedlizard55-lab.github.io/GEMSDOE31/docs/", "user-supplied site report"),
+        ("GEMSDOE32", "0.2778", "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html", "no local TIFF, method, or receipt"),
+        ("GEMSDOE33", "0.2632", "https://buffedlizard55-lab.github.io/GEMSDOE33/", "user-supplied site report"),
+        ("GEMSDOE36", "0.2750", "https://buffedlizard55-lab.github.io/GEMSDOE36/docs/", "user-supplied site report"),
+    ]
+    score_rows = "".join(
+        f'<tr><td><a href="{esc(url)}">{esc(site)}</a></td><td>{esc(score)}</td><td>{esc(status)}</td></tr>'
+        for site, score, url, status in scores
+    )
+    hypotheses = review.get("hypotheses", [])
+
+    def hypothesis_row(h: dict) -> str:
+        source = h.get("source")
+        if not source and h.get("sources"):
+            source = h["sources"][0]
+        source_link = f'<a href="{esc(source)}">official/source listing</a>' if source else "source not recorded"
+        return (
+            f'<tr><td>{int(h.get("rank", 0))}</td><td><strong>{esc(h.get("id"))}</strong><br>{esc(h.get("name"))}</td>'
+            f'<td>{esc(h.get("layers_and_signature", "not recorded"))}</td>'
+            f'<td>{esc(h.get("why_off_catalogue", "not recorded"))}</td>'
+            f'<td>{esc(h.get("difference", "not recorded"))}</td>'
+            f'<td>{esc(h.get("non_fault_mimic", "not recorded"))}</td>'
+            f'<td>{esc(h.get("expected_dti_improvement_qualitative", "unrated"))}<br>Cost: {esc(h.get("implementation_cost", "not recorded"))}</td>'
+            f'<td>{source_link}<br>{esc(h.get("availability", "availability not checked"))}</td></tr>'
+        )
+
+    hypothesis_rows = "".join(hypothesis_row(h) for h in hypotheses)
+    return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Session 15 review</div>
+<section class="hero"><div class="hero-content"><div class="eyebrow">Evidence audit · no new submission</div>
+<h1>High score,<br>low certainty.</h1>
+<p class="lead">The highest score in the user-supplied site list is <strong>0.2778</strong> for GEMSDOE32 H33-2. A cross-site audit identifies the owner-repository raster paths and summarizes the page as describing catalogue-proximity pruning, but also reports that the owner page says no organizer score exists. The exact TIFF bytes, receipt, and full code are absent here.</p>
+<div class="value-line"><span class="status blocked">NEGATIVE / BLOCKED</span><span class="value-pill">No experiment run</span><span class="value-pill">No new TIFF</span><span class="value-pill">No slot used</span></div></div></section>
+<section class="section"><div class="callout callout-danger"><strong>Why the reported 0.2778 cannot be treated as an organizer result.</strong> The <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/review_2026-10-25.md">cross-site audit summary</a> describes H33-2-B2 as pruning an existing dotted base by excluding predictions close to the catalogue, and says its <a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/docs/index.html">owner page at an immutable tree</a> explicitly states no organizer score exists for the artifacts. This conflicts with the user-supplied score claim. Without the raw TIFF, full source code, receipt and evaluator association, the cause of any reported value cannot be established. If a catalogue-distance rule was evaluated without rebuilding it from visible faults inside a buffered whole-segment holdout, leakage is a material risk; the available summary does not resolve this. The suffix <code>zeros</code> is not proof of correct footprint coding. The prompt separately gives current leaderboard maxima of 0.4413 and 0.3195; this conflict is unresolved, and the repository's dated leaderboard snapshot is stale.</div>
+<p><strong>Can we exceed the reported 0.2778?</strong> In principle yes, but no local experiment demonstrates it. The evidence-backed strategy is not to copy a past raster; it is to improve credited fault coverage per false-positive cost with independent information, then validate against a spatially blocked holdout. No claim of a higher score or submission readiness is made here.</p></section>
+<section class="section"><h2>Reported site results (not organizer receipts)</h2><p>Every score below is transcribed from the user's prompt. No current site/leaderboard page or submission receipt was fetched during this session; this table records reported results, not verified score-to-file associations.</p>
+<div class="table-wrap"><table><thead><tr><th>Site</th><th>User-reported result(s)</th><th>Local evidence note</th></tr></thead><tbody>{score_rows}</tbody></table></div></section>
+<section class="section"><h2>Five unrun hypotheses, ranked qualitatively</h2><p>These are unmeasured research priorities, not score predictions. The method paragraph defining the parallel-run lane is missing from the request; no candidate has been selected or run.</p>
+<div class="table-wrap"><table><thead><tr><th>Rank</th><th>Hypothesis</th><th>Layers / physical signature</th><th>Why off-catalogue</th><th>Difference from implemented work</th><th>Named non-fault mimic</th><th>Expected improvement / cost</th><th>Source / availability</th></tr></thead><tbody>{hypothesis_rows}</tbody></table></div>
+<p>Full layer signatures, physical rationale, confounders, differences from prior implementations, and exact data gates are in <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/47_session15_high-score-review_and_blocked-experiment.md">the review dossier</a>; the machine-readable record is <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/session15_review.json">evidence/session15_review.json</a>.</p></section>
+<section class="section"><h2>Why no unique TIFF was emitted</h2><p>The requested lane paragraph is absent; the competition rasters and cached feature stack are not in <code>data/</code>; the current environment lacks <code>rasterio</code>; and the existing holdout implementation has not been shown to meet the requested buffered whole-segment protocol. Therefore the feature-only leakage canary, holdout DTI/95% CI, rank-correlation and 3 px registry-overlap checks, and new-TIFF validator cannot honestly be run. Writing a TIFF now would violate the duplicate-stop and holdout-superiority gates.</p>
+<p><strong>Current validator status:</strong> not run on a new candidate. The existing historical download artifacts remain separately documented; this page does not label any one of them as newly generated or newly approved.</p></section>
+<section class="section"><h2>Manual review sources</h2><ul><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official DrivenData problem description</a></li><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official public leaderboard (manual review only)</a></li><li><a href="https://gdr.openei.org/submissions/1391">DOE GDR #1391</a></li><li><a href="https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b">USGS Great Basin MT conductance release</a></li><li><a href="https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28">USGS Great Basin heat-flow release</a></li><li><a href="https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e">USGS 3DEP 1 m DEM catalog</a></li><li><a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat FDSN API (availability not verified here)</a></li></ul>
+<p><strong>Machine-readable run card:</strong> holdout DTI is null because no experiment was run; verdict is <strong>negative</strong>. See the repo dossier for the exact reasons.</p></section>"""
 
 
 def layout(title: str, body: str, active: str = "") -> str:
@@ -449,6 +502,8 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
   <p><strong>Current status (2026-10-03):</strong> the prominent one-click file below is <strong>{esc(primary.get('hypothesis', 'H32-1 reference'))}</strong> (<code>{esc(primary['nan'])}</code>, {comma(primary.get('emitted_px'))} px), and it was {primary_holdout_clause}. It is built on the owner-reported <strong>0.2600</strong> live base (<code>dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code>, 44,090 px) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (−0.0028 vs 0.2477). It is locally format-audited, <strong>unscored</strong>, and not slot-approved.</p>
   <p class="small"><strong>How it got here — and what is closed.</strong> The H35 addition series ran and <strong>H35-1 (hydrothermal-discharge conjunction) is closed on its own evidence</strong>: 3 of 4 frozen criteria failed on seeds 230–234 — it earned {fmt_number(h35_g1, 5)} credit per added dot against a {fmt_number(h35_tau, 5)} threshold and <em>lost to its own matched-count random control</em> ({fmt_number(h35_ctrl, 5)}). That agrees with the reachability frontier read from the pruning side: at this operating point new dots are expensive and a physical layer must be very specific to pay for itself, while the profitable axis remains <strong>removal</strong>. Review then found the one-click primary strictly dominated by the file in its own tertiary slot on every published statistic, so the arm that followed was an <strong>adjudication of the candidate ladder on fresh seeds</strong>. {h35_6_index} The H36-1 re-pack arm replaced it in turn. <strong>Session 13 then measured the emission rule itself</strong>: the packing step was content-blind (raster-index order), so H37-1 replaced it with lazy-greedy maximum expected coverage of the detector probability field under the official 300 m kernel at a matched dot count. It passed all five frozen criteria on fresh seeds 250–259 (+0.007289 vs the same-run d=2.8 reference, +0.004614 over the H36-1 incumbent, 10/10 seeds, 4/4 folds) while a content-blind matched-N random subset scored −0.044684 (0/10 seeds), and the H36-1 incumbent itself replicated at +0.002675 against its own +0.002599 on seeds 240–249. <strong>The far-field falsification test then failed F1:</strong> on the LOSFO decade (seeds 210–214, whole fault systems removed with a 600 m buffer) the same rule ties the raster cascade — mean paired ΔDTI −<strong>0.000037</strong> (95% interval ±0.000832, 9/20 cells, base arms reproducing the stored diagnostic exactly). The interleaved gain is therefore a catalogue-adjacency effect, the modelled 0.278–0.286 projection is withdrawn, and the pre-committed rule returned the one-click slot to <strong>H36-1</strong>; H37-1 stays fully audited (<a href="../knowledge/33_h37_1_farfield_result.md">knowledge/33</a>). <strong>Session 14 then verified H36-1 on LOSFO far-field truth and validated H38-1 multi-physics corroboration:</strong> on fresh LOSFO seeds 265–269 (<a href="../evidence/losfo_session14_h36_1_and_h38.json">evidence/losfo_session14_h36_1_and_h38.json</a>), <strong>H36-1</strong> passed all four frozen far-field criteria (<strong>+0.001713</strong> mean ΔDTI, 16/20 cells, 5/5 seeds, +0.005810 over matched-count random drop in 20/20 cells, far-field removal efficiency <em>e</em><sub>far</sub> = 0.01359 &lt; τ<sub>live</sub> = 0.05485, and exact 0.00 TP lost by the H27-4 blind r=1 prune). And <strong>H38-1</strong> (USGS conductive heat-flow residual &ge; 50 mW/m&sup2; from DeAngelo et al. 2022 + shallow Reid et al. 1990 SI=0 Euler clusters aligned within 300 m of the 1-px detector ridge) became the <strong>first addition arm to clear the live break-even efficiency on LOSFO far-field truth</strong>: <strong>0.07724 credit/dot</strong> (+0.000792 mean ΔDTI, 17/20 cells, 4/5 seeds, 4/4 folds) on the d=2.8 base, <strong>0.06993 credit/dot</strong> (+0.000747 over H36-1, +0.002460 over d=2.8, 16/20 cells, 4/5 seeds, 4/4 folds) on H36-1, and <strong>+0.000543</strong> over H36-1 on fresh interleaved seeds 270–279 (27/40 cells, 8/10 seeds, 4/4 folds, <a href="../knowledge/45_h36_1_and_h38_1_result.md">knowledge/39</a>). Its companion artifact (<code>gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif</code>, 37,860 px = 37,660 H36-1 + 200 corroborated dots) is slotted at secondary below. Independent of all of the above: {esc(h31_result_summary(screen, confirmation, seed_audit))} {esc(h32_result_summary(h32))}</p>
 </div></section>
+
+<section class="callout callout-danger"><strong>Session 15 review (2026-10-25):</strong> the GEMSDOE32 H33-2 <strong>0.2778</strong> figure is user-reported; the cross-site audit describes catalogue-proximity pruning but says the owner page disclaims an organizer score. Raw TIFF, full code and receipt are absent here. The prompt's <strong>0.4413</strong> and <strong>0.3195</strong> leaderboard maxima conflict. The required lane paragraph and cached input rasters are also missing, so no new unique TIFF was generated and no slot was used. <a href="session15-review.html">Read the full high-score audit, ranked hypotheses and negative run card →</a></section>
 
 <section class="download-panel" id="download" aria-labelledby="download-heading">
   <div class="eyebrow">Manual research download · no upload made</div>
@@ -965,12 +1020,14 @@ def main() -> int:
     h35 = read_json("evidence/h35_1_thermal_farfield.json", {})
     h35_6 = read_json("evidence/h35_6_candidate_headtohead.json", {})
     local_h38_claim = read_json("evidence/h38_1_holdout.started.json", {})
+    session15_review = read_json("evidence/session15_review.json", {})
     pages = {
         "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "Overview"),
         "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
+        "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():

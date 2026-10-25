@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "review_date_utc": "2026-10-25",
+  "scope": "Review of GEMSDOE24/25/27/28/30/31/32/33/36 reports, local GEMSDOE28 repository, proposed new hypotheses, and submission readiness.",
+  "evidence_class": "User-supplied site scores are owner-site reports without organizer receipts in this checkout. They are not ORGANIZER-CONFIRMED. Existing local holdout figures remain HOLDOUT-DTI only and cannot be equated with competition scores.",
+  "highest_reported_score_in_user_list": {
+    "value": 0.2778,
+    "submission": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+    "site": "GEMSDOE32",
+    "source": "User prompt: https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+    "organizer_confirmed": false,
+    "local_tif_available": false,
+    "owner_repository_paths_identified": [
+      "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+      "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
+    ],
+    "owner_tree_sha": "012e17b2a115c3c0d5e7885bea625bf9657c99fc",
+    "method_attribution": "The checked-in cross-site audit summary reports the owner page describes H33-2-B2 as pruning an existing dotted base by excluding catalogue-near dots. No full processing code, raw local TIFF, submission receipt, or organizer-confirmed score association is available; no causal score explanation is established.",
+    "owner_page_score_note": "The cross-site review summary says the owner page explicitly states that no organizer score exists for these artifacts; this conflicts with the user-supplied 0.2778 score claim."
+  },
+  "leaderboard_claims": {
+    "user_prompt_maxima": [
+      0.4413,
+      0.3195
+    ],
+    "status": "conflict unresolved; no live leaderboard read in this session",
+    "repo_snapshot": "registry/leaderboard_snapshot_2026-10-03.json is a dated one-off observation, not current as of 2026-10-25"
+  },
+  "lane": {
+    "protocol_requires_one_method_paragraph": true,
+    "method_paragraph_found_in_request": false,
+    "action": "No experiment or TIFF emission; record blocker and require lane definition before any experiment."
+  },
+  "data_and_tooling": {
+    "data_manifest_present": true,
+    "competition_rasters_in_data_dir": 0,
+    "cached_feature_stack_present": false,
+    "sample_template_present": false,
+    "labels_raster_present": false,
+    "rasterio_import": "failed: ModuleNotFoundError: No module named 'rasterio'",
+    "pytest_import": "failed: No module named 'pytest'",
+    "shared_holdout": "src/gems27/holdout.py exists but its docstring specifies interleaved quadrants and random 20% of catalogue components; it is not shown to implement the user-required buffered whole-segment hide-and-recover protocol. Audit/fix the shared template harness before using it."
+  },
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "P15-A",
+      "name": "Magnetic/gravity edge-migration consistency across upward-continuation heights",
+      "layers_and_signature": "Competition TMI/magnetic and isostatic-gravity fields; trace signed lateral movement of matched gradient ridges across several upward-continuation heights using NaN-safe padding and edge taper.",
+      "why_off_catalogue": "A dipping density/susceptibility boundary can persist beneath cover or without a mapped Quaternary surface rupture.",
+      "difference": "Tests the trajectory of an edge with continuation height, unlike static cross-scale edge agreement (H28-1) or SI-assumption-dependent Euler source-depth estimates.",
+      "non_fault_mimic": "Dipping lithological contact or dike.",
+      "expected_dti_improvement_qualitative": "highest qualitative information potential; unmeasured, no numeric projection",
+      "implementation_cost": "medium",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "availability": "competition bands conceptually; cached stack/template absent in this checkout; restore/hash-verify before use",
+      "not_a_score_or_projection": true
+    },
+    {
+      "rank": 2,
+      "id": "P15-B",
+      "name": "Paired signed cross-scarp change points in elevation and radiometry",
+      "layers_and_signature": "DEM elevation plus GeoDAWN radiometric K/Th or U/Th; detrend regional signals and test consistently oriented paired flank change points along strike.",
+      "why_off_catalogue": "Aligned relief and material asymmetry may reveal subtle or degraded scarps with weak individual elevation contrast.",
+      "difference": "Joint signed flank-change statistic, not generic structural-step features or radiometric ridge co-location; cross-repository novelty not established.",
+      "non_fault_mimic": "Lithologic contact, alluvial-fan boundary, paleoshoreline, road or earthwork.",
+      "expected_dti_improvement_qualitative": "moderate qualitative potential; unmeasured, no numeric projection",
+      "implementation_cost": "medium",
+      "source": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "availability": "official landing page named; source host unavailable in this sandbox; local radiometric layers absent; not viable until bytes/coverage/metadata verified",
+      "not_a_score_or_projection": true
+    },
+    {
+      "rank": 3,
+      "id": "P15-C",
+      "name": "Basin-scale drainage-divide asymmetry reversals aligned with an independent magnetic edge",
+      "layers_and_signature": "Conditioned DEM plus magnetic-edge candidates; multi-basin divide asymmetry/direction reversals along corridor, with basin-scale validation.",
+      "why_off_catalogue": "Distributed tilting around a concealed normal fault can perturb basin/drainage geometry without a crisp scarp.",
+      "difference": "Basin-scale network response rather than local terrain descriptors; refines previously proposed, unimplemented H38-4 drainage work, not globally novel.",
+      "non_fault_mimic": "Lithology-controlled erosion, stream capture, or climate/base-level changes.",
+      "expected_dti_improvement_qualitative": "moderate but highly uncertain; unmeasured, no numeric projection",
+      "implementation_cost": "high",
+      "source": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+      "availability": "official USGS 3DEP 1 m DEM catalog named; exact in-footprint tile availability/bytes not checked; tiles absent, not viable yet",
+      "not_a_score_or_projection": true
+    },
+    {
+      "rank": 4,
+      "id": "P15-D",
+      "name": "Depth-coherent lateral MT conductance-boundary migration plus gravity",
+      "layers_and_signature": "USGS multi-depth MT conductance slices plus gravity; trace lateral boundary migration across depth slices with independent gravity-edge corroboration.",
+      "why_off_catalogue": "A concealed fluid-bearing or altered structure may produce a coherent conductive boundary beneath cover without a surface trace.",
+      "difference": "Depth-dependent boundary trajectory, unlike single-depth conductance × dilatation or proposed pipe-alignment tests; verify queued H38-3 and other-site code first.",
+      "non_fault_mimic": "Clay-rich sedimentary basin margin or lithologic conductor.",
+      "expected_dti_improvement_qualitative": "low-to-moderate qualitative potential; unmeasured, no numeric projection",
+      "implementation_cost": "high; data blocked",
+      "source": "https://doi.org/10.5066/P9TWT2LU",
+      "availability": "official USGS DOI named; exact item/bytes/coverage not verified obtainable in this session; not viable yet",
+      "not_a_score_or_projection": true
+    }
+  ],
+  "experiment_count": 0,
+  "budget_experiment_cap": 3,
+  "holdout_dti": null,
+  "holdout_dti_label": "No experiment run; no HOLDOUT-DTI value or CI exists for this review. No projection substituted.",
+  "feature_auc_leakage_canary": "not run; source raster stack absent",
+  "registry_correlation_overlap": "not run; source registry rasters and H33-2 raster absent",
+  "unique_tif": null,
+  "submission_name": null,
+  "validator_output": {
+    "status": "not run for a new candidate",
+    "reason": "No candidate TIFF was generated; competition template absent and rasterio unavailable.",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null
+  },
+  "verdict": "negative",
+  "verdict_reason": "No honest unique submission can be produced under the lane, holdout-superiority, registry-overlap and file-validation rules with the available inputs. Generating an untested TIFF would violate the user's own no-slot and duplicate-stop protocol.",
+  "run_card": {
+    "hypothesis": "P15-A (ranked proposal only; no assigned lane and not run)",
+    "mechanism": "Depth-sensitive magnetic/gravity edge migration across upward-continuation heights might delineate concealed dipping contacts beneath areas without mapped surface rupture.",
+    "named_non_fault_mimic": "Dipping lithological contact or dike with magnetic/density contrast.",
+    "holdout_dti": null,
+    "holdout_dti_label": "No HOLDOUT-DTI: no evaluator run, withheld-positive count, evaluator version, or 95% CI available.",
+    "correlation_overlap_vs_registry": null,
+    "correlation_overlap_label": "Not computed: no candidate raster or source registry rasters; no Spearman coefficient or 3 px overlap fraction can be reported.",
+    "raster_sha256": null,
+    "validator_output": {
+      "status": "NOT RUN — no submission TIFF was written",
+      "no_nan_inside_footprint": null,
+      "values_in_0_1": null,
+      "crs_shape_transform_match": null
+    },
+    "submission_name": null,
+    "submission_note_max_140_chars": null,
+    "verdict": "negative"
+  }
+}

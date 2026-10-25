@@ -815,5 +815,69 @@
       "current_mainline_path_belongs_to": "Separate GeoDAWN-radiometric H38-1 experiment on seeds 280–289; not the summary for this branch-local run."
     },
     "reconciliation": "Do not rerun or re-analyze the raw output; seeds were already used upstream. Keep the failed local experiment distinct from mainline heat-flow/Euler and radiometric H38-1 work; see knowledge/39_session14_closeout_2026-10-03.md."
+  },
+  "session15_review": {
+    "date_utc": "2026-10-25",
+    "status": "Four unrun proposals recorded in knowledge/47_session15_high-score-review_and_blocked-experiment.md and evidence/session15_review.json. They are not assigned lanes; no candidate is authorized because the required method paragraph is absent.",
+    "hypotheses": [
+      {
+        "rank": 1,
+        "id": "P15-A",
+        "name": "Magnetic/gravity edge-migration consistency across upward-continuation heights",
+        "layers_and_signature": "Competition TMI/magnetic and isostatic-gravity fields; trace signed lateral movement of matched gradient ridges across several upward-continuation heights using NaN-safe padding and edge taper.",
+        "why_off_catalogue": "A dipping density/susceptibility boundary can persist beneath cover or without a mapped Quaternary surface rupture.",
+        "difference": "Tests the trajectory of an edge with continuation height, unlike static cross-scale edge agreement (H28-1) or SI-assumption-dependent Euler source-depth estimates.",
+        "non_fault_mimic": "Dipping lithological contact or dike.",
+        "expected_dti_improvement_qualitative": "highest qualitative information potential; unmeasured, no numeric projection",
+        "implementation_cost": "medium",
+        "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+        "availability": "competition bands conceptually; cached stack/template absent in this checkout; restore/hash-verify before use",
+        "not_a_score_or_projection": true
+      },
+      {
+        "rank": 2,
+        "id": "P15-B",
+        "name": "Paired signed cross-scarp change points in elevation and radiometry",
+        "layers_and_signature": "DEM elevation plus GeoDAWN radiometric K/Th or U/Th; detrend regional signals and test consistently oriented paired flank change points along strike.",
+        "why_off_catalogue": "Aligned relief and material asymmetry may reveal subtle or degraded scarps with weak individual elevation contrast.",
+        "difference": "Joint signed flank-change statistic, not generic structural-step features or radiometric ridge co-location; cross-repository novelty not established.",
+        "non_fault_mimic": "Lithologic contact, alluvial-fan boundary, paleoshoreline, road or earthwork.",
+        "expected_dti_improvement_qualitative": "moderate qualitative potential; unmeasured, no numeric projection",
+        "implementation_cost": "medium",
+        "source": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+        "availability": "official landing page named; source host unavailable in this sandbox; local radiometric layers absent; not viable until bytes/coverage/metadata verified",
+        "not_a_score_or_projection": true
+      },
+      {
+        "rank": 3,
+        "id": "P15-C",
+        "name": "Basin-scale drainage-divide asymmetry reversals aligned with an independent magnetic edge",
+        "layers_and_signature": "Conditioned DEM plus magnetic-edge candidates; multi-basin divide asymmetry/direction reversals along corridor, with basin-scale validation.",
+        "why_off_catalogue": "Distributed tilting around a concealed normal fault can perturb basin/drainage geometry without a crisp scarp.",
+        "difference": "Basin-scale network response rather than local terrain descriptors; refines previously proposed, unimplemented H38-4 drainage work, not globally novel.",
+        "non_fault_mimic": "Lithology-controlled erosion, stream capture, or climate/base-level changes.",
+        "expected_dti_improvement_qualitative": "moderate but highly uncertain; unmeasured, no numeric projection",
+        "implementation_cost": "high",
+        "source": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+        "availability": "official USGS 3DEP 1 m DEM catalog named; exact in-footprint tile availability/bytes not checked; tiles absent, not viable yet",
+        "not_a_score_or_projection": true
+      },
+      {
+        "rank": 4,
+        "id": "P15-D",
+        "name": "Depth-coherent lateral MT conductance-boundary migration plus gravity",
+        "layers_and_signature": "USGS multi-depth MT conductance slices plus gravity; trace lateral boundary migration across depth slices with independent gravity-edge corroboration.",
+        "why_off_catalogue": "A concealed fluid-bearing or altered structure may produce a coherent conductive boundary beneath cover without a surface trace.",
+        "difference": "Depth-dependent boundary trajectory, unlike single-depth conductance × dilatation or proposed pipe-alignment tests; verify queued H38-3 and other-site code first.",
+        "non_fault_mimic": "Clay-rich sedimentary basin margin or lithologic conductor.",
+        "expected_dti_improvement_qualitative": "low-to-moderate qualitative potential; unmeasured, no numeric projection",
+        "implementation_cost": "high; data blocked",
+        "source": "https://doi.org/10.5066/P9TWT2LU",
+        "availability": "official USGS DOI named; exact item/bytes/coverage not verified obtainable in this session; not viable yet",
+        "not_a_score_or_projection": true
+      }
+    ],
+    "gate": "No experiment or TIFF until lane is specified, exact data and cached stack are restored, shared buffered whole-segment holdout is verified, and candidate beats comparator with paired CI. Feature-only AUC/leakage and registry rank-correlation/3px-overlap checks are mandatory.",
+    "next_action": "Resolve the lane and required input availability; then preregister exactly one selected proposal after checking cross-repository novelty."
   }
 }
