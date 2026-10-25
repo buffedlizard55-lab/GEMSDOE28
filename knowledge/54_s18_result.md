@@ -212,3 +212,19 @@ Do not retrospectively call this a fully protocol-certified submission. See
 The previous parallel review's hashed manifest is preserved byte-for-byte in
 `evidence/pr39_manifest_snapshot.json`; its historical evidence card was not silently rewritten
 when the current manifest and public card aliases advanced to this measured research result.
+
+## Concurrent PR41 scientific integration (no rerun)
+PR41 merged a different H39-5 extrapolated-placement experiment, also using seeds310–314.
+Its negative evidence and three artifacts are preserved, not combined with MXTP or treated as
+independent replication. Generic names collided: it now has the distinct manifest slot
+`s18_h39_5_candidate` and nonexperimental binder `scripts/finalize_s18_h39_5.py`.
+Our canonical card remains `s18_mxtp_run_card.json`; PR38's blocked card and PR39's original
+no-experiment card remain unchanged. PR41's adjusted historical review card is separately
+archived as `pr41_parallel_review_snapshot.json`, not substituted for the original.
+
+PR41 appended helpers to `migration.py`; it did not change the original function definitions
+used by MXTP. Their exact executed source is retained in `evidence/s18_frozen_sources/migration.py`
+and tested to be the unchanged prefix of the expanded module, with its original frozen hash.
+This provenance snapshot is not a private imported evaluator fork. No TIFF is regenerated.
+The original 166-raster uniqueness table does not include PR41's contemporaneous output; no
+synchronized global registry completeness or cross-run novelty claim is made.

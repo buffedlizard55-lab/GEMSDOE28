@@ -89,3 +89,13 @@ Preserved the actual PR42 merge's deployment-verification record and follow-up r
 regression. Kept the scientific MXTP card canonical across root/docs aliases; historical PR39/42
 no-experiment evidence remains untouched. Refreshed source-feed bytes retained. Final suite:
 471 passed, zero skips. No TIFF/model/seed rerun.
+
+### Final PR41 scientific integration
+Preserved the separate negative H39-5 card, three artifact variants, method and tests.
+Namespaced its manifest slot/finalizer, retained PR39's original historical card plus PR41's
+separate snapshot of its revised binding. MXTP's executed migration definitions remain the
+byte-exact prefix of main's append-only extension, with frozen original source archived and
+hash-tested. No experiment rerun or combination of the overlapping seed decades.
+Final regression run: **478 passed, zero skips; Ruff clean; independent exact-file audit
+347 PASS / zero failures** (grew by30 for the separately preserved H39-5 variants).
+All 11 root/docs HTML routes have 231 valid local file/fragment references.

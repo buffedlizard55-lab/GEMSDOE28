@@ -1,0 +1,7 @@
+{
+  "path": "src/gems27/migration.py",
+  "executed_snapshot": "evidence/s18_frozen_sources/migration.py",
+  "executed_sha256": "d1da9eb84aaacc711aff6dec3a516bef43c106928804b31cfd52ef2d32bdc881",
+  "append_only_main_commit": "5425817b96f64fc0626ea03afe5eae2f6aefe0b4",
+  "note": "PR41 appended H39-5 physical-model helpers after the exact original module bytes; all executed MXTP function definitions remain unchanged. No rerun. This is an audit snapshot, not an imported private evaluator/writer."
+}

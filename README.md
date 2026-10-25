@@ -78,9 +78,14 @@ PR #39’s separate no-experiment audit, upstream tool pins, stronger validator/
 checks are also retained. Its original hashed manifest is archived without changing its old card.
 PR #42’s root-route compatibility test and observed historic deployment evidence are retained
 ([prior release proof](evidence/current_deployment_verification.json), not proof for the new TIFF).
-Final local integration: **471 tests pass, zero skips; 317 independent file checks pass; Ruff clean**.
+Final local integration: **478 tests pass, zero skips; 347 independent file checks pass; Ruff clean**.
 Do not combine these sessions' numbers or treat the blocked review's missing-data statement as
 current after this restoration.
+
+Concurrent PR #41's **different** H39-5 run is retained under
+`evidence/s18_h39_5_run_card.json` / manifest `s18_h39_5_candidate`, with its negative TIFFs
+in the archive. It is not MXTP, not independent replication, and not part of our frozen 166-raster
+snapshot. Shared seed/method-family collision is logged; no global exclusivity is claimed.
 
 ## Historical notices and prior standing briefs (superseded by current result above)
 

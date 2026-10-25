@@ -18,7 +18,11 @@ def load(path):
 
 def test_s18_sources_are_bound_and_no_spent_runner_was_reformatted():
     for path, digest in load("evidence/s18_source_hashes.json")["files"].items():
-        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest, path
+        source = ROOT / path
+        if path == "src/gems27/migration.py":
+            source = ROOT / "evidence/s18_frozen_sources/migration.py"
+            assert (ROOT / path).read_bytes().startswith(source.read_bytes())
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == digest, path
     started = load("evidence/s18_holdout.started.json")
     result = load("evidence/s18_holdout.json")
     assert started["evaluator_hashes"] == result["evaluator_hashes"]

@@ -459,6 +459,36 @@ def test_current_public_card_aliases_use_restored_data_review_not_older_checkout
     assert 'Submission download locked' in root_summary and 'docs/downloads/gems28-s18-mxtp-' in root_summary
 
 
+def test_session18_h39_5_candidate_is_unique_valid_but_do_not_submit():
+    # Parallel Session 18 H39-5 experiment (knowledge/52-53): unique + format
+    # valid, frozen LOSFO gate FAILED -> DO NOT SUBMIT everywhere it appears.
+    archive = (DOCS / 'archive.html').read_text()
+    assert '719b83fb659b' in archive
+    assert 'RED DO NOT SUBMIT - HOLDOUT GATE FAILED - INSPECTION ONLY' in archive
+    card = json.loads((ROOT / 'evidence/s18_h39_5_run_card.json').read_text())
+    assert card == json.loads((DOCS / 'data/run_card_s18_2026-10-25.json').read_text())
+    assert card['verdict'] == 'negative'
+    assert card['submission_ready'] is False
+    assert card['slot_selected'] is False
+    assert card['selector_promotion'] is False
+    assert card['holdout_dti']['gate_passed'] is False
+    assert card['correlation_overlap_vs_registry']['uniqueness_pass_strict'] is True
+    assert card['validator']['nan_hard_pass'] is True
+    assert card['validator']['allfinite_hard_pass'] is True
+    assert card['validator']['no_nan_inside_footprint'] is True
+    assert card['validator']['values_in_0_1'] is True
+    assert len(card['note']) <= 140 and 'DO NOT SUBMIT' in card['note']
+    manifest = json.loads((DOCS / 'downloads/manifest.json').read_text())
+    slot = manifest['s18_h39_5_candidate']
+    assert slot['verdict'] == 'negative' and slot['content_id'] == '719b83fb659b'
+    assert slot['run_card'] == 'evidence/s18_h39_5_run_card.json'
+    assert (DOCS / 'downloads' / slot['nan']).is_file()
+    assert (DOCS / 'downloads' / slot['allfinite']).is_file()
+    # The parallel safety review keeps its own card/path (label collision).
+    review = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
+    assert review['run_id'] == 's18-safety-review-20261025'
+    assert review['experiments_run'] == 0 and card['experiments_run'] == 3
+
 def test_legacy_main_root_routes_match_generated_pages_and_current_card():
     from scripts.build_site import root_relative_links
 
