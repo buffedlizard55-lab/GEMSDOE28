@@ -77,3 +77,9 @@ Final post-merge test/deployment results are recorded in the pull request and se
 - Moved historical primary/secondary download narratives to a separate archive, using namespaced
   anchors. Current pages offer the rejected NEW research file and a disabled submission control.
 - Integration regression run: 470 tests passed, no skips. Ruff and exact-file audits rechecked.
+
+- Pages API read after PR39 still returned `build_type: legacy`, root `main` source. An attempted
+  authenticated switch to workflow mode returned HTTP403 `Resource not accessible by integration`,
+  not an authentication failure. Adopted the concurrently proposed PR42 root-route compatibility
+  approach: root executive mirror and exact JSON bytes for legacy and Actions layouts, checked by CI.
+  No Pages setting change is claimed. This is a publication fix, not another experiment.

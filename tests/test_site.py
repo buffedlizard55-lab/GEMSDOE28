@@ -174,7 +174,7 @@ def test_local_failure_claim_and_registry_disambiguate_summary_path_collision():
 
 
 def test_all_internal_links_and_assets_resolve():
-    for page in list(DOCS.glob("*.html")) + [ROOT / "index.html"]:
+    for page in list(DOCS.glob("*.html")) + [ROOT / "index.html", ROOT / "executive-summary.html"]:
         parser = Links()
         parser.feed(page.read_text())
         for ref in parser.refs:
@@ -453,3 +453,7 @@ def test_current_public_card_aliases_use_restored_data_review_not_older_checkout
     assert historical['submission_ready'] is False
     workflow = (ROOT / '.github/workflows/pages.yml').read_text()
     assert 'EXPECTED_CARD_SHA256' in workflow and 'hashlib.sha256(body)' in workflow
+    assert (ROOT / 'data/current_run_card_2026-10-25.json').read_bytes() == (
+        DOCS / 'data/current_run_card_2026-10-25.json').read_bytes()
+    root_summary = (ROOT / 'executive-summary.html').read_text()
+    assert 'Submission download locked' in root_summary and 'docs/downloads/gems28-s18-mxtp-' in root_summary

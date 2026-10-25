@@ -1215,6 +1215,11 @@ def main() -> int:
     current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (DOCS / "data/run_card_2026-10-25.json").write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
+    (ROOT / "executive-summary.html").write_text(
+        root_relative_links(publish_source_links(pages["executive-summary.html"])), encoding="utf-8")
+    legacy_card = ROOT / "data/current_run_card_2026-10-25.json"
+    legacy_card.parent.mkdir(parents=True, exist_ok=True)
+    legacy_card.write_bytes(current_card_path.read_bytes())
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,

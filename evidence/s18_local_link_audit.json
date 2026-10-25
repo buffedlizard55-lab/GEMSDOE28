@@ -1,7 +1,7 @@
 {
-  "pages": 10,
-  "local_references_checked": 205,
+  "pages": 11,
+  "local_references_checked": 238,
   "errors": [],
   "external_http_verified": false,
-  "regression": "tests/test_site.py::test_all_internal_links_and_assets_resolve covers all HTML routes, assets and fragment IDs"
+  "regression": "tests/test_site.py::test_all_internal_links_and_assets_resolve covers every docs HTML route, both root mirrors, assets and fragment IDs; canonical-card test checks exact legacy JSON bytes"
 }

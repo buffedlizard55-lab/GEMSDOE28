@@ -6,6 +6,8 @@ on:
     paths:
       - 'docs/**'
       - 'index.html'
+      - 'executive-summary.html'
+      - 'data/current_run_card_2026-10-25.json'
       - '.nojekyll'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
