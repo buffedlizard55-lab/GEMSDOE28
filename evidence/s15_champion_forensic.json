@@ -1,0 +1,126 @@
+{
+  "purpose": "S15 champion forensic, education only; no dots copied to any shipped raster",
+  "score_label": "OWNER-REPORTED (task-statement lists); no organizer receipt found in GEMSDOE32/36 bytes fetched 2026-10-25, so NOT ORGANIZER-CONFIRMED",
+  "champion_sha256_verified_vs_audit": true,
+  "counts": {
+    "champion_e5eb6e7e_GEMSDOE32_owner_reported_0.2778": 37654,
+    "gems36_9b9ea4e6_GEMSDOE36_owner_reported_0.2750": 38854,
+    "d2_8_e56ea318af89_owner_reported_0.2600": 44090,
+    "solo_r1_8acb75e1f2cc_owner_reported_0.2708": 40199,
+    "h36_1_b531dae0a36f_unscored": 37660,
+    "h38_1_56a9f473edc7_unscored": 37860,
+    "h37_1_0bbddf41eb6d_unscored": 37447
+  },
+  "on_catalogue_dots": {
+    "champion_e5eb6e7e_GEMSDOE32_owner_reported_0.2778": 0,
+    "gems36_9b9ea4e6_GEMSDOE36_owner_reported_0.2750": 0,
+    "d2_8_e56ea318af89_owner_reported_0.2600": 0,
+    "solo_r1_8acb75e1f2cc_owner_reported_0.2708": 0,
+    "h36_1_b531dae0a36f_unscored": 0,
+    "h38_1_56a9f473edc7_unscored": 0,
+    "h37_1_0bbddf41eb6d_unscored": 0
+  },
+  "d_cat_hist_px": {
+    "champion_e5eb6e7e_GEMSDOE32_owner_reported_0.2778": {
+      "=0": 0,
+      "(0,1]": 0,
+      "(1,2]": 0,
+      "(2,3]": 2171,
+      "(3,5]": 3466,
+      "(5,10]": 5723,
+      ">10": 26294
+    },
+    "gems36_9b9ea4e6_GEMSDOE36_owner_reported_0.2750": {
+      "=0": 0,
+      "(0,1]": 0,
+      "(1,2]": 0,
+      "(2,3]": 2281,
+      "(3,5]": 3543,
+      "(5,10]": 5959,
+      ">10": 27071
+    },
+    "d2_8_e56ea318af89_owner_reported_0.2600": {
+      "=0": 0,
+      "(0,1]": 3891,
+      "(1,2]": 2545,
+      "(2,3]": 2171,
+      "(3,5]": 3466,
+      "(5,10]": 5723,
+      ">10": 26294
+    },
+    "solo_r1_8acb75e1f2cc_owner_reported_0.2708": {
+      "=0": 0,
+      "(0,1]": 0,
+      "(1,2]": 2545,
+      "(2,3]": 2171,
+      "(3,5]": 3466,
+      "(5,10]": 5723,
+      ">10": 26294
+    },
+    "h36_1_b531dae0a36f_unscored": {
+      "=0": 0,
+      "(0,1]": 0,
+      "(1,2]": 2353,
+      "(2,3]": 2024,
+      "(3,5]": 3175,
+      "(5,10]": 5384,
+      ">10": 24724
+    },
+    "h38_1_56a9f473edc7_unscored": {
+      "=0": 0,
+      "(0,1]": 0,
+      "(1,2]": 2353,
+      "(2,3]": 2043,
+      "(3,5]": 3239,
+      "(5,10]": 5449,
+      ">10": 24776
+    },
+    "h37_1_0bbddf41eb6d_unscored": {
+      "=0": 0,
+      "(0,1]": 0,
+      "(1,2]": 2619,
+      "(2,3]": 2676,
+      "(3,5]": 3324,
+      "(5,10]": 5847,
+      ">10": 22981
+    }
+  },
+  "champion_subset_of_solo": true,
+  "champion_equals_solo_minus_dcat_le2_exact": true,
+  "symdiff_champion_vs_solo_minus_dcat_le2": 0,
+  "removed_solo_to_champion": 2545,
+  "added_solo_to_champion": 0,
+  "removed_d28_to_solo": 3891,
+  "added_d28_to_solo": 0,
+  "frac_of_each_within3px_of_champion": {
+    "champion_e5eb6e7e_GEMSDOE32_owner_reported_0.2778": 1.0,
+    "gems36_9b9ea4e6_GEMSDOE36_owner_reported_0.2750": 0.9740309878004839,
+    "d2_8_e56ea318af89_owner_reported_0.2600": 0.8817192107053754,
+    "solo_r1_8acb75e1f2cc_owner_reported_0.2708": 0.9539043259782581,
+    "h36_1_b531dae0a36f_unscored": 0.9547265002655337,
+    "h38_1_56a9f473edc7_unscored": 0.9501320655044903,
+    "h37_1_0bbddf41eb6d_unscored": 0.9443480118567575
+  },
+  "frac_of_champion_within3px_of_each": {
+    "champion_e5eb6e7e_GEMSDOE32_owner_reported_0.2778": 1.0,
+    "gems36_9b9ea4e6_GEMSDOE36_owner_reported_0.2750": 1.0,
+    "d2_8_e56ea318af89_owner_reported_0.2600": 1.0,
+    "solo_r1_8acb75e1f2cc_owner_reported_0.2708": 1.0,
+    "h36_1_b531dae0a36f_unscored": 0.9987517926382323,
+    "h38_1_56a9f473edc7_unscored": 0.9987517926382323,
+    "h37_1_0bbddf41eb6d_unscored": 0.959765230785574
+  },
+  "owner_reported_live_ladder": {
+    "d2_8_N44090": 0.26,
+    "solo_r1": 0.2708,
+    "champion_B2": 0.2778,
+    "gems36_champion_plus_conduits": 0.275,
+    "delta_per_removed_dot_ring1": 2.7756360832690764e-06,
+    "delta_per_removed_dot_ring2": 2.7504911591355625e-06
+  },
+  "ring3_candidate_dots_in_champion_dcat_(2,3]": 2171,
+  "gems36_vs_champion": {
+    "added": 1200,
+    "removed": 0
+  }
+}

@@ -639,6 +639,64 @@ def summarize_h38_corroboration(
     }
 
 
+def summarize_s15_depthslice(cells: list[dict], s15_meta: dict) -> dict:
+    """Frozen H39-1 gate readout (knowledge/47 §4): pooled + paired D1-D0 with bootstrap CI."""
+    rows = [c for c in cells if c.get("s15")]
+    if not rows:
+        return {"n_cells": 0, "gate_passed": False}
+
+    def pooled(arm: str) -> dict:
+        tp = sum(c["s15"][arm]["tp"] for c in rows)
+        fp = sum(c["s15"][arm]["fp"] for c in rows)
+        ng = sum(c["s15"][arm]["n_truth"] for c in rows)
+        dots = sum(c["s15"][arm]["dots"] for c in rows)
+        return {"pooled_dti": float(tp / (tp + metric.ALPHA * fp + metric.BETA * (ng - tp) + metric.EPS)),
+                "sum_tp": float(tp), "sum_fp": float(fp), "sum_n_truth": int(ng),
+                "dots": int(dots), "credit_per_dot": float(tp / max(1, dots)),
+                "mean_dti": float(np.mean([c["s15"][arm]["dti"] for c in rows]))}
+
+    p0, p1, p1nw = pooled("d0"), pooled("d1"), pooled("d1_nw")
+    paired = np.array([c["s15"]["d1"]["dti"] - c["s15"]["d0"]["dti"] for c in rows])
+    paired_nw = np.array([c["s15"]["d1_nw"]["dti"] - c["s15"]["d0"]["dti"] for c in rows])
+    rng = np.random.default_rng(290)
+    boot = np.array([paired[rng.integers(0, len(paired), len(paired))].mean() for _ in range(10_000)])
+    seed_means = {str(s): float(np.mean([v for c, v in zip(rows, paired) if c["seed"] == s]))
+                  for s in sorted({c["seed"] for c in rows})}
+    fold_means = {fn: float(np.mean([v for c, v in zip(rows, paired) if c["fold"] == fn]))
+                  for fn in FOLD_NAMES if any(c["fold"] == fn for c in rows)}
+    on_known = sum(c["s15"]["d1_on_known"] + c["s15"]["d0_on_known"] for c in rows)
+    n_ratio = abs(p1["dots"] - p0["dots"]) / max(1, p0["dots"])
+    gate = {
+        "G1_pooled_gt0_and_mean_ge_0.001": bool(p1["pooled_dti"] - p0["pooled_dti"] > 0
+                                               and paired.mean() >= 0.0010),
+        "G2_spread_14cells_4seeds_3folds": bool((paired > 0).sum() >= 14
+                                                and sum(v > 0 for v in seed_means.values()) >= 4
+                                                and sum(v > 0 for v in fold_means.values()) >= 3),
+        "G3_credit_per_dot_not_worse": bool(p1["credit_per_dot"] >= p0["credit_per_dot"]),
+        "G4_integrity_onknown0_and_count_ratio_le_0.10": bool(on_known == 0 and n_ratio <= 0.10),
+        "G5_canary_pass_from_evidence_s15_canary": bool(s15_meta.get("canary_pass")),
+    }
+    return {
+        "preregistration": "knowledge/47_s15_hypotheses_and_preregistration_H39-1.md",
+        "evaluator": "scripts/run_losfo_harness.py --s15-depthslice; src/gems27/losfo.py + metric.py "
+                     "(alpha=0.2, beta=0.8, 300 m triangular kernel, pooled over cells)",
+        "n_cells": len(rows), "meta": s15_meta,
+        "arms_pooled": {"d0": p0, "d1": p1, "d1_nw": p1nw},
+        "pooled_delta_dti_d1_minus_d0": float(p1["pooled_dti"] - p0["pooled_dti"]),
+        "mean_paired_delta_dti": float(paired.mean()),
+        "ci95_paired_bootstrap_10k_seed290": [float(np.quantile(boot, 0.025)),
+                                              float(np.quantile(boot, 0.975))],
+        "mean_paired_delta_dti_d1nw_minus_d0": float(paired_nw.mean()),
+        "cells_positive": int((paired > 0).sum()), "per_seed_mean_delta": seed_means,
+        "per_fold_mean_delta": fold_means, "on_known_dots_total": int(on_known),
+        "pooled_count_ratio_abs": float(n_ratio),
+        "n_withheld_positives_pooled_cell_truth_px": int(p0["sum_n_truth"]),
+        "tau_at_d0_pooled_dti": float(metric.inclusion_threshold(p0["pooled_dti"])),
+        "tau_live_at_0.2778_owner_reported": float(metric.inclusion_threshold(0.2778)),
+        "gate": gate, "gate_passed": bool(all(gate.values())),
+    }
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seeds", default="210-214")
@@ -659,6 +717,12 @@ def main() -> int:
     ap.add_argument("--h38-corroboration", action="store_true",
                     help="also evaluate the Session 14 H38 conductive heat-flow residual & "
                          "shallow SI=0 Euler lineament corroboration arms")
+    ap.add_argument("--s15-depthslice", action="store_true",
+                    help="also train the LOSFO detector with the 5 H39-1 depth-slice extra "
+                         "bands (data/prepared/depthslice_extra.npy) and evaluate D1 "
+                         "(persistence-weighted ranking) and D1_nw against the identical "
+                         "truth; frozen gate knowledge/47 (Session 15). Default behaviour "
+                         "without this flag is unchanged.")
     args = ap.parse_args()
 
     a, _, b = args.seeds.partition("-")
@@ -698,6 +762,26 @@ def main() -> int:
         }
         print(f"H37-3 licence: {n_cand} candidate clusters from {args.euler_licence}", flush=True)
 
+    s15_extra = None
+    s15_persist_rank = None
+    s15_meta = None
+    if args.s15_depthslice:
+        extra_path = paths.DATA / "prepared/depthslice_extra.npy"
+        rank_path = paths.DATA / "prepared/depthslice_persist_rank01.npy"
+        canary_path = paths.EVIDENCE / "s15_canary.json"
+        s15_extra = np.load(extra_path, mmap_mode="r")
+        s15_persist_rank = np.load(rank_path)
+        canary = json.loads(canary_path.read_text()) if canary_path.is_file() else {}
+        s15_meta = {
+            "extra_path": str(extra_path), "extra_shape": list(s15_extra.shape),
+            "extra_sha256": canary.get("extra_sha256"),
+            "persist_rank_sha256": canary.get("persist_rank_sha256"),
+            "canary_pass": bool(canary.get("canary_pass")),
+            "canary_aucs": canary.get("single_feature_auc_vs_hidden_systems"),
+            "ranking": "score = prob * (0.5 + persist_rank01), ridge from prob (knowledge/47 §3)",
+        }
+        print(f"S15 H39-1: extra {s15_extra.shape}, canary_pass={s15_meta['canary_pass']}", flush=True)
+
     sys_grid, n_sys = losfo.fault_systems(labels, args.dilate_px)
     tab = losfo.system_table(sys_grid, n_sys, foot)
     sizes = tab["n_px"]
@@ -719,6 +803,13 @@ def main() -> int:
         # Detector B: leaky control - same held-out truth, trained on the full catalogue.
         prob_leaky = oof_detector.fit_predict_oof_probabilities(foot, labels, fold)
         ridge_leaky = oof_detector.ridge_nms(prob_leaky, foot, sigma=1.0)
+        # Detector C (S15, optional): identical LOSFO labels + 5 label-free depth-slice bands.
+        prob_d1 = ridge_d1 = score_d1 = None
+        if s15_extra is not None:
+            prob_d1 = oof_detector.fit_predict_oof_probabilities(foot, masked, fold,
+                                                                 extra=s15_extra)
+            ridge_d1 = oof_detector.ridge_nms(prob_d1, foot, sigma=1.0)
+            score_d1 = (prob_d1 * (0.5 + s15_persist_rank)).astype(np.float32)
 
         diag_meta = {
             "n_systems": n_sys, "n_systems_held_out": n_held,
@@ -830,6 +921,21 @@ def main() -> int:
                     r_l,
                 )
 
+            s15_block = None
+            if s15_extra is not None:
+                base_d1 = oof_detector.build_oof_dotted_base(
+                    score_d1[sl], ridge_d1[sl], fm, sp.known[sl],
+                    budget_frac=oof_detector.PRE_THIN_FRAC, thin_d=args.thin_d) & active
+                base_d1nw = oof_detector.build_oof_dotted_base(
+                    prob_d1[sl], ridge_d1[sl], fm, sp.known[sl],
+                    budget_frac=oof_detector.PRE_THIN_FRAC, thin_d=args.thin_d) & active
+                s15_block = {
+                    "d0": r_l, "d1": eval_set(base_d1, hidden, active),
+                    "d1_nw": eval_set(base_d1nw, hidden, active),
+                    "d0_on_known": int((base_l & sp.known[sl]).sum()),
+                    "d1_on_known": int((base_d1 & sp.known[sl]).sum()),
+                }
+
             row = {
                 "seed": seed, "fold": sp.name, "n_truth": r_l["n_truth"],
                 "min_dist_truth_to_known_px": float(sp.min_dist_hidden_to_known),
@@ -843,6 +949,7 @@ def main() -> int:
                 "euler": euler_block,
                 "h36_1": h36_block,
                 "h38": h38_block,
+                "s15": s15_block,
             }
             cells.append(row)
             per_fold_summary[sp.name].append(row)
@@ -988,6 +1095,8 @@ def main() -> int:
         "euler_licence": euler_block_out,
         "h36_1_farfield": h36_1_block_out,
         "h38_corroboration": h38_block_out,
+        "s15_depthslice_h39_1": (summarize_s15_depthslice(cells, s15_meta)
+                                 if s15_meta is not None else None),
         "far_field_check": {
             "min_dist_truth_to_known_px_over_cells": float(
                 min(c["min_dist_truth_to_known_px"] for c in cells)),
