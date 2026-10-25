@@ -269,10 +269,10 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
         assert len(candidate["note"]) <= 200
         assert candidate["nan"] in research and candidate["zip"] in research
         assert candidate["allfinite"] in research
-        assert "not one of the four weekly slots" in research
+        assert "not an authorized weekly submission" in research
         summary = (DOCS / "executive-summary.html").read_text()
         assert candidate["nan"] in summary
-        assert "not one of the four weekly slots" in summary
+        assert "not an authorized weekly submission" in summary
 
 
 def test_ai_use_disclosure_is_present_and_linked_from_source_ledger():
@@ -323,8 +323,8 @@ def test_current_run_notice_is_above_historical_body():
     card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
-    # Session 16: an inspection-only raster exists but is gate/uniqueness-failed,
-    # so a hash is recorded while submission_ready stays False (DO NOT SUBMIT).
-    assert card['raster_sha256'] is None or (
-        isinstance(card['raster_sha256'], dict) and card.get('slot_selected') is False
-    )
+    # Current S18 card is bound to the new exact TIFF; a negative gate cannot approve it.
+    assert card['session'] == 'S18-MXTP'
+    assert re.fullmatch(r'[0-9a-f]{64}', card['raster_sha256'])
+    assert card['slot_selected'] is False
+    assert card['evidence_schema_gate']['verdict'] == 'negative'

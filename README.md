@@ -1,3 +1,72 @@
+# Current result — 2026-10-25 S18-MXTP (read first every session)
+
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+
+[**Download the new unique research TIFF**](docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif)
+· [Executive summary / submission process](docs/executive-summary.html)
+· [Current full JSON run card](evidence/s18_mxtp_run_card.json)
+· [Scientific result, sources and next steps](knowledge/54_s18_result.md)
+
+The new 11,082-dot migration-extrapolated TMI/gravity raster is independently generated, not copied
+from a previous submission. Both pre-placement and final-dot uniqueness pass against 166 pinned
+valid-grid rasters across the nine requested repositories plus local research artifacts. Exact-file
+checks pass: no NaN anywhere, values {0,1}, single-band float32, template CRS/shape/transform.
+**It is safe to download for research, NOT approved to submit.** Format validity and novelty do
+not compensate for failed scientific validation; no human inspector or competition slot was used.
+
+**HOLDOUT-DTI** (shared eval_set **v2** → metric.dti_binary, buffered whole-system LOSFO,
+seeds 310–314, 20 cells, 76,869 pooled withheld positives / 45,155 unique): **0.020384**
+(95% CI **[0.016438, 0.024729]**) vs recomputed registered H38-1 candidate **0.108239**;
+paired gain **−0.087855** (95% CI **[−0.112958, −0.059642]**). Four-geographic-block bootstrap;
+local recovery proxy, not an organizer score. All three experiments used; lane closed.
+
+**Current source corrections:** the official leaderboard displayed **0.4413** on 2026-10-25
+(one-off public source observation, NOT a submission-page receipt). The September rules §§3.2/3.4
+state **three submissions/week**; the authenticated account's remaining allowance is unknown.
+[Source review](evidence/s18_official_source_review.json). No score for a GEMSDOE raster has an
+organizer receipt here. Fresh byte forensics confirm that the reported GEMSDOE32 champion is
+solo-r1 minus 2,545 catalogue-flank dots; its reported 0.2778 association remains unverified.
+
+### Standing owner prompt — start here every session
+
+Read the [current normalized owner request](knowledge/53_current_request.md), the
+[frozen S18 ranking and method](knowledge/52_s18_preregistration.md), and the result above.
+The request is archived as an operational requirements record, **not a verbatim export of this
+chat**; historical verbatim prompts below remain historical. The chat remains authoritative.
+Core values: **Maximize P(Win)** and **Own the Outcome**. Do not relabel a rejected candidate,
+retune spent seeds, copy a previous raster, or spend a slot without a separate selector.
+
+- Unique TIFF + obvious first-screen upload decision; no human geological inspection gate.
+- One lane; cached features + shared evaluator/writer; buffered whole-system hide/recover;
+  visible-only catalogue features; exact visible masking; pooled α=.2 / β=.8 / triangular 300 m DTI.
+- Feature-alone leakage canaries; pre-placement AND final-dot comparisons to registry; duplicate
+  stop at Spearman >.90 or >70% within 3 px. Snapshot scope must be explicit.
+- Versioned HOLDOUT-DTI with withheld positives and 95% CI. ORGANIZER-CONFIRMED only from a
+  submission-page receipt; never turn owner claims or projections into verified scores.
+- Before implementation rank 3–5 physical hypotheses by expected benefit/cost, distinguishing
+  faults from lithologic contacts and vents. Official free-source availability/provenance gates.
+- Stop at 3 experiments or 2 hours; JSON run card (hypothesis, mechanism, non-fault mimic, DTI+CI,
+  registry checks, SHA-256, validator, name, note ≤140 characters, promote/negative verdict).
+- Three implementation/review passes; automated exact-file validation; clean Pages executive
+  summary; auditable official sources; no automatic competition upload. PR then merge after checks.
+
+**Shared fix:** eval_set v2 now delegates to the existing tested metric to prevent phantom TP on
+empty predictions and to mask truth consistently. Historical outputs were not silently rewritten.
+**Erratum:** the frozen rank-2 hypothesis mislabeled conductive-base depth as basement thickness;
+it is rejected as stated. No alternative experiment was run.
+
+**Limitations / next session:** explicit exclusive lane paragraph was absent; S18 followed the
+repo's recommended next step and discloses that interpretation. Registry is pinned, not synchronized
+across every parallel run. Owner-mirror bytes are hash-verified, not organizer-authenticated.
+No private labels, DrivenData login, account quota, eligibility verification or receipt. Restore the
+17 pinned inputs via the existing tools to reproduce file checks; CPU classifier training worked.
+Keep S18 closed. Establish a synchronized registry and one frozen best baseline before a fresh,
+provenance-audited scarp-displacement hypothesis with road/shoreline controls.
+
+---
+
+## Historical notices and prior standing briefs (superseded by current result above)
+
 # Current session safety notice — 2026-10-25 Session 16 (read first)
 
 **NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** The Session 16 H40-1 migration TIFF

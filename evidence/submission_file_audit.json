@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-25T22:23:15Z",
+  "checked_utc": "2026-10-25T23:06:38Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "5da508791648db936664a020f66c9dd4b6243b2d9e95549325062bf89b445fa6",
+  "manifest_sha256": "b430176715bac1abf96aaebadcfc82f90689961befe4c2413846c2b28ddd7566",
   "checks": [
     {
       "check": "labels_grid_matches_template",
@@ -1549,9 +1549,59 @@
       "detail": "note-gemsdoe28-h40-1-5f2efa891ce7.txt"
     },
     {
+      "check": "s18_safe_filename",
+      "pass": true,
+      "detail": "gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif"
+    },
+    {
+      "check": "s18_file_exists",
+      "pass": true,
+      "detail": "gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif"
+    },
+    {
+      "check": "s18_exact_sha256",
+      "pass": true,
+      "detail": "ce043566a96a1bf0abae366ba706ed6be5907297248b1d14deace8596500b186"
+    },
+    {
+      "check": "s18_exact_grid",
+      "pass": true,
+      "detail": "CRS/shape/transform match template"
+    },
+    {
+      "check": "s18_single_band_float32",
+      "pass": true,
+      "detail": "('float32',)"
+    },
+    {
+      "check": "s18_strict_whole_array_0_1",
+      "pass": true,
+      "detail": "No NaN/infinity or out-of-range value anywhere"
+    },
+    {
+      "check": "s18_zero_outside_footprint",
+      "pass": true,
+      "detail": "zeros outside footprint"
+    },
+    {
+      "check": "s18_no_catalogue_predictions",
+      "pass": true,
+      "detail": "no catalogue dots"
+    },
+    {
+      "check": "s18_note_140",
+      "pass": true,
+      "detail": "S18 MXTP: extrapolated TMI/gravity ridges; 11082 dots; holdout rejected; research only; DO NOT SUBMIT."
+    },
+    {
+      "check": "s18_rejected_not_approved",
+      "pass": true,
+      "detail": "Unique and format-valid RESEARCH TIFF; failed frozen holdout superiority gate. DO NOT SUBMIT."
+    },
+    {
       "check": "all_tif_names_unique",
       "pass": true,
-      "detail": "30 unique GeoTIFF(s)"
+      "detail": "31 unique GeoTIFF(s)"
     },
     {
       "check": "all_tif_names_content_addressed",
@@ -1560,5 +1610,5 @@
     }
   ],
   "failures": [],
-  "check_count": 307
+  "check_count": 317
 }

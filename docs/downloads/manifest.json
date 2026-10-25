@@ -348,5 +348,17 @@
     "holdout_preregistration": "knowledge/49_preregistration_H40-1_migration.md",
     "holdout_seeds": "300-304",
     "verdict": "negative"
+  },
+  "s18_candidate": {
+    "filename": "gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif",
+    "submission_name": "GEMSDOE28-S18-MXTP-3e95505c011a",
+    "sha256": "ce043566a96a1bf0abae366ba706ed6be5907297248b1d14deace8596500b186",
+    "note": "S18 MXTP: extrapolated TMI/gravity ridges; 11082 dots; holdout rejected; research only; DO NOT SUBMIT.",
+    "format_verified": true,
+    "unique_within_snapshot": true,
+    "submission_ready": false,
+    "verdict": "negative",
+    "status": "Unique and format-valid RESEARCH TIFF; failed frozen holdout superiority gate. DO NOT SUBMIT.",
+    "run_card": "data/run_card_s18.json"
   }
 }
