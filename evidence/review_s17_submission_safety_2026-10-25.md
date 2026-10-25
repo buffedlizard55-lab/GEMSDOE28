@@ -47,7 +47,7 @@ The shared generator now states **NO FILE APPROVED**, labels H40-1 and H36-1 as 
 ### Pass 2 — bugs, assumptions, and edge cases
 
 - Full test suite after adding the new assertions: **317 passed, 7 skipped**. The first run revealed one overly exact test-string expectation; it was corrected to test the actual message, and the full suite then passed.
-- The first full-repo Ruff invocation found three pre-existing lint findings in untouched files (`scripts/build_unique_submission.py`, `scripts/evaluate_unique_holdout.py`). Do not auto-fix them: one is explicitly marked as unsafe; these are outside this site-safety change. Targeted Ruff for `scripts/build_site.py` and `tests/test_site.py`: **pass**.
+- The first full-repo Ruff invocation found three unused-variable findings in `scripts/build_unique_submission.py` and `scripts/evaluate_unique_holdout.py`. Removed the dead `order` calculation and `pooled_cand_n` assignment, and renamed the unused loop key `_fid`; these changes do not affect candidate ordering or holdout calculations. Full-repository Ruff now passes, with the complete test suite rerun after the fixes.
 - `git diff --check`: pass. All site pages contain the no-approval status; Overview and Executive Summary no longer recommend the older TIFF.
 - Edge case retained: “all-finite” means values meet the strict range validator; it does not fix a failed holdout, duplicate placement, input provenance, or missing selector approval.
 
