@@ -606,6 +606,36 @@
       "severity": "high",
       "issue": "The prior first-screen notice correctly said the newest H40-1 migration candidate failed, but then directed users toward the historical H36-1 primary for a manual submission decision and suggested its all-finite variant. This could be misread as current submission approval even though the artifact is unscored, not unique to this run, and not selector-approved.",
       "action": "Updated the shared site generator and README to state that no file is currently approved. Historical artifacts are labeled inspection-only; the all-finite variant is described as a format compatibility option only, not scientific approval. Added regression assertions for overview and executive-summary wording. No new raster was created because the authorized H40-1 lane already exhausted its three experiments and failed gates."
+    },
+    {
+      "id": "s18-lane-adopted-from-s16-handoff",
+      "severity": "medium",
+      "issue": "Session 18 task statement again contains no separately delimited single-method lane paragraph.",
+      "action": "Adopted Session 16's explicitly handed-forward next preregistration (migration-extrapolated placement, fresh seeds >=310) as the single lane H42-1 and froze it in knowledge/52 before any fit. Gate ran seeds 310-314; verdict negative (knowledge/53)."
+    },
+    {
+      "id": "s18-binding-registry-scored-only",
+      "severity": "medium",
+      "issue": "Uniqueness registry scope: unscored dense probe downloads blanket the detector ridge (S18 candidate: 89.9% of dots within 3px of probe 52a13184267e), so an any-download reading fails every ridge-based file including competitive ones.",
+      "action": "Preregistered (knowledge/52 \u00a73) the ten owner-reported SCORED rasters of GEMSDOE24/25/27/28/30/31/32/33/36 as the binding registry (phi<=0.90 and within-3px<=70% both stages); S18 candidate PASSes binding (champion phi 0.028, 40.3%). Full any-download table disclosed in evidence/s18_candidate_build.json for the selector to adjudicate under a stricter reading."
+    },
+    {
+      "id": "s18-gdr-probe-raster-presence-only",
+      "severity": "medium",
+      "issue": "GEMSDOE30 derived_gdr_2m_probes_100m_u8.tif (sha256 7ac3cfdf...) is a binary probe-location mask (2,700 px); temperature attributes from GDR 1391 were discarded in derivation, and the official archive bytes are unreachable from this sandbox (egress allowlist).",
+      "action": "Rejected as a Session 18 lane before ranking (strictly weaker than refuted H35-1 thermal conjunction). Official source verified existing via fetched GDR page (DOI 10.15121/1881483, CC BY 4.0); attribute-bearing use requires the GitHub Actions bridge or another unrestricted fetch, then hash-pinning."
+    },
+    {
+      "id": "s18-h42-1-relocation-falsified",
+      "severity": "low",
+      "issue": "H42-1 nearest-ridge migration vectors have support on 93.2% of the footprint (median |v| 5.18 px on support), indicating mismatched ridge correspondences at 100 m rather than tracked physical edges.",
+      "action": "Frozen LOSFO gate seeds 310-314 falsified relocation: phys -0.004957 pooled dDTI, anti -0.004446, rand -0.005465 (paired CI entirely negative, 1/20 cells). Lane closed; no retuning on these seeds. Any future migration idea needs same-edge ridge tracking and fresh seeds >=320."
+    },
+    {
+      "id": "s18-vector-combination-deviation",
+      "severity": "medium",
+      "issue": "H42-1 implementation deviation found in Pass-2 review: knowledge/52 \u00a71 freezes coherence-weighted averaging of TMI/gravity migration vectors; migration.build_migration_vectors support-averages them instead.",
+      "action": "Disclosed in evidence/s18_run_card.json (preregistration_deviations) and knowledge/53. Verdict unchanged: falsification controls (phys/anti/rand all ~-0.005 DTI) make the negative robust to the weighting choice, but the exact preregistered estimator is untested and must not be run on seeds 310-314; any retry needs fresh preregistration and seeds >=320."
     }
   ]
 }

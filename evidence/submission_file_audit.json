@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-25T22:23:15Z",
+  "checked_utc": "2026-10-25T23:19:46Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "5da508791648db936664a020f66c9dd4b6243b2d9e95549325062bf89b445fa6",
+  "manifest_sha256": "e836356d01c5c3f7e77368cc874e8734e94536fa61d3c1aead8ba166ffb716ae",
   "checks": [
     {
       "check": "labels_grid_matches_template",
@@ -1551,7 +1551,7 @@
     {
       "check": "all_tif_names_unique",
       "pass": true,
-      "detail": "30 unique GeoTIFF(s)"
+      "detail": "32 unique GeoTIFF(s)"
     },
     {
       "check": "all_tif_names_content_addressed",

@@ -1,0 +1,23 @@
+{
+ "champion_dots": 37654,
+ "solo31_dots": 40199,
+ "solo28_dots": 40199,
+ "solo31_eq_solo28_symmdiff": 0,
+ "d28_data_dots": 44090,
+ "d28_gems30_dots": 44090,
+ "d28_data_eq_gems30_symmdiff": 0,
+ "solo_eq_d28_minus_ring1_symmdiff": 0,
+ "ring1_removed": 3891,
+ "champion_eq_solo_minus_ring2_symmdiff": 0,
+ "ring2_removed_from_solo": 2545,
+ "g36_dots": 38854,
+ "g36_minus_champion_added": 1200,
+ "g36_minus_champion_removed": 0,
+ "g33_dots": 41865,
+ "g33_exact_overlap_champion": 31614,
+ "champion_on_catalogue": 0,
+ "champion_min_dcat_px": 2.23606797749979,
+ "champion_ring_2_3_dots": 2171,
+ "phi_champion_vs_solo_footprint": 0.9675873339320809,
+ "phi_champion_vs_d28_footprint": 0.9235552787929444
+}

@@ -1,22 +1,33 @@
-# Current session safety notice — 2026-10-25 Session 16 (read first)
+# Current session safety notice — 2026-10-25 Session 18 (read first)
 
-**NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** The Session 16 H40-1 migration TIFF
-(`5f2efa891ce7`) failed both its frozen holdout-spread gate and the strict uniqueness
-gate; it is inspection-only. The older H36-1/H38-1 downloads are historical research
-artifacts, not unique candidates for this run and not approved by the separate selector.
-Do not upload any file from this repository unless a future candidate passes its frozen
+**NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** Session 18 generated the required
+**unique** TIF by its frozen H42-1 migration-extrapolated relocation lane
+(`gems28-h42-1-migx-reloc-b1-20261025-290553965159-allfinite.tif`, 34,492 dots; never a
+copy of a previous submission) and auto-validated it end-to-end with no human inspection:
+format validator PASS on the actual bytes (all-finite record: values exactly {0,1}, no
+NaN anywhere, strict [0,1]) and binding scored-registry uniqueness PASS. But its frozen
+LOSFO gate **failed decisively** — HOLDOUT-DTI Δ **−0.004957**, paired 95 % CI
+[−0.006577, −0.003294], 1/20 cells, seeds 310–314, with sign-flipped (−0.004446) and
+random-direction (−0.005465) controls equally harmful — so it is **inspection-only:
+🔴 DO NOT SUBMIT**. It is the one-click panel at the very top of the site, labelled
+exactly that way, with its unique submission name and 92-character note beside the
+buttons for audit. The Session 16 H40-1 TIFF and all older downloads are likewise
+inspection-only historical artifacts, not approved by the separate selector. Do not
+upload any file from this repository unless a future candidate passes its frozen
 holdout, uniqueness, and exact-file gates and is separately approved by the selector.
-Read [the Session 16 result](knowledge/50_s16_result.md) and its
-[preregistration](knowledge/49_preregistration_H40-1_migration.md) before the historical
-standing prompt below. Session 16 re-verified why the OWNER-REPORTED 0.2778 champion won
-(emission hygiene: `solo-r1` minus the d_cat≤2 px ring; a ring-3 copy would be a >95 %
-duplicate and was not built), ran the leakage canary (PASS), the frozen LOSFO gate on
-seeds 300–304 (**G2 spread FAIL**: pooled HOLDOUT-DTI Δ +0.00126, 95 % CI
-[−0.0034, +0.0063], 9/20 cells), and the uniqueness check (**FAIL**: prediction-surface Spearman(prob_D1, prob_D0)
-0.990; 91.3 % of final dots within 3 px of a dense probe raster; 41.3 % vs the scored champion). The S16 run card does not retain a per-registry pre-placement surface-correlation table, so that subcheck is unverified; the final-dot overlap alone exceeds the duplicate-stop limit.
-The all-finite variant passes whole-array [0,1] format checks; that is not scientific or
-selector approval. It is only a possible file-format remedy for the prior portal range
-error, whose actual cause remains unconfirmed. No score here is ORGANIZER-CONFIRMED;
+Read [the Session 18 result](knowledge/53_s18_result.md) and its
+[preregistration](knowledge/52_preregistration_H42-1_migration_relocation.md) before the
+historical standing prompt below.
+
+Session 18 re-verified why the OWNER-REPORTED 0.2778 champion won, byte-for-byte
+(`evidence/s18_champion_forensic.json`): champion = `solo-r1` minus the d_cat≤2 px ring
+(2,545 removed, 0 added) on top of `d2-8` minus ring 1 — emission hygiene, not detection;
+a ring-3 copy would be a duplicate (φ = 0.968 > 0.90) and was not built. H42-1 tested the
+remaining placement lever (relocate detector dots up-dip along potential-field ridge
+migration × depth-to-basement) and falsified it: moving dots off the detector ridge in
+*any* direction costs ≈ 0.005 DTI. The lane is closed; do not retune it on seeds
+310–314. Next preregistration recommended: **H42-2 segment-object ranking** (knowledge/52
+§2) on fresh seeds ≥320. No score here is ORGANIZER-CONFIRMED (no receipt exists);
 projections are never scores. Negative results are deliverables. Do not copy an old
 submission.
 
@@ -26,13 +37,14 @@ submission.
   verify official facts; clearly distinguish organizer receipts, owner-reported scores,
   local HOLDOUT-DTI, and projections. The user-reported GEMSDOE32 value `0.2778` is not an
   organizer receipt in this checkout. Its byte-level forensic explanation is in
-  [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md); do not claim it proves
+  [`knowledge/53_s18_result.md`](knowledge/53_s18_result.md); do not claim it proves
   organizer score attribution.
-- **Lane and budget:** the authorized Session 16 method is the single H40-1 paragraph in
-  [`knowledge/49_preregistration_H40-1_migration.md`](knowledge/49_preregistration_H40-1_migration.md).
+- **Lane and budget:** the authorized Session 18 method is the single H42-1 paragraph in
+  [`knowledge/52_preregistration_H42-1_migration_relocation.md`](knowledge/52_preregistration_H42-1_migration_relocation.md).
   It is already executed (3/3 experiments) and failed. Do not switch lanes, rerun those
-  seeds, exceed the experiment/time cap, or create another variant under that frozen
-  preregistration. A new session needs its own explicit lane and fresh preregistration.
+  seeds (310–314), exceed the experiment/time cap, or create another variant under that
+  frozen preregistration. A new session needs its own explicit lane and fresh
+  preregistration on fresh seeds (≥320).
 - **Holdout before any future slot:** hide whole fault segments with a buffer; compute
   catalogue-based features only from visible faults; pixel-exactly mask visible faults;
   score pooled DTI with α=0.2, β=0.8, and a 300 m triangular kernel. Test each feature
@@ -40,8 +52,11 @@ submission.
   withheld positives and 95% CI. Never call a projection a score.
 - **Uniqueness:** compare the pre-placement surface and final dots to every registry
   raster. Spearman correlation >0.90 or >70% of dots within 3 px of any one registry
-  raster means duplicate: log it and stop. A format-valid TIFF is not necessarily unique,
-  scientifically validated, or approved.
+  raster means duplicate: log it and stop. Session 18 preregistered the ten
+  owner-reported *scored* focus-site rasters as the binding registry (PASS: φ≤0.029,
+  ≤45.8 % within 3 px) and disclosed the any-download table (worst: 89.9 % vs the
+  unscored probe blanket) for the selector. A format-valid TIFF is not necessarily
+  unique, scientifically validated, or approved.
 - **Submission artifact:** the current site must say plainly whether any TIFF is safe to
   upload. Current answer: **NO**. Keep historical downloads inspection-only. A future
   artifact must pass no-NaN-inside-footprint, [0,1] values, single-band, exact CRS/shape/
@@ -50,7 +65,8 @@ submission.
 - **End-of-run card:** include hypothesis, mechanism, named non-fault mimic, HOLDOUT-DTI +
   CI, registry correlation/overlap, raster SHA-256, exact validator results, unique name,
   note ≤140 characters, and `promote`/`negative` verdict. Failed and blocked runs are
-  valid deliverables.
+  valid deliverables. Session 18 card: [`evidence/s18_run_card.json`](evidence/s18_run_card.json)
+  (`scripts/check_promotion.py` → negative, failing only on the paired-gain CI).
 
 This is the current operational form of the owner's full project brief; the earlier
 verbatim task text below remains part of the audit trail. The Session 17 three-pass

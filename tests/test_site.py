@@ -328,3 +328,29 @@ def test_current_run_notice_is_above_historical_body():
     assert card['raster_sha256'] is None or (
         isinstance(card['raster_sha256'], dict) and card.get('slot_selected') is False
     )
+
+
+def test_session18_unique_tif_panel_is_prominent_and_negative():
+    for page in ('index.html', 'executive-summary.html'):
+        text = (DOCS / page).read_text()
+        assert 'Session 18' in text
+        assert '290553965159' in text
+        assert 'DO NOT SUBMIT' in text
+        assert 'data/run_card_s18.json' in text
+    overview = (DOCS / 'index.html').read_text()
+    # The S18 panel must appear before the historical one-click primary panel.
+    assert overview.index('id="s18-candidate"') < overview.index('id="download"')
+    assert 'gems28-h42-1-migx-reloc-b1-20261025-290553965159-allfinite.tif' in overview
+    assert 'GEMSDOE28-h42-1-migx-reloc-b1-290553965159' in overview
+    card = json.loads((DOCS / 'data/run_card_s18.json').read_text())
+    assert card['verdict'] == 'negative'
+    assert card['submission_ready'] is False
+    assert card['slot_selected'] is False
+    assert card['holdout']['label'] == 'HOLDOUT-DTI'
+    assert card['holdout']['paired_gain_ci95'][1] < 0  # falsified, CI entirely negative
+    assert card['registry']['binding_pass'] is True
+    assert len(card['registry']['members']) == 10
+    assert len(card['note']) <= 140
+    man = json.loads((DOCS / 'downloads/manifest.json').read_text())
+    assert man['s18_candidate']['verdict'] == 'negative'
+    assert man['s18_candidate']['content_id'] == '290553965159'
