@@ -339,7 +339,7 @@
     "bytes_zip": 286466,
     "emitted_px": 37694,
     "format_verified": true,
-    "status": "DO NOT SUBMIT \u2014 HOLDOUT GATE FAILED; HOLDOUT-DTI LOSFO seeds 300-304 pooled dDTI +0.001261 (95% CI [-0.0034, +0.0063], 9/20 cells, G2 spread FAIL); uniqueness FAIL (surface Spearman 0.990 > 0.90; worst 91.3% dots within 3px of gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif; vs scored champion e5eb6e7e 41.3%); validator PASS (all-finite variant: values exactly {0,1}, no NaN anywhere); verdict negative; research/inspection only, no slot spent, selector step separate.",
+    "status": "DO NOT SUBMIT \u2014 HOLDOUT GATE FAILED; HOLDOUT-DTI LOSFO seeds 300-304 pooled dDTI +0.001261 (paired 95% CI [-0.0034, +0.0063], 9/20 cells, G2 spread FAIL); uniqueness FAIL (recorded Spearman(prob_D1, prob_D0)=0.990; per-registry pre-placement surface correlations are not retained; worst final-dot overlap 91.3% within 3px of gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif; vs scored champion e5eb6e7e 41.3%); validator PASS (all-finite variant: values exactly {0,1}, no NaN anywhere); verdict negative; research/inspection only, no slot spent, selector step separate.",
     "note": "28GEMSDOE H40-1 migration B1 | LOSFO GATE FAIL dDTI +0.0013 CI[-0.0034,+0.0063] uniq FAIL DO NOT SUBMIT | id 5f2efa891ce7",
     "note_file": "note-gemsdoe28-h40-1-5f2efa891ce7.txt",
     "submission_name": "GEMSDOE28-h40-1-migration-b1-5f2efa891ce7",
