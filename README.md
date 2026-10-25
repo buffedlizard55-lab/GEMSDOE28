@@ -74,7 +74,10 @@ Their [blocked review card](evidence/s18_run_card.json) is preserved, distinct f
 [this experiment's S18-MXTP card](evidence/s18_mxtp_run_card.json). Their schema-only readiness fix
 and withdrawal of historical H38 uniqueness/promotion claims remain in force. S18-MXTP restored
 data autonomously and discloses its lane interpretation; it is still rejected and not slot-approved.
-Do not combine the two sessions' numbers or treat the blocked review's missing-data statement as
+PR #39’s separate no-experiment audit, upstream tool pins, stronger validator/gate and publication
+checks are also retained. Its original hashed manifest is archived without changing its old card.
+Final local integration: **470 tests pass, zero skips; 317 independent file checks pass; Ruff clean**.
+Do not combine these sessions' numbers or treat the blocked review's missing-data statement as
 current after this restoration.
 
 ## Historical notices and prior standing briefs (superseded by current result above)

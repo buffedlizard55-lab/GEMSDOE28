@@ -5,6 +5,7 @@ import subprocess
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -173,14 +174,19 @@ def test_local_failure_claim_and_registry_disambiguate_summary_path_collision():
 
 
 def test_all_internal_links_and_assets_resolve():
-    for base, p in [(DOCS, q) for q in PAGES] + [(ROOT, "index.html")]:
+    for page in list(DOCS.glob("*.html")) + [ROOT / "index.html"]:
         parser = Links()
-        parser.feed((base / p).read_text())
+        parser.feed(page.read_text())
         for ref in parser.refs:
-            if re.match(r"^(https?:|mailto:|#|data:)", ref):
+            url = urlsplit(ref)
+            if url.scheme or url.netloc:
                 continue
-            target = ref.split("#")[0]
-            assert (base / target).exists(), f"{base.name}/{p}: broken internal reference {ref}"
+            target = page.parent / unquote(url.path) if url.path else page
+            assert target.exists(), f"{page.name}: broken internal reference {ref}"
+            if url.fragment and target.suffix == ".html":
+                destination = Links()
+                destination.feed(target.read_text())
+                assert unquote(url.fragment) in destination.ids, f"{page.name}: broken anchor {ref}"
 
 
 def test_pages_source_links_resolve_to_public_repository_files():

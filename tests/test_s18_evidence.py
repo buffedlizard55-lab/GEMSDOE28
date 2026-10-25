@@ -37,6 +37,14 @@ def test_s18_exact_file_and_negative_gate_are_not_confused():
     assert card["validator"]["no_nan_anywhere"] and card["validator"]["range_0_1"]
     assert card["verdict"] == "negative" and card["submission_ready"] is False
     assert card["slot_selected"] is False and card["organizer_receipt"] is None
+    limits = card["strict_protocol_limitations"]
+    assert all(limits[key] is False for key in (
+        "upstream_template_api_equivalence_established", "exclusive_external_lane_assignment_confirmed",
+        "global_parallel_registry_complete", "certified_global_best_baseline"))
+    provenance = load("evidence/s18_writer_provenance.json")
+    assert provenance["artifact_sha256"] == card["raster_sha256"]
+    assert provenance["post_merge_validator_sha256"] == hashlib.sha256(
+        (ROOT / "src/gems27/submission.py").read_bytes()).hexdigest()
     assert len(card["note"]) <= 140 and "DO NOT SUBMIT" in card["note"]
     gate = promotion.promotion_gate(card)
     assert gate["failures"] == ["no positive paired gain CI over frozen current best"]
