@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-25T21:11:30Z",
+  "checked_utc": "2026-10-25T21:14:23Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -1551,7 +1551,7 @@
     {
       "check": "all_tif_names_unique",
       "pass": true,
-      "detail": "26 unique GeoTIFF(s)"
+      "detail": "30 unique GeoTIFF(s)"
     },
     {
       "check": "all_tif_names_content_addressed",

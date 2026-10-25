@@ -17,6 +17,8 @@ primary's all-finite variant** (values exactly 0/1, no NaN anywhere — strict w
 range [0, 1]". No score here is ORGANIZER-CONFIRMED; projections are never scores.
 Negative results are deliverables. Do not copy an old submission.
 
+**Follow-up (parallel merged run):** [registry-coverage gate review and next steps](knowledge/48_gate_review_2026-10-25.md). Note the H40-1 label collision flagged in `registry/irregularities.json` (`s16-h40-id-collision`): main also carries a parallel H40-1 thermal-vent / H41-1 thermal-spring experiment — do not combine its numbers with Session 16 migration numbers.
+
 This is an operational summary of the 2026-10-25 request, **not a verbatim copy** of the full prompt.
 Historical verbatim prompts below remain historical. Core values remain Maximize P(Win) and Own
 the Outcome: fail closed rather than spending a slot on unverified evidence.

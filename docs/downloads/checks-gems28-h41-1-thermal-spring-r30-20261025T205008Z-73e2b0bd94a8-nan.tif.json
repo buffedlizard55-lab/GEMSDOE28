@@ -1,0 +1,42 @@
+{
+  "file": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif",
+  "bytes": 1591554,
+  "sha256": "4ff7626cc689d8c3a6f07d0b8512d76bc958c643d3efbeb49c01ffff09be1660",
+  "cid": "73e2b0bd94a8",
+  "grid": {
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "footprint_px": 5167373,
+  "nonzero_inside_px": 38024,
+  "value_set_inside": [
+    0.0,
+    1.0
+  ],
+  "nan_inside_footprint": 0,
+  "nan_outside_footprint": 7111787,
+  "dots_on_catalogue": 0,
+  "n_base_px": 37660,
+  "n_spring_dots": 364,
+  "spring_min_dist_px": 3.0,
+  "temp_threshold_c": 40.0,
+  "format_checks": {
+    "values_in_0_1_inside": true,
+    "no_nan_inside": true,
+    "nan_outside": true,
+    "shape_matches": true,
+    "single_band": true
+  },
+  "all_checks_passed": true
+}

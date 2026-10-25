@@ -1,0 +1,42 @@
+{
+  "file": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif",
+  "bytes": 1590874,
+  "sha256": "149ba3dfee032bdc8f11c8b64f3f5b082671581fc9760e0d94ef520330996553",
+  "cid": "7935260dcfad",
+  "grid": {
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "footprint_px": 5167373,
+  "nonzero_inside_px": 37677,
+  "value_set_inside": [
+    0.0,
+    1.0
+  ],
+  "nan_inside_footprint": 0,
+  "nan_outside_footprint": 7111787,
+  "dots_on_catalogue": 0,
+  "n_base_px": 37660,
+  "n_vent_dots": 17,
+  "vent_min_dist_px": 3.5,
+  "format_checks": {
+    "values_in_0_1_inside": true,
+    "no_nan_inside": true,
+    "nan_outside": true,
+    "crs_epsg_32611": true,
+    "shape_matches": true,
+    "single_band": true
+  },
+  "all_checks_passed": true
+}

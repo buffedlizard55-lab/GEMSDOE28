@@ -582,6 +582,18 @@
       "severity": "medium",
       "issue": "H40-1 candidate surface Spearman vs D0 = 0.990 and 91.3% of dots lie within 3px of unscored dense probe 52a13184267e (41.3% vs the scored champion e5eb6e7e). Same binding constraint as s15-uniqueness-dense-probes: re-derived GBDT detectors re-emit the shared ridge network regardless of added bands.",
       "action": "Logged as duplicate under the strict any-registry-raster rule; no slot. Recommended next lane (knowledge/50) emits on migration-extrapolated positions and pre-checks pool uniqueness before training."
+    },
+    {
+      "id": "gate-registry-coverage-2026-10-25",
+      "severity": "high",
+      "issue": "Evidence gate formerly accepted incomplete or mismatched comparison sets despite registry.complete=true, and malformed containers could raise exceptions.",
+      "action": "Fixed exact declared-member coverage for surface and dot stages, defensive JSON parsing and finite-number overflow. Regression tested. External registry completeness and evidence authenticity remain unverified; no candidate promoted. See knowledge/48_gate_review_2026-10-25.md."
+    },
+    {
+      "id": "s16-h40-id-collision",
+      "severity": "high",
+      "issue": "Parallel sessions assigned H40-1 to two different hypotheses on 2026-10-25: this branch's continuation-height ridge-migration lane (knowledge/49-50) and merged main's thermal-vent experiment (superseded by H41-1 thermal-spring, negative on its catalogue holdout). Results must not be combined.",
+      "action": "Refer to this branch's arm as 'H40-1 migration (S16)' and main's as 'H40-1 thermal-vent / H41-1 thermal-spring (parallel)'. Run cards are session-scoped; docs/data/run_card_2026-10-25.json holds the S16 card, the parallel card remains in main history at 4da21f8."
     }
   ]
 }

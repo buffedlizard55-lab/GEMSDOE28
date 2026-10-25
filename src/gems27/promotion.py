@@ -10,11 +10,33 @@ import re
 
 
 def finite_number(value):
-    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        return False
+    try:
+        return math.isfinite(value)
+    except OverflowError:
+        return False
 
 
 def promotion_gate(card: dict) -> dict:
     failures = []
+
+    def result():
+        return {"verdict": "negative" if failures else "promote", "submission_ready": not failures,
+                "failures": failures, "slot_selected": False,
+                "scope": "Evidence schema gate only; promotion is not slot selection or organizer acceptance."}
+
+    # Evidence is untrusted JSON. Wrong container types must never crash or pass.
+    if not isinstance(card, dict):
+        failures.append("run card must be an object")
+        return result()
+
+    def section(name):
+        value = card.get(name)
+        if not isinstance(value, dict):
+            failures.append(f"missing or malformed object: {name}")
+            return {}
+        return value
 
     def require(ok, reason):
         if not ok:
@@ -27,7 +49,7 @@ def promotion_gate(card: dict) -> dict:
     require(isinstance(note, str) and 0 < len(note) <= 140, "note must contain 1–140 characters")
     require(bool(card.get("hypothesis")) and bool(card.get("mechanism")) and bool(card.get("non_fault_mimic")),
             "missing scientific hypothesis, mechanism, or named confounder")
-    h = card.get("holdout") or {}
+    h = section("holdout")
     require(h.get("raster_sha256") == card.get("raster_sha256") and bool(h.get("raster_sha256")),
             "holdout raster hash mismatch")
     require(bool(re.fullmatch(r"[0-9a-f]{64}", str(h.get("baseline_sha256", "")))),
@@ -52,22 +74,35 @@ def promotion_gate(card: dict) -> dict:
     if isinstance(features, dict):
         for name, auc in features.items():
             require(finite_number(auc) and 0 <= auc <= 0.90, f"invalid or leaking feature: {name}")
-    registry = card.get("registry") or {}
+    registry = section("registry")
     require(registry.get("complete") is True and bool(re.fullmatch(r"[0-9a-f]{64}", str(registry.get("manifest_sha256", "")))), "registry incomplete")
+    members = registry.get("members")
+    valid_members = (isinstance(members, list) and bool(members)
+                     and all(isinstance(x, str) and re.fullmatch(r"[0-9a-f]{64}", x) for x in members))
+    require(valid_members, "missing or invalid registry member identities")
+    expected = set(members) if valid_members else set()
+    require(not valid_members or len(expected) == len(members), "duplicate registry member identities")
     for stage in ("surface", "dots"):
         comparisons = registry.get(stage)
         require(isinstance(comparisons, list) and bool(comparisons), f"no {stage} registry comparisons")
         if isinstance(comparisons, list):
+            identities = []
             for comparison in comparisons:
+                if not isinstance(comparison, dict):
+                    failures.append(f"malformed {stage} registry comparison")
+                    continue
+                identity = comparison.get("raster_sha256")
+                if isinstance(identity, str):
+                    identities.append(identity)
                 require(bool(re.fullmatch(r"[0-9a-f]{64}", str(comparison.get("raster_sha256", "")))),
                         f"{stage} registry comparison missing raster identity")
                 corr, overlap = comparison.get("spearman"), comparison.get("within_3px_fraction")
                 require(finite_number(corr) and -1 <= corr <= 0.90, f"{stage} duplicate or undefined correlation")
                 require(finite_number(overlap) and 0 <= overlap <= 0.70, f"{stage} duplicate or undefined overlap")
-    validator = card.get("validator") or {}
+            require(set(identities) == expected and len(identities) == len(expected),
+                    f"{stage} comparisons must cover every registry member exactly once")
+    validator = section("validator")
     require(validator.get("raster_sha256") == card.get("raster_sha256"), "validator hash mismatch")
     for key in ("no_nan_inside", "range_0_1", "crs_match", "shape_match", "transform_match", "single_band"):
         require(validator.get(key) is True, f"validator failed or absent: {key}")
-    return {"verdict": "negative" if failures else "promote", "submission_ready": not failures,
-            "failures": failures, "slot_selected": False,
-            "scope": "Evidence schema gate only; promotion is not slot selection or organizer acceptance."}
+    return result()
