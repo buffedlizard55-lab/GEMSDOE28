@@ -24,6 +24,55 @@
 
 <section class="callout callout-danger"><strong>Session 15 review (2026-10-25):</strong> the GEMSDOE32 H33-2 <strong>0.2778</strong> figure is user-reported; the cross-site audit describes catalogue-proximity pruning but says the owner page disclaims an organizer score. Raw TIFF, full code and receipt are absent here. The prompt's <strong>0.4413</strong> and <strong>0.3195</strong> leaderboard maxima conflict. The required lane paragraph and cached input rasters are also missing, so no new unique TIFF was generated and no slot was used in that review run. A sibling parallel Session-15 lane that restored the rasters did build one candidate; it failed its frozen gate and is banner-marked DO NOT SUBMIT immediately below. <a href="docs/session15-review.html">Read the full high-score audit, ranked hypotheses and negative run card →</a></section>
 
+<section class="section" id="submission-status-at-a-glance">
+  <div class="eyebrow">Submission files — download status at a glance (read before downloading)</div>
+  <h2>Which file is OK to download and submit?</h2>
+  <p><strong>Status key:</strong> <span class="status ok">&#10003; OK TO DOWNLOAD</span> = format-validated (values exactly {0,1} inside the footprint, zero NaN inside, CRS/shape/geotransform match the sample template — no &ldquo;Predicted values must be in range [0, 1]&rdquo; error; an all-finite zeros-outside variant is included for strict validators).
+  <span class="status holdout">&#9881; HOLDOUT-REPORTED</span> = local holdout evidence only, not an organizer score.
+  <span class="status unscored">UNSCORED</span> = no organizer receipt exists in any fetched repository.
+  <span class="status noslot">NOT slot-approved</span> = promotion to a real weekly slot is a separate selector step; this site spends no slot.
+  <span class="status danger">&#128308; DO NOT SUBMIT</span> = failed its frozen holdout/uniqueness gates; published inspection-only.</p>
+  <table class="status-table">
+    <thead>
+      <tr><th>File</th><th>Format</th><th>Holdout evidence (HOLDOUT-DTI, not a score)</th><th>Score / slot</th><th>Verdict</th><th>One-click download</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="file-name">gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif</code> (<span>37,660</span> px)</td>
+        <td><span class="status ok">&#10003; PASS</span> single-band float32, EPSG:32611, 3730&#215;3292, 100 m grid, values exactly {0,1} inside footprint</td>
+        <td><span class="status holdout">&#9881;</span> +0.002599 mean &Delta;DTI vs the d=2.8 control (10/10 seeds, 4/4 spatial folds); LOSFO far-field F1&#8211;F4 ALL PASS (0.001713)</td>
+        <td>UNSCORED &#183; NOT slot-approved</td>
+        <td><span class="status ok">OK to download</span> — strongest replicated validated gain in the repo; the operator decides whether to submit</td>
+        <td><a class="button" href="docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif" download>Download GeoTIFF</a> <a class="button quiet" href="docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.zip" download>ZIP</a></td>
+      </tr>
+      <tr>
+        <td><code class="file-name">gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif</code> (<span>37,860</span> px = H36-1 + 200 dots)</td>
+        <td><span class="status ok">&#10003; PASS</span> single-band float32, exact template grid, values exactly {0,1} inside footprint, 0 dots on catalogue</td>
+        <td><span class="status holdout">&#9881;</span> registered Session 14 gates PASSED: +0.000747 over H36-1 on LOSFO far-field truth (16/20 cells, 4/5 folds, credit/dot 0.06993 &gt; &#964; 0.054852); interleaved +0.000543 (27/40 cells, 8/10 seeds); fresh seed-1 check this session neutral (&minus;5.4&#215;10&#8315;, 95% CI [&minus;6.8&#215;10&#8315;, &minus;4.1&#215;10&#8315;]) — margin small, disclosed</td>
+        <td>UNSCORED &#183; NOT slot-approved</td>
+        <td><span class="status ok">OK to download</span> — this session's regenerated unique submission (content ID 56a9f473edc7); run card: <code>docs/data/run_card_gems28-h38-1-hf-euler-r30-r1_2026-10-25.json</code></td>
+        <td><a class="button" href="docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif" download>Download GeoTIFF</a> <a class="button quiet" href="docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.zip" download>ZIP</a></td>
+      </tr>
+      <tr>
+        <td><code class="file-name">gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif</code></td>
+        <td><span class="status ok">&#10003; PASS</span> (format only)</td>
+        <td>&#128308; HOLDOUT GATE FAILED (pooled &Delta;DTI &minus;0.0016, 9/20 cells)</td>
+        <td>&#8212;</td>
+        <td><span class="status danger">&#128308; DO NOT SUBMIT</span> — inspection only, no slot spent</td>
+        <td><a class="button" href="docs/downloads/gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif" download>Download GeoTIFF</a></td>
+      </tr>
+      <tr>
+        <td><code class="file-name">gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif</code></td>
+        <td><span class="status ok">&#10003; PASS</span> (format only)</td>
+        <td>&#128308; HOLDOUT GATE FAILED (G2 spread) + uniqueness fail vs dense probe (91.3% within 3 px)</td>
+        <td>&#8212;</td>
+        <td><span class="status danger">&#128308; DO NOT SUBMIT</span> — inspection only, no slot spent</td>
+        <td><a class="button" href="docs/downloads/gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif" download>Download GeoTIFF</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="small"><strong>How to submit in 30 seconds:</strong> (1) download the single-band GeoTIFF above (or its ZIP), (2) open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData GEMS competition submission page</a> yourself — this site never logs in or uploads on your behalf, (3) upload the file, (4) paste the exact short note printed on the <a href="docs/executive-summary.html">executive summary</a> (&le; 200 characters), (5) submit and keep the organizer receipt. Full instructions: <a href="docs/executive-summary.html">Executive summary &#8594;</a> · PhD analysis and ranked hypotheses: <a href="knowledge/51_session17_unique_submission.md">&#8594;</a></p>
+</section>
 <section class="download-panel" id="s16-candidate" aria-labelledby="s16-heading">
   <div class="eyebrow">Session 16 - 2026-10-25 - newest candidate - auto-validated, no human inspection</div>
   <h2 id="s16-heading">RED DO NOT SUBMIT - HOLDOUT GATE FAILED (G2) + UNIQUENESS FAIL - INSPECTION ONLY</h2>

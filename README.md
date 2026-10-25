@@ -23,6 +23,20 @@ This is an operational summary of the 2026-10-25 request, **not a verbatim copy*
 Historical verbatim prompts below remain historical. Core values remain Maximize P(Win) and Own
 the Outcome: fail closed rather than spending a slot on unverified evidence.
 
+## This session's operative requirements (2026-10-25 — read first every session; the full chat transcript is authoritative, see knowledge/48 §Pass 3)
+
+- **MUST generate a UNIQUE TIF submission.** Do not copy a previous submission unless it is for learning and education. It must be obvious whether it is OK to download and submit the generated TIF.
+- **Easy one-click download:** there must be an easy-to-download submission `.tif` as described by the prompt, obvious on arrival at the site (executive summary or the very beginning of the site).
+- **Inspection is automated through the project:** no human inspector; every number validated without human intervention before any file is offered for download.
+- **Evidence classes:** label every number HOLDOUT-DTI (evaluator version, withheld positives, 95% CI) or ORGANIZER-CONFIRMED (copied from a submission-page receipt). A projection is never written as a score.
+- **Leakage canary:** test each feature alone on the holdout; AUC above 0.90 means leakage until proven otherwise.
+- **Run card (JSON, end of session):** hypothesis; mechanism; named non-fault mimic; holdout DTI + 95% CI; correlation/overlap vs registry; raster sha256; validator output (no NaN inside the footprint, values in [0,1], CRS/shape/transform match); submission name + note ≤ 140 chars; verdict promote / negative. Negative results are deliverables.
+- **Budget:** stop after 3 experiments or 2 hours. Do not pick submissions — promotion to a real slot is a separate selector step within the weekly cap.
+- **Hypotheses:** generate 3–5 not-yet-tried candidates (layers, physical signature, why off-catalogue vs USGS/INGENIOUS, difference from repo); rank by expected DTI improvement × cost; validate the top candidate on the spatially-blocked holdout before touching a weekly submission slot.
+- **Submission mechanics:** single-band GeoTIFF (or zip of one), matching the submission format's CRS/shape/geotransform, values in [0,1] — this fixes the "<em>Predicted values must be in range [0, 1]</em>" portal error; unique name + short note (≤ 200 chars); executive-summary subpage explaining exactly how to submit.
+- **Data:** no DrivenData auth in this environment; inputs restored from hash-pinned public mirrors via `scripts/download_competition_data.sh` (never contacts DrivenData); external data only from free official verified sources.
+- **Process:** work line by line, verify from official verified trusted sources with links for manual review, no manual input, flag irregularities in `registry/irregularities.json`, no hallucinations. Run three passes (Pass 1 implement & verify; Pass 2 review & fix; Pass 3 re-check against the request), then open a pull request and merge onto `main`.
+
 ---
 
 # GEMSDOE28 — Fault Mapping for the Great Basin (`DrivenData #306`)

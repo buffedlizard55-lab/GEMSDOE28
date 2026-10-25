@@ -1,0 +1,208 @@
+{
+  "evaluated_utc": "2026-10-25T22:05:12.212277+00:00",
+  "candidate_file": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+  "candidate_sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+  "content_id": "56a9f473edc7",
+  "base_file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+  "method": "paired 4-quadrant component-hiding holdout (src/gems27/holdout.py); metric src/gems27/metric.py alpha=0.2 beta=0.8 300 m triangular kernel; format re-read src/gems27/submission.verify_geotiff",
+  "note": "HOLDOUT-DTI (catalogue-internal proxy), NOT an organizer score; no claim of portal acceptance",
+  "format_verification": {
+    "file": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+    "bytes": 1591212,
+    "sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+    "variant": "nan",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "outside_footprint_is_nan": {
+        "pass": true,
+        "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+        "hard": true
+      },
+      "nodata_tag_is_nan": {
+        "pass": true,
+        "detail": "nodata=NaN declared, same as the sample submission",
+        "hard": true
+      },
+      "masked_read_in_0_1": {
+        "pass": true,
+        "detail": "masked count=5167373, min=0, max=1",
+        "hard": true
+      },
+      "nan_aware_range_in_0_1": {
+        "pass": true,
+        "detail": "nanmin=0 nanmax=1",
+        "hard": true
+      },
+      "strict_whole_array_range_ignoring_nan_is_informational": {
+        "pass": false,
+        "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+        "hard": false
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": false
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 37860,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "format_all_hard_checks_passed": true,
+  "emitted_px": 37860,
+  "n_added_over_h36_1": 200,
+  "dots_on_catalogue": 0,
+  "min_d_cat_of_added_dots_px": 3.0,
+  "holdout_folds": [
+    {
+      "fold": 0,
+      "fold_name": "NW",
+      "arm": "base_H36_1",
+      "dti": 0.011750013212445188,
+      "TPw": 110.94544478962848,
+      "FPw": 37603.82903797609,
+      "FNw": 2263.0545552103713,
+      "n_truth": 2374,
+      "n_emitted": 37660
+    },
+    {
+      "fold": 0,
+      "fold_name": "NW",
+      "arm": "cand_H38_1",
+      "dti": 0.01170044636465369,
+      "TPw": 110.94544478962848,
+      "FPw": 37803.82903797609,
+      "FNw": 2263.0545552103713,
+      "n_truth": 2374,
+      "n_emitted": 37860
+    },
+    {
+      "fold": 1,
+      "fold_name": "NE_LidarGapHeavy",
+      "arm": "base_H36_1",
+      "dti": 0.01727913353775803,
+      "TPw": 164.67462273386874,
+      "FPw": 37578.62177250984,
+      "FNw": 2312.3253772661315,
+      "n_truth": 2477,
+      "n_emitted": 37660
+    },
+    {
+      "fold": 1,
+      "fold_name": "NE_LidarGapHeavy",
+      "arm": "cand_H38_1",
+      "dti": 0.01720691341065905,
+      "TPw": 164.67462273386874,
+      "FPw": 37778.62177250984,
+      "FNw": 2312.3253772661315,
+      "n_truth": 2477,
+      "n_emitted": 37860
+    },
+    {
+      "fold": 2,
+      "fold_name": "SW",
+      "arm": "base_H36_1",
+      "dti": 0.010721537733469696,
+      "TPw": 115.2885905401361,
+      "FPw": 37597.662578341464,
+      "FNw": 3897.7114094598637,
+      "n_truth": 4013,
+      "n_emitted": 37660
+    },
+    {
+      "fold": 2,
+      "fold_name": "SW",
+      "arm": "cand_H38_1",
+      "dti": 0.010681802544236159,
+      "TPw": 115.2885905401361,
+      "FPw": 37797.662578341464,
+      "FNw": 3897.7114094598637,
+      "n_truth": 4013,
+      "n_emitted": 37860
+    },
+    {
+      "fold": 3,
+      "fold_name": "SE",
+      "arm": "base_H36_1",
+      "dti": 0.014534965422525768,
+      "TPw": 146.8921180807874,
+      "FPw": 37591.71246515605,
+      "FNw": 3051.1078819192126,
+      "n_truth": 3198,
+      "n_emitted": 37660
+    },
+    {
+      "fold": 3,
+      "fold_name": "SE",
+      "arm": "cand_H38_1",
+      "dti": 0.014477662870972163,
+      "TPw": 146.8921180807874,
+      "FPw": 37791.71246515605,
+      "FNw": 3051.1078819192126,
+      "n_truth": 3198,
+      "n_emitted": 37860
+    }
+  ],
+  "paired_deltas_per_fold": [
+    -4.9566847791497615e-05,
+    -7.222012709898196e-05,
+    -3.973518923353764e-05,
+    -5.7302551553605266e-05
+  ],
+  "mean_paired_delta_dti": -5.470617891940562e-05,
+  "ci95_paired_approx": [
+    -6.814353339479887e-05,
+    -4.1268824444012366e-05
+  ],
+  "positive_folds": 0,
+  "total_folds": 4,
+  "pooled_base_dti": 0.013501887556178429,
+  "pooled_cand_dti": 0.01344786856111956,
+  "pooled_delta_dti": -5.4018995058868063e-05,
+  "pooled_delta_over_base": -5.4018995058868063e-05,
+  "n_withheld_positives_pooled": 12062,
+  "credit_per_added_dot_px": 0.0,
+  "surface_spearman_cand_vs_base": 0.997335749507672,
+  "uniqueness_vs_registry": {
+    "probe_file": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+    "probe_dots": 38545,
+    "cand_dots_within_3px_of_probe": 195,
+    "fraction_cand_dots_within_3px_of_probe": 0.975,
+    "surface_spearman_cand_vs_probe": 0.061726810889492445
+  },
+  "verdict": "negative",
+  "verdict_reason": "one or more gates failed"
+}

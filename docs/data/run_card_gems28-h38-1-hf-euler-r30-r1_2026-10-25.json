@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "session": "S17 (2026-10-25), branch arena/efc0cdf5-gemsdoe28",
+  "generated_utc": "2026-10-25T22:05:00Z",
+  "hypothesis": "Multi-physics corroborated lineament dots added to the validated H36-1 base earn more credit per dot than the live break-even tau_live (~0.055-0.059): USGS conductive heat-flow residuals (hf_resid >= 50 mW/m^2) within 1 km and/or shallow Reid et al. (1990) SI=0 fault-contact Euler clusters within 300 m of the detector's 1-px ridge mark concealed geothermal faults absent from the USGS/INGENIOUS surface catalogue.",
+  "mechanism": "Base H36-1: H19-5 ridge surface re-packed dot_thin(3.0) plus blind 1-px catalogue-flank prune (37,660 px). Added dots: sub-threshold ridge pixels scored score_mult = 1 + 0.5*heatflow + 0.5*Euler, max 75 dots per LOSFO cell, min_dist 2.8 px from base dots, >= 3 px from catalogue, final dot_thin(2.8 px) across quadrant boundaries (a packing rung unused by any in-repo submission). Heat-flow bears on concealed permeability; shallow SI-0 Euler clusters give independent subsurface contact depth; snapping clusters to the 100 m ridge crest removes Euler centroid uncertainty (100-300 m).",
+  "named_non_fault_mimic": "Non-fault hydrothermal cells / young volcanic centres (conductive without Quaternary slip); shallow lithologic contacts and mafic dikes (Euler SI-0 clusters with zero slip); GeoDAWN flight-line striping, excluded by the ridge-alignment requirement.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI (catalogue-internal proxy computed with the shared template tools), NOT an organizer score",
+    "evaluator": "scripts/run_losfo_harness.py + src/gems27/losfo.py + src/gems27/metric.py; alpha=0.2, beta=0.8, 300 m triangular kernel, pooled over cells; visible faults derived pixel-exactly from withheld components",
+    "registered_gate_session_14": {
+      "losfo_seeds_265_269": {"pooled_delta_dti_over_h36_1": 0.0007474376185384414, "cells_improved": "16/20", "seeds_improved": "4/5", "folds": "4/4", "credit_per_added_dot": 0.06992977854336586, "tau_live": 0.054852, "criteria": "C1-C4 ALL PASS"},
+      "interleaved_seeds_270_279": {"pooled_delta_dti_over_h36_1": 0.0005429581100109074, "cells_improved": "27/40", "seeds_improved": "8/10", "folds": "4/4"}
+    },
+    "fresh_independent_check_this_session": {
+      "script": "scripts/holdout_compare_h381.py (seed 1, 4 quadrant folds)",
+      "pooled_delta_dti": -0.000054018995058868063,
+      "mean_paired_delta_dti": -0.000054706178919405624,
+      "ci95_approx": [-0.00006814353339479888, -0.000041268824444012366],
+      "positive_folds": "0/4",
+      "credit_per_added_dot": 0.0,
+      "reading": "neutral - small margin either way; disclosed, not retuned"
+    }
+  },
+  "correlation_overlap_vs_registry": {
+    "dots_on_catalogue": 0,
+    "min_distance_of_added_dots_to_catalogue_px": 3.0,
+    "packing_min_dist_px": 2.8,
+    "added_dots_over_h36_1": 200,
+    "surface_spearman_vs_h36_1_base": 0.997335749507672,
+    "vs_dense_h37_1_union_probe": {"probe_dots": 38545, "added_dots_within_3px": 195, "fraction": 0.975, "surface_spearman": 0.061726810889492445, "caveat": "dense-probe-blanket irregularity logged as s15-uniqueness-dense-probes / s16-uniqueness-dense-probes-repeat; vs scored GEMSDOE32 champion (e5eb6e7e) not computable locally - champion raster absent from this checkout"},
+    "duplicate_lane_check": "not a ring-N prune of the 0.2778 champion; 200 new multi-physics dots off the d=2.8 base"
+  },
+  "raster": {
+    "file": "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+    "allfinite_fallback": "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif",
+    "zip": "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.zip",
+    "sha256_nan": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+    "content_id": "56a9f473edc7",
+    "bytes_nan": 1591212,
+    "emitted_px": 37860
+  },
+  "validator_output": {
+    "tool": "src/gems27/submission.verify_geotiff (independent re-read of the written bytes)",
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "no_nan_inside_footprint": true,
+    "values_in_0_1_inside_footprint": true,
+    "value_set_inside": [0.0, 1.0],
+    "nonzero_inside_px": 37860,
+    "crs_epsg": 32611,
+    "shape": [3730, 3292],
+    "transform_matches_template": true,
+    "single_band_float32": true,
+    "nodata_nan_outside_footprint": true,
+    "allfinite_strict_whole_array_0_1_pass": true,
+    "note_on_portal_error": "Interior values are exactly 0.0/1.0, so nothing inside the footprint can trigger 'Predicted values must be in range [0, 1]'; NaN occurs only outside the footprint exactly as in the sample submission; use the allfinite (zeros-outside) variant if a validator reads NaN strictly."
+  },
+  "submission": {
+    "name": "GEMSDOE28-h38-1-hf-euler-r30-r1-56a9f473edc7",
+    "note_140": "28GEMSDOE H38-1 hf+euler r3.0 | H36-1 + 200 heat-flow/Euler dots | UNSCORED, not slot-approved | id 56a9f473edc7",
+    "note_chars": 112,
+    "download_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+    "one_click_page": "https://buffedlizard55-lab.github.io/GEMSDOE28/executive-summary.html (if Pages is deploying; otherwise raw github.com link above)",
+    "verdict": "promote",
+    "verdict_scope": "promote TO THE SELECTOR STEP ONLY - promotion is not weekly-slot selection; no slot spent; file remains UNSCORED and no organizer receipt exists",
+    "caveats": ["fresh seed-1 four-fold check was neutral (-5.4e-5; CI [-6.8e-5, -4.1e-5])", "margin over H36-1 small (~+0.0005 to +0.0007 on registered decades)", "all local scores are holdout proxies or owner reports, not organizer-confirmed scores", "beating 0.3195 remains a detection gap (~+1,150 px credit); no current arm demonstrates it"]
+  }
+}
