@@ -1,0 +1,170 @@
+{
+  "label": "OBSERVED GITHUB RELEASE / METADATA / HTTP VERIFICATION; not HOLDOUT-DTI",
+  "checked_at_utc": "2026-10-25T23:16:26.640251+00:00",
+  "pull_request": {
+    "number": 39,
+    "state": "MERGED",
+    "merged_at_utc": "2026-10-25T23:07:56Z",
+    "merge_commit": "eb4c44f14603eb9ab639f0345d4742c7a7e96ea1",
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/pull/39"
+  },
+  "deployment": {
+    "conclusion": "success",
+    "event": "workflow_run",
+    "headSha": "76847b222f5f5b73582f8a48f9851bdf211cb35a",
+    "jobs": [
+      {
+        "completedAt": "2026-10-25T23:09:05Z",
+        "conclusion": "success",
+        "databaseId": 121319778895,
+        "name": "build",
+        "startedAt": "2026-10-25T23:08:23Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Bind the deployed run card to checked-out bytes",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Prefer one Actions-based Pages deployment source",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Report source-configuration permission limit without hiding deployment",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/configure-pages@v5",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Stage the site and preserve legacy /docs/ URLs",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/upload-pages-artifact@v3",
+            "number": 8,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 16,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 17,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/actions/runs/40243382815/job/121319778895"
+      },
+      {
+        "completedAt": "2026-10-25T23:09:05Z",
+        "conclusion": "success",
+        "databaseId": 121319842412,
+        "name": "deploy",
+        "startedAt": "2026-10-25T23:08:43Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Deploy to GitHub Pages",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify published root and legacy routes and exact run-card bytes",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 4,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/actions/runs/40243382815/job/121319842412"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/actions/runs/40243382815"
+  },
+  "pages_source": {
+    "observed_build_type": "legacy",
+    "status": "built",
+    "source": {
+      "branch": "main",
+      "path": "/"
+    },
+    "arena_settings_attempt_http_status": 403,
+    "workflow_migration_warning_step_executed": true,
+    "workflow_settings_attempt_http_status": null,
+    "limit": "Continue-on-error exposes a successful step conclusion even when the attempt outcome failed. The conditional warning ran and the later Pages GET still reports legacy. Do not claim source migration succeeded."
+  },
+  "verified_site_base": "https://buffedlizard55-lab.github.io/GEMSDOE28/",
+  "runner_http_check": {
+    "conclusion": "success",
+    "html_routes": 4,
+    "exact_sha_bound_json_routes": 2,
+    "expected_run_card_sha256": "7fda77081b782493d1ffb7266d3050ccd1687d10c0a6c5d6e96302f98496f6c4",
+    "scope": "Published URLs checked by GitHub hosted runner; no local browser visual/mobile or portal validation."
+  },
+  "source_feed": {
+    "commit": "76847b222f5f5b73582f8a48f9851bdf211cb35a",
+    "workflow_run": "https://github.com/buffedlizard55-lab/GEMSDOE28/actions/runs/40243361975",
+    "observed_at_utc": "2026-10-25T23:08:06Z",
+    "freshly_observed": 8,
+    "total": 10,
+    "feed_sha256": "cce0062a00c4f2fe33f4db02350d1cfb4e6cab4d1d159409577f1801051910ae",
+    "failures": [
+      {
+        "id": "hermant-2025",
+        "status": "fetch-failed",
+        "error": "response exceeds configured 2000000-byte limit"
+      },
+      {
+        "id": "usgs-qfaults",
+        "status": "fetch-failed",
+        "error": "response exceeds configured 2000000-byte limit"
+      }
+    ],
+    "limit": "Metadata/body retrieval is not full scientific paper review, dataset-license authentication, current portal rules/cap or an organizer score receipt."
+  },
+  "new_competition_tiff_generated": false,
+  "slot_selected": false,
+  "followup": "Local root executive-summary and small run-card aliases make the six checked routes available under both legacy and Actions publication layouts. This recorded remote deployment predates that compatibility followup."
+}
