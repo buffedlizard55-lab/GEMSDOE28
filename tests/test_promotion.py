@@ -13,7 +13,7 @@ def complete_card():
                              whole_segments=True, buffered=True, visible_only_features=True,
                              pixel_exact_visible_mask=True, pooled=True, alpha=0.2, beta=0.8,
                              kernel_m=300, kernel="triangular"),
-                feature_canaries={"f": 0.7}, registry=dict(complete=True, manifest_sha256="b" * 64,
+                feature_canaries={"f": 0.7}, registry=dict(complete=True, manifest_sha256="b" * 64, members=["d" * 64],
                 surface=[dict(raster_sha256="d" * 64, spearman=0.4, within_3px_fraction=0.2)],
                 dots=[dict(raster_sha256="d" * 64, spearman=0.3, within_3px_fraction=0.4)]),
                 validator=dict(raster_sha256="a" * 64, no_nan_inside=True, range_0_1=True,
@@ -60,4 +60,54 @@ def test_exact_protocol_boundaries():
     card["registry"]["surface"][0].update(spearman=0.90, within_3px_fraction=0.70)
     assert promotion_gate(card)["submission_ready"]
     card["holdout"]["paired_gain_ci95"] = [0, 0.01]
+    assert not promotion_gate(card)["submission_ready"]
+
+
+@pytest.mark.parametrize("value", [None, [], "invalid", 1, True])
+def test_malformed_card_fails_closed(value):
+    assert promotion_gate(value)["verdict"] == "negative"
+
+
+@pytest.mark.parametrize("section", ["holdout", "registry", "validator"])
+@pytest.mark.parametrize("value", [[], "invalid", 1, True])
+def test_malformed_sections_fail_closed(section, value):
+    card = complete_card()
+    card[section] = value
+    assert not promotion_gate(card)["submission_ready"]
+
+
+@pytest.mark.parametrize("stage", ["surface", "dots"])
+@pytest.mark.parametrize("value", [[None], ["invalid"], [1]])
+def test_malformed_comparison_fails_closed(stage, value):
+    card = complete_card()
+    card["registry"][stage] = value
+    assert not promotion_gate(card)["submission_ready"]
+
+
+@pytest.mark.parametrize("stage", ["surface", "dots"])
+def test_missing_extra_and_repeated_registry_comparisons(stage):
+    for mode in ("missing", "extra", "repeated", "wrong"):
+        card = complete_card()
+        if mode == "missing":
+            card["registry"]["members"].append("e" * 64)
+        elif mode == "extra":
+            comparison = dict(card["registry"][stage][0], raster_sha256="e" * 64)
+            card["registry"][stage].append(comparison)
+        elif mode == "repeated":
+            card["registry"][stage] *= 2
+        else:
+            card["registry"][stage][0]["raster_sha256"] = "e" * 64
+        assert not promotion_gate(card)["submission_ready"], mode
+
+
+@pytest.mark.parametrize("members", [None, [], ["bad"], [None], ["d" * 64, "d" * 64]])
+def test_invalid_registry_inventory(members):
+    card = complete_card()
+    card["registry"]["members"] = members
+    assert not promotion_gate(card)["submission_ready"]
+
+
+def test_extreme_json_integer_is_negative_not_exception():
+    card = complete_card()
+    card["holdout"]["dti"] = 10 ** 1000
     assert not promotion_gate(card)["submission_ready"]
