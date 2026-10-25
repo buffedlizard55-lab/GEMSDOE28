@@ -328,3 +328,38 @@ def test_current_run_notice_is_above_historical_body():
     assert card['raster_sha256'] is None or (
         isinstance(card['raster_sha256'], dict) and card.get('slot_selected') is False
     )
+
+
+def test_session18_candidate_is_unique_valid_but_do_not_submit():
+    # Session 18 (H39-5, knowledge/52-53): the newest unique TIF passed strict
+    # uniqueness + format validation but FAILED the frozen LOSFO gate, so every
+    # surface that names it must say DO NOT SUBMIT, and no historical file may
+    # be presented as an operator-decides submission option.
+    overview = (DOCS / 'index.html').read_text()
+    executive = (DOCS / 'executive-summary.html').read_text()
+    for text in (overview, executive):
+        assert '719b83fb659b' in text
+        assert 'DO NOT SUBMIT - HOLDOUT GATE FAILED' in text
+        assert 'data/run_card_s18_2026-10-25.json' in text
+    assert 'Answer for this run: NONE.' in overview
+    assert 'the operator decides whether to submit' not in overview + executive
+    assert 'Yes, to download.' not in overview + executive
+    assert 'Whether to submit is your decision' not in overview + executive
+    card = json.loads((DOCS / 'data/run_card_s18_2026-10-25.json').read_text())
+    assert card['verdict'] == 'negative'
+    assert card['submission_ready'] is False
+    assert card['slot_selected'] is False
+    assert card['selector_promotion'] is False
+    assert card['holdout_dti']['gate_passed'] is False
+    assert card['correlation_overlap_vs_registry']['uniqueness_pass_strict'] is True
+    assert card['validator']['nan_hard_pass'] is True
+    assert card['validator']['allfinite_hard_pass'] is True
+    assert card['validator']['no_nan_inside_footprint'] is True
+    assert card['validator']['values_in_0_1'] is True
+    assert len(card['note']) <= 140 and 'DO NOT SUBMIT' in card['note']
+    manifest = json.loads((DOCS / 'downloads/manifest.json').read_text())
+    slot = manifest['s18_candidate']
+    assert slot['verdict'] == 'negative'
+    assert slot['content_id'] == '719b83fb659b'
+    assert (DOCS / 'downloads' / slot['nan']).is_file()
+    assert (DOCS / 'downloads' / slot['allfinite']).is_file()

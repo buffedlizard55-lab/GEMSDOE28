@@ -606,6 +606,30 @@
       "severity": "high",
       "issue": "The prior first-screen notice correctly said the newest H40-1 migration candidate failed, but then directed users toward the historical H36-1 primary for a manual submission decision and suggested its all-finite variant. This could be misread as current submission approval even though the artifact is unscored, not unique to this run, and not selector-approved.",
       "action": "Updated the shared site generator and README to state that no file is currently approved. Historical artifacts are labeled inspection-only; the all-finite variant is described as a format compatibility option only, not scientific approval. Added regression assertions for overview and executive-summary wording. No new raster was created because the authorized H40-1 lane already exhausted its three experiments and failed gates."
+    },
+    {
+      "id": "s18-exp1-rerun-nameerror",
+      "severity": "low",
+      "issue": "Session 18 Experiment 1 (scripts/build_s18_extra.py) crashed with NameError on a leftover '_ = thinning' line after writing evidence/s18_canary.json and data/prepared/extrap_surfaces.npz.",
+      "action": "Line removed; Exp1 rerun cleanly. Surfaces NPZ byte-identical across runs (sha256 caa1127becfbc41a9d8acc7a6f30c8a5d5c9c2cb064424021ca1a7da6d84f104); JSON differs only in seconds. Same deterministic experiment, not an extra budget experiment. Disclosed in knowledge/53_s18_result.md."
+    },
+    {
+      "id": "s18-h39-5-gate-fail",
+      "severity": "medium",
+      "issue": "H39-5 migration-extrapolated placement (knowledge/52) failed its frozen LOSFO gate on seeds 310-314: pooled HOLDOUT-DTI delta -0.010731, 95% CI [-0.01460,-0.00743], 2/20 cells, credit/dot 0.04353 vs 0.04851 (G1/G2/G3 FAIL). Median displacement on eligible pool 8.6 px; canary AUCs ~0.499.",
+      "action": "Verdict negative in evidence/s18_run_card.json; candidate 719b83fb659b banner-marked DO NOT SUBMIT despite PASSING strict uniqueness (68.3% worst) and format validation. Seeds 310-314 consumed for this placement family; no retuning. Next-lane preregistrations should include an Exp1 signal floor."
+    },
+    {
+      "id": "s18-site-mixed-disposition",
+      "severity": "high",
+      "issue": "Parallel Session 17 site panels (s17_status_section_html / s17_one_click_html) labeled historical H36-1/H38-1 'OK to download - the operator decides whether to submit' / 'Yes, to download... Whether to submit is your decision', contradicting the first-screen NO FILE APPROVED banner and the s17 safety review. Same defect class as submission-ui-mixed-disposition-2026-10-25, reintroduced by the parallel knowledge/51 run.",
+      "action": "Session 18 build_site.py: status table now answers NONE up front and lists the S18 candidate first as DO NOT SUBMIT; H36-1/H38-1 marked NOT APPROVED TO SUBMIT (inspection only); Session 17 one-click panel relabeled historical. Regression test test_session18_candidate_is_unique_valid_but_do_not_submit asserts the operator-decides strings are absent."
+    },
+    {
+      "id": "s18-verify-downloads-slot-omission",
+      "severity": "medium",
+      "issue": "scripts/verify_downloads.py enumerated candidate slots from a hardcoded tuple ending at s16_candidate, so its green audit (307 checks, status PASS) silently never inspected Session 18's s18_candidate files.",
+      "action": "Fixed once in the shared tool: slots are now enumerated from the manifest (any dict with a 'nan' file). Re-audit reports 337 checks, 0 failures, including 30 s18_candidate checks (hashes, grid, [0,1], no-NaN-inside, catalogue overlap, ZIP, note). The pre-fix 307-check PASS must not be quoted as covering s18 bytes; evidence/submission_file_audit.json regenerated."
     }
   ]
 }

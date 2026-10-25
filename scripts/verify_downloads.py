@@ -76,13 +76,13 @@ def main() -> int:
           and template_info["crs"] == "EPSG:32611", "expected_template_grid",
           f"{template_info['crs']} {template_info['shape']}; footprint={footprint.sum():,}")
 
-    candidates = []
-    for slot in ("primary", "secondary", "tertiary", "quaternary", "quinary_probe",
-                 "conservative_alternative", "research_candidate", "h37_1_falsified",
-                 "s15_candidate", "s16_candidate"):
-        item = manifest.get(slot)
-        if isinstance(item, dict) and item.get("nan"):
-            candidates.append((slot, item))
+    # Audit every manifest slot that names a NaN-variant GeoTIFF. The slot list
+    # was previously hardcoded ("s15_candidate", "s16_candidate", ...), which
+    # silently skipped Session 18's s18_candidate: a green 307-check audit that
+    # never touched the newest file. Enumerating the manifest fixes the class
+    # of bug, not just this instance (Session 18, knowledge/53).
+    candidates = [(slot, item) for slot, item in manifest.items()
+                  if isinstance(item, dict) and item.get("nan")]
     check(bool(candidates), "manifest_candidates_present", f"{len(candidates)} candidate(s) listed")
     submission_names = [str(item.get("submission_name", "")).strip() for _, item in candidates]
     check(all(submission_names), "submission_names_present", f"{len(submission_names)} artifact(s) have a registered portal name")

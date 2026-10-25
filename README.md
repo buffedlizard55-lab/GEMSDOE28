@@ -1,24 +1,28 @@
-# Current session safety notice — 2026-10-25 Session 16 (read first)
+# Current session safety notice — 2026-10-25 Session 18 (read first)
 
-**NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** The Session 16 H40-1 migration TIFF
-(`5f2efa891ce7`) failed both its frozen holdout-spread gate and the strict uniqueness
-gate; it is inspection-only. The older H36-1/H38-1 downloads are historical research
+**NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** The newest unique Session 18 H39-5
+migration-extrapolated TIFF (`719b83fb659b`, 37,521 dots) **passed** the strict
+uniqueness gate (worst 68.3 % of final dots within 3 px of any registry raster; 34.0 %
+vs the scored champion) and every format-validator hard check, but **failed its frozen
+LOSFO holdout gate decisively** (HOLDOUT-DTI pooled Δ −0.01073, 95 % CI
+[−0.0146, −0.0074], 2/20 cells, seeds 310–314): it is inspection-only, banner
+🔴 DO NOT SUBMIT. The older H36-1/H38-1/H39-1/H40-1 downloads are historical research
 artifacts, not unique candidates for this run and not approved by the separate selector.
 Do not upload any file from this repository unless a future candidate passes its frozen
 holdout, uniqueness, and exact-file gates and is separately approved by the selector.
-Read [the Session 16 result](knowledge/50_s16_result.md) and its
-[preregistration](knowledge/49_preregistration_H40-1_migration.md) before the historical
-standing prompt below. Session 16 re-verified why the OWNER-REPORTED 0.2778 champion won
+Read [the Session 18 result](knowledge/53_s18_result.md) and its
+[preregistration](knowledge/52_preregistration_H39-5_extrapolated.md) first, then the
+[Session 16 result](knowledge/50_s16_result.md), before the historical standing prompt
+below. Why the OWNER-REPORTED 0.2778 champion won is byte-verified in Sessions 15–17
 (emission hygiene: `solo-r1` minus the d_cat≤2 px ring; a ring-3 copy would be a >95 %
-duplicate and was not built), ran the leakage canary (PASS), the frozen LOSFO gate on
-seeds 300–304 (**G2 spread FAIL**: pooled HOLDOUT-DTI Δ +0.00126, 95 % CI
-[−0.0034, +0.0063], 9/20 cells), and the uniqueness check (**FAIL**: prediction-surface Spearman(prob_D1, prob_D0)
-0.990; 91.3 % of final dots within 3 px of a dense probe raster; 41.3 % vs the scored champion). The S16 run card does not retain a per-registry pre-placement surface-correlation table, so that subcheck is unverified; the final-dot overlap alone exceeds the duplicate-stop limit.
-The all-finite variant passes whole-array [0,1] format checks; that is not scientific or
-selector approval. It is only a possible file-format remedy for the prior portal range
-error, whose actual cause remains unconfirmed. No score here is ORGANIZER-CONFIRMED;
-projections are never scores. Negative results are deliverables. Do not copy an old
-submission.
+duplicate and must not be built). Session 18's one positive finding: off-ridge placement
+breaks the dense-probe uniqueness ceiling (pure extrapolated pool 24.4 % within 3 px of
+the worst probe), so uniqueness is no longer the binding constraint — earning above
+τ ≈ 0.059 credit/dot on far-field truth is. The all-finite variant passes whole-array
+[0,1] format checks; that is not scientific or selector approval. It is only a possible
+file-format remedy for the prior portal range error, whose actual cause remains
+unconfirmed. No score here is ORGANIZER-CONFIRMED; projections are never scores.
+Negative results are deliverables. Do not copy an old submission.
 
 ## Current-session protocol (read before every run)
 
@@ -26,13 +30,17 @@ submission.
   verify official facts; clearly distinguish organizer receipts, owner-reported scores,
   local HOLDOUT-DTI, and projections. The user-reported GEMSDOE32 value `0.2778` is not an
   organizer receipt in this checkout. Its byte-level forensic explanation is in
-  [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md); do not claim it proves
+  [`knowledge/50_s16_result.md`](knowledge/50_s16_result.md) and
+  [`knowledge/53_s18_result.md`](knowledge/53_s18_result.md); do not claim it proves
   organizer score attribution.
-- **Lane and budget:** the authorized Session 16 method is the single H40-1 paragraph in
-  [`knowledge/49_preregistration_H40-1_migration.md`](knowledge/49_preregistration_H40-1_migration.md).
-  It is already executed (3/3 experiments) and failed. Do not switch lanes, rerun those
-  seeds, exceed the experiment/time cap, or create another variant under that frozen
-  preregistration. A new session needs its own explicit lane and fresh preregistration.
+- **Lane and budget:** the authorized Session 18 method is the single H39-5 paragraph in
+  [`knowledge/52_preregistration_H39-5_extrapolated.md`](knowledge/52_preregistration_H39-5_extrapolated.md).
+  It is already executed (3/3 experiments) and failed its holdout gate. Do not switch
+  lanes, rerun seeds 310–314, exceed the experiment/time cap, or create another variant
+  under that frozen preregistration. A new session needs its own explicit lane and fresh
+  preregistration (next in queue: H39-2 radiometric alteration lineaments, with an
+  Experiment-1 signal floor; fresh seeds ≥ 320). The Session 16 H40-1 lane
+  (`knowledge/49`) is likewise executed and closed.
 - **Holdout before any future slot:** hide whole fault segments with a buffer; compute
   catalogue-based features only from visible faults; pixel-exactly mask visible faults;
   score pooled DTI with α=0.2, β=0.8, and a 300 m triangular kernel. Test each feature
