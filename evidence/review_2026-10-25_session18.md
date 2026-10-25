@@ -31,6 +31,7 @@ The generated landing page said **NO FILE APPROVED**, while the executive summar
 - `.venv/bin/ruff check src scripts tests`: PASS.
 - `git diff --check`: PASS.
 - Tests passing does not establish source provenance, scientific validation, organizer acceptance, or current submission eligibility.
+- GitHub accepted the branch push but warned that existing tracked file `docs/data/sb_slip_tendency_in_footprint.json` is 59.10 MB (above GitHub's recommended 50 MB). The file was not created or modified by this review; it should be evaluated for Git LFS/release/external storage in a separate change, preserving its hash and provenance.
 
 ## Ranked hypotheses for a future explicitly assigned lane
 
