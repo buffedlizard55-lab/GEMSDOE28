@@ -63,7 +63,7 @@
     "evidence/current_archive_format_audit.json": "a45563477f9967583e69846b40a7b34763c1a3ac9767a348f6707299952974b3",
     "evidence/current_review.json": "5c44ec3ac151919006ca79a5f75b85b08c793a8d88bd523e2613dbc987aec5ec",
     "evidence/current_concurrent_claim_review.json": "a1331e4344bf56219a4e2f135f2ec4c62c161e51a2a50f07f062ed3164e0cb58",
-    "docs/downloads/manifest.json": "a7eec61d58cbc0e328cda348b13b0d5b4cf4fd6a4c85eb4a6c3f72823712e9d9",
+    "docs/downloads/manifest.json": "b01975a855cbaabe8291ff9fc61d4d89585ac91f2445309606734f884f42c02a",
     "scripts/review_concurrent_h38_claim.py": "7405eadff2b2866ab66244a3acd0e86ef50367c9959ef093701ac6af6eb872d2",
     "evidence/current_input_audit.json": "035445512d6fe793359f176443598f22db375f49b35bcfaf77784fb27d34a2e0",
     "evidence/current_preflight.json": "81db04c9d281f1c08eb16363197528a9eae979799430346161c88d21c942e1b0",

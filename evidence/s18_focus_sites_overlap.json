@@ -1,0 +1,30 @@
+{
+  "candidate": "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-nan.tif",
+  "candidate_dots": 37521,
+  "candidate_sha256": "90225b1b7438c561be1390a4b133eb7990a1c86f917c9075f4789d28fdf72e8e",
+  "metric": "fraction of candidate dots within 3 px of the registry raster (protocol limit 0.70)",
+  "targets": {
+    "gems33_h33d_cb490425926e_owner_reported_0.2632": {
+      "path": "/tmp/forensic/gems33_cb490425926e.tif",
+      "sha256_verified": true,
+      "registry_dots": 41865,
+      "frac_our_dots_within3px": 0.3605714133418619,
+      "pass_le_0.70": true
+    },
+    "gems25_30_dotted_h19_5_d2_8_owner_reported_0.2600": {
+      "path": "/home/user/GEMSDOE28/data/dotted_h19_5_d2_8_nan.tif",
+      "sha256_verified": true,
+      "registry_dots": 44090,
+      "frac_our_dots_within3px": 0.36528877162122547,
+      "pass_le_0.70": true
+    },
+    "gems24_dotted_h19_5_d1_5_owner_reported_0.2477": {
+      "path": "/home/user/GEMSDOE28/data/dotted_h19_5_d1_5_nan.tif",
+      "sha256_verified": true,
+      "registry_dots": 60069,
+      "frac_our_dots_within3px": 0.3785879907251939,
+      "pass_le_0.70": true
+    }
+  },
+  "all_pass": true
+}

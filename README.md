@@ -13,6 +13,24 @@ The previously advertised primary and the concurrently promoted H38-1 are existi
 - [Observed PR39 release, real hosted HTTP checks and 8/10 source refresh](evidence/current_deployment_verification.json) — Pages source remains legacy; compatibility aliases are locally validated.
 - [Input/cache verification](evidence/current_input_audit.json) · [Shared-tool pins](registry/protocol_assets.json) · [Synthetic software contract tests](evidence/shared_template_contract.json)
 
+**Parallel-run addendum (merged Session 18 H39-5 experiment, same date):** a second
+preregistered run executed the queued H39-5 migration-extrapolated lane
+([preregistration](knowledge/52_preregistration_H39-5_extrapolated.md),
+[result](knowledge/53_s18_result.md), run card `evidence/s18_h39_5_run_card.json`).
+It generated a genuinely unique TIFF (`719b83fb659b`, 37,521 dots) that **passed**
+strict uniqueness (68.3 % worst-case within-3px overlap) and format validation but
+**failed its frozen LOSFO gate** on fresh seeds 310–314 (HOLDOUT-DTI Δ −0.01073,
+95 % CI [−0.0146, −0.0074]). Verdict `negative`; 🔴 DO NOT SUBMIT. This does not
+change the locked disposition below — **still no file is approved** — but statements
+in this section that no experiment ran / no TIFF was generated describe the
+safety-review run only. The two runs share the "Session 18" label by collision
+(`s18-session-label-collision` in `registry/irregularities.json`); never combine
+their numbers. Positive finding carried forward: off-ridge placement breaks the
+dense-probe uniqueness ceiling, so the binding constraint is now credit per dot
+(> τ ≈ 0.059 on far-field truth), not duplicate overlap. Next lane in queue:
+H39-2 radiometric alteration lineaments with an Experiment-1 signal floor, fresh
+seeds ≥ 320.
+
 Read this current section, the detailed review, and the standing brief before substantive work. The old README is retained unchanged in the collapsed historical record below. **Its old slot labels, projections, unbuffered holdouts, 200-character notes, missing-data statements and download recommendations are superseded, not current authorization.**
 
 ### What changed, and what is still incomplete

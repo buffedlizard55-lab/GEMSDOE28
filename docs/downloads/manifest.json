@@ -357,5 +357,30 @@
     "reason": "Inputs and shared cache restored and verified. No assigned method lane, complete pinned registry or comparable frozen strict incumbent; all listed TIFFs are historical inspection-only files.",
     "session_id": "G28-A51-20261025",
     "source_card": "data/current_run_card_2026-10-25.json"
+  },
+  "s18_candidate": {
+    "slug": "h39-5-extrap-swap35",
+    "hypothesis": "H39-5 migration-extrapolated placement: weakest 35% of the frozen 32-band detector emission replaced 1-for-1 by TMI/gravity shallow-minus-migration-vector positions (knowledge/52)",
+    "content_id": "719b83fb659b",
+    "nan": "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-nan.tif",
+    "allfinite": "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-allfinite.tif",
+    "zip": "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-nan.zip",
+    "sha256_nan": "90225b1b7438c561be1390a4b133eb7990a1c86f917c9075f4789d28fdf72e8e",
+    "sha256_allfinite": "aeaa72057b85c4e07fee9c3beaa99e87e4a41a1a8eba396251281f46595fe972",
+    "sha256_zip": "33728dae821fb9ac6208c6101288e759466eb7771326472fa2c59b7af6577667",
+    "bytes_nan": 1590432,
+    "bytes_allfinite": 825966,
+    "bytes_zip": 293308,
+    "emitted_px": 37521,
+    "format_verified": true,
+    "status": "DO NOT SUBMIT; HOLDOUT-DTI LOSFO seeds 310-314 pooled dDTI -0.010731 (paired 95% CI [-0.0146, -0.0074], 2/20 cells; gate FAIL (G1_pooled_gt0_and_mean_ge_0.001, G2_spread_14cells_4seeds_3folds, G3_credit_per_dot_not_worse)); uniqueness PASS (worst 68.3% dots within 3px of gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif; lane-surface |Spearman| max 0.0037); validator PASS (values exactly {0,1} inside, no NaN inside footprint; all-finite variant has no NaN anywhere); verdict negative; UNSCORED, no organizer receipt, no slot spent, selector step separate.",
+    "note": "28GEMSDOE H39-5 extrap35 | LOSFO dDTI -0.0107 CI[-0.015,-0.007] gate FAIL uniq PASS DO NOT SUBMIT | id 719b83fb659b",
+    "note_file": "note-gemsdoe28-h39-5-719b83fb659b.txt",
+    "submission_name": "GEMSDOE28-h39-5-extrap-swap35-719b83fb659b",
+    "run_card": "evidence/s18_h39_5_run_card.json",
+    "holdout_evidence": "evidence/s18_h39_5_losfo_gate.json",
+    "holdout_preregistration": "knowledge/52_preregistration_H39-5_extrapolated.md",
+    "holdout_seeds": "310-314",
+    "verdict": "negative"
   }
 }
