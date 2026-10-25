@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "review_date_utc": "2026-10-25",
+  "scope": "Review of GEMSDOE24/25/27/28/30/31/32/33/36 reports, local GEMSDOE28 repository, proposed new hypotheses, and submission readiness.",
+  "evidence_class": "User-supplied site scores are owner-site reports without organizer receipts in this checkout. They are not ORGANIZER-CONFIRMED. Existing local holdout figures remain HOLDOUT-DTI only and cannot be equated with competition scores.",
+  "highest_reported_score_in_user_list": {
+    "value": 0.2778,
+    "submission": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+    "site": "GEMSDOE32",
+    "source": "User prompt: https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+    "organizer_confirmed": false,
+    "local_tif_available": false,
+    "method_attribution": "Not determinable from the local repository. No matching TIFF, receipt, code, or method manifest was found; the filename is insufficient to infer the method."
+  },
+  "leaderboard_claims": {
+    "user_prompt_maxima": [
+      0.4413,
+      0.3195
+    ],
+    "status": "conflict unresolved; no live leaderboard read in this session",
+    "repo_snapshot": "registry/leaderboard_snapshot_2026-10-03.json is a dated one-off observation, not current as of 2026-10-25"
+  },
+  "lane": {
+    "protocol_requires_one_method_paragraph": true,
+    "method_paragraph_found_in_request": false,
+    "action": "No experiment or TIFF emission; record blocker and require lane definition before any experiment."
+  },
+  "data_and_tooling": {
+    "data_manifest_present": true,
+    "competition_rasters_in_data_dir": 0,
+    "cached_feature_stack_present": false,
+    "sample_template_present": false,
+    "labels_raster_present": false,
+    "rasterio_import": "failed: ModuleNotFoundError: No module named 'rasterio'",
+    "pytest_import": "failed: No module named 'pytest'",
+    "shared_holdout": "src/gems27/holdout.py exists but its docstring specifies interleaved quadrants and random 20% of catalogue components; it is not shown to implement the user-required buffered whole-segment hide-and-recover protocol. Audit/fix the shared template harness before using it."
+  },
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "H39-DRAIN",
+      "name": "1 m DEM drainage-network offsets/knickpoints × independent structural corridor",
+      "planning_prior_not_score": true,
+      "implementation_cost": "high",
+      "source": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+      "availability": "not verified in current checkout; DEM tiles absent",
+      "expected_dti_improvement_qualitative": "potentially moderate, high uncertainty",
+      "not_a_score_or_projection": true
+    },
+    {
+      "rank": 2,
+      "id": "H39-PALEO",
+      "name": "Paleogeothermal sinter/tufa/travertine deposits × buried contact corridor",
+      "planning_prior_not_score": true,
+      "implementation_cost": "medium-high",
+      "source": "https://gdr.openei.org/submissions/1391",
+      "availability": "official listing referenced in repo; source archive bytes/schema/coverage not verified locally",
+      "expected_dti_improvement_qualitative": "potentially small-to-moderate, sparse-support risk",
+      "not_a_score_or_projection": true
+    },
+    {
+      "rank": 3,
+      "id": "H39-MT",
+      "name": "Multi-depth MT conductance transition × structural edge",
+      "planning_prior_not_score": true,
+      "implementation_cost": "medium-high",
+      "source": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+      "availability": "prior repo notes say upstream hash verification occurred; local clipped rasters are absent",
+      "expected_dti_improvement_qualitative": "likely small at raster scale",
+      "not_a_score_or_projection": true
+    },
+    {
+      "rank": 4,
+      "id": "H39-COMCAT",
+      "name": "Depth-binned, declustered ComCat seismicity-fabric coherence",
+      "planning_prior_not_score": true,
+      "implementation_cost": "high; external bridge required",
+      "source": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "availability": "prior repo review reported HTTP 000 from sandbox; unavailable in this run, not viable until official bytes are obtainable",
+      "expected_dti_improvement_qualitative": "potentially moderate, exceptionally uncertain",
+      "not_a_score_or_projection": true
+    },
+    {
+      "rank": 5,
+      "id": "H39-PROBE",
+      "name": "2 m temperature-probe anomaly × residual heat flow × lineament conjunction",
+      "planning_prior_not_score": true,
+      "implementation_cost": "medium-high",
+      "sources": [
+        "https://gdr.openei.org/submissions/1391",
+        "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28"
+      ],
+      "availability": "heat-flow local vector data is present, but probe archive is absent; not runnable",
+      "expected_dti_improvement_qualitative": "potentially small; sparse sampling/confounding",
+      "not_a_score_or_projection": true
+    }
+  ],
+  "experiment_count": 0,
+  "budget_experiment_cap": 3,
+  "holdout_dti": null,
+  "holdout_dti_label": "No experiment run; no HOLDOUT-DTI value or CI exists for this review. No projection substituted.",
+  "feature_auc_leakage_canary": "not run; source raster stack absent",
+  "registry_correlation_overlap": "not run; source registry rasters and H33-2 raster absent",
+  "unique_tif": null,
+  "submission_name": null,
+  "validator_output": {
+    "status": "not run for a new candidate",
+    "reason": "No candidate TIFF was generated; competition template absent and rasterio unavailable.",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null
+  },
+  "verdict": "negative",
+  "verdict_reason": "No honest unique submission can be produced under the lane, holdout-superiority, registry-overlap and file-validation rules with the available inputs. Generating an untested TIFF would violate the user's own no-slot and duplicate-stop protocol.",
+  "run_card": {
+    "hypothesis": "H39-DRAIN (ranked first only; not selected for the parallel lane and not run)",
+    "mechanism": "Drainage-channel displacement/knickpoint trains crossing an independently derived structural corridor could preserve deformation evidence where scarp relief is subdued.",
+    "named_non_fault_mimic": "Lithologic contacts can create knickpoints and channel diversions without fault displacement; road/ditch engineering and drainage capture are additional image/geomorphic confounders.",
+    "holdout_dti": null,
+    "holdout_dti_label": "No HOLDOUT-DTI: no evaluator run, withheld-positive count, evaluator version, or 95% CI available.",
+    "correlation_overlap_vs_registry": null,
+    "correlation_overlap_label": "Not computed: no candidate raster or source registry rasters; no Spearman coefficient or 3 px overlap fraction can be reported.",
+    "raster_sha256": null,
+    "validator_output": {
+      "status": "NOT RUN — no submission TIFF was written",
+      "no_nan_inside_footprint": null,
+      "values_in_0_1": null,
+      "crs_shape_transform_match": null
+    },
+    "submission_name": null,
+    "submission_note_max_140_chars": null,
+    "verdict": "negative"
+  }
+}

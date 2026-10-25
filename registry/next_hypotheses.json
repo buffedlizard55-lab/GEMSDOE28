@@ -815,5 +815,71 @@
       "current_mainline_path_belongs_to": "Separate GeoDAWN-radiometric H38-1 experiment on seeds 280–289; not the summary for this branch-local run."
     },
     "reconciliation": "Do not rerun or re-analyze the raw output; seeds were already used upstream. Keep the failed local experiment distinct from mainline heat-flow/Euler and radiometric H38-1 work; see knowledge/39_session14_closeout_2026-10-03.md."
+  },
+  "session15_review": {
+    "date_utc": "2026-10-25",
+    "status": "Five prospective, unrun hypotheses recorded in knowledge/47_session15_high-score-review_and_blocked-experiment.md and evidence/session15_review.json. No candidate is authorized for the current parallel lane because its required method paragraph is absent.",
+    "hypotheses": [
+      {
+        "rank": 1,
+        "id": "H39-DRAIN",
+        "name": "1 m DEM drainage-network offsets/knickpoints × independent structural corridor",
+        "planning_prior_not_score": true,
+        "implementation_cost": "high",
+        "source": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+        "availability": "not verified in current checkout; DEM tiles absent",
+        "not_a_score_or_projection": true,
+        "expected_dti_improvement_qualitative": "potentially moderate, high uncertainty"
+      },
+      {
+        "rank": 2,
+        "id": "H39-PALEO",
+        "name": "Paleogeothermal sinter/tufa/travertine deposits × buried contact corridor",
+        "planning_prior_not_score": true,
+        "implementation_cost": "medium-high",
+        "source": "https://gdr.openei.org/submissions/1391",
+        "availability": "official listing referenced in repo; source archive bytes/schema/coverage not verified locally",
+        "not_a_score_or_projection": true,
+        "expected_dti_improvement_qualitative": "potentially small-to-moderate, sparse-support risk"
+      },
+      {
+        "rank": 3,
+        "id": "H39-MT",
+        "name": "Multi-depth MT conductance transition × structural edge",
+        "planning_prior_not_score": true,
+        "implementation_cost": "medium-high",
+        "source": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
+        "availability": "prior repo notes say upstream hash verification occurred; local clipped rasters are absent",
+        "not_a_score_or_projection": true,
+        "expected_dti_improvement_qualitative": "likely small at raster scale"
+      },
+      {
+        "rank": 4,
+        "id": "H39-COMCAT",
+        "name": "Depth-binned, declustered ComCat seismicity-fabric coherence",
+        "planning_prior_not_score": true,
+        "implementation_cost": "high; external bridge required",
+        "source": "https://earthquake.usgs.gov/fdsnws/event/1/",
+        "availability": "prior repo review reported HTTP 000 from sandbox; unavailable in this run, not viable until official bytes are obtainable",
+        "not_a_score_or_projection": true,
+        "expected_dti_improvement_qualitative": "potentially moderate, exceptionally uncertain"
+      },
+      {
+        "rank": 5,
+        "id": "H39-PROBE",
+        "name": "2 m temperature-probe anomaly × residual heat flow × lineament conjunction",
+        "planning_prior_not_score": true,
+        "implementation_cost": "medium-high",
+        "sources": [
+          "https://gdr.openei.org/submissions/1391",
+          "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28"
+        ],
+        "availability": "heat-flow local vector data is present, but probe archive is absent; not runnable",
+        "not_a_score_or_projection": true,
+        "expected_dti_improvement_qualitative": "potentially small; sparse sampling/confounding"
+      }
+    ],
+    "gate": "No experiment or TIFF until lane is specified, exact data and cached stack are restored, shared buffered whole-segment holdout is verified, and candidate beats comparator with paired CI. Feature-only AUC/leakage and registry rank-correlation/3px-overlap checks are mandatory.",
+    "next_action": "Resolve the lane and required input availability without consuming a submission slot; then preregister the single selected hypothesis."
   }
 }

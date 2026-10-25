@@ -93,6 +93,18 @@ Generative AI (Arena.ai Agent Mode) assisted research synthesis, hypothesis plan
 
 ---
 
+## Session 15 — High-Score Review, Fresh-Hypothesis Slate & No-Slot Gate (Read Before Work)
+
+Before every substantive session, reread this README and [`knowledge/00_standing_brief.md`](knowledge/00_standing_brief.md). For this research track, also read [`knowledge/47_session15_high-score-review_and_blocked-experiment.md`](knowledge/47_session15_high-score-review_and_blocked-experiment.md) and its structured card [`evidence/session15_review.json`](evidence/session15_review.json). The card is an explicit **negative/blocked result**, not a competition submission.
+
+The user-provided list reports `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` at `0.2778` as the highest score among the listed GEMSDOE24/25/27/28/30/31/32/33/36 sites. The checkout has no matching raster, receipt, code, or method manifest; its filename cannot establish why it scored. This is not organizer-confirmed. The prompt also gives two current-leaderboard maxima (`0.4413` and `0.3195`), which conflict; the dated 2026-10-03 repository snapshot is not a current refresh. Do not infer a score, artifact identity, or winning mechanism from any of these claims.
+
+**Critical experiment controls:** the current parallel-run prompt references a single method paragraph defining the authorized lane, but no such paragraph is included. Do not guess the lane, run a non-lane experiment, fabricate a TIFF, or place anything in a submission slot. The checkout has no cached input rasters/features/template/labels under `data/`, and `rasterio`/`pytest` are unavailable in the current Python environment. The existing shared `src/gems27/holdout.py` documents random component withholding in quadrants; do not assume it satisfies the newer buffered whole-segment hide-and-recover requirement without auditing/fixing it once in the shared template.
+
+The five unrun research directions and their explicit source/data gates are ranked in the session-15 review. Any eventual candidate must pass one-feature-at-a-time leakage checks (AUC >0.90 is a stop pending proof), buffered whole-segment holdout with alpha 0.2/beta 0.8 and a 300 m triangular kernel, a paired 95% CI, and pre-/post-placement registry correlation/3 px overlap gates. Do not write or present a new submission TIFF until it beats the frozen holdout comparator and passes the exact grid/range/hash/uniqueness validator. A failed or blocked experiment is a valid deliverable.
+
+---
+
 ## 1. Executive Summary & One-Click Verified Submission GeoTIFFs (`docs/downloads/`)
 
 All submission artifacts in `docs/downloads/` are verified by `scripts/verify_downloads.py` (**`247/247` checks PASS, `0` failures**, `evidence/submission_file_audit.json`; the count grew from `208` because Session 14 added the `H38-1` multi-physics corroborated package at `secondary` while retaining `H37-1` under `h37_1_falsified`): single-band `float32`, exact template grid (`EPSG:32611`, `3730 × 3292`, `100 m` pixels, `5,167,373` inside-footprint cells), values strictly in `{0.0, 1.0} ⊂ [0, 1]` inside the footprint, zero internal `NaN`s, `NaN` outside the footprint (`-nan.tif`, with an `-allfinite.tif` fallback having `0.0` outside and no `NaN` anywhere), zero overlap with the `60,988` known catalogue pixels, content-addressed 12-hex ID, single-member `.zip`, and a registered note $\le 200$ characters.

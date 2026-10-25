@@ -44,6 +44,8 @@ on:
       - 'knowledge/38_preregistration_H38-1.md'
       - 'knowledge/39_session14_closeout_2026-10-03.md'
       - 'scripts/build_site.py'
+      - 'evidence/session15_review.json'
+      - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
   pull_request:
     paths:
@@ -87,6 +89,8 @@ on:
       - 'knowledge/38_preregistration_H38-1.md'
       - 'knowledge/39_session14_closeout_2026-10-03.md'
       - 'scripts/build_site.py'
+      - 'evidence/session15_review.json'
+      - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
   workflow_dispatch:
 

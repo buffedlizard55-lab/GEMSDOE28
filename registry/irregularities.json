@@ -522,6 +522,24 @@
       "severity": "high",
       "issue": "Parallel Session 14 work assigned the short label H38-1 to different hypotheses: this branch’s shallow SI-0 Euler × gravity-gradient × low-valid-relief rule (frozen at cf1d036, run from 9880ca6), main’s GeoDAWN radiometric detector extension on seeds 280–289 (knowledge/38_preregistration_H38-1.md and knowledge/41_h38_1_result.md), and main’s conductive heat-flow residual × Euler ridge arm in knowledge/43–45. The experiments and their evidence are distinct; the canonical path knowledge/38_preregistration_H38-1.md now contains the mainline protocol, not this branch’s preregistration.",
       "action": "Keep all historical files/results under their recorded commit/path and do not combine their metrics. Refer to the failed local attempt by its full Euler × gravity × low-relief rule and freeze/run commits; use a distinct, globally unique ID for future hypotheses. The branch’s original protocol/code remain accessible at cf1d036/9880ca6 in Git history; the full reconciliation is in knowledge/39_session14_closeout_2026-10-03.md."
+    },
+    {
+      "id": "IRR-2026-10-25-01",
+      "severity": "high",
+      "issue": "The parallel-run protocol requires a single method paragraph to define the authorized lane, but the current request does not contain an identifiable lane paragraph. It also names registry-raster correlation and dot-overlap stop thresholds that cannot be checked without candidate/source rasters.",
+      "action": "Do not guess a lane, run a candidate experiment, write a new TIFF, or use a submission slot. Record the blocked negative result in evidence/session15_review.json; obtain the lane definition and restore the exact source/registry rasters before running the specified checks."
+    },
+    {
+      "id": "IRR-2026-10-25-02",
+      "severity": "high",
+      "issue": "The prompt gives incompatible current leaderboard maxima (0.4413 and 0.3195). The local leaderboard snapshot is dated 2026-10-03 and is stale; no current organizer page was read in this session. The cited 0.2778 H33-2 score has no matching TIFF, receipt, method manifest, or code in this checkout.",
+      "action": "Treat all three figures as unverified claims until matched to a current official leaderboard/receipt and exact raster. Do not infer the H33-2 method from its filename. See knowledge/47_session15_high-score-review_and_blocked-experiment.md."
+    },
+    {
+      "id": "IRR-2026-10-25-03",
+      "severity": "high",
+      "issue": "The current checkout contains the data manifest but no competition input TIFFs, labels, sample template, prepared feature cache, or candidate inputs for H33-2. The Python environment cannot import rasterio or pytest. The shared holdout docstring describes random 20% catalogue-component hiding in quadrants; the request now requires buffered whole-segment hide-and-recover, so compatibility is unproven.",
+      "action": "Do not produce a submission TIFF or claim validator/holdout results. Restore the exact pinned inputs and dependencies, audit/fix the shared harness (not a private fork), and run required feature-only leakage and registry uniqueness tests before any candidate can pass the gate."
     }
   ]
 }
