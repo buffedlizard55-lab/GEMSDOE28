@@ -185,6 +185,7 @@ def main() -> int:
         "bytes_zip": zip_path.stat().st_size,
         "emitted_px": n_total,
         "added_px_over_h36_1": n_added,
+        "submission_name": f"GEMSDOE28-h38-1-hf-euler-r30-r1-{cid}",
         "per_quadrant_added_px": per_quad_added,
         "format_verified": True,
         "status": (

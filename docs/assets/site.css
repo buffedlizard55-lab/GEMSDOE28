@@ -57,6 +57,12 @@ p { margin: .55em 0 1em; }
 .status.unscored { background: #ffe1d4; color: #862d19; border: 1px solid #e8ad96; }
 .status.proxy { background: #e2eee9; color: var(--pine-dark); }
 .status.blocked { background: #fff0cd; color: #75500c; }
+.status.ok { background: #dcf7e3; color: #1b5e20; border: 1px solid #86d89f; }
+.status.holdout { background: #fff7e0; color: #7a5c00; border: 1px solid #f2c94c; }
+.status.noslot { background: #eceff1; color: #37474f; border: 1px solid #b0bec5; }
+.status.danger { background: #ffe1d4; color: #862d19; border: 1px solid #e8ad96; }
+.status-table td, .status-table th { padding: 10px 12px; }
+.status-table code.file-name { display: inline; background: transparent; padding: 0; font-size: .78rem; }
 .callout { background: var(--warning); border: 1px solid var(--warning-line); border-left: 5px solid var(--warning-line); padding: 16px 18px; border-radius: 10px; margin: 22px 0; }
 .callout strong { color: #633e00; }
 .callout p:last-child { margin-bottom: 0; }

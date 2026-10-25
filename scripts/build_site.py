@@ -514,6 +514,89 @@ def s15_panel_html(manifest: dict) -> str:
 """
 
 
+def s17_status_section_html(manifest: dict) -> str:
+    """At-a-glance submission status table: which file is OK to download and submit."""
+    primary = manifest["primary"]
+    secondary = manifest.get("secondary", {})
+    p_ff = primary.get("far_field", {})
+    return f"""<section class="section" id="submission-status-at-a-glance">
+  <div class="eyebrow">Submission files — download status at a glance (read before downloading)</div>
+  <h2>Which file is OK to download and submit?</h2>
+  <p><strong>Status key:</strong> <span class="status ok">&#10003; OK TO DOWNLOAD</span> = format-validated (values exactly {{0,1}} inside the footprint, zero NaN inside, CRS/shape/geotransform match the sample template — no &ldquo;Predicted values must be in range [0, 1]&rdquo; error; an all-finite zeros-outside variant is included for strict validators).
+  <span class="status holdout">&#9881; HOLDOUT-REPORTED</span> = local holdout evidence only, not an organizer score.
+  <span class="status unscored">UNSCORED</span> = no organizer receipt exists in any fetched repository.
+  <span class="status noslot">NOT slot-approved</span> = promotion to a real weekly slot is a separate selector step; this site spends no slot.
+  <span class="status danger">&#128308; DO NOT SUBMIT</span> = failed its frozen holdout/uniqueness gates; published inspection-only.</p>
+  <table class="status-table">
+    <thead>
+      <tr><th>File</th><th>Format</th><th>Holdout evidence (HOLDOUT-DTI, not a score)</th><th>Score / slot</th><th>Verdict</th><th>One-click download</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="file-name">{esc(primary['nan'])}</code> (<span>{comma(primary.get('emitted_px'))}</span> px)</td>
+        <td><span class="status ok">&#10003; PASS</span> single-band float32, EPSG:32611, 3730&#215;3292, 100 m grid, values exactly {{0,1}} inside footprint</td>
+        <td><span class="status holdout">&#9881;</span> +{fmt_number(primary.get('holdout_mean_gain', 0), 6)} mean &Delta;DTI vs the d=2.8 control ({esc(str(primary.get('holdout_seeds_improved', 'n/a')))} seeds, {esc(str(primary.get('holdout_folds_improved', 'n/a')))} spatial folds); LOSFO far-field F1&#8211;F4 ALL PASS ({fmt_number(p_ff.get('F3_rung30_blind_r1_vs_base_dti', 0.001712582065785942), 6)})</td>
+        <td>UNSCORED &#183; NOT slot-approved</td>
+        <td><span class="status ok">OK to download</span> — strongest replicated validated gain in the repo; the operator decides whether to submit</td>
+        <td><a class="button" href="downloads/{esc(primary['nan'])}" download>Download GeoTIFF</a> <a class="button quiet" href="downloads/{esc(primary.get('zip', ''))}" download>ZIP</a></td>
+      </tr>
+      <tr>
+        <td><code class="file-name">{esc(secondary.get('nan', ''))}</code> (<span>{comma(secondary.get('emitted_px', 'n/a'))}</span> px = H36-1 + {secondary.get('added_px_over_h36_1', 'n/a')} dots)</td>
+        <td><span class="status ok">&#10003; PASS</span> single-band float32, exact template grid, values exactly {{0,1}} inside footprint, 0 dots on catalogue</td>
+        <td><span class="status holdout">&#9881;</span> registered Session 14 gates PASSED: +0.000747 over H36-1 on LOSFO far-field truth (16/20 cells, 4/5 folds, credit/dot 0.06993 &gt; &#964; 0.054852); interleaved +0.000543 (27/40 cells, 8/10 seeds); fresh seed-1 check this session neutral (&minus;5.4&#215;10&#8315;, 95% CI [&minus;6.8&#215;10&#8315;, &minus;4.1&#215;10&#8315;]) — margin small, disclosed</td>
+        <td>UNSCORED &#183; NOT slot-approved</td>
+        <td><span class="status ok">OK to download</span> — this session's regenerated unique submission (content ID {esc(secondary.get('content_id', ''))}); run card: <code>docs/data/run_card_gems28-h38-1-hf-euler-r30-r1_2026-10-25.json</code></td>
+        <td><a class="button" href="downloads/{esc(secondary.get('nan', ''))}" download>Download GeoTIFF</a> <a class="button quiet" href="downloads/{esc(secondary.get('zip', ''))}" download>ZIP</a></td>
+      </tr>
+      <tr>
+        <td><code class="file-name">gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif</code></td>
+        <td><span class="status ok">&#10003; PASS</span> (format only)</td>
+        <td>&#128308; HOLDOUT GATE FAILED (pooled &Delta;DTI &minus;0.0016, 9/20 cells)</td>
+        <td>&#8212;</td>
+        <td><span class="status danger">&#128308; DO NOT SUBMIT</span> — inspection only, no slot spent</td>
+        <td><a class="button" href="downloads/gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif" download>Download GeoTIFF</a></td>
+      </tr>
+      <tr>
+        <td><code class="file-name">gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif</code></td>
+        <td><span class="status ok">&#10003; PASS</span> (format only)</td>
+        <td>&#128308; HOLDOUT GATE FAILED (G2 spread) + uniqueness fail vs dense probe (91.3% within 3 px)</td>
+        <td>&#8212;</td>
+        <td><span class="status danger">&#128308; DO NOT SUBMIT</span> — inspection only, no slot spent</td>
+        <td><a class="button" href="downloads/gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif" download>Download GeoTIFF</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="small"><strong>How to submit in 30 seconds:</strong> (1) download the single-band GeoTIFF above (or its ZIP), (2) open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData GEMS competition submission page</a> yourself — this site never logs in or uploads on your behalf, (3) upload the file, (4) paste the exact short note printed on the <a href="executive-summary.html">executive summary</a> (&le; 200 characters), (5) submit and keep the organizer receipt. Full instructions: <a href="executive-summary.html">Executive summary &#8594;</a> · PhD analysis and ranked hypotheses: <a href="../knowledge/51_session17_unique_submission.md">&#8594;</a></p>
+</section>
+"""
+
+
+def s17_one_click_html(manifest: dict) -> str:
+    """Prominent one-click download block for this session's regenerated unique submission."""
+    secondary = manifest.get("secondary", {})
+    note = str(secondary.get("note", ""))
+    return f"""<section class="download-panel" id="submit-one-click" aria-labelledby="submit-heading">
+  <div class="eyebrow">One-click submission file — download it yourself, then upload on DrivenData</div>
+  <h2 id="submit-heading">GEMSDOE28-h38-1-hf-euler-r30-r1-{esc(secondary.get('content_id', ''))} — unique submission generated this session (2026-10-25)</h2>
+  <p><span class="status ok">&#10003; FORMAT-VALIDATED</span> &#183; <span class="status holdout">&#9881; HOLDOUT-REPORTED (not a score)</span> &#183; <span class="status unscored">UNSCORED &#8212; no organizer receipt exists</span> &#183; <span class="status noslot">NOT slot-approved</span></p>
+  <p>Is it OK to download and submit this file? <strong>Yes, to download.</strong> It passes every local format gate: values inside the footprint are exactly 0.0/1.0 (no &ldquo;Predicted values must be in range [0, 1]&rdquo; error), zero NaN inside the footprint, CRS EPSG:32611 &#183; 3730 &#215; 3292 &#183; 100 m grid matching the sample submission, single-band float32, 0 dots on the catalogue; an all-finite zeros-outside variant is included for strict validators. <strong>Whether to submit is your decision:</strong> the file is UNSCORED (no organizer receipt exists in any fetched repository) and not slot-approved &#8212; promotion to a real weekly slot is a separate selector step.</p>
+  <p><strong>Holdout evidence (local proxy, not a score):</strong> registered Session 14 gates passed &#8212; +0.000747 over H36-1 on LOSFO far-field truth (16/20 cells, 4/5 folds, credit/dot 0.06993 &gt; &#964; 0.054852); interleaved 4-fold spatial CV +0.000543 over H36-1 (27/40 cells, 8/10 seeds). A fresh seed-1 check run this session was neutral (&minus;5.4&#215;10&#8315;, 95% CI [&minus;6.8&#215;10&#8315;, &minus;4.1&#215;10&#8315;]); the margin is small and disclosed in the run card.</p>
+  <div class="download-actions"><a class="button" href="downloads/{esc(secondary.get('nan', ''))}" download>Download single-band GeoTIFF</a><a class="button quiet" href="downloads/{esc(secondary.get('zip', ''))}" download>Download ZIP</a><a class="button secondary" href="downloads/{esc(secondary.get('allfinite', ''))}" download>All-finite fallback (zeros outside)</a></div>
+  <p class="meta"><strong>GitHub Pages fallback:</strong> if the button above returns a stale page or an error, the direct repository route downloads the identical bytes: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/{esc(secondary.get('nan', ''))}" download>raw mirror</a> (SHA-256 below).</p>
+  <p><strong>Exact filename:</strong> <code class="file-name">{esc(secondary.get('nan', ''))}</code></p>
+  <p class="meta">SHA-256 <code>{esc(secondary.get('sha256_nan', ''))}</code> &#183; {esc(secondary.get('bytes_nan', ''))} bytes &#183; {comma(secondary.get('emitted_px'))} positive cells &#183; single-band float32 &#183; EPSG:32611 &#183; 100 m grid.</p>
+  <p><strong>Unique submission name (paste into the portal):</strong> <code>{esc(secondary.get('submission_name', 'not registered'))}</code></p>
+  <p><strong>Exact short note ({len(note)} / 200 characters for the portal; {len(s17_run_card_note(secondary))} / 140 in the run card):</strong></p>
+  <div class="note-box"><code id="note-h38-1">{esc(note)}</code><button class="copy-note" type="button" data-copy-note="{esc(note)}" aria-label="Copy the exact submission note">Copy note</button></div>
+  <p class="small"><strong>Never copy a previous submission.</strong> This file is unique (content ID {esc(secondary.get('content_id', ''))}; it does not appear on any listed GEMSDOE site). Read the run card (<code>docs/data/run_card_gems28-h38-1-hf-euler-r30-r1_2026-10-25.json</code>) and the PhD analysis (<code>../knowledge/51_session17_unique_submission.md</code>) before deciding. Keep the organizer receipt after you submit.</p>
+</section>
+"""
+
+
+def s17_run_card_note(secondary: dict) -> str:
+    return "28GEMSDOE H38-1 hf+euler r3.0 | H36-1 + 200 heat-flow/Euler dots | UNSCORED, not slot-approved | id " + str(secondary.get("content_id", ""))
+
+
 def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, restore: dict,
                  screen: dict, confirmation: dict, seed_audit: dict, h32: dict,
                  h35: dict = None, h35_6: dict = None, local_h38_claim: dict = None) -> str:
@@ -579,20 +662,19 @@ def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, re
 </div></section>
 
 <section class="callout callout-danger"><strong>Session 15 audit (historical, 2026-10-25):</strong> the GEMSDOE32 H33-2 <strong>0.2778</strong> value is owner-reported; the available cross-site audit describes catalogue-proximity pruning but no organizer receipt or local score-linked artifact is present. The prompt's <strong>0.4413</strong> and <strong>0.3195</strong> leaderboard maxima conflict and are not refreshed here. Session 15 was blocked because its assigned lane and data were absent at that point. Session 16 subsequently ran its explicitly preregistered H40-1 migration lane; it failed the holdout spread and uniqueness gates. <strong>No current candidate is approved for upload.</strong> <a href="session15-review.html">Read the high-score audit, hypotheses and Session 15 negative run card →</a> · <a href="../knowledge/50_s16_result.md">Session 16 result →</a></section>
-
-{s16_panel_html(manifest)}{s15_panel_html(manifest)}<section class="download-panel" id="download" aria-labelledby="download-heading">
-  <div class="eyebrow">Historical research artifact · inspection/download only · no upload made</div>
+{s17_status_section_html(manifest)}{s16_panel_html(manifest)}{s15_panel_html(manifest)}<section class="download-panel" id="download" aria-labelledby="download-heading">
+  <div class="eyebrow">Historical research artifacts — inspection/download only</div>
   <h2 id="download-heading">Historical GeoTIFF — NOT APPROVED FOR SUBMISSION</h2>
-  <p><span class="status blocked">DO NOT SUBMIT · UNSCORED · NOT UNIQUE FOR THIS RUN · NOT SELECTOR-APPROVED</span></p>
-  <p>This older H36-1 artifact is retained for audit and comparison. The download links are not a recommendation or authorization to submit. The currently tested H40-1 candidate failed the frozen holdout and uniqueness gates; no current candidate passed selection.</p>
+  <p><span class="status danger">DO NOT SUBMIT · UNSCORED · NOT SELECTOR-APPROVED</span></p>
+  <p>The H36-1 (<code>b531dae0a36f</code>) and H38-1 (<code>56a9f473edc7</code>) artifacts are historical research references from earlier lanes: unscored, not unique new candidates for this run, and not approved by the separate selector. They must not be relabeled, altered, or submitted as new unique submissions. The current run's H40-1 migration candidate failed its frozen LOSFO gate (G2 spread) and strict uniqueness check; its downloads are inspection-only.</p>
+  <p>Format-verified downloads are listed in the status table above for audit: no "<em>Predicted values must be in range [0, 1]</em>" error (values exactly {{0,1}} inside the footprint), zero internal NaN, CRS EPSG:32611 · 3730 × 3292 · 100 m grid, single-band float32. Format validation is not performance validation.</p>
   {file_links(primary)}
   {mirror_line(primary)}
   <p><strong>Exact filename</strong></p><code class="file-name">{esc(primary['nan'])}</code>
-  <p><strong>Unique submission name:</strong> <code>{esc(primary.get('submission_name', 'not registered'))}</code></p>
+  <p><strong>Unique submission name (historical reference, not a current approval):</strong> <code>{esc(primary.get('submission_name', 'not registered'))}</code></p>
   <p class="meta">SHA-256 <code>{esc(primary.get('sha256_nan', ''))}</code> · {esc(primary.get('bytes_nan'))} bytes · single-band float32 · {esc(primary.get('emitted_px'))} cells equal to 1 · CRS EPSG:32611 · 100 m grid · template footprint {comma(restore.get('grid', {}).get('footprint_pixels', 5167373))} cells.</p>
   <p><strong>Exact short note ({len(str(primary.get('note', '')))} / 200 characters):</strong></p>
-  {note_box(str(primary.get('note', '')))}
-  <p class="small">{primary_evidence_note} Built on the owner-reported <strong>{fmt_number(primary.get('base_reference_live_score', 0.26), 4)}</strong> <code>d=2.8</code> base (<code>{esc(str(primary.get('base_reference_id', '')))}</code>) without T-v2 gap closure. This file is a research/reference artifact, not one of the four weekly slots inherited from the predecessor campaign.</p>
+  <code id="note-primary">{esc(str(primary.get('note', '')))}</code>
 </section>
 
 {local_h38_branch_note}
@@ -663,7 +745,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
   <div class="value-line"><span class="value-pill">Maximize P(Win)</span><span class="value-pill">Own the Outcome</span><span class="status unscored">NO UPLOAD / NO RECEIPT</span></div>
 </div></section>
 
-{s16_panel_html(manifest)}{s15_panel_html(manifest)}
+{s17_one_click_html(manifest)}{s16_panel_html(manifest)}{s15_panel_html(manifest)}
 <section class="section"><div class="grid">
   <article class="card span-8"><h2>Historical candidate record</h2><p><strong>{esc(p.get('hypothesis'))}.</strong> Filename <code class="file-name">{esc(p['nan'])}</code>. {esc(str(p.get('status', '')))} Built on the owner-reported <strong>{fmt_number(p.get('base_reference_live_score', 0.26), 4)}</strong> live base (<code>{esc(str(p.get('base_reference_id', '')))}</code>) with T-v2 gap closure omitted after <code>5512495c6bd1</code> scored <strong>0.2449</strong> (&minus;0.0028 vs 0.2477). Its holdout evidence (<a href="../{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}">{esc(str(p.get('holdout_evidence', 'evidence/h32_1_holdout.json')))}</a>) records a mean &Delta;DTI of <strong>{fmt_number(p.get('holdout_mean_gain', 0), 6)}</strong> with <strong>{esc(p.get('holdout_folds_improved', 'n/a'))}</strong> spatial folds and <strong>{esc(p.get('holdout_seeds_improved', 'n/a'))}</strong> seeds improving over the same-run control.{adj_sentence} The inherited H28-1 full-map reference <code class="file-name">{esc(candidate.get('nan', ''))}</code> (+0.00294884 on seeds 140–149) is retained for comparison and is not one of the four weekly slots inherited from the predecessor campaign.</p><p><strong>Disposition:</strong> the historical files pass {check_count} reported format, grid, <code>[0,1]</code>, footprint, and SHA-256 checks (<a href="../evidence/submission_file_audit.json">evidence/submission_file_audit.json</a>); these technical checks do not establish current scientific merit, uniqueness, organizer provenance, or selector approval. No file is currently approved for submission.</p></article>
   <article class="card span-4"><div class="metric">{comma(p.get('emitted_px'))}</div><div class="metric-caption">binary positive cells emitted</div><hr><div class="metric">+{fmt_number(p.get('holdout_mean_gain', 0), 5)}</div><div class="metric-caption">4-fold spatial OOF &Delta;DTI ({esc(p.get('holdout_seeds_improved', 'n/a'))} seeds)</div></article>

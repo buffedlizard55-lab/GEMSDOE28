@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-25T00:00:00Z",
+  "generated_utc": "2026-10-25T22:11:36Z",
   "status": "Session 14 (2026-10-03): H36-1 (primary, b531dae0a36f, 37,660 px) is now verified on BOTH interleaved spatial CV (seeds 240-249, +0.002599) and LOSFO far-field truth (seeds 265-269, +0.001713, F1-F4 ALL PASS, e_far = 0.01359 < tau_live 0.054852). H38-1 (secondary, 56a9f473edc7, 37,860 px) adds 200 multi-physics corroborated lineament dots (DeAngelo et al. 2022 conductive heat-flow residual hf_resid >= 50 mW/m^2 + Reid et al. 1990 shallow SI=0 Euler contact cluster) and passed both LOSFO far-field C1-C4 (+0.000747 over H36-1, 0.06993 credit/dot) and interleaved spatial CV (seeds 270-279, +0.000543 over H36-1). All files UNSCORED / not slot-approved.",
   "provenance_warning": "All inputs and historical model artifacts are owner-repository mirrors; local SHA-256 integrity does not prove organizer authenticity or score association.",
   "manual_policy": "No upload, portal call, scheduled check, scraping, API monitoring or other automated DrivenData access. All site links are downloads/manual-review links only.",
@@ -75,6 +75,7 @@
     "bytes_zip": 295603,
     "emitted_px": 37860,
     "added_px_over_h36_1": 200,
+    "submission_name": "GEMSDOE28-h38-1-hf-euler-r30-r1-56a9f473edc7",
     "per_quadrant_added_px": {
       "NW": 48,
       "NE_LidarGapHeavy": 56,
@@ -112,8 +113,7 @@
       "verdict": "C1-C4 ALL PASS - first addition arm to clear tau_live (0.054852) and both sub-ridge and random controls on LOSFO far-field truth"
     },
     "base_reference_id": "b531dae0a36f",
-    "base_reference_live_score": 0.26,
-    "submission_name": "GEMSDOE28-h38-1-hf-euler-r30-r1-56a9f473edc7"
+    "base_reference_live_score": 0.26
   },
   "tertiary": {
     "slug": "h27-4-r1-solo-d2-8",
