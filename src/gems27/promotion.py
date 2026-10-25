@@ -22,9 +22,10 @@ def promotion_gate(card: dict) -> dict:
     failures = []
 
     def result():
-        return {"verdict": "negative" if failures else "promote", "submission_ready": not failures,
+        return {"verdict": "negative" if failures else "promote", "evidence_schema_passed": not failures,
+                "submission_ready": False,
                 "failures": failures, "slot_selected": False,
-                "scope": "Evidence schema gate only; promotion is not slot selection or organizer acceptance."}
+                "scope": "Evidence schema gate only; no raster execution or selector approval. Not upload authorization."}
 
     # Evidence is untrusted JSON. Wrong container types must never crash or pass.
     if not isinstance(card, dict):

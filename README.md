@@ -1,3 +1,19 @@
+# Latest review — 2026-10-25: no approved submission
+
+**DO NOT UPLOAD any current TIFF.** This review did not generate a new candidate.
+The prompt references a single method paragraph but does not supply one; the prior
+migration lane is exhausted. No lane switch or fourth experiment was performed.
+Training rasters and the feature cache are absent from this checkout.
+
+Read [the latest three-pass review](evidence/review_s18_submission_gate_2026-10-25.md)
+before the historical notices below. The schema checker now reports
+`evidence_schema_passed` independently of `submission_ready` (always false for a
+schema-only check). A passing JSON schema is **not** exact-file validation or
+selector approval. The contradictory historical “unique/promote” claims in
+[knowledge/51](knowledge/51_session17_unique_submission.md) are explicitly withdrawn.
+The full task brief remains recorded below; this is an operational update, not a
+verbatim replacement of the supplied prompt. Core values: Maximize P(Win), Own the Outcome.
+
 # Current session safety notice — 2026-10-25 Session 16 (read first)
 
 **NO FILE IS CURRENTLY APPROVED FOR SUBMISSION.** The Session 16 H40-1 migration TIFF

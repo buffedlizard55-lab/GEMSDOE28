@@ -22,3 +22,15 @@ def test_negative_card_exit_status(tmp_path, capsys):
 def test_missing_file(tmp_path, capsys):
     assert main([str(tmp_path / "absent")]) == 2
     assert json.loads(capsys.readouterr().out)["verdict"] == "negative"
+
+
+def test_schema_pass_is_not_upload_authorization(tmp_path, capsys):
+    from tests.test_promotion import complete_card
+
+    path = tmp_path / "schema-only.json"
+    path.write_text(json.dumps(complete_card()))
+    assert main([str(path)]) == 0
+    result = json.loads(capsys.readouterr().out)
+    assert result["evidence_schema_passed"] is True
+    assert result["submission_ready"] is False
+    assert result["slot_selected"] is False
