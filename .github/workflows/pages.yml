@@ -9,6 +9,12 @@ on:
       - '.nojekyll'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
+  workflow_run:
+    # GITHUB_TOKEN commits do not fire push workflows. Deploy after the scheduled
+    # feed finishes so generated observation dates cannot remain stale on Pages.
+    workflows: ['Source metadata feed (no competition requests)']
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -21,13 +27,19 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Stage the site and preserve legacy /docs/ URLs
+        run: |
+          mkdir -p build/pages/docs
+          cp -a docs/. build/pages/
+          cp -a docs/. build/pages/docs/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: build/pages
   deploy:
     environment:
       name: github-pages

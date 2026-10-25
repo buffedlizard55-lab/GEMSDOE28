@@ -1,0 +1,82 @@
+{
+  "status": "BLOCKED",
+  "checked_at_utc": "2026-10-25T22:43:21Z",
+  "elapsed_seconds": 2925.378889,
+  "time_cap_seconds": 7200,
+  "experiment_allowed": false,
+  "failures": [
+    "Missing explicit assigned method lane and assignment source",
+    "Missing complete shared parallel-run registry",
+    "Missing frozen current-best result under the same strict protocol"
+  ],
+  "cached_features": {
+    "path": "data/prepared/features.npy",
+    "sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc"
+  },
+  "shared_template": {
+    "passed": true,
+    "files": [
+      {
+        "id": "template-__init__",
+        "dest": "shared_template/src/gems/__init__.py",
+        "sha256": "1a0b12829abd20797161f12c4d4f900f5bfb2af13df35c68435ce647e6fb264a",
+        "bytes": 410
+      },
+      {
+        "id": "template-holdout",
+        "dest": "shared_template/src/gems/holdout.py",
+        "sha256": "3b1cc38fa15c849284116e875a00b11f722dd0c05b9afc5fe7ea71d5fa2312b8",
+        "bytes": 23976
+      },
+      {
+        "id": "template-metric",
+        "dest": "shared_template/src/gems/metric.py",
+        "sha256": "c024510de39746c9390e5bbf5c1d1b639a9ee895017a38fab4b609f0f2c33e48",
+        "bytes": 9544
+      },
+      {
+        "id": "template-submission",
+        "dest": "shared_template/src/gems/submission.py",
+        "sha256": "380ef4c785680d0c9063f53f9fa6227e8a564314d40df02fa46f02fe37d29711",
+        "bytes": 10463
+      },
+      {
+        "id": "template-validator",
+        "dest": "shared_template/src/gems/validator.py",
+        "sha256": "a5176d6e13924382f52bfd170a1f91c8beb1f31d413765295e881b65dc79a5e0",
+        "bytes": 396
+      },
+      {
+        "id": "template-novelty",
+        "dest": "shared_template/src/gems/novelty.py",
+        "sha256": "8ffb8d61bd44fd1191927ddf8f3fe040c7cb341cd6811a63f1af8e2093749842",
+        "bytes": 9833
+      },
+      {
+        "id": "template-evaluate_holdout",
+        "dest": "shared_template/scripts/evaluate_holdout.py",
+        "sha256": "040d4ea3b231f76fc3cd200206e95a67ee86babc1dd9f26027adae39f674df78",
+        "bytes": 13558
+      },
+      {
+        "id": "template-submission_writer",
+        "dest": "shared_template/scripts/submission_writer.py",
+        "sha256": "552621e4f1a8836922cbd0557c56e409b22e98d90d8b091baaa77a2fa0ef0717",
+        "bytes": 1515
+      },
+      {
+        "id": "template-priority-registry",
+        "dest": "research/shared_priority_registry.json",
+        "sha256": "0844816e4cb8e9f6fa64970b339412dd97d12cb0b507c67b0b9bb3f2f3ea2974",
+        "bytes": 83432
+      }
+    ],
+    "failures": [],
+    "manifest_sha256": "b4e23ba97cb72e89a78bcfda7d4b3076ea2076141ba1f648801083b79e500d79",
+    "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+    "network_access": "none"
+  },
+  "submission_ready": false,
+  "slot_selected": false,
+  "scope": "No model, no scientific evaluation, no raster emission, no weekly cap or slot decision"
+}

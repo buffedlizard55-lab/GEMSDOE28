@@ -77,7 +77,7 @@ def main() -> int:
         folds.setdefault(r["fold"], {})[r["arm"]] = r
 
     deltas = []
-    for fid, arms in folds.items():
+    for arms in folds.values():
         d = arms["cand_H40_1"]["dti"] - arms["base_H36_1"]["dti"]
         deltas.append(d)
 
@@ -96,7 +96,6 @@ def main() -> int:
     pooled_cand_tp = sum(r["tpw"] for r in results if r["arm"] == "cand_H40_1")
     pooled_cand_fp = sum(r["fpw"] for r in results if r["arm"] == "cand_H40_1")
     pooled_cand_fn = sum(r["fnw"] for r in results if r["arm"] == "cand_H40_1")
-    pooled_cand_n = sum(r["n_truth"] for r in results if r["arm"] == "cand_H40_1")
     pooled_cand_dti = pooled_cand_tp / (pooled_cand_tp + ALPHA * pooled_cand_fp + BETA * pooled_cand_fn + EPS)
 
     pooled_delta = pooled_cand_dti - pooled_base_dti

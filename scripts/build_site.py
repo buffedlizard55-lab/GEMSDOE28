@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the static, source-linked manual-only Pages site from repository JSON records.
+"""Build current evidence panels and a separate historical archive from local JSON.
 
 The build is deterministic apart from the data's checked-in observation dates. It reads no rasters,
 performs no external requests, and never contacts DrivenData. Review the original standing brief in
@@ -11,6 +11,7 @@ import hashlib
 import html
 import json
 import re
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +20,28 @@ DOCS = ROOT / "docs"
 REPOSITORY_SOURCE_BASE = "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/"
 SOURCE_PATH_ROOTS = {"evidence", "knowledge", "registry", "scripts", "src", "tests", ".github"}
 SOURCE_PATH_FILES = {"README.md", "AI_DISCLOSURE.md", "pyproject.toml", "requirements.txt"}
+
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "src"))
+from scripts.site_current import (  # noqa: E402
+    current_notice,
+    render_hypotheses,
+    render_overview,
+    render_review,
+)
+from scripts.site_current import render_executive as render_current_executive  # noqa: E402
+
+
+def namespace_anchors(text: str, prefix: str) -> str:
+    """Keep combined historical pages' IDs and accessible labels unambiguous."""
+    ids = set(re.findall(r'(?<![\w:-])id="([^"]+)"', text))
+    text = re.sub(r'(?<![\w:-])id="([^"]+)"', lambda m: f'id="{prefix}{m[1]}"', text)
+    for attribute in ("aria-labelledby", "aria-describedby", "for"):
+        text = re.sub(rf'{attribute}="([^"]+)"',
+                      lambda m, attr=attribute: attr + '="' + " ".join(
+                          prefix + value if value in ids else value for value in m[1].split()) + '"', text)
+    return re.sub(r'href="#([^"]+)"',
+                  lambda m: f'href="#{prefix}{m[1]}"' if m[1] in ids else m[0], text)
 
 
 def read_json(path: str, default: Any = None) -> Any:
@@ -277,7 +300,8 @@ def nav() -> str:
         ("Overview", "index.html"),
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
-        ("Session 15 review", "session15-review.html"),
+        ("Latest review", "submission-review.html"),
+        ("Archive", "archive.html"),
         ("Topology", "topology.html"),
         ("Sources", "sources.html"),
     ]
@@ -344,7 +368,7 @@ def layout(title: str, body: str, active: str = "") -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="GEMSDOE28 auditable geoscience research, manual-only submission path, and source-linked evidence.">
+  <meta name="description" content="GEMSDOE28 automated submission gates, fault-mapping research and source-linked evidence.">
   <title>{esc(title)} | GEMSDOE28</title>
   <link rel="stylesheet" href="assets/site.css">
   <script defer src="assets/site.js"></script>
@@ -354,7 +378,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main><section class="card" aria-label="Current submission readiness"><h2>Current run: NOT READY TO SUBMIT</h2><p>2026-10-25 (Session 16): a new unique-lane TIFF (H40-1 migration, 5f2efa891ce7) WAS generated and auto-validated, but it FAILED its frozen LOSFO gate (G2 spread) and the strict uniqueness check. It is banner-marked DO NOT SUBMIT below; the validated one-click primary further down is unchanged and remains the only download presented for a manual submission decision. If you submit anything, use the primary&#x27;s <strong>all-finite</strong> variant (values exactly 0/1, no NaN anywhere) to avoid the portal error &#8220;Predicted values must be in range [0, 1]&#8221;.</p><p><a href="data/run_card_2026-10-25.json">Download current machine-readable run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/50_s16_result.md">Session 16 audit, ranked hypotheses, limitations and next steps</a></p><p><a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/48_gate_review_2026-10-25.md">Follow-up: registry coverage, automated evidence check and next steps</a></p><p>Format validation is not performance validation. Promotion is not weekly slot selection. No human-inspector sign-off is substituted for automated evidence.</p></section>{body}</main>
+<main>{current_notice(read_json("evidence/current_run_card.json", {}))}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -381,11 +405,11 @@ def note_box(note: str) -> str:
 
 
 def file_links(item: dict, prefix: str = "downloads/") -> str:
-    links = [f'<a class="button" href="{prefix}{esc(item["nan"])}" download>Download single-band GeoTIFF</a>']
+    links = [f'<a class="button" href="{prefix}{esc(item["nan"])}" download>Archive TIFF · DO NOT SUBMIT</a>']
     if item.get("zip"):
-        links.append(f'<a class="button quiet" href="{prefix}{esc(item["zip"])}" download>Download ZIP</a>')
+        links.append(f'<a class="button quiet" href="{prefix}{esc(item["zip"])}" download>Archive ZIP · DO NOT SUBMIT</a>')
     if item.get("allfinite"):
-        links.append(f'<a class="button secondary" href="{prefix}{esc(item["allfinite"])}" download>All-finite fallback</a>')
+        links.append(f'<a class="button secondary" href="{prefix}{esc(item["allfinite"])}" download>Archive all-finite TIFF · DO NOT SUBMIT</a>')
     return '<div class="download-actions">' + "".join(links) + "</div>"
 
 
@@ -1097,10 +1121,21 @@ def main() -> int:
     h35_6 = read_json("evidence/h35_6_candidate_headtohead.json", {})
     local_h38_claim = read_json("evidence/h38_1_holdout.started.json", {})
     session15_review = read_json("evidence/session15_review.json", {})
+    review = read_json("evidence/current_review.json")
+    current_audit = read_json("evidence/current_submission_audit.json")
+    current_inputs = read_json("evidence/current_input_audit.json")
+    priority = read_json("evidence/priority_repository_audit.json")
+    official_reference = read_json("evidence/official_reference_audit.json")
+    feed = read_json("docs/data/feed.json")
+    historical_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
+    historical_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
+    archive_warning = '<section class="callout callout-danger"><h1>Historical campaign archive</h1><p><strong>SUPERSEDED · DO NOT SUBMIT THESE FILES.</strong> Old primary/secondary/weekly-slot labels and instructions below describe the past campaign, not current approval. No archive download is newly generated or cleared by the current protocol. <a href="submission-review.html">Read the automated rejection of the historical primary.</a></p></section>'
     pages = {
-        "index.html": layout("Overview", render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "Overview"),
-        "executive-summary.html": layout("Executive summary", render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "Executive summary"),
-        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
+        "index.html": layout("Overview", render_overview(review, current_audit, current_inputs, priority, feed), "Overview"),
+        "executive-summary.html": layout("Executive summary", render_current_executive(review), "Executive summary"),
+        "research.html": layout("Research and hypotheses", render_hypotheses(review) + '<details class="historical-record"><summary>Historical research record — superseded, no current approval</summary>' + render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim) + "</details>", "Research"),
+        "submission-review.html": layout("Current automated review", render_review(review, current_audit, priority, official_reference)),
+        "archive.html": layout("Historical campaign archive", archive_warning + '<details class="historical-record"><summary>Historical overview and research TIFFs — DO NOT SUBMIT</summary>' + historical_index + '</details><details class="historical-record"><summary>Historical executive instructions — superseded</summary>' + historical_executive + "</details>"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
@@ -1108,11 +1143,12 @@ def main() -> int:
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
-    (ROOT / "index.html").write_text(root_relative_links(pages["index.html"]), encoding="utf-8")
+    (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
-                      "primary_download": manifest["primary"]["nan"]}, indent=2))
+                      "primary_download": None, "historical_primary": manifest["primary"]["nan"],
+                      "submission_ready": False}, indent=2))
     return 0
 
 

@@ -5,16 +5,18 @@ import subprocess
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html",
+         "archive.html", "submission-review.html", "session15-review.html"]
 
 
 class Links(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.refs, self.ids = [], set()
+        self.refs, self.ids, self.duplicate_ids = [], set(), set()
 
     def handle_starttag(self, tag, attrs):
         d = dict(attrs)
@@ -22,6 +24,8 @@ class Links(HTMLParser):
             if k in d:
                 self.refs.append(d[k])
         if "id" in d:
+            if d["id"] in self.ids:
+                self.duplicate_ids.add(d["id"])
             self.ids.add(d["id"])
 
 
@@ -104,7 +108,7 @@ def test_h31_site_status_distinguishes_screen_confirmation_and_proxy_results(tmp
     assert "weekly slot" in screen_text
     assert build_site.h31_hypothesis_status(screen_pass, {}, consumed) == "SCREEN PASSED — unchanged confirmation required; not slot-approved"
     research = (DOCS / "research.html").read_text()
-    front_page = (DOCS / "index.html").read_text()
+    front_page = (DOCS / "archive.html").read_text()
     assert "No model fit, holdout score, confirmation, or promotion decision." not in front_page
     assert "The feature build is label-free; H31 screen outcome is shown above." in front_page
     assert "screen evidence" in front_page
@@ -176,11 +180,17 @@ def test_all_internal_links_and_assets_resolve():
     for base, p in [(DOCS, q) for q in PAGES] + [(ROOT, "index.html")]:
         parser = Links()
         parser.feed((base / p).read_text())
+        assert not parser.duplicate_ids, (p, parser.duplicate_ids)
         for ref in parser.refs:
-            if re.match(r"^(https?:|mailto:|#|data:)", ref):
+            url = urlsplit(ref)
+            if url.scheme or url.netloc:
                 continue
-            target = ref.split("#")[0]
-            assert (base / target).exists(), f"{base.name}/{p}: broken internal reference {ref}"
+            target = (base / unquote(url.path)).resolve() if url.path else base / p
+            assert target.exists(), f"{base.name}/{p}: broken internal reference {ref}"
+            if url.fragment and target.suffix == ".html":
+                destination = Links()
+                destination.feed(target.read_text())
+                assert unquote(url.fragment) in destination.ids, f"{p}: broken fragment {ref}"
 
 
 def test_pages_source_links_resolve_to_public_repository_files():
@@ -194,17 +204,19 @@ def test_pages_source_links_resolve_to_public_repository_files():
     assert "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/12_preregistration_H31-1_euler.md" in research
 
 
-def test_repository_root_front_page_serves_the_one_click_download():
+def test_repository_root_front_page_locks_submission_download_and_preserves_archive():
     man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
     root_idx = (ROOT / "index.html").read_text()
     P = man["primary"]
-    assert f'href="docs/downloads/{P["nan"]}"' in root_idx and "download" in root_idx
+    assert f'href="docs/downloads/{P["nan"]}"' not in root_idx
+    assert 'href="docs/archive.html"' in root_idx
+    assert "Submission download locked" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
-def test_front_page_has_download_and_exact_note():
+def test_archive_preserves_exact_download_and_note_without_approval():
     man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
-    idx = (DOCS / "index.html").read_text()
+    idx = (DOCS / "archive.html").read_text()
     P = man["primary"]
     assert f'href="downloads/{P["nan"]}"' in idx and "download" in idx
     assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
@@ -270,7 +282,7 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
         assert candidate["nan"] in research and candidate["zip"] in research
         assert candidate["allfinite"] in research
         assert "not one of the four weekly slots" in research
-        summary = (DOCS / "executive-summary.html").read_text()
+        summary = (DOCS / "archive.html").read_text()
         assert candidate["nan"] in summary
         assert "not one of the four weekly slots" in summary
 
@@ -317,3 +329,34 @@ def test_current_run_notice_is_above_historical_body():
     assert card['raster_sha256'] is None or (
         isinstance(card['raster_sha256'], dict) and card.get('slot_selected') is False
     )
+
+
+def test_feed_refresh_rebuilds_and_deploys_without_requiring_a_branch_push_event():
+    feed = (ROOT / ".github/workflows/source-feed.yml").read_text()
+    pages = (ROOT / ".github/workflows/pages.yml").read_text()
+    assert "python scripts/build_site.py" in feed
+    assert "docs/*.html index.html" in feed
+    assert "branches: [main]" in feed and "branches: ['arena/**']" not in feed
+    assert "workflow_run:" in pages
+    assert "workflows: ['Source metadata feed (no competition requests)']" in pages
+    assert "github.event.workflow_run.conclusion == 'success'" in pages
+    assert "cp -a docs/. build/pages/docs/" in pages  # legacy /docs/ bookmarks remain valid
+    assert "path: build/pages" in pages
+
+
+def test_static_build_still_needs_no_third_party_dependencies():
+    result = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/build_site.py")],
+                            capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+
+
+def test_combined_archive_namespaces_ids_and_accessible_labels():
+    from scripts.build_site import namespace_anchors
+
+    html = '<h2 id="title">Old</h2><p id="body" data-id="cache" aria-labelledby="title outside"></p><a href="#title">Jump</a><a href="index.html#download">Current</a>'
+    result = namespace_anchors(html, "old-")
+    assert 'id="old-title"' in result and 'id="old-body"' in result
+    assert 'aria-labelledby="old-title outside"' in result
+    assert 'href="#old-title"' in result
+    assert 'href="index.html#download"' in result
+    assert 'data-id="cache"' in result

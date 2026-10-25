@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-25T00:00:00Z",
+  "generated": "2026-10-25",
   "items": [
     {
       "id": "parallel-run-2026-10-25-blocked",
@@ -594,6 +594,78 @@
       "severity": "high",
       "issue": "Parallel sessions assigned H40-1 to two different hypotheses on 2026-10-25: this branch's continuation-height ridge-migration lane (knowledge/49-50) and merged main's thermal-vent experiment (superseded by H41-1 thermal-spring, negative on its catalogue holdout). Results must not be combined.",
       "action": "Refer to this branch's arm as 'H40-1 migration (S16)' and main's as 'H40-1 thermal-vent / H41-1 thermal-spring (parallel)'. Run cards are session-scoped; docs/data/run_card_2026-10-25.json holds the S16 card, the parallel card remains in main history at 4da21f8."
+    },
+    {
+      "id": "g28-a51-no-lane-or-strict-baseline",
+      "severity": "high",
+      "issue": "The latest parallel-run request references an assigned single method paragraph, but none is identifiable. The complete parallel-run registry and frozen same-protocol incumbent are also missing.",
+      "action": "Stop before scientific experiments; do not guess a lane or create a renamed TIFF. See registry/current_session.json and evidence/current_preflight.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-archive-primary-duplicate",
+      "severity": "high",
+      "issue": "The previously advertised H36-1 primary passes format checks but has final-dot overlap 1.0 with at least one other audited raster and max absolute rank correlation 0.9997727160804492. It is not a new lane.",
+      "action": "Current download locked; old files are educational only. See evidence/current_submission_audit.json and the separate website archive.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-shared-priority-predictions",
+      "severity": "high",
+      "issue": "Several of the nine priority sites distribute identical footprint predictions under different names or outside-footprint packaging. Byte uniqueness alone is insufficient.",
+      "action": "Read-only comparison and stop, not registry-driven dot perturbation. See evidence/priority_repository_audit.json and evidence/current_submission_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-gem31-allfinite-convention",
+      "severity": "medium",
+      "issue": "Three GEMSDOE31 allfinite-labeled variants fail the independent local outside/nodata convention checks. No organizer rejection or cause of the historical range error was established.",
+      "action": "Report the exact files and actual checks, not a speculative portal error diagnosis. See evidence/priority_repository_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-gem36-readme-sha",
+      "severity": "medium",
+      "issue": "The inspected GEMSDOE36 README NaN-variant SHA does not match the freshly fetched Git-blob-verified file. The zero-outside artifact identity matches the educational comparison.",
+      "action": "Use the inspected file SHA and Git blob; do not copy the README hash. See evidence/priority_repository_audit.json.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-owner-score-not-receipt",
+      "severity": "high",
+      "issue": "Owner pages use contradictory stop/submit language and an ORGANIZER-CONFIRMED label for a claim without an independently inspected submission-page receipt. Supplied current leaderboard maxima conflict.",
+      "action": "Keep 0.2778 user/owner-reported and all current maxima/caps unverified. See evidence/current_review.json and knowledge/51_current_review_and_next_steps.md.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-depth-band-meaning",
+      "severity": "medium",
+      "issue": "Historical structural_step.py prose alternates basement and conductive-base interpretations of depth_to_base_surf. Official units/source metadata have not been authenticated here.",
+      "action": "Do not resolve physical meaning by guessing, or base a new hypothesis on that assumption. See knowledge/51_current_review_and_next_steps.md.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-data-cache-blocker-resolved",
+      "severity": "info",
+      "issue": "Earlier 2026-10-25 notes described absent inputs/cache/tools. This session restored all 17 pinned inputs and reproduced the existing 32-band cache; source integrity is not organizer authentication.",
+      "action": "Earlier absence statements are dated history. Use evidence/current_input_audit.json and registry/protocol_assets.json for current state; missing lane/registry/baseline still block science.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
+    },
+    {
+      "id": "g28-a51-latest-verbatim-prompt-unavailable",
+      "severity": "medium",
+      "issue": "The latest complete verbatim request is not present in retained conversation context. Existing README prompt blocks are historical summaries, not a recovered current original.",
+      "action": "Current README faithfully restates available requirements and labels them a summary; do not fabricate a full prompt or claim this part complete.",
+      "checked_at_utc": "2026-10-25",
+      "evidence_class": "CURRENT REVIEW / not a competition score"
     }
   ]
 }
