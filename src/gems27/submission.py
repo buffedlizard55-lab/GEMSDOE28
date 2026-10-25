@@ -46,9 +46,10 @@ def write_geotiff(pred: np.ndarray, template: Path | str, out: Path | str, *, ou
         raise ValueError("outside must be 'nan' or 'zero'")
     out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
+    # Validate the actual template, not only its footprint pixel count.
+    foot = grid.load_footprint(template)
     with rasterio.open(template) as t:
         profile = t.profile.copy()
-        foot = np.isfinite(t.read(1))
     if foot.sum() != grid.FOOTPRINT_PX:
         raise ValueError("template footprint differs from the competition footprint")
     pred = np.asarray(pred)
@@ -85,9 +86,8 @@ def zip_single(tif: Path | str, zip_path: Path | str | None = None) -> Path:
 def verify_geotiff(path: Path | str, template: Path | str) -> dict[str, Any]:
     """Independent re-read of a submission file under several plausible validator interpretations."""
     path = Path(path)
+    foot = grid.load_footprint(template)
     with rasterio.open(template) as t:
-        t_arr = t.read(1)
-        foot = np.isfinite(t_arr)
         t_prof = t.profile
     with rasterio.open(path) as s:
         a = s.read(1)
