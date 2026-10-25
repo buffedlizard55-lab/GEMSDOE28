@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-25",
+  "scope": "GitHub source HTML, not verification of deployed Pages or organizer scores",
+  "sites": [
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE24",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/HEAD/docs/index.html",
+      "sha256": "98434605d82586968217d0c40efedbc830cdb310e5387b75c96ebf3d395d6423",
+      "bytes": 8039,
+      "observations": []
+    },
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE25",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/HEAD/docs/index.html",
+      "sha256": "181911fb98c8466bbece6effb10f851666fc4b9bfe23b136e693d7e626d9230f",
+      "bytes": 51216,
+      "observations": [
+        "tice: 100.0% of dots within 3 px (IR-25-LANE-DENSITY)) no live projection (HOLDOUT-DTI 0.1499 only; not a score) model projection for this file versus the owner-reported 0.2778 best \u2014 not a score XG1 cross-gradient + H35 base (48,669 dots) \u2014 unique file; verdict negative; DO NOT SUBMIT. The download card below has the local-testing file, checks",
+        "ms25-h35-resmag-tip-sapd2-4-k3p5-20261025-d5d4cde1e719-nan.tif), worst final-dot |Spearman| 0.363, pre-placement surface worst |Spearman| 0.152; overlap vs GEMSDOE32 B2 (0.2778) 0.314; FLAGGED (own unscored lineage): h31-1-flank-subscarp-sapd24-20261025-40bfe1d5b1c5, h31-aniso-scarp-b2-d2-8-20261025-c213681203f6, h31-control-sapd2-4-k3p5-bde7-2",
+        "ms25-h35-resmag-tip-sapd2-4-k3p5-20261025-d5d4cde1e719-nan.tif), worst final-dot |Spearman| 0.363, pre-placement surface worst |Spearman| 0.152; overlap vs GEMSDOE32 B2 (0.2778) 0.314; FLAGGED (own unscored lineage): h31-1-flank-subscarp-sapd24-20261025-40bfe1d5b1c5, h31-aniso-scarp-b2-d2-8-20261025-c213681203f6, h31-control-sapd2-4-k3p5-bde7-2",
+        "st 0.680) \u00b7 pre-registered holdout gate FAILED \u00b7 verdict negative \u00b7 DO NOT SUBMIT Additive complement design (G25-K1, knowledge/17): keep every dot of the owner-reported 0.2778 H33-2-B2 file and add 17,720 score-ordered dots from this repo&#x27;s full-catalogue HGB (BDE + 7 add-ons; reproduces H31-C content id 9edd6bed8268) on ridge pixels &gt;",
+        "e (same dots); same verdict: strict lane fail, holdout gate failed; DO NOT SUBMIT Additive complement design (G25-K1, knowledge/17): keep every dot of the owner-reported 0.2778 H33-2-B2 file and add 17,720 score-ordered dots from this repo&#x27;s full-catalogue HGB (BDE + 7 add-ons; reproduces H31-C content id 9edd6bed8268) on ridge pixels &gt;",
+        "tector uniqueness (max rank-corr 0.1697 &lt;= 0.90, max symmetric 3-px overlap 0.5837 &lt;= 0.70, max sparse-detector 3-px overlap 0.6707 &lt;= 0.70, 31.75% vs GEMSDOE32 0.2778). Under the literal strict lane gate against the 5-px r13 calibration lattice (100% of any in-footprint pixel lies within sqrt(8)=2.83 &lt; 3 px of a 5x5 grid; IR-25-LAN",
+        "gue). Passes 16/16 format checks and Leakage Canary (max standalone AUC 0.8386 &lt;= 0.90). Comparable dotted/focus 3-px dot overlap is &lt;= 0.6544 (0.3183 vs GEMSDOE32 0.2778) and max surface Spearman is 0.1826 &lt;= 0.90, while literal one-way inclusion against the 99.9%-covering r13 5-px lattice is 1.000 (strict lane gate stop). Screen (dra",
+        "other-site substantive scored rasters: worst 3-px overlap 0.682, worst final |rho| 0.047, worst pre-placement surface |rho| 0.152 (caps 0.70/0.90) -- clean; vs H33-2-B2 (0.2778 file) overlap 0.312 (reverse 0.375); dense r13 lattice: literal overlap 1.000 but halo coverage 0.9987 (a random file scores the same; symmetric-min 0.186); own lineage "
+      ]
+    },
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE27",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/HEAD/docs/index.html",
+      "sha256": "e860b7c5408562c6c30c6f6ad983727bd2857bc61ff77311217d73d4a87ec58f",
+      "bytes": 20526,
+      "observations": [
+        "y at d_cat &ge; 3 px (far field), so holdout DTI = 0 by design (knowledge/10). Support: GEMSDOE32 truth model (+0.0247, 12/12 draws) and convergence with GEMSDOE36 PINN (0.2750) on the B2 + ~38k optimum. Full run card: evidence/run_card_unique_scatter_farfield_20261025.json \u00b7 Format receipt: checks JSON 27GEMSDOE \u00b7 DrivenData #306 DOE GEMS. The",
+        "7). Efficacy and format gates PASS . Unique vs every scored rival (measured): max &le;3&nbsp;px dot overlap vs the 12 pinned peer rasters 46.2% (limit 70&nbsp;%); vs the 0.2778 file specifically 40.9% (exact shared pixels 1,649 of 38,000); surface Spearman max 0.446 (limit 0.90). Why it is still NOT certified: the frozen screen also covered thi",
+        "shipped. Unique (measured): max dot overlap within 3&nbsp;px vs any registry raster 51.0% (limit 70&nbsp;%); surface Spearman max 0.100 (limit 0.90). Why the family best 0.2778 won, reconstructed pixel-exactly: knowledge/12 . Format: all-finite, nodata=None, every cell in [0,1] ( re-read receipt ); research bytes in downloads/research/ (sha256 ",
+        "eceipt verifies their score/file pairing. The next action is a new pre-registered, data-ready hypothesis\u2014not a renamed legacy raster. 61,328 emitted pixels = 60,069 (the 0.2477 emission, nothing removed) + 1,259 345 aligned gap links (median 1.8 km), each with NBMG/USGS vector fault attribution &amp; written argument 0.28 / 0.10 holdout efficie",
+        "rarr;d1.5, H25-ctx&rarr;h28) 0.2550 ceiling of the emission-geometry lever (d=2.25&ndash;2.8, 44,090 px). The sibling's independent fit: 0.2553 5.67 concentration of the 0.2477 file &mdash; 5.67&times; better than a blind lattice at finding truth. The whole H19-5 family plateaus at 5.3&ndash;5.7 No submission in the group&#39;s history has ever",
+        "0 ) was hash-authenticated and inverted: concentration 1.62&times; blind (exact bracket 0.76&ndash;1.65&times;) against 5.3&ndash;6.0&times; for the family that produced 0.2477, and its 1-px lines cover less DTI kernel mass than a uniform spray of the same size (c&nbsp;=&nbsp;0.0384 vs 0.1050). Never emit on an &ldquo;independent second catalog",
+        "t matters. 100% of hidden truth in every gate here lies at distance 0 from the published catalogue and 99.6% of credit is earned within 200&nbsp;m of it , while the live 0.2477 emission puts 81.4% of its dots &ge;300&nbsp;m away . Two Addendum-D arms passed both registered criteria on that proxy (+SGMC features: out-of-fold PR-AUC 0.0246&rarr;0",
+        " verified/modelled increments on H19-5 alone (they reach \u22480.262\u20130.270) \u2013 see research . The agent never uploads anything; you press the button. Reference (owner-reported 0.2477): 24GEMSDOE audit record (sha256 68d0e2e4fcc594f9\u2026). It is historical comparison evidence, not a current download recommendation. Built 2026-10-25 22:13 UTC from the rep"
+      ]
+    },
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE28",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/HEAD/docs/index.html",
+      "sha256": "fde0619403978cc157225a5d7c27811a104995388df84c2c381b7da26e8ecbd8",
+      "bytes": 47342,
+      "observations": [
+        "( evidence/h36_1_holdout.json ): 0.002599 mean &Delta;DTI, 10/10 seeds and 4/4 spatial folds improving over the same-run d=2.8 control. It is built on the owner-reported 0.2600 live base ( dotted-h19-5-d2-8-20261002-e56ea318af89-nan , 44,090 px) with T-v2 gap closure omitted after 5512495c6bd1 reportedly scored 0.2449 (\u22120.0028 vs 0.2477). This ",
+        "uilt on the owner-reported 0.2600 live base ( dotted-h19-5-d2-8-20261002-e56ea318af89-nan , 44,090 px) with T-v2 gap closure omitted after 5512495c6bd1 reportedly scored 0.2449 (\u22120.0028 vs 0.2477). This historic artifact is locally format-audited, unscored , not unique to this run, and not approved for submission. How it got here \u2014 and what is ",
+        "eported 0.2600 live base ( dotted-h19-5-d2-8-20261002-e56ea318af89-nan , 44,090 px) with T-v2 gap closure omitted after 5512495c6bd1 reportedly scored 0.2449 (\u22120.0028 vs 0.2477). This historic artifact is locally format-audited, unscored , not unique to this run, and not approved for submission. How it got here \u2014 and what is closed. The H35 add",
+        "ositive folds 3/4 and positive seed means 3/10; the arm is closed with no confirmation and no weekly slot. Session 15 audit (historical, 2026-10-25): the GEMSDOE32 H33-2 0.2778 value is owner-reported; the available cross-site audit describes catalogue-proximity pruning but no organizer receipt or local score-linked artifact is present. The pro",
+        "ce: run card - LOSFO gate (seeds 300-304) - leakage canary - preregistration (frozen before the seeds) - result . HOLDOUT-DTI is a local proxy, never an organizer score; 0.2778 is owner-reported (no organizer receipt in any fetched repository). Session 15 \u00b7 2026-10-25 \u00b7 newest candidate \u00b7 auto-validated, no human inspection \ud83d\udd34 DO NOT SUBMIT \u2014 HO",
+        "): 28GEMSDOE H39-1 depthslice B2 | LOSFO GATE FAIL dDTI -0.0016 (290-294) DO NOT SUBMIT | id a86b8ed33727 Copy note Evidence: run card \u00b7 LOSFO gate (seeds 290\u2013294) \u00b7 why 0.2778 won (byte forensic) \u00b7 preregistration (frozen before the seeds) \u00b7 result . HOLDOUT-DTI is a local proxy, never an organizer score; 0.2778 is owner-reported (no organizer",
+        "OSFO gate (seeds 290\u2013294) \u00b7 why 0.2778 won (byte forensic) \u00b7 preregistration (frozen before the seeds) \u00b7 result . HOLDOUT-DTI is a local proxy, never an organizer score; 0.2778 is owner-reported (no organizer receipt in any fetched repository). Historical research artifacts \u2014 inspection/download only Historical GeoTIFF \u2014 NOT APPROVED FOR SUBMIS",
+        "m ridge-aligned corroborator. Open Euler audit \u2192 screen evidence \u00b7 single-use screen claim PhD analysis \u00b7 24-submission live-score inversion Why dotted-h19-5-d2-8 scored 0.2600, why T-v2 scored 0.2449, and how to beat 0.2600. Why e56ea318af89 ( d=2.8 ) achieved 0.2600 Priority-ordered Poisson-disk thinning of the 6-expert scarp/geophysics ridge"
+      ]
+    },
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/HEAD/docs/index.html",
+      "sha256": "86955f30ace3d92d3b87c691ac8cdcbbc322dbc8e605ddbccb2bc6fc753c89ef",
+      "bytes": 302,
+      "observations": []
+    },
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE31",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/HEAD/docs/index.html",
+      "sha256": "08a36bf8aee8ca73fa3897a327d7279f27bd5246d4ff661092dae853283e625e",
+      "bytes": 13985,
+      "observations": [
+        "nus dots within 2 pixels of the catalogue. Sparse, separated emissions can reduce redundant false-positive cost under the triangular DTI kernel. Can we beat the reported 0.2778? Unknown. No result here establishes that. New fault-specific information and a significant comparable holdout win are needed; renaming, re-budgeting or copying the same"
+      ]
+    },
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE32",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/HEAD/docs/index.html",
+      "sha256": "80dfe26321a56a2310fe9e2813d2798d5e773251d9c5f73c3b080b50bf59af96",
+      "bytes": 25372,
+      "observations": [
+        "ce-control 0.1571 and off-catalogue SGMC also loses. Format (G5) passes: all cells finite, [0,1], EPSG:32611, nodata=None \u2014 portal-legal but predicted to score below the 0.2778 champion, so do not spend a slot on it. Full audit: evidence/arena41_run_card.json , docs/research/arena41-report.md . Champion status correction: the H33-2-B2 file belo",
+        "udit: evidence/arena41_run_card.json , docs/research/arena41-report.md . Champion status correction: the H33-2-B2 file below was already submitted \u2014 owner-reported score 0.2778 . Do not resubmit it. The Arena41 lane itself has no &#128994; file \u2014 the registry primary further below is a separate parallel lane&#x27;s artifact; judge it by its own",
+        "ry cell finite \u00b7 every value in [0, 1] \u00b7 0 NaN anywhere \u00b7 no nodata tag \u00b7 sha256 04fd8a73eb584dd1&hellip; \u00b7 format receipt (independent re-read) Already-scored fallback: 0.2708 anchor (already-scored base) Identification pack &mdash; the other two queries slot file sha256 what it gives SECONDARY (Tier 2 - previous primary) gemsdoe32-h33-h33-2-b",
+        "lot file sha256 what it gives SECONDARY (Tier 2 - previous primary) gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif c55bafc470054e82&hellip; Previous primary: 0.2708 base minus 2px flank (B=2), 37654 dots, 0 within 200m of catalogue, live-mirror +0.00487 safety 2.08 projected 0.2747 NaN-outside twin of the primary gemsdoe32-h32-winni",
+        "all three holdout instruments. NO ORGANISER SCORE EXISTS for this or any artifact in this repository. &#128300;&nbsp;ROUND 5 (2026-10-25) &mdash; why the champion scored 0.2778, and two new unique files Round-5 verdict: the champion file h33-2-b2-\u2026-e5eb6e7e-zeros.tif is already submitted and scored 0.2778 (ORGANIZER-CONFIRMED, owner-reported) \u2014",
+        "-10-25) &mdash; why the champion scored 0.2778, and two new unique files Round-5 verdict: the champion file h33-2-b2-\u2026-e5eb6e7e-zeros.tif is already submitted and scored 0.2778 (ORGANIZER-CONFIRMED, owner-reported) \u2014 do not resubmit it. The two round-5 files below are unique and format-valid but both measured worse than the champion on the fair",
+        "s one. Why h33-2-b2 got the group's highest score (measured from the bytes) The whole top cluster is one nested family : H19-5 (121,131 dots, 0.1922) &sup; d2.8 (44,090, 0.2600) &sup; solo (40,199, 0.2708) &sup; champion (37,654, 0.2778 ). Every gain came from removing dots. The champion's construction is verified pixel-exactly: the 0.2708 base",
+        "group's highest score (measured from the bytes) The whole top cluster is one nested family : H19-5 (121,131 dots, 0.1922) &sup; d2.8 (44,090, 0.2600) &sup; solo (40,199, 0.2708) &sup; champion (37,654, 0.2778 ). Every gain came from removing dots. The champion's construction is verified pixel-exactly: the 0.2708 base minus its 2,545 dots within"
+      ]
+    },
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE33",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/HEAD/docs/index.html",
+      "sha256": "7177c1368c904ed92d8c2c8f0efbd9abb52bc4ca9d0f7cb1b5881faa3fc39bd9",
+      "bytes": 5702,
+      "observations": [
+        "ailable. No upload was made and no score is predicted. What can be concluded about the cited scores? The values supplied in the project brief\u2014including the claimed H27-4 0.2708 and the 0.3195 target\u2014are not organizer-confirmed by a submission receipt in this checkout. The GEMSDOE28 owner page was previously recorded as calling H27-4 unscored/re"
+      ]
+    },
+    {
+      "repo": "buffedlizard55-lab/GEMSDOE36",
+      "source_class": "OWNER-PUBLISHED; not organizer-confirmed",
+      "path": "docs/index.html",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/HEAD/docs/index.html",
+      "sha256": "5ca9cd7902124d0c704fb91c07ccbf728510db87bbba51f6771796cd3c0d2548",
+      "bytes": 17453,
+      "observations": [
+        "erson-PINN : 38,854 positive dots \u00b7 0 on-catalogue \u00b7 100% cells finite in [0, 1] with nodata=None (fixing the portal range error). Holdout Mirror: 0.269908 (+0.001987 vs 0.2778 base). Projected live score: 0.2798 . Off-catalogue H6 prior : 24,881 dots on the exact organizer grid; beat the incumbent on all 5 spatially-blocked folds (mean 0.43 vs",
+        "hysics-20261004 Submission Note: GEMSDOE36 Anderson PINN | H36-1/3 GDR geotherm conduit + B=2 catalogue-flank prune: 38,854 dots; 0 on-cat; LM holdout 0.2699 (+0.0020 vs 0.2778 base, 1/4 quads); projected 0.2798 Forensic Autopsy Why GEMSDOE32 Reached 0.2778 &amp; The Path to 0.3195 A mathematical and geological examination of the Distance-Weigh",
+        "onduit + B=2 catalogue-flank prune: 38,854 dots; 0 on-cat; LM holdout 0.2699 (+0.0020 vs 0.2778 base, 1/4 quads); projected 0.2798 Forensic Autopsy Why GEMSDOE32 Reached 0.2778 &amp; The Path to 0.3195 A mathematical and geological examination of the Distance-Weighted Tversky Index (DTI) and the Great Basin extensional stress field. DTI Metric ",
+        "h to 0.3195 A mathematical and geological examination of the Distance-Weighted Tversky Index (DTI) and the Great Basin extensional stress field. DTI Metric Mechanics Why 0.2778 Succeeded: Submodular Flank Pruning The competition DTI metric uses asymmetric penalties (&alpha; = 0.2, &beta; = 0.8) with a 300 m triangular support radius: DTI = TP_w",
+        "exclusion buffer ( B = 2 pixels / 200 m ) pruned 2,545 redundant dots from the 40,199 base, eliminating 509 penalty units from the denominator and raising the score from 0.2708 to 0.2778 . Geological Deficiencies Why 0.2778 Plateaued: 26.5% Kinematic Violations An orientation audit of all 37,654 dots in the 0.2778 submission revealed critical k",
+        "buffer ( B = 2 pixels / 200 m ) pruned 2,545 redundant dots from the 40,199 base, eliminating 509 penalty units from the denominator and raising the score from 0.2708 to 0.2778 . Geological Deficiencies Why 0.2778 Plateaued: 26.5% Kinematic Violations An orientation audit of all 37,654 dots in the 0.2778 submission revealed critical kinematic d",
+        "d 2,545 redundant dots from the 40,199 base, eliminating 509 penalty units from the denominator and raising the score from 0.2708 to 0.2778 . Geological Deficiencies Why 0.2778 Plateaued: 26.5% Kinematic Violations An orientation audit of all 37,654 dots in the 0.2778 submission revealed critical kinematic defects: Anderson (1905) Kinematics: I",
+        "tor and raising the score from 0.2708 to 0.2778 . Geological Deficiencies Why 0.2778 Plateaued: 26.5% Kinematic Violations An orientation audit of all 37,654 dots in the 0.2778 submission revealed critical kinematic defects: Anderson (1905) Kinematics: In the Great Basin extensional regime (&sigma; 1 vertical, &sigma; 3 horizontal &sim; 105&deg"
+      ]
+    }
+  ]
+}

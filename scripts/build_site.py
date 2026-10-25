@@ -477,9 +477,9 @@ def s16_panel_html(manifest: dict) -> str:
         if promote else
         "<strong>Do not download this file for the portal.</strong> Published so the negative result is "
         "inspectable byte-for-byte. Submitting it would spend a weekly slot on an idea the holdout rejected. "
-        "The one-click primary under it is unchanged.")
+        "No other file on this site is approved for submission.")
     return f"""<section class="download-panel" id="s16-candidate" aria-labelledby="s16-heading">
-  <div class="eyebrow">Session 16 - 2026-10-25 - newest candidate - auto-validated, no human inspection</div>
+  <div class="eyebrow">Historical Session 16 candidate · failed gates · inspection only</div>
   <h2 id="s16-heading">{esc(banner)}</h2>
   <p><strong>{esc(item.get('hypothesis', 'H40-1'))}</strong></p>
   <p>{verdict_line}</p>
@@ -518,7 +518,7 @@ def s15_panel_html(manifest: dict) -> str:
         "<strong>Do not download this file for the portal.</strong> It is published so the negative "
         "result is inspectable byte-for-byte. It failed the frozen validation gates stated below; "
         "submitting it would spend a weekly slot on an idea the holdout already rejected. "
-        "The one-click primary under it is unchanged.")
+        "No other file on this site is approved for submission.")
     return f"""<section class="download-panel" id="s15-candidate" aria-labelledby="s15-heading">
   <div class="eyebrow">Session 15 · 2026-10-25 · newest candidate · auto-validated, no human inspection</div>
   <h2 id="s15-heading">{esc(banner)}</h2>
@@ -539,86 +539,25 @@ def s15_panel_html(manifest: dict) -> str:
 
 
 def s17_status_section_html(manifest: dict) -> str:
-    """At-a-glance submission status table: which file is OK to download and submit."""
-    primary = manifest["primary"]
-    secondary = manifest.get("secondary", {})
-    p_ff = primary.get("far_field", {})
-    return f"""<section class="section" id="submission-status-at-a-glance">
-  <div class="eyebrow">Submission files — download status at a glance (read before downloading)</div>
-  <h2>Which file is OK to download and submit?</h2>
-  <p><strong>Status key:</strong> <span class="status ok">&#10003; OK TO DOWNLOAD</span> = format-validated (values exactly {{0,1}} inside the footprint, zero NaN inside, CRS/shape/geotransform match the sample template — no &ldquo;Predicted values must be in range [0, 1]&rdquo; error; an all-finite zeros-outside variant is included for strict validators).
-  <span class="status holdout">&#9881; HOLDOUT-REPORTED</span> = local holdout evidence only, not an organizer score.
-  <span class="status unscored">UNSCORED</span> = no organizer receipt exists in any fetched repository.
-  <span class="status noslot">NOT slot-approved</span> = promotion to a real weekly slot is a separate selector step; this site spends no slot.
-  <span class="status danger">&#128308; DO NOT SUBMIT</span> = failed its frozen holdout/uniqueness gates; published inspection-only.</p>
-  <table class="status-table">
-    <thead>
-      <tr><th>File</th><th>Format</th><th>Holdout evidence (HOLDOUT-DTI, not a score)</th><th>Score / slot</th><th>Verdict</th><th>One-click download</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code class="file-name">{esc(primary['nan'])}</code> (<span>{comma(primary.get('emitted_px'))}</span> px)</td>
-        <td><span class="status ok">&#10003; PASS</span> single-band float32, EPSG:32611, 3730&#215;3292, 100 m grid, values exactly {{0,1}} inside footprint</td>
-        <td><span class="status holdout">&#9881;</span> +{fmt_number(primary.get('holdout_mean_gain', 0), 6)} mean &Delta;DTI vs the d=2.8 control ({esc(str(primary.get('holdout_seeds_improved', 'n/a')))} seeds, {esc(str(primary.get('holdout_folds_improved', 'n/a')))} spatial folds); LOSFO far-field F1&#8211;F4 ALL PASS ({fmt_number(p_ff.get('F3_rung30_blind_r1_vs_base_dti', 0.001712582065785942), 6)})</td>
-        <td>UNSCORED &#183; NOT slot-approved</td>
-        <td><span class="status ok">OK to download</span> — strongest replicated validated gain in the repo; the operator decides whether to submit</td>
-        <td><a class="button" href="downloads/{esc(primary['nan'])}" download>Download GeoTIFF</a> <a class="button quiet" href="downloads/{esc(primary.get('zip', ''))}" download>ZIP</a></td>
-      </tr>
-      <tr>
-        <td><code class="file-name">{esc(secondary.get('nan', ''))}</code> (<span>{comma(secondary.get('emitted_px', 'n/a'))}</span> px = H36-1 + {secondary.get('added_px_over_h36_1', 'n/a')} dots)</td>
-        <td><span class="status ok">&#10003; PASS</span> single-band float32, exact template grid, values exactly {{0,1}} inside footprint, 0 dots on catalogue</td>
-        <td><span class="status holdout">&#9881;</span> registered Session 14 gates PASSED: +0.000747 over H36-1 on LOSFO far-field truth (16/20 cells, 4/5 folds, credit/dot 0.06993 &gt; &#964; 0.054852); interleaved +0.000543 (27/40 cells, 8/10 seeds); fresh seed-1 check this session neutral (&minus;5.4&#215;10&#8315;, 95% CI [&minus;6.8&#215;10&#8315;, &minus;4.1&#215;10&#8315;]) — margin small, disclosed</td>
-        <td>UNSCORED &#183; NOT slot-approved</td>
-        <td><span class="status ok">OK to download</span> — this session's regenerated unique submission (content ID {esc(secondary.get('content_id', ''))}); run card: <code>docs/data/run_card_gems28-h38-1-hf-euler-r30-r1_2026-10-25.json</code></td>
-        <td><a class="button" href="downloads/{esc(secondary.get('nan', ''))}" download>Download GeoTIFF</a> <a class="button quiet" href="downloads/{esc(secondary.get('zip', ''))}" download>ZIP</a></td>
-      </tr>
-      <tr>
-        <td><code class="file-name">gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif</code></td>
-        <td><span class="status ok">&#10003; PASS</span> (format only)</td>
-        <td>&#128308; HOLDOUT GATE FAILED (pooled &Delta;DTI &minus;0.0016, 9/20 cells)</td>
-        <td>&#8212;</td>
-        <td><span class="status danger">&#128308; DO NOT SUBMIT</span> — inspection only, no slot spent</td>
-        <td><a class="button" href="downloads/gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif" download>Download GeoTIFF</a></td>
-      </tr>
-      <tr>
-        <td><code class="file-name">gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif</code></td>
-        <td><span class="status ok">&#10003; PASS</span> (format only)</td>
-        <td>&#128308; HOLDOUT GATE FAILED (G2 spread) + uniqueness fail vs dense probe (91.3% within 3 px)</td>
-        <td>&#8212;</td>
-        <td><span class="status danger">&#128308; DO NOT SUBMIT</span> — inspection only, no slot spent</td>
-        <td><a class="button" href="downloads/gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif" download>Download GeoTIFF</a></td>
-      </tr>
-    </tbody>
-  </table>
-  <p class="small"><strong>How to submit in 30 seconds:</strong> (1) download the single-band GeoTIFF above (or its ZIP), (2) open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData GEMS competition submission page</a> yourself — this site never logs in or uploads on your behalf, (3) upload the file, (4) paste the exact short note printed on the <a href="executive-summary.html">executive summary</a> (&le; 200 characters), (5) submit and keep the organizer receipt. Full instructions: <a href="executive-summary.html">Executive summary &#8594;</a> · PhD analysis and ranked hypotheses: <a href="../knowledge/51_session17_unique_submission.md">&#8594;</a></p>
+    """Show the blocked state without presenting old files as submission choices."""
+    return """<section class="section callout-danger" id="submission-status-at-a-glance" aria-labelledby="submission-status-heading">
+  <div class="eyebrow">Current automated submission gate</div>
+  <h2 id="submission-status-heading">No file is approved for download and submission</h2>
+  <p>The current run has no assigned method lane and no local competition feature/cache data. No experiment was run and no new TIFF was generated. Historical GeoTIFFs elsewhere on this site are for inspection and education only; their download links do not authorize submission. Do not upload any repository artifact.</p>
+  <p>Required before any future file can be offered as submission-ready: preregister a lane, run the shared hide-and-recover evaluator and feature-alone leakage canaries, pass all registry uniqueness comparisons and exact-byte GeoTIFF validation, then pass the separate selector step. <a href="data/current_run_card_2026-10-25.json">Read the current negative run card</a>.</p>
 </section>
 """
 
 
 def s17_one_click_html(manifest: dict) -> str:
-    """Prominent one-click download block for this session's regenerated unique submission."""
-    secondary = manifest.get("secondary", {})
-    note = str(secondary.get("note", ""))
-    return f"""<section class="download-panel" id="submit-one-click" aria-labelledby="submit-heading">
-  <div class="eyebrow">One-click submission file — download it yourself, then upload on DrivenData</div>
-  <h2 id="submit-heading">GEMSDOE28-h38-1-hf-euler-r30-r1-{esc(secondary.get('content_id', ''))} — unique submission generated this session (2026-10-25)</h2>
-  <p><span class="status ok">&#10003; FORMAT-VALIDATED</span> &#183; <span class="status holdout">&#9881; HOLDOUT-REPORTED (not a score)</span> &#183; <span class="status unscored">UNSCORED &#8212; no organizer receipt exists</span> &#183; <span class="status noslot">NOT slot-approved</span></p>
-  <p>Is it OK to download and submit this file? <strong>Yes, to download.</strong> It passes every local format gate: values inside the footprint are exactly 0.0/1.0 (no &ldquo;Predicted values must be in range [0, 1]&rdquo; error), zero NaN inside the footprint, CRS EPSG:32611 &#183; 3730 &#215; 3292 &#183; 100 m grid matching the sample submission, single-band float32, 0 dots on the catalogue; an all-finite zeros-outside variant is included for strict validators. <strong>Whether to submit is your decision:</strong> the file is UNSCORED (no organizer receipt exists in any fetched repository) and not slot-approved &#8212; promotion to a real weekly slot is a separate selector step.</p>
-  <p><strong>Holdout evidence (local proxy, not a score):</strong> registered Session 14 gates passed &#8212; +0.000747 over H36-1 on LOSFO far-field truth (16/20 cells, 4/5 folds, credit/dot 0.06993 &gt; &#964; 0.054852); interleaved 4-fold spatial CV +0.000543 over H36-1 (27/40 cells, 8/10 seeds). A fresh seed-1 check run this session was neutral (&minus;5.4&#215;10&#8315;, 95% CI [&minus;6.8&#215;10&#8315;, &minus;4.1&#215;10&#8315;]); the margin is small and disclosed in the run card.</p>
-  <div class="download-actions"><a class="button" href="downloads/{esc(secondary.get('nan', ''))}" download>Download single-band GeoTIFF</a><a class="button quiet" href="downloads/{esc(secondary.get('zip', ''))}" download>Download ZIP</a><a class="button secondary" href="downloads/{esc(secondary.get('allfinite', ''))}" download>All-finite fallback (zeros outside)</a></div>
-  <p class="meta"><strong>GitHub Pages fallback:</strong> if the button above returns a stale page or an error, the direct repository route downloads the identical bytes: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/{esc(secondary.get('nan', ''))}" download>raw mirror</a> (SHA-256 below).</p>
-  <p><strong>Exact filename:</strong> <code class="file-name">{esc(secondary.get('nan', ''))}</code></p>
-  <p class="meta">SHA-256 <code>{esc(secondary.get('sha256_nan', ''))}</code> &#183; {esc(secondary.get('bytes_nan', ''))} bytes &#183; {comma(secondary.get('emitted_px'))} positive cells &#183; single-band float32 &#183; EPSG:32611 &#183; 100 m grid.</p>
-  <p><strong>Unique submission name (paste into the portal):</strong> <code>{esc(secondary.get('submission_name', 'not registered'))}</code></p>
-  <p><strong>Exact short note ({len(note)} / 200 characters for the portal; {len(s17_run_card_note(secondary))} / 140 in the run card):</strong></p>
-  <div class="note-box"><code id="note-h38-1">{esc(note)}</code><button class="copy-note" type="button" data-copy-note="{esc(note)}" aria-label="Copy the exact submission note">Copy note</button></div>
-  <p class="small"><strong>Never copy a previous submission.</strong> This file is unique (content ID {esc(secondary.get('content_id', ''))}; it does not appear on any listed GEMSDOE site). Read the run card (<code>docs/data/run_card_gems28-h38-1-hf-euler-r30-r1_2026-10-25.json</code>) and the PhD analysis (<code>../knowledge/51_session17_unique_submission.md</code>) before deciding. Keep the organizer receipt after you submit.</p>
+    """Fail closed: do not expose a historical raster as the current one-click candidate."""
+    return """<section class="download-panel callout-danger" id="submit-one-click" aria-labelledby="submit-heading">
+  <div class="eyebrow">Submission download status</div>
+  <h2 id="submit-heading">NO APPROVED TIFF — DO NOT SUBMIT</h2>
+  <p>No new submission TIFF was generated in this run. No method lane was assigned and the required shared template/cache is absent. Historical TIFFs are not substitutes, regardless of prior holdout or format checks.</p>
+  <p><a href="data/current_run_card_2026-10-25.json">Current negative run card</a> · <a href="../evidence/review_2026-10-25_session18.md">Current three-pass review</a>.</p>
 </section>
 """
-
-
-def s17_run_card_note(secondary: dict) -> str:
-    return "28GEMSDOE H38-1 hf+euler r3.0 | H36-1 + 200 heat-flow/Euler dots | UNSCORED, not slot-approved | id " + str(secondary.get("content_id", ""))
 
 
 def render_index(manifest: dict, board: dict, euler: dict, range_audit: dict, restore: dict,
@@ -761,7 +700,7 @@ def render_executive(manifest: dict, board: dict, file_audit: dict, range_audit:
         adj_sentence = ""
     check_count = file_audit.get("check_count", "not recorded")
     return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Executive summary</div>
-<section class="card callout-danger" aria-label="Submission decision"><h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2><p>The newest H40-1 candidate failed its frozen holdout spread and uniqueness gates. Older downloads below are historical inspection artifacts only. Do not upload any file from this site unless a future run card passes the holdout, uniqueness, and exact-file validators and a separate selector approves it. This page explains the manual competition process; it does not recommend a current file or spend a weekly slot.</p></section>
+<section class="card callout-danger" aria-label="Submission decision"><h2>Current run: BLOCKED — NO FILE APPROVED</h2><p>No method lane was assigned and required competition rasters/cache are absent, so no experiment or new TIFF was generated. All downloads below are historical inspection artifacts only. <strong>Do not upload any file from this site.</strong> A future file can be called submission-ready only after the preregistered holdout, leakage, uniqueness, exact-file and separate selector gates pass.</p></section>
 <section class="hero"><div class="hero-content">
   <div class="eyebrow">Submission executive summary · manual operator checklist</div>
   <h1>Research file,<br>not a score claim.</h1>
@@ -1227,12 +1166,20 @@ def main() -> int:
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    # Keep both historical public current-card routes consistent with the actual
+    # current review. S18's missing-input observations remain in its own source.
+    current_card = read_json("evidence/current_run_card.json")
+    current_card_path = DOCS / "data" / "current_run_card_2026-10-25.json"
+    current_card_path.parent.mkdir(parents=True, exist_ok=True)
+    current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
-                      "primary_download": None, "historical_primary": manifest["primary"]["nan"],
-                      "submission_ready": False}, indent=2))
+                      "historical_primary": manifest["primary"]["nan"],
+                      "submission_ready": False, "slot_selected": False,
+                      "inspection_artifacts": [manifest["primary"]["nan"],
+                                               manifest.get("secondary", {}).get("nan")]}, indent=2))
     return 0
 
 

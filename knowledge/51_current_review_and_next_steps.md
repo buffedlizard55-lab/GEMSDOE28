@@ -155,7 +155,7 @@ This section is finalized after implementation, review and full-suite re-check; 
 
 ### Final local verification notes
 
-- Installed the existing vector-test dependencies (`geopandas`, `pyogrio`) and included them in `requirements.txt`, so their regression modules are no longer silently skipped. The final local suite passed **443 tests, no skips**. This is software verification, not 441 geological experiments.
+- Installed the existing vector-test dependencies (`geopandas`, `pyogrio`) and included them in `requirements.txt`, so their regression modules are no longer silently skipped. The final local suite passed **451 tests, no skips** after both concurrent safety merges. These are software checks, not geological experiments.
 - Full-repository Ruff passes. Three inherited unused-variable warnings in two legacy runners were removed without changing their numerical operations; those runners were not re-executed as science.
 - Fixed an inherited test side effect: the archived-download regression now writes its fresh audit to a temporary report rather than rewriting tracked historical `submission_file_audit.json`. The original historical evidence was preserved.
 - Edge-case regressions exercise missing/unlisted/tampered shared assets, stale bytecode, path/symlink escapes, expired/future/missing budget clocks, incomplete registry/baseline metadata, malformed text and inverted leakage, missing pre-placement/final-dot evidence, complex/NaN/wrong-shape rasters, nodata sentinels, failed atomic TIFF/ZIP publication and ZIP hardlinks to the source.
@@ -178,4 +178,14 @@ This is a comparison-only duplicate stop, not an additional geological experimen
 
 The direct Pages configuration change was also attempted, not assumed: the Arena integration returned **HTTP 403** for Pages-write authorization, while authenticated repository access continued to work. The deployment workflow will try the same setting using its explicitly scoped built-in `pages: write` token, report any failure and still execute the real deployment. Configuration success and live deployment success must be verified separately from GitHub results.
 
-Final data-free tracked export: **438 passed, five data-dependent skips**; the same checks all pass locally with restored data. Link smoke found and repaired one legacy `index.html#download` anchor and duplicate IDs in combined archived panels; regression tests now check fragments, IDs and associated labels. Eight pages and the archived TIFF/ZIP transport bytes were verified over the live local preview. This does not count as a browser visual test or portal acceptance.
+Final data-free tracked export: **446 passed, five data-dependent skips**; the same checks all pass locally with restored data. Link smoke found and repaired one legacy `index.html#download` anchor and duplicate IDs in combined archived panels; regression tests now check fragments, IDs and associated labels. Eight pages and the archived TIFF/ZIP transport bytes were verified over the live local preview. This does not count as a browser visual test or portal acceptance.
+
+### Subsequent safety PRs #37/#38 integrated
+
+Before release, `main` advanced again to `f747c884369667ffc0daf3b780141918c57bce0b`. Both safety reviews and their evidence are retained, including the S18 negative card and its checkout-specific missing-input observations. Those old observations do not override this run's verified input/cache restoration. Both public current-card routes now mirror the actual G28-A51 negative card, not S18's earlier absent-data state. No TIFF bytes changed.
+
+The concurrent `evidence_schema_passed` and `promotion_eligible` API names now agree; even a complete synthetic schema returns `submission_ready: false` and `slot_selected: false`. Original and incoming positive/negative schema tests are preserved. The build result lists inspection artifacts and never advertises an old `primary_download`. Generated archive changes retain, rather than undo, the withdrawn Session 17 recommendations.
+
+Post-integration verification: **451 passed, zero skips** locally; a fresh tracked export passed **446 tests with the same five data-dependent skips**. Ruff, compileall, stdlib build, all eight HTTP/link/ID/ARIA pages and 21 evidence bindings pass. Root and legacy deployment copies match every source file byte-for-byte. The Pages workflow additionally checks the published root/executive/legacy URLs and SHA-bound current-card bytes after deployment on GitHub's runner; adding that check is not a claim it already ran.
+
+Release is tracked in [PR #39](https://github.com/buffedlizard55-lab/GEMSDOE28/pull/39). This document records pre-merge verification. Read the PR's checks/merge state and closeout comment for observed remote outcomes. The unique-new-TIFF and strict held-out superiority objectives remain **unfulfilled**; the verdict is **negative**, with zero geological experiments and no slot used.

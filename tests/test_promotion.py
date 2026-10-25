@@ -141,3 +141,23 @@ def test_required_text_cannot_be_replaced_by_truthy_containers(field, value):
     card = complete_card()
     card[field] = value
     assert not promotion_gate(card)["promotion_eligible"]
+
+
+def test_schema_success_always_withholds_upload_authorization():
+    # This checker has no raster/template path and cannot verify bytes or select a slot.
+    card = complete_card()
+    for status in (None, True, False, "approved"):
+        card["submission_ready"] = status
+        card["selector_approved"] = status
+        result = promotion_gate(card)
+        assert result["evidence_schema_passed"] is True
+        assert result["submission_ready"] is False
+        assert result["slot_selected"] is False
+
+
+@pytest.mark.parametrize("card", [complete_card(), {}, []])
+def test_concurrent_schema_api_names_are_consistent_without_granting_a_slot(card):
+    result = promotion_gate(card)
+    assert result['evidence_schema_passed'] is result['promotion_eligible']
+    assert result['submission_ready'] is False
+    assert result['slot_selected'] is False

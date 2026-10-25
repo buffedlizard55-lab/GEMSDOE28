@@ -23,6 +23,7 @@ def promotion_gate(card: dict) -> dict:
 
     def result():
         return {"verdict": "negative" if failures else "promote", "promotion_eligible": not failures,
+                "evidence_schema_passed": not failures,
                 "submission_ready": False, "failures": failures, "slot_selected": False,
                 "scope": "Evidence schema eligibility only; no independent evidence authentication, slot selection, cap check or organizer acceptance."}
 
