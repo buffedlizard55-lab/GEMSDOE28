@@ -1,0 +1,2 @@
+GEMSDOE28-h41-1-thermal-spring-r30-73e2b0bd94a8
+28GEMSDOE H41-1 thermal-spring r3.0 | H36-1 base 37,660px + 364 GDR hot-spring dots (>40C, >=3px from cat & base, min_dist=3.0px) | UNSCORED holdout-pending | id 73e2b0bd94a8
