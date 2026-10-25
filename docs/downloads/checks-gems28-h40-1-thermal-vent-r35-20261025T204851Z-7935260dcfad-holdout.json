@@ -1,0 +1,115 @@
+{
+  "evaluated_utc": "2026-10-25T20:49:24.578726+00:00",
+  "submission_file": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif",
+  "submission_cid": "7935260dcfad",
+  "base_file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+  "method": "4-quadrant component-hiding holdout (src/gems27/holdout.py)",
+  "note": "HOLDOUT-DTI (catalogue-internal proxy), NOT an organizer score",
+  "folds": [
+    {
+      "fold": 0,
+      "fold_name": "NW",
+      "arm": "base_H36_1",
+      "dti": 0.011750013212445188,
+      "tpw": 110.94544478962848,
+      "fpw": 37603.82903797609,
+      "fnw": 2263.0545552103713,
+      "n_truth": 2374,
+      "n_emitted": 37660
+    },
+    {
+      "fold": 0,
+      "fold_name": "NW",
+      "arm": "cand_H40_1",
+      "dti": 0.011745783704982745,
+      "tpw": 110.94544478962848,
+      "fpw": 37620.82903797609,
+      "fnw": 2263.0545552103713,
+      "n_truth": 2374,
+      "n_emitted": 37677
+    },
+    {
+      "fold": 1,
+      "fold_name": "NE_LidarGapHeavy",
+      "arm": "base_H36_1",
+      "dti": 0.01727913353775803,
+      "tpw": 164.67462273386874,
+      "fpw": 37578.62177250984,
+      "fnw": 2312.3253772661315,
+      "n_truth": 2477,
+      "n_emitted": 37660
+    },
+    {
+      "fold": 1,
+      "fold_name": "NE_LidarGapHeavy",
+      "arm": "cand_H40_1",
+      "dti": 0.01727297126026225,
+      "tpw": 164.67462273386874,
+      "fpw": 37595.62177250984,
+      "fnw": 2312.3253772661315,
+      "n_truth": 2477,
+      "n_emitted": 37677
+    },
+    {
+      "fold": 2,
+      "fold_name": "SW",
+      "arm": "base_H36_1",
+      "dti": 0.010721537733469696,
+      "tpw": 115.2885905401361,
+      "fpw": 37597.662578341464,
+      "fnw": 3897.7114094598637,
+      "n_truth": 4013,
+      "n_emitted": 37660
+    },
+    {
+      "fold": 2,
+      "fold_name": "SW",
+      "arm": "cand_H40_1",
+      "dti": 0.01071814875003741,
+      "tpw": 115.2885905401361,
+      "fpw": 37614.662578341464,
+      "fnw": 3897.7114094598637,
+      "n_truth": 4013,
+      "n_emitted": 37677
+    },
+    {
+      "fold": 3,
+      "fold_name": "SE",
+      "arm": "base_H36_1",
+      "dti": 0.014534965422525768,
+      "tpw": 146.8921180807874,
+      "fpw": 37591.71246515605,
+      "fnw": 3051.1078819192126,
+      "n_truth": 3198,
+      "n_emitted": 37660
+    },
+    {
+      "fold": 3,
+      "fold_name": "SE",
+      "arm": "cand_H40_1",
+      "dti": 0.014530077071945797,
+      "tpw": 146.8921180807874,
+      "fpw": 37608.71246515605,
+      "fnw": 3051.1078819192126,
+      "n_truth": 3198,
+      "n_emitted": 37677
+    }
+  ],
+  "paired_deltas_per_fold": [
+    -4.2295074624432855e-06,
+    -6.162277495780355e-06,
+    -3.388983432286996e-06,
+    -4.888350579971071e-06
+  ],
+  "mean_paired_delta_dti": -4.667279742620427e-06,
+  "ci95_approx": [
+    -5.814281252223866e-06,
+    -3.520278233016987e-06
+  ],
+  "pooled_base_dti": 0.013501887556178429,
+  "pooled_cand_dti": 0.013497279070968225,
+  "pooled_delta_dti": -4.608485210203309e-06,
+  "n_withheld_positives": 12062,
+  "positive_folds": 0,
+  "total_folds": 4
+}

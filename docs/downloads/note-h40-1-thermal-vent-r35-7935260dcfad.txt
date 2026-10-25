@@ -1,0 +1,2 @@
+GEMSDOE28-h40-1-thermal-vent-r35-7935260dcfad
+28GEMSDOE H40-1 thermal-vent r3.5 | H36-1 base 37,660px + 17 GDR volcanic-vent dots (>=3px from cat & base, min_dist=3.5px) | UNSCORED holdout-pending | id 7935260dcfad
