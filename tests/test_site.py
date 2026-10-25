@@ -302,3 +302,14 @@ def test_downloads_have_unique_names_and_zip_single_member():
     for z in (DOCS / "downloads").glob("*.zip"):
         with zipfile.ZipFile(z) as zf:
             assert len(zf.namelist()) == 1 and zf.namelist()[0].endswith(".tif")
+
+
+def test_current_run_notice_is_above_historical_body():
+    for page in PAGES:
+        text = (DOCS / page).read_text()
+        assert 'Current run: NOT READY TO SUBMIT' in text
+        assert 'data/run_card_2026-10-25.json' in text
+    card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
+    assert card['verdict'] == 'negative'
+    assert card['submission_ready'] is False
+    assert card['raster_sha256'] is None

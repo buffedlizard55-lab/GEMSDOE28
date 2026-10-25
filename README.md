@@ -1,3 +1,24 @@
+# Current session safety notice — 2026-10-25 (read first)
+
+**NOT READY TO SUBMIT: no new unique TIFF was generated this session.**
+Read [the current audit and ranked hypotheses](knowledge/47_parallel_run_audit_2026-10-25.md)
+before the historical standing prompt below. The current request overrides stale leaderboard and
+submission-readiness claims. It requires a unique scientific raster, buffered whole-segment
+hide-and-recover evaluation, visible-only catalogue features, feature-alone leakage canaries,
+pooled DTI with confidence intervals, complete surface and final-dot registry comparisons,
+and exact finite/range/grid checks. Promotion is separate from weekly slot selection.
+
+**Blocking irregularities:** the method paragraph assigning this session's lane and the shared
+template location were not supplied; training/cache files are absent in this checkout; current
+organizer receipts are unavailable. Stop after the specified experiment/time budget. Negative
+results are deliverables. Do not copy an old submission or claim a simulation is a score.
+
+This is an operational summary of the 2026-10-25 request, **not a verbatim copy** of the full prompt.
+Historical verbatim prompts below remain historical. Core values remain Maximize P(Win) and Own
+the Outcome: fail closed rather than spending a slot on unverified evidence.
+
+---
+
 # GEMSDOE28 — Fault Mapping for the Great Basin (`DrivenData #306`)
 
 ## Standing Prompt & Arena AI Core Values (Read First Every Session)

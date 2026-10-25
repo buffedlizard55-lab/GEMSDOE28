@@ -79,3 +79,20 @@ def test_content_id_ignores_catalogue_pixels():
     b = a.copy()
     b[2, 2] = 1.0
     assert submission.scored_content_id(a, foot, cat) == submission.scored_content_id(b, foot, cat)
+
+
+def test_template_with_shifted_grid_is_rejected(tiny_template, tmp_path):
+    tpl, foot = tiny_template
+    with rasterio.open(tpl, 'r+') as dst:
+        dst.transform = Affine(100, 0, 243450, 0, -100, 4508550)
+    with pytest.raises(ValueError, match='geotransform'):
+        submission.write_geotiff(np.zeros(foot.shape), tpl, tmp_path / 'wrong-grid.tif')
+
+
+def test_verifier_rejects_invalid_template(tiny_template, tmp_path):
+    tpl, foot = tiny_template
+    output = submission.write_geotiff(np.zeros(foot.shape), tpl, tmp_path / 'valid.tif')
+    with rasterio.open(tpl, 'r+') as dst:
+        dst.crs = 'EPSG:4326'
+    with pytest.raises(ValueError, match='CRS/shape'):
+        submission.verify_geotiff(output, tpl)

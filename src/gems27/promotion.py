@@ -1,0 +1,73 @@
+"""Fail-closed evidence gate. Format validity alone never authorizes submission.
+
+This checks evidence structure, not scientific truth or provenance authenticity.
+Callers must retain independently produced, hash-bound evaluator outputs.
+"""
+from __future__ import annotations
+
+import math
+import re
+
+
+def finite_number(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def promotion_gate(card: dict) -> dict:
+    failures = []
+
+    def require(ok, reason):
+        if not ok:
+            failures.append(reason)
+
+    require(bool(card.get("lane")), "missing assigned method lane")
+    require(bool(re.fullmatch(r"[0-9a-f]{64}", str(card.get("raster_sha256", "")))), "missing raster SHA-256")
+    require(bool(card.get("submission_name")), "missing submission name")
+    note = card.get("note")
+    require(isinstance(note, str) and 0 < len(note) <= 140, "note must contain 1–140 characters")
+    require(bool(card.get("hypothesis")) and bool(card.get("mechanism")) and bool(card.get("non_fault_mimic")),
+            "missing scientific hypothesis, mechanism, or named confounder")
+    h = card.get("holdout") or {}
+    require(h.get("raster_sha256") == card.get("raster_sha256") and bool(h.get("raster_sha256")),
+            "holdout raster hash mismatch")
+    require(bool(re.fullmatch(r"[0-9a-f]{64}", str(h.get("baseline_sha256", "")))),
+            "missing frozen baseline hash")
+    require(h.get("label") == "HOLDOUT-DTI" and bool(h.get("evaluator_version")), "missing versioned HOLDOUT-DTI")
+    require(isinstance(h.get("withheld_positives"), int) and not isinstance(h.get("withheld_positives"), bool)
+            and h["withheld_positives"] > 0, "missing withheld positives")
+    ci = h.get("ci95")
+    score = h.get("dti")
+    require(finite_number(score) and 0 <= score <= 1, "invalid holdout DTI")
+    require(isinstance(ci, list) and len(ci) == 2 and all(finite_number(x) for x in ci)
+            and finite_number(score) and 0 <= ci[0] <= score <= ci[1] <= 1, "invalid holdout CI")
+    gain = h.get("paired_gain_ci95")
+    require(isinstance(gain, list) and len(gain) == 2 and all(finite_number(x) for x in gain)
+            and 0 < gain[0] <= gain[1] <= 1, "no positive paired gain CI over frozen current best")
+    for key in ("whole_segments", "buffered", "visible_only_features", "pixel_exact_visible_mask", "pooled"):
+        require(h.get(key) is True, f"holdout protocol missing: {key}")
+    require(h.get("alpha") == 0.2 and h.get("beta") == 0.8 and h.get("kernel_m") == 300
+            and h.get("kernel") == "triangular", "wrong metric protocol")
+    features = card.get("feature_canaries")
+    require(isinstance(features, dict) and bool(features), "no feature-alone canaries")
+    if isinstance(features, dict):
+        for name, auc in features.items():
+            require(finite_number(auc) and 0 <= auc <= 0.90, f"invalid or leaking feature: {name}")
+    registry = card.get("registry") or {}
+    require(registry.get("complete") is True and bool(re.fullmatch(r"[0-9a-f]{64}", str(registry.get("manifest_sha256", "")))), "registry incomplete")
+    for stage in ("surface", "dots"):
+        comparisons = registry.get(stage)
+        require(isinstance(comparisons, list) and bool(comparisons), f"no {stage} registry comparisons")
+        if isinstance(comparisons, list):
+            for comparison in comparisons:
+                require(bool(re.fullmatch(r"[0-9a-f]{64}", str(comparison.get("raster_sha256", "")))),
+                        f"{stage} registry comparison missing raster identity")
+                corr, overlap = comparison.get("spearman"), comparison.get("within_3px_fraction")
+                require(finite_number(corr) and -1 <= corr <= 0.90, f"{stage} duplicate or undefined correlation")
+                require(finite_number(overlap) and 0 <= overlap <= 0.70, f"{stage} duplicate or undefined overlap")
+    validator = card.get("validator") or {}
+    require(validator.get("raster_sha256") == card.get("raster_sha256"), "validator hash mismatch")
+    for key in ("no_nan_inside", "range_0_1", "crs_match", "shape_match", "transform_match", "single_band"):
+        require(validator.get(key) is True, f"validator failed or absent: {key}")
+    return {"verdict": "negative" if failures else "promote", "submission_ready": not failures,
+            "failures": failures, "slot_selected": False,
+            "scope": "Evidence schema gate only; promotion is not slot selection or organizer acceptance."}

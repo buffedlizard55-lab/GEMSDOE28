@@ -301,7 +301,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{body}</main>
+<main><section class="card" aria-label="Current submission readiness"><h2>Current run: NOT READY TO SUBMIT</h2><p>2026-10-25: No new unique TIFF was generated. The assigned method lane and shared template location are missing; holdout and registry gates remain unmeasured. Historical downloads below are not promoted by this run.</p><p><a href="data/run_card_2026-10-25.json">Download current machine-readable run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/47_parallel_run_audit_2026-10-25.md">Audit, ranked hypotheses, limitations and next steps</a></p><p>Format validation is not performance validation. Promotion is not weekly slot selection. No human-inspector sign-off is substituted for automated evidence.</p></section>{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
