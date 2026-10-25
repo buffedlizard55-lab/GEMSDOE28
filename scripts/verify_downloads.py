@@ -183,6 +183,30 @@ def main() -> int:
             check(path.is_file() and path.read_text(encoding="utf-8").strip() == note,
                   f"{slot}_note_file_matches", str(note_file))
 
+    # Current allfinite-only artifact: independent re-read, not a reported format flag.
+    current = manifest.get("s18_candidate")
+    if isinstance(current, dict):
+        filename = str(current.get("filename", ""))
+        safe_name = bool(filename and Path(filename).name == filename and filename.endswith(".tif"))
+        check(safe_name, "s18_safe_filename", filename)
+        path = downloads_dir / filename if safe_name else downloads_dir / "__invalid__"
+        check(path.is_file(), "s18_file_exists", filename)
+        if path.is_file():
+            check(sha256_file(path) == current.get("sha256"), "s18_exact_sha256", sha256_file(path))
+            with rasterio.open(path) as src:
+                arr = src.read(1)
+                check((src.crs, src.shape, src.transform) == template_signature,
+                      "s18_exact_grid", "CRS/shape/transform match template")
+                check(src.count == 1 and src.dtypes[0] == "float32", "s18_single_band_float32", str(src.dtypes))
+            check(np.isfinite(arr).all() and ((arr >= 0) & (arr <= 1)).all(),
+                  "s18_strict_whole_array_0_1", "No NaN/infinity or out-of-range value anywhere")
+            check((arr[~footprint] == 0).all(), "s18_zero_outside_footprint", "zeros outside footprint")
+            check(not ((arr > 0) & catalogue & footprint).any(), "s18_no_catalogue_predictions", "no catalogue dots")
+        note = current.get("note")
+        check(isinstance(note, str) and 0 < len(note) <= 140, "s18_note_140", str(note))
+        check(current.get("submission_ready") is False and current.get("verdict") == "negative",
+              "s18_rejected_not_approved", str(current.get("status")))
+
     names = [path.name for path in downloads_dir.glob("*.tif")]
     check(len(names) == len(set(names)), "all_tif_names_unique", f"{len(names)} unique GeoTIFF(s)")
     check(all(re.search(r"-[0-9a-f]{12}-(nan|allfinite)\.tif$", name) for name in names),

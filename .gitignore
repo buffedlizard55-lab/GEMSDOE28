@@ -7,7 +7,7 @@ venv/
 data_cache/
 data/*
 !data/manifest.json
-# Small generated Pages compatibility alias, never training data or model arrays.
+# Small generated Pages route alias only; large training data/cache remain ignored.
 !data/current_run_card_2026-10-25.json
 *.egg-info/
 .DS_Store

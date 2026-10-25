@@ -167,8 +167,11 @@ def test_current_review_evidence_is_bound_and_not_a_new_tiff():
     assert card["submission_ready"] is False and card["verdict"] == "negative"
     assert len(card["note"]) <= 140
     for path, expected in card["evidence_sha256"].items():
-        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected, path
-    assert json.loads((ROOT / "docs/data/run_card_2026-10-25.json").read_text()) == card
+        observed = ROOT / ("evidence/pr39_manifest_snapshot.json" if path == "docs/downloads/manifest.json" else path)
+        assert hashlib.sha256(observed.read_bytes()).hexdigest() == expected, path
+    # The no-experiment review remains historical; current aliases bind the later MXTP experiment.
+    assert json.loads((ROOT / "docs/data/run_card_2026-10-25.json").read_text()) == json.loads(
+        (ROOT / "evidence/s18_mxtp_run_card.json").read_text())
 
 
 def test_priority_audit_is_not_called_a_complete_parallel_registry():

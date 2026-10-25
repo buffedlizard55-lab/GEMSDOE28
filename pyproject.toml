@@ -22,3 +22,7 @@ ignore = ["E741", "E501", "B905"]
 # SHA-256, so it must stay byte-identical to the version that produced the result; the B007 here is a
 # deliberately unused loop label, and editing the file to silence it would invalidate the provenance.
 "scripts/run_h35_1_thermal_farfield.py" = ["B007"]
+
+# S18 executed evidence hashes bind these runners; preserve source bytes after the frozen run.
+"scripts/evaluate_s18_holdout.py" = ["I001"]
+"scripts/run_s18_extrapolated_trace.py" = ["I001"]

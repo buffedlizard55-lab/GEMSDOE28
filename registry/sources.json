@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-03 | Session 6: owner-mirror restoration, range-validator forensics, H31-1 feature audit, and one-off manual public leaderboard snapshot.",
-  "note": "Verification status is stated per row. DrivenData is accessed manually only; there is no scraper, API poll, scheduled fetch, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer 'hash-pinned, raw bytes NOT downloaded': the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json). | 2026-10-03 Session 14: official DrivenData problem, ScienceBase heat-flow/conductance, GDR #1391, and USGS 3DEP pages were rechecked. These checks establish that the pages/resources are listed, not that the contest owner mirrors are organizer-authenticated or that new layers are locally clipped/schema-audited.",
+  "note": "Verification status is stated per row. DrivenData is accessed manually only; there is no scraper, API poll, scheduled fetch, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer 'hash-pinned, raw bytes NOT downloaded': the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json). | 2026-10-03 Session 14: official DrivenData problem, ScienceBase heat-flow/conductance, GDR #1391, and USGS 3DEP pages were rechecked. These checks establish that the pages/resources are listed, not that the contest owner mirrors are organizer-authenticated or that new layers are locally clipped/schema-audited. | S18 2026-10-25: one-off research-tool official page/PDF review in evidence/s18_official_source_review.json. Static feed still never contacts DrivenData. No organizer receipt or login obtained.",
   "sources": [
     {
       "id": "dd-problem",
@@ -9,9 +9,9 @@
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
       "category": "competition",
       "used_for": "Metric (kernel, TPw/FPw/FNw, alpha 0.2 / beta 0.8), submission format, rounds and prizes, training layers",
-      "status": "Problem page re-fetched 2026-10-03; official content confirms public faults are incomplete, experts labelled additional faults for initial private scoring, and final scoring uses an expanded expert-reviewed label set.",
-      "accessed": "2026-10-03",
-      "evidence": "The problem page states public fault labels are incomplete; experts manually identified faults absent from the public USGS database for the initial private test, and submissions are reviewed to update labels for final-round rescoring. It describes DTI and the 300 m distance-weighted tolerance. This source motivates ADD candidates but does not authenticate local labels or any repository score.",
+      "status": "Rechecked S18 via one-off source retrieval; not a submission receipt",
+      "accessed": "2026-10-25",
+      "evidence": "Fault location is the target, not confirmed geothermal vents. DTI uses alpha=0.2, beta=0.8, triangular 300 m kernel. GeoTIFF: one float32 band, EPSG:32611, 100 m grid, matching bounds, confidence [0,1]; text says null/NaN outside bounds. Both chunks read via fetch_page. Not an authenticated download, portal test, or private scorer audit. Zeros outside the irregular footprint are a compatibility variant, not a guarantee of official acceptance.",
       "feed": false
     },
     {
@@ -21,8 +21,8 @@
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/",
       "category": "competition",
       "used_for": "Sponsor (DOE Geothermal), GeoDAWN data origin, cited literature",
-      "status": "read-in-full (agent, one-off)",
-      "accessed": "2026-10-02",
+      "status": "Full one-chunk public description rechecked via research tool; no receipt",
+      "accessed": "2026-10-25",
       "evidence": "Cites Matteo et al. 2021 (doi 10.1029/2020JB021269) and Hermant et al. 2025 (Stanford Geothermal Workshop).",
       "feed": false
     },
@@ -45,9 +45,9 @@
       "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
       "category": "competition",
       "used_for": "Single GeoTIFF at 100 m, 3 submissions/week, one final submission, generative-AI disclosure, labels = INGENIOUS + expert-labelled new faults, $300k prize structure",
-      "status": "read-in-full (all 7 chunks 0-6 verified line-by-line)",
-      "accessed": "2026-10-02",
-      "evidence": "Confirms $300k prize pool ($50k Phase 1 split among top 5 on private test set; $250k Phase 2 = $100k/$70k/$40k/$25k/$15k on expert-updated full label set), 100 m GeoTIFF in [0, 1], 3 submissions/week, 1 chosen final submission across both phases, distance-weighted Tversky index penalizing FN more than FP, AI disclosure requirement in narrative (excluded from word count), and Appendix A legal terms.",
+      "status": "Rechecked S18 via one-off source retrieval; not a submission receipt",
+      "accessed": "2026-10-25",
+      "evidence": "Three submissions per week stated in sections 3.2 and 3.4; one final submission across both rounds. AI use is allowed with disclosure in narrative. Finalists deliver reproducible code/assets/documentation; eligibility applies. All seven extracted chunks read. Current account-specific allowance, rules acceptance and eligibility not accessed or established. This is not a submission receipt.",
       "feed": true,
       "feed_kind": "http"
     },
@@ -123,9 +123,9 @@
       "url": "https://gdr.openei.org/submissions/1391",
       "category": "data",
       "used_for": "Origin of the catalogue labels (doi 10.15121/1881483 per the Official Rules)",
-      "status": "GDR #1391 page re-fetched 2026-10-03; public CC BY 4.0 listing and named resources confirmed. Page listing does not prove local package bytes or a clipped/schema-audited layer.",
-      "accessed": "2026-10-03",
-      "evidence": "DOI 10.15121/1881483. The public page lists nine archives totaling 116.98 MB, including 2 m temperature probes (1.03 MB), paleogeothermal features (82.04 kB), MT and heat-flow companion items. No package download or new clip was performed by this source-page check; see individual entries and evidence/external_layer_inventory.json for prior runner byte checks.",
+      "status": "Rechecked S18 via one-off source retrieval; not a submission receipt",
+      "accessed": "2026-10-25",
+      "evidence": "DOI 10.15121/1881483; publicly accessible, CC BY 4.0; lists faults, shear/dilation, magnetics/gravity, heat flow, MT, paleogeothermal features, well/spring chemistry and probe resources with official resource links. Resource listing/citation portion read. Listing obtainable does not mean binary bytes, schema, footprint coverage or local mirror transformation authenticated.",
       "feed": true,
       "feed_kind": "http"
     },
@@ -202,9 +202,9 @@
       "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
       "category": "competition",
       "used_for": "Official reference data-preparation and baseline pipeline (`src/prepare_data.py`, `scripts/download_competition_data.sh`) mirrored and extended in this repository",
-      "status": "inspected and verified via GitHub API on 2026-10-02",
-      "accessed": "2026-10-02",
-      "evidence": "Confirms official competition file list and baseline structure; our `scripts/prepare_data.py` and `scripts/download_competition_data.sh` implement the reference CLI while adding band-description assertions and excluding the mislabelled `tc` band.",
+      "status": "Rechecked S18 via one-off source retrieval; not a submission receipt",
+      "accessed": "2026-10-25",
+      "evidence": "Official notebook implements U-Net with Monte Carlo patch splits and TverskyLoss alpha=0.2 beta=0.8. README supports CPU-only environments as well as GPU acceleration. README and notebook fetched at pinned GitHub commit; notebook does not establish this repository's buffered whole-system validation or certify its results.",
       "feed": true,
       "feed_kind": "github",
       "feed_repo": "drivendataorg/gems-prize-reference-solution"
@@ -331,6 +331,78 @@
       "status": "Official ScienceBase item page fetched 2026-10-03. Five 2\u2013200 km depth-slice GeoTIFFs are listed; listing and local runner availability do not establish that this checkout has five audited clips.",
       "accessed": "2026-10-03",
       "evidence": "DOI 10.5066/P9TWT2LU. The release describes conductivity/conductance estimated from 800+ MT transfer functions and lists surface (2\u201312 km), middle crust (12\u201320 km), lower crust (20\u201350 km), upper mantle (50\u201390 km), and mantle (90\u2013200 km) rasters. Scale is regional and must not be interpreted as 100 m fault geometry.",
+      "feed": false
+    },
+    {
+      "id": "dd-leaderboard-s18",
+      "title": "Official public leaderboard, dated source observation",
+      "publisher": "Official source; see linked publisher",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "category": "competition",
+      "used_for": "Dated S18 source verification",
+      "status": "One-off research-tool page observation; no receipt",
+      "accessed": "2026-10-25",
+      "evidence": "First displayed public row: xiaofanhu, public DW-Tversky 0.4413. This supersedes treating 0.3195 as a current target. First page chunk observed 2026-10-25 via research fetch tool, not a submission-page receipt. Does not identify the owner, local raster, private performance or future leaderboard state. No recurring DrivenData monitoring added.",
+      "feed": false
+    },
+    {
+      "id": "geodawn-official-s18",
+      "title": "USGS GeoDAWN release description",
+      "publisher": "Official source; see linked publisher",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "category": "data",
+      "used_for": "Dated S18 source verification",
+      "status": "One-off research-tool page observation; no receipt",
+      "accessed": "2026-10-25",
+      "evidence": "Glen and Earney 2024 release, DOI 10.5066/P93LGLVQ, CC0. Magnetic data constrain subsurface structure; radiometrics surface geology/soil. Area 2 nominal flight-line spacing is 400 m and flight height varies with terrain; processed grid products include GeoTIFFs. Both page chunks read. Listing/license verified; original binary grids and processing histories not independently re-downloaded. A magnetic contact does not prove slip or a geothermal vent.",
+      "feed": false
+    },
+    {
+      "id": "gauch-cordell-hg-offsets-s18",
+      "title": "Grauch & Cordell (1987), HG contact-location limitations",
+      "publisher": "USGS / Stanford-hosted proceedings, as linked",
+      "url": "https://www.usgs.gov/publications/limitations-determining-density-or-magnetic-boundaries-horizontal-gradient-gravity-or",
+      "category": "literature",
+      "used_for": "S18 scientific limitations and falsification",
+      "status": "One-off source review; scope explicitly limited",
+      "accessed": "2026-10-25",
+      "evidence": "HG maxima can be offset when contacts are not near vertical or when sources are close together. DOI 10.1190/1.1442236. Official USGS publication abstract read in full. Supports ambiguity, not S18 linear-in-height extrapolation or verified fault displacement.",
+      "feed": false
+    },
+    {
+      "id": "usgs-pymaxspots-s18",
+      "title": "USGS pymaxspots software release (2025)",
+      "publisher": "USGS / Stanford-hosted proceedings, as linked",
+      "url": "https://www.usgs.gov/software/pymaxspots-computing-and-connecting-horizontal-gradient-maxima-potential-field-geophysics",
+      "category": "literature",
+      "used_for": "S18 scientific limitations and falsification",
+      "status": "One-off source review; scope explicitly limited",
+      "accessed": "2026-10-25",
+      "evidence": "HG maxspots mark edges of contrasts associated with faults, intrusions OR lithologic contacts. DOI 10.5066/P13FSKEM; source page marks CC0. Software description and citation read. Software not installed/used; no claim it validates S18 candidates.",
+      "feed": false
+    },
+    {
+      "id": "phillips-2002-s18",
+      "title": "USGS OFR 02-98, Phillips: aeromagnetic processing and interpretation",
+      "publisher": "USGS / Stanford-hosted proceedings, as linked",
+      "url": "https://pubs.usgs.gov/of/2002/0098/intro.htm",
+      "category": "literature",
+      "used_for": "S18 scientific limitations and falsification",
+      "status": "One-off source review; scope explicitly limited",
+      "accessed": "2026-10-25",
+      "evidence": "HG contact interpretation assumes vertical field/magnetizations, vertical isolated thick sources; violations shift peaks or add secondary peaks. Reduction to the pole is usually needed. Introduction/flight-line noise/HG assumptions portion read, not all five extracted chunks. S18 used raw TMI; these limitations are a caution, not a tuned correction.",
+      "feed": false
+    },
+    {
+      "id": "hermant-2025-s18",
+      "title": "Hermant et al. 2025, Stanford geothermal workshop paper",
+      "publisher": "USGS / Stanford-hosted proceedings, as linked",
+      "url": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf",
+      "category": "literature",
+      "used_for": "S18 scientific limitations and falsification",
+      "status": "One-off source review; scope explicitly limited",
+      "accessed": "2026-10-25",
+      "evidence": "Figure 2 states USGS/TLS fault-label offsets can reach 400 m; introduction notes faults can be permeability conduits or barriers. Abstract, introduction and Figure 2 chunk read; not all eight chunks. Conference paper, not official competition truth or validation of the new heuristic.",
       "feed": false
     }
   ]

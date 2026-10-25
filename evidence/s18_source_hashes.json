@@ -1,0 +1,14 @@
+{
+  "session": "S18-MXTP",
+  "note": "Executed evidence-producing source retained unchanged after execution; no seed reruns.",
+  "files": {
+    "scripts/run_s18_extrapolated_trace.py": "cc049bcaeb7d56ebb3539467015115bb3ed8172f28f76622aac7c1b18a9811a8",
+    "scripts/evaluate_s18_holdout.py": "1ddf260ab7ed992b9ebfa0017af95af068cdf32a48cafafd34bcb5a57858678c",
+    "scripts/run_losfo_harness.py": "5478545885800f84de70e68088eb216b4b9a433243803e3a4a101c87f1409ee2",
+    "src/gems27/extrapolated_trace.py": "7f6438727023021c1f9db0ac394d28563f945172b3f231265fc802a86e043ecb",
+    "src/gems27/registry_compare.py": "b8e325d42ba5babb404bc15bc3186b03067d7504600e1904286747b546b79fb4",
+    "src/gems27/depthslice.py": "e8c4ab3b2b3737dd2303974ab68bd550ceff94e5d0ccba3724f94727c6fac0f5",
+    "src/gems27/migration.py": "d1da9eb84aaacc711aff6dec3a516bef43c106928804b31cfd52ef2d32bdc881",
+    "knowledge/52_s18_preregistration.md": "fd6abff36602e222b7d4e066667a4914ff75a46a0013a51ce831ac9fe59bd654"
+  }
+}

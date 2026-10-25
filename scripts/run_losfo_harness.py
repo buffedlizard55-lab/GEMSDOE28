@@ -108,14 +108,12 @@ def packing_arms(prob: np.ndarray, ridge: np.ndarray, fold_mask: np.ndarray, kno
 
 def eval_set(pred: np.ndarray, truth: np.ndarray, active: np.ndarray) -> dict:
     """DTI of a binary emission against a truth set, restricted to `active` cells."""
-    p = pred & active
-    n_g = int(truth.sum())
-    if n_g == 0:
-        return {"tp": 0.0, "fp": float(p.sum()), "dti": 0.0, "dots": int(p.sum()), "n_truth": 0}
-    tp = float(metric.kernel_from_distance(distance_transform_edt(~p)[truth]).sum())
-    fp = float((1.0 - metric.kernel_from_distance(distance_transform_edt(~truth))[p]).sum())
-    dti = tp / (tp + metric.ALPHA * fp + metric.BETA * (n_g - tp) + metric.EPS)
-    return {"tp": tp, "fp": fp, "dti": dti, "dots": int(p.sum()), "n_truth": n_g}
+    # v2 (S18): use the shared exact metric. EDT on an all-True array (empty
+    # prediction) measures an implicit off-array background, awarding phantom TP.
+    # Also intersect truth with active, not just predictions, for consistent masking.
+    r = metric.dti_binary(pred, truth, valid=active)
+    return {"tp": r["TPw"], "fp": r["FPw"], "dti": r["dti"],
+            "dots": r["n_emitted"], "n_truth": r["n_truth"]}
 
 
 def load_licence_mask(csv_path, shape, mad_max=60.0, depth_max=400.0, n_min=8):

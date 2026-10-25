@@ -1,0 +1,101 @@
+# S18-MXTP — three-pass implementation review
+
+## Pass 1: audit, preregister, execute
+- Read current safety notices, prior failures, shared tools and next-step recommendation.
+- Disclosed omitted exclusive method paragraph; adopted repo's proposed extrapolated-placement
+  method as a new research lane, not the exhausted migration-feature lane.
+- Restored all 17 hash-pinned mirrors, prepared existing 32-column raw physical cache; CPU training
+  available. Large datasets/cache remain ignored.
+- Wrote four ranked hypotheses and froze one method and all gates before outputs.
+- Three experiments only: canary + pre-placement registry check; placement + final registry check
+  and exact TIFF writer/validator; five-seed buffered LOSFO comparison against registered prior recipe.
+- Generated independent 11,082-dot TIFF. No previous submission pixels copied. Snapshot uniqueness
+  and local format passed; scientific superiority failed. No slot. No threshold search or rerun.
+
+## Pass 2: assumptions, edge cases, disclosure, UI
+- Fixed shared eval_set once by delegating to existing metric.dti_binary (empty prediction EDT
+  phantom credit; truth mask). Added synthetic tests. Historical evidence not rewritten.
+- Exact Spearman fast path tested against SciPy with ties; directed proximity and projection bounds,
+  empty ridges and nonlinear-height rejection covered.
+- Report corrected from JSON: 45,155 unique withheld pixels; 76,869 pooled across overlapping seeds.
+  Bootstrap uses 4 geographic blocks, not 20 falsely independent cells.
+- Official public pages and all 7 rules PDF chunks read via research tools. Recorded separate classes
+  for public leaderboard observation (0.4413), owner-reported claims, diagnostics and HOLDOUT-DTI.
+  No submission-page receipt and no authenticated account accessed.
+- Explicit erratum: proposed depth_to_base_surf basement-thickness interpretation is wrong;
+  conductive-base layer does not establish basement. Proposal rejected as stated; not run.
+- Corrected active weekly-cap text from four inherited slots to official PDF's three/week;
+  account-specific allowance remains unknown.
+- New exact TIFF is prominently downloadable on the first screen with DO NOT SUBMIT; older H38/H36
+  files cannot be substituted. No claim of guaranteed portal acceptance or confirmed geothermal vents.
+- Shared download verifier now independently re-reads the allfinite-only current artifact.
+- Preserved executed source bytes with hash checks rather than lint-reformatting frozen runners.
+
+## Pass 3: regression and original-request check
+- 371 tests passed after installing optional geopandas/pyogrio (no skipped tests at that point).
+- Ruff clean; all generated-page local links resolved; static builder uses JSON only, no network.
+- Shared exact-download audit: PASS, 317 checks; promotion checker correctly returns negative for
+  wholly negative paired gain CI. This expected exit 1 is a rejection, not a failed pipeline run.
+- Artifact/card hashes, every declared registry member in BOTH stages, frozen source hashes, pooled
+  arithmetic, CI regeneration, no visible-fault dots, and UI decision wording have regression tests.
+- Original request's unique downloadable TIFF is delivered; an APPROVED high-scoring submission is
+  NOT demonstrated and is not claimed. The prompt is retained as normalized operational requirements,
+  explicitly not a byte-for-byte transcript; original chat remains authoritative.
+- Historical owner-score causation remains unverified; no receipt can be invented to meet a label.
+- Limits: missing explicit external lane assignment; bounded snapshot rather than synchronized global
+  registry; mirrored binary inputs not organizer-authenticated; only 4 uncertainty blocks;
+  current account quota, eligibility and private labels unavailable. Final expert review is official
+  competition procedure, not replaced by local automated inspection.
+
+## Parallel-main integration
+While this branch ran, PRs #37/#38 merged a blocked, no-experiment review into main. Preserve that
+review as historical evidence and keep its `evidence/s18_run_card.json`. This branch's scientific
+card is `evidence/s18_mxtp_run_card.json` to avoid the parallel Session 18 filename collision.
+Keep main's schema-only gate fix: a schema pass NEVER sets submission_ready=true. Current displayed
+card must describe the newly executed MXTP research experiment, not falsely claim data are absent.
+Final post-merge test/deployment results are recorded in the pull request and session response.
+
+### Final integration verification
+- Preserved main's schema-only approval fix and its historical blocked review card unchanged.
+- Replaced outdated missing-data/no-new-file UI with this run's measured negative outcome, while
+  keeping historical H38/H36 promotion/uniqueness retractions and no-upload warnings.
+- Restored metadata/manifest regressions from the parallel review, adapted to a newly generated but
+  rejected research file. The build never advertises a historical primary as an approved download.
+- Final local run after integration: **375 tests passed, zero skips** (optional geospatial test
+  dependencies installed); Ruff clean; shared download audit **317 checks PASS**; all generated-page
+  local links resolve; every scientific source hash still matches its executed version.
+- Preview binds 0.0.0.0:8080 and serves docs, with no browser-to-localhost service calls.
+- No additional experiment/model fit was performed during integration; spent seed and method guards
+  remain in place. PR merge and deployment are code-delivery steps only, not competition submission.
+
+### PR #39 integration — final audit
+- Preserved stronger local atomic writer/validator, schema canary inversion/correlation checks,
+  pinned upstream tool discovery, source-feed freshness/date handling and dual-route Pages checks.
+- Did not rerun or regenerate the experiment. Re-read same TIFF with the hardened validator.
+- Upstream API equivalence is unestablished: explicit scientific-card limitation, not a claim of
+  exact compliance. Historical review cards retained, with historical manifest bytes preserved.
+- Moved historical primary/secondary download narratives to a separate archive, using namespaced
+  anchors. Current pages offer the rejected NEW research file and a disabled submission control.
+- Integration regression run: 470 tests passed, no skips. Ruff and exact-file audits rechecked.
+
+- Pages API read after PR39 still returned `build_type: legacy`, root `main` source. An attempted
+  authenticated switch to workflow mode returned HTTP403 `Resource not accessible by integration`,
+  not an authentication failure. Adopted the concurrently proposed PR42 root-route compatibility
+  approach: root executive mirror and exact JSON bytes for legacy and Actions layouts, checked by CI.
+  No Pages setting change is claimed. This is a publication fix, not another experiment.
+
+### Final PR42 compatibility merge
+Preserved the actual PR42 merge's deployment-verification record and follow-up root-route
+regression. Kept the scientific MXTP card canonical across root/docs aliases; historical PR39/42
+no-experiment evidence remains untouched. Refreshed source-feed bytes retained. Final suite:
+471 passed, zero skips. No TIFF/model/seed rerun.
+
+### Final PR41 scientific integration
+Preserved the separate negative H39-5 card, three artifact variants, method and tests.
+Namespaced its manifest slot/finalizer, retained PR39's original historical card plus PR41's
+separate snapshot of its revised binding. MXTP's executed migration definitions remain the
+byte-exact prefix of main's append-only extension, with frozen original source archived and
+hash-tested. No experiment rerun or combination of the overlapping seed decades.
+Final regression run: **478 passed, zero skips; Ruff clean; independent exact-file audit
+347 PASS / zero failures** (grew by30 for the separately preserved H39-5 variants).
+All 11 root/docs HTML routes have 231 valid local file/fragment references.

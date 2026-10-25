@@ -1,0 +1,29 @@
+{
+  "session": "S18-MXTP",
+  "experiment": 3,
+  "seeds": [
+    310,
+    311,
+    312,
+    313,
+    314
+  ],
+  "preregistration_sha256": "fd6abff36602e222b7d4e066667a4914ff75a46a0013a51ce831ac9fe59bd654",
+  "evaluator_hashes": {
+    "eval_set_v2": "5478545885800f84de70e68088eb216b4b9a433243803e3a4a101c87f1409ee2",
+    "metric": "4b0a600d7fa92e1338b3f8ffeed3df76031ab94725f8143df1fc194c40bfb101",
+    "split": "cba280e138ca540dc6549ef56d4c0f88062dfb457118d757b896a864fa2b9738",
+    "runner": "1ddf260ab7ed992b9ebfa0017af95af068cdf32a48cafafd34bcb5a57858678c"
+  },
+  "baseline_sha256": "c42fed9b21237e936d697fe2f3d7bac370861616337a7c579452c09350db0289",
+  "inputs": {
+    "cache": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "heat_flow": "8f57091b064aa899354ae595a368cdc1b69673f15a18c7456cc228694071f49c",
+    "euler_clusters": "cdd07d53de2c64bebbaffa6e083a7fd2d242e45b88f41b35417e8d0c782c8da1",
+    "lidar": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "baseline_detector": "6e30410e17c3b6d226ff3a343662417cd2c847711d0e3242658fc5b304c2023e",
+    "baseline_selection": "3640bae3996327d1873e111c34b73669f8c9d00ceb472e02d477c938ffdcf5d2"
+  }
+}

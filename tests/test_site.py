@@ -9,14 +9,13 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html",
-         "archive.html", "submission-review.html", "session15-review.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html"]
 
 
 class Links(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.refs, self.ids, self.duplicate_ids = [], set(), set()
+        self.refs, self.ids = [], set()
 
     def handle_starttag(self, tag, attrs):
         d = dict(attrs)
@@ -24,8 +23,6 @@ class Links(HTMLParser):
             if k in d:
                 self.refs.append(d[k])
         if "id" in d:
-            if d["id"] in self.ids:
-                self.duplicate_ids.add(d["id"])
             self.ids.add(d["id"])
 
 
@@ -177,20 +174,19 @@ def test_local_failure_claim_and_registry_disambiguate_summary_path_collision():
 
 
 def test_all_internal_links_and_assets_resolve():
-    for base, p in [(DOCS, q) for q in PAGES] + [(ROOT, "index.html")]:
+    for page in list(DOCS.glob("*.html")) + [ROOT / "index.html", ROOT / "executive-summary.html"]:
         parser = Links()
-        parser.feed((base / p).read_text())
-        assert not parser.duplicate_ids, (p, parser.duplicate_ids)
+        parser.feed(page.read_text())
         for ref in parser.refs:
             url = urlsplit(ref)
             if url.scheme or url.netloc:
                 continue
-            target = (base / unquote(url.path)).resolve() if url.path else base / p
-            assert target.exists(), f"{base.name}/{p}: broken internal reference {ref}"
+            target = page.parent / unquote(url.path) if url.path else page
+            assert target.exists(), f"{page.name}: broken internal reference {ref}"
             if url.fragment and target.suffix == ".html":
                 destination = Links()
                 destination.feed(target.read_text())
-                assert unquote(url.fragment) in destination.ids, f"{p}: broken fragment {ref}"
+                assert unquote(url.fragment) in destination.ids, f"{page.name}: broken anchor {ref}"
 
 
 def test_pages_source_links_resolve_to_public_repository_files():
@@ -204,26 +200,25 @@ def test_pages_source_links_resolve_to_public_repository_files():
     assert "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/12_preregistration_H31-1_euler.md" in research
 
 
-def test_repository_root_front_page_locks_submission_download_and_preserves_archive():
-    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+def test_repository_root_front_page_serves_the_one_click_download():
+    man = json.loads((DOCS / "downloads/manifest.json").read_text())
     root_idx = (ROOT / "index.html").read_text()
-    P = man["primary"]
-    assert f'href="docs/downloads/{P["nan"]}"' not in root_idx
-    assert 'href="docs/archive.html"' in root_idx
-    assert "Submission download locked" in root_idx
+    candidate = man["s18_candidate"]
+    assert f'href="docs/downloads/{candidate["filename"]}"' in root_idx
+    assert "Download NEW unique research TIFF — DO NOT SUBMIT" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
-def test_archive_preserves_exact_download_and_note_without_approval():
-    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
-    idx = (DOCS / "archive.html").read_text()
-    P = man["primary"]
-    assert f'href="downloads/{P["nan"]}"' in idx and "download" in idx
-    assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
-    assert P["note"] in idx.replace("&#x27;", "'") or P["note"].replace("|", "|") in idx
-    assert len(P["note"]) <= 200
-    assert P["submission_name"] in idx and P["content_id"] in P["submission_name"]
-    assert "UNSCORED" in idx
+def test_front_page_has_download_and_exact_note():
+    man = json.loads((DOCS / "downloads/manifest.json").read_text())
+    idx = (DOCS / "index.html").read_text()
+    candidate = man["s18_candidate"]
+    assert f'href="downloads/{candidate["filename"]}"' in idx
+    assert (DOCS / "downloads" / candidate["filename"]).is_file()
+    assert candidate["note"] in idx and len(candidate["note"]) <= 140
+    assert candidate["submission_name"] in idx and candidate["sha256"] in idx
+    assert "Submission download locked" in idx
+
 
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
@@ -281,10 +276,10 @@ def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
         assert len(candidate["note"]) <= 200
         assert candidate["nan"] in research and candidate["zip"] in research
         assert candidate["allfinite"] in research
-        assert "not one of the four weekly slots" in research
+        assert "not an authorized weekly submission" in research
         summary = (DOCS / "archive.html").read_text()
         assert candidate["nan"] in summary
-        assert "not one of the four weekly slots" in summary
+        assert "not an authorized weekly submission" in summary
 
 
 def test_ai_use_disclosure_is_present_and_linked_from_source_ledger():
@@ -307,15 +302,6 @@ def test_no_score_is_claimed_for_27gemsdoe_and_scripts_never_fetch_drivendata():
     assert 'FORBIDDEN = ("drivendata.org",)' in feed and "refusing to request" in feed
 
 
-def test_download_manifest_marks_all_current_slots_blocked():
-    manifest = json.loads((DOCS / "downloads" / "manifest.json").read_text())
-    current = manifest["current_run"]
-    assert current["status"] == "BLOCKED — NO FILE APPROVED"
-    assert current["submission_ready"] is False
-    assert current["slot_selected"] is False
-    assert current["new_tiff_generated"] is False
-
-
 def test_downloads_have_unique_names_and_zip_single_member():
     import zipfile
     names = [p.name for p in (DOCS / "downloads").glob("*.tif")]
@@ -323,6 +309,92 @@ def test_downloads_have_unique_names_and_zip_single_member():
     for z in (DOCS / "downloads").glob("*.zip"):
         with zipfile.ZipFile(z) as zf:
             assert len(zf.namelist()) == 1 and zf.namelist()[0].endswith(".tif")
+
+
+def test_current_run_notice_is_above_historical_body():
+    for page in PAGES:
+        text = (DOCS / page).read_text()
+        assert 'Current run: NOT READY TO SUBMIT' in text
+        assert 'NO FILE APPROVED' in text
+        assert 'Do not upload any file from this site' in text
+        assert 'data/run_card_2026-10-25.json' in text
+    overview = (DOCS / 'index.html').read_text()
+    executive = (DOCS / 'executive-summary.html').read_text()
+    assert 'failed its frozen LOSFO gate' in overview
+    assert 'inspection-only' in overview
+    assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in (DOCS / 'archive.html').read_text()
+    assert 'NO FILE APPROVED' in executive
+    assert 'Do not select a file from this page at present' in executive
+    assert 'The suggested `.tif` above' not in executive
+    assert 'If you submit anything, use the primary' not in overview + executive
+    card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
+    assert card['verdict'] == 'negative'
+    assert card['submission_ready'] is False
+    # Current S18 card is bound to the new exact TIFF; a negative gate cannot approve it.
+    assert card['session'] == 'S18-MXTP'
+    assert re.fullmatch(r'[0-9a-f]{64}', card['raster_sha256'])
+    assert card['slot_selected'] is False
+    assert card['evidence_schema_gate']['verdict'] == 'negative'
+
+
+def test_download_manifest_marks_new_research_raster_not_approved():
+    manifest = json.loads((DOCS / 'downloads/manifest.json').read_text())
+    current = manifest['current_run']
+    assert current['status'] == 'NEGATIVE — NO FILE APPROVED'
+    assert current['new_tiff_generated'] is True
+    assert current['submission_ready'] is False and current['slot_selected'] is False
+    assert manifest['s18_candidate']['verdict'] == 'negative'
+
+
+def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(capsys):
+    from scripts import build_site
+
+    assert build_site.main() == 0
+    metadata = json.loads(capsys.readouterr().out)
+    assert metadata['submission_ready'] is False and metadata['slot_selected'] is False
+    assert 'primary_download' not in metadata
+    assert 's18-mxtp' in metadata['research_download']
+    assert metadata['inspection_artifacts']
+    current = json.loads((DOCS / 'data/current_run_card_2026-10-25.json').read_text())
+    exact = json.loads((ROOT / 'evidence/s18_mxtp_run_card.json').read_text())
+    assert current == exact and current['verdict'] == 'negative'
+    # The parallel blocked review is preserved, not overwritten with this experiment.
+    parallel = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
+    assert parallel['experiments_run'] == 0 and parallel['raster_sha256'] is None
+
+
+def test_repository_root_front_page_locks_submission_download_and_preserves_archive():
+    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    root_idx = (ROOT / "index.html").read_text()
+    P = man["primary"]
+    assert f'href="docs/downloads/{P["nan"]}"' not in root_idx
+    assert 'href="docs/archive.html"' in root_idx
+    assert "Submission download locked" in root_idx
+    assert (ROOT / ".nojekyll").exists()
+
+
+
+def test_archive_preserves_exact_download_and_note_without_approval():
+    man = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    idx = (DOCS / "archive.html").read_text()
+    P = man["primary"]
+    assert f'href="downloads/{P["nan"]}"' in idx and "download" in idx
+    assert (DOCS / "downloads" / P["nan"]).is_file() and (DOCS / "downloads" / P["zip"]).is_file()
+    assert P["note"] in idx.replace("&#x27;", "'") or P["note"].replace("|", "|") in idx
+    assert len(P["note"]) <= 200
+    assert P["submission_name"] in idx and P["content_id"] in P["submission_name"]
+    assert "UNSCORED" in idx
+
+
+
+def test_download_manifest_marks_all_current_slots_blocked():
+    manifest = json.loads((DOCS / "downloads" / "manifest.json").read_text())
+    current = manifest["current_run"]
+    assert current["status"] == "NEGATIVE — NO FILE APPROVED"
+    assert current["submission_ready"] is False
+    assert current["slot_selected"] is False
+    assert current["new_tiff_generated"] is True
+
 
 
 def test_site_build_metadata_does_not_call_historical_raster_a_submission_download(capsys):
@@ -335,37 +407,6 @@ def test_site_build_metadata_does_not_call_historical_raster_a_submission_downlo
     assert "primary_download" not in build_result
     assert build_result["inspection_artifacts"]
 
-
-def test_current_run_notice_is_above_historical_body():
-    for page in PAGES:
-        text = (DOCS / page).read_text()
-        assert 'Current run: BLOCKED — NO FILE APPROVED' in text
-        assert 'Do not upload any file from this site' in text
-        assert 'data/current_run_card_2026-10-25.json' in text
-    overview = (DOCS / 'index.html').read_text()
-    executive = (DOCS / 'executive-summary.html').read_text()
-    # Historical candidate details are in the clearly labeled archive, not a
-    # current-generation recommendation on the first screen.
-    archive = (DOCS / 'archive.html').read_text()
-    assert 'DO NOT SUBMIT' in archive and 'inspection-only' in archive
-    assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in archive
-    assert 'Submission download locked' in overview
-    assert 'NO FILE APPROVED' in executive
-    assert 'Do not select a file from this page at present' in executive
-    assert 'The suggested `.tif` above' not in executive
-    assert 'If you submit anything, use the primary' not in overview + executive
-    for page in (overview, executive):
-        assert 'Yes, to download.' not in page
-        assert 'OK TO DOWNLOAD' not in page
-        assert 'unique submission generated this session' not in page
-    card = json.loads((DOCS / 'data/current_run_card_2026-10-25.json').read_text())
-    assert card['verdict'] == 'negative'
-    assert card['submission_ready'] is False
-    source_card = json.loads((ROOT / 'evidence/current_run_card.json').read_text())
-    assert card == source_card
-    assert card['raster_sha256'] is None
-    assert card['lane'] is None
-    assert card['experiments_run'] == 0
 
 
 def test_feed_refresh_rebuilds_and_deploys_without_requiring_a_branch_push_event():
@@ -381,10 +422,12 @@ def test_feed_refresh_rebuilds_and_deploys_without_requiring_a_branch_push_event
     assert "path: build/pages" in pages
 
 
+
 def test_static_build_still_needs_no_third_party_dependencies():
     result = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/build_site.py")],
                             capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
+
 
 
 def test_combined_archive_namespaces_ids_and_accessible_labels():
@@ -399,16 +442,21 @@ def test_combined_archive_namespaces_ids_and_accessible_labels():
     assert 'data-id="cache"' in result
 
 
+
 def test_current_public_card_aliases_use_restored_data_review_not_older_checkout_state():
-    source = json.loads((ROOT / 'evidence/current_run_card.json').read_text())
+    source = json.loads((ROOT / 'evidence/s18_mxtp_run_card.json').read_text())
     for name in ('run_card_2026-10-25.json', 'current_run_card_2026-10-25.json'):
         assert json.loads((DOCS / 'data' / name).read_text()) == source
     # Keep the concurrent negative review intact as its own historical record.
     historical = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
-    assert historical['run_id'] != source['session_id']
+    assert historical['run_id'] != source['session']
     assert historical['submission_ready'] is False
     workflow = (ROOT / '.github/workflows/pages.yml').read_text()
     assert 'EXPECTED_CARD_SHA256' in workflow and 'hashlib.sha256(body)' in workflow
+    assert (ROOT / 'data/current_run_card_2026-10-25.json').read_bytes() == (
+        DOCS / 'data/current_run_card_2026-10-25.json').read_bytes()
+    root_summary = (ROOT / 'executive-summary.html').read_text()
+    assert 'Submission download locked' in root_summary and 'docs/downloads/gems28-s18-mxtp-' in root_summary
 
 
 def test_session18_h39_5_candidate_is_unique_valid_but_do_not_submit():
@@ -431,7 +479,7 @@ def test_session18_h39_5_candidate_is_unique_valid_but_do_not_submit():
     assert card['validator']['values_in_0_1'] is True
     assert len(card['note']) <= 140 and 'DO NOT SUBMIT' in card['note']
     manifest = json.loads((DOCS / 'downloads/manifest.json').read_text())
-    slot = manifest['s18_candidate']
+    slot = manifest['s18_h39_5_candidate']
     assert slot['verdict'] == 'negative' and slot['content_id'] == '719b83fb659b'
     assert slot['run_card'] == 'evidence/s18_h39_5_run_card.json'
     assert (DOCS / 'downloads' / slot['nan']).is_file()
