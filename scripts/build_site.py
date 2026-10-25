@@ -1211,10 +1211,15 @@ def main() -> int:
     # Keep both historical public current-card routes consistent with the actual
     # current review. S18's missing-input observations remain in its own source.
     current_card = read_json("evidence/current_run_card.json")
-    current_card_path = DOCS / "data" / "current_run_card_2026-10-25.json"
-    current_card_path.parent.mkdir(parents=True, exist_ok=True)
-    current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-    (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
+    # The root aliases also survive GitHub's still-enabled legacy main-root
+    # publisher. Do not depend on privileged Pages-source mutation succeeding.
+    card_bytes = json.dumps(current_card, indent=2, allow_nan=False) + "\n"
+    for base in (DOCS, ROOT):
+        current_card_path = base / "data" / "current_run_card_2026-10-25.json"
+        current_card_path.parent.mkdir(parents=True, exist_ok=True)
+        current_card_path.write_text(card_bytes, encoding="utf-8")
+    for name in ("index.html", "executive-summary.html"):
+        (ROOT / name).write_text(root_relative_links(publish_source_links(pages[name])), encoding="utf-8")
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
