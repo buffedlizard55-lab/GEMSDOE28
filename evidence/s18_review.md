@@ -54,3 +54,16 @@ card is `evidence/s18_mxtp_run_card.json` to avoid the parallel Session 18 filen
 Keep main's schema-only gate fix: a schema pass NEVER sets submission_ready=true. Current displayed
 card must describe the newly executed MXTP research experiment, not falsely claim data are absent.
 Final post-merge test/deployment results are recorded in the pull request and session response.
+
+### Final integration verification
+- Preserved main's schema-only approval fix and its historical blocked review card unchanged.
+- Replaced outdated missing-data/no-new-file UI with this run's measured negative outcome, while
+  keeping historical H38/H36 promotion/uniqueness retractions and no-upload warnings.
+- Restored metadata/manifest regressions from the parallel review, adapted to a newly generated but
+  rejected research file. The build never advertises a historical primary as an approved download.
+- Final local run after integration: **375 tests passed, zero skips** (optional geospatial test
+  dependencies installed); Ruff clean; shared download audit **317 checks PASS**; all generated-page
+  local links resolve; every scientific source hash still matches its executed version.
+- Preview binds 0.0.0.0:8080 and serves docs, with no browser-to-localhost service calls.
+- No additional experiment/model fit was performed during integration; spent seed and method guards
+  remain in place. PR merge and deployment are code-delivery steps only, not competition submission.
