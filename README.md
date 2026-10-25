@@ -1,5 +1,11 @@
 # Current session safety notice — 2026-10-25 (read first)
 
+**Follow-up:** [registry-coverage gate review and next steps](knowledge/48_gate_review_2026-10-25.md).
+Run `.venv/bin/python scripts/check_promotion.py docs/data/run_card_2026-10-25.json`
+for a machine-readable evidence-schema verdict (exit 1 is the expected current negative).
+This is not a TIFF validator or authorization to upload. The gate now requires a declared registry
+member inventory and exact comparison coverage at both stages; malformed evidence fails closed.
+
 **NOT READY TO SUBMIT: no new unique TIFF was generated this session.**
 Read [the current audit and ranked hypotheses](knowledge/47_parallel_run_audit_2026-10-25.md)
 before the historical standing prompt below. The current request overrides stale leaderboard and
