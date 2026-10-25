@@ -1,0 +1,174 @@
+{
+  "session": "S15 (2026-10-25), branch arena/5ac802ba-gemsdoe28, lane H39-1 (knowledge/47 \u00a73)",
+  "hypothesis": "Depth-persistent potential-field lineaments (TMI/gravity upward-continued 1-2 km) mark basement faults buried under cover that the surface-scarp catalogue omits; adding them as detector bands + persistence-weighted ranking raises far-field DTI at the champion's budget.",
+  "mechanism": "Upward continuation exp(-|k|h) attenuates shallow sources; HG ridges persisting to 2 km indicate deep-rooted contacts. 5 label-free bands appended to the frozen 32-band GBDT; candidates ranked by prob*(0.5+persist_rank); dot_thin(2.8); build-time d_cat>2px exclusion.",
+  "named_nonfault_mimic": "Basement lithologic contacts and mafic dike swarms (deep-persistent magnetic lineaments with zero Quaternary slip); GeoDAWN flight-line striping.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI (not an organizer score)",
+    "evaluator": "scripts/run_losfo_harness.py --s15-depthslice; src/gems27/losfo.py + metric.py (alpha=0.2, beta=0.8, 300 m triangular kernel, pooled over cells)",
+    "seeds": "290-294 (20 paired cells)",
+    "n_withheld_positives_pooled_cell_truth_px": 74557,
+    "d0_pooled_dti": 0.10309520346807577,
+    "d1_pooled_dti": 0.1014967492462266,
+    "pooled_delta_dti": -0.0015984542218491632,
+    "mean_paired_delta_dti": -0.002599167947501733,
+    "ci95_paired_bootstrap": [
+      -0.007387944147376352,
+      0.002080983724642792
+    ],
+    "d1nw_mean_paired_delta_dti": -0.0016990319133754132,
+    "cells_positive": "9/20",
+    "per_seed_mean_delta": {
+      "290": 0.0005038719621507891,
+      "291": -0.005749256002495557,
+      "292": -0.0032828212594738348,
+      "293": -0.0016499442658231799,
+      "294": -0.002817690171866883
+    },
+    "per_fold_mean_delta": {
+      "NW": -0.005829695769403528,
+      "NE_LidarGapHeavy": -0.005032826827610909,
+      "SW": -0.003013538719588253,
+      "SE": 0.003479389526595758
+    },
+    "credit_per_dot_d0": 0.04674243049759331,
+    "credit_per_dot_d1": 0.0456743026632592,
+    "tau_at_d0": 0.02105313616492803,
+    "gate": {
+      "G1_pooled_gt0_and_mean_ge_0.001": false,
+      "G2_spread_14cells_4seeds_3folds": false,
+      "G3_credit_per_dot_not_worse": false,
+      "G4_integrity_onknown0_and_count_ratio_le_0.10": true,
+      "G5_canary_pass_from_evidence_s15_canary": true
+    },
+    "gate_passed": false,
+    "canary_single_feature_aucs": {
+      "tmi_hg_up1000": {
+        "auc": 0.5081449378405296,
+        "canary_max_auc_1mauc": 0.5081449378405296
+      },
+      "tmi_hg_up2000": {
+        "auc": 0.510355843693245,
+        "canary_max_auc_1mauc": 0.510355843693245
+      },
+      "tmi_persist": {
+        "auc": 0.5169535090514968,
+        "canary_max_auc_1mauc": 0.5169535090514968
+      },
+      "tmi_tilt_up1000": {
+        "auc": 0.47646682242662136,
+        "canary_max_auc_1mauc": 0.5235331775733787
+      },
+      "grav_hg_up2000": {
+        "auc": 0.5425720364403304,
+        "canary_max_auc_1mauc": 0.5425720364403304
+      }
+    }
+  },
+  "organizer_confirmed_scores": "none (no submission-page receipt exists for any file here; 0.2778/0.2750/0.2708/0.2600 are OWNER-REPORTED)",
+  "correlation_overlap_vs_registry": {
+    "spearman_probD1_vs_probD0_sample400k": 0.9774770335220111,
+    "worst_registry_raster_by_dot_overlap": {
+      "raster": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+      "frac_our_dots_within3px": 0.7989653800238758,
+      "spearman_vs_binary": 0.1243700401152796
+    },
+    "full_table": {
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": {
+        "frac_our_dots_within3px": 0.3966308528982624,
+        "spearman_probD1_vs_binary_sample400k": 0.08029665025907015,
+        "registry_dots": 41507
+      },
+      "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif": {
+        "frac_our_dots_within3px": 0.4004509881947208,
+        "spearman_probD1_vs_binary_sample400k": 0.0942753272595828,
+        "registry_dots": 54714
+      },
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": {
+        "frac_our_dots_within3px": 0.7678471945881417,
+        "spearman_probD1_vs_binary_sample400k": 0.1587003221516924,
+        "registry_dots": 59075
+      },
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": {
+        "frac_our_dots_within3px": 0.4204005836317814,
+        "spearman_probD1_vs_binary_sample400k": 0.1055440513908282,
+        "registry_dots": 61328
+      },
+      "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif": {
+        "frac_our_dots_within3px": 0.38572755007295395,
+        "spearman_probD1_vs_binary_sample400k": 0.07895885250128586,
+        "registry_dots": 40199
+      },
+      "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif": {
+        "frac_our_dots_within3px": 0.3933412919485343,
+        "spearman_probD1_vs_binary_sample400k": 0.08257052805806497,
+        "registry_dots": 42294
+      },
+      "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif": {
+        "frac_our_dots_within3px": 0.3899190874121236,
+        "spearman_probD1_vs_binary_sample400k": 0.08184434886603612,
+        "registry_dots": 41656
+      },
+      "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif": {
+        "frac_our_dots_within3px": 0.3820400583631781,
+        "spearman_probD1_vs_binary_sample400k": 0.0757992037519912,
+        "registry_dots": 37660
+      },
+      "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif": {
+        "frac_our_dots_within3px": 0.4051730998806208,
+        "spearman_probD1_vs_binary_sample400k": 0.08846276142115657,
+        "registry_dots": 37447
+      },
+      "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif": {
+        "frac_our_dots_within3px": 0.7989653800238758,
+        "spearman_probD1_vs_binary_sample400k": 0.1243700401152796,
+        "registry_dots": 38545
+      },
+      "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif": {
+        "frac_our_dots_within3px": 0.38795596232922136,
+        "spearman_probD1_vs_binary_sample400k": 0.07634752636659596,
+        "registry_dots": 37860
+      },
+      "champion_e5eb6e7e_GEMSDOE32": {
+        "frac_our_dots_within3px": 0.3715877437325905,
+        "spearman_probD1_vs_binary_sample400k": 0.07345480801006725,
+        "registry_dots": 37654
+      },
+      "gems36_9b9ea4e6_GEMSDOE36": {
+        "frac_our_dots_within3px": 0.3731264093381085,
+        "spearman_probD1_vs_binary_sample400k": 0.07353549732907888,
+        "registry_dots": 38854
+      }
+    },
+    "thresholds": {
+      "rank_corr_max": 0.9,
+      "dots_within3px_max": 0.7
+    },
+    "uniqueness_pass": false
+  },
+  "raster_sha256": {
+    "nan": "a33fe4c2cd4cfe9b8ea684f3855333eb72ebda784813aade1bfa337cc7f78168",
+    "allfinite": "64fe7b27512ad5d22a4c6ef166afd6b901259d1536ff42d573f2e944bbcf92d2",
+    "zip": "0607a0e3355ec4b41cae8d7c36a9a371c948446c21971e71047eed16972288eb"
+  },
+  "validator_output": {
+    "nan_hard_checks_passed": true,
+    "allfinite_hard_checks_passed": true,
+    "summary": "no NaN inside footprint; values exactly {0,1} in [0,1]; CRS EPSG:32611, shape 3730x3292, transform = template; 0 dots on catalogue; 37695 emitted px (min d_cat 2.24 px)",
+    "detail_file": "docs/downloads/checks-gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.json"
+  },
+  "submission_name": "GEMSDOE28-h39-1-depthslice-persist-b2-a86b8ed33727",
+  "note_le140": "28GEMSDOE H39-1 depthslice B2 | LOSFO GATE FAIL dDTI -0.0016 (290-294) DO NOT SUBMIT | id a86b8ed33727",
+  "candidate_files": {
+    "nan": "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif",
+    "allfinite": "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-allfinite.tif",
+    "zip": "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.zip"
+  },
+  "verdict": "negative",
+  "verdict_reasons": [
+    "LOSFO gate FAILED (pooled dDTI -0.001598)",
+    "uniqueness FAILED vs registry"
+  ],
+  "slot_spent_by_this_session": false,
+  "experiments_used": "3 of 3 (Exp1 canary, Exp2 LOSFO gate 290-294, Exp3 build)"
+}
