@@ -18,6 +18,8 @@ on:
       - 'docs/data/topology_review_classes.json'
       - 'docs/*.html'
       - 'index.html'
+      - 'executive-summary.html'
+      - 'data/current_run_card_2026-10-25.json'
       - 'AI_DISCLOSURE.md'
       - '.github/workflows/build-site.yml'
       - 'evidence/h28_1_edge_holdout.json'
@@ -79,6 +81,8 @@ on:
       - 'docs/data/topology_review_classes.json'
       - 'docs/*.html'
       - 'index.html'
+      - 'executive-summary.html'
+      - 'data/current_run_card_2026-10-25.json'
       - 'AI_DISCLOSURE.md'
       - '.github/workflows/build-site.yml'
       - 'evidence/h28_1_edge_holdout.json'
@@ -141,4 +145,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html executive-summary.html data/current_run_card_2026-10-25.json

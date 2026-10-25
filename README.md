@@ -10,6 +10,7 @@ The previously advertised primary and the concurrently promoted H38-1 are existi
 - [Current auditable review and next steps](knowledge/51_current_review_and_next_steps.md) · [Current negative JSON run card](evidence/current_run_card.json)
 - [Nine-repository artifact audit](evidence/priority_repository_audit.json) · [Actual duplicate measurements](evidence/current_submission_audit.json)
 - [Concurrent H38 claim rejected: byte-history and duplicate proof](evidence/current_concurrent_claim_review.json)
+- [Observed PR39 release, real hosted HTTP checks and 8/10 source refresh](evidence/current_deployment_verification.json) — Pages source remains legacy; compatibility aliases are locally validated.
 - [Input/cache verification](evidence/current_input_audit.json) · [Shared-tool pins](registry/protocol_assets.json) · [Synthetic software contract tests](evidence/shared_template_contract.json)
 
 Read this current section, the detailed review, and the standing brief before substantive work. The old README is retained unchanged in the collapsed historical record below. **Its old slot labels, projections, unbuffered holdouts, 200-character notes, missing-data statements and download recommendations are superseded, not current authorization.**

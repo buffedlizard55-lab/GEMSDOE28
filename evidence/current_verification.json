@@ -1,6 +1,6 @@
 {
   "label": "SOFTWARE / INTEGRITY VERIFICATION; not HOLDOUT-DTI",
-  "checked_at_utc": "2026-10-25T23:06:35.070778+00:00",
+  "checked_at_utc": "2026-10-25T23:16:26.640251+00:00",
   "branch": "arena/a51a5f3f-gemsdoe28",
   "session_base_commit": "22cd17590460d8e76e180957f31f75d85dd3ec17",
   "concurrent_main_integrated": "f747c884369667ffc0daf3b780141918c57bce0b",
@@ -23,15 +23,15 @@
   ],
   "local_tests": {
     "command": ".venv/bin/python -m pytest -q -rs",
-    "passed": 451,
+    "passed": 452,
     "skipped": 0,
-    "stdout": "........................................................................ [ 15%]\n........................................................................ [ 31%]\n........................................................................ [ 47%]\n........................................................................ [ 63%]\n........................................................................ [ 79%]\n........................................................................ [ 95%]\n...................                                                      [100%]\n451 passed in 18.58s\n"
+    "stdout": "........................................................................ [ 15%]\n........................................................................ [ 31%]\n........................................................................ [ 47%]\n........................................................................ [ 63%]\n........................................................................ [ 79%]\n........................................................................ [ 95%]\n....................                                                     [100%]\n452 passed in 19.64s\n"
   },
   "clean_checkout_tests": {
     "command": "python -m pytest -q -rs in tracked-file export without ignored data",
-    "passed": 446,
+    "passed": 447,
     "skipped": 5,
-    "stdout": "........................................................................ [ 15%]\n.........................................s....................s......... [ 31%]\n..............................................s......................... [ 47%]\n........................................................................ [ 63%]\n........................................................................ [ 79%]\n....................................................s..................s [ 95%]\n...................                                                      [100%]\n=========================== short test summary info ============================\nSKIPPED [1] tests/test_heatflow_euler.py:125: Real footprint or sb_heat_flow_in_footprint.json unavailable\nSKIPPED [1] tests/test_inversion.py:118: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.\nSKIPPED [1] tests/test_newinfo.py:103: restored input rasters not present\nSKIPPED [1] tests/test_thermal.py:140: GDR well/spring table not restored in this checkout\nSKIPPED [1] tests/test_vector_and_oof.py:44: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.\n446 passed, 5 skipped in 10.27s\n",
+    "stdout": "........................................................................ [ 15%]\n.........................................s....................s......... [ 31%]\n..............................................s......................... [ 47%]\n........................................................................ [ 63%]\n........................................................................ [ 79%]\n.....................................................s.................. [ 95%]\ns...................                                                     [100%]\n=========================== short test summary info ============================\nSKIPPED [1] tests/test_heatflow_euler.py:125: Real footprint or sb_heat_flow_in_footprint.json unavailable\nSKIPPED [1] tests/test_inversion.py:118: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.\nSKIPPED [1] tests/test_newinfo.py:103: restored input rasters not present\nSKIPPED [1] tests/test_thermal.py:140: GDR well/spring table not restored in this checkout\nSKIPPED [1] tests/test_vector_and_oof.py:44: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.\n447 passed, 5 skipped in 10.72s\n",
     "limitation": "These five data-dependent checks run locally with restored inputs, not in a data-free CI checkout."
   },
   "lint": {
@@ -148,7 +148,7 @@
   "limits": [
     "No real-browser visual/mobile rendering test was performed; local HTTP and structural checks passed.",
     "No portal upload, authenticated organizer data or organizer receipt.",
-    "This is pre-merge local evidence. CI, PR merge and Pages deployment must be confirmed from GitHub outcomes; they are not predicted here."
+    "PR39 CI/merge/deployment verified; Pages source migration failed. Small root aliases pass both local publication layouts; their new followup PR still needs remote checks and merge. No unique scientific submission exists."
   ],
   "concurrent_safety_pull_requests_integrated": [
     35,
@@ -164,12 +164,42 @@
   },
   "pages_post_deploy_http_check": {
     "python_syntax": "PASS",
-    "execution": "Pending main-branch deployment",
-    "scope": "Runner must verify root/executive and legacy routes plus both exact SHA-bound current-card URLs; not visual or portal QA"
+    "execution": "PASS in observed post-feed deployment 40243382815 before root-alias followup",
+    "scope": "Runner must verify root/executive and legacy routes plus both exact SHA-bound current-card URLs; not visual or portal QA",
+    "workflow_run": "https://github.com/buffedlizard55-lab/GEMSDOE28/actions/runs/40243382815"
   },
   "release": {
     "pull_request": "https://github.com/buffedlizard55-lab/GEMSDOE28/pull/39",
-    "state_when_recorded": "OPEN; final merge-resolution head not yet pushed",
-    "scope": "Pre-merge local verification. Consult this PR and its closeout comment for actual CI/merge/deployment outcomes."
-  }
+    "state_when_recorded": "MERGED; compatibility followup awaiting separate PR/checks",
+    "scope": "PR39 CI/merge/deployment observed. New root-alias patch is locally verified but not yet merged; read the followup PR closeout for its remote outcome."
+  },
+  "local_publisher_compatibility": {
+    "scope": "Local HTTP layout compatibility, not remote/browser/portal QA",
+    "run_card_sha256": "7fda77081b782493d1ffb7266d3050ccd1687d10c0a6c5d6e96302f98496f6c4",
+    "layouts": {
+      "legacy_main_root": {
+        "status": "PASS",
+        "http_200_routes": [
+          "/",
+          "/executive-summary.html",
+          "/docs/",
+          "/docs/executive-summary.html",
+          "/data/current_run_card_2026-10-25.json",
+          "/docs/data/current_run_card_2026-10-25.json"
+        ]
+      },
+      "actions_artifact": {
+        "status": "PASS",
+        "http_200_routes": [
+          "/",
+          "/executive-summary.html",
+          "/docs/",
+          "/docs/executive-summary.html",
+          "/data/current_run_card_2026-10-25.json",
+          "/docs/data/current_run_card_2026-10-25.json"
+        ]
+      }
+    }
+  },
+  "observed_deployment_evidence": "evidence/current_deployment_verification.json"
 }
