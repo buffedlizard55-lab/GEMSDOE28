@@ -1375,11 +1375,17 @@ def main() -> int:
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
     session22_template = (ROOT / "site_templates" / "session22-result.html").read_text(encoding="utf-8")
+    session22_mofr_template = (ROOT / "site_templates" / "session22-mofr-result.html").read_text(encoding="utf-8")
+    session22_mofr_brief = """<section class=\"card callout-danger\" aria-label=\"Session 22 S22-MOFR result\">
+<h2>Session 22 S22-MOFR (2026-10-26): potential-field marker-offset lane — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
+<p>A separate concurrent lane generated a new, catalogue-blind raster from paired TMI and isostatic-gravity horizontal-gradient ridge endpoints (<code>gems28-s22-mofr-union-20261026-599452947272-allfinite.tif</code>, 42,480 dots). Leakage canary <strong>PASS</strong> (max feature AUC 0.538); registry novelty <strong>PASS</strong> (max |Spearman| 0.0164, max 3-px overlap 18.9% vs the full registry \u2014 genuinely unique). But <strong>HOLDOUT-DTI 0.03385 [0.0300, 0.0375] vs a freshly retrained baseline 0.14399</strong> (paired gain -0.1101, 95% CI [-0.1239, -0.0972], 0/4 folds positive). This is a distinct concurrent lane from S22-SIGN and S22-AUDIT (see below); never pool their numbers. <strong>Verdict: negative \u2014 zero weekly slots spent. Do not upload any file from this site.</strong></p>
+<p><a class=\"button quiet\" href=\"session22-mofr-result.html\">Session 22 S22-MOFR executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
+</section>"""
     current_review = render_focus_review()
     pages = {
-        "index.html": layout("Overview", current_review + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", session22_mofr_brief + current_review + s18_feed_html(feed), "Overview"),
         "cross-site-review.html": layout("Nine-site review", current_review, "Nine-site review"),
-        "executive-summary.html": layout("Executive summary", render_current_executive(), "Executive summary"),
+        "executive-summary.html": layout("Executive summary", session22_mofr_brief + render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
@@ -1390,6 +1396,7 @@ def main() -> int:
         "session20-result.html": session20_template,
         "session21-result.html": session21_template,
         "session22-result.html": session22_template,
+        "session22-mofr-result.html": session22_mofr_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
@@ -1419,6 +1426,13 @@ def main() -> int:
     # Preserve the separate signed-piedmont run card under its own name; all
     # generic current aliases refer to this later negative audit, not that run.
     (DOCS / "data/s22_run_card.json").write_text(json.dumps(read_json("evidence/s22_run_card.json"), indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    # Preserve the separate S22-MOFR (marker-offset) run card under its own name;
+    # a third distinct concurrent lane from S22-SIGN and S22-AUDIT. Never pool.
+    s22_mofr_card = read_json("evidence/s22_mofr_run_card.json")
+    (DOCS / "data/run_card_s22_mofr.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s22_mofr.json").write_text(
+        json.dumps(s22_mofr_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
+    )
     (DOCS / "data/current_run_card.json").write_bytes(current_card_path.read_bytes())
     (DOCS / "data/current_run_card_2026-10-27.json").write_bytes(current_card_path.read_bytes())
     (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")

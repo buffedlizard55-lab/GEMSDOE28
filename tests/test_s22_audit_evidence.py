@@ -37,7 +37,11 @@ def test_priority_novelty_has_every_direction_and_preserves_score_separation():
 def test_current_run_card_is_negative_and_archive_failures_are_bound():
     card = load("evidence/s22_audit_run_card.json")
     audit = load("evidence/s22_download_audit.json")
-    manifest = ROOT / "docs/downloads/manifest.json"
+    # docs/downloads/manifest.json is a live, mutable file (later sessions register new
+    # candidates into it); this audit's pinned hash can only ever bind the exact bytes
+    # it actually read at the time, which are preserved verbatim in this snapshot — the
+    # same pattern already used for evidence/pr39_manifest_snapshot.json.
+    manifest = ROOT / "evidence/pr59_s22_manifest_snapshot.json"
     assert audit["manifest_sha256"] == hashlib.sha256(manifest.read_bytes()).hexdigest()
     assert audit["status"] == "FAIL" and audit["check_count"] == 823
     assert set(audit["failures"]) == {"s22_archive_h40_vent_allfinite_outside_zero",

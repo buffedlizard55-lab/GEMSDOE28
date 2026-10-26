@@ -34,6 +34,22 @@ and frozen same-protocol best are missing. [Current run card](evidence/s22_audit
   shared tools and canaries, pre-/post-placement novelty checks, buffered visible-only whole-segment
   holdout, paired 95% CI and separate slot selector. See the linked audit for limitations.
 
+**Parallel-run disclosure:** three independent sessions ran concurrently under the S22 label from the same prompt: S22-AUDIT (above, a validation/corrective review, no new TIFF or experiment), S22-SIGN (a signed-piedmont detector, referenced inline above, also negative), and S22-MOFR (below, a potential-field marker-offset detector, also negative). All three reached independent negative/blocked verdicts. Never pool their numbers; each keeps its own run-card name (`evidence/s22_audit_run_card.json`, `evidence/s22_run_card.json`, `evidence/s22_mofr_run_card.json`).
+
+---
+
+# Session 22 (`S22-MOFR`) — 2026-10-26 UTC (read first every session)
+
+## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
+
+- **Download:** [`docs/downloads/gems28-s22-mofr-union-20261026-599452947272-allfinite.tif`](docs/downloads/gems28-s22-mofr-union-20261026-599452947272-allfinite.tif) (826,992 bytes · all-finite `{0,1}` in `[0,1]` · 42,480 off-catalogue dots · EPSG:32611 · template-exact grid/CRS/transform)
+- **Lane (H44-1):** potential-field **marker-offset / piercing-point realignment detector** — ridge-skeletonize the TMI horizontal-gradient band (`tmi_hg`) and the isostatic-gravity horizontal-gradient band (`iso_grav_anom_hg`) independently, extract endpoints, keep only strike-compatible (±20°, same tolerance as `newinfo.steppover_links`), gap-bounded, offset-bounded endpoint pairs. Never reads `labels.tif`. A genuinely new mechanism, distinct from every prior session's elevation/hillshade/LiDAR/heat-flow/vent-proximity features.
+- **Gates:** leakage canary **PASS** (max single-feature AUC 0.5378, all four candidate features ≈ chance) · registry novelty **PASS** vs the full 9-site + local registry (max |Spearman| 0.0164, max 3-px dot overlap 18.9% — genuinely unique, not a duplicate) · format validator **PASS** (`variant_strict_whole_array_no_nan_allowed`) · **HOLDOUT-DTI 0.033855 [95% CI 0.029998, 0.037495] vs a freshly retrained baseline 0.143993 on the same SegmentHoldout folds — paired gain −0.110138 [−0.123912, −0.097175], 0/4 folds improved → verdict `negative`, 0 slots spent.**
+- **What this means:** this is now the fifth independently preregistered, catalogue-blind, physically motivated hypothesis in a row (after H42-1 migration/relocation, S20V vesselness/LiDAR-scarp, H43 topological closure, S21 PU-HGB) to lose decisively to the simple retrained-baseline / "dotted" catalogue-adjacent family (the H19-5 lineage behind the 0.2778 GEMSDOE32 champion). No file produced this session beats 0.2778, and no evidence from this session changes the public leaderboard high of 0.4413. The project's standing finding — hand-built geological detectors within this feature stack and holdout design are very unlikely to close that gap without new external data or a materially different modelling approach — is now strong, not speculative.
+- **Deliverables:** [Session 22 S22-MOFR executive page](docs/session22-mofr-result.html) · [Full report](knowledge/63_s22_mofr_result.md) · [Preregistration (frozen lane, mechanism, non-fault mimics)](knowledge/62_s22_mofr_preregistration.md) · [JSON run card](evidence/s22_mofr_run_card.json) · [Experiment code](scripts/run_s22_mofr.py)
+- **Registry-check scope caveat:** the registry novelty check above was built from every `docs/downloads/*.tif` and freshly-pulled priority-repository raster present at run time; it ran concurrently with — and therefore does not include — the separate S22-SIGN and S22-AUDIT sessions' own artifacts added to this repository afterward. This is the same inherent limitation already disclosed for every prior pair of concurrent sessions (e.g. S20-NCHC vs S20-H43, S21-PUHGB vs S21-AUDIT); it is not evidence of a duplicate, only an acknowledged gap pending a future merged-registry re-check.
+
+
 ---
 
 # Session 21 (`S21-PUHGB`) — 2026-10-26 UTC (read first every session)
