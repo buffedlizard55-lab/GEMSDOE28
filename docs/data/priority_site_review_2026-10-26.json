@@ -178,16 +178,51 @@
     "recommendation_status": "LEARNING REFERENCE ONLY — NOT AN APPROVED SUBMISSION",
     "why": "Largest user-supplied site value; no receipt ties the number to the TIFF. The pixel set reuses GEMSDOE28 solo dots and violates the requested novelty threshold.",
     "new_tiff_this_review": false,
-    "download_decision": "No current TIFF is OK to submit. The previously generated S21-PUHGB file may be downloaded for research only; its holdout gate is negative and final-dot uniqueness fails against one archived probe."
+    "download_decision": "No file is approved to submit. The S22-SIGN TIFF is the newest generated research candidate, passes local format and its scoped registry gate, but fails holdout superiority; do not submit."
   },
   "limits": [
     "No organizer submission-page receipts were available for any of the nine reported scores.",
     "No score projection should be interpreted as an organizer score; the S21 projection is conditioned on an unverified 0.2778 anchor and an older local holdout protocol.",
     "The user-provided leaderboard values 0.3195 and 0.4413 conflict; a dated 2026-10-25 repository observation of 0.4413 exists, but is not a current check or submission receipt.",
     "The S21 archive-wide file audit failed: 12 of 44 TIFFs are unregistered. Cached prepared features are absent in this checkout; the explicit method lane and synchronized global registry are also absent.",
-    "No new experiment or submission raster was generated in the latest audit review. No file is approved or eligible for a competition slot."
+    "No new experiment or submission raster was generated in the latest audit review. No file is approved or eligible for a competition slot.",
+    "S22-SIGN run card reports no 95% CI; do not invent one. Its uniqueness registry has 22 members and is not a complete record of all historical/private concurrent submissions."
   ],
   "candidate_review": {
+    "session": "S22-SIGN (separate concurrent lane; source branch merged in PR #57)",
+    "file": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+    "sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+    "submission_name": "GEMSDOE28-S22-SIGNED-PIEDMONT-20261026-08703322d2af",
+    "note": "S22 SIGN break-slope+asym pol 37692d HOLDOUT 0.0547 vs 0.1219 gain -0.0673 | DO NOT SUBMIT",
+    "score_estimate": 0.18,
+    "score_estimate_range": [
+      0.16,
+      0.2
+    ],
+    "score_estimate_class": "MODEL PROJECTION — not a score; holdout-ratio to an unverified 0.2778 anchor; range is not an organizer confidence interval",
+    "holdout_dti": 0.05466427133794576,
+    "holdout_ci95": null,
+    "withheld_positives": 60988,
+    "holdout_evaluator": "gems-segment-pooled-v1 (local quadrant proxy, 4 folds × 3 seeds, 12 cells; paired CI not recorded in the run card)",
+    "baseline_dti": 0.12191439631459906,
+    "paired_delta": -0.06725012497665331,
+    "paired_delta_ci95": null,
+    "uniqueness": "PASS within the run-specific 22-prior-raster registry: max final-dot overlap 43.29%, max |Spearman| 0.0283. This is not proof of uniqueness against every historical or concurrent private raster.",
+    "registry_members": 22,
+    "format": "PASS in the all-finite run card: single-band float32, whole-array [0,1], exact EPSG:32611 / 3730×3292 / transform",
+    "verdict": "NEGATIVE — research download only; DO NOT SUBMIT",
+    "submission_ready": false,
+    "parallel_disclosure": "This is the distinct S22-SIGN lane from PR #57. The S22 scorecard audit in this branch ran zero experiments; do not combine their results.",
+    "nan_file": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
+    "zip_file": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip",
+    "bytes_allfinite": 826250,
+    "run_card": "evidence/s22_run_card.json",
+    "archive_coverage": "evidence/s22_archive_coverage.json",
+    "archive_unregistered_count": 14,
+    "archive_tif_count": 48,
+    "prior_candidate_link": "downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif"
+  },
+  "prior_candidate_s21": {
     "session": "S21-PUHGB, 2026-10-26 (historical generated artifact; not a fresh run)",
     "file": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif",
     "sha256": "2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c",

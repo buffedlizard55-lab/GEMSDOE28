@@ -1,11 +1,16 @@
-# Current review — S22 scorecard audit · 2026-10-26 UTC (read first every session)
+# Current review — S22-SIGN result + S22 audit · 2026-10-26 UTC (read first every session)
 
-**Decision: no approved submission.** The latest audit generated no new raster. The newest prior candidate (S21-PUHGB) is downloadable for research only, not submission: it failed holdout superiority and the strict uniqueness threshold (72.3% of final dots within 3 px of one registry raster). The archive audit also remains incomplete: 12/44 TIFFs lack manifest entries. Fresh S22 preflight restored and verified the nine pinned shared-template assets, but blocks experiments because there is no explicit method lane, complete synchronized registry, same-protocol frozen baseline, or prepared feature cache.
+**Decision: no approved submission.** The newest generated candidate is the separate S22-SIGN signed-piedmont TIFF, downloadable for research only. Its all-finite GeoTIFF passes local format/range and its 22-member run registry novelty checks, but HOLDOUT-DTI is negative (0.0547 vs 0.1219 baseline); **DO NOT SUBMIT**. Its live-score estimate (~0.18 [0.16–0.20]) is a MODEL PROJECTION, not a score; paired 95% CI was not recorded in that run card. The candidate is from a distinct concurrent lane and its result must not be pooled with this S22 audit.
+
+- **Research-only artifact (not portal-approved):** [`gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif`](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif) · 37,692 dots · SHA-256 `d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229`.
+
+This S22 scorecard audit itself generated no raster and ran zero geological experiments. Its fresh preflight verifies the nine pinned shared-template assets but blocks experiment execution because there is no explicit lane assignment for this run, complete synchronized registry, same-protocol frozen baseline, or prepared feature cache. The refreshed filename/manifest coverage check is incomplete: 14/48 TIFFs are unregistered (content not audited in this pass); the prior full raster audit covered 44 files and found 12 unregistered.
 
 - [Nine-site scorecard: files, owner-reported values, uniqueness findings, downloads](docs/cross-site-review.html)
 - [Three-pass review, interpretation of 0.2778, limitations and next steps](knowledge/62_s21_scorecard_review_2026-10-26.md)
-- [S22 preflight](evidence/s22_preflight.json) · [S21 download audit](evidence/s21_download_audit.json)
-- Historical highest cited site value: GEMSDOE32 0.2778, **USER-REPORTED / UNVERIFIED**; no receipt links that number to the file. Do not copy it.
+- [S22-SIGN result and run card](knowledge/63_s22_result.md) · [S22 audit preflight](evidence/s22_preflight.json) · [current filename coverage](evidence/s22_archive_coverage.json) · [prior full raster audit](evidence/s21_download_audit.json)
+- Historical highest cited value among the nine listed sites: GEMSDOE32 0.2778, **USER-REPORTED / UNVERIFIED**; no receipt links that number to the file. Do not copy it.
+- Official-source provenance for this reconciliation: [repository source ledger](docs/sources.html) is retained, but no official competition/data page, leaderboard, or submission receipt was independently refreshed in this turn.
 
 ---
 

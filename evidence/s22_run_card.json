@@ -1,0 +1,218 @@
+{
+  "session": "S22-SIGN",
+  "hypothesis": "Signed piedmont break-in-slope concavity + asymmetric LiDAR polarity + subsurface concordance hybrid recovers range-front scarps missed by symmetric Hessian.",
+  "mechanism": "DETM profile curvature \u2202\u00b2z/\u2202n\u00b2 >0 along slope-normal \u00d7 (upface-downface)/255 \u00d7 coherence \u00d7 (mag+grav+depth gradient) geometric mean; B=2 hygiene 200m, dot_thin 2.8",
+  "non_fault_mimic": "Terrace risers (symmetric), Lahontan shorelines, GeoDAWN E-W flight stripes, road cuts",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1 (local quadrant proxy, 4 folds x 3 seeds, 12 cells)",
+    "withheld_positives": 60988,
+    "candidate_mean": 0.05466427133794576,
+    "baseline_mean": 0.12191439631459906,
+    "paired_gain": -0.06725012497665331,
+    "gate_pass": false
+  },
+  "canary": {},
+  "canary_pass": true,
+  "registry": {
+    "members": 22,
+    "max_abs_surface_spearman": 0.08441677130578061,
+    "max_abs_final_spearman": 0.0283,
+    "max_final_overlap_3px": 0.4329,
+    "worst_spearman": {
+      "name": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+      "spearman": 0.0283,
+      "overlap3px": 0.13
+    },
+    "worst_overlap": {
+      "name": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+      "overlap3px": 0.4329,
+      "ref_dots": 61328
+    },
+    "pre_pass": true,
+    "post_pass": true
+  },
+  "raster_sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+  "validator": {
+    "nan": {
+      "file": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
+      "bytes": 1590594,
+      "sha256": "0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165",
+      "variant": "nan",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "nodata_convention": {
+          "pass": true,
+          "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+          "hard": true
+        },
+        "outside_footprint_is_nan": {
+          "pass": true,
+          "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+          "hard": true
+        },
+        "nodata_tag_is_nan": {
+          "pass": true,
+          "detail": "nodata=NaN declared, same as the sample submission",
+          "hard": true
+        },
+        "masked_read_in_0_1": {
+          "pass": true,
+          "detail": "masked count=5167373, min=0, max=1",
+          "hard": true
+        },
+        "nan_aware_range_in_0_1": {
+          "pass": true,
+          "detail": "nanmin=0 nanmax=1",
+          "hard": true
+        },
+        "strict_whole_array_range_ignoring_nan_is_informational": {
+          "pass": false,
+          "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+          "hard": false
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": true
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 37692,
+      "nonfinite_inside_px": 0,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    },
+    "allfinite": {
+      "file": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+      "bytes": 826250,
+      "sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+      "variant": "allfinite",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "nodata_convention": {
+          "pass": true,
+          "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+          "hard": true
+        },
+        "outside_footprint_is_zero_and_finite": {
+          "pass": true,
+          "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+          "hard": true
+        },
+        "strict_whole_array_range": {
+          "pass": true,
+          "detail": "whole-array min=0 max=1",
+          "hard": true
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": true
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 37692,
+      "nonfinite_inside_px": 0,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    },
+    "no_nan_inside": true,
+    "range_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true
+  },
+  "submission_name": "GEMSDOE28-S22-SIGNED-PIEDMONT-20261026-08703322d2af",
+  "submission_file": "docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+  "submission_nan_file": "docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
+  "submission_zip": "docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip",
+  "content_id": "08703322d2af",
+  "note": "S22 SIGN break-slope+asym pol 37692d HOLDOUT 0.0547 vs 0.1219 gain -0.0673 | DO NOT SUBMIT",
+  "diagnostics": {
+    "profile_curv_mean": 0.00012,
+    "profile_curv_p95": 0.0005148813361302018,
+    "f_concavity_mean": 0.19686441123485565,
+    "f_polarity_mean": 0.16736891865730286,
+    "f_subsurface_mean": 0.4662235677242279,
+    "S_mean": 0.06563208252191544,
+    "S_p95": 0.5129687190055847,
+    "S_max": 1.0000009536743164
+  },
+  "experiments_run": 3,
+  "elapsed_seconds": 157.2,
+  "verdict": "negative",
+  "submission_ready": false,
+  "slot_selected": false,
+  "limitations": [
+    "Owner-mirrored DEM/LiDAR descriptors not organizer-authenticated",
+    "Profile curvature proxy via 100m DEM gradients, not field-validated",
+    "Holdout is quadrant LOSFO proxy, not organizer hidden truth",
+    "No new external data beyond already-restored mirrors"
+  ],
+  "irregularity_note": "Self-reference in initial uniqueness scan corrected: max overlap 43.29% (<70%) and max |Spearman| 0.0283 (<0.90) vs 22 prior registry rasters; candidate is genuinely unique."
+}

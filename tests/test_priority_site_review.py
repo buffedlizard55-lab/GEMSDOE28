@@ -58,12 +58,14 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertIn("NOT CERTIFIED", self.page)
         self.assertIn("NOT UNIQUE", self.page)
         self.assertIn("Download cited TIFF", self.page)
-        self.assertIn("gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif", self.page)
-        self.assertIn("72.3%", self.page)
+        self.assertIn("gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif", self.page)
+        self.assertIn("72.3%", self.page)  # S21's strict uniqueness failure remains historical context.
+        self.assertIn("14 of 48 TIFFs", self.page)
+        self.assertIn("95% CI not recorded", self.page)
         self.assertIn("DO NOT SUBMIT", self.page)
         for site in ["GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30", "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"]:
             self.assertIn(site, self.page)
-        self.assertIn('href="session21-result.html">Latest result</a>', self.page)
+        self.assertIn('href="session22-result.html">Latest result</a>', self.page)
         self.assertNotIn("h33-h33-2-b2</code> (0.2778) — learning reference only", self.page)
 
     def test_scorecard_download_links_are_commit_pinned_and_novelty_is_not_overclaimed(self):
@@ -75,6 +77,13 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertFalse(self.data["candidate_review"]["submission_ready"])
         self.assertEqual(self.data["candidate_review"]["verdict"], "NEGATIVE — research download only; DO NOT SUBMIT")
         self.assertIn("MODEL PROJECTION", self.data["candidate_review"]["score_estimate_class"])
+        self.assertIsNone(self.data["candidate_review"]["holdout_ci95"])
+        self.assertIsNone(self.data["candidate_review"]["paired_delta_ci95"])
+        coverage = json.loads((ROOT / "evidence/s22_archive_coverage.json").read_text())
+        self.assertEqual((coverage["total_tif_count"], coverage["unregistered_tif_count"]), (48, 14))
+        self.assertIn("Filename/manifest coverage only", coverage["scope"])
+        published = json.loads((ROOT / "docs/data/s22_archive_coverage.json").read_text())
+        self.assertEqual(published, coverage)
 
     def test_s22_preflight_blocks_science_until_required_inputs_exist(self):
         preflight = json.loads((ROOT / "evidence/s22_preflight.json").read_text())
@@ -88,7 +97,7 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertTrue(preflight["shared_template"]["passed"])
         self.assertEqual(len(preflight["failures"]), 4)
         self.assertIn("Cached feature stack unavailable", preflight["failures"][-1])
-        self.assertIn("S22 experiment preflight (blocked)", self.page)
+        self.assertIn("S22 audit preflight (blocked; zero experiments)", self.page)
 
     def test_session19_card_is_negative_and_does_not_claim_a_new_raster(self):
         card = json.loads((ROOT / "evidence/session19_run_card.json").read_text())

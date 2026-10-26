@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 22 Result — S22 Signed Piedmont | GEMSDOE28</title>
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
+<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session22-result.html" aria-current="page">S22 Result</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main>
+<section class="card callout-danger" aria-label="Session 22 submission readiness" data-submission-ready="false">
+<p class="eyebrow">SESSION 22 · S22-SIGN · 2026-10-26 → 2026-10-27 UTC · AUTOMATED GATES, NO HUMAN INSPECTOR</p>
+<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
+<p><strong>NEW RESEARCH TIFF — local format PASS, scoped novelty checks PASS:</strong> <code>gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif</code> (37,692 dots · SHA-256 <code>d9c23570…</code> · all-finite [0,1] · EPSG:32611 · 3730×3292). Format PASS · leakage canary PASS · novelty PASS within the 22-prior run registry only (max 3-px overlap 43.3%, max |Spearman| 0.028; incomplete historical/private registry scope) · <strong>HOLDOUT-DTI 0.0547 vs 0.1219 baseline (Δ −0.0673; 60,988 withheld positives; paired 95% CI not recorded) → NEGATIVE. Do not upload.</strong> Estimated live score (MODEL PROJECTION, not a score): ~0.18 [0.16–0.20] via holdout-ratio to unverified 0.2778 anchor; range is a projection, not a confidence interval.</p>
+<div class="download-actions">
+<button class="button" type="button" disabled aria-disabled="true">Submission download locked</button>
+<a class="button" href="downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif" download>1-Click Download S22 Unique GeoTIFF — Research Only / DO NOT SUBMIT (allfinite, [0,1])</a>
+<a class="button secondary" href="downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif" download>Template-NaN GeoTIFF (.tif)</a>
+<a class="button quiet" href="downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip" download>ZIP Bundle (.zip)</a>
+<a class="button quiet" href="data/current_run_card_2026-10-27.json" download>JSON run card</a>
+</div>
+<p><strong>Unique portal name:</strong> <code>GEMSDOE28-S22-SIGNED-PIEDMONT-20261026-08703322d2af</code><br>
+<strong>Short submission note (90/140 chars):</strong></p>
+<div class="note-box"><code>S22 SIGN break-slope+asym pol 37692d HOLDOUT 0.0547 vs 0.1219 gain -0.0673 | DO NOT SUBMIT</code><button class="copy-note" type="button" data-copy-note="S22 SIGN break-slope+asym pol 37692d HOLDOUT 0.0547 vs 0.1219 gain -0.0673 | DO NOT SUBMIT" aria-label="Copy note">Copy note</button></div>
+<p class="meta">SHA-256 allfinite <code>d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229</code> · nan variant <code>0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165</code> · 37,692 off-catalogue positive pixels · 826,250 bytes · single-band float32 · strict [0.0,1.0] finite across 12,279,160 cells · EPSG:32611 · exact CRS/shape/geotransform PASS.</p>
+</section>
+
+<section class="section">
+<h1>Session 22 — Signed Piedmont Break-in-Slope: Unique Bytes, Negative Geology Gate</h1>
+<p><strong>Executive decision: DO NOT SUBMIT.</strong> S22 declared its lane in writing before experimenting (<a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/62_s22_preregistration.md">frozen preregistration</a>), ran 3/3 experiments within budget (157 s), and failed closed on pooled holdout. No weekly slot was spent. This page is the single-session executive summary plus the 9-site audit you requested.</p>
+
+<h2>1. Why GEMSDOE32 h33-h33-2-b2 (0.2778) leads the 9 requested sites — PhD-level forensics</h2>
+<p>Byte-exact forensic lineage (evidence/s18_champion_forensic.json, replicated in S21) proves the entire 0.1922 → 0.2778 progression across 9 sites used <strong>one unchanged probability surface (H19-5)</strong> with zero new fault discovery:</p>
+<ol>
+<li><code>H19-5 solid ridges</code> (GEMSDOE24 e27054cf, 121,131 px): 0.1922 — USER-REPORTED, UNVERIFIED</li>
+<li><code>dot_thin(H19-5, 1.5)</code> (GEMSDOE24 989f59505db1, 60,069 px): 0.2477 (+0.0555)</li>
+<li><code>dot_thin(H19-5, 2.8)</code> (GEMSDOE25/30 e56ea318af89, 44,090 px): 0.2600 (+0.0123)</li>
+<li>Prune d<sub>cat</sub> ≤100 m (GEMSDOE28/31 8acb75e1f2cc, 40,199 px): 0.2708 (+0.0108)</li>
+<li>Prune d<sub>cat</sub> ≤200 m (GEMSDOE32 e5eb6e7e, 37,654 px = 40,199 − 2,545 px, 0 added): <strong>0.2778 (+0.0070)</strong></li>
+<li>GEMSDOE36 9b9ea4e6 (38,854 px = e5eb6e7e ∪ 1,200 PINN dots): 0.2750 (−0.0028, proving those 1,200 added dots were below break-even)</li>
+</ol>
+<p><strong>Exact Tversky calculus (official DrivenData metric, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967</a>):</strong> DTI = TP<sub>w</sub> / (TP<sub>w</sub> + 0.2 FP<sub>w</sub> + 0.8 FN<sub>w</sub>) with 300 m triangular kernel. At DTI=0.2778 the marginal break-even is τ = 0.2·DTI/(1−0.2·DTI) = <strong>0.0588 credit/dot</strong> (calibrated |G|≈12,226 px from lattice submission). Catalogue-flank blur dots (100–200 m from mapped faults) earn only ~0.0034 credit/dot (17× below τ); deleting 6,436 of them removed ~1,280 denominator FP<sub>w</sub> mass while sacrificing ≈22 TP<sub>w</sub>. Poisson-disk thinning at 2.8 px works identically: contiguous 1-px ridges pay 3× FP<sub>w</sub> inside each 300 m disk while max<sub>x</sub> k(‖x−g‖) is already saturated at ≥0.53 by 2.8-px spaced dots.</p>
+<p><strong>Are we able to generate >0.2778?</strong> Yes, mathematically: 0.2778 ≈ 39% weighted recall (TP<sub>w</sub>≈4,760 px). The live leaderboard #1 at 0.4413 (2026-10-26 public observation, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>, reconciled vs 0.3195 at 2026-10-03 #1 DARD) corresponds to ~61–70% recall (TP<sub>w</sub>≈7,500–8,500 px). Reaching it with a <em>unique</em> submission requires <strong>new high-credit dots</strong> (e<sub>marg</sub> >0.0588), not further pruning — specifically signed piedmont concavity + subsurface concordance (H43-2) to recover degraded Basin-and-Range range-front scarps missed by the symmetric Hessian that caused S20-NCHC's NE/SE −0.029/−0.038 losses. S22 tested the first half of that fusion; its −0.067 pooled interval says this exact parameterization is not the answer, but the lane remains the highest-expected-value direction per the fold diagnostics.</p>
+
+<h2>2. Leak-safe holdout proof (gems-segment-pooled-v1)</h2>
+<p>Hide whole fault components +1500 m buffer per quadrant; derive every catalogue distance from <code>fold["visible"]</code> only; mask visible faults pixel-exactly; pool DTI across 60,988 withheld positives (4 quadrants × 3 seeds =12 cells, 583×10 km bootstrap). This session's holdout is a <strong>local proxy, never an organizer score</strong>.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Metric</th><th>S22-SIGN candidate</th><th>Retrained 32-band VIS baseline</th><th>Paired Δ</th></tr></thead>
+<tbody>
+<tr><td><strong>HOLDOUT-DTI</strong> (pooled, 12 cells)</td><td>0.05466</td><td>0.12191</td><td><strong>−0.06725</strong></td></tr>
+<tr><td>Per-fold wins</td><td>—</td><td>—</td><td>0/4 folds (NE/SE dragged)</td></tr>
+<tr><td>Emitted (typical fold)</td><td>~8–9k px</td><td>~9–10k px</td><td>fewer dots, far less recall</td></tr>
+</tbody>
+</table></div>
+<p>Paired gain is wholly negative; the deterministic signed-surface under-recalls withheld faults vs the data-driven baseline. Verdict <code>negative</code>, 0 slots spent. The non-fault mimic is symmetric terrace/Lahontan shorelines (high concavity but no polarity) — this surface still admits too many of them relative to true scarps.</p>
+
+<h2>3. Leakage canary: each physical leg</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature leg</th><th>Single-feature AUC (max polarity)</th><th>0.90 gate</th></tr></thead>
+<tbody>
+<tr><td>f_concavity (∂²z/∂n² >0)</td><td>~0.54</td><td>PASS</td></tr>
+<tr><td>f_polarity (upface−downface)</td><td>~0.56</td><td>PASS</td></tr>
+<tr><td>f_coherence (coh100)</td><td>~0.51</td><td>PASS</td></tr>
+<tr><td>f_mag_tubular (|∇ tmi_hg|)</td><td>~0.52</td><td>PASS</td></tr>
+<tr><td>f_grav_tubular (|∇ grav|)</td><td>~0.53</td><td>PASS</td></tr>
+<tr><td>f_emcb_tubular (|∇ depth_to_base|)</td><td>~0.52</td><td>PASS</td></tr>
+<tr><td>combined S(x)</td><td>~0.58</td><td>PASS</td></tr>
+</tbody>
+</table></div>
+<p>Both AUC polarities checked per fold via shared tool. PASS means no single feature leaks catalogue label identity; it does not prove usefulness.</p>
+
+<h2>4. The 9 requested sites — executive scorecard (all OWNER-REPORTED / UNVERIFIED)</h2>
+<p>Every row is a user-supplied score claim from the prompt; <strong>no organizer receipt binds any score to any raster in git</strong>. Rankings describe only those claim values. The linked pinned snapshots are for manual inspection, not receipts. The <em>Best file to download</em> column is the highest-claimed artifact per site; its <em>Estimated live score</em> is the owner's claim verbatim (not our model, not an organizer score). <em>Unique vs requested 9?</em> compares that artifact's bytes to the other 8 focus-site artifacts (not to our new S22 file).</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Site</th><th>Best cited submission (pinned)</th><th>Owner-reported claim</th><th>Measured dots</th><th>Estimated score*</th><th>Unique vs other 9 focus sites?</th><th>Manual-review source</th></tr></thead>
+<tbody>
+<tr><td><strong>GEMSDOE24</strong></td><td><code>gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif</code></td><td>0.2477</td><td>60,069</td><td>0.2477 (claim)</td><td>Yes — D1.5 family, 15k dots distinct from D2.8</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE24/">Site</a></td></tr>
+<tr><td><strong>GEMSDOE25</strong></td><td><code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif</code></td><td>0.2600</td><td>44,090</td><td>0.2600 (claim)</td><td>Duplicate of GEMSDOE30 (byte-identical footprint) — not distinct</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE25/blob/8c32763ca00a04ba82a27aac047952a0e3f9ef60/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE25/">Site</a></td></tr>
+<tr><td><strong>GEMSDOE27</strong></td><td><code>gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif</code></td><td>0.2449</td><td>61,328</td><td>0.2449 (claim, below its own D1.5 parent — net drag)</td><td>Yes — T-v2 1,259 added gap-closure dots, but live-negative</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/f55cda6b0a940e44f2b4fdc516d212cd2729933c/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE27/">Site</a></td></tr>
+<tr><td><strong>GEMSDOE28</strong></td><td><code>gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif</code></td><td>0.2710</td><td>37,660</td><td>0.2710 (claim; local manifest: UNSCORED, holdout +0.0026 valid)</td><td>Yes — rung3.0 repack, 4,373 dots shifted vs D2.8</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/604af8e87e88080d6cdc2e887b81ea60f2013c4c/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE28/">Site</a></td></tr>
+<tr><td><strong>GEMSDOE30</strong></td><td><code>gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif</code></td><td>0.2600</td><td>44,090</td><td>0.2600 (claim)</td><td>Duplicate of GEMSDOE25 D2.8 — not distinct</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE30/blob/44ebe89365ab5b5b5ac73e9c77787239ae51707b/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE30/">Site</a></td></tr>
+<tr><td><strong>GEMSDOE31</strong></td><td><code>gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif</code></td><td>0.2708</td><td>40,199</td><td>0.2708 (claim; = solo d2.8 minus 1-px ring)</td><td>Yes — but 94% 3-px overlap with GEMSDOE32 champion (dup family)</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE31/blob/ecdf391d955e1ae199e12f9537026b65aa5ddb7e/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE31/docs/">Site</a></td></tr>
+<tr><td><strong>GEMSDOE32</strong></td><td><code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></td><td><strong>0.2778 — highest claim across 9</strong></td><td><strong>37,654</strong></td><td><strong>0.2778 (claim, own audit JSON: UNSCORED, MODEL 0.2747)</strong></td><td>Yes — solo minus 2-px ring (2,545 dots removed, 0 added)</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/5786b21a1674b26ee525e8e9bf048e2e0f50fc0e/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">Site</a></td></tr>
+<tr><td><strong>GEMSDOE33</strong></td><td><code>GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif</code></td><td>0.2632</td><td>41,865</td><td>0.2632 (claim)</td><td>Yes — tip-stepover +3,711 dots, but below D2.8</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f618cc54773bd9b4d6c2b3ebf78103a05cc10cb6/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE33/">Site</a></td></tr>
+<tr><td><strong>GEMSDOE36</strong></td><td><code>gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif</code></td><td>0.2750</td><td>38,854</td><td>0.2750 (claim = champion +1,200 PINN dots, −0.0028)</td><td>Yes — champion +1,200 new dots (negative marginal)</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif">Pinned TIFF</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE36/docs/">Site</a></td></tr>
+</tbody>
+</table></div>
+<p class="meta">*Estimated score = owner-reported claim verbatim; local HOLDOUT-DTI is ~0.13–0.14 for this family (S20-NCHC baseline), not 0.27. No organizer receipt in git proves any claim. Leaderboard #1 is now 0.4413 (2026-10-26 public observation, <code>xiaofanhu</code>), not 0.2778 — none of these 9 files reach it.</p>
+
+<h2>5. What to download — and whether to submit</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>File to download (this repo)</th><th>Content</th><th>Estimated score</th><th>Unique vs 9 focus sites + 112-registry?</th><th>OK to download? OK to submit?</th></tr></thead>
+<tbody>
+<tr><td><a href="downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif" download><code>gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif</code></a> (+ <a href="downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif">nan</a>, <a href="downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip">zip</a>)</td><td>S22-SIGN 37,692 signed break-slope + asymmetry dots (new lane, this session)</td><td>HOLDOUT-DTI 0.0547 vs 0.1219 (pooled proxy, not a live score); MODEL projection ~0.18 vs 0.2778 champion anchor</td><td>Yes — 43.3% max 3-px overlap, |r| 0.028 (both &lt;70%/0.90)</td><td><strong>Download: YES (research) · Submit: NO — holdout negative, 0 slots spent</strong></td></tr>
+<tr><td><a href="downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif"><code>gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif</code></a></td><td>S20-NCHC nematic+claycap 40,071 dots (prior best internal holdout)</td><td>HOLDOUT 0.1313 vs 0.1444 (won SW +0.0134); MODEL ~0.23</td><td>Yes — 53.6% overlap</td><td>Download YES · Submit NO</td></tr>
+<tr><td><a href="downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif"><code>gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif</code></a></td><td>S21-PUHGB 37,654 fresh PU-HGB dots</td><td>HOLDOUT 0.0839 vs 0.1062 (Δ−0.022)</td><td>Yes — but 72.3% vs dense probe (strict fail)</td><td>Download YES · Submit NO</td></tr>
+<tr><td colspan="5"><em>Historical 9-site best (learning only, never copy):</em> <a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/5786b21a1674b26ee525e8e9bf048e2e0f50fc0e/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">GEMSDOE32 h33-h33-2-b2 e5eb6e7e (37,654 px, 0.2778 claim)</a> — byte-verified as solo minus 2-px ring; plausible emission hygiene, not fault discovery; copying violates uniqueness.</td></tr>
+</tbody>
+</table></div>
+<p><strong>Overall executive answer:</strong> Among the 9 requested sites the highest <em>owner-reported</em> value is GEMSDOE32's 0.2778, but it is <strong>USER-REPORTED / UNVERIFIED</strong> (no organizer receipt, own audit JSON calls it UNSCORED). No file in this repository — including the new S22 research TIFF above — has positive holdout evidence to beat it, and the live leaderboard #1 (0.4413) is far above all of them. <strong>Do not submit any file from this site today.</strong> Download the S22/S20 files for research/reproducibility only.</p>
+
+<h2>6. How the “Predicted values must be in range [0,1]” portal error is prevented</h2>
+<p>The S22 TIFFs are <strong>all-finite, single-band float32 with values exactly {0,1}</strong> across 12,279,160 cells (5,167,373 inside footprint, 7,111,787 outside). The <code>allfinite</code> variant writes <code>0</code> outside the footprint (no NaN anywhere, strict [0,1] finite), the <code>nan</code> variant writes <code>NaN</code> outside with <code>nodata=NaN</code> (sample-submission convention). Both pass <code>scripts/verify_downloads.py</code> and <code>submission.check_probabilities</code> (no non-finite inside footprint, min 0 max 1). This <strong>prevents the local numeric defect described by that portal message</strong> for this exact new file; it does not diagnose the earlier file's cause or guarantee portal acceptance.</p>
+
+<h2>7. 5 ranked hypotheses for the next slot (untried)</h2>
+<p>See <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/62_s22_hypotheses.md">knowledge/62_s22_hypotheses.md</a> for full layer/physics/mimic justification. Ranked by expected HOLDOUT-DTI × cost:</p>
+<ol>
+<li><strong>H43-2 (this lane, now tested):</strong> Signed concavity + asymmetry — tested, negative (−0.067), closed.</li>
+<li><strong>H43-3:</strong> Euler SI=0 depth-coherence — next up; 3D contact solutions for blind intrabasinal faults under 200–1500 m fill.</li>
+<li><strong>H43-4:</strong> Coulomb stepover dilation bridge — strain-resolved tip bridging.</li>
+<li><strong>H43-5:</strong> Radiometric K/Th × silica disequilibrium alteration — blind geothermal halos.</li>
+<li><strong>H43-6:</strong> Multi-scale vesselness retune with E–W flight-line filter — fixes S20V upslope bias.</li>
+</ol>
+
+<h2>8. Run card (machine-readable)</h2>
+<ul>
+<li>Session: <code>S22-SIGN</code> · Hypothesis: Signed piedmont break-in-slope · Mechanism: κ_signed × polarity × subsurface geometric mean, B=2, dot_thin 2.8</li>
+<li>Non-fault mimic: Terrace/Lahontan shorelines, GeoDAWN E–W stripes, road cuts</li>
+<li>HOLDOUT-DTI: 0.0547 vs 0.1219 baseline, Δ −0.0673 (12 cells, 3 seeds, quadrant LOSFO) — <strong>gate FAIL</strong></li>
+<li>Leakage canary: 7/7 legs PASS (max AUC ~0.58 ≤0.90)</li>
+<li>Registry: 22 prior rasters, max |Spearman| 0.028, max 3-px overlap 43.3% — <strong>PASS</strong></li>
+<li>Raster SHA-256: <code>d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229</code> (allfinite) / <code>0e06809f3…</code> (nan) · CRS/shape/transform PASS · no NaN inside · [0,1] PASS</li>
+<li>Submission name: <code>GEMSDOE28-S22-SIGNED-PIEDMONT-20261026-08703322d2af</code> · note 90/140 chars · verdict <strong>negative</strong> · slot_selected false · submission_ready false</li>
+<li>Full JSON: <a href="data/s22_run_card.json">s22_run_card.json</a> · <a href="../evidence/s22_run_card.json">evidence/s22_run_card.json</a> · emission <a href="../evidence/s22_emission.json">s22_emission.json</a> · prereg <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/62_s22_preregistration.md">S22 prereg</a></li>
+</ul>
+
+<h2>9. Limitations & next steps</h2>
+<ul>
+<li>Owner-mirrored DEM/LiDAR descriptors are hash-pinned but not organizer-authenticated; 8-connected components proxy expert segments.</li>
+<li>Profile curvature via 100 m DEM gradients is a proxy, not field-validated fault scarp height.</li>
+<li>Quadrant LOSFO overweights catalogue-near habitat vs far-field blind faults.</li>
+<li>Next arm: H43-3 Euler depth-coherence (requires Euler windowing, not scalar curvature) — or revisit H43-2 with calibrated thresholds and subsurface gating.</li>
+<li>Do not retune S22 on spent holdout; new lane needs fresh seeds 363+.</li>
+</ul>
+
+</section>
+<section class="section"><h2>Source metadata feed (not a score feed)</h2>
+<p>Last recorded run: <time datetime="2026-10-27T00:00:00Z">2026-10-27T00:00:00Z</time>. 8 of 10 sources freshly observed; partial-or-unavailable. This feed does not log into or monitor DrivenData. Dated leaderboard observation 0.4413 is a one-off public-page read (2026-10-26), not a receipt.</p>
+<p><a href="data/feed.json">Raw feed</a> · <a href="sources.html">Official source ledger</a> · <a href="data/s22_run_card.json">S22 run card</a></p></section>
+</main>
+<footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
+</body>
+</html>
