@@ -823,6 +823,18 @@
       "severity": "low",
       "issue": "After S19-ASCP became the latest run, the nine-site review template still labeled its navigation link to session18-result.html as \u201cLatest result.\u201d Readers could land on an older experiment from the page intended to summarize current-site comparisons.",
       "action": "Changed the scorecard navigation target to session19-result.html and added a regression test that checks the generated page links to S19 rather than S18."
+    },
+    {
+      "id": "s19-uniqueness-dense-probe-blanket",
+      "severity": "high",
+      "issue": "S19-RADLIN candidate (6fa38f9d317b) passed its frozen LOSFO gate (paired gain +0.005436, 95% CI [+0.001285,+0.009245], seeds 320-324) and exact-file validation, but 93.38% of its final dots fall within 3 px of the unscored dense H37-1 probe-union-pool registry raster (38,545 dots over the H19-5 + detector-ridge union) and 74.2%/71.2% vs two other dense research rasters, exceeding the frozen >70% any-raster duplicate-stop. Against every scored focus-site artifact (GEMSDOE24/25/27/28/30/31/32/33/36, byte-verified) the maximum is 44.5%, and sample Spearman vs every registry raster is <=0.695.",
+      "action": "Verdict negative under the frozen rule; banner DO NOT SUBMIT; no post-hoc registry redefinition. A future preregistered session must settle, before placement, whether unscored dense probe blankets are uniqueness comparators or only scored/submitted rasters are, and must not reuse seeds 320-324 to re-decide this candidate."
+    },
+    {
+      "id": "s19b-parallel-session-collision-and-rename",
+      "severity": "provenance",
+      "issue": "Two autonomous 2026-10-26 sessions both labelled S19: S19-ASCP (antislope scarp pairs; gems-segment-pooled-v1 harness; holdout negative) merged first via PR #46, and this ThK-lineament run (LOSFO seeds 320-324; gate passed, strict uniqueness failed).",
+      "action": "On merge (PR #51) the lineament run was renamed S19B-RADLIN: knowledge/57-58, evidence/s19b_radlin_*, manifest key s19b_candidate, site page session19b-result.html; ASCP keeps current_run and the current site card. No number, hash, TIFF byte or verdict changed. Different evaluators/baselines (0.141694 vs 0.101933): never pool or compare their deltas."
     }
   ],
   "irregularities": [

@@ -372,6 +372,43 @@ def current_status_html() -> str:
 <p><strong>Why rejected:</strong> the antislope crest/toe morphology recovered substantially less withheld fault credit than the baseline. The paired interval is wholly negative. Roads, channels, terrace/paleo-shoreline risers, landslides and mine benches remain plausible mimics. Format and novelty cannot rescue failed performance evidence.</p>
 </section>"""
 
+def s19b_parallel_html() -> str:
+    card = read_json("docs/data/run_card_s19b_radlin.json", {})
+    if not card:
+        return ""
+    h, reg = card["holdout"], card["registry"]
+    fin = reg["final"]
+    return f"""<section class="card callout-danger" aria-label="Parallel run readiness" id="parallel-s19b" data-submission-ready="false">
+<h2>🔴 Parallel run S19B-RADLIN (same day, different lane): NOT APPROVED — DO NOT UPLOAD</h2>
+<p><strong>HOLDOUT GATE PASSED, STRICT UNIQUENESS GATE FAILED.</strong> This ThK alteration-lineament run ran in parallel with S19-ASCP above (different evaluator — never combine their numbers). Automated validation is complete; no human inspection is needed. The frozen holdout gate <strong>passed</strong>, but <strong>{fin['worst_by_overlap']['frac_our_dots_within3px']:.1%}</strong> of its dots fall within 3 px of the unscored dense H37-1 probe-union registry raster, above the frozen 70% duplicate-stop. <strong>Do not upload any file from this site.</strong> No competition slot was selected or spent.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="{esc(card['download'])}" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session19b-result.html">Parallel research result</a></div>
+<p><strong>Submission name:</strong> <code>{esc(card['submission_name'])}</code><br><strong>Research note ({len(card['note'])}/140):</strong> <code>{esc(card['note'])}</code></p>
+<p class="meta">Exact SHA-256 <code>{esc(card['raster_sha256'])}</code> · {comma(card['dot_count'])} dots · all-finite float32 · [0,1] · EPSG:32611 · 3730 × 3292 · template CRS/shape/transform PASS (independent download audit, 0 failures). Local validity does not guarantee portal acceptance or scientific quality.</p>
+<p><strong>HOLDOUT-DTI:</strong> {h['dti']:.5f} (95% CI {h['ci95'][0]:.5f}–{h['ci95'][1]:.5f}); recomputed H38-1 baseline {h['baseline_dti']:.5f}; paired gain {h['paired_gain']:+.5f} (95% CI {h['paired_gain_ci95'][0]:+.5f} to {h['paired_gain_ci95'][1]:+.5f}). Evaluator: shared eval_set v2 → metric.dti_binary; {comma(h['withheld_positives'])} pooled withheld positives, seeds 320–324. Local recovery test, not an organizer score; does not isolate the RADLIN bonus from all-ridge coverage packing.</p>
+<p><strong>Uniqueness:</strong> vs byte-verified scored focus-site artifacts max overlap {reg['scored_focus_max_overlap']:.1%}; vs the full declared registry max overlap {fin['worst_by_overlap']['frac_our_dots_within3px']:.1%} ({esc(fin['worst_by_overlap']['raster'])}). The strict any-raster rule fails; the scored-only reading is reported for a separate selector, not used to approve this file.</p>
+<p><a href="data/run_card_s19b_radlin.json">Parallel complete JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/58_s19b_radlin_result.md">Interpretation and next steps</a></p>
+</section>"""
+
+
+def render_s19b_result() -> str:
+    card = read_json("docs/data/run_card_s19b_radlin.json", {})
+    forensic = read_json("evidence/s18_champion_forensic.json", {})
+    h = card.get("holdout", {})
+    rows = ''.join(f"<tr><td>{esc(x['site'])}</td><td><code>{esc(x['artifact'])}</code></td><td>{esc(x['owner_reported_claim'])} (unverified owner report)</td><td>{comma(x['dot_count'])}</td><td><a href=\"{esc(x['review_url'])}\">Pinned source</a></td></tr>" for x in forensic.get('sites', []))
+    return f"""<section class="section"><h1>S19B-RADLIN (parallel run): holdout gate passed, uniqueness gate failed — no file approved</h1>
+<p>The frozen candidate (ThK alteration-lineament-weighted all-ridge coverage packing, <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/57_s19b_radlin_preregistration.md">preregistration knowledge/57</a>) beat the recomputed H38-1 baseline on buffered whole-system LOSFO seeds 320–324, then failed the frozen strict uniqueness rule against an unscored dense probe raster. It ran in parallel with S19-ASCP (different evaluator and baseline — never combine the two sessions' numbers). Full report: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/58_s19b_radlin_result.md">knowledge/58</a>.</p>
+<h2>Executive summary: the nine focus sites and their best reported submissions</h2>
+<p>Reported claims are owner-reported context, never ORGANIZER-CONFIRMED (no submission-page receipt exists for any row). <strong>The best reported artifact is GEMSDOE32's champion (0.2778)</strong> — a previous submission, byte-verified as the solo-r1 dot set minus its 2,545 catalogue-adjacent (≤200 m) dots, zero added: emission hygiene (pruning low-credit dots), not a new detector. Copying or ring-pruning it would be a duplicate and is prohibited. <strong>No row is a file this project may submit as its own; the correct submission decision today is to submit nothing.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Site</th><th>Best reported artifact</th><th>Historical reported claim</th><th>Measured dots</th><th>Source</th></tr></thead><tbody>{rows}</tbody></table></div>
+<h2>Why 0.2778 plausibly leads, and whether we can beat it</h2><p>For binary predictions DTI = TP / (0.2·(TP+FP) + 0.8·|G|); deleting dots whose lost credit per removed false-positive mass is below the break-even 0.2·DTI/(1−0.2·DTI) raises the score without finding anything new. That algebra plus the byte reconstruction explains the reported ladder <em>conditionally</em> — hidden expert truth and receipts are unavailable, so causation is not proven. Beating it requires new credit on unmapped faults, not fewer of the same dots. S19B's local gain (+{h.get('paired_gain', 0):.5f} HOLDOUT-DTI vs the H38-1 recipe) is a catalogue-recovery proxy, <strong>not</strong> a projected organizer score; no honest claim to exceed 0.2778 can be made from it, especially with the uniqueness failure standing.</p>
+<h2>Experiments (budget 3/3, lane closed)</h2><ol>
+<li><strong>Surface + canary + pre-placement:</strong> canary AUCs 0.500/0.513/0.502 (no leakage; also no standalone signal); pre-placement max |Spearman| 0.0027, max pool overlap 26.4% — PASS.</li>
+<li><strong>LOSFO gate seeds 320–324:</strong> HOLDOUT-DTI {h.get('dti', 0):.5f} vs baseline {h.get('baseline_dti', 0):.5f}; paired gain +{h.get('paired_gain', 0):.5f}; 5/5 seeds, 3/4 folds — PASS. Attribution limit: all-ridge coverage alone was previously measured at similar magnitude; the RADLIN bonus is not isolated.</li>
+<li><strong>Build + validator + final uniqueness:</strong> 37,654 dots, exact-file validation PASS; final dots ≤44.5% within 3 px of every scored focus artifact but 93.4% vs the dense H37-1 probe-union registry raster — FAIL under the frozen any-raster rule. Verdict <strong>negative</strong>.</li></ol>
+<h2>What happens next</h2><ol><li>Keep S19B closed; do not retune on seeds 320–324.</li><li>A future preregistered session (fresh seeds ≥325) must settle <em>before placement</em> whether unscored dense probe blankets are uniqueness comparators; it must not re-decide this raster retroactively.</li><li>Isolate the RADLIN bonus (bonus on/off, paired, fresh seeds) before claiming any alteration mechanism.</li><li>Promotion to a weekly slot remains a separate selector step within the authenticated page allowance (September rules: three submissions/week; account allowance unknown here).</li></ol>
+<p>Current session: <a href="session19-result.html">S19-ASCP result</a>. Historical files: <a href="archive.html">archive — DO NOT SUBMIT</a>.</p></section>"""
+
+
 def render_s18_result() -> str:
     facts = read_json("evidence/s18_official_source_review.json", {})
     forensic = read_json("evidence/s18_champion_forensic.json", {})
@@ -469,7 +506,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{current_status_html()}{body}</main>
+<main>{current_status_html()}{s19b_parallel_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1343,12 +1380,15 @@ def main() -> int:
         "archive.html": layout("Historical campaign archive", archive, "Archive"),
         "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; current S18-MXTP evidence is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/76847b2/docs/submission-review.html">Complete original PR39 HTML audit at its historical commit</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
         "session19-result.html": layout("S19 unique TIFF result", render_s19_result(), "S19 result"),
+        "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    s19b_card = read_json("evidence/s19b_radlin_run_card.json")
+    (DOCS / "data" / "run_card_s19b_radlin.json").write_text(json.dumps(s19b_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     current_card = read_json("evidence/s19_ascp_run_card.json")
     current_card_path = DOCS / "data" / "current_run_card_2026-10-26.json"
     current_card_path.parent.mkdir(parents=True, exist_ok=True)

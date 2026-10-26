@@ -435,5 +435,40 @@
     "run_card": "evidence/s19_ascp_run_card.json",
     "holdout_evidence": "evidence/s19_ascp_holdout.json",
     "preregistration": "knowledge/55_s19_preregistration.md"
-  }
+  },
+  "s19b_candidate": {
+    "filename": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif",
+    "nan": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.tif",
+    "allfinite": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif",
+    "zip": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.zip",
+    "content_id": "6fa38f9d317b",
+    "submission_name": "GEMSDOE28-S19-RADLIN-6fa38f9d317b",
+    "note": "S19 RADLIN coverage 37654 dots; LOSFO passed but uniqueness vs dense probe FAILED; DO NOT SUBMIT.",
+    "note_file": "note-gemsdoe28-s19-radlin-6fa38f9d317b.txt",
+    "sha256": "8534701e5d91572a39dba5e9d132e1c747aeab2f5223015a96ee96ace292493b",
+    "sha256_nan": "de21416d03f8baf8c70e56cb0f90272ac7660ef23af89f301f2c5a545dea93c6",
+    "sha256_allfinite": "8534701e5d91572a39dba5e9d132e1c747aeab2f5223015a96ee96ace292493b",
+    "sha256_zip": "ccaf22aa1fa191e191e61bf98f609df45f3093cfa8853b4f876d5d358dff59b5",
+    "bytes_nan": 1590626,
+    "bytes_allfinite": 826170,
+    "bytes_zip": 293745,
+    "emitted_px": 37654,
+    "format_verified": true,
+    "unique_within_snapshot": false,
+    "holdout_gate_passed": true,
+    "submission_ready": false,
+    "verdict": "negative",
+    "status": "LOSFO gate PASSED but strict uniqueness FAILED vs dense probe-union raster; research TIFF only. DO NOT SUBMIT.",
+    "run_card": "data/run_card_s19b_radlin.json"
+  },
+  "parallel_runs": [
+    {
+      "run_id": "S19B-RADLIN",
+      "status": "NEGATIVE \u2014 NO FILE APPROVED",
+      "submission_ready": false,
+      "slot_selected": false,
+      "new_tiff_generated": true,
+      "run_card": "data/run_card_s19b_radlin.json"
+    }
+  ]
 }
