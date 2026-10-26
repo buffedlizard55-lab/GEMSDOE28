@@ -372,7 +372,13 @@ def s20_nchc_status_html() -> str:
     sw_c = float(cand_folds.get("SW", {}).get("dti", 0.0))
     sw_b = float(b0_folds.get("SW", {}).get("dti", 0.0))
     sw_d = sw_c - sw_b
-    return f"""<section class="card callout-danger" aria-label="Session 20-NCHC submission readiness and one-click download" id="s20-nchc-submission" data-submission-ready="false">
+    return f"""<section class="card callout-danger" aria-label="Session 21 audit coverage warning">
+<h2>Submission audit incomplete — DO NOT SUBMIT</h2>
+<p>Session 21 independently re-read the registered downloads after restoring the pinned template.
+The archive-wide audit now fails closed: 12 of 44 TIFFs have no manifest entry and cannot receive a complete hash-bound audit.
+Format checks for registered files do not override failed scientific or uniqueness gates. No new candidate or score was produced.</p>
+<p><a href="../evidence/s21_download_audit.json">Exact automated audit</a> · <a href="../knowledge/61_s21_validation_review.md">Review and next steps</a></p>
+</section><section class="card callout-danger" aria-label="Session 20-NCHC submission readiness and one-click download" id="s20-nchc-submission" data-submission-ready="false">
 <p class="eyebrow">PARALLEL SESSION 20-NCHC (H43-1) · 2026-10-26 UTC · AUTOMATED GATE COMPLETE</p>
 <h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
 <p><strong>NEW GENUINELY UNIQUE GeoTIFF GENERATED &amp; BYTE-VERIFIED (<code>{esc(dl_allfinite.removeprefix('downloads/'))}</code>):</strong> Automated format/range validator (strict <code>[0, 1]</code> finite across all <code>12,279,160</code> cells; <code>0</code> catalogue overlap), all <code>28</code> single-feature leakage canaries (max AUC <code>0.6010 &le; 0.90</code>), and cross-site + concurrent-lane uniqueness across all <code>{comma(reg.get('member_count', 112))}</code> pre-merge 9-site+PR48 rasters plus all <code>4</code> concurrent <code>2026-10-26</code> lanes (max 3-px dot overlap <code>{reg.get('max_dots_within_3px_fraction', 0):.2%} &le; 70%</code>, max <code>|Spearman| = {reg.get('max_abs_dots_spearman', 0):.4f} &le; 0.90</code>) <strong>ALL PASSED</strong>. However, pooled 4-fold <strong>HOLDOUT-DTI</strong> was <strong>{h.get('dti', 0):.6f}</strong> vs retrained visible-only 32-band baseline <strong>{h.get('baseline_dti', 0):.6f}</strong> (paired delta <strong>{h.get('paired_gain', 0):+.6f}</strong>, 95% CI <strong>[{h.get('paired_gain_ci95', [0, 0])[0]:+.6f}, {h.get('paired_gain_ci95', [0, 0])[1]:+.6f}]</strong>; <strong>won SW Walker Lane + geothermal quadrant {sw_c:.6f} vs {sw_b:.6f}, {sw_d:+.6f}</strong>). Distinct parallel run (concurrent seed 340–344 overlap with S20-H43/S20V disclosed; never pool). <strong>Automated promotion gate verdict: NEGATIVE — zero weekly submission slots spent. Do not upload any file from this site to DrivenData.</strong></p>
