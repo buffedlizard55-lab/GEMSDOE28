@@ -8,6 +8,7 @@ No organizer score is inferred from filenames or GitHub availability.
 """
 from __future__ import annotations
 
+import argparse
 import concurrent.futures
 import hashlib
 import json
@@ -29,8 +30,8 @@ def gh_json(endpoint):
     return json.loads(subprocess.check_output(["gh", "api", endpoint], text=True))
 
 
-def restore(row):
-    dest = ROOT / "data/registry_s18" / f"{row['blob_sha']}.tif"
+def restore(row, cache_dir):
+    dest = cache_dir / f"{row['blob_sha']}.tif"
     try:
         if not dest.exists():
             tmp = dest.with_suffix(".partial")
@@ -59,8 +60,16 @@ def restore(row):
         return {**row, "status": "fetch_or_read_failed", "error": str(exc)}
 
 
-def main():
-    (ROOT / "data/registry_s18").mkdir(parents=True, exist_ok=True)
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--session", default="S18-MXTP")
+    parser.add_argument("--cache-dir", type=Path, default=ROOT / "data/registry_s18")
+    parser.add_argument("--output", type=Path, default=ROOT / "evidence/s18_registry_snapshot.json")
+    args = parser.parse_args(argv)
+    cache_dir = args.cache_dir.resolve()
+    if not cache_dir.is_relative_to((ROOT / "data").resolve()):
+        raise SystemExit("Registry cache must remain inside the ignored data directory")
+    cache_dir.mkdir(parents=True, exist_ok=True)
     repos, rows, failures = [], [], []
     for site in SITES:
         repo = f"buffedlizard55-lab/GEMSDOE{site}"
@@ -81,7 +90,8 @@ def main():
     for row in rows:
         groups.setdefault(row["blob_sha"], []).append(row)
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
-        restored = list(pool.map(restore, [group[0] for group in groups.values()]))
+        restored = list(pool.map(lambda row: restore(row, cache_dir),
+                                 [group[0] for group in groups.values()]))
     entries = []
     for row in restored:
         row["aliases"] = [{k: x[k] for k in ("repo", "ref", "path")} for x in groups[row["blob_sha"]]]
@@ -98,14 +108,18 @@ def main():
         entries.append({"repo": "local_pre_run_checkout", "path": str(path.relative_to(ROOT)),
                         "local_path": str(path.relative_to(ROOT)), "sha256": sha, "bytes": len(raw),
                         "status": "included" if good else "excluded_non_submission_grid", "aliases": []})
-    obj = {"schema": 1, "session": "S18-MXTP", "repos": repos, "failures": failures,
+    obj = {"schema": 1, "session": args.session, "repos": repos, "failures": failures,
            "scope": "Nine pinned published-submission directories plus pre-run local TIFFs; not a global registry",
            "organizer_authenticated": False,
            "complete_within_declared_scope": not failures and all(x["status"] != "fetch_or_read_failed" for x in entries),
            "entries": entries}
-    output = ROOT / "evidence/s18_registry_snapshot.json"
-    output.write_text(json.dumps(obj, indent=2, allow_nan=False) + "\n")
-    print(json.dumps({"snapshot": str(output.relative_to(ROOT)), "repos": len(repos), "entries": len(entries),
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(obj, indent=2, allow_nan=False) + "\n")
+    try:
+        display_output = str(args.output.relative_to(ROOT))
+    except ValueError:
+        display_output = str(args.output)
+    print(json.dumps({"snapshot": display_output, "repos": len(repos), "entries": len(entries),
                       "included": sum(x["status"] == "included" for x in entries),
                       "complete_within_declared_scope": obj["complete_within_declared_scope"]}, indent=2))
     return 0 if obj["complete_within_declared_scope"] else 1
