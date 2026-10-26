@@ -391,6 +391,7 @@ def render_s18_result() -> str:
 def render_s18_executive() -> str:
     return """<section class="section"><h1>Executive summary: a new file, not an approved submission</h1>
 <p>A new independent research TIFF is downloadable above. It is unique within the audited snapshot and locally format-valid, but <strong>failed scientific validation</strong>. Do not select a file from this page at present. No human geological inspection is needed to detect this rejection.</p>
+<h2>Which prior site leads?</h2><p>The highest of the nine supplied historical site claims is GEMSDOE32 H33-2-B2 at 0.2778 (owner-reported, not organizer-confirmed). No current file is approved: S18-MXTP failed its holdout. See the <a href="../knowledge/55_focus_site_review.md">full nine-site executive comparison</a> for per-site maxima, provenance, interpretation and next steps.</p>
 <h2>Exactly how a future approved submission works</h2><ol>
 <li>Preregister an explicit lane, reuse verified cached features/shared evaluator/writer, test feature-alone leakage, and pass pre-placement registry checks.</li>
 <li>Recover whole withheld fault systems with a buffer and visible-only catalogue features. Beat the frozen comparable best on pooled HOLDOUT-DTI with a positive paired spatial-block confidence interval. Check final-dot uniqueness.</li>
