@@ -4,8 +4,6 @@ import hashlib
 import json
 from pathlib import Path
 
-import pytest
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -50,7 +48,6 @@ def test_s19_site_explains_all_nine_priority_sites_and_decision() -> None:
     assert "None is recommended for upload" in page
 
 
-@pytest.mark.requires_rasters
 def test_s19_exact_tiff_hash_and_numeric_contract() -> None:
     import numpy as np
     import rasterio

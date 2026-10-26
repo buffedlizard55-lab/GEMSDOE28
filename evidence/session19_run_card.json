@@ -73,20 +73,27 @@
       0.3195,
       0.4413
     ],
-    "note": "Conflicting maxima were stated in the prompt; the 2026-10-26 public page observation below is not a receipt and does not verify any owner-site score-to-file association."
+    "note": "Conflicting maxima appeared in the prompt. A dated 2026-10-26 official public-page observation is recorded below; it does not verify any owner-site score-to-file association or receipt."
   },
   "verdict": "negative",
   "promotion_eligible": false,
   "submission_ready": false,
   "verification": {
-    "site_build": "PASS — two consecutive site builds produced identical hashes for docs/*.html, index.html, and executive-summary.html; local-link/fragment audit passed for 12 generated HTML files.",
-    "pytest": "PASS — 481 passed, 5 skipped; skipped checks require hash-pinned data rasters/tables absent from this checkout.",
-    "ruff": "PASS — ruff check src scripts tests.",
-    "git_diff_check": "PASS — git diff --check.",
+    "site_build": "PASS — two consecutive builds produced identical hashes for generated root/index/report pages",
+    "pytest": "485 passed, 6 skipped, 9 subtests passed; skipped checks require absent hash-pinned input rasters",
+    "ruff": "PASS — src scripts tests",
+    "git_diff_check": "PASS",
     "full_scientific_holdout": "NOT RUN — data/lane/registry/baseline prerequisites missing"
   },
   "scope": "Repository review and candidate slate only; no scientific experiment, TIFF, competition upload, or slot decision.",
   "next_gate": "Provide an identifiable assigned method paragraph, complete synchronized registry, frozen same-protocol best, and restore hash-verified cached feature/source inputs; then re-run strict preflight before authorizing any experiment.",
+  "review_status": "HISTORICAL A52 PRE-EXPERIMENT SNAPSHOT; not the current run summary.",
+  "superseded_by": {
+    "session": "S19-ASCP",
+    "result": "negative; unique research TIFF generated later but failed frozen HOLDOUT-DTI; DO NOT SUBMIT",
+    "run_card": "evidence/s19_ascp_run_card.json",
+    "report": "knowledge/56_s19_result.md"
+  },
   "leaderboard_observation": {
     "observed_date_utc": "2026-10-26",
     "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
@@ -98,12 +105,5 @@
     },
     "scope_limit": "Not linked to any local GEMSDOE24/25/27/28/30/31/32/33/36 TIFF; does not establish private-round performance or account allowance.",
     "evidence": "evidence/leaderboard_observation_2026-10-26.json"
-  },
-  "review_status": "HISTORICAL A52 PRE-EXPERIMENT SNAPSHOT; not the current run summary.",
-  "superseded_by": {
-    "session": "S19-ASCP",
-    "result": "negative; generated unique research TIFF but failed frozen HOLDOUT-DTI; DO NOT SUBMIT",
-    "run_card": "evidence/s19_ascp_run_card.json",
-    "report": "knowledge/56_s19_result.md"
   }
 }
