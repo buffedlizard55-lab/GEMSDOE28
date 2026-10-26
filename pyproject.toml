@@ -26,3 +26,8 @@ ignore = ["E741", "E501", "B905"]
 # S18 executed evidence hashes bind these runners; preserve source bytes after the frozen run.
 "scripts/evaluate_s18_holdout.py" = ["I001"]
 "scripts/run_s18_extrapolated_trace.py" = ["I001"]
+
+# Historical S21 evidence-producing scripts; keep their executed source stable rather than making
+# unrelated style-only rewrites after the result. The exceptions are scoped to those two files.
+"scripts/run_s21_lane.py" = ["B023", "E401", "E701", "E702", "F401", "I001"]
+"scripts/finalize_s21.py" = ["E401", "E701", "E702", "F401", "I001"]
