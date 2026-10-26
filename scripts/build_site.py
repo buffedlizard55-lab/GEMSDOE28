@@ -61,6 +61,54 @@ def comma(value: Any) -> str:
         return esc(value)
 
 
+def render_priority_scorecard() -> str:
+    """Render the nine-site artifact table from the auditable JSON source record."""
+    review = read_json("docs/data/priority_site_review_2026-10-26.json")
+    rows = []
+    for site in review["sites"]:
+        uniqueness = site["uniqueness_audit"]
+        rows.append(
+            "<tr>"
+            f"<th scope=\"row\">{esc(site['site'])}</th>"
+            f"<td><code>{esc(site['artifact'])}</code></td>"
+            f"<td><strong>{float(site['reported_best_score']):.4f}</strong><br>"
+            "USER-REPORTED / UNVERIFIED; not a modeled estimate</td>"
+            f"<td>{esc(uniqueness['status'])}: {esc(uniqueness['finding'])}</td>"
+            f"<td><a href=\"{esc(site['raw_download_url'])}\" download>Download cited TIFF</a> · "
+            f"<a href=\"https://buffedlizard55-lab.github.io/{esc(site['site'])}/\">Site</a></td>"
+            "</tr>"
+        )
+    candidate = review["candidate_review"]
+    candidate_html = (
+        "<section class=\"card callout-danger\" aria-label=\"Latest generated candidate disposition\">"
+        "<h2>Most recent generated candidate (S21-PUHGB; latest audit generated none): research download only — DO NOT SUBMIT</h2>"
+        f"<p><code>{esc(candidate['file'])}</code>. Estimate: <strong>MODEL PROJECTION {float(candidate['score_estimate']):.3f} "
+        f"(range propagated from paired-delta CI: {float(candidate['score_estimate_ci95'][0]):.3f}–{float(candidate['score_estimate_ci95'][1]):.3f})</strong>; "
+        f"not a score and anchored to an unverified 0.2778 claim. <strong>HOLDOUT-DTI {float(candidate['holdout_dti']):.4f}</strong> "
+        f"(95% CI [{float(candidate['holdout_ci95'][0]):.4f}, {float(candidate['holdout_ci95'][1]):.4f}]; 35,900 withheld positives; "
+        f"{esc(candidate['holdout_evaluator'])}). Paired delta vs baseline {float(candidate['paired_delta_vs_baseline']):+.4f} "
+        f"(95% CI [{float(candidate['paired_delta_ci95'][0]):+.4f}, {float(candidate['paired_delta_ci95'][1]):+.4f}]). "
+        f"Uniqueness: {esc(candidate['uniqueness'])}. File format passed locally; the scientific and duplicate gates failed.</p>"
+        "<p><a class=\"button\" href=\"downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif\" download>Download research TIFF — DO NOT SUBMIT</a> "
+        "<a href=\"session21-result.html\">Full prior run record</a> · <a href=\"../evidence/s21_download_audit.json\">Current archive audit</a> · "
+        "<a href=\"../evidence/s22_preflight.json\">S22 experiment preflight (blocked)</a></p>"
+        "</section>"
+    )
+    return candidate_html + (
+        "<section class=\"section\"><h2>Nine-site historical scorecard</h2>"
+        "<p>Current archive-wide verification is INCOMPLETE: 12 of 44 TIFFs are unregistered; see the audit linked above. "
+        "These are the highest values reported in the supplied site list, not organizer-confirmed receipts. "
+        "They are reported values, not independent model estimates. The uniqueness column is limited to explicitly documented evidence; "
+        "NOT CERTIFIED means the strict threshold was not established. Do not upload any of these historical files as a new submission.</p>"
+        "<div class=\"table-wrap\"><table><thead><tr><th>Site</th><th>File</th><th>Score / estimate status</th>"
+        "<th>Unique vs listed sites?</th><th>Download / review</th></tr></thead><tbody>"
+        + "".join(rows)
+        + "</tbody></table></div>"
+        "<p><a href=\"data/priority_site_review_2026-10-26.json\">Machine-readable scorecard and provenance</a> · "
+        "<a href=\"../knowledge/62_s21_scorecard_review_2026-10-26.md\">Three-pass review, findings and next steps</a></p></section>"
+    )
+
+
 def range_summary(record: dict) -> str:
     return str(record.get("conclusion", {}).get(
         "most_plausible_explanation", record.get("summary", "Historical validator cause remains unconfirmed.")))
@@ -366,9 +414,9 @@ def s21_status_html() -> str:
     return f"""<section class="card callout-danger" aria-label="Session 21 submission readiness" id="s21-submission" data-submission-ready="false">
 <p class="eyebrow">SESSION 21 · S21-PUHGB · 2026-10-26 · AUTOMATED GATES, NO HUMAN INSPECTOR</p>
 <h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
-<p><strong>NEW UNIQUE TIFF:</strong> <code>{esc(f.get('allfinite', ''))}</code> ({comma(f.get('positive_px', 0))} fresh 31-band PU-detector dots; SHA-256 <code>{esc(str(f.get('sha256_allfinite', ''))[:8])}…</code>; all-finite [0,1]). Format PASS · canary PASS (0.580) · unique vs all scored rasters (≤54.7% overlap; 28.7% vs 0.2778 champion) · <strong>HOLDOUT-DTI delta {g.get('holdout_delta', 0):+.4f} (CI wholly negative) → NEGATIVE. Do not upload.</strong> Estimated live score (MODEL): ~{est.get('estimate', 0):.2f}. Best historical file remains GEMSDOE32 <code>h33-h33-2-b2</code> (0.2778 OWNER-REPORTED) — learning reference only, never copy.</p>
-<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(f.get('allfinite', ''))}" download>1-Click Download S21 Unique GeoTIFF — Research Only / DO NOT SUBMIT</a><a class="button quiet" href="session21-result.html">Session 21 executive result + download table</a><a class="button quiet" href="data/run_card_s21.json" download>JSON run card</a></div>
-<p><strong>Unique name:</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
+<p><strong>PRIOR RESEARCH TIFF — STRICT UNIQUENESS FAIL:</strong> <code>{esc(f.get('allfinite', ''))}</code> ({comma(f.get('positive_px', 0))} fresh 31-band PU-detector dots; SHA-256 <code>{esc(str(f.get('sha256_allfinite', ''))[:8])}…</code>; all-finite [0,1]). Format PASS · canary PASS (0.580) · below thresholds vs scored rasters but strict any-raster rule FAIL (72.3% within 3 px of an unscored probe) · <strong>HOLDOUT-DTI delta {g.get('holdout_delta', 0):+.4f} (CI wholly negative) → NEGATIVE. Do not upload.</strong> MODEL PROJECTION (not a score): {est.get('estimate', 0):.3f} [{est.get('range_from_delta_ci', [0, 0])[0]:.3f}, {est.get('range_from_delta_ci', [0, 0])[1]:.3f}]. Best historical file remains GEMSDOE32 <code>h33-h33-2-b2</code> (0.2778 OWNER-REPORTED) — learning reference only, never copy.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(f.get('allfinite', ''))}" download>1-Click Download S21-PUHGB Research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session21-result.html">Session 21 executive result + download table</a><a class="button quiet" href="data/run_card_s21.json" download>JSON run card</a></div>
+<p><strong>Research artifact name (not approved for upload):</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
 </section>"""
 
 
@@ -1480,12 +1528,16 @@ def main() -> int:
 <p><a class=\"button quiet\" href=\"session20-result.html\">Session 20-H43 executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
 </section>"""
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
+    scorecard_placeholder = "<!-- PRIORITY_SCORECARD -->"
+    if cross_site_template.count(scorecard_placeholder) != 1:
+        raise ValueError("Expected exactly one priority scorecard placeholder")
+    cross_site_page = cross_site_template.replace(scorecard_placeholder, render_priority_scorecard())
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
     s20_nchc_block = render_s20_nchc_overview()
     pages = {
         "index.html": layout("Overview", s20_nchc_block + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
-        "cross-site-review.html": cross_site_template,
+        "cross-site-review.html": cross_site_page,
         "executive-summary.html": layout("Executive summary", s20_nchc_block + s20v_brief + session20_brief + render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),

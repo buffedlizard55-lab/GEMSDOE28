@@ -225,9 +225,11 @@ def test_session19_cross_site_review_is_linked_and_fail_closed():
     page = (DOCS / "cross-site-review.html").read_text()
     index = (DOCS / "index.html").read_text()
     card = json.loads((ROOT / "evidence/s19_ascp_run_card.json").read_text())
-    assert "GEMSDOE32 H33-2-B2" in page
+    assert "H33-2-B2" in page
     assert "0.2778" in page and "USER-REPORTED / UNVERIFIED" in page
-    assert "S19-ASCP research TIFF was generated" in page
+    assert "Most recent generated candidate" in page
+    assert "72.3%" in page
+    assert "NOT UNIQUE" in page
     assert "DO NOT SUBMIT" in page
     assert "autonomously chose" in page
     assert "Displaced potential-field piercing markers" in page
@@ -340,10 +342,10 @@ def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
         if page == "cross-site-review.html":
-            assert 'Current status: NOT READY TO SUBMIT' in text
-            assert 'NO FILE APPROVED' in text
+            assert 'Most recent generated candidate' in text
             assert 'DO NOT SUBMIT' in text
-            assert 's19_ascp_run_card.json' in text
+            assert 's21_download_audit.json' in text
+            assert '12 of 44 TIFFs' in text
             continue
         assert 'Current run: NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text
@@ -618,7 +620,7 @@ def test_session20_s20_nchc_candidate_and_nine_site_review_rendered():
     assert (DOCS / "downloads" / slot["nan"]).is_file()
     assert (DOCS / "downloads" / slot["zip"]).is_file()
     assert json.loads((DOCS / "data/run_card_s20_nchc.json").read_text()) == card
-    for page_name in ("index.html", "executive-summary.html", "cross-site-review.html"):
+    for page_name in ("index.html", "executive-summary.html"):
         page_text = (DOCS / page_name).read_text()
         assert f'href="downloads/{slot["allfinite"]}"' in page_text
         assert "OK TO DOWNLOAD FOR RESEARCH: YES" in page_text
@@ -627,6 +629,10 @@ def test_session20_s20_nchc_candidate_and_nine_site_review_rendered():
         assert "40,071" in page_text
         assert "53.63%" in page_text
         assert "0.2778" in page_text
+    scorecard_page = (DOCS / "cross-site-review.html").read_text()
+    assert "Nine-site historical scorecard" in scorecard_page
+    assert "NOT UNIQUE" in scorecard_page and "NOT CERTIFIED" in scorecard_page
+    assert "0.2778" in scorecard_page
     idx_text = (DOCS / "index.html").read_text()
     assert "0.112115" in idx_text and "+0.013416" in idx_text
     assert "NE_LidarGapHeavy" in idx_text and "0.4413" in idx_text and "0.3195" in idx_text
