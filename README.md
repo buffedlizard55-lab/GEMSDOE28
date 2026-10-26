@@ -1,4 +1,12 @@
-# Current result — 2026-10-25 S18-MXTP (read first every session)
+# Current result — review updated 2026-10-26 (read first every session)
+
+## 2026-10-26 priority-site review: **NO FILE APPROVED TO SUBMIT**
+
+The highest user-reported score in the requested nine-site set is GEMSDOE32 H33-2-B2 at 0.2778, but it is **OWNER-REPORTED**, not receipt-confirmed. Byte audit indicates that raster is solo-r1 with 2,545 catalogue-flank dots removed and no additions. This is a plausible emission-hygiene explanation, not proven score causation. The current official public leaderboard fetch displayed 0.4413 in its first row on 2026-10-26; that public observation is not linked to any local TIFF and is not a submission receipt. The user-supplied 0.3195 is not the leading row observed in that fetch.
+
+[**Review all nine priority sites, raster relationships, and four ranked hypotheses**](docs/priority-submissions.html) · [Full dated dossier](knowledge/55_priority_site_review_2026-10-26.md) · [Machine-readable review](evidence/priority_submission_review_2026-10-26.json) · [Dated public leaderboard observation](evidence/leaderboard_observation_2026-10-26.json)
+
+The previously generated [unique S18-MXTP research TIFF](docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif) remains downloadable for research/reproducibility only. Its HOLDOUT-DTI gate failed; **DO NOT SUBMIT**. No new TIFF, experiment, or submission-slot selection was made in this review because the prompt supplies no identifiable assigned method paragraph, complete synchronized parallel registry, or fresh comparable frozen-best result. Current web page displays the research-only status and the executive-summary upload instructions.
 
 ## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 

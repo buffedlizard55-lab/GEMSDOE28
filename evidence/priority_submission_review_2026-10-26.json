@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "label": "PRIORITY SUBMISSION REVIEW; user-supplied score associations are not organizer-confirmed",
+  "review_date_utc": "2026-10-26",
+  "source_method": "Repository-pinned raster forensic records plus the current user-supplied site list; one public leaderboard page fetch in this session.",
+  "decision": {
+    "best_reported_in_nine_sites": "GEMSDOE32 H33-2-B2, 0.2778 (OWNER-REPORTED; no submission-page receipt)",
+    "safe_to_submit_recommendation": null,
+    "reason": "No listed TIFF has a receipt binding the claimed score to its exact bytes, and none is approved by the separate selector under a fresh comparable buffered holdout. The highest reported artifact is historical and is not a new unique candidate.",
+    "current_public_leaderboard_observation": "0.4413 displayed in the first public row on 2026-10-26; this is not a receipt for a local raster and does not identify a file that can be copied or reproduced."
+  },
+  "sites": [
+    {
+      "site": "GEMSDOE24",
+      "artifact": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif",
+      "reported_score": 0.2477,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 60069,
+      "review": "H19-5 probability surface with d=1.5 thinning. Against the next H19-5 d=2.8 result the reported score rises while the dot count falls, consistent with greater emission efficiency but not proof of hidden-truth causation.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/996fc0b3c827ababb180fda40769e1edc0d8716c/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif"
+    },
+    {
+      "site": "GEMSDOE25",
+      "artifact": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "reported_score": 0.2600,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 44090,
+      "review": "H19-5 d=2.8 thinned raster. Its pixel set is byte-for-byte dot-identical to the GEMSDOE30 d28 artifact in the pinned forensic audit; therefore these are not independent algorithmic confirmations.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/8c32763ca00a04ba82a27aac047952a0e3f9ef60/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif"
+    },
+    {
+      "site": "GEMSDOE27",
+      "artifact": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
+      "reported_score": 0.2449,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 61328,
+      "review": "Topology gap-closure variant on a d=1.5 base. The reported result is below the H19-5 d=2.8 and solo results despite the larger dot count; this cannot distinguish useful fault additions from false positives without held-out truth.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/f55cda6b0a940e44f2b4fdc516d212cd2729933c/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif"
+    },
+    {
+      "site": "GEMSDOE28",
+      "artifact": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+      "reported_score": 0.2710,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 37660,
+      "review": "Highest score reported for this site in the user's list. It is only 6 dots above the H33-2-B2 count, but similar count is not identity and does not establish similar predictions.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/604af8e87e88080d6cdc2e887b81ea60f2013c4c/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif"
+    },
+    {
+      "site": "GEMSDOE30",
+      "artifact": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "reported_score": 0.2600,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 44090,
+      "review": "The pinned forensic audit finds the same dot set as GEMSDOE25's H19-5 d=2.8 raster; this is a cross-site replication of bytes, not a second independent model result.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/44ebe89365ab5b5b5ac73e9c77787239ae51707b/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif"
+    },
+    {
+      "site": "GEMSDOE31",
+      "artifact": "gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
+      "reported_score": 0.2708,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 40199,
+      "review": "The pinned forensic audit finds the same solo-r1 set at GEMSDOE28. GEMSDOE32's 37,654-dot set is this solo raster after removing 2,545 catalogue-flank dots; it adds no predictions.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/ecdf391d955e1ae199e12f9537026b65aa5ddb7e/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif"
+    },
+    {
+      "site": "GEMSDOE32",
+      "artifact": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "reported_score": 0.2778,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 37654,
+      "review": "Highest reported result in the nine-site list. Exact pixel audit: solo-r1 minus the catalogue-distance <=2-pixel ring; 2,545 dots removed, zero added, zero reconstruction difference. This supports a precision/emission-hygiene explanation conditional on the reported ladder, not score causation or a new detector.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/5786b21a1674b26ee525e8e9bf048e2e0f50fc0e/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
+    },
+    {
+      "site": "GEMSDOE33",
+      "artifact": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+      "reported_score": 0.2632,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 41865,
+      "review": "The pinned forensic audit measures 31,614 exact shared dots with the GEMSDOE32 raster: 75.5% of this artifact's dots. That exceeds the protocol's >70% within-3-pixel duplicate threshold against that registry raster; it is not a unique-candidate template.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f618cc54773bd9b4d6c2b3ebf78103a05cc10cb6/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif"
+    },
+    {
+      "site": "GEMSDOE36",
+      "artifact": "gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+      "reported_score": 0.2750,
+      "score_label": "OWNER-REPORTED; not ORGANIZER-CONFIRMED",
+      "dot_count": 38854,
+      "review": "The pinned forensic audit finds the GEMSDOE32 set plus 1,200 dots. Thus 37,654/38,854 = 96.9% of its dots exactly overlap the GEMSDOE32 raster, above the protocol's >70% duplicate threshold; the reported PINN name does not establish independent predictions.",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif"
+    }
+  ],
+  "forensic_source": "evidence/s18_champion_forensic.json",
+  "leaderboard_observation": {
+    "observed_date_utc": "2026-10-26",
+    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "method": "One fetch of the public HTML leaderboard in this session; no authentication, upload, or submission-page receipt.",
+    "first_row": {
+      "rank": 1,
+      "participant_display_name": "xiaofanhu",
+      "public_dw_tversky": 0.4413
+    },
+    "organizer_confirmed_local_raster": false,
+    "scope_limit": "A public leaderboard row is an official page observation but does not associate the score with any raster in GEMSDOE24/25/27/28/30/31/32/33/36. The page is dynamic; this is a dated snapshot."
+  },
+  "hypotheses": [
+    {
+      "rank": 1,
+      "name": "Displaced potential-field piercing markers",
+      "layers": "Cached RTP/TMI and isostatic-gravity anomaly bands; LiDAR strike/validity only as an independent support mask.",
+      "physical_signature": "Register paired magnetic/density marker ridges on opposite sides of a candidate corridor; require at least two coherent lateral offsets with a consistent direction and support the intervening corridor rather than the displaced contacts.",
+      "off_catalogue_reason": "A structure may offset pre-existing magnetic/density contacts without a mapped Quaternary surface scarp; use no catalogue-tip interpolation and no copied raster dots.",
+      "difference_from_repo": "No paired-marker registration/displacement transform found in the reviewed modules. Distinct from Euler source-depth estimates, upward-continuation ridge migration, ordinary edge co-location and catalogue-gap closure.",
+      "non_fault_mimic": "Cross-cutting intrusive contacts, branching lithologic contacts, or survey-registration seams.",
+      "expected_benefit": "Highest qualitative information potential in this four-item slate; no numeric projection or measured DTI.",
+      "implementation_cost": "Medium-high; require registration-quality and seam/placebo controls.",
+      "data_status": "Existing cached bands were restored and hash-verified in the prior S18 run; owner-mirror integrity is not organizer authentication. No new external bytes required for the first test.",
+      "official_source": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "status": "Proposed only; no implementation or holdout result in this review; no global novelty claim."
+    },
+    {
+      "rank": 2,
+      "name": "Lithology-conditioned uranium/thorium transport dipoles",
+      "layers": "GeoDAWN K, Th, U radiometry / U-Th ratio and isostatic-gravity edge orientation.",
+      "physical_signature": "Odd-symmetric, cross-corridor U/Th residual conditioned on local Th and K, persistent along strike while bulk lithologic contrast is weak; test missingness and quantization separately.",
+      "off_catalogue_reason": "Fluid/redox transport along a concealed permeable boundary could alter mobile uranium relative to thorium without preserving a surface scarp; this is a conjecture, not a geothermal detector claim.",
+      "difference_from_repo": "Tests signed dipole morphology and a lithology-conditioned residual, unlike scalar radiometric values/ratios, ridge conjunctions, or the earlier magnetic-trough/Th-K depletion proposal.",
+      "non_fault_mimic": "Groundwater redox fronts, surficial sediment sorting, radon disequilibrium, or airborne survey artifacts.",
+      "expected_benefit": "Moderate qualitative potential; high physical ambiguity; no numeric projection or measured DTI.",
+      "implementation_cost": "Medium; quantized raster inputs cannot support absolute geochemical calibration.",
+      "data_status": "Source bands are recorded in the GeoDAWN and GDR inventories, but original official bytes have not been independently downloaded in this review; owner-mirror hashes do not authenticate provenance.",
+      "official_source": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "status": "Proposed only; no implementation or holdout result in this review; no global novelty claim."
+    },
+    {
+      "rank": 3,
+      "name": "Paired-geothermometer cooling corridors",
+      "layers": "INGENIOUS GDR well/spring coordinates, measured temperatures, paired quartz/chalcedony geothermometer estimates, plus magnetic/gravity geometry.",
+      "physical_signature": "After deduplicating source sites, test persistent directional differences between reservoir-temperature estimates and measured temperatures along a multi-site corridor, not a circular hot-spring buffer.",
+      "off_catalogue_reason": "A connected upflow/discharge path may lack a mapped surface rupture; paired cooling/disequilibrium may supply evidence not present in a single high-temperature threshold.",
+      "difference_from_repo": "Retains paired temperatures and directional site-to-site structure; differs from the thermal module's maximum-geothermometer and near-site distance thresholds and the earlier vent/spring halo experiment.",
+      "non_fault_mimic": "Groundwater mixing, incomplete mineral equilibration, drilling/production effects, or preferential sampling.",
+      "expected_benefit": "Low-medium qualitative priority owing to sparse, biased point support; no numeric projection or measured DTI.",
+      "implementation_cost": "Medium; deduplicate measurements and pass site-density/leakage canaries.",
+      "data_status": "Official GDR #1391 listing and well/spring archive link are publicly visible; the linked archive bytes, CRS, coverage and transformed owner mirror were not re-downloaded/authenticated here. Thus not data-ready for a holdout run.",
+      "official_source": "https://gdr.openei.org/submissions/1391",
+      "status": "Proposed only; holdout blocked on data-byte/schema/coverage re-verification; no global novelty claim."
+    },
+    {
+      "rank": 4,
+      "name": "Opposite-flank flexural curvature pairs",
+      "layers": "Detrended elevation, LiDAR upface/downface/relief/strike/validity descriptors, and long-wavelength isostatic gravity.",
+      "physical_signature": "Ordered signed broad-curvature lobes on opposite sides of a corridor with consistent relief asymmetry, separating broad warping from a sharp scarp response.",
+      "off_catalogue_reason": "Distributed flexure above a buried normal fault could persist where no sharp mapped surface break occurs; scalar layers alone do not establish dip or slip.",
+      "difference_from_repo": "Tests ordered opposite-flank pairs rather than the existing gradient strength, local relief or unsigned curvature magnitude.",
+      "non_fault_mimic": "Alluvial-fan margins, paleoshorelines, differential compaction, lithology-controlled erosion or raster seams.",
+      "expected_benefit": "Lowest of this slate due to abundant geomorphic mimics; no numeric projection or measured DTI.",
+      "implementation_cost": "Medium for coarse screening; higher for full-resolution confirmation.",
+      "data_status": "Coarse feature bands are available from prior hash-verified owner mirrors. A high-resolution validation would require USGS 3DEP tiles; tile availability/coverage was not checked in this review, so no high-resolution experiment is proposed as viable yet.",
+      "official_source": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+      "status": "Proposed only; no implementation or holdout result; global novelty is unproven."
+    }
+  ],
+  "nonexperiment_status": {
+    "experiments_run_this_review": 0,
+    "reason": [
+      "The request names a single method paragraph but provides no identifiable method assignment; the current session registry has no assigned lane.",
+      "The cross-parallel-run registry is not complete and does not establish a globally synchronized novelty comparison.",
+      "No fresh frozen current-best result on the required shared buffered whole-segment protocol is registered for paired comparison."
+    ],
+    "unique_tiff_generated_this_review": false,
+    "latest_existing_unique_tiff": "docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif",
+    "latest_existing_tiff_disposition": "Download for research/reproducibility only; DO NOT SUBMIT because its frozen HOLDOUT-DTI gate failed.",
+    "run_card": "evidence/s18_mxtp_run_card.json",
+    "no_slot_selected_or_spent": true
+  }
+}

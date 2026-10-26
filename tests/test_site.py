@@ -9,7 +9,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "priority-submissions.html"]
 
 
 class Links(HTMLParser):
@@ -35,6 +35,30 @@ def test_site_builds_from_json_only_and_pages_exist():
         assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
 
 
+def test_priority_review_uses_receipt_safe_scores_and_exact_overlap_evidence():
+    record = json.loads((ROOT / "evidence" / "priority_submission_review_2026-10-26.json").read_text())
+    assert len(record["sites"]) == 9
+    assert all(row["score_label"] == "OWNER-REPORTED; not ORGANIZER-CONFIRMED" for row in record["sites"])
+    assert record["decision"]["safe_to_submit_recommendation"] is None
+    assert record["leaderboard_observation"]["first_row"]["public_dw_tversky"] == 0.4413
+    assert record["leaderboard_observation"]["organizer_confirmed_local_raster"] is False
+    assert len(record["hypotheses"]) == 4
+    assert all(hyp["non_fault_mimic"] and hyp["official_source"] for hyp in record["hypotheses"])
+    forensic = json.loads((ROOT / "evidence" / "s18_champion_forensic.json").read_text())
+    assert forensic["removed_from_solo"] == 2545
+    assert forensic["added_to_solo"] == 0
+    assert forensic["symmetric_difference_reconstruction"] == 0
+    by_site = {row["site"]: row for row in record["sites"]}
+    assert round(by_site["GEMSDOE32"]["dot_count"] / by_site["GEMSDOE36"]["dot_count"], 3) == 0.969
+    assert round(31614 / by_site["GEMSDOE33"]["dot_count"], 3) == 0.755
+    html = (DOCS / "priority-submissions.html").read_text()
+    assert "None is approved to submit" in html
+    assert "0.4413" in html and "0.2778" in html
+    assert "75.5%" in html and "96.9%" in html
+    assert "Download existing unique research TIFF — DO NOT SUBMIT" in html
+    assert "HOLDOUT-DTI" in html and "whole-system" in html
+
+
 def test_build_site_workflow_tracks_generator_inputs_and_outputs():
     workflow = (ROOT / ".github" / "workflows" / "build-site.yml").read_text()
     builder = (ROOT / "scripts" / "build_site.py").read_text()
@@ -55,6 +79,7 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
         "docs/assets/**",
         "docs/*.html",
         "index.html",
+        "priority-submissions.html",
     }:
         assert workflow.count(f"'{path}'") == 2, f"missing push/pull_request trigger for {path}"
 
@@ -174,7 +199,7 @@ def test_local_failure_claim_and_registry_disambiguate_summary_path_collision():
 
 
 def test_all_internal_links_and_assets_resolve():
-    for page in list(DOCS.glob("*.html")) + [ROOT / "index.html", ROOT / "executive-summary.html"]:
+    for page in list(DOCS.glob("*.html")) + [ROOT / "index.html", ROOT / "executive-summary.html", ROOT / "priority-submissions.html"]:
         parser = Links()
         parser.feed(page.read_text())
         for ref in parser.refs:

@@ -20,6 +20,7 @@ on:
       - 'docs/*.html'
       - 'index.html'
       - 'executive-summary.html'
+      - 'priority-submissions.html'
       - 'data/current_run_card_2026-10-25.json'
       - 'AI_DISCLOSURE.md'
       - '.github/workflows/build-site.yml'
@@ -67,6 +68,9 @@ on:
       - 'docs/data/run_card_s18.json'
       - 'evidence/s18_official_source_review.json'
       - 'evidence/s18_champion_forensic.json'
+      - 'evidence/priority_submission_review_2026-10-26.json'
+      - 'evidence/leaderboard_observation_2026-10-26.json'
+      - 'knowledge/55_priority_site_review_2026-10-26.md'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
   pull_request:
@@ -87,6 +91,7 @@ on:
       - 'docs/*.html'
       - 'index.html'
       - 'executive-summary.html'
+      - 'priority-submissions.html'
       - 'data/current_run_card_2026-10-25.json'
       - 'AI_DISCLOSURE.md'
       - '.github/workflows/build-site.yml'
@@ -134,6 +139,9 @@ on:
       - 'docs/data/run_card_s18.json'
       - 'evidence/s18_official_source_review.json'
       - 'evidence/s18_champion_forensic.json'
+      - 'evidence/priority_submission_review_2026-10-26.json'
+      - 'evidence/leaderboard_observation_2026-10-26.json'
+      - 'knowledge/55_priority_site_review_2026-10-26.md'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
   workflow_dispatch:
@@ -153,4 +161,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html executive-summary.html data/current_run_card_2026-10-25.json
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html executive-summary.html priority-submissions.html data/current_run_card_2026-10-25.json
