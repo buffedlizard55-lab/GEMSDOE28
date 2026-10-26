@@ -286,8 +286,14 @@ def test_concurrent_h38_claim_is_rejected_without_rewriting_its_original_card():
     assert "Concurrent H38-1 claim: rejected" in (ROOT / "docs/submission-review.html").read_text()
 
 
-@pytest.mark.parametrize("bad", [float("nan"), float("inf"), -float("inf")])
-def test_preflight_rejects_hash_pinned_nonfinite_cache(shared_fixture, monkeypatch, bad):
+@pytest.mark.parametrize("bad,reason", [
+    (float("nan"), "Cached feature stack contains undeclared NaN values"),
+    (float("inf"), "Cached feature stack contains infinity"),
+    (-float("inf"), "Cached feature stack contains infinity"),
+])
+def test_preflight_rejects_hash_pinned_undeclared_nonfinite_cache(
+    shared_fixture, monkeypatch, bad, reason
+):
     root = shared_fixture
     config = valid_config(root)
     monkeypatch.setattr(check_run_preflight, "FOOTPRINT_PX", 3)
@@ -301,7 +307,35 @@ def test_preflight_rejects_hash_pinned_nonfinite_cache(shared_fixture, monkeypat
     write_json(meta_path, meta)
     result = check_run_preflight.preflight(config, root=root)
     assert result["experiment_allowed"] is False
-    assert "Cached feature stack contains NaN or infinity" in result["failures"]
+    assert reason in result["failures"]
+
+
+def test_preflight_accepts_exactly_declared_nan_missingness(shared_fixture, monkeypatch):
+    root = shared_fixture
+    config = valid_config(root)
+    monkeypatch.setattr(check_run_preflight, "FOOTPRINT_PX", 3)
+    path = root / config["cached_features"]
+    array = np.zeros((3, 32), np.float32)
+    array[-1, -1] = np.nan
+    np.save(path, array)
+    finite = np.isfinite(array).sum(axis=0).tolist()
+    nan = np.isnan(array).sum(axis=0).tolist()
+    inf = np.isinf(array).sum(axis=0).tolist()
+    meta_path = root / config["cached_features_metadata"]
+    meta = json.loads(meta_path.read_text())
+    meta["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    meta["feature_validity"] = {
+        "contract": "Missing source coverage is NaN; infinity is forbidden.",
+        "finite_counts_by_column": finite,
+        "nan_counts_by_column": nan,
+        "infinite_counts_by_column": inf,
+        "total_nan": 1,
+        "total_infinite": 0,
+    }
+    write_json(meta_path, meta)
+    result = check_run_preflight.preflight(config, root=root)
+    assert result["experiment_allowed"] is True, result["failures"]
+    assert result["cached_features"]["feature_validity_declared"] is True
 
 
 @pytest.mark.parametrize("text", ['{"lane":"a","lane":"b"}', '{"x":1e999}'])

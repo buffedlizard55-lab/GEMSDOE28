@@ -290,9 +290,9 @@ def nav() -> str:
         ("Overview", "index.html"),
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
-        ("Latest result", "session19-result.html"),
-        ("S20 result", "session20-result.html"),
+        ("Latest result", "session22-result.html"),
         ("S21 result", "session21-result.html"),
+        ("S20 result", "session20-result.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
@@ -356,6 +356,27 @@ def render_session15(review: dict) -> str:
 <p><strong>Machine-readable run card:</strong> holdout DTI is null because no experiment was run; verdict is <strong>negative</strong>. See the repo dossier for the exact reasons.</p></section>"""
 
 
+def s22_status_html() -> str:
+    card = read_json("evidence/s22_dpmr_run_card.json", {})
+    if not card:
+        return ""
+    files = card.get("files", {})
+    holdout = card.get("holdout", {})
+    registry = card.get("registry", {})
+    estimate = card.get("score_estimate", {})
+    note = str(card.get("note", ""))
+    interval = holdout.get("ci95", [0, 0])
+    delta_interval = holdout.get("paired_gain_ci95", [0, 0])
+    projection_range = estimate.get("range", [0, 0])
+    return f"""<section class="card callout-danger" aria-label="Session 22 submission readiness" id="s22-submission" data-submission-ready="false">
+<p class="eyebrow">SESSION 22 · S22-DPMR · 2026-10-26 · 3/3 EXPERIMENTS · AUTOMATED GATES</p>
+<h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED · RESEARCH DOWNLOAD ONLY</h2>
+<p><strong>NEW GENUINELY UNIQUE TIFF:</strong> <code>{esc(files.get('allfinite', ''))}</code> ({comma(files.get('positive_pixels', 0))} independently placed RTP/gravity displacement dots; SHA-256 <code>{esc(str(files.get('allfinite_sha256', ''))[:12])}…</code>; all-finite [0,1]). Canary PASS · bounded-registry uniqueness PASS (max |Spearman| {registry.get('final_max_abs_spearman', 0):.4f}; max 3 px overlap {registry.get('final_max_overlap_3px', 0):.2%}) · exact format PASS. <strong>HOLDOUT-DTI {holdout.get('dti', 0):.6f} [{interval[0]:.6f}, {interval[1]:.6f}] vs B0 {holdout.get('baseline_dti', 0):.6f}; paired delta {holdout.get('paired_gain_vs_baseline', 0):+.6f} [{delta_interval[0]:+.6f}, {delta_interval[1]:+.6f}] → NEGATIVE. Do not upload.</strong> MODEL PROJECTION {estimate.get('estimate', 0):.4f} [{projection_range[0]:.4f}, {projection_range[1]:.4f}] — NOT A SCORE.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(files.get('allfinite', ''))}" download>1-Click Download S22 Unique GeoTIFF — Research Only / DO NOT SUBMIT</a><a class="button quiet" href="session22-result.html">Session 22 executive result + download table</a><a class="button quiet" href="data/run_card_s22.json" download>JSON run card</a></div>
+<p><strong>Unique name:</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({len(note)}/140):</strong> <code>{esc(note)}</code></p>
+</section>"""
+
+
 def s21_status_html() -> str:
     card = read_json("evidence/s21_puhgb_run_card.json", {})
     if not card:
@@ -389,12 +410,10 @@ def s20_nchc_status_html() -> str:
     sw_c = float(cand_folds.get("SW", {}).get("dti", 0.0))
     sw_b = float(b0_folds.get("SW", {}).get("dti", 0.0))
     sw_d = sw_c - sw_b
-    return f"""<section class="card callout-danger" aria-label="Session 21 audit coverage warning">
-<h2>Submission audit incomplete — DO NOT SUBMIT</h2>
-<p>Session 21 independently re-read the registered downloads after restoring the pinned template.
-The archive-wide audit now fails closed: 12 of 44 TIFFs have no manifest entry and cannot receive a complete hash-bound audit.
-Format checks for registered files do not override failed scientific or uniqueness gates. No new candidate or score was produced.</p>
-<p><a href="../evidence/s21_download_audit.json">Exact automated audit</a> · <a href="../knowledge/61_s21_validation_review.md">Review and next steps</a></p>
+    return f"""<section class="card" aria-label="Session 22 archive audit status">
+<h2>Archive exact-file audit repaired: 723/723 checks PASS</h2>
+<p>Session 22 registered the 14 previously omitted historical/concurrent TIFFs and independently re-read all 48 local TIFFs. Hash, grid, range, footprint and manifest coverage now pass. This repairs audit coverage only: format validity never overrides a negative scientific or uniqueness gate, and no file is approved.</p>
+<p><a href="../evidence/s22_download_audit.json">Exact automated audit</a> · <a href="../knowledge/63_s22_result.md">Session 22 result and limitations</a></p>
 </section><section class="card callout-danger" aria-label="Session 20-NCHC submission readiness and one-click download" id="s20-nchc-submission" data-submission-ready="false">
 <p class="eyebrow">PARALLEL SESSION 20-NCHC (H43-1) · 2026-10-26 UTC · AUTOMATED GATE COMPLETE</p>
 <h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
@@ -459,10 +478,10 @@ def current_status_html() -> str:
         return '<section class="card callout-danger"><h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2><p>Missing current evidence. Do not upload any file from this site.</p></section>'
     h, reg = card["holdout"], card["registry"]
     download = Path(card["submission_file"]).name
-    return f"""<section class="card callout-danger" aria-label="Current submission readiness" id="current-submission" data-submission-ready="false">
-<h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
-<p><strong>NEW UNIQUE TIFF GENERATED: S19-ASCP · 2026-10-26.</strong> The exact file passed automated uniqueness and format gates, but its frozen shared holdout gate <strong>FAILED</strong>. <strong>Download for research only; do not upload it.</strong> This disposition is computed without human geological inspection. No competition slot was selected or spent.</p>
-<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(download)}" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session19-result.html">Current scientific result</a></div>
+    return f"""<section class="card callout-danger" aria-label="Historical Session 19 submission readiness" id="historical-s19-submission" data-submission-ready="false">
+<h2>Historical Session 19 result: rejected — retained for audit</h2>
+<p><strong>EARLIER UNIQUE TIFF GENERATED: S19-ASCP · 2026-10-26.</strong> The exact file passed automated uniqueness and format gates, but its frozen shared holdout gate <strong>FAILED</strong>. <strong>Download for research only; do not upload it.</strong> This disposition is computed without human geological inspection. No competition slot was selected or spent.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(download)}" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session19-result.html">Historical Session 19 result</a></div>
 <p><strong>Submission name:</strong> <code>{esc(card['submission_name'])}</code><br><strong>Research note ({len(card['note'])}/140):</strong> <code>{esc(card['note'])}</code></p>
 <p class="meta">Exact SHA-256 <code>{esc(card['raster_sha256'])}</code> · 37,654 dots · all-finite float32 · values {{0,1}} · EPSG:32611 · 3730 × 3292 · exact template CRS/shape/transform PASS. Local validity does not guarantee portal acceptance.</p>
 <p><strong>HOLDOUT-DTI ({esc(h['evaluator_version'])}, {comma(h['withheld_positives'])} withheld positives):</strong> {h['dti']:.5f} (95% CI {h['ci95'][0]:.5f}–{h['ci95'][1]:.5f}); recomputed visible-only baseline {h['baseline_dti']:.5f}; paired gain {h['paired_gain']:+.5f} (95% CI {h['paired_gain_ci95'][0]:+.5f} to {h['paired_gain_ci95'][1]:+.5f}). Local recovery proxy, not an organizer score.</p>
@@ -605,7 +624,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{s21_status_html()}{s20_nchc_status_html()}{current_status_html()}{s19b_parallel_html()}{body}</main>
+<main>{s22_status_html()}{s21_status_html()}{s20_nchc_status_html()}{current_status_html()}{s19b_parallel_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1482,6 +1501,7 @@ def main() -> int:
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
+    session22_template = (ROOT / "site_templates" / "session22-result.html").read_text(encoding="utf-8")
     s20_nchc_block = render_s20_nchc_overview()
     pages = {
         "index.html": layout("Overview", s20_nchc_block + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
@@ -1496,12 +1516,18 @@ def main() -> int:
         "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),
         "session20-result.html": session20_template,
         "session21-result.html": session21_template,
+        "session22-result.html": session22_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    s22_card = read_json("evidence/s22_dpmr_run_card.json")
+    (DOCS / "data/run_card_s22.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s22.json").write_text(
+        json.dumps(s22_card, indent=2, allow_nan=False) + "\n", encoding="utf-8"
+    )
     s21_card = read_json("evidence/s21_puhgb_run_card.json")
     (DOCS / "data/run_card_s21.json").parent.mkdir(parents=True, exist_ok=True)
     (DOCS / "data/run_card_s21.json").write_text(
@@ -1517,7 +1543,7 @@ def main() -> int:
     (DOCS / "data/run_card_s20_2026-10-26.json").write_text(json.dumps(s20_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     s19b_card = read_json("evidence/s19b_radlin_run_card.json")
     (DOCS / "data" / "run_card_s19b_radlin.json").write_text(json.dumps(s19b_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-    current_card = read_json("evidence/s19_ascp_run_card.json")
+    current_card = s22_card
     current_card_path = DOCS / "data" / "current_run_card_2026-10-26.json"
     current_card_path.parent.mkdir(parents=True, exist_ok=True)
     current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
@@ -1532,7 +1558,7 @@ def main() -> int:
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
                       "submission_ready": False, "slot_selected": False,
-                      "research_download": Path(current_card["submission_file"]).name,
+                      "research_download": current_card["files"]["allfinite"],
                       "inspection_artifacts": [manifest["primary"]["nan"], manifest.get("secondary", {}).get("nan")]}, indent=2))
     return 0
 

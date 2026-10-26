@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Session 22 S22-DPMR: unique displaced-marker research GeoTIFF, negative buffered HOLDOUT-DTI gate, exact automated validation and nine-site decision table.">
+<title>Session 22 result | GEMSDOE28</title>
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="assets/site.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
+<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session22-result.html" aria-current="page">Latest result</a><a href="session21-result.html">S21 result</a><a href="session20-result.html">S20 result</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main>
+<p class="breadcrumb"><a href="index.html">Overview</a> / Session 22 result</p>
+
+<section class="card callout-danger" data-submission-ready="false" id="s22-decision">
+<p class="eyebrow">Session 22 · S22-DPMR · 2026-10-26 · 3/3 experiments · automated gates</p>
+<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
+<h1>🔴 DO NOT SUBMIT — unique GeoTIFF, decisive holdout failure</h1>
+<p class="lead"><code>gems28-s22-dpmr-20261026-ecf809d55d2a-allfinite.tif</code> is a genuinely new 37,654-dot magnetic/gravity displacement raster, not a copied or pruned historical file. Leakage, bounded-registry uniqueness and exact format checks passed. But shared buffered <strong>HOLDOUT-DTI = 0.067574</strong> (95% CI <strong>[0.060575, 0.075372]</strong>) versus visible-only B0 <strong>0.144433</strong>; paired delta <strong>−0.076860</strong> (95% CI <strong>[−0.091128, −0.062776]</strong>), 0/4 folds improved. <strong>Verdict: negative; zero submission slots selected or spent.</strong></p>
+<div class="download-actions">
+<button class="button" type="button" disabled aria-disabled="true">Submission download locked</button>
+<a class="button" href="downloads/gems28-s22-dpmr-20261026-ecf809d55d2a-allfinite.tif" download>1-Click Download S22 Unique GeoTIFF — Research Only / DO NOT SUBMIT</a>
+<a class="button secondary" href="downloads/gems28-s22-dpmr-20261026-ecf809d55d2a-nan.tif" download>Template-NaN research twin</a>
+<a class="button quiet" href="downloads/gems28-s22-dpmr-20261026-ecf809d55d2a-nan.zip" download>One-TIFF ZIP</a>
+<a class="button quiet" href="data/run_card_s22.json" download>JSON run card</a>
+</div>
+<p><strong>Unique portal name:</strong> <code>GEMSDOE28-S22-DPMR-ecf809d55d2a</code><br><strong>Note (97/140):</strong></p>
+<div class="note-box"><code>S22 DPMR displaced RTP+gravity markers 37654d | HOLDOUT 0.0676 vs 0.1444 | NEGATIVE DO NOT SUBMIT</code><button class="copy-note" type="button" data-copy-note="S22 DPMR displaced RTP+gravity markers 37654d | HOLDOUT 0.0676 vs 0.1444 | NEGATIVE DO NOT SUBMIT" aria-label="Copy the exact note">Copy note</button></div>
+<p class="meta">SHA-256 <code>66bbd9f91ecc407e43bbd5018be2b03cfe4aa10fd73613a52d1fddf43bdc8b10</code> · 826,126 bytes · one float32 band · whole array finite · values exactly {0,1} · EPSG:32611 · 3730 × 3292 · sample transform exact · zero catalogue overlap.</p>
+</section>
+
+<section class="section"><h2>Download decision table</h2>
+<p>Projections are explicitly <strong>not scores</strong>. No historical value below is organizer-confirmed because no filename/hash-bound receipt exists here.</p>
+<div class="table-wrap"><table><thead><tr><th>File</th><th>Estimate / evidence class</th><th>Unique?</th><th>OK to submit?</th></tr></thead><tbody>
+<tr><td><code>gems28-s22-dpmr-20261026-ecf809d55d2a-allfinite.tif</code></td><td><strong>HOLDOUT-DTI 0.067574</strong> [0.060575, 0.075372]; <strong>MODEL PROJECTION 0.1285 [0.1003, 0.1578] — NOT A SCORE</strong></td><td>YES in frozen bounded registry: max |Spearman| 0.3347; max 3 px overlap 50.62%</td><td><strong>NO — research only</strong></td></tr>
+<tr><td><code>gems28-s22-dpmr-20261026-ecf809d55d2a-nan.tif</code> / ZIP</td><td>Same rejected S22 candidate; sample-footprint fallback</td><td>YES in same registry</td><td><strong>NO — research only</strong></td></tr>
+<tr><td>GEMSDOE32 <code>h33-h33-2-b2-…-e5eb6e7e-zeros</code></td><td>0.2778 <strong>USER-REPORTED / UNVERIFIED</strong></td><td>Previous submission family</td><td><strong>NO — learning reference; do not copy</strong></td></tr>
+</tbody></table></div>
+<p><strong>Best decision:</strong> download S22 only if you need the reproducibility artifact. <strong>Upload nothing today.</strong></p>
+</section>
+
+<section class="section"><h2>Spatially blocked hide-and-recover result</h2>
+<p>Evaluator <code>gems-segment-pooled-v1</code>: whole fault components hidden; 1,500 m buffer; catalogue features rebuilt from visible faults only; visible faults pixel-exactly masked; pooled α=0.2, β=0.8, 300 m triangular kernel. There were 60,988 withheld positive pixels in 3,199 components and 583 ten-kilometre bootstrap blocks. This is local validation, not an organizer score.</p>
+<div class="table-wrap"><table><thead><tr><th>Fold</th><th>Withheld positives</th><th>S22 HOLDOUT-DTI</th><th>B0 visible-only</th><th>Delta</th></tr></thead><tbody>
+<tr><td>NW</td><td>10,165</td><td>0.067056</td><td>0.149113</td><td>−0.082057</td></tr>
+<tr><td>NE_LidarGapHeavy</td><td>12,511</td><td>0.062545</td><td>0.172542</td><td>−0.109997</td></tr>
+<tr><td>SW</td><td>20,534</td><td>0.071773</td><td>0.098698</td><td>−0.026925</td></tr>
+<tr><td>SE</td><td>17,778</td><td>0.066823</td><td>0.172605</td><td>−0.105783</td></tr>
+<tr><td><strong>Pooled</strong></td><td><strong>60,988</strong></td><td><strong>0.067574 [0.060575, 0.075372]</strong></td><td><strong>0.144433 [0.131736, 0.157532]</strong></td><td><strong>−0.076860 [−0.091128, −0.062776]</strong></td></tr>
+</tbody></table></div>
+<p>The secondary visible-only champion analogue reached HOLDOUT-DTI 0.146082 [0.133233, 0.159449]. S22 lost in every fold, so no tuning or selector escalation is justified.</p>
+</section>
+
+<section class="section"><h2>Leakage, novelty and exact-file gates</h2>
+<div class="grid">
+<article class="card span-6"><h3>Feature-alone canaries</h3><ul><li>Magnetic displacement pooled AUC 0.514249; worst fold polarity 0.539256.</li><li>Gravity displacement pooled AUC 0.526023; worst fold polarity 0.559368.</li><li>Fused surface pooled AUC 0.523830; worst fold polarity 0.535832.</li></ul><p>All pass the presumed-leakage stop at 0.90.</p></article>
+<article class="card span-6"><h3>Frozen registry</h3><p>190 byte/footprint-deduplicated valid-grid rasters across nine Git-pinned sites plus local pre-run TIFFs. Pre-placement maxima: |Spearman| 0.3310, 3 px overlap 49.52%. Final maxima: |Spearman| 0.3347, 3 px overlap 50.62%. All pass 0.90 / 70%.</p><p class="meta">Bounded-scope complete, not a claim about unpublished concurrent work.</p></article>
+<article class="card span-6"><h3>Exact bytes</h3><p>Shared writer plus independent read-back checked [0,1], finiteness, band/dtype, CRS, shape, transform, footprint convention, catalogue overlap and SHA-256. Archive-wide manifest audit now passes <strong>723/723 checks across 48 TIFFs</strong>.</p></article>
+<article class="card span-6"><h3>Scientific disposition</h3><p>Format and novelty pass; superiority fails decisively. A valid file is not a good submission. Run-card verdict <code>negative</code>; <code>submission_ready=false</code>; <code>slot_selected=false</code>.</p></article>
+</div>
+</section>
+
+<section class="section"><h2>Nine-site executive comparison</h2>
+<div class="table-wrap"><table><thead><tr><th>Site</th><th>Best listed artifact</th><th>Evidence class / value</th><th>Decision</th></tr></thead><tbody>
+<tr><td>GEMSDOE24</td><td><code>h25-1-dotted-h19-5-d1-5</code></td><td>USER-REPORTED / UNVERIFIED 0.2477</td><td>Prior reference; do not submit</td></tr>
+<tr><td>GEMSDOE25</td><td><code>dotted-h19-5-d2-8</code></td><td>USER-REPORTED / UNVERIFIED 0.2600</td><td>Prior reference; do not submit</td></tr>
+<tr><td>GEMSDOE27</td><td><code>topo-gap-closure-t-v2-on-d1-5</code></td><td>USER-REPORTED / UNVERIFIED 0.2449</td><td>Prior reference; do not submit</td></tr>
+<tr><td>GEMSDOE28</td><td><code>h36-1-rung30-blind-r1</code></td><td>USER-REPORTED / UNVERIFIED 0.2710</td><td>Historical; no current approval</td></tr>
+<tr><td>GEMSDOE30</td><td><code>d28-poisson300m-offcat-44090</code></td><td>USER-REPORTED / UNVERIFIED 0.2600</td><td>Prior reference; do not submit</td></tr>
+<tr><td>GEMSDOE31</td><td><code>h27-4-solo-d28</code></td><td>USER-REPORTED / UNVERIFIED 0.2708</td><td>Prior reference; do not submit</td></tr>
+<tr><td><strong>GEMSDOE32</strong></td><td><code><strong>h33-h33-2-b2-…-e5eb6e7e-zeros</strong></code></td><td><strong>USER-REPORTED / UNVERIFIED 0.2778</strong></td><td><strong>Best listed; learning reference only</strong></td></tr>
+<tr><td>GEMSDOE33</td><td><code>h33d-analog-tip-stepover-r30</code></td><td>USER-REPORTED / UNVERIFIED 0.2632</td><td>Prior reference; do not submit</td></tr>
+<tr><td>GEMSDOE36</td><td><code>anderson-geothermal-pinn-38854</code></td><td>USER-REPORTED / UNVERIFIED 0.2750</td><td>Prior reference; do not submit</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="section"><h2>Why the reported 0.2778 led this family</h2>
+<p>Byte-exact reconstruction established the emission chain: H19-5 support → 2.8 px thinning (44,090 dots) → remove the ≤1 px catalogue ring (40,199) → remove the ≤2 px ring (37,654). The last step deletes 2,545 dots and adds none. Kernel-matched spacing preserves 300 m-tolerant line coverage at much lower false-positive mass, while catalogue-flank blur has little hidden-target credit after known faults are masked. That is a credible precision mechanism, not proof that the hidden score belongs to the file: its own archived audit calls it unscored and no organizer receipt exists here. Keep 0.2778 labelled USER-REPORTED / UNVERIFIED.</p>
+</section>
+
+<section class="section"><h2>Five hypotheses were ranked before implementation</h2>
+<ol><li><strong>Tested:</strong> RTP + gravity displaced piercing-marker registration; buried cross-cutting offsets; intrusive/contact/seam mimic.</li><li>32-channel patch encoder–decoder; high upside but no honest four-fold GPU/CPU path inside the cap.</li><li>Signed piedmont break-in-slope × LiDAR scarp polarity; shoreline/terrace/fan-toe suppression.</li><li>Cross-scale shallow magnetic termination; lava-flow, cultural-source and flight-line controls.</li><li>Multi-depth MT conductance column; official USGS DOI 10.5066/P9TWT2LU, but required slice bytes unavailable here.</li></ol>
+<p><a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/62_s22_preregistration.md">Frozen full ranking with layers, costs and source gates</a>.</p>
+</section>
+
+<section class="section"><h2>How to submit — only after a future approval</h2>
+<ol><li>Download the selector-approved <strong>all-finite</strong> TIFF; do not use an artifact marked research-only.</li><li>Match its SHA-256 to its run card and require one float32 band, exact template CRS/shape/transform, and finite values in [0,1] everywhere.</li><li>On the authenticated DrivenData page, check the account’s current weekly allowance; choose <em>New submission → File to submit</em>.</li><li>Select that exact TIFF (or a ZIP containing exactly one TIFF), paste the registered unique name and ≤140-character note, and submit.</li><li>Save the organizer receipt, timestamp and hash. Only a receipt-bound value may be called ORGANIZER-CONFIRMED.</li></ol>
+<p><strong>Do not take these upload steps for S22.</strong> Its paired holdout interval is wholly negative.</p>
+</section>
+
+<section class="section"><h2>Evidence, sources and limitations</h2>
+<p><a href="data/run_card_s22.json">JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s22_dpmr_exp2_holdout.json">Holdout evidence</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s22_download_audit.json">723-check archive audit</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/63_s22_result.md">Full report</a></p>
+<p>Official manual-review links: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem and metric</a> · <a href="https://github.com/drivendataorg/gems-prize-reference-solution">reference solution</a> · <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a> · <a href="https://gdr.openei.org/submissions/1391">DOE GDR INGENIOUS</a> · <a href="https://doi.org/10.5066/P9TWT2LU">USGS MT source</a>.</p>
+<p class="meta">Used competition/derived bytes are hash-pinned owner mirrors, not organizer-authenticated downloads. No DrivenData login, upload, quota query, score query or receipt was used. The registry cannot see private/unpublished concurrent work.</p>
+</section>
+</main>
+<footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Preserve decisive negatives; never spend a slot because a file merely passes formatting.</p></div></footer>
+</body></html>

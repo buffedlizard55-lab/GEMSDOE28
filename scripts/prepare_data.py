@@ -68,6 +68,26 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def feature_validity(array: np.ndarray, *, chunk_rows: int = 65_536) -> dict:
+    """Summarize every cached value without materializing the full matrix."""
+    finite = np.zeros(array.shape[1], dtype=np.int64)
+    nan = np.zeros(array.shape[1], dtype=np.int64)
+    infinite = np.zeros(array.shape[1], dtype=np.int64)
+    for start in range(0, array.shape[0], chunk_rows):
+        block = np.asarray(array[start : start + chunk_rows])
+        finite += np.isfinite(block).sum(axis=0)
+        nan += np.isnan(block).sum(axis=0)
+        infinite += np.isinf(block).sum(axis=0)
+    return {
+        "contract": "Missing source coverage is NaN; infinity is forbidden; consumers must fit imputation on training/visible data only.",
+        "finite_counts_by_column": finite.tolist(),
+        "nan_counts_by_column": nan.tolist(),
+        "infinite_counts_by_column": infinite.tolist(),
+        "total_nan": int(nan.sum()),
+        "total_infinite": int(infinite.sum()),
+    }
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true")
@@ -100,7 +120,7 @@ def main() -> int:
             cached_meta = json.loads(meta_path.read_text())
             cached_arr = np.load(dest, mmap_mode="r")
             cache_valid = (
-                cached_meta.get("schema") == 2
+                cached_meta.get("schema") in {2, 3}
                 and cached_meta.get("names") == names
                 and cached_meta.get("inputs") == input_hashes
                 and cached_meta.get("shape") == [int(len(idx)), int(len(names))]
@@ -108,9 +128,24 @@ def main() -> int:
                 and cached_arr.dtype == np.dtype("float32")
                 and sha256_file(dest) == cached_meta.get("sha256")
             )
+            validity = feature_validity(cached_arr) if cache_valid else None
+            if validity and validity["total_infinite"]:
+                cache_valid = False
         except (OSError, ValueError, json.JSONDecodeError):
             cache_valid = False
+            validity = None
         if cache_valid:
+            cached_meta["schema"] = 3
+            cached_meta["feature_validity"] = validity
+            base_note = str(cached_meta.get("note", "")).split(
+                " Missing source coverage remains NaN by contract;", 1
+            )[0]
+            cached_meta["note"] = (
+                base_note
+                + " Missing source coverage remains NaN by contract; infinity is forbidden and "
+                "consumers must fit imputation on training/visible data only."
+            )
+            meta_path.write_text(json.dumps(cached_meta, indent=2) + "\n")
             ev_path.write_text(json.dumps(cached_meta, indent=2) + "\n")
             print(json.dumps(cached_meta, indent=2))
             return 0
@@ -199,8 +234,13 @@ def main() -> int:
     del arr
     partial.replace(dest)
 
+    prepared = np.load(dest, mmap_mode="r", allow_pickle=False)
+    validity = feature_validity(prepared)
+    if validity["total_infinite"]:
+        raise SystemExit("Prepared feature matrix contains infinity")
+
     metadata = {
-        "schema": 2,
+        "schema": 3,
         "names": names,
         "n_features": len(names),
         "shape": [int(len(idx)), int(len(names))],
@@ -211,7 +251,8 @@ def main() -> int:
         "inputs": input_hashes,
         "lidar_band_descriptions": list(LIDAR_EXPECTED_DESCRIPTIONS),
         "lidar_metadata_sha256": input_hashes["lidar_scarp_features_metadata"],
-        "note": "Label-free feature matrix for spatial-CV detectors. Band 6 ('tc') is excluded because it is rank-identical to radiometric total count (Spearman 1.0000); all remaining 18 training bands are verified by embedded description.",
+        "feature_validity": validity,
+        "note": "Label-free feature matrix for spatial-CV detectors. Band 6 ('tc') is excluded because it is rank-identical to radiometric total count (Spearman 1.0000); all remaining 18 training bands are verified by embedded description. Missing source coverage remains NaN by contract; infinity is forbidden and consumers must fit imputation on training/visible data only.",
     }
     meta_path.write_text(json.dumps(metadata, indent=2) + "\n")
     ev_path.write_text(json.dumps(metadata, indent=2) + "\n")

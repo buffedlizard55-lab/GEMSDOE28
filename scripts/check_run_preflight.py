@@ -134,10 +134,34 @@ def preflight(config: dict, *, root: Path = ROOT) -> dict:
                 or len(set(names)) != 32):
             failures.append("Cached feature checksum, shape, dtype or band contract mismatch")
         # Bound temporary memory while checking every value, not a random sample.
+        # Missing source coverage is intentionally NaN in prepare_data.py; its exact
+        # per-column counts must be declared. Infinity is never permitted.
+        finite_counts = np.zeros(array.shape[1], dtype=np.int64)
+        nan_counts = np.zeros(array.shape[1], dtype=np.int64)
+        inf_counts = np.zeros(array.shape[1], dtype=np.int64)
         for start in range(0, array.shape[0], 65536):
-            if not np.isfinite(array[start:start + 65536]).all():
-                failures.append("Cached feature stack contains NaN or infinity")
-                break
+            block = np.asarray(array[start:start + 65536])
+            finite_counts += np.isfinite(block).sum(axis=0)
+            nan_counts += np.isnan(block).sum(axis=0)
+            inf_counts += np.isinf(block).sum(axis=0)
+        validity = meta.get("feature_validity")
+        declared_validity = (
+            isinstance(validity, dict)
+            and validity.get("finite_counts_by_column") == finite_counts.tolist()
+            and validity.get("nan_counts_by_column") == nan_counts.tolist()
+            and validity.get("infinite_counts_by_column") == inf_counts.tolist()
+            and validity.get("total_nan") == int(nan_counts.sum())
+            and validity.get("total_infinite") == int(inf_counts.sum())
+            and isinstance(validity.get("contract"), str)
+            and bool(validity["contract"].strip())
+        )
+        if inf_counts.any():
+            failures.append("Cached feature stack contains infinity")
+        if nan_counts.any() and not declared_validity:
+            failures.append("Cached feature stack contains undeclared NaN values")
+        cache["feature_validity_declared"] = bool(declared_validity)
+        cache["total_nan"] = int(nan_counts.sum())
+        cache["total_infinite"] = int(inf_counts.sum())
     except (OSError, EOFError, KeyError, TypeError, ValueError) as exc:
         failures.append(f"Cached feature stack unavailable: {exc}")
     try:

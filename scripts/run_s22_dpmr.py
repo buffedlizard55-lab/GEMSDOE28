@@ -457,6 +457,14 @@ def make_run_card(exp1: dict, exp2: dict, exp3: dict) -> dict:
     return {
         "schema_version": 1,
         "session": "S22-DPMR",
+        "execution_provenance": {
+            "preregistration_commit": "9b703e59283ad8f4fac86ec37d2e91f5c6d9c64e",
+            "transform_and_registry_commit": "3450ff2d85140e71fb1452347d8fd32cb4c8fa5d",
+            "experiment_1_head": "c9f2f07eb2bda5e58d10e598e7900665d4340164",
+            "experiment_2_head": "36742be55e4e6c19708ba5f81af6e865842d929b",
+            "experiment_3_head": "fd1cd19444e4c82fb955e2843e3605135be0ab22",
+            "void_startup": "evidence/s22_dpmr_exp2_void_import.json",
+        },
         "lane": "Displaced potential-field piercing-marker registration (self-assigned; no external exclusivity claimed)",
         "hypothesis": (
             "A concealed fault offsets pre-existing magnetic/density marker patterns; a common non-zero "

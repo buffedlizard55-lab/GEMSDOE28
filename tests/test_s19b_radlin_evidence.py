@@ -76,7 +76,8 @@ def test_s19_site_pages_carry_decision_and_nine_site_table():
         assert site in page
     assert "0.2778" in page and "NOT APPROVED" in page
     manifest = load("docs/downloads/manifest.json")
-    # S19-ASCP (parallel lane) merged first and owns the current card.
-    assert manifest["current_run"]["run_id"] == "S19-ASCP"
+    # S19-ASCP remains preserved, while the newer S22 negative owns the current card.
+    assert manifest["current_run"]["run_id"] == "S22-DPMR"
+    assert manifest["s19_candidate"]["verdict"] == "negative"
     assert manifest["s19b_candidate"]["verdict"] == "negative"
     assert any(r["run_id"] == "S19B-RADLIN" for r in manifest["parallel_runs"])

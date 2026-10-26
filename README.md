@@ -1,3 +1,21 @@
+# Session 22 (`S22-DPMR`) — 2026-10-26 UTC (read first every session)
+
+## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
+
+- **1-click research download:** [`docs/downloads/gems28-s22-dpmr-20261026-ecf809d55d2a-allfinite.tif`](docs/downloads/gems28-s22-dpmr-20261026-ecf809d55d2a-allfinite.tif) (826,126 bytes · SHA-256 `66bbd9f91ecc407e43bbd5018be2b03cfe4aa10fd73613a52d1fddf43bdc8b10` · 37,654 independently placed dots · one float32 band · whole array finite · values `{0,1}` · EPSG:32611 · 3730 × 3292 · exact sample transform) · [NaN twin](docs/downloads/gems28-s22-dpmr-20261026-ecf809d55d2a-nan.tif) · [one-TIFF ZIP](docs/downloads/gems28-s22-dpmr-20261026-ecf809d55d2a-nan.zip).
+- **Lane:** deterministic two-scale displaced piercing-marker registration across opposite-side RTP and isostatic-gravity patches. No prior raster seeded, protected, copied or pruned.
+- **Automated gates:** three feature-alone canaries PASS (worst fold polarity 0.5594 ≤ 0.90); bounded-registry uniqueness PASS across 190 deduplicated rasters (final max `|Spearman|=0.3347`, max 3 px overlap `50.62%`); exact candidate format/hash/footprint/range PASS; repaired archive audit **723/723 PASS across 48 TIFFs**.
+- **Scientific gate:** shared `gems-segment-pooled-v1`, whole systems + 1,500 m buffers, visible-only catalogue construction, exact visible mask, pooled α=.2/β=.8/300 m triangular kernel, 60,988 withheld positives. Candidate **HOLDOUT-DTI 0.067574 [0.060575, 0.075372]** vs B0 **0.144433**; paired Δ **−0.076860 [−0.091128, −0.062776]**, 0/4 folds → **`negative`; no slot selected or spent**.
+- **MODEL PROJECTION — NOT A SCORE:** `0.1285 [0.1003, 0.1578]`, using the preregistered ratio to the `0.2778` USER-REPORTED / UNVERIFIED GEMSDOE32 anchor. Do not call this a score.
+- **Unique portal name:** `GEMSDOE28-S22-DPMR-ecf809d55d2a`; **note (97/140):** `S22 DPMR displaced RTP+gravity markers 37654d | HOLDOUT 0.0676 vs 0.1444 | NEGATIVE DO NOT SUBMIT`.
+- **Deliverables:** [Session 22 executive page](docs/session22-result.html) · [full result + nine-site table](knowledge/63_s22_result.md) · [frozen preregistration/ranked hypotheses](knowledge/62_s22_preregistration.md) · [JSON run card](evidence/s22_dpmr_run_card.json) · [723-check download audit](evidence/s22_download_audit.json).
+
+**Best decision: download S22 only for reproducibility; upload nothing today.** The historical GEMSDOE32 `h33-h33-2-b2…` claim remains the best listed at `0.2778 USER-REPORTED / UNVERIFIED`, plausibly because 2.8 px kernel-matched spacing plus removal of 2,545 low-credit catalogue-flank dots improves emission efficiency. It has no hash-bound organizer receipt here and must not be copied.
+
+**Core values:** **Maximize P(Win)** — reject a decisively inferior lane. **Own the Outcome** — preserve the negative file, fix the shared cache contract and archive audit, and spend zero slots.
+
+---
+
 # Session 21 (`S21-PUHGB`) — 2026-10-26 UTC (read first every session)
 
 ## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**

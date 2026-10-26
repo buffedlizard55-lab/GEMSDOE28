@@ -361,8 +361,8 @@ def test_current_run_notice_is_above_historical_body():
     card = json.loads((DOCS / 'data/run_card_2026-10-26.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
-    # The current S19-ASCP card is bound to the exact TIFF; its negative gate cannot approve it.
-    assert card['session'] == 'S19-ASCP'
+    # The current S22 card is bound to the exact TIFF; its negative gate cannot approve it.
+    assert card['session'] == 'S22-DPMR'
     assert re.fullmatch(r'[0-9a-f]{64}', card['raster_sha256'])
     assert card['slot_selected'] is False
     assert card['experiments_run'] == 3 and card['verdict'] == 'negative'
@@ -384,10 +384,10 @@ def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(ca
     metadata = json.loads(capsys.readouterr().out)
     assert metadata['submission_ready'] is False and metadata['slot_selected'] is False
     assert 'primary_download' not in metadata
-    assert 's19-ascp' in metadata['research_download']
+    assert 's22-dpmr' in metadata['research_download']
     assert metadata['inspection_artifacts']
     current = json.loads((DOCS / 'data/current_run_card_2026-10-26.json').read_text())
-    exact = json.loads((ROOT / 'evidence/s19_ascp_run_card.json').read_text())
+    exact = json.loads((ROOT / 'evidence/s22_dpmr_run_card.json').read_text())
     assert current == exact and current['verdict'] == 'negative'
     # The parallel blocked review is preserved, not overwritten with this experiment.
     parallel = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
@@ -474,8 +474,8 @@ def test_combined_archive_namespaces_ids_and_accessible_labels():
 
 
 
-def test_current_public_card_aliases_use_restored_data_review_not_older_checkout_state():
-    source = json.loads((ROOT / 'evidence/s19_ascp_run_card.json').read_text())
+def test_current_public_card_aliases_use_s22_not_older_checkout_state():
+    source = json.loads((ROOT / 'evidence/s22_dpmr_run_card.json').read_text())
     for name in ('run_card_2026-10-26.json', 'current_run_card_2026-10-26.json'):
         assert json.loads((DOCS / 'data' / name).read_text()) == source
     # Keep the concurrent negative review intact as its own historical record.
@@ -487,7 +487,8 @@ def test_current_public_card_aliases_use_restored_data_review_not_older_checkout
     assert (ROOT / 'data/current_run_card_2026-10-26.json').read_bytes() == (
         DOCS / 'data/current_run_card_2026-10-26.json').read_bytes()
     root_summary = (ROOT / 'executive-summary.html').read_text()
-    assert 'Submission download locked' in root_summary and 'docs/downloads/gems28-s19-ascp-' in root_summary
+    assert 'Submission download locked' in root_summary
+    assert 'docs/downloads/gems28-s22-dpmr-20261026-ecf809d55d2a-allfinite.tif' in root_summary
 
 
 def test_session18_h39_5_candidate_is_unique_valid_but_do_not_submit():
