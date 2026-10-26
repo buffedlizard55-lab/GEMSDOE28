@@ -1,5 +1,5 @@
 {
-  "session": "S19-RADLIN",
+  "session": "S19B-RADLIN",
   "date_utc": "2026-10-26",
   "lane": "radiometric alteration lineament (ThK) weighted all-ridge coverage packing",
   "lane_authorization": "Autonomous adoption of repository queued next lane H39-2; prompt omitted explicit method paragraph",
@@ -629,15 +629,16 @@
   "organizer_receipt": null,
   "disposition": "\ud83d\udd34 DO NOT SUBMIT \u2014 unique vs scored artifacts but duplicate-stop vs the dense H37-1 probe-union registry raster under the frozen any-raster rule. Research download only; a future preregistered session must first settle whether unscored dense probes belong in the uniqueness registry.",
   "evidence": {
-    "surface": "evidence/s19_surface.json",
-    "holdout": "evidence/s19_holdout.json",
-    "build": "evidence/s19_candidate_build.json",
-    "preregistration": "knowledge/55_s19_preregistration.md",
+    "surface": "evidence/s19b_radlin_surface.json",
+    "holdout": "evidence/s19b_radlin_holdout.json",
+    "build": "evidence/s19b_radlin_candidate_build.json",
+    "preregistration": "knowledge/57_s19b_radlin_preregistration.md",
     "result": "knowledge/56_s19_result.md"
   },
   "evidence_schema_gate": {
     "verdict": "negative",
     "submission_ready": false,
     "slot_selected": false
-  }
+  },
+  "merge_reconciliation": "Parallel-session collision on merge (another S19-ASCP lane merged first via PR #46, plus Session 20): this run renamed S19-RADLIN -> S19B-RADLIN with renamed artifact paths on 2026-10-26; no number, hash or verdict changed. See registry/irregularities.json: s19b-parallel-session-collision-and-rename."
 }

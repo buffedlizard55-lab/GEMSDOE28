@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S19 Experiment 3 (knowledge/55): build the RADLIN candidate GeoTIFF package.
+"""S19 Experiment 3 (knowledge/57): build the RADLIN candidate GeoTIFF package.
 
 Runs only if Experiment 1 passed (a duplicate/canary stop means no TIFF).
 The LOSFO verdict does not change the build; it changes the label the
@@ -56,7 +56,7 @@ def within_frac(ours: np.ndarray, ref: np.ndarray, r: float = 3.0) -> float:
 
 def main() -> int:
     t0 = time.time()
-    stage = json.loads((ROOT / "evidence/s19_surface.json").read_text())
+    stage = json.loads((ROOT / "evidence/s19b_radlin_surface.json").read_text())
     if not stage["passed"]:
         raise SystemExit("Experiment 1 did not pass; preregistration says STOP, no TIFF.")
     surf_path = paths.DATA / "prepared" / "s19_radlin_surface.npz"
@@ -113,7 +113,7 @@ def main() -> int:
     worst_rho = max(uniq.items(), key=lambda kv: abs(kv[1]["spearman_binary_sample400k"]))
     uniq_pass = worst_ov[1]["frac_our_dots_within3px"] <= 0.70 and abs(worst_rho[1]["spearman_binary_sample400k"]) <= 0.90
     out = {
-        "session": "S19-RADLIN", "experiment": 3, "candidate": nan_name, "content_id": cid,
+        "session": "S19B-RADLIN", "experiment": 3, "candidate": nan_name, "content_id": cid,
         "n_dots": n_final, "target_n": TARGET_N,
         "files": {"nan": nan_name, "allfinite": af_name, "zip": p_zip.name},
         "sha256": {"nan": sha256_file(p_nan), "allfinite": sha256_file(p_af), "zip": sha256_file(p_zip)},
@@ -126,7 +126,7 @@ def main() -> int:
                        "pass_strict": bool(uniq_pass)},
         "seconds": round(time.time() - t0, 1),
     }
-    (ROOT / "evidence/s19_candidate_build.json").write_text(json.dumps(out, indent=2) + "\n")
+    (ROOT / "evidence/s19b_radlin_candidate_build.json").write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({"candidate": nan_name, "content_id": cid, "n_dots": n_final,
                       "validator_pass": out["validator_pass"],
                       "worst_overlap": out["uniqueness"]["worst_by_overlap"],

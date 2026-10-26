@@ -1,116 +1,30 @@
-# S19 — radiometric alteration lineaments (2026-10-26)
+# S19-ASCP preregistration — antislope scarp curvature pairs
 
-## Lane and provenance
+**Frozen before scientific outputs on 2026-10-26 UTC.**
 
-The current user message again references "the single method paragraph below" but supplies no
-identifiable exclusive method paragraph. Autonomous interpretation, disclosed not concealed:
-adopt the repository's own queued next lane — H39-2 radiometric alteration lineaments
-(`knowledge/53_s18_result.md` next steps; `registry/next_hypotheses.json` session15_addendum
-`next_ranked[0]`), which no prior session executed. Session-scoped ID: `S19-RADLIN`.
-No claim of an externally assigned exclusive lane. No competition upload; promotion, if any,
-is a separate selector step. Budget: **3 experiments / 2 hours**. Fresh LOSFO seeds **320–324**
-(seeds ≤319 are spent or reserved by prior lanes; do not retune on them).
+## Lane and coordination
 
-**Frozen method paragraph (before any fit or placement):** From the hash-pinned GeoDAWN
-radiometric mirrors, take the extension ratio grid `ThK` (band 1 of
-`geodawn_extensions_u8.tif`; valid = value > 0 inside the footprint). Low Th/K is the
-potassic-alteration signature: form `f = clip((p95 − ThK)/(p95 − p5), 0, 1)` over valid pixels
-(nearest-valid fill only for filtering), smooth at σ=1 px, and take its 1-px ridge by the shared
-`oof_detector.ridge_nms`. A ridge pixel earns lineament score
-`clip(mx10,0,1) · (0.5 + 0.5·aniso10)` where `mx10`/`aniso10` are the max and
-`(max−mean)/max` anisotropy of the four-orientation (0/45/90/135°) ±10 px (1 km half-length)
-line means of the smoothed field; score is 0 off-ridge and outside valid radiometry. The bonus
-field is the 7×7 maximum of that score (lineament influence within 300 m). Placement is the
-shared detector's all-ridge **coverage packing** (`packing.coverage_greedy`) with weight
-`prob · (1 + 0.5 · bonus)`, candidates = detector ridge pixels >2 px from the *visible*
-catalogue, at a per-cell dot count matched to the recomputed H38-1 baseline (full map:
-37,654 dots, the champion's budget, for count comparability only — no champion pixels are
-read into placement). Nothing else changes: 32-band cached feature stack, detector,
-LOSFO split, evaluator and writer are the shared template tools. K/Th/U raw bands
-(`geodawn_rad_u8.tif`) are used only for a validity/quantisation audit of the ratio grid,
-not in the score.
+The owner request again says the lane is “the single method paragraph below,” but contains no identifiable exclusive method paragraph. To avoid stopping at an old rejected file while also avoiding silent scope drift, this run autonomously takes the repository's documented next step: a provenance-audited **scarp-displacement observable with named road/channel/shoreline controls**. Session ID `S19-ASCP`. This is not a claim of external exclusivity. The run stops on duplicate evidence, leakage, three experiments, or two hours. It does not upload or select a competition slot.
 
-**Mechanism.** Hydrothermal alteration along a fluid conduit depletes Th relative to K
-(potassic alteration halo). A buried fault that never produced a Quaternary scarp can still
-host such a halo, linear at ≥1 km scale, where the surface-rupture catalogue has no trace.
-Coverage packing under the official 300 m kernel then spends dots preferentially covering
-detector-probability mass that is alteration-corroborated, instead of covering the
-probability field blind to alteration.
+**Frozen method paragraph:** Decode only the hash-pinned 12-band 100 m LiDAR terrain-descriptor raster. Build four label-free physical legs: (1) 10–50 m scale `step_max`; (2) a paired curvature leg `2*min(lapneg_max,lappos_max)/(lapneg_max+lappos_max)`, requiring both a crest and toe rather than a lone edge; (3) antislope selectivity `upface_max/(upface_max+downface_max+cross_max)`, targeting uphill-facing scarps and penalizing downslope faces and channel-bank-like cross-slope edges; and (4) `coh100`, local structure-tensor coherence. The candidate surface is the geometric mean of normalized step strength, paired-curvature balance, antislope selectivity and coherence, multiplied by the LiDAR-valid mask. No labels, registry pixels, fault-distance field, score report, roads layer or hand inspection enter the surface. Candidate emission applies shared ridge NMS and probability-order spacing at 2.8 pixels, caps at 37,654 dots, removes visible catalogue pixels exactly, and excludes positions within two pixels of the visible catalogue. The named non-fault processes are road cuts, terrace/paleo-shoreline risers, channels, landslides and mine benches; the antislope/pair/coherence conjunction is a falsifiable control, not proof that those mimics are absent.
 
-**Named non-fault mimic.** Felsic lithologic boundaries and playa evaporite K enrichment
-produce low-Th/K lineaments with zero fault displacement; GeoDAWN flight-line striping can
-manufacture linear ratio artefacts. A lineament is alteration geometry, not proof of a fault
-or a geothermal vent.
+## Ranked hypotheses before implementation
 
-## Ranked candidate hypotheses (before implementation)
+Expected benefit is qualitative—not a projected score. “Different” means different from code/results reviewed in this checkout, not globally novel.
 
-Qualitative expected utility only — no numeric DTI projection is a score. Novelty means
-"not executed in this checkout" (checked against `src/gems27/`, `knowledge/` and
-`registry/next_hypotheses.json`), not a claim nobody else has studied the process.
-All use already-restored, hash-pinned owner mirrors (provenance class: owner mirror,
-NOT organizer-authenticated). No new external data is required for ranks 1–4.
-
-| Rank | Hypothesis / layers | Signature and missing-catalogue rationale | Difference from implemented work | Non-fault mimic | Expected benefit / cost |
+| Rank | Specific layers and physical signature | Why it may recover off-catalogue faults | Difference from this repo | Named non-fault mimic | Expected DTI benefit / implementation cost |
 |---|---|---|---|---|---|
-| 1 | **S19-RADLIN**: GeoDAWN `ThK` (+`UTh`) alteration lineaments × detector all-ridge coverage | Low-Th/K ridge, ≥1 km oriented collinearity, as multiplicative coverage weight; alteration haloes outlive/absent scarps along buried conduits | Radiometrics entered only as scalar GBDT bands (S14a radiometric detector: interleaved pass, LOSFO unresolved) or pointwise halo thresholds (H35-1); never as an object lineament weighting coverage placement | Felsic contact; playa K; flight-line striping | Highest in this slate (builds on the twice-replicated all-ridge coverage far-field gain, +0.0052/+0.0059, `knowledge/39`) / medium |
-| 2 | Signed shear→dilatation transition corridors; `geod_shearrate`, `geod_dilaterate`, `tmi_hg` | Zero-crossing of dilatation flanked by high \|shear\|, collinear with a TMI horizontal-gradient ridge, as detector extra bands | Kinematic gates used scalar tendencies/thresholds; no signed transition object exists in `src/gems27/` | Distributed ductile strain; interpolation boundary of the geodetic grid | Low–moderate (100 m expression of a km-scale geodetic field is weak) / low |
-| 3 | Drainage-chain collinearity; `det_elev`, `det_elev_slope` | Valley-skeleton pixels whose 900 m, 16-direction collinearity vote is high, as extra bands | Terrain work used amplitude/step/curvature descriptors; no drainage-chain object at 100 m | Joint sets; strike valleys; lithologic channels | Low–moderate / medium |
-| 4 | Cross-slope radiometric sign reversal; `det_elev` + K/Th/U | Ratio reversal with consistent sign across opposing drainage slopes along a line | Scalar radiometric bands and H39-2-style lineaments proposed; cross-slope sign-consistency never executed; u8 quantisation must be audited first | Felsic contact; transported alluvium; topographic gamma attenuation | Uncertain / medium |
-| 5 | Depth-coherent MT conductance-boundary migration + gravity | Lateral migration of a conductance boundary across depth slices with gravity-edge corroboration | Differs from single-depth `cond_surf` scalars, but **not viable now**: no MT slices exist in this checkout and the official source (USGS, DOI [10.5066/P9TWT2LU](https://doi.org/10.5066/P9TWT2LU)) cannot be fetched/byte-verified from this sandbox's allowlisted hosts. Named, gated, not proposed as runnable. | Clay-rich basin margin; lithologic conductor | Unranked benefit / high, data-blocked |
+| 1 | `step_max`, `lapneg_max`, `lappos_max`, `upface_max`, `downface_max`, `cross_max`, `coh100`: paired crest/toe curvature plus uphill-facing selectivity and linear coherence | Subtle/degraded fault scarps can retain an antislope crest-toe pair even when no regional catalogue trace was digitized | Prior LiDAR work uses scalar scarp strength, anisotropic continuity, relief or generic ridges; no reviewed executed arm uses this exact paired-curvature × antislope-ratio conjunction | Road cut, terrace/paleo-shoreline riser, channel bank, landslide, mine bench | Highest / low-medium; cached raster available and hash-pinned |
+| 2 | `det_elev`, `det_local_relief`, `iso_grav_anom`: opposite-flank flexural-curvature pair corroborated by a gravity gradient | Broad basin tilting may reveal concealed normal faults without a sharp surface rupture | Existing work uses scalar curvature/gradient and gravity benches, not an ordered opposite-sign flank object | Playa margin or depositional hinge | Moderate / medium; cached fields available |
+| 3 | TMI/RTP/gravity: lateral offset of two or more piercing-marker ridges across a corridor | Fault displacement can offset pre-existing contacts while the fault itself has weak potential-field contrast | Prior HG/Euler/migration work places contact ridges; it does not require a repeated piercing-marker offset | Intrusive contact geometry or acquisition seam | Potentially high / high; cached fields available |
+| 4 | U/Th, Th/K, K plus SGMC context: odd-symmetric cross-corridor radiometric residual pair | Fluid-rock alteration/transport may persist across a buried structure absent from a scarp catalogue | Prior radiometric models use scalar channels/ratios and lineaments, not a lithology-conditioned signed dipole | Felsic contact, soil transport or moisture contrast | Uncertain / medium; cached rank grids available but not absolute chemistry |
 
-## Frozen experiments and gates
+No new external layer is required for the selected candidate. The free official upstream source class is USGS 3DEP; availability/provenance is represented by the pinned 716-link inventory and the 706/716-tile owner-derived raster. The derived bytes are owner-mirrored and hash-pinned, **not organizer-authenticated**; ten failed tiles and an OCR-recovered inventory are limitations, not silently treated as complete coverage.
 
-1. **Surface + canary + pre-placement uniqueness (no detector fit).** Build the label-free
-   lineament surface from the radiometric mirrors only. Feature-alone leakage canaries on
-   LOSFO seed 320 withheld systems (250,000 sampled negatives >6 px from hidden truth,
-   fixed RNG): each of (a) lineament score, (b) bonus field, (c) inverted-ThK field alone.
-   `max(AUC, 1−AUC) > 0.90` ⇒ leakage, log and STOP. Pre-placement registry check on the
-   surface: Spearman(surface, each registry raster) on a fixed 400,000-pixel footprint
-   sample, and the fraction of the top-37,654 eligible surface pool (score order,
-   ≥2.8 px packing, >2 px from full catalogue for sizing only) within 3 px of each
-   registry raster. Spearman >0.90 OR overlap >70% against ANY member ⇒ duplicate,
-   log and STOP (no TIFF). Registry scope is declared, not global: every local
-   `docs/downloads/*-nan.tif` present at freeze time plus byte-verified forensic copies
-   of the nine focus sites' highest-reported artifacts (GEMSDOE24/25/27/28/30/31/32/33/36,
-   hashes pinned in `evidence/s18_champion_forensic.json`), fetched for education/forensic
-   comparison only and never copied into any shipped raster.
-2. **Buffered LOSFO gate, seeds 320–324.** Shared tools only:
-   `run_losfo_harness.eval_set` v2 → `metric.dti_binary`, pooled DTI α=0.2, β=0.8,
-   300 m triangular kernel; whole fault systems (dilate 3 px) hidden per quadrant fold,
-   600 m buffer erased from training labels; every catalogue-derived quantity inside a
-   cell (visible mask, distance eligibility) computed only from visible labels; visible
-   faults masked pixel-exactly. Baseline per cell = the S18-registered H38-1 recipe
-   recomputed on visible-only labels (rung-3.0 dotted base + joint heat-flow/Euler
-   corroborated additions). Candidate per cell = coverage packing as frozen above at the
-   baseline's per-cell dot count. Gates: pooled paired gain >0.001 AND lower 95% of the
-   paired geographic-fold block bootstrap (10,000 draws, 4 blocks) >0 AND ≥3/4 fold
-   pooled gains >0 AND ≥4/5 seed pooled gains >0 AND 0 candidate dots on visible
-   catalogue AND every cell's hidden-to-visible separation >6 px. No retuning on these
-   seeds under any outcome.
-3. **Build + validator + final uniqueness (runs regardless; the verdict decides the label).**
-   Full-fit detector on all labels; coverage packing to 37,654 dots, >2 px from the full
-   catalogue. Write the all-finite TIFF (and NaN-outside variant + single-member ZIP for
-   transport parity) through shared `submission.write_geotiff`; independently re-read and
-   validate the exact files (single-band float32, template CRS/shape/transform, no NaN
-   inside footprint, values in [0,1]). Final uniqueness: fraction of final dots within
-   3 px of every registry raster (same declared scope as Exp. 1) and sample Spearman of
-   the final binary vs each registry raster. `promote` (to a separate selector only,
-   still not slot-approved) requires Exp. 2 gates AND uniqueness AND validator all PASS.
-   Any other outcome is `negative`: the download banner must read 🔴 DO NOT SUBMIT.
+## Frozen experiment plan and gates
 
-Every computed number is labelled **HOLDOUT-DTI** (evaluator version, withheld positives,
-95% CI). The 0.2477–0.2778 family values are **OWNER-REPORTED** context only; nothing is
-**ORGANIZER-CONFIRMED** without a submission-page receipt. The dated public-leaderboard
-observation (0.4413, 2026-10-25) is not a receipt and does not identify any raster's owner.
+1. **Feature canary and pre-placement novelty.** Use the hash-verified shared `SegmentHoldout.canary` on each physical leg and the combined surface. Any pooled or fold AUC polarity above 0.90 stops the lane as suspected leakage. Compare the continuous surface and its positive support against all valid submission-grid rasters in the freshly observed nine-repository priority cache plus pre-run local registry. Spearman >0.90 or >70% support within 3 px of any one raster stops as duplicate.
+2. **Final placement and exact-file validation.** Create fold-independent predictions using only the fixed surface and each fold's visible catalogue mask. Compare final full-fit dots to the same registry; >70% within 3 px stops. If unique, write one all-finite float32 TIFF using the hash-verified shared submission writer, then independently re-open it and require one band, no NaN in the footprint or array, values [0,1], and exact template CRS/shape/transform. This research file remains **DO NOT SUBMIT** until Experiment 3 passes.
+3. **Shared buffered holdout.** Use shared `SegmentHoldout` (`gems-segment-pooled-v1`): whole 8-connected catalogue components, 1.5 km collar, four quadrants, visible-only catalogue exclusion, pixel-exact visible masking, pooled alpha=0.2/beta=0.8/300 m triangular DTI, 10 km spatial-block percentile CI. Compare with a recomputed visible-only 32-band detector/H38-style baseline under the same folds. Promotion requires candidate pooled DTI above baseline, paired-gain 95% CI lower bound >0, positive gain in at least 3/4 folds, all integrity gates, uniqueness, and exact-file validation. The shared comparator is a registered prior recipe, not an authenticated global best.
 
-## Why the reported GEMSDOE32 leader improved (byte-verified, conditional)
-
-`evidence/s18_champion_forensic.json`: the `e5eb6e7e-zeros` raster is exactly the solo-r1
-dot set minus its 2,545 dots at catalogue distance ≤2 px (zero added, zero reconstruction
-difference); solo-r1 is d2.8 minus the ≤1 px ring. For binary predictions
-`DTI = TP/(0.2·(TP+FP) + 0.8·|G|)` at fixed truth, removing dots whose lost credit per
-removed FP is below `0.2·DTI/(1−0.2·DTI)` raises DTI. The construction proves *emission
-hygiene* (pruning), not a new detector; whether those dots earned zero credit on the
-private expert labels cannot be measured here, so score causation stays conditional.
-Copying or ring-pruning that raster would be a >95% duplicate and is prohibited by the
-lane rule. Beating it requires new credit, not fewer of the same dots.
+The TIFF is generated after uniqueness, as required, even if holdout later rejects it; its site disposition must then be unambiguously research-only. No same-seed tuning or fallback submission is allowed.

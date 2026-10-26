@@ -1,5 +1,5 @@
 {
-  "session": "S19-RADLIN",
+  "session": "S19B-RADLIN",
   "experiment": 3,
   "candidate": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.tif",
   "content_id": "6fa38f9d317b",
@@ -340,5 +340,6 @@
     },
     "pass_strict": false
   },
-  "seconds": 55.4
+  "seconds": 55.4,
+  "merge_reconciliation": "Parallel-session collision on merge (another S19-ASCP lane merged first via PR #46, plus Session 20): this run renamed S19-RADLIN -> S19B-RADLIN with renamed artifact paths on 2026-10-26; no number, hash or verdict changed. See registry/irregularities.json: s19b-parallel-session-collision-and-rename."
 }

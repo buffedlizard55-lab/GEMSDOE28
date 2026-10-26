@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S19 Experiment 1 (knowledge/55): label-free RADLIN surface, leakage canary,
+"""S19 Experiment 1 (knowledge/57): label-free RADLIN surface, leakage canary,
 pre-placement registry uniqueness. No detector fit, no TIFF written.
 
 Registry scope (declared, not global): local docs/downloads/*-nan.tif at freeze
@@ -130,7 +130,7 @@ def main() -> int:
               and abs(worst_rho[1]["spearman_surface_sample400k"]) <= 0.90
               and worst_ov[1]["frac_pool_within3px"] <= 0.70)
     out = {
-        "session": "S19-RADLIN", "experiment": 1, "preregistration": "knowledge/55_s19_preregistration.md",
+        "session": "S19B-RADLIN", "experiment": 1, "preregistration": "knowledge/57_s19b_radlin_preregistration.md",
         "surface_npz": str(out_npz.relative_to(ROOT)), "surface_npz_sha256": sha256_file(out_npz),
         "surface_meta": surf["meta"], "extensions_descriptions": ext_desc,
         "rad_descriptions": rad_desc, "rad_K_valid_frac_in_footprint": rad_valid_frac,
@@ -144,7 +144,7 @@ def main() -> int:
         "registry_scope": "local docs/downloads/*-nan.tif + byte-verified /tmp/forensic focus-9 copies; declared snapshot, not a global parallel registry",
         "passed": bool(passed), "seconds": round(time.time() - t0, 1),
     }
-    (ROOT / "evidence/s19_surface.json").write_text(json.dumps(out, indent=2) + "\n")
+    (ROOT / "evidence/s19b_radlin_surface.json").write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({"passed": passed, "worst_rho": out["preplacement"]["worst_by_spearman"],
                       "worst_overlap": out["preplacement"]["worst_by_overlap"]}, indent=2))
     return 0 if passed else 2

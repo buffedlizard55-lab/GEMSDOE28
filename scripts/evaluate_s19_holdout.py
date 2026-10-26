@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S19 Experiment 2 (knowledge/55): buffered whole-system LOSFO gate, seeds 320-324.
+"""S19 Experiment 2 (knowledge/57): buffered whole-system LOSFO gate, seeds 320-324.
 
 Candidate = shared detector all-ridge coverage packing weighted by
 prob * (1 + 0.5 * RADLIN bonus). Baseline = S18-registered H38-1 recipe
@@ -65,11 +65,11 @@ def confidence_intervals(cells):
 
 def main():
     t0 = time.monotonic()
-    output = ROOT / "evidence/s19_holdout.json"
-    started = ROOT / "evidence/s19_holdout.started.json"
+    output = ROOT / "evidence/s19b_radlin_holdout.json"
+    started = ROOT / "evidence/s19b_radlin_holdout.started.json"
     if output.exists() or started.exists():
         raise SystemExit("Frozen experiment already started; do not rerun spent seeds 320-324.")
-    stage = json.loads((ROOT / "evidence/s19_surface.json").read_text())
+    stage = json.loads((ROOT / "evidence/s19b_radlin_surface.json").read_text())
     if not stage["passed"]:
         raise SystemExit("Experiment 1 (canary/pre-placement) did not pass; gate is stopped.")
     surf_path = paths.DATA / "prepared" / "s19_radlin_surface.npz"
@@ -97,8 +97,8 @@ def main():
         "split": "src/gems27/losfo.py", "runner": "scripts/evaluate_s19_holdout.py",
         "radlin": "src/gems27/radlin.py", "packing": "src/gems27/packing.py"}.items()}
     started.write_text(json.dumps({
-        "session": "S19-RADLIN", "experiment": 2, "seeds": SEEDS,
-        "preregistration": "knowledge/55_s19_preregistration.md",
+        "session": "S19B-RADLIN", "experiment": 2, "seeds": SEEDS,
+        "preregistration": "knowledge/57_s19b_radlin_preregistration.md",
         "evaluator_hashes": evaluator_hashes, "baseline_sha256": baseline_hash,
         "inputs": hashes}, indent=2) + "\n")
 
@@ -160,7 +160,7 @@ def main():
             "positive_4_of_5_seeds": sum(v > 0 for v in per_seed.values()) >= 4,
             "all_cells_buffered": all(r["minimum_hidden_to_visible_px"] > 6 for r in cells),
             "no_visible_dots": all(r["candidate_on_visible"] == r["baseline_on_visible"] == 0 for r in cells)}
-    result = {"label": "HOLDOUT-DTI", "session": "S19-RADLIN", "experiment": 2,
+    result = {"label": "HOLDOUT-DTI", "session": "S19B-RADLIN", "experiment": 2,
               "baseline": "H38-1 joint-on-r30-r1 recomputed via registered shared recipe on visible-only labels",
               "baseline_scope": "Registered prior best candidate; not a certified global or organizer best",
               "baseline_sha256": baseline_hash,

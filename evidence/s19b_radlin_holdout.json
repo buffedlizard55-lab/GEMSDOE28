@@ -1,6 +1,6 @@
 {
   "label": "HOLDOUT-DTI",
-  "session": "S19-RADLIN",
+  "session": "S19B-RADLIN",
   "experiment": 2,
   "baseline": "H38-1 joint-on-r30-r1 recomputed via registered shared recipe on visible-only labels",
   "baseline_scope": "Registered prior best candidate; not a certified global or organizer best",
@@ -584,5 +584,6 @@
     "Withheld-positive pooled count repeats faults across seeds; unique count reported separately.",
     "Historical heat-flow/Euler external mirrors are not independently authenticated official inputs."
   ],
-  "seconds": 376.6
+  "seconds": 376.6,
+  "merge_reconciliation": "Parallel-session collision on merge (another S19-ASCP lane merged first via PR #46, plus Session 20): this run renamed S19-RADLIN -> S19B-RADLIN with renamed artifact paths on 2026-10-26; no number, hash or verdict changed. See registry/irregularities.json: s19b-parallel-session-collision-and-rename."
 }

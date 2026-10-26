@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """S19 finalizer: assemble the JSON run card, manifest entry and note file.
 
-Not an experiment. Verdict logic is frozen in knowledge/55: promote (to a
+Not an experiment. Verdict logic is frozen in knowledge/57: promote (to a
 separate selector only) requires LOSFO gate AND strict uniqueness AND exact-file
 validator all PASS. Here the LOSFO gate passed but strict uniqueness failed
 against the dense H37-1 probe-union registry raster, so the verdict is
@@ -18,9 +18,9 @@ sys.path.insert(0, str(ROOT / "src"))
 
 
 def main() -> int:
-    surf = json.loads((ROOT / "evidence/s19_surface.json").read_text())
-    hold = json.loads((ROOT / "evidence/s19_holdout.json").read_text())
-    build = json.loads((ROOT / "evidence/s19_candidate_build.json").read_text())
+    surf = json.loads((ROOT / "evidence/s19b_radlin_surface.json").read_text())
+    hold = json.loads((ROOT / "evidence/s19b_radlin_holdout.json").read_text())
+    build = json.loads((ROOT / "evidence/s19b_radlin_candidate_build.json").read_text())
     dl = ROOT / "docs/downloads"
     files, sha = build["files"], build["sha256"]
     cid = build["content_id"]
@@ -43,7 +43,7 @@ def main() -> int:
 
     v = build["validator_allfinite"]
     card = {
-        "session": "S19-RADLIN", "date_utc": "2026-10-26",
+        "session": "S19B-RADLIN", "date_utc": "2026-10-26",
         "lane": "radiometric alteration lineament (ThK) weighted all-ridge coverage packing",
         "lane_authorization": "Autonomous adoption of repository queued next lane H39-2; prompt omitted explicit method paragraph",
         "hypothesis": "Low-Th/K alteration lineaments collinear over >=1 km mark buried fluid conduits; weighting all-ridge coverage packing by that lineament field earns credit on scarp-less faults the catalogue omits.",
@@ -92,18 +92,18 @@ def main() -> int:
                         "dense H37-1 probe-union registry raster under the frozen any-raster rule. "
                         "Research download only; a future preregistered session must first settle "
                         "whether unscored dense probes belong in the uniqueness registry."),
-        "evidence": {"surface": "evidence/s19_surface.json", "holdout": "evidence/s19_holdout.json",
-                     "build": "evidence/s19_candidate_build.json",
-                     "preregistration": "knowledge/55_s19_preregistration.md",
-                     "result": "knowledge/56_s19_result.md"},
+        "evidence": {"surface": "evidence/s19b_radlin_surface.json", "holdout": "evidence/s19b_radlin_holdout.json",
+                     "build": "evidence/s19b_radlin_candidate_build.json",
+                     "preregistration": "knowledge/57_s19b_radlin_preregistration.md",
+                     "result": "knowledge/58_s19b_radlin_result.md"},
         "evidence_schema_gate": {"verdict": verdict, "submission_ready": False, "slot_selected": False},
     }
-    (ROOT / "evidence/s19_run_card.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
-    (ROOT / "docs/data/run_card_s19.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
+    (ROOT / "evidence/s19b_radlin_run_card.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
+    (ROOT / "docs/data/run_card_s19b_radlin.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
 
     manifest_path = dl / "manifest.json"
     man = json.loads(manifest_path.read_text())
-    man["s19_candidate"] = {
+    man["s19b_candidate"] = {
         "filename": files["allfinite"], "nan": files["nan"], "allfinite": files["allfinite"],
         "zip": files["zip"], "content_id": cid, "submission_name": name, "note": note,
         "note_file": note_file, "sha256": sha["allfinite"], "sha256_nan": sha["nan"],
@@ -114,13 +114,15 @@ def main() -> int:
         "holdout_gate_passed": gate_pass, "submission_ready": False, "verdict": verdict,
         "status": ("LOSFO gate PASSED but strict uniqueness FAILED vs dense probe-union raster; "
                    "research TIFF only. DO NOT SUBMIT."),
-        "run_card": "data/run_card_s19.json",
+        "run_card": "data/run_card_s19b_radlin.json",
     }
-    man["current_run"] = {
-        "run_id": "S19-RADLIN", "status": "NEGATIVE — NO FILE APPROVED",
+    # Post-merge reconciliation: S19-ASCP (parallel lane, merged first via PR #46)
+    # owns manifest["current_run"]; this parallel run must not displace it.
+    man.setdefault("parallel_runs", []).append({
+        "run_id": "S19B-RADLIN", "status": "NEGATIVE — NO FILE APPROVED",
         "submission_ready": False, "slot_selected": False, "new_tiff_generated": True,
-        "run_card": "data/run_card_s19.json", "prior_parallel_review": "evidence/s18_run_card.json",
-    }
+        "run_card": "data/run_card_s19b_radlin.json",
+    })
     man["generated_utc"] = "2026-10-26T00:00:00Z"
     manifest_path.write_text(json.dumps(man, indent=2) + "\n")
     print(json.dumps({"verdict": verdict, "name": name, "note_len": len(note),

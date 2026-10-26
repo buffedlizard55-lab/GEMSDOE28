@@ -1,80 +1,65 @@
-"""S19-RADLIN evidence locks: gate passed, uniqueness failed, verdict negative."""
+from __future__ import annotations
+
 import hashlib
 import json
 from pathlib import Path
 
-import numpy as np
-import rasterio
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def load(rel):
-    return json.loads((ROOT / rel).read_text())
+def load(path: str):
+    return json.loads((ROOT / path).read_text())
 
 
-def test_s19_preregistration_frozen_lanes_gates_and_ranking():
-    text = (ROOT / "knowledge/55_s19_preregistration.md").read_text()
-    for needle in ("S19-RADLIN", "ThK", "320", "H39-2",
-                   "0.90", "70", "DO NOT SUBMIT"):
-        assert needle in text
-    result = (ROOT / "knowledge/56_s19_result.md").read_text()
-    assert "negative" in result and "DO NOT SUBMIT" in result
-
-
-def test_s19_run_card_verdict_negative_despite_passed_gate():
-    card = load("evidence/s19_run_card.json")
-    assert card["session"] == "S19-RADLIN"
+def test_s19_card_is_complete_negative_and_note_bounded() -> None:
+    card = load("evidence/s19_ascp_run_card.json")
+    assert card["session"] == "S19-ASCP"
+    assert card["experiments_run"] == 3
     assert card["verdict"] == "negative"
-    assert card["submission_ready"] is False
-    assert card["slot_selected"] is False
-    assert card["holdout"]["gate_passed"] is True
-    assert card["registry"]["pass_strict"] is False
-    assert card["validator"]["hard_checks_passed"] is True
-    assert len(card["note"]) <= 140 and len(card["submission_name"]) > 0
-    h = card["holdout"]
-    assert h["dti"] > h["baseline_dti"] and h["paired_gain_ci95"][0] > 0
-    assert h["withheld_positives"] == 74025 and h["seeds"] == [320, 321, 322, 323, 324]
-    fin = card["registry"]["final"]
-    assert fin["worst_by_overlap"]["frac_our_dots_within3px"] > 0.70
-    assert card["registry"]["scored_focus_max_overlap"] < 0.70
+    assert card["submission_ready"] is False and card["slot_selected"] is False
+    assert len(card["note"]) <= 140 and "DO NOT SUBMIT" in card["note"]
+    assert card["holdout"]["evaluator_version"] == "gems-segment-pooled-v1"
+    assert card["holdout"]["withheld_positives"] == 60988
+    assert card["holdout"]["paired_gain_ci95"][1] < 0
+    assert card["registry"]["max_abs_surface_spearman"] <= 0.90
+    assert card["registry"]["max_final_overlap_3px"] <= 0.70
+    assert all(card["validator"].values())
 
 
-def test_s19_holdout_evidence_matches_run_card():
-    ev = load("evidence/s19_holdout.json")
-    card = load("evidence/s19_run_card.json")
-    assert ev["gate_passed"] is True
-    assert abs(ev["candidate_pooled"]["dti"] - card["holdout"]["dti"]) < 1e-9
-    assert len(ev["cells"]) == 20 and len(ev["seeds"]) == 5
-    surf = load("evidence/s19_surface.json")
-    assert surf["passed"] is True
-    aucs = [f["auc"] for f in surf["canary"]["features"].values()]
-    assert all(0.40 <= v <= 0.90 for v in aucs)
-    assert abs(surf["preplacement"]["worst_by_spearman"]["spearman_surface_sample400k"]) <= 0.90
+def test_s19_exact_overlap_supersedes_conservative_preliminary_screen() -> None:
+    exact = load("evidence/s19_exact_registry_overlap.json")
+    card = load("evidence/s19_ascp_run_card.json")
+    assert exact["passed"] is True and exact["members"] == card["registry"]["members"]
+    assert card["registry"]["max_surface_support_overlap_3px"] == exact["max_surface_support"][
+        "surface_support_within_euclidean_3px_fraction"
+    ]
+    assert card["registry"]["max_final_overlap_3px"] == exact["max_final_overlap"][
+        "final_dots_within_euclidean_3px_fraction"
+    ]
+    assert "exact Euclidean" in card["registry"]["distance_definition"]
 
 
-def test_s19_candidate_raster_independent_reopen():
-    card = load("evidence/s19_run_card.json")
-    path = ROOT / "docs" / "downloads" / Path(card["download"]).name
-    assert hashlib.sha256(path.read_bytes()).hexdigest() == card["raster_sha256"]
-    with rasterio.open(path) as ds:
-        assert ds.count == 1 and str(ds.crs) == "EPSG:32611"
-        assert (ds.width, ds.height) == (3292, 3730)
-        a = ds.read(1)
-    assert np.isfinite(a).all() and set(np.unique(a).tolist()) <= {0.0, 1.0}
-    assert int((a > 0).sum()) == card["dot_count"] == 37654
-
-
-def test_s19_site_pages_carry_decision_and_nine_site_table():
-    idx = (ROOT / "docs/index.html").read_text()
-    s19 = load("evidence/s19_run_card.json")
-    assert s19["download"].split("/")[-1] in idx
-    assert "NOT APPROVED TO SUBMIT" in idx and "93.4%" in idx
+def test_s19_site_explains_all_nine_priority_sites_and_decision() -> None:
     page = (ROOT / "docs/session19-result.html").read_text()
     for site in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
                  "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
         assert site in page
-    assert "0.2778" in page and "not approved" in page
-    manifest = load("docs/downloads/manifest.json")
-    assert manifest["current_run"]["run_id"] == "S19-RADLIN"
-    assert manifest["s19_candidate"]["verdict"] == "negative"
+    assert "submit none of them today" in page
+    assert "None is recommended for upload" in page
+
+
+def test_s19_exact_tiff_hash_and_numeric_contract() -> None:
+    import numpy as np
+    import rasterio
+
+    card = load("evidence/s19_ascp_run_card.json")
+    path = ROOT / card["submission_file"]
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == card["raster_sha256"]
+    with rasterio.open(path) as src:
+        arr = src.read(1)
+        assert src.count == 1 and src.dtypes == ("float32",)
+        assert src.crs.to_epsg() == 32611 and src.shape == (3730, 3292)
+        assert tuple(src.transform)[:6] == (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)
+    assert np.isfinite(arr).all()
+    assert set(np.unique(arr)) == {0.0, 1.0}
+    assert int((arr > 0).sum()) == 37654

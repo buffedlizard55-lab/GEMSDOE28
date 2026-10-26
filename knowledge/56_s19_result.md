@@ -1,126 +1,76 @@
-# S19-RADLIN result — LOSFO gate PASSED, strict uniqueness FAILED, verdict negative
+# S19-ASCP result — unique all-finite TIFF, negative holdout
 
-**2026-10-26. Three experiments used; lane closed. No slot spent, no upload.**
+**Date:** 2026-10-26 UTC
+**Decision:** safe to download for research; **DO NOT SUBMIT**. No competition slot was selected.
 
-## Download and disposition
+## Executive result
 
-New output: [`gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif`](../docs/downloads/gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif)
+S19 executed the frozen top-ranked hypothesis in [`55_s19_preregistration.md`](55_s19_preregistration.md): a LiDAR-derived conjunction of 10–50 m step strength, paired crest/toe curvature, uphill-facing selectivity and 100 m coherence. It generated 37,654 new dots without copying or modifying a prior submission.
 
-- **Download for reproducibility: YES. Submit to competition: NO — 🔴 DO NOT SUBMIT.**
-  The file passed its frozen scientific (LOSFO) gate and exact-file validation, but failed
-  the frozen strict uniqueness rule against a dense unscored probe raster (below).
-  Under the preregistered rule that failure is a duplicate-stop; the banner does not
-  negotiate after the result is known.
-- Name: `GEMSDOE28-S19-RADLIN-6fa38f9d317b`
-- Note (97/140): `S19 RADLIN coverage 37654 dots; LOSFO passed but uniqueness vs dense probe FAILED; DO NOT SUBMIT.`
-- All-finite SHA-256: `8534701e5d91572a39dba5e9d132e1c747aeab2f5223015a96ee96ace292493b`
-  (NaN variant `de21416d03f8baf8c70e56cb0f90272ac7660ef23af89f301f2c5a545dea93c6`).
-- Automated exact-file checks (shared `verify_geotiff`, plus independent
-  `scripts/verify_downloads.py`: **407 checks, 0 failures** over all manifest downloads):
-  one float32 band; 3,730 × 3,292; EPSG:32611; transform `[100,0,243350,0,-100,4508550]`;
-  whole array finite and in [0,1]; values {0,1}; 37,654 dots; zero catalogue dots.
-  Local checks against the pinned owner-mirror template are NOT organizer authentication
-  and do not guarantee portal acceptance. The all-finite (zeros-outside) variant is the
-  download named above because it cannot trigger a whole-array NaN/range reading; the
-  official format text describes null/NaN outside bounds, and no claim is made that the
-  compatibility variant supersedes it.
+The exact output is [`gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif`](../docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif), SHA-256 `553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537`.
 
-## Why the reported GEMSDOE32 leader improved (byte-verified, conditional)
+- One float32 band, 3,730 × 3,292, EPSG:32611.
+- Exact template CRS, shape and transform.
+- No NaN inside the footprint or elsewhere; values are exactly 0 or 1.
+- Name: `GEMSDOE28-S19-ASCP-dc717c1ab13b`.
+- Note (84/140): `S19 ASCP paired antislope LiDAR scarps; 37654 dots; holdout rejected; DO NOT SUBMIT.`
+- These are local exact-file facts, not a guarantee of portal acceptance.
 
-`evidence/s18_champion_forensic.json` (re-verified this session: all nine focus-site
-artifacts fetched and SHA-256-matched): the `e5eb6e7e-zeros` raster is exactly solo-r1
-minus its 2,545 dots at catalogue distance ≤2 px, zero added. With
-`DTI = TP/(0.2·(TP+FP) + 0.8·|G|)`, deleting dots whose lost credit per removed FP is
-below the break-even `0.2·DTI/(1−0.2·DTI)` raises DTI — emission hygiene, not a new
-detector. Score causation on private expert labels cannot be measured here; all
-0.2477–0.2778 values remain **OWNER-REPORTED**, none **ORGANIZER-CONFIRMED**.
+## Three experiments
 
-**Best submission among the nine focus sites, stated plainly:** by owner-reported score
-the GEMSDOE32 champion (0.2778, 37,654 dots) is the family's best *reported* artifact,
-followed by GEMSDOE36 (0.2750), GEMSDOE28 H36-1 (0.2710) and GEMSDOE31/28 solo (0.2708).
-None of them is a file this project may submit as its own: they are previous submissions,
-and copying or ring-pruning any of them is a >95% duplicate. The only honest "submit
-this" answer today is **none** — see the disposition above.
+### 1. Feature-alone canary and pre-placement novelty
 
-## Experiment 1 — surface, canary, pre-placement uniqueness
+The hash-verified shared `SegmentHoldout.canary` tested each physical leg and the combined surface, including both AUC polarities and each fold. All passed the 0.90 leakage stop. Pooled AUCs are recorded in `evidence/s19_ascp_stage.json`; a low AUC is not proof of usefulness or independence.
 
-Label-free ThK lineament surface (`src/gems27/radlin.py`, frozen in `knowledge/55`):
-valid ThK pixels 5,166,085; ridge pixels 918,545; score max 0.620.
-Leakage canaries vs LOSFO seed-320 withheld systems (74,025 withheld positives over the
-gate seeds; canary positives are seed-320's hidden set, 250,000 sampled negatives >600 m
-from hidden truth): score AUC 0.4998, bonus AUC 0.5134, inverted-ThK field AUC 0.5024 —
-all far below the 0.90 leakage stop. Near-chance AUC is **not** evidence the lineament
-field is useful; it only clears leakage.
-Pre-placement registry check (declared scope: local `*-nan.tif` downloads + byte-verified
-focus-9 forensic copies): max |Spearman| 0.0027, max top-pool within-3 px overlap 26.4%.
-**PASS** — placement proceeded.
+The fresh registry contains 53 unique-byte valid-grid rasters from the nine requested priority repositories and the pre-run local archive. Exact continuous-surface |Spearman| peaked at 0.103044, below 0.90.
 
-## Experiment 2 — frozen LOSFO gate (seeds 320–324)
+The frozen runner's preliminary proximity check used a conservative 7 × 7 square neighborhood, which includes diagonal cells farther than three Euclidean pixels. That labeling defect is disclosed in `registry/irregularities.json`. A post-run read-only correction on identical bytes (`evidence/s19_exact_registry_overlap.json`) measured exact Euclidean distance ≤3 pixels: maximum support overlap 0.205685. Both versions pass; no model was refit and no threshold changed.
 
-**HOLDOUT-DTI**, evaluator `run_losfo_harness.eval_set v2 → metric.dti_binary`
-(hash bundle in `evidence/s19_holdout.json`). Whole fault systems hidden with a 600 m
-buffer, four quadrants, 20 cells, **74,025 pooled withheld positives / 46,711 unique**.
+### 2. Final placement and exact bytes
 
-| Arm | HOLDOUT-DTI | 95% CI | credit/dot |
-|---|---:|---|---:|
-| S19 candidate (RADLIN-weighted coverage) | **0.10737** | [0.08803, 0.12631] | 0.05132 |
-| H38-1 baseline recomputed (rung30 + joint) | 0.10193 | [0.08261, 0.12086] | 0.04865 |
-| Paired gain | **+0.00544** | **[+0.00128, +0.00925]** | — |
+Fixed ridge NMS and 2.8-pixel packing produced 37,654 dots. Maximum final binary |Spearman| was 0.006538. Exact Euclidean ≤3-pixel overlap peaked at 0.279811, below 0.70. The shared writer produced the all-finite file, and the exact disk bytes passed every required format check.
 
-All six frozen gates pass (gain >0.001, lower CI >0, 3/4 folds — NE fold −0.00052 —
-5/5 seeds, buffered >6 px everywhere, zero visible-catalogue dots). Matched dot counts
-per cell (218,167 both arms).
+### 3. Shared buffered holdout
 
-**Attribution limit (do not over-read):** this gate tests the candidate *as frozen*.
-Prior work (`knowledge/39`) measured the all-ridge coverage construction alone at
-+0.0052/+0.0059 far-field — the same magnitude as this gain. This experiment therefore
-does **not** isolate a contribution of the RADLIN ThK bonus over plain coverage packing,
-and no such claim is made. The canary AUCs (~0.50) say the lineament field alone has no
-discriminative power against catalogue truth; any RADLIN contribution would be through
-placement weighting, unmeasured separately. Catalogue-mapped hidden systems are also
-not a sample of truly unmapped faults, and only four geographic bootstrap blocks exist.
+**HOLDOUT-DTI** — evaluator `gems-segment-pooled-v1`; 60,988 withheld-positive pixels; whole 8-connected components hidden everywhere; 1.5 km collar; four geographic quadrants; visible-only catalogue exclusion; pixel-exact visible masking; pooled α=0.2, β=0.8, 300 m triangular kernel; 10 km spatial-block percentile intervals:
 
-## Experiment 3 — build, validator, final uniqueness
-
-Full-fit detector, coverage packing to exactly 37,654 dots at >2 px from the full
-catalogue (781,821 eligible ridge pixels). Validator: PASS both variants.
-Final-dot uniqueness vs the declared registry:
-
-| Comparator scope | Max within-3 px | Max sample Spearman |
+| Arm | HOLDOUT-DTI | 95% CI |
 |---|---:|---:|
-| Scored focus-9 artifacts (byte-verified) | **44.5%** (GEMSDOE27) | 0.037 |
-| All local registry rasters | **93.4%** (H37-1 probe-union, unscored) | 0.695 |
+| S19 antislope paired-curvature candidate | 0.080806 | [0.072325, 0.089111] |
+| Recomputed visible-only 32-band H38-style baseline | 0.141694 | [0.128368, 0.154587] |
+| Paired gain | −0.060888 | [−0.074029, −0.047638] |
 
-The strict frozen rule — >70% within 3 px of **any** registry raster ⇒ duplicate, log
-and stop — fires on the H37-1 probe-union blanket (38,545 dots spread over the
-H19-5 ∪ detector-ridge union, a research probe that was never a scored submission),
-and also on two other dense research rasters (74.2%, 71.2%). **Verdict: negative.**
-Logged as `s19-uniqueness-dense-probe-blanket` in `registry/irregularities.json`.
+The candidate lost in every fold. The superiority, paired-interval and 3-of-4-fold gates failed. Canary, uniqueness and validator gates passed. The final verdict is therefore `negative`.
 
-## What this does and does not establish
+This holdout uses catalogue-mapped raster components as a recovery proxy. It is neither private organizer truth nor an organizer score. Eight-connected components are not authenticated expert segment IDs.
 
-- It establishes a reproducible, buffered, whole-system holdout gain of the frozen
-  candidate over the registered H38-1 recipe, at matched count, with no leakage canary
-  triggered and an exactly valid file. That is the strongest local scientific result
-  in this repository's S18-style protocol to date — and it still earns no slot, because
-  uniqueness is a co-equal gate, not a tiebreaker.
-- It does not establish that the file would score above 0.2778 (or any value) on the
-  organizer leaderboard: HOLDOUT-DTI is a local catalogue-recovery proxy, the
-  attribution limit above applies, and no organizer receipt exists.
-- The open question for a future preregistered session (fresh seeds ≥325, decided
-  *before* placement): should unscored dense probe blankets count as uniqueness
-  comparators, or only scored/submitted rasters? If the latter had been frozen, this
-  candidate would have passed uniqueness at 44.5%. That question must not be answered
-  retroactively for this raster.
+## Scientific interpretation
 
-## Next steps (ranked)
+The test targeted an antislope crest/toe pair that a subtle normal-fault scarp might preserve after regional mapping missed it. Named non-fault mimics were road cuts, channels, terrace and paleo-shoreline risers, landslides and mine benches. The negative result says this exact statistic and emission rule are less effective at recovering withheld mapped faults than the recomputed baseline. It does not prove that scarps or LiDAR are generally uninformative.
 
-1. Preregister the registry-scope question and, if probes are excluded with reasons
-   recorded in advance, re-run an RADLIN-weighted coverage candidate on fresh seeds
-   ≥325 — or accept the strict scope and design placement that also escapes probe
-   blankets (e.g. off-ridge placement with a positive LOSFO result, which two prior
-   migration lanes failed to produce).
-2. Isolate the RADLIN bonus: candidate-as-frozen vs identical coverage with bonus=0,
-   paired on fresh seeds, before claiming any alteration mechanism.
-3. Keep the slot with the separate selector; reconcile the parallel-run registry
-   across sessions so uniqueness scope is synchronized, not snapshot-local.
+The input descriptor is an owner-mirrored, hash-pinned derivative of USGS 3DEP tiles. Its sidecar reports 706 of 716 tiles succeeded and explicitly calls the descriptors uncalibrated terrain measurements. Mirror integrity does not authenticate organizer provenance or complete coverage.
+
+## GEMSDOE32 and the nine priority sites
+
+The prior byte forensic result remains the strongest explanation available for the owner-reported GEMSDOE32 value 0.2778: its 37,654-dot artifact equals the solo raster after deleting 2,545 catalogue-near dots, with no additions. Reducing low-credit prediction mass can improve the Tversky denominator while spaced dots preserve some triangular-kernel coverage. This proves pruning construction, not hidden-label causation or receipt-linked score attribution.
+
+The site's current nine-row table names each site's highest owner-reported historical artifact and clearly labels every one as unverified and not approved. None is an eligible new submission. S19 is unique but fails performance. Consequently the evidence-based submission choice today is **none**. There is no defensible evidence that S19 would exceed 0.2778, 0.3195 or 0.4413; the latter two are historical/conflicting leaderboard context, not projections for this raster.
+
+## Official/source links for manual review
+
+- [DrivenData problem, metric and submission format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
+- [DrivenData public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/)
+- [Official reference solution](https://github.com/drivendataorg/gems-prize-reference-solution)
+- [USGS 3DEP data catalog](https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e)
+- [USGS GeoDAWN data page](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and)
+- [DOE GDR compilation 1391](https://gdr.openei.org/submissions/1391)
+
+The non-GitHub pages were not newly fetched by the batch runtime in S19. Their most recent observed status and claim boundaries remain in the repository source ledger and S18 official-source review; links are provided for manual review, not represented as fresh authentication.
+
+## Next work and limits
+
+1. Do not retune S19 on this spent holdout or submit its TIFF.
+2. Create a new preregistered lane from the remaining ranked hypotheses only after synchronizing the parallel registry.
+3. Prefer a direct displacement observable—repeated piercing-marker offsets or ordered flexural flank pairs—over another scalar scarp-strength reweighting.
+4. Preserve separate roles: automated evidence can establish promotion eligibility; only the selector may choose a weekly slot after checking the authenticated account allowance.
+5. A filename/hash-bound submission-page receipt is required before labeling any result ORGANIZER-CONFIRMED.

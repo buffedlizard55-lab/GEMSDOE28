@@ -1,7 +1,7 @@
 {
-  "session": "S19-RADLIN",
+  "session": "S19B-RADLIN",
   "experiment": 1,
-  "preregistration": "knowledge/55_s19_preregistration.md",
+  "preregistration": "knowledge/57_s19b_radlin_preregistration.md",
   "surface_npz": "data/prepared/s19_radlin_surface.npz",
   "surface_npz_sha256": "1aaa684430d39ab529de042be4ce73f2269ab77cfef00a967fa555006f25498e",
   "surface_meta": {
@@ -227,5 +227,6 @@
   },
   "registry_scope": "local docs/downloads/*-nan.tif + byte-verified /tmp/forensic focus-9 copies; declared snapshot, not a global parallel registry",
   "passed": true,
-  "seconds": 15.7
+  "seconds": 15.7,
+  "merge_reconciliation": "Parallel-session collision on merge (another S19-ASCP lane merged first via PR #46, plus Session 20): this run renamed S19-RADLIN -> S19B-RADLIN with renamed artifact paths on 2026-10-26; no number, hash or verdict changed. See registry/irregularities.json: s19b-parallel-session-collision-and-rename."
 }

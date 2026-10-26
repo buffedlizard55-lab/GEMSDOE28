@@ -1,0 +1,53 @@
+{
+  "session": "S19-ASCP",
+  "hypothesis": "Paired crest/toe curvature plus antislope selectivity and coherence recovers subtle unmapped fault scarps.",
+  "mechanism": "Fixed geometric mean of decoded LiDAR step, curvature-pair, uphill-facing and coherence legs; 2.8 px packing.",
+  "non_fault_mimic": "Road cut, terrace or paleo-shoreline riser, channel bank, landslide, or mine bench.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "withheld_positives": 60988,
+    "dti": 0.08080635227066556,
+    "ci95": [
+      0.07232485681140427,
+      0.08911093061078756
+    ],
+    "baseline_dti": 0.14169434045791646,
+    "paired_gain": -0.0608879881872509,
+    "paired_gain_ci95": [
+      -0.07402906930599784,
+      -0.047637576205972816
+    ]
+  },
+  "registry": {
+    "members": 53,
+    "max_abs_surface_spearman": 0.10304419298512539,
+    "max_surface_support_overlap_3px": 0.20568525546545605,
+    "max_abs_final_spearman": 0.006538418059267532,
+    "max_final_overlap_3px": 0.27981090986349394,
+    "distance_definition": "exact Euclidean distance <=3 pixels; evidence/s19_exact_registry_overlap.json",
+    "preliminary_check": "Experiment runner used a conservative 7x7 Chebyshev neighborhood; it also passed. Exact Euclidean audit supersedes overlap values."
+  },
+  "raster_sha256": "553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537",
+  "validator": {
+    "no_nan_inside": true,
+    "no_nan_whole_array": true,
+    "range_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true
+  },
+  "submission_name": "GEMSDOE28-S19-ASCP-dc717c1ab13b",
+  "submission_file": "docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+  "note": "S19 ASCP paired antislope LiDAR scarps; 37654 dots; holdout rejected; DO NOT SUBMIT.",
+  "experiments_run": 3,
+  "verdict": "negative",
+  "submission_ready": false,
+  "slot_selected": false,
+  "limitations": [
+    "Owner-mirrored LiDAR descriptors are hash-pinned but not organizer-authenticated.",
+    "Eight-connected raster components proxy expert fault segments.",
+    "Registry covers fresh priority rasters and local archive, not unknowable concurrent private outputs.",
+    "Local holdout performance is not an organizer score or guarantee."
+  ]
+}

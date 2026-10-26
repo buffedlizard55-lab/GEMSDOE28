@@ -1,39 +1,63 @@
-# Current result — 2026-10-26 S19-RADLIN (read first every session)
+# Session 20 — validation hardening (2026-10-26)
 
-## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT PASSED, STRICT UNIQUENESS FAILED**
+**This validation review generated no TIFF; no file is approved to submit.** Reviewed the standing owner request and
+prior results. Fixed cache NaN/infinity detection and ambiguous evidence JSON in the
+automated gates; no scientific result or score was invented.
+[Three-pass review and next steps](knowledge/56_session20_validation_review.md) ·
+[JSON run card](evidence/session20_run_card.json) ·
+[Nine-site executive comparison](docs/cross-site-review.html).
+The standing normalized owner prompt below remains the starting point every session.
 
-[**Download the new unique research TIFF**](docs/downloads/gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif)
-· [Executive summary / submission process](docs/executive-summary.html)
-· [Current full JSON run card](evidence/s19_run_card.json)
-· [Scientific result, sources and next steps](knowledge/56_s19_result.md)
-· [Frozen preregistration (5 ranked hypotheses, lane, gates)](knowledge/55_s19_preregistration.md)
+# Current result — 2026-10-26 S19-ASCP (read first every session)
 
-The new 37,654-dot ThK alteration-lineament-weighted coverage raster is independently generated,
-not copied from a previous submission. Exact-file checks pass (shared validator + independent
-407-check download audit, 0 failures): no NaN anywhere, values {0,1}, single-band float32,
-template CRS/shape/transform, zero catalogue dots. **Safe to download for research, NOT approved
-to submit.** No human inspector or competition slot was used; automated gates made the decision.
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 
-**HOLDOUT-DTI** (shared eval_set **v2** → metric.dti_binary, buffered whole-system LOSFO,
-seeds 320–324, 20 cells, 74,025 pooled withheld positives / 46,711 unique): **0.107369**
-(95% CI **[0.088033, 0.126307]**) vs recomputed registered H38-1 candidate **0.101933**;
-paired gain **+0.005436** (95% CI **[+0.001285, +0.009245]**), 5/5 seeds, 3/4 folds.
-**The frozen scientific gate PASSED.** Attribution limit: the gate does not isolate the
-RADLIN bonus from the all-ridge coverage construction (previously measured at similar
-magnitude, knowledge/39); canary AUCs ≈0.50 show no standalone lineament signal.
+[**Download the new unique research TIFF**](docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif)
+· [Executive summary / exact submission process](docs/executive-summary.html)
+· [JSON run card](evidence/s19_ascp_run_card.json)
+· [Frozen hypotheses and method](knowledge/55_s19_preregistration.md)
 
-**Why it is still 🔴 DO NOT SUBMIT:** final-dot uniqueness under the frozen any-raster rule
-failed — 93.4% of dots within 3 px of the unscored dense H37-1 probe-union registry raster
-(>70% duplicate-stop), although ≤44.5% vs every byte-verified *scored* focus-site artifact
-(GEMSDOE24/25/27/28/30/31/32/33/36; GEMSDOE32 champion owner-reported 0.2778 remains the
-best reported, unverified, and is a previous submission — do not copy it). Verdict
-`negative`; irregularity `s19-uniqueness-dense-probe-blanket`. A future preregistered
-session (fresh seeds ≥325) must settle the registry-scope question *before* placement;
-do not re-decide this raster or retune on seeds 320–324. Lane closed; 3/3 experiments used.
+S19 tested one new lane: paired LiDAR crest/toe curvature × uphill-facing selectivity × coherence.
+It produced 37,654 independently placed dots and passed the feature-alone leakage canary, declared
+53-raster registry checks and exact-file validation. It then **failed** the shared whole-component,
+1.5 km-buffered performance gate. **HOLDOUT-DTI** (`gems-segment-pooled-v1`, 60,988 withheld
+positives): **0.080806** (95% CI **[0.072325, 0.089111]**) versus recomputed visible-only baseline
+**0.141694**; paired gain **−0.060888** (95% CI **[−0.074029, −0.047638]**). This local proxy is
+not an organizer score. Three experiments used; no slot selected.
+
+The TIFF is single-band float32, all-finite across the whole array, values {0,1}, EPSG:32611,
+3,730 × 3,292, and matches the template transform. SHA-256:
+`553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537`. Maximum pre-placement
+|Spearman| was 0.1030; maximum exact-Euclidean surface-support overlap was 20.6%; maximum final-dot overlap was
+28.0%, below the 0.90/70% duplicate stops (exact maximum 0.279811 in the S19 run card). **Safe to download for research; NOT OK to submit.**
+Road cuts, channels, terrace/paleo-shoreline risers, landslides and mine benches remain named mimics.
+
+The owner prompt and Core Values remain archived below and normalized in
+[`knowledge/53_current_request.md`](knowledge/53_current_request.md). The explicit parallel lane
+paragraph was again absent; the run autonomously used the repository's documented scarp-observable
+next step and does not claim external exclusivity. Historical S18 and earlier notices are superseded.
+
+A concurrent pre-experiment Session 19 review ran zero experiments before inputs were restored. Its
+[nine-site scorecard](docs/cross-site-review.html), [review dossier](knowledge/55_session19_cross_site_review.md)
+and [blocked JSON card](evidence/session19_run_card.json) are retained as an audit snapshot, not the
+current result. Its “no new TIFF” statement was true for that checkout but is superseded by S19-ASCP.
+
+**Parallel-run addendum (S19B-RADLIN, same date, different lane):** a second concurrent run executed
+the ThK alteration-lineament lane ([preregistration](knowledge/57_s19b_radlin_preregistration.md),
+[result](knowledge/58_s19b_radlin_result.md), run card `evidence/s19b_radlin_run_card.json`). It
+generated a unique 37,654-dot TIFF (`GEMSDOE28-S19-RADLIN-6fa38f9d317b`) that **passed** its frozen
+buffered LOSFO gate (HOLDOUT-DTI **0.107369** vs baseline 0.101933; paired gain **+0.005436**,
+95% CI [+0.001285, +0.009245], seeds 320–324) but **failed** the frozen strict any-raster
+uniqueness rule: 93.4% of dots within 3 px of the unscored dense H37-1 probe-union registry raster
+(≤44.5% vs every scored focus-site artifact). Verdict `negative`; 🔴 DO NOT SUBMIT
+(`s19-uniqueness-dense-probe-blanket`). It used a different evaluator than S19-ASCP above
+(eval_set v2 LOSFO vs `gems-segment-pooled-v1`) — never pool or compare the two sessions' deltas.
+Renamed S19B on merge because S19-ASCP merged first (`s19b-parallel-session-collision-and-rename`);
+no number, hash or verdict changed. Still **no file approved**.
 
 ---
 
-# Previous result — 2026-10-25 S18-MXTP (historical)
+# Current result — 2026-10-25 S18-MXTP (read first every session)
 
 ## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 
