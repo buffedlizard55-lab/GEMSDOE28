@@ -167,7 +167,11 @@ def test_current_review_evidence_is_bound_and_not_a_new_tiff():
     assert card["submission_ready"] is False and card["verdict"] == "negative"
     assert len(card["note"]) <= 140
     for path, expected in card["evidence_sha256"].items():
-        observed = ROOT / ("evidence/pr39_manifest_snapshot.json" if path == "docs/downloads/manifest.json" else path)
+        snapshots = {
+            "docs/downloads/manifest.json": "evidence/pr39_manifest_snapshot.json",
+            "scripts/check_run_preflight.py": "evidence/snapshots/pr39_check_run_preflight.py",
+        }
+        observed = ROOT / snapshots.get(path, path)
         assert hashlib.sha256(observed.read_bytes()).hexdigest() == expected, path
     # The no-experiment review remains historical; current aliases bind the later MXTP experiment.
     assert json.loads((ROOT / "docs/data/run_card_2026-10-25.json").read_text()) == json.loads(
@@ -280,3 +284,29 @@ def test_concurrent_h38_claim_is_rejected_without_rewriting_its_original_card():
                                ("claimed_check_report", "claimed_check_report_sha256")):
         assert hashlib.sha256((ROOT / report[path_key]).read_bytes()).hexdigest() == report[hash_key]
     assert "Concurrent H38-1 claim: rejected" in (ROOT / "docs/submission-review.html").read_text()
+
+
+@pytest.mark.parametrize("bad", [float("nan"), float("inf"), -float("inf")])
+def test_preflight_rejects_hash_pinned_nonfinite_cache(shared_fixture, monkeypatch, bad):
+    root = shared_fixture
+    config = valid_config(root)
+    monkeypatch.setattr(check_run_preflight, "FOOTPRINT_PX", 3)
+    path = root / config["cached_features"]
+    array = np.zeros((3, 32), np.float32)
+    array[-1, -1] = bad
+    np.save(path, array)
+    meta_path = root / config["cached_features_metadata"]
+    meta = json.loads(meta_path.read_text())
+    meta["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    write_json(meta_path, meta)
+    result = check_run_preflight.preflight(config, root=root)
+    assert result["experiment_allowed"] is False
+    assert "Cached feature stack contains NaN or infinity" in result["failures"]
+
+
+@pytest.mark.parametrize("text", ['{"lane":"a","lane":"b"}', '{"x":1e999}'])
+def test_preflight_cli_rejects_ambiguous_json(tmp_path, capsys, text):
+    path = tmp_path / "session.json"
+    path.write_text(text)
+    assert check_run_preflight.main(["--config", str(path)]) == 2
+    assert json.loads(capsys.readouterr().out)["experiment_allowed"] is False

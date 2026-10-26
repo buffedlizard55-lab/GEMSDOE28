@@ -1,3 +1,13 @@
+# Session 20 — validation hardening (2026-10-26)
+
+**This validation review generated no TIFF; no file is approved to submit.** Reviewed the standing owner request and
+prior results. Fixed cache NaN/infinity detection and ambiguous evidence JSON in the
+automated gates; no scientific result or score was invented.
+[Three-pass review and next steps](knowledge/56_session20_validation_review.md) ·
+[JSON run card](evidence/session20_run_card.json) ·
+[Nine-site executive comparison](docs/cross-site-review.html).
+The standing normalized owner prompt below remains the starting point every session.
+
 # Current result — 2026-10-26 S19-ASCP (read first every session)
 
 ## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
