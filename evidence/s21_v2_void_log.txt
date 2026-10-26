@@ -1,0 +1,20 @@
+[    0.1s] footprint 5167373 labels 60988
+[    1.4s] FORENSIC {"h19_5_px": 121131, "dotted_file_px": 44090, "recomputed_dot_thin_2.8_px": 44090, "symdiff_recomputed_vs_dotted_file": 0, "solo_file_px": 40199, "recomputed_solo_d_minus_ring_le1_px": 40199, "symdiff_recomputed_solo_vs_file": 0, "champion_constructed_solo_minus_ring_le2_px": 37654, "champion_b3_constructed_px": 35483, "ring_le2_removed_from_solo": 2545, "ring_2_to_3_removed_from_champion": 2171}
+[   47.2s] cube16 built (19, 12279160)
+[   49.2s] cube with lidar (31, 12279160)
+[   63.3s] cell s350 NW hid=1883 AUC=0.585 HGB=0.1125 FUS=0.0794 BASE=0.0833
+[   78.3s] cell s350 NE_LidarGapHeavy hid=2045 AUC=0.530 HGB=0.0533 FUS=0.0596 BASE=0.1030
+[   93.8s] cell s350 SW hid=4245 AUC=0.556 HGB=0.1194 FUS=0.0787 BASE=0.0786
+[  107.4s] cell s350 SE hid=3742 AUC=0.543 HGB=0.1042 FUS=0.0861 BASE=0.1581
+[  121.0s] cell s351 NW hid=1673 AUC=0.544 HGB=0.0725 FUS=0.0660 BASE=0.0849
+[  136.6s] cell s351 NE_LidarGapHeavy hid=2626 AUC=0.519 HGB=0.0628 FUS=0.0481 BASE=0.1425
+[  152.3s] cell s351 SW hid=4409 AUC=0.568 HGB=0.1179 FUS=0.0765 BASE=0.0759
+[  165.7s] cell s351 SE hid=2990 AUC=0.545 HGB=0.0978 FUS=0.0861 BASE=0.0997
+[  178.8s] cell s352 NW hid=2056 AUC=0.548 HGB=0.0980 FUS=0.0791 BASE=0.0986
+[  194.3s] cell s352 NE_LidarGapHeavy hid=2900 AUC=0.528 HGB=0.0690 FUS=0.0578 BASE=0.1476
+[  210.1s] cell s352 SW hid=4077 AUC=0.586 HGB=0.1302 FUS=0.0986 BASE=0.0789
+[  222.9s] cell s352 SE hid=3254 AUC=0.568 HGB=0.0997 FUS=0.1051 BASE=0.1314
+[  223.0s] HOLDOUT pooled {"hgb": 0.09737718338255437, "fusion": 0.07767060307295695, "dotted_b2": 0.10621036726651399} deltaHGB -0.008833183883959622 [-0.038106532769961836, 0.01822239957285452]
+[  283.3s] full prediction done; allowed 4862825
+[  293.7s] UNIQ {"hgb": {"solo_h27_4": {"overlap3px": 0.2587507303340946, "jaccard": 0.006685114306403227, "spearman_surface_vs_binary_sample200k": 0.008441637779518365}, "champion_constructed_b2": {"overlap3px": 0.2106549105008764, "jaccard": 0.006912596435399982, "spearman_surface_vs_binary_sample200k": 0.02577837421615259}, "dotted_d2_8": {"overlap3px": 0.3069262229776385, "jaccard": 0.006364878673347532, "spearman_surface_vs_binary_sample200k": -0.015795371602454526}, "h36_1": {"overlap3px": 0.25381101609390766, "jaccard": 0.006212507849136261, "spearman_surface_vs_binary_sample200k": 0.011242510258801769}, "s20_nchc": {"overlap3px": 0.4448929728581293, "jaccard": 0.019758852779490677, "spearman_surface_vs_binary_sample200k": 0.07356286760764712}, "s20v": {"overlap3px": 0.1791044776119403, "jaccard": 
+[  293.7s] DONE 293.72683668136597

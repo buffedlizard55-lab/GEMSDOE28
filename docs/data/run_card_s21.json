@@ -1,0 +1,352 @@
+{
+  "session": "S21-PUHGB",
+  "date_utc": "2026-10-26",
+  "lane": "Fresh PU-HGB (31-band) detector geography; no H19-5 dots in final raster",
+  "hypothesis": "A PU-trained gradient-boosted detector on 19 GeoDAWN + 12 LiDAR-scarp bands finds off-catalogue fault habitat that the single H19-5 surface misses; with champion emission hygiene (2.8px spacing, ring<=2px exclusion, 37,654 budget) it can match/beat the dotted baseline in hide-and-recover holdout.",
+  "mechanism": "Catalogued faults occupy a learnable multivariate habitat (magnetic/gravity gradients, strain, conductivity, scarp steps); unmapped faults in the same habitat rank high off-catalogue.",
+  "named_nonfault_mimic": "Roads, channels, terrace/paleo-shoreline risers, landslides and mine benches produce LiDAR steps; lithologic contacts produce magnetic/gravity gradients without Quaternary faulting.",
+  "holdout": {
+    "evaluator": "src/gems27/metric.py dti_binary (alpha0.2 beta0.8 300m triangular), holdout=gems27.holdout quadrant component-hide 20%",
+    "seeds": [
+      350,
+      351,
+      352
+    ],
+    "cells": 12,
+    "withheld_positives_total_across_cells": 35900,
+    "pooled": {
+      "hgb": 0.08391208219082612,
+      "fusion": 0.07274655536024077,
+      "dotted_b2": 0.10621036726651399
+    },
+    "ci95_hgb": [
+      0.06702032602232456,
+      0.10324382649374127
+    ],
+    "ci95_fusion": [
+      0.05814345464205903,
+      0.08805763528146487
+    ],
+    "ci95_base": [
+      0.09024649409888681,
+      0.12450642166230017
+    ],
+    "delta_hgb_minus_base": -0.022298285075687874,
+    "ci95_delta_hgb": [
+      -0.03092447561450171,
+      -0.013740963716503862
+    ],
+    "delta_fus_minus_base": -0.03346381190627322,
+    "ci95_delta_fus": [
+      -0.040896052822034075,
+      -0.02725888919712703
+    ],
+    "canary_single_feature_auc_cell0": {
+      "f0": 0.47976689125000005,
+      "f1": 0.4955169841666667,
+      "f2": 0.5288335295833333,
+      "f3": 0.571630715,
+      "f4": 0.5382617212499999,
+      "f5": 0.43438806916666667,
+      "f6": 0.5692913095833333,
+      "f7": 0.5348446029166667,
+      "f8": 0.4840781716666666,
+      "f9": 0.55017913875,
+      "f10": 0.5349238816666666,
+      "f11": 0.4705506595833333,
+      "f12": 0.45312285166666666,
+      "f13": 0.47845702,
+      "f14": 0.5152887308333334,
+      "f15": 0.5745076879166666,
+      "f16": 0.46510588708333334,
+      "f17": 0.5046944216666667,
+      "f18": 0.5486500904166667,
+      "f19": 0.56504380125,
+      "f20": 0.5572946533333333,
+      "f21": 0.5648414108333334,
+      "f22": 0.566904515,
+      "f23": 0.5702473249999999,
+      "f24": 0.5769963379166667,
+      "f25": 0.5804344837500001,
+      "f26": 0.5713498,
+      "f27": 0.5593773316666666,
+      "f28": 0.5095693879166667,
+      "f29": 0.5276313312500001,
+      "f30": 0.5223677241666667,
+      "f31": 0.55272776875,
+      "f32": 0.4369044591666667
+    },
+    "canary_max_abs_dev_from_0.5": 0.08043448375000006
+  },
+  "forensic_champion_lineage": {
+    "h19_5_px": 121131,
+    "dotted_file_px": 44090,
+    "recomputed_dot_thin_2.8_px": 44090,
+    "symdiff_recomputed_vs_dotted_file": 0,
+    "solo_file_px": 40199,
+    "recomputed_solo_d_minus_ring_le1_px": 40199,
+    "symdiff_recomputed_solo_vs_file": 0,
+    "champion_constructed_solo_minus_ring_le2_px": 37654,
+    "champion_b3_constructed_px": 35483,
+    "ring_le2_removed_from_solo": 2545,
+    "ring_2_to_3_removed_from_champion": 2171
+  },
+  "uniqueness_extended": {
+    "n_registry_rasters_compared": 44,
+    "max_overlap3px": {
+      "file": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
+      "ref_px": 38545,
+      "overlap3px_of_s21": 0.7234291177564136,
+      "jaccard": 0.02896534960974424
+    },
+    "top5": [
+      {
+        "file": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
+        "ref_px": 38545,
+        "overlap3px_of_s21": 0.7234291177564136,
+        "jaccard": 0.02896534960974424
+      },
+      {
+        "file": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+        "ref_px": 38545,
+        "overlap3px_of_s21": 0.7234291177564136,
+        "jaccard": 0.02896534960974424
+      },
+      {
+        "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+        "ref_px": 59075,
+        "overlap3px_of_s21": 0.7098050671907367,
+        "jaccard": 0.03616380834038542
+      },
+      {
+        "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+        "ref_px": 59075,
+        "overlap3px_of_s21": 0.7098050671907367,
+        "jaccard": 0.03616380834038542
+      },
+      {
+        "file": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif",
+        "ref_px": 37654,
+        "overlap3px_of_s21": 0.693950177935943,
+        "jaccard": 0.035574318284952076
+      }
+    ],
+    "surface_spearman_vs_key_registry": {
+      "solo_h27_4": {
+        "overlap3px": 0.321240771232804,
+        "jaccard": 0.011932150516669916,
+        "spearman_surface_vs_binary_sample200k": 0.0493234774534136
+      },
+      "champion_constructed_b2": {
+        "overlap3px": 0.28663621394805333,
+        "jaccard": 0.01234036832907649,
+        "spearman_surface_vs_binary_sample200k": 0.06147486601189195
+      },
+      "dotted_d2_8": {
+        "overlap3px": 0.35709353587932224,
+        "jaccard": 0.011357731423056938,
+        "spearman_surface_vs_binary_sample200k": 0.033815169311206046
+      },
+      "h36_1": {
+        "overlap3px": 0.31635417219950074,
+        "jaccard": 0.011469245232339512,
+        "spearman_surface_vs_binary_sample200k": 0.04751308051489256
+      },
+      "s20_nchc": {
+        "overlap3px": 0.5469272852817761,
+        "jaccard": 0.02736104685744498,
+        "spearman_surface_vs_binary_sample200k": 0.08888995887279275
+      },
+      "s20v": {
+        "overlap3px": 0.23402560152971796,
+        "jaccard": 0.007574843475579509,
+        "spearman_surface_vs_binary_sample200k": 0.03281068667500234
+      }
+    }
+  },
+  "validator": {
+    "allfinite": {
+      "file": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif",
+      "bytes": 826602,
+      "sha256": "2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c",
+      "variant": "allfinite",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "nodata_convention": {
+          "pass": true,
+          "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+          "hard": true
+        },
+        "outside_footprint_is_zero_and_finite": {
+          "pass": true,
+          "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+          "hard": true
+        },
+        "strict_whole_array_range": {
+          "pass": true,
+          "detail": "whole-array min=0 max=1",
+          "hard": true
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": true
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 37654,
+      "nonfinite_inside_px": 0,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    },
+    "nan": {
+      "file": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif",
+      "bytes": 1590770,
+      "sha256": "a43ae055706f44e0896fdb68499f1f85f424250bd27ee5ea66b14dfd6c45c625",
+      "variant": "nan",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "nodata_convention": {
+          "pass": true,
+          "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+          "hard": true
+        },
+        "outside_footprint_is_nan": {
+          "pass": true,
+          "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+          "hard": true
+        },
+        "nodata_tag_is_nan": {
+          "pass": true,
+          "detail": "nodata=NaN declared, same as the sample submission",
+          "hard": true
+        },
+        "masked_read_in_0_1": {
+          "pass": true,
+          "detail": "masked count=5167373, min=0, max=1",
+          "hard": true
+        },
+        "nan_aware_range_in_0_1": {
+          "pass": true,
+          "detail": "nanmin=0 nanmax=1",
+          "hard": true
+        },
+        "strict_whole_array_range_ignoring_nan_is_informational": {
+          "pass": false,
+          "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+          "hard": false
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": true
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 37654,
+      "nonfinite_inside_px": 0,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "files": {
+    "allfinite": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif",
+    "sha256_allfinite": "2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c",
+    "bytes_allfinite": 826602,
+    "nan": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif",
+    "sha256_nan": "a43ae055706f44e0896fdb68499f1f85f424250bd27ee5ea66b14dfd6c45c625",
+    "zip": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.zip",
+    "sha256_zip": "7a9b62d933c6780deedd5331959073fc1e0f70e15c2b8985a34ced44318b89ae",
+    "positive_px": 37654,
+    "content_id": "16bbf281ba9b"
+  },
+  "submission_name": "GEMSDOE28-S21-PUHGB-20261026-16bbf281ba9b",
+  "note": "S21 PU-HGB 31-band fresh 37654d b2 HOLDOUT 0.0839 vs 0.1062 NEGATIVE DO NOT SUBMIT",
+  "note_chars": 82,
+  "score_estimate_MODEL_PROJECTION_not_a_score": {
+    "anchor_owner_reported_unverified": 0.2778,
+    "anchor_file": "GEMSDOE32 h33-h33-2-b2 (owner-reported 0.2778, no organizer receipt)",
+    "method": "anchor * (pooled HOLDOUT-DTI of S21 / pooled HOLDOUT-DTI of dotted_b2 [=champion construction]) on identical cells",
+    "estimate": 0.2194774110338748,
+    "range_from_delta_ci": [
+      0.19691505866323195,
+      0.24185963166602972
+    ]
+  },
+  "verdict": "negative-gate-fail",
+  "gates": {
+    "format_pass": true,
+    "uniqueness_pass_le_70pct": false,
+    "canary_pass": true,
+    "holdout_delta": -0.022298285075687874,
+    "holdout_delta_ci95": [
+      -0.03092447561450171,
+      -0.013740963716503862
+    ],
+    "holdout_beats_baseline_ci_gt_0": false
+  }
+}

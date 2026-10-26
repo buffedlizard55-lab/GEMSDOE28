@@ -292,6 +292,7 @@ def nav() -> str:
         ("Research", "research.html"),
         ("Latest result", "session19-result.html"),
         ("S20 result", "session20-result.html"),
+        ("S21 result", "session21-result.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
@@ -353,6 +354,22 @@ def render_session15(review: dict) -> str:
 <p><strong>Current validator status:</strong> not run on a new candidate. The existing historical download artifacts remain separately documented; this page does not label any one of them as newly generated or newly approved.</p></section>
 <section class="section"><h2>Manual review sources</h2><ul><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official DrivenData problem description</a></li><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official public leaderboard (manual review only)</a></li><li><a href="https://gdr.openei.org/submissions/1391">DOE GDR #1391</a></li><li><a href="https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b">USGS Great Basin MT conductance release</a></li><li><a href="https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28">USGS Great Basin heat-flow release</a></li><li><a href="https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e">USGS 3DEP 1 m DEM catalog</a></li><li><a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat FDSN API (availability not verified here)</a></li></ul>
 <p><strong>Machine-readable run card:</strong> holdout DTI is null because no experiment was run; verdict is <strong>negative</strong>. See the repo dossier for the exact reasons.</p></section>"""
+
+
+def s21_status_html() -> str:
+    card = read_json("evidence/s21_run_card.json", {})
+    if not card:
+        return ""
+    f = card.get("files", {})
+    g = card.get("gates", {})
+    est = card.get("score_estimate_MODEL_PROJECTION_not_a_score", {})
+    return f"""<section class="card callout-danger" aria-label="Session 21 submission readiness" id="s21-submission" data-submission-ready="false">
+<p class="eyebrow">SESSION 21 · S21-PUHGB · 2026-10-26 · AUTOMATED GATES, NO HUMAN INSPECTOR</p>
+<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
+<p><strong>NEW UNIQUE TIFF:</strong> <code>{esc(f.get('allfinite', ''))}</code> ({comma(f.get('positive_px', 0))} fresh 31-band PU-detector dots; SHA-256 <code>{esc(str(f.get('sha256_allfinite', ''))[:8])}…</code>; all-finite [0,1]). Format PASS · canary PASS (0.580) · unique vs all scored rasters (≤54.7% overlap; 28.7% vs 0.2778 champion) · <strong>HOLDOUT-DTI delta {g.get('holdout_delta', 0):+.4f} (CI wholly negative) → NEGATIVE. Do not upload.</strong> Estimated live score (MODEL): ~{est.get('estimate', 0):.2f}. Best historical file remains GEMSDOE32 <code>h33-h33-2-b2</code> (0.2778 OWNER-REPORTED) — learning reference only, never copy.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(f.get('allfinite', ''))}" download>1-Click Download S21 Unique GeoTIFF — Research Only / DO NOT SUBMIT</a><a class="button quiet" href="session21-result.html">Session 21 executive result + download table</a><a class="button quiet" href="data/run_card_s21.json" download>JSON run card</a></div>
+<p><strong>Unique name:</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
+</section>"""
 
 
 def s20_nchc_status_html() -> str:
@@ -582,7 +599,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{s20_nchc_status_html()}{current_status_html()}{s19b_parallel_html()}{body}</main>
+<main>{s21_status_html()}{s20_nchc_status_html()}{current_status_html()}{s19b_parallel_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1458,6 +1475,7 @@ def main() -> int:
 </section>"""
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
+    session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
     s20_nchc_block = render_s20_nchc_overview()
     pages = {
         "index.html": layout("Overview", s20_nchc_block + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
@@ -1471,12 +1489,18 @@ def main() -> int:
         "session19-result.html": layout("S19 unique TIFF result", render_s19_result(), "S19 result"),
         "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),
         "session20-result.html": session20_template,
+        "session21-result.html": session21_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    s21_card = read_json("evidence/s21_run_card.json")
+    (DOCS / "data/run_card_s21.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s21.json").write_text(
+        json.dumps(s21_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
+    )
     s20_nchc_card = read_json("evidence/s20_nchc_run_card.json")
     (DOCS / "data/run_card_s20_nchc.json").parent.mkdir(parents=True, exist_ok=True)
     (DOCS / "data/run_card_s20_nchc.json").write_text(

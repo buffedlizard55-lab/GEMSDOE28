@@ -1,10 +1,10 @@
 {
-  "checked_utc": "2026-10-26T01:51:33Z",
+  "checked_utc": "2026-10-26T20:44:00Z",
   "status": "PASS",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
   "template": {
-    "path": "/home/user/GEMSDOE28/.cache/gems-data/sample_submission.tif",
+    "path": "/home/user/GEMSDOE28/data/sample_submission.tif",
     "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
     "crs": "EPSG:32611",
     "shape": [
@@ -2351,7 +2351,7 @@
     {
       "check": "all_tif_names_unique",
       "pass": true,
-      "detail": "44 unique GeoTIFF(s)"
+      "detail": "46 unique GeoTIFF(s)"
     },
     {
       "check": "all_tif_names_content_addressed",
