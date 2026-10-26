@@ -817,6 +817,12 @@
       "severity": "medium",
       "issue": "H42-1 implementation deviation found in Pass-2 review: knowledge/52 \u00a71 freezes coherence-weighted averaging of TMI/gravity migration vectors; migration.build_migration_vectors support-averages them instead.",
       "action": "Disclosed in evidence/s18_run_card.json (preregistration_deviations) and knowledge/53. Verdict unchanged: falsification controls (phys/anti/rand all ~-0.005 DTI) make the negative robust to the weighting choice, but the exact preregistered estimator is untested and must not be run on seeds 310-314; any retry needs fresh preregistration and seeds >=320."
+    },
+    {
+      "id": "nine-site-review-latest-result-nav-stale",
+      "severity": "low",
+      "issue": "After S19-ASCP became the latest run, the nine-site review template still labeled its navigation link to session18-result.html as \u201cLatest result.\u201d Readers could land on an older experiment from the page intended to summarize current-site comparisons.",
+      "action": "Changed the scorecard navigation target to session19-result.html and added a regression test that checks the generated page links to S19 rather than S18."
     }
   ],
   "irregularities": [

@@ -59,6 +59,8 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertIn("https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/", self.page)
         self.assertIn("S19-ASCP research TIFF was generated", self.page)
         self.assertIn("S19-ASCP JSON run card", self.page)
+        self.assertIn('href="session19-result.html">Latest result</a>', self.page)
+        self.assertNotIn('href="session18-result.html">Latest result</a>', self.page)
         self.assertIn("DO NOT SUBMIT", self.page)
 
     def test_session19_card_is_negative_and_does_not_claim_a_new_raster(self):
