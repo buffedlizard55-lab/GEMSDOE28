@@ -1,3 +1,34 @@
+# Current result — 2026-10-26 S19-ASCP (read first every session)
+
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+
+[**Download the new unique research TIFF**](docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif)
+· [Executive summary / exact submission process](docs/executive-summary.html)
+· [JSON run card](evidence/s19_ascp_run_card.json)
+· [Frozen hypotheses and method](knowledge/55_s19_preregistration.md)
+
+S19 tested one new lane: paired LiDAR crest/toe curvature × uphill-facing selectivity × coherence.
+It produced 37,654 independently placed dots and passed the feature-alone leakage canary, declared
+53-raster registry checks and exact-file validation. It then **failed** the shared whole-component,
+1.5 km-buffered performance gate. **HOLDOUT-DTI** (`gems-segment-pooled-v1`, 60,988 withheld
+positives): **0.080806** (95% CI **[0.072325, 0.089111]**) versus recomputed visible-only baseline
+**0.141694**; paired gain **−0.060888** (95% CI **[−0.074029, −0.047638]**). This local proxy is
+not an organizer score. Three experiments used; no slot selected.
+
+The TIFF is single-band float32, all-finite across the whole array, values {0,1}, EPSG:32611,
+3,730 × 3,292, and matches the template transform. SHA-256:
+`553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537`. Maximum pre-placement
+|Spearman| was 0.1030; maximum exact-Euclidean surface-support overlap was 20.6%; maximum final-dot overlap was
+37.0%, below the 0.90/70% duplicate stops. **Safe to download for research; NOT OK to submit.**
+Road cuts, channels, terrace/paleo-shoreline risers, landslides and mine benches remain named mimics.
+
+The owner prompt and Core Values remain archived below and normalized in
+[`knowledge/53_current_request.md`](knowledge/53_current_request.md). The explicit parallel lane
+paragraph was again absent; the run autonomously used the repository's documented scarp-observable
+next step and does not claim external exclusivity. Historical S18 and earlier notices are superseded.
+
+---
+
 # Current result — 2026-10-25 S18-MXTP (read first every session)
 
 ## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
