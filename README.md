@@ -79,6 +79,19 @@ A concurrent pre-experiment Session 19 review ran zero experiments before inputs
 and [blocked JSON card](evidence/session19_run_card.json) are retained as an audit snapshot, not the
 current result. Its “no new TIFF” statement was true for that checkout but is superseded by S19-ASCP.
 
+**Parallel-run addendum (S19B-RADLIN, same date, different lane):** a second concurrent run executed
+the ThK alteration-lineament lane ([preregistration](knowledge/57_s19b_radlin_preregistration.md),
+[result](knowledge/58_s19b_radlin_result.md), run card `evidence/s19b_radlin_run_card.json`). It
+generated a unique 37,654-dot TIFF (`GEMSDOE28-S19-RADLIN-6fa38f9d317b`) that **passed** its frozen
+buffered LOSFO gate (HOLDOUT-DTI **0.107369** vs baseline 0.101933; paired gain **+0.005436**,
+95% CI [+0.001285, +0.009245], seeds 320–324) but **failed** the frozen strict any-raster
+uniqueness rule: 93.4% of dots within 3 px of the unscored dense H37-1 probe-union registry raster
+(≤44.5% vs every scored focus-site artifact). Verdict `negative`; 🔴 DO NOT SUBMIT
+(`s19-uniqueness-dense-probe-blanket`). It used a different evaluator than S19-ASCP above
+(eval_set v2 LOSFO vs `gems-segment-pooled-v1`) — never pool or compare the two sessions' deltas.
+Renamed S19B on merge because S19-ASCP merged first (`s19b-parallel-session-collision-and-rename`);
+no number, hash or verdict changed. Still **no file approved**.
+
 ---
 
 # Current result — 2026-10-25 S18-MXTP (read first every session)
