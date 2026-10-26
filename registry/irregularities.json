@@ -907,6 +907,34 @@
       "severity": "low",
       "issue": "Knowledge number 57 is used by both knowledge/57_s19b_radlin_preregistration.md (S19B, merged PR #51) and knowledge/57_s20_result.md (Session 20-H43). Filenames are distinct; only the numeric prefix collides.",
       "action": "Both files retained unchanged (the S19B preregistration is frozen). Cite by full filename, not by number alone. No numbers were pooled across S19B, S19-ASCP, Session 20 validation review, and Session 20-H43."
+    },
+    {
+      "id": "s22-lane-self-assignment-2026-10-26",
+      "date": "2026-10-26",
+      "severity": "disclosed",
+      "issue": "The S22 session prompt again references a single method paragraph lane assignment that is not identifiable in the prompt text (same defect as S18-S21).",
+      "action": "Lane declared and frozen before experiments in knowledge/62_s22_preregistration.md and labelled a self-assignment; no external exclusivity claimed. Seeds 360-362 claimed (S21 had reserved 360+)."
+    },
+    {
+      "id": "s22-focus-site-best-files-are-one-nested-family",
+      "date": "2026-10-26",
+      "severity": "material",
+      "issue": "Byte-fetched best files of GEMSDOE24/25/27/28/30/31/32/33/36 are one nested H19-5 dot family, not independent detectors: GEMSDOE25-best and GEMSDOE30-best have identical dot-set SHA-256, as do GEMSDOE28-solo and GEMSDOE31-best; GEMSDOE36 'PINN' (0.2750 USER-REPORTED) contains all 37,654 GEMSDOE32 champion dots plus 1,200 (97.40% within 3px).",
+      "action": "Recorded in evidence/s22_forensic.json and knowledge/63_s22_result.md. Treat the nine-site top scores as one emission-hygiene ladder (0.1922-0.2778), not as independent confirmations; do not resubmit any family member as a unique file."
+    },
+    {
+      "id": "s22-legacy-thermal-allfinite-nodata-tag",
+      "date": "2026-10-26",
+      "severity": "legacy-minor",
+      "issue": "Historical gems28-h40-1-thermal-vent and gems28-h41-1-thermal-spring *-allfinite.tif files carry a nodata=NaN tag over zero outside-footprint values, failing the strict allfinite outside-zero/no-nodata audit check (values themselves are clean: 0 NaN and 0 nonzero outside).",
+      "action": "Exposed by S22's manifest registration of all previously unregistered TIFFs (evidence/s22_download_audit.json: 720 checks, exactly these 2 failures). Historical hash-bound bytes left untouched; test_inversion now pins the failure set to exactly these two checks."
+    },
+    {
+      "id": "s22-uniqueness-margin-vs-unscored-union-pool",
+      "date": "2026-10-26",
+      "severity": "disclosed",
+      "issue": "S22 candidate's worst 3px registry overlap is 0.6992 vs the unscored dense H37-1 probe-union-pool raster (pass threshold 0.70; margin about 30 dots). The same raster failed S21 (0.723) and S19B lanes; it is a union of many detectors' pools, so any competent detector overlaps it heavily.",
+      "action": "Disclosed in evidence/s22_run_card.json and knowledge/63; against every scored raster the overlap is <=0.4845 and 0.4205 vs the champion. Selector should note the thin margin if a stricter coordinator audit is expected."
     }
   ],
   "irregularities": [

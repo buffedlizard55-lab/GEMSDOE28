@@ -119,13 +119,25 @@ def test_dot_thin_budget_is_monotone_in_distance():
 def test_verify_downloads_still_passes_with_four_slots(tmp_path):
     # Never rewrite a tracked historical evidence file as a side effect of testing.
     # Inherits GEMS_DATA_DIR so it verifies the same cache the suite is using.
+    # S22 registered every previously unregistered TIFF (S21-AUDIT next-step #1), which exposed
+    # exactly two genuine legacy defects: the h40-1/h41-1 thermal *allfinite* files carry a stray
+    # nodata=NaN tag over clean zero values (knowledge/63 irregularity 4). Historical bytes are
+    # hash-bound evidence and are not rewritten to hide this; the audit must fail with precisely
+    # those two checks and nothing else.
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "verify_downloads.py"),
                         "--out", str(tmp_path / "archive-audit.json")],
                        capture_output=True, text=True)
-    assert r.returncode == 0, r.stdout[-3000:]
-    assert "0 failure(s)" in r.stdout
+    report = json.loads((tmp_path / "archive-audit.json").read_text())
+    known_legacy = {
+        "archive_gems28_h40_1_thermal_vent_allfinite_outside_zero",
+        "archive_gems28_h41_1_thermal_spring_allfinite_outside_zero",
+    }
+    assert set(report["failures"]) == known_legacy, r.stdout[-3000:]
+    assert r.returncode == 1 and "2 failure(s)" in r.stdout
     for slot in ("primary", "secondary", "tertiary", "quaternary"):
         assert f"{slot}/nan" in r.stdout or slot in r.stdout, f"{slot} not verified"
+    s22_checks = [c for c in report["checks"] if c["check"].startswith("s22_candidate")]
+    assert s22_checks and all(c["pass"] for c in s22_checks)
 
 
 def test_historical_manifest_slots_remain_only_in_archive():

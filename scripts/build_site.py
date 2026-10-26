@@ -293,6 +293,7 @@ def nav() -> str:
         ("Latest result", "session19-result.html"),
         ("S20 result", "session20-result.html"),
         ("S21 result", "session21-result.html"),
+        ("S22 result", "session22-result.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
@@ -372,6 +373,22 @@ def s21_status_html() -> str:
 </section>"""
 
 
+def s22_status_html() -> str:
+    card = read_json("evidence/s22_run_card.json", {})
+    if not card:
+        return ""
+    f = card.get("files", {})
+    h = card.get("holdout", {})
+    proj = card.get("live_projection", {})
+    return f"""<section class="card callout-danger" aria-label="Session 22 submission readiness" id="s22-submission" data-submission-ready="false">
+<p class="eyebrow">SESSION 22 · S22-H1 MULTI-SCALE SPATIAL-CONTEXT · 2026-10-26 · AUTOMATED GATES, NO HUMAN INSPECTOR</p>
+<h2>OK TO DOWNLOAD: YES · OK TO SUBMIT: SELECTOR CHECKLIST REQUIRED — NO SLOT SPENT</h2>
+<p><strong>NEW UNIQUE TIFF — first fresh lane to PASS its frozen holdout gate:</strong> <code>{esc(f.get('primary_allfinite', ''))}</code> ({comma(card.get('n_dots', 0))} fresh context-detector dots, 0 on catalogue; SHA-256 <code>{esc(str(card.get('raster_sha256', ''))[:8])}…</code>; all-finite {{0,1}} in [0,1], no NaN anywhere). Canary PASS (0.7200 ≤ 0.90) · <strong>HOLDOUT-DTI {h.get('dti', 0):.5f} vs dotted-b2 {h.get('baseline_dti', 0):.5f} (paired Δ {h.get('paired_gain', 0):+.5f}, 95 % CI [{h.get('paired_gain_ci95', [0, 0])[0]:+.5f}, {h.get('paired_gain_ci95', [0, 0])[1]:+.5f}], 12/12 cells, seeds 360–362)</strong> · unique vs GEMSDOE32 champion (42.05 % within 3 px) · validator PASS. <strong>Verdict promote (frozen gate); submission_ready=false until the separate selector step confirms the weekly portal allowance. Nothing has been uploaded.</strong> Estimated live score (MODEL PROJECTION, not a score): ~{proj.get('projected_live_dti', 0):.3f} vs the 0.2778 USER-REPORTED champion anchor — see the transfer-risk caveats on the S22 page before believing it.</p>
+<div class="download-actions"><a class="button" href="downloads/{esc(f.get('primary_allfinite', ''))}" download>1-Click Download S22 Unique GeoTIFF — gate-passing candidate</a><a class="button quiet" href="session22-result.html">Session 22 executive result + nine-site table + selector steps</a><a class="button quiet" href="data/run_card_s22.json" download>JSON run card</a></div>
+<p><strong>Unique name:</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
+</section>"""
+
+
 def s20_nchc_status_html() -> str:
     card = read_json("evidence/s20_nchc_run_card.json", {})
     exp2 = read_json("evidence/s20_nchc_exp2_holdout.json", {})
@@ -389,12 +406,14 @@ def s20_nchc_status_html() -> str:
     sw_c = float(cand_folds.get("SW", {}).get("dti", 0.0))
     sw_b = float(b0_folds.get("SW", {}).get("dti", 0.0))
     sw_d = sw_c - sw_b
-    return f"""<section class="card callout-danger" aria-label="Session 21 audit coverage warning">
-<h2>Submission audit incomplete — DO NOT SUBMIT</h2>
-<p>Session 21 independently re-read the registered downloads after restoring the pinned template.
-The archive-wide audit now fails closed: 12 of 44 TIFFs have no manifest entry and cannot receive a complete hash-bound audit.
-Format checks for registered files do not override failed scientific or uniqueness gates. No new candidate or score was produced.</p>
-<p><a href="../evidence/s21_download_audit.json">Exact automated audit</a> · <a href="../knowledge/61_s21_validation_review.md">Review and next steps</a></p>
+    return f"""<section class="card callout-danger" aria-label="Session 22 audit coverage update">
+<h2>Archive audit coverage fixed by S22 — 2 legacy tag defects remain (historical files only)</h2>
+<p>Session 21-AUDIT failed closed because 12 of 44 TIFFs had no manifest entry. Session 22 registered every
+previously unregistered TIFF (hashes/bytes/counts recomputed from disk; provenance named per entry; no verdicts changed):
+the archive audit now runs 720 checks with only 2 failures — the historical h40-1 thermal-vent and h41-1 thermal-spring
+<em>allfinite</em> files carry a stray <code>nodata=NaN</code> tag over clean zero values (bytes left untouched).
+Format checks never override scientific or uniqueness gates.</p>
+<p><a href="../evidence/s22_download_audit.json">S22 exact automated audit</a> · <a href="../evidence/s21_download_audit.json">S21 audit (superseded)</a> · <a href="../knowledge/63_s22_result.md">S22 result and irregularities</a></p>
 </section><section class="card callout-danger" aria-label="Session 20-NCHC submission readiness and one-click download" id="s20-nchc-submission" data-submission-ready="false">
 <p class="eyebrow">PARALLEL SESSION 20-NCHC (H43-1) · 2026-10-26 UTC · AUTOMATED GATE COMPLETE</p>
 <h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
@@ -605,7 +624,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{s21_status_html()}{s20_nchc_status_html()}{current_status_html()}{s19b_parallel_html()}{body}</main>
+<main>{s22_status_html()}{s21_status_html()}{s20_nchc_status_html()}{current_status_html()}{s19b_parallel_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1482,6 +1501,7 @@ def main() -> int:
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
+    session22_template = (ROOT / "site_templates" / "session22-result.html").read_text(encoding="utf-8")
     s20_nchc_block = render_s20_nchc_overview()
     pages = {
         "index.html": layout("Overview", s20_nchc_block + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
@@ -1496,12 +1516,18 @@ def main() -> int:
         "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),
         "session20-result.html": session20_template,
         "session21-result.html": session21_template,
+        "session22-result.html": session22_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    s22_card = read_json("evidence/s22_run_card.json")
+    (DOCS / "data/run_card_s22.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s22.json").write_text(
+        json.dumps(s22_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
+    )
     s21_card = read_json("evidence/s21_puhgb_run_card.json")
     (DOCS / "data/run_card_s21.json").parent.mkdir(parents=True, exist_ok=True)
     (DOCS / "data/run_card_s21.json").write_text(
