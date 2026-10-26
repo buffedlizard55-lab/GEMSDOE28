@@ -9,7 +9,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "cross-site-review.html"]
 
 
 class Links(HTMLParser):
@@ -53,6 +53,7 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
         "scripts/build_site.py",
         ".github/workflows/build-site.yml",
         "docs/assets/**",
+        "site_templates/**",
         "docs/*.html",
         "index.html",
     }:
@@ -220,6 +221,26 @@ def test_front_page_has_download_and_exact_note():
     assert "Submission download locked" in idx
 
 
+def test_session19_cross_site_review_is_linked_and_fail_closed():
+    page = (DOCS / "cross-site-review.html").read_text()
+    index = (DOCS / "index.html").read_text()
+    card = json.loads((ROOT / "evidence/session19_run_card.json").read_text())
+    assert "GEMSDOE32 H33-2-B2" in page
+    assert "0.2778" in page and "USER-REPORTED / UNVERIFIED" in page
+    assert "Do not upload any file from this site" in page
+    assert "Displaced potential-field piercing markers" in page
+    assert "Paired-geothermometer cooling corridors" in page
+    assert "Opposite-flank flexural curvature pairs" in page
+    assert "Lithology-conditioned U/Th transport dipoles" in page
+    assert "cross-site-review.html" in index
+    assert card["verdict"] == "negative"
+    assert card["experiments_run"] == 0 and card["new_tiff_generated"] is False
+    assert card["holdout"]["label"] == "HOLDOUT-DTI"
+    assert card["holdout"]["status"].startswith("NOT RUN")
+    assert card["raster_sha256"] is None and card["submission_name"] is None
+    assert card["submission_ready"] is False and card["slot_selected"] is False
+
+
 
 def test_research_page_lists_preregistered_h28_hypotheses_and_evidence_link():
     research = (DOCS / "research.html").read_text()
@@ -314,6 +335,12 @@ def test_downloads_have_unique_names_and_zip_single_member():
 def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
+        if page == "cross-site-review.html":
+            assert 'Current run: NOT READY TO SUBMIT' in text
+            assert 'NO FILE APPROVED' in text
+            assert 'Do not upload any file from this site' in text
+            assert 'session19_run_card.json' in text
+            continue
         assert 'Current run: NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text
         assert 'Do not upload any file from this site' in text
