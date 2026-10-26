@@ -98,15 +98,16 @@ def test_s18_bootstrap_identical_arms_has_zero_paired_gain():
 
 
 def test_s18_latest_download_is_visible_before_historical_downloads():
+    # Superseded by S19 (2026-10-26): the S18 download is now preserved on its
+    # historical result page, still labelled DO NOT SUBMIT with its run card.
     card = load("evidence/s18_mxtp_run_card.json")
-    for page in ("index.html", "executive-summary.html", "session18-result.html"):
-        html = (ROOT / "docs" / page).read_text()
-        assert html.index(card["download"]) < html.index("Prior-run context")
-        assert "Download NEW unique research TIFF — DO NOT SUBMIT" in html
-        assert "0.02038" in html and "76,869" in html and "45,155" in html
-        assert 'data/run_card_2026-10-25.json' in html
-        assert "unique submission generated this session" not in html
-        assert "Whether to submit is your decision" not in html
+    html = (ROOT / "docs" / "session18-result.html").read_text()
+    assert card["download"] in html
+    assert "Download NEW unique research TIFF — DO NOT SUBMIT" in html
+    assert "0.02038" in html and "76,869" in html and "45,155" in html
+    assert 'data/run_card_2026-10-25.json' in html
+    assert "unique submission generated this session" not in html
+    assert "Whether to submit is your decision" not in html
     summary = (ROOT / "docs/executive-summary.html").read_text()
     assert "three submissions per week" in summary and "four weekly slots" not in summary
 

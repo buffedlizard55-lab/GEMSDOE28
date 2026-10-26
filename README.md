@@ -1,4 +1,39 @@
-# Current result — 2026-10-25 S18-MXTP (read first every session)
+# Current result — 2026-10-26 S19-RADLIN (read first every session)
+
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT PASSED, STRICT UNIQUENESS FAILED**
+
+[**Download the new unique research TIFF**](docs/downloads/gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif)
+· [Executive summary / submission process](docs/executive-summary.html)
+· [Current full JSON run card](evidence/s19_run_card.json)
+· [Scientific result, sources and next steps](knowledge/56_s19_result.md)
+· [Frozen preregistration (5 ranked hypotheses, lane, gates)](knowledge/55_s19_preregistration.md)
+
+The new 37,654-dot ThK alteration-lineament-weighted coverage raster is independently generated,
+not copied from a previous submission. Exact-file checks pass (shared validator + independent
+407-check download audit, 0 failures): no NaN anywhere, values {0,1}, single-band float32,
+template CRS/shape/transform, zero catalogue dots. **Safe to download for research, NOT approved
+to submit.** No human inspector or competition slot was used; automated gates made the decision.
+
+**HOLDOUT-DTI** (shared eval_set **v2** → metric.dti_binary, buffered whole-system LOSFO,
+seeds 320–324, 20 cells, 74,025 pooled withheld positives / 46,711 unique): **0.107369**
+(95% CI **[0.088033, 0.126307]**) vs recomputed registered H38-1 candidate **0.101933**;
+paired gain **+0.005436** (95% CI **[+0.001285, +0.009245]**), 5/5 seeds, 3/4 folds.
+**The frozen scientific gate PASSED.** Attribution limit: the gate does not isolate the
+RADLIN bonus from the all-ridge coverage construction (previously measured at similar
+magnitude, knowledge/39); canary AUCs ≈0.50 show no standalone lineament signal.
+
+**Why it is still 🔴 DO NOT SUBMIT:** final-dot uniqueness under the frozen any-raster rule
+failed — 93.4% of dots within 3 px of the unscored dense H37-1 probe-union registry raster
+(>70% duplicate-stop), although ≤44.5% vs every byte-verified *scored* focus-site artifact
+(GEMSDOE24/25/27/28/30/31/32/33/36; GEMSDOE32 champion owner-reported 0.2778 remains the
+best reported, unverified, and is a previous submission — do not copy it). Verdict
+`negative`; irregularity `s19-uniqueness-dense-probe-blanket`. A future preregistered
+session (fresh seeds ≥325) must settle the registry-scope question *before* placement;
+do not re-decide this raster or retune on seeds 320–324. Lane closed; 3/3 experiments used.
+
+---
+
+# Previous result — 2026-10-25 S18-MXTP (historical)
 
 ## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 

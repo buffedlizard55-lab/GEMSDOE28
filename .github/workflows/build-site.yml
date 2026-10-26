@@ -67,6 +67,8 @@ on:
       - 'docs/data/run_card_s18.json'
       - 'evidence/s18_official_source_review.json'
       - 'evidence/s18_champion_forensic.json'
+      - 'evidence/s19_run_card.json'
+      - 'docs/data/run_card_s19.json'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
   pull_request:
@@ -134,6 +136,8 @@ on:
       - 'docs/data/run_card_s18.json'
       - 'evidence/s18_official_source_review.json'
       - 'evidence/s18_champion_forensic.json'
+      - 'evidence/s19_run_card.json'
+      - 'docs/data/run_card_s19.json'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
   workflow_dispatch:

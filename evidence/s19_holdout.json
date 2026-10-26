@@ -1,0 +1,588 @@
+{
+  "label": "HOLDOUT-DTI",
+  "session": "S19-RADLIN",
+  "experiment": 2,
+  "baseline": "H38-1 joint-on-r30-r1 recomputed via registered shared recipe on visible-only labels",
+  "baseline_scope": "Registered prior best candidate; not a certified global or organizer best",
+  "baseline_sha256": "a95d04310e5e192cdf3ab9717fed3a959ff1971b234a767905f07407049b5eea",
+  "evaluator_version": "run_losfo_harness.eval_set v2 -> metric.dti_binary; S19 evaluator hash bundle",
+  "evaluator_hashes": {
+    "eval_set_v2": "5478545885800f84de70e68088eb216b4b9a433243803e3a4a101c87f1409ee2",
+    "metric": "4b0a600d7fa92e1338b3f8ffeed3df76031ab94725f8143df1fc194c40bfb101",
+    "split": "cba280e138ca540dc6549ef56d4c0f88062dfb457118d757b896a864fa2b9738",
+    "runner": "1d241836edde72bae5340dedebc36a3aee03205bf2fe80c7ebb76d83646612f7",
+    "radlin": "f208bff677980a6fe5b0e6c2a4e4e285332e7538028d89e72e99e7088542e907",
+    "packing": "39cce1812fadfcad1b46cd532a9d4d74b255c5eaca6fcc6663699423a9c47d1d"
+  },
+  "inputs": {
+    "cache": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "heat_flow": "8f57091b064aa899354ae595a368cdc1b69673f15a18c7456cc228694071f49c",
+    "euler_clusters": "cdd07d53de2c64bebbaffa6e083a7fd2d242e45b88f41b35417e8d0c782c8da1",
+    "lidar": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "surface_npz": "1aaa684430d39ab529de042be4ce73f2269ab77cfef00a967fa555006f25498e",
+    "extensions": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b"
+  },
+  "seeds": [
+    320,
+    321,
+    322,
+    323,
+    324
+  ],
+  "whole_segments": true,
+  "buffered": true,
+  "visible_only_features": true,
+  "pixel_exact_visible_mask": true,
+  "pooled": true,
+  "alpha": 0.2,
+  "beta": 0.8,
+  "kernel_m": 300,
+  "kernel": "triangular",
+  "withheld_positives": 74025,
+  "unique_withheld_positive_pixels": 46711,
+  "candidate_pooled": {
+    "dti": 0.10736938036676277,
+    "tp": 11192.649877956153,
+    "fp": 213929.03547183692,
+    "n_truth": 74025,
+    "dots": 218167
+  },
+  "baseline_pooled": {
+    "dti": 0.10193317277959904,
+    "tp": 10609.077710231357,
+    "fp": 213684.69700137406,
+    "n_truth": 74025,
+    "dots": 218167
+  },
+  "pooled_gain": 0.005436207587163733,
+  "ci": {
+    "method": "paired geographic-fold block percentile bootstrap; 10000 replicates; only 4 blocks",
+    "candidate_ci95": [
+      0.08803287556019129,
+      0.12630622778090708
+    ],
+    "baseline_ci95": [
+      0.0826110297670998,
+      0.12086171269626636
+    ],
+    "paired_gain_ci95": [
+      0.001284883690996344,
+      0.009245371090262092
+    ]
+  },
+  "per_fold_gain": {
+    "0": 0.0035546901872755138,
+    "1": -0.0005167241091096619,
+    "2": 0.006534855706181467,
+    "3": 0.010521678780070515
+  },
+  "per_seed_gain": {
+    "320": 0.003280807043810438,
+    "321": 0.005981884140123031,
+    "322": 0.008745541928652525,
+    "323": 0.006455131365876415,
+    "324": 0.0019198079753613012
+  },
+  "candidate_credit_per_dot": 0.051303129611518485,
+  "baseline_credit_per_dot": 0.04862824217334132,
+  "gate": {
+    "positive_paired_gain_ci": true,
+    "pooled_gain_gt_0.001": true,
+    "positive_3_of_4_folds": true,
+    "positive_4_of_5_seeds": true,
+    "all_cells_buffered": true,
+    "no_visible_dots": true
+  },
+  "gate_passed": true,
+  "cells": [
+    {
+      "seed": 320,
+      "fold_id": 0,
+      "fold": "NW",
+      "minimum_hidden_to_visible_px": 8.54400374531753,
+      "candidate": {
+        "tp": 396.02821904124926,
+        "fp": 9353.89927765982,
+        "dti": 0.09957499319480823,
+        "dots": 9510,
+        "n_truth": 2534
+      },
+      "baseline": {
+        "tp": 384.6383157991015,
+        "fp": 9336.726245315569,
+        "dti": 0.09685029315084127,
+        "dots": 9510,
+        "n_truth": 2534
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9510,
+      "visible_mask_sha256": "990b59e70617a30bc64ea6a7add922c983610b605f08311f557008683c9d903e"
+    },
+    {
+      "seed": 320,
+      "fold_id": 1,
+      "fold": "NE_LidarGapHeavy",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 554.0516046324074,
+        "fp": 11698.204636610048,
+        "dti": 0.11573480811635789,
+        "dots": 11920,
+        "n_truth": 2921
+      },
+      "baseline": {
+        "tp": 550.2139861400904,
+        "fp": 11670.552578231036,
+        "dti": 0.11508457625949979,
+        "dots": 11920,
+        "n_truth": 2921
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 11920,
+      "visible_mask_sha256": "eacaaf71942e4a951656ecd25648fea79c7dfcf6d8d1365972fae07162c35a6d"
+    },
+    {
+      "seed": 320,
+      "fold_id": 2,
+      "fold": "SW",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 513.5219637482692,
+        "fp": 12111.05414803814,
+        "dti": 0.08915133533200385,
+        "dots": 12303,
+        "n_truth": 4044
+      },
+      "baseline": {
+        "tp": 484.6774585756122,
+        "fp": 12097.573979904524,
+        "dti": 0.08426754658641382,
+        "dots": 12303,
+        "n_truth": 4044
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 12303,
+      "visible_mask_sha256": "3028f14d0a6a89ab5254e710c2f016eaf3118f9164f0c49062f32f8c05f3c1d2"
+    },
+    {
+      "seed": 320,
+      "fold_id": 3,
+      "fold": "SE",
+      "minimum_hidden_to_visible_px": 8.246211251235321,
+      "candidate": {
+        "tp": 527.9042590741258,
+        "fp": 9625.54486002314,
+        "dti": 0.12409918472870199,
+        "dots": 9813,
+        "n_truth": 2779
+      },
+      "baseline": {
+        "tp": 507.3731416308946,
+        "fp": 9602.756921359878,
+        "dti": 0.11951616712826593,
+        "dots": 9813,
+        "n_truth": 2779
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9813,
+      "visible_mask_sha256": "c5b74b9e5807bc1640d8e565868f8c769dbe71d08f128a54a87cb52efb3b5ecf"
+    },
+    {
+      "seed": 321,
+      "fold_id": 0,
+      "fold": "NW",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 420.4398276363471,
+        "fp": 9686.313491222194,
+        "dti": 0.09781877382065089,
+        "dots": 9855,
+        "n_truth": 2846
+      },
+      "baseline": {
+        "tp": 436.66221894709577,
+        "fp": 9655.55216416697,
+        "dti": 0.10166182250449608,
+        "dots": 9855,
+        "n_truth": 2846
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9855,
+      "visible_mask_sha256": "5ec5f400a706a8089cfc4a04584293d05fd90e3ef53d9540b6bc9f4fb0ec864e"
+    },
+    {
+      "seed": 321,
+      "fold_id": 1,
+      "fold": "NE_LidarGapHeavy",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 545.3434074987463,
+        "fp": 11754.473060777065,
+        "dti": 0.12133941380673237,
+        "dots": 11954,
+        "n_truth": 2543
+      },
+      "baseline": {
+        "tp": 567.9276274821893,
+        "fp": 11717.785309807052,
+        "dti": 0.126443781042046,
+        "dots": 11954,
+        "n_truth": 2543
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 11954,
+      "visible_mask_sha256": "f2c6c3dad75a662674cd6b445df29cb5289f45cfd7db012be7ade3a872115c40"
+    },
+    {
+      "seed": 321,
+      "fold_id": 2,
+      "fold": "SW",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 701.5075898274998,
+        "fp": 11912.820053687055,
+        "dti": 0.10518513422473011,
+        "dots": 12186,
+        "n_truth": 5183
+      },
+      "baseline": {
+        "tp": 655.7929063868914,
+        "fp": 11905.791251175811,
+        "dti": 0.09848637852768972,
+        "dots": 12186,
+        "n_truth": 5183
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 12186,
+      "visible_mask_sha256": "0ec5d6f6440e41e72eb5de438eeea687ff0b89b49b91fb090ee726b7e32d98cf"
+    },
+    {
+      "seed": 321,
+      "fold_id": 3,
+      "fold": "SE",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 914.8636945012261,
+        "fp": 9671.635652762703,
+        "dti": 0.14414339493364167,
+        "dots": 9997,
+        "n_truth": 5287
+      },
+      "baseline": {
+        "tp": 786.9336963256487,
+        "fp": 9686.095781997903,
+        "dti": 0.12443201712528909,
+        "dots": 9997,
+        "n_truth": 5287
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9997,
+      "visible_mask_sha256": "7c94de92ffb7d00030bfc662201ef57b230953014ba3f9153c0ca15e1c592bf1"
+    },
+    {
+      "seed": 322,
+      "fold_id": 0,
+      "fold": "NW",
+      "minimum_hidden_to_visible_px": 8.246211251235321,
+      "candidate": {
+        "tp": 190.49500738874065,
+        "fp": 9824.556035215384,
+        "dti": 0.05170017901569139,
+        "dots": 9900,
+        "n_truth": 2102
+      },
+      "baseline": {
+        "tp": 148.53007543772122,
+        "fp": 9835.567307101555,
+        "dti": 0.04037877582539658,
+        "dots": 9900,
+        "n_truth": 2102
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9900,
+      "visible_mask_sha256": "13579b2ccbdfd54ded1c5179cc4d75706a99a726443cc1a40190544b94b239fb"
+    },
+    {
+      "seed": 322,
+      "fold_id": 1,
+      "fold": "NE_LidarGapHeavy",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 416.4497299486121,
+        "fp": 11752.647555989735,
+        "dti": 0.08907216427383507,
+        "dots": 11919,
+        "n_truth": 2802
+      },
+      "baseline": {
+        "tp": 404.9409662892864,
+        "fp": 11741.997274449863,
+        "dti": 0.08669279321284161,
+        "dots": 11919,
+        "n_truth": 2802
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 11919,
+      "visible_mask_sha256": "b5676109591235111762edcfdd1fd4e87be1400564bbc3d168e350081b59e478"
+    },
+    {
+      "seed": 322,
+      "fold_id": 2,
+      "fold": "SW",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 753.2600497771314,
+        "fp": 11845.761817323708,
+        "dti": 0.10527737097755782,
+        "dots": 12137,
+        "n_truth": 5794
+      },
+      "baseline": {
+        "tp": 663.3433108048173,
+        "fp": 11847.615710558213,
+        "dti": 0.09293917568017365,
+        "dots": 12137,
+        "n_truth": 5794
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 12137,
+      "visible_mask_sha256": "c484b87520f6c91a65960ef2c665ad0775b2940a69ae7d6af72fcc6f146ea414"
+    },
+    {
+      "seed": 322,
+      "fold_id": 3,
+      "fold": "SE",
+      "minimum_hidden_to_visible_px": 8.246211251235321,
+      "candidate": {
+        "tp": 1190.4163171107111,
+        "fp": 9509.917636413029,
+        "dti": 0.16965069347913117,
+        "dots": 9917,
+        "n_truth": 6096
+      },
+      "baseline": {
+        "tp": 1132.109067444322,
+        "fp": 9487.103500205798,
+        "dti": 0.16171502333395002,
+        "dots": 9917,
+        "n_truth": 6096
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9917,
+      "visible_mask_sha256": "688cce01d676fe0baace2d5b0fde7d09c9d80fd9a7df6415415ef2f3b66ba821"
+    },
+    {
+      "seed": 323,
+      "fold_id": 0,
+      "fold": "NW",
+      "minimum_hidden_to_visible_px": 8.246211251235321,
+      "candidate": {
+        "tp": 406.7659535197814,
+        "fp": 9628.089426565075,
+        "dti": 0.10736658897176847,
+        "dots": 9788,
+        "n_truth": 2227
+      },
+      "baseline": {
+        "tp": 395.5030600568724,
+        "fp": 9616.604559254905,
+        "dti": 0.10451924164604909,
+        "dots": 9788,
+        "n_truth": 2227
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9788,
+      "visible_mask_sha256": "1d21b155526eec507ef12eb919741cc46e76db22606a507e2687dc90c79956a5"
+    },
+    {
+      "seed": 323,
+      "fold_id": 1,
+      "fold": "NE_LidarGapHeavy",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 695.7227770877687,
+        "fp": 11788.070947229004,
+        "dti": 0.14284836364615755,
+        "dots": 12066,
+        "n_truth": 2967
+      },
+      "baseline": {
+        "tp": 675.2483432443767,
+        "fp": 11773.281549096744,
+        "dti": 0.13884553968433885,
+        "dots": 12066,
+        "n_truth": 2967
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 12066,
+      "visible_mask_sha256": "aeacf2f3e42f8dfc146576cf287eaa12ad317a1566e2b34b998b5e4596bb8dd9"
+    },
+    {
+      "seed": 323,
+      "fold_id": 2,
+      "fold": "SW",
+      "minimum_hidden_to_visible_px": 8.06225774829855,
+      "candidate": {
+        "tp": 544.7629481791134,
+        "fp": 11910.089526658423,
+        "dti": 0.08410248396227271,
+        "dots": 12128,
+        "n_truth": 4983
+      },
+      "baseline": {
+        "tp": 514.2612645879858,
+        "fp": 11897.470335226928,
+        "dti": 0.07949937115218002,
+        "dots": 12128,
+        "n_truth": 4983
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 12128,
+      "visible_mask_sha256": "7c03053174e939d67f2d09c590f8446ffcda0b6b92c4172a31239cd430f302d9"
+    },
+    {
+      "seed": 323,
+      "fold_id": 3,
+      "fold": "SE",
+      "minimum_hidden_to_visible_px": 8.06225774829855,
+      "candidate": {
+        "tp": 588.783521724462,
+        "fp": 9486.935384314893,
+        "dti": 0.08964503067156551,
+        "dots": 9696,
+        "n_truth": 5691
+      },
+      "baseline": {
+        "tp": 507.5369962982516,
+        "fp": 9494.215177062011,
+        "dti": 0.07744931256349313,
+        "dots": 9696,
+        "n_truth": 5691
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9696,
+      "visible_mask_sha256": "d33fb06e00c3a4841ac344b2be4748ceebd71658293275f748700f8ce3a881c6"
+    },
+    {
+      "seed": 324,
+      "fold_id": 0,
+      "fold": "NW",
+      "minimum_hidden_to_visible_px": 8.246211251235321,
+      "candidate": {
+        "tp": 198.4428329770152,
+        "fp": 9603.131595171768,
+        "dti": 0.05637076211035544,
+        "dots": 9683,
+        "n_truth": 1950
+      },
+      "baseline": {
+        "tp": 176.48123402806044,
+        "fp": 9605.672193971357,
+        "dti": 0.050187604932964855,
+        "dots": 9683,
+        "n_truth": 1950
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9683,
+      "visible_mask_sha256": "194ab860959137fc5ae41fe4ac63e3cd2475c4105752245b13962c263718559d"
+    },
+    {
+      "seed": 324,
+      "fold_id": 1,
+      "fold": "NE_LidarGapHeavy",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 813.5477643182636,
+        "fp": 11313.213814286943,
+        "dti": 0.1511565850573959,
+        "dots": 11637,
+        "n_truth": 3696
+      },
+      "baseline": {
+        "tp": 836.3803763691461,
+        "fp": 11277.290312709569,
+        "dti": 0.15547449926457665,
+        "dots": 11637,
+        "n_truth": 3696
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 11637,
+      "visible_mask_sha256": "27ccb1391c228dc055a9cfba8d37a5b6d5f4b6eed45ec970fc0493e9cb660d4b"
+    },
+    {
+      "seed": 324,
+      "fold_id": 2,
+      "fold": "SW",
+      "minimum_hidden_to_visible_px": 8.0,
+      "candidate": {
+        "tp": 415.3263944305113,
+        "fp": 11985.230102719806,
+        "dti": 0.06648082263193016,
+        "dots": 12148,
+        "n_truth": 4709
+      },
+      "baseline": {
+        "tp": 394.89933232952467,
+        "fp": 11978.074186936557,
+        "dti": 0.06326695302545224,
+        "dots": 12148,
+        "n_truth": 4709
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 12148,
+      "visible_mask_sha256": "3a81485e6fb85d9166c5a09b32161fca91967d1e94647fc669dad86ec85d1373"
+    },
+    {
+      "seed": 324,
+      "fold_id": 3,
+      "fold": "SE",
+      "minimum_hidden_to_visible_px": 8.06225774829855,
+      "candidate": {
+        "tp": 405.0160155341721,
+        "fp": 9467.44644916903,
+        "dti": 0.09482282381599438,
+        "dots": 9610,
+        "n_truth": 2871
+      },
+      "baseline": {
+        "tp": 385.6243320534675,
+        "fp": 9456.970662841826,
+        "dti": 0.0904092594567321,
+        "dots": 9610,
+        "n_truth": 2871
+      },
+      "candidate_on_visible": 0,
+      "baseline_on_visible": 0,
+      "candidate_target": 9610,
+      "visible_mask_sha256": "c719bc4b3c1813e15ae7865edd5ff78a898ca7853b522d4fb29a4a18fc5b9b45"
+    }
+  ],
+  "limitations": [
+    "Catalogue-mapped systems are not a sample of truly unmapped faults.",
+    "Only four geographic bootstrap blocks; uncertainty is descriptive.",
+    "Withheld-positive pooled count repeats faults across seeds; unique count reported separately.",
+    "Historical heat-flow/Euler external mirrors are not independently authenticated official inputs."
+  ],
+  "seconds": 376.6
+}

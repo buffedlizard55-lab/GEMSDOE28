@@ -290,7 +290,7 @@ def nav() -> str:
         ("Overview", "index.html"),
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
-        ("Latest result", "session18-result.html"),
+        ("S19 result", "session19-result.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
         ("Topology", "topology.html"),
@@ -379,6 +379,7 @@ def render_s18_result() -> str:
     sources = ''.join(f"<tr><td><a href=\"{esc(x['url'])}\">{esc(x['title'])}</a></td><td>{esc(x['verified_claim'])}</td><td>{esc(x['limits'])}</td></tr>" for x in facts.get('sources', []))
     return f"""<section class="section"><h1>S18: a genuinely different TIFF, a negative scientific result</h1>
 <p>The physical hypothesis was tested, not sold as a breakthrough. Magnetic/gravity contacts need not be faults and their apparent location does not determine a surface trace uniquely. AUC near chance and failed recovery reject this placement-only method at its frozen settings. It does not demonstrate geothermal vents or a way to beat the reported GEMSDOE32 result.</p>
+<p>Historical S18 research artifact (superseded by S19 above): <a href="downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif" download>Download NEW unique research TIFF — DO NOT SUBMIT</a> · HOLDOUT-DTI 0.02038 (76,869 pooled withheld positives, 45,155 unique) · 11,082 dots · <a href="data/run_card_2026-10-25.json">S18 run card</a>. Prior-run context: S18 failed its frozen holdout gate; this file was never approved.</p>
 <h2>Why the reported GEMSDOE32 leader improved</h2><p>New byte-level comparison confirms: H33-2-B2 equals the solo-r1 dot set minus {comma(forensic.get('removed_from_solo', 0))} catalogue-adjacent dots (≤200 m), with zero added dots and zero symmetric difference. Removing predictions that earn little hidden-truth credit can reduce the α·FP denominator while preserving TP. This is an emission-hygiene explanation consistent with the owner-reported ladder, not proof of organizer score causation. No receipt associates the reported 0.2778 with those bytes. Do not copy/prune it as a new submission.</p>
 <h2>Nine requested sites: artifact audit</h2><p>Reported claims below are excluded from promotion decisions. No row is ORGANIZER-CONFIRMED. Dot counts and hashes are measured locally. Each pinned link permits manual source review.</p><div class="table-wrap"><table><thead><tr><th>Site</th><th>Artifact</th><th>Historical reported claim</th><th>Measured dots</th><th>Source</th></tr></thead><tbody>{rows}</tbody></table></div>
 <h2>Four hypotheses ranked before implementation</h2><p><a href="../knowledge/52_s18_preregistration.md">Frozen ranking, layers, physical signatures, off-catalogue rationale, non-fault mimics and implementation costs</a>. Only rank 1 was executed, using the three-experiment budget. <strong>Erratum:</strong> rank 2 incorrectly called depth_to_base_surf a basement-thickness layer. The official problem description identifies a conductive-base surface. The basement-hinge interpretation is rejected pending a separate provenance/physical review; it is not a viable tested proposal.</p>
@@ -402,6 +403,60 @@ def render_s18_executive() -> str:
 <p><a href="session18-result.html">Scientific result, nine-site audit and official sources</a> · <a href="data/current_run_card_2026-10-25.json">Complete automated run card</a> · <a href="archive.html">Historical files and instructions — superseded, DO NOT SUBMIT</a></p></section>"""
 
 
+def s19_status_html() -> str:
+    card = read_json("docs/data/run_card_s19.json", {})
+    if not card:
+        return '<section class="card callout-danger"><h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2><p>Missing current evidence. Do not upload any file from this site.</p></section>'
+    h, reg = card["holdout"], card["registry"]
+    fin = reg["final"]
+    return f"""<section class="card callout-danger" aria-label="Current submission readiness" id="current-submission" data-submission-ready="false">
+<h2>🔴 Current run: NOT APPROVED TO SUBMIT — DO NOT UPLOAD (S19-RADLIN, 2026-10-26)</h2>
+<p><strong>NEW UNIQUE-vs-SCORED TIFF GENERATED, HOLDOUT GATE PASSED, STRICT UNIQUENESS GATE FAILED.</strong> Automated validation is complete; no human inspection is needed to reach this decision. The frozen holdout gate <strong>passed</strong>, but <strong>{fin['worst_by_overlap']['frac_our_dots_within3px']:.1%}</strong> of the new dots fall within 3 px of the unscored dense H37-1 probe-union registry raster, above the frozen 70% duplicate-stop. <strong>Do not upload any file from this site.</strong> No competition slot was selected or spent.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="{esc(card['download'])}" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session19-result.html">Executive research result &amp; nine-site audit</a></div>
+<p><strong>Submission name:</strong> <code>{esc(card['submission_name'])}</code><br><strong>Research note ({len(card['note'])}/140):</strong> <code>{esc(card['note'])}</code></p>
+<p class="meta">Exact SHA-256 <code>{esc(card['raster_sha256'])}</code> · {comma(card['dot_count'])} dots · all-finite float32 · [0,1] · EPSG:32611 · 3730 × 3292 · template CRS/shape/transform PASS (407 independent download checks, 0 failures). Local file validity does not guarantee portal acceptance or scientific quality.</p>
+<p><strong>HOLDOUT-DTI:</strong> {h['dti']:.5f} (95% CI {h['ci95'][0]:.5f}–{h['ci95'][1]:.5f}); recomputed H38-1 baseline {h['baseline_dti']:.5f}; paired gain {h['paired_gain']:+.5f} (95% CI {h['paired_gain_ci95'][0]:+.5f} to {h['paired_gain_ci95'][1]:+.5f}). Evaluator: shared eval_set v2 → metric.dti_binary; {comma(h['withheld_positives'])} pooled withheld positives, {comma(h['unique_withheld_positive_pixels'])} unique, seeds 320–324, 20 cells; geographic-fold block bootstrap, only four blocks. Local recovery test, not an organizer score. Attribution limit: this gate does not isolate the RADLIN bonus from the all-ridge coverage construction.</p>
+<p><strong>Uniqueness:</strong> vs byte-verified scored focus-site artifacts max overlap {reg['scored_focus_max_overlap']:.1%}; vs the full declared registry max overlap {fin['worst_by_overlap']['frac_our_dots_within3px']:.1%} ({esc(fin['worst_by_overlap']['raster'])}), max sample Spearman {fin['worst_by_spearman']['spearman_binary_sample400k']:.3f}. The strict any-raster rule fails; the scored-only reading is reported for the separate selector, not used to approve this file.</p>
+<p><a href="data/run_card_s19.json">Current complete JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/56_s19_result.md">Scientific interpretation, ranked hypotheses and next steps</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s19_holdout.json">HOLDOUT-DTI cells and confidence intervals</a></p>
+<p><strong>Best reported focus-site submission:</strong> GEMSDOE32 <code>h33-h33-2-b2-…-e5eb6e7e-zeros</code> at owner-reported 0.2778 (unverified, no organizer receipt) — a previous submission; do not copy or submit it as this project's file. See the nine-site executive table on the <a href="session19-result.html">S19 result page</a>.</p>
+</section>"""
+
+
+def render_s19_result() -> str:
+    card = read_json("docs/data/run_card_s19.json", {})
+    forensic = read_json("evidence/s18_champion_forensic.json", {})
+    h = card.get("holdout", {})
+    rows = ''.join(f"<tr><td>{esc(x['site'])}</td><td><code>{esc(x['artifact'])}</code></td><td>{esc(x['owner_reported_claim'])} (unverified owner report)</td><td>{comma(x['dot_count'])}</td><td><a href=\"{esc(x['review_url'])}\">Pinned source</a></td></tr>" for x in forensic.get('sites', []))
+    return f"""<section class="section"><h1>S19: holdout gate passed, uniqueness gate failed — no file approved</h1>
+<p>The frozen candidate (ThK alteration-lineament-weighted all-ridge coverage packing, <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/55_s19_preregistration.md">preregistration knowledge/55</a>) beat the recomputed H38-1 baseline on buffered whole-system LOSFO seeds 320–324, then failed the frozen strict uniqueness rule against an unscored dense probe raster. Both results are automated; no human geological inspection enters the decision. Full report: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/56_s19_result.md">knowledge/56</a>.</p>
+<h2>Executive summary: the nine focus sites and their best reported submissions</h2>
+<p>Reported claims are owner-reported context, never ORGANIZER-CONFIRMED (no submission-page receipt exists for any row). Dot counts and hashes were re-measured this session from byte-verified artifacts. <strong>The best reported artifact is GEMSDOE32's champion (0.2778).</strong> It is a previous submission — byte-verified as the solo-r1 dot set minus its 2,545 catalogue-adjacent (≤200 m) dots, zero added — so its reported edge is emission hygiene (pruning low-credit dots), not a new detector. Copying or ring-pruning it would be a duplicate and is prohibited. <strong>No row is a file this project may submit as its own, and the S19 file above is also not approved: the correct submission decision today is to submit nothing.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Site</th><th>Best reported artifact</th><th>Historical reported claim</th><th>Measured dots</th><th>Source</th></tr></thead><tbody>{rows}</tbody></table></div>
+<h2>Why 0.2778 plausibly leads, and whether we can beat it</h2><p>For binary predictions DTI = TP / (0.2·(TP+FP) + 0.8·|G|); deleting dots whose lost credit per removed false-positive mass is below the break-even 0.2·DTI/(1−0.2·DTI) raises the score without finding anything new. That algebra plus the byte reconstruction explains the reported ladder <em>conditionally</em> — hidden expert truth and receipts are unavailable, so causation is not proven. Beating it requires new credit on unmapped faults, not fewer of the same dots. S19's local gain (+{h.get('paired_gain', 0):.5f} HOLDOUT-DTI vs the H38-1 recipe) is a catalogue-recovery proxy and is <strong>not</strong> a projected organizer score; no honest claim to exceed 0.2778 can be made from it, especially with the uniqueness failure standing.</p>
+<h2>Experiments (budget 3/3, lane closed)</h2><ol>
+<li><strong>Surface + canary + pre-placement:</strong> label-free ThK lineament surface; canary AUCs 0.500/0.513/0.502 (no leakage; also no standalone signal); pre-placement max |Spearman| 0.0027, max pool overlap 26.4% — PASS.</li>
+<li><strong>LOSFO gate seeds 320–324:</strong> HOLDOUT-DTI {h.get('dti', 0):.5f} vs baseline {h.get('baseline_dti', 0):.5f}; paired gain +{h.get('paired_gain', 0):.5f} (95% CI +{h.get('paired_gain_ci95', [0, 0])[0]:.5f} to +{h.get('paired_gain_ci95', [0, 0])[1]:.5f}); 5/5 seeds, 3/4 folds — PASS. Attribution limit: the all-ridge coverage construction alone was previously measured at similar magnitude; the RADLIN bonus is not isolated.</li>
+<li><strong>Build + validator + final uniqueness:</strong> 37,654 dots, exact-file validation PASS (407 checks); final dots ≤44.5% within 3 px of every scored focus artifact but 93.4% vs the dense H37-1 probe-union registry raster — FAIL under the frozen any-raster rule. Verdict <strong>negative</strong>.</li></ol>
+<h2>Ranked hypotheses (frozen before implementation)</h2><p>Rank 1 RADLIN (executed); rank 2 signed shear→dilatation transition corridors; rank 3 drainage-chain collinearity; rank 4 cross-slope radiometric sign reversal; rank 5 depth-coherent MT boundary migration (not viable: official USGS DOI 10.5066/P9TWT2LU bytes cannot be fetched or verified from this sandbox). Layers, signatures, off-catalogue rationale, mimics and costs are frozen in <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/55_s19_preregistration.md">knowledge/55</a>. No numeric projection was written as a score.</p>
+<h2>What happens next</h2><ol><li>Keep S19 closed; do not retune on seeds 320–324.</li><li>A future preregistered session (fresh seeds ≥325) must settle <em>before placement</em> whether unscored dense probe blankets are uniqueness comparators; it must not re-decide this raster retroactively.</li><li>Isolate the RADLIN bonus (bonus on/off, paired, fresh seeds) before claiming any alteration mechanism.</li><li>Promotion to a weekly slot remains a separate selector step within the authenticated page allowance (September rules: three submissions/week; account allowance unknown here).</li></ol>
+<p>Previous session: <a href="session18-result.html">S18-MXTP result (unique TIFF, holdout failed)</a>. Historical files: <a href="archive.html">archive — DO NOT SUBMIT</a>.</p></section>"""
+
+
+def render_s19_executive() -> str:
+    return """<section class="section"><h1>Executive summary: holdout passed, uniqueness failed — submit nothing today</h1>
+<p>The newest file (S19-RADLIN, downloadable in the banner above for reproducibility) is <strong>not approved — NO FILE APPROVED</strong>: automated checks already made that decision — no human inspection is required or substituted. It passed its frozen LOSFO holdout gate and exact-file validation, but 93.4% of its dots lie within 3 px of an unscored dense probe registry raster, breaching the frozen duplicate-stop rule.</p>
+<h2>Exactly how a future approved submission works</h2><ol>
+<li>Preregister an explicit lane, reuse verified cached features/shared evaluator/writer, test feature-alone leakage, and pass pre-placement registry checks.</li>
+<li>Recover whole withheld fault systems with a buffer and visible-only catalogue features. Beat the frozen comparable best on pooled HOLDOUT-DTI with a positive paired spatial-block confidence interval. Check final-dot uniqueness.</li>
+<li>Serialize and independently re-read the exact file. Require single-band float32, sample CRS/shape/transform, no NaN inside footprint, values [0,1] and registered SHA-256. Local validation cannot guarantee portal acceptance.</li>
+<li>Only after those gates and a separate selector decision, download that exact approved TIFF. Check the authenticated competition page's cap and remaining allowance. The September rules state three submissions per week; current account allowance is not available here.</li>
+<li>At DrivenData choose <strong>New submission → File to submit</strong>, select the approved single-band .tif (or ZIP containing that one TIFF), paste its registered unique name and note of at most 140 characters, and submit. Preserve the organizer receipt and file hash — that receipt is the only route to an ORGANIZER-CONFIRMED score.</li>
+<li>Do not perform those upload steps today. The disabled submission control does not prevent downloading a clearly rejected research artifact for reproducibility.</li></ol>
+<h2>About the earlier &quot;Predicted values must be in range [0, 1]&quot; error</h2><p>The portal's exact cause is unconfirmed. The S19 research raster has no NaN anywhere and only values 0 and 1 (all-finite variant), which removes every locally checkable numeric-range violation — but that does not diagnose the earlier error or guarantee portal acceptance of any footprint convention.</p>
+<h2>Which focus-site submission is best?</h2><p>By unverified owner report, GEMSDOE32's <code>h33-h33-2-b2-…-e5eb6e7e-zeros</code> (0.2778) — a previous submission, byte-verified as a pruned earlier dot set. It is not this project's file to submit. The full nine-site table, hashes and pinned sources are on the <a href="session19-result.html">S19 result page</a>.</p>
+<p><a href="data/run_card_s19.json">Complete automated S19 run card (JSON)</a> · <a href="archive.html">Historical files and instructions — superseded, DO NOT SUBMIT</a></p></section>"""
+
+
 def s18_feed_html(feed: dict) -> str:
     return f"""<section class="section"><h2>Source metadata feed (not a score feed)</h2><p>Last recorded run: <time datetime="{esc(feed.get('checked_at_utc', ''))}" data-feed-time>{esc(feed.get('checked_at_utc', 'not recorded'))}</time>. <span data-feed-freshness>Observation time is not a guarantee of current availability.</span></p><p>Freshly observed: {esc(feed.get('freshly_observed_count', 'not recorded'))} of {esc(feed.get('source_count', 'not recorded'))}; {esc(feed.get('status', 'historical record'))}. This feed does not log into or monitor DrivenData. Dated one-off official research observations are separately recorded, not fabricated as feed successes.</p><p><a href="data/feed.json">Raw feed</a> · <a href="sources.html">Official source ledger</a></p></section>"""
 
@@ -422,7 +477,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{s18_status_html()}{body}</main>
+<main>{s19_status_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1286,8 +1341,9 @@ def main() -> int:
     old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
     pages = {
-        "index.html": layout("Overview", render_s18_result() + s18_feed_html(feed), "Overview"),
-        "executive-summary.html": layout("Executive summary", render_s18_executive(), "Executive summary"),
+        "index.html": layout("Overview", render_s19_result() + s18_feed_html(feed), "Overview"),
+        "executive-summary.html": layout("Executive summary", render_s19_executive(), "Executive summary"),
+        "session19-result.html": layout("S19 unique TIFF result", render_s19_result(), "S19 result"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
@@ -1299,6 +1355,8 @@ def main() -> int:
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    s19_card = read_json("evidence/s19_run_card.json")
+    (DOCS / "data" / "run_card_s19.json").write_text(json.dumps(s19_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     current_card = read_json("evidence/s18_mxtp_run_card.json")
     current_card_path = DOCS / "data" / "current_run_card_2026-10-25.json"
     current_card_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1314,7 +1372,7 @@ def main() -> int:
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
                       "submission_ready": False, "slot_selected": False,
-                      "research_download": manifest["s18_candidate"]["filename"],
+                      "research_download": manifest["s19_candidate"]["filename"],
                       "inspection_artifacts": [manifest["primary"]["nan"], manifest.get("secondary", {}).get("nan")]}, indent=2))
     return 0
 

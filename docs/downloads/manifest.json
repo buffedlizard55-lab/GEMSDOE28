@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_utc": "2026-10-25T00:00:00Z",
+  "generated_utc": "2026-10-26T00:00:00Z",
   "status": "Session 14 (2026-10-03): H36-1 (primary, b531dae0a36f, 37,660 px) is now verified on BOTH interleaved spatial CV (seeds 240-249, +0.002599) and LOSFO far-field truth (seeds 265-269, +0.001713, F1-F4 ALL PASS, e_far = 0.01359 < tau_live 0.054852). H38-1 (secondary, 56a9f473edc7, 37,860 px) adds 200 multi-physics corroborated lineament dots (DeAngelo et al. 2022 conductive heat-flow residual hf_resid >= 50 mW/m^2 + Reid et al. 1990 shallow SI=0 Euler contact cluster) and passed both LOSFO far-field C1-C4 (+0.000747 over H36-1, 0.06993 credit/dot) and interleaved spatial CV (seeds 270-279, +0.000543 over H36-1). All files UNSCORED / not slot-approved.",
   "provenance_warning": "All inputs and historical model artifacts are owner-repository mirrors; local SHA-256 integrity does not prove organizer authenticity or score association.",
   "manual_policy": "No upload, portal call, scheduled check, scraping, API monitoring or other automated DrivenData access. All site links are downloads/manual-review links only.",
@@ -362,12 +362,12 @@
     "run_card": "data/run_card_s18.json"
   },
   "current_run": {
-    "run_id": "S18-MXTP",
+    "run_id": "S19-RADLIN",
     "status": "NEGATIVE \u2014 NO FILE APPROVED",
     "submission_ready": false,
     "slot_selected": false,
     "new_tiff_generated": true,
-    "run_card": "data/current_run_card_2026-10-25.json",
+    "run_card": "data/run_card_s19.json",
     "prior_parallel_review": "evidence/s18_run_card.json"
   },
   "s18_h39_5_candidate": {
@@ -419,5 +419,30 @@
     "holdout_preregistration": "knowledge/52_preregistration_H42-1_migration_relocation.md",
     "holdout_seeds": "310-314",
     "verdict": "negative"
+  },
+  "s19_candidate": {
+    "filename": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif",
+    "nan": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.tif",
+    "allfinite": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif",
+    "zip": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.zip",
+    "content_id": "6fa38f9d317b",
+    "submission_name": "GEMSDOE28-S19-RADLIN-6fa38f9d317b",
+    "note": "S19 RADLIN coverage 37654 dots; LOSFO passed but uniqueness vs dense probe FAILED; DO NOT SUBMIT.",
+    "note_file": "note-gemsdoe28-s19-radlin-6fa38f9d317b.txt",
+    "sha256": "8534701e5d91572a39dba5e9d132e1c747aeab2f5223015a96ee96ace292493b",
+    "sha256_nan": "de21416d03f8baf8c70e56cb0f90272ac7660ef23af89f301f2c5a545dea93c6",
+    "sha256_allfinite": "8534701e5d91572a39dba5e9d132e1c747aeab2f5223015a96ee96ace292493b",
+    "sha256_zip": "ccaf22aa1fa191e191e61bf98f609df45f3093cfa8853b4f876d5d358dff59b5",
+    "bytes_nan": 1590626,
+    "bytes_allfinite": 826170,
+    "bytes_zip": 293745,
+    "emitted_px": 37654,
+    "format_verified": true,
+    "unique_within_snapshot": false,
+    "holdout_gate_passed": true,
+    "submission_ready": false,
+    "verdict": "negative",
+    "status": "LOSFO gate PASSED but strict uniqueness FAILED vs dense probe-union raster; research TIFF only. DO NOT SUBMIT.",
+    "run_card": "data/run_card_s19.json"
   }
 }

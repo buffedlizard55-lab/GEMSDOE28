@@ -1,0 +1,231 @@
+{
+  "session": "S19-RADLIN",
+  "experiment": 1,
+  "preregistration": "knowledge/55_s19_preregistration.md",
+  "surface_npz": "data/prepared/s19_radlin_surface.npz",
+  "surface_npz_sha256": "1aaa684430d39ab529de042be4ce73f2269ab77cfef00a967fa555006f25498e",
+  "surface_meta": {
+    "thk_p5": 54.0,
+    "thk_p95": 203.0,
+    "valid_px": 5166085,
+    "ridge_px": 918545,
+    "score_positive_px": 918545,
+    "bonus_positive_px": 5075244,
+    "score_max": 0.6197597980499268
+  },
+  "extensions_descriptions": [
+    "ThK",
+    "UK",
+    "UTh",
+    "TMI_up150"
+  ],
+  "rad_descriptions": [
+    "K",
+    "Th",
+    "U",
+    "TC"
+  ],
+  "rad_K_valid_frac_in_footprint": 0.9997507437531604,
+  "uth_valid_px": 5166085,
+  "canary": {
+    "seed": 320,
+    "withheld_positives": 12278,
+    "negatives_sampled": 250000,
+    "features": {
+      "score": {
+        "auc": 0.4997998701742955,
+        "max_auc_inv": 0.5002001298257045,
+        "pass_le_0.90": true
+      },
+      "bonus": {
+        "auc": 0.5134306989737742,
+        "max_auc_inv": 0.5134306989737742,
+        "pass_le_0.90": true
+      },
+      "field_inverted_thk": {
+        "auc": 0.5024388001303144,
+        "max_auc_inv": 0.5024388001303144,
+        "pass_le_0.90": true
+      }
+    }
+  },
+  "preplacement": {
+    "pool_dots": 37654,
+    "eligible_px": 864481,
+    "worst_by_spearman": {
+      "raster": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+      "spearman_surface_sample400k": -0.0027083370753021984,
+      "frac_pool_within3px": 0.21315132522441174,
+      "registry_dots": 61328,
+      "sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d"
+    },
+    "worst_by_overlap": {
+      "raster": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+      "spearman_surface_sample400k": 5.962312085920056e-05,
+      "frac_pool_within3px": 0.26382323259149093,
+      "registry_dots": 38545,
+      "sha256": "4d00b72c78fa21c258061079daad55c3a99b1bc91dc5d3e2516ad4c0e90ba334"
+    },
+    "table": {
+      "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif": {
+        "spearman_surface_sample400k": -0.0018940493515562865,
+        "frac_pool_within3px": 0.19955383226217666,
+        "registry_dots": 41507,
+        "sha256": "344e7c857f363b195dbfd6e64a0a0e0fc77923c8c14d7830e53bfd2d5c05610c"
+      },
+      "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif": {
+        "spearman_surface_sample400k": -0.0017802178642622522,
+        "frac_pool_within3px": 0.2026079566579912,
+        "registry_dots": 54714,
+        "sha256": "17c67554a1fde7607e9ffe9846433162035364eb4ef5ec3d2ab65778fe3bbdd2"
+      },
+      "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif": {
+        "spearman_surface_sample400k": 4.4238825616610064e-05,
+        "frac_pool_within3px": 0.22260583204971585,
+        "registry_dots": 59075,
+        "sha256": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411"
+      },
+      "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": {
+        "spearman_surface_sample400k": -0.0027083370753021984,
+        "frac_pool_within3px": 0.21315132522441174,
+        "registry_dots": 61328,
+        "sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d"
+      },
+      "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif": {
+        "spearman_surface_sample400k": -0.0018928423136977896,
+        "frac_pool_within3px": 0.19182556966059383,
+        "registry_dots": 40199,
+        "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73"
+      },
+      "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif": {
+        "spearman_surface_sample400k": -0.002550058160777533,
+        "frac_pool_within3px": 0.1936846019015244,
+        "registry_dots": 42294,
+        "sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff"
+      },
+      "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif": {
+        "spearman_surface_sample400k": -0.0017421214752910731,
+        "frac_pool_within3px": 0.19312689222924523,
+        "registry_dots": 41656,
+        "sha256": "8a954440f358a55e06c0c41b1032dded8626b2130e022091996d28380d340e17"
+      },
+      "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif": {
+        "spearman_surface_sample400k": -0.002018483641077979,
+        "frac_pool_within3px": 0.1883199660062676,
+        "registry_dots": 37660,
+        "sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641"
+      },
+      "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif": {
+        "spearman_surface_sample400k": -0.0022831740163702925,
+        "frac_pool_within3px": 0.19578265257343178,
+        "registry_dots": 37447,
+        "sha256": "4557311baedb4e661363bc1d3e6c959a1d8f9999f8bfc5fabb85fd8c338850c6"
+      },
+      "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif": {
+        "spearman_surface_sample400k": 5.962312085920056e-05,
+        "frac_pool_within3px": 0.26382323259149093,
+        "registry_dots": 38545,
+        "sha256": "4d00b72c78fa21c258061079daad55c3a99b1bc91dc5d3e2516ad4c0e90ba334"
+      },
+      "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif": {
+        "spearman_surface_sample400k": -0.0019458190543638863,
+        "frac_pool_within3px": 0.18890423328198863,
+        "registry_dots": 37860,
+        "sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783"
+      },
+      "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif": {
+        "spearman_surface_sample400k": -0.0020421864076327276,
+        "frac_pool_within3px": 0.1549105008764009,
+        "registry_dots": 37695,
+        "sha256": "a33fe4c2cd4cfe9b8ea684f3855333eb72ebda784813aade1bfa337cc7f78168"
+      },
+      "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-nan.tif": {
+        "spearman_surface_sample400k": 0.001842105079743582,
+        "frac_pool_within3px": 0.23285706697827588,
+        "registry_dots": 37521,
+        "sha256": "90225b1b7438c561be1390a4b133eb7990a1c86f917c9075f4789d28fdf72e8e"
+      },
+      "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif": {
+        "spearman_surface_sample400k": -0.00045075056258933865,
+        "frac_pool_within3px": 0.19140064800552398,
+        "registry_dots": 37694,
+        "sha256": "2b32f81dcb734c51fe7b67da5b58123668ee6d614abe119a6d0dfbd23ccd7c0f"
+      },
+      "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif": {
+        "spearman_surface_sample400k": -0.002057180559524878,
+        "frac_pool_within3px": 0.18847931162691878,
+        "registry_dots": 37677,
+        "sha256": "149ba3dfee032bdc8f11c8b64f3f5b082671581fc9760e0d94ef520330996553"
+      },
+      "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif": {
+        "spearman_surface_sample400k": -0.0018305414998802398,
+        "frac_pool_within3px": 0.19256918255696606,
+        "registry_dots": 38024,
+        "sha256": "4ff7626cc689d8c3a6f07d0b8512d76bc958c643d3efbeb49c01ffff09be1660"
+      },
+      "gems28-h42-1-migx-reloc-b1-20261025-290553965159-nan.tif": {
+        "spearman_surface_sample400k": -0.0008125613627100151,
+        "frac_pool_within3px": 0.18253040845594093,
+        "registry_dots": 34492,
+        "sha256": "ca712c4aee38bf0325ec7b8ad512bb4e9e6c2bc6ed57219b38d72ce96238c5c9"
+      },
+      "forensic_GEMSDOE24": {
+        "spearman_surface_sample400k": -0.00268016362537925,
+        "frac_pool_within3px": 0.20555585064003826,
+        "registry_dots": 60069,
+        "sha256": "3e0730e8d4f7db095dd80246a98cba3bc0fc9a28f436b91db27ca34df4d0d1ce"
+      },
+      "forensic_GEMSDOE25": {
+        "spearman_surface_sample400k": -0.002138051743748594,
+        "frac_pool_within3px": 0.19482657884952462,
+        "registry_dots": 44090,
+        "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30"
+      },
+      "forensic_GEMSDOE27": {
+        "spearman_surface_sample400k": -0.0027083370753021984,
+        "frac_pool_within3px": 0.21315132522441174,
+        "registry_dots": 61328,
+        "sha256": "a9bf76b57453a5b3af74c8eef837df53c29a0931162aa540b8763220b36ba3bb"
+      },
+      "forensic_GEMSDOE28": {
+        "spearman_surface_sample400k": -0.002018483641077979,
+        "frac_pool_within3px": 0.1883199660062676,
+        "registry_dots": 37660,
+        "sha256": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32"
+      },
+      "forensic_GEMSDOE30": {
+        "spearman_surface_sample400k": -0.002138051743748594,
+        "frac_pool_within3px": 0.19482657884952462,
+        "registry_dots": 44090,
+        "sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd"
+      },
+      "forensic_GEMSDOE31": {
+        "spearman_surface_sample400k": -0.0018928423136977896,
+        "frac_pool_within3px": 0.19182556966059383,
+        "registry_dots": 40199,
+        "sha256": "acd853936e5a7170b207f23411b1844caa0e7cfdfc303c600e520ccfe75159e6"
+      },
+      "forensic_GEMSDOE32": {
+        "spearman_surface_sample400k": -0.0023064802466683763,
+        "frac_pool_within3px": 0.18837308121315133,
+        "registry_dots": 37654,
+        "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+      },
+      "forensic_GEMSDOE33": {
+        "spearman_surface_sample400k": -0.0013800196596407022,
+        "frac_pool_within3px": 0.19464067562543155,
+        "registry_dots": 41865,
+        "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
+      },
+      "forensic_GEMSDOE36": {
+        "spearman_surface_sample400k": -0.00205421202433958,
+        "frac_pool_within3px": 0.20706963403622458,
+        "registry_dots": 38854,
+        "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a"
+      }
+    }
+  },
+  "registry_scope": "local docs/downloads/*-nan.tif + byte-verified /tmp/forensic focus-9 copies; declared snapshot, not a global parallel registry",
+  "passed": true,
+  "seconds": 15.7
+}
