@@ -1370,6 +1370,12 @@ def main() -> int:
     old_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
     old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
+    s20v_brief = """<section class=\"card callout-danger\" aria-label=\"Parallel Session 20V result\">
+<h2>Parallel Session 20V (2026-10-26): fourth concurrent TIFF \u2014 HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
+<p><strong>Current run: NOT READY TO SUBMIT \u2014 NO FILE APPROVED. Do not upload any file from this site.</strong> S20V-H2 Hessian tubularity of the LiDAR scarp-step field (<code>gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif</code>, 37,500 dots) passed leakage (AUC 0.5378), uniqueness and exact-file validation (all-finite {0,1}, no NaN anywhere) but <strong>failed its frozen LOSFO gate</strong>: HOLDOUT-DTI <strong>0.08631</strong> vs control <strong>0.09881</strong> (delta -0.01251, 95% CI [-0.03170, +0.00133], seeds 340-342; local proxy, not an organizer score). Distinct parallel run from S19-ASCP, S19B-RADLIN and Session 20-H43 (seed overlap 340-342 disclosed; different protocol; never pool). No slot was spent.</p>
+<div class=\"download-actions\"><button class=\"button\" type=\"button\" disabled aria-disabled=\"true\">Submission download locked</button><a class=\"button\" href=\"downloads/gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif\" download>Download S20V unique research TIFF \u2014 DO NOT SUBMIT</a><a class=\"button quiet\" href=\"executive-summary.html\">Executive summary &amp; blocked submission steps</a></div>
+<p><strong>Submission name:</strong> <code>GEMSDOE28-s20-vesselness-lidarstep-7a7c5e449fe0</code> \u00b7 <a href=\"../knowledge/60_s20v_result.md\">S20V scientific report + nine-site table</a> \u00b7 <a href=\"data/run_card_s20v.json\">S20V JSON run card</a> \u00b7 <a href=\"../knowledge/59_s20v_preregistration_and_hypotheses.md\">Preregistration + 5 ranked hypotheses</a></p>
+</section>"""
     session20_brief = """<section class=\"card callout-danger\" aria-label=\"Session 20-H43 result\">
 <h2>Parallel Session 20-H43 (2026-10-26): third concurrent TIFF — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
 <p>A concurrent preregistered lane (<code>gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif</code>, 33,354 dots) was also generated and rejected automatically: <strong>HOLDOUT-DTI paired gain -0.007434 (95% CI [-0.01081, -0.00496], 0/20 cells)</strong> and 94.3% of dots within 3 px of the GEMSDOE32 champion (duplicate family lane). Its file format is valid (all-finite, values in [0,1]); that does not make it submittable. It is a distinct parallel run from S19-ASCP, S19B-RADLIN and the Session 20 validation review; never pool their numbers. The best existing file remains GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>, byte-verified in Session 20-H43 as solo minus the 2 px catalogue ring. <strong>Do not upload any file from this site.</strong></p>
@@ -1378,9 +1384,9 @@ def main() -> int:
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     pages = {
-        "index.html": layout("Overview", session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
         "cross-site-review.html": cross_site_template,
-        "executive-summary.html": layout("Executive summary", session20_brief + render_current_executive(), "Executive summary"),
+        "executive-summary.html": layout("Executive summary", s20v_brief + session20_brief + render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),

@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "session_id": "G28-S20V-20261026",
+  "date_utc": "2026-10-26",
+  "branch": "arena/6ee1b262-gemsdoe28",
+  "lane": "S20-H2 Hessian tubularity of LiDAR step_max (self-assigned; see lane_note)",
+  "lane_note": "Prompt's 'single method paragraph' was not identifiable; lane declared and frozen in knowledge/56 before any S20 canary/DTI. No external exclusivity claimed.",
+  "hypothesis": "Second-derivative (Hessian) tubularity of the 100 m LiDAR scarp-step field marks subdued/buried scarp centrelines missed by the Quaternary catalogue, beyond what gradient magnitude or the tabular 32-band detector captures at matched budget.",
+  "mechanism": "Frangi vesselness (sigma 1/2/3 px, beta 0.5) on step_max -> ridge NMS -> d_visible>2px pool -> top-K by vesselness -> dot_thin(2.8) -> N=37,500 binary dots.",
+  "named_non_fault_mimic": "Roads/levees, paleoshorelines, incised drainages, bedding ridges (tubular step anomalies, no slip).",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "shared metric.dti_binary (eval_set v2 semantics) on LOSFO splits; src/gems27/metric.py+losfo.py",
+    "protocol": "LOSFO whole-system hide-and-recover, 600 m buffer, visible-only catalogue features, pixel-exact masking, pooled alpha=0.2 beta=0.8 300 m triangular DTI",
+    "seeds": [
+      340,
+      341,
+      342
+    ],
+    "n_cells": 12,
+    "withheld_positives_pooled": 49387,
+    "withheld_positives_unique": 38941,
+    "lane_pooled_dti": 0.08630532308685906,
+    "control_pooled_dti": 0.09881181156109797,
+    "pooled_delta_dti": -0.012506488474238908,
+    "paired_mean_delta": -0.01592793007478754,
+    "paired_ci95": [
+      -0.03170271200691641,
+      0.001327719458981944
+    ],
+    "cells_lane_wins": 3,
+    "gate": {
+      "G1_pooled_delta_gt0": false,
+      "G2_paired_ci_lower_gt0": false
+    },
+    "gate_pass": false
+  },
+  "feature_alone_leakage_canaries": {
+    "seed": 340,
+    "n_pos": 16408,
+    "n_neg_sampled": 500000,
+    "auc_vesselness_alone": 0.5377841573013163,
+    "auc_step_max_alone": 0.5288190335202341,
+    "leakage_stop_above": 0.9,
+    "pass": true
+  },
+  "registry_comparison": {
+    "registry": "19 rasters (docs/downloads *-nan.tif + byte-verified GEMSDOE32 champion + GEMSDOE36); snapshot-bounded, not a synchronized global registry",
+    "preplacement_surface_max_abs_spearman": 0.03455777955834293,
+    "preplacement_worst_raster": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+    "final_dots_worst_within3px": {
+      "raster": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+      "frac_our_dots_within3px": 0.33416,
+      "registry_dots": 61328
+    },
+    "vs_champion_within3px": {
+      "frac_our_dots_within3px": 0.30346666666666666,
+      "registry_dots": 37654
+    },
+    "thresholds": {
+      "abs_spearman_stop_if_above": 0.9,
+      "dot_overlap_stop_if_above": 0.7
+    },
+    "pass": true,
+    "extended_pass2": {
+      "n_distinct_dotsets": 103,
+      "worst": {
+        "file": "/home/user/GEMSDOE28/docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+        "sha256": "553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537",
+        "dotset_sha256": "16abb3f7e7ea08ab124311755cbbd4103cb4339ebd7c171c352177d29443bb71",
+        "registry_dots": 37654,
+        "frac_our_dots_within3px": 0.5422133333333333
+      },
+      "pass": true,
+      "file": "evidence/s20v_uniqueness_extended.json",
+      "scope": "S20V extended uniqueness, regenerated at PR #53 merge so the registry includes the parallel S19-ASCP / S19B-RADLIN / Session 20-H43 rasters merged to main. Distinct dot-sets under sparse clones of GEMSDOE,GEMSDOE24,25,27,30,31,32,33,36 docs/downloads + local docs/downloads, snapshot 2026-10-26."
+    }
+  },
+  "raster_sha256": {
+    "nan": "b80f73aa15e8b39c138be510a93d92e9a524e914187aba448ec3b05fdc78150c",
+    "allfinite_primary": "86ef9a3975cc0a96e2e2ec4de0f6ac55cd970c8006b1b3939338521cbf746c79",
+    "zip": "d6ffc8d10d28cfa64188f0daf5231e1333dc3fd7f9099b0634b6202e1ecf8943"
+  },
+  "validator": {
+    "nan_hard_pass": true,
+    "allfinite_hard_pass": true,
+    "no_nan_inside_footprint": true,
+    "allfinite_no_nan_anywhere": true,
+    "values_in_0_1": true,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ],
+    "crs_shape_transform_match_template": true,
+    "single_band_float32": true,
+    "detail_file": "docs/downloads/checks-gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0.json",
+    "portal_note": "All-finite primary removes every local numeric cause of a [0,1] range failure (no NaN anywhere); prior portal error cause remains undiagnosed and acceptance is not guaranteed."
+  },
+  "submission_name": "GEMSDOE28-s20-vesselness-lidarstep-7a7c5e449fe0",
+  "submission_note": "28GEMSDOE S20-H2 vesselness | LOSFO dDTI -0.0125 CI[-0.032,+0.001] seeds340-342 | id 7a7c5e449fe0 | DO NOT SUBMIT",
+  "submission_note_chars": 113,
+  "files": {
+    "primary_allfinite": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif",
+    "nan": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-nan.tif",
+    "zip": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-nan.zip",
+    "n_dots": 37500
+  },
+  "experiments_run": 3,
+  "experiment_cap": 3,
+  "slot_selected": false,
+  "organizer_confirmed_scores": [],
+  "user_reported_score_context": {
+    "highest_nine_site_claim": {
+      "site": "GEMSDOE32",
+      "artifact": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+      "value": 0.2778,
+      "class": "USER-REPORTED / UNVERIFIED"
+    },
+    "leaderboard_dated_observation": {
+      "value": 0.4413,
+      "team": "xiaofanhu (#1)",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "observed_utc": "2026-10-26 via research fetch (chunk 0); dated public observation, NOT a receipt",
+      "note": "Prompt also quotes 0.3195 as a high score; superseded as a current-top claim by the dated 0.4413 observation. Neither value is linked to any local raster."
+    },
+    "forensic": "evidence/s20v_forensic.json (byte-verified ladder + closure inversion; education only)"
+  },
+  "verdict": "negative",
+  "promotion_eligible": false,
+  "submission_ready": false,
+  "download_decision": "OK to download for research/reproducibility. NOT OK to submit: frozen LOSFO gate failed. No human inspection changes this computed disposition.",
+  "next_gate": "Close S20-H2 at frozen settings (budget spent). Next programme priority S20-H1 U-Net patch segmentation on the restored 32-band stack (knowledge/56), new preregistration + fresh seeds.",
+  "merge_rename_note": "Renamed S20->S20V at merge with main (PR #53): a concurrent Session 20-H43 run (PR #51/#52) already owned evidence/s20_holdout.json + knowledge/57_s20_result.md and seeds 340-344 under a different (interleaved) protocol. Evidence contents unchanged; never pool numbers across sessions."
+}

@@ -1,3 +1,28 @@
+# Parallel Session 20V result — 2026-10-26 (vesselness lane; read with Session 20-H43 below)
+
+**A fourth concurrent unique TIFF was generated in parallel and likewise REJECTED. No file is approved.**
+
+[**Download the S20V unique research TIFF (DO NOT SUBMIT)**](docs/downloads/gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif)
+· [S20V full result + nine-site executive summary](knowledge/60_s20v_result.md)
+· [S20V JSON run card](evidence/s20v_run_card.json)
+· [Preregistration + 5 ranked hypotheses](knowledge/59_s20v_preregistration_and_hypotheses.md)
+
+S20V-H2 (multi-scale Hessian tubularity of the LiDAR scarp-step field; 37,500 dots) declared its lane
+before experimenting and ran 3/3 experiments. Automated gates — no human inspector: canary AUC
+0.5378 PASS; uniqueness PASS; exact-file validation PASS (all-finite {0,1}, no NaN anywhere, template
+grid). **HOLDOUT-DTI** (LOSFO whole-system buffered holdout, seeds 340–342, 49,387 pooled withheld
+positives): lane **0.08631** vs control **0.09881**, Δ **−0.01251** (95% CI
+**[−0.03170, +0.00133]**) → **gate FAILED, verdict `negative`, no slot spent**.
+**Parallel-run disclosure:** this run was labelled “S20” on its branch and independently claimed
+seeds 340–342; Session 20-H43 (below, merged first) used seeds 340–344 under a different
+(interleaved) protocol and owns the `s20_*` filenames. Renamed **S20V** at merge (PR #53); never pool
+numbers across S19-ASCP / S19B-RADLIN / Session 20-H43 / S20V. Both S20-H43 and S20V independently
+byte-verified the champion lineage (solo minus the ≤2 px catalogue ring, symmetric difference 0):
+the owner-reported **0.2778** (USER-REPORTED / UNVERIFIED) is emission hygiene, and S20V inversion
+bounds further pruning near ~0.285 versus the dated 2026-10-26 official-leaderboard top **0.4413**
+(public row, not a receipt). Next priority: U-Net patch segmentation (`knowledge/59` S20-H1).
+**Maximize P(Win) · Own the Outcome.**
+
 # Session 20-H43 result — 2026-10-26 (read first every session)
 
 **A new unique TIFF was generated and the automated gates REJECTED it. No file is approved to submit.**

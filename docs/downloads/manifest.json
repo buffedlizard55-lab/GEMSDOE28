@@ -469,6 +469,39 @@
       "slot_selected": false,
       "new_tiff_generated": true,
       "run_card": "data/run_card_s19b_radlin.json"
+    },
+    {
+      "run_id": "S20V-vesselness",
+      "status": "NEGATIVE \u2014 NO FILE APPROVED",
+      "submission_ready": false,
+      "slot_selected": false,
+      "new_tiff_generated": true,
+      "run_card": "data/run_card_s20v.json"
     }
-  ]
+  ],
+  "s20v_candidate": {
+    "slug": "s20-vesselness-lidarstep",
+    "hypothesis": "S20V-H2 multi-scale Hessian tubularity (Frangi vesselness, sigma 1/2/3 px) of the LiDAR scarp-step field as a standalone label-free surface; ridge NMS, d_cat>2px hygiene, dot_thin(2.8), N=37,500",
+    "content_id": "7a7c5e449fe0",
+    "nan": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-nan.tif",
+    "allfinite": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif",
+    "zip": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-nan.zip",
+    "sha256_nan": "b80f73aa15e8b39c138be510a93d92e9a524e914187aba448ec3b05fdc78150c",
+    "sha256_allfinite": "86ef9a3975cc0a96e2e2ec4de0f6ac55cd970c8006b1b3939338521cbf746c79",
+    "sha256_zip": "d6ffc8d10d28cfa64188f0daf5231e1333dc3fd7f9099b0634b6202e1ecf8943",
+    "bytes_nan": 1590134,
+    "bytes_allfinite": 825238,
+    "bytes_zip": 292279,
+    "emitted_px": 37500,
+    "format_verified": true,
+    "status": "DO NOT SUBMIT \u2014 HOLDOUT GATE FAILED; HOLDOUT-DTI LOSFO seeds 340-342 pooled lane 0.08631 vs control 0.09881, dDTI -0.01251 (paired 95% CI [-0.0317, +0.0013], 3/12 cells); uniqueness PASS; validator PASS (all-finite primary {0,1}, no NaN anywhere); verdict negative; parallel S20V run (seed overlap with Session 20-H43 disclosed, never pool); no slot spent.",
+    "note": "28GEMSDOE S20-H2 vesselness | LOSFO dDTI -0.0125 CI[-0.032,+0.001] seeds340-342 | id 7a7c5e449fe0 | DO NOT SUBMIT",
+    "note_file": "note-gemsdoe28-s20-7a7c5e449fe0.txt",
+    "submission_name": "GEMSDOE28-s20-vesselness-lidarstep-7a7c5e449fe0",
+    "run_card": "evidence/s20v_run_card.json",
+    "holdout_evidence": "evidence/s20v_holdout.json",
+    "holdout_preregistration": "knowledge/59_s20v_preregistration_and_hypotheses.md",
+    "holdout_seeds": "340-342",
+    "verdict": "negative"
+  }
 }
