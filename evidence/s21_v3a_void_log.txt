@@ -1,0 +1,10 @@
+[    0.1s] footprint 5167373 labels 60988
+[    1.3s] FORENSIC {"h19_5_px": 121131, "dotted_file_px": 44090, "recomputed_dot_thin_2.8_px": 44090, "symdiff_recomputed_vs_dotted_file": 0, "solo_file_px": 40199, "recomputed_solo_d_minus_ring_le1_px": 40199, "symdiff_recomputed_solo_vs_file": 0, "champion_constructed_solo_minus_ring_le2_px": 37654, "champion_b3_constructed_px": 35483, "ring_le2_removed_from_solo": 2545, "ring_2_to_3_removed_from_champion": 2171}
+[   46.2s] cube16 built (19, 12279160)
+[   48.1s] cube with lidar (31, 12279160)
+[   49.7s] CANARY max single-feature AUC 0.9628897170833334
+Traceback (most recent call last):
+  File "/home/user/GEMSDOE28/scripts/run_s21_lane.py", line 180, in <module>
+    assert worst <= 0.90, f"LEAKAGE CANARY FAIL: max AUC {worst}"
+           ^^^^^^^^^^^^^
+AssertionError: LEAKAGE CANARY FAIL: max AUC 0.9628897170833334

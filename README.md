@@ -1,4 +1,16 @@
-# Session 21 validation review — 2026-10-26 (read first)
+# Session 21 (`S21-PUHGB`) — 2026-10-26 UTC (read first every session)
+
+## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
+
+- **Download:** [`docs/downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif`](docs/downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif) (826,602 bytes · SHA-256 `2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c` · 37,654 fresh dots · all-finite `{0,1}` · EPSG:32611 · 3730 × 3292 · template-exact) · [NaN twin](docs/downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif) · [ZIP](docs/downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-nan.zip)
+- **Lane:** fresh PU-HGB detector on 19 GeoDAWN + 12 LiDAR-scarp bands + coordinates (catalogue geometry used only for masking; zero H19-5 dots). Replicated the champion lineage byte-exactly (H19-5 121,131 → dotted 44,090 → solo 40,199 → champion 37,654; symdiff 0 at each step): **0.2778 = emission hygiene (2.8 px spacing + ≤2 px ring prune vs break-even τ≈0.0588/dot), not new geology.**
+- **Gates:** format PASS · leakage canary PASS (max single-feature AUC 0.580; two earlier variants VOIDED at AUC 1.00/0.963 on catalogue-density features — archived) · unique vs all scored rasters PASS (28.7% 3-px overlap vs champion; |Spearman| ≤0.089) but strict any-raster rule FAIL vs unscored dense H37-1 probe (72.3%) · **HOLDOUT-DTI 0.0839 vs dotted-b2 0.1062, Δ −0.0223 [−0.0309, −0.0137] (seeds 350–352, 35,900 withheld positives) → verdict `negative`, 0 slots spent.**
+- **Estimated live score (MODEL PROJECTION, not a score):** ~0.22 [0.20–0.24] (holdout-ratio to the OWNER-REPORTED 0.2778 anchor). No file today is both unique and evidenced >0.2778; the only evidenced higher direction (ring≤3 pruning, 35,483 dots, ~0.279–0.285 MODEL) is a 94%-champion duplicate — no file shipped.
+- **Deliverables:** [Session 21 executive page](docs/session21-result.html) · [Full report + 9-site table + 5 ranked hypotheses](knowledge/61_s21_result.md) · [JSON run card](evidence/s21_puhgb_run_card.json) · Next: U-Net (GPU) or soft-probability emission on fresh seeds 360+.
+
+---
+
+# Parallel Session 21-AUDIT validation review (concurrent, merged first via PR #55) — 2026-10-26
 
 **DO NOT SUBMIT. No new candidate was generated or approved.** Restored the pinned core
 competition mirrors and shared evaluator/writer. Fixed filename-only artifact discovery in
@@ -11,6 +23,8 @@ verdicts remain unchanged. This is an automated decision, not a request for a hu
 - [Nine-site executive scorecard](docs/cross-site-review.html)
 
 No experiments, no leaderboard estimate, no slot selected. No other repository was modified.
+
+**Parallel-run disclosure:** S21-PUHGB (above) and S21-AUDIT ran concurrently from the same prompt; S21-AUDIT ran no experiment and generated no TIFF, so there is no lane/seed collision. Its run card keeps the name `evidence/s21_run_card.json`; the PUHGB card is `evidence/s21_puhgb_run_card.json`. Never pool numbers across parallel sessions.
 
 ---
 
