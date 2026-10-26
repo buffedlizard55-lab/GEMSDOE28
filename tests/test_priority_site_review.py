@@ -40,7 +40,7 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertEqual(best["site"], "GEMSDOE32")
         self.assertEqual(best["reported_best_score"], 0.2778)
         self.assertFalse(self.data["recommendation"]["new_tiff_this_review"])
-        self.assertIn("USER-REPORTED, UNVERIFIED", self.page)
+        self.assertIn("USER-REPORTED / UNVERIFIED", self.page)
 
     def test_all_rows_have_auditable_artifact_metadata(self):
         for row in self.data["sites"]:
@@ -54,13 +54,14 @@ class PrioritySiteReviewTests(unittest.TestCase):
 
     def test_cross_site_review_links_supplemental_artifact_audit(self):
         self.assertIn("Best reported result is not an approved submission", self.page)
-        self.assertIn("USER-REPORTED, UNVERIFIED", self.page)
+        self.assertIn("USER-REPORTED / UNVERIFIED", self.page)
         self.assertIn("data/priority_site_review_2026-10-26.json", self.page)
         self.assertIn("https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/", self.page)
-        self.assertIn("S19-ASCP research TIFF was generated", self.page)
-        self.assertIn("S19-ASCP JSON run card", self.page)
-        self.assertIn('href="session19-result.html">Latest result</a>', self.page)
-        self.assertNotIn('href="session18-result.html">Latest result</a>', self.page)
+        self.assertIn("72 directional comparisons", self.page)
+        self.assertIn("not the complete current registry", self.page)
+        self.assertIn("S22 audit: no new TIFF", self.page)
+        self.assertIn('href="session19-result.html">S19 archive</a>', self.page)
+        self.assertIn("s22_focus_novelty.json", self.page)
         self.assertIn("DO NOT SUBMIT", self.page)
 
     def test_session19_card_is_negative_and_does_not_claim_a_new_raster(self):

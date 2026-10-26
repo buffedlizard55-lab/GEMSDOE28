@@ -1,0 +1,48 @@
+{
+  "session": "S22-SIGN, distinct concurrent PR #57",
+  "scope": "Read-only code/evidence and exact-file review; not a new geological experiment or complete registry certification.",
+  "artifact": "docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+  "raster_sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+  "dots": 37692,
+  "download_allowed": "Research only; do not submit",
+  "submission_ready": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "holdout": {
+    "label": "HOLDOUT-DTI, historical local proxy only",
+    "evaluator": "gems27.metric.dti_binary with local quadrant-clipped make_split; not the shared whole-segment evaluator",
+    "cells": 12,
+    "withheld_positives_summed_over_cells": 36596,
+    "withheld_positives_in_run_card": 60988,
+    "positive_count_disagreement": "Cell detail sums to 36,596, not 60,988 as stated in the source run card; cells can reuse labels and are not unique positives.",
+    "candidate_unweighted_cell_mean": 0.05466427133794576,
+    "baseline_unweighted_cell_mean": 0.12191439631459906,
+    "paired_mean_difference": -0.06725012497665331,
+    "ci95": null,
+    "ci_note": "No CI recorded; no claim of shared pooled DTI or positive paired interval."
+  },
+  "canary": {
+    "source_card_results": {},
+    "source_card_pass": true,
+    "review_status": "FAIL — empty feature result cannot establish canary coverage; the historical runner treated an empty dictionary as a pass."
+  },
+  "final_dots": {
+    "report": "evidence/s22_sign_final_dot_audit.json",
+    "local_tiffs_excluding_self": 46,
+    "priority_rasters": 9,
+    "duplicate_comparisons": 0,
+    "maximum_overlap": 0.5356309031094132,
+    "maximum_abs_spearman": 0.039182038100242574,
+    "worst_reference": "gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+    "complete_registry": false,
+    "surface_verified": false
+  },
+  "historical_runner_sha256": "36c0df253b80932da41274ad86ed0fa806f77d1633255a1c5ecffe2b111d857f",
+  "historical_runner_snapshot": "evidence/snapshots/pr57_run_s22_candidate.py",
+  "runner_action": "Original source preserved as a snapshot; scripts/run_s22_candidate.py now stops without executing because the historical path is not the shared protocol.",
+  "other_limitations": [
+    "Owner mirror bytes are not organizer-authenticated.",
+    "No organizer receipt binds any score to this TIFF.",
+    "Original raw emission report included the candidate itself in an initial uniqueness scan; the run card claims a corrected 22-reference summary without detailed post-correction rows. Our independent final-dot audit has a larger but still incomplete scope."
+  ]
+}

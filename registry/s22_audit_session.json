@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "session_id": "S22-AUDIT-20261026",
+  "branch": "arena/6b47a951-gemsdoe28",
+  "lane": null,
+  "lane_assignment_source": null,
+  "lane_status": "No assigned method paragraph or verified parallel registry was supplied; ranked proposals are not assignments.",
+  "shared_template_pin": "registry/protocol_assets.json",
+  "cached_features": "data/prepared/features.npy",
+  "cached_features_metadata": "data/prepared/features.json",
+  "required_parallel_registry": null,
+  "frozen_protocol_comparable_best": null,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "slot_selected": false,
+  "weekly_cap": null,
+  "weekly_cap_status": "Account-specific remaining allowance has not been verified.",
+  "started_at_utc": "2026-10-26T21:00:00Z",
+  "start_time_note": "Conservative earlier-than-observed session-start bound, not a claim of the exact start; never extends the two-hour budget. This audit does not authorize a model run."
+}

@@ -227,9 +227,10 @@ and note are content-bound and unchanged. Original run-card bytes were renamed, 
 fields inside it that name `knowledge/62` or the pre-merge downloads-manifest SHA-256 refer to
 the branch-time state.
 
-**Post-merge uniqueness regeneration** (merge duty, not a fourth experiment): computed after
-merging `main` and recorded in `evidence/s22c_merge_addendum.json` — final-dot overlap and
-surface Spearman of the S22C candidate vs the S22-SIGN and S22-MOFR TIFFs, plus the merged
-archive audit. The S22C frozen-gate verdict above is unchanged; if the merged comparison were
-to breach the 0.70/0.90 duplicate stops, this addendum (not a silent edit) is where the
-reclassification would be recorded.
+**Post-merge uniqueness regeneration** (merge duty, not a fourth experiment;
+`evidence/s22c_merge_addendum.json`): vs **S22-SIGN** TIFF — 28.04 % of S22C dots within 3 px,
+surface Spearman +0.031, exact Jaccard 0.0096 → **PASS**; vs **S22-MOFR** TIFF — 6.84 %,
+Spearman −0.007, Jaccard 0.0032 → **PASS**; vs GEMSDOE32 champion recheck — 42.05 %, +0.067
+(unchanged). No lane drift into the SIGN or MOFR geographies; the S22C frozen-gate verdict
+above stands. The merged archive audit (S22C slot included) is recorded in the same addendum
+workflow via `scripts/verify_downloads.py` at merge time.

@@ -51,7 +51,9 @@ def test_s18_exact_file_and_negative_gate_are_not_confused():
         (ROOT / "src/gems27/submission.py").read_bytes()).hexdigest()
     assert len(card["note"]) <= 140 and "DO NOT SUBMIT" in card["note"]
     gate = promotion.promotion_gate(card)
-    assert gate["failures"] == ["no positive paired gain CI over frozen current best"]
+    assert "no positive paired gain CI containing the paired gain" in gate["failures"]
+    assert "missing or non-comparable shared HOLDOUT-DTI evaluator" in gate["failures"]
+    assert "feature-alone canaries must cover every declared model feature exactly" in gate["failures"]
     assert gate["verdict"] == "negative"
 
 
@@ -97,16 +99,17 @@ def test_s18_bootstrap_identical_arms_has_zero_paired_gain():
     assert ci["paired_gain_ci95"] == [0.0, 0.0]
 
 
-def test_current_s19_download_is_visible_and_s18_remains_historical():
+def test_s19_download_remains_visible_on_its_historical_page_only():
     card = load("evidence/s19_ascp_run_card.json")
     filename = Path(card["submission_file"]).name
-    for page in ("index.html", "executive-summary.html", "session19-result.html"):
-        html = (ROOT / "docs" / page).read_text()
-        assert filename in html
-        assert "Download NEW unique research TIFF — DO NOT SUBMIT" in html
-        assert "0.08081" in html and "60,988" in html
-        assert 'data/current_run_card_2026-10-26.json' in html
-        assert "Whether to submit is your decision" not in html
+    page = (ROOT / "docs/session19-result.html").read_text()
+    assert filename in page and "Download rejected research TIFF" in page
+    assert "0.08081" in page and "60,988" in page
+    assert "s19_ascp_run_card.json" in page
+    for name in ("index.html", "executive-summary.html"):
+        html = (ROOT / "docs" / name).read_text()
+        assert "S22 audit: no new TIFF" in html
+        assert f'href="downloads/{filename}"' not in html
     assert (ROOT / "docs/session18-result.html").is_file()
 
 

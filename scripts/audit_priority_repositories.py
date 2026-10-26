@@ -55,6 +55,13 @@ def fetch_blob(repo: str, ref: str, entry: dict, destination: Path) -> bytes:
     return data
 
 
+def cache_display_path(destination: Path, root: Path = ROOT) -> str:
+    """Report a stable repo-relative cache path when possible, absolute otherwise."""
+    absolute = destination.resolve()
+    root = root.resolve()
+    return str(absolute.relative_to(root)) if absolute.is_relative_to(root) else str(absolute)
+
+
 def inspect_repository(name: str, directory: Path, template: Path) -> dict:
     import numpy as np
     import rasterio
@@ -87,7 +94,11 @@ def inspect_repository(name: str, directory: Path, template: Path) -> dict:
         with rasterio.open(destination) as dataset:
             values = dataset.read(1)[foot].astype("<f4")
         values[values == 0] = 0
-        result.update({"path": path, "local_path": str(destination.relative_to(ROOT)),
+        # The CLI accepts relative and absolute cache directories, including a
+        # cache outside the checkout. Resolve before making a display path;
+        # Path.relative_to() on a relative path previously rejected every repo.
+        local_path = cache_display_path(destination)
+        result.update({"path": path, "local_path": local_path,
                        "git_blob": entries[path]["sha"], "blob_verified": True,
                        "footprint_values_sha256": hashlib.sha256(values.tobytes()).hexdigest(),
                        "binary_inside": bool(np.isin(values, [0, 1]).all()),

@@ -1,0 +1,367 @@
+{
+  "emission": {
+    "nan": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
+    "allfinite": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+    "n_final": 37692,
+    "sha_nan": "0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165",
+    "sha_af": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+    "v_nan": {
+      "file": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
+      "bytes": 1590594,
+      "sha256": "0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165",
+      "variant": "nan",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "nodata_convention": {
+          "pass": true,
+          "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+          "hard": true
+        },
+        "outside_footprint_is_nan": {
+          "pass": true,
+          "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+          "hard": true
+        },
+        "nodata_tag_is_nan": {
+          "pass": true,
+          "detail": "nodata=NaN declared, same as the sample submission",
+          "hard": true
+        },
+        "masked_read_in_0_1": {
+          "pass": true,
+          "detail": "masked count=5167373, min=0, max=1",
+          "hard": true
+        },
+        "nan_aware_range_in_0_1": {
+          "pass": true,
+          "detail": "nanmin=0 nanmax=1",
+          "hard": true
+        },
+        "strict_whole_array_range_ignoring_nan_is_informational": {
+          "pass": false,
+          "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+          "hard": false
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": true
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 37692,
+      "nonfinite_inside_px": 0,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    },
+    "v_af": {
+      "file": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+      "bytes": 826250,
+      "sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+      "variant": "allfinite",
+      "checks": {
+        "grid_matches_template": {
+          "pass": true,
+          "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard": true
+        },
+        "single_band_float32": {
+          "pass": true,
+          "detail": "count=1 dtype=float32",
+          "hard": true
+        },
+        "inside_footprint_all_finite": {
+          "pass": true,
+          "detail": "0 non-finite inside 5167373 px",
+          "hard": true
+        },
+        "inside_footprint_in_0_1": {
+          "pass": true,
+          "detail": "min=0 max=1",
+          "hard": true
+        },
+        "no_infinities_anywhere": {
+          "pass": true,
+          "detail": "np.isinf(whole array) is empty",
+          "hard": true
+        },
+        "nodata_convention": {
+          "pass": true,
+          "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+          "hard": true
+        },
+        "outside_footprint_is_zero_and_finite": {
+          "pass": true,
+          "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+          "hard": true
+        },
+        "strict_whole_array_range": {
+          "pass": true,
+          "detail": "whole-array min=0 max=1",
+          "hard": true
+        },
+        "profile_driver_gtiff": {
+          "pass": true,
+          "detail": "GTiff",
+          "hard": true
+        },
+        "compression_like_sample": {
+          "pass": true,
+          "detail": "Compression.lzw",
+          "hard": false
+        }
+      },
+      "hard_checks_passed": true,
+      "hard_failures": [],
+      "nonzero_inside_px": 37692,
+      "nonfinite_inside_px": 0,
+      "value_set_inside": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "uniqueness": {
+    "n_registry": 23,
+    "max_abs_spearman": 0.1450785863945991,
+    "worst_spearman_member": {
+      "name": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
+      "sha": "0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165",
+      "spearman": 0.1450785863945991,
+      "overlap3px": 1.0,
+      "ref_dots": 37692
+    },
+    "max_overlap3px": 1.0,
+    "worst_overlap_member": {
+      "name": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
+      "sha": "0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165",
+      "spearman": 0.1450785863945991,
+      "overlap3px": 1.0,
+      "ref_dots": 37692
+    },
+    "pass_spearman": true,
+    "pass_overlap": false,
+    "pass_overall": false
+  },
+  "holdout": {
+    "candidate_mean": 0.05466427133794576,
+    "baseline_mean": 0.12191439631459906,
+    "gain": -0.06725012497665331,
+    "details": [
+      {
+        "fold": 0,
+        "seed": 360,
+        "dti": 0.09034869601001061,
+        "TPw": 236.6217133955162,
+        "FPw": 3310.2940870640555,
+        "n_truth": 2387,
+        "n_emitted": 3409
+      },
+      {
+        "fold": 0,
+        "seed": 361,
+        "dti": 0.06815979098823945,
+        "TPw": 150.81790376287762,
+        "FPw": 3348.7359576393947,
+        "n_truth": 1891,
+        "n_emitted": 3413
+      },
+      {
+        "fold": 0,
+        "seed": 362,
+        "dti": 0.0681858199112001,
+        "TPw": 156.67325986580045,
+        "FPw": 3336.0248347688994,
+        "n_truth": 1999,
+        "n_emitted": 3403
+      },
+      {
+        "fold": 1,
+        "seed": 360,
+        "dti": 0.04237985007920538,
+        "TPw": 123.67440536407778,
+        "FPw": 4075.5057343367243,
+        "n_truth": 2598,
+        "n_emitted": 4137
+      },
+      {
+        "fold": 1,
+        "seed": 361,
+        "dti": 0.052449770418875295,
+        "TPw": 163.09112380037797,
+        "FPw": 4068.2718572624312,
+        "n_truth": 2829,
+        "n_emitted": 4141
+      },
+      {
+        "fold": 1,
+        "seed": 362,
+        "dti": 0.028385464123333398,
+        "TPw": 73.85411051129725,
+        "FPw": 4135.288559759365,
+        "n_truth": 2200,
+        "n_emitted": 4166
+      },
+      {
+        "fold": 2,
+        "seed": 360,
+        "dti": 0.041888766898508845,
+        "TPw": 169.00106249502429,
+        "FPw": 4275.598300516005,
+        "n_truth": 3932,
+        "n_emitted": 4348
+      },
+      {
+        "fold": 2,
+        "seed": 361,
+        "dti": 0.03926885372546384,
+        "TPw": 162.0254798004355,
+        "FPw": 4292.253281232432,
+        "n_truth": 4044,
+        "n_emitted": 4359
+      },
+      {
+        "fold": 2,
+        "seed": 362,
+        "dti": 0.041322566340736486,
+        "TPw": 179.7227224180641,
+        "FPw": 4274.593918709592,
+        "n_truth": 4323,
+        "n_emitted": 4349
+      },
+      {
+        "fold": 3,
+        "seed": 360,
+        "dti": 0.062074012768334956,
+        "TPw": 213.17076183721133,
+        "FPw": 3257.5221194635187,
+        "n_truth": 3425,
+        "n_emitted": 3344
+      },
+      {
+        "fold": 3,
+        "seed": 361,
+        "dti": 0.056995434460435944,
+        "TPw": 186.89722442957122,
+        "FPw": 3272.909404047715,
+        "n_truth": 3234,
+        "n_emitted": 3348
+      },
+      {
+        "fold": 3,
+        "seed": 362,
+        "dti": 0.06451223033100471,
+        "TPw": 237.86654838526113,
+        "FPw": 3261.9050222413025,
+        "n_truth": 3734,
+        "n_emitted": 3351
+      }
+    ],
+    "baseline_details": [
+      {
+        "fold": 0,
+        "seed": 360,
+        "dti": 0.11271959430819616,
+        "n_emitted": 2583
+      },
+      {
+        "fold": 0,
+        "seed": 361,
+        "dti": 0.10365253454669691,
+        "n_emitted": 2583
+      },
+      {
+        "fold": 0,
+        "seed": 362,
+        "dti": 0.10320500759043068,
+        "n_emitted": 2590
+      },
+      {
+        "fold": 1,
+        "seed": 360,
+        "dti": 0.14898584052510244,
+        "n_emitted": 3505
+      },
+      {
+        "fold": 1,
+        "seed": 361,
+        "dti": 0.13818769013032067,
+        "n_emitted": 3509
+      },
+      {
+        "fold": 1,
+        "seed": 362,
+        "dti": 0.1305941811871539,
+        "n_emitted": 3489
+      },
+      {
+        "fold": 2,
+        "seed": 360,
+        "dti": 0.08544737894237676,
+        "n_emitted": 3029
+      },
+      {
+        "fold": 2,
+        "seed": 361,
+        "dti": 0.09118318496207783,
+        "n_emitted": 3053
+      },
+      {
+        "fold": 2,
+        "seed": 362,
+        "dti": 0.10709817385524176,
+        "n_emitted": 3078
+      },
+      {
+        "fold": 3,
+        "seed": 360,
+        "dti": 0.14384199907137168,
+        "n_emitted": 2699
+      },
+      {
+        "fold": 3,
+        "seed": 361,
+        "dti": 0.14851454324616273,
+        "n_emitted": 2674
+      },
+      {
+        "fold": 3,
+        "seed": 362,
+        "dti": 0.14954262741005742,
+        "n_emitted": 2628
+      }
+    ]
+  }
+}

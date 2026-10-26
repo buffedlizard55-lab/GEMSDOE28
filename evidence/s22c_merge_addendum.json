@@ -1,0 +1,38 @@
+{
+  "date_utc": "2026-10-26",
+  "scope": "S22C post-merge uniqueness regeneration vs parallel S22-SIGN/S22-MOFR rasters merged to main (PR #63). Not a fourth experiment: no fitting, no new dots; merge duty per parallel-run protocol section 1.",
+  "candidate": "gems28-s22-ctxhgb-20261026-e23dabcec6e2-allfinite.tif",
+  "candidate_dotset_sha256": "e23dabcec6e2b347901f093f96382ac84d027192c53290a07b08459a011e9de1",
+  "candidate_dots": 37654,
+  "seed_collision": "S22-SIGN independently claimed seeds 360-362 from the same base; deterministic shared splits withheld identical components (36,596 pooled positives in both). Disclosed; never pool.",
+  "comparisons": {
+    "S22-SIGN (PR #57)": {
+      "file": "docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+      "dotset_sha256": "57f4263dfe78800be4116159ee230841c1ece87e22a01e4f5ccd3e8c91aa5bdb",
+      "dots": 37692,
+      "frac_our_dots_within3px": 0.28039517713921497,
+      "jaccard_exact": 0.009621053759982848,
+      "spearman_surface_vs_registry_sample200k": 0.031005384736929265,
+      "pass": true
+    },
+    "S22-MOFR (PR #59/#61)": {
+      "file": "docs/downloads/gems28-s22-mofr-union-20261026-599452947272-allfinite.tif",
+      "dotset_sha256": "5a436814ed6ef08443a5bdd1e9e2ca7dc923ddd4424f2a7656f44cf00fc1ee77",
+      "dots": 42480,
+      "frac_our_dots_within3px": 0.06838582886280342,
+      "jaccard_exact": 0.0031923283967000087,
+      "spearman_surface_vs_registry_sample200k": -0.007156238065989631,
+      "pass": true
+    },
+    "GEMSDOE32 champion (recheck)": {
+      "file": "evidence/_scratch/registry32/champion32_zeros.tif",
+      "dotset_sha256": "c928e233d07802983283e0c937f7b00ad8ab565a67800cc1c4c8ae812d21baf3",
+      "dots": 37654,
+      "frac_our_dots_within3px": 0.4205396505019387,
+      "jaccard_exact": 0.019673684923160246,
+      "spearman_surface_vs_registry_sample200k": 0.06707589714670831,
+      "pass": true
+    }
+  },
+  "all_pass": true
+}
