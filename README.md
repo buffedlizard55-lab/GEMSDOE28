@@ -29,7 +29,7 @@ The TIFF is single-band float32, all-finite across the whole array, values {0,1}
 3,730 × 3,292, and matches the template transform. SHA-256:
 `553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537`. Maximum pre-placement
 |Spearman| was 0.1030; maximum exact-Euclidean surface-support overlap was 20.6%; maximum final-dot overlap was
-37.0%, below the 0.90/70% duplicate stops. **Safe to download for research; NOT OK to submit.**
+28.0%, below the 0.90/70% duplicate stops (exact maximum 0.279811 in the S19 run card). **Safe to download for research; NOT OK to submit.**
 Road cuts, channels, terrace/paleo-shoreline risers, landslides and mine benches remain named mimics.
 
 The owner prompt and Core Values remain archived below and normalized in

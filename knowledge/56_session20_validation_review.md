@@ -66,4 +66,4 @@ original local checkout, not a claim that the concurrent run lacked data. The
 S19-ASCP report and website are now the latest scientific result. No evidence was
 pooled across runs and neither negative verdict was promoted.
 
-Post-merge verification: **499 passed, 7 skipped**; lint and site rebuild PASS.
+Post-merge verification in the current branch: **505 passed, 6 skipped, 9 subtests passed**; Ruff, site rebuild, and `git diff --check` PASS. The S19 exact-file integrity test is not skipped; only tests requiring the absent hash-pinned competition inputs are skipped.

@@ -1,6 +1,6 @@
 # S19-ASCP result — unique all-finite TIFF, negative holdout
 
-**Date:** 2026-10-26 UTC  
+**Date:** 2026-10-26 UTC
 **Decision:** safe to download for research; **DO NOT SUBMIT**. No competition slot was selected.
 
 ## Executive result

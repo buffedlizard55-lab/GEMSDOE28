@@ -224,20 +224,24 @@ def test_front_page_has_download_and_exact_note():
 def test_session19_cross_site_review_is_linked_and_fail_closed():
     page = (DOCS / "cross-site-review.html").read_text()
     index = (DOCS / "index.html").read_text()
-    card = json.loads((ROOT / "evidence/session19_run_card.json").read_text())
+    card = json.loads((ROOT / "evidence/s19_ascp_run_card.json").read_text())
     assert "GEMSDOE32 H33-2-B2" in page
     assert "0.2778" in page and "USER-REPORTED / UNVERIFIED" in page
-    assert "Do not upload any file from this site" in page
+    assert "S19-ASCP research TIFF was generated" in page
+    assert "DO NOT SUBMIT" in page
+    assert "autonomously chose" in page
     assert "Displaced potential-field piercing markers" in page
     assert "Paired-geothermometer cooling corridors" in page
     assert "Opposite-flank flexural curvature pairs" in page
     assert "Lithology-conditioned U/Th transport dipoles" in page
     assert "cross-site-review.html" in index
     assert card["verdict"] == "negative"
-    assert card["experiments_run"] == 0 and card["new_tiff_generated"] is False
+    assert card["experiments_run"] == 3
     assert card["holdout"]["label"] == "HOLDOUT-DTI"
-    assert card["holdout"]["status"].startswith("NOT RUN")
-    assert card["raster_sha256"] is None and card["submission_name"] is None
+    assert card["holdout"]["paired_gain_ci95"][1] < 0
+    assert card["registry"]["max_abs_surface_spearman"] <= 0.90
+    assert card["registry"]["max_final_overlap_3px"] <= 0.70
+    assert card["raster_sha256"] and card["submission_name"]
     assert card["submission_ready"] is False and card["slot_selected"] is False
 
 
@@ -336,10 +340,10 @@ def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
         if page == "cross-site-review.html":
-            assert 'Current run: NOT READY TO SUBMIT' in text
+            assert 'Current status: NOT READY TO SUBMIT' in text
             assert 'NO FILE APPROVED' in text
-            assert 'Do not upload any file from this site' in text
-            assert 'session19_run_card.json' in text
+            assert 'DO NOT SUBMIT' in text
+            assert 's19_ascp_run_card.json' in text
             continue
         assert 'Current run: NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text
@@ -357,7 +361,7 @@ def test_current_run_notice_is_above_historical_body():
     card = json.loads((DOCS / 'data/run_card_2026-10-26.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
-    # Current S18 card is bound to the new exact TIFF; a negative gate cannot approve it.
+    # The current S19-ASCP card is bound to the exact TIFF; its negative gate cannot approve it.
     assert card['session'] == 'S19-ASCP'
     assert re.fullmatch(r'[0-9a-f]{64}', card['raster_sha256'])
     assert card['slot_selected'] is False
