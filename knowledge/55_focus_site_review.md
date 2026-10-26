@@ -4,7 +4,7 @@
 
 **No file in this repository is approved for a competition slot.** The current generated S18-MXTP GeoTIFF is downloadable for reproducibility only and is explicitly **DO NOT SUBMIT**: its registered holdout gate failed. The best score in the supplied nine-site list is GEMSDOE32's `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` at **0.2778, owner-reported**. It is not an ORGANIZER-CONFIRMED score because no submission-page receipt is present in this checkout. Do not copy it; its reported score does not establish a new candidate will beat it.
 
-The user-provided leaderboard figure `0.3195` and separate `0.4413` observation are not authenticated receipts in this repository. They are different reported snapshots and must not be conflated with a local HOLDOUT-DTI or a competition score. Current project README also records a 2026-10-25 public-page observation of 0.4413; that dated observation is not a receipt and should be refreshed from the official leaderboard before making a current-leader claim.
+The user-provided leaderboard figure `0.3195` and separate `0.4413` claim are not authenticated receipts in this repository. A later one-off fetch of the official public leaderboard on 2026-10-26 displayed 0.4413 for xiaofanhu in the first row. This dated public-page observation is not a receipt for a local TIFF and does not establish private-round performance; see [`evidence/leaderboard_observation_2026-10-26.json`](../evidence/leaderboard_observation_2026-10-26.json).
 
 ## Highest listed entry for each site
 

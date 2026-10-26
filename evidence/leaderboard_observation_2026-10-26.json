@@ -1,0 +1,17 @@
+{
+  "label": "OFFICIAL PUBLIC LEADERBOARD OBSERVATION; not an organizer submission receipt",
+  "observed_date_utc": "2026-10-26",
+  "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "observation_method": "One read-only fetch of the public leaderboard page in this session; no account login, upload, private scorer access, or submission-page receipt.",
+  "first_displayed_row": {
+    "rank": 1,
+    "participant": "xiaofanhu",
+    "public_dw_tversky": 0.4413
+  },
+  "interpretation": "The 0.4413 figure was displayed as the leading public DW-Tversky score in this fetch. It is not linked by this record to any local GEMSDOE24/25/27/28/30/31/32/33/36 TIFF, nor does it establish private or final-round performance.",
+  "limitations": [
+    "Dynamic public page; this is a dated one-off observation, not a continuously refreshed feed.",
+    "The user-provided 0.3195 statement is lower than the first row observed here, but cannot be assigned a date from this fetch.",
+    "No current account-specific weekly submission allowance or remaining-slot count was accessed."
+  ]
+}

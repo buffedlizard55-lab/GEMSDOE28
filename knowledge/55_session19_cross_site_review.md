@@ -3,6 +3,9 @@
 **Date:** 2026-10-26 (UTC)
 **Scope:** Review the supplied GEMSDOE24/25/27/28/30/31/32/33/36 results, current repository state, candidate hypotheses, and submission readiness.
 **Result:** Negative/blocked review. No new model, holdout run, experiment, TIFF, or competition upload was produced. This is deliberate: the required method-lane paragraph is not present as an assignment, and the frozen cross-run registry and comparable strict-protocol baseline are absent.
+
+**Supersession:** This is the A52 pre-experiment snapshot taken before S19 inputs were restored. A later S19-ASCP run generated a unique research TIFF but failed the frozen HOLDOUT-DTI gate; it is available for research only and is **DO NOT SUBMIT**. See [`knowledge/56_s19_result.md`](56_s19_result.md), [`evidence/s19_ascp_run_card.json`](../evidence/s19_ascp_run_card.json), and [`docs/session19-result.html`](../docs/session19-result.html). No file is currently approved.
+
 **Score labels:** Values copied from the user prompt are labelled **USER-REPORTED (unverified)**. They are neither HOLDOUT-DTI nor ORGANIZER-CONFIRMED. There is no submission-page receipt in this checkout that binds them to TIFF bytes.
 
 > **Scope/update:** This is the initial G28-A52 blocked review; its “no experiment/no TIFF” statements describe that review only. A separate, later S19-ASCP run on 2026-10-26 preregistered a LiDAR antislope-curvature method, used three experiments, emitted a unique research TIFF, and failed its spatially blocked holdout. The current disposition remains **DO NOT SUBMIT**. See [`knowledge/56_s19_result.md`](56_s19_result.md), [`docs/session19-result.html`](../docs/session19-result.html), and [`evidence/s19_ascp_run_card.json`](../evidence/s19_ascp_run_card.json). The later run's preregistration records that its method was autonomously selected because the requested exclusive lane paragraph was absent; this is a process irregularity, not owner-provided authorization.
@@ -31,7 +34,9 @@ These are the highest score claims supplied for each site in the user prompt, no
 | [GEMSDOE33](https://buffedlizard55-lab.github.io/GEMSDOE33/) | `h33d-analog-tip-stepover-r30`; **0.2632 — USER-REPORTED (unverified)** | Highest cited claim in the supplied list. A name suggesting tip/stepover logic does not by itself show its code or measured mechanism. [Pinned artifact](https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif). |
 | [GEMSDOE36](https://buffedlizard55-lab.github.io/GEMSDOE36/docs/) | `anderson-geothermal-pinn`; **0.2750 — USER-REPORTED (unverified)** | Second-highest cited claim in the supplied list, but its name and score do not establish independent validation, uniqueness, or hidden-test transfer. [Pinned artifact](https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif). |
 
-**Comparison caveat:** The user message separately states leaderboard maxima of 0.3195 and 0.4413. They conflict and neither has a fresh, dated official capture or submission receipt in this run. They are not adopted as current leaderboard facts. A displayed public leaderboard row would not, by itself, bind an owner-site file to a receipt.
+**Fresh public-source addendum (2026-10-26):** one read-only fetch of the [official public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) displayed xiaofanhu, 0.4413, in the first row. This is a dated public-page observation, not a submission receipt and not a score-to-TIFF association for any of the nine sites; it does not establish private-round performance. The 0.3195 figure was not the leading row observed in this fetch. See [`evidence/leaderboard_observation_2026-10-26.json`](../evidence/leaderboard_observation_2026-10-26.json). The user/owner score-to-artifact claims remain unverified.
+
+**Byte-audit addendum:** the recorded forensic audit finds GEMSDOE25/GEMSDOE30 dot-identical; GEMSDOE31 matches the GEMSDOE28 solo-r1 set; GEMSDOE32 removes 2,545 dots from that solo set and adds none; GEMSDOE33 shares 75.5% exact dots with GEMSDOE32; GEMSDOE36 shares 96.9%. The last two exceed the >70% duplicate stop. These are recorded raster relations, not a fresh byte comparison during this merge. Details: [`evidence/priority_submission_review_2026-10-26.json`](../evidence/priority_submission_review_2026-10-26.json) and [`evidence/s18_champion_forensic.json`](../evidence/s18_champion_forensic.json).
 
 ## Fresh hypothesis slate — ranked, not implemented
 
@@ -53,7 +58,7 @@ No candidate can therefore pass feature-alone canaries, buffered whole-segment h
 ## Irregularities to retain for review
 
 1. **Score provenance:** the cross-site score values are user/owner reports, not organizer receipts; at least one older source extraction in `evidence/priority_repository_audit.json` contains contradictory wording (“ORGANIZER-CONFIRMED, owner-reported”). This report follows the stricter receipt rule and does not upgrade those values.
-2. **Leaderboard inconsistency:** the prompt gives two different top values. No fresh official leaderboard observation or account receipt was captured in this run.
+2. **Leaderboard scope:** the 2026-10-26 public-page observation is recorded above; no account-specific receipt, private score, or account-cap information was accessed.
 3. **GEMSDOE28 claim mismatch:** the user lists H36-1 at 0.2710; local archived manifests classify that file as unscored. The site claim cannot be linked to the bytes/receipt here.
 4. **Lane assignment omitted:** no explicit single method paragraph is identifiable; selection is not inferred from the proposal list.
 5. **Stale session metadata:** `registry/current_session.json` records a previous session ID/branch and its two-hour timer is expired. The pinned shared-template manifest exists, but its required source files are absent under the expected `shared_template/` paths. The config is preserved as inherited evidence and was not overwritten to imply new experiment authorization.
@@ -64,7 +69,7 @@ No candidate can therefore pass feature-alone canaries, buffered whole-segment h
 Links below are provided for review. This run did not freshly access DrivenData or download external packages. Previously stored audit artifacts identify versioned owner-page snapshots; they are not official confirmation of competition scores.
 
 - [DrivenData problem description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) and [about page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/).
-- [DrivenData leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) — manual current check needed; no fresh observation made here.
+- [DrivenData leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) — one public-page fetch on 2026-10-26; first row displayed 0.4413. Snapshot only; no receipt or account-specific status.
 - [Official competition rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf).
 - [DrivenData reference solution](https://github.com/drivendataorg/gems-prize-reference-solution).
 - [USGS GeoDAWN survey description](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and).

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "session_id": "G28-PRIORITY-REVIEW-20261026",
+  "branch": "arena/202abb24-gemsdoe28",
+  "started_at_utc": "2026-10-26T00:23:56Z",
+  "session_type": "review and documentation only; no scientific experiment",
+  "lane": null,
+  "lane_assignment_source": null,
+  "lane_status": "The request references a single method paragraph but does not identify a method assignment. No lane is inferred from the ranked candidate slate.",
+  "preflight_status": "BLOCKED: no explicit lane, synchronized parallel registry, or frozen comparable best under the required buffered whole-segment evaluator.",
+  "shared_template_pin": "registry/protocol_assets.json",
+  "shared_template_files_restored_this_session": false,
+  "cached_features": "data/prepared/features.npy",
+  "cached_features_present_this_checkout": false,
+  "inputs_restored_this_session": {
+    "group": "core",
+    "count": 4,
+    "provenance": "hash-pinned public owner mirrors, not organizer-authenticated",
+    "restore_receipt": "data/restore_receipt.json (git-ignored)",
+    "sha256_verified": true
+  },
+  "required_parallel_registry": null,
+  "parallel_registry_status": "The 166-raster S18 snapshot is historical and not synchronized across all concurrent runs; no global completeness claim.",
+  "frozen_protocol_comparable_best": null,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "slot_selected": false,
+  "weekly_cap": null,
+  "weekly_cap_status": "Not freshly retrieved from an authenticated submission page; no current account allowance or remaining slot count asserted.",
+  "new_tiff_generated": false,
+  "latest_unique_tiff": "docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif",
+  "latest_unique_tiff_verdict": "negative; research download only; DO NOT SUBMIT; frozen holdout gate failed",
+  "review_artifacts": [
+    "knowledge/55_priority_site_review_2026-10-26.md",
+    "evidence/priority_submission_review_2026-10-26.json",
+    "evidence/leaderboard_observation_2026-10-26.json"
+  ]
+}

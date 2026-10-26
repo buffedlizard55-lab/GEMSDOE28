@@ -69,8 +69,11 @@
       "artifact": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
       "value": 0.2778
     },
-    "other_leaderboard_maxima_in_prompt": [0.3195, 0.4413],
-    "note": "Conflicting leader maxima are not freshly verified. No submission-page receipt was obtained."
+    "other_leaderboard_maxima_in_prompt": [
+      0.3195,
+      0.4413
+    ],
+    "note": "Conflicting maxima appeared in the prompt. A dated 2026-10-26 official public-page observation is recorded below; it does not verify any owner-site score-to-file association or receipt."
   },
   "verdict": "negative",
   "promotion_eligible": false,
@@ -83,5 +86,24 @@
     "full_scientific_holdout": "NOT RUN — data/lane/registry/baseline prerequisites missing"
   },
   "scope": "Repository review and candidate slate only; no scientific experiment, TIFF, competition upload, or slot decision.",
-  "next_gate": "Provide an identifiable assigned method paragraph, complete synchronized registry, frozen same-protocol best, and restore hash-verified cached feature/source inputs; then re-run strict preflight before authorizing any experiment."
+  "next_gate": "Provide an identifiable assigned method paragraph, complete synchronized registry, frozen same-protocol best, and restore hash-verified cached feature/source inputs; then re-run strict preflight before authorizing any experiment.",
+  "review_status": "HISTORICAL A52 PRE-EXPERIMENT SNAPSHOT; not the current run summary.",
+  "superseded_by": {
+    "session": "S19-ASCP",
+    "result": "negative; unique research TIFF generated later but failed frozen HOLDOUT-DTI; DO NOT SUBMIT",
+    "run_card": "evidence/s19_ascp_run_card.json",
+    "report": "knowledge/56_s19_result.md"
+  },
+  "leaderboard_observation": {
+    "observed_date_utc": "2026-10-26",
+    "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "method": "One read-only fetch of the public HTML leaderboard; no login, upload, private scorer access, or submission-page receipt.",
+    "first_displayed_row": {
+      "rank": 1,
+      "participant": "xiaofanhu",
+      "public_dw_tversky": 0.4413
+    },
+    "scope_limit": "Not linked to any local GEMSDOE24/25/27/28/30/31/32/33/36 TIFF; does not establish private-round performance or account allowance.",
+    "evidence": "evidence/leaderboard_observation_2026-10-26.json"
+  }
 }

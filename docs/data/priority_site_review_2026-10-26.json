@@ -115,12 +115,53 @@
     "recommendation_status": "LEARNING REFERENCE ONLY — NOT AN APPROVED SUBMISSION",
     "why": "It is the largest score in the supplied nine-site list, but no organizer receipt ties that number to the raster. Its prediction set also substantially reuses the GEMSDOE28 H27-4 solo raster; copying it would violate the uniqueness request.",
     "new_tiff_this_review": false,
-    "download_decision": "No new TIFF is approved or generated in this review. The previously generated S18-MXTP all-finite TIFF is explicitly research-only and must not be submitted; it failed its paired HOLDOUT-DTI gate."
+    "download_decision": "No new TIFF was generated in this A52 review. The later S19-ASCP TIFF is available only for research/reproducibility and failed HOLDOUT-DTI; DO NOT SUBMIT. S18-MXTP is an older negative research TIFF, not a substitute.",
+    "later_s19_ascp_result": {
+      "status": "negative; unique research TIFF generated later, HOLDOUT-DTI failed; DO NOT SUBMIT",
+      "artifact": "docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+      "run_card": "evidence/s19_ascp_run_card.json",
+      "report": "knowledge/56_s19_result.md"
+    }
   },
   "limits": [
-    "The supplied historical leaderboard numbers conflict with one another; the repository contains only a dated 2026-10-25 public leaderboard observation of 0.4413. Neither is a current 2026-10-26 check.",
+    "The user prompt gave conflicting leaderboard maxima. One later one-off public-page fetch on 2026-10-26 displayed 0.4413 in the first row; that is a dated public observation, not a receipt or score-to-file association.",
     "No organizer submission-page receipts were available for any of the nine reported scores.",
     "Repository raster audits cover pinned artifacts, not every submission ever made across every parallel site.",
-    "The active session has no explicit single-method lane assignment, no synchronized global parallel registry, and no certified current-best result under an identical strict holdout protocol. No new experiment or submission TIFF can responsibly be approved until these are resolved."
+    "At the initial A52 review there was no identifiable exclusive lane assignment, synchronized global parallel registry, or comparable strict-protocol baseline. A later S19-ASCP run autonomously used a repository-documented next step; this was not an owner-provided lane assignment and is recorded as a process irregularity."
+  ],
+  "review_status": "Historical pre-experiment A52 review. Its no-new-TIFF conclusion applies to that review only; later S19-ASCP generated a unique research raster but failed its HOLDOUT-DTI gate and is DO NOT SUBMIT.",
+  "fresh_public_leaderboard_observation_2026_10_26": {
+    "observed_date_utc": "2026-10-26",
+    "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "method": "One read-only public HTML page fetch; no login, upload, private scorer access, or submission-page receipt.",
+    "first_displayed_row": {
+      "rank": 1,
+      "participant": "xiaofanhu",
+      "public_dw_tversky": 0.4413
+    },
+    "scope_limit": "Dated public observation only; no association to any local TIFF; no evidence of private-round performance or account allowance.",
+    "evidence_file": "evidence/leaderboard_observation_2026-10-26.json"
+  },
+  "site_artifact_duplicate_flags": [
+    {
+      "relation": "GEMSDOE25 vs GEMSDOE30",
+      "finding": "Same 44,090-dot set inside footprint; not independent artifact evidence."
+    },
+    {
+      "relation": "GEMSDOE31 vs GEMSDOE28 H27-4 solo-r1",
+      "finding": "Same dot set inside footprint."
+    },
+    {
+      "relation": "GEMSDOE32 vs GEMSDOE28 H27-4 solo-r1",
+      "finding": "2,545 catalogue-flank dots removed, none added."
+    },
+    {
+      "relation": "GEMSDOE33 vs GEMSDOE32",
+      "finding": "31,614 / 41,865 = 75.5% exact shared dots; exceeds >70% within-3-pixel duplicate stop."
+    },
+    {
+      "relation": "GEMSDOE36 vs GEMSDOE32",
+      "finding": "37,654 / 38,854 = 96.9% exact shared dots; exceeds >70% within-3-pixel duplicate stop."
+    }
   ]
 }

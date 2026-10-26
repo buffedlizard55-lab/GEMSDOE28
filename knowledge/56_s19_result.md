@@ -54,7 +54,9 @@ The input descriptor is an owner-mirrored, hash-pinned derivative of USGS 3DEP t
 
 The prior byte forensic result remains the strongest explanation available for the owner-reported GEMSDOE32 value 0.2778: its 37,654-dot artifact equals the solo raster after deleting 2,545 catalogue-near dots, with no additions. Reducing low-credit prediction mass can improve the Tversky denominator while spaced dots preserve some triangular-kernel coverage. This proves pruning construction, not hidden-label causation or receipt-linked score attribution.
 
-The site's current nine-row table names each site's highest owner-reported historical artifact and clearly labels every one as unverified and not approved. None is an eligible new submission. S19 is unique but fails performance. Consequently the evidence-based submission choice today is **none**. There is no defensible evidence that S19 would exceed 0.2778, 0.3195 or 0.4413; the latter two are historical/conflicting leaderboard context, not projections for this raster.
+The site's current nine-row table names each site's highest owner-reported historical artifact and clearly labels every one as unverified and not approved. None is an eligible new submission. S19 is unique but fails performance. Consequently the evidence-based submission choice today is **none**. There is no defensible evidence that S19 would exceed 0.2778, 0.3195 or 0.4413; those values are not projections for this raster.
+
+A one-off fetch of the official public leaderboard on 2026-10-26 displayed xiaofanhu at 0.4413 in the first row. This is a dated public-page observation, not a submission-page receipt, not an association to any local GEMSDOE TIFF, and not evidence of private-round performance or account-specific allowance. Preserve the source note in [`evidence/leaderboard_observation_2026-10-26.json`](../evidence/leaderboard_observation_2026-10-26.json).
 
 ## Official/source links for manual review
 
