@@ -1,15 +1,27 @@
-# Current result — 2026-10-25 S18-MXTP (read first every session)
+# Repository review — 2026-10-26 (start here for this checkout)
 
-## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+**Submission status: NO NEW TIFF GENERATED; NO FILE APPROVED.** The request did not identify the exclusive method paragraph required by the parallel-run protocol. In this checkout, the prepared feature cache and source rasters are not present (`data/` currently contains manifests/run-card records only); the prior notes describe a different restored runtime. The run also lacks a synchronized global registry and a certified, same-protocol current-best baseline. Do not relabel or submit a historical TIFF to fill those gaps.
 
-[**Download the new unique research TIFF**](docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif)
+[**Nine-site executive review**](docs/site-submission-review.html) compares the best score claim supplied for GEMSDOE24/25/27/28/30/31/32/33/36. All nine values are **OWNER-REPORTED**, not organizer-confirmed. GEMSDOE32 H33-2-B2 (0.2778) is the largest value in that supplied set, but its score-to-file receipt is absent and its pixels substantially reuse GEMSDOE28 H27-4 solo. It is a learning reference only, not a unique submission recommendation. The official leaderboard snapshot in older repository notes is dated 2026-10-25 (0.4413); it is not verified current for 2026-10-26 and conflicts with the 0.3195 claim in the request.
+
+The already-generated S18-MXTP file below is a historical, all-finite, format-checked **research artifact that FAILED its paired HOLDOUT-DTI gate**. It remains clearly downloadable for reproducibility but is **NOT safe to submit**. This review did not generate a fresh TIFF or touch a weekly slot.
+
+The standing owner prompt and protocol are preserved below as a starting point and must be reread each project session; its requirements do not authorize guessing a missing lane.
+
+---
+
+# Historical result — 2026-10-25 S18-MXTP (superseded; read review overlay above)
+
+## Historical S18-MXTP TIFF — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+
+[**Download the historical S18 research TIFF — DO NOT SUBMIT**](docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif)
 · [Executive summary / submission process](docs/executive-summary.html)
 · [Current full JSON run card](evidence/s18_mxtp_run_card.json)
 · [Scientific result, sources and next steps](knowledge/54_s18_result.md)
 
-The new 11,082-dot migration-extrapolated TMI/gravity raster is independently generated, not copied
-from a previous submission. Both pre-placement and final-dot uniqueness pass against 166 pinned
-valid-grid rasters across the nine requested repositories plus local research artifacts. Exact-file
+The historical S18-MXTP 11,082-dot migration-extrapolated TMI/gravity raster was independently generated, not copied
+from a previous submission. Both pre-placement and final-dot uniqueness passed against 166 pinned
+valid-grid rasters across the nine requested repositories plus local research artifacts in that prior run. Exact-file
 checks pass: no NaN anywhere, values {0,1}, single-band float32, template CRS/shape/transform.
 **It is safe to download for research, NOT approved to submit.** Format validity and novelty do
 not compensate for failed scientific validation; no human inspector or competition slot was used.
@@ -103,7 +115,7 @@ Concurrent PR #41's **different** H39-5 run is retained under
 in the archive. It is not MXTP, not independent replication, and not part of our frozen 166-raster
 snapshot. Shared seed/method-family collision is logged; no global exclusivity is claimed.
 
-## Historical notices and prior standing briefs (superseded by current result above)
+## Historical notices and prior standing briefs (superseded by review overlay at top)
 
 # Current session safety notice — 2026-10-25 Session 16 (read first)
 
