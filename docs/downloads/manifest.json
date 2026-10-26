@@ -739,5 +739,32 @@
     "run_card": "evidence/s22_mofr_run_card.json",
     "holdout_evidence": "evidence/s22_mofr_stage.json",
     "preregistration": "knowledge/62_s22_mofr_preregistration.md"
+  },
+  "s22c_candidate": {
+    "slug": "s22-ctxhgb",
+    "hypothesis": "S22-H1 multi-scale spatial-context HGB (32 base + Gaussian-pyramid/tensor context), ridge-restricted 2.8px emission, d_cat>2px, N=37,654",
+    "content_id": "e23dabcec6e2",
+    "nan": "gems28-s22-ctxhgb-20261026-e23dabcec6e2-nan.tif",
+    "allfinite": "gems28-s22-ctxhgb-20261026-e23dabcec6e2-allfinite.tif",
+    "zip": "gems28-s22-ctxhgb-20261026-e23dabcec6e2-nan.zip",
+    "sha256_nan": "0234de8e61d6eb037f06c8c6574e5dc5014111c16a1cbd30ed01d828e0469524",
+    "sha256_allfinite": "77934be607d48a4daec5b046009cdabf61d3fdee210aadc75be82ac70f3beb2e",
+    "sha256_zip": "a7b2fc4eb5059c7d1f9e97078e3e016682d664db5291a69b58adce67465d4fe4",
+    "bytes_nan": 1590692,
+    "bytes_allfinite": 826194,
+    "bytes_zip": 293136,
+    "emitted_px": 37654,
+    "format_verified": true,
+    "status": "PASSES FROZEN S22 GATE \u2014 SELECTOR DECISION REQUIRED, NO SLOT SPENT BY THIS SESSION; HOLDOUT-DTI quadrant component-hide seeds 360-362 pooled lane 0.12018 vs dotted_b2 0.10519 (paired +0.01498, 95% CI [+0.01067,+0.01932], 12/12 cells) vs per-pixel control 0.09505; canary max AUC 0.7200 PASS; uniqueness vs champion 42.1% within3px / |Spearman| 0.067 PASS, worst 69.92% vs unscored H37-1 union-pool (margin 0.0008, disclosed); validator PASS (all-finite {0,1}); MODEL projection ~0.317 vs USER-REPORTED 0.2778 anchor (not a score); verdict promote (frozen gate), submission_ready=false, slot_selected=false.",
+    "note": "S22 ctxHGB multiscale-context 37654d | HOLDOUT-DTI 0.1202 vs dotted 0.1052 (+0.0150) seeds360-362 | e23dabcec6e2",
+    "note_file": "note-gems28-s22-e23dabcec6e2.txt",
+    "submission_name": "GEMSDOE28-S22-ctxhgb-e23dabcec6e2",
+    "run_card": "evidence/s22c_run_card.json",
+    "holdout_evidence": "evidence/s22c_holdout.json",
+    "holdout_preregistration": "knowledge/64_s22c_preregistration.md",
+    "holdout_seeds": "360-362",
+    "verdict": "promote",
+    "submission_ready": false,
+    "slot_selected": false
   }
 }

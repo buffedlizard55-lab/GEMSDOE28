@@ -293,6 +293,7 @@ def nav() -> str:
         ("S19 archive", "session19-result.html"),
         ("S20 result", "session20-result.html"),
         ("S21 result", "session21-result.html"),
+        ("S22C result", "session22c-result.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
@@ -354,6 +355,22 @@ def render_session15(review: dict) -> str:
 <p><strong>Current validator status:</strong> not run on a new candidate. The existing historical download artifacts remain separately documented; this page does not label any one of them as newly generated or newly approved.</p></section>
 <section class="section"><h2>Manual review sources</h2><ul><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official DrivenData problem description</a></li><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official public leaderboard (manual review only)</a></li><li><a href="https://gdr.openei.org/submissions/1391">DOE GDR #1391</a></li><li><a href="https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b">USGS Great Basin MT conductance release</a></li><li><a href="https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28">USGS Great Basin heat-flow release</a></li><li><a href="https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e">USGS 3DEP 1 m DEM catalog</a></li><li><a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat FDSN API (availability not verified here)</a></li></ul>
 <p><strong>Machine-readable run card:</strong> holdout DTI is null because no experiment was run; verdict is <strong>negative</strong>. See the repo dossier for the exact reasons.</p></section>"""
+
+
+def s22c_status_html() -> str:
+    card = read_json("evidence/s22c_run_card.json", {})
+    if not card:
+        return ""
+    f = card.get("files", {})
+    h = card.get("holdout", {})
+    proj = card.get("live_projection", {})
+    return f"""<section class="card callout-danger" aria-label="Session 22 submission readiness" id="s22c-submission" data-submission-ready="false">
+<p class="eyebrow">SESSION 22C · S22-H1 MULTI-SCALE SPATIAL-CONTEXT (parallel session; renamed at merge — S22-SIGN/S22-MOFR own “S22”; seed 360–362 collision disclosed) · 2026-10-26 · AUTOMATED GATES, NO HUMAN INSPECTOR</p>
+<h2>OK TO DOWNLOAD: YES · OK TO SUBMIT: SELECTOR CHECKLIST REQUIRED — NO SLOT SPENT</h2>
+<p><strong>NEW UNIQUE TIFF — first fresh lane to PASS its frozen holdout gate:</strong> <code>{esc(f.get('primary_allfinite', ''))}</code> ({comma(card.get('n_dots', 0))} fresh context-detector dots, 0 on catalogue; SHA-256 <code>{esc(str(card.get('raster_sha256', ''))[:8])}…</code>; all-finite {{0,1}} in [0,1], no NaN anywhere). Canary PASS (0.7200 ≤ 0.90) · <strong>HOLDOUT-DTI {h.get('dti', 0):.5f} vs dotted-b2 {h.get('baseline_dti', 0):.5f} (paired Δ {h.get('paired_gain', 0):+.5f}, 95 % CI [{h.get('paired_gain_ci95', [0, 0])[0]:+.5f}, {h.get('paired_gain_ci95', [0, 0])[1]:+.5f}], 12/12 cells, seeds 360–362)</strong> · unique vs GEMSDOE32 champion (42.05 % within 3 px) · validator PASS. <strong>Verdict promote (frozen gate); submission_ready=false until the separate selector step confirms the weekly portal allowance. Nothing has been uploaded.</strong> Estimated live score (MODEL PROJECTION, not a score): ~{proj.get('projected_live_dti', 0):.3f} vs the 0.2778 USER-REPORTED champion anchor — see the transfer-risk caveats on the S22C page before believing it.</p>
+<div class="download-actions"><a class="button" href="downloads/{esc(f.get('primary_allfinite', ''))}" download>1-Click Download S22C Unique GeoTIFF — gate-passing candidate</a><a class="button quiet" href="session22c-result.html">Session 22C executive result + nine-site table + selector steps</a><a class="button quiet" href="data/run_card_s22c.json" download>JSON run card</a></div>
+<p><strong>Unique name:</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
+</section>"""
 
 
 def current_status_html() -> str:
@@ -509,7 +526,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{current_status_html()}{body}</main>
+<main>{s22c_status_html()}{current_status_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1376,6 +1393,7 @@ def main() -> int:
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
     session22_template = (ROOT / "site_templates" / "session22-result.html").read_text(encoding="utf-8")
     session22_mofr_template = (ROOT / "site_templates" / "session22-mofr-result.html").read_text(encoding="utf-8")
+    session22c_template = (ROOT / "site_templates" / "session22c-result.html").read_text(encoding="utf-8")
     session22_mofr_brief = """<section class=\"card callout-danger\" aria-label=\"Session 22 S22-MOFR result\">
 <h2>Session 22 S22-MOFR (2026-10-26): potential-field marker-offset lane — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
 <p>A separate concurrent lane generated a new, catalogue-blind raster from paired TMI and isostatic-gravity horizontal-gradient ridge endpoints (<code>gems28-s22-mofr-union-20261026-599452947272-allfinite.tif</code>, 42,480 dots). Leakage canary <strong>PASS</strong> (max feature AUC 0.538); registry novelty <strong>PASS</strong> (max |Spearman| 0.0164, max 3-px overlap 18.9% vs the full registry \u2014 genuinely unique). But <strong>HOLDOUT-DTI 0.03385 [0.0300, 0.0375] vs a freshly retrained baseline 0.14399</strong> (paired gain -0.1101, 95% CI [-0.1239, -0.0972], 0/4 folds positive). This is a distinct concurrent lane from S22-SIGN and S22-AUDIT (see below); never pool their numbers. <strong>Verdict: negative \u2014 zero weekly slots spent. Do not upload any file from this site.</strong></p>
@@ -1397,6 +1415,7 @@ def main() -> int:
         "session21-result.html": session21_template,
         "session22-result.html": session22_template,
         "session22-mofr-result.html": session22_mofr_template,
+        "session22c-result.html": session22c_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
@@ -1432,6 +1451,13 @@ def main() -> int:
     (DOCS / "data/run_card_s22_mofr.json").parent.mkdir(parents=True, exist_ok=True)
     (DOCS / "data/run_card_s22_mofr.json").write_text(
         json.dumps(s22_mofr_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
+    )
+    # Preserve the separate S22C (spatial-context) run card under its own name;
+    # a fourth distinct concurrent lane (renamed from S22 at merge). Never pool.
+    s22c_card = read_json("evidence/s22c_run_card.json")
+    (DOCS / "data/run_card_s22c.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s22c.json").write_text(
+        json.dumps(s22c_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
     )
     (DOCS / "data/current_run_card.json").write_bytes(current_card_path.read_bytes())
     (DOCS / "data/current_run_card_2026-10-27.json").write_bytes(current_card_path.read_bytes())

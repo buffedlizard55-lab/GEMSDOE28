@@ -1,0 +1,168 @@
+{
+  "candidate": "gems28-s22-ctxhgb-20261026-e23dabcec6e2",
+  "validator_allfinite": {
+    "file": "gems28-s22-ctxhgb-20261026-e23dabcec6e2-allfinite.tif",
+    "bytes": 826194,
+    "sha256": "77934be607d48a4daec5b046009cdabf61d3fdee210aadc75be82ac70f3beb2e",
+    "variant": "allfinite",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "nodata_convention": {
+        "pass": true,
+        "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+        "hard": true
+      },
+      "outside_footprint_is_zero_and_finite": {
+        "pass": true,
+        "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+        "hard": true
+      },
+      "strict_whole_array_range": {
+        "pass": true,
+        "detail": "whole-array min=0 max=1",
+        "hard": true
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": true
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 37654,
+    "nonfinite_inside_px": 0,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "validator_nan": {
+    "file": "gems28-s22-ctxhgb-20261026-e23dabcec6e2-nan.tif",
+    "bytes": 1590692,
+    "sha256": "0234de8e61d6eb037f06c8c6574e5dc5014111c16a1cbd30ed01d828e0469524",
+    "variant": "nan",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "nodata_convention": {
+        "pass": true,
+        "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+        "hard": true
+      },
+      "outside_footprint_is_nan": {
+        "pass": true,
+        "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+        "hard": true
+      },
+      "nodata_tag_is_nan": {
+        "pass": true,
+        "detail": "nodata=NaN declared, same as the sample submission",
+        "hard": true
+      },
+      "masked_read_in_0_1": {
+        "pass": true,
+        "detail": "masked count=5167373, min=0, max=1",
+        "hard": true
+      },
+      "nan_aware_range_in_0_1": {
+        "pass": true,
+        "detail": "nanmin=0 nanmax=1",
+        "hard": true
+      },
+      "strict_whole_array_range_ignoring_nan_is_informational": {
+        "pass": false,
+        "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+        "hard": false
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": true
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 37654,
+    "nonfinite_inside_px": 0,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "n_dots": 37654,
+  "dotset_sha256": "e23dabcec6e2b347901f093f96382ac84d027192c53290a07b08459a011e9de1",
+  "uniqueness_worst_overlap3px": {
+    "file": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
+    "dotset_sha256": "0419012029a214321f9691f13b3f22a96cbda2dc1a0e5b055a7ca7ecfda83e30",
+    "registry_dots": 38545,
+    "frac_our_dots_within3px": 0.6992351410208743,
+    "jaccard_exact": 0.029173813800834694,
+    "spearman_surface_vs_registry_sample200k": 0.10236896468924972
+  },
+  "uniqueness_vs_champion": {
+    "file": "champion32_zeros.tif",
+    "dotset_sha256": "c928e233d07802983283e0c937f7b00ad8ab565a67800cc1c4c8ae812d21baf3",
+    "registry_dots": 37654,
+    "frac_our_dots_within3px": 0.4205396505019387,
+    "jaccard_exact": 0.019673684923160246,
+    "spearman_surface_vs_registry_sample200k": 0.06707589714670831
+  }
+}

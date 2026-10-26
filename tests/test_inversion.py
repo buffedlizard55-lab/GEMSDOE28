@@ -131,6 +131,8 @@ def test_verify_downloads_reports_known_archive_metadata_failures(tmp_path):
     assert checks["all_tifs_registered_for_audit"]
     for slot in ("primary", "secondary", "tertiary", "quaternary"):
         assert checks[f"{slot}_nan_sha256"]
+    s22c_checks = [name for name in checks if name.startswith("s22c_candidate")]
+    assert s22c_checks and all(checks[name] for name in s22c_checks)
 
 
 def test_historical_manifest_slots_remain_only_in_archive():
