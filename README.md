@@ -1,4 +1,4 @@
-# Session 20 (`S20-NCHC` / `H43-1`) — 2026-10-26 UTC (read first every session)
+# Parallel Session 20-NCHC (`S20-NCHC` / `H43-1`) — 2026-10-26 UTC (read first every session)
 
 ## NEW GENUINELY UNIQUE GeoTIFF GENERATED & BYTE-VERIFIED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
 
@@ -7,31 +7,141 @@
 - **Unique Portal Name:** `GEMSDOE28-S20-NCHC-20261026-d432a1d5d6ee`
 - **Short Submission Note (`93/140` chars):** `S20-NCHC nematic+claycap 300m submod B2 40071d | HOLDOUT-DTI 0.1313 vs 0.1444 | DO NOT SUBMIT`
 - **Automated Validation & Promotion Gate (`scripts/verify_downloads.py` + `scripts/check_promotion.py`):**
-  - **File / Portal `[0, 1]` Range Gate:** **PASS (`407 / 407` checks)** — zero NaN/Inf across all `12,279,160` cells, strict `[0.0, 1.0]`, exact template CRS/shape/geotransform, zero catalogue overlap.
+  - **File / Portal `[0, 1]` Range Gate:** **PASS** — zero NaN/Inf across all `12,279,160` cells, strict `[0.0, 1.0]`, exact template CRS/shape/geotransform, zero catalogue overlap.
   - **Leakage Canary (`SegmentHoldout.canary`):** **PASS (`28 / 28` features)** — max single-feature `AUC = 0.6010 <= 0.90`.
-  - **Cross-Site Duplicate Stop:** **PASS** — across all `112` published 9-site+PR48 rasters, OOF surface `max |Spearman| = 0.1035 <= 0.90`, full surface `max |Spearman| = 0.1280 <= 0.90`, final dots `max |Spearman| = 0.0583 <= 0.90`, and `max 3-px dot overlap = 53.63% <= 70%` (`58.35% <= 70%` across all `118` method rasters incl. historic references).
-  - **Holdout Performance (`HOLDOUT-DTI`, `gems-segment-pooled-v1`, `60,988` withheld positives, `583` 10-km bootstrap blocks, seeds `340–344`):** **`0.131263` (`95% CI [0.120346, 0.141838]`)** vs retrained visible-only 32-band H38 baseline **`0.144433` (`95% CI [0.131520, 0.157926]`)**, paired delta **`-0.013171` (`95% CI [-0.027721, -0.000417]`)**. **Won the Walker Lane + geothermal `SW` quadrant (`0.112115` vs `0.098698`, `+0.013416`)** and jumped `6.44×` over `S18-MXTP` (`0.020384`), while diagnosing the missing signed piedmont concavity operator for `NE`/`SE` Basin-and-Range range fronts (`H43-2`).
-  - **Verdict:** `verdict: "negative"`, `submission_ready: false`, `slot_selected: false` (**DO NOT SUBMIT TO PORTAL — 0 weekly slots spent**).
-- **Auditable Deliverables:** [Executive Summary](docs/executive-summary.html) · [9-Site Executive Review](docs/cross-site-review.html) · [Frozen S20 Preregistration](knowledge/56_s20_preregistration.md) · [Full S20 Scientific & 9-Site Report](knowledge/57_s20_nchc_result_and_9site_review.md) · [S20 JSON Run Card](evidence/s20_nchc_run_card.json)
+  - **Cross-Site & Concurrent-Lane Duplicate Stop:** **PASS** — across all `112` pre-merge 9-site+PR48 rasters AND all `4` concurrent `2026-10-26` lanes (`S19-ASCP`, `S19B-RADLIN`, `S20-H43`, `S20V`), `max |Spearman| = 0.0583 <= 0.90` and `max 3-px dot overlap = 53.63% <= 70%` (`31.49%` vs `S20-H43`, `27.89%` vs `S20V`, `52.24%` vs `S19B-RADLIN`, `28.84%` vs `S19-ASCP`).
+  - **Holdout Performance (`HOLDOUT-DTI`, `gems-segment-pooled-v1`, `60,988` withheld positives, `583` 10-km bootstrap blocks, seeds `340–344`):** **`0.131263` (`95% CI [0.120346, 0.141838]`)** vs retrained visible-only 32-band H38 baseline **`0.144433` (`95% CI [0.131520, 0.157926]`)**, paired delta **`-0.013171` (`95% CI [-0.027721, -0.000417]`)**. **Won the Walker Lane + geothermal `SW` quadrant (`0.112115` vs `0.098698`, `+0.013416`)**, while diagnosing the missing signed piedmont break-in-slope concavity operator for `NE`/`SE` Basin-and-Range range fronts (`H43-2`).
+  - **Parallel-run disclosure & Verdict:** Branched from `10c26af` before `Session 20-H43` and `S20V` merged (`340–344` concurrent seed overlap disclosed in `registry/irregularities.json`; never pool numbers across parallel sessions). `verdict: "negative"`, `submission_ready: false`, `slot_selected: false` (**DO NOT SUBMIT TO PORTAL — 0 weekly slots spent**).
+- **Auditable Deliverables:** [Executive Summary](docs/executive-summary.html) · [9-Site Executive Review](docs/cross-site-review.html) · [Frozen S20-NCHC Preregistration](knowledge/56_s20_preregistration.md) · [Full S20-NCHC Scientific & 9-Site Report](knowledge/57_s20_nchc_result_and_9site_review.md) · [S20-NCHC JSON Run Card](evidence/s20_nchc_run_card.json)
 
 ---
 
-# Session 19 review — 2026-10-26 (archived prior session)
+# Parallel Session 20V result — 2026-10-26 (vesselness lane; read with Session 20-H43 below)
 
-**No new TIFF was generated; no file is approved to submit.** The nine-site review ranks the supplied GEMSDOE32 H33-2-B2 claim, `0.2778`, highest among the values in the prompt, but labels it **USER-REPORTED / UNVERIFIED** (not HOLDOUT-DTI or ORGANIZER-CONFIRMED). A method lane, complete parallel registry, frozen strict-protocol baseline, and local feature cache are missing. Do not reuse the prior S18 TIFF or copy/prune an older submission.
+**A fourth concurrent unique TIFF was generated in parallel and likewise REJECTED. No file is approved.**
 
-- [Nine-site executive scorecard, ranked hypotheses and source links](docs/cross-site-review.html)
-- [Full Session 19 review](knowledge/55_session19_cross_site_review.md)
-- [Session 19 JSON run card](evidence/session19_run_card.json)
+[**Download the S20V unique research TIFF (DO NOT SUBMIT)**](docs/downloads/gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif)
+· [S20V full result + nine-site executive summary](knowledge/60_s20v_result.md)
+· [S20V JSON run card](evidence/s20v_run_card.json)
+· [Preregistration + 5 ranked hypotheses](knowledge/59_s20v_preregistration_and_hypotheses.md)
 
-The top proposed research hypothesis is displaced potential-field piercing markers; it is not assigned or run. The JSON card records a negative/blocked review, zero experiments, no raster hash, and no slot selection. Existing S18-MXTP remains the latest generated research TIFF and its prior holdout rejection remains in force.
+S20V-H2 (multi-scale Hessian tubularity of the LiDAR scarp-step field; 37,500 dots) declared its lane
+before experimenting and ran 3/3 experiments. Automated gates — no human inspector: canary AUC
+0.5378 PASS; uniqueness PASS; exact-file validation PASS (all-finite {0,1}, no NaN anywhere, template
+grid). **HOLDOUT-DTI** (LOSFO whole-system buffered holdout, seeds 340–342, 49,387 pooled withheld
+positives): lane **0.08631** vs control **0.09881**, Δ **−0.01251** (95% CI
+**[−0.03170, +0.00133]**) → **gate FAILED, verdict `negative`, no slot spent**.
+**Parallel-run disclosure:** this run was labelled “S20” on its branch and independently claimed
+seeds 340–342; Session 20-H43 (below, merged first) used seeds 340–344 under a different
+(interleaved) protocol and owns the `s20_*` filenames. Renamed **S20V** at merge (PR #53); never pool
+numbers across S19-ASCP / S19B-RADLIN / Session 20-H43 / S20V. Both S20-H43 and S20V independently
+byte-verified the champion lineage (solo minus the ≤2 px catalogue ring, symmetric difference 0):
+the owner-reported **0.2778** (USER-REPORTED / UNVERIFIED) is emission hygiene, and S20V inversion
+bounds further pruning near ~0.285 versus the dated 2026-10-26 official-leaderboard top **0.4413**
+(public row, not a receipt). Next priority: U-Net patch segmentation (`knowledge/59` S20-H1).
+**Maximize P(Win) · Own the Outcome.**
 
-# Current result — 2026-10-25 S18-MXTP (prior run; read its limits)
+# Session 20-H43 result — 2026-10-26 (read first every session)
 
-## PRIOR UNIQUE TIFF — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+**A new unique TIFF was generated and the automated gates REJECTED it. No file is approved to submit.**
+Session 20 declared its own lane in writing before experimenting (the prompt's method-paragraph
+assignment is absent), ran exactly the 3 permitted experiments, and the pipeline — no human
+inspector — produced the rejection. Do not retune seeds 340–344; do not submit the S20 file.
+
+- [Session 20 executive result page (site)](docs/session20-result.html)
+- [Full Session 20 report: nine-site answer, champion mechanism, gate numbers](knowledge/57_s20_result.md)
+- [Frozen preregistration H43-1](knowledge/56_s20_preregistration_H43-1.md)
+- [Session 20 JSON run card](evidence/session20_h43_run_card.json)
+
+**Nine-site executive answer (all values USER-REPORTED / UNVERIFIED, no organizer receipts):**
+GEMSDOE32 `h33-h33-2-b2-…-e5eb6e7e-zeros` (**0.2778**, 37,654 dots) is the best listed file, ahead of
+GEMSDOE36 (0.2750), GEMSDOE28 (0.2710), GEMSDOE31 (0.2708), GEMSDOE33 (0.2632), GEMSDOE25/30
+(0.2600), GEMSDOE24 (0.2477) and GEMSDOE27 (0.2449). This session fetched the champion bytes
+(`GEMSDOE32@012e17b`, SHA-256 `c55bafc4…6fa9`) and proved the lineage **byte-exactly**: H19-5
+(121,131) → `dot_thin(·,2.8)` (44,090) → −ring≤1px (40,199 solo) → −ring≤2px (37,654 champion),
+symmetric difference 0 at each step. The champion is therefore emission hygiene on one surface
+(kernel-matched spacing + deletion of catalogue-flank shadow below the ΔTP/ΔFP≈0.059 inclusion
+bar), not new geology. **Irregularity:** the champion's own audit JSON calls it UNSCORED with a
+0.2747 MODEL projection, so the 0.2778 association still has no receipt; if that hash has no
+receipt on the account, the champion file itself (downloaded from GEMSDOE32, never re-hosted
+here as ours) is the single best slot candidate, subject to the separate selector step.
+
+**New S20 candidate (🔴 DO NOT SUBMIT):**
+[`gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif`](docs/downloads/gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif)
+— 33,354 dots, SHA-256 `960c3d49…f117`, all-finite {0,1} float32, template grid exact (fixes the
+"[0,1] range" error class), not an exact duplicate of any of 22 registry dot-sets. **HOLDOUT-DTI**
+(`metric.dti_binary`, seeds 340–344, 61,613 pooled withheld positives): 0.095807 vs
+champion-analogue 0.103241, paired gain **−0.007434 (95% CI [−0.01081, −0.00496], 0/20 cells)**;
+greedy packing exhausted at 88.6% of target; 94.3% of dots within 3 px of the champion =
+duplicate family lane by protocol. Verdict `negative`. Next: fresh-seed piercing-marker lane
+(report §5). Core values unchanged: **Maximize P(Win)**, **Own the Outcome**.
+
+**Parallel-session note:** `main` also carries a distinct *Session 20 validation review* (no experiment; `knowledge/56_session20_validation_review.md`, card `evidence/session20_run_card.json`) and the S19-ASCP experiment (`knowledge/56_s19_result.md`) from concurrent sessions. Their negative verdicts stand independently; never pool their numbers with Session 20-H43 (`s20-parallel-session-id-collision` in `registry/irregularities.json`).
+
+# Session 20 — validation hardening (2026-10-26)
+
+**This validation review generated no TIFF; no file is approved to submit.** Reviewed the standing owner request and
+prior results. Fixed cache NaN/infinity detection and ambiguous evidence JSON in the
+automated gates; no scientific result or score was invented.
+[Three-pass review and next steps](knowledge/56_session20_validation_review.md) ·
+[JSON run card](evidence/session20_run_card.json) ·
+[Nine-site executive comparison](docs/cross-site-review.html).
+The standing normalized owner prompt below remains the starting point every session.
+
+# Current result — 2026-10-26 S19-ASCP (read first every session)
+
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+
+[**Download the new unique research TIFF**](docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif)
+· [Executive summary / exact submission process](docs/executive-summary.html)
+· [JSON run card](evidence/s19_ascp_run_card.json)
+· [Frozen hypotheses and method](knowledge/55_s19_preregistration.md)
+
+S19 tested one new lane: paired LiDAR crest/toe curvature × uphill-facing selectivity × coherence.
+It produced 37,654 independently placed dots and passed the feature-alone leakage canary, declared
+53-raster registry checks and exact-file validation. It then **failed** the shared whole-component,
+1.5 km-buffered performance gate. **HOLDOUT-DTI** (`gems-segment-pooled-v1`, 60,988 withheld
+positives): **0.080806** (95% CI **[0.072325, 0.089111]**) versus recomputed visible-only baseline
+**0.141694**; paired gain **−0.060888** (95% CI **[−0.074029, −0.047638]**). This local proxy is
+not an organizer score. Three experiments used; no slot selected.
+
+The TIFF is single-band float32, all-finite across the whole array, values {0,1}, EPSG:32611,
+3,730 × 3,292, and matches the template transform. SHA-256:
+`553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537`. Maximum pre-placement
+|Spearman| was 0.1030; maximum exact-Euclidean surface-support overlap was 20.6%; maximum final-dot overlap was
+28.0%, below the 0.90/70% duplicate stops (exact maximum 0.279811 in the S19 run card). **Safe to download for research; NOT OK to submit.**
+Road cuts, channels, terrace/paleo-shoreline risers, landslides and mine benches remain named mimics.
+
+The owner prompt and Core Values remain archived below and normalized in
+[`knowledge/53_current_request.md`](knowledge/53_current_request.md). The explicit parallel lane
+paragraph was again absent; the run autonomously used the repository's documented scarp-observable
+next step and does not claim external exclusivity. Historical S18 and earlier notices are superseded.
+
+A concurrent pre-experiment Session 19 review ran zero experiments before inputs were restored. Its
+[nine-site scorecard](docs/cross-site-review.html), [review dossier](knowledge/55_session19_cross_site_review.md)
+and [blocked JSON card](evidence/session19_run_card.json) are retained as an audit snapshot, not the
+current result. Its “no new TIFF” statement was true for that checkout but is superseded by S19-ASCP.
+
+**Parallel-run addendum (S19B-RADLIN, same date, different lane):** a second concurrent run executed
+the ThK alteration-lineament lane ([preregistration](knowledge/57_s19b_radlin_preregistration.md),
+[result](knowledge/58_s19b_radlin_result.md), run card `evidence/s19b_radlin_run_card.json`). It
+generated a unique 37,654-dot TIFF (`GEMSDOE28-S19-RADLIN-6fa38f9d317b`) that **passed** its frozen
+buffered LOSFO gate (HOLDOUT-DTI **0.107369** vs baseline 0.101933; paired gain **+0.005436**,
+95% CI [+0.001285, +0.009245], seeds 320–324) but **failed** the frozen strict any-raster
+uniqueness rule: 93.4% of dots within 3 px of the unscored dense H37-1 probe-union registry raster
+(≤44.5% vs every scored focus-site artifact). Verdict `negative`; 🔴 DO NOT SUBMIT
+(`s19-uniqueness-dense-probe-blanket`). It used a different evaluator than S19-ASCP above
+(eval_set v2 LOSFO vs `gems-segment-pooled-v1`) — never pool or compare the two sessions' deltas.
+Renamed S19B on merge because S19-ASCP merged first (`s19b-parallel-session-collision-and-rename`);
+no number, hash or verdict changed. Still **no file approved**.
+
+---
+
+# Current result — 2026-10-25 S18-MXTP (read first every session)
+
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 
 [**Download the new unique research TIFF**](docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif)
-· [Nine-site executive comparison](knowledge/55_focus_site_review.md)
 · [Executive summary / submission process](docs/executive-summary.html)
 · [Current full JSON run card](evidence/s18_mxtp_run_card.json)
 · [Scientific result, sources and next steps](knowledge/54_s18_result.md)

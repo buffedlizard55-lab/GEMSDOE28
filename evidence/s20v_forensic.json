@@ -1,0 +1,601 @@
+{
+  "schema": 1,
+  "session": "S20 Experiment 1 (education only; no dots copied to any candidate)",
+  "date_utc": "2026-10-26",
+  "score_evidence_class": "USER-REPORTED / UNVERIFIED for every ladder score; no organizer receipt",
+  "leaderboard_observation": {
+    "value": 0.4413,
+    "team": "xiaofanhu (#1)",
+    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "observed_utc": "2026-10-26 via research fetch (chunk 0); dated public observation, NOT a receipt",
+    "note": "Prompt also quotes 0.3195 as a high score; superseded as a current-top claim by the dated 0.4413 observation. Neither value is linked to any local raster."
+  },
+  "metric": "DTI(alpha=0.2, beta=0.8), triangular 300 m kernel (official problem page, re-fetched 2026-10-26, both chunks read)",
+  "closure": "DTI = A/(0.8|G| + 0.2N) holds exactly when A == B (truth-side credit equals prediction-side matched mass); for dotted emissions A~=B is an approximation, so implied credits are closure estimates, not measurements of hidden truth.",
+  "files": {
+    "champion_GEMSDOE32_e5eb6e7e": {
+      "path": "/tmp/gems-mirrors/GEMSDOE32/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "sha256_checked": true,
+      "owner_reported_score": 0.2778,
+      "evidence_class": "USER-REPORTED / UNVERIFIED",
+      "dot_count": 37654,
+      "on_catalogue": 0,
+      "d_cat_hist_px": {
+        "=0": 0,
+        "(0,1]": 0,
+        "(1,2]": 0,
+        "(2,3]": 2171,
+        "(3,5]": 3466,
+        "(5,10]": 5723,
+        ">10": 26294
+      }
+    },
+    "site36_GEMSDOE36_9b9ea4e6": {
+      "path": "/tmp/gems-mirrors/GEMSDOE36/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+      "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+      "sha256_checked": true,
+      "owner_reported_score": 0.275,
+      "evidence_class": "USER-REPORTED / UNVERIFIED",
+      "dot_count": 38854,
+      "on_catalogue": 0,
+      "d_cat_hist_px": {
+        "=0": 0,
+        "(0,1]": 0,
+        "(1,2]": 0,
+        "(2,3]": 2281,
+        "(3,5]": 3543,
+        "(5,10]": 5959,
+        ">10": 27071
+      }
+    },
+    "site33_GEMSDOE33_cb490425926e": {
+      "path": "/tmp/gems-mirrors/GEMSDOE33/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "sha256_checked": true,
+      "owner_reported_score": 0.2632,
+      "evidence_class": "USER-REPORTED / UNVERIFIED",
+      "dot_count": 41865,
+      "on_catalogue": 0,
+      "d_cat_hist_px": {
+        "=0": 0,
+        "(0,1]": 1377,
+        "(1,2]": 2517,
+        "(2,3]": 2130,
+        "(3,5]": 3533,
+        "(5,10]": 5783,
+        ">10": 26525
+      }
+    },
+    "solo_GEMSDOE31_8acb75e1_allfinite": {
+      "path": "/tmp/gems-mirrors/GEMSDOE31/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
+      "sha256": "acd853936e5a7170b207f23411b1844caa0e7cfdfc303c600e520ccfe75159e6",
+      "sha256_checked": true,
+      "owner_reported_score": 0.2708,
+      "evidence_class": "USER-REPORTED / UNVERIFIED",
+      "dot_count": 40199,
+      "on_catalogue": 0,
+      "d_cat_hist_px": {
+        "=0": 0,
+        "(0,1]": 0,
+        "(1,2]": 2545,
+        "(2,3]": 2171,
+        "(3,5]": 3466,
+        "(5,10]": 5723,
+        ">10": 26294
+      }
+    },
+    "site30_GEMSDOE30_91eae1ca": {
+      "path": "/tmp/gems-mirrors/GEMSDOE30/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+      "sha256_checked": false,
+      "owner_reported_score": 0.26,
+      "evidence_class": "USER-REPORTED / UNVERIFIED",
+      "dot_count": 44090,
+      "on_catalogue": 0,
+      "d_cat_hist_px": {
+        "=0": 0,
+        "(0,1]": 3891,
+        "(1,2]": 2545,
+        "(2,3]": 2171,
+        "(3,5]": 3466,
+        "(5,10]": 5723,
+        ">10": 26294
+      }
+    },
+    "d28_local_mirror": {
+      "path": "/home/user/GEMSDOE28/data/dotted_h19_5_d2_8_nan.tif",
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "sha256_checked": true,
+      "owner_reported_score": 0.26,
+      "evidence_class": "USER-REPORTED / UNVERIFIED",
+      "dot_count": 44090,
+      "on_catalogue": 0,
+      "d_cat_hist_px": {
+        "=0": 0,
+        "(0,1]": 3891,
+        "(1,2]": 2545,
+        "(2,3]": 2171,
+        "(3,5]": 3466,
+        "(5,10]": 5723,
+        ">10": 26294
+      }
+    },
+    "d15_local_mirror": {
+      "path": "/home/user/GEMSDOE28/data/dotted_h19_5_d1_5_nan.tif",
+      "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+      "sha256_checked": true,
+      "owner_reported_score": 0.2477,
+      "evidence_class": "USER-REPORTED / UNVERIFIED",
+      "dot_count": 60069,
+      "on_catalogue": 0,
+      "d_cat_hist_px": {
+        "=0": 0,
+        "(0,1]": 5355,
+        "(1,2]": 3414,
+        "(2,3]": 3169,
+        "(3,5]": 4668,
+        "(5,10]": 7835,
+        ">10": 35628
+      }
+    },
+    "h19_5_solid_local_mirror": {
+      "path": "/home/user/GEMSDOE28/data/h19_5_nan.tif",
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+      "sha256_checked": true,
+      "owner_reported_score": 0.1922,
+      "evidence_class": "USER-REPORTED / UNVERIFIED",
+      "dot_count": 121131,
+      "on_catalogue": 0,
+      "d_cat_hist_px": {
+        "=0": 0,
+        "(0,1]": 9651,
+        "(1,2]": 7675,
+        "(2,3]": 6841,
+        "(3,5]": 9826,
+        "(5,10]": 15753,
+        ">10": 71385
+      }
+    }
+  },
+  "relations": {
+    "champion_subset_of_solo": true,
+    "champion_equals_solo_minus_dcat_le2": true,
+    "removed_solo_to_champion": 2545,
+    "added_solo_to_champion": 0,
+    "solo_equals_d28_minus_dcat_le1": true,
+    "removed_d28_to_solo": 3891,
+    "added_d28_to_solo": 0,
+    "site30_dots_equal_d28_dots": true,
+    "site36_contains_champion": true,
+    "site36_added_over_champion": 1200,
+    "site36_removed_from_champion": 0,
+    "site33_shared_with_champion": 31614,
+    "site33_only": 10251,
+    "champion_ring_2_3_dots_B3_measurement_only": 2171,
+    "champion_minus_dcat_le3_count_B3_measurement_only": 35483
+  },
+  "inversion": {
+    "|G|=10000": {
+      "ladder": {
+        "h19_5_solid_local_mirror": {
+          "N": 121131,
+          "reported_dti": 0.1922,
+          "implied_credit_A": 6193.87564,
+          "credit_per_dot_avg": 0.051133695255549776
+        },
+        "d15_local_mirror": {
+          "N": 60069,
+          "reported_dti": 0.2477,
+          "implied_credit_A": 4957.41826,
+          "credit_per_dot_avg": 0.08252872962759494,
+          "marginal_vs_prev": {
+            "prev": "h19_5_solid_local_mirror",
+            "dN": -61062,
+            "dA": -1236.4573799999998,
+            "marginal_credit_per_dot": 0.020249211948511345,
+            "breakeven_0.2xDTI_prev": 0.03844
+          }
+        },
+        "d28_local_mirror": {
+          "N": 44090,
+          "reported_dti": 0.26,
+          "implied_credit_A": 4372.68,
+          "credit_per_dot_avg": 0.09917623043774099,
+          "marginal_vs_prev": {
+            "prev": "d15_local_mirror",
+            "dN": -15979,
+            "dA": -584.7382600000001,
+            "marginal_credit_per_dot": 0.03659417109956819,
+            "breakeven_0.2xDTI_prev": 0.04954
+          }
+        },
+        "solo_GEMSDOE31_8acb75e1_allfinite": {
+          "N": 40199,
+          "reported_dti": 0.2708,
+          "implied_credit_A": 4343.57784,
+          "credit_per_dot_avg": 0.10805188785790691,
+          "marginal_vs_prev": {
+            "prev": "d28_local_mirror",
+            "dN": -3891,
+            "dA": -29.102160000000367,
+            "marginal_credit_per_dot": 0.007479352351580665,
+            "breakeven_0.2xDTI_prev": 0.052000000000000005
+          }
+        },
+        "champion_GEMSDOE32_e5eb6e7e": {
+          "N": 37654,
+          "reported_dti": 0.2778,
+          "implied_credit_A": 4314.4562399999995,
+          "credit_per_dot_avg": 0.11458161788920167,
+          "marginal_vs_prev": {
+            "prev": "solo_GEMSDOE31_8acb75e1_allfinite",
+            "dN": -2545,
+            "dA": -29.1216000000004,
+            "marginal_credit_per_dot": 0.011442671905697603,
+            "breakeven_0.2xDTI_prev": 0.05416
+          }
+        },
+        "site36_GEMSDOE36_9b9ea4e6": {
+          "N": 38854,
+          "reported_dti": 0.275,
+          "implied_credit_A": 4336.97,
+          "credit_per_dot_avg": 0.11162222679775571,
+          "marginal_vs_prev": {
+            "prev": "champion_GEMSDOE32_e5eb6e7e",
+            "dN": 1200,
+            "dA": 22.51376000000073,
+            "marginal_credit_per_dot": 0.018761466666667274,
+            "breakeven_0.2xDTI_prev": 0.05556
+          }
+        }
+      },
+      "B3_projection_measurement_only": {
+        "eff_0.0": 0.28578992885815346,
+        "eff_0.0065": 0.2848551819615012,
+        "eff_0.02": 0.282913784560762,
+        "eff_0.0556": 0.2777942477114052
+      },
+      "targets_from_champion": {
+        "0.3195": {
+          "credit_needed_at_champion_N": 4962.0905999999995,
+          "extra_credit_vs_champion": 647.63436,
+          "new_dots_needed_by_marginal_efficiency": {
+            "eff_0.2": 4758.5184423218225,
+            "eff_0.3": 2743.0510800508264,
+            "eff_0.4": 1926.909729247248,
+            "eff_0.5": 1485.0592983260722,
+            "eff_1.0": 691.8431364170494
+          }
+        },
+        "0.4413": {
+          "credit_needed_at_champion_N": 6853.74204,
+          "extra_credit_vs_champion": 2539.2858000000006,
+          "new_dots_needed_by_marginal_efficiency": {
+            "eff_0.2": 22724.948988723827,
+            "eff_0.3": 11992.470954944747,
+            "eff_0.4": 8145.524475524477,
+            "eff_0.5": 6167.206975275661,
+            "eff_1.0": 2785.098602671815
+          }
+        }
+      }
+    },
+    "|G|=12226": {
+      "ladder": {
+        "h19_5_solid_local_mirror": {
+          "N": 121131,
+          "reported_dti": 0.1922,
+          "implied_credit_A": 6536.1454,
+          "credit_per_dot_avg": 0.05395931181943516
+        },
+        "d15_local_mirror": {
+          "N": 60069,
+          "reported_dti": 0.2477,
+          "implied_credit_A": 5398.52242,
+          "credit_per_dot_avg": 0.08987202084269758,
+          "marginal_vs_prev": {
+            "prev": "h19_5_solid_local_mirror",
+            "dN": -61062,
+            "dA": -1137.62298,
+            "marginal_credit_per_dot": 0.018630621008155646,
+            "breakeven_0.2xDTI_prev": 0.03844
+          }
+        },
+        "d28_local_mirror": {
+          "N": 44090,
+          "reported_dti": 0.26,
+          "implied_credit_A": 4835.688000000001,
+          "credit_per_dot_avg": 0.10967765933318215,
+          "marginal_vs_prev": {
+            "prev": "d15_local_mirror",
+            "dN": -15979,
+            "dA": -562.8344199999992,
+            "marginal_credit_per_dot": 0.035223381938794616,
+            "breakeven_0.2xDTI_prev": 0.04954
+          }
+        },
+        "solo_GEMSDOE31_8acb75e1_allfinite": {
+          "N": 40199,
+          "reported_dti": 0.2708,
+          "implied_credit_A": 4825.81848,
+          "credit_per_dot_avg": 0.12004822209507698,
+          "marginal_vs_prev": {
+            "prev": "d28_local_mirror",
+            "dN": -3891,
+            "dA": -9.869520000001103,
+            "marginal_credit_per_dot": 0.0025364996144952717,
+            "breakeven_0.2xDTI_prev": 0.052000000000000005
+          }
+        },
+        "champion_GEMSDOE32_e5eb6e7e": {
+          "N": 37654,
+          "reported_dti": 0.2778,
+          "implied_credit_A": 4809.162480000001,
+          "credit_per_dot_avg": 0.127719830031338,
+          "marginal_vs_prev": {
+            "prev": "solo_GEMSDOE31_8acb75e1_allfinite",
+            "dN": -2545,
+            "dA": -16.65599999999904,
+            "marginal_credit_per_dot": 0.0065445972495084635,
+            "breakeven_0.2xDTI_prev": 0.05416
+          }
+        },
+        "site36_GEMSDOE36_9b9ea4e6": {
+          "N": 38854,
+          "reported_dti": 0.275,
+          "implied_credit_A": 4826.690000000001,
+          "credit_per_dot_avg": 0.12422633448293616,
+          "marginal_vs_prev": {
+            "prev": "champion_GEMSDOE32_e5eb6e7e",
+            "dN": 1200,
+            "dA": 17.52752000000055,
+            "marginal_credit_per_dot": 0.014606266666667124,
+            "breakeven_0.2xDTI_prev": 0.05556
+          }
+        }
+      },
+      "B3_projection_measurement_only": {
+        "eff_0.0": 0.2849468804436703,
+        "eff_0.0065": 0.28411076232121063,
+        "eff_0.02": 0.2823742092976407,
+        "eff_0.0556": 0.277794854657708
+      },
+      "targets_from_champion": {
+        "0.3195": {
+          "credit_needed_at_champion_N": 5531.056200000001,
+          "extra_credit_vs_champion": 721.89372,
+          "new_dots_needed_by_marginal_efficiency": {
+            "eff_0.2": 5304.141954445261,
+            "eff_0.3": 3057.576111817027,
+            "eff_0.4": 2147.8539720321332,
+            "eff_0.5": 1655.3398761751894,
+            "eff_1.0": 771.1715842324538
+          }
+        },
+        "0.4413": {
+          "credit_needed_at_champion_N": 7639.609080000001,
+          "extra_credit_vs_champion": 2830.4466,
+          "new_dots_needed_by_marginal_efficiency": {
+            "eff_0.2": 25330.647932700915,
+            "eff_0.3": 13367.557381694533,
+            "eff_0.4": 9079.51048951049,
+            "eff_0.5": 6874.35420410939,
+            "eff_1.0": 3104.4449075394305
+          }
+        }
+      }
+    },
+    "|G|=15000": {
+      "ladder": {
+        "h19_5_solid_local_mirror": {
+          "N": 121131,
+          "reported_dti": 0.1922,
+          "implied_credit_A": 6962.6756399999995,
+          "credit_per_dot_avg": 0.05748054288332466
+        },
+        "d15_local_mirror": {
+          "N": 60069,
+          "reported_dti": 0.2477,
+          "implied_credit_A": 5948.218260000001,
+          "credit_per_dot_avg": 0.09902309444139241,
+          "marginal_vs_prev": {
+            "prev": "h19_5_solid_local_mirror",
+            "dN": -61062,
+            "dA": -1014.4573799999989,
+            "marginal_credit_per_dot": 0.016613562936032212,
+            "breakeven_0.2xDTI_prev": 0.03844
+          }
+        },
+        "d28_local_mirror": {
+          "N": 44090,
+          "reported_dti": 0.26,
+          "implied_credit_A": 5412.68,
+          "credit_per_dot_avg": 0.12276434565661148,
+          "marginal_vs_prev": {
+            "prev": "d15_local_mirror",
+            "dN": -15979,
+            "dA": -535.5382600000003,
+            "marginal_credit_per_dot": 0.03351512985793856,
+            "breakeven_0.2xDTI_prev": 0.04954
+          }
+        },
+        "solo_GEMSDOE31_8acb75e1_allfinite": {
+          "N": 40199,
+          "reported_dti": 0.2708,
+          "implied_credit_A": 5426.77784,
+          "credit_per_dot_avg": 0.13499783178686037,
+          "marginal_vs_prev": {
+            "prev": "d28_local_mirror",
+            "dN": -3891,
+            "dA": 14.09783999999945,
+            "marginal_credit_per_dot": -0.0036231919814956183,
+            "breakeven_0.2xDTI_prev": 0.052000000000000005
+          }
+        },
+        "champion_GEMSDOE32_e5eb6e7e": {
+          "N": 37654,
+          "reported_dti": 0.2778,
+          "implied_credit_A": 5425.656239999999,
+          "credit_per_dot_avg": 0.1440924268338025,
+          "marginal_vs_prev": {
+            "prev": "solo_GEMSDOE31_8acb75e1_allfinite",
+            "dN": -2545,
+            "dA": -1.1216000000003987,
+            "marginal_credit_per_dot": 0.00044070726915536296,
+            "breakeven_0.2xDTI_prev": 0.05416
+          }
+        },
+        "site36_GEMSDOE36_9b9ea4e6": {
+          "N": 38854,
+          "reported_dti": 0.275,
+          "implied_credit_A": 5436.97,
+          "credit_per_dot_avg": 0.13993334019663356,
+          "marginal_vs_prev": {
+            "prev": "champion_GEMSDOE32_e5eb6e7e",
+            "dN": 1200,
+            "dA": 11.313760000000912,
+            "marginal_credit_per_dot": 0.009428133333334093,
+            "breakeven_0.2xDTI_prev": 0.05556
+          }
+        }
+      },
+      "B3_projection_measurement_only": {
+        "eff_0.0": 0.2841163474126284,
+        "eff_0.0065": 0.28337739388163335,
+        "eff_0.02": 0.28184264424033595,
+        "eff_0.0556": 0.2777954525936554
+      },
+      "targets_from_champion": {
+        "0.3195": {
+          "credit_needed_at_champion_N": 6240.0905999999995,
+          "extra_credit_vs_champion": 814.4343600000002,
+          "new_dots_needed_by_marginal_efficiency": {
+            "eff_0.2": 5984.087876561353,
+            "eff_0.3": 3449.5313850063544,
+            "eff_0.4": 2423.1905980362994,
+            "eff_0.5": 1867.540380646641,
+            "eff_1.0": 870.0292276466191
+          }
+        },
+        "0.4413": {
+          "credit_needed_at_champion_N": 8618.94204,
+          "extra_credit_vs_champion": 3193.2858000000006,
+          "new_dots_needed_by_marginal_efficiency": {
+            "eff_0.2": 28577.821729013787,
+            "eff_0.3": 15081.16463587419,
+            "eff_0.4": 10243.426573426575,
+            "eff_0.5": 7755.587992422404,
+            "eff_1.0": 3502.408362033036
+          }
+        }
+      }
+    },
+    "|G|=20000": {
+      "ladder": {
+        "h19_5_solid_local_mirror": {
+          "N": 121131,
+          "reported_dti": 0.1922,
+          "implied_credit_A": 7731.47564,
+          "credit_per_dot_avg": 0.06382739051109955
+        },
+        "d15_local_mirror": {
+          "N": 60069,
+          "reported_dti": 0.2477,
+          "implied_credit_A": 6939.018260000001,
+          "credit_per_dot_avg": 0.11551745925518987,
+          "marginal_vs_prev": {
+            "prev": "h19_5_solid_local_mirror",
+            "dN": -61062,
+            "dA": -792.4573799999989,
+            "marginal_credit_per_dot": 0.012977913923553092,
+            "breakeven_0.2xDTI_prev": 0.03844
+          }
+        },
+        "d28_local_mirror": {
+          "N": 44090,
+          "reported_dti": 0.26,
+          "implied_credit_A": 6452.68,
+          "credit_per_dot_avg": 0.14635246087548198,
+          "marginal_vs_prev": {
+            "prev": "d15_local_mirror",
+            "dN": -15979,
+            "dA": -486.33826000000045,
+            "marginal_credit_per_dot": 0.030436088616308934,
+            "breakeven_0.2xDTI_prev": 0.04954
+          }
+        },
+        "solo_GEMSDOE31_8acb75e1_allfinite": {
+          "N": 40199,
+          "reported_dti": 0.2708,
+          "implied_credit_A": 6509.97784,
+          "credit_per_dot_avg": 0.1619437757158138,
+          "marginal_vs_prev": {
+            "prev": "d28_local_mirror",
+            "dN": -3891,
+            "dA": 57.29783999999927,
+            "marginal_credit_per_dot": -0.014725736314571901,
+            "breakeven_0.2xDTI_prev": 0.052000000000000005
+          }
+        },
+        "champion_GEMSDOE32_e5eb6e7e": {
+          "N": 37654,
+          "reported_dti": 0.2778,
+          "implied_credit_A": 6536.856239999999,
+          "credit_per_dot_avg": 0.17360323577840334,
+          "marginal_vs_prev": {
+            "prev": "solo_GEMSDOE31_8acb75e1_allfinite",
+            "dN": -2545,
+            "dA": 26.8783999999996,
+            "marginal_credit_per_dot": -0.010561257367386877,
+            "breakeven_0.2xDTI_prev": 0.05416
+          }
+        },
+        "site36_GEMSDOE36_9b9ea4e6": {
+          "N": 38854,
+          "reported_dti": 0.275,
+          "implied_credit_A": 6536.97,
+          "credit_per_dot_avg": 0.1682444535955114,
+          "marginal_vs_prev": {
+            "prev": "champion_GEMSDOE32_e5eb6e7e",
+            "dN": 1200,
+            "dA": 0.11376000000109343,
+            "marginal_credit_per_dot": 9.480000000091119e-05,
+            "breakeven_0.2xDTI_prev": 0.05556
+          }
+        }
+      },
+      "B3_projection_measurement_only": {
+        "eff_0.0": 0.28302244659387094,
+        "eff_0.0065": 0.2824114692205779,
+        "eff_0.02": 0.28114251621450775,
+        "eff_0.0556": 0.27779624013924126
+      },
+      "targets_from_champion": {
+        "0.3195": {
+          "credit_needed_at_champion_N": 7518.0905999999995,
+          "extra_credit_vs_champion": 981.2343600000004,
+          "new_dots_needed_by_marginal_efficiency": {
+            "eff_0.2": 7209.657310800884,
+            "eff_0.3": 4156.011689961882,
+            "eff_0.4": 2919.4714668253505,
+            "eff_0.5": 2250.0214629672105,
+            "eff_1.0": 1048.2153188761888
+          }
+        },
+        "0.4413": {
+          "credit_needed_at_champion_N": 10384.14204,
+          "extra_credit_vs_champion": 3847.2858000000015,
+          "new_dots_needed_by_marginal_efficiency": {
+            "eff_0.2": 34430.69446930375,
+            "eff_0.3": 18169.858316803635,
+            "eff_0.4": 12341.328671328676,
+            "eff_0.5": 9343.96900956915,
+            "eff_1.0": 4219.718121394259
+          }
+        }
+      }
+    }
+  },
+  "reading": "The ladder solid(0.1922) -> d1.5(0.2477) -> d2.8(0.2600) -> solo B1(0.2708) -> champion B2(0.2778) is ONE H19-5 emission family under successive thinning + catalogue-flank pruning (byte-verified subset relations above). Under the closure, both pruned rings earned ~0.003-0.007 credit/dot vs a ~0.052-0.056 break-even, i.e. they were almost pure false-positive mass; GEMSDOE36's +1,200 added dots earned ~0.015/dot, also below break-even, and its reported score fell. The champion therefore leads by emission hygiene against the asymmetric metric, with no evidence in these bytes of additional fault detection. Causation remains conditional: hidden truth and receipts are unavailable."
+}

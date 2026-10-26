@@ -1,0 +1,128 @@
+{
+ "experiment": "S20-EXP1 forensic + leakage canary",
+ "preregistration": "knowledge/56_s20_preregistration_H43-1.md",
+ "inputs": {
+  "h19_5": {
+   "path": "data/h19_5_nan.tif",
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "dots": 121131,
+   "dots_on_catalogue": 0,
+   "dots_ring_le1": 9651,
+   "dots_ring_1_2": 7675,
+   "dots_ring_2_3": 6841,
+   "dots_d_cat_le2_offcat": 17326
+  },
+  "dotted_d1_5": {
+   "path": "data/dotted_h19_5_d1_5_nan.tif",
+   "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "dots": 60069,
+   "dots_on_catalogue": 0,
+   "dots_ring_le1": 5355,
+   "dots_ring_1_2": 3414,
+   "dots_ring_2_3": 3169,
+   "dots_d_cat_le2_offcat": 8769
+  },
+  "dotted_d2_8": {
+   "path": "data/dotted_h19_5_d2_8_nan.tif",
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "dots": 44090,
+   "dots_on_catalogue": 0,
+   "dots_ring_le1": 3891,
+   "dots_ring_1_2": 2545,
+   "dots_ring_2_3": 2171,
+   "dots_d_cat_le2_offcat": 6436
+  },
+  "solo_r1_local": {
+   "path": "docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif",
+   "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+   "dots": 40199,
+   "dots_on_catalogue": 0,
+   "dots_ring_le1": 0,
+   "dots_ring_1_2": 2545,
+   "dots_ring_2_3": 2171,
+   "dots_d_cat_le2_offcat": 2545
+  },
+  "champion_g32_b2": {
+   "path": "data/registry_edu/champion_g32_h33_2_b2_zeros.tif",
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "dots": 37654,
+   "dots_on_catalogue": 0,
+   "dots_ring_le1": 0,
+   "dots_ring_1_2": 0,
+   "dots_ring_2_3": 2171,
+   "dots_d_cat_le2_offcat": 0
+  }
+ },
+ "relations": {
+  "champion_subset_of_solo": true,
+  "champion_added_vs_solo": 0,
+  "champion_removed_vs_solo": 2545,
+  "solo_minus_ringLe2_equals_champion": true,
+  "solo_minus_ringLe2_symmetric_difference_vs_champion": 0,
+  "solo_equals_d28_minus_ringLe1": true,
+  "d28_minus_ringLe1_symmetric_difference_vs_solo": 0,
+  "d28_subset_of_h19_5": true,
+  "champion_subset_of_h19_5": true,
+  "champion_fraction_within_3px_of_solo": 1.0,
+  "h19_5_on_catalogue_px": 0,
+  "dot_thin_h19_5_minus_catalogue_2p8_px": 44090,
+  "dot_thin_regen_equals_pinned_d2_8": true,
+  "dot_thin_regen_symmetric_difference": 0
+ },
+ "canary_seed340_assignment_only": {
+  "NW": {
+   "fold": "NW",
+   "hidden_px_in_fold": 1923,
+   "sample_px": 200000,
+   "auc": {
+    "neg_d_visible": 0.8016924406663348,
+    "ring_le2_indicator": 0.4986014469110773,
+    "tip_indicator": 0.5211642489934663,
+    "eligible_indicator": 0.4887619629505356,
+    "pool_indicator": 0.4880082532464606
+   }
+  },
+  "NE_LidarGapHeavy": {
+   "fold": "NE_LidarGapHeavy",
+   "hidden_px_in_fold": 2521,
+   "sample_px": 200000,
+   "auc": {
+    "neg_d_visible": 0.7427382173986653,
+    "ring_le2_indicator": 0.49059088166500336,
+    "tip_indicator": 0.5150894599509043,
+    "eligible_indicator": 0.48944291661031214,
+    "pool_indicator": 0.48842102099394374
+   }
+  },
+  "SW": {
+   "fold": "SW",
+   "hidden_px_in_fold": 3590,
+   "sample_px": 200000,
+   "auc": {
+    "neg_d_visible": 0.7626657732118864,
+    "ring_le2_indicator": 0.48989221534520866,
+    "tip_indicator": 0.5251209210938874,
+    "eligible_indicator": 0.48880144368138756,
+    "pool_indicator": 0.48805955185723593
+   }
+  },
+  "SE": {
+   "fold": "SE",
+   "hidden_px_in_fold": 4228,
+   "sample_px": 200000,
+   "auc": {
+    "neg_d_visible": 0.7189758495649439,
+    "ring_le2_indicator": 0.4880637498516578,
+    "tip_indicator": 0.5074934850768886,
+    "eligible_indicator": 0.4895695331004858,
+    "pool_indicator": 0.48849060580513065
+   }
+  }
+ },
+ "canary_max_auc": 0.8016924406663348,
+ "canary_pass_le_0_90": true,
+ "catalogue_px": 60988,
+ "footprint_px": 5167373,
+ "runtime_s": 14.0,
+ "note": "Scores in provenance text are USER-REPORTED / UNVERIFIED. Champion audit JSON at GEMSDOE32@012e17b labels the file UNSCORED with MODEL projection 0.2747."
+}

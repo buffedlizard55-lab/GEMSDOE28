@@ -77,7 +77,7 @@
   "submission_ready": false,
   "verification": {
     "site_build": "PASS — two consecutive builds produced identical hashes for generated root/index/report pages",
-    "pytest": "480 passed, 6 skipped; skipped checks require absent hash-pinned input rasters",
+    "pytest": "485 passed, 6 skipped, 9 subtests passed; skipped checks require absent hash-pinned input rasters",
     "ruff": "PASS — src scripts tests",
     "git_diff_check": "PASS",
     "full_scientific_holdout": "NOT RUN — data/lane/registry/baseline prerequisites missing"

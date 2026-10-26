@@ -1,0 +1,1 @@
+S20 H43-1 TPB2-GKC greedy kernel-cover, tip-protected B2, 33354 dots; holdout gate FAILED; DO NOT SUBMIT

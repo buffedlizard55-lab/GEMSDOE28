@@ -2,6 +2,12 @@
   "generated": "2026-10-26T01:30:00Z",
   "items": [
     {
+      "id": "s20-nchc-concurrent-seed-340-344-disclosure",
+      "severity": "medium",
+      "issue": "S20-NCHC branched from 10c26af when seeds 340-344 were locally unused; concurrently on independent branches, Session 20-H43 and S20V (340-342) also reserved 340-344 before merging into main.",
+      "action": "Keep S20-NCHC (SegmentHoldout, PriorCalibratedHistGBM seeds 340-344, content_id d432a1d5d6ee) strictly isolated as its own parallel negative run card (evidence/s20_nchc_run_card.json); never pool or combine metrics across S20-NCHC, Session 20-H43, and S20V."
+    },
+    {
       "id": "s20-public-leaderboard-04413-vs-03195-reconciled",
       "severity": "medium",
       "issue": "Earlier project notes cited two different public leaderboard top values (0.3195 and 0.4413). One-off read-only inspection of the public DrivenData leaderboard (https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) on 2026-10-26 reconciled them: 0.3195 was the 2026-10-03 #1 snapshot (DARD, registry/leaderboard_snapshot_2026-10-03.json), while by 2026-10-26 the public top 5 reached 0.4413 (xiaofanhu), 0.3916 (cfld__), 0.3904 (Batik Shirt Brothers), 0.3724 (BrandenKMurray), and 0.3553 (No Fault of Our Own).",
@@ -847,6 +853,69 @@
       "severity": "medium",
       "issue": "H42-1 implementation deviation found in Pass-2 review: knowledge/52 \u00a71 freezes coherence-weighted averaging of TMI/gravity migration vectors; migration.build_migration_vectors support-averages them instead.",
       "action": "Disclosed in evidence/s18_run_card.json (preregistration_deviations) and knowledge/53. Verdict unchanged: falsification controls (phys/anti/rand all ~-0.005 DTI) make the negative robust to the weighting choice, but the exact preregistered estimator is untested and must not be run on seeds 310-314; any retry needs fresh preregistration and seeds >=320."
+    },
+    {
+      "id": "nine-site-review-latest-result-nav-stale",
+      "severity": "low",
+      "issue": "After S19-ASCP became the latest run, the nine-site review template still labeled its navigation link to session18-result.html as \u201cLatest result.\u201d Readers could land on an older experiment from the page intended to summarize current-site comparisons.",
+      "action": "Changed the scorecard navigation target to session19-result.html and added a regression test that checks the generated page links to S19 rather than S18."
+    },
+    {
+      "id": "s19-uniqueness-dense-probe-blanket",
+      "severity": "high",
+      "issue": "S19-RADLIN candidate (6fa38f9d317b) passed its frozen LOSFO gate (paired gain +0.005436, 95% CI [+0.001285,+0.009245], seeds 320-324) and exact-file validation, but 93.38% of its final dots fall within 3 px of the unscored dense H37-1 probe-union-pool registry raster (38,545 dots over the H19-5 + detector-ridge union) and 74.2%/71.2% vs two other dense research rasters, exceeding the frozen >70% any-raster duplicate-stop. Against every scored focus-site artifact (GEMSDOE24/25/27/28/30/31/32/33/36, byte-verified) the maximum is 44.5%, and sample Spearman vs every registry raster is <=0.695.",
+      "action": "Verdict negative under the frozen rule; banner DO NOT SUBMIT; no post-hoc registry redefinition. A future preregistered session must settle, before placement, whether unscored dense probe blankets are uniqueness comparators or only scored/submitted rasters are, and must not reuse seeds 320-324 to re-decide this candidate."
+    },
+    {
+      "id": "s19b-parallel-session-collision-and-rename",
+      "severity": "provenance",
+      "issue": "Two autonomous 2026-10-26 sessions both labelled S19: S19-ASCP (antislope scarp pairs; gems-segment-pooled-v1 harness; holdout negative) merged first via PR #46, and this ThK-lineament run (LOSFO seeds 320-324; gate passed, strict uniqueness failed).",
+      "action": "On merge (PR #51) the lineament run was renamed S19B-RADLIN: knowledge/57-58, evidence/s19b_radlin_*, manifest key s19b_candidate, site page session19b-result.html; ASCP keeps current_run and the current site card. No number, hash, TIFF byte or verdict changed. Different evaluators/baselines (0.141694 vs 0.101933): never pool or compare their deltas."
+    },
+    {
+      "id": "s20-champion-unscored-audit-vs-02778",
+      "severity": "high",
+      "issue": "GEMSDOE32 champion audit JSON (tree 012e17b, fetched Session 20) embeds submission notes saying UNSCORED with projected live 0.2747, and holdout_metrics.predicted_leaderboard_dti=0.27467315976932155; the owner prompt associates the same filename with 0.2778. Construction is byte-verified (solo minus ring<=2, symmetric difference 0, SHA-256 c55bafc4...), score attribution is not.",
+      "action": "Kept 0.2778 as USER-REPORTED / UNVERIFIED everywhere. Selector must check the authenticated submissions page for a receipt bound to that SHA-256 before treating the file as scored or spending a slot on it."
+    },
+    {
+      "id": "s20-greedy-cover-packing-exhaustion",
+      "severity": "medium",
+      "issue": "H43-1 lazy-greedy kernel cover exhausts its 2.8 px packing at 87.1% of the champion-analogue budget per holdout cell and 33,354/37,654 dots (88.6%) at full build, although a same-spacing packing of full size exists (C0 dots are eligible and mutually >=2.8 px). Greedy max-cover is maximal, not maximum, on 1-px ridge networks.",
+      "action": "Gate result stands; no retuning on seeds 340-344. Any future placement work must be packing-first (dot_thin phase) with swap improvement, on fresh seeds, and disclosed as champion-lane refinement."
+    },
+    {
+      "id": "s20-family-protocol-duplicate-trap",
+      "severity": "high",
+      "issue": "Any emission drawn from the H19-5 pool has ~100% of dots within 3 px of the d1.5/d2.8 registry rasters (their dots tile the same ridges) and surface Spearman ~0.95 vs the pool, so the parallel-run >70%/0.90 stop rules classify every in-family improvement attempt as a duplicate lane by construction.",
+      "action": "Logged S20 candidate as protocol duplicate and stopped. Future uniqueness claims must come from a new detection surface (e.g. piercing-marker lane); in-family refinements must be labelled selector-side champion refinements, never new lanes."
+    },
+    {
+      "id": "s20-gh-api-rate-limit-restore-fallback",
+      "severity": "low",
+      "issue": "gh api content fetch hit a GitHub rate limit (HTTP 403) during Session 20 data restore; scripts/restore_data.py prefers gh when present.",
+      "action": "Used depth-1 blob-filtered sparse git clones of the pinned mirror commits instead; every restored file's SHA-256 matches registry/data_manifest.json exactly (evidence/s20_exp1_forensic.json). restore_data.py left unchanged (shared tool); fallback documented here and in knowledge/57."
+    },
+    {
+      "id": "s20-parallel-session-id-collision",
+      "severity": "medium",
+      "issue": "Two parallel 2026-10-26 sessions both used the Session 20 label: main's validation-hardening review (evidence/session20_run_card.json, knowledge/56_session20_validation_review.md, no experiment) and this branch's H43-1 experiment (originally also written to evidence/session20_run_card.json). Knowledge number 56 is likewise shared with knowledge/56_s19_result.md.",
+      "action": "Main's validation-review card keeps evidence/session20_run_card.json; the H43-1 card moved to evidence/session20_h43_run_card.json with all references updated. The two sessions' numbers must never be pooled; cite as Session 20 (validation review) vs Session 20-H43 (this experiment)."
+    },
+    {
+      "id": "s20h43-knowledge57-number-collision",
+      "severity": "low",
+      "issue": "Knowledge number 57 is used by both knowledge/57_s19b_radlin_preregistration.md (S19B, merged PR #51) and knowledge/57_s20_result.md (Session 20-H43). Filenames are distinct; only the numeric prefix collides.",
+      "action": "Both files retained unchanged (the S19B preregistration is frozen). Cite by full filename, not by number alone. No numbers were pooled across S19B, S19-ASCP, Session 20 validation review, and Session 20-H43."
+    }
+  ],
+  "irregularities": [
+    {
+      "id": "s19-preliminary-overlap-neighborhood",
+      "date": "2026-10-26",
+      "severity": "corrected",
+      "issue": "The frozen S19 runner labeled a 7x7 square dilation as within 3 px; this conservative Chebyshev neighborhood includes corner cells farther than 3 Euclidean pixels.",
+      "action": "Retain the preliminary stage evidence. Re-read identical rasters without model fitting and publish exact Euclidean <=3 px values in evidence/s19_exact_registry_overlap.json and the final card. Both checks pass; exact maxima are 20.57% support and 27.98% final dots."
     }
   ]
 }
