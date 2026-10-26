@@ -835,6 +835,42 @@
       "severity": "provenance",
       "issue": "Two autonomous 2026-10-26 sessions both labelled S19: S19-ASCP (antislope scarp pairs; gems-segment-pooled-v1 harness; holdout negative) merged first via PR #46, and this ThK-lineament run (LOSFO seeds 320-324; gate passed, strict uniqueness failed).",
       "action": "On merge (PR #51) the lineament run was renamed S19B-RADLIN: knowledge/57-58, evidence/s19b_radlin_*, manifest key s19b_candidate, site page session19b-result.html; ASCP keeps current_run and the current site card. No number, hash, TIFF byte or verdict changed. Different evaluators/baselines (0.141694 vs 0.101933): never pool or compare their deltas."
+    },
+    {
+      "id": "s20-champion-unscored-audit-vs-02778",
+      "severity": "high",
+      "issue": "GEMSDOE32 champion audit JSON (tree 012e17b, fetched Session 20) embeds submission notes saying UNSCORED with projected live 0.2747, and holdout_metrics.predicted_leaderboard_dti=0.27467315976932155; the owner prompt associates the same filename with 0.2778. Construction is byte-verified (solo minus ring<=2, symmetric difference 0, SHA-256 c55bafc4...), score attribution is not.",
+      "action": "Kept 0.2778 as USER-REPORTED / UNVERIFIED everywhere. Selector must check the authenticated submissions page for a receipt bound to that SHA-256 before treating the file as scored or spending a slot on it."
+    },
+    {
+      "id": "s20-greedy-cover-packing-exhaustion",
+      "severity": "medium",
+      "issue": "H43-1 lazy-greedy kernel cover exhausts its 2.8 px packing at 87.1% of the champion-analogue budget per holdout cell and 33,354/37,654 dots (88.6%) at full build, although a same-spacing packing of full size exists (C0 dots are eligible and mutually >=2.8 px). Greedy max-cover is maximal, not maximum, on 1-px ridge networks.",
+      "action": "Gate result stands; no retuning on seeds 340-344. Any future placement work must be packing-first (dot_thin phase) with swap improvement, on fresh seeds, and disclosed as champion-lane refinement."
+    },
+    {
+      "id": "s20-family-protocol-duplicate-trap",
+      "severity": "high",
+      "issue": "Any emission drawn from the H19-5 pool has ~100% of dots within 3 px of the d1.5/d2.8 registry rasters (their dots tile the same ridges) and surface Spearman ~0.95 vs the pool, so the parallel-run >70%/0.90 stop rules classify every in-family improvement attempt as a duplicate lane by construction.",
+      "action": "Logged S20 candidate as protocol duplicate and stopped. Future uniqueness claims must come from a new detection surface (e.g. piercing-marker lane); in-family refinements must be labelled selector-side champion refinements, never new lanes."
+    },
+    {
+      "id": "s20-gh-api-rate-limit-restore-fallback",
+      "severity": "low",
+      "issue": "gh api content fetch hit a GitHub rate limit (HTTP 403) during Session 20 data restore; scripts/restore_data.py prefers gh when present.",
+      "action": "Used depth-1 blob-filtered sparse git clones of the pinned mirror commits instead; every restored file's SHA-256 matches registry/data_manifest.json exactly (evidence/s20_exp1_forensic.json). restore_data.py left unchanged (shared tool); fallback documented here and in knowledge/57."
+    },
+    {
+      "id": "s20-parallel-session-id-collision",
+      "severity": "medium",
+      "issue": "Two parallel 2026-10-26 sessions both used the Session 20 label: main's validation-hardening review (evidence/session20_run_card.json, knowledge/56_session20_validation_review.md, no experiment) and this branch's H43-1 experiment (originally also written to evidence/session20_run_card.json). Knowledge number 56 is likewise shared with knowledge/56_s19_result.md.",
+      "action": "Main's validation-review card keeps evidence/session20_run_card.json; the H43-1 card moved to evidence/session20_h43_run_card.json with all references updated. The two sessions' numbers must never be pooled; cite as Session 20 (validation review) vs Session 20-H43 (this experiment)."
+    },
+    {
+      "id": "s20h43-knowledge57-number-collision",
+      "severity": "low",
+      "issue": "Knowledge number 57 is used by both knowledge/57_s19b_radlin_preregistration.md (S19B, merged PR #51) and knowledge/57_s20_result.md (Session 20-H43). Filenames are distinct; only the numeric prefix collides.",
+      "action": "Both files retained unchanged (the S19B preregistration is frozen). Cite by full filename, not by number alone. No numbers were pooled across S19B, S19-ASCP, Session 20 validation review, and Session 20-H43."
     }
   ],
   "irregularities": [

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Session 20-H43: nine-site executive answer, byte-verified GEMSDOE32 champion mechanism, H43-1 gated experiment (failed), and the automated do-not-submit decision.">
+  <title>Session 20-H43 result | GEMSDOE28</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
+  <nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session20-result.html" aria-current="page">S20 result</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<main>
+<p class="breadcrumb"><a href="index.html">Overview</a> / Session 20-H43 result</p>
+
+<section class="card callout-danger" aria-labelledby="s20-decision" data-submission-ready="false">
+  <p class="eyebrow">Session 20-H43 (parallel run) · 2026-10-26 · automated gates, no human inspector</p>
+  <h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
+  <h1 id="s20-decision">🔴 DO NOT SUBMIT the new Session 20 TIFF</h1>
+  <p class="lead">A brand-new TIFF was generated this session (<code>gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif</code>, 33,354 dots, SHA-256 <code>960c3d49…f117</code>). It is <strong>not an exact duplicate</strong> of any previous submission, and its file format is valid — but the frozen holdout gate <strong>FAILED</strong> and the dot-overlap stop rule classifies it as a duplicate family lane. <strong>Do not upload any file from this site.</strong> The pipeline computed this rejection automatically; no human inspection is needed or used.</p>
+  <div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif" download>Download S20 research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="data/run_card_s20_2026-10-26.json" download>Download JSON run card</a></div>
+  <p><strong>Research file name:</strong> <code>gems28-h43-1-tpb2gkc-20261026-76737f19814e</code><br><strong>Note (104/140):</strong> <code>S20 H43-1 TPB2-GKC greedy kernel-cover, tip-protected B2, 33354 dots; holdout gate FAILED; DO NOT SUBMIT</code></p>
+  <p class="meta">Primary variant is all-finite (zeros outside footprint): whole-array min 0, max 1, no NaN anywhere, single-band float32, EPSG:32611, 3730 × 3292, template transform — every hard validator check passes. Format validity does <em>not</em> override the failed scientific gates below.</p>
+</section>
+
+<section class="section" aria-labelledby="s20-best">
+<h2 id="s20-best">Executive answer: the best existing submission, per site</h2>
+<p>Every score below is <strong>USER-REPORTED / UNVERIFIED</strong> (copied from the owner prompt; no submission-page receipt exists in this repository). Byte forensics this session prove the GEMSDOE24/25/31/32 spine is <strong>one surface with progressively cleaner dot emission</strong>, not competing strategies. Full table and per-site reading: <a href="../knowledge/57_s20_result.md">Session 20 report §1</a> · <a href="cross-site-review.html">nine-site scorecard</a>.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Site</th><th>Best listed submission</th><th>Reported</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td>GEMSDOE24</td><td><code>h25-1-dotted-h19-5-d1-5</code></td><td>0.2477</td><td>H19-5 dotted at 1.5 px (60,069 dots, byte-verified)</td></tr>
+<tr><td>GEMSDOE25</td><td><code>dotted-h19-5-d2-8</code></td><td>0.2600</td><td>Same surface at 2.8 px (44,090 dots, regenerated exactly)</td></tr>
+<tr><td>GEMSDOE27</td><td><code>topo-gap-closure-t-v2-on-d1-5</code></td><td>0.2449</td><td>d1.5 + 1,259 gap dots — addition <em>lost</em> 0.0028 vs its base</td></tr>
+<tr><td>GEMSDOE28</td><td><code>h36-1-rung30-blind-r1</code></td><td>0.2710</td><td>Rung-3.0 repack + ring-1 prune, same family</td></tr>
+<tr><td>GEMSDOE30</td><td><code>d28-poisson300m-offcat-44090</code></td><td>0.2600</td><td>44,090-dot Poisson emission, same family scale</td></tr>
+<tr><td>GEMSDOE31</td><td><code>h27-4-solo-d28</code></td><td>0.2708</td><td>d2.8 − ring ≤1 px (40,199 dots, byte-verified exact)</td></tr>
+<tr><td><strong>GEMSDOE32</strong></td><td><code><strong>h33-h33-2-b2-…-e5eb6e7e-zeros</strong></code></td><td><strong>0.2778</strong></td><td><strong>solo − ring ≤2 px (37,654 dots, byte-verified exact). Best in the list.</strong></td></tr>
+<tr><td>GEMSDOE33</td><td><code>h33d-analog-tip-stepover-r30</code></td><td>0.2632</td><td>Tip/stepover variant, below blind B2</td></tr>
+<tr><td>GEMSDOE36</td><td><code>anderson-geothermal-pinn-38854</code></td><td>0.2750</td><td>Second-highest listed; champion-scale dot count</td></tr>
+</tbody></table></div>
+<div class="callout"><p><strong>If one existing file ever deserves a slot, it is the GEMSDOE32 champion itself</strong> — <a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">pinned TIFF (37,654 dots, SHA-256 c55bafc4…6fa9)</a> — <strong>and only if it has not already been submitted</strong>. That repo's own audit JSON calls the file <em>UNSCORED</em> with a 0.2747 model projection, which conflicts with the reported 0.2778; check the authenticated submissions page for a receipt bound to that hash before spending a slot. This site does not re-host the champion as its own file — that would be the forbidden exact duplicate. Slot selection is a separate step; nothing here selects or spends one.</p></div>
+</section>
+
+<section class="section" aria-labelledby="s20-why">
+<h2 id="s20-why">Why GEMSDOE32 H33-2-B2 leads — verified mechanism</h2>
+<p><strong>Construction (byte-exact, this session):</strong> H19-5 solid ridge (121,131 dots) → <code>dot_thin(·, 2.8)</code> (44,090) → delete dots within 1 px of the catalogue (−3,891 → 40,199 "solo") → delete dots within 2 px (−2,545 → <strong>37,654 champion</strong>). Zero dots added at the last two steps; symmetric difference 0 at every step.</p>
+<p><strong>Why subtraction wins:</strong> under the official distance-tolerant Tversky metric (α=0.2, β=0.8, 300 m triangular kernel, catalogue masked), one dot already earns most of the available credit within 300 m, so dense lines mostly buy false-positive mass; and dots hugging known faults are digitisation shadow whose marginal credit is ≈0 while their FP cost is ≈1. A dot pays for itself only above ΔTP/ΔFP ≈ 0.059 at this operating point — both deleted rings were below it (constant +2.76×10⁻⁶ DTI per removed dot, owner-reported anchors), while every <em>addition</em> experiment in the family history also fell below it. The champion is emission hygiene, not new geology. Beating it needs genuinely new credit above that bar — the full derivation is in the <a href="../knowledge/57_s20_result.md">Session 20 report §§2–3</a>.</p>
+</section>
+
+<section class="section" aria-labelledby="s20-exp">
+<h2 id="s20-exp">Session 20 experiments (3 of 3, preregistered)</h2>
+<p>Lane <strong>H43-1 TPB2-GKC</strong>: tip-protected ring-≤2 eligibility + greedy triangular-kernel max-cover placement over the H19-5 pool at the champion's budget. Gate frozen in <a href="../knowledge/56_s20_preregistration_H43-1.md">the preregistration</a> before any experiment ran.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Experiment</th><th>Result</th><th>Numbers (labelled)</th></tr></thead>
+<tbody>
+<tr><td>1 · Forensics + leakage canary</td><td>PASS to proceed</td><td>Lineage byte-exact (above). Single-feature AUC max 0.802 ≤ 0.90 (seed-340 assignment only).</td></tr>
+<tr><td>2 · Holdout gate (seeds 340–344)</td><td><strong>FAIL</strong></td><td><strong>HOLDOUT-DTI</strong> (<code>metric.dti_binary</code>, 61,613 pooled / 40,739 unique withheld positives): candidate 0.095807 vs champion-analogue 0.103241; paired gain −0.007434, 95% CI [−0.01081, −0.00496]; 0/20 cells positive. Greedy packing placed only 87.1% of the baseline's dots per cell.</td></tr>
+<tr><td>3 · Build + uniqueness + validator</td><td>Generated; <strong>rejected</strong></td><td>33,354 dots (packing exhausted at 88.6% of 37,654 target). Exact duplicate: <strong>no</strong> (Jaccard vs champion 0.260). Protocol duplicate: <strong>yes</strong> — 94.3% of dots within 3 px of the champion; surface Spearman 0.949 vs H19-5 (&gt; 0.90 stop). Validator: all hard checks pass.</td></tr>
+</tbody></table></div>
+<p><strong>Verdict: negative.</strong> Seeds 340–344 are spent for this lane; no retuning was done. Evidence: <a href="../evidence/s20_exp1_forensic.json">Experiment 1</a> · <a href="../evidence/s20_holdout.json">Experiment 2</a> · <a href="../evidence/s20_build.json">Experiment 3</a> · <a href="../evidence/session20_h43_run_card.json">JSON run card</a> · <a href="../knowledge/57_s20_result.md">full report</a>.</p>
+</section>
+
+<section class="section" aria-labelledby="s20-how">
+<h2 id="s20-how">Exactly how a future *approved* submission is made</h2>
+<ol>
+<li>Only after a preregistered candidate beats its frozen baseline on the buffered holdout (positive paired CI), passes pre-placement <em>and</em> final-dot uniqueness, and passes exact-file validation may its banner turn green. None has.</li>
+<li>Download that exact approved single-band float32 <code>.tif</code> (values in [0,1], no NaN inside the footprint; the all-finite zeros-outside variant has no NaN anywhere). Check the competition page's weekly cap on the authenticated account (September rules state 3/week; current allowance unknown here).</li>
+<li>At DrivenData: <strong>New submission → File to submit</strong> → choose the approved <code>.tif</code> (or a ZIP containing exactly that one TIFF) → paste its registered note (≤140 characters) → submit → save the organizer receipt bound to the file SHA-256.</li>
+<li><strong>Do not perform these steps with any file on this site today.</strong></li>
+</ol>
+<p><strong>Official manual-review links:</strong> <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem description</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">rules PDF</a> · <a href="https://github.com/drivendataorg/gems-prize-reference-solution">reference solution</a> · <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a> · <a href="https://gdr.openei.org/submissions/1391">GDR 1391 (INGENIOUS)</a> · <a href="https://epsg.io/32611">EPSG:32611</a>.</p>
+<p><strong>Next:</strong> account-side receipt check for the champion hash (owner), then a fresh preregistered lane with fresh seeds — displaced potential-field piercing markers on the restored training stack (Session 19 rank 1). Details in report §5.</p>
+</section>
+</main>
+<footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Reported site values are not organizer receipts. HOLDOUT-DTI is a local recovery proxy, not a competition score. No upload or automatic DrivenData access occurs here.</p></div></footer>
+</body>
+</html>

@@ -291,6 +291,7 @@ def nav() -> str:
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
         ("Latest result", "session19-result.html"),
+        ("S20 result", "session20-result.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
@@ -1369,11 +1370,17 @@ def main() -> int:
     old_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
     old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
+    session20_brief = """<section class=\"card callout-danger\" aria-label=\"Session 20-H43 result\">
+<h2>Parallel Session 20-H43 (2026-10-26): third concurrent TIFF — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
+<p>A concurrent preregistered lane (<code>gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif</code>, 33,354 dots) was also generated and rejected automatically: <strong>HOLDOUT-DTI paired gain -0.007434 (95% CI [-0.01081, -0.00496], 0/20 cells)</strong> and 94.3% of dots within 3 px of the GEMSDOE32 champion (duplicate family lane). Its file format is valid (all-finite, values in [0,1]); that does not make it submittable. It is a distinct parallel run from S19-ASCP, S19B-RADLIN and the Session 20 validation review; never pool their numbers. The best existing file remains GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>, byte-verified in Session 20-H43 as solo minus the 2 px catalogue ring. <strong>Do not upload any file from this site.</strong></p>
+<p><a class=\"button quiet\" href=\"session20-result.html\">Session 20-H43 executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
+</section>"""
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
+    session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     pages = {
-        "index.html": layout("Overview", render_s19_result() + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
         "cross-site-review.html": cross_site_template,
-        "executive-summary.html": layout("Executive summary", render_current_executive(), "Executive summary"),
+        "executive-summary.html": layout("Executive summary", session20_brief + render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
@@ -1381,12 +1388,16 @@ def main() -> int:
         "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; current S18-MXTP evidence is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/76847b2/docs/submission-review.html">Complete original PR39 HTML audit at its historical commit</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
         "session19-result.html": layout("S19 unique TIFF result", render_s19_result(), "S19 result"),
         "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),
+        "session20-result.html": session20_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    s20_card = read_json("evidence/session20_h43_run_card.json")
+    (DOCS / "data/run_card_s20_2026-10-26.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s20_2026-10-26.json").write_text(json.dumps(s20_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     s19b_card = read_json("evidence/s19b_radlin_run_card.json")
     (DOCS / "data" / "run_card_s19b_radlin.json").write_text(json.dumps(s19b_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     current_card = read_json("evidence/s19_ascp_run_card.json")

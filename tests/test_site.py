@@ -568,3 +568,32 @@ def test_session18b_h42_1_candidate_is_unique_valid_but_do_not_submit():
     assert (DOCS / 'downloads' / slot['allfinite']).is_file()
     # The parallel Session 18 artifacts keep their own names/numbers.
     assert manifest['s18_h39_5_candidate']['content_id'] == '719b83fb659b'
+
+
+def test_session20_result_is_linked_and_fail_closed():
+    page = (DOCS / "session20-result.html").read_text()
+    index = (DOCS / "index.html").read_text()
+    executive = (DOCS / "executive-summary.html").read_text()
+    card = json.loads((ROOT / "evidence/session20_h43_run_card.json").read_text())
+    stem = "gems28-h43-1-tpb2gkc-20261026-76737f19814e"
+    assert "DO NOT SUBMIT the new Session 20 TIFF" in page
+    assert "Submission download locked" in page
+    assert f"downloads/{stem}-allfinite.tif" in page
+    assert "data/run_card_s20_2026-10-26.json" in page
+    assert "session20-result.html" in index and "session20-result.html" in executive
+    assert "HOLDOUT-DTI" in page and "USER-REPORTED / UNVERIFIED" in page
+    assert "0.2778" in page and "GEMSDOE32" in page
+    assert card["verdict"] == "negative" and card["submission_ready"] is False
+    assert card["slot_selected"] is False and card["new_tiff_generated"] is True
+    assert card["experiments_run"] == 3 and card["holdout"]["gate_pass"] is False
+    assert card["holdout"]["pooled_gain"] < 0
+    assert card["registry_comparison"]["exact_duplicate_of_any_registry"] is False
+    assert card["registry_comparison"]["duplicate_by_protocol"] is True
+    assert len(card["submission_note"]) <= 140
+    # The generated S20 TIFF is bound to the run card hash and never approved.
+    tif = DOCS / "downloads" / f"{stem}-allfinite.tif"
+    assert tif.is_file()
+    assert hashlib.sha256(tif.read_bytes()).hexdigest() == card["raster_sha256"]
+    build = json.loads((ROOT / "evidence/s20_build.json").read_text())
+    assert build["validator_primary_hard_pass"] is True
+    assert build["dots"] == 33354 and build["budget_reached"] is False
