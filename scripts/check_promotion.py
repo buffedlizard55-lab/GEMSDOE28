@@ -12,20 +12,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from gems27.evidence_json import loads  # noqa: E402
 from gems27.promotion import promotion_gate  # noqa: E402
-
-
-def reject_constant(value):
-    raise ValueError(f"Non-finite JSON constant: {value}")
-
-
-def unique_keys(pairs):
-    result = {}
-    for key, value in pairs:
-        if key in result:
-            raise ValueError(f"Duplicate JSON key: {key}")
-        result[key] = value
-    return result
 
 
 def main(argv=None):
@@ -33,8 +21,7 @@ def main(argv=None):
     parser.add_argument("card", type=Path)
     args = parser.parse_args(argv)
     try:
-        card = json.loads(args.card.read_text(encoding="utf-8"),
-                          parse_constant=reject_constant, object_pairs_hook=unique_keys)
+        card = loads(args.card.read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
         print(json.dumps({"verdict": "negative", "evidence_schema_passed": False, "promotion_eligible": False, "submission_ready": False,
                           "slot_selected": False, "failures": [str(exc)]}), file=sys.stdout)

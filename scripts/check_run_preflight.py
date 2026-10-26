@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from gems27.evidence_json import loads  # noqa: E402
 from gems27.grid import FOOTPRINT_PX  # noqa: E402
 from gems27.promotion import finite_number  # noqa: E402
 from gems27.shared_template import verify_assets  # noqa: E402
@@ -42,7 +43,7 @@ def preflight(config: dict, *, root: Path = ROOT) -> dict:
             path = (root / spec["path"]).resolve()
             if not path.is_relative_to(root.resolve()) or file_hash(path) != spec["sha256"]:
                 raise ValueError("path or evidence checksum mismatch")
-            value = json.loads(path.read_text())
+            value = loads(path.read_text())
             if not isinstance(value, dict):
                 raise ValueError("evidence must be an object")
             return value
@@ -117,7 +118,7 @@ def preflight(config: dict, *, root: Path = ROOT) -> dict:
         metadata_path = (root / config["cached_features_metadata"]).resolve()
         if not all(p.is_relative_to(root.resolve()) for p in (array_path, metadata_path)):
             raise ValueError("cache path escapes repository")
-        meta = json.loads(metadata_path.read_text())
+        meta = loads(metadata_path.read_text())
         if not isinstance(meta, dict):
             raise ValueError("Cached feature metadata must be an object")
         array = np.load(array_path, mmap_mode="r", allow_pickle=False)
@@ -132,6 +133,11 @@ def preflight(config: dict, *, root: Path = ROOT) -> dict:
                 or len(names) != 32 or not all(isinstance(x, str) for x in names)
                 or len(set(names)) != 32):
             failures.append("Cached feature checksum, shape, dtype or band contract mismatch")
+        # Bound temporary memory while checking every value, not a random sample.
+        for start in range(0, array.shape[0], 65536):
+            if not np.isfinite(array[start:start + 65536]).all():
+                failures.append("Cached feature stack contains NaN or infinity")
+                break
     except (OSError, EOFError, KeyError, TypeError, ValueError) as exc:
         failures.append(f"Cached feature stack unavailable: {exc}")
     try:
@@ -157,7 +163,7 @@ def main(argv=None) -> int:
     parser.add_argument("--out", type=Path)
     args = parser.parse_args(argv)
     try:
-        config = json.loads(args.config.read_text())
+        config = loads(args.config.read_text())
         if not isinstance(config, dict):
             raise ValueError("Session configuration must be an object")
         result = preflight(config)
