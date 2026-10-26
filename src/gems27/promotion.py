@@ -58,7 +58,9 @@ def promotion_gate(card: dict) -> dict:
             "holdout raster hash mismatch")
     require(bool(re.fullmatch(r"[0-9a-f]{64}", str(h.get("baseline_sha256", "")))),
             "missing frozen baseline hash")
-    require(h.get("label") == "HOLDOUT-DTI" and bool(h.get("evaluator_version")), "missing versioned HOLDOUT-DTI")
+    require(h.get("label") == "HOLDOUT-DTI"
+            and h.get("evaluator_version") == "gems-segment-pooled-v1",
+            "missing or non-comparable shared HOLDOUT-DTI evaluator")
     require(isinstance(h.get("withheld_positives"), int) and not isinstance(h.get("withheld_positives"), bool)
             and h["withheld_positives"] > 0, "missing withheld positives")
     ci = h.get("ci95")
@@ -66,16 +68,31 @@ def promotion_gate(card: dict) -> dict:
     require(finite_number(score) and 0 <= score <= 1, "invalid holdout DTI")
     require(isinstance(ci, list) and len(ci) == 2 and all(finite_number(x) for x in ci)
             and finite_number(score) and 0 <= ci[0] <= score <= ci[1] <= 1, "invalid holdout CI")
+    baseline = h.get("baseline_dti")
+    point_gain = h.get("paired_gain")
+    require(finite_number(baseline) and 0 <= baseline <= 1,
+            "missing or invalid frozen baseline DTI")
+    require(finite_number(score) and finite_number(baseline) and finite_number(point_gain)
+            and point_gain > 0 and math.isclose(point_gain, score - baseline, rel_tol=1e-6, abs_tol=1e-8),
+            "paired gain must equal candidate minus baseline and be positive")
     gain = h.get("paired_gain_ci95")
     require(isinstance(gain, list) and len(gain) == 2 and all(finite_number(x) for x in gain)
-            and 0 < gain[0] <= gain[1] <= 1, "no positive paired gain CI over frozen current best")
+            and finite_number(point_gain) and 0 < gain[0] <= point_gain <= gain[1] <= 1,
+            "no positive paired gain CI containing the paired gain")
     for key in ("whole_segments", "buffered", "visible_only_features", "pixel_exact_visible_mask", "pooled"):
         require(h.get(key) is True, f"holdout protocol missing: {key}")
     require(h.get("alpha") == 0.2 and h.get("beta") == 0.8 and h.get("kernel_m") == 300
             and h.get("kernel") == "triangular", "wrong metric protocol")
     features = card.get("feature_canaries")
+    names = card.get("feature_names")
+    valid_names = (isinstance(names, list) and bool(names)
+                   and all(nonempty_text(name) for name in names)
+                   and len(set(names)) == len(names))
+    require(valid_names, "missing or invalid complete feature list")
     require(isinstance(features, dict) and bool(features), "no feature-alone canaries")
     if isinstance(features, dict):
+        require(valid_names and set(features) == set(names),
+                "feature-alone canaries must cover every declared model feature exactly")
         for name, auc in features.items():
             # Inverting a near-perfect feature must not evade the leakage canary.
             require(nonempty_text(name) and finite_number(auc) and 0.10 <= auc <= 0.90,

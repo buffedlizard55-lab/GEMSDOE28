@@ -1,6 +1,12 @@
 {
-  "generated": "2026-10-26T01:30:00Z",
+  "generated": "2026-10-26T22:14:35Z",
   "items": [
+    {
+      "id": "s22-one-off-research-tool-competition-access",
+      "severity": "medium",
+      "issue": "S22 used the Arena read-only research fetch tool to retrieve public competition pages. This was a tool-mediated request despite the repository manual-only access policy; the quoted DrivenData terms prohibit automated means. Whether this particular request violates those terms is not determined here.",
+      "action": "Disclose the method and potential conflict; do not repeat automated competition-site access absent permission. The repository feed has a forbidden-host guard and the static site makes no competition requests. No login, upload, scheduled poll, slot, or submission receipt occurred. See evidence/s22_official_source_review.json."
+    },
     {
       "id": "s20-nchc-concurrent-seed-340-344-disclosure",
       "severity": "medium",

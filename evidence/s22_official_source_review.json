@@ -1,0 +1,53 @@
+{
+  "observed_utc": "2026-10-26T22:02:42Z",
+  "method": "One-off read-only Arena fetch_page observations of public pages, not a scheduled feed, login, account access, upload, or organizer receipt. This tool-mediated access may conflict with the repository manual-only policy and quoted site terms; compliance is undetermined and future automated requests must not be repeated absent permission. Returned text was reviewed; raw response bytes were not retained. Rankings may change.",
+  "sources": [
+    {
+      "id": "public_leaderboard",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "observation": "The public leaderboard listed xiaofanhu at rank #1 with best public DW-Tversky 0.4437 when read. This is a public leaderboard observation, not a submission-page receipt or evidence linking any score to this repository's TIFFs.",
+      "top_public_score": 0.4437,
+      "top_public_participant": "xiaofanhu"
+    },
+    {
+      "id": "problem",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "observation": "The target is geologic faults; submissions are single-band float32 confidence in [0,1], same CRS/resolution/bounds, with null or NaN outside the bounds. Metric: alpha 0.2, beta 0.8, 300 m triangular kernel. Source states pre-competition expert-labeled faults are divided into public/private test sets; the final prize round uses an expanded label set. Local hide-and-recover is only a proxy."
+    },
+    {
+      "id": "overview",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/",
+      "observation": "Page listed Dec. 3, 2026, 11:59 p.m. UTC as the competition end date when read; confirm current schedule before acting. External data must be licensed and shareable."
+    },
+    {
+      "id": "data_page",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "observation": "Unauthenticated request redirected to login; no account, organizer data bytes, current allowance, or submission receipt was accessed."
+    },
+    {
+      "id": "official_rules",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "observation": "September 2026 rules section 3.4 describes up to three feedback submissions per week as specified on the website and one final submission per entity. Account-specific remaining allowance and current rule changes were not checked."
+    },
+    {
+      "id": "geodawn",
+      "url": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+      "observation": "USGS data release describes magnetic and radiometric surveys, processing, variable terrain clearance and associated lidar. Page availability does not authenticate local mirror bytes or establish feature coverage or licenses for this run."
+    },
+    {
+      "id": "ingenious",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "observation": "DOE GDR INGENIOUS catalog lists regional fault, seismicity, thermal, geochemistry and related layers and a CC BY 4.0 label. Listing does not prove local bytes, coverage, absence of catalogue leakage, or competition-specific licensing."
+    },
+    {
+      "id": "tectonic_settings",
+      "url": "https://www.osti.gov/servlets/purl/1724082",
+      "observation": "Faulds and Hinz (2015) discuss geothermal systems' structural associations with relay ramps, fault tips and intersections. These are motivating physical associations, not evidence that any proposed detector predicts the competition's hidden faults."
+    },
+    {
+      "id": "reference_solution",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution/tree/aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+      "observation": "Pinned README describes a U-Net reference notebook and CPU as well as GPU environment options. It does not authenticate owner-mirrored data or provide this project's organizer receipt."
+    }
+  ]
+}

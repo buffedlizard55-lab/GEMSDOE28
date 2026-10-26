@@ -45,10 +45,29 @@ def main() -> int:
     downloads_dir = Path(args.downloads_dir)
     template_path = Path(args.template) if args.template else data_dir / "sample_submission.tif"
     manifest_path = Path(args.manifest) if args.manifest else downloads_dir / "manifest.json"
-    manifest = json.loads(manifest_path.read_text())
     labels_path = data_dir / "labels.tif"
-    if not template_path.is_file() or not labels_path.is_file():
-        raise SystemExit(f"Template or labels missing: {template_path}, {labels_path}")
+
+    def fail_early(reason: str) -> int:
+        # Replace any prior green report, even when required inputs are unreadable.
+        report = {"checked_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                  "status": "FAIL", "scope": "input validation failed; no TIFF was approved",
+                  "network_access": "none", "checks": [{"check": "inputs_readable", "pass": False,
+                                                          "detail": reason}],
+                  "failures": ["inputs_readable"], "check_count": 1}
+        output = Path(args.out)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
+        print(f"FAIL inputs_readable: {reason}")
+        return 1
+
+    try:
+        manifest = json.loads(manifest_path.read_text())
+        if not isinstance(manifest, dict):
+            raise ValueError("manifest must be an object")
+        if not template_path.is_file() or not labels_path.is_file():
+            raise ValueError(f"template or labels missing: {template_path}, {labels_path}")
+    except (OSError, ValueError) as exc:
+        return fail_early(str(exc))
 
     failures: list[str] = []
     checks: list[dict] = []
@@ -58,19 +77,24 @@ def main() -> int:
         if not condition:
             failures.append(name)
 
-    with rasterio.open(template_path) as template:
-        template_array = template.read(1)
-        footprint = np.isfinite(template_array)
-        template_signature = (template.crs, template.shape, template.transform)
-        template_info = {
-            "path": str(template_path), "sha256": sha256_file(template_path),
-            "crs": template.crs.to_string(), "shape": list(template.shape),
-            "transform": list(tuple(template.transform)[:6]), "footprint_pixels": int(footprint.sum()),
-        }
-    with rasterio.open(labels_path) as label_ds:
-        labels = label_ds.read(1)
-        label_grid_ok = (label_ds.crs, label_ds.shape, label_ds.transform) == template_signature
-        catalogue = np.isfinite(labels) & (labels > 0)
+    try:
+        with rasterio.open(template_path) as template:
+            template_array = template.read(1)
+            footprint = np.isfinite(template_array)
+            if not footprint.any() or template.crs is None:
+                raise ValueError("template needs a CRS and a nonempty finite footprint")
+            template_signature = (template.crs, template.shape, template.transform)
+            template_info = {
+                "path": str(template_path), "sha256": sha256_file(template_path),
+                "crs": template.crs.to_string(), "shape": list(template.shape),
+                "transform": list(tuple(template.transform)[:6]), "footprint_pixels": int(footprint.sum()),
+            }
+        with rasterio.open(labels_path) as label_ds:
+            labels = label_ds.read(1)
+            label_grid_ok = (label_ds.crs, label_ds.shape, label_ds.transform) == template_signature
+            catalogue = np.isfinite(labels) & (labels > 0)
+    except (OSError, rasterio.errors.RasterioError, IndexError, ValueError) as exc:
+        return fail_early(str(exc))
     check(label_grid_ok, "labels_grid_matches_template", f"{labels_path.name} grid matches {template_path.name}")
     check(int(footprint.sum()) == 5_167_373 and template_info["shape"] == [3730, 3292]
           and template_info["crs"] == "EPSG:32611", "expected_template_grid",
@@ -94,8 +118,15 @@ def main() -> int:
         content_token = str(item.get("content_id", ""))
         check(bool(submission_name and content_token and content_token in submission_name),
               f"{slot}_submission_name_content_id", submission_name)
+        if item.get("archive_only") is True:
+            check(item.get("submission_ready") is False and item.get("verdict") == "negative",
+                  f"{slot}_research_archive_not_approved", "Archived research is never upload approval")
         content_id = str(item.get("content_id", ""))
         nan_name = str(item["nan"])
+        safe_nan = Path(nan_name).name == nan_name and nan_name.endswith(".tif")
+        check(safe_nan, f"{slot}_nan_safe_filename", nan_name)
+        if not safe_nan:
+            continue
         nan_path = downloads_dir / nan_name
         stem_check = bool(content_id and re.search(rf"-{re.escape(content_id)}-nan\.tif$", nan_name))
         check(stem_check, f"{slot}_content_addressed_name", nan_name)
@@ -106,20 +137,27 @@ def main() -> int:
         actual_sha = sha256_file(nan_path)
         check(actual_bytes == item.get("bytes_nan"), f"{slot}_nan_byte_count", f"{actual_bytes} bytes")
         check(actual_sha == item.get("sha256_nan"), f"{slot}_nan_sha256", actual_sha)
-        with rasterio.open(nan_path) as dataset:
-            arr = dataset.read(1)
-            grid_match = (dataset.crs, dataset.shape, dataset.transform) == template_signature
-            one_band = dataset.count == 1 and dataset.dtypes[0] == "float32"
-            nodata_is_nan = dataset.nodata is not None and np.isnan(dataset.nodata)
+        try:
+            with rasterio.open(nan_path) as dataset:
+                arr = dataset.read(1)
+                grid_match = (dataset.crs, dataset.shape, dataset.transform) == template_signature
+                one_band = dataset.count == 1 and dataset.dtypes[0] == "float32"
+                nodata_is_nan = dataset.nodata is not None and np.isnan(dataset.nodata)
+        except (OSError, rasterio.errors.RasterioError, IndexError, ValueError) as exc:
+            check(False, f"{slot}_nan_readable", str(exc))
+            continue
         check(grid_match, f"{slot}_nan_grid", "CRS/shape/transform equal the sample template")
         check(one_band, f"{slot}_nan_single_band_float32", f"count=1 dtype={arr.dtype}")
+        if arr.shape != footprint.shape:
+            # Do not index a mismatched array or silently resample it.
+            continue
         inside = arr[footprint]
         outside = arr[~footprint]
         inside_finite = bool(np.isfinite(inside).all())
         inside_range = bool(inside_finite and inside.min() >= 0.0 and inside.max() <= 1.0)
         values_binary = bool(inside_finite and set(np.unique(inside).tolist()) <= {0.0, 1.0})
         outside_nan = bool(np.isnan(outside).all() and nodata_is_nan)
-        overlap = int(((arr > 0) & catalogue & footprint).sum())
+        overlap = int(((arr > 0) & catalogue & footprint).sum()) if label_grid_ok else None
         emitted = int((inside == 1.0).sum()) if inside_finite else -1
         check(inside_finite, f"{slot}_nan_inside_finite", f"nonfinite inside={int((~np.isfinite(inside)).sum())}")
         check(inside_range, f"{slot}_nan_inside_0_1", f"finite inside range=[{np.nanmin(inside):g}, {np.nanmax(inside):g}]")
@@ -130,9 +168,13 @@ def main() -> int:
         check(not bool(np.isinf(arr).any()), f"{slot}_nan_no_infinities", "no infinity anywhere")
 
         allfinite_name = item.get("allfinite")
+        safe_fallback = False
         if allfinite_name:
-            fallback = downloads_dir / allfinite_name
-            fallback_ok = fallback.is_file()
+            safe_fallback = (isinstance(allfinite_name, str) and Path(allfinite_name).name == allfinite_name
+                             and allfinite_name.endswith(".tif"))
+            check(safe_fallback, f"{slot}_allfinite_safe_filename", str(allfinite_name))
+            fallback = downloads_dir / allfinite_name if safe_fallback else downloads_dir / "__invalid__"
+            fallback_ok = safe_fallback and fallback.is_file()
             check(fallback_ok, f"{slot}_allfinite_file_exists", str(allfinite_name))
             if fallback_ok:
                 check(bool(re.search(rf"-{re.escape(content_id)}-allfinite\.tif$", allfinite_name)),
@@ -141,11 +183,18 @@ def main() -> int:
                       f"{slot}_allfinite_byte_count", f"{fallback.stat().st_size} bytes")
                 check(sha256_file(fallback) == item.get("sha256_allfinite"),
                       f"{slot}_allfinite_sha256", sha256_file(fallback))
-                with rasterio.open(fallback) as dataset:
-                    fallback_arr = dataset.read(1)
-                    fallback_grid = (dataset.crs, dataset.shape, dataset.transform) == template_signature
-                    fallback_type = dataset.count == 1 and dataset.dtypes[0] == "float32"
-                    no_nodata = dataset.nodata is None
+                try:
+                    with rasterio.open(fallback) as dataset:
+                        fallback_arr = dataset.read(1)
+                        fallback_grid = (dataset.crs, dataset.shape, dataset.transform) == template_signature
+                        fallback_type = dataset.count == 1 and dataset.dtypes[0] == "float32"
+                        no_nodata = dataset.nodata is None
+                except (OSError, rasterio.errors.RasterioError, IndexError, ValueError) as exc:
+                    check(False, f"{slot}_allfinite_readable", str(exc))
+                    continue
+                if fallback_arr.shape != footprint.shape:
+                    check(False, f"{slot}_allfinite_grid_and_type", "fallback shape differs from template")
+                    continue
                 fin = fallback_arr[footprint]
                 fout = fallback_arr[~footprint]
                 check(fallback_grid and fallback_type, f"{slot}_allfinite_grid_and_type", "single float32 band on exact template grid")
@@ -153,34 +202,44 @@ def main() -> int:
                       f"{slot}_allfinite_range", f"whole array finite; inside range=[{fin.min():g},{fin.max():g}]")
                 check(bool((fout == 0).all() and no_nodata), f"{slot}_allfinite_outside_zero", "outside zero; no nodata tag")
                 check(int((fin == 1.0).sum()) == item.get("emitted_px"), f"{slot}_allfinite_emitted_count", f"{int((fin == 1.0).sum())} cells equal 1.0")
-                check(int(((fallback_arr > 0) & catalogue & footprint).sum()) == 0,
-                      f"{slot}_allfinite_no_catalogue_overlap", "no positive known-catalogue overlap")
+                check(bool(np.array_equal(inside, fin)), f"{slot}_variant_footprint_values_equal",
+                      "NaN and all-finite variants contain identical prediction values on every footprint cell")
+                check(label_grid_ok and int(((fallback_arr > 0) & catalogue & footprint).sum()) == 0,
+                      f"{slot}_allfinite_no_catalogue_overlap", "requires aligned labels and no positive known-catalogue overlap")
 
         zip_name = item.get("zip")
         if zip_name:
-            zip_path = downloads_dir / zip_name
-            zip_ok = zip_path.is_file()
+            safe_zip = (isinstance(zip_name, str) and Path(zip_name).name == zip_name
+                        and zip_name.endswith(".zip"))
+            check(safe_zip, f"{slot}_zip_safe_filename", str(zip_name))
+            zip_path = downloads_dir / zip_name if safe_zip else downloads_dir / "__invalid__"
+            zip_ok = safe_zip and zip_path.is_file()
             check(zip_ok, f"{slot}_zip_exists", str(zip_name))
             if zip_ok:
                 check(zip_path.stat().st_size == item.get("bytes_zip"), f"{slot}_zip_byte_count", f"{zip_path.stat().st_size} bytes")
                 check(sha256_file(zip_path) == item.get("sha256_zip"), f"{slot}_zip_sha256", sha256_file(zip_path))
+                members = []
+                zip_member = item.get("zip_member", nan_name)
+                valid_member = zip_member == nan_name or (safe_fallback and zip_member == allfinite_name)
+                member_path = downloads_dir / zip_member if valid_member else downloads_dir / "__invalid__"
                 try:
                     with zipfile.ZipFile(zip_path) as archive:
                         members = archive.namelist()
-                        one_tif = members == [nan_name]
-                        byte_identical = one_tif and archive.read(nan_name) == nan_path.read_bytes()
+                        one_tif = bool(valid_member and members == [zip_member])
+                        byte_identical = one_tif and member_path.is_file() and archive.read(zip_member) == member_path.read_bytes()
                 except (OSError, zipfile.BadZipFile):
                     one_tif = byte_identical = False
-                check(one_tif, f"{slot}_zip_single_tif", f"members={members if 'members' in locals() else 'invalid zip'}")
-                check(byte_identical, f"{slot}_zip_byte_identical", "single member matches the NaN TIFF byte-for-byte")
+                check(one_tif, f"{slot}_zip_single_tif", f"members={members}")
+                check(byte_identical, f"{slot}_zip_byte_identical", "single member matches the registered TIFF byte-for-byte")
 
         note = str(item.get("note", ""))
         note_chars = len(note)
         check(0 < note_chars <= 200, f"{slot}_note_length", f"{note_chars} chars; max 200")
         note_file = item.get("note_file")
         if note_file:
-            path = downloads_dir / note_file
-            check(path.is_file() and path.read_text(encoding="utf-8").strip() == note,
+            safe_note = isinstance(note_file, str) and Path(note_file).name == note_file
+            path = downloads_dir / note_file if safe_note else downloads_dir / "__invalid__"
+            check(safe_note and path.is_file() and path.read_text(encoding="utf-8").strip() == note,
                   f"{slot}_note_file_matches", str(note_file))
 
     # Audit every filename-style artifact, including future/concurrent sessions.
@@ -196,15 +255,23 @@ def main() -> int:
         check(path.is_file(), f"{prefix}_file_exists", filename)
         if path.is_file():
             check(sha256_file(path) == current.get("sha256"), f"{prefix}_exact_sha256", sha256_file(path))
-            with rasterio.open(path) as src:
-                arr = src.read(1)
-                check((src.crs, src.shape, src.transform) == template_signature,
-                      f"{prefix}_exact_grid", "CRS/shape/transform match template")
-                check(src.count == 1 and src.dtypes[0] == "float32", f"{prefix}_single_band_float32", str(src.dtypes))
+            try:
+                with rasterio.open(path) as src:
+                    arr = src.read(1)
+                    check((src.crs, src.shape, src.transform) == template_signature,
+                          f"{prefix}_exact_grid", "CRS/shape/transform match template")
+                    check(src.count == 1 and src.dtypes[0] == "float32", f"{prefix}_single_band_float32", str(src.dtypes))
+            except (OSError, rasterio.errors.RasterioError, IndexError, ValueError) as exc:
+                check(False, f"{prefix}_readable", str(exc))
+                continue
+            if arr.shape != footprint.shape:
+                # Grid failure has already been recorded; do not mask/resize it.
+                continue
             check(np.isfinite(arr).all() and ((arr >= 0) & (arr <= 1)).all(),
                   f"{prefix}_strict_whole_array_0_1", "No NaN/infinity or out-of-range value anywhere")
             check((arr[~footprint] == 0).all(), f"{prefix}_zero_outside_footprint", "zeros outside footprint")
-            check(not ((arr > 0) & catalogue & footprint).any(), f"{prefix}_no_catalogue_predictions", "no catalogue dots")
+            check(label_grid_ok and not ((arr > 0) & catalogue & footprint).any(),
+                  f"{prefix}_no_catalogue_predictions", "requires aligned labels and no catalogue dots")
         note = current.get("note")
         check(isinstance(note, str) and 0 < len(note) <= 140, f"{prefix}_note_140", str(note))
         if current.get("verdict") == "negative":

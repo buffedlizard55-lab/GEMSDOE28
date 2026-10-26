@@ -1,53 +1,54 @@
 {
-  "session": "S19-ASCP",
-  "hypothesis": "Paired crest/toe curvature plus antislope selectivity and coherence recovers subtle unmapped fault scarps.",
-  "mechanism": "Fixed geometric mean of decoded LiDAR step, curvature-pair, uphill-facing and coherence legs; 2.8 px packing.",
-  "non_fault_mimic": "Road cut, terrace or paleo-shoreline riser, channel bank, landslide, or mine bench.",
-  "holdout": {
+  "session": "S22-AUDIT-20261026",
+  "hypothesis": "No geological hypothesis was assigned or tested. Ranked proposals remain research only.",
+  "mechanism": "A future displaced-marker lane would test repeated coherent offsets of magnetic or gravity contacts across a candidate fault corridor.",
+  "named_non_fault_mimic": "Branching lithologic contacts or survey-registration seams.",
+  "holdout_dti": {
     "label": "HOLDOUT-DTI",
     "evaluator_version": "gems-segment-pooled-v1",
-    "withheld_positives": 60988,
-    "dti": 0.08080635227066556,
-    "ci95": [
-      0.07232485681140427,
-      0.08911093061078756
+    "dti": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "reason": "No experiment; strict baseline and required feature cache unavailable."
+  },
+  "registry_correlations_overlaps": {
+    "scope": "Nine explicitly named historical artifacts only; not the complete parallel registry",
+    "artifact": "evidence/s22_focus_novelty.json",
+    "directional_pairs": 72,
+    "duplicate_pairs": 72,
+    "minimum_directional_overlap_3px": 0.8671895382207149,
+    "maximum_directional_overlap_3px": 1.0,
+    "maximum_absolute_spearman": 1.0,
+    "complete_current_parallel_registry": false,
+    "candidate_surface_checked": false,
+    "candidate_final_dots_checked": false
+  },
+  "raster_sha256": null,
+  "validator_outputs": {
+    "new_candidate": "NOT RUN \u2014 no candidate",
+    "archive_audit": "FAIL",
+    "archive_check_count": 790,
+    "archive_failures": [
+      "s22_archive_h40_vent_allfinite_outside_zero",
+      "s22_archive_h41_spring_allfinite_outside_zero"
     ],
-    "baseline_dti": 0.14169434045791646,
-    "paired_gain": -0.0608879881872509,
-    "paired_gain_ci95": [
-      -0.07402906930599784,
-      -0.047637576205972816
-    ]
+    "registered_tiffs": 46,
+    "preflight": "BLOCKED",
+    "preflight_failures": [
+      "Missing explicit assigned method lane and assignment source",
+      "Missing complete shared parallel-run registry",
+      "Missing frozen current-best result under the same strict protocol",
+      "Cached feature stack unavailable: [Errno 2] No such file or directory: '/home/user/GEMSDOE28/data/prepared/features.json'"
+    ],
+    "shared_synthetic_contract": "PASS; software test only"
   },
-  "registry": {
-    "members": 53,
-    "max_abs_surface_spearman": 0.10304419298512539,
-    "max_surface_support_overlap_3px": 0.20568525546545605,
-    "max_abs_final_spearman": 0.006538418059267532,
-    "max_final_overlap_3px": 0.27981090986349394,
-    "distance_definition": "exact Euclidean distance <=3 pixels; evidence/s19_exact_registry_overlap.json",
-    "preliminary_check": "Experiment runner used a conservative 7x7 Chebyshev neighborhood; it also passed. Exact Euclidean audit supersedes overlap values."
-  },
-  "raster_sha256": "553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537",
-  "validator": {
-    "no_nan_inside": true,
-    "no_nan_whole_array": true,
-    "range_0_1": true,
-    "crs_match": true,
-    "shape_match": true,
-    "transform_match": true
-  },
-  "submission_name": "GEMSDOE28-S19-ASCP-dc717c1ab13b",
-  "submission_file": "docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
-  "note": "S19 ASCP paired antislope LiDAR scarps; 37654 dots; holdout rejected; DO NOT SUBMIT.",
-  "experiments_run": 3,
-  "verdict": "negative",
-  "submission_ready": false,
+  "submission_name": null,
+  "submission_note": "S22 audit only; no candidate generated; DO NOT SUBMIT.",
+  "submission_note_characters": 54,
+  "new_tiff_generated": false,
+  "experiments_run": 0,
   "slot_selected": false,
-  "limitations": [
-    "Owner-mirrored LiDAR descriptors are hash-pinned but not organizer-authenticated.",
-    "Eight-connected raster components proxy expert fault segments.",
-    "Registry covers fresh priority rasters and local archive, not unknowable concurrent private outputs.",
-    "Local holdout performance is not an organizer score or guarantee."
-  ]
+  "submission_ready": false,
+  "verdict": "negative",
+  "source_access_irregularity": "One-off research-tool access to public competition pages may conflict with the manual-only project policy and quoted site terms; compliance is undetermined. No login or upload; do not repeat automated access absent permission."
 }

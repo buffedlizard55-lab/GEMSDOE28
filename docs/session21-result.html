@@ -1,84 +1,13 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Session 21 S21-PUHGB: fresh 31-band PU detector, byte-replicated champion lineage, canary-voided runs, negative holdout verdict, unique research TIFF download table.">
-<title>Session 21 result | GEMSDOE28</title>
-<link rel="stylesheet" href="assets/site.css">
-<script defer src="assets/site.js"></script>
-</head>
-<body>
-<header class="site-header"><div class="header-inner">
-<a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
-<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session21-result.html" aria-current="page">S21 result</a><a href="session20-result.html">S20 result</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
-</div></header>
-<main>
-<p class="breadcrumb"><a href="index.html">Overview</a> / Session 21 result</p>
-
-<section class="card callout-danger" data-submission-ready="false" id="s21-decision">
-<p class="eyebrow">Session 21 · S21-PUHGB lane · 2026-10-26 · automated gates, no human inspector</p>
-<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
-<h1>🔴 DO NOT SUBMIT — new unique TIFF generated, holdout gate FAILED</h1>
-<p class="lead">A brand-new GeoTIFF was generated this session from a <strong>fresh 31-band PU-trained detector</strong> (no H19-5 dots): <code>gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif</code> — 37,654 dots, SHA-256 <code>2bf4737a…3787c</code>, all-finite {0,1} in [0,1] (fixes the DrivenData “[0, 1]” range error), EPSG:32611, 3730 × 3292, template-exact. Leakage canary <strong>PASS</strong> (max AUC 0.580 ≤ 0.90). Uniqueness vs every <em>scored</em> raster <strong>PASS</strong> (≤54.7% 3-px overlap; 28.7% vs the 0.2778 champion). But pooled <strong>HOLDOUT-DTI 0.0839 vs 0.1062</strong> baseline (Δ −0.0223, 95% CI [−0.0309, −0.0137]) and the strict any-raster uniqueness rule fails vs an unscored dense probe (72.3%). <strong>Verdict: negative — zero weekly slots spent.</strong></p>
-<div class="download-actions">
-<button class="button" type="button" disabled aria-disabled="true">Submission download locked</button>
-<a class="button" href="downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif" download>1-Click Download S21 Unique GeoTIFF (.tif, all-finite [0,1]) — Research Only / DO NOT SUBMIT</a>
-<a class="button secondary" href="downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif" download>Template-NaN GeoTIFF (.tif)</a>
-<a class="button quiet" href="downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-nan.zip" download>ZIP Bundle (.zip)</a>
-<a class="button quiet" href="data/run_card_s21.json" download>JSON Run Card</a>
-</div>
-<p><strong>Unique name:</strong> <code>GEMSDOE28-S21-PUHGB-20261026-16bbf281ba9b</code><br>
-<strong>Note (82/140 chars):</strong></p>
-<div class="note-box"><code>S21 PU-HGB 31-band fresh 37654d b2 HOLDOUT 0.0839 vs 0.1062 NEGATIVE DO NOT SUBMIT</code><button class="copy-note" type="button" data-copy-note="S21 PU-HGB 31-band fresh 37654d b2 HOLDOUT 0.0839 vs 0.1062 NEGATIVE DO NOT SUBMIT" aria-label="Copy note">Copy note</button></div>
-</section>
-
-<section class="section"><h2>Download table — file, estimated score, unique?</h2>
-<p>Estimates are <strong>MODEL PROJECTIONS, never scores</strong>. The only labelled score classes used are HOLDOUT-DTI (local hide-and-recover) and OWNER-REPORTED (user-supplied, no organizer receipt in this repo).</p>
-<div class="table-wrap"><table>
-<thead><tr><th>File to download</th><th>Estimated live score (MODEL)</th><th>Unique vs GEMSDOE24/25/27/28/30/31/32/33/36?</th><th>OK to submit?</th></tr></thead>
-<tbody>
-<tr><td><code>gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif</code> (this session)</td><td>~0.22 [0.20–0.24] (holdout-ratio to 0.2778 anchor)</td><td>YES vs all scored rasters (≤55% overlap); NO vs unscored dense probe (72.3%)</td><td><strong>NO — research only</strong></td></tr>
-<tr><td>Champion-recipe b3 (35,483 dots, counted only — no file shipped)</td><td>~0.279–0.285 (marginal-model family)</td><td><strong>NO — 94% of champion dots</strong></td><td><strong>NO — duplicate lane</strong></td></tr>
-<tr><td>GEMSDOE32 <code>h33-h33-2-b2-…-e5eb6e7e-zeros</code></td><td>0.2778 OWNER-REPORTED / UNVERIFIED</td><td>It is a previous submission</td><td><strong>NO — copying prohibited</strong></td></tr>
-</tbody></table></div>
-<p><strong>Bottom line:</strong> today no file is both genuinely unique <em>and</em> evidenced to beat 0.2778. The only evidenced &gt;0.2778 direction (deeper ring pruning) is a duplicate of the champion.</p>
-</section>
-
-<section class="section"><h2>Why 0.2778 won — replicated byte-exactly this session</h2>
-<p>On hash-verified restored data: <code>dot_thin(H19-5, 2.8px)</code> reproduces the 44,090-dot file with symmetric difference <strong>0</strong>; minus the ≤1 px catalogue ring reproduces solo (40,199), symdiff <strong>0</strong>; minus the ≤2 px ring gives exactly <strong>37,654</strong> (champion construction). The 300 m scoring kernel makes ~2.8 px dot spacing nearly as good as a solid line at ~⅓ the false-positive cost, and dots 100–200 m from known faults are mostly detector blur-shadow of faults the scorer masks anyway — deleting all 2,545 is pure precision gain (break-even credit τ ≈ 0.0588/dot at DTI 0.2778). The entire 0.1922 → 0.2778 ladder is emission hygiene on one surface, not new geology. Full evidence: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/61_s21_result.md">knowledge/61</a>.</p>
-</section>
-
-<section class="section"><h2>Nine priority sites — best listed submission (OWNER-REPORTED / UNVERIFIED)</h2>
-<div class="table-wrap"><table>
-<thead><tr><th>Site</th><th>Best listed submission</th><th>Reported</th><th>Construction</th></tr></thead>
-<tbody>
-<tr><td>GEMSDOE24</td><td><code>h25-1-dotted-h19-5-d1-5</code></td><td>0.2477</td><td>H19-5 dotted @1.5px (60,069)</td></tr>
-<tr><td>GEMSDOE25</td><td><code>dotted-h19-5-d2-8</code></td><td>0.2600</td><td>H19-5 dotted @2.8px (44,090; = GEMSDOE30 raster)</td></tr>
-<tr><td>GEMSDOE27</td><td><code>topo-gap-closure-t-v2-on-d1-5</code></td><td>0.2449</td><td>d1.5 + gap additions (61,328) — additions lost</td></tr>
-<tr><td>GEMSDOE28</td><td><code>h36-1-rung30-blind-r1</code></td><td>0.2710</td><td>rung-3.0 repack + ring≤1 (37,660)</td></tr>
-<tr><td>GEMSDOE30</td><td><code>d28-poisson300m-offcat-44090</code></td><td>0.2600</td><td>same 44,090-dot family</td></tr>
-<tr><td>GEMSDOE31</td><td><code>h27-4-solo-d28</code></td><td>0.2708</td><td>d2.8 − ring≤1 (40,199; = GEMSDOE28 solo)</td></tr>
-<tr><td><strong>GEMSDOE32</strong></td><td><code><strong>h33-h33-2-b2-…-e5eb6e7e-zeros</strong></code></td><td><strong>0.2778</strong></td><td><strong>solo − ring≤2 (37,654). Best listed. Learning reference only.</strong></td></tr>
-<tr><td>GEMSDOE33</td><td><code>h33d-analog-tip-stepover-r30</code></td><td>0.2632</td><td>tip/stepover placement (41,865)</td></tr>
-<tr><td>GEMSDOE36</td><td><code>anderson-geothermal-pinn-38854</code></td><td>0.2750</td><td>champion dots + 1,200 extra (extras cost 0.0028)</td></tr>
-</tbody></table></div>
-<p class="meta">Public leaderboard top observed 2026-10-26: 0.4413 (0.3195 was the 2026-10-03 snapshot). <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard (manual review)</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description &amp; metric</a> · <a href="https://github.com/drivendataorg/gems-prize-reference-solution">Reference solution</a></p>
-</section>
-
-<section class="section"><h2>How to make a submission (when a future file is approved)</h2>
-<ol>
-<li>Download the approved <strong>all-finite</strong> <code>.tif</code> (whole array finite in [0,1] — this avoids the portal error “Predicted values must be in range [0, 1]”).</li>
-<li>Open the DrivenData competition → <em>Make a submission</em> → choose the single-band GeoTIFF (or a .zip containing exactly one).</li>
-<li>Paste the exact <strong>Note</strong> from the run card (≤140 chars) so the file is identifiable later.</li>
-<li>Confirm CRS/shape/geotransform match is automatic — files here are written from the sample-submission template and re-verified on read-back.</li>
-<li>Record the submission-page receipt (score + timestamp) back into <code>registry/</code> — until then every number stays OWNER-REPORTED.</li>
-</ol>
-<p>No file currently on this site is approved. Promotion is a separate selector step within the weekly cap shown on the submission page.</p>
-</section>
-
-<section class="section"><h2>Method, voided runs &amp; audit trail</h2>
-<p>Lane: fresh PU-HGB on 19 GeoDAWN + 12 LiDAR-scarp bands + coordinates (catalogue geometry used only for masking). Three earlier variants were <strong>voided and archived</strong>: v1 (baseline pruned with hidden truth; no LiDAR), v2 (leakage canary AUC 1.00 on a catalogue-density feature), v3a (canary 0.963). Valid run v3b: canary 0.580 PASS; HOLDOUT-DTI seeds 350–352, 12 cells, 35,900 withheld positives. Named non-fault mimics: roads, channels, terrace/paleo-shoreline risers, landslides, mine benches, lithologic contacts. Next: U-Net patch segmentation (GPU) or soft-probability emission, pre-registered on fresh seeds 360+.</p>
-<p><a href="data/run_card_s21.json">JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/61_s21_result.md">Full Session 21 report</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/scripts/run_s21_lane.py">Experiment code</a></p>
-</section>
-</main>
-</body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Corrected historical S21 research result: strict uniqueness and holdout limitations, do not submit.">
+<title>Historical S21 result | GEMSDOE28</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><header class="site-header"><div class="header-inner"><a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a><nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session21-result.html" aria-current="page">S21 result</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a></nav></div></header>
+<main><section class="card callout-danger" data-submission-ready="false">
+<p class="eyebrow">Historical Session 21 · corrected 2026-10-26</p>
+<h1>DO NOT SUBMIT — strict uniqueness and holdout gates failed</h1>
+<p>This is a historical research file, not a new S22 candidate. The S21 card reports 72.34% of its dots within 3 pixels of an H37-1 probe, above the strict 70% any-registry stop. Its local holdout used a quadrant-clipped component split and a negative pool selected using full labels, not the required shared buffered whole-segment visible-only protocol. Its cell-0 feature canary does not establish freedom from structural leakage.</p>
+<p>Historical <strong>HOLDOUT-DTI</strong> (<code>gems27.metric.dti_binary</code>, 35,900 pooled withheld positives across cells): 0.083912 (95% CI 0.067020–0.103244), baseline 0.106210 (95% CI 0.090246–0.124506), paired gain −0.022298 (95% CI −0.030924 to −0.013741). This is a noncomparable local proxy, not an organizer score.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button quiet" href="downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif" download>Download historical TIFF for research — DO NOT SUBMIT</a><a class="button quiet" href="data/run_card_s21.json">Historical run card</a><a class="button quiet" href="cross-site-review.html">Current nine-site audit</a></div>
+<p>Historical all-finite TIFF SHA-256: <code>2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c</code>. Its finite 0/1 values do not diagnose the prior portal error or guarantee acceptance; the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official format</a> specifies null or NaN outside the bounds.</p>
+</section><section class="section"><h2>Corrections and next work</h2><p>The historical extrapolated leaderboard estimates are not scores and do not prove a higher entry. The GEMSDOE32 reported 0.2778 is unverified without a receipt; pixel reconstruction demonstrates a pruning relationship, not score causation. S22 ran no geological experiments and wrote no new TIFF.</p><p>Obtain the assigned lane, complete registry, template cache and comparable frozen baseline before any experiment. The <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/62_s22_audit.md">current audit</a> records the ranked hypotheses, official source observations, exact artifact findings and automated gates.</p></section></main></body></html>

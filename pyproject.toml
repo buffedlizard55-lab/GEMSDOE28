@@ -26,3 +26,9 @@ ignore = ["E741", "E501", "B905"]
 # S18 executed evidence hashes bind these runners; preserve source bytes after the frozen run.
 "scripts/evaluate_s18_holdout.py" = ["I001"]
 "scripts/run_s18_extrapolated_trace.py" = ["I001"]
+# S21 source bytes are historical evidence. Preserve them exactly; they are not
+# the current shared-template runner and their protocol defects are documented.
+# run_s21_lane.py SHA-256: 46fd8f67fd9583d9c0940b7e464b7f16f74b5c45c88332e33d9b66d6cc342e34
+# finalize_s21.py SHA-256: 8ac51e1502bec51e0b710d3dc9b3eba9c68346d380d259c49c2c4d4e62acb002
+"scripts/run_s21_lane.py" = ["I001", "E401", "F401", "E701", "E702", "B023"]
+"scripts/finalize_s21.py" = ["I001", "E401", "F401", "E701", "E702"]
