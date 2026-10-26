@@ -1,0 +1,12 @@
+{
+  "session": "S22-DPMR",
+  "stage": "Experiment 2 startup",
+  "status": "VOID-INFRASTRUCTURE",
+  "observed_utc": "2026-10-26T22:08:42Z",
+  "issue": "Executing scripts/run_s22_dpmr.py by path did not place the repository root on sys.path, so importing the existing scripts.run_s20_nchc baseline constructor raised ModuleNotFoundError after deterministic fold-local candidate placement and before any baseline fit, DTI score, confidence interval, or holdout evidence was produced.",
+  "scientific_output_observed": false,
+  "hyperparameters_changed": false,
+  "seeds_spent": [],
+  "remedy": "Add the repository root to sys.path. No geological transform, placement rule, comparator, seed, threshold, or gate changed.",
+  "rerun_policy": "One clean execution is allowed because the failed startup exposed no holdout result."
+}
