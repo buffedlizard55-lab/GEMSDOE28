@@ -1,4 +1,37 @@
-# Session 19 review — 2026-10-26 (read first every session)
+# Session 20 result — 2026-10-26 (read first every session)
+
+**A new unique TIFF was generated. It is NOT approved to submit — its frozen holdout gate FAILED.**
+
+[**Download the S20 unique research TIFF (DO NOT SUBMIT)**](docs/downloads/gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif)
+· [S20 full result + nine-site executive summary](knowledge/57_s20_result.md)
+· [Executive summary / submission process](docs/executive-summary.html)
+· [S20 JSON run card](evidence/s20_run_card.json)
+· [Preregistration + 5 ranked hypotheses](knowledge/56_s20_preregistration_and_hypotheses.md)
+
+S20-H2 (multi-scale Hessian tubularity of the LiDAR scarp-step field; 37,500 dots; declared lane,
+seeds 340–342) is independently generated, not copied from any prior submission. Automated gates —
+no human inspector: leakage canary AUC 0.5378 PASS; uniqueness PASS (surface max |ρ| 0.0346; final
+dots worst 33.4% within 3 px frozen registry, 54.2% extended 100 dot-sets; champion 30.3%);
+exact-file validation PASS (all-finite primary: no NaN anywhere, values {0,1}, single-band float32,
+EPSG:32611 3730×3292 template grid; `verify_downloads.py` 407 checks PASS). **HOLDOUT-DTI**
+(LOSFO whole-system buffered holdout, shared `metric.dti_binary`, 12 cells, 49,387 pooled /
+38,941 unique withheld positives): lane **0.08631** vs matched control **0.09881**, Δ **−0.01251**
+(paired 95% CI **[−0.03170, +0.00133]**, 3/12 cells) → **gate FAILED, verdict `negative`, no slot
+spent**. Safe to download for research; **NOT OK to submit**. Submission name
+`GEMSDOE28-s20-vesselness-lidarstep-7a7c5e449fe0`; note (113/140) in
+`docs/downloads/note-gemsdoe28-s20-7a7c5e449fe0.txt`.
+
+Byte-verified forensic (education only, `evidence/s20_forensic.json`): the owner-reported leader
+GEMSDOE32 H33-2-B2 (**0.2778, USER-REPORTED / UNVERIFIED**, no organizer receipt) is exactly the
+solo-r1 emission minus its 2,545 dots within 2 px of the catalogue (0 added). Live-ladder inversion
+shows both pruned rings earned ≈0.003–0.007 credit/dot vs ≈0.054 break-even — emission hygiene,
+not new detection. Pruning headroom caps near ~0.285 (B3, duplicate-lane: measured, not shipped);
+the dated official-leaderboard top observed 2026-10-26 is **0.4413** (public row, not a receipt),
+which needs ≈+2,830 credit px of genuine far-field detection. Next priority: S20-H1 U-Net patch
+segmentation on the restored 32-band stack (`knowledge/56`). Standing brief below remains in force;
+reread it plus `knowledge/53_current_request.md` every session. **Maximize P(Win) · Own the Outcome.**
+
+# Session 19 review — 2026-10-26 (superseded by S20 above; preserved)
 
 **No new TIFF was generated; no file is approved to submit.** The nine-site review ranks the supplied GEMSDOE32 H33-2-B2 claim, `0.2778`, highest among the values in the prompt, but labels it **USER-REPORTED / UNVERIFIED** (not HOLDOUT-DTI or ORGANIZER-CONFIRMED). A method lane, complete parallel registry, frozen strict-protocol baseline, and local feature cache are missing. Do not reuse the prior S18 TIFF or copy/prune an older submission.
 
