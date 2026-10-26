@@ -291,6 +291,7 @@ def nav() -> str:
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
         ("Latest result", "session18-result.html"),
+        ("S20 result", "session20-result.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
@@ -1292,22 +1293,32 @@ def main() -> int:
 <p>The highest value among the nine site claims supplied by the owner is GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>; it is not an organizer receipt or local HOLDOUT-DTI. A new experiment/TIFF is blocked because the assigned method lane, complete parallel registry, frozen comparator and cached inputs are unavailable. <strong>Do not submit any file from this site.</strong></p>
 <p><a class=\"button quiet\" href=\"cross-site-review.html\">Open the nine-site scorecard, ranked hypotheses and run card</a></p>
 </section>"""
+    session20_brief = """<section class=\"card callout-danger\" aria-label=\"Session 20 result\">
+<h2>Session 20 (2026-10-26): new TIFF generated — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
+<p>A new unique-bytes research TIFF (<code>gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif</code>, 33,354 dots) was generated under a frozen preregistration and rejected automatically: <strong>HOLDOUT-DTI paired gain -0.007434 (95% CI [-0.01081, -0.00496], 0/20 cells)</strong> and 94.3% of dots within 3 px of the GEMSDOE32 champion (duplicate family lane). Its file format is valid (all-finite, values in [0,1]); that does not make it submittable. The best existing file remains GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>, byte-verified this session as solo minus the 2 px catalogue ring. <strong>Do not upload any file from this site.</strong></p>
+<p><a class=\"button quiet\" href=\"session20-result.html\">Session 20 executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard (Session 19)</a></p>
+</section>"""
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
+    session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     pages = {
-        "index.html": layout("Overview", session19_brief + render_s18_result() + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", session20_brief + session19_brief + render_s18_result() + s18_feed_html(feed), "Overview"),
         "cross-site-review.html": cross_site_template,
-        "executive-summary.html": layout("Executive summary", render_s18_executive(), "Executive summary"),
+        "executive-summary.html": layout("Executive summary", session20_brief + render_s18_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
         "archive.html": layout("Historical campaign archive", archive, "Archive"),
         "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; current S18-MXTP evidence is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/76847b2/docs/submission-review.html">Complete original PR39 HTML audit at its historical commit</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
         "session18-result.html": layout("S18 unique TIFF result", render_s18_result(), "S18 result"),
+        "session20-result.html": session20_template,
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    s20_card = read_json("evidence/session20_run_card.json")
+    (DOCS / "data/run_card_s20_2026-10-26.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s20_2026-10-26.json").write_text(json.dumps(s20_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     current_card = read_json("evidence/s18_mxtp_run_card.json")
     current_card_path = DOCS / "data" / "current_run_card_2026-10-25.json"
     current_card_path.parent.mkdir(parents=True, exist_ok=True)

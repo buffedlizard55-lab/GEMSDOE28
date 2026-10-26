@@ -1,3 +1,38 @@
+# Session 20 result — 2026-10-26 (read first every session)
+
+**A new unique TIFF was generated and the automated gates REJECTED it. No file is approved to submit.**
+Session 20 declared its own lane in writing before experimenting (the prompt's method-paragraph
+assignment is absent), ran exactly the 3 permitted experiments, and the pipeline — no human
+inspector — produced the rejection. Do not retune seeds 340–344; do not submit the S20 file.
+
+- [Session 20 executive result page (site)](docs/session20-result.html)
+- [Full Session 20 report: nine-site answer, champion mechanism, gate numbers](knowledge/57_s20_result.md)
+- [Frozen preregistration H43-1](knowledge/56_s20_preregistration_H43-1.md)
+- [Session 20 JSON run card](evidence/session20_run_card.json)
+
+**Nine-site executive answer (all values USER-REPORTED / UNVERIFIED, no organizer receipts):**
+GEMSDOE32 `h33-h33-2-b2-…-e5eb6e7e-zeros` (**0.2778**, 37,654 dots) is the best listed file, ahead of
+GEMSDOE36 (0.2750), GEMSDOE28 (0.2710), GEMSDOE31 (0.2708), GEMSDOE33 (0.2632), GEMSDOE25/30
+(0.2600), GEMSDOE24 (0.2477) and GEMSDOE27 (0.2449). This session fetched the champion bytes
+(`GEMSDOE32@012e17b`, SHA-256 `c55bafc4…6fa9`) and proved the lineage **byte-exactly**: H19-5
+(121,131) → `dot_thin(·,2.8)` (44,090) → −ring≤1px (40,199 solo) → −ring≤2px (37,654 champion),
+symmetric difference 0 at each step. The champion is therefore emission hygiene on one surface
+(kernel-matched spacing + deletion of catalogue-flank shadow below the ΔTP/ΔFP≈0.059 inclusion
+bar), not new geology. **Irregularity:** the champion's own audit JSON calls it UNSCORED with a
+0.2747 MODEL projection, so the 0.2778 association still has no receipt; if that hash has no
+receipt on the account, the champion file itself (downloaded from GEMSDOE32, never re-hosted
+here as ours) is the single best slot candidate, subject to the separate selector step.
+
+**New S20 candidate (🔴 DO NOT SUBMIT):**
+[`gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif`](docs/downloads/gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif)
+— 33,354 dots, SHA-256 `960c3d49…f117`, all-finite {0,1} float32, template grid exact (fixes the
+"[0,1] range" error class), not an exact duplicate of any of 22 registry dot-sets. **HOLDOUT-DTI**
+(`metric.dti_binary`, seeds 340–344, 61,613 pooled withheld positives): 0.095807 vs
+champion-analogue 0.103241, paired gain **−0.007434 (95% CI [−0.01081, −0.00496], 0/20 cells)**;
+greedy packing exhausted at 88.6% of target; 94.3% of dots within 3 px of the champion =
+duplicate family lane by protocol. Verdict `negative`. Next: fresh-seed piercing-marker lane
+(report §5). Core values unchanged: **Maximize P(Win)**, **Own the Outcome**.
+
 # Session 19 review — 2026-10-26 (read first every session)
 
 **No new TIFF was generated; no file is approved to submit.** The nine-site review ranks the supplied GEMSDOE32 H33-2-B2 claim, `0.2778`, highest among the values in the prompt, but labels it **USER-REPORTED / UNVERIFIED** (not HOLDOUT-DTI or ORGANIZER-CONFIRMED). A method lane, complete parallel registry, frozen strict-protocol baseline, and local feature cache are missing. Do not reuse the prior S18 TIFF or copy/prune an older submission.
