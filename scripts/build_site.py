@@ -414,7 +414,6 @@ def render_priority_site_review(review: dict) -> str:
             f"<td>{esc(item['construction_summary'])}<br><span class=\"small\">{esc(item['forensic_note'])}</span></td>"
             f"<td><a href=\"{esc(url)}\">Pinned historical TIFF source (review only)</a></td></tr>"
         )
-    recommendation = review["recommendation"]
     return f"""<section class="card callout-danger"><h1>Submission decision: no file approved</h1>
 <p><strong>Do not download an old site raster as a new submission.</strong> This page compares the historical score claims supplied in the request. Each is <strong>OWNER-REPORTED</strong>, not organizer-confirmed. The latest generated S18-MXTP research TIFF failed its paired holdout gate and is marked DO NOT SUBMIT.</p>
 <p><strong>Best reported among these nine sites:</strong> GEMSDOE32 H33-2-B2 at <strong>0.2778</strong>. This is the highest score claim in the supplied set, not a verified high-score recommendation. No submission receipt ties the claim to those bytes. Forensic evidence shows substantial pixel-set reuse from GEMSDOE28 H27-4 solo; do not copy it as a unique candidate.</p>

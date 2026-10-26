@@ -17,6 +17,8 @@ on:
       - 'evidence/s18_mxtp_run_card.json'
       - 'docs/downloads/h28_1_candidate_manifest.json'
       - 'docs/data/topology_review_classes.json'
+      - 'docs/data/priority_site_review_2026-10-26.json'
+      - 'evidence/run_card_2026-10-26_review.json'
       - 'docs/*.html'
       - 'index.html'
       - 'executive-summary.html'
@@ -84,6 +86,8 @@ on:
       - 'evidence/s18_mxtp_run_card.json'
       - 'docs/downloads/h28_1_candidate_manifest.json'
       - 'docs/data/topology_review_classes.json'
+      - 'docs/data/priority_site_review_2026-10-26.json'
+      - 'evidence/run_card_2026-10-26_review.json'
       - 'docs/*.html'
       - 'index.html'
       - 'executive-summary.html'
@@ -153,4 +157,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html executive-summary.html data/current_run_card_2026-10-25.json
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json docs/data/run_card_2026-10-26_review.json index.html executive-summary.html data/current_run_card_2026-10-25.json
