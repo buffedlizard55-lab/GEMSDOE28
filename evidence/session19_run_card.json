@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "session_id": "G28-A52-20261026",
+  "date_utc": "2026-10-26",
+  "lane": null,
+  "lane_assignment_source": null,
+  "hypothesis": "Ranked proposal only: displaced potential-field piercing markers; not an assigned lane and not implemented.",
+  "mechanism": "Not run. The proposed transform would test coherent lateral displacement of multiple RTP/TMI and isostatic-gravity marker ridges across a corridor and score the corridor rather than the lithologic markers.",
+  "named_non_fault_mimic": "Intrusive or branching lithologic contacts and survey-registration seams.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN — blocked before experiment",
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null,
+    "paired_gain_ci95": null,
+    "reason": "No explicit lane assignment, complete shared parallel registry, frozen strict-protocol baseline, or local cached feature stack. The declared packages were installed into an isolated environment and the full test suite passed, but the data-dependent checks are skipped because the hash-pinned inputs are absent."
+  },
+  "feature_alone_leakage_canaries": {
+    "status": "NOT RUN",
+    "features_tested": [],
+    "auc_gt_0_90_stop": null
+  },
+  "registry_comparison": {
+    "status": "NOT RUN — no new candidate surface or dots",
+    "registry_complete": false,
+    "surface_max_abs_spearman": null,
+    "max_dot_fraction_within_3px": null,
+    "thresholds": {
+      "abs_spearman_stop_if_above": 0.9,
+      "dot_overlap_stop_if_above": 0.7
+    }
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "NOT RUN — no new raster",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null,
+    "single_band": null
+  },
+  "submission_name": null,
+  "submission_note": "No new TIFF: prerequisites and strict holdout gates were not met; research review only.",
+  "preflight": {
+    "status": "BLOCKED",
+    "checked_at_utc": "2026-10-26T00:22:05Z",
+    "failures": [
+      "Missing explicit assigned method lane and assignment source",
+      "Missing complete shared parallel-run registry",
+      "Missing frozen current-best result under the same strict protocol",
+      "Expired inherited two-hour timer in registry/current_session.json",
+      "Cached feature metadata/data/prepared/features.json absent",
+      "All pinned shared-template source files absent under shared_template/"
+    ],
+    "details": "The complete evaluator/writer contract was not restored or executed; metadata pins alone are insufficient."
+  },
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "new_tiff_generated": false,
+  "slot_selected": false,
+  "organizer_confirmed_scores": [],
+  "user_reported_score_claims": {
+    "status": "USER-REPORTED / UNVERIFIED; excluded from HOLDOUT-DTI and ORGANIZER-CONFIRMED classes",
+    "highest_in_nine_sites": {
+      "site": "GEMSDOE32",
+      "artifact": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+      "value": 0.2778
+    },
+    "other_leaderboard_maxima_in_prompt": [0.3195, 0.4413],
+    "note": "Conflicting leader maxima are not freshly verified. No submission-page receipt was obtained."
+  },
+  "verdict": "negative",
+  "promotion_eligible": false,
+  "submission_ready": false,
+  "verification": {
+    "site_build": "PASS — two consecutive builds produced identical hashes for generated root/index/report pages",
+    "pytest": "480 passed, 6 skipped; skipped checks require absent hash-pinned input rasters",
+    "ruff": "PASS — src scripts tests",
+    "git_diff_check": "PASS",
+    "full_scientific_holdout": "NOT RUN — data/lane/registry/baseline prerequisites missing"
+  },
+  "scope": "Repository review and candidate slate only; no scientific experiment, TIFF, competition upload, or slot decision.",
+  "next_gate": "Provide an identifiable assigned method paragraph, complete synchronized registry, frozen same-protocol best, and restore hash-verified cached feature/source inputs; then re-run strict preflight before authorizing any experiment."
+}

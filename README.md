@@ -1,6 +1,16 @@
-# Current result — 2026-10-25 S18-MXTP (read first every session)
+# Session 19 review — 2026-10-26 (read first every session)
 
-## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+**No new TIFF was generated; no file is approved to submit.** The nine-site review ranks the supplied GEMSDOE32 H33-2-B2 claim, `0.2778`, highest among the values in the prompt, but labels it **USER-REPORTED / UNVERIFIED** (not HOLDOUT-DTI or ORGANIZER-CONFIRMED). A method lane, complete parallel registry, frozen strict-protocol baseline, and local feature cache are missing. Do not reuse the prior S18 TIFF or copy/prune an older submission.
+
+- [Nine-site executive scorecard, ranked hypotheses and source links](docs/cross-site-review.html)
+- [Full Session 19 review](knowledge/55_session19_cross_site_review.md)
+- [Session 19 JSON run card](evidence/session19_run_card.json)
+
+The top proposed research hypothesis is displaced potential-field piercing markers; it is not assigned or run. The JSON card records a negative/blocked review, zero experiments, no raster hash, and no slot selection. Existing S18-MXTP remains the latest generated research TIFF and its prior holdout rejection remains in force.
+
+# Current result — 2026-10-25 S18-MXTP (prior run; read its limits)
+
+## PRIOR UNIQUE TIFF — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 
 [**Download the new unique research TIFF**](docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif)
 · [Executive summary / submission process](docs/executive-summary.html)
