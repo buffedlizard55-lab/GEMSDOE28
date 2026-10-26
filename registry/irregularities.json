@@ -819,6 +819,12 @@
       "action": "Disclosed in evidence/s18_run_card.json (preregistration_deviations) and knowledge/53. Verdict unchanged: falsification controls (phys/anti/rand all ~-0.005 DTI) make the negative robust to the weighting choice, but the exact preregistered estimator is untested and must not be run on seeds 310-314; any retry needs fresh preregistration and seeds >=320."
     },
     {
+      "id": "nine-site-review-latest-result-nav-stale",
+      "severity": "low",
+      "issue": "After S19-ASCP became the latest run, the nine-site review template still labeled its navigation link to session18-result.html as \u201cLatest result.\u201d Readers could land on an older experiment from the page intended to summarize current-site comparisons.",
+      "action": "Changed the scorecard navigation target to session19-result.html and added a regression test that checks the generated page links to S19 rather than S18."
+    },
+    {
       "id": "s20-champion-unscored-audit-vs-02778",
       "severity": "high",
       "issue": "GEMSDOE32 champion audit JSON (tree 012e17b, fetched Session 20) embeds submission notes saying UNSCORED with projected live 0.2747, and holdout_metrics.predicted_leaderboard_dti=0.27467315976932155; the owner prompt associates the same filename with 0.2778. Construction is byte-verified (solo minus ring<=2, symmetric difference 0, SHA-256 c55bafc4...), score attribution is not.",
@@ -841,6 +847,21 @@
       "severity": "low",
       "issue": "gh api content fetch hit a GitHub rate limit (HTTP 403) during Session 20 data restore; scripts/restore_data.py prefers gh when present.",
       "action": "Used depth-1 blob-filtered sparse git clones of the pinned mirror commits instead; every restored file's SHA-256 matches registry/data_manifest.json exactly (evidence/s20_exp1_forensic.json). restore_data.py left unchanged (shared tool); fallback documented here and in knowledge/57."
+    },
+    {
+      "id": "s20-parallel-session-id-collision",
+      "severity": "medium",
+      "issue": "Two parallel 2026-10-26 sessions both used the Session 20 label: main's validation-hardening review (evidence/session20_run_card.json, knowledge/56_session20_validation_review.md, no experiment) and this branch's H43-1 experiment (originally also written to evidence/session20_run_card.json). Knowledge number 56 is likewise shared with knowledge/56_s19_result.md.",
+      "action": "Main's validation-review card keeps evidence/session20_run_card.json; the H43-1 card moved to evidence/session20_h43_run_card.json with all references updated. The two sessions' numbers must never be pooled; cite as Session 20 (validation review) vs Session 20-H43 (this experiment)."
+    }
+  ],
+  "irregularities": [
+    {
+      "id": "s19-preliminary-overlap-neighborhood",
+      "date": "2026-10-26",
+      "severity": "corrected",
+      "issue": "The frozen S19 runner labeled a 7x7 square dilation as within 3 px; this conservative Chebyshev neighborhood includes corner cells farther than 3 Euclidean pixels.",
+      "action": "Retain the preliminary stage evidence. Re-read identical rasters without model fitting and publish exact Euclidean <=3 px values in evidence/s19_exact_registry_overlap.json and the final card. Both checks pass; exact maxima are 20.57% support and 27.98% final dots."
     }
   ]
 }

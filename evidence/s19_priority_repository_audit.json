@@ -1,0 +1,3053 @@
+{
+  "schema_version": 1,
+  "observed_utc": "2026-10-26T00:19:29.162226+00:00",
+  "purpose": "Educational audit only; no predictions generated or scores inferred",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "repositories": [
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE24",
+      "commit": "fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1",
+      "tree": "fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "058ab4da751b11a7acd767341c6420b58831e2f792e50bc4eb0fa8df2b27dfb4",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1/README.md",
+          "matching_excerpts": [
+            {
+              "line": 1198,
+              "text": "h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan: 0.2477"
+            }
+          ]
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "e0851f4938f9777b520b4ddd8f07e2255fd2b652d18e583360ef5e103d58a5d6",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1/docs/index.html",
+          "matching_excerpts": []
+        },
+        {
+          "path": "index.html",
+          "sha256": "dab8da654ab937cd0d17e594985a46ac0792273dc9ea7635fa7e10230233e32d",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1/index.html",
+          "matching_excerpts": []
+        }
+      ],
+      "all_raster_paths": [
+        "data/bridge/existing_faults.tif",
+        "data/bridge/labels.tif",
+        "data/bridge/sample_submission.tif",
+        "data/external/audit_sources/acquisition_block_id_100m.tif",
+        "data/external/audit_sources/blm_closed_claim_distance_m.tif",
+        "data/external/audit_sources/tiger_road_distance_m.tif",
+        "data/external/derived_sgmc_faults_100m_u8.tif",
+        "data/external/geodawn_extensions_u8.tif",
+        "data/external/geodawn_rad_u8.tif",
+        "data/external/lidar_scarp_features_u8.tif",
+        "docs/downloads/24gems-doer-fault-guided-k-20261025T220208Z-dedb860f7e83-zeros.tif",
+        "docs/downloads/gems24-aspc-20261025-6393e9d9b0df-RESEARCH-NOT-SUBMISSION-nan.tif",
+        "docs/downloads/gems24-aspc-20261025-6393e9d9b0df-RESEARCH-NOT-SUBMISSION-zeros.tif",
+        "docs/downloads/gems24-con-claycap-strain-saddle-20261025-ded121060878-nan.tif",
+        "docs/downloads/gems24-con-claycap-strain-saddle-20261025-ded121060878-zeros.tif",
+        "docs/downloads/gems24-fuse-fuse-hcw-hgb-20261025-3fd41218a10a-nan.tif",
+        "docs/downloads/gems24-fuse-fuse-hcw-hgb-20261025-3fd41218a10a-zeros.tif",
+        "docs/downloads/gems24-gvc1-negative-geothermal-lineament-submod-20261025-abe8e51c719d-nan.tif",
+        "docs/downloads/gems24-gvc1-negative-geothermal-lineament-submod-20261025-abe8e51c719d-zeros.tif",
+        "docs/downloads/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-allfinite.tif",
+        "docs/downloads/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-nan.tif",
+        "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif",
+        "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+        "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-allfinite.tif",
+        "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+        "docs/downloads/gems24-mtr1-negative-paired-trough-20261025-ed7243e6d163-nan.tif",
+        "docs/downloads/gems24-mtr1-negative-paired-trough-20261025-ed7243e6d163-zeros.tif",
+        "docs/downloads/gems24-oj1-3eef450351de-RESEARCH-NOT-SUBMISSION-zeros.tif",
+        "docs/downloads/gems24-reference-h19-5-20261002-80d47e1ab2ee-allfinite.tif",
+        "docs/downloads/gems24-reference-h19-5-20261002-80d47e1ab2ee-nan.tif",
+        "docs/downloads/gems24-rshg1-regime-hydro-hgb-20261025-98f69d77e868-nan.tif",
+        "docs/downloads/gems24-rshg1-regime-hydro-hgb-20261025-98f69d77e868-zeros.tif",
+        "docs/downloads/gems24-sahg1-strike-hydro-geomorph-20261025-13d01f28d5db-nan.tif",
+        "docs/downloads/gems24-sahg1-strike-hydro-geomorph-20261025-13d01f28d5db-zeros.tif",
+        "evidence/experiments/h24-2a-clipped-road-v1/prediction-4945c83d6f09.tif",
+        "inputs/calibration/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+        "inputs/calibration/8GEMSDOE_Hedge-v2_submission.tif",
+        "inputs/calibration/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+        "inputs/calibration/gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+        "inputs/calibration/gemsdoe-ens12-adopted-7f00890a.tif",
+        "inputs/calibration/gemsdoe9-PLACEHOLDER-2314b599.tif",
+        "inputs/gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
+        "inputs/gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-allfinite.tif",
+        "inputs/gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan.tif",
+        "inputs/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-allfinite.tif",
+        "inputs/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif",
+          "bytes": 863902,
+          "sha256": "3e0730e8d4f7db095dd80246a98cba3bc0fc9a28f436b91db27ca34df4d0d1ce",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 60069,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE24/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif",
+          "git_blob": "6b6d31807e501af4749bbaeb43702450893fd720",
+          "blob_verified": true,
+          "footprint_values_sha256": "b8858b87e08fbf18e6ebfc1f6a4777644f6c514ec44d4ca116b6cdec6c6db934",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif"
+        },
+        {
+          "file": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+          "bytes": 1632732,
+          "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 60069,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE24/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+          "git_blob": "cc1752f2ea48b23bd41232c1fdcdceb5f439e401",
+          "blob_verified": true,
+          "footprint_values_sha256": "b8858b87e08fbf18e6ebfc1f6a4777644f6c514ec44d4ca116b6cdec6c6db934",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    },
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE25",
+      "commit": "0a45b3ca6403f7e8d4deac5d8b208797d5e8f477",
+      "tree": "0a45b3ca6403f7e8d4deac5d8b208797d5e8f477",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "09a1c47e1df03ff55d2f6dc4578ad75de6e0ec0ca860104744a8fa0008e345ba",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/0a45b3ca6403f7e8d4deac5d8b208797d5e8f477/README.md",
+          "matching_excerpts": [
+            {
+              "line": 71,
+              "text": "> \u26a0 **Withdrawn:** the earlier D2.8 download (`e56ea318af89`, SHA-256 `91eae1ca\u2026`) was byte-identical to a listed submission and is a duplicate. Do not submit it as new (IR-25-DUPLICATE-DOWNLOAD)."
+            },
+            {
+              "line": 211,
+              "text": "* **IR-25-DUPLICATE-DOWNLOAD** (critical, fixed (withdrawn)) \u2014 The front-page 'format-validated' download gems25-dotted-h19-5-d2-8-\u2026-e56ea318af89-nan.tif (SHA-256 91eae1ca\u2026) is byte-identical to a raster the group already lists (GEMSDOE24 d2-8 alternate in registry/artifact_ledger.json and the GEMSDOE30 entry tagged 91eae\u2026"
+            },
+            {
+              "line": 216,
+              "text": "* **IR-25-LEGACY-PACKAGER-DUPLICATE** (high, fixed (disabled)) \u2014 scripts/package_submissions.py could regenerate the previously identified D2.8 file (content id e56ea318af89; SHA-256 91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8) and rewrite registry/submissions.json with it as primary, despite the duplic\u2026"
+            },
+            {
+              "line": 445,
+              "text": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600"
+            }
+          ]
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "3ea3f6a46a5f741a3a72b2a564fffe8d67b00daaf3acb35977a8cd769d765c05",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/0a45b3ca6403f7e8d4deac5d8b208797d5e8f477/docs/index.html",
+          "matching_excerpts": []
+        },
+        {
+          "path": "index.html",
+          "sha256": "d5b30f4b19f6dbfb106086cb590b0642a87bc05dafa048701817439c41f8db25",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/0a45b3ca6403f7e8d4deac5d8b208797d5e8f477/index.html",
+          "matching_excerpts": []
+        }
+      ],
+      "all_raster_paths": [
+        "docs/downloads/gems25-cf1-transverse-negative-20261025-22e2f9eddad9-zeros.tif",
+        "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+        "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+        "docs/downloads/gems25-gem-fuse1-blind-magnetics-prune2-20261025-c2097a554ef2-nan.tif",
+        "docs/downloads/gems25-gem-fuse1-blind-magnetics-prune2-20261025-c2097a554ef2-zeros.tif",
+        "docs/downloads/gems25-gem1-blind-magnetics-20261025-279a305b80d2-nan.tif",
+        "docs/downloads/gems25-h31-1-flank-subscarp-sapd24-20261025-40bfe1d5b1c5-nan.tif",
+        "docs/downloads/gems25-h31-1-flank-subscarp-sapd24-20261025-40bfe1d5b1c5-zeros.tif",
+        "docs/downloads/gems25-h31-aniso-scarp-b2-d2-8-20261025-c213681203f6-nan.tif",
+        "docs/downloads/gems25-h31-aniso-scarp-b2-d2-8-20261025-c213681203f6-zeros.tif",
+        "docs/downloads/gems25-h31-control-sapd2-4-k3p5-bde7-20261025-9edd6bed8268-nan.tif",
+        "docs/downloads/gems25-h31-control-sapd2-4-k3p5-bde7-20261025-9edd6bed8268-zeros.tif",
+        "docs/downloads/gems25-h35-resmag-tip-sapd2-4-k3p5-20261025-d5d4cde1e719-nan.tif",
+        "docs/downloads/gems25-h35-resmag-tip-sapd2-4-k3p5-20261025-d5d4cde1e719-zeros.tif",
+        "docs/downloads/gems25-h36-spigm-subsurface-submod300-20261025-3937b96ce366-nan.tif",
+        "docs/downloads/gems25-h36-spigm-subsurface-submod300-20261025-3937b96ce366-zeros.tif",
+        "docs/downloads/gems25-h36-tiltzero-coincide-sapd2-4-k3p5-20261025-92562b7b7fea-nan.tif",
+        "docs/downloads/gems25-h36-tiltzero-coincide-sapd2-4-k3p5-20261025-92562b7b7fea-zeros.tif",
+        "docs/downloads/gems25-h37-doc-dipoffset-sapd2-4-k3p5-20261025-558c08ce13bf-nan.tif",
+        "docs/downloads/gems25-h37-doc-dipoffset-sapd2-4-k3p5-20261025-558c08ce13bf-zeros.tif",
+        "docs/downloads/gems25-h38-greedy-credit-k3p5-20261025-18de99d38bb0-nan.tif",
+        "docs/downloads/gems25-h38-greedy-credit-k3p5-20261025-18de99d38bb0-zeros.tif",
+        "docs/downloads/gems25-h38-ospc-submod-20261025-680d62616417-nan.tif",
+        "docs/downloads/gems25-h38-ospc-submod-20261025-680d62616417-zeros.tif",
+        "docs/downloads/gems25-h66-mgd-flank-sapd3-0-k3p5-20261025-da617550a0e9-nan.tif",
+        "docs/downloads/gems25-h66-mgd-flank-sapd3-0-k3p5-20261025-da617550a0e9-zeros.tif",
+        "docs/downloads/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-nan.tif",
+        "docs/downloads/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-zeros.tif",
+        "docs/downloads/gems25-mscr-multiscale-crest-sapd2-4-k3p5-20261025-dd2bb4b09cd2-nan.tif",
+        "docs/downloads/gems25-mscr-multiscale-crest-sapd2-4-k3p5-20261025-dd2bb4b09cd2-zeros.tif",
+        "docs/downloads/gems25-xg1-crossgrad-sapd2-4-k3p5-20261025-52e65fb521f9-nan.tif",
+        "docs/downloads/gems25-xg1-crossgrad-sapd2-4-k3p5-20261025-52e65fb521f9-zeros.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+          "bytes": 1603424,
+          "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 44090,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE25/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+          "git_blob": "c8d3a46481152bbdfd61b113484be979fde9d4c6",
+          "blob_verified": true,
+          "footprint_values_sha256": "2610c8dc6554d98e5a08c70eaebde92a53de701f89f465a613b3ec09e075abf6",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/0a45b3ca6403f7e8d4deac5d8b208797d5e8f477/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif"
+        },
+        {
+          "file": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+          "bytes": 836982,
+          "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 44090,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+          "local_path": "data/priority_repositories/GEMSDOE25/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+          "git_blob": "bfb7e86d046dd178c3d6ab60522861b5464dd420",
+          "blob_verified": true,
+          "footprint_values_sha256": "2610c8dc6554d98e5a08c70eaebde92a53de701f89f465a613b3ec09e075abf6",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/0a45b3ca6403f7e8d4deac5d8b208797d5e8f477/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    },
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE27",
+      "commit": "927322eadbde56be42ae129ccdfb9b37540d8e60",
+      "tree": "927322eadbde56be42ae129ccdfb9b37540d8e60",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "4ef08210646a52c02f5d94dd0129cc025563a5c702238946ef780fa5bf4e7dff",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/927322eadbde56be42ae129ccdfb9b37540d8e60/README.md",
+          "matching_excerpts": [
+            {
+              "line": 69,
+              "text": "  - **`27GEMSDOE` Slot 1 (`5512495c6bd1`, `0.2449` vs `24GEMSDOE` `0.2477`):** Byte diff (`evidence/slot1_live_ab_inversion.json`) proves Slot 1 adds `1,259` `T-v2` straight-line continuation dots (`0` removed); pure zero-hit FP dilution predicts `0.24491`, matching `0.2449` to 4 decimal places (`-0.00018` credit/dot vs `+0.05024` break-even)."
+            },
+            {
+              "line": 191,
+              "text": "| Plausible effect on DTI at the 0.2477 operating point | Slot 1 (`5512495c6bd1`): `-0.0029` (zero hit rate) ... `+0.0024` (`FID_trace` eff `0.1003`) ... `+0.0110` (`component` eff `0.280`); Slot 3 (`d466b251f309`): `+0.0141` (`FID_trace`) to `+0.0223` (`component`) |"
+            }
+          ]
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "3306a56b49730add112b1ce330e2fcf01cf2607247f3b87defd0c0d4c6bd4fbb",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/927322eadbde56be42ae129ccdfb9b37540d8e60/docs/index.html",
+          "matching_excerpts": [
+            {
+              "line": 212,
+              "text": " <p class=\"small\">Audit IDs: Slot 1 <code>5512495c6bd1</code>; Slot 2 <code>3ebd51534bb1</code>; Slot 3 <code>d466b251f309</code>; Slot 4 <code>23ad46a4d7ba</code>; probe <code>a34b0799df59</code>. Historical manifests are versioned with the repository.</p>"
+            }
+          ]
+        },
+        {
+          "path": "index.html",
+          "sha256": "2549310d5df6bc2d27e1fc229f95a45dda2e0733608b3710e962c7b47f4a4999",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/927322eadbde56be42ae129ccdfb9b37540d8e60/index.html",
+          "matching_excerpts": [
+            {
+              "line": 212,
+              "text": " <p class=\"small\">Audit IDs: Slot 1 <code>5512495c6bd1</code>; Slot 2 <code>3ebd51534bb1</code>; Slot 3 <code>d466b251f309</code>; Slot 4 <code>23ad46a4d7ba</code>; probe <code>a34b0799df59</code>. Historical manifests are versioned with the repository.</p>"
+            }
+          ]
+        }
+      ],
+      "all_raster_paths": [
+        "docs/downloads/gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif",
+        "docs/downloads/gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif",
+        "docs/downloads/gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-allfinite.tif",
+        "docs/downloads/gems27-farfield-swap-augmented-detector-probe-20261002-a34b0799df59-nan.tif",
+        "docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+        "docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+        "docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-allfinite.tif",
+        "docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-nan.tif",
+        "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
+        "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+        "docs/downloads/gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-allfinite.tif",
+        "docs/downloads/gems27-topo-gap-closure-t-v2-on-d2-8-20261002-3ebd51534bb1-nan.tif",
+        "docs/downloads/gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif",
+        "docs/downloads/gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif",
+        "docs/downloads/gems27-unique-scatter-farfield-20261025-98e59bf8e3ce-allfinite.tif",
+        "docs/downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-allfinite.tif",
+        "docs/downloads/research/gems27-dconfirm-hybrid-armd-b2-38k-20261025-5ea0385b7e70-nan.tif",
+        "docs/downloads/research/gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-allfinite.tif",
+        "docs/downloads/research/gems27-h28-3-strain-conductivity-negative-research-20261025-27d6875f3b22-nan.tif",
+        "docs/downloads/research/gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-allfinite.tif",
+        "docs/downloads/research/gems27-h29-1-drefill-b2-38k-20261025-c24b6371179c-nan.tif",
+        "docs/downloads/research/gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-allfinite.tif",
+        "docs/downloads/research/gems27-h29-1b-drefill-deconf-b2-38k-20261025-14e416a1a380-nan.tif",
+        "docs/downloads/research/gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-allfinite.tif",
+        "docs/downloads/research/gems27-h30-chem-deconf-b2-38k-20261025-ad5a68bb0535-nan.tif",
+        "docs/downloads/research/gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-allfinite.tif",
+        "docs/downloads/research/gems27-h30-gapflank-b2-38k-20261025-3107a3007b77-nan.tif",
+        "docs/downloads/research/gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-allfinite.tif",
+        "docs/downloads/research/gems27-lane-subsurface-buried-fault-20261025-fc6d8c3acf6c-nan.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
+          "bytes": 866160,
+          "sha256": "a9bf76b57453a5b3af74c8eef837df53c29a0931162aa540b8763220b36ba3bb",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 61328,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE27/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
+          "git_blob": "49ad427035b2267dcd3e8acee10bdc85d5dbe322",
+          "blob_verified": true,
+          "footprint_values_sha256": "14bb0e945a8bb3391e3860377c56a90d238ed60ddaaaa429b27dd941bfcf483c",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/927322eadbde56be42ae129ccdfb9b37540d8e60/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif"
+        },
+        {
+          "file": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+          "bytes": 1635084,
+          "sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 61328,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE27/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+          "git_blob": "c64e48b8bece14391fb59c1969c42c7efd718d39",
+          "blob_verified": true,
+          "footprint_values_sha256": "14bb0e945a8bb3391e3860377c56a90d238ed60ddaaaa429b27dd941bfcf483c",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/927322eadbde56be42ae129ccdfb9b37540d8e60/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    },
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE28",
+      "commit": "e6321461066f89080e3b1bb670d3951ab20d3638",
+      "tree": "e6321461066f89080e3b1bb670d3951ab20d3638",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "e60f82e1b63fd2fc0f472c1bb32ada46aaeef53e6f6f78ea3e6830e34a30f11f",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/README.md",
+          "matching_excerpts": [
+            {
+              "line": 308,
+              "text": "| **Primary (One-Click) \u2014 Verified on Interleaved AND LOSFO Far-Field** | `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` | `b531dae0a36f` | `37,660` | **`+0.002599` interleaved (`10/10` seeds `240\u2013249`, replicated `+0.002675` on `250\u2013259` and `+0.002804` on `270\u2013279`) AND `+0.001713` LOSFO far-field (`16/20` cells, `5/5` seeds `265\u2013269`, `F1\u2013F4` ALL PASS, $e_{\\text{far}} = 0.01359 < \\tau_{\\text{live}} = 0.05485$)** | `0.2717\u20130.2727` (live-anchored dose ladder) | `28GEMSDOE H36-1 rung3.0+r1 \\| \u2026` |"
+            },
+            {
+              "line": 309,
+              "text": "| **Secondary \u2014 H38-1 Multi-Physics Corroboration (`C1\u2013C4` ALL PASS)** | `gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif` | `56a9f473edc7` | `37,860` | **`0.07724` LOSFO credit/dot (`+0.000792`, `17/20` cells, `4/5` seeds) on `d=2.8`; `0.06993` credit/dot (`+0.000747` over `H36-1`, `+0.002460` over `d=2.8`, `16/20` cells, `4/5` seeds) on `H36-1`; `+0.000543` interleaved over `H36-1` (`27/40` cells, `8/10` seeds `270\u2013279`)** | `0.2722\u20130.2735` (adds `200` corroborated dots onto `H36-1`) | `28GEMSDOE H38-1 hf+euler+r30r1 \\| \u2026 \\| id 56a9f473edc7` |"
+            },
+            {
+              "line": 310,
+              "text": "| **Tertiary** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) \u2014 replicated `+0.001761` on fresh seeds 235\u2013239 (`5/5` seeds, `4/4` folds) AND `+0.002249` LOSFO far-field (`20/20` cells, exact `0.00` TP lost) | `0.2686` | `28GEMSDOE H27-4 d2.8 solo \\| \u0394DTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) \\| 0.2600 d2.8 base, no T-v2 \\| id 8acb75e1f2cc` |"
+            },
+            {
+              "line": 311,
+              "text": "| **Quaternary** | `gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif` | `31e35eee884e` | `42,294` | +0.001399 (`10/10` seeds, `4/4` folds) | `0.2669` | `28GEMSDOE H32-1 d2.8 pre \\| OOF \u0394DTI +0.00140 (10/10 seeds, 4/4 folds, seeds 180-189) pre-thinning d2.8; no T-v2 \\| id 31e35eee884e \\| UNSCORED, not slot-approved` |"
+            },
+            {
+              "line": 316,
+              "text": "**Primary submission name:** `GEMSDOE28-h36-1-rung30-blind-r1-b531dae0a36f`"
+            },
+            {
+              "line": 318,
+              "text": "**Exact registered note (`192/200` characters):** `28GEMSDOE H36-1 rung3.0+r1 | OOF dDTI +0.00260, 10/10 seeds, 4/4 folds (seeds 240-249); re-pack beats matched-N random drop by +0.00261; no T-v2 | id b531dae0a36f | UNSCORED, not slot-approved`"
+            },
+            {
+              "line": 324,
+              "text": "https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif"
+            },
+            {
+              "line": 327,
+              "text": "https://github.com/buffedlizard55-lab/GEMSDOE28/raw/main/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif"
+            },
+            {
+              "line": 371,
+              "text": "- **Yes \u2014 to `~0.2665\u20130.2701` directly on the `0.2600` (`d=2.8`) base by removing `100 m` catalogue-flank digitisation shadow (`c3aeda1d31a3`, `31e35eee884e`, `8acb75e1f2cc`) without `T-v2` drag**:"
+            },
+            {
+              "line": 374,
+              "text": "  - Removing those `2,434` mid-segment flank-shadow pixels on `d=2.8` (`c3aeda1d31a3`, `41,656` px) passes all 4-fold spatially-blocked holdout gates (`+0.001272` mean \u0394DTI, `10/10` seeds, `4/4` folds on seeds `180\u2013189`) and projects to **`0.2665`** (`+0.0065` over `0.2600`), while pre-thinning de-jittering (`31e35eee884e`, `42,294` px, `+0.001399` mean \u0394DTI) projects to **`0.2685`** and solo `H27-4` `r=1` on `d=2.8` (`8acb75e1f2cc`, `40,199` px, `+0.001766` mean \u0394DTI) projects to **`0.2701`**."
+            },
+            {
+              "line": 697,
+              "text": "published statistic** by the file sitting in its own *tertiary* slot (`8acb75e1f2cc`) \u2014 mean gain"
+            },
+            {
+              "line": 712,
+              "text": "| H27-4 solo r=1 `8acb75e1f2cc` (tertiary) | `+0.001766` | **`+0.001761`** | `5/5` | `4/4` |"
+            }
+          ]
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "d514c4ad866209beebdfe5bc07b48dc167ac6633b6db9d31071de6204589af3f",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/index.html",
+          "matching_excerpts": [
+            {
+              "line": 30,
+              "text": "<h2>Nine requested sites: artifact audit</h2><p>Reported claims below are excluded from promotion decisions. No row is ORGANIZER-CONFIRMED. Dot counts and hashes are measured locally. Each pinned link permits manual source review.</p><div class=\"table-wrap\"><table><thead><tr><th>Site</th><th>Artifact</th><th>Historical reported claim</th><th>Measured dots</th><th>Source</th></tr></thead><tbody><tr><td>GEMSDOE24</td><td><code>gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif</code></td><td>0.2477 (unverified owner report)</td><td>60,069</td><td><a href=\"https://github.com/buffedlizard55-lab/GEMSDOE24/blob/996fc0b3c827ababb180fda40769e1edc0d8716c/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif\">Pinned source</a></td></tr><tr><td>GEMSDOE25</td><td><code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif</code></td><td>0.26 (unverified owner report)</td><td>44,090</td><td><a href=\"https://github.com/buffedlizard55-lab/GEMSDOE25/blob/8c32763ca00a04ba82a27aac047952a0e3f9ef60/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif\">Pinned source</a></td></tr><tr><td>GEMSDOE27</td><td><code>gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif</code></td><td>0.2449 (unverified owner report)</td><td>61,328</td><td><a href=\"https://github.com/buffedlizard55-lab/GEMSDOE27/blob/f55cda6b0a940e44f2b4fdc516d212cd2729933c/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfin"
+            }
+          ]
+        },
+        {
+          "path": "index.html",
+          "sha256": "c1e2cb96b1a12f51d37a964f406cc62505a47097144e52b7fd2e7ee1a7a5f9f3",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/index.html",
+          "matching_excerpts": [
+            {
+              "line": 30,
+              "text": "<h2>Nine requested sites: artifact audit</h2><p>Reported claims below are excluded from promotion decisions. No row is ORGANIZER-CONFIRMED. Dot counts and hashes are measured locally. Each pinned link permits manual source review.</p><div class=\"table-wrap\"><table><thead><tr><th>Site</th><th>Artifact</th><th>Historical reported claim</th><th>Measured dots</th><th>Source</th></tr></thead><tbody><tr><td>GEMSDOE24</td><td><code>gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif</code></td><td>0.2477 (unverified owner report)</td><td>60,069</td><td><a href=\"https://github.com/buffedlizard55-lab/GEMSDOE24/blob/996fc0b3c827ababb180fda40769e1edc0d8716c/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif\">Pinned source</a></td></tr><tr><td>GEMSDOE25</td><td><code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif</code></td><td>0.26 (unverified owner report)</td><td>44,090</td><td><a href=\"https://github.com/buffedlizard55-lab/GEMSDOE25/blob/8c32763ca00a04ba82a27aac047952a0e3f9ef60/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif\">Pinned source</a></td></tr><tr><td>GEMSDOE27</td><td><code>gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif</code></td><td>0.2449 (unverified owner report)</td><td>61,328</td><td><a href=\"https://github.com/buffedlizard55-lab/GEMSDOE27/blob/f55cda6b0a940e44f2b4fdc516d212cd2729933c/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfin"
+            }
+          ]
+        }
+      ],
+      "all_raster_paths": [
+        "docs/downloads/gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif",
+        "docs/downloads/gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif",
+        "docs/downloads/gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-allfinite.tif",
+        "docs/downloads/gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif",
+        "docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+        "docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+        "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
+        "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+        "docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif",
+        "docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif",
+        "docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif",
+        "docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif",
+        "docs/downloads/gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif",
+        "docs/downloads/gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif",
+        "docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+        "docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+        "docs/downloads/gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif",
+        "docs/downloads/gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif",
+        "docs/downloads/gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
+        "docs/downloads/gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+        "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif",
+        "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+        "docs/downloads/gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-allfinite.tif",
+        "docs/downloads/gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif",
+        "docs/downloads/gems28-h39-5-extrap-swap35-20261025-719b83fb659b-allfinite.tif",
+        "docs/downloads/gems28-h39-5-extrap-swap35-20261025-719b83fb659b-nan.tif",
+        "docs/downloads/gems28-h40-1-migration-b1-20261025-5f2efa891ce7-allfinite.tif",
+        "docs/downloads/gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif",
+        "docs/downloads/gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif",
+        "docs/downloads/gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif",
+        "docs/downloads/gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif",
+        "docs/downloads/gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif",
+        "docs/downloads/gems28-h42-1-migx-reloc-b1-20261025-290553965159-allfinite.tif",
+        "docs/downloads/gems28-h42-1-migx-reloc-b1-20261025-290553965159-nan.tif",
+        "docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif",
+          "bytes": 830036,
+          "sha256": "2fc94a38d77f74d4f4ed1a97a83e7bb71a1ceea090515ec641e6681cc47c44c8",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 40199,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE28/docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif",
+          "git_blob": "7e422e07d5d3aac9ceb187a154bacc0f72a79f5c",
+          "blob_verified": true,
+          "footprint_values_sha256": "2fd68f4802a13e01bfdc0a4a6b21db4a1cda9c0f69128dd231715289a31eab0a",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif"
+        },
+        {
+          "file": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif",
+          "bytes": 1595850,
+          "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 40199,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE28/docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif",
+          "git_blob": "12b0a4ddf1cf76f2552621b8a8b1a1b88d783786",
+          "blob_verified": true,
+          "footprint_values_sha256": "2fd68f4802a13e01bfdc0a4a6b21db4a1cda9c0f69128dd231715289a31eab0a",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/downloads/gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif"
+        },
+        {
+          "file": "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif",
+          "bytes": 833784,
+          "sha256": "26748e4b4721277b093c776f7ca72920023d0ee6e9514ee38e677c8010f4068e",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 42294,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE28/docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif",
+          "git_blob": "3fa20e5def84596794539ba9c3304c9c9277f04f",
+          "blob_verified": true,
+          "footprint_values_sha256": "e3691dceaa5bfc0c0ac2dc74a7451d2a8e8614b04039ab5ddb0183fc6242f507",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif"
+        },
+        {
+          "file": "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif",
+          "bytes": 1599962,
+          "sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 42294,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE28/docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif",
+          "git_blob": "6d9717d75f144ccbd3c8ec7886000fae95af312e",
+          "blob_verified": true,
+          "footprint_values_sha256": "e3691dceaa5bfc0c0ac2dc74a7451d2a8e8614b04039ab5ddb0183fc6242f507",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif"
+        },
+        {
+          "file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+          "bytes": 825430,
+          "sha256": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 37660,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE28/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+          "git_blob": "10b2354d4ac8af863419284f1e694a02db180711",
+          "blob_verified": true,
+          "footprint_values_sha256": "77fea717bc4af6d6b9ca70085bae7bf22b92909173f0ce70423536901f8a7921",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif"
+        },
+        {
+          "file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+          "bytes": 1590848,
+          "sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 37660,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE28/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+          "git_blob": "d0fc9ebbda0b15c31208022dbd124d4b9b112108",
+          "blob_verified": true,
+          "footprint_values_sha256": "77fea717bc4af6d6b9ca70085bae7bf22b92909173f0ce70423536901f8a7921",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif"
+        },
+        {
+          "file": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif",
+          "bytes": 825790,
+          "sha256": "529d9e1bd80b54957ca16398e47bfc51b1e32eaee8fc89d6dfbddbd7036c5ffc",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 37860,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE28/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif",
+          "git_blob": "37dd960345125bc943542e16994b2736ff0e9e22",
+          "blob_verified": true,
+          "footprint_values_sha256": "db2ae40b21c350f6ae278f08014918c8ba3a379324c6aecf99de596ec46e4a9b",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif"
+        },
+        {
+          "file": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+          "bytes": 1591212,
+          "sha256": "81d5b87bc8424f162a8f56aa9aac8fbe630c61646b9cac24d5ebbdc1b1951783",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 37860,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE28/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif",
+          "git_blob": "c20459cd43667af1404447362c8cb8e81696871e",
+          "blob_verified": true,
+          "footprint_values_sha256": "db2ae40b21c350f6ae278f08014918c8ba3a379324c6aecf99de596ec46e4a9b",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/e6321461066f89080e3b1bb670d3951ab20d3638/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    },
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE30",
+      "commit": "c6d5710324ee31b82fcf8489b9f65d070da9eaf8",
+      "tree": "c6d5710324ee31b82fcf8489b9f65d070da9eaf8",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "4ebed787a4ecc56f4339559dd3522fc9c50124eff08d2152e69e21f3c93b66ff",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/c6d5710324ee31b82fcf8489b9f65d070da9eaf8/README.md",
+          "matching_excerpts": [
+            {
+              "line": 355,
+              "text": "- **Submission file \u2014 READY, one click, range-error hardened (session 7).** `index.html` and `executive-summary.html` now open with a single prominent download: `gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif` (806,758 B, SHA-256 `8cf893ea\u2026129fd`). Independently re-read from disk: one `float32` band, EPSG:32611, 3730\u00d73292, template transform `(100, 0, 243350, 0, -100, 4508550)`, **all 12,279,160 cells finite and in `[0, 1]`, 0 NaN anywhere, no nodata tag**, 44,090 predictions all off-catalogue, in-footprint values bit-identical to the source. A denser d1.5 alternate and a NaN-outside twin are linked beside it, each with a JSON sidecar and a paste-ready DrivenData note. No file was uploaded by this session and no weekly slot was used."
+            },
+            {
+              "line": 359,
+              "text": "- **Scores and TIFFs:** the dated public snapshot showed DARD 0.3195 and `wbg1` 0.2600 (rank 15); neither leaderboard row identifies a TIFF hash. The D2.8 attribution conflict is still open and is now logged as IR-30-048: the owner brief says 0.2600 while `mirror-pins.json` annotates that same SHA-256 (`91eae1ca\u2026`) as an \"unscored alternate\" and the d1.5 raster (`68d0e2e4\u2026`) as \"labelled 0.2477\". Catalogue-proxy DTI is **anti-correlated** with portal score (GBM 0.19020 > d2.8 0.16177 while the portal ordering is the reverse) and must never be used as a holdout \u2014 IR-30-046."
+            },
+            {
+              "line": 853,
+              "text": "   says D2.8 = 0.2600; `mirror-pins.json` annotates that same SHA-256 (`91eae1ca\u2026`) as an"
+            },
+            {
+              "line": 859,
+              "text": "1. **A submittable file now exists; nothing has been uploaded.** `index.html` and `executive-summary.html` lead with `gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif` \u2014 all 12,279,160 cells finite `float32` in `[0, 1]`, 0 NaN, exact template grid, 44,090 off-catalogue predictions \u2014 plus a paste-ready note, a d1.5 alternate, and a NaN-outside twin. The range-error cause is diagnosed (IR-30-044), not \"undiagnosed\". **Remaining limit:** local format validation is not organizer acceptance, and no score is claimed. The prediction content is the owner's best-reported artifact re-encoded without altering a single in-footprint value, so it cannot itself beat 0.2600; a slot spent on it re-tests a known file. The next lever is a better score field, per \u00a77.3 of the knowledge base."
+            },
+            {
+              "line": 1113,
+              "text": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca: 0.2600"
+            }
+          ]
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "86955f30ace3d92d3b87c691ac8cdcbbc322dbc8e605ddbccb2bc6fc753c89ef",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/c6d5710324ee31b82fcf8489b9f65d070da9eaf8/docs/index.html",
+          "matching_excerpts": []
+        },
+        {
+          "path": "index.html",
+          "sha256": "adfa3232e29a7f236e6d2d5614f3e85370704736d1826044a928a573a4e47bcd",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/c6d5710324ee31b82fcf8489b9f65d070da9eaf8/index.html",
+          "matching_excerpts": []
+        }
+      ],
+      "all_raster_paths": [
+        "data/external/derived_gdr_2m_probes_100m_u8.tif",
+        "data/external/derived_gdr_paleo_100m_u8.tif",
+        "data/external/derived_gdr_qfaults_v2_100m_u8.tif",
+        "data/external/derived_gdr_volcanics_100m_u8.tif",
+        "data/external/derived_sgmc_faults_100m_u8.tif",
+        "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
+        "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
+        "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+        "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+        "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+        "docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
+        "docs/downloads/gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif",
+        "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+        "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+        "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif",
+        "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+        "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
+        "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif",
+        "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+        "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+        "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
+        "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+        "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
+        "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+          "bytes": 1573188,
+          "sha256": "5f963b8bca5ec226ddc7caaadec239c6be6d28aa567f890033be04d04bfd5e32",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 44090,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+          "local_path": "data/priority_repositories/GEMSDOE30/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+          "git_blob": "e2c01413650468bc444507ba44018d6f22f07a92",
+          "blob_verified": true,
+          "footprint_values_sha256": "2610c8dc6554d98e5a08c70eaebde92a53de701f89f465a613b3ec09e075abf6",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/c6d5710324ee31b82fcf8489b9f65d070da9eaf8/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif"
+        },
+        {
+          "file": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+          "bytes": 806758,
+          "sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 44090,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+          "local_path": "data/priority_repositories/GEMSDOE30/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+          "git_blob": "a59665a7fad659dcc6a45e5e7e71059586c3247a",
+          "blob_verified": true,
+          "footprint_values_sha256": "2610c8dc6554d98e5a08c70eaebde92a53de701f89f465a613b3ec09e075abf6",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/c6d5710324ee31b82fcf8489b9f65d070da9eaf8/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    },
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE31",
+      "commit": "1aebc0b80570406b9eca6c56eed915b8d064e3b2",
+      "tree": "1aebc0b80570406b9eca6c56eed915b8d064e3b2",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "af615871414ee44935a163d70a2dc87e04155c73f493838b55a376e83db2e540",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/README.md",
+          "matching_excerpts": [
+            {
+              "line": 232,
+              "text": "- **Submissions present:** primary `gemsdoe31-h27-4-solo-d28-20261004-8acb75e1` (40,199 px, sha256"
+            },
+            {
+              "line": 234,
+              "text": "  `gemsdoe31-union-b-p060-20261004-8acb75e1` (106,138 px, sha256 `a4b8ffa5\u2026`) and"
+            },
+            {
+              "line": 235,
+              "text": "  `gemsdoe31-add-arm-d28-20261004-8acb75e1` (55,304 px, sha256 `5987d505\u2026`), plus the legacy D2.8 reference. All"
+            },
+            {
+              "line": 602,
+              "text": "h27-4-solo-d28-20261004-8acb75e1-nan:0.2708"
+            },
+            {
+              "line": 674,
+              "text": "h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan: 0.2708"
+            }
+          ]
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "4311c2aeb3c694f6c9e45908e0d1e1659d4489723849cc5e73ae6e9259990334",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/docs/index.html",
+          "matching_excerpts": []
+        },
+        {
+          "path": "index.html",
+          "sha256": "317a591311da033cfa38d9d71b3e51d0f13cf1127c5cf03adbbfc9b413049045",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/index.html",
+          "matching_excerpts": []
+        }
+      ],
+      "all_raster_paths": [
+        "docs/downloads/blocked/gemsdoe31-as1-lidar-antislope-38000dots-20261025-9b3afbc8-allfinite.tif",
+        "docs/downloads/blocked/gemsdoe31-as1-lidar-antislope-38000dots-20261025-9b3afbc8-nan.tif",
+        "docs/downloads/gems31-tgj31-transfer-20261025-8d912b23db-DO-NOT-SUBMIT.tif",
+        "docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-allfinite.tif",
+        "docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-nan.tif",
+        "docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
+        "docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+        "docs/downloads/gemsdoe31-h3-lidar-scarp-unique-50k-20261025-allfinite.tif",
+        "docs/downloads/gemsdoe31-h3-lidar-scarp-unique-50k-20261025-nan.tif",
+        "docs/downloads/gemsdoe31-h31-hvdc-submod300-37654-20261025-43714168-allfinite.tif",
+        "docs/downloads/gemsdoe31-h31-hvdc-submod300-37654-20261025-43714168-nan.tif",
+        "docs/downloads/gemsdoe31-h31b-corroborated-b2-hybrid-20261025-37654-allfinite.tif",
+        "docs/downloads/gemsdoe31-h31b-corroborated-b2-hybrid-20261025-37654-nan.tif",
+        "docs/downloads/gemsdoe31-h31b-scarp-hessian-20261025-37654-allfinite.tif",
+        "docs/downloads/gemsdoe31-h31b-scarp-hessian-20261025-37654-nan.tif",
+        "docs/downloads/gemsdoe31-h31e-surfexpr-20261025-8817f551-allfinite.tif",
+        "docs/downloads/gemsdoe31-h31e-surfexpr-20261025-8817f551-nan.tif",
+        "docs/downloads/gemsdoe31-h31m-bstep-xmod-submod-20261025-37654-allfinite.tif",
+        "docs/downloads/gemsdoe31-h31m-bstep-xmod-submod-20261025-37654-nan.tif",
+        "docs/downloads/gemsdoe31-magrest-concordant-37654-20261025-2c800a59ff-nan.tif",
+        "docs/downloads/gemsdoe31-magrest-concordant-37654-20261025-2c800a59ff-zeros.tif",
+        "docs/downloads/gemsdoe31-rbu31-regimeunion-37654-20261025-1788ff29-allfinite.tif",
+        "docs/downloads/gemsdoe31-rbu31-regimeunion-37654-20261025-1788ff29-nan.tif",
+        "docs/downloads/gemsdoe31-rbu31b-localunion-37654-20261025-b7585935-allfinite.tif",
+        "docs/downloads/gemsdoe31-rbu31b-localunion-37654-20261025-b7585935-nan.tif",
+        "docs/downloads/gemsdoe31-reference-d28-offcat-44090-20261004-nan.tif",
+        "docs/downloads/gemsdoe31-scgp-submod-37654-20261025-fa735287-allfinite.tif",
+        "docs/downloads/gemsdoe31-scgp-submod-37654-20261025-fa735287-nan.tif",
+        "docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-allfinite.tif",
+        "docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-nan.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "gemsdoe31-add-arm-d28-20261004-8acb75e1-allfinite.tif",
+          "bytes": 169213,
+          "sha256": "deda0533e4aa041e3877f58a8d6b9d0f8930fec6db1f66934f649a6583c71201",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": false,
+              "detail": "0/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": false,
+              "detail": "masked count=12279160, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": true,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": false,
+          "hard_failures": [
+            "outside_footprint_is_nan",
+            "masked_read_in_0_1"
+          ],
+          "nonzero_inside_px": 55304,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE31/docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-allfinite.tif",
+          "git_blob": "5e02dda181f30749fefa57b021fe377415cbf9ab",
+          "blob_verified": true,
+          "footprint_values_sha256": "87a8c051a7c625bc1dd607c64fe757717e1777f69ffbe1e365dc62659411e792",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-allfinite.tif"
+        },
+        {
+          "file": "gemsdoe31-add-arm-d28-20261004-8acb75e1-nan.tif",
+          "bytes": 212925,
+          "sha256": "5987d5051a76a8a28e8a31106936413d26ab8d8af143d6849c29827cf1d35597",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 55304,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE31/docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-nan.tif",
+          "git_blob": "fe3071fafc209240d188af4b4201f10e39c030eb",
+          "blob_verified": true,
+          "footprint_values_sha256": "87a8c051a7c625bc1dd607c64fe757717e1777f69ffbe1e365dc62659411e792",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/docs/downloads/gemsdoe31-add-arm-d28-20261004-8acb75e1-nan.tif"
+        },
+        {
+          "file": "gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
+          "bytes": 154580,
+          "sha256": "acd853936e5a7170b207f23411b1844caa0e7cfdfc303c600e520ccfe75159e6",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": false,
+              "detail": "0/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": false,
+              "detail": "masked count=12279160, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": true,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": false,
+          "hard_failures": [
+            "outside_footprint_is_nan",
+            "masked_read_in_0_1"
+          ],
+          "nonzero_inside_px": 40199,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE31/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
+          "git_blob": "40df0d6d854542aefc00f1fed87d4e9c7719fa63",
+          "blob_verified": true,
+          "footprint_values_sha256": "2fd68f4802a13e01bfdc0a4a6b21db4a1cda9c0f69128dd231715289a31eab0a",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif"
+        },
+        {
+          "file": "gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+          "bytes": 199214,
+          "sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 40199,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE31/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+          "git_blob": "36c2aa32e0bba3d976d1ba76f3fb14903199262d",
+          "blob_verified": true,
+          "footprint_values_sha256": "2fd68f4802a13e01bfdc0a4a6b21db4a1cda9c0f69128dd231715289a31eab0a",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif"
+        },
+        {
+          "file": "gemsdoe31-union-b-p060-20261004-8acb75e1-allfinite.tif",
+          "bytes": 204922,
+          "sha256": "b44248ee7ca46405326b81998c5e4c417971d0596c01d3f995f6dd73f3997707",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": false,
+              "detail": "0/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": false,
+              "detail": "masked count=12279160, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": true,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": false,
+          "hard_failures": [
+            "outside_footprint_is_nan",
+            "masked_read_in_0_1"
+          ],
+          "nonzero_inside_px": 106138,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-allfinite.tif",
+          "local_path": "data/priority_repositories/GEMSDOE31/docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-allfinite.tif",
+          "git_blob": "733661a0e887ff059ee7ad99e8537d8abe9b2f60",
+          "blob_verified": true,
+          "footprint_values_sha256": "0651dd2e39c668791d54753f4b05034b445fb0b7c45fe718d79fb57c737703df",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-allfinite.tif"
+        },
+        {
+          "file": "gemsdoe31-union-b-p060-20261004-8acb75e1-nan.tif",
+          "bytes": 247886,
+          "sha256": "a4b8ffa59655d2e4ca1bf77fa27a53c86d168bebb55e8d7ee2bc82720261cb23",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 106138,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE31/docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-nan.tif",
+          "git_blob": "6249e86a58570c15e72c3ab6157f82e1d6d54876",
+          "blob_verified": true,
+          "footprint_values_sha256": "0651dd2e39c668791d54753f4b05034b445fb0b7c45fe718d79fb57c737703df",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/docs/downloads/gemsdoe31-union-b-p060-20261004-8acb75e1-nan.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    },
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE32",
+      "commit": "7a97c5a88936a3fdb99d0358c3b85d739a714631",
+      "tree": "7a97c5a88936a3fdb99d0358c3b85d739a714631",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "61acea9ad9ac84d3604ea7008ac5b1b07f402da1b2c116ee64b985b08eaf4ba9",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/7a97c5a88936a3fdb99d0358c3b85d739a714631/README.md",
+          "matching_excerpts": [
+            {
+              "line": 86,
+              "text": "> h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+            }
+          ]
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "b7f7d1fdf1ac32e66bda5a45bca791c60b0af92312057f3d57eebb96aab7731a",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/7a97c5a88936a3fdb99d0358c3b85d739a714631/docs/index.html",
+          "matching_excerpts": [
+            {
+              "line": 48,
+              "text": "<p><b>Already-scored fallback:</b> <a href=\"downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif\">0.2708 anchor (already-scored base)</a> </p>"
+            },
+            {
+              "line": 49,
+              "text": "<h3>Identification pack &mdash; the other two queries</h3><table><tr><th>slot</th><th>file</th><th>sha256</th><th>what it gives</th></tr><tr><td><b>NaN-outside twin of the primary</b></td><td><a href=\"downloads/gemsdoe32-h-geo-conduit-37654-20261025T235617Z-2d0d0c5e-nan.tif\">gemsdoe32-h-geo-conduit-37654-20261025T235617Z-2d0d0c5e-nan.tif</a> </td><td class=mut>2ba153e5d86e3274&hellip;</td><td class=mut>spec format (identical values inside footprint)</td></tr><tr><td><b>HISTORICAL CHAMPION (already submitted)</b></td><td><a href=\"downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif\">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a> </td><td class=mut>c55bafc470054e82&hellip;</td><td class=mut>0.2778 organizer-confirmed score (for comparison/study only)</td></tr></table>"
+            },
+            {
+              "line": 54,
+              "text": "<p><b>Round-5 verdict:</b> the champion file <code>h33-2-b2-\u2026-e5eb6e7e-zeros.tif</code> is already"
+            }
+          ]
+        },
+        {
+          "path": "index.html",
+          "sha256": "5e4b8ba8d4c8975c98df72ededcd5b305657327f8cc6af65c759b40e7072930e",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/7a97c5a88936a3fdb99d0358c3b85d739a714631/index.html",
+          "matching_excerpts": [
+            {
+              "line": 48,
+              "text": "<p><b>Already-scored fallback:</b> <a href=\"docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif\">0.2708 anchor (already-scored base)</a> </p>"
+            },
+            {
+              "line": 49,
+              "text": "<h3>Identification pack &mdash; the other two queries</h3><table><tr><th>slot</th><th>file</th><th>sha256</th><th>what it gives</th></tr><tr><td><b>NaN-outside twin of the primary</b></td><td><a href=\"docs/downloads/gemsdoe32-h-geo-conduit-37654-20261025T235617Z-2d0d0c5e-nan.tif\">gemsdoe32-h-geo-conduit-37654-20261025T235617Z-2d0d0c5e-nan.tif</a> </td><td class=mut>2ba153e5d86e3274&hellip;</td><td class=mut>spec format (identical values inside footprint)</td></tr><tr><td><b>HISTORICAL CHAMPION (already submitted)</b></td><td><a href=\"docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif\">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a> </td><td class=mut>c55bafc470054e82&hellip;</td><td class=mut>0.2778 organizer-confirmed score (for comparison/study only)</td></tr></table>"
+            }
+          ]
+        }
+      ],
+      "all_raster_paths": [
+        "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+        "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+        "docs/downloads/gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+        "docs/downloads/gems32-bayesopt-dilation-scarp-d28-20261004-zeros.tif",
+        "docs/downloads/gems32-lazygreedy-maxcov-44090-supconfined-zeros.tif",
+        "docs/downloads/gems32-probe-S1-ANCHOR-identical-to-live-02600.tif",
+        "docs/downloads/gems32-probe-S2-SCALE-lambda-0.5.tif",
+        "docs/downloads/gems32-probe-S3-NULLADD-2000px.tif",
+        "docs/downloads/gemsdoe32-arena41-pfonly-blindbasin-37654-20261025T202725Z-530d08d1-zeros.tif",
+        "docs/downloads/gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-nan.tif",
+        "docs/downloads/gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-zeros.tif",
+        "docs/downloads/gemsdoe32-h-geo-conduit-37654-20261025T235617Z-2d0d0c5e-nan.tif",
+        "docs/downloads/gemsdoe32-h-geo-conduit-37654-20261025T235617Z-2d0d0c5e-zeros.tif",
+        "docs/downloads/gemsdoe32-h32-newvariant-43200-20261025T202557Z-2cf1447f-nan.tif",
+        "docs/downloads/gemsdoe32-h32-newvariant-43200-20261025T202557Z-2cf1447f-zeros.tif",
+        "docs/downloads/gemsdoe32-h32-winning-46090-prune400-20261025T203017Z-c3459dcd-nan.tif",
+        "docs/downloads/gemsdoe32-h32-winning-46090-prune400-20261025T203017Z-c3459dcd-zeros.tif",
+        "docs/downloads/gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-nan.tif",
+        "docs/downloads/gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-zeros.tif",
+        "docs/downloads/gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-nan.tif",
+        "docs/downloads/gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-zeros.tif",
+        "docs/downloads/gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-nan.tif",
+        "docs/downloads/gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-zeros.tif",
+        "docs/downloads/gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-nan.tif",
+        "docs/downloads/gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-zeros.tif",
+        "docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-nan.tif",
+        "docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif",
+        "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+        "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+        "docs/downloads/gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-nan.tif",
+        "docs/downloads/gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-zeros.tif",
+        "docs/downloads/gemsdoe32-h35-cv-altfusion-b2-42600-20261025T202439Z-35887fc3-nan.tif",
+        "docs/downloads/gemsdoe32-h35-cv-altfusion-b2-42600-20261025T202439Z-35887fc3-zeros.tif",
+        "docs/downloads/gemsdoe32-hcvf2-cvgbm35-b2-greedy37654-20261025T202730Z-f9b36c7e-nan.tif",
+        "docs/downloads/gemsdoe32-hcvf2-cvgbm35-b2-greedy37654-20261025T202730Z-f9b36c7e-zeros.tif",
+        "docs/downloads/gemsdoe32-hsupsgmc-cvgbm35-b2-greedy37654-20261025T203327Z-6abcd2b5-nan.tif",
+        "docs/downloads/gemsdoe32-hsupsgmc-cvgbm35-b2-greedy37654-20261025T203327Z-6abcd2b5-zeros.tif",
+        "docs/research/quarantine/QUARANTINED-gems32-h19-5-smoothmaxcov-44090-zeros.tif",
+        "docs/research/quarantine/QUARANTINED-gems32-h19-5-smoothmaxcov-44090.tif",
+        "docs/research/quarantine/QUARANTINED-gems32-heatfield-44090-cv-supconfined-zeros.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+          "bytes": 355443,
+          "sha256": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 37654,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE32/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+          "git_blob": "c00c2ca916c046544baeb6e40d1e782bf46f50c0",
+          "blob_verified": true,
+          "footprint_values_sha256": "15c51e5173924ec162539b77a3863defb57e7f6b0e6e05acdaf1b90cbbf157a2",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/7a97c5a88936a3fdb99d0358c3b85d739a714631/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif"
+        },
+        {
+          "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+          "bytes": 219065,
+          "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 37654,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+          "local_path": "data/priority_repositories/GEMSDOE32/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+          "git_blob": "17a76895f68174cc93f3cb1597d25686f6d6bc67",
+          "blob_verified": true,
+          "footprint_values_sha256": "15c51e5173924ec162539b77a3863defb57e7f6b0e6e05acdaf1b90cbbf157a2",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/7a97c5a88936a3fdb99d0358c3b85d739a714631/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    },
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE33",
+      "commit": "b542e5ce4186b54dbd07a6a6e8756be676a3f088",
+      "tree": "b542e5ce4186b54dbd07a6a6e8756be676a3f088",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "848e4926d8f5376f822a7ae4d0dcdf83b84d85746d35540598e2b8f28d66a23b",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/b542e5ce4186b54dbd07a6a6e8756be676a3f088/README.md",
+          "matching_excerpts": []
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "0298524ef6f0497ba5d850a7351ff49517d650a5eac06552851f2f0e406a1da1",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/b542e5ce4186b54dbd07a6a6e8756be676a3f088/docs/index.html",
+          "matching_excerpts": []
+        },
+        {
+          "path": "index.html",
+          "sha256": "8adf6a087f93f378de538d8908b52745cb59409ea5ace9f811278ce9a1548848",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/b542e5ce4186b54dbd07a6a6e8756be676a3f088/index.html",
+          "matching_excerpts": []
+        }
+      ],
+      "all_raster_paths": [
+        "archive/legacy_candidates/gems33-c0-scored-reference-20261004-89bf5b9a2fea.tif",
+        "archive/legacy_candidates/gems33-c2-stepover-relay-20261004-01f660dd8656.tif",
+        "docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e-nanoutside.tif",
+        "docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+        "docs/downloads/gemsdoe33-a33-l1-analog-transfer-research-37654-20261025-85c94a805a34-nan.tif",
+        "docs/downloads/gemsdoe33-a33-l1-analog-transfer-research-37654-20261025-85c94a805a34-zeros.tif",
+        "docs/downloads/gemsdoe33-d28-reference-20261004-426073b6b4ab-nan.tif",
+        "docs/downloads/gemsdoe33-d28-reference-20261004-426073b6b4ab-zeros.tif",
+        "docs/downloads/gemsdoe33-h33f-analog-xfer-20261004-d042874b26ef-nan.tif",
+        "docs/downloads/gemsdoe33-h33f-analog-xfer-20261004-d042874b26ef-zeros.tif",
+        "docs/downloads/research/GEMSDOE33-H33-6-edge-consensus-research-20261004-6c888d2ce0f7-nan.tif",
+        "docs/downloads/research/GEMSDOE33-H33-6-edge-consensus-research-20261004-6c888d2ce0f7-zeros.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e-nanoutside.tif",
+          "bytes": 966684,
+          "sha256": "bc3af2a5fcb4b49bc5845a2d7dc3da23daf41ce75e4c64da3337c0c8c93cc12c",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 41865,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e-nanoutside.tif",
+          "local_path": "data/priority_repositories/GEMSDOE33/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e-nanoutside.tif",
+          "git_blob": "c6e73d35a5ee8a36abdd06b7314bf79646c5d7f9",
+          "blob_verified": true,
+          "footprint_values_sha256": "8d7b3c4b4af892b28c8a9b29c604e280e0e8d6e121da3c3f1c4428aac8d07e26",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/b542e5ce4186b54dbd07a6a6e8756be676a3f088/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e-nanoutside.tif"
+        },
+        {
+          "file": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+          "bytes": 917544,
+          "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.lzw",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 41865,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+          "local_path": "data/priority_repositories/GEMSDOE33/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+          "git_blob": "901d9db3f008f0f5c3be9c314524ccc8e95fb43e",
+          "blob_verified": true,
+          "footprint_values_sha256": "8d7b3c4b4af892b28c8a9b29c604e280e0e8d6e121da3c3f1c4428aac8d07e26",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/b542e5ce4186b54dbd07a6a6e8756be676a3f088/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    },
+    {
+      "repository": "buffedlizard55-lab/GEMSDOE36",
+      "commit": "c5a8ae7da3bd2fcff5aa5855afd44c7a3346c16f",
+      "tree": "c5a8ae7da3bd2fcff5aa5855afd44c7a3346c16f",
+      "pages": [
+        {
+          "path": "README.md",
+          "sha256": "f4dcd51653204150de862ff43af0f0f5bf4d3e68f306930a8804105e7374ea9d",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c5a8ae7da3bd2fcff5aa5855afd44c7a3346c16f/README.md",
+          "matching_excerpts": [
+            {
+              "line": 125,
+              "text": "  `docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif`"
+            },
+            {
+              "line": 157,
+              "text": "| **Primary Submission TIF** | [`gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif`](docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif) | 1-band GeoTIFF, EPSG:32611, float32, `nodata=None` | 311 KB | `e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a` | **38,854 dots**; 100% finite in [0.0, 1.0] (0 NaN) |"
+            },
+            {
+              "line": 158,
+              "text": "| **Single-Member ZIP** | [`gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.zip`](docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.zip) | ZIP archive containing primary GeoTIFF | 208 KB | `89528f8f041ff360ca6774e1d167ae2c43105ff76166164d785a975765792ec0` | 1 member |"
+            },
+            {
+              "line": 159,
+              "text": "| **NaN Companion TIF** | [`gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-nan.tif`](docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-nan.tif) | 1-band GeoTIFF, EPSG:32611, float32, `nodata=nan` | 363 KB | `0692a54fb2a62886c9134b9d0ecad8d9ffc7128695beee78ce6c86720f496101` | **38,854 dots**; 5,167,373 finite in [0.0, 1.0]; NaN outside |"
+            },
+            {
+              "line": 160,
+              "text": "| **12-Point Audit JSON** | [`gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-audit.json`](docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-audit.json) | JSON validation sidecar | 2.4 KB | `b348d2fc7603c7340b17169f470aa10ec33dca3d6ee178049a46327b7c251d13` | Complete 12-point check report |"
+            },
+            {
+              "line": 305,
+              "text": "  docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif \\"
+            }
+          ]
+        },
+        {
+          "path": "docs/index.html",
+          "sha256": "5889e55cc963229807dbfae43d6e58209e55aa2e5a7d70c26329ab5ab0326c8e",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c5a8ae7da3bd2fcff5aa5855afd44c7a3346c16f/docs/index.html",
+          "matching_excerpts": [
+            {
+              "line": 6,
+              "text": " <p><a class=\"button secondary\" href=\"downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif\" download>Download Anderson research TIFF \u2014 DO NOT SUBMIT</a></p>"
+            }
+          ]
+        },
+        {
+          "path": "index.html",
+          "sha256": "7167063f8b8c90fbf6fe6429ec4d1df118b7aa85dd030e5ccc245a13b0cd9ef5",
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c5a8ae7da3bd2fcff5aa5855afd44c7a3346c16f/index.html",
+          "matching_excerpts": []
+        }
+      ],
+      "all_raster_paths": [
+        "docs/downloads/GEMS36_FORMAT_TEST_NOT_SUBMISSION.tif",
+        "docs/downloads/GEMS36_h6_offcatalog_network_prior_20261004T193432.021282Z_3276c04090_3c064db2.tif",
+        "docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-nan.tif",
+        "docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif"
+      ],
+      "priority_rasters": [
+        {
+          "file": "gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-nan.tif",
+          "bytes": 371126,
+          "sha256": "96d451d5ffc819fc3834052f22ab66190621f206c0bf8990446082a3363dc2ef",
+          "variant": "nan",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_nan": {
+              "pass": true,
+              "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+              "hard": true
+            },
+            "nodata_tag_is_nan": {
+              "pass": true,
+              "detail": "nodata=NaN declared, same as the sample submission",
+              "hard": true
+            },
+            "masked_read_in_0_1": {
+              "pass": true,
+              "detail": "masked count=5167373, min=0, max=1",
+              "hard": true
+            },
+            "nan_aware_range_in_0_1": {
+              "pass": true,
+              "detail": "nanmin=0 nanmax=1",
+              "hard": true
+            },
+            "strict_whole_array_range_ignoring_nan_is_informational": {
+              "pass": false,
+              "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+              "hard": false
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 38854,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-nan.tif",
+          "local_path": "data/priority_repositories/GEMSDOE36/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-nan.tif",
+          "git_blob": "366095dcdb3c71c1a84cdcb840c0f90c4047cc48",
+          "blob_verified": true,
+          "footprint_values_sha256": "666b650bb546c0653077608273bfd3b7cb59def2fdeeff6487efa8f70b0775e3",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c5a8ae7da3bd2fcff5aa5855afd44c7a3346c16f/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-nan.tif"
+        },
+        {
+          "file": "gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+          "bytes": 318190,
+          "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+          "variant": "allfinite",
+          "checks": {
+            "grid_matches_template": {
+              "pass": true,
+              "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+              "hard": true
+            },
+            "single_band_float32": {
+              "pass": true,
+              "detail": "count=1 dtype=float32",
+              "hard": true
+            },
+            "inside_footprint_all_finite": {
+              "pass": true,
+              "detail": "0 non-finite inside 5167373 px",
+              "hard": true
+            },
+            "inside_footprint_in_0_1": {
+              "pass": true,
+              "detail": "min=0 max=1",
+              "hard": true
+            },
+            "no_infinities_anywhere": {
+              "pass": true,
+              "detail": "np.isinf(whole array) is empty",
+              "hard": true
+            },
+            "nodata_convention": {
+              "pass": true,
+              "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+              "hard": true
+            },
+            "outside_footprint_is_zero_and_finite": {
+              "pass": true,
+              "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+              "hard": true
+            },
+            "strict_whole_array_range": {
+              "pass": true,
+              "detail": "whole-array min=0 max=1",
+              "hard": true
+            },
+            "profile_driver_gtiff": {
+              "pass": true,
+              "detail": "GTiff",
+              "hard": true
+            },
+            "compression_like_sample": {
+              "pass": true,
+              "detail": "Compression.deflate",
+              "hard": false
+            }
+          },
+          "hard_checks_passed": true,
+          "hard_failures": [],
+          "nonzero_inside_px": 38854,
+          "nonfinite_inside_px": 0,
+          "value_set_inside": [
+            0.0,
+            1.0
+          ],
+          "path": "docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+          "local_path": "data/priority_repositories/GEMSDOE36/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+          "git_blob": "e79b7bdb633369c724628e30efba6de60c1d25d9",
+          "blob_verified": true,
+          "footprint_values_sha256": "666b650bb546c0653077608273bfd3b7cb59def2fdeeff6487efa8f70b0775e3",
+          "binary_inside": true,
+          "source": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c5a8ae7da3bd2fcff5aa5855afd44c7a3346c16f/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif"
+        }
+      ],
+      "missing_requested_identities": [],
+      "evidence_class": "Owner repository bytes, not organizer receipts or confirmed scores"
+    }
+  ],
+  "errors": [],
+  "priority_inventory_retrieved": true,
+  "external_parallel_registry_complete": false,
+  "registry_limitation": "Priority artifact subset only; no shared parallel-run registry or pre-placement surfaces supplied.",
+  "organizer_confirmed_scores": [],
+  "experiments_run": 0,
+  "slot_selected": false
+}

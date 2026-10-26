@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble evidence/session20_run_card.json from the three S20 evidence files.
+"""Assemble evidence/session20_h43_run_card.json from the three S20 evidence files.
 
 Run after scripts/build_s20_candidate.py. Pure assembly — no measurement is redone here;
 every number is copied from evidence/s20_exp1_forensic.json, s20_holdout.json and
@@ -20,9 +20,10 @@ def main() -> int:
     u = b["uniqueness"]
     card = {
         "schema_version": 1,
-        "session_id": "G28-S20-20261026",
+        "session_id": "G28-S20H43-20261026",
         "date_utc": "2026-10-26",
         "branch": "arena/36be803a-gemsdoe28",
+        "parallel_session_collision": "Renamed from evidence/session20_run_card.json at merge time: a concurrent Session 20 validation review on main owns that filename (knowledge/56_session20_validation_review.md). A concurrent S19-ASCP experiment also landed on main. Never pool numbers across these sessions; see s20-parallel-session-id-collision in registry/irregularities.json.",
         "lane": "H43-1 TPB2-GKC: tip-protected B2 eligibility + greedy triangular-kernel "
                 "max-cover re-placement over the H19-5 pool at champion budget",
         "lane_assignment_source": "Prompt's method-paragraph assignment absent (as in Session 19); "
@@ -130,7 +131,7 @@ def main() -> int:
                      "evidence/s20_holdout.json", "evidence/s20_build.json",
                      "knowledge/57_s20_result.md"],
     }
-    out = ROOT / "evidence/session20_run_card.json"
+    out = ROOT / "evidence/session20_h43_run_card.json"
     out.write_text(json.dumps(card, indent=1) + "\n")
     print("wrote", out, "| note chars:", len(card["submission_note"]),
           "| raster:", card["raster"]["primary_file"])

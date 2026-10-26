@@ -1,4 +1,4 @@
-# Session 20 result — 2026-10-26 (read first every session)
+# Session 20-H43 result — 2026-10-26 (read first every session)
 
 **A new unique TIFF was generated and the automated gates REJECTED it. No file is approved to submit.**
 Session 20 declared its own lane in writing before experimenting (the prompt's method-paragraph
@@ -8,7 +8,7 @@ inspector — produced the rejection. Do not retune seeds 340–344; do not subm
 - [Session 20 executive result page (site)](docs/session20-result.html)
 - [Full Session 20 report: nine-site answer, champion mechanism, gate numbers](knowledge/57_s20_result.md)
 - [Frozen preregistration H43-1](knowledge/56_s20_preregistration_H43-1.md)
-- [Session 20 JSON run card](evidence/session20_run_card.json)
+- [Session 20 JSON run card](evidence/session20_h43_run_card.json)
 
 **Nine-site executive answer (all values USER-REPORTED / UNVERIFIED, no organizer receipts):**
 GEMSDOE32 `h33-h33-2-b2-…-e5eb6e7e-zeros` (**0.2778**, 37,654 dots) is the best listed file, ahead of
@@ -33,22 +33,59 @@ greedy packing exhausted at 88.6% of target; 94.3% of dots within 3 px of the ch
 duplicate family lane by protocol. Verdict `negative`. Next: fresh-seed piercing-marker lane
 (report §5). Core values unchanged: **Maximize P(Win)**, **Own the Outcome**.
 
-# Session 19 review — 2026-10-26 (read first every session)
+**Parallel-session note:** `main` also carries a distinct *Session 20 validation review* (no experiment; `knowledge/56_session20_validation_review.md`, card `evidence/session20_run_card.json`) and the S19-ASCP experiment (`knowledge/56_s19_result.md`) from concurrent sessions. Their negative verdicts stand independently; never pool their numbers with Session 20-H43 (`s20-parallel-session-id-collision` in `registry/irregularities.json`).
 
-**No new TIFF was generated; no file is approved to submit.** The nine-site review ranks the supplied GEMSDOE32 H33-2-B2 claim, `0.2778`, highest among the values in the prompt, but labels it **USER-REPORTED / UNVERIFIED** (not HOLDOUT-DTI or ORGANIZER-CONFIRMED). A method lane, complete parallel registry, frozen strict-protocol baseline, and local feature cache are missing. Do not reuse the prior S18 TIFF or copy/prune an older submission.
+# Session 20 — validation hardening (2026-10-26)
 
-- [Nine-site executive scorecard, ranked hypotheses and source links](docs/cross-site-review.html)
-- [Full Session 19 review](knowledge/55_session19_cross_site_review.md)
-- [Session 19 JSON run card](evidence/session19_run_card.json)
+**This validation review generated no TIFF; no file is approved to submit.** Reviewed the standing owner request and
+prior results. Fixed cache NaN/infinity detection and ambiguous evidence JSON in the
+automated gates; no scientific result or score was invented.
+[Three-pass review and next steps](knowledge/56_session20_validation_review.md) ·
+[JSON run card](evidence/session20_run_card.json) ·
+[Nine-site executive comparison](docs/cross-site-review.html).
+The standing normalized owner prompt below remains the starting point every session.
 
-The top proposed research hypothesis is displaced potential-field piercing markers; it is not assigned or run. The JSON card records a negative/blocked review, zero experiments, no raster hash, and no slot selection. Existing S18-MXTP remains the latest generated research TIFF and its prior holdout rejection remains in force.
+# Current result — 2026-10-26 S19-ASCP (read first every session)
 
-# Current result — 2026-10-25 S18-MXTP (prior run; read its limits)
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 
-## PRIOR UNIQUE TIFF — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+[**Download the new unique research TIFF**](docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif)
+· [Executive summary / exact submission process](docs/executive-summary.html)
+· [JSON run card](evidence/s19_ascp_run_card.json)
+· [Frozen hypotheses and method](knowledge/55_s19_preregistration.md)
+
+S19 tested one new lane: paired LiDAR crest/toe curvature × uphill-facing selectivity × coherence.
+It produced 37,654 independently placed dots and passed the feature-alone leakage canary, declared
+53-raster registry checks and exact-file validation. It then **failed** the shared whole-component,
+1.5 km-buffered performance gate. **HOLDOUT-DTI** (`gems-segment-pooled-v1`, 60,988 withheld
+positives): **0.080806** (95% CI **[0.072325, 0.089111]**) versus recomputed visible-only baseline
+**0.141694**; paired gain **−0.060888** (95% CI **[−0.074029, −0.047638]**). This local proxy is
+not an organizer score. Three experiments used; no slot selected.
+
+The TIFF is single-band float32, all-finite across the whole array, values {0,1}, EPSG:32611,
+3,730 × 3,292, and matches the template transform. SHA-256:
+`553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537`. Maximum pre-placement
+|Spearman| was 0.1030; maximum exact-Euclidean surface-support overlap was 20.6%; maximum final-dot overlap was
+28.0%, below the 0.90/70% duplicate stops (exact maximum 0.279811 in the S19 run card). **Safe to download for research; NOT OK to submit.**
+Road cuts, channels, terrace/paleo-shoreline risers, landslides and mine benches remain named mimics.
+
+The owner prompt and Core Values remain archived below and normalized in
+[`knowledge/53_current_request.md`](knowledge/53_current_request.md). The explicit parallel lane
+paragraph was again absent; the run autonomously used the repository's documented scarp-observable
+next step and does not claim external exclusivity. Historical S18 and earlier notices are superseded.
+
+A concurrent pre-experiment Session 19 review ran zero experiments before inputs were restored. Its
+[nine-site scorecard](docs/cross-site-review.html), [review dossier](knowledge/55_session19_cross_site_review.md)
+and [blocked JSON card](evidence/session19_run_card.json) are retained as an audit snapshot, not the
+current result. Its “no new TIFF” statement was true for that checkout but is superseded by S19-ASCP.
+
+---
+
+# Current result — 2026-10-25 S18-MXTP (read first every session)
+
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 
 [**Download the new unique research TIFF**](docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif)
-· [Nine-site executive comparison](knowledge/55_focus_site_review.md)
 · [Executive summary / submission process](docs/executive-summary.html)
 · [Current full JSON run card](evidence/s18_mxtp_run_card.json)
 · [Scientific result, sources and next steps](knowledge/54_s18_result.md)

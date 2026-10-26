@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
-  "session_id": "G28-S20-20261026",
+  "session_id": "G28-S20H43-20261026",
   "date_utc": "2026-10-26",
   "branch": "arena/36be803a-gemsdoe28",
+  "parallel_session_collision": "Renamed from evidence/session20_run_card.json at merge time: a concurrent Session 20 validation review on main owns that filename (knowledge/56_session20_validation_review.md). A concurrent S19-ASCP experiment also landed on main. Never pool numbers across these sessions; see s20-parallel-session-id-collision in registry/irregularities.json.",
   "lane": "H43-1 TPB2-GKC: tip-protected B2 eligibility + greedy triangular-kernel max-cover re-placement over the H19-5 pool at champion budget",
   "lane_assignment_source": "Prompt's method-paragraph assignment absent (as in Session 19); lane self-declared in knowledge/56_s20_preregistration_H43-1.md before any experiment and disclosed there.",
   "hypothesis": "Rescuing along-strike tip-continuation dots (ring <=2 px, <=3 px from a catalogue endpoint) that blind B2 deleted, and re-placing all dots by greedy kernel max-cover instead of raster-order dot_thin phase, earns more credit per dot at the champion's budget.",

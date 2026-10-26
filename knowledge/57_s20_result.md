@@ -1,9 +1,13 @@
-# Session 20 result — nine-site executive answer, H43-1 experiment, and the honest submission decision
+# Session 20-H43 result — nine-site executive answer, H43-1 experiment, and the honest submission decision
 
 **Date:** 2026-10-26 (UTC) · **Branch:** `arena/36be803a-gemsdoe28`
 **Preregistration (frozen before experiments):** `knowledge/56_s20_preregistration_H43-1.md`
 **Evidence:** `evidence/s20_exp1_forensic.json`, `evidence/s20_holdout.json`,
-`evidence/s20_build.json`, `evidence/session20_run_card.json`
+`evidence/s20_build.json`, `evidence/session20_h43_run_card.json`
+**Parallel-session note (added at merge):** concurrent sessions landed a distinct *Session 20
+validation review* (no experiment; owns `evidence/session20_run_card.json`) and an *S19-ASCP*
+experiment on `main`. This report is the separate **Session 20-H43** run; never pool numbers
+across them (`s20-parallel-session-id-collision` in `registry/irregularities.json`).
 **Lane disclosure:** the prompt's "single method paragraph" assignment is absent (as Session 19
 found); this session declared its own single lane (H43-1) in writing *before* any experiment and
 stayed inside it. Three of three permitted experiments were used. Nothing was uploaded; no slot
