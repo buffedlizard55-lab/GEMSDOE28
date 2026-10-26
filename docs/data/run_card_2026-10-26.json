@@ -27,12 +27,12 @@
   "validator_outputs": {
     "new_candidate": "NOT RUN \u2014 no candidate",
     "archive_audit": "FAIL",
-    "archive_check_count": 790,
+    "archive_check_count": 823,
     "archive_failures": [
       "s22_archive_h40_vent_allfinite_outside_zero",
       "s22_archive_h41_spring_allfinite_outside_zero"
     ],
-    "registered_tiffs": 46,
+    "registered_tiffs": 48,
     "preflight": "BLOCKED",
     "preflight_failures": [
       "Missing explicit assigned method lane and assignment source",
@@ -50,5 +50,16 @@
   "slot_selected": false,
   "submission_ready": false,
   "verdict": "negative",
-  "source_access_irregularity": "One-off research-tool access to public competition pages may conflict with the manual-only project policy and quoted site terms; compliance is undetermined. No login or upload; do not repeat automated access absent permission."
+  "source_access_irregularity": "One-off research-tool access to public competition pages may conflict with the manual-only project policy and quoted site terms; compliance is undetermined. No login or upload; do not repeat automated access absent permission.",
+  "concurrent_research_artifact": {
+    "session": "S22-SIGN (PR #57; separate lane)",
+    "file": "docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+    "sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+    "download": "research only; DO NOT SUBMIT",
+    "holdout": "historical local quadrant cell mean 0.054664 vs 0.121914; CI not recorded; positive-count inconsistency in source",
+    "final_dot_audit": "55 available comparisons; 0 duplicates, maximum 53.56% within 3 px; complete registry and pre-placement surfaces unavailable",
+    "canary": "FAIL: recorded feature results empty despite pass flag",
+    "submission_ready": false,
+    "audit": "evidence/s22_sign_audit.json"
+  }
 }

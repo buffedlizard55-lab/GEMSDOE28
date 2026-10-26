@@ -29,8 +29,8 @@ class Links(HTMLParser):
 def test_site_builds_from_json_only_and_pages_exist():
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_site.py")], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
-    # The registry retains four untried entries in the historical Session 10 H33 queue.
-    assert json.loads(r.stdout)["hypotheses"] == 4
+    # The current audit has three proposals after withdrawing the overlapping S22-SIGN arm.
+    assert json.loads(r.stdout)["hypotheses"] == 3
     for p in PAGES:
         assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
 
@@ -331,7 +331,7 @@ def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
         assert 'Current run: NOT READY TO SUBMIT' in text
-        assert 'NO FILE APPROVED' in text and 'do not upload them' in text
+        assert 'NO FILE APPROVED' in text and 'do not upload it or any prior file' in text
         assert 'S22 audit: no new TIFF' in text
         assert 'data/current_run_card_2026-10-26.json' in text
     overview = (DOCS / 'index.html').read_text()

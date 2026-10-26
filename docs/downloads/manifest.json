@@ -485,6 +485,14 @@
       "slot_selected": false,
       "new_tiff_generated": true,
       "run_card": "data/run_card_s20_nchc.json"
+    },
+    {
+      "run_id": "S22-SIGN",
+      "status": "NEGATIVE — RESEARCH ONLY; DO NOT SUBMIT",
+      "submission_ready": false,
+      "slot_selected": false,
+      "new_tiff_generated": true,
+      "run_card": "evidence/s22_run_card.json"
     }
   ],
   "s20v_candidate": {
@@ -694,5 +702,26 @@
     "bytes_zip": 279023,
     "sha256_zip": "7a9b62d933c6780deedd5331959073fc1e0f70e15c2b8985a34ced44318b89ae",
     "zip_member": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif"
+  },
+  "s22_signed_piedmont": {
+    "slug": "s22-signed-piedmont",
+    "hypothesis": "S22 SIGNED piedmont break-in-slope + asymmetric polarity",
+    "content_id": "08703322d2af",
+    "nan": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
+    "allfinite": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+    "zip": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip",
+    "sha256_nan": "0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165",
+    "sha256_allfinite": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+    "sha256_zip": "8b5d2da2301ba3e5cff789bc759c63c892c742f1d909294587fb28b197452fec",
+    "bytes_nan": 1590594,
+    "bytes_allfinite": 826250,
+    "bytes_zip": 284591,
+    "emitted_px": 37692,
+    "format_verified": true,
+    "status": "S22-SIGN research-only; reported 22-raster novelty is scoped, canary evidence is empty, holdout uses a non-shared local quadrant proxy with no CI; no promotion or slot. DO NOT SUBMIT.",
+    "note": "S22 SIGN break-slope+asym pol 37692d HOLDOUT 0.0547 vs 0.1219 gain -0.0673 | DO NOT SUBMIT",
+    "submission_name": "GEMSDOE28-S22-SIGNED-PIEDMONT-20261026-08703322d2af",
+    "verdict": "negative",
+    "submission_ready": false
   }
 }

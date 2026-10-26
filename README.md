@@ -1,6 +1,6 @@
 # Session 22 audit — 2026-10-26 UTC (READ FIRST EVERY SESSION)
 
-**DO NOT SUBMIT. No new TIFF or geological experiment was produced, and no slot was selected.**
+**DO NOT SUBMIT. This audit produced no TIFF or geological experiment and selected no slot.**
 The requested method assignment, complete current parallel registry, reusable prepared feature cache,
 and frozen same-protocol best are missing. [Current run card](evidence/s22_audit_run_card.json) ·
 [Detailed nine-site audit and ranked hypotheses](knowledge/62_s22_audit.md) ·
@@ -17,7 +17,7 @@ and frozen same-protocol best are missing. [Current run card](evidence/s22_audit
   and 0.3195 prompt claims are not current at that observation. The read used a one-off research
   tool despite the repository manual-only access policy; this may conflict with quoted site terms.
   Compliance is undetermined: do not repeat automated access without permission. No login or upload.
-- **Archive audit FAIL:** all 46 TIFFs are now registered for audit, but the H40/H41 finite 0/1
+- **Archive audit FAIL:** all 48 TIFFs are now registered for audit, but the H40/H41 finite 0/1
   variants retain NaN nodata metadata. Registration is not promotion or authentication. A historic
   portal range-error cause is unknown; zero outside the footprint does not prove acceptance and may
   differ from the sample convention. The [official problem](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
@@ -27,6 +27,7 @@ and frozen same-protocol best are missing. [Current run card](evidence/s22_audit
   is not comparable strict evidence. S20-NCHC's literal all-entries prospective check is false,
   even though a narrower comparison excluded controls. Prior leaderboard projections are not
   scores and cannot establish improvement. Historical TIFFs are research-only.
+- **Concurrent S22-SIGN, PR #57:** a separate lane produced a [research-only TIFF](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif) (SHA-256 `d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229`); **DO NOT SUBMIT**. Final-dot checks found no duplicate in 46 local non-self TIFFs plus nine historical sites (max 53.56% overlap), but the complete registry and pre-placement surface are unavailable. Its local quadrant **HOLDOUT-DTI** `gems27.metric.dti_binary` cell means are 0.054664 versus 0.121914; 95% CI not recorded. The cell details sum to 36,596 withheld positives (repeated across cells), conflicting with 60,988 in its run card. The recorded canary is empty despite a pass flag. Original evidence and runner are preserved; the unsafe entry point is blocked. [Detailed review](evidence/s22_sign_audit.json) · [research page](docs/session22-result.html).
 - Preserve the original standing prompt below. Before any future experiment, obtain the actual
   template-provided cache (do not silently rebuild/impute), lane assignment, complete registry and
   comparable baseline; resolve the preparation-NaN/preflight-finiteness contract. Then use the

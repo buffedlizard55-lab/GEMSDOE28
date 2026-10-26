@@ -362,7 +362,7 @@ def current_status_html() -> str:
     audit = card["validator_outputs"]
     return f"""<section class="card callout-danger" aria-label="Current submission readiness" id="current-submission" data-submission-ready="false">
 <h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
-<p><strong>S22 audit: no new TIFF or geological experiment.</strong> The assigned lane, complete current registry, reusable prepared cache and frozen same-protocol best are unavailable. Historical TIFFs may be downloaded for research only; <strong>do not upload them</strong>. No human geological inspector was used and no slot was selected.</p>
+<p><strong>S22 audit: no new TIFF or geological experiment.</strong> The assigned lane, complete current registry, reusable prepared cache and frozen same-protocol best are unavailable. The separate <a href="session22-result.html">S22-SIGN TIFF</a> exists for research only; <strong>do not upload it or any prior file</strong>. No human geological inspector was used and no slot was selected in this audit.</p>
 <p>Archive audit <strong>{esc(audit['archive_audit'])}</strong>: all {audit['registered_tiffs']} historical TIFFs are registered, but two all-finite variants retain NaN nodata metadata. This does not diagnose the portal error. Read the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official format</a>; acceptance is not guaranteed.</p>
 <div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button quiet" href="data/current_run_card_2026-10-26.json">Current negative run card</a><a class="button quiet" href="cross-site-review.html">Nine-site evidence</a><a class="button quiet" href="archive.html">Historical research archive</a></div>
 </section>"""
@@ -460,7 +460,7 @@ def render_s19_result() -> str:
 
 def render_current_executive() -> str:
     return """<section class="section"><h1>Executive summary: no candidate is approved</h1>
-<p>No new candidate was generated in this audit. Historical files are available for research, but <strong>not OK to submit</strong>. The decision is automatic and does not require a human geological inspector.</p>
+<p>No new candidate was generated in this audit. A distinct concurrent <a href="session22-result.html">S22-SIGN research TIFF</a> is available for research only, but <strong>not OK to submit</strong>: its local holdout is negative and leakage/uniqueness evidence is incomplete. The decision is automatic and does not require a human geological inspector.</p>
 <h2>Exactly how a future approved submission works</h2><ol>
 <li>Preregister one explicit lane; use verified cached features and the hash-pinned shared evaluator/writer.</li>
 <li>Run every feature-alone leakage canary. Stop if either AUC polarity exceeds 0.90.</li>
@@ -1374,6 +1374,7 @@ def main() -> int:
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
+    session22_template = (ROOT / "site_templates" / "session22-result.html").read_text(encoding="utf-8")
     current_review = render_focus_review()
     pages = {
         "index.html": layout("Overview", current_review + s18_feed_html(feed), "Overview"),
@@ -1388,6 +1389,7 @@ def main() -> int:
         "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),
         "session20-result.html": session20_template,
         "session21-result.html": session21_template,
+        "session22-result.html": session22_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
@@ -1414,6 +1416,11 @@ def main() -> int:
     current_card_path.parent.mkdir(parents=True, exist_ok=True)
     current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (DOCS / "data/run_card_2026-10-26.json").write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    # Preserve the separate signed-piedmont run card under its own name; all
+    # generic current aliases refer to this later negative audit, not that run.
+    (DOCS / "data/s22_run_card.json").write_text(json.dumps(read_json("evidence/s22_run_card.json"), indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    (DOCS / "data/current_run_card.json").write_bytes(current_card_path.read_bytes())
+    (DOCS / "data/current_run_card_2026-10-27.json").write_bytes(current_card_path.read_bytes())
     (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
     (ROOT / "executive-summary.html").write_text(
         root_relative_links(publish_source_links(pages["executive-summary.html"])), encoding="utf-8")
@@ -1421,10 +1428,12 @@ def main() -> int:
     legacy_card.parent.mkdir(parents=True, exist_ok=True)
     legacy_card.write_bytes(current_card_path.read_bytes())
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
-                      "hypotheses": len(hypotheses.get("hypotheses", [])),
+                      "hypotheses": len(read_json("registry/s22_audit_hypotheses.json").get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
                       "submission_ready": False, "slot_selected": False,
                       "research_download": None,
+                      "concurrent_research_download": "downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+                      "concurrent_submission_ready": False,
                       "inspection_artifacts": [manifest["primary"]["nan"], manifest.get("secondary", {}).get("nan")]}, indent=2))
     return 0
 

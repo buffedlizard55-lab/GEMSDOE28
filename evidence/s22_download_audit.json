@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-10-26T22:16:39Z",
+  "checked_utc": "2026-10-26T22:18:12Z",
   "status": "FAIL",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "e8744db4b62b9c50ecf7706bb7d1c4f3e2c444fe3c7e715b580712f0348cb725",
+  "manifest_sha256": "605bb9784cb3b1a495881e4ffd5b209c7f46812267330a175199bf2e826f06df",
   "checks": [
     {
       "check": "labels_grid_matches_template",
@@ -36,17 +36,17 @@
     {
       "check": "manifest_candidates_present",
       "pass": true,
-      "detail": "22 candidate(s) listed"
+      "detail": "23 candidate(s) listed"
     },
     {
       "check": "submission_names_present",
       "pass": true,
-      "detail": "22 artifact(s) have a registered portal name"
+      "detail": "23 artifact(s) have a registered portal name"
     },
     {
       "check": "submission_names_unique",
       "pass": true,
-      "detail": "22 registered name(s), all distinct"
+      "detail": "23 registered name(s), all distinct"
     },
     {
       "check": "primary_submission_name_content_id",
@@ -3809,6 +3809,171 @@
       "detail": "82 chars; max 200"
     },
     {
+      "check": "s22_signed_piedmont_submission_name_content_id",
+      "pass": true,
+      "detail": "GEMSDOE28-S22-SIGNED-PIEDMONT-20261026-08703322d2af"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_file_exists",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_byte_count",
+      "pass": true,
+      "detail": "1590594 bytes"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_sha256",
+      "pass": true,
+      "detail": "0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_grid",
+      "pass": true,
+      "detail": "CRS/shape/transform equal the sample template"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_single_band_float32",
+      "pass": true,
+      "detail": "count=1 dtype=float32"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_inside_finite",
+      "pass": true,
+      "detail": "nonfinite inside=0"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_inside_0_1",
+      "pass": true,
+      "detail": "finite inside range=[0, 1]"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_exact_binary",
+      "pass": true,
+      "detail": "inside values are exactly 0.0 or 1.0"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_outside_nan",
+      "pass": true,
+      "detail": "outside NaN count=7111787/7111787; nodata=NaN"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_emitted_count",
+      "pass": true,
+      "detail": "37692 cells equal 1.0"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_no_catalogue_overlap",
+      "pass": true,
+      "detail": "positive catalogue overlap=0"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_no_infinities",
+      "pass": true,
+      "detail": "no infinity anywhere"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_file_exists",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_byte_count",
+      "pass": true,
+      "detail": "826250 bytes"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_sha256",
+      "pass": true,
+      "detail": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_grid_and_type",
+      "pass": true,
+      "detail": "single float32 band on exact template grid"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_range",
+      "pass": true,
+      "detail": "whole array finite; inside range=[0,1]"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_outside_zero",
+      "pass": true,
+      "detail": "outside zero; no nodata tag"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_emitted_count",
+      "pass": true,
+      "detail": "37692 cells equal 1.0"
+    },
+    {
+      "check": "s22_signed_piedmont_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_exists",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_byte_count",
+      "pass": true,
+      "detail": "284591 bytes"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_sha256",
+      "pass": true,
+      "detail": "8b5d2da2301ba3e5cff789bc759c63c892c742f1d909294587fb28b197452fec"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_single_tif",
+      "pass": true,
+      "detail": "members=['gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif']"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_byte_identical",
+      "pass": true,
+      "detail": "single member matches the registered TIFF byte-for-byte"
+    },
+    {
+      "check": "s22_signed_piedmont_note_length",
+      "pass": true,
+      "detail": "90 chars; max 200"
+    },
+    {
       "check": "s18_safe_filename",
       "pass": true,
       "detail": "gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif"
@@ -3966,7 +4131,7 @@
     {
       "check": "all_tif_names_unique",
       "pass": true,
-      "detail": "46 unique GeoTIFF(s)"
+      "detail": "48 unique GeoTIFF(s)"
     },
     {
       "check": "all_tif_names_content_addressed",
@@ -3978,5 +4143,5 @@
     "s22_archive_h40_vent_allfinite_outside_zero",
     "s22_archive_h41_spring_allfinite_outside_zero"
   ],
-  "check_count": 790
+  "check_count": 823
 }

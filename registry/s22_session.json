@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "session_id": "G28-S22-SCORECARD-20261026",
+  "branch": "arena/7188b7b1-gemsdoe28",
+  "lane": null,
+  "lane_assignment_source": null,
+  "lane_status": "No identifiable single-method paragraph/assignment was supplied. Do not treat earlier ranked ideas as lane authorization.",
+  "shared_template_pin": "registry/protocol_assets.json",
+  "cached_features": "data/prepared/features.npy",
+  "cached_features_metadata": "data/prepared/features.json",
+  "required_parallel_registry": null,
+  "frozen_protocol_comparable_best": null,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "slot_selected": false,
+  "weekly_cap": null,
+  "weekly_cap_status": "Not freshly retrieved from the authenticated submission page; do not infer current account allowance.",
+  "started_at_utc": "2026-10-26T21:59:35Z"
+}

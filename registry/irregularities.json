@@ -1,6 +1,12 @@
 {
-  "generated": "2026-10-26T22:14:35Z",
+  "generated": "2026-10-26T22:23:15Z",
   "items": [
+    {
+      "id": "s22-sign-canary-holdout-count-and-runner",
+      "severity": "high",
+      "issue": "Concurrent PR #57 S22-SIGN card has canary={} but canary_pass=true; its historical runner accepts an empty result. The source card says 60,988 withheld positives, while 12 emission-detail n_truth counts sum to 36,596; holdout is a non-shared quadrant proxy and no CI was recorded. Its original uniqueness emission also contained self-comparison.",
+      "action": "Preserve the original run card, emissions, and exact runner source as evidence/snapshots/pr57_run_s22_candidate.py. Block the unsafe historical entry point and disclose the discrepancies in evidence/s22_sign_audit.json; reran final-dot-only comparisons against 46 local non-self TIFFs plus nine historical priority rasters. Complete registry and pre-placement surfaces remain unavailable. DO NOT SUBMIT; no scientific rerun or slot."
+    },
     {
       "id": "s22-one-off-research-tool-competition-access",
       "severity": "medium",

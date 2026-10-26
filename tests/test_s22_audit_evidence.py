@@ -39,7 +39,7 @@ def test_current_run_card_is_negative_and_archive_failures_are_bound():
     audit = load("evidence/s22_download_audit.json")
     manifest = ROOT / "docs/downloads/manifest.json"
     assert audit["manifest_sha256"] == hashlib.sha256(manifest.read_bytes()).hexdigest()
-    assert audit["status"] == "FAIL" and audit["check_count"] == 790
+    assert audit["status"] == "FAIL" and audit["check_count"] == 823
     assert set(audit["failures"]) == {"s22_archive_h40_vent_allfinite_outside_zero",
                                       "s22_archive_h41_spring_allfinite_outside_zero"}
     assert card["validator_outputs"]["archive_failures"] == audit["failures"]
@@ -80,3 +80,63 @@ def test_tool_access_irregularity_is_disclosed_without_claiming_compliance():
     sources = (ROOT / "docs/sources.html").read_text()
     assert "Competition-page access irregularity" in sources
     assert "Compliance is undetermined" in sources
+
+
+def test_concurrent_sign_historical_record_is_reconciled_without_overwriting():
+    historical = load("evidence/s22_run_card.json")
+    emission = load("evidence/s22_emission.json")
+    review = load("evidence/s22_sign_audit.json")
+    novelty = load("evidence/s22_sign_final_dot_audit.json")
+    assert historical["session"] == "S22-SIGN" and historical["submission_ready"] is False
+    assert historical["canary"] == {} and historical["canary_pass"] is True
+    assert review["canary"]["review_status"].startswith("FAIL")
+    assert historical["holdout"]["withheld_positives"] == 60988
+    assert sum(row["n_truth"] for row in emission["holdout"]["details"]) == 36596
+    assert review["holdout"]["withheld_positives_summed_over_cells"] == 36596
+    assert review["holdout"]["ci95"] is None
+    assert novelty["local_reference_files"] == 46 and novelty["priority_reference_files"] == 9
+    assert len(novelty["comparisons"]) == 55 and novelty["duplicate_comparisons"] == 0
+    assert novelty["maximum_overlap"]["candidate_within_3px_fraction"] < 0.70
+    candidate = ROOT / historical["submission_file"]
+    assert hashlib.sha256(candidate.read_bytes()).hexdigest() == historical["raster_sha256"]
+    assert novelty["candidate_sha256"] == historical["raster_sha256"]
+    assert review["submission_ready"] is False and review["final_dots"]["complete_registry"] is False
+    assert review["final_dots"]["surface_verified"] is False
+    assert load("docs/data/s22_run_card.json") == historical
+    assert load("docs/data/current_run_card.json") == load("evidence/s22_audit_run_card.json")
+    page = (ROOT / "docs/session22-result.html").read_text()
+    assert "DO NOT SUBMIT" in page and "36,596" in page and "60,988" in page
+    assert "empty canary object" in page and "95% CI not recorded" in page
+
+
+def test_archived_sign_runner_is_blocked_and_original_is_snapshotted():
+    import subprocess
+    import sys
+
+    review = load("evidence/s22_sign_audit.json")
+    snapshot = ROOT / review["historical_runner_snapshot"]
+    assert hashlib.sha256(snapshot.read_bytes()).hexdigest() == review["historical_runner_sha256"]
+    assert review["historical_runner_sha256"] == "36c0df253b80932da41274ad86ed0fa806f77d1633255a1c5ecffe2b111d857f"
+    result = subprocess.run([sys.executable, str(ROOT / "scripts/run_s22_candidate.py")],
+                            capture_output=True, text=True, check=False)
+    assert result.returncode != 0
+    assert "BLOCKED" in result.stderr and "No experiment was run" in result.stderr
+
+
+def test_sign_novelty_failure_replaces_prior_green_report(tmp_path, monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT / "scripts"))
+    import audit_s22_sign_novelty
+
+    monkeypatch.setattr(audit_s22_sign_novelty, "ROOT", tmp_path)
+
+    def fail():
+        raise ValueError("candidate twin was modified")
+
+    monkeypatch.setattr(audit_s22_sign_novelty, "audit", fail)
+    report = tmp_path / "evidence/s22_sign_final_dot_audit.json"
+    report.parent.mkdir()
+    report.write_text('{"status":"COMPLETE_SCOPED"}')
+    assert audit_s22_sign_novelty.main() == 1
+    result = json.loads(report.read_text())
+    assert result["status"] == "FAIL" and result["submission_ready"] is False
+    assert "twin" in result["failure"]
