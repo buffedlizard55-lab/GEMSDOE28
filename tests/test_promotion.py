@@ -8,12 +8,13 @@ from gems27.promotion import promotion_gate
 def complete_card():
     return dict(lane="fixture only", raster_sha256="a" * 64, submission_name="fixture",
                 note="Test only", hypothesis="h", mechanism="m", non_fault_mimic="dike",
-                holdout=dict(raster_sha256="a" * 64, baseline_sha256="c" * 64, label="HOLDOUT-DTI", evaluator_version="fixture-v1", withheld_positives=10,
-                             dti=0.2, ci95=[0.1, 0.3], paired_gain_ci95=[0.001, 0.01],
+                holdout=dict(raster_sha256="a" * 64, baseline_sha256="c" * 64, label="HOLDOUT-DTI", evaluator_version="gems-segment-pooled-v1", withheld_positives=10,
+                             dti=0.2, ci95=[0.1, 0.3], baseline_dti=0.195, paired_gain=0.005,
+                             paired_gain_ci95=[0.001, 0.01],
                              whole_segments=True, buffered=True, visible_only_features=True,
                              pixel_exact_visible_mask=True, pooled=True, alpha=0.2, beta=0.8,
                              kernel_m=300, kernel="triangular"),
-                feature_canaries={"f": 0.7}, registry=dict(complete=True, manifest_sha256="b" * 64, members=["d" * 64],
+                feature_names=["f"], feature_canaries={"f": 0.7}, registry=dict(complete=True, manifest_sha256="b" * 64, members=["d" * 64],
                 surface=[dict(raster_sha256="d" * 64, spearman=0.4, within_3px_fraction=0.2)],
                 dots=[dict(raster_sha256="d" * 64, spearman=0.3, within_3px_fraction=0.4)]),
                 validator=dict(raster_sha256="a" * 64, no_nan_inside=True, range_0_1=True,
@@ -161,3 +162,31 @@ def test_concurrent_schema_api_names_are_consistent_without_granting_a_slot(card
     assert result['evidence_schema_passed'] is result['promotion_eligible']
     assert result['submission_ready'] is False
     assert result['slot_selected'] is False
+
+
+@pytest.mark.parametrize("baseline,gain,ci", [
+    (None, 0.005, [0.001, 0.01]),
+    (0.25, 0.005, [0.001, 0.01]),  # a winning interval cannot rescue a worse point score
+    (0.195, 0.004, [0.001, 0.01]),  # inconsistent paired difference
+    (0.195, 0.005, [0.006, 0.01]),  # interval does not contain the reported gain
+])
+def test_paired_gain_is_bound_to_a_comparable_baseline(baseline, gain, ci):
+    card = complete_card()
+    card["holdout"].update(baseline_dti=baseline, paired_gain=gain, paired_gain_ci95=ci)
+    assert not promotion_gate(card)["promotion_eligible"]
+
+
+def test_canaries_must_cover_every_model_feature():
+    card = complete_card()
+    card["feature_names"].append("omitted_or_missingness_indicator")
+    assert not promotion_gate(card)["promotion_eligible"]
+    card["feature_canaries"]["omitted_or_missingness_indicator"] = 0.5
+    assert promotion_gate(card)["promotion_eligible"]
+    card["feature_canaries"]["not_a_feature"] = 0.5
+    assert not promotion_gate(card)["promotion_eligible"]
+
+
+def test_noncomparable_evaluator_cannot_promote():
+    card = complete_card()
+    card["holdout"]["evaluator_version"] = "gems27-sparse-quadrant-legacy"
+    assert not promotion_gate(card)["promotion_eligible"]

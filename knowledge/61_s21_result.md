@@ -1,3 +1,10 @@
+> **S22 erratum / historical record:** This report contains superseded uniqueness, protocol and
+> score-causation claims. S21 fails the literal any-raster duplicate rule (72.34% overlap), its
+> split/full-label negative selection is not the shared whole-segment protocol, and the projected
+> leaderboard values are not scores or evidence of superiority. Portal-range cause is unconfirmed.
+> See [the current audit](62_s22_audit.md); no file is approved. The original statements below
+> are preserved only to show what the earlier run claimed, not endorsed as current facts.
+
 # 61 — Session 21 (S21-PUHGB) result — 2026-10-26
 
 **Verdict: NEGATIVE. New unique TIFF generated and format-validated; automated gates REJECT it for

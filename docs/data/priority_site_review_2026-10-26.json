@@ -4,9 +4,9 @@
   "scope": "The nine priority repositories and historical score/artifact claims supplied in the user request. Repository artifact references are pinned to commits already recorded in docs/index.html. Scores are owner-reported claims, not organizer receipts.",
   "score_evidence_class": "OWNER-REPORTED (user-supplied; no submission-page receipt inspected)",
   "official_leaderboard_observation": {
-    "value": 0.4413,
-    "source_date": "2026-10-25",
-    "classification": "dated public-page observation recorded in the repository; not current verification and not an organizer receipt for any listed raster",
+    "value": 0.4437,
+    "source_date": "2026-10-26T22:02:42Z",
+    "classification": "One-off public page observation via research tool; not a submission-page receipt or proof of file association. Access-policy conflict disclosed in registry/irregularities.json.",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/"
   },
   "sites": [
@@ -18,14 +18,14 @@
       "measured_positive_pixels": 60069,
       "construction_summary": "Dotted H19-5 baseline at the d=1.5 spacing operating point.",
       "forensic_note": "This is the best score listed by the user for GEMSDOE24. A score receipt was not available; construction summary is based on the artifact name and existing audit, not an independently rerun experiment.",
-      "source_commit": "996fc0b3c827ababb180fda40769e1edc0d8716c",
+      "source_commit": "a433b430b74b813a9118ebd4ec438b12cbc69f46",
       "source_path": "docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif",
       "uniqueness_audit": {
-        "status": "NOT CERTIFIED",
-        "finding": "No complete pairwise 3-pixel registry result is recorded for this selected artifact.",
+        "status": "NOT UNIQUE",
+        "finding": "100.00% of this row's dots within Euclidean 3 pixels of GEMSDOE25 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE24/996fc0b3c827ababb180fda40769e1edc0d8716c/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE24/a433b430b74b813a9118ebd4ec438b12cbc69f46/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     },
     {
@@ -36,14 +36,14 @@
       "measured_positive_pixels": 44090,
       "construction_summary": "Dotted H19-5 baseline at the d=2.8 spacing operating point.",
       "forensic_note": "Existing repository forensic record reports that the GEMSDOE25 and GEMSDOE30 raster values are identical inside the competition footprint. That is a cross-site artifact reuse finding, not independent score replication.",
-      "source_commit": "8c32763ca00a04ba82a27aac047952a0e3f9ef60",
+      "source_commit": "b4e74b3f9b191fbc214b6447e9ff1f3fa67552c4",
       "source_path": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
       "uniqueness_audit": {
         "status": "NOT UNIQUE",
-        "finding": "Repository forensic comparison reports exact pixel equality within the competition footprint with GEMSDOE30 d=2.8.",
+        "finding": "100.00% of this row's dots within Euclidean 3 pixels of GEMSDOE24 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE25/8c32763ca00a04ba82a27aac047952a0e3f9ef60/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE25/b4e74b3f9b191fbc214b6447e9ff1f3fa67552c4/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     },
     {
@@ -54,14 +54,14 @@
       "measured_positive_pixels": 61328,
       "construction_summary": "H19-5 d=1.5 baseline with T-v2 topographic gap-closure additions.",
       "forensic_note": "The reported score is below the user's GEMSDOE24 d=1.5 score claim; this comparison is descriptive only and neither score is organizer-confirmed.",
-      "source_commit": "f55cda6b0a940e44f2b4fdc516d212cd2729933c",
+      "source_commit": "bef7ae8e8f63b69d299c9214c75988c8f5055f9c",
       "source_path": "docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
       "uniqueness_audit": {
-        "status": "NOT CERTIFIED",
-        "finding": "Full pairwise 3-pixel comparison against all listed submissions is not documented.",
+        "status": "NOT UNIQUE",
+        "finding": "98.02% of this row's dots within Euclidean 3 pixels of GEMSDOE24 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE27/f55cda6b0a940e44f2b4fdc516d212cd2729933c/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE27/bef7ae8e8f63b69d299c9214c75988c8f5055f9c/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     },
     {
@@ -72,14 +72,14 @@
       "measured_positive_pixels": 37660,
       "construction_summary": "Historical H36-1: re-packed H19-5 at rung 3.0 with a blind one-pixel catalogue-flank prune; the repo records positive local holdout evidence, but no organizer score receipt.",
       "forensic_note": "Best score for this site among the user's listed claims: 0.2710, narrowly above H27-4 (0.2708) and H38-1 (0.2707). This old artifact is a research reference, not a current unique or approved upload.",
-      "source_commit": "604af8e87e88080d6cdc2e887b81ea60f2013c4c",
+      "source_commit": "2c839d10f57ec9b074829e93c84bc39935f52896",
       "source_path": "docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
       "uniqueness_audit": {
-        "status": "NOT CERTIFIED",
-        "finding": "No complete pairwise comparison of this selected H36-1 artifact against every listed raster is recorded.",
+        "status": "NOT UNIQUE",
+        "finding": "100.00% of this row's dots within Euclidean 3 pixels of GEMSDOE24 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE28/604af8e87e88080d6cdc2e887b81ea60f2013c4c/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE28/2c839d10f57ec9b074829e93c84bc39935f52896/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     },
     {
@@ -90,14 +90,14 @@
       "measured_positive_pixels": 44090,
       "construction_summary": "44,090-dot off-catalogue d=2.8 Poisson placement.",
       "forensic_note": "Existing repository forensic record reports pixel equality inside the footprint with the GEMSDOE25 d=2.8 raster. Treat this as the same raster strategy/artifact family, not independent confirmation of its 0.2600 score.",
-      "source_commit": "44ebe89365ab5b5b5ac73e9c77787239ae51707b",
+      "source_commit": "9c0d637c0171407196b61b780444bc772ce75438",
       "source_path": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
       "uniqueness_audit": {
         "status": "NOT UNIQUE",
-        "finding": "Repository forensic comparison reports exact pixel equality within the competition footprint with GEMSDOE25 d=2.8.",
+        "finding": "100.00% of this row's dots within Euclidean 3 pixels of GEMSDOE24 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE30/44ebe89365ab5b5b5ac73e9c77787239ae51707b/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE30/9c0d637c0171407196b61b780444bc772ce75438/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     },
     {
@@ -108,14 +108,14 @@
       "measured_positive_pixels": 40199,
       "construction_summary": "H27-4 solo-r1 d=2.8 raster, without the T-v2 additions.",
       "forensic_note": "Existing repository forensic record reports GEMSDOE28's H27-4 solo raster equals this raster inside the footprint. Its owner-reported 0.2708 is not an independent score confirmation.",
-      "source_commit": "ecdf391d955e1ae199e12f9537026b65aa5ddb7e",
+      "source_commit": "eeb7da54ca4a8ae056f45e5b23eeef586ad79bf2",
       "source_path": "docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
       "uniqueness_audit": {
         "status": "NOT UNIQUE",
-        "finding": "The H27-4 solo pixel set is reported equal to the GEMSDOE28 H27-4 solo raster; it is not an independent prediction set.",
+        "finding": "100.00% of this row's dots within Euclidean 3 pixels of GEMSDOE24 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE31/ecdf391d955e1ae199e12f9537026b65aa5ddb7e/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE31/eeb7da54ca4a8ae056f45e5b23eeef586ad79bf2/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     },
     {
@@ -126,14 +126,14 @@
       "measured_positive_pixels": 37654,
       "construction_summary": "Forensic pixel-set comparison in the current evidence says this equals the H27-4 solo-r1 dot set after removing 2,545 catalogue-adjacent dots (distance <=2 pixels), with no added dots. This is a plausible emission-efficiency explanation, not proof that pruning caused the reported score.",
       "forensic_note": "Highest user-supplied score among these nine sites. The score-to-file association remains unverified without an organizer receipt; do not copy this raster or describe its score as confirmed.",
-      "source_commit": "5786b21a1674b26ee525e8e9bf048e2e0f50fc0e",
+      "source_commit": "400b60d4a6d99f425ee90504e6c4552227556dd1",
       "source_path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
       "uniqueness_audit": {
         "status": "NOT UNIQUE",
-        "finding": "All 37,654 dots are a subset of the GEMSDOE28 H27-4 solo raster (zero additions; each point exactly overlaps), exceeding the 70% duplicate stop.",
+        "finding": "100.00% of this row's dots within Euclidean 3 pixels of GEMSDOE24 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE32/5786b21a1674b26ee525e8e9bf048e2e0f50fc0e/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE32/400b60d4a6d99f425ee90504e6c4552227556dd1/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     },
     {
@@ -144,14 +144,14 @@
       "measured_positive_pixels": 41865,
       "construction_summary": "Analogue tip/stepover placement hypothesis at r=30, according to the artifact name and site report.",
       "forensic_note": "The reported score does not establish a geothermal-vent detector: the competition target is fault location. No organizer receipt or fresh holdout comparison is associated here.",
-      "source_commit": "f618cc54773bd9b4d6c2b3ebf78103a05cc10cb6",
+      "source_commit": "efa438d3104893c3e8aedf3817ac22167b1c681a",
       "source_path": "docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
       "uniqueness_audit": {
-        "status": "NOT CERTIFIED",
-        "finding": "Full pairwise 3-pixel comparison against all listed submissions is not documented.",
+        "status": "NOT UNIQUE",
+        "finding": "99.71% of this row's dots within Euclidean 3 pixels of GEMSDOE27 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE33/f618cc54773bd9b4d6c2b3ebf78103a05cc10cb6/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE33/efa438d3104893c3e8aedf3817ac22167b1c681a/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     },
     {
@@ -162,14 +162,14 @@
       "measured_positive_pixels": 38854,
       "construction_summary": "Anderson-geothermal PINN candidate with 38,854 raster positives, according to the historical artifact label.",
       "forensic_note": "Existing cross-site audit says this raster contains all GEMSDOE32 champion dots plus 1,200 additional pixels. Its lower owner-reported score (0.2750 vs 0.2778) is consistent with, but does not prove, a cost to those additions.",
-      "source_commit": "c9ad59ec6f969ed931d089a03044c1567a633e84",
+      "source_commit": "32c2660001d98f6fa9084a0971b3a9d5062d49b9",
       "source_path": "docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
       "uniqueness_audit": {
         "status": "NOT UNIQUE",
-        "finding": "Contains all 37,654 GEMSDOE32 dots plus 1,200 extras: 96.9% of its dots exactly overlap the champion, above the 70% stop.",
+        "finding": "97.58% of this row's dots within Euclidean 3 pixels of GEMSDOE27 in the nine-site audit.",
         "threshold": "|Spearman| > 0.90 OR >70% of dots within 3 px of any one registry raster => duplicate"
       },
-      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE36/c9ad59ec6f969ed931d089a03044c1567a633e84/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+      "raw_download_url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE36/32c2660001d98f6fa9084a0971b3a9d5062d49b9/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
       "score_label": "USER-REPORTED / UNVERIFIED; not an independent score estimate"
     }
   ],
@@ -182,11 +182,11 @@
   },
   "limits": [
     "No organizer submission-page receipts were available for any of the nine reported scores.",
-    "No score projection should be interpreted as an organizer score; the S21 projection is conditioned on an unverified 0.2778 anchor and an older local holdout protocol.",
-    "The user-provided leaderboard values 0.3195 and 0.4413 conflict; a dated 2026-10-25 repository observation of 0.4413 exists, but is not a current check or submission receipt.",
-    "The S21 archive-wide file audit failed: 12 of 44 TIFFs are unregistered. Cached prepared features are absent in this checkout; the explicit method lane and synchronized global registry are also absent.",
-    "No new experiment or submission raster was generated in the latest audit review. No file is approved or eligible for a competition slot.",
-    "S22-SIGN run card reports no 95% CI; do not invent one. Its uniqueness registry has 22 members and is not a complete record of all historical/private concurrent submissions."
+    "The named historical nine-site comparison is not the complete current parallel registry.",
+    "S22-SIGN is a distinct concurrent research result; its canary results are empty, local holdout is non-shared, cell positive-count evidence disagrees with the source card, and no CI was recorded. Do not submit.",
+    "All 48 local TIFFs are registered for audit, but the archive audit fails H40/H41 all-finite nodata metadata checks.",
+    "The S22-AUDIT run generated no candidate, ran no geological experiment and selected no slot.",
+    "One-off research-tool access to public competition pages may conflict with the repository manual-only policy or quoted terms; compliance undetermined."
   ],
   "candidate_review": {
     "session": "S22-SIGN (separate concurrent lane; source branch merged in PR #57)",
@@ -194,44 +194,39 @@
     "sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
     "submission_name": "GEMSDOE28-S22-SIGNED-PIEDMONT-20261026-08703322d2af",
     "note": "S22 SIGN break-slope+asym pol 37692d HOLDOUT 0.0547 vs 0.1219 gain -0.0673 | DO NOT SUBMIT",
-    "score_estimate": 0.18,
-    "score_estimate_range": [
-      0.16,
-      0.2
-    ],
-    "score_estimate_class": "MODEL PROJECTION — not a score; holdout-ratio to an unverified 0.2778 anchor; range is not an organizer confidence interval",
+    "score_estimate": null,
+    "score_estimate_range": null,
+    "score_estimate_class": "WITHDRAWN — projection is not evidence of a score",
     "holdout_dti": 0.05466427133794576,
     "holdout_ci95": null,
-    "withheld_positives": 60988,
-    "holdout_evaluator": "gems-segment-pooled-v1 (local quadrant proxy, 4 folds × 3 seeds, 12 cells; paired CI not recorded in the run card)",
+    "withheld_positives": 36596,
+    "holdout_evaluator": "gems27.metric.dti_binary, local quadrant-clipped make_split, 12-cell unweighted means; CI not recorded. Source card states 60,988 positives but its details sum to 36,596 across cells.",
     "baseline_dti": 0.12191439631459906,
     "paired_delta": -0.06725012497665331,
     "paired_delta_ci95": null,
-    "uniqueness": "PASS within the run-specific 22-prior-raster registry: max final-dot overlap 43.29%, max |Spearman| 0.0283. This is not proof of uniqueness against every historical or concurrent private raster.",
-    "registry_members": 22,
+    "uniqueness": "Read-only final dots: 0 duplicates in 46 local non-self TIFFs plus nine historical priority files; maximum overlap 53.56%. Incomplete current registry and pre-placement surface not verified.",
+    "registry_members": 55,
     "format": "PASS in the all-finite run card: single-band float32, whole-array [0,1], exact EPSG:32611 / 3730×3292 / transform",
     "verdict": "NEGATIVE — research download only; DO NOT SUBMIT",
     "submission_ready": false,
-    "parallel_disclosure": "This is the distinct S22-SIGN lane from PR #57. The S22 scorecard audit in this branch ran zero experiments; do not combine their results.",
+    "parallel_disclosure": "Separate S22-SIGN lane from PR #57. S22-AUDIT ran no geological experiments. Do not pool results.",
     "nan_file": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif",
     "zip_file": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip",
     "bytes_allfinite": 826250,
     "run_card": "evidence/s22_run_card.json",
-    "archive_coverage": "evidence/s22_archive_coverage.json",
-    "archive_unregistered_count": 14,
+    "archive_coverage": "evidence/s22_download_audit.json",
+    "archive_unregistered_count": 0,
     "archive_tif_count": 48,
-    "prior_candidate_link": "downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif"
+    "prior_candidate_link": "downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif",
+    "canary_status": "FAIL: source card records an empty feature-result object despite canary_pass=true; feature coverage is not established."
   },
   "prior_candidate_s21": {
     "session": "S21-PUHGB, 2026-10-26 (historical generated artifact; not a fresh run)",
     "file": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif",
     "sha256": "2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c",
-    "score_estimate": 0.2194774110338748,
-    "score_estimate_ci95": [
-      0.19691505866323195,
-      0.24185963166602972
-    ],
-    "score_estimate_class": "MODEL PROJECTION — not a score; calibrated by multiplying an unverified 0.2778 anchor by the holdout DTI ratio",
+    "score_estimate": null,
+    "score_estimate_ci95": null,
+    "score_estimate_class": "WITHDRAWN — model projection is not evidence of a score",
     "holdout_dti": 0.08391208219082612,
     "holdout_ci95": [
       0.06702032602232456,

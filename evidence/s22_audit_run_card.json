@@ -1,0 +1,65 @@
+{
+  "session": "S22-AUDIT-20261026",
+  "hypothesis": "No geological hypothesis was assigned or tested. Ranked proposals remain research only.",
+  "mechanism": "A future displaced-marker lane would test repeated coherent offsets of magnetic or gravity contacts across a candidate fault corridor.",
+  "named_non_fault_mimic": "Branching lithologic contacts or survey-registration seams.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "reason": "No experiment; strict baseline and required feature cache unavailable."
+  },
+  "registry_correlations_overlaps": {
+    "scope": "Nine explicitly named historical artifacts only; not the complete parallel registry",
+    "artifact": "evidence/s22_focus_novelty.json",
+    "directional_pairs": 72,
+    "duplicate_pairs": 72,
+    "minimum_directional_overlap_3px": 0.8671895382207149,
+    "maximum_directional_overlap_3px": 1.0,
+    "maximum_absolute_spearman": 1.0,
+    "complete_current_parallel_registry": false,
+    "candidate_surface_checked": false,
+    "candidate_final_dots_checked": false
+  },
+  "raster_sha256": null,
+  "validator_outputs": {
+    "new_candidate": "NOT RUN — no candidate",
+    "archive_audit": "FAIL",
+    "archive_check_count": 823,
+    "archive_failures": [
+      "s22_archive_h40_vent_allfinite_outside_zero",
+      "s22_archive_h41_spring_allfinite_outside_zero"
+    ],
+    "registered_tiffs": 48,
+    "preflight": "BLOCKED",
+    "preflight_failures": [
+      "Missing explicit assigned method lane and assignment source",
+      "Missing complete shared parallel-run registry",
+      "Missing frozen current-best result under the same strict protocol",
+      "Cached feature stack unavailable: [Errno 2] No such file or directory: '/home/user/GEMSDOE28/data/prepared/features.json'"
+    ],
+    "shared_synthetic_contract": "PASS; software test only"
+  },
+  "submission_name": null,
+  "submission_note": "S22 audit only; no candidate generated; DO NOT SUBMIT.",
+  "submission_note_characters": 54,
+  "new_tiff_generated": false,
+  "experiments_run": 0,
+  "slot_selected": false,
+  "submission_ready": false,
+  "verdict": "negative",
+  "source_access_irregularity": "One-off research-tool access to public competition pages may conflict with the manual-only project policy and quoted site terms; compliance is undetermined. No login or upload; do not repeat automated access absent permission.",
+  "concurrent_research_artifact": {
+    "session": "S22-SIGN (PR #57; separate lane)",
+    "file": "docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+    "sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
+    "download": "research only; DO NOT SUBMIT",
+    "holdout": "historical local quadrant cell mean 0.054664 vs 0.121914; CI not recorded; positive-count inconsistency in source",
+    "final_dot_audit": "55 available comparisons; 0 duplicates, maximum 53.56% within 3 px; complete registry and pre-placement surfaces unavailable",
+    "canary": "FAIL: recorded feature results empty despite pass flag",
+    "submission_ready": false,
+    "audit": "evidence/s22_sign_audit.json"
+  }
+}

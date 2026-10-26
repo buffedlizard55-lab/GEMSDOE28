@@ -1,3 +1,5 @@
+> **S22-AUDIT ERRATUM (2026-10-26):** The source run card's canary object is empty despite a true pass flag; no feature-alone coverage was established. Its stated 60,988 withheld positives conflicts with 36,596 summed over the 12 detail rows. The historic code uses a local quadrant-clipped proxy and unweighted cell means, not the shared pooled whole-segment holdout; no 95% CI is recorded. Independent final-dot checks pass only within 46 local non-self TIFFs plus nine named site rasters (maximum 53.56%); the complete registry and pre-placement surface are unavailable. The TIFF is research-only and **DO NOT SUBMIT**. See [corrected audit](../evidence/s22_sign_audit.json). Exact original runner bytes are snapshotted; its entry point is blocked.
+
 # S22 Result — Signed Piedmont Break-in-Slope (H43-2-SIGN)
 
 - Date: 2026-10-26/27 UTC

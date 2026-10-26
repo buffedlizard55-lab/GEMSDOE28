@@ -68,15 +68,16 @@ def test_s19_candidate_raster_independent_reopen():
 def test_s19_site_pages_carry_decision_and_nine_site_table():
     idx = (ROOT / "docs/index.html").read_text()
     s19 = load("evidence/s19b_radlin_run_card.json")
-    assert s19["download"].split("/")[-1] in idx
-    assert "Parallel run S19B-RADLIN" in idx and "93.4%" in idx
+    assert "S22 audit: no new TIFF" in idx
+    assert s19["download"].split("/")[-1] not in idx
     page = (ROOT / "docs/session19b-result.html").read_text()
+    assert s19["download"].split("/")[-1] in page
+    assert "93.4%" in page and "DO NOT SUBMIT" in page
     for site in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
                  "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
         assert site in page
-    assert "0.2778" in page and "NOT APPROVED" in page
+    assert "0.2778" in page and "no file approved" in page
     manifest = load("docs/downloads/manifest.json")
-    # S19-ASCP (parallel lane) merged first and owns the current card.
-    assert manifest["current_run"]["run_id"] == "S19-ASCP"
+    assert manifest["current_run"]["run_id"] == "S22-AUDIT-20261026"
     assert manifest["s19b_candidate"]["verdict"] == "negative"
     assert any(r["run_id"] == "S19B-RADLIN" for r in manifest["parallel_runs"])

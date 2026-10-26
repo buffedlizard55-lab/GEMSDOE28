@@ -116,16 +116,21 @@ def test_dot_thin_budget_is_monotone_in_distance():
 
 
 @pytest.mark.requires_rasters
-def test_verify_downloads_still_passes_with_four_slots(tmp_path):
-    # Never rewrite a tracked historical evidence file as a side effect of testing.
-    # Inherits GEMS_DATA_DIR so it verifies the same cache the suite is using.
+def test_verify_downloads_reports_known_archive_metadata_failures(tmp_path):
+    # Never rewrite tracked evidence as a side effect of testing. The report
+    # must fail closed on H40/H41 while still auditing the four historical slots.
+    report = tmp_path / "archive-audit.json"
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "verify_downloads.py"),
-                        "--out", str(tmp_path / "archive-audit.json")],
-                       capture_output=True, text=True)
-    assert r.returncode == 0, r.stdout[-3000:]
-    assert "0 failure(s)" in r.stdout
+                        "--out", str(report)], capture_output=True, text=True)
+    assert r.returncode == 1, r.stdout[-3000:]
+    audit = json.loads(report.read_text())
+    assert audit["status"] == "FAIL"
+    assert set(audit["failures"]) == {"s22_archive_h40_vent_allfinite_outside_zero",
+                                      "s22_archive_h41_spring_allfinite_outside_zero"}
+    checks = {x["check"]: x["pass"] for x in audit["checks"]}
+    assert checks["all_tifs_registered_for_audit"]
     for slot in ("primary", "secondary", "tertiary", "quaternary"):
-        assert f"{slot}/nan" in r.stdout or slot in r.stdout, f"{slot} not verified"
+        assert checks[f"{slot}_nan_sha256"]
 
 
 def test_historical_manifest_slots_remain_only_in_archive():

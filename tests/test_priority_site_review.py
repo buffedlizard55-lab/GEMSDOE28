@@ -52,52 +52,17 @@ class PrioritySiteReviewTests(unittest.TestCase):
                 self.assertTrue(row["construction_summary"])
                 self.assertTrue(row["forensic_note"])
 
-    def test_scorecard_exposes_download_estimate_and_uniqueness_status(self):
-        self.assertIn("NINE-SITE HISTORICAL SCORECARD", self.page.upper())
-        self.assertIn("MODEL PROJECTION", self.page)
-        self.assertIn("NOT CERTIFIED", self.page)
-        self.assertIn("NOT UNIQUE", self.page)
-        self.assertIn("Download cited TIFF", self.page)
-        self.assertIn("gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif", self.page)
-        self.assertIn("72.3%", self.page)  # S21's strict uniqueness failure remains historical context.
-        self.assertIn("14 of 48 TIFFs", self.page)
-        self.assertIn("95% CI not recorded", self.page)
+    def test_cross_site_review_links_supplemental_artifact_audit(self):
+        self.assertIn("Best reported result is not an approved submission", self.page)
+        self.assertIn("USER-REPORTED / UNVERIFIED", self.page)
+        self.assertIn("data/priority_site_review_2026-10-26.json", self.page)
+        self.assertIn("https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/", self.page)
+        self.assertIn("72 directional comparisons", self.page)
+        self.assertIn("not the complete current registry", self.page)
+        self.assertIn("S22 audit: no new TIFF", self.page)
+        self.assertIn('href="session19-result.html">S19 archive</a>', self.page)
+        self.assertIn("s22_focus_novelty.json", self.page)
         self.assertIn("DO NOT SUBMIT", self.page)
-        for site in ["GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30", "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"]:
-            self.assertIn(site, self.page)
-        self.assertIn('href="session22-result.html">Latest result</a>', self.page)
-        self.assertNotIn("h33-h33-2-b2</code> (0.2778) — learning reference only", self.page)
-
-    def test_scorecard_download_links_are_commit_pinned_and_novelty_is_not_overclaimed(self):
-        for row in self.data["sites"]:
-            with self.subTest(site=row["site"]):
-                self.assertRegex(row["raw_download_url"], r"/GEMSDOE\d+/[0-9a-f]{40}/docs/downloads/.+\.tif$")
-                self.assertIn(row["uniqueness_audit"]["status"], {"NOT UNIQUE", "NOT CERTIFIED"})
-                self.assertEqual(row["score_label"], "USER-REPORTED / UNVERIFIED; not an independent score estimate")
-        self.assertFalse(self.data["candidate_review"]["submission_ready"])
-        self.assertEqual(self.data["candidate_review"]["verdict"], "NEGATIVE — research download only; DO NOT SUBMIT")
-        self.assertIn("MODEL PROJECTION", self.data["candidate_review"]["score_estimate_class"])
-        self.assertIsNone(self.data["candidate_review"]["holdout_ci95"])
-        self.assertIsNone(self.data["candidate_review"]["paired_delta_ci95"])
-        coverage = json.loads((ROOT / "evidence/s22_archive_coverage.json").read_text())
-        self.assertEqual((coverage["total_tif_count"], coverage["unregistered_tif_count"]), (48, 14))
-        self.assertIn("Filename/manifest coverage only", coverage["scope"])
-        published = json.loads((ROOT / "docs/data/s22_archive_coverage.json").read_text())
-        self.assertEqual(published, coverage)
-
-    def test_s22_preflight_blocks_science_until_required_inputs_exist(self):
-        preflight = json.loads((ROOT / "evidence/s22_preflight.json").read_text())
-        session = json.loads((ROOT / "registry/s22_session.json").read_text())
-        self.assertEqual(session["branch"], "arena/7188b7b1-gemsdoe28")
-        self.assertIsNone(session["lane"])
-        self.assertEqual(preflight["status"], "BLOCKED")
-        self.assertFalse(preflight["experiment_allowed"])
-        self.assertFalse(preflight["submission_ready"])
-        self.assertFalse(preflight["slot_selected"])
-        self.assertTrue(preflight["shared_template"]["passed"])
-        self.assertEqual(len(preflight["failures"]), 4)
-        self.assertIn("Cached feature stack unavailable", preflight["failures"][-1])
-        self.assertIn("S22 audit preflight (blocked; zero experiments)", self.page)
 
     def test_session19_card_is_negative_and_does_not_claim_a_new_raster(self):
         card = json.loads((ROOT / "evidence/session19_run_card.json").read_text())
