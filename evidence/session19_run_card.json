@@ -98,5 +98,12 @@
     },
     "scope_limit": "Not linked to any local GEMSDOE24/25/27/28/30/31/32/33/36 TIFF; does not establish private-round performance or account allowance.",
     "evidence": "evidence/leaderboard_observation_2026-10-26.json"
+  },
+  "review_status": "HISTORICAL A52 PRE-EXPERIMENT SNAPSHOT; not the current run summary.",
+  "superseded_by": {
+    "session": "S19-ASCP",
+    "result": "negative; generated unique research TIFF but failed frozen HOLDOUT-DTI; DO NOT SUBMIT",
+    "run_card": "evidence/s19_ascp_run_card.json",
+    "report": "knowledge/56_s19_result.md"
   }
 }

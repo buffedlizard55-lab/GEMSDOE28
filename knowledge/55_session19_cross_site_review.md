@@ -3,6 +3,9 @@
 **Date:** 2026-10-26 (UTC)
 **Scope:** Review the supplied GEMSDOE24/25/27/28/30/31/32/33/36 results, current repository state, candidate hypotheses, and submission readiness.
 **Result:** Negative/blocked review. No new model, holdout run, experiment, TIFF, or competition upload was produced. This is deliberate: the required method-lane paragraph is not present as an assignment, and the frozen cross-run registry and comparable strict-protocol baseline are absent.
+
+**Supersession:** This is the A52 pre-experiment snapshot taken before S19 inputs were restored. A later S19-ASCP run generated a unique research TIFF but failed the frozen HOLDOUT-DTI gate; it is available for research only and is **DO NOT SUBMIT**. See [`knowledge/56_s19_result.md`](56_s19_result.md), [`evidence/s19_ascp_run_card.json`](../evidence/s19_ascp_run_card.json), and [`docs/session19-result.html`](../docs/session19-result.html). No file is currently approved.
+
 **Score labels:** Values copied from the user prompt are labelled **USER-REPORTED (unverified)**. They are neither HOLDOUT-DTI nor ORGANIZER-CONFIRMED. There is no submission-page receipt in this checkout that binds them to TIFF bytes.
 
 ## Executive decision

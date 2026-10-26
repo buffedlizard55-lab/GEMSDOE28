@@ -10,17 +10,17 @@
 <body>
 <header class="site-header"><div class="header-inner">
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
-  <nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session18-result.html">Latest result</a><a href="cross-site-review.html" aria-current="page">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
+  <nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session19-result.html">Latest result</a><a href="cross-site-review.html" aria-current="page">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
 </div></header>
 <main>
 <p class="breadcrumb"><a href="index.html">Overview</a> / Nine-site review</p>
 <section class="card callout-danger" aria-labelledby="readiness">
-  <p class="eyebrow">Session 19 review · 2026-10-26</p>
-  <h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
+  <p class="eyebrow">Session 19 pre-experiment review · 2026-10-26 (historical snapshot)</p>
+  <h2>Current submission readiness: NOT READY — NO FILE APPROVED</h2>
   <h1 id="readiness">Best reported result is not an approved submission</h1>
   <p class="lead">Within the nine sites supplied by the project owner, GEMSDOE32 H33-2-B2 is the highest reported entry: <strong>0.2778 — USER-REPORTED, UNVERIFIED</strong>. No organizer receipt in this repository binds that number to the raster. It is not a HOLDOUT-DTI result or an ORGANIZER-CONFIRMED score.</p>
-  <p><strong>No new TIFF was generated and no file is approved to submit.</strong> The required lane assignment, complete shared registry, frozen comparable baseline and local cached feature stack are missing. The existing <a href="session18-result.html">S18-MXTP TIFF</a> remains available for research/reproducibility only; its frozen HOLDOUT-DTI gate failed. <strong>Do not upload any file from this site; DO NOT SUBMIT the S18-MXTP research TIFF.</strong> No account cap was checked and no slot was selected or spent.</p>
-  <p><a class="button quiet" href="../knowledge/55_session19_cross_site_review.md">Read the full review and evidence limits</a> <a class="button quiet" href="../evidence/session19_run_card.json">Open the JSON run card</a></p>
+  <p><strong>This earlier A52 review generated no TIFF; it is superseded by the later S19-ASCP research result.</strong> S19-ASCP produced a locally unique file but failed its frozen HOLDOUT-DTI gate. The <a href="session19-result.html">S19-ASCP TIFF</a> and the older <a href="session18-result.html">S18-MXTP TIFF</a> are downloadable for research/reproducibility only. <strong>Do not upload any file from this site; DO NOT SUBMIT either research TIFF.</strong> No account cap was checked and no slot was selected or spent.</p>
+  <p><a class="button quiet" href="session19-result.html">Read the current S19-ASCP result and exact-file checks</a> <a class="button quiet" href="../knowledge/55_session19_cross_site_review.md">Read the earlier blocked review snapshot</a> <a class="button quiet" href="../evidence/session19_run_card.json">Open its JSON run card</a></p>
 </section>
 
 <section class="section" aria-labelledby="site-scorecard">
@@ -45,14 +45,14 @@
 
 <section class="section" aria-labelledby="champion-mechanism">
 <h2 id="champion-mechanism">Why the cited GEMSDOE32 result may have risen</h2>
-<p>The local cross-site byte audit reports that H33-2-B2 is a pruned version of an existing solo-r1 raster, removing 2,545 catalogue-flank dots and adding none. The underlying raster and full original process are not part of the present working checkout, so this page relies on the recorded audit rather than a fresh byte comparison.</p>
+<p>The pinned forensic audit reports that H33-2-B2 is a pruned version of an existing solo-r1 raster, removing 2,545 catalogue-flank dots and adding none. These pairwise site relations are carried forward from that recorded audit; the later S19-ASCP registry audit evaluated candidate novelty against 53 rasters but did not re-run or replace every pairwise site comparison here.</p>
 <p>Under a proximity-tolerant metric, predictions close to already represented structures can be redundant: removing a prediction may lower false-positive cost while leaving nearby predictions able to earn spatial credit. That is a plausible reason a sparse subset can outperform a denser map. It is not certain: pruning can also discard a true hidden fault, and catalogue distance can leak if it is not recomputed from visible faults inside each buffered holdout. The owner's score claim itself lacks a receipt here, so causation is not established.</p>
 <p><strong>Answer:</strong> the cited 0.2778 cannot yet be explained as an organizer-confirmed result. Beating it is possible in principle but unproven. The current evidence does not justify claiming a higher score or uploading a derivative.</p>
 </section>
 
 <section class="section" aria-labelledby="hypotheses">
-<h2 id="hypotheses">Ranked untested geological hypotheses</h2>
-<p>These are proposals reviewed against local code, not an assigned experiment lane. “Expected benefit” is qualitative research prioritization, not a DTI score or leaderboard projection.</p>
+<h2 id="hypotheses">Ranked hypotheses from the pre-experiment review</h2>
+<p>These were proposals reviewed against local code, not assigned lanes. S19-ASCP later tested a separate LiDAR scarp statistic and failed its holdout; these proposals remain untested in this review. “Expected benefit” is qualitative research prioritization, not a DTI score or leaderboard projection.</p>
 <div class="grid">
 <article class="card span-6"><p class="rank">Rank 1 · Highest qualitative information potential</p><h3>Displaced potential-field piercing markers</h3><p><strong>Layers/signature:</strong> reduced-to-pole/TMI and isostatic-gravity grids; coherent lateral offsets of multiple marker ridges across a corridor.</p><p><strong>Missing-fault rationale:</strong> a buried fault may displace magnetic/density contacts without a mapped surface scarp. Score the offset corridor, not the contact itself.</p><p><strong>Non-fault mimic:</strong> intrusive or branching lithologic contacts and survey-registration seams.</p><p><strong>Difference/cost:</strong> patch-registration/displacement differs from ordinary edge-coherence, Euler depth, and catalogue gap closure. Medium-high; local cached features are currently absent.</p></article>
 <article class="card span-6"><p class="rank">Rank 2 · Moderate, physically ambiguous</p><h3>Lithology-conditioned U/Th transport dipoles</h3><p><strong>Layers/signature:</strong> GeoDAWN uranium, thorium and potassium; signed odd-symmetric U/Th residuals conditioned on local Th/K.</p><p><strong>Missing-fault rationale:</strong> fluid/redox transport may modify mobile uranium across concealed permeable structures.</p><p><strong>Non-fault mimic:</strong> groundwater redox fronts, sediment sorting, radon disequilibrium, or survey artifacts.</p><p><strong>Difference/cost:</strong> tests dipole morphology, not a scalar ratio threshold. Medium; input bytes are absent locally and quantized ranks cannot provide absolute geochemistry.</p></article>
@@ -62,7 +62,8 @@
 </section>
 
 <section class="section" aria-labelledby="blockers">
-<h2 id="blockers">Why there is no new submission TIFF</h2>
+<h2 id="blockers">Why the earlier A52 review produced no TIFF</h2>
+<p>This blocker list is a historical snapshot from before the later S19-ASCP input restoration and experiment; it is not the current run status. The <a href="session19-result.html">current S19-ASCP result</a> is also negative and explicitly DO NOT SUBMIT.</p>
 <ul>
 <li>The method paragraph that should assign this session's single lane is missing.</li>
 <li>The shared parallel registry and a frozen current-best baseline under the requested strict protocol are not configured.</li>

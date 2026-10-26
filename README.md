@@ -1,21 +1,56 @@
-# Session 19 review — 2026-10-26 (read first every session)
+# Session 20 — validation hardening (2026-10-26)
 
-**No new TIFF was generated; no file is approved to submit.** The nine-site review ranks the supplied GEMSDOE32 H33-2-B2 claim, `0.2778`, highest among the values in the prompt, but labels it **USER-REPORTED / UNVERIFIED** (not HOLDOUT-DTI or ORGANIZER-CONFIRMED). A method lane, complete parallel registry, frozen strict-protocol baseline, and local feature cache are missing. Do not reuse the prior S18 TIFF or copy/prune an older submission.
+**This validation review generated no TIFF; no file is approved to submit.** Reviewed the standing owner request and
+prior results. Fixed cache NaN/infinity detection and ambiguous evidence JSON in the
+automated gates; no scientific result or score was invented.
+[Three-pass review and next steps](knowledge/56_session20_validation_review.md) ·
+[JSON run card](evidence/session20_run_card.json) ·
+[Nine-site executive comparison](docs/cross-site-review.html).
+The standing normalized owner prompt below remains the starting point every session.
 
-- [Nine-site executive scorecard, ranked hypotheses and source links](docs/cross-site-review.html)
-- [Full Session 19 review](knowledge/55_session19_cross_site_review.md)
-- [Session 19 JSON run card](evidence/session19_run_card.json)
+# Current result — 2026-10-26 S19-ASCP (read first every session)
 
-A one-off read-only fetch of the official public leaderboard on 2026-10-26 displayed 0.4413 in its first row (xiaofanhu). This public observation is not a receipt for any local TIFF and does not establish private-round performance. The recorded byte audit also flags repeated/overlapping predictions across several site artifacts; see the [dated evidence addendum](knowledge/55_priority_site_review_2026-10-26.md) and [observation JSON](evidence/leaderboard_observation_2026-10-26.json).
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 
-The top proposed research hypothesis is displaced potential-field piercing markers; it is not assigned or run. The JSON card records a negative/blocked review, zero experiments, no raster hash, and no slot selection. Existing S18-MXTP remains the latest generated research TIFF, available for research download only; its prior holdout rejection remains in force. **DO NOT SUBMIT.**
+[**Download the new unique research TIFF**](docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif)
+· [Executive summary / exact submission process](docs/executive-summary.html)
+· [JSON run card](evidence/s19_ascp_run_card.json)
+· [Frozen hypotheses and method](knowledge/55_s19_preregistration.md)
 
-# Current result — 2026-10-25 S18-MXTP (prior run; read its limits)
+S19 tested one new lane: paired LiDAR crest/toe curvature × uphill-facing selectivity × coherence.
+It produced 37,654 independently placed dots and passed the feature-alone leakage canary, declared
+53-raster registry checks and exact-file validation. It then **failed** the shared whole-component,
+1.5 km-buffered performance gate. **HOLDOUT-DTI** (`gems-segment-pooled-v1`, 60,988 withheld
+positives): **0.080806** (95% CI **[0.072325, 0.089111]**) versus recomputed visible-only baseline
+**0.141694**; paired gain **−0.060888** (95% CI **[−0.074029, −0.047638]**). This local proxy is
+not an organizer score. Three experiments used; no slot selected.
 
-## PRIOR UNIQUE TIFF — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+The TIFF is single-band float32, all-finite across the whole array, values {0,1}, EPSG:32611,
+3,730 × 3,292, and matches the template transform. SHA-256:
+`553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537`. Maximum pre-placement
+|Spearman| was 0.1030; maximum exact-Euclidean surface-support overlap was 20.6%; exact-Euclidean final-dot overlap peaked at
+28.0%, below the 0.90/70% duplicate stops. An initial conservative 7×7 overlap check was superseded by the disclosed exact-distance audit; no model or threshold changed. **Safe to download for research; NOT OK to submit.**
+Road cuts, channels, terrace/paleo-shoreline risers, landslides and mine benches remain named mimics.
+
+**Public leaderboard observation:** a one-off fetch on 2026-10-26 displayed xiaofanhu at 0.4413 in the first public row. This is not a receipt for any local TIFF and does not establish private-round performance or account allowance. See the [dated observation record](evidence/leaderboard_observation_2026-10-26.json). The latest row is context only, not a score target for S19-ASCP.
+
+The owner prompt and Core Values remain archived below and normalized in
+[`knowledge/53_current_request.md`](knowledge/53_current_request.md). The explicit parallel lane
+paragraph was again absent; the run autonomously used the repository's documented scarp-observable
+next step and does not claim external exclusivity. Historical S18 and earlier notices are superseded.
+
+A concurrent pre-experiment Session 19 review ran zero experiments before inputs were restored. Its
+[nine-site scorecard](docs/cross-site-review.html), [review dossier](knowledge/55_session19_cross_site_review.md)
+and [blocked JSON card](evidence/session19_run_card.json) are retained as an audit snapshot, not the
+current result. Its “no new TIFF” statement was true for that checkout but is superseded by S19-ASCP.
+
+---
+
+# Current result — 2026-10-25 S18-MXTP (read first every session)
+
+## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
 
 [**Download the new unique research TIFF**](docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif)
-· [Nine-site executive comparison](knowledge/55_focus_site_review.md)
 · [Executive summary / submission process](docs/executive-summary.html)
 · [Current full JSON run card](evidence/s18_mxtp_run_card.json)
 · [Scientific result, sources and next steps](knowledge/54_s18_result.md)
@@ -33,7 +68,9 @@ seeds 310–314, 20 cells, 76,869 pooled withheld positives / 45,155 unique): **
 paired gain **−0.087855** (95% CI **[−0.112958, −0.059642]**). Four-geographic-block bootstrap;
 local recovery proxy, not an organizer score. All three experiments used; lane closed.
 
-**Leaderboard update:** a one-off fetch on **2026-10-26** again displayed **0.4413** as the first public row; see the current observation record above. The earlier 2026-10-25 read is historical. Neither public observation is a submission-page receipt or identifies a local TIFF. The September rules §§3.2/3.4 state **three submissions/week**; the authenticated account's remaining allowance is unknown.
+**Current source corrections:** the official leaderboard displayed **0.4413** on 2026-10-25
+(one-off public source observation, NOT a submission-page receipt). The September rules §§3.2/3.4
+state **three submissions/week**; the authenticated account's remaining allowance is unknown.
 [Source review](evidence/s18_official_source_review.json). No score for a GEMSDOE raster has an
 organizer receipt here. Fresh byte forensics confirm that the reported GEMSDOE32 champion is
 solo-r1 minus 2,545 catalogue-flank dots; its reported 0.2778 association remains unverified.
@@ -302,7 +339,7 @@ Generative AI (Arena.ai Agent Mode) assisted research synthesis, hypothesis plan
 
 Before every substantive session, reread this README and [`knowledge/00_standing_brief.md`](knowledge/00_standing_brief.md). For this research track, also read [`knowledge/47_session15_high-score-review_and_blocked-experiment.md`](knowledge/47_session15_high-score-review_and_blocked-experiment.md) and its structured card [`evidence/session15_review.json`](evidence/session15_review.json). The card is an explicit **negative/blocked result**, not a competition submission.
 
-The user-provided list reports `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` at `0.2778` as the highest score among the listed GEMSDOE24/25/27/28/30/31/32/33/36 sites. The cross-site audit identifies the owner-repository TIFF paths and summarizes the page's H33-2-B2 method as pruning an existing dotted base by excluding predictions close to the catalogue; it also reports that the owner page says no organizer score exists for those artifacts. The raw TIFF bytes, full method code, and submission receipt are not available here, so the user-supplied `0.2778` is not organizer-confirmed and cannot be causally explained. The earlier prompt gave two conflicting leaderboard maxima (`0.4413` and `0.3195`). A later one-off official public-page fetch on 2026-10-26 displayed `0.4413` for xiaofanhu in the first row; `0.3195` was not the leading row observed in that fetch. This dated public observation is not a receipt for any local artifact and does not establish private-round performance; see [`evidence/leaderboard_observation_2026-10-26.json`](evidence/leaderboard_observation_2026-10-26.json). Do not infer an owner score, artifact identity, or winning mechanism from these claims.
+The user-provided list reports `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` at `0.2778` as the highest score among the listed GEMSDOE24/25/27/28/30/31/32/33/36 sites. The cross-site audit identifies the owner-repository TIFF paths and summarizes the page's H33-2-B2 method as pruning an existing dotted base by excluding predictions close to the catalogue; it also reports that the owner page says no organizer score exists for those artifacts. The raw TIFF bytes, full method code, and submission receipt are not available here, so the user-supplied `0.2778` is not organizer-confirmed and cannot be causally explained. The prompt also gives two current-leaderboard maxima (`0.4413` and `0.3195`), which conflict; the dated 2026-10-03 repository snapshot is not a current refresh. Do not infer a score, artifact identity, or winning mechanism from any of these claims.
 
 **Critical experiment controls:** the current parallel-run prompt references a single method paragraph defining the authorized lane, but no such paragraph is included. Do not guess the lane, run a non-lane experiment, fabricate a TIFF, or place anything in a submission slot. The checkout has no cached input rasters/features/template/labels under `data/`, and `rasterio`/`pytest` are unavailable in the current Python environment. The existing shared `src/gems27/holdout.py` documents random component withholding in quadrants; do not assume it satisfies the newer buffered whole-segment hide-and-recover requirement without auditing/fixing it once in the shared template.
 

@@ -1,5 +1,7 @@
 # Priority-site and submission review — 2026-10-26
 
+> **Historical A52 pre-experiment review.** The later S19-ASCP experiment generated a unique research TIFF but failed HOLDOUT-DTI. The S19-ASCP file—not the S18-MXTP listed below—is now the latest research TIFF; both are **DO NOT SUBMIT**. See [`knowledge/56_s19_result.md`](56_s19_result.md) and [`evidence/s19_ascp_run_card.json`](../evidence/s19_ascp_run_card.json). No file is currently approved.
+
 ## Executive decision
 
 **No file from the nine sites is approved to submit.** The largest score associated by the user with a site artifact is **0.2778 for GEMSDOE32 H33-2-B2**, but this remains an **OWNER-REPORTED** association: the repository has no submission-page receipt tying that number to those exact raster bytes. Do not call it ORGANIZER-CONFIRMED, do not copy it, and do not treat it as a safe upload recommendation.

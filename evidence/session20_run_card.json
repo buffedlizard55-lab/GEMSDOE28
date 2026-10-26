@@ -1,0 +1,44 @@
+{
+  "session_id": "G28-S20-validation-review-20261026",
+  "hypothesis": "No new geological experiment; retain ranked Session 19 proposals pending lane assignment.",
+  "mechanism": "Validation hardening: finite cached features and unambiguous evidence JSON.",
+  "non_fault_mimic": "Intrusive contacts and survey seams could mimic the top proposed displaced-marker signature.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN",
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null
+  },
+  "registry": {
+    "surface": null,
+    "final_dots": null,
+    "complete": false,
+    "status": "NOT RUN; no new raster"
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "NOT RUN; no new raster",
+    "no_nan_inside": null,
+    "range_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null
+  },
+  "submission_name": null,
+  "note": "No new TIFF: missing lane, cache, complete registry and comparable baseline. Validation code hardened only.",
+  "experiments_run": 0,
+  "new_tiff_generated": false,
+  "submission_ready": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "preflight_evidence": "evidence/session20_preflight.json",
+  "verification": {
+    "pytest": "499 passed, 7 skipped after concurrent-main reconciliation",
+    "ruff": "PASS",
+    "site_build": "PASS; no generated-page drift",
+    "git_diff_check": "PASS"
+  },
+  "concurrent_main_result": "S19-ASCP independently generated a research TIFF; holdout failed. Preserved, not promoted or pooled."
+}

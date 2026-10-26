@@ -204,7 +204,7 @@ def test_pages_source_links_resolve_to_public_repository_files():
 def test_repository_root_front_page_serves_the_one_click_download():
     man = json.loads((DOCS / "downloads/manifest.json").read_text())
     root_idx = (ROOT / "index.html").read_text()
-    candidate = man["s18_candidate"]
+    candidate = man["s19_candidate"]
     assert f'href="docs/downloads/{candidate["filename"]}"' in root_idx
     assert "Download NEW unique research TIFF — DO NOT SUBMIT" in root_idx
     assert (ROOT / ".nojekyll").exists()
@@ -213,7 +213,7 @@ def test_repository_root_front_page_serves_the_one_click_download():
 def test_front_page_has_download_and_exact_note():
     man = json.loads((DOCS / "downloads/manifest.json").read_text())
     idx = (DOCS / "index.html").read_text()
-    candidate = man["s18_candidate"]
+    candidate = man["s19_candidate"]
     assert f'href="downloads/{candidate["filename"]}"' in idx
     assert (DOCS / "downloads" / candidate["filename"]).is_file()
     assert candidate["note"] in idx and len(candidate["note"]) <= 140
@@ -336,32 +336,32 @@ def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
         if page == "cross-site-review.html":
-            assert 'Current run: NOT READY TO SUBMIT' in text
+            assert 'Current submission readiness: NOT READY' in text
             assert 'NO FILE APPROVED' in text
             assert 'Do not upload any file from this site' in text
             assert 'session19_run_card.json' in text
             continue
         assert 'Current run: NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text
-        assert 'Do not upload any file from this site' in text
-        assert 'data/run_card_2026-10-25.json' in text
+        assert 'do not upload it' in text
+        assert 'data/current_run_card_2026-10-26.json' in text
     overview = (DOCS / 'index.html').read_text()
     executive = (DOCS / 'executive-summary.html').read_text()
-    assert 'failed its frozen LOSFO gate' in overview
-    assert 'inspection-only' in overview
+    assert 'paired gain -0.06089' in overview
+    assert 'unique bytes, negative geology gate' in overview
     assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in (DOCS / 'archive.html').read_text()
     assert 'NO FILE APPROVED' in executive
-    assert 'Do not select a file from this page at present' in executive
+    assert 'not OK to submit' in executive
     assert 'The suggested `.tif` above' not in executive
     assert 'If you submit anything, use the primary' not in overview + executive
-    card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
+    card = json.loads((DOCS / 'data/run_card_2026-10-26.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submission_ready'] is False
     # Current S18 card is bound to the new exact TIFF; a negative gate cannot approve it.
-    assert card['session'] == 'S18-MXTP'
+    assert card['session'] == 'S19-ASCP'
     assert re.fullmatch(r'[0-9a-f]{64}', card['raster_sha256'])
     assert card['slot_selected'] is False
-    assert card['evidence_schema_gate']['verdict'] == 'negative'
+    assert card['experiments_run'] == 3 and card['verdict'] == 'negative'
 
 
 def test_download_manifest_marks_new_research_raster_not_approved():
@@ -370,7 +370,7 @@ def test_download_manifest_marks_new_research_raster_not_approved():
     assert current['status'] == 'NEGATIVE — NO FILE APPROVED'
     assert current['new_tiff_generated'] is True
     assert current['submission_ready'] is False and current['slot_selected'] is False
-    assert manifest['s18_candidate']['verdict'] == 'negative'
+    assert manifest['s19_candidate']['verdict'] == 'negative'
 
 
 def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(capsys):
@@ -380,10 +380,10 @@ def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(ca
     metadata = json.loads(capsys.readouterr().out)
     assert metadata['submission_ready'] is False and metadata['slot_selected'] is False
     assert 'primary_download' not in metadata
-    assert 's18-mxtp' in metadata['research_download']
+    assert 's19-ascp' in metadata['research_download']
     assert metadata['inspection_artifacts']
-    current = json.loads((DOCS / 'data/current_run_card_2026-10-25.json').read_text())
-    exact = json.loads((ROOT / 'evidence/s18_mxtp_run_card.json').read_text())
+    current = json.loads((DOCS / 'data/current_run_card_2026-10-26.json').read_text())
+    exact = json.loads((ROOT / 'evidence/s19_ascp_run_card.json').read_text())
     assert current == exact and current['verdict'] == 'negative'
     # The parallel blocked review is preserved, not overwritten with this experiment.
     parallel = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
@@ -471,8 +471,8 @@ def test_combined_archive_namespaces_ids_and_accessible_labels():
 
 
 def test_current_public_card_aliases_use_restored_data_review_not_older_checkout_state():
-    source = json.loads((ROOT / 'evidence/s18_mxtp_run_card.json').read_text())
-    for name in ('run_card_2026-10-25.json', 'current_run_card_2026-10-25.json'):
+    source = json.loads((ROOT / 'evidence/s19_ascp_run_card.json').read_text())
+    for name in ('run_card_2026-10-26.json', 'current_run_card_2026-10-26.json'):
         assert json.loads((DOCS / 'data' / name).read_text()) == source
     # Keep the concurrent negative review intact as its own historical record.
     historical = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
@@ -480,10 +480,10 @@ def test_current_public_card_aliases_use_restored_data_review_not_older_checkout
     assert historical['submission_ready'] is False
     workflow = (ROOT / '.github/workflows/pages.yml').read_text()
     assert 'EXPECTED_CARD_SHA256' in workflow and 'hashlib.sha256(body)' in workflow
-    assert (ROOT / 'data/current_run_card_2026-10-25.json').read_bytes() == (
-        DOCS / 'data/current_run_card_2026-10-25.json').read_bytes()
+    assert (ROOT / 'data/current_run_card_2026-10-26.json').read_bytes() == (
+        DOCS / 'data/current_run_card_2026-10-26.json').read_bytes()
     root_summary = (ROOT / 'executive-summary.html').read_text()
-    assert 'Submission download locked' in root_summary and 'docs/downloads/gems28-s18-mxtp-' in root_summary
+    assert 'Submission download locked' in root_summary and 'docs/downloads/gems28-s19-ascp-' in root_summary
 
 
 def test_session18_h39_5_candidate_is_unique_valid_but_do_not_submit():

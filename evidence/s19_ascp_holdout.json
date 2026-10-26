@@ -1,0 +1,183 @@
+{
+  "label": "HOLDOUT-DTI",
+  "evaluator_version": "gems-segment-pooled-v1",
+  "candidate": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "TP_w": 4595.852252892761,
+    "FP_w": 35826.58884863139,
+    "FN_w": 56392.14774710724,
+    "n_truth": 60988.0,
+    "n_emitted": 37654.0,
+    "dti": 0.08080635227066556,
+    "n_withheld_positive_pixels": 60988,
+    "n_unique_withheld_components": 3199,
+    "ci95": {
+      "level": 0.95,
+      "interval": [
+        0.07232485681140427,
+        0.08911093061078756
+      ],
+      "method": "percentile spatial-block bootstrap of pooled TPw/FPw/FNw",
+      "block_pixels": 100,
+      "block_size_m": 10000,
+      "n_blocks": 583,
+      "resamples": 1999,
+      "seed": 20261025,
+      "limitation": "Internal-validation uncertainty; geologic structures may cross blocks. Not a hidden-score interval."
+    },
+    "folds": [
+      {
+        "fold": "NW",
+        "TP_w": 992.1359897166597,
+        "FP_w": 8002.826505813811,
+        "FN_w": 9172.86401028334,
+        "n_truth": 10165,
+        "n_emitted": 8414,
+        "dti": 0.09990300463885891,
+        "coverage": 0.09760314704541659
+      },
+      {
+        "fold": "NE_LidarGapHeavy",
+        "TP_w": 879.8581705959548,
+        "FP_w": 10042.836221537058,
+        "FN_w": 11631.141829404045,
+        "n_truth": 12511,
+        "n_emitted": 10404,
+        "dti": 0.07215892048612312,
+        "coverage": 0.07032676609351408
+      },
+      {
+        "fold": "SW",
+        "TP_w": 1515.3475017635942,
+        "FP_w": 9802.208880743503,
+        "FN_w": 19018.652498236406,
+        "n_truth": 20534,
+        "n_emitted": 10410,
+        "dti": 0.08107489754339267,
+        "coverage": 0.07379699531331423
+      },
+      {
+        "fold": "SE",
+        "TP_w": 1208.5105908165522,
+        "FP_w": 7978.7172405370175,
+        "FN_w": 16569.489409183447,
+        "n_truth": 17778,
+        "n_emitted": 8426,
+        "dti": 0.07525044906703032,
+        "coverage": 0.06797787101004343
+      }
+    ],
+    "protocol": {
+      "aggregation": "pooled TPw/FPw/FNw, not mean fold DTI",
+      "buffer_m": 1500,
+      "whole_components_hidden_everywhere": true,
+      "visible_fault_mask": "pixel-exact, applied before credit and FP calculation",
+      "catalogue_features": "must be constructed from fold.visible only",
+      "alpha": 0.2,
+      "beta": 0.8,
+      "triangular_kernel_radius_m": 300
+    }
+  },
+  "baseline": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "TP_w": 8331.610793007138,
+    "FP_w": 41715.80958142465,
+    "FN_w": 52656.38920699286,
+    "n_truth": 60988.0,
+    "n_emitted": 45286.0,
+    "dti": 0.14169434045791646,
+    "n_withheld_positive_pixels": 60988,
+    "n_unique_withheld_components": 3199,
+    "ci95": {
+      "level": 0.95,
+      "interval": [
+        0.128368231896353,
+        0.15458703678149205
+      ],
+      "method": "percentile spatial-block bootstrap of pooled TPw/FPw/FNw",
+      "block_pixels": 100,
+      "block_size_m": 10000,
+      "n_blocks": 583,
+      "resamples": 1999,
+      "seed": 20261025,
+      "limitation": "Internal-validation uncertainty; geologic structures may cross blocks. Not a hidden-score interval."
+    },
+    "folds": [
+      {
+        "fold": "NW",
+        "TP_w": 1557.939315879653,
+        "FP_w": 9248.530618021687,
+        "FN_w": 8607.060684120348,
+        "n_truth": 10165,
+        "n_emitted": 9944,
+        "dti": 0.151354786705343,
+        "coverage": 0.15326505812883945
+      },
+      {
+        "fold": "NE_LidarGapHeavy",
+        "TP_w": 2154.638983767375,
+        "FP_w": 11221.285789830781,
+        "FN_w": 10356.361016232626,
+        "n_truth": 12511,
+        "n_emitted": 12155,
+        "dti": 0.16987082462193084,
+        "coverage": 0.1722195654837643
+      },
+      {
+        "fold": "SW",
+        "TP_w": 1944.1597609453386,
+        "FP_w": 11859.561080188625,
+        "FN_w": 18589.84023905466,
+        "n_truth": 20534,
+        "n_emitted": 12719,
+        "dti": 0.10132194173018959,
+        "coverage": 0.09468003121385694
+      },
+      {
+        "fold": "SE",
+        "TP_w": 2674.8727324147712,
+        "FP_w": 9386.432093383552,
+        "FN_w": 15103.127267585229,
+        "n_truth": 17778,
+        "n_emitted": 10468,
+        "dti": 0.16080115717423138,
+        "coverage": 0.15045971045195022
+      }
+    ],
+    "protocol": {
+      "aggregation": "pooled TPw/FPw/FNw, not mean fold DTI",
+      "buffer_m": 1500,
+      "whole_components_hidden_everywhere": true,
+      "visible_fault_mask": "pixel-exact, applied before credit and FP calculation",
+      "catalogue_features": "must be constructed from fold.visible only",
+      "alpha": 0.2,
+      "beta": 0.8,
+      "triangular_kernel_radius_m": 300
+    }
+  },
+  "baseline_name": "visible-only 32-band H38-style detector",
+  "paired_gain": -0.0608879881872509,
+  "paired_gain_ci95": [
+    -0.07402906930599784,
+    -0.047637576205972816
+  ],
+  "per_fold_gain": [
+    -0.051451782066484084,
+    -0.09771190413580773,
+    -0.020247044186796917,
+    -0.08555070810720106
+  ],
+  "withheld_positives": 60988,
+  "gates": {
+    "candidate_beats_baseline": false,
+    "paired_gain_ci_lower_gt_zero": false,
+    "positive_3_of_4_folds": false,
+    "canary_passed": true,
+    "registry_passed": true,
+    "validator_passed": true
+  },
+  "gate_passed": false,
+  "seconds": 156.3
+}
