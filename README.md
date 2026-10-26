@@ -1,3 +1,15 @@
+# Session 22 (`S22-MOFR`) — 2026-10-26 UTC (read first every session)
+
+## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
+
+- **Download:** [`docs/downloads/gems28-s22-mofr-union-20261026-599452947272-allfinite.tif`](docs/downloads/gems28-s22-mofr-union-20261026-599452947272-allfinite.tif) (826,992 bytes · all-finite `{0,1}` in `[0,1]` · 42,480 off-catalogue dots · EPSG:32611 · template-exact grid/CRS/transform)
+- **Lane (H44-1):** potential-field **marker-offset / piercing-point realignment detector** — ridge-skeletonize the TMI horizontal-gradient band (`tmi_hg`) and the isostatic-gravity horizontal-gradient band (`iso_grav_anom_hg`) independently, extract endpoints, keep only strike-compatible (±20°, same tolerance as `newinfo.steppover_links`), gap-bounded, offset-bounded endpoint pairs. Never reads `labels.tif`. A genuinely new mechanism, distinct from every prior session's elevation/hillshade/LiDAR/heat-flow/vent-proximity features.
+- **Gates:** leakage canary **PASS** (max single-feature AUC 0.5378, all four candidate features ≈ chance) · registry novelty **PASS** vs the full 9-site + local registry (max |Spearman| 0.0164, max 3-px dot overlap 18.9% — genuinely unique, not a duplicate) · format validator **PASS** (`variant_strict_whole_array_no_nan_allowed`) · **HOLDOUT-DTI 0.033855 [95% CI 0.029998, 0.037495] vs a freshly retrained baseline 0.143993 on the same SegmentHoldout folds — paired gain −0.110138 [−0.123912, −0.097175], 0/4 folds improved → verdict `negative`, 0 slots spent.**
+- **What this means:** this is now the fifth independently preregistered, catalogue-blind, physically motivated hypothesis in a row (after H42-1 migration/relocation, S20V vesselness/LiDAR-scarp, H43 topological closure, S21 PU-HGB) to lose decisively to the simple retrained-baseline / "dotted" catalogue-adjacent family (the H19-5 lineage behind the 0.2778 GEMSDOE32 champion). No file produced this session beats 0.2778, and no evidence from this session changes the public leaderboard high of 0.4413. The project's standing finding — hand-built geological detectors within this feature stack and holdout design are very unlikely to close that gap without new external data or a materially different modelling approach — is now strong, not speculative.
+- **Deliverables:** [Session 22 executive page](docs/session22-result.html) · [Full report](knowledge/63_s22_mofr_result.md) · [Preregistration (frozen lane, mechanism, non-fault mimics)](knowledge/62_s22_mofr_preregistration.md) · [JSON run card](evidence/s22_mofr_run_card.json) · [Experiment code](scripts/run_s22_mofr.py)
+
+---
+
 # Session 21 (`S21-PUHGB`) — 2026-10-26 UTC (read first every session)
 
 ## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**

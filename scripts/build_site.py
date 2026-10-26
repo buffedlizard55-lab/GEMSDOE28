@@ -293,6 +293,7 @@ def nav() -> str:
         ("Latest result", "session19-result.html"),
         ("S20 result", "session20-result.html"),
         ("S21 result", "session21-result.html"),
+        ("S22 result", "session22-result.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
@@ -567,8 +568,10 @@ def render_current_executive() -> str:
 <li>Only after a separate selector approves a gate-passing card, download that exact file, open DrivenData’s New submission form, choose the TIFF (or ZIP containing exactly one TIFF), paste its ≤140-character note, and preserve the filename/hash-bound receipt.</li>
 </ol>
 <p><strong>Do not perform step 7 today.</strong> No competition slot was selected. A local validator cannot authenticate account allowance, eligibility, portal acceptance or organizer score.</p>
+<h2>Why some filenames end "-allfinite" and some end "-nan" — and which one to submit</h2>
+<p>Every candidate raster on this site is written in two variants from the same prediction array. The <strong>"-nan"</strong> variant places NaN in every pixel outside the competition footprint (useful for local visual contrast and QA, never for the portal). The <strong>"-allfinite"</strong> variant replaces those same outside-footprint pixels with 0, so the whole array is finite and in [0,1] everywhere. This repo’s own strict validator (<code>variant_strict_whole_array_no_nan_allowed</code> in <code>scripts/verify_downloads.py</code>) fails the "-nan" file and passes the "-allfinite" file for exactly this reason: a NaN tag or NaN pixel anywhere in the array — even legitimately outside the scored footprint — can trip a validator that checks the whole array rather than only the footprint. The user-reported DrivenData portal error "Predicted values must be in range [0, 1]" is consistent with exactly this failure mode. <strong>Always download and submit the "-allfinite" file; never the "-nan" file.</strong> This is a format-safety rule, independent of whether a given file has passed its scientific holdout gate.</p>
 <h2>Prior range-error protection</h2><p>The S19 research TIFF contains only finite 0 and 1 values across the whole array, so it does not have the local numeric defect described by “Predicted values must be in range [0,1].” This does not diagnose the earlier file or guarantee portal acceptance; it only verifies the exact new bytes.</p>
-<p><a href="session19-result.html">Current science and nine-site executive table</a> · <a href="data/current_run_card_2026-10-26.json">Complete automated run card</a> · <a href="archive.html">Historical files — DO NOT SUBMIT</a></p></section>"""
+<p><a href="session19-result.html">Current science and nine-site executive table</a> · <a href="session22-result.html">Latest result (Session 22, S22-MOFR, negative)</a> · <a href="data/current_run_card_2026-10-26.json">Complete automated run card</a> · <a href="archive.html">Historical files — DO NOT SUBMIT</a></p></section>"""
 
 def render_s18_executive() -> str:
     return """<section class="section"><h1>Executive summary: a new file, not an approved submission</h1>
@@ -1479,14 +1482,20 @@ def main() -> int:
 <p>A concurrent preregistered lane (<code>gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif</code>, 33,354 dots) was also generated and rejected automatically: <strong>HOLDOUT-DTI paired gain -0.007434 (95% CI [-0.01081, -0.00496], 0/20 cells)</strong> and 94.3% of dots within 3 px of the GEMSDOE32 champion (duplicate family lane). Its file format is valid (all-finite, values in [0,1]); that does not make it submittable. It is a distinct parallel run from S19-ASCP, S19B-RADLIN and the Session 20 validation review; never pool their numbers. The best existing file remains GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>, byte-verified in Session 20-H43 as solo minus the 2 px catalogue ring. <strong>Do not upload any file from this site.</strong></p>
 <p><a class=\"button quiet\" href=\"session20-result.html\">Session 20-H43 executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
 </section>"""
+    session22_brief = """<section class=\"card callout-danger\" aria-label=\"Session 22 S22-MOFR result\">
+<h2>Session 22 S22-MOFR (2026-10-26): fifth concurrent lane — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
+<p>A new catalogue-blind lane, the potential-field marker-offset / piercing-point detector (H44-1: paired TMI and isostatic-gravity horizontal-gradient ridge endpoints across strike-compatible, gap-bounded offsets), produced a genuinely unique new raster: <code>gems28-s22-mofr-union-20261026-599452947272-allfinite.tif</code> (42,480 dots). Leakage canary <strong>PASS</strong> (max feature AUC 0.538); registry novelty <strong>PASS</strong> (max |Spearman| 0.0164, max 3-px overlap 18.9% vs the full 9-site registry — not a duplicate of anything previously listed). But <strong>HOLDOUT-DTI 0.03385 [0.0300, 0.0375] vs a freshly retrained baseline 0.14399</strong> (paired gain -0.1101, 95% CI [-0.1239, -0.0972], 0/4 folds positive). This is now the fifth independently preregistered, catalogue-independent hypothesis across Sessions 18-22 to lose decisively to the simple dotted catalogue-adjacent baseline family. <strong>Verdict: negative — zero weekly slots spent. Do not upload any file from this site.</strong></p>
+<p><a class=\"button quiet\" href=\"session22-result.html\">Session 22 S22-MOFR executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
+</section>"""
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
+    session22_template = (ROOT / "site_templates" / "session22-result.html").read_text(encoding="utf-8")
     s20_nchc_block = render_s20_nchc_overview()
     pages = {
-        "index.html": layout("Overview", s20_nchc_block + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", s20_nchc_block + session22_brief + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
         "cross-site-review.html": cross_site_template,
-        "executive-summary.html": layout("Executive summary", s20_nchc_block + s20v_brief + session20_brief + render_current_executive(), "Executive summary"),
+        "executive-summary.html": layout("Executive summary", s20_nchc_block + session22_brief + s20v_brief + session20_brief + render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
@@ -1496,6 +1505,7 @@ def main() -> int:
         "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),
         "session20-result.html": session20_template,
         "session21-result.html": session21_template,
+        "session22-result.html": session22_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
@@ -1506,6 +1516,11 @@ def main() -> int:
     (DOCS / "data/run_card_s21.json").parent.mkdir(parents=True, exist_ok=True)
     (DOCS / "data/run_card_s21.json").write_text(
         json.dumps(s21_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
+    )
+    s22_card = read_json("evidence/s22_mofr_run_card.json")
+    (DOCS / "data/run_card_s22_mofr.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s22_mofr.json").write_text(
+        json.dumps(s22_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
     )
     s20_nchc_card = read_json("evidence/s20_nchc_run_card.json")
     (DOCS / "data/run_card_s20_nchc.json").parent.mkdir(parents=True, exist_ok=True)
