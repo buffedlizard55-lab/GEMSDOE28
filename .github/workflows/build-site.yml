@@ -71,6 +71,7 @@ on:
       - 'evidence/s18_champion_forensic.json'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
+      - 'site_templates/**'
   pull_request:
     paths:
       - 'registry/next_hypotheses.json'
@@ -140,6 +141,7 @@ on:
       - 'evidence/s18_champion_forensic.json'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
+      - 'site_templates/**'
   workflow_dispatch:
 
 permissions:

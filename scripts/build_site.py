@@ -291,6 +291,7 @@ def nav() -> str:
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
         ("Latest result", "session19-result.html"),
+        ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
         ("Topology", "topology.html"),
@@ -436,6 +437,7 @@ def render_current_executive() -> str:
 def render_s18_executive() -> str:
     return """<section class="section"><h1>Executive summary: a new file, not an approved submission</h1>
 <p>A new independent research TIFF is downloadable above. It is unique within the audited snapshot and locally format-valid, but <strong>failed scientific validation</strong>. Do not select a file from this page at present. No human geological inspection is needed to detect this rejection.</p>
+<h2>Which prior site leads?</h2><p>The highest of the nine supplied historical site claims is GEMSDOE32 H33-2-B2 at 0.2778 (owner-reported, not organizer-confirmed). No current file is approved: S18-MXTP failed its holdout. See the <a href="../knowledge/55_focus_site_review.md">full nine-site executive comparison</a> for per-site maxima, provenance, interpretation and next steps.</p>
 <h2>Exactly how a future approved submission works</h2><ol>
 <li>Preregister an explicit lane, reuse verified cached features/shared evaluator/writer, test feature-alone leakage, and pass pre-placement registry checks.</li>
 <li>Recover whole withheld fault systems with a buffer and visible-only catalogue features. Beat the frozen comparable best on pooled HOLDOUT-DTI with a positive paired spatial-block confidence interval. Check final-dot uniqueness.</li>
@@ -1330,8 +1332,10 @@ def main() -> int:
     old_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
     old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
+    cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     pages = {
         "index.html": layout("Overview", render_s19_result() + s18_feed_html(feed), "Overview"),
+        "cross-site-review.html": cross_site_template,
         "executive-summary.html": layout("Executive summary", render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),

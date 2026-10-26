@@ -27,6 +27,11 @@ The owner prompt and Core Values remain archived below and normalized in
 paragraph was again absent; the run autonomously used the repository's documented scarp-observable
 next step and does not claim external exclusivity. Historical S18 and earlier notices are superseded.
 
+A concurrent pre-experiment Session 19 review ran zero experiments before inputs were restored. Its
+[nine-site scorecard](docs/cross-site-review.html), [review dossier](knowledge/55_session19_cross_site_review.md)
+and [blocked JSON card](evidence/session19_run_card.json) are retained as an audit snapshot, not the
+current result. Its “no new TIFF” statement was true for that checkout but is superseded by S19-ASCP.
+
 ---
 
 # Current result — 2026-10-25 S18-MXTP (read first every session)
