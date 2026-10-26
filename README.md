@@ -1,3 +1,19 @@
+# Session 21 validation review — 2026-10-26 (read first)
+
+**DO NOT SUBMIT. No new candidate was generated or approved.** Restored the pinned core
+competition mirrors and shared evaluator/writer. Fixed filename-only artifact discovery in
+`verify_downloads.py`, then added a fail-closed archive coverage gate: **12 of 44 TIFFs lack
+manifest records**. The current exact-file audit therefore FAILS; prior scientific negative
+verdicts remain unchanged. This is an automated decision, not a request for a human inspector.
+
+- [Review, ranked next work, limitations](knowledge/61_s21_validation_review.md)
+- [Exact download audit](evidence/s21_download_audit.json) · [Fresh preflight](evidence/s21_preflight.json)
+- [Nine-site executive scorecard](docs/cross-site-review.html)
+
+No experiments, no leaderboard estimate, no slot selected. No other repository was modified.
+
+---
+
 # Parallel Session 20-NCHC (`S20-NCHC` / `H43-1`) — 2026-10-26 UTC (read first every session)
 
 ## NEW GENUINELY UNIQUE GeoTIFF GENERATED & BYTE-VERIFIED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**

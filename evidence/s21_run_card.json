@@ -1,0 +1,42 @@
+{
+  "session_id": "G28-S21-AUDIT-20261026",
+  "hypothesis": "Audit coverage review; no geological experiment authorized",
+  "mechanism": "Discover every filename-style artifact and fail closed on unregistered archive TIFFs",
+  "non_fault_mimic": null,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "status": "not run"
+  },
+  "registry": {
+    "surface_rank_correlation": null,
+    "final_dot_overlap_3px": null,
+    "status": "not run; complete registry absent"
+  },
+  "raster_sha256": null,
+  "validator": {
+    "new_raster": false,
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null,
+    "archive_report": "evidence/s21_download_audit.json",
+    "archive_status": "FAIL",
+    "unregistered_tiffs": 12
+  },
+  "submission_name": null,
+  "note": "S21 audit coverage failure; no new raster or scientific run. DO NOT SUBMIT.",
+  "verdict": "negative",
+  "submission_ready": false,
+  "slot_selected": false,
+  "experiments_run": 0,
+  "limitations": [
+    "No assigned lane",
+    "No complete parallel registry",
+    "No frozen comparable best",
+    "Prepared cache absent",
+    "No organizer receipt or portal allowance obtained"
+  ]
+}
