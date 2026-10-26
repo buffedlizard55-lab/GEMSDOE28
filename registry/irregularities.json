@@ -819,6 +819,12 @@
       "action": "Disclosed in evidence/s18_run_card.json (preregistration_deviations) and knowledge/53. Verdict unchanged: falsification controls (phys/anti/rand all ~-0.005 DTI) make the negative robust to the weighting choice, but the exact preregistered estimator is untested and must not be run on seeds 310-314; any retry needs fresh preregistration and seeds >=320."
     },
     {
+      "id": "nine-site-review-latest-result-nav-stale",
+      "severity": "low",
+      "issue": "After S19-ASCP became the latest run, the nine-site review template still labeled its navigation link to session18-result.html as \u201cLatest result.\u201d Readers could land on an older experiment from the page intended to summarize current-site comparisons.",
+      "action": "Changed the scorecard navigation target to session19-result.html and added a regression test that checks the generated page links to S19 rather than S18."
+    },
+    {
       "id": "s19-uniqueness-dense-probe-blanket",
       "severity": "high",
       "issue": "S19-RADLIN candidate (6fa38f9d317b) passed its frozen LOSFO gate (paired gain +0.005436, 95% CI [+0.001285,+0.009245], seeds 320-324) and exact-file validation, but 93.38% of its final dots fall within 3 px of the unscored dense H37-1 probe-union-pool registry raster (38,545 dots over the H19-5 + detector-ridge union) and 74.2%/71.2% vs two other dense research rasters, exceeding the frozen >70% any-raster duplicate-stop. Against every scored focus-site artifact (GEMSDOE24/25/27/28/30/31/32/33/36, byte-verified) the maximum is 44.5%, and sample Spearman vs every registry raster is <=0.695.",
