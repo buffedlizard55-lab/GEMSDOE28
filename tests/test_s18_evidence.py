@@ -105,7 +105,7 @@ def test_historical_s18_download_is_visible_but_never_approved():
         assert "Historical S18 research TIFF — DO NOT SUBMIT" in html
         assert "Current review (2026-10-26): NOT READY TO SUBMIT" in html
         assert "0.02038" in html and "76,869" in html
-        assert 'data/run_card_2026-10-26_review.json' in html
+        assert 'session19_run_card.json' in html
         assert "Download NEW unique research TIFF" not in html
         assert "Whether to submit is your decision" not in html
     summary = (ROOT / "docs/executive-summary.html").read_text()

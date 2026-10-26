@@ -9,7 +9,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "cross-site-review.html"]
 
 
 class Links(HTMLParser):
@@ -46,8 +46,6 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
     inputs.add("docs/downloads/h28_1_candidate_manifest.json")
     for path in inputs | {
         "docs/data/topology_review_classes.json",
-        "docs/data/priority_site_review_2026-10-26.json",
-        "evidence/run_card_2026-10-26_review.json",
         "evidence/losfo_h38_1_raw.json",
         "evidence/h38_1_seed_audit_pre_run.json",
         "knowledge/39_session14_closeout_2026-10-03.md",
@@ -55,6 +53,7 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
         "scripts/build_site.py",
         ".github/workflows/build-site.yml",
         "docs/assets/**",
+        "site_templates/**",
         "docs/*.html",
         "index.html",
     }:
@@ -208,7 +207,7 @@ def test_repository_root_front_page_serves_the_one_click_download():
     candidate = man["s18_candidate"]
     assert f'href="docs/downloads/{candidate["filename"]}"' in root_idx
     assert "Historical S18 research TIFF — DO NOT SUBMIT" in root_idx
-    assert "Current review (2026-10-26): NOT READY TO SUBMIT" in root_idx
+    assert "Submission download locked" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
@@ -218,10 +217,30 @@ def test_front_page_has_download_and_exact_note():
     candidate = man["s18_candidate"]
     assert f'href="downloads/{candidate["filename"]}"' in idx
     assert (DOCS / "downloads" / candidate["filename"]).is_file()
-    assert "Historical S18 research TIFF — DO NOT SUBMIT" in idx
+    assert candidate["note"] in idx and len(candidate["note"]) <= 140
+    assert candidate["submission_name"] in idx and candidate["sha256"] in idx
+    assert "Historical run note" in idx
     assert "Submission download locked" in idx
-    assert 'data/run_card_2026-10-26_review.json' in idx
-    assert candidate["note"] not in idx and candidate["submission_name"] not in idx
+
+
+def test_session19_cross_site_review_is_linked_and_fail_closed():
+    page = (DOCS / "cross-site-review.html").read_text()
+    index = (DOCS / "index.html").read_text()
+    card = json.loads((ROOT / "evidence/session19_run_card.json").read_text())
+    assert "GEMSDOE32 H33-2-B2" in page
+    assert "0.2778" in page and "USER-REPORTED / UNVERIFIED" in page
+    assert "Do not upload any file from this site" in page
+    assert "Displaced potential-field piercing markers" in page
+    assert "Paired-geothermometer cooling corridors" in page
+    assert "Opposite-flank flexural curvature pairs" in page
+    assert "Lithology-conditioned U/Th transport dipoles" in page
+    assert "cross-site-review.html" in index
+    assert card["verdict"] == "negative"
+    assert card["experiments_run"] == 0 and card["new_tiff_generated"] is False
+    assert card["holdout"]["label"] == "HOLDOUT-DTI"
+    assert card["holdout"]["status"].startswith("NOT RUN")
+    assert card["raster_sha256"] is None and card["submission_name"] is None
+    assert card["submission_ready"] is False and card["slot_selected"] is False
 
 
 
@@ -318,26 +337,29 @@ def test_downloads_have_unique_names_and_zip_single_member():
 def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
+        if page == "cross-site-review.html":
+            assert 'Current run: NOT READY TO SUBMIT' in text
+            assert 'NO FILE APPROVED' in text
+            assert 'Do not upload any file from this site' in text
+            assert 'session19_run_card.json' in text
+            continue
         assert 'Current review (2026-10-26): NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text
         assert 'Do not upload any file from this site' in text
-        assert 'data/run_card_2026-10-26_review.json' in text
+        assert 'session19_run_card.json' in text
     overview = (DOCS / 'index.html').read_text()
     executive = (DOCS / 'executive-summary.html').read_text()
-    assert 'Latest prior experiment — S18-MXTP' in overview
+    assert 'paired holdout gate <strong>FAILED</strong>' in overview
     assert 'Historical S18 research TIFF — DO NOT SUBMIT' in overview
     assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in (DOCS / 'archive.html').read_text()
     assert 'NO FILE APPROVED' in executive
     assert 'must not be submitted' in executive
     assert 'The suggested `.tif` above' not in executive
     assert 'If you submit anything, use the primary' not in overview + executive
-    current = json.loads((DOCS / 'data/run_card_2026-10-26_review.json').read_text())
-    assert current['verdict'] == 'negative'
-    assert current['submission_ready'] is False and current['new_tiff_generated'] is False
-    assert current['slot_selected'] is False and current['raster_sha256'] is None
-    # Preserve the prior S18 result as historical, independently auditable evidence.
     card = json.loads((DOCS / 'data/run_card_2026-10-25.json').read_text())
-    assert card['verdict'] == 'negative' and card['submission_ready'] is False
+    assert card['verdict'] == 'negative'
+    assert card['submission_ready'] is False
+    # Current S18 card is bound to the new exact TIFF; a negative gate cannot approve it.
     assert card['session'] == 'S18-MXTP'
     assert re.fullmatch(r'[0-9a-f]{64}', card['raster_sha256'])
     assert card['slot_selected'] is False

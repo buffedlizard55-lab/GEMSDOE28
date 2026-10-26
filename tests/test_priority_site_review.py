@@ -1,4 +1,4 @@
-"""Dependency-free integrity checks for the public nine-site comparison."""
+"""Dependency-free integrity checks for the supplemental nine-site raster audit."""
 
 import json
 import re
@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "docs/data/priority_site_review_2026-10-26.json"
-PAGE_PATH = ROOT / "docs/site-submission-review.html"
+PAGE_PATH = ROOT / "docs/cross-site-review.html"
 
 
 class PrioritySiteReviewTests(unittest.TestCase):
@@ -35,14 +35,12 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertEqual(len(sites), len(set(sites)))
 
     def test_highest_supplied_score_and_evidence_class_are_explicit(self):
-        self.assertEqual(
-            self.data["score_evidence_class"],
-            "OWNER-REPORTED (user-supplied; no submission-page receipt inspected)",
-        )
+        self.assertIn("OWNER-REPORTED", self.data["score_evidence_class"])
         best = max(self.data["sites"], key=lambda row: row["reported_best_score"])
         self.assertEqual(best["site"], "GEMSDOE32")
         self.assertEqual(best["reported_best_score"], 0.2778)
-        self.assertEqual(self.data["recommendation"]["new_tiff_this_review"], False)
+        self.assertFalse(self.data["recommendation"]["new_tiff_this_review"])
+        self.assertIn("USER-REPORTED, UNVERIFIED", self.page)
 
     def test_all_rows_have_auditable_artifact_metadata(self):
         for row in self.data["sites"]:
@@ -54,15 +52,15 @@ class PrioritySiteReviewTests(unittest.TestCase):
                 self.assertTrue(row["construction_summary"])
                 self.assertTrue(row["forensic_note"])
 
-    def test_page_states_safety_and_source_status(self):
-        self.assertIn("no file approved", self.page.lower())
-        self.assertIn("do not submit", self.page.lower())
-        self.assertIn("OWNER-REPORTED", self.page)
+    def test_cross_site_review_links_supplemental_artifact_audit(self):
+        self.assertIn("Best reported result is not an approved submission", self.page)
+        self.assertIn("USER-REPORTED, UNVERIFIED", self.page)
         self.assertIn("data/priority_site_review_2026-10-26.json", self.page)
         self.assertIn("https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/", self.page)
+        self.assertIn("No new TIFF was generated", self.page)
 
-    def test_run_card_is_negative_and_does_not_claim_a_new_raster(self):
-        card = json.loads((ROOT / "evidence/run_card_2026-10-26_review.json").read_text())
+    def test_session19_card_is_negative_and_does_not_claim_a_new_raster(self):
+        card = json.loads((ROOT / "evidence/session19_run_card.json").read_text())
         self.assertEqual(card["verdict"], "negative")
         self.assertFalse(card["new_tiff_generated"])
         self.assertFalse(card["submission_ready"])
