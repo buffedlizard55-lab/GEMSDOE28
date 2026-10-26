@@ -36,7 +36,8 @@ distance-to-catalogue, density, or label feature is computed anywhere below.
 from __future__ import annotations
 
 import numpy as np
-from scipy.ndimage import convolve, gaussian_filter, label as ndi_label
+from scipy.ndimage import convolve, gaussian_filter
+from scipy.ndimage import label as ndi_label
 from scipy.spatial import cKDTree
 from skimage.morphology import skeletonize
 

@@ -290,10 +290,9 @@ def nav() -> str:
         ("Overview", "index.html"),
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
-        ("Latest result", "session19-result.html"),
+        ("S19 archive", "session19-result.html"),
         ("S20 result", "session20-result.html"),
         ("S21 result", "session21-result.html"),
-        ("S22 result", "session22-result.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
@@ -357,137 +356,41 @@ def render_session15(review: dict) -> str:
 <p><strong>Machine-readable run card:</strong> holdout DTI is null because no experiment was run; verdict is <strong>negative</strong>. See the repo dossier for the exact reasons.</p></section>"""
 
 
-def s21_status_html() -> str:
-    card = read_json("evidence/s21_puhgb_run_card.json", {})
-    if not card:
-        return ""
-    f = card.get("files", {})
-    g = card.get("gates", {})
-    est = card.get("score_estimate_MODEL_PROJECTION_not_a_score", {})
-    return f"""<section class="card callout-danger" aria-label="Session 21 submission readiness" id="s21-submission" data-submission-ready="false">
-<p class="eyebrow">SESSION 21 · S21-PUHGB · 2026-10-26 · AUTOMATED GATES, NO HUMAN INSPECTOR</p>
-<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
-<p><strong>NEW UNIQUE TIFF:</strong> <code>{esc(f.get('allfinite', ''))}</code> ({comma(f.get('positive_px', 0))} fresh 31-band PU-detector dots; SHA-256 <code>{esc(str(f.get('sha256_allfinite', ''))[:8])}…</code>; all-finite [0,1]). Format PASS · canary PASS (0.580) · unique vs all scored rasters (≤54.7% overlap; 28.7% vs 0.2778 champion) · <strong>HOLDOUT-DTI delta {g.get('holdout_delta', 0):+.4f} (CI wholly negative) → NEGATIVE. Do not upload.</strong> Estimated live score (MODEL): ~{est.get('estimate', 0):.2f}. Best historical file remains GEMSDOE32 <code>h33-h33-2-b2</code> (0.2778 OWNER-REPORTED) — learning reference only, never copy.</p>
-<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(f.get('allfinite', ''))}" download>1-Click Download S21 Unique GeoTIFF — Research Only / DO NOT SUBMIT</a><a class="button quiet" href="session21-result.html">Session 21 executive result + download table</a><a class="button quiet" href="data/run_card_s21.json" download>JSON run card</a></div>
-<p><strong>Unique name:</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
-</section>"""
-
-
-def s20_nchc_status_html() -> str:
-    card = read_json("evidence/s20_nchc_run_card.json", {})
-    exp2 = read_json("evidence/s20_nchc_exp2_holdout.json", {})
-    if not card:
-        return ""
-    h = card.get("holdout", {})
-    reg = card.get("registry", {})
-    val = card.get("validator", {})
-    note = str(card.get("note", ""))
-    dl_allfinite = str(card.get("submission_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif")).removeprefix("docs/")
-    dl_nan = str(card.get("submission_nan_twin_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-nan.tif")).removeprefix("docs/")
-    dl_zip = str(card.get("submission_zip_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-nan.zip")).removeprefix("docs/")
-    cand_folds = {f.get("fold"): f for f in exp2.get("candidate_s20_nchc", {}).get("folds", [])}
-    b0_folds = {f.get("fold"): f for f in exp2.get("baseline_b0_32band_h38_vis", {}).get("folds", [])}
-    sw_c = float(cand_folds.get("SW", {}).get("dti", 0.0))
-    sw_b = float(b0_folds.get("SW", {}).get("dti", 0.0))
-    sw_d = sw_c - sw_b
-    return f"""<section class="card callout-danger" aria-label="Session 21 audit coverage warning">
-<h2>Submission audit incomplete — DO NOT SUBMIT</h2>
-<p>Session 21 independently re-read the registered downloads after restoring the pinned template.
-The archive-wide audit now fails closed: 12 of 44 TIFFs have no manifest entry and cannot receive a complete hash-bound audit.
-Format checks for registered files do not override failed scientific or uniqueness gates. No new candidate or score was produced.</p>
-<p><a href="../evidence/s21_download_audit.json">Exact automated audit</a> · <a href="../knowledge/61_s21_validation_review.md">Review and next steps</a></p>
-</section><section class="card callout-danger" aria-label="Session 20-NCHC submission readiness and one-click download" id="s20-nchc-submission" data-submission-ready="false">
-<p class="eyebrow">PARALLEL SESSION 20-NCHC (H43-1) · 2026-10-26 UTC · AUTOMATED GATE COMPLETE</p>
-<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
-<p><strong>NEW GENUINELY UNIQUE GeoTIFF GENERATED &amp; BYTE-VERIFIED (<code>{esc(dl_allfinite.removeprefix('downloads/'))}</code>):</strong> Automated format/range validator (strict <code>[0, 1]</code> finite across all <code>12,279,160</code> cells; <code>0</code> catalogue overlap), all <code>28</code> single-feature leakage canaries (max AUC <code>0.6010 &le; 0.90</code>), and cross-site + concurrent-lane uniqueness across all <code>{comma(reg.get('member_count', 112))}</code> pre-merge 9-site+PR48 rasters plus all <code>4</code> concurrent <code>2026-10-26</code> lanes (max 3-px dot overlap <code>{reg.get('max_dots_within_3px_fraction', 0):.2%} &le; 70%</code>, max <code>|Spearman| = {reg.get('max_abs_dots_spearman', 0):.4f} &le; 0.90</code>) <strong>ALL PASSED</strong>. However, pooled 4-fold <strong>HOLDOUT-DTI</strong> was <strong>{h.get('dti', 0):.6f}</strong> vs retrained visible-only 32-band baseline <strong>{h.get('baseline_dti', 0):.6f}</strong> (paired delta <strong>{h.get('paired_gain', 0):+.6f}</strong>, 95% CI <strong>[{h.get('paired_gain_ci95', [0, 0])[0]:+.6f}, {h.get('paired_gain_ci95', [0, 0])[1]:+.6f}]</strong>; <strong>won SW Walker Lane + geothermal quadrant {sw_c:.6f} vs {sw_b:.6f}, {sw_d:+.6f}</strong>). Distinct parallel run (concurrent seed 340–344 overlap with S20-H43/S20V disclosed; never pool). <strong>Automated promotion gate verdict: NEGATIVE — zero weekly submission slots spent. Do not upload any file from this site to DrivenData.</strong></p>
-<div class="download-actions">
-  <button class="button" type="button" disabled aria-disabled="true">Submission download locked</button>
-  <a class="button" href="{esc(dl_allfinite)}" download>1-Click Download S20-NCHC Unique GeoTIFF (.tif, all-finite [0,1]) — Research Only / DO NOT SUBMIT</a>
-  <a class="button secondary" href="{esc(dl_nan)}" download>Template-NaN GeoTIFF (.tif)</a>
-  <a class="button quiet" href="{esc(dl_zip)}" download>ZIP Bundle (.zip)</a>
-  <a class="button quiet" href="executive-summary.html">Executive Summary &amp; How to Submit</a>
-  <a class="button quiet" href="cross-site-review.html">9-Site Executive Scorecard</a>
-</div>
-<p><strong>Unique portal name:</strong> <code>{esc(card.get('submission_name', ''))}</code><br>
-<strong>Short submission note ({len(note)}/140 chars):</strong></p>
-{note_box(note)}
-<p class="meta">All-finite SHA-256 <code>{esc(card.get('raster_sha256', ''))}</code> · {comma(val.get('emitted_positive_pixels', 0))} positive off-catalogue pixels · 830,586 bytes · single-band <code>float32</code> · strict <code>[0.0, 1.0]</code> (prevents DrivenData <code>[0, 1]</code> range error) · <code>EPSG:32611</code> · <code>3730 &times; 3292</code> · exact template CRS/shape/geotransform PASS.</p>
-<p><strong>Evaluator provenance:</strong> <code>HOLDOUT-DTI</code> via shared <code>{esc(h.get('evaluator_version', 'gems-segment-pooled-v1'))}</code> (buffered whole-segment hide-and-recover, 1,500 m buffer, {comma(h.get('withheld_positives', 60988))} withheld positives across 4 quadrant folds, 583 10-km bootstrap blocks, seeds 340–344). <a href="data/run_card_s20_nchc.json">S20-NCHC JSON Run Card</a> · <a href="../knowledge/56_s20_preregistration.md">Frozen S20-NCHC preregistration</a> · <a href="../knowledge/57_s20_nchc_result_and_9site_review.md">Full Session 20-NCHC scientific &amp; 9-site report</a></p>
-</section>"""
-
-
-def render_s20_nchc_overview() -> str:
-    exp2 = read_json("evidence/s20_nchc_exp2_holdout.json", {})
-    s20_hyps = read_json("registry/s20_hypotheses.json", {})
-    cand_folds = exp2.get("candidate_s20_nchc", {}).get("folds", [])
-    b0_folds = {f.get("fold"): f for f in exp2.get("baseline_b0_32band_h38_vis", {}).get("folds", [])}
-    b1_folds = {f.get("fold"): f for f in exp2.get("baseline_b1_32band_b2_d28_vis", {}).get("folds", [])}
-    fold_rows = "".join(
-        f"<tr><td><strong>{esc(cf.get('fold'))}</strong></td><td>{comma(cf.get('n_truth'))}</td>"
-        f"<td><strong>{cf.get('dti', 0):.6f}</strong> ({comma(cf.get('n_emitted'))} px)</td>"
-        f"<td>{b0_folds.get(cf.get('fold'), {}).get('dti', 0):.6f} ({comma(b0_folds.get(cf.get('fold'), {}).get('n_emitted'))} px)</td>"
-        f"<td>{b1_folds.get(cf.get('fold'), {}).get('dti', 0):.6f} ({comma(b1_folds.get(cf.get('fold'), {}).get('n_emitted'))} px)</td>"
-        f"<td><strong>{(cf.get('dti', 0) - b0_folds.get(cf.get('fold'), {}).get('dti', 0)):+.6f}</strong></td></tr>"
-        for cf in cand_folds
-    )
-    hyp_cards = "".join(
-        f'<article class="card span-6"><div class="rank">Rank {int(item.get("rank", 0))} · {esc(item.get("id"))}</div>'
-        f'<h3>{esc(item.get("title"))}</h3>'
-        f'<p><strong>Signature:</strong> {esc(item.get("signature"))}</p>'
-        f'<p><strong>Non-fault mimic control:</strong> {esc(item.get("non_fault_mimic_deconfounder"))}</p>'
-        f'<p><strong>Status:</strong> {esc(item.get("status"))}</p></article>'
-        for item in s20_hyps.get("hypotheses", [])
-    )
-    return f"""<section class="section" id="s20-nchc-overview">
-<h2>Parallel Session 20-NCHC Executive Synthesis: 9-Site HEAD Audit, PhD Analysis of 0.2778 vs 0.3195/0.4413 &amp; 4-Fold Results</h2>
-<div class="callout">
-<ol>
-<li><strong>Best historical focus-site submission:</strong> Across <code>GEMSDOE24, 25, 27, 28, 30, 31, 32, 33, 36</code>, <strong>GEMSDOE32 <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></strong> (<code>37,654</code> px) holds the highest reported score at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong> (no organizer submission receipt in git; never copy). Across 2026-10-26 live <code>HEAD</code> commits, <strong>GEMSDOE36 <code>Lane36-SupGBM</code></strong> (<code>f35cb3e4</code>, <code>68,302</code> px) achieved the strongest positive internal <strong>HOLDOUT-DTI = 0.1777</strong> (<code>[0.164, 0.191]</code> vs <code>0.1615</code>; <code>slot_selected: false</code>), while <strong>GEMSDOE28 <code>S20-NCHC</code></strong> (<code>d432a1d5d6ee</code>, <code>40,071</code> px) achieved <strong>HOLDOUT-DTI = 0.131263</strong> and won the Walker Lane <code>SW</code> quadrant (<code>+0.013416</code>).</li>
-<li><strong>Why <code>0.2778</code> led &amp; reconciliation of <code>0.3195</code> vs <code>0.4413</code>:</strong> Removing <code>2,545</code> <code>100–200 m</code> catalogue-flank blur dots (credit <code>~0.0034</code> &ll; break-even <code>&tau;(0.2778) = 0.0588</code> credit/dot for hidden <code>|G| &approx; 12,226</code> px) raised precision <code>+0.0070</code> on the unchanged <code>H19-5</code> surface. Read-only inspection of the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData public leaderboard</a> on <code>2026-10-26</code> reconciled <strong>0.3195</strong> (<code>2026-10-03</code> #1 snapshot, <code>DARD</code>) with <strong>0.4413</strong> (<code>2026-10-26</code> live #1 public score, <code>xiaofanhu</code>). Surpassing <code>0.2778</code> requires fusing signed Basin-and-Range piedmont break-in-slope concavity (<code>H43-2</code>) with <code>S20-NCHC</code> subsurface nematic + hydrothermal concordance and 300 m submodular coverage.</li>
-</ol>
-</div>
-<div class="table-wrap"><table>
-<thead><tr><th>Quadrant Fold</th><th>Withheld Positives</th><th>S20-NCHC <code>HOLDOUT-DTI</code></th><th>B0 (32-Band+H38 Vis)</th><th>B1 (32-Band B=2 d=2.8)</th><th>Paired Delta (S20 &minus; B0)</th></tr></thead>
-<tbody>{fold_rows}</tbody>
-</table></div>
-<div class="grid">{hyp_cards}</div>
-</section>"""
-
-
 def current_status_html() -> str:
-    card = read_json("evidence/s19_ascp_run_card.json", {})
-    if not card:
-        return '<section class="card callout-danger"><h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2><p>Missing current evidence. Do not upload any file from this site.</p></section>'
-    h, reg = card["holdout"], card["registry"]
-    download = Path(card["submission_file"]).name
+    """Show the latest audit decision, never imply a new candidate exists."""
+    card = read_json("evidence/s22_audit_run_card.json")
+    audit = card["validator_outputs"]
     return f"""<section class="card callout-danger" aria-label="Current submission readiness" id="current-submission" data-submission-ready="false">
 <h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
-<p><strong>NEW UNIQUE TIFF GENERATED: S19-ASCP · 2026-10-26.</strong> The exact file passed automated uniqueness and format gates, but its frozen shared holdout gate <strong>FAILED</strong>. <strong>Download for research only; do not upload it.</strong> This disposition is computed without human geological inspection. No competition slot was selected or spent.</p>
-<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(download)}" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session19-result.html">Current scientific result</a></div>
-<p><strong>Submission name:</strong> <code>{esc(card['submission_name'])}</code><br><strong>Research note ({len(card['note'])}/140):</strong> <code>{esc(card['note'])}</code></p>
-<p class="meta">Exact SHA-256 <code>{esc(card['raster_sha256'])}</code> · 37,654 dots · all-finite float32 · values {{0,1}} · EPSG:32611 · 3730 × 3292 · exact template CRS/shape/transform PASS. Local validity does not guarantee portal acceptance.</p>
-<p><strong>HOLDOUT-DTI ({esc(h['evaluator_version'])}, {comma(h['withheld_positives'])} withheld positives):</strong> {h['dti']:.5f} (95% CI {h['ci95'][0]:.5f}–{h['ci95'][1]:.5f}); recomputed visible-only baseline {h['baseline_dti']:.5f}; paired gain {h['paired_gain']:+.5f} (95% CI {h['paired_gain_ci95'][0]:+.5f} to {h['paired_gain_ci95'][1]:+.5f}). Local recovery proxy, not an organizer score.</p>
-<p><strong>Uniqueness:</strong> {reg['members']} unique-byte valid-grid priority/local rasters. Surface max |Spearman| {reg['max_abs_surface_spearman']:.4f}, support overlap {reg['max_surface_support_overlap_3px']:.1%}; final max |Spearman| {reg['max_abs_final_spearman']:.4f}, dot overlap {reg['max_final_overlap_3px']:.1%}. All below the 0.90 / 70% duplicate stops.</p>
-<p><a href="data/current_run_card_2026-10-26.json">Complete JSON run card</a> · <a href="../knowledge/55_s19_preregistration.md">Frozen ranking and method</a> · <a href="../evidence/s19_ascp_holdout.json">Holdout components and gates</a></p>
-<p><strong>Why rejected:</strong> the antislope crest/toe morphology recovered substantially less withheld fault credit than the baseline. The paired interval is wholly negative. Roads, channels, terrace/paleo-shoreline risers, landslides and mine benches remain plausible mimics. Format and novelty cannot rescue failed performance evidence.</p>
+<p><strong>S22 audit: no new TIFF or geological experiment.</strong> The assigned lane, complete current registry, reusable prepared cache and frozen same-protocol best are unavailable. The separate <a href="session22-result.html">S22-SIGN TIFF</a> exists for research only; <strong>do not upload it or any prior file</strong>. No human geological inspector was used and no slot was selected in this audit.</p>
+<p>Archive audit <strong>{esc(audit['archive_audit'])}</strong>: all {audit['registered_tiffs']} historical TIFFs are registered, but two all-finite variants retain NaN nodata metadata. This does not diagnose the portal error. Read the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official format</a>; acceptance is not guaranteed.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button quiet" href="data/current_run_card_2026-10-26.json">Current negative run card</a><a class="button quiet" href="cross-site-review.html">Nine-site evidence</a><a class="button quiet" href="archive.html">Historical research archive</a></div>
 </section>"""
 
-def s19b_parallel_html() -> str:
-    card = read_json("docs/data/run_card_s19b_radlin.json", {})
-    if not card:
-        return ""
-    h, reg = card["holdout"], card["registry"]
-    fin = reg["final"]
-    return f"""<section class="card callout-danger" aria-label="Parallel run readiness" id="parallel-s19b" data-submission-ready="false">
-<h2>🔴 Parallel run S19B-RADLIN (same day, different lane): NOT APPROVED — DO NOT UPLOAD</h2>
-<p><strong>HOLDOUT GATE PASSED, STRICT UNIQUENESS GATE FAILED.</strong> This ThK alteration-lineament run ran in parallel with S19-ASCP above (different evaluator — never combine their numbers). Automated validation is complete; no human inspection is needed. The frozen holdout gate <strong>passed</strong>, but <strong>{fin['worst_by_overlap']['frac_our_dots_within3px']:.1%}</strong> of its dots fall within 3 px of the unscored dense H37-1 probe-union registry raster, above the frozen 70% duplicate-stop. <strong>Do not upload any file from this site.</strong> No competition slot was selected or spent.</p>
-<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="{esc(card['download'])}" download>Download NEW unique research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session19b-result.html">Parallel research result</a></div>
-<p><strong>Submission name:</strong> <code>{esc(card['submission_name'])}</code><br><strong>Research note ({len(card['note'])}/140):</strong> <code>{esc(card['note'])}</code></p>
-<p class="meta">Exact SHA-256 <code>{esc(card['raster_sha256'])}</code> · {comma(card['dot_count'])} dots · all-finite float32 · [0,1] · EPSG:32611 · 3730 × 3292 · template CRS/shape/transform PASS (independent download audit, 0 failures). Local validity does not guarantee portal acceptance or scientific quality.</p>
-<p><strong>HOLDOUT-DTI:</strong> {h['dti']:.5f} (95% CI {h['ci95'][0]:.5f}–{h['ci95'][1]:.5f}); recomputed H38-1 baseline {h['baseline_dti']:.5f}; paired gain {h['paired_gain']:+.5f} (95% CI {h['paired_gain_ci95'][0]:+.5f} to {h['paired_gain_ci95'][1]:+.5f}). Evaluator: shared eval_set v2 → metric.dti_binary; {comma(h['withheld_positives'])} pooled withheld positives, seeds 320–324. Local recovery test, not an organizer score; does not isolate the RADLIN bonus from all-ridge coverage packing.</p>
-<p><strong>Uniqueness:</strong> vs byte-verified scored focus-site artifacts max overlap {reg['scored_focus_max_overlap']:.1%}; vs the full declared registry max overlap {fin['worst_by_overlap']['frac_our_dots_within3px']:.1%} ({esc(fin['worst_by_overlap']['raster'])}). The strict any-raster rule fails; the scored-only reading is reported for a separate selector, not used to approve this file.</p>
-<p><a href="data/run_card_s19b_radlin.json">Parallel complete JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/58_s19b_radlin_result.md">Interpretation and next steps</a></p>
-</section>"""
+
+def render_focus_review() -> str:
+    """Build the current scorecard from pinned historical artifacts, without raster access."""
+    novelty = read_json("evidence/s22_focus_novelty.json")
+    historical = read_json("docs/data/priority_site_review_2026-10-26.json")
+    hypotheses = read_json("registry/s22_audit_hypotheses.json")
+    scores = {row["site"]: row["reported_best_score"] for row in historical["sites"]}
+    rows = []
+    for row in novelty["summary"]:
+        worst = row["max_overlap"]
+        validation = "PASS" if row["hard_checks_passed"] else "FAIL: " + ", ".join(row["hard_failures"])
+        rows.append(f'<tr><td>{esc(row["site"])}</td><td><a href="{esc(row["source"])}">{esc(row["filename"])}</a></td>'
+                    f'<td>{scores[row["site"]]:.4f}<br>USER-REPORTED / UNVERIFIED</td>'
+                    f'<td>{comma(row["positive_pixels"])}</td><td>{worst["candidate_within_3px_fraction"]:.2%} vs {esc(worst["reference_site"])}</td>'
+                    f'<td>{esc(validation)} · DO NOT SUBMIT</td></tr>')
+    cards = []
+    for item in hypotheses["hypotheses"]:
+        cards.append(f'<article class="card span-6"><p class="rank">Rank {item["rank"]} · unrun in this audit</p>'
+                     f'<h3>{esc(item["name"])}</h3><p>{esc(item["mechanism"])}</p>'
+                     f'<p><strong>Non-fault mimic:</strong> {esc(item["non_fault_mimic"])}</p>'
+                     f'<p><strong>Cost and prerequisites:</strong> {esc(item["cost_and_gates"])}</p>'
+                     f'<p><a href="{esc(item["source"])}">Official source</a> · no score projection</p></article>')
+    template = (ROOT / "site_templates/cross-site-review.html").read_text(encoding="utf-8")
+    return template.replace("{{ROWS}}", "".join(rows)).replace("{{HYPOTHESES}}", "".join(cards))
 
 
 def render_s19b_result() -> str:
@@ -505,8 +408,8 @@ def render_s19b_result() -> str:
 <li><strong>Surface + canary + pre-placement:</strong> canary AUCs 0.500/0.513/0.502 (no leakage; also no standalone signal); pre-placement max |Spearman| 0.0027, max pool overlap 26.4% — PASS.</li>
 <li><strong>LOSFO gate seeds 320–324:</strong> HOLDOUT-DTI {h.get('dti', 0):.5f} vs baseline {h.get('baseline_dti', 0):.5f}; paired gain +{h.get('paired_gain', 0):.5f}; 5/5 seeds, 3/4 folds — PASS. Attribution limit: all-ridge coverage alone was previously measured at similar magnitude; the RADLIN bonus is not isolated.</li>
 <li><strong>Build + validator + final uniqueness:</strong> 37,654 dots, exact-file validation PASS; final dots ≤44.5% within 3 px of every scored focus artifact but 93.4% vs the dense H37-1 probe-union registry raster — FAIL under the frozen any-raster rule. Verdict <strong>negative</strong>.</li></ol>
-<h2>What happens next</h2><ol><li>Keep S19B closed; do not retune on seeds 320–324.</li><li>A future preregistered session (fresh seeds ≥325) must settle <em>before placement</em> whether unscored dense probe blankets are uniqueness comparators; it must not re-decide this raster retroactively.</li><li>Isolate the RADLIN bonus (bonus on/off, paired, fresh seeds) before claiming any alteration mechanism.</li><li>Promotion to a weekly slot remains a separate selector step within the authenticated page allowance (September rules: three submissions/week; account allowance unknown here).</li></ol>
-<p>Current session: <a href="session19-result.html">S19-ASCP result</a>. Historical files: <a href="archive.html">archive — DO NOT SUBMIT</a>.</p></section>"""
+<h2>What happens next</h2><ol><li>Keep S19B closed; do not retune on seeds 320–324.</li><li>A future assigned lane must compare against every member of its complete registry, including unscored probes, before placement and on final dots.</li><li>Isolate the RADLIN bonus before claiming any alteration mechanism.</li><li>Promotion to a weekly slot remains a separate selector step within the authenticated page allowance (September rules: three submissions/week; account allowance unknown here).</li></ol>
+<p>Historical research TIFF: <a href="{esc(card['download'])}" download>download for research — DO NOT SUBMIT</a> · <a href="data/run_card_s19b_radlin.json">S19B run card</a>. Current status: <a href="cross-site-review.html">S22 audit</a>.</p></section>"""
 
 
 def render_s18_result() -> str:
@@ -542,22 +445,22 @@ def render_s19_result() -> str:
         for name, value in canary.items()
     )
     h = card["holdout"]
-    return f"""<section class="section"><h1>S19-ASCP: unique bytes, negative geology gate</h1>
-<p><strong>Executive decision: DO NOT SUBMIT.</strong> S19 generated a genuinely new, all-finite GeoTIFF through the hash-verified shared writer. Automated canary, pre-placement novelty, final-dot novelty and exact-file checks passed. The shared whole-component buffered holdout then rejected it: <strong>HOLDOUT-DTI {h['dti']:.5f}</strong> (95% CI {h['ci95'][0]:.5f}–{h['ci95'][1]:.5f}) versus {h['baseline_dti']:.5f}; paired gain {h['paired_gain']:+.5f} (95% CI {h['paired_gain_ci95'][0]:+.5f} to {h['paired_gain_ci95'][1]:+.5f}). Evaluator {esc(h['evaluator_version'])}; {comma(h['withheld_positives'])} withheld positives. This is not an organizer score.</p>
+    return f"""<section class="section"><h1>Historical S19-ASCP: scope-limited novelty, negative geology gate</h1>
+<p><strong>Executive decision: DO NOT SUBMIT.</strong> S19 generated an all-finite research TIFF through the hash-verified shared writer. Automated canary, novelty and format checks passed within its historical recorded snapshot, not the absent complete current registry. The shared whole-component buffered holdout then rejected it: <strong>HOLDOUT-DTI {h['dti']:.5f}</strong> (95% CI {h['ci95'][0]:.5f}–{h['ci95'][1]:.5f}) versus {h['baseline_dti']:.5f}; paired gain {h['paired_gain']:+.5f} (95% CI {h['paired_gain_ci95'][0]:+.5f} to {h['paired_gain_ci95'][1]:+.5f}). Evaluator {esc(h['evaluator_version'])}; {comma(h['withheld_positives'])} withheld positives. This is not an organizer score.</p>
 <h2>Physical test and interpretation</h2><p>The fixed surface combined 10–50 m step strength, paired crest/toe curvature, uphill-facing selectivity and 100 m coherence from the owner-mirrored USGS 3DEP-derived descriptor raster. The intended signal was a subtle antislope fault scarp; named mimics were road cuts, channels, terrace or paleo-shoreline risers, landslides and mine benches. The negative paired interval says this exact conjunction recovers the mapped-fault proxy less effectively than the visible-only 32-band baseline. It does not show that fault scarps are unimportant, only that this frozen statistic and emission rule should not consume a slot.</p>
 <h2>Leakage canary: each physical leg</h2><div class="table-wrap"><table><thead><tr><th>Feature</th><th>Pooled AUC</th><th>0.90 gate</th></tr></thead><tbody>{canary_rows}</tbody></table></div>
 <p>Both AUC polarities and every fold were checked by the shared tool. A pass does not prove usefulness or independence; it only avoids the specified leakage stop.</p>
-<h2>Nine requested sites: the obvious historical best, with the correct warning</h2><p>The artifact listed for each site is the highest owner-reported starting point in the audited priority family. <strong>None is recommended for upload from this project</strong>: they are previous submissions/research artifacts, not a unique S19 candidate, and no local row has a filename/hash-bound organizer receipt. The new S19 file is unique but scientifically rejected. Thus the current best submission decision is unambiguous: <strong>submit none of them today.</strong></p>
+<h2>Nine requested sites: the obvious historical best, with the correct warning</h2><p>The artifact listed for each site is the highest owner-reported starting point in the audited priority family. <strong>None is recommended for upload from this project</strong>: they are previous submissions/research artifacts, not a unique S19 candidate, and no local row has a filename/hash-bound organizer receipt. The historical S19 file passed its snapshot-only novelty check but was scientifically rejected. Thus the current best submission decision is unambiguous: <strong>submit none of them today.</strong></p>
 <div class="table-wrap"><table><thead><tr><th>Site</th><th>Historical site-best artifact</th><th>Owner-reported claim (unverified)</th><th>Measured dots</th><th>Decision</th><th>Source</th></tr></thead><tbody>{rows}</tbody></table></div>
 <h2>Why GEMSDOE32's reported 0.2778 leads this family</h2><p>Byte forensics show its 37,654-dot raster is exactly the prior solo raster with 2,545 catalogue-near dots removed and no dots added. For binary predictions, reducing low-credit false-positive mass can improve the Tversky denominator while spaced dots retain triangular-kernel coverage. That establishes the construction and a plausible emission-efficiency mechanism—not hidden-truth causation, geothermal-vent discovery, or an ORGANIZER-CONFIRMED score. Copying or slightly repruning it would violate this run's uniqueness requirement.</p>
 <h2>Exact artifact disposition</h2><ul><li>Name: <code>{esc(card['submission_name'])}</code></li><li>SHA-256: <code>{esc(card['raster_sha256'])}</code></li><li>Note ({len(card['note'])}/140): <code>{esc(card['note'])}</code></li><li>Validator: no NaN inside or outside, values [0,1], and exact CRS/shape/transform all PASS.</li><li>Registry: {card['registry']['members']} unique-byte rasters; max surface |Spearman| {card['registry']['max_abs_surface_spearman']:.4f}; max final overlap within 3 px {card['registry']['max_final_overlap_3px']:.1%}.</li><li>Verdict: <strong>{esc(card['verdict']).upper()} — DO NOT SUBMIT</strong>; no slot selected.</li></ul>
-<p><a href="downloads/{esc(Path(card['submission_file']).name)}" download>Download rejected research TIFF</a> · <a href="data/current_run_card_2026-10-26.json">JSON run card</a> · <a href="../knowledge/55_s19_preregistration.md">Frozen method/ranking</a> · <a href="../evidence/s19_ascp_holdout.json">Full holdout evidence</a></p>
+<p><a href="downloads/{esc(Path(card['submission_file']).name)}" download>Download rejected research TIFF</a> · <a href="../evidence/s19_ascp_run_card.json">Historical S19 JSON run card</a> · <a href="../knowledge/55_s19_preregistration.md">Frozen method/ranking</a> · <a href="../evidence/s19_ascp_holdout.json">Full holdout evidence</a></p>
 <h2>Limitations and next work</h2><ul>{''.join('<li>'+esc(x)+'</li>' for x in card['limitations'])}<li>The 53-member comparison covers freshly fetched priority artifacts and the local archive, not unknowable private concurrent outputs.</li><li>Do not retune S19 on the spent holdout. Next work needs a new preregistered lane and a synchronized registry.</li></ul></section>"""
 
 
 def render_current_executive() -> str:
-    return """<section class="section"><h1>Executive summary: download exists; submission is rejected</h1>
-<p>The one-click file above is newly generated, unique within the declared registry and locally format-valid. It <strong>failed the frozen performance gate</strong>. It is safe to download for research, but <strong>not OK to submit</strong>. No human geological inspection is required to reach that decision.</p>
+    return """<section class="section"><h1>Executive summary: no candidate is approved</h1>
+<p>No new candidate was generated in this audit. A distinct concurrent <a href="session22-result.html">S22-SIGN research TIFF</a> is available for research only, but <strong>not OK to submit</strong>: its local holdout is negative and leakage/uniqueness evidence is incomplete. The decision is automatic and does not require a human geological inspector.</p>
 <h2>Exactly how a future approved submission works</h2><ol>
 <li>Preregister one explicit lane; use verified cached features and the hash-pinned shared evaluator/writer.</li>
 <li>Run every feature-alone leakage canary. Stop if either AUC polarity exceeds 0.90.</li>
@@ -568,10 +471,8 @@ def render_current_executive() -> str:
 <li>Only after a separate selector approves a gate-passing card, download that exact file, open DrivenData’s New submission form, choose the TIFF (or ZIP containing exactly one TIFF), paste its ≤140-character note, and preserve the filename/hash-bound receipt.</li>
 </ol>
 <p><strong>Do not perform step 7 today.</strong> No competition slot was selected. A local validator cannot authenticate account allowance, eligibility, portal acceptance or organizer score.</p>
-<h2>Why some filenames end "-allfinite" and some end "-nan" — and which one to submit</h2>
-<p>Every candidate raster on this site is written in two variants from the same prediction array. The <strong>"-nan"</strong> variant places NaN in every pixel outside the competition footprint (useful for local visual contrast and QA, never for the portal). The <strong>"-allfinite"</strong> variant replaces those same outside-footprint pixels with 0, so the whole array is finite and in [0,1] everywhere. This repo’s own strict validator (<code>variant_strict_whole_array_no_nan_allowed</code> in <code>scripts/verify_downloads.py</code>) fails the "-nan" file and passes the "-allfinite" file for exactly this reason: a NaN tag or NaN pixel anywhere in the array — even legitimately outside the scored footprint — can trip a validator that checks the whole array rather than only the footprint. The user-reported DrivenData portal error "Predicted values must be in range [0, 1]" is consistent with exactly this failure mode. <strong>Always download and submit the "-allfinite" file; never the "-nan" file.</strong> This is a format-safety rule, independent of whether a given file has passed its scientific holdout gate.</p>
-<h2>Prior range-error protection</h2><p>The S19 research TIFF contains only finite 0 and 1 values across the whole array, so it does not have the local numeric defect described by “Predicted values must be in range [0,1].” This does not diagnose the earlier file or guarantee portal acceptance; it only verifies the exact new bytes.</p>
-<p><a href="session19-result.html">Current science and nine-site executive table</a> · <a href="session22-result.html">Latest result (Session 22, S22-MOFR, negative)</a> · <a href="data/current_run_card_2026-10-26.json">Complete automated run card</a> · <a href="archive.html">Historical files — DO NOT SUBMIT</a></p></section>"""
+<h2>Prior range-error uncertainty</h2><p>The error cause is unknown. The official problem specifies null or NaN outside the bounds; a zero-filled all-finite variant may differ from the sample convention and cannot guarantee portal acceptance. The current archive audit also fails two historical nodata metadata checks.</p>
+<p><a href="cross-site-review.html">Current nine-site executive table</a> · <a href="data/current_run_card_2026-10-26.json">Complete automated run card</a> · <a href="archive.html">Historical files — DO NOT SUBMIT</a></p></section>"""
 
 def render_s18_executive() -> str:
     return """<section class="section"><h1>Executive summary: a new file, not an approved submission</h1>
@@ -608,7 +509,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{s21_status_html()}{s20_nchc_status_html()}{current_status_html()}{s19b_parallel_html()}{body}</main>
+<main>{current_status_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1346,7 +1247,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 <p><a href="../knowledge/16_preregistration_H32-2.md">Frozen H32-2 protocol + run-1 integrity correction</a> · <a href="../knowledge/17_h32_2_result.md">H32-2 result record</a> · <a href="../evidence/h32_2_holdout.json">Valid screen evidence JSON</a> · <a href="../evidence/h32_2_holdout_run1_invalid_2026-10-03.json">Preserved invalid run 1</a> · <a href="../scripts/run_h32_2_holdout.py">Runner source</a></p></section>
 
 <section class="section"><h2>H28-1 benchmark and candidate file</h2><p>The paired hide-and-recover screen compared H28-1 multiscale magnetic/gravity edge-coherence features against the best comparable same-run control, across spatially blocked folds and seeds 140–149. The mean paired catalogue proxy ΔDTI was {fmt_number(candidate.get('holdout_mean_gain', 0.002948838794400959), 6)}, with 3/4 folds and 9/10 seed means positive; the frozen screen gate passed. This is not a leaderboard score and does not establish transfer to expert-created faults outside the catalogue habitat.</p><p>Candidate filename: <code>{esc(candidate.get('nan', ''))}</code>. Its full-map construction is separate from the holdout-only fit and no current GEMSDOE28 upload exists. It is not an authorized weekly submission. The file is an auditable research reference, not a submission recommendation.</p><p>Local manual downloads: <a href="downloads/{esc(candidate.get('nan', ''))}" download>{esc(candidate.get('nan', ''))}</a> · <a href="downloads/{esc(candidate.get('allfinite', ''))}" download>{esc(candidate.get('allfinite', ''))}</a> · <a href="downloads/{esc(candidate.get('zip', ''))}" download>{esc(candidate.get('zip', ''))}</a>.</p><p><a href="../evidence/h28_1_edge_holdout.json">Holdout evidence</a> · <a href="../knowledge/08_preregistration_H28-1.md">H28-1 preregistration</a> · <a href="../knowledge/09_preregistration_H28-1_candidate.md">Full-map candidate construction record</a></p>
-<p>Historical hypothesis register: <a href="../knowledge/07_untried_hypotheses.md">knowledge/07_untried_hypotheses.md</a>. Historical H28 preregistration: <a href="../knowledge/08_preregistration_H28-1.md">knowledge/08_preregistration_H28-1.md</a>. Current hypothesis ranking: <a href="../knowledge/18_new_hypotheses_H33_series_2026-10-03.md">knowledge/18_new_hypotheses_H33_series_2026-10-03.md</a> (session-8 ranking archived at <a href="../knowledge/13_current_ranked_hypotheses_2026-10-03.md">knowledge/13</a>).</p></section>
+<p>Historical hypothesis register: <a href="../knowledge/07_untried_hypotheses.md">knowledge/07_untried_hypotheses.md</a>. Historical H28 preregistration: <a href="../knowledge/08_preregistration_H28-1.md">knowledge/08_preregistration_H28-1.md</a>. Historical session-10 hypothesis ranking: <a href="../knowledge/18_new_hypotheses_H33_series_2026-10-03.md">knowledge/18_new_hypotheses_H33_series_2026-10-03.md</a> (session-8 ranking archived at <a href="../knowledge/13_current_ranked_hypotheses_2026-10-03.md">knowledge/13</a>).</p></section>
 
 <section class="section"><h2>Promotion gate and what counts</h2><div class="table-wrap"><table><thead><tr><th>Stage</th><th>Required evidence</th><th>What it is not</th></tr></thead><tbody>
 <tr><td>Pre-fit</td><td>Freeze transform, data and provenance, folds/draws, response, model, metrics, seeds, analysis and gate; run label-free sufficiency only.</td><td>Not permission to tune thresholds on a held-out seed.</td></tr>
@@ -1356,7 +1257,7 @@ def render_research(registry: dict, h28: dict, euler: dict, board: dict,
 </tbody></table></div><p>A candidate must not spend a weekly slot until every predeclared gate is met. The catalogue hide-and-recover task is necessarily a proxy: labels are mostly faults already represented in a published catalogue and do not provide an independent sample of hidden expert-created, far-field faults.</p></section>
 
 <section class="section"><h2>Live score and leaderboard boundaries</h2><p>A one-off manual public-page observation on {esc(board.get('snapshot_date', 'not recorded'))} records DARD #1 at 0.3195 and wbg1 #15 at 0.2600. A public leaderboard row alone does not link a score to the repository owner or a local TIFF. The owner-reported 0.2477 is likewise unverified without an organizer receipt. No row is treated as a score claim for this project. <a href="{esc(board.get('url', 'https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'))}">Manual-review link</a>; automated access and monitoring are prohibited by project policy.</p></section>
-<section class="section"><h2>Historical screen archive (superseded)</h2><div class="callout"><strong>Archive marker:</strong> the predecessor project used the heading “Current Session 5 untried screen (4 hypotheses).” That was a dated four-item view. The current GEMSDOE28 session-10 ranking above contains the {n_untried} H33-series hypotheses that remain untried ({", ".join(untried)}); H33-1 was run on its reserved seeds 200–209 and refuted, so it now appears in the tested list rather than the untried one. Nothing in this archive section is part of the current untried list.</div>
+<section class="section"><h2>Historical screen archive (superseded)</h2><div class="callout"><strong>Archive marker:</strong> the predecessor project used the heading “Current Session 5 untried screen (4 hypotheses).” That was a dated four-item view. The historical GEMSDOE28 session-10 ranking above contained the {n_untried} H33-series hypotheses that remain untried ({", ".join(untried)}); H33-1 was run on its reserved seeds 200–209 and refuted, so it now appears in the tested list rather than the untried one. Nothing in this archive section is part of the S22 hypothesis slate.</div>
 <h3>H27-10 annulus result — REJECTED; no weekly slot.</h3><p>The frozen 100–300 m annulus/reallocation gate on seeds 150–159 failed: mean paired ΔDTI +0.000846, 4/4 fold means but only 7/10 seed means improved, and annulus gross efficiency 0.03357 was below the 0.05212 live break-even estimate. A spacing-check bug in the first diagnostic was corrected for an integrity rerun on the same seeds; values and the frozen FAIL did not change. This is not fresh confirmation.</p><p>Evidence: <a href="../evidence/h27_10_annulus_holdout_initial.json">h27_10_annulus_holdout_initial.json</a> · <a href="../evidence/h27_10_annulus_holdout.json">corrected integrity rerun</a> · <a href="../knowledge/07_untried_hypotheses.md">historical disclosure</a>. The rejected H27-10 arm is not part of the current untried list and is not eligible to justify a weekly slot.</p></section>
 """
 
@@ -1418,8 +1319,8 @@ def render_sources(sources_registry: dict, board: dict) -> str:
 <p><strong>Evidence/limitation:</strong> {esc(source.get('evidence', 'No evidence note recorded.'))}</p>
 </article>""")
     return f"""<div class="breadcrumb"><a href="index.html">Overview</a> / Sources</div>
-<section class="hero"><div class="hero-content"><div class="eyebrow">Manual source review ledger</div><h1>Claims tied<br>to their sources.</h1><p class="lead">Each entry says what was reviewed, how it was accessed, and what remains unknown. A repository mirror or catalog listing does not establish official byte identity, schema, coverage, downloadability, or licence.</p><div class="value-line"><span class="value-pill">Primary/official first</span><span class="value-pill">No invented provenance</span><span class="status blocked">NO DD AUTOMATION</span></div></div></section>
-<section class="section"><div class="callout"><strong>Competition-page policy:</strong> no automated DrivenData fetch, browser bot, API, scraping, upload, scheduled job or monitoring. The leaderboard snapshot dated {esc(board.get('snapshot_date', 'not recorded'))} was read once manually. <a href="{esc(board.get('url', 'https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'))}">Manual human-review link</a>. Public scores shown there are not linked to the repository owner or local files.</div>
+<section class="hero"><div class="hero-content"><div class="eyebrow">Source observation ledger</div><h1>Claims tied<br>to their sources.</h1><p class="lead">Each entry says what was reviewed, how it was accessed, and what remains unknown. A repository mirror or catalog listing does not establish official byte identity, schema, coverage, downloadability, or licence.</p><div class="value-line"><span class="value-pill">Primary/official first</span><span class="value-pill">No invented provenance</span><span class="status blocked">NO SCHEDULED DD FEED</span></div></div></section>
+<section class="section"><div class="callout"><strong>Competition-page access irregularity:</strong> S22 used a one-off read-only research tool despite the project manual-only access policy; this tool-mediated request may conflict with quoted site terms. Compliance is undetermined. Do not repeat automated competition access without permission. The repository feed never contacts DrivenData, and no login or upload occurred. <a href="../registry/irregularities.json">Disclosure</a> · <a href="{esc(board.get('url', 'https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'))}">Public leaderboard</a>. Public rows do not identify local files.</div>
 <p>Registry note: {esc(sources_registry.get('note', 'Verification status varies by source.'))}</p>
 <p><strong>AI-use disclosure:</strong> <a href="../AI_DISCLOSURE.md">AI_DISCLOSURE.md</a> records the tools and review boundaries for this repository; the required final-round narrative must still disclose AI use in the organizer’s requested format.</p>
 <p>The site generator reads the local JSON registry only; it makes no external request. The separately invoked <code>scripts/refresh_source_feed.py</code> has an explicit forbidden-host guard for <code>drivendata.org</code> and is not part of site build or CI.</p>
@@ -1471,31 +1372,20 @@ def main() -> int:
     old_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
     old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
-    s20v_brief = """<section class=\"card callout-danger\" aria-label=\"Parallel Session 20V result\">
-<h2>Parallel Session 20V (2026-10-26): fourth concurrent TIFF \u2014 HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
-<p><strong>Current run: NOT READY TO SUBMIT \u2014 NO FILE APPROVED. Do not upload any file from this site.</strong> S20V-H2 Hessian tubularity of the LiDAR scarp-step field (<code>gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif</code>, 37,500 dots) passed leakage (AUC 0.5378), uniqueness and exact-file validation (all-finite {0,1}, no NaN anywhere) but <strong>failed its frozen LOSFO gate</strong>: HOLDOUT-DTI <strong>0.08631</strong> vs control <strong>0.09881</strong> (delta -0.01251, 95% CI [-0.03170, +0.00133], seeds 340-342; local proxy, not an organizer score). Distinct parallel run from S19-ASCP, S19B-RADLIN and Session 20-H43 (seed overlap 340-342 disclosed; different protocol; never pool). No slot was spent.</p>
-<div class=\"download-actions\"><button class=\"button\" type=\"button\" disabled aria-disabled=\"true\">Submission download locked</button><a class=\"button\" href=\"downloads/gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif\" download>Download S20V unique research TIFF \u2014 DO NOT SUBMIT</a><a class=\"button quiet\" href=\"executive-summary.html\">Executive summary &amp; blocked submission steps</a></div>
-<p><strong>Submission name:</strong> <code>GEMSDOE28-s20-vesselness-lidarstep-7a7c5e449fe0</code> \u00b7 <a href=\"../knowledge/60_s20v_result.md\">S20V scientific report + nine-site table</a> \u00b7 <a href=\"data/run_card_s20v.json\">S20V JSON run card</a> \u00b7 <a href=\"../knowledge/59_s20v_preregistration_and_hypotheses.md\">Preregistration + 5 ranked hypotheses</a></p>
-</section>"""
-    session20_brief = """<section class=\"card callout-danger\" aria-label=\"Session 20-H43 result\">
-<h2>Parallel Session 20-H43 (2026-10-26): third concurrent TIFF — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
-<p>A concurrent preregistered lane (<code>gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif</code>, 33,354 dots) was also generated and rejected automatically: <strong>HOLDOUT-DTI paired gain -0.007434 (95% CI [-0.01081, -0.00496], 0/20 cells)</strong> and 94.3% of dots within 3 px of the GEMSDOE32 champion (duplicate family lane). Its file format is valid (all-finite, values in [0,1]); that does not make it submittable. It is a distinct parallel run from S19-ASCP, S19B-RADLIN and the Session 20 validation review; never pool their numbers. The best existing file remains GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>, byte-verified in Session 20-H43 as solo minus the 2 px catalogue ring. <strong>Do not upload any file from this site.</strong></p>
-<p><a class=\"button quiet\" href=\"session20-result.html\">Session 20-H43 executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
-</section>"""
-    session22_brief = """<section class=\"card callout-danger\" aria-label=\"Session 22 S22-MOFR result\">
-<h2>Session 22 S22-MOFR (2026-10-26): fifth concurrent lane — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
-<p>A new catalogue-blind lane, the potential-field marker-offset / piercing-point detector (H44-1: paired TMI and isostatic-gravity horizontal-gradient ridge endpoints across strike-compatible, gap-bounded offsets), produced a genuinely unique new raster: <code>gems28-s22-mofr-union-20261026-599452947272-allfinite.tif</code> (42,480 dots). Leakage canary <strong>PASS</strong> (max feature AUC 0.538); registry novelty <strong>PASS</strong> (max |Spearman| 0.0164, max 3-px overlap 18.9% vs the full 9-site registry — not a duplicate of anything previously listed). But <strong>HOLDOUT-DTI 0.03385 [0.0300, 0.0375] vs a freshly retrained baseline 0.14399</strong> (paired gain -0.1101, 95% CI [-0.1239, -0.0972], 0/4 folds positive). This is now the fifth independently preregistered, catalogue-independent hypothesis across Sessions 18-22 to lose decisively to the simple dotted catalogue-adjacent baseline family. <strong>Verdict: negative — zero weekly slots spent. Do not upload any file from this site.</strong></p>
-<p><a class=\"button quiet\" href=\"session22-result.html\">Session 22 S22-MOFR executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
-</section>"""
-    cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
     session22_template = (ROOT / "site_templates" / "session22-result.html").read_text(encoding="utf-8")
-    s20_nchc_block = render_s20_nchc_overview()
+    session22_mofr_template = (ROOT / "site_templates" / "session22-mofr-result.html").read_text(encoding="utf-8")
+    session22_mofr_brief = """<section class=\"card callout-danger\" aria-label=\"Session 22 S22-MOFR result\">
+<h2>Session 22 S22-MOFR (2026-10-26): potential-field marker-offset lane — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
+<p>A separate concurrent lane generated a new, catalogue-blind raster from paired TMI and isostatic-gravity horizontal-gradient ridge endpoints (<code>gems28-s22-mofr-union-20261026-599452947272-allfinite.tif</code>, 42,480 dots). Leakage canary <strong>PASS</strong> (max feature AUC 0.538); registry novelty <strong>PASS</strong> (max |Spearman| 0.0164, max 3-px overlap 18.9% vs the full registry \u2014 genuinely unique). But <strong>HOLDOUT-DTI 0.03385 [0.0300, 0.0375] vs a freshly retrained baseline 0.14399</strong> (paired gain -0.1101, 95% CI [-0.1239, -0.0972], 0/4 folds positive). This is a distinct concurrent lane from S22-SIGN and S22-AUDIT (see below); never pool their numbers. <strong>Verdict: negative \u2014 zero weekly slots spent. Do not upload any file from this site.</strong></p>
+<p><a class=\"button quiet\" href=\"session22-mofr-result.html\">Session 22 S22-MOFR executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
+</section>"""
+    current_review = render_focus_review()
     pages = {
-        "index.html": layout("Overview", s20_nchc_block + session22_brief + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
-        "cross-site-review.html": cross_site_template,
-        "executive-summary.html": layout("Executive summary", s20_nchc_block + session22_brief + s20v_brief + session20_brief + render_current_executive(), "Executive summary"),
+        "index.html": layout("Overview", session22_mofr_brief + current_review + s18_feed_html(feed), "Overview"),
+        "cross-site-review.html": layout("Nine-site review", current_review, "Nine-site review"),
+        "executive-summary.html": layout("Executive summary", session22_mofr_brief + render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
@@ -1506,6 +1396,7 @@ def main() -> int:
         "session20-result.html": session20_template,
         "session21-result.html": session21_template,
         "session22-result.html": session22_template,
+        "session22-mofr-result.html": session22_mofr_template,
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
@@ -1517,11 +1408,6 @@ def main() -> int:
     (DOCS / "data/run_card_s21.json").write_text(
         json.dumps(s21_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
     )
-    s22_card = read_json("evidence/s22_mofr_run_card.json")
-    (DOCS / "data/run_card_s22_mofr.json").parent.mkdir(parents=True, exist_ok=True)
-    (DOCS / "data/run_card_s22_mofr.json").write_text(
-        json.dumps(s22_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
-    )
     s20_nchc_card = read_json("evidence/s20_nchc_run_card.json")
     (DOCS / "data/run_card_s20_nchc.json").parent.mkdir(parents=True, exist_ok=True)
     (DOCS / "data/run_card_s20_nchc.json").write_text(
@@ -1532,11 +1418,23 @@ def main() -> int:
     (DOCS / "data/run_card_s20_2026-10-26.json").write_text(json.dumps(s20_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     s19b_card = read_json("evidence/s19b_radlin_run_card.json")
     (DOCS / "data" / "run_card_s19b_radlin.json").write_text(json.dumps(s19b_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-    current_card = read_json("evidence/s19_ascp_run_card.json")
+    current_card = read_json("evidence/s22_audit_run_card.json")
     current_card_path = DOCS / "data" / "current_run_card_2026-10-26.json"
     current_card_path.parent.mkdir(parents=True, exist_ok=True)
     current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (DOCS / "data/run_card_2026-10-26.json").write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    # Preserve the separate signed-piedmont run card under its own name; all
+    # generic current aliases refer to this later negative audit, not that run.
+    (DOCS / "data/s22_run_card.json").write_text(json.dumps(read_json("evidence/s22_run_card.json"), indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    # Preserve the separate S22-MOFR (marker-offset) run card under its own name;
+    # a third distinct concurrent lane from S22-SIGN and S22-AUDIT. Never pool.
+    s22_mofr_card = read_json("evidence/s22_mofr_run_card.json")
+    (DOCS / "data/run_card_s22_mofr.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s22_mofr.json").write_text(
+        json.dumps(s22_mofr_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
+    )
+    (DOCS / "data/current_run_card.json").write_bytes(current_card_path.read_bytes())
+    (DOCS / "data/current_run_card_2026-10-27.json").write_bytes(current_card_path.read_bytes())
     (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
     (ROOT / "executive-summary.html").write_text(
         root_relative_links(publish_source_links(pages["executive-summary.html"])), encoding="utf-8")
@@ -1544,10 +1442,12 @@ def main() -> int:
     legacy_card.parent.mkdir(parents=True, exist_ok=True)
     legacy_card.write_bytes(current_card_path.read_bytes())
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
-                      "hypotheses": len(hypotheses.get("hypotheses", [])),
+                      "hypotheses": len(read_json("registry/s22_audit_hypotheses.json").get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
                       "submission_ready": False, "slot_selected": False,
-                      "research_download": Path(current_card["submission_file"]).name,
+                      "research_download": None,
+                      "concurrent_research_download": "downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+                      "concurrent_submission_ready": False,
                       "inspection_artifacts": [manifest["primary"]["nan"], manifest.get("secondary", {}).get("nan")]}, indent=2))
     return 0
 

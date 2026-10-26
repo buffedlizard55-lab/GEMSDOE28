@@ -1,0 +1,49 @@
+{
+  "session": "S22-AUDIT-20261026",
+  "status": "Qualitative research slate only; no assigned lane and no implementation or geological experiment in this session.",
+  "novelty_limit": "The cited G28 reviews describe these specific operators as untried at their dates; the complete current parallel registry is absent, so present-day exclusivity or global novelty is unverified.",
+  "hypotheses": [
+    {
+      "rank": 1,
+      "name": "Displaced potential-field piercing markers",
+      "layers": "Reduced-to-pole / total magnetic intensity and gravity; candidate corridor across multiple marker ridges.",
+      "mechanism": "A concealed fault could displace pre-existing magnetic or density contacts; look for a consistent repeated lateral offset, not the contact itself.",
+      "non_fault_mimic": "Intrusive or branching lithologic contacts and acquisition/registration seams.",
+      "prior_work_difference": "Paired cross-corridor displacement rather than an ordinary edge or scalar gradient; earlier G28 slate ranked it unimplemented.",
+      "expected_improvement": "Unknown, no score or quantitative projection; highest qualitative information potential in this slate.",
+      "cost_and_gates": "Medium-high; requires verified reusable template cache, signal and alignment checks, feature canaries and complete registry. Raw owner mirrors exist but cache is absent.",
+      "source": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+      "prior_review": "knowledge/55_session19_cross_site_review.md"
+    },
+    {
+      "rank": 2,
+      "name": "Lithology-conditioned U/Th transport dipoles",
+      "layers": "GeoDAWN uranium, thorium and potassium radiometrics; signed cross-corridor residual conditioned on local lithology.",
+      "mechanism": "Fluid/redox transport could create an asymmetric geochemical signature near a permeable structure, even without a visible scarp.",
+      "non_fault_mimic": "Groundwater redox fronts, sediment sorting, lithologic contacts, radon disequilibrium and survey seams.",
+      "prior_work_difference": "Ordered paired residual rather than a scalar ratio or lineament; earlier G28 slate described this exact operator as untried.",
+      "expected_improvement": "Unknown and physically ambiguous; no DTI projection.",
+      "cost_and_gates": "Medium; verify radiometric units, quantization, coverage, source alignment and missingness before any trial.",
+      "source": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+      "prior_review": "knowledge/55_session19_cross_site_review.md"
+    },
+    {
+      "rank": 3,
+      "name": "Paired-geothermometer cooling corridors",
+      "layers": "Quality-filtered, spatially deduplicated well/spring temperatures and paired geothermometers from INGENIOUS.",
+      "mechanism": "Directional multi-site thermal/geochemical contrasts might trace a permeable fault-controlled discharge corridor; they are not direct fault labels.",
+      "non_fault_mimic": "Groundwater mixing, geothermometer disequilibrium, drilling effects and preferential sampling.",
+      "prior_work_difference": "Paired directional contrasts rather than maximum-temperature buffers; earlier G28 slate described this exact operator as untried.",
+      "expected_improvement": "Unknown, constrained by sparse and biased observations; no DTI projection.",
+      "cost_and_gates": "Medium; hash-pinned owner-mirror CSV restored for tests, but raw source package, coverage, duplicate sites, sample quality and competition shareability still require verification; avoid any catalogue-derived leakage.",
+      "source": "https://gdr.openei.org/submissions/1391",
+      "prior_review": "knowledge/55_session19_cross_site_review.md"
+    }
+  ],
+  "context_source": "https://www.osti.gov/servlets/purl/1724082",
+  "protocol": "Select only the assigned lane, run feature-alone canaries and surface novelty first, then a frozen buffered whole-segment shared holdout with visible-only catalogue features. Check final dots, exact bytes and separate slot selector.",
+  "withdrawn_for_parallel_overlap": {
+    "name": "Opposite-flank flexural curvature pairs",
+    "reason": "PR #57 concurrently tested signed piedmont break-in-slope curvature and LiDAR polarity. Overlap with this proposed idea is unresolved; withdraw rather than call it untried."
+  }
+}

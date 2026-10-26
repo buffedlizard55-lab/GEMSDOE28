@@ -1,81 +1,12 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Session 22 S22-MOFR: potential-field marker-offset/piercing-point detector, catalogue-blind geometry, negative holdout verdict, unique research TIFF download table.">
-<title>Session 22 result | GEMSDOE28</title>
-<link rel="stylesheet" href="assets/site.css">
-<script defer src="assets/site.js"></script>
-</head>
-<body>
-<header class="site-header"><div class="header-inner">
-<a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
-<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session22-result.html" aria-current="page">S22 result</a><a href="session21-result.html">S21 result</a><a href="session20-result.html">S20 result</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
-</div></header>
-<main>
-<p class="breadcrumb"><a href="index.html">Overview</a> / Session 22 result</p>
-
-<section class="card callout-danger" data-submission-ready="false" id="s22-decision">
-<p class="eyebrow">Session 22 · S22-MOFR lane (H44-1) · 2026-10-26 · automated gates, no human inspector</p>
-<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
-<h1>🔴 DO NOT SUBMIT — new unique TIFF generated, holdout gate FAILED</h1>
-<p class="lead">A brand-new GeoTIFF was generated this session from a <strong>potential-field marker-offset / piercing-point detector</strong>: ridges are skeletonised independently on the TMI horizontal-gradient band and the isostatic-gravity horizontal-gradient band, ridge endpoints are extracted, and endpoint pairs across a ridge gap are kept only when strike-compatible (±20°, the same tolerance already used by <code>newinfo.steppover_links</code>) and gap/offset-bounded — a geometry that never reads the fault catalogue. File: <code>gems28-s22-mofr-union-20261026-599452947272-allfinite.tif</code> — 42,480 dots, all-finite {0,1} in [0,1] (fixes the DrivenData “[0, 1]” range error), EPSG:32611, template-exact grid/CRS/transform. Leakage canary <strong>PASS</strong> (max single-feature AUC 0.538 ≤ 0.90, all four candidate features). Registry uniqueness vs every scored/unscored raster in the 9-site + local registry <strong>PASS</strong> (max |Spearman| 0.0164, max 3-px dot overlap 18.9%, both far under the 0.90 / 0.70 stop thresholds). But pooled <strong>HOLDOUT-DTI 0.03385 [95% CI 0.0300, 0.0375] vs a freshly retrained baseline 0.14399</strong> on the same four SegmentHoldout folds (paired gain −0.1101, 95% CI [−0.1239, −0.0972], positive in 0 of 4 folds). <strong>Verdict: negative — zero weekly slots spent.</strong></p>
-<div class="download-actions">
-<button class="button" type="button" disabled aria-disabled="true">Submission download locked</button>
-<a class="button" href="downloads/gems28-s22-mofr-union-20261026-599452947272-allfinite.tif" download>1-Click Download S22 Unique GeoTIFF (.tif, all-finite [0,1]) — Research Only / DO NOT SUBMIT</a>
-<a class="button quiet" href="data/run_card_s22_mofr.json" download>JSON Run Card</a>
-</div>
-<p><strong>Unique name:</strong> <code>GEMSDOE28-S22-MOFR-UNION-599452947272</code><br>
-<strong>Note (110/140 chars):</strong></p>
-<div class="note-box"><code>S22-MOFR union marker-offset 42480d | HOLDOUT-DTI 0.0339 vs baseline 0.1440 | verdict negative | DO NOT SUBMIT</code><button class="copy-note" type="button" data-copy-note="S22-MOFR union marker-offset 42480d | HOLDOUT-DTI 0.0339 vs baseline 0.1440 | verdict negative | DO NOT SUBMIT" aria-label="Copy note">Copy note</button></div>
-</section>
-
-<section class="section"><h2>Download table — file, estimated score, unique?</h2>
-<p>Estimates are <strong>MODEL PROJECTIONS, never scores</strong>. The only labelled score classes used are HOLDOUT-DTI (local hide-and-recover) and OWNER-REPORTED (user-supplied, no organizer receipt in this repo).</p>
-<div class="table-wrap"><table>
-<thead><tr><th>File to download</th><th>Estimated live score (MODEL)</th><th>Unique vs GEMSDOE24/25/27/28/30/31/32/33/36?</th><th>OK to submit?</th></tr></thead>
-<tbody>
-<tr><td><code>gems28-s22-mofr-union-20261026-599452947272-allfinite.tif</code> (this session)</td><td>No credible positive estimate — HOLDOUT-DTI is 76% below this session's own baseline</td><td>YES — max |Spearman| 0.0164, max 3-px overlap 18.9% vs the full 9-site registry</td><td><strong>NO — research only, holdout gate failed</strong></td></tr>
-<tr><td>GEMSDOE32 <code>h33-h33-2-b2-…-e5eb6e7e-zeros</code></td><td>0.2778 OWNER-REPORTED / UNVERIFIED</td><td>It is a previous submission</td><td><strong>NO — copying prohibited</strong></td></tr>
-</tbody></table></div>
-<p><strong>Bottom line:</strong> this session produced a genuinely novel, genuinely unique raster, but it is scientifically worse than the already-known baseline family — not merely "not yet better." No evidence from this session raises the GEMSDOE28 ceiling above 0.2778, and no evidence from this session beats the public leaderboard high of 0.4413 either.</p>
-</section>
-
-<section class="section"><h2>Why this hypothesis lost — the pattern, stated plainly</h2>
-<p>H44-1 targeted marker-offset / piercing-point realignments: places where a TMI or gravity horizontal-gradient ridge is laterally offset or truncated across a short gap, the classic potential-field signature of a fault the INGENIOUS catalogue missed because it has no surface trace. The geometry is entirely catalogue-blind (it never reads <code>labels.tif</code>) and is physically well-motivated. It still lost to a freshly retrained baseline by a wide margin (0.034 vs 0.144, 0/4 folds positive) — not a marginal miss. This is now the <strong>sixth or seventh</strong> independently preregistered, catalogue-independent, physically-motivated hypothesis across Sessions 18–22 (migration/relocation H42-1, vesselness/LiDAR-scarp S20V, PU-HGB S21, and now marker-offset S22-MOFR) to lose decisively to the simple "dotted catalogue-adjacent" baseline family (H19-5 lineage) on the real spatially-blocked holdout. The project's standing conclusion is now strong: additional geological creativity within this feature stack and this holdout design is very unlikely to beat 0.2778 without either (a) new external data the organizers did not already encode into the feature stack, or (b) a materially different modelling approach (e.g. learned dense segmentation rather than hand-built ridge geometry).</p>
-</section>
-
-<section class="section"><h2>Nine priority sites — best listed submission (OWNER-REPORTED / UNVERIFIED)</h2>
-<div class="table-wrap"><table>
-<thead><tr><th>Site</th><th>Best listed submission</th><th>Reported</th><th>Construction</th></tr></thead>
-<tbody>
-<tr><td>GEMSDOE24</td><td><code>h25-1-dotted-h19-5-d1-5</code></td><td>0.2477</td><td>H19-5 dotted @1.5px (60,069)</td></tr>
-<tr><td>GEMSDOE25</td><td><code>dotted-h19-5-d2-8</code></td><td>0.2600</td><td>H19-5 dotted @2.8px (44,090; = GEMSDOE30 raster)</td></tr>
-<tr><td>GEMSDOE27</td><td><code>topo-gap-closure-t-v2-on-d1-5</code></td><td>0.2449</td><td>d1.5 + gap additions (61,328) — additions lost</td></tr>
-<tr><td>GEMSDOE28</td><td><code>h36-1-rung30-blind-r1</code></td><td>0.2710</td><td>rung-3.0 repack + ring≤1 (37,660)</td></tr>
-<tr><td>GEMSDOE30</td><td><code>d28-poisson300m-offcat-44090</code></td><td>0.2600</td><td>same 44,090-dot family</td></tr>
-<tr><td>GEMSDOE31</td><td><code>h27-4-solo-d28</code></td><td>0.2708</td><td>d2.8 − ring≤1 (40,199; = GEMSDOE28 solo)</td></tr>
-<tr><td><strong>GEMSDOE32</strong></td><td><code><strong>h33-h33-2-b2-…-e5eb6e7e-zeros</strong></code></td><td><strong>0.2778</strong></td><td><strong>solo − ring≤2 (37,654). Best listed. Learning reference only.</strong></td></tr>
-<tr><td>GEMSDOE33</td><td><code>h33d-analog-tip-stepover-r30</code></td><td>0.2632</td><td>tip/stepover placement (41,865)</td></tr>
-<tr><td>GEMSDOE36</td><td><code>anderson-geothermal-pinn-38854</code></td><td>0.2750</td><td>champion dots + 1,200 extra (extras cost 0.0028)</td></tr>
-</tbody></table></div>
-<p class="meta">These nine figures are carried forward unchanged from Session 21's byte-level review; Session 22 did not re-fetch or re-score any sibling site. A fresh, byte-verified raster <em>inventory</em> re-pull of all nine repos was performed this session for duplicate-detection purposes only (<a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/priority_repository_audit_2026-10-26_s22_refresh.json">evidence/priority_repository_audit_2026-10-26_s22_refresh.json</a>); it uses different per-raster identity tokens than the older <code>data/research/shared_priority_registry.json</code> snapshot for the same underlying files — an unresolved cataloguing irregularity, flagged rather than silently merged. Public leaderboard top observed 2026-10-26: 0.4413 (0.3195 was the 2026-10-03 snapshot). <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard (manual review)</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description &amp; metric</a> · <a href="https://github.com/drivendataorg/gems-prize-reference-solution">Reference solution</a></p>
-</section>
-
-<section class="section"><h2>How to make a submission (when a future file is approved)</h2>
-<ol>
-<li>Download the approved <strong>all-finite</strong> (filename ends <code>-allfinite.tif</code>) GeoTIFF — whole array finite in [0,1], GDAL <code>nodata</code> tag unset. This specific combination is what avoids the portal error “Predicted values must be in range [0, 1]”: the strict validator used in this repo (<code>variant_strict_whole_array_no_nan_allowed</code>) fails on <em>any</em> NaN anywhere in the array, even legitimate NaN outside the competition footprint, and some portal validators appear to apply the same strict rule. A file whose name ends <code>-nan.tif</code> intentionally carries NaN outside the footprint (useful for local analysis/visual contrast) and is <strong>never</strong> the one to submit.</li>
-<li>Open the DrivenData competition → <em>Make a submission</em> → choose the single-band GeoTIFF (or a .zip containing exactly one).</li>
-<li>Paste the exact <strong>Note</strong> from the run card (≤140 chars) so the file is identifiable later.</li>
-<li>Confirm CRS/shape/geotransform match is automatic — files here are written from the sample-submission template and re-verified on read-back.</li>
-<li>Record the submission-page receipt (score + timestamp) back into <code>registry/</code> — until then every number stays OWNER-REPORTED.</li>
-</ol>
-<p>No file currently on this site is approved. Promotion is a separate selector step within the weekly cap shown on the submission page.</p>
-</section>
-
-<section class="section"><h2>Method, canaries &amp; audit trail</h2>
-<p>Lane: TMI horizontal-gradient ridge (band <code>tmi_hg</code>) and isostatic-gravity horizontal-gradient ridge (band <code>iso_grav_anom_hg</code>) of <code>training_features.tif</code>, skeletonised with the shared <code>ridge_nms</code>/<code>ridge_strike_degrees</code> utilities, endpoints paired across short gaps at matching strike (±20°) and bounded lateral offset — reused evaluator family (fresh <code>HistGradientBoostingClassifier</code>, same hyperparameters as prior sessions, retrained per fold) and reused shared writer/validator. Two emission variants were compared pre-registry-placement (<code>union</code> of both potential-field lanes' candidate pairs vs <code>corroborated</code>, requiring agreement from both lanes); <code>union</code> (42,480 dots) was chosen for the final file because it was denser and the sparser <code>corroborated</code> variant scored no better on the same canaries. Three experiments were used, exactly as budgeted: (1) leakage canary + pre-placement registry check, (2) final placement + post-placement registry/validator, (3) SegmentHoldout evaluation against a freshly retrained baseline. Named non-fault mimics: pipeline/transmission-line magnetic noise, vehicle/structure cultural magnetic anomalies, survey-line levelling seams, intrusive dike contacts crossing the gradient ridge, and coincidental ridge termination from a survey-boundary edge effect. No new external data was used or assumed; USGS/3DEP hosts are outside this sandbox's network allowlist, so any such extension remains explicitly deferred, not assumed obtainable.</p>
-<p><a href="data/run_card_s22_mofr.json">JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/63_s22_mofr_result.md">Full Session 22 report</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/62_s22_mofr_preregistration.md">Preregistration</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/scripts/run_s22_mofr.py">Experiment code</a></p>
-</section>
-</main>
-</body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Corrected research-only S22-SIGN result: no submission approval."><title>S22-SIGN research result | GEMSDOE28</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><header class="site-header"><div class="header-inner"><a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a><nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="session22-result.html" aria-current="page">S22-SIGN</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a></nav></div></header>
+<main><section class="card callout-danger" data-submission-ready="false"><p class="eyebrow">Separate concurrent lane · PR #57 · reviewed 2026-10-26</p><h1>S22-SIGN research TIFF — DO NOT SUBMIT</h1>
+<p>A distinct concurrent lane generated this file. It is <strong>OK to download for research only; not approved for portal submission</strong>. The separate S22-AUDIT produced no TIFF or geological experiment. Do not combine their results.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button quiet" href="downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif" download>Download research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="data/s22_run_card.json">Original S22-SIGN run card</a><a class="button quiet" href="cross-site-review.html">Current nine-site review</a></div>
+<p>All-finite file: 37,692 dots, SHA-256 <code>d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229</code>. Local grid, range and pair checks passed; portal acceptance and organizer score were not tested.</p>
+</section><section class="section"><h2>Holdout and canary corrections</h2>
+<p>Historical local <strong>HOLDOUT-DTI</strong> using <code>gems27.metric.dti_binary</code> with quadrant-clipped <code>make_split</code> reports unweighted means over 12 cells: <strong>0.054664</strong> versus 0.121914 baseline, difference −0.067250. <strong>95% CI not recorded.</strong> The 12 detail rows sum to 36,596 withheld positives, counting repeat cells; the run card instead says 60,988. This is not the shared whole-segment evaluator and is not a competition score.</p>
+<p>The original card has an empty canary object but a true pass flag; the historic runner treated an empty result as passing. Feature-alone leakage coverage is therefore <strong>not established</strong>. The exact historical runner is preserved as a source snapshot; its executable entry point now stops rather than repeat the invalid gate.</p>
+<h2>Novelty scope</h2><p>Independent final-dot checks against 46 local non-self TIFFs plus nine named historical site rasters found zero duplicate comparisons; maximum overlap is 53.56% within 3 pixels and maximum absolute binary Spearman is 0.0392. The complete parallel registry and pre-placement surfaces were not available, so global uniqueness remains unverified. No slot was selected.</p>
+<p><a href="../evidence/s22_sign_audit.json">Detailed corrected audit</a> · <a href="../evidence/s22_sign_final_dot_audit.json">55 final-dot comparisons</a> · <a href="../knowledge/62_s22_audit.md">Current review and next steps</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official problem statement</a></p></section></main></body></html>

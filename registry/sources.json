@@ -1,7 +1,19 @@
 {
   "generated": "2026-10-03 | Session 6: owner-mirror restoration, range-validator forensics, H31-1 feature audit, and one-off manual public leaderboard snapshot.",
-  "note": "Verification status is stated per row. DrivenData is accessed manually only; there is no scraper, API poll, scheduled fetch, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer 'hash-pinned, raw bytes NOT downloaded': the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json). | 2026-10-03 Session 14: official DrivenData problem, ScienceBase heat-flow/conductance, GDR #1391, and USGS 3DEP pages were rechecked. These checks establish that the pages/resources are listed, not that the contest owner mirrors are organizer-authenticated or that new layers are locally clipped/schema-audited. | S18 2026-10-25: one-off research-tool official page/PDF review in evidence/s18_official_source_review.json. Static feed still never contacts DrivenData. No organizer receipt or login obtained.",
+  "note": "Verification status is stated per row. Project policy restricts DrivenData to manual access. S22 nevertheless used a one-off read-only research tool for public pages; this tool-mediated request may conflict with policy or quoted terms, so do not repeat it absent permission. The repository has no scheduled DrivenData poll, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer 'hash-pinned, raw bytes NOT downloaded': the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json). | 2026-10-03 Session 14: official DrivenData problem, ScienceBase heat-flow/conductance, GDR #1391, and USGS 3DEP pages were rechecked. These checks establish that the pages/resources are listed, not that the contest owner mirrors are organizer-authenticated or that new layers are locally clipped/schema-audited. | S18 2026-10-25: one-off research-tool official page/PDF review in evidence/s18_official_source_review.json. Static feed still never contacts DrivenData. No organizer receipt or login obtained. | S22: one-off public page and official source observations at 2026-10-26T22:02:42Z are recorded in evidence/s22_official_source_review.json; static feed still never contacts DrivenData. No login or submission receipt obtained.",
   "sources": [
+    {
+      "id": "dd-leaderboard-s22-observation",
+      "title": "Official public leaderboard — S22 one-off observation",
+      "publisher": "DrivenData",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "category": "competition (public observation, not receipt)",
+      "used_for": "Resolve conflicting historical leaderboard claims at a dated observation time; never associate a public row with project TIFF bytes.",
+      "status": "Read once via the Arena research tool at 2026-10-26T22:02:42Z; no script, polling, account access or submission receipt.",
+      "accessed": "2026-10-26T22:02:42Z",
+      "evidence": "Public leaderboard top DW-Tversky 0.4437, participant xiaofanhu, when observed. This is not an ORGANIZER-CONFIRMED score for this project and may change. See evidence/s22_official_source_review.json.",
+      "feed": false
+    },
     {
       "id": "dd-leaderboard-2026-10-26",
       "title": "DrivenData #306 DOE GEMS - Public Leaderboard (one-off read-only check)",
@@ -9,9 +21,9 @@
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
       "category": "competition",
       "used_for": "Reconciling the cited 0.3195 (2026-10-03 #1 DARD) vs 0.4413 (2026-10-26 #1 xiaofanhu) public DW-Tversky benchmarks",
-      "status": "Read once via research tool on 2026-10-26; no automated polling, login, or owner-file attribution",
+      "status": "Read once via research tool on 2026-10-26; no automated polling, login, or owner-file attribution; historical earlier snapshot, superseded by the later S22 observation",
       "accessed": "2026-10-26",
-      "evidence": "Top 5 public DW-Tversky rows on 2026-10-26: #1 xiaofanhu 0.4413, #2 cfld__ 0.3916, #3 Batik Shirt Brothers 0.3904, #4 BrandenKMurray 0.3724, #5 No Fault of Our Own 0.3553. Public leaderboard rows do not identify owner repositories or prove any local TIFF score.",
+      "evidence": "Top 5 public DW-Tversky rows on 2026-10-26: #1 xiaofanhu 0.4413, #2 cfld__ 0.3916, #3 Batik Shirt Brothers 0.3904, #4 BrandenKMurray 0.3724, #5 No Fault of Our Own 0.3553. Public leaderboard rows do not identify owner repositories or prove any local TIFF score. This is an earlier historical observation, not the 22:02 UTC S22 result.",
       "feed": false
     },
     {
@@ -56,8 +68,8 @@
       "publisher": "DrivenData",
       "url": "https://www.drivendata.org/termsofuse/",
       "category": "compliance",
-      "used_for": "Decision: this project never automates access to drivendata.org",
-      "status": "quotes verified",
+      "used_for": "Manual-only project policy; evaluate potential conflict from S22 one-off research-tool access.",
+      "status": "Quoted terms recorded; S22 tool-mediated read disclosed in registry/irregularities.json; compliance undetermined.",
       "accessed": "2026-10-02",
       "evidence": "\"Use any robot, spider or other automatic device, process or means to access the Website for any purpose, including monitoring or copying any of the material on the Website.\"",
       "feed": false
@@ -254,7 +266,7 @@
       "used_for": "Date-stamped context only; no candidate score or owner association is inferred.",
       "status": "Public page read once manually on 2026-10-03. Not an automated fetch; no API polling or monitoring.",
       "accessed": "2026-10-03",
-      "evidence": "Observed DARD at rank 1 with 0.3195 and wbg1 at rank 15 with 0.2600. The rows do not establish the repository owner\u2019s identity or link either score to a local TIFF. The separate 0.2477 remains owner-reported without an organizer receipt. See registry/leaderboard_snapshot_2026-10-03.json.",
+      "evidence": "Observed DARD at rank 1 with 0.3195 and wbg1 at rank 15 with 0.2600. The rows do not establish the repository owner’s identity or link either score to a local TIFF. The separate 0.2477 remains owner-reported without an organizer receipt. See registry/leaderboard_snapshot_2026-10-03.json.",
       "feed": false
     },
     {
@@ -264,7 +276,7 @@
       "url": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
       "category": "candidate-data-and-provenance",
       "used_for": "Official provenance/context for the owner-mirrored LiDAR-derived terrain descriptors and H28-2 multi-scale scarp hypothesis",
-      "status": "Official USGS catalog page fetched 2026-10-03: public 1 m lidar-derived bare-earth DEM product. Product-level availability only; the challenge mirror\u2019s 716 tile links, bytes, datum consistency and footprint coverage have not been validated in this checkout.",
+      "status": "Official USGS catalog page fetched 2026-10-03: public 1 m lidar-derived bare-earth DEM product. Product-level availability only; the challenge mirror’s 716 tile links, bytes, datum consistency and footprint coverage have not been validated in this checkout.",
       "accessed": "2026-10-03",
       "evidence": "The catalog describes standard one-meter DEM tiles as lidar-derived bare-earth elevations, public domain, in UTM/NAD83 with NAVD88 elevations. The owner-mirrored 1m_DEM_links list is not a retrieval audit; actual tile availability and compatibility remain a pre-run data gate for H38-4.",
       "feed": false
@@ -276,7 +288,7 @@
       "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
       "category": "external layer (not yet used by any detector here)",
       "used_for": "Proposed detector FEATURE for surface-geothermal evidence of fault-hosted fluid pathways. Never as an emission habitat: h18-4 live-refuted bedrock-map-gap emission at 1.62x blind (evidence/sgmc_gap_inversion.json).",
-      "status": "OBTAINABLE \u2014 bytes fetched by the GitHub Actions runner 2026-10-03T16:25:32Z, 84,008 B, SHA-256 matches the independent 2026-09-30 pin; see evidence/external_layer_inventory.json",
+      "status": "OBTAINABLE — bytes fetched by the GitHub Actions runner 2026-10-03T16:25:32Z, 84,008 B, SHA-256 matches the independent 2026-09-30 pin; see evidence/external_layer_inventory.json",
       "accessed": "pin read 2026-10-02; file not accessed from this sandbox",
       "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); checkout workflow run metadata through branch head a58e74d for 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 (zero jobs, no logs); no run artifact.",
       "feed": false,
@@ -289,7 +301,7 @@
       "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
       "category": "external layer (not yet used by any detector here)",
       "used_for": "Proposed detector FEATURE: shallow (2 m) sediment/soil temperature anomalies are a direct, independently measured signature of permeable fault zones; absent from every layer this repo holds.",
-      "status": "OBTAINABLE \u2014 bytes fetched by the GitHub Actions runner 2026-10-03T16:25:32Z, 1,080,530 B, SHA-256 matches the independent 2026-09-30 pin; see evidence/external_layer_inventory.json",
+      "status": "OBTAINABLE — bytes fetched by the GitHub Actions runner 2026-10-03T16:25:32Z, 1,080,530 B, SHA-256 matches the independent 2026-09-30 pin; see evidence/external_layer_inventory.json",
       "accessed": "pin read 2026-10-02; file not accessed from this sandbox",
       "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); checkout workflow run metadata through branch head a58e74d for 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 (zero jobs, no logs); no run artifact.",
       "feed": false,
@@ -302,7 +314,7 @@
       "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
       "category": "external layer (not yet used by any detector here)",
       "used_for": "Proposed detector FEATURE: Quaternary volcanic units are cut by, and their vents sit on, young faults. This repo currently holds only 21 vent POINTS (data_cache/gdr_volcanic_vents_in_footprint.csv), not the polygons.",
-      "status": "OBTAINABLE \u2014 bytes fetched by the GitHub Actions runner 2026-10-03T16:25:32Z, 9,898,770 B, SHA-256 matches the independent 2026-09-30 pin; see evidence/external_layer_inventory.json",
+      "status": "OBTAINABLE — bytes fetched by the GitHub Actions runner 2026-10-03T16:25:32Z, 9,898,770 B, SHA-256 matches the independent 2026-09-30 pin; see evidence/external_layer_inventory.json",
       "accessed": "pin read 2026-10-02; file not accessed from this sandbox",
       "evidence": "Sibling runner provenance: 16GEMSDOE evidence/ci/external_verification.json (2026-09-30; retrieved by gh api on 2026-10-02); checkout workflow run metadata through branch head a58e74d for 37099986237, 37100053264, 37100608786, 37100751573, 37100935082, and 37101134684 (zero jobs, no logs); no run artifact.",
       "feed": false,
@@ -339,7 +351,7 @@
       "publisher": "U.S. Geological Survey ScienceBase",
       "url": "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
       "category": "candidate-external-data",
-      "used_for": "H38-2 queued hypothesis: measured geothermal-well heat-flow residual \u00d7 2 m temperature \u00d7 potential-field corridor.",
+      "used_for": "H38-2 queued hypothesis: measured geothermal-well heat-flow residual × 2 m temperature × potential-field corridor.",
       "status": "Official ScienceBase item page fetched 2026-10-03. It lists the Great Basin ZIP (124.12 MB) and describes a well residual. Listing/availability evidence only; no H38-2 layer was newly fetched, clipped, or schema-audited by this page check.",
       "accessed": "2026-10-03",
       "evidence": "DOI 10.5066/P9BZPVUC. ScienceBase describes the point residual as departure from estimated background conductive heat flow, potentially useful for hydrothermal or groundwater influence. evidence/external_layer_inventory.json separately records a runner HTTP 200 / pinned-byte match; this does not establish a local clip or footprint coverage.",
@@ -352,9 +364,9 @@
       "url": "https://www.sciencebase.gov/catalog/item/62979746d34ec53d276c113b",
       "category": "candidate-external-data",
       "used_for": "H38-5 queued coarse-context hypothesis: depth-boundary coherence across five magnetotelluric conductance layers.",
-      "status": "Official ScienceBase item page fetched 2026-10-03. Five 2\u2013200 km depth-slice GeoTIFFs are listed; listing and local runner availability do not establish that this checkout has five audited clips.",
+      "status": "Official ScienceBase item page fetched 2026-10-03. Five 2–200 km depth-slice GeoTIFFs are listed; listing and local runner availability do not establish that this checkout has five audited clips.",
       "accessed": "2026-10-03",
-      "evidence": "DOI 10.5066/P9TWT2LU. The release describes conductivity/conductance estimated from 800+ MT transfer functions and lists surface (2\u201312 km), middle crust (12\u201320 km), lower crust (20\u201350 km), upper mantle (50\u201390 km), and mantle (90\u2013200 km) rasters. Scale is regional and must not be interpreted as 100 m fault geometry.",
+      "evidence": "DOI 10.5066/P9TWT2LU. The release describes conductivity/conductance estimated from 800+ MT transfer functions and lists surface (2–12 km), middle crust (12–20 km), lower crust (20–50 km), upper mantle (50–90 km), and mantle (90–200 km) rasters. Scale is regional and must not be interpreted as 100 m fault geometry.",
       "feed": false
     },
     {
@@ -364,9 +376,9 @@
       "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
       "category": "competition",
       "used_for": "Dated S18 source verification",
-      "status": "One-off research-tool page observation; no receipt",
+      "status": "One-off research-tool page observation; no receipt; historical, superseded by S22",
       "accessed": "2026-10-25",
-      "evidence": "First displayed public row: xiaofanhu, public DW-Tversky 0.4413. This supersedes treating 0.3195 as a current target. First page chunk observed 2026-10-25 via research fetch tool, not a submission-page receipt. Does not identify the owner, local raster, private performance or future leaderboard state. No recurring DrivenData monitoring added.",
+      "evidence": "First displayed public row: xiaofanhu, public DW-Tversky 0.4413. This supersedes treating 0.3195 as a current target. First page chunk observed 2026-10-25 via research fetch tool, not a submission-page receipt. Does not identify the owner, local raster, private performance or future leaderboard state. No recurring DrivenData monitoring added. Do not treat as the current leaderboard.",
       "feed": false
     },
     {

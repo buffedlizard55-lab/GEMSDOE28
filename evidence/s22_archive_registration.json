@@ -1,0 +1,54 @@
+{
+  "scope": "Previously unregistered archived pairs; registration is not promotion or proof of historical portal submission",
+  "pairs": [
+    {
+      "manifest_key": "s22_archive_h27_all",
+      "nan_sha256": "344e7c857f363b195dbfd6e64a0a0e0fc77923c8c14d7830e53bfd2d5c05610c",
+      "allfinite_sha256": "f881810d6713a4bd8d6f9fd15bca99cc928ea052473bbd6a82c738d54dd4067b",
+      "same_footprint_values": true,
+      "source": "checked out repository bytes"
+    },
+    {
+      "manifest_key": "s22_archive_h27_prune",
+      "nan_sha256": "17c67554a1fde7607e9ffe9846433162035364eb4ef5ec3d2ab65778fe3bbdd2",
+      "allfinite_sha256": "7ae6f90df568a2578294968ec5e4a8a088653b569e5ab3c149afbe132ba29238",
+      "same_footprint_values": true,
+      "source": "checked out repository bytes"
+    },
+    {
+      "manifest_key": "s22_archive_h28_edge",
+      "nan_sha256": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411",
+      "allfinite_sha256": "60a7930a5ac229bb8a3a81656de49c1e228eab8398e0b26316972d516a2951f5",
+      "same_footprint_values": true,
+      "source": "checked out repository bytes"
+    },
+    {
+      "manifest_key": "s22_archive_h40_vent",
+      "nan_sha256": "149ba3dfee032bdc8f11c8b64f3f5b082671581fc9760e0d94ef520330996553",
+      "allfinite_sha256": "f0f50442dfe682911a2f49ee56d59a468b3f6b6f2ad35e90932532d3715abcc4",
+      "same_footprint_values": true,
+      "source": "checked out repository bytes"
+    },
+    {
+      "manifest_key": "s22_archive_h41_spring",
+      "nan_sha256": "4ff7626cc689d8c3a6f07d0b8512d76bc958c643d3efbeb49c01ffff09be1660",
+      "allfinite_sha256": "89fd98a638a0aebe2e9be6da6948eb879154f05312d6fff24e083794b9f41515",
+      "same_footprint_values": true,
+      "source": "checked out repository bytes"
+    },
+    {
+      "manifest_key": "s22_archive_h43",
+      "nan_sha256": "212439622ab36d282fee549b040df0d66d4c5a713a643685b5403ab0ed138ea9",
+      "allfinite_sha256": "960c3d493179deed8f743f0f6c5ab18fad1ca58a025b2dd57db565c36d56f117",
+      "same_footprint_values": true,
+      "source": "checked out repository bytes"
+    },
+    {
+      "manifest_key": "s22_archive_s21",
+      "nan_sha256": "a43ae055706f44e0896fdb68499f1f85f424250bd27ee5ea66b14dfd6c45c625",
+      "allfinite_sha256": "2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c",
+      "same_footprint_values": true,
+      "source": "checked out repository bytes"
+    }
+  ]
+}

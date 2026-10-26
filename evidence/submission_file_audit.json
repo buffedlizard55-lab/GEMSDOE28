@@ -1,6 +1,6 @@
 {
-  "checked_utc": "2026-10-26T22:23:58Z",
-  "status": "PASS",
+  "checked_utc": "2026-10-26T22:34:07Z",
+  "status": "FAIL",
   "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
   "network_access": "none",
   "template": {
@@ -21,7 +21,7 @@
     ],
     "footprint_pixels": 5167373
   },
-  "manifest_sha256": "712ce157e8467ea7680c809b9d62b5add7c3536fe9b9ffbcb4a152b369d4bc6f",
+  "manifest_sha256": "460bad7e6eb1be5e071848d23d66fc5dce7f7be3943f4e888a602e3c3710ea85",
   "checks": [
     {
       "check": "labels_grid_matches_template",
@@ -36,22 +36,27 @@
     {
       "check": "manifest_candidates_present",
       "pass": true,
-      "detail": "22 candidate(s) listed"
+      "detail": "23 candidate(s) listed"
     },
     {
       "check": "submission_names_present",
       "pass": true,
-      "detail": "22 artifact(s) have a registered portal name"
+      "detail": "23 artifact(s) have a registered portal name"
     },
     {
       "check": "submission_names_unique",
       "pass": true,
-      "detail": "22 registered name(s), all distinct"
+      "detail": "23 registered name(s), all distinct"
     },
     {
       "check": "primary_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h36-1-rung30-blind-r1-b531dae0a36f"
+    },
+    {
+      "check": "primary_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif"
     },
     {
       "check": "primary_content_addressed_name",
@@ -119,6 +124,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "primary_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif"
+    },
+    {
       "check": "primary_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif"
@@ -159,9 +169,19 @@
       "detail": "37660 cells equal 1.0"
     },
     {
+      "check": "primary_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "primary_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "primary_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.zip"
     },
     {
       "check": "primary_zip_exists",
@@ -186,7 +206,7 @@
     {
       "check": "primary_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "primary_note_length",
@@ -202,6 +222,11 @@
       "check": "secondary_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h38-1-hf-euler-r30-r1-56a9f473edc7"
+    },
+    {
+      "check": "secondary_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif"
     },
     {
       "check": "secondary_content_addressed_name",
@@ -269,6 +294,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "secondary_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif"
+    },
+    {
       "check": "secondary_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif"
@@ -309,9 +339,19 @@
       "detail": "37860 cells equal 1.0"
     },
     {
+      "check": "secondary_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "secondary_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "secondary_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.zip"
     },
     {
       "check": "secondary_zip_exists",
@@ -336,7 +376,7 @@
     {
       "check": "secondary_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "secondary_note_length",
@@ -352,6 +392,11 @@
       "check": "tertiary_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h27-4-r1-solo-d2-8-8acb75e1f2cc"
+    },
+    {
+      "check": "tertiary_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif"
     },
     {
       "check": "tertiary_content_addressed_name",
@@ -419,6 +464,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "tertiary_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif"
+    },
+    {
       "check": "tertiary_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-allfinite.tif"
@@ -459,9 +509,19 @@
       "detail": "40199 cells equal 1.0"
     },
     {
+      "check": "tertiary_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "tertiary_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "tertiary_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.zip"
     },
     {
       "check": "tertiary_zip_exists",
@@ -486,7 +546,7 @@
     {
       "check": "tertiary_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "tertiary_note_length",
@@ -502,6 +562,11 @@
       "check": "quaternary_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h32-1-prethin-tip-euler-d2-8-31e35eee884e"
+    },
+    {
+      "check": "quaternary_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.tif"
     },
     {
       "check": "quaternary_content_addressed_name",
@@ -569,6 +634,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "quaternary_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif"
+    },
+    {
       "check": "quaternary_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif"
@@ -609,9 +679,19 @@
       "detail": "42294 cells equal 1.0"
     },
     {
+      "check": "quaternary_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "quaternary_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "quaternary_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-nan.zip"
     },
     {
       "check": "quaternary_zip_exists",
@@ -636,7 +716,7 @@
     {
       "check": "quaternary_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "quaternary_note_length",
@@ -652,6 +732,11 @@
       "check": "quinary_probe_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-t-v2-topology-d1-5-5512495c6bd1"
+    },
+    {
+      "check": "quinary_probe_nan_safe_filename",
+      "pass": true,
+      "detail": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif"
     },
     {
       "check": "quinary_probe_content_addressed_name",
@@ -719,6 +804,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "quinary_probe_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif"
+    },
+    {
       "check": "quinary_probe_allfinite_file_exists",
       "pass": true,
       "detail": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif"
@@ -759,9 +849,19 @@
       "detail": "61328 cells equal 1.0"
     },
     {
+      "check": "quinary_probe_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "quinary_probe_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "quinary_probe_zip_safe_filename",
+      "pass": true,
+      "detail": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.zip"
     },
     {
       "check": "quinary_probe_zip_exists",
@@ -786,7 +886,7 @@
     {
       "check": "quinary_probe_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "quinary_probe_note_length",
@@ -802,6 +902,11 @@
       "check": "conservative_alternative_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h32-1-tip-euler-dejitter-d2-8-c3aeda1d31a3"
+    },
+    {
+      "check": "conservative_alternative_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif"
     },
     {
       "check": "conservative_alternative_content_addressed_name",
@@ -869,6 +974,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "conservative_alternative_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif"
+    },
+    {
       "check": "conservative_alternative_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif"
@@ -909,9 +1019,19 @@
       "detail": "41656 cells equal 1.0"
     },
     {
+      "check": "conservative_alternative_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "conservative_alternative_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "conservative_alternative_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.zip"
     },
     {
       "check": "conservative_alternative_zip_exists",
@@ -936,7 +1056,7 @@
     {
       "check": "conservative_alternative_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "conservative_alternative_note_length",
@@ -952,6 +1072,11 @@
       "check": "research_candidate_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h37-1-probe-union-pool-r1-52a13184267e"
+    },
+    {
+      "check": "research_candidate_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif"
     },
     {
       "check": "research_candidate_content_addressed_name",
@@ -1019,6 +1144,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "research_candidate_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif"
+    },
+    {
       "check": "research_candidate_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif"
@@ -1059,9 +1189,19 @@
       "detail": "38545 cells equal 1.0"
     },
     {
+      "check": "research_candidate_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "research_candidate_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "research_candidate_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.zip"
     },
     {
       "check": "research_candidate_zip_exists",
@@ -1086,7 +1226,7 @@
     {
       "check": "research_candidate_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "research_candidate_note_length",
@@ -1102,6 +1242,11 @@
       "check": "h37_1_falsified_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h37-1-coverprob-h19-5-r1-0bbddf41eb6d"
+    },
+    {
+      "check": "h37_1_falsified_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.tif"
     },
     {
       "check": "h37_1_falsified_content_addressed_name",
@@ -1169,6 +1314,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "h37_1_falsified_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif"
+    },
+    {
       "check": "h37_1_falsified_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif"
@@ -1209,9 +1359,19 @@
       "detail": "37447 cells equal 1.0"
     },
     {
+      "check": "h37_1_falsified_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "h37_1_falsified_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "h37_1_falsified_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-nan.zip"
     },
     {
       "check": "h37_1_falsified_zip_exists",
@@ -1236,7 +1396,7 @@
     {
       "check": "h37_1_falsified_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "h37_1_falsified_note_length",
@@ -1252,6 +1412,11 @@
       "check": "s15_candidate_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h39-1-depthslice-persist-b2-a86b8ed33727"
+    },
+    {
+      "check": "s15_candidate_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.tif"
     },
     {
       "check": "s15_candidate_content_addressed_name",
@@ -1319,6 +1484,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "s15_candidate_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-allfinite.tif"
+    },
+    {
       "check": "s15_candidate_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-allfinite.tif"
@@ -1359,9 +1529,19 @@
       "detail": "37695 cells equal 1.0"
     },
     {
+      "check": "s15_candidate_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "s15_candidate_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s15_candidate_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-nan.zip"
     },
     {
       "check": "s15_candidate_zip_exists",
@@ -1386,7 +1566,7 @@
     {
       "check": "s15_candidate_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "s15_candidate_note_length",
@@ -1402,6 +1582,11 @@
       "check": "s16_candidate_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h40-1-migration-b1-5f2efa891ce7"
+    },
+    {
+      "check": "s16_candidate_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.tif"
     },
     {
       "check": "s16_candidate_content_addressed_name",
@@ -1469,6 +1654,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "s16_candidate_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-allfinite.tif"
+    },
+    {
       "check": "s16_candidate_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-allfinite.tif"
@@ -1509,9 +1699,19 @@
       "detail": "37694 cells equal 1.0"
     },
     {
+      "check": "s16_candidate_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "s16_candidate_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s16_candidate_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h40-1-migration-b1-20261025-5f2efa891ce7-nan.zip"
     },
     {
       "check": "s16_candidate_zip_exists",
@@ -1536,7 +1736,7 @@
     {
       "check": "s16_candidate_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "s16_candidate_note_length",
@@ -1552,6 +1752,11 @@
       "check": "s18_h39_5_candidate_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h39-5-extrap-swap35-719b83fb659b"
+    },
+    {
+      "check": "s18_h39_5_candidate_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-nan.tif"
     },
     {
       "check": "s18_h39_5_candidate_content_addressed_name",
@@ -1619,6 +1824,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "s18_h39_5_candidate_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-allfinite.tif"
+    },
+    {
       "check": "s18_h39_5_candidate_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-allfinite.tif"
@@ -1659,9 +1869,19 @@
       "detail": "37521 cells equal 1.0"
     },
     {
+      "check": "s18_h39_5_candidate_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "s18_h39_5_candidate_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s18_h39_5_candidate_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h39-5-extrap-swap35-20261025-719b83fb659b-nan.zip"
     },
     {
       "check": "s18_h39_5_candidate_zip_exists",
@@ -1686,7 +1906,7 @@
     {
       "check": "s18_h39_5_candidate_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "s18_h39_5_candidate_note_length",
@@ -1702,6 +1922,11 @@
       "check": "s18b_candidate_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-h42-1-migx-reloc-b1-290553965159"
+    },
+    {
+      "check": "s18b_candidate_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-h42-1-migx-reloc-b1-20261025-290553965159-nan.tif"
     },
     {
       "check": "s18b_candidate_content_addressed_name",
@@ -1769,6 +1994,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "s18b_candidate_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h42-1-migx-reloc-b1-20261025-290553965159-allfinite.tif"
+    },
+    {
       "check": "s18b_candidate_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h42-1-migx-reloc-b1-20261025-290553965159-allfinite.tif"
@@ -1809,9 +2039,19 @@
       "detail": "34492 cells equal 1.0"
     },
     {
+      "check": "s18b_candidate_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "s18b_candidate_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s18b_candidate_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h42-1-migx-reloc-b1-20261025-290553965159-nan.zip"
     },
     {
       "check": "s18b_candidate_zip_exists",
@@ -1836,7 +2076,7 @@
     {
       "check": "s18b_candidate_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "s18b_candidate_note_length",
@@ -1852,6 +2092,11 @@
       "check": "s19b_candidate_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-S19-RADLIN-6fa38f9d317b"
+    },
+    {
+      "check": "s19b_candidate_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.tif"
     },
     {
       "check": "s19b_candidate_content_addressed_name",
@@ -1919,6 +2164,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "s19b_candidate_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif"
+    },
+    {
       "check": "s19b_candidate_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif"
@@ -1959,9 +2209,19 @@
       "detail": "37654 cells equal 1.0"
     },
     {
+      "check": "s19b_candidate_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "s19b_candidate_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s19b_candidate_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.zip"
     },
     {
       "check": "s19b_candidate_zip_exists",
@@ -1986,7 +2246,7 @@
     {
       "check": "s19b_candidate_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "s19b_candidate_note_length",
@@ -2002,6 +2262,11 @@
       "check": "s20v_candidate_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-s20-vesselness-lidarstep-7a7c5e449fe0"
+    },
+    {
+      "check": "s20v_candidate_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-nan.tif"
     },
     {
       "check": "s20v_candidate_content_addressed_name",
@@ -2069,6 +2334,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "s20v_candidate_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif"
+    },
+    {
       "check": "s20v_candidate_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif"
@@ -2109,9 +2379,19 @@
       "detail": "37500 cells equal 1.0"
     },
     {
+      "check": "s20v_candidate_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "s20v_candidate_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s20v_candidate_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-nan.zip"
     },
     {
       "check": "s20v_candidate_zip_exists",
@@ -2136,7 +2416,7 @@
     {
       "check": "s20v_candidate_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "s20v_candidate_note_length",
@@ -2152,6 +2432,11 @@
       "check": "s20_nchc_candidate_submission_name_content_id",
       "pass": true,
       "detail": "GEMSDOE28-S20-NCHC-20261026-d432a1d5d6ee"
+    },
+    {
+      "check": "s20_nchc_candidate_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-s20-nchc-20261026-d432a1d5d6ee-nan.tif"
     },
     {
       "check": "s20_nchc_candidate_content_addressed_name",
@@ -2219,6 +2504,11 @@
       "detail": "no infinity anywhere"
     },
     {
+      "check": "s20_nchc_candidate_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif"
+    },
+    {
       "check": "s20_nchc_candidate_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif"
@@ -2259,9 +2549,19 @@
       "detail": "40071 cells equal 1.0"
     },
     {
+      "check": "s20_nchc_candidate_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
       "check": "s20_nchc_candidate_allfinite_no_catalogue_overlap",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s20_nchc_candidate_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-s20-nchc-20261026-d432a1d5d6ee-nan.zip"
     },
     {
       "check": "s20_nchc_candidate_zip_exists",
@@ -2286,7 +2586,7 @@
     {
       "check": "s20_nchc_candidate_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
       "check": "s20_nchc_candidate_note_length",
@@ -2299,929 +2599,1379 @@
       "detail": "gems28-s20-nchc-20261026-d432a1d5d6ee.note.txt"
     },
     {
-      "check": "orphan_h27_8_allincrements_submission_name_content_id",
+      "check": "s22_archive_h27_all_submission_name_content_id",
       "pass": true,
-      "detail": "GEMSDOE27-H27-8-ALLINCREMENTS-23ad46a4d7ba"
+      "detail": "GEMSDOE28-archive-reference-23ad46a4d7ba"
     },
     {
-      "check": "orphan_h27_8_allincrements_content_addressed_name",
+      "check": "s22_archive_h27_all_research_archive_not_approved",
+      "pass": true,
+      "detail": "Archived research is never upload approval"
+    },
+    {
+      "check": "s22_archive_h27_all_nan_safe_filename",
       "pass": true,
       "detail": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_file_exists",
+      "check": "s22_archive_h27_all_content_addressed_name",
       "pass": true,
       "detail": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_byte_count",
+      "check": "s22_archive_h27_all_nan_file_exists",
+      "pass": true,
+      "detail": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif"
+    },
+    {
+      "check": "s22_archive_h27_all_nan_byte_count",
       "pass": true,
       "detail": "1598402 bytes"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_sha256",
+      "check": "s22_archive_h27_all_nan_sha256",
       "pass": true,
       "detail": "344e7c857f363b195dbfd6e64a0a0e0fc77923c8c14d7830e53bfd2d5c05610c"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_grid",
+      "check": "s22_archive_h27_all_nan_grid",
       "pass": true,
       "detail": "CRS/shape/transform equal the sample template"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_single_band_float32",
+      "check": "s22_archive_h27_all_nan_single_band_float32",
       "pass": true,
       "detail": "count=1 dtype=float32"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_inside_finite",
+      "check": "s22_archive_h27_all_nan_inside_finite",
       "pass": true,
       "detail": "nonfinite inside=0"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_inside_0_1",
+      "check": "s22_archive_h27_all_nan_inside_0_1",
       "pass": true,
       "detail": "finite inside range=[0, 1]"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_exact_binary",
+      "check": "s22_archive_h27_all_nan_exact_binary",
       "pass": true,
       "detail": "inside values are exactly 0.0 or 1.0"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_outside_nan",
+      "check": "s22_archive_h27_all_nan_outside_nan",
       "pass": true,
       "detail": "outside NaN count=7111787/7111787; nodata=NaN"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_emitted_count",
+      "check": "s22_archive_h27_all_nan_emitted_count",
       "pass": true,
       "detail": "41507 cells equal 1.0"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_no_catalogue_overlap",
+      "check": "s22_archive_h27_all_nan_no_catalogue_overlap",
       "pass": true,
       "detail": "positive catalogue overlap=0"
     },
     {
-      "check": "orphan_h27_8_allincrements_nan_no_infinities",
+      "check": "s22_archive_h27_all_nan_no_infinities",
       "pass": true,
       "detail": "no infinity anywhere"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_file_exists",
+      "check": "s22_archive_h27_all_allfinite_safe_filename",
       "pass": true,
       "detail": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_content_addressed_name",
+      "check": "s22_archive_h27_all_allfinite_file_exists",
       "pass": true,
       "detail": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_byte_count",
+      "check": "s22_archive_h27_all_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h27_all_allfinite_byte_count",
       "pass": true,
       "detail": "832396 bytes"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_sha256",
+      "check": "s22_archive_h27_all_allfinite_sha256",
       "pass": true,
       "detail": "f881810d6713a4bd8d6f9fd15bca99cc928ea052473bbd6a82c738d54dd4067b"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_grid_and_type",
+      "check": "s22_archive_h27_all_allfinite_grid_and_type",
       "pass": true,
       "detail": "single float32 band on exact template grid"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_range",
+      "check": "s22_archive_h27_all_allfinite_range",
       "pass": true,
       "detail": "whole array finite; inside range=[0,1]"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_outside_zero",
+      "check": "s22_archive_h27_all_allfinite_outside_zero",
       "pass": true,
       "detail": "outside zero; no nodata tag"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_emitted_count",
+      "check": "s22_archive_h27_all_allfinite_emitted_count",
       "pass": true,
       "detail": "41507 cells equal 1.0"
     },
     {
-      "check": "orphan_h27_8_allincrements_allfinite_no_catalogue_overlap",
+      "check": "s22_archive_h27_all_variant_footprint_values_equal",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
     },
     {
-      "check": "orphan_h27_8_allincrements_zip_exists",
+      "check": "s22_archive_h27_all_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_archive_h27_all_zip_safe_filename",
       "pass": true,
       "detail": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.zip"
     },
     {
-      "check": "orphan_h27_8_allincrements_zip_byte_count",
+      "check": "s22_archive_h27_all_zip_exists",
+      "pass": true,
+      "detail": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.zip"
+    },
+    {
+      "check": "s22_archive_h27_all_zip_byte_count",
       "pass": true,
       "detail": "310496 bytes"
     },
     {
-      "check": "orphan_h27_8_allincrements_zip_sha256",
+      "check": "s22_archive_h27_all_zip_sha256",
       "pass": true,
       "detail": "67d94c00cc37c58ef8ecefa9f1da65bbfd66b3eafd557cf5626fcf3a04e2c666"
     },
     {
-      "check": "orphan_h27_8_allincrements_zip_single_tif",
+      "check": "s22_archive_h27_all_zip_single_tif",
       "pass": true,
       "detail": "members=['gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif']"
     },
     {
-      "check": "orphan_h27_8_allincrements_zip_byte_identical",
+      "check": "s22_archive_h27_all_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
-      "check": "orphan_h27_8_allincrements_note_length",
+      "check": "s22_archive_h27_all_note_length",
       "pass": true,
-      "detail": "172 chars; max 200"
+      "detail": "132 chars; max 200"
     },
     {
-      "check": "orphan_h27_8_allincrements_note_file_matches",
+      "check": "s22_archive_h27_all_note_file_matches",
       "pass": true,
-      "detail": "note-gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.txt"
+      "detail": "note-gemsdoe28-h27-8-23ad46a4d7ba.txt"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_submission_name_content_id",
+      "check": "s22_archive_h27_prune_submission_name_content_id",
       "pass": true,
-      "detail": "GEMSDOE27-H27-4-R1-PRUNED-D15-450eb6859636"
+      "detail": "GEMSDOE28-archive-reference-450eb6859636"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_content_addressed_name",
+      "check": "s22_archive_h27_prune_research_archive_not_approved",
+      "pass": true,
+      "detail": "Archived research is never upload approval"
+    },
+    {
+      "check": "s22_archive_h27_prune_nan_safe_filename",
       "pass": true,
       "detail": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_file_exists",
+      "check": "s22_archive_h27_prune_content_addressed_name",
       "pass": true,
       "detail": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_byte_count",
+      "check": "s22_archive_h27_prune_nan_file_exists",
+      "pass": true,
+      "detail": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif"
+    },
+    {
+      "check": "s22_archive_h27_prune_nan_byte_count",
       "pass": true,
       "detail": "1622840 bytes"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_sha256",
+      "check": "s22_archive_h27_prune_nan_sha256",
       "pass": true,
       "detail": "17c67554a1fde7607e9ffe9846433162035364eb4ef5ec3d2ab65778fe3bbdd2"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_grid",
+      "check": "s22_archive_h27_prune_nan_grid",
       "pass": true,
       "detail": "CRS/shape/transform equal the sample template"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_single_band_float32",
+      "check": "s22_archive_h27_prune_nan_single_band_float32",
       "pass": true,
       "detail": "count=1 dtype=float32"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_inside_finite",
+      "check": "s22_archive_h27_prune_nan_inside_finite",
       "pass": true,
       "detail": "nonfinite inside=0"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_inside_0_1",
+      "check": "s22_archive_h27_prune_nan_inside_0_1",
       "pass": true,
       "detail": "finite inside range=[0, 1]"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_exact_binary",
+      "check": "s22_archive_h27_prune_nan_exact_binary",
       "pass": true,
       "detail": "inside values are exactly 0.0 or 1.0"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_outside_nan",
+      "check": "s22_archive_h27_prune_nan_outside_nan",
       "pass": true,
       "detail": "outside NaN count=7111787/7111787; nodata=NaN"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_emitted_count",
+      "check": "s22_archive_h27_prune_nan_emitted_count",
       "pass": true,
       "detail": "54714 cells equal 1.0"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_no_catalogue_overlap",
+      "check": "s22_archive_h27_prune_nan_no_catalogue_overlap",
       "pass": true,
       "detail": "positive catalogue overlap=0"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_nan_no_infinities",
+      "check": "s22_archive_h27_prune_nan_no_infinities",
       "pass": true,
       "detail": "no infinity anywhere"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_file_exists",
+      "check": "s22_archive_h27_prune_allfinite_safe_filename",
       "pass": true,
       "detail": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-allfinite.tif"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_content_addressed_name",
+      "check": "s22_archive_h27_prune_allfinite_file_exists",
       "pass": true,
       "detail": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-allfinite.tif"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_byte_count",
+      "check": "s22_archive_h27_prune_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h27_prune_allfinite_byte_count",
       "pass": true,
       "detail": "854790 bytes"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_sha256",
+      "check": "s22_archive_h27_prune_allfinite_sha256",
       "pass": true,
       "detail": "7ae6f90df568a2578294968ec5e4a8a088653b569e5ab3c149afbe132ba29238"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_grid_and_type",
+      "check": "s22_archive_h27_prune_allfinite_grid_and_type",
       "pass": true,
       "detail": "single float32 band on exact template grid"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_range",
+      "check": "s22_archive_h27_prune_allfinite_range",
       "pass": true,
       "detail": "whole array finite; inside range=[0,1]"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_outside_zero",
+      "check": "s22_archive_h27_prune_allfinite_outside_zero",
       "pass": true,
       "detail": "outside zero; no nodata tag"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_emitted_count",
+      "check": "s22_archive_h27_prune_allfinite_emitted_count",
       "pass": true,
       "detail": "54714 cells equal 1.0"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_allfinite_no_catalogue_overlap",
+      "check": "s22_archive_h27_prune_variant_footprint_values_equal",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_zip_exists",
+      "check": "s22_archive_h27_prune_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_archive_h27_prune_zip_safe_filename",
       "pass": true,
       "detail": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.zip"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_zip_byte_count",
+      "check": "s22_archive_h27_prune_zip_exists",
+      "pass": true,
+      "detail": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.zip"
+    },
+    {
+      "check": "s22_archive_h27_prune_zip_byte_count",
       "pass": true,
       "detail": "353966 bytes"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_zip_sha256",
+      "check": "s22_archive_h27_prune_zip_sha256",
       "pass": true,
       "detail": "7a44371dbff63363526be03f57b8fac1730a9ebb85576dcabb2aa2b76daca6d5"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_zip_single_tif",
+      "check": "s22_archive_h27_prune_zip_single_tif",
       "pass": true,
       "detail": "members=['gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif']"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_zip_byte_identical",
+      "check": "s22_archive_h27_prune_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_note_length",
+      "check": "s22_archive_h27_prune_note_length",
       "pass": true,
       "detail": "125 chars; max 200"
     },
     {
-      "check": "orphan_h27_4_r1_pruned_note_file_matches",
+      "check": "s22_archive_h27_prune_note_file_matches",
       "pass": true,
       "detail": "note-gemsdoe28-h27-4-r1-450eb6859636.txt"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_submission_name_content_id",
+      "check": "s22_archive_h28_edge_submission_name_content_id",
       "pass": true,
-      "detail": "GEMSDOE27-H28-1-EDGECOH-1113fba5f6cb"
+      "detail": "GEMSDOE28-archive-reference-1113fba5f6cb"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_content_addressed_name",
+      "check": "s22_archive_h28_edge_research_archive_not_approved",
+      "pass": true,
+      "detail": "Archived research is never upload approval"
+    },
+    {
+      "check": "s22_archive_h28_edge_nan_safe_filename",
       "pass": true,
       "detail": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_file_exists",
+      "check": "s22_archive_h28_edge_content_addressed_name",
       "pass": true,
       "detail": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_byte_count",
+      "check": "s22_archive_h28_edge_nan_file_exists",
+      "pass": true,
+      "detail": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif"
+    },
+    {
+      "check": "s22_archive_h28_edge_nan_byte_count",
       "pass": true,
       "detail": "1630604 bytes"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_sha256",
+      "check": "s22_archive_h28_edge_nan_sha256",
       "pass": true,
       "detail": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_grid",
+      "check": "s22_archive_h28_edge_nan_grid",
       "pass": true,
       "detail": "CRS/shape/transform equal the sample template"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_single_band_float32",
+      "check": "s22_archive_h28_edge_nan_single_band_float32",
       "pass": true,
       "detail": "count=1 dtype=float32"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_inside_finite",
+      "check": "s22_archive_h28_edge_nan_inside_finite",
       "pass": true,
       "detail": "nonfinite inside=0"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_inside_0_1",
+      "check": "s22_archive_h28_edge_nan_inside_0_1",
       "pass": true,
       "detail": "finite inside range=[0, 1]"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_exact_binary",
+      "check": "s22_archive_h28_edge_nan_exact_binary",
       "pass": true,
       "detail": "inside values are exactly 0.0 or 1.0"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_outside_nan",
+      "check": "s22_archive_h28_edge_nan_outside_nan",
       "pass": true,
       "detail": "outside NaN count=7111787/7111787; nodata=NaN"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_emitted_count",
+      "check": "s22_archive_h28_edge_nan_emitted_count",
       "pass": true,
       "detail": "59075 cells equal 1.0"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_no_catalogue_overlap",
+      "check": "s22_archive_h28_edge_nan_no_catalogue_overlap",
       "pass": true,
       "detail": "positive catalogue overlap=0"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_nan_no_infinities",
+      "check": "s22_archive_h28_edge_nan_no_infinities",
       "pass": true,
       "detail": "no infinity anywhere"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_file_exists",
+      "check": "s22_archive_h28_edge_allfinite_safe_filename",
       "pass": true,
       "detail": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_content_addressed_name",
+      "check": "s22_archive_h28_edge_allfinite_file_exists",
       "pass": true,
       "detail": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_byte_count",
+      "check": "s22_archive_h28_edge_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h28_edge_allfinite_byte_count",
       "pass": true,
       "detail": "863814 bytes"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_sha256",
+      "check": "s22_archive_h28_edge_allfinite_sha256",
       "pass": true,
       "detail": "60a7930a5ac229bb8a3a81656de49c1e228eab8398e0b26316972d516a2951f5"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_grid_and_type",
+      "check": "s22_archive_h28_edge_allfinite_grid_and_type",
       "pass": true,
       "detail": "single float32 band on exact template grid"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_range",
+      "check": "s22_archive_h28_edge_allfinite_range",
       "pass": true,
       "detail": "whole array finite; inside range=[0,1]"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_outside_zero",
+      "check": "s22_archive_h28_edge_allfinite_outside_zero",
       "pass": true,
       "detail": "outside zero; no nodata tag"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_emitted_count",
+      "check": "s22_archive_h28_edge_allfinite_emitted_count",
       "pass": true,
       "detail": "59075 cells equal 1.0"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_allfinite_no_catalogue_overlap",
+      "check": "s22_archive_h28_edge_variant_footprint_values_equal",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_zip_exists",
+      "check": "s22_archive_h28_edge_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_archive_h28_edge_zip_safe_filename",
       "pass": true,
       "detail": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.zip"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_zip_byte_count",
+      "check": "s22_archive_h28_edge_zip_exists",
+      "pass": true,
+      "detail": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.zip"
+    },
+    {
+      "check": "s22_archive_h28_edge_zip_byte_count",
       "pass": true,
       "detail": "355484 bytes"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_zip_sha256",
+      "check": "s22_archive_h28_edge_zip_sha256",
       "pass": true,
       "detail": "6570c7a97db51c238750f66cb3e828935f75a091dca8f7252122a961ff5daa11"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_zip_single_tif",
+      "check": "s22_archive_h28_edge_zip_single_tif",
       "pass": true,
       "detail": "members=['gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif']"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_zip_byte_identical",
+      "check": "s22_archive_h28_edge_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_note_length",
+      "check": "s22_archive_h28_edge_note_length",
       "pass": true,
-      "detail": "142 chars; max 200"
+      "detail": "138 chars; max 200"
     },
     {
-      "check": "orphan_h28_1_edge_coherence_note_file_matches",
+      "check": "s22_archive_h28_edge_note_file_matches",
       "pass": true,
-      "detail": "note-gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.txt"
+      "detail": "note-gemsdoe28-h28-1-1113fba5f6cb.txt"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_submission_name_content_id",
+      "check": "s22_archive_h40_vent_submission_name_content_id",
       "pass": true,
-      "detail": "GEMSDOE28-H40-1-THERMALVENT-7935260dcfad"
+      "detail": "GEMSDOE28-archive-reference-7935260dcfad"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_content_addressed_name",
+      "check": "s22_archive_h40_vent_research_archive_not_approved",
+      "pass": true,
+      "detail": "Archived research is never upload approval"
+    },
+    {
+      "check": "s22_archive_h40_vent_nan_safe_filename",
       "pass": true,
       "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_file_exists",
+      "check": "s22_archive_h40_vent_content_addressed_name",
       "pass": true,
       "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_byte_count",
+      "check": "s22_archive_h40_vent_nan_file_exists",
+      "pass": true,
+      "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif"
+    },
+    {
+      "check": "s22_archive_h40_vent_nan_byte_count",
       "pass": true,
       "detail": "1590874 bytes"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_sha256",
+      "check": "s22_archive_h40_vent_nan_sha256",
       "pass": true,
       "detail": "149ba3dfee032bdc8f11c8b64f3f5b082671581fc9760e0d94ef520330996553"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_grid",
+      "check": "s22_archive_h40_vent_nan_grid",
       "pass": true,
       "detail": "CRS/shape/transform equal the sample template"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_single_band_float32",
+      "check": "s22_archive_h40_vent_nan_single_band_float32",
       "pass": true,
       "detail": "count=1 dtype=float32"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_inside_finite",
+      "check": "s22_archive_h40_vent_nan_inside_finite",
       "pass": true,
       "detail": "nonfinite inside=0"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_inside_0_1",
+      "check": "s22_archive_h40_vent_nan_inside_0_1",
       "pass": true,
       "detail": "finite inside range=[0, 1]"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_exact_binary",
+      "check": "s22_archive_h40_vent_nan_exact_binary",
       "pass": true,
       "detail": "inside values are exactly 0.0 or 1.0"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_outside_nan",
+      "check": "s22_archive_h40_vent_nan_outside_nan",
       "pass": true,
       "detail": "outside NaN count=7111787/7111787; nodata=NaN"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_emitted_count",
+      "check": "s22_archive_h40_vent_nan_emitted_count",
       "pass": true,
       "detail": "37677 cells equal 1.0"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_no_catalogue_overlap",
+      "check": "s22_archive_h40_vent_nan_no_catalogue_overlap",
       "pass": true,
       "detail": "positive catalogue overlap=0"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_nan_no_infinities",
+      "check": "s22_archive_h40_vent_nan_no_infinities",
       "pass": true,
       "detail": "no infinity anywhere"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_zip_exists",
+      "check": "s22_archive_h40_vent_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_file_exists",
+      "pass": true,
+      "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_byte_count",
+      "pass": true,
+      "detail": "825484 bytes"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_sha256",
+      "pass": true,
+      "detail": "f0f50442dfe682911a2f49ee56d59a468b3f6b6f2ad35e90932532d3715abcc4"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_grid_and_type",
+      "pass": true,
+      "detail": "single float32 band on exact template grid"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_range",
+      "pass": true,
+      "detail": "whole array finite; inside range=[0,1]"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_outside_zero",
+      "pass": false,
+      "detail": "outside zero; no nodata tag"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_emitted_count",
+      "pass": true,
+      "detail": "37677 cells equal 1.0"
+    },
+    {
+      "check": "s22_archive_h40_vent_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
+      "check": "s22_archive_h40_vent_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_archive_h40_vent_zip_safe_filename",
       "pass": true,
       "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.zip"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_zip_byte_count",
+      "check": "s22_archive_h40_vent_zip_exists",
+      "pass": true,
+      "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.zip"
+    },
+    {
+      "check": "s22_archive_h40_vent_zip_byte_count",
       "pass": true,
       "detail": "294411 bytes"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_zip_sha256",
+      "check": "s22_archive_h40_vent_zip_sha256",
       "pass": true,
       "detail": "a9119b2fbe15e642b19f9082bf020953d7a79f514bf7ecfc62fcf025a0477fc2"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_zip_single_tif",
+      "check": "s22_archive_h40_vent_zip_single_tif",
       "pass": true,
       "detail": "members=['gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif']"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_zip_byte_identical",
+      "check": "s22_archive_h40_vent_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
-      "check": "orphan_h40_1_thermal_vent_note_length",
+      "check": "s22_archive_h40_vent_note_length",
       "pass": true,
-      "detail": "168 chars; max 200"
+      "detail": "69 chars; max 200"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_submission_name_content_id",
+      "check": "s22_archive_h41_spring_submission_name_content_id",
       "pass": true,
-      "detail": "GEMSDOE28-H41-1-THERMALSPRING-73e2b0bd94a8"
+      "detail": "GEMSDOE28-archive-reference-73e2b0bd94a8"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_content_addressed_name",
+      "check": "s22_archive_h41_spring_research_archive_not_approved",
+      "pass": true,
+      "detail": "Archived research is never upload approval"
+    },
+    {
+      "check": "s22_archive_h41_spring_nan_safe_filename",
       "pass": true,
       "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_file_exists",
+      "check": "s22_archive_h41_spring_content_addressed_name",
       "pass": true,
       "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_byte_count",
+      "check": "s22_archive_h41_spring_nan_file_exists",
+      "pass": true,
+      "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif"
+    },
+    {
+      "check": "s22_archive_h41_spring_nan_byte_count",
       "pass": true,
       "detail": "1591554 bytes"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_sha256",
+      "check": "s22_archive_h41_spring_nan_sha256",
       "pass": true,
       "detail": "4ff7626cc689d8c3a6f07d0b8512d76bc958c643d3efbeb49c01ffff09be1660"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_grid",
+      "check": "s22_archive_h41_spring_nan_grid",
       "pass": true,
       "detail": "CRS/shape/transform equal the sample template"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_single_band_float32",
+      "check": "s22_archive_h41_spring_nan_single_band_float32",
       "pass": true,
       "detail": "count=1 dtype=float32"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_inside_finite",
+      "check": "s22_archive_h41_spring_nan_inside_finite",
       "pass": true,
       "detail": "nonfinite inside=0"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_inside_0_1",
+      "check": "s22_archive_h41_spring_nan_inside_0_1",
       "pass": true,
       "detail": "finite inside range=[0, 1]"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_exact_binary",
+      "check": "s22_archive_h41_spring_nan_exact_binary",
       "pass": true,
       "detail": "inside values are exactly 0.0 or 1.0"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_outside_nan",
+      "check": "s22_archive_h41_spring_nan_outside_nan",
       "pass": true,
       "detail": "outside NaN count=7111787/7111787; nodata=NaN"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_emitted_count",
+      "check": "s22_archive_h41_spring_nan_emitted_count",
       "pass": true,
       "detail": "38024 cells equal 1.0"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_no_catalogue_overlap",
+      "check": "s22_archive_h41_spring_nan_no_catalogue_overlap",
       "pass": true,
       "detail": "positive catalogue overlap=0"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_nan_no_infinities",
+      "check": "s22_archive_h41_spring_nan_no_infinities",
       "pass": true,
       "detail": "no infinity anywhere"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_zip_exists",
+      "check": "s22_archive_h41_spring_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_file_exists",
+      "pass": true,
+      "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_byte_count",
+      "pass": true,
+      "detail": "826124 bytes"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_sha256",
+      "pass": true,
+      "detail": "89fd98a638a0aebe2e9be6da6948eb879154f05312d6fff24e083794b9f41515"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_grid_and_type",
+      "pass": true,
+      "detail": "single float32 band on exact template grid"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_range",
+      "pass": true,
+      "detail": "whole array finite; inside range=[0,1]"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_outside_zero",
+      "pass": false,
+      "detail": "outside zero; no nodata tag"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_emitted_count",
+      "pass": true,
+      "detail": "38024 cells equal 1.0"
+    },
+    {
+      "check": "s22_archive_h41_spring_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
+      "check": "s22_archive_h41_spring_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_archive_h41_spring_zip_safe_filename",
       "pass": true,
       "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.zip"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_zip_byte_count",
+      "check": "s22_archive_h41_spring_zip_exists",
+      "pass": true,
+      "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.zip"
+    },
+    {
+      "check": "s22_archive_h41_spring_zip_byte_count",
       "pass": true,
       "detail": "295407 bytes"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_zip_sha256",
+      "check": "s22_archive_h41_spring_zip_sha256",
       "pass": true,
       "detail": "ba04153405f2476c8023f4cd4c59d84e8c05bd08a4f079157181e300f7445b05"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_zip_single_tif",
+      "check": "s22_archive_h41_spring_zip_single_tif",
       "pass": true,
       "detail": "members=['gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif']"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_zip_byte_identical",
+      "check": "s22_archive_h41_spring_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
-      "check": "orphan_h41_1_thermal_spring_note_length",
+      "check": "s22_archive_h41_spring_note_length",
       "pass": true,
-      "detail": "174 chars; max 200"
+      "detail": "69 chars; max 200"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_submission_name_content_id",
+      "check": "s22_archive_h43_submission_name_content_id",
       "pass": true,
-      "detail": "GEMSDOE28-H43-1-TPB2GKC-76737f19814e"
+      "detail": "GEMSDOE28-archive-reference-76737f19814e"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_content_addressed_name",
+      "check": "s22_archive_h43_research_archive_not_approved",
+      "pass": true,
+      "detail": "Archived research is never upload approval"
+    },
+    {
+      "check": "s22_archive_h43_nan_safe_filename",
       "pass": true,
       "detail": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-nan.tif"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_file_exists",
+      "check": "s22_archive_h43_content_addressed_name",
       "pass": true,
       "detail": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-nan.tif"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_byte_count",
+      "check": "s22_archive_h43_nan_file_exists",
+      "pass": true,
+      "detail": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-nan.tif"
+    },
+    {
+      "check": "s22_archive_h43_nan_byte_count",
       "pass": true,
       "detail": "1582326 bytes"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_sha256",
+      "check": "s22_archive_h43_nan_sha256",
       "pass": true,
       "detail": "212439622ab36d282fee549b040df0d66d4c5a713a643685b5403ab0ed138ea9"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_grid",
+      "check": "s22_archive_h43_nan_grid",
       "pass": true,
       "detail": "CRS/shape/transform equal the sample template"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_single_band_float32",
+      "check": "s22_archive_h43_nan_single_band_float32",
       "pass": true,
       "detail": "count=1 dtype=float32"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_inside_finite",
+      "check": "s22_archive_h43_nan_inside_finite",
       "pass": true,
       "detail": "nonfinite inside=0"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_inside_0_1",
+      "check": "s22_archive_h43_nan_inside_0_1",
       "pass": true,
       "detail": "finite inside range=[0, 1]"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_exact_binary",
+      "check": "s22_archive_h43_nan_exact_binary",
       "pass": true,
       "detail": "inside values are exactly 0.0 or 1.0"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_outside_nan",
+      "check": "s22_archive_h43_nan_outside_nan",
       "pass": true,
       "detail": "outside NaN count=7111787/7111787; nodata=NaN"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_emitted_count",
+      "check": "s22_archive_h43_nan_emitted_count",
       "pass": true,
       "detail": "33354 cells equal 1.0"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_no_catalogue_overlap",
+      "check": "s22_archive_h43_nan_no_catalogue_overlap",
       "pass": true,
       "detail": "positive catalogue overlap=0"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_nan_no_infinities",
+      "check": "s22_archive_h43_nan_no_infinities",
       "pass": true,
       "detail": "no infinity anywhere"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_file_exists",
+      "check": "s22_archive_h43_allfinite_safe_filename",
       "pass": true,
       "detail": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_content_addressed_name",
+      "check": "s22_archive_h43_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_byte_count",
+      "check": "s22_archive_h43_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_h43_allfinite_byte_count",
       "pass": true,
       "detail": "817614 bytes"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_sha256",
+      "check": "s22_archive_h43_allfinite_sha256",
       "pass": true,
       "detail": "960c3d493179deed8f743f0f6c5ab18fad1ca58a025b2dd57db565c36d56f117"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_grid_and_type",
+      "check": "s22_archive_h43_allfinite_grid_and_type",
       "pass": true,
       "detail": "single float32 band on exact template grid"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_range",
+      "check": "s22_archive_h43_allfinite_range",
       "pass": true,
       "detail": "whole array finite; inside range=[0,1]"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_outside_zero",
+      "check": "s22_archive_h43_allfinite_outside_zero",
       "pass": true,
       "detail": "outside zero; no nodata tag"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_emitted_count",
+      "check": "s22_archive_h43_allfinite_emitted_count",
       "pass": true,
       "detail": "33354 cells equal 1.0"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_allfinite_no_catalogue_overlap",
+      "check": "s22_archive_h43_variant_footprint_values_equal",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_note_length",
+      "check": "s22_archive_h43_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_archive_h43_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.zip"
+    },
+    {
+      "check": "s22_archive_h43_zip_exists",
+      "pass": true,
+      "detail": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.zip"
+    },
+    {
+      "check": "s22_archive_h43_zip_byte_count",
+      "pass": true,
+      "detail": "171902 bytes"
+    },
+    {
+      "check": "s22_archive_h43_zip_sha256",
+      "pass": true,
+      "detail": "ca6b3cb0e74875e9d8e96aad88fe0eaa5070a68b9738c891533ae57abd9fdb52"
+    },
+    {
+      "check": "s22_archive_h43_zip_single_tif",
+      "pass": true,
+      "detail": "members=['gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif']"
+    },
+    {
+      "check": "s22_archive_h43_zip_byte_identical",
+      "pass": true,
+      "detail": "single member matches the registered TIFF byte-for-byte"
+    },
+    {
+      "check": "s22_archive_h43_note_length",
       "pass": true,
       "detail": "104 chars; max 200"
     },
     {
-      "check": "orphan_h43_1_tpb2gkc_note_file_matches",
+      "check": "s22_archive_h43_note_file_matches",
       "pass": true,
       "detail": "note-gems28-h43-1-tpb2gkc-20261026-76737f19814e.txt"
     },
     {
-      "check": "orphan_s21_puhgb_submission_name_content_id",
+      "check": "s22_archive_s21_submission_name_content_id",
       "pass": true,
-      "detail": "GEMSDOE28-S21-PUHGB-16bbf281ba9b"
+      "detail": "GEMSDOE28-S21-PUHGB-20261026-16bbf281ba9b"
     },
     {
-      "check": "orphan_s21_puhgb_content_addressed_name",
+      "check": "s22_archive_s21_research_archive_not_approved",
+      "pass": true,
+      "detail": "Archived research is never upload approval"
+    },
+    {
+      "check": "s22_archive_s21_nan_safe_filename",
       "pass": true,
       "detail": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif"
     },
     {
-      "check": "orphan_s21_puhgb_nan_file_exists",
+      "check": "s22_archive_s21_content_addressed_name",
       "pass": true,
       "detail": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif"
     },
     {
-      "check": "orphan_s21_puhgb_nan_byte_count",
+      "check": "s22_archive_s21_nan_file_exists",
+      "pass": true,
+      "detail": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif"
+    },
+    {
+      "check": "s22_archive_s21_nan_byte_count",
       "pass": true,
       "detail": "1590770 bytes"
     },
     {
-      "check": "orphan_s21_puhgb_nan_sha256",
+      "check": "s22_archive_s21_nan_sha256",
       "pass": true,
       "detail": "a43ae055706f44e0896fdb68499f1f85f424250bd27ee5ea66b14dfd6c45c625"
     },
     {
-      "check": "orphan_s21_puhgb_nan_grid",
+      "check": "s22_archive_s21_nan_grid",
       "pass": true,
       "detail": "CRS/shape/transform equal the sample template"
     },
     {
-      "check": "orphan_s21_puhgb_nan_single_band_float32",
+      "check": "s22_archive_s21_nan_single_band_float32",
       "pass": true,
       "detail": "count=1 dtype=float32"
     },
     {
-      "check": "orphan_s21_puhgb_nan_inside_finite",
+      "check": "s22_archive_s21_nan_inside_finite",
       "pass": true,
       "detail": "nonfinite inside=0"
     },
     {
-      "check": "orphan_s21_puhgb_nan_inside_0_1",
+      "check": "s22_archive_s21_nan_inside_0_1",
       "pass": true,
       "detail": "finite inside range=[0, 1]"
     },
     {
-      "check": "orphan_s21_puhgb_nan_exact_binary",
+      "check": "s22_archive_s21_nan_exact_binary",
       "pass": true,
       "detail": "inside values are exactly 0.0 or 1.0"
     },
     {
-      "check": "orphan_s21_puhgb_nan_outside_nan",
+      "check": "s22_archive_s21_nan_outside_nan",
       "pass": true,
       "detail": "outside NaN count=7111787/7111787; nodata=NaN"
     },
     {
-      "check": "orphan_s21_puhgb_nan_emitted_count",
+      "check": "s22_archive_s21_nan_emitted_count",
       "pass": true,
       "detail": "37654 cells equal 1.0"
     },
     {
-      "check": "orphan_s21_puhgb_nan_no_catalogue_overlap",
+      "check": "s22_archive_s21_nan_no_catalogue_overlap",
       "pass": true,
       "detail": "positive catalogue overlap=0"
     },
     {
-      "check": "orphan_s21_puhgb_nan_no_infinities",
+      "check": "s22_archive_s21_nan_no_infinities",
       "pass": true,
       "detail": "no infinity anywhere"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_file_exists",
+      "check": "s22_archive_s21_allfinite_safe_filename",
       "pass": true,
       "detail": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_content_addressed_name",
+      "check": "s22_archive_s21_allfinite_file_exists",
       "pass": true,
       "detail": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_byte_count",
+      "check": "s22_archive_s21_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif"
+    },
+    {
+      "check": "s22_archive_s21_allfinite_byte_count",
       "pass": true,
       "detail": "826602 bytes"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_sha256",
+      "check": "s22_archive_s21_allfinite_sha256",
       "pass": true,
       "detail": "2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_grid_and_type",
+      "check": "s22_archive_s21_allfinite_grid_and_type",
       "pass": true,
       "detail": "single float32 band on exact template grid"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_range",
+      "check": "s22_archive_s21_allfinite_range",
       "pass": true,
       "detail": "whole array finite; inside range=[0,1]"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_outside_zero",
+      "check": "s22_archive_s21_allfinite_outside_zero",
       "pass": true,
       "detail": "outside zero; no nodata tag"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_emitted_count",
+      "check": "s22_archive_s21_allfinite_emitted_count",
       "pass": true,
       "detail": "37654 cells equal 1.0"
     },
     {
-      "check": "orphan_s21_puhgb_allfinite_no_catalogue_overlap",
+      "check": "s22_archive_s21_variant_footprint_values_equal",
       "pass": true,
-      "detail": "no positive known-catalogue overlap"
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
     },
     {
-      "check": "orphan_s21_puhgb_zip_exists",
+      "check": "s22_archive_s21_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_archive_s21_zip_safe_filename",
       "pass": true,
       "detail": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.zip"
     },
     {
-      "check": "orphan_s21_puhgb_zip_byte_count",
+      "check": "s22_archive_s21_zip_exists",
+      "pass": true,
+      "detail": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.zip"
+    },
+    {
+      "check": "s22_archive_s21_zip_byte_count",
       "pass": true,
       "detail": "279023 bytes"
     },
     {
-      "check": "orphan_s21_puhgb_zip_sha256",
+      "check": "s22_archive_s21_zip_sha256",
       "pass": true,
       "detail": "7a9b62d933c6780deedd5331959073fc1e0f70e15c2b8985a34ced44318b89ae"
     },
     {
-      "check": "orphan_s21_puhgb_zip_single_tif",
+      "check": "s22_archive_s21_zip_single_tif",
       "pass": true,
       "detail": "members=['gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif']"
     },
     {
-      "check": "orphan_s21_puhgb_zip_byte_identical",
+      "check": "s22_archive_s21_zip_byte_identical",
       "pass": true,
-      "detail": "single member matches the NaN TIFF byte-for-byte"
+      "detail": "single member matches the registered TIFF byte-for-byte"
     },
     {
-      "check": "orphan_s21_puhgb_note_length",
+      "check": "s22_archive_s21_note_length",
       "pass": true,
       "detail": "82 chars; max 200"
     },
     {
-      "check": "orphan_s21_puhgb_note_file_matches",
+      "check": "s22_signed_piedmont_submission_name_content_id",
       "pass": true,
-      "detail": "note-gems28-s21-puhgb-20261026-16bbf281ba9b.txt"
+      "detail": "GEMSDOE28-S22-SIGNED-PIEDMONT-20261026-08703322d2af"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_safe_filename",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_file_exists",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_byte_count",
+      "pass": true,
+      "detail": "1590594 bytes"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_sha256",
+      "pass": true,
+      "detail": "0e06809f377bcf98aaab6522ebf60887a26e5995cd15442be6803b79fb058165"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_grid",
+      "pass": true,
+      "detail": "CRS/shape/transform equal the sample template"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_single_band_float32",
+      "pass": true,
+      "detail": "count=1 dtype=float32"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_inside_finite",
+      "pass": true,
+      "detail": "nonfinite inside=0"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_inside_0_1",
+      "pass": true,
+      "detail": "finite inside range=[0, 1]"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_exact_binary",
+      "pass": true,
+      "detail": "inside values are exactly 0.0 or 1.0"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_outside_nan",
+      "pass": true,
+      "detail": "outside NaN count=7111787/7111787; nodata=NaN"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_emitted_count",
+      "pass": true,
+      "detail": "37692 cells equal 1.0"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_no_catalogue_overlap",
+      "pass": true,
+      "detail": "positive catalogue overlap=0"
+    },
+    {
+      "check": "s22_signed_piedmont_nan_no_infinities",
+      "pass": true,
+      "detail": "no infinity anywhere"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_safe_filename",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_file_exists",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_content_addressed_name",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_byte_count",
+      "pass": true,
+      "detail": "826250 bytes"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_sha256",
+      "pass": true,
+      "detail": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_grid_and_type",
+      "pass": true,
+      "detail": "single float32 band on exact template grid"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_range",
+      "pass": true,
+      "detail": "whole array finite; inside range=[0,1]"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_outside_zero",
+      "pass": true,
+      "detail": "outside zero; no nodata tag"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_emitted_count",
+      "pass": true,
+      "detail": "37692 cells equal 1.0"
+    },
+    {
+      "check": "s22_signed_piedmont_variant_footprint_values_equal",
+      "pass": true,
+      "detail": "NaN and all-finite variants contain identical prediction values on every footprint cell"
+    },
+    {
+      "check": "s22_signed_piedmont_allfinite_no_catalogue_overlap",
+      "pass": true,
+      "detail": "requires aligned labels and no positive known-catalogue overlap"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_safe_filename",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_exists",
+      "pass": true,
+      "detail": "gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_byte_count",
+      "pass": true,
+      "detail": "284591 bytes"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_sha256",
+      "pass": true,
+      "detail": "8b5d2da2301ba3e5cff789bc759c63c892c742f1d909294587fb28b197452fec"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_single_tif",
+      "pass": true,
+      "detail": "members=['gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif']"
+    },
+    {
+      "check": "s22_signed_piedmont_zip_byte_identical",
+      "pass": true,
+      "detail": "single member matches the registered TIFF byte-for-byte"
+    },
+    {
+      "check": "s22_signed_piedmont_note_length",
+      "pass": true,
+      "detail": "90 chars; max 200"
     },
     {
       "check": "s18_safe_filename",
@@ -3261,7 +4011,7 @@
     {
       "check": "s18_no_catalogue_predictions",
       "pass": true,
-      "detail": "no catalogue dots"
+      "detail": "requires aligned labels and no catalogue dots"
     },
     {
       "check": "s18_note_140",
@@ -3311,7 +4061,7 @@
     {
       "check": "s19_no_catalogue_predictions",
       "pass": true,
-      "detail": "no catalogue dots"
+      "detail": "requires aligned labels and no catalogue dots"
     },
     {
       "check": "s19_note_140",
@@ -3361,7 +4111,7 @@
     {
       "check": "s19b_no_catalogue_predictions",
       "pass": true,
-      "detail": "no catalogue dots"
+      "detail": "requires aligned labels and no catalogue dots"
     },
     {
       "check": "s19b_note_140",
@@ -3372,106 +4122,6 @@
       "check": "s19b_rejected_not_approved",
       "pass": true,
       "detail": "LOSFO gate PASSED but strict uniqueness FAILED vs dense probe-union raster; research TIFF only. DO NOT SUBMIT."
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_safe_filename",
-      "pass": true,
-      "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif"
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_file_exists",
-      "pass": true,
-      "detail": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif"
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_exact_sha256",
-      "pass": true,
-      "detail": "f0f50442dfe682911a2f49ee56d59a468b3f6b6f2ad35e90932532d3715abcc4"
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_exact_grid",
-      "pass": true,
-      "detail": "CRS/shape/transform match template"
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_single_band_float32",
-      "pass": true,
-      "detail": "('float32',)"
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_strict_whole_array_0_1",
-      "pass": true,
-      "detail": "No NaN/infinity or out-of-range value anywhere"
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_zero_outside_footprint",
-      "pass": true,
-      "detail": "zeros outside footprint"
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_no_catalogue_predictions",
-      "pass": true,
-      "detail": "no catalogue dots"
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_note_140",
-      "pass": true,
-      "detail": "28GEMSDOE H40-1 thermal-vent r3.5 | H36-1 base 37,660px + 17 GDR volcanic-vent dots (>=3px from cat & base, min_dist=3.5px) | UNSCORED ho..."
-    },
-    {
-      "check": "orphan_h40_1_thermal_vent_allfinite_rejected_not_approved",
-      "pass": true,
-      "detail": "Session 15 exploratory off-catalogue vent overlay; never holdout-validated, never live-scored, never approved. Registered post-hoc for audit coverage only (Session 22). DO NOT SUBMIT. All-finite fallback variant; pre-existing cosmetic NaN nodata tag retained in file metadata despite all-finite, all-zero-outside pixel values -- flagged for review, does not affect portal [0,1] validity."
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_safe_filename",
-      "pass": true,
-      "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif"
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_file_exists",
-      "pass": true,
-      "detail": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif"
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_exact_sha256",
-      "pass": true,
-      "detail": "89fd98a638a0aebe2e9be6da6948eb879154f05312d6fff24e083794b9f41515"
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_exact_grid",
-      "pass": true,
-      "detail": "CRS/shape/transform match template"
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_single_band_float32",
-      "pass": true,
-      "detail": "('float32',)"
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_strict_whole_array_0_1",
-      "pass": true,
-      "detail": "No NaN/infinity or out-of-range value anywhere"
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_zero_outside_footprint",
-      "pass": true,
-      "detail": "zeros outside footprint"
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_no_catalogue_predictions",
-      "pass": true,
-      "detail": "no catalogue dots"
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_note_140",
-      "pass": true,
-      "detail": "28GEMSDOE H41-1 thermal-spring r3.0 | H36-1 base 37,660px + 364 GDR hot-spring dots (>40C, >=3px from cat & base, min_dist=3.0px) | UNSCO..."
-    },
-    {
-      "check": "orphan_h41_1_thermal_spring_allfinite_rejected_not_approved",
-      "pass": true,
-      "detail": "Session 15 exploratory off-catalogue spring overlay; never holdout-validated, never live-scored, never approved. Registered post-hoc for audit coverage only (Session 22). DO NOT SUBMIT. All-finite fallback variant; pre-existing cosmetic NaN nodata tag retained in file metadata despite all-finite, all-zero-outside pixel values -- flagged for review, does not affect portal [0,1] validity."
     },
     {
       "check": "s22_mofr_safe_filename",
@@ -3511,7 +4161,7 @@
     {
       "check": "s22_mofr_no_catalogue_predictions",
       "pass": true,
-      "detail": "no catalogue dots"
+      "detail": "requires aligned labels and no catalogue dots"
     },
     {
       "check": "s22_mofr_note_140",
@@ -3531,7 +4181,7 @@
     {
       "check": "all_tif_names_unique",
       "pass": true,
-      "detail": "47 unique GeoTIFF(s)"
+      "detail": "49 unique GeoTIFF(s)"
     },
     {
       "check": "all_tif_names_content_addressed",
@@ -3539,6 +4189,9 @@
       "detail": "all downloaded GeoTIFF names contain a 12-hex content ID"
     }
   ],
-  "failures": [],
-  "check_count": 703
+  "failures": [
+    "s22_archive_h40_vent_allfinite_outside_zero",
+    "s22_archive_h41_spring_allfinite_outside_zero"
+  ],
+  "check_count": 833
 }

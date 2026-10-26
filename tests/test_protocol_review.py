@@ -170,6 +170,8 @@ def test_current_review_evidence_is_bound_and_not_a_new_tiff():
         snapshots = {
             "docs/downloads/manifest.json": "evidence/pr39_manifest_snapshot.json",
             "scripts/check_run_preflight.py": "evidence/snapshots/pr39_check_run_preflight.py",
+            "src/gems27/promotion.py": "evidence/snapshots/pr39_promotion.py",
+            "scripts/audit_priority_repositories.py": "evidence/snapshots/pr39_audit_priority_repositories.py",
         }
         observed = ROOT / snapshots.get(path, path)
         assert hashlib.sha256(observed.read_bytes()).hexdigest() == expected, path
