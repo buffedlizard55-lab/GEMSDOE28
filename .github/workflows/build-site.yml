@@ -20,7 +20,6 @@ on:
       - 'docs/*.html'
       - 'index.html'
       - 'executive-summary.html'
-      - 'priority-submissions.html'
       - 'data/current_run_card_2026-10-25.json'
       - 'AI_DISCLOSURE.md'
       - '.github/workflows/build-site.yml'
@@ -73,6 +72,7 @@ on:
       - 'knowledge/55_priority_site_review_2026-10-26.md'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
+      - 'site_templates/**'
   pull_request:
     paths:
       - 'registry/next_hypotheses.json'
@@ -91,7 +91,6 @@ on:
       - 'docs/*.html'
       - 'index.html'
       - 'executive-summary.html'
-      - 'priority-submissions.html'
       - 'data/current_run_card_2026-10-25.json'
       - 'AI_DISCLOSURE.md'
       - '.github/workflows/build-site.yml'
@@ -144,6 +143,7 @@ on:
       - 'knowledge/55_priority_site_review_2026-10-26.md'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
       - 'docs/assets/**'
+      - 'site_templates/**'
   workflow_dispatch:
 
 permissions:
@@ -161,4 +161,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html executive-summary.html priority-submissions.html data/current_run_card_2026-10-25.json
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html executive-summary.html data/current_run_card_2026-10-25.json

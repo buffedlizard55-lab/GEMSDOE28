@@ -9,7 +9,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "priority-submissions.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "cross-site-review.html"]
 
 
 class Links(HTMLParser):
@@ -35,30 +35,6 @@ def test_site_builds_from_json_only_and_pages_exist():
         assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
 
 
-def test_priority_review_uses_receipt_safe_scores_and_exact_overlap_evidence():
-    record = json.loads((ROOT / "evidence" / "priority_submission_review_2026-10-26.json").read_text())
-    assert len(record["sites"]) == 9
-    assert all(row["score_label"] == "OWNER-REPORTED; not ORGANIZER-CONFIRMED" for row in record["sites"])
-    assert record["decision"]["safe_to_submit_recommendation"] is None
-    assert record["leaderboard_observation"]["first_row"]["public_dw_tversky"] == 0.4413
-    assert record["leaderboard_observation"]["organizer_confirmed_local_raster"] is False
-    assert len(record["hypotheses"]) == 4
-    assert all(hyp["non_fault_mimic"] and hyp["official_source"] for hyp in record["hypotheses"])
-    forensic = json.loads((ROOT / "evidence" / "s18_champion_forensic.json").read_text())
-    assert forensic["removed_from_solo"] == 2545
-    assert forensic["added_to_solo"] == 0
-    assert forensic["symmetric_difference_reconstruction"] == 0
-    by_site = {row["site"]: row for row in record["sites"]}
-    assert round(by_site["GEMSDOE32"]["dot_count"] / by_site["GEMSDOE36"]["dot_count"], 3) == 0.969
-    assert round(31614 / by_site["GEMSDOE33"]["dot_count"], 3) == 0.755
-    html = (DOCS / "priority-submissions.html").read_text()
-    assert "None is approved to submit" in html
-    assert "0.4413" in html and "0.2778" in html
-    assert "75.5%" in html and "96.9%" in html
-    assert "Download existing unique research TIFF — DO NOT SUBMIT" in html
-    assert "HOLDOUT-DTI" in html and "whole-system" in html
-
-
 def test_build_site_workflow_tracks_generator_inputs_and_outputs():
     workflow = (ROOT / ".github" / "workflows" / "build-site.yml").read_text()
     builder = (ROOT / "scripts" / "build_site.py").read_text()
@@ -77,9 +53,9 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
         "scripts/build_site.py",
         ".github/workflows/build-site.yml",
         "docs/assets/**",
+        "site_templates/**",
         "docs/*.html",
         "index.html",
-        "priority-submissions.html",
     }:
         assert workflow.count(f"'{path}'") == 2, f"missing push/pull_request trigger for {path}"
 
@@ -199,7 +175,7 @@ def test_local_failure_claim_and_registry_disambiguate_summary_path_collision():
 
 
 def test_all_internal_links_and_assets_resolve():
-    for page in list(DOCS.glob("*.html")) + [ROOT / "index.html", ROOT / "executive-summary.html", ROOT / "priority-submissions.html"]:
+    for page in list(DOCS.glob("*.html")) + [ROOT / "index.html", ROOT / "executive-summary.html"]:
         parser = Links()
         parser.feed(page.read_text())
         for ref in parser.refs:
@@ -243,6 +219,26 @@ def test_front_page_has_download_and_exact_note():
     assert candidate["note"] in idx and len(candidate["note"]) <= 140
     assert candidate["submission_name"] in idx and candidate["sha256"] in idx
     assert "Submission download locked" in idx
+
+
+def test_session19_cross_site_review_is_linked_and_fail_closed():
+    page = (DOCS / "cross-site-review.html").read_text()
+    index = (DOCS / "index.html").read_text()
+    card = json.loads((ROOT / "evidence/session19_run_card.json").read_text())
+    assert "GEMSDOE32 H33-2-B2" in page
+    assert "0.2778" in page and "USER-REPORTED / UNVERIFIED" in page
+    assert "Do not upload any file from this site" in page
+    assert "Displaced potential-field piercing markers" in page
+    assert "Paired-geothermometer cooling corridors" in page
+    assert "Opposite-flank flexural curvature pairs" in page
+    assert "Lithology-conditioned U/Th transport dipoles" in page
+    assert "cross-site-review.html" in index
+    assert card["verdict"] == "negative"
+    assert card["experiments_run"] == 0 and card["new_tiff_generated"] is False
+    assert card["holdout"]["label"] == "HOLDOUT-DTI"
+    assert card["holdout"]["status"].startswith("NOT RUN")
+    assert card["raster_sha256"] is None and card["submission_name"] is None
+    assert card["submission_ready"] is False and card["slot_selected"] is False
 
 
 
@@ -339,6 +335,12 @@ def test_downloads_have_unique_names_and_zip_single_member():
 def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
+        if page == "cross-site-review.html":
+            assert 'Current run: NOT READY TO SUBMIT' in text
+            assert 'NO FILE APPROVED' in text
+            assert 'Do not upload any file from this site' in text
+            assert 'session19_run_card.json' in text
+            continue
         assert 'Current run: NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text
         assert 'Do not upload any file from this site' in text

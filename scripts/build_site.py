@@ -291,7 +291,7 @@ def nav() -> str:
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
         ("Latest result", "session18-result.html"),
-        ("Priority site review", "priority-submissions.html"),
+        ("Nine-site review", "cross-site-review.html"),
         ("Archive", "archive.html"),
         ("Parallel review", "submission-review.html"),
         ("Topology", "topology.html"),
@@ -373,61 +373,6 @@ def s18_status_html() -> str:
 </section>"""
 
 
-def render_priority_submissions() -> str:
-    record = read_json("evidence/priority_submission_review_2026-10-26.json")
-    sites = record.get("sites", [])
-    site_rows = "".join(
-        f'<tr><th scope="row"><a href="{esc(site_url(item["site"]))}">{esc(item["site"])}</a></th>'
-        f'<td>{float(item["reported_score"]):.4f}<br><span class="meta">{esc(item["score_label"])}</span></td>'
-        f'<td><code>{esc(item["artifact"])}</code><br>{comma(item["dot_count"])} dots<br>'
-        f'<a href="{esc(item["source_url"])}">Pinned artifact source</a></td>'
-        f'<td>{esc(item["review"])}</td></tr>' for item in sites
-    )
-    hypotheses = record.get("hypotheses", [])
-    hypothesis_rows = "".join(
-        f'<tr><th scope="row">{item["rank"]}. {esc(item["name"])}</th>'
-        f'<td>{esc(item["layers"])}</td><td>{esc(item["physical_signature"])}</td>'
-        f'<td>{esc(item["off_catalogue_reason"])}</td><td>{esc(item["difference_from_repo"])}</td>'
-        f'<td>{esc(item["non_fault_mimic"])}</td>'
-        f'<td>{esc(item["expected_benefit"])}<br>Cost: {esc(item["implementation_cost"])}</td>'
-        f'<td><a href="{esc(item["official_source"])}">Official source</a><br>{esc(item["data_status"])}</td></tr>'
-        for item in hypotheses
-    )
-    board = record.get("leaderboard_observation", {})
-    first = board.get("first_row", {})
-    return f"""<section class="section"><div class="eyebrow">Nine-site artifact audit · dated public leaderboard observation</div>
-<h1>Which submission should be selected?</h1>
-<div class="callout callout-danger"><strong>None is approved to submit.</strong> The largest user-reported score in this nine-site list is GEMSDOE32 H33-2-B2 at <strong>0.2778</strong>, but no organizer submission-page receipt ties that score to the TIFF bytes. It is a historical raster and cannot be repackaged as a unique submission. The existing unique S18-MXTP TIFF is downloadable for research only and is marked <strong>DO NOT SUBMIT</strong> because its frozen HOLDOUT-DTI gate failed.</div>
-<div class="callout"><strong>Public leaderboard, observed {esc(board.get('observed_date_utc_date', board.get('observed_date_utc', 'date not recorded')))}:</strong> first displayed row is {esc(first.get('participant_display_name', first.get('participant', 'not recorded')))}, DW-Tversky <strong>{fmt_number(first.get('public_dw_tversky'), 4)}</strong>. This public-page observation is not a receipt for a GEMSDOE TIFF, does not identify those bytes and does not establish private/final-round performance. The user-supplied 0.3195 figure was not the highest row observed here. <a href="{esc(board.get('url', ''))}">Open the official public leaderboard</a>.</div>
-<h2>Reported scores and what the byte audit supports</h2>
-<p>Every score is labeled OWNER-REPORTED, not ORGANIZER-CONFIRMED. The dot counts and construction findings are taken from the repository's pinned forensic comparison; they do not expose the competition's private labels and cannot prove score causation.</p>
-<div class="table-wrap"><table><thead><tr><th>Site</th><th>Reported score / evidence class</th><th>Pinned artifact</th><th>Interpretation, caveat and duplicate finding</th></tr></thead><tbody>{site_rows}</tbody></table></div>
-<h2>Why GEMSDOE32 is the best reported artifact, but not a safe submission recommendation</h2>
-<p>The measured pixel relation is H33-2-B2 = GEMSDOE28/31 solo-r1 minus 2,545 predictions within the catalogue-distance ≤2-pixel ring; no pixels were added. Under distance-weighted Tversky scoring, suppressing predictions with negligible withheld-truth credit can reduce false-positive cost while keeping true-positive credit. This makes emission hygiene a plausible explanation for the reported ladder. It does <strong>not</strong> prove the removed points were false positives or that this operation caused the claimed 0.2778: no receipt or private truth is available. Copying or pruning that raster now violates the uniqueness requirement.</p>
-<h2>New hypotheses ranked for a future preregistered test</h2>
-<p>Qualitative ranks are research priorities, not numerical score projections. The four candidates were not implemented or scored in this review. The highest-ranked hypothesis uses existing cached physical layers and requires no new external bytes for an initial test; its official source provenance still needs distinction from owner-mirror hash integrity.</p>
-<div class="table-wrap"><table><thead><tr><th>Rank / hypothesis</th><th>Layer(s)</th><th>Physical signature</th><th>Why it may find off-catalogue faults</th><th>Difference from repo</th><th>Named non-fault mimic</th><th>Expected benefit / cost</th><th>Source / data gate</th></tr></thead><tbody>{hypothesis_rows}</tbody></table></div>
-<h2>Why the top candidate was not run today</h2>
-<p>No explicit assigned method paragraph is present. The local session record has no lane assignment, no complete synchronized parallel registry, and no fresh frozen current-best result under the same buffered whole-segment holdout. Running a candidate anyway would invent assignment authority and would not establish global novelty or paired superiority. No experiment, raster, or slot was produced by this review.</p>
-<p><strong>Next-session sequence:</strong> (1) freeze an authorized lane and common baseline/registry; (2) reuse the hash-verified feature cache and pinned shared evaluator/writer; (3) run each feature-alone leakage canary; (4) compare its unplaced surface to every registry raster and stop if Spearman &gt;0.90 or &gt;70% support overlap within 3 px; (5) only then conduct the preregistered buffered whole-system holdout with pooled α=.2, β=.8, 300 m triangular-kernel HOLDOUT-DTI and spatial-block 95% CI; (6) require positive paired superiority, final-dot novelty and exact-file validation before a separate selector considers a slot.</p>
-<p><a href="downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif" download>Download existing unique research TIFF — DO NOT SUBMIT</a> · <a href="data/run_card_s18.json">S18-MXTP run card</a> · <a href="../knowledge/55_priority_site_review_2026-10-26.md">Full review dossier</a> · <a href="../evidence/priority_submission_review_2026-10-26.json">Machine-readable site audit and hypothesis slate</a> · <a href="../evidence/leaderboard_observation_2026-10-26.json">Dated leaderboard observation</a></p>
-</section>"""
-
-
-def site_url(site: str) -> str:
-    return {
-        "GEMSDOE24": "https://buffedlizard55-lab.github.io/GEMSDOE24/",
-        "GEMSDOE25": "https://buffedlizard55-lab.github.io/GEMSDOE25/",
-        "GEMSDOE27": "https://buffedlizard55-lab.github.io/GEMSDOE27/",
-        "GEMSDOE28": "https://buffedlizard55-lab.github.io/GEMSDOE28/",
-        "GEMSDOE30": "https://buffedlizard55-lab.github.io/GEMSDOE30/",
-        "GEMSDOE31": "https://buffedlizard55-lab.github.io/GEMSDOE31/docs/",
-        "GEMSDOE32": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
-        "GEMSDOE33": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
-        "GEMSDOE36": "https://buffedlizard55-lab.github.io/GEMSDOE36/docs/",
-    }.get(site, "#")
-
-
 def render_s18_result() -> str:
     facts = read_json("evidence/s18_official_source_review.json", {})
     forensic = read_json("evidence/s18_champion_forensic.json", {})
@@ -435,7 +380,6 @@ def render_s18_result() -> str:
     sources = ''.join(f"<tr><td><a href=\"{esc(x['url'])}\">{esc(x['title'])}</a></td><td>{esc(x['verified_claim'])}</td><td>{esc(x['limits'])}</td></tr>" for x in facts.get('sources', []))
     return f"""<section class="section"><h1>S18: a genuinely different TIFF, a negative scientific result</h1>
 <p>The physical hypothesis was tested, not sold as a breakthrough. Magnetic/gravity contacts need not be faults and their apparent location does not determine a surface trace uniquely. AUC near chance and failed recovery reject this placement-only method at its frozen settings. It does not demonstrate geothermal vents or a way to beat the reported GEMSDOE32 result.</p>
-<div class="callout"><strong>Current public-leader observation (2026-10-26):</strong> the official leaderboard's first displayed row was 0.4413. It is not associated here with a local TIFF or organizer receipt; the user-supplied 0.3195 figure was not the leading row observed. <a href="priority-submissions.html">Review all nine requested sites, exact raster relationships, and next hypotheses</a>.</div>
 <h2>Why the reported GEMSDOE32 leader improved</h2><p>New byte-level comparison confirms: H33-2-B2 equals the solo-r1 dot set minus {comma(forensic.get('removed_from_solo', 0))} catalogue-adjacent dots (≤200 m), with zero added dots and zero symmetric difference. Removing predictions that earn little hidden-truth credit can reduce the α·FP denominator while preserving TP. This is an emission-hygiene explanation consistent with the owner-reported ladder, not proof of organizer score causation. No receipt associates the reported 0.2778 with those bytes. Do not copy/prune it as a new submission.</p>
 <h2>Nine requested sites: artifact audit</h2><p>Reported claims below are excluded from promotion decisions. No row is ORGANIZER-CONFIRMED. Dot counts and hashes are measured locally. Each pinned link permits manual source review.</p><div class="table-wrap"><table><thead><tr><th>Site</th><th>Artifact</th><th>Historical reported claim</th><th>Measured dots</th><th>Source</th></tr></thead><tbody>{rows}</tbody></table></div>
 <h2>Four hypotheses ranked before implementation</h2><p><a href="../knowledge/52_s18_preregistration.md">Frozen ranking, layers, physical signatures, off-catalogue rationale, non-fault mimics and implementation costs</a>. Only rank 1 was executed, using the three-experiment budget. <strong>Erratum:</strong> rank 2 incorrectly called depth_to_base_surf a basement-thickness layer. The official problem description identifies a conductive-base surface. The basement-hinge interpretation is rejected pending a separate provenance/physical review; it is not a viable tested proposal.</p>
@@ -447,7 +391,8 @@ def render_s18_result() -> str:
 
 def render_s18_executive() -> str:
     return """<section class="section"><h1>Executive summary: a new file, not an approved submission</h1>
-<p>A new independent research TIFF is downloadable above. It is unique within the audited snapshot and locally format-valid, but <strong>failed scientific validation</strong>. Do not select a file from this page at present. No human geological inspection is needed to detect this rejection. The official public leaderboard's first row was 0.4413 in a dated 2026-10-26 observation; it is not receipt-linked to any raster on these sites. <a href="priority-submissions.html">See the nine-site review and ranked research hypotheses</a>.</p>
+<p>A new independent research TIFF is downloadable above. It is unique within the audited snapshot and locally format-valid, but <strong>failed scientific validation</strong>. Do not select a file from this page at present. No human geological inspection is needed to detect this rejection.</p>
+<h2>What is the latest public leaderboard observation?</h2><p>A one-off read-only fetch of the official public leaderboard on <strong>2026-10-26</strong> displayed <strong>0.4413</strong> for xiaofanhu in the first row. This public observation is not a submission receipt and is not linked to any local GEMSDOE24/25/27/28/30/31/32/33/36 TIFF; it does not establish private-round performance. The highest score claimed for a TIFF in the supplied nine-site list remains GEMSDOE32 H33-2-B2 at 0.2778, owner-reported and unverified. No current file is approved: S18-MXTP failed its holdout. See the <a href="cross-site-review.html">nine-site review</a>, <a href="../evidence/leaderboard_observation_2026-10-26.json">dated observation record</a>, and <a href="../knowledge/55_priority_site_review_2026-10-26.md">byte-level review addendum</a>.</p>
 <h2>Exactly how a future approved submission works</h2><ol>
 <li>Preregister an explicit lane, reuse verified cached features/shared evaluator/writer, test feature-alone leakage, and pass pre-placement registry checks.</li>
 <li>Recover whole withheld fault systems with a buffer and visible-only catalogue features. Beat the frozen comparable best on pooled HOLDOUT-DTI with a positive paired spatial-block confidence interval. Check final-dot uniqueness.</li>
@@ -1342,8 +1287,15 @@ def main() -> int:
     old_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
     old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
+    session19_brief = """<section class=\"card callout-danger\" aria-label=\"Session 19 review\">
+<h2>Session 19 review: no new file is approved</h2>
+<p>The highest value among the nine site claims supplied by the owner is GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>; it is not an organizer receipt or local HOLDOUT-DTI. A new experiment/TIFF is blocked because the assigned method lane, complete parallel registry, frozen comparator and cached inputs are unavailable. <strong>Do not submit any file from this site.</strong></p>
+<p><a class=\"button quiet\" href=\"cross-site-review.html\">Open the nine-site scorecard, ranked hypotheses and run card</a></p>
+</section>"""
+    cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     pages = {
-        "index.html": layout("Overview", render_s18_result() + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", session19_brief + render_s18_result() + s18_feed_html(feed), "Overview"),
+        "cross-site-review.html": cross_site_template,
         "executive-summary.html": layout("Executive summary", render_s18_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
@@ -1351,7 +1303,6 @@ def main() -> int:
         "archive.html": layout("Historical campaign archive", archive, "Archive"),
         "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; current S18-MXTP evidence is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/76847b2/docs/submission-review.html">Complete original PR39 HTML audit at its historical commit</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
         "session18-result.html": layout("S18 unique TIFF result", render_s18_result(), "S18 result"),
-        "priority-submissions.html": layout("Priority submission and hypothesis review", render_priority_submissions(), "Priority site review"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
@@ -1365,8 +1316,6 @@ def main() -> int:
     (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
     (ROOT / "executive-summary.html").write_text(
         root_relative_links(publish_source_links(pages["executive-summary.html"])), encoding="utf-8")
-    (ROOT / "priority-submissions.html").write_text(
-        root_relative_links(publish_source_links(pages["priority-submissions.html"])), encoding="utf-8")
     legacy_card = ROOT / "data/current_run_card_2026-10-25.json"
     legacy_card.parent.mkdir(parents=True, exist_ok=True)
     legacy_card.write_bytes(current_card_path.read_bytes())

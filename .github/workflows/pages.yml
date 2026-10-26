@@ -7,7 +7,6 @@ on:
       - 'docs/**'
       - 'index.html'
       - 'executive-summary.html'
-      - 'priority-submissions.html'
       - 'data/current_run_card_2026-10-25.json'
       - '.nojekyll'
       - '.github/workflows/pages.yml'
