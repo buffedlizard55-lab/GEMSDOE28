@@ -97,19 +97,17 @@ def test_s18_bootstrap_identical_arms_has_zero_paired_gain():
     assert ci["paired_gain_ci95"] == [0.0, 0.0]
 
 
-def test_historical_s18_download_is_visible_but_never_approved():
-    card = load("evidence/s18_mxtp_run_card.json")
-    for page in ("index.html", "executive-summary.html", "session18-result.html"):
+def test_current_s19_download_is_visible_and_s18_remains_historical():
+    card = load("evidence/s19_ascp_run_card.json")
+    filename = Path(card["submission_file"]).name
+    for page in ("index.html", "executive-summary.html", "session19-result.html"):
         html = (ROOT / "docs" / page).read_text()
-        assert card["download"] in html
-        assert "Historical S18 research TIFF — DO NOT SUBMIT" in html
-        assert "Current review (2026-10-26): NOT READY TO SUBMIT" in html
-        assert "0.02038" in html and "76,869" in html
-        assert 'session19_run_card.json' in html
-        assert "Download NEW unique research TIFF" not in html
+        assert filename in html
+        assert "Download NEW unique research TIFF — DO NOT SUBMIT" in html
+        assert "0.08081" in html and "60,988" in html
+        assert 'data/current_run_card_2026-10-26.json' in html
         assert "Whether to submit is your decision" not in html
-    summary = (ROOT / "docs/executive-summary.html").read_text()
-    assert "three submissions per week" in summary and "four weekly slots" not in summary
+    assert (ROOT / "docs/session18-result.html").is_file()
 
 
 @pytest.mark.requires_rasters

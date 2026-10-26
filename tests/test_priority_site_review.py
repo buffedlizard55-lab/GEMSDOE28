@@ -57,7 +57,9 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertIn("USER-REPORTED, UNVERIFIED", self.page)
         self.assertIn("data/priority_site_review_2026-10-26.json", self.page)
         self.assertIn("https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/", self.page)
-        self.assertIn("No new TIFF was generated", self.page)
+        self.assertIn("S19-ASCP research TIFF was generated", self.page)
+        self.assertIn("S19-ASCP JSON run card", self.page)
+        self.assertIn("DO NOT SUBMIT", self.page)
 
     def test_session19_card_is_negative_and_does_not_claim_a_new_raster(self):
         card = json.loads((ROOT / "evidence/session19_run_card.json").read_text())
