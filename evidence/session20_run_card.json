@@ -35,9 +35,10 @@
   "verdict": "negative",
   "preflight_evidence": "evidence/session20_preflight.json",
   "verification": {
-    "pytest": "493 passed, 6 skipped (input-dependent checks)",
+    "pytest": "499 passed, 7 skipped after concurrent-main reconciliation",
     "ruff": "PASS",
     "site_build": "PASS; no generated-page drift",
     "git_diff_check": "PASS"
-  }
+  },
+  "concurrent_main_result": "S19-ASCP independently generated a research TIFF; holdout failed. Preserved, not promoted or pooled."
 }

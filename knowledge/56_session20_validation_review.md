@@ -65,3 +65,5 @@ negative scientific verdict. This review's missing-input observations describe i
 original local checkout, not a claim that the concurrent run lacked data. The
 S19-ASCP report and website are now the latest scientific result. No evidence was
 pooled across runs and neither negative verdict was promoted.
+
+Post-merge verification: **499 passed, 7 skipped**; lint and site rebuild PASS.
