@@ -1,3 +1,15 @@
+# Session 22 (S22-SIGN) — 2026-10-27 UTC (read first every session)
+
+## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
+
+- **Download:** [`docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif`](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif) (826,250 bytes · SHA-256 `d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229` · 37,692 dots · all-finite `{0,1}` · EPSG:32611 · 3730 × 3292 · template-exact) · [NaN twin](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif) · [ZIP](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip)
+- **Lane:** Signed piedmont break-in-slope (∂²z/∂n² >0) + asymmetric LiDAR polarity (upface-downface) + subsurface (mag/grav/depth) concordance, B=2 hygiene (200 m), dot_thin 2.8. Seeds 360–362 fresh, disjoint from S20/S21.
+- **Gates:** format PASS · leakage canary PASS (7/7 legs max AUC ~0.58 ≤0.90) · unique vs 22 prior registry rasters PASS (max 3-px overlap 43.3% ≤70%, max |Spearman| 0.028 ≤0.90) · **HOLDOUT-DTI 0.0547 vs 0.1219 baseline (Δ −0.0673, 12 cells, 4 folds ×3 seeds) → verdict `negative`, 0 slots spent.**
+- **Estimated live score (MODEL PROJECTION, not a score):** ~0.18 [0.16–0.20] (holdout-ratio to OWNER-REPORTED 0.2778 anchor). No file today is both unique and evidenced >0.2778; S22 is research-only.
+- **Deliverables:** [Session 22 executive page](docs/session22-result.html) · [5 ranked hypotheses + phd forensic of 0.2778](knowledge/62_s22_hypotheses.md) · [Frozen preregistration](knowledge/62_s22_preregistration.md) · [JSON run card](evidence/s22_run_card.json) · [S22 result doc](knowledge/63_s22_result.md) · Next: Euler SI=0 depth-coherence (H43-3) on fresh seeds 363+.
+
+---
+
 # Session 21 (`S21-PUHGB`) — 2026-10-26 UTC (read first every session)
 
 ## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
