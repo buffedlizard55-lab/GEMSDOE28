@@ -1,205 +1,233 @@
-# S20 result — unique vesselness TIFF generated, holdout gate FAILED, DO NOT SUBMIT (2026-10-26)
+# Session 20-H43 result — nine-site executive answer, H43-1 experiment, and the honest submission decision
 
-**Maximize P(Win) · Own the Outcome.** Evidence classes are never mixed: every performance number
-below is labelled **HOLDOUT-DTI** (local buffered recovery proxy) or **USER-REPORTED / UNVERIFIED**
-(prompt lists). No number in this repository is **ORGANIZER-CONFIRMED** (no submission-page receipt
-exists in any fetched repository). Preregistration: [`knowledge/56`](56_s20_preregistration_and_hypotheses.md)
-(frozen before any S20 canary/DTI). Run card: [`evidence/s20_run_card.json`](../evidence/s20_run_card.json).
+**Date:** 2026-10-26 (UTC) · **Branch:** `arena/36be803a-gemsdoe28`
+**Preregistration (frozen before experiments):** `knowledge/56_s20_preregistration_H43-1.md`
+**Evidence:** `evidence/s20_exp1_forensic.json`, `evidence/s20_holdout.json`,
+`evidence/s20_build.json`, `evidence/session20_h43_run_card.json`
+**Parallel-session note (added at merge):** concurrent sessions landed a distinct *Session 20
+validation review* (no experiment; owns `evidence/session20_run_card.json`) and an *S19-ASCP*
+experiment on `main`. This report is the separate **Session 20-H43** run; never pool numbers
+across them (`s20-parallel-session-id-collision` in `registry/irregularities.json`).
+**Lane disclosure:** the prompt's "single method paragraph" assignment is absent (as Session 19
+found); this session declared its own single lane (H43-1) in writing *before* any experiment and
+stayed inside it. Three of three permitted experiments were used. Nothing was uploaded; no slot
+was selected.
 
-## 1. Executive decision (obvious download/submit disposition, no human inspector)
+**Score labels:** site values from the owner prompt are **USER-REPORTED / UNVERIFIED** (no
+submission-page receipt exists in this checkout for any of them). Local gate values are
+**HOLDOUT-DTI** with evaluator, withheld positives and CI stated. Arithmetic extrapolations are
+**MODEL**. Nothing here is ORGANIZER-CONFIRMED.
 
-| Question | Answer |
-|---|---|
-| Was a **new unique TIF generated** this session? | **Yes.** `gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif` (primary; 37,500 dots; SHA-256 `86ef9a3975cc0a96e2e2ec4de0f6ac55cd970c8006b1b3939338521cbf746c79`) + NaN variant + ZIP, in `docs/downloads/`. |
-| Is it **OK to download**? | **Yes — for research/reproducibility only.** One-click download at the top of the site/README. |
-| Is it **OK to submit** to DrivenData? | **NO. DO NOT SUBMIT.** The frozen LOSFO gate failed (below). The pipeline computed this rejection automatically; no human/geological inspection is needed or substituted. |
-| Is **any** file on this site approved today? | **No.** Submission download stays locked. No weekly slot was selected or spent (separate selector step). |
-| Best prior site to study (not copy)? | **GEMSDOE32** H33-2-B2, owner-reported **0.2778** — highest of the nine focus sites (§2). Forensic benchmark only. |
+---
 
-Submission identity (for the locked research file; do not use on the portal):
-**Name** `GEMSDOE28-s20-vesselness-lidarstep-7a7c5e449fe0` ·
-**Note (113/140)** `28GEMSDOE S20-H2 vesselness | LOSFO dDTI -0.0125 CI[-0.032,+0.001] seeds340-342 | id 7a7c5e449fe0 | DO NOT SUBMIT`
+## 1. Executive summary per site — which single submission is best, site by site
 
-## 2. Nine focus sites — executive summary (best listed artifact per site)
+"Best" = highest of the values supplied in the owner prompt for that site. The right-most column
+is the decision-relevant reading: **all nine "best" files are emissions from one detection
+family** (verified byte-by-byte for the GEMSDOE24/25/28/31/32 spine in Experiment 1), so there
+are not nine competing strategies — there is one surface and a sequence of cleaner dot-emission
+rules applied to it, plus two same-family variants whose bytes were not re-fetched this session
+(GEMSDOE27/30/33/36; pinned links in Session 19's scorecard).
 
-Scores are transcribed from the owner's prompt lists (**USER-REPORTED / UNVERIFIED**). Dot counts and
-set relations for the starred rows were **re-measured this session from SHA-256-verified bytes**
-(`evidence/s20_forensic.json`; clones: GEMSDOE32 `15a5fce9`, GEMSDOE36 `1f92ee9c`, GEMSDOE33
-`c9a24250`, GEMSDOE25 `5d46f06b`, GEMSDOE31 `76afe5c5`, GEMSDOE30 `781eea04`, GEMSDOE27 `927322ea`).
+| Site | Best listed submission | Reported score | Executive reading |
+|---|---|---:|---|
+| GEMSDOE24 | `h25-1-dotted-h19-5-d1-5` (60,069 dots, verified) | 0.2477 | First dotted emission (spacing 1.5 px). Superseded everywhere by the 2.8 px spacing. Benchmark only. |
+| GEMSDOE25 | `dotted-h19-5-d2-8` (44,090 dots, verified) | 0.2600 | Same surface, kernel-matched spacing 2.8 px (+0.0123 over d1.5). Regenerated *exactly* this session from H19-5 via `dot_thin(·, 2.8)` (symmetric difference 0). |
+| GEMSDOE27 | `topo-gap-closure-t-v2-on-d1-5` (61,328 dots per repo record) | 0.2449 | Adding 1,259 gap-closure dots to d1.5 *lost* 0.0028 vs its own base — the family's cleanest live refutation of "new dots = new credit". Don't add dots without per-dot efficiency proof. |
+| GEMSDOE28 | `h36-1-rung30-blind-r1` | 0.2710 | Highest listed for this repo; a rung-3.0 repack + ring-1 prune of the same family (local manifest calls the file unscored — association unverified). |
+| GEMSDOE30 | `d28-poisson300m-offcat-44090` | 0.2600 | 44,090 in the name = the d2.8 dot count; treat as the same emission family unless byte-diffed. No independent strategy is evidenced. |
+| GEMSDOE31 | `h27-4-solo-d28` (40,199-dot base, verified via local twin) | 0.2708 | d2.8 minus ring ≤1 px (verified *exactly* this session: symmetric difference 0). The champion's direct parent. |
+| **GEMSDOE32** | **`h33-h33-2-b2-…-e5eb6e7e-zeros` (37,654 dots, fetched + verified)** | **0.2778** | **Best in the supplied list.** solo minus ring ≤2 px, nothing added (verified *exactly*). Its own audit JSON calls it UNSCORED with a MODEL projection of 0.2747 — see §2 for the conflict this creates. |
+| GEMSDOE33 | `h33d-analog-tip-stepover-r30` | 0.2632 | Name suggests tip/stepover logic on the same base; below blind B2, consistent with "rescued dots earn < break-even". |
+| GEMSDOE36 | `anderson-geothermal-pinn-38854` | 0.2750 | Second-highest listed, 0.0028 below the champion. Dot count (38,854) is champion-scale; the PINN framing is not evidence of a different surface — byte-level family check still owed before any novelty claim. |
 
-| Site | Best submission listed | Reported | Measured dots | Executive interpretation |
-|---|---|---:|---:|---|
-| GEMSDOE24 | `h25-1-dotted-h19-5-d1-5-…-989f59505db1-nan` | 0.2477 | 60,069* | H19-5 dotted at d=1.5. Superseded within its own family by sparser thinning. Benchmark only. |
-| GEMSDOE25 | `dotted-h19-5-d2-8-…-e56ea318af89-nan` | 0.2600 | 44,090* | Same emission, d=2.8 thinning. Dot-identical to GEMSDOE30's best (verified*). |
-| GEMSDOE27 | `topo-gap-closure-t-v2-on-d1-5-…-5512495c6bd1-nan` | 0.2449 | 61,328 | d1.5 + 1,259 topology gap dots; reported **below** its d1.5 base — gap-closure dots were net drag live. |
-| GEMSDOE28 | `h36-1-rung30-blind-r1-…-b531dae0a36f-nan` | 0.2710 | 37,660 | Best listed for this repo's lineage (claim conflicts with local manifests marking it unscored — irregularity retained). S20 file above does **not** replace it. |
-| GEMSDOE30 | `d28-poisson300m-offcat-44090-…-91eae1ca` | 0.2600 | 44,090* | Dot-identical to GEMSDOE25 d2.8 (verified*); same reported score, consistent. |
-| GEMSDOE31 | `h27-4-solo-d28-…-8acb75e1-nan` | 0.2708 | 40,199* | d2.8 minus d_cat≤1 px ring (3,891 removed, 0 added — verified*). Parent of the champion. |
-| **GEMSDOE32** | **`h33-h33-2-b2-…-e5eb6e7e-zeros`** | **0.2778** | 37,654* | **Highest of the nine.** Solo minus d_cat≤2 px ring (2,545 removed, 0 added — verified*). See §3. |
-| GEMSDOE33 | `h33d-analog-tip-stepover-r30-…-cb490425926e` | 0.2632 | 41,865* | Tip/stepover additions; shares 31,614 dots with champion, 10,251 own* — additions did not beat pruning. |
-| GEMSDOE36 | `anderson-geothermal-pinn-38854-…-9b9ea4e6-zeros` | 0.2750 | 38,854* | Champion **plus** 1,200 dots, 0 removed (verified*) — reported 0.0028 **below** champion: direct live evidence its additions were sub-break-even. |
+**Obvious bottom line the owner asked for:** if any single existing file deserves a submission
+slot, it is the **GEMSDOE32 H33-2-B2 zeros TIFF**
+(`gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`, SHA-256 `c55bafc4…6fa9`,
+37,654 dots, all-finite [0,1], EPSG:32611, 3730×3292) — **and only if it has not already been
+submitted**. Every other site's best is a strictly earlier, dirtier emission of the same dots.
+This session deliberately does **not** re-host that file as "ours" (that would be the exact
+duplicate the prompt forbids); it is downloaded from GEMSDOE32 (pinned URL in §6). The new file
+generated this session (§4) is **not** that file and is **not approved** — the automated gates
+rejected it, without any human inspection.
 
-**Which is "the best submission to submit"?** None of these may be re-submitted as a new unique
-entry (duplicates by construction), and none carries an organizer receipt here. For learning, the
-champion is the reference operating point (N=37,654, d_cat>2 hygiene). For a future slot, only a new
-candidate that beats the frozen holdout control under §5's gates qualifies — S20 did not.
+Also from the prompt: competition-leaderboard maxima are stated as both **0.3195** and
+**0.4413**. They conflict, neither was freshly retrieved from the authenticated leaderboard in
+this session, and neither is bound to any raster above. Both are flagged, neither is adopted.
 
-Leaderboard context: the prompt quotes both 0.3195 and 0.4413. A dated fetch of the
-[official leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/)
-on **2026-10-26** shows #1 `xiaofanhu` at **0.4413** public DW-Tversky (30 submissions), #2 0.3916,
-#3 0.3904 — so 0.4413 is the current dated public top and 0.3195 is stale as a "current leader"
-claim. A public row is not a receipt and links no local raster to any score.
+## 2. Why and how GEMSDOE32 H33-2-B2 got the highest listed score (PhD-level answer)
 
-## 3. Why and how did GEMSDOE32's 0.2778 entry lead? (PhD-level answer, line-by-line verified)
+**How (construction — now byte-verified three independent ways).** This session restored the
+SHA-256-pinned inputs and fetched the champion bytes from `GEMSDOE32@012e17b` (hash matches that
+repo's own audit JSON). The full lineage is exact, zero symmetric difference at each step
+(`evidence/s20_exp1_forensic.json`):
 
-**Construction (byte-verified this session, `scripts/s20_forensic.py` → `evidence/s20_forensic.json`).**
-All SHA-256 values matched the Session-18 forensic record before analysis; abort-on-mismatch was armed.
+```
+H19-5 solid ridge                121,131 dots   (owner-reported 0.1922)
+  dot_thin(·, 1.5)                60,069 dots   (owner-reported 0.2477, GEMSDOE24 best)
+  dot_thin(·, 2.8)                44,090 dots   (owner-reported 0.2600, GEMSDOE25/30 best)
+  − dots at d(catalogue) ≤ 1 px   −3,891 → 40,199  "solo-r1" (owner-reported 0.2708, GEMSDOE31 best)
+  − dots at d(catalogue) ≤ 2 px   −2,545 → 37,654  "H33-2-B2" (owner-reported 0.2778, GEMSDOE32 best)
+```
 
-1. `champion ⊆ solo`, and **champion == solo ∧ (d_cat > 2 px) exactly**: 2,545 removed, **0 added**, 0 symmetric difference.
-2. **solo == d2.8 ∧ (d_cat > 1 px) exactly**: 3,891 removed, 0 added.
-3. GEMSDOE30 dots **==** d2.8 dots exactly; GEMSDOE36 = champion **+1,200 / −0** exactly.
-4. d_cat histograms confirm the rings: d2.8 carries 3,891 dots at (0,1] px and 2,545 at (1,2] px; champion carries **0** in both, then 2,171 at (2,3] px. On-catalogue dots = 0 in every file.
+The champion **adds zero dots and contains zero new geology** relative to a 0.1922 file. It is
+the most aggressively *subtracted* emission of the family's one good surface.
 
-So the entire top ladder — solid H19-5 (0.1922, N=121,131) → d1.5 (0.2477, N=60,069) → d2.8 (0.2600,
-N=44,090) → solo/B1 (0.2708, N=40,199) → champion/B2 (0.2778, N=37,654) — is **one detector emission**
-under successive Poisson-disk thinning and catalogue-flank pruning. (Reported scores remain
-USER-REPORTED; the file↔score association is the owner's, unreceipted.)
+**Why subtraction wins under this metric (the actual mechanism).** The official score is a
+distance-tolerant Tversky index, DTI = TPw / (TPw + 0.2·FPw + 0.8·FNw), with triangular kernel
+k(d)=max(1−d/300 m, 0) and catalogue pixels masked (`src/gems27/metric.py`, re-derived from the
+official problem page; α=0.2, β=0.8). Two consequences dominate everything the 100+ sibling
+submissions have measured:
 
-**Metric mechanism.** Official DTI (problem page re-fetched 2026-10-26, both chunks):
-TPw/FPw/FNw with triangular 300 m kernel, α=0.2, β=0.8. Writing A=TPw, B=prediction-side matched
-mass, T=|G| hidden-truth px, N=emitted px gives DTI = A/(0.8T+0.2N+0.2(A−B)); for dotted emissions
-A≈B, hence the closure DTI ≈ A/(0.8T+0.2N) (validated numerically in prior sessions; T unobservable,
-so inversion is tabulated over T∈{10k, 12,226, 15k, 20k}). A dot trading ΔA credit for its 0.2
-denominator charge helps iff its marginal credit/dot exceeds ≈0.2·DTI (≈0.052–0.056 here). Inversion:
+1. **Credit saturates per dot; cost does not.** One dot already earns ≥0.5 credit for every truth
+   pixel within 150 m and some credit out to 300 m, so a solid 1-px line pays ~3× the FP mass of
+   a 2.8–3 px-spaced dotted line for only ~1.3× the on-line credit (exact table in
+   `knowledge/01…md` §2). Spacing 1.5→2.8 px bought +0.0123 (0.2477→0.2600) with no new evidence.
+2. **Catalogue-flank dots are near-pure FP.** Hidden truth consists of *new* expert traces, and
+   known catalogue pixels are masked out of scoring. A dot 100–200 m beside a mapped fault is
+   therefore H19-5's digitisation/scarp shadow of an already-known structure: it pays (almost)
+   full FP cost and earns credit only if an unmapped fault happens to run within 300 m parallel
+   to the mapped one. The inclusion rule makes the bar explicit — a dot set pays for itself iff
+   ΔTP/ΔFP > 0.2·DTI/(1−0.2·DTI) ≈ **0.059** at DTI 0.2778. Rings 1 and 2 were below that bar:
+   deleting them gained a remarkably constant **+2.76×10⁻⁶ DTI per dot** (3,891 dots → +0.0108;
+   2,545 dots → +0.0070, owner-reported anchors), the signature of removing mass with ≈zero
+   marginal credit. Meanwhile every *addition* experiment in the family's history (gap closure
+   −0.0028 live; fresh ML/Euler/thermal surfaces 0.02–0.19 owner-reported) failed to clear the
+   same bar. That asymmetry — subtraction has never lost, addition has never won — *is* the
+   group's empirical law, and the champion is simply its furthest validated application.
 
-| Rung transition | ΔN | Marginal credit/dot (T=12,226) | Range over T grid | Break-even | Verdict |
-|---|---:|---:|---:|---:|---|
-| solid → d1.5 | −61,062 | 0.019 | 0.013–0.020 | 0.038 | Removed dots were net drag → thinning paid |
-| d1.5 → d2.8 | −15,979 | 0.035 | 0.030–0.037 | 0.050 | Still net drag → sparser paid |
-| d2.8 → solo (ring ≤1 px) | −3,891 | **0.003** | −0.015–0.008 | 0.052 | **≈ pure false-positive mass** |
-| solo → champion (ring 1–2 px) | −2,545 | **0.007** | −0.011–0.011 | 0.054 | **≈ pure false-positive mass** |
-| champion → site36 (+1,200 adds) | +1,200 | 0.015 | 0.000–0.019 | 0.056 | Additions sub-break-even → score fell |
+**Two honesty caveats that must travel with the 0.2778.**
 
-**Interpretation.** The champion leads by *emission hygiene against an FP-cheap-but-not-free
-asymmetric metric*, not by evidence of superior fault detection: dots within 200 m of the published
-catalogue earned essentially no hidden-truth credit (≤⅛ of break-even under every T). Two physical
-explanations both predict this and cannot be separated without hidden truth: (a) H19-5 fires on the
-100–200 m flank/shadow of already-catalogued scarps (digitisation/offset shadow), so those dots
-duplicate known structures the scorer masks or that carry no new truth; (b) expert test faults were
-compiled to be genuinely new structures, so near-catalogue space is truth-poor by design. Either way,
-**catalogue-adjacent emission is taxed, far-field detection is the only remaining credit source.**
+- The champion file's own audit JSON (fetched this session) embeds the note *"…projected
+  live 0.2747; UNSCORED"* and `predicted_leaderboard_dti = 0.27467315976932155`. So at build
+  time the file was unscored and 0.2747 was a MODEL. The prompt's 0.2778 may be a later real
+  result (it is close to the projection, as a good model's outcome would be) — or the projection
+  lineage may have been mis-copied somewhere. Without the submission-page receipt binding
+  SHA-256 `c55bafc4…6fa9` to 0.2778, this report can verify the *construction and the
+  mechanism*, not the score attribution. Logged in `registry/irregularities.json`
+  (`s20-champion-unscored-audit-vs-02778`).
+- The per-dot gains above use owner-reported anchors (0.2600/0.2708/0.2778). They are internally
+  consistent to 3 significant figures across two independent ring deletions, which is why the
+  mechanism is believed; they are still not organizer receipts.
 
-**Can a submission scoring higher than 0.2778 be generated?** Three-part answer:
+## 3. Can we generate a unique submission above 0.2778? — what it would take
 
-- **By more pruning (B3: also remove ring (2,3] px, 2,171 dots → N=35,483):** closure projection
-  **0.284–0.285** if that ring is also ~zero-credit (0.2778 if it earns break-even). This is the
-  single highest-P(next live point) move known — and it is **94% subset-identical to the champion**,
-  i.e. a duplicate under the parallel-run uniqueness rule (>70% within 3 px). It was therefore
-  **measured, not shipped** (protocol §1: log duplicate, stop). Anyone ignoring the uniqueness rule
-  should still note it risks the Final Prize Round (below).
-- **By additions at champion budget:** reaching **0.3195** needs ≈+1,130 credit px (≈2,600–3,400 new
-  dots at 0.4–0.5 efficiency); reaching **0.4413** needs **+2,830 credit** (≈3,104 perfect dots;
-  ≈9,080 at 0.4; ≈25,300 at 0.2). No pruning/repacking supplies this; only genuinely better
-  far-field detection does. The 0.33–0.44 leaderboard cluster therefore almost certainly reflects a
-  different detector class (learned spatial-context models on the full stack ± 1 m DEMs), not better
-  thinning of H19-5. This is inference from arithmetic + the official U-Net reference, not insider knowledge.
-- **By this session's unique lane:** **No — tested and falsified at frozen settings** (§4). The honest
-  deliverable is the negative result + the measurement that the pruning ceiling (~0.285) sits far
-  below the leaderboard top, redirecting effort to S20-H1 (U-Net segmentation, `knowledge/56`).
+Under the corrected closure DTI = a/(0.8 + 0.2·N/|G|) (MODEL; |G| ≈ 12,226 px from a single
+lattice calibration, unconfirmed; `knowledge/01…md` Addendum), at the champion's budget
+N=37,654 the *only* route up is weighted-credit fraction a: ≈+24% more credit at the same dot
+count reaches the 0.3195 figure quoted in the prompt, and proportionally more for 0.4413. There
+are exactly three candidate sources, in descending credibility:
 
-**Final-Round caveat (official structure, fetched 2026-10-26):** each team picks **one** GeoTIFF
-scored first on private expert faults (Initial, $50k), then re-scored after experts expand labels
-using all submissions (Final, $250k). A pure-pruning file maximises Initial DTI per dot but offers
-experts no new discoveries to verify; a discovery-rich file can gain in the Final round. Optimising
-only the public/Initial number is therefore not obviously prize-optimal — another reason not to ship B3.
+1. **Placement efficiency** — same pool, better dots (each dot covering more probable fault mass
+   under the kernel). *Tested this session (H43-1): failed* — see §4. Greedy max-cover improved
+   credit/dot by only +0.49% on holdout and *lost* packing capacity, net −0.0074 HOLDOUT-DTI.
+2. **Ring-3 deletion** — the champion still carries **2,171 dots at 200–300 m** from the
+   catalogue. Linear extrapolation of rings 1–2 predicts ≈**+0.0060 MODEL** (≈0.284) — but ring
+   3 is the last ring inside the credit kernel, exactly where a genuine unmapped parallel splay
+   would live, so the zero-credit assumption is weakest there; and as a pure subset of the
+   champion it is 100% within-3px duplicate under the owner's protocol. Recorded as a labelled
+   MODEL only; not built, not submitted.
+3. **Genuinely new credit** — structure absent from H19-5's surface (Session 19's ranked slate:
+   displaced potential-field piercing markers first). This is the only route to a *large* jump
+   and the only route that is protocol-unique by construction (a new surface is not within 3 px
+   of the family's dots everywhere). It is also the route that has failed every live test so
+   far, because new detectors in this terrain keep earning < 0.059 credit/FP. It needs the
+   419 MB training stack (hash-pinned owner mirror, obtainable — sparse git clone worked this
+   session while `gh api` was rate-limited) and a fresh preregistered lane with fresh seeds.
 
-## 4. S20 lane result (HOLDOUT-DTI, frozen gate)
+**Answer:** above 0.2778 is possible in principle via route 3 (and marginally via a
+packing-aware version of route 1, §5), but **no file in existence today is shown to do it**, and
+this session's gated attempt made things measurably worse on the only honest local proxy.
+Claiming otherwise would be exactly the hallucination the prompt forbids.
 
-Lane: Frangi Hessian tubularity of LiDAR `step_max` (σ=1/2/3 px), standalone label-free surface;
-mimic: roads/shorelines/drainages/bedding. Evaluator: shared `metric.dti_binary` on LOSFO
-whole-system splits (600 m buffer, visible-only catalogue features, pixel-exact masking), seeds
-340–342 × 4 folds = 12 cells, matched-N vs buffer-masked OOF-HGB control. Full cells:
-`evidence/s20_holdout.json`.
+## 4. Session 20 experiments (all three, line-verified)
 
-| Check | Result | Gate |
-|---|---|---|
-| Leakage canary AUC, vesselness alone (seed 340; 16,408 pos / 500k neg) | **0.5378** (raw step_max 0.5288) | PASS (≤0.90; weak-but-real signal, no leakage signature) |
-| Pre-placement Spearman vs 19 registry rasters (400k sample) | max \|ρ\| **0.0346** | PASS (≤0.90) |
-| **HOLDOUT-DTI pooled lane** (49,387 pooled / 38,941 unique withheld positives) | **0.08631** | — |
-| **HOLDOUT-DTI pooled control** (identical splits/budget/hygiene) | **0.09881** | — |
-| Pooled ΔDTI; paired mean Δ; 95% CI (cell bootstrap) | **−0.01251; −0.01593; [−0.03170, +0.00133]** | **FAIL** (need >0 and CI>0) |
-| Cells won | 3/12 (341-SW, 342-NW, 342-SW) | — |
-| Final-dot uniqueness (frozen 19-raster registry) | worst **33.4%** within 3 px (champion 30.3%) | PASS (≤70%) |
-| Extended uniqueness (Pass 2; 100 distinct dot-sets, 9 repos) | worst **54.2%** (GEMSDOE31 lidar-scarp 50k) | PASS (≤70%) |
-| Validator (both variants, independent re-read) | hard checks **PASS**; all-finite values {0,1}, no NaN anywhere | PASS |
+**Experiment 1 — forensics + leakage canary → PASS to proceed.**
+Lineage exact (§2). Single-feature AUCs vs seed-340 hidden components (assignment only):
+−d_visible 0.72–0.80, ring≤2 0.49–0.50, tip indicator 0.51–0.53, eligibility 0.49, pool 0.49.
+Max 0.802 ≤ 0.90 ⇒ no leakage stop. (`evidence/s20_exp1_forensic.json`)
 
-Per-fold pattern (recorded, **not** tuned on): lane won both SW cells with the largest truth counts
-and lost NE_LidarGapHeavy heavily — consistent with a LiDAR-coverage-dependent signal, but with
-12 cells this is hypothesis-generating only. Vesselness credit is real (absolute LOSFO DTI 0.086 at
-far-field truth ≥800 m from visible labels) yet strictly dominated by the 32-band detector at equal
-budget. **S20-H2 is closed at frozen settings; all 3 experiments spent.**
+**Experiment 2 — frozen holdout gate, seeds 340–344 → FAIL (decisive).**
+HOLDOUT-DTI (`metric.dti_binary`, quadrant component hide-and-recover, visible-only catalogue
+quantities, pixel-exact visible masking, 20 cells, **61,613 pooled / 40,739 unique withheld
+positives**): champion-analogue C0 = **0.103241**; H43-1 C1 = **0.095807**; pooled gain
+**−0.007434**; paired gain 95% CI **[−0.01081, −0.00496]** (4-fold geographic block bootstrap,
+S18 method; 20-cell sensitivity [−0.00899, −0.00608]); **0/20 cells positive**. Gates: G1 ✗,
+G2 ✗, G3 ✓ (credit/dot 0.047580 vs 0.047350, +0.49%), G4 ✓ (0 dots on visible catalogue),
+G5 ✓. Diagnosis, stated as finding not excuse: greedy max-cover is a *maximal* not *maximum*
+packing — high-density early picks block line positions, so C1 placed only **87.1%** of C0's
+dots per cell; a +0.49% per-dot efficiency cannot repay a −12.9% dot deficit when each missing
+dot forfeits its full kernel credit. `dot_thin`'s humble raster-order sweep is, on 1-px ridge
+networks, the better packer. (`evidence/s20_holdout.json`)
 
-## 5. The generated file, the [0,1] portal error, and exact (blocked) submission steps
+**Experiment 3 — build + uniqueness + validator → generated, format-valid, NOT unique by
+protocol, rejected.**
+`gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif` (33,354 dots — packing exhausted at
+88.6% of the 37,654 target; SHA-256 `960c3d49…f117`; note 104/140 chars). Exact-file validator:
+**all hard checks pass** (single-band float32; EPSG:32611; 3730×3292; template transform; no
+NaN anywhere in the primary zeros variant; whole-array min 0 / max 1 — the direct fix for the
+owner's *"Predicted values must be in range [0, 1]"* error class). Uniqueness vs 22 distinct
+local registry dot-sets (+champion education copy): **exact duplicate: NO** (new dot digest;
+Jaccard vs champion 0.260); **protocol duplicate: YES** — 94.3% of its dots lie within 3 px of
+the champion's (100% vs H19-5/d1.5/d2.8, whose dots tile the same ridges), and pre-placement
+surface Spearman vs the H19-5 pool is 0.949 > 0.90. Per the owner's stop rule this is logged as
+a duplicate lane and stops here. (`evidence/s20_build.json`)
 
-- **Primary download:** `docs/downloads/gems28-s20-vesselness-lidarstep-20261026-7a7c5e449fe0-allfinite.tif`
-  — single-band float32, EPSG:32611, 3730×3292, template transform, **no NaN anywhere**, finite values
-  exactly {0.0, 1.0}, zeros outside footprint, 0 dots on catalogue, min catalogue distance >2 px.
-  NaN-outside variant + single-member ZIP alongside. `scripts/verify_downloads.py`: **407 checks PASS**
-  (`evidence/s20_submission_audit.json`).
-- **Portal error "Predicted values must be in range [0, 1]":** cause still **undiagnosed** (validator
-  not public; no claim otherwise). The all-finite primary eliminates every *local numeric* cause —
-  including NaN-comparison failure modes that would reject even sample-conformant NaN-outside files —
-  verified by whole-array re-read. This does **not** guarantee portal acceptance; zeros-outside vs
-  NaN-outside scoring equivalence is an owner report, not an organizer receipt.
-- **Exact future submission steps (do NOT execute today):** (1) new preregistered lane beats frozen
-  holdout control + uniqueness + validator; (2) separate selector approves; (3) on the authenticated
-  DrivenData page confirm remaining weekly allowance (rules PDF §§3.2/3.4 state 3/week; account state
-  unknown here); (4) *New submission → File to submit* → the approved single-band `.tif` (or ZIP with
-  exactly that one TIFF); (5) paste its registered ≤140-char note; (6) submit once, preserve receipt +
-  file SHA-256; (7) remember the single-file choice is re-scored in the Final round.
+**Verdict: `negative`.** 🔴 **DO NOT SUBMIT the S20 file.** It is downloadable for
+reproducibility only, is banner-marked as such on the site's first screen, and its
+holdout + uniqueness failures were computed entirely by the project pipeline — no human
+inspection was needed or used, per the owner's requirement. Seeds 340–344 are spent for this
+lane; no retuning was performed.
 
-## 6. Irregularities flagged (retained for review)
+## 5. What to do next (ranked, concrete)
 
-1. **Lane self-assignment:** no identifiable single method paragraph in the prompt; S20 lane declared
-   in `knowledge/56` before experiments. No external exclusivity; synchronized global registry absent.
-2. **Score provenance:** all nine-site scores USER-REPORTED; GEMSDOE28 0.2710 claim conflicts with
-   local "unscored" manifests; leaderboard 0.3195 vs 0.4413 resolved only as dated public observation.
-3. **Restore gap:** 16/17 pinned objects restored+verified; `qfaults_v2_vectors` source-missing in
-   the sparse clone (expected path `data/external/qfaults_v2_in_footprint.json` absent at mirror ref).
-   Not used by S20. GitHub REST API hit a rate limit (403) during forensic fetch; git-clone path used instead.
-4. **Pass-2 self-match bug (caught & fixed):** first extended-uniqueness run matched the candidate's
-   own NaN variant (1.0000); corrected by content-ID exclusion + dot-set hashing (`evidence/s20_uniqueness_extended.json`).
-5. **Vesselness degeneracy (caught by unit test):** truncated Gaussian derivatives give |Dxx|≈5e-4 on
-   constant fields; relative-c Frangi normalisation would amplify this — guarded (`src/gems27/vesselness.py`).
-6. **Registry boundedness:** frozen gate used 19 rasters; Pass-2 extension to 100 distinct dot-sets
-   still covers only cloned `docs/downloads/` at 2026-10-26 HEADs, not concurrent unmerged work.
+1. **Selector decision on the existing champion (owner action, account-side).** Check the
+   DrivenData submissions page: if SHA-256 `c55bafc4…6fa9` (the zeros champion) has no receipt
+   yet and the weekly allowance (September rules: 3/week — verify on the page) permits, that
+   file — downloaded from GEMSDOE32, §6 — is the single highest-E[V] slot spend available.
+   Preserve the receipt; it converts 0.2778 from USER-REPORTED to ORGANIZER-CONFIRMED and
+   anchors every future MODEL.
+2. **Next lane (new session, new preregistration, fresh seeds ≥350): displaced potential-field
+   piercing markers** (Session 19 rank 1; also §2 rank 2 of the S20 preregistration). Restore
+   `training_features.tif` via sparse git clone of the pinned mirror (gh-API rate limit
+   workaround proven this session), canary each derived band alone, gate exactly as in the S20
+   gate script (which is now a tested, reusable harness: `scripts/run_s20_gate.py` pattern +
+   `src/gems27/greedy_cover.py` eligibility).
+3. **If staying in-family is ever revisited:** packing-first placement — `dot_thin` phase over
+   tip-protected eligibles (guarantees champion-scale packing), *then* 1-for-1 greedy swap
+   improvement under the kernel, accepted only if pooled holdout Δ>0 with positive paired CI on
+   fresh seeds. Expect ≤ +0.002 live (MODEL); it cannot reach 0.3195, and it remains >70%
+   within-3px of the champion, so under current protocol it is a *selector-side refinement of
+   the champion lane*, not a new parallel-run lane. Say so wherever it appears.
+4. **Registry hygiene:** keep one synchronised cross-repo registry (this session's 22-dot-set
+   local snapshot is in `evidence/s20_build.json`); GEMSDOE27/30/33/36 best-file bytes still owe
+   a same-family byte-diff to close §1's last unverified cells.
 
-## 7. Three passes & limitations
+**Limitations:** no DrivenData login, receipts, quota, or hidden labels were available or
+attempted; inputs are hash-pinned owner mirrors, not organizer-authenticated; the holdout
+hides catalogue-internal components and is directionally biased *against* flank deletion
+(disclosed in the preregistration before the run); |G| and every MODEL number inherit the
+single-lattice calibration uncertainty; `gh api` was rate-limited this session (git sparse
+clone fallback used, all SHA-256s verified identically).
 
-- **Pass 1 (implement+verify):** restored hash-pinned data (16/17), rebuilt 32-band cache, froze
-  `knowledge/56`, implemented+tested vesselness, ran forensic (Exp 1), canary+LOSFO gate (Exp 2),
-  candidate build+validator+uniqueness (Exp 3), finalized run card/manifest (407-check audit PASS).
-- **Pass 2 (bugs/assumptions):** fixed vesselness constant-field degeneracy; fixed extended-uniqueness
-  self-match; widened uniqueness 19→100 dot-sets; re-checked matched-N fairness, visible-only
-  catalogue distances, matched hygiene on control, note length, content-addressed names. Reverted a
-  Pass-1 rewrite of `registry/current_session.json` (its bytes are hash-bound historical evidence;
-  caught by `tests/test_protocol_review.py`). Post-run edits to `scripts/s20_canary_and_gate.py` are
-  semicolon-splitting formatting only (ruff E702; statements/order unchanged, evidence JSON untouched).
-- **Pass 3 (requirements re-check):** nine-site executive table ✓; why-0.2778 + beat-it analysis ✓;
-  5 ranked hypotheses with layers/signatures/mimics/costs/data gates ✓ (`knowledge/56`); unique TIF
-  with obvious locked disposition ✓; automated (non-human) validation ✓; HOLDOUT vs USER-REPORTED
-  labelling ✓; run card ✓; budget 3/3, no slot ✓; site + README updated; full tests + ruff (see PR).
-- **Limitations:** LOSFO truth = mapped faults (upper-bound proxy); 12 cells/4 blocks → wide CI;
-  A≈B closure for live inversion; mirrors are owner-supplied, not organizer-authenticated; no
-  DrivenData account/receipt/cap access; 2-core CPU sandbox (U-Net training out of scope here).
+## 6. Manual-review links (official first, then pinned owner artifacts)
 
-## 8. Next steps (prioritised)
+Competition: https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/ ·
+Leaderboard: https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/ ·
+Rules PDF: https://docs.nlr.gov/docs/fy26osti/96647.pdf · Reference solution:
+https://github.com/drivendataorg/gems-prize-reference-solution · USGS GeoDAWN:
+https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and ·
+INGENIOUS: https://gbcge.org/current-projects/ingenious/ · GDR 1391:
+https://gdr.openei.org/submissions/1391 · EPSG:32611: https://epsg.io/32611 · Tversky index:
+https://en.wikipedia.org/wiki/Tversky_index ·
+Champion TIFF (pinned): https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif
+(SHA-256 `c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9`) · Champion audit
+JSON (same tree, `…-audit.json`, contains the UNSCORED note) · Nine site scorecard with pinned
+per-site TIFFs: `docs/cross-site-review.html`.
 
-1. **S20-H1 U-Net patch segmentation** on the restored 32-band stack (Tversky loss; LOSFO-gated;
-   torch via PyPI; GPU strongly preferred) — only identified route with headroom toward 0.33–0.44.
-2. Restore/verify 1 m DEM tiles from `data/dem_links.json` (USGS 3DEP) for native-resolution scarp
-   features; audit coverage before designing around them.
-3. Stand up **one** synchronized parallel registry + frozen same-protocol best so future lanes need
-   no self-assignment; claim fresh seed decade per run.
-4. If owners ever spend a *measurement* slot, the B3-vs-B2 live A/B is the cheapest decisive
-   experiment about ring (2,3] credit — but it is a duplicate-lane file and Final-Round-poor; selector's call, not this run's.
+**How a submission is made (when a future file is ever approved):** DrivenData → competition
+306 → *New submission → File to submit* → choose the single-band float32 `.tif` (or a `.zip`
+containing exactly that one TIFF) whose CRS/shape/transform match the sample submission →
+paste the file's registered ≤140-character note → submit → save the organizer receipt bound to
+the file's SHA-256. The full gated procedure is on `docs/executive-summary.html`. **Do not
+perform these steps with the S20 file.**

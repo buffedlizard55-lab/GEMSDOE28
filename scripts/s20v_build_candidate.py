@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S20 Experiment 3: build the full-grid vesselness candidate GeoTIFFs (knowledge/56).
+"""S20 Experiment 3: build the full-grid vesselness candidate GeoTIFFs (knowledge/59).
 
 Recipe identical to the gate cells, with the full catalogue as the visible set: ridge of the
 cached label-free vesselness surface, pool restricted to d_cat > 2 px, top-K by vesselness with K
@@ -7,7 +7,7 @@ budget-searched so dot_thin(2.8) lands within +/-1% of 37,654 dots. Writes NaN-o
 all-finite variants + single-member ZIP via the shared submission writer, verifies both variants
 by independent re-read, and checks final-dot uniqueness (fraction within 3 px) against every
 registry raster (docs/downloads/*-nan.tif + byte-verified champion/GEMSDOE36 forensic copies).
-Does NOT decide the verdict (scripts/s20_finalize.py does, from gate + uniqueness + validator).
+Does NOT decide the verdict (scripts/s20v_finalize.py does, from gate + uniqueness + validator).
 """
 
 from __future__ import annotations
@@ -122,7 +122,7 @@ def main() -> int:
         uniq[name] = {"frac_our_dots_within3px": within_frac(dots, ref),
                       "registry_dots": int(ref.sum())}
     worst = max(uniq.items(), key=lambda kv: kv[1]["frac_our_dots_within3px"]) if uniq else (None, {})
-    holdout = json.loads((ROOT / "evidence/s20_holdout.json").read_text())
+    holdout = json.loads((ROOT / "evidence/s20v_holdout.json").read_text())
     pre_ok = bool((holdout.get("preplacement") or {}).get("pass"))
     out = {"candidate": nan_name, "allfinite": af_name, "zip": p_zip.name, "content_id": cid,
            "slug": SLUG, "date": DATE, "n_dots": n_final, "target_n": TARGET_N,
@@ -136,7 +136,7 @@ def main() -> int:
            "uniqueness_table": uniq,
            "uniqueness_pass": bool(pre_ok and worst[1].get("frac_our_dots_within3px", 1.0) <= 0.70),
            "seconds": round(time.time() - t0, 1)}
-    (ROOT / "evidence/s20_candidate_build.json").write_text(json.dumps(out, indent=2) + "\n")
+    (ROOT / "evidence/s20v_candidate_build.json").write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({"candidate": nan_name, "n_dots": n_final, "content_id": cid,
                       "validator_nan_pass": v_nan["hard_checks_passed"],
                       "validator_allfinite_pass": v_af["hard_checks_passed"],

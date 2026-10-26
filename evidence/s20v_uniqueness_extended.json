@@ -1,19 +1,26 @@
 {
-  "scope": "S20 Pass-2 extended uniqueness (corrected: own content-id files excluded; dot-set duplicates across nan/zeros conventions collapsed). Every distinct dot-set .tif under sparse clones of GEMSDOE,GEMSDOE24,25,27,30,31,32,33,36 docs/downloads + local docs/downloads, snapshot 2026-10-26.",
-  "n_distinct_dotsets": 100,
+  "scope": "S20V extended uniqueness, regenerated at PR #53 merge so the registry includes the parallel S19-ASCP / S19B-RADLIN / Session 20-H43 rasters merged to main. Distinct dot-sets under sparse clones of GEMSDOE,GEMSDOE24,25,27,30,31,32,33,36 docs/downloads + local docs/downloads, snapshot 2026-10-26.",
+  "n_distinct_dotsets": 103,
   "skipped_own_files": 2,
-  "skipped_dotset_duplicates": 94,
+  "skipped_dotset_duplicates": 96,
   "our_dots": 37500,
   "threshold_stop_above": 0.7,
   "worst": {
-    "file": "/tmp/gems-mirrors/GEMSDOE31/docs/downloads/gemsdoe31-h3-lidar-scarp-unique-50k-20261025-allfinite.tif",
-    "sha256": "7906d5744a8456f09cb17193f4a3f7169a893d3c5ccddcb75b1c28fdb68e662a",
-    "dotset_sha256": "2651977301f396e55aa734156f6d173df6aedb9af852128878d2a55280b94ecb",
-    "registry_dots": 50000,
-    "frac_our_dots_within3px": 0.5418133333333334
+    "file": "/home/user/GEMSDOE28/docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+    "sha256": "553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537",
+    "dotset_sha256": "16abb3f7e7ea08ab124311755cbbd4103cb4339ebd7c171c352177d29443bb71",
+    "registry_dots": 37654,
+    "frac_our_dots_within3px": 0.5422133333333333
   },
   "pass": true,
   "top10": [
+    {
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+      "sha256": "553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537",
+      "dotset_sha256": "16abb3f7e7ea08ab124311755cbbd4103cb4339ebd7c171c352177d29443bb71",
+      "registry_dots": 37654,
+      "frac_our_dots_within3px": 0.5422133333333333
+    },
     {
       "file": "/tmp/gems-mirrors/GEMSDOE31/docs/downloads/gemsdoe31-h3-lidar-scarp-unique-50k-20261025-allfinite.tif",
       "sha256": "7906d5744a8456f09cb17193f4a3f7169a893d3c5ccddcb75b1c28fdb68e662a",
@@ -76,16 +83,16 @@
       "dotset_sha256": "234741de835d176eaf75bfb8cfe30ac47f84e68e7c1f14298a7b3e021966a8c9",
       "registry_dots": 37654,
       "frac_our_dots_within3px": 0.3592266666666667
-    },
-    {
-      "file": "/tmp/gems-mirrors/GEMSDOE24/docs/downloads/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-allfinite.tif",
-      "sha256": "ef2ae808eb7179861b9f1ff753fd3ded625ace7b7c158e29cec45bbd8fa3cfaa",
-      "dotset_sha256": "ff8db147c96e8d8355aa8c3a8d632cef51ad623b4e009c107c44aec327c924c8",
-      "registry_dots": 121131,
-      "frac_our_dots_within3px": 0.35632
     }
   ],
   "all": [
+    {
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+      "sha256": "553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537",
+      "dotset_sha256": "16abb3f7e7ea08ab124311755cbbd4103cb4339ebd7c171c352177d29443bb71",
+      "registry_dots": 37654,
+      "frac_our_dots_within3px": 0.5422133333333333
+    },
     {
       "file": "/tmp/gems-mirrors/GEMSDOE31/docs/downloads/gemsdoe31-h3-lidar-scarp-unique-50k-20261025-allfinite.tif",
       "sha256": "7906d5744a8456f09cb17193f4a3f7169a893d3c5ccddcb75b1c28fdb68e662a",
@@ -255,7 +262,7 @@
       "frac_our_dots_within3px": 0.3253333333333333
     },
     {
-      "file": "docs/downloads/gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-allfinite.tif",
       "sha256": "7ae6f90df568a2578294968ec5e4a8a088653b569e5ab3c149afbe132ba29238",
       "dotset_sha256": "c4886e8a910c892ae35bd8a6a211ed32506806be4b73cfd99779a809d6adcdfc",
       "registry_dots": 54714,
@@ -297,7 +304,7 @@
       "frac_our_dots_within3px": 0.3152
     },
     {
-      "file": "docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35eee884e-allfinite.tif",
       "sha256": "26748e4b4721277b093c776f7ca72920023d0ee6e9514ee38e677c8010f4068e",
       "dotset_sha256": "3609deb889336d6bb0c68765663de615238f5e311c381496e78dee1c7ffcb037",
       "registry_dots": 42294,
@@ -318,7 +325,7 @@
       "frac_our_dots_within3px": 0.3132
     },
     {
-      "file": "docs/downloads/gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-allfinite.tif",
       "sha256": "8aaa2a9b6a78419b4366935f74d731d6f1e669ca866b73280c91420bb60dd675",
       "dotset_sha256": "b30f221761dcb560b5e5e7f04a60d6e1a29ed2e8cfe2ca0f1ff015a0456c1c31",
       "registry_dots": 41656,
@@ -353,7 +360,7 @@
       "frac_our_dots_within3px": 0.30949333333333334
     },
     {
-      "file": "docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-allfinite.tif",
       "sha256": "529d9e1bd80b54957ca16398e47bfc51b1e32eaee8fc89d6dfbddbd7036c5ffc",
       "dotset_sha256": "0f2ae4748496c22e99cf8cf7361139f9ec20cc7a396e9843da5c5a6d8eb2b6af",
       "registry_dots": 37860,
@@ -367,28 +374,28 @@
       "frac_our_dots_within3px": 0.30706666666666665
     },
     {
-      "file": "docs/downloads/gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif",
       "sha256": "89fd98a638a0aebe2e9be6da6948eb879154f05312d6fff24e083794b9f41515",
       "dotset_sha256": "38b2f40f999c75f580bc72ecf02db241f568fc5c014c6a9f317eb23d0b860807",
       "registry_dots": 38024,
       "frac_our_dots_within3px": 0.3065866666666667
     },
     {
-      "file": "docs/downloads/gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h37-1-coverprob-h19-5-r1-20261003-0bbddf41eb6d-allfinite.tif",
       "sha256": "b733cfdbf0d479e1c0eea06f75ef61ba55f14409f2fa9a5876ef7234f294e7df",
       "dotset_sha256": "cd91a78085ba7bf5bfceb46621f28c912b551cfdc4dc0cc2ef247114fea3709d",
       "registry_dots": 37447,
       "frac_our_dots_within3px": 0.3062666666666667
     },
     {
-      "file": "docs/downloads/gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif",
       "sha256": "f0f50442dfe682911a2f49ee56d59a468b3f6b6f2ad35e90932532d3715abcc4",
       "dotset_sha256": "6be619c4192c5261f0e69a53712b7041b226dad6db192cbdb71b662fbc4b2a69",
       "registry_dots": 37677,
       "frac_our_dots_within3px": 0.3058666666666667
     },
     {
-      "file": "docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif",
       "sha256": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32",
       "dotset_sha256": "5fb1778e8a471c98be4771ab5e245174b1256c68571d52f0e988ca0bbff10f6b",
       "registry_dots": 37660,
@@ -409,11 +416,25 @@
       "frac_our_dots_within3px": 0.30346666666666666
     },
     {
-      "file": "docs/downloads/gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
       "sha256": "8a59bc5ea68df8c64f2467fd5e8b3652a324fa3d5e364b9e974d993401c2ec1f",
       "dotset_sha256": "b7ba1aa33fc9fc41b88fca112236303019150c526221677076a90e5820b41d0b",
       "registry_dots": 38545,
       "frac_our_dots_within3px": 0.29186666666666666
+    },
+    {
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif",
+      "sha256": "960c3d493179deed8f743f0f6c5ab18fad1ca58a025b2dd57db565c36d56f117",
+      "dotset_sha256": "a6e088c9b334e3c711e5422a0b9395df5c1b4bc7b58f507acc2a4b72c35e6636",
+      "registry_dots": 33354,
+      "frac_our_dots_within3px": 0.29013333333333335
+    },
+    {
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif",
+      "sha256": "8534701e5d91572a39dba5e9d132e1c747aeab2f5223015a96ee96ace292493b",
+      "dotset_sha256": "fe039d4240b85d5e68530bdc0d5289edeb4e879667fc810931ec4bbfcba51b17",
+      "registry_dots": 37654,
+      "frac_our_dots_within3px": 0.2894933333333333
     },
     {
       "file": "/tmp/gems-mirrors/GEMSDOE27/docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
@@ -493,14 +514,14 @@
       "frac_our_dots_within3px": 0.26210666666666665
     },
     {
-      "file": "docs/downloads/gems28-h40-1-migration-b1-20261025-5f2efa891ce7-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h40-1-migration-b1-20261025-5f2efa891ce7-allfinite.tif",
       "sha256": "93abd1dbd2b06961eeafb25dbb428848d15d3c5e36ab9505d165f150fc9e9316",
       "dotset_sha256": "789751b9eff4c2a62f6e0ab8c8b524da6492a2e897f2c19893b84d05bfecd020",
       "registry_dots": 37694,
       "frac_our_dots_within3px": 0.25162666666666667
     },
     {
-      "file": "docs/downloads/gems28-h42-1-migx-reloc-b1-20261025-290553965159-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h42-1-migx-reloc-b1-20261025-290553965159-allfinite.tif",
       "sha256": "d62d5ed1852afd1eb5ce6f3fd4736c61d15434d366f2e008dafc0aaa4d04d22a",
       "dotset_sha256": "9b66825bfcfbaac5204502acd70d550cce4888d9325a29a8e3e0d1b815c471a3",
       "registry_dots": 34492,
@@ -514,7 +535,7 @@
       "frac_our_dots_within3px": 0.24248
     },
     {
-      "file": "docs/downloads/gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h39-1-depthslice-persist-b2-20261025-a86b8ed33727-allfinite.tif",
       "sha256": "64fe7b27512ad5d22a4c6ef166afd6b901259d1536ff42d573f2e944bbcf92d2",
       "dotset_sha256": "87221963cfe4c53d63dd441a1e487992878a043c136014dd717da9aa907c8be8",
       "registry_dots": 37695,
@@ -535,7 +556,7 @@
       "frac_our_dots_within3px": 0.23298666666666668
     },
     {
-      "file": "docs/downloads/gems28-h39-5-extrap-swap35-20261025-719b83fb659b-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-h39-5-extrap-swap35-20261025-719b83fb659b-allfinite.tif",
       "sha256": "aeaa72057b85c4e07fee9c3beaa99e87e4a41a1a8eba396251281f46595fe972",
       "dotset_sha256": "31ffa3ab3f389a15914570eb7dbbd098bd016223de14182df4cf6b043a4f8ac1",
       "registry_dots": 37521,
@@ -773,7 +794,7 @@
       "frac_our_dots_within3px": 0.07869333333333334
     },
     {
-      "file": "docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif",
+      "file": "/home/user/GEMSDOE28/docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif",
       "sha256": "ce043566a96a1bf0abae366ba706ed6be5907297248b1d14deace8596500b186",
       "dotset_sha256": "1396f10b098bd5fdd124d785afe36ed3444a12988f0e20a5a91f6e6537cb5db5",
       "registry_dots": 11082,
@@ -787,5 +808,5 @@
       "frac_our_dots_within3px": 0.0
     }
   ],
-  "pass2_note": "First Pass-2 run self-matched the candidate NaN variant (1.0000) because file-sha dedupe does not collapse outside-convention variants; corrected here by content-id exclusion + dot-set hashing. Frozen Exp-3 registry check (19 rasters) was unaffected (it excluded the candidate by name)."
+  "pass2_note": "Pre-merge run (100 dot-sets, worst 54.2% GEMSDOE31 lidar-scarp) predated the parallel-session rasters; this regeneration supersedes its registry scope."
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S20 Experiment 2: leakage canary + LOSFO gate for the Hessian-tubularity lane (knowledge/56).
+"""S20 Experiment 2: leakage canary + LOSFO gate for the Hessian-tubularity lane (knowledge/59).
 
 Frozen design (do not tune after seeing results):
   * Lane surface V = vesselness.frangi_vesselness(lidar step_max) — label-free, computed once.
@@ -14,7 +14,7 @@ Frozen design (do not tune after seeing results):
     AUC > 0.90 aborts before any DTI is trusted (protocol section 4).
   * Pre-placement uniqueness: Spearman(V, registry rasters) on a fixed 400k footprint sample.
 
-Writes evidence/s20_holdout.json and caches the surface to data/prepared/s20_vesselness.npy
+Writes evidence/s20v_holdout.json and caches the surface to data/prepared/s20_vesselness.npy
 (git-ignored) for the Experiment-3 build. Every performance number written here is HOLDOUT-DTI.
 """
 
@@ -157,7 +157,7 @@ def main() -> int:
     if not canary["pass"] or not preplacement["pass"]:
         out = {"schema": 1, "session": "S20 Experiment 2", "status": "STOPPED at canary/pre-placement",
                "canary": canary, "preplacement": preplacement, "holdout": None}
-        (ROOT / "evidence/s20_holdout.json").write_text(json.dumps(out, indent=2) + "\n")
+        (ROOT / "evidence/s20v_holdout.json").write_text(json.dumps(out, indent=2) + "\n")
         print("STOPPED before DTI per protocol.")
         return 0
 
@@ -222,7 +222,7 @@ def main() -> int:
            "caveats": ["LOSFO truth is still mapped faults: absolute DTI is an upper bound vs genuinely unmapped faults.",
                        "12 cells / 4 geographic blocks: bootstrap CI is optimistic about spatial independence.",
                        "HOLDOUT-DTI is a local recovery proxy, never an organizer score."]}
-    (ROOT / "evidence/s20_holdout.json").write_text(json.dumps(out, indent=2) + "\n")
+    (ROOT / "evidence/s20v_holdout.json").write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({"pooled_lane_dti": out["pooled_lane"]["dti"], "pooled_control_dti": out["pooled_control"]["dti"],
                       "pooled_delta": out["pooled_delta_dti"], "paired_ci95": out["paired_ci95_bootstrap_cells"],
                       "gate_pass": out["gate_pass"], "seconds": out["seconds"]}, indent=2))

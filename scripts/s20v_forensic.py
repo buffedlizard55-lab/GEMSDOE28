@@ -186,7 +186,7 @@ def main() -> int:
                     "bytes of additional fault detection. Causation remains conditional: hidden truth and "
                     "receipts are unavailable."),
     }
-    outp = ROOT / "evidence/s20_forensic.json"
+    outp = ROOT / "evidence/s20v_forensic.json"
     outp.write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({"relations": relations,
                       "B3_|G|12226": inversion["|G|=12226"]["B3_projection_measurement_only"],

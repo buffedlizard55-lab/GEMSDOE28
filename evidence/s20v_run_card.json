@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "session_id": "G28-S20-20261026",
+  "session_id": "G28-S20V-20261026",
   "date_utc": "2026-10-26",
   "branch": "arena/6ee1b262-gemsdoe28",
   "lane": "S20-H2 Hessian tubularity of LiDAR step_max (self-assigned; see lane_note)",
@@ -63,16 +63,17 @@
     },
     "pass": true,
     "extended_pass2": {
-      "n_distinct_dotsets": 100,
+      "n_distinct_dotsets": 103,
       "worst": {
-        "file": "/tmp/gems-mirrors/GEMSDOE31/docs/downloads/gemsdoe31-h3-lidar-scarp-unique-50k-20261025-allfinite.tif",
-        "sha256": "7906d5744a8456f09cb17193f4a3f7169a893d3c5ccddcb75b1c28fdb68e662a",
-        "dotset_sha256": "2651977301f396e55aa734156f6d173df6aedb9af852128878d2a55280b94ecb",
-        "registry_dots": 50000,
-        "frac_our_dots_within3px": 0.5418133333333334
+        "file": "/home/user/GEMSDOE28/docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+        "sha256": "553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537",
+        "dotset_sha256": "16abb3f7e7ea08ab124311755cbbd4103cb4339ebd7c171c352177d29443bb71",
+        "registry_dots": 37654,
+        "frac_our_dots_within3px": 0.5422133333333333
       },
       "pass": true,
-      "file": "evidence/s20_uniqueness_extended.json"
+      "file": "evidence/s20v_uniqueness_extended.json",
+      "scope": "S20V extended uniqueness, regenerated at PR #53 merge so the registry includes the parallel S19-ASCP / S19B-RADLIN / Session 20-H43 rasters merged to main. Distinct dot-sets under sparse clones of GEMSDOE,GEMSDOE24,25,27,30,31,32,33,36 docs/downloads + local docs/downloads, snapshot 2026-10-26."
     }
   },
   "raster_sha256": {
@@ -122,11 +123,12 @@
       "observed_utc": "2026-10-26 via research fetch (chunk 0); dated public observation, NOT a receipt",
       "note": "Prompt also quotes 0.3195 as a high score; superseded as a current-top claim by the dated 0.4413 observation. Neither value is linked to any local raster."
     },
-    "forensic": "evidence/s20_forensic.json (byte-verified ladder + closure inversion; education only)"
+    "forensic": "evidence/s20v_forensic.json (byte-verified ladder + closure inversion; education only)"
   },
   "verdict": "negative",
   "promotion_eligible": false,
   "submission_ready": false,
   "download_decision": "OK to download for research/reproducibility. NOT OK to submit: frozen LOSFO gate failed. No human inspection changes this computed disposition.",
-  "next_gate": "Close S20-H2 at frozen settings (budget spent). Next programme priority S20-H1 U-Net patch segmentation on the restored 32-band stack (knowledge/56), new preregistration + fresh seeds."
+  "next_gate": "Close S20-H2 at frozen settings (budget spent). Next programme priority S20-H1 U-Net patch segmentation on the restored 32-band stack (knowledge/56), new preregistration + fresh seeds.",
+  "merge_rename_note": "Renamed S20->S20V at merge with main (PR #53): a concurrent Session 20-H43 run (PR #51/#52) already owned evidence/s20_holdout.json + knowledge/57_s20_result.md and seeds 340-344 under a different (interleaved) protocol. Evidence contents unchanged; never pool numbers across sessions."
 }

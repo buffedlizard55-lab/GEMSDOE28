@@ -1,0 +1,166 @@
+{
+ "stem": "gems28-h43-1-tpb2gkc-20261026-76737f19814e",
+ "primary_file": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif",
+ "primary_sha256": "960c3d493179deed8f743f0f6c5ab18fad1ca58a025b2dd57db565c36d56f117",
+ "primary_bytes": 817614,
+ "nan_file": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-nan.tif",
+ "nan_sha256": "212439622ab36d282fee549b040df0d66d4c5a713a643685b5403ab0ed138ea9",
+ "zip_file": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.zip",
+ "zip_sha256": "ca6b3cb0e74875e9d8e96aad88fe0eaa5070a68b9738c891533ae57abd9fdb52",
+ "dots": 33354,
+ "target_budget": 37654,
+ "budget_reached": false,
+ "verify_primary": {
+  "file": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif",
+  "bytes": 817614,
+  "sha256": "960c3d493179deed8f743f0f6c5ab18fad1ca58a025b2dd57db565c36d56f117",
+  "variant": "allfinite",
+  "checks": {
+   "grid_matches_template": {
+    "pass": true,
+    "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+    "hard": true
+   },
+   "single_band_float32": {
+    "pass": true,
+    "detail": "count=1 dtype=float32",
+    "hard": true
+   },
+   "inside_footprint_all_finite": {
+    "pass": true,
+    "detail": "0 non-finite inside 5167373 px",
+    "hard": true
+   },
+   "inside_footprint_in_0_1": {
+    "pass": true,
+    "detail": "min=0 max=1",
+    "hard": true
+   },
+   "no_infinities_anywhere": {
+    "pass": true,
+    "detail": "np.isinf(whole array) is empty",
+    "hard": true
+   },
+   "nodata_convention": {
+    "pass": true,
+    "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+    "hard": true
+   },
+   "outside_footprint_is_zero_and_finite": {
+    "pass": true,
+    "detail": "zeros outside the footprint, no NaN anywhere (fallback variant)",
+    "hard": true
+   },
+   "strict_whole_array_range": {
+    "pass": true,
+    "detail": "whole-array min=0 max=1",
+    "hard": true
+   },
+   "profile_driver_gtiff": {
+    "pass": true,
+    "detail": "GTiff",
+    "hard": true
+   },
+   "compression_like_sample": {
+    "pass": true,
+    "detail": "Compression.lzw",
+    "hard": false
+   }
+  },
+  "hard_checks_passed": true,
+  "hard_failures": [],
+  "nonzero_inside_px": 33354,
+  "nonfinite_inside_px": 0,
+  "value_set_inside": [
+   0.0,
+   1.0
+  ]
+ },
+ "verify_nan": {
+  "file": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-nan.tif",
+  "bytes": 1582326,
+  "sha256": "212439622ab36d282fee549b040df0d66d4c5a713a643685b5403ab0ed138ea9",
+  "variant": "nan",
+  "checks": {
+   "grid_matches_template": {
+    "pass": true,
+    "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+    "hard": true
+   },
+   "single_band_float32": {
+    "pass": true,
+    "detail": "count=1 dtype=float32",
+    "hard": true
+   },
+   "inside_footprint_all_finite": {
+    "pass": true,
+    "detail": "0 non-finite inside 5167373 px",
+    "hard": true
+   },
+   "inside_footprint_in_0_1": {
+    "pass": true,
+    "detail": "min=0 max=1",
+    "hard": true
+   },
+   "no_infinities_anywhere": {
+    "pass": true,
+    "detail": "np.isinf(whole array) is empty",
+    "hard": true
+   },
+   "nodata_convention": {
+    "pass": true,
+    "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+    "hard": true
+   },
+   "outside_footprint_is_nan": {
+    "pass": true,
+    "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+    "hard": true
+   },
+   "nodata_tag_is_nan": {
+    "pass": true,
+    "detail": "nodata=NaN declared, same as the sample submission",
+    "hard": true
+   },
+   "masked_read_in_0_1": {
+    "pass": true,
+    "detail": "masked count=5167373, min=0, max=1",
+    "hard": true
+   },
+   "nan_aware_range_in_0_1": {
+    "pass": true,
+    "detail": "nanmin=0 nanmax=1",
+    "hard": true
+   },
+   "strict_whole_array_range_ignoring_nan_is_informational": {
+    "pass": false,
+    "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+    "hard": false
+   },
+   "profile_driver_gtiff": {
+    "pass": true,
+    "detail": "GTiff",
+    "hard": true
+   },
+   "compression_like_sample": {
+    "pass": true,
+    "detail": "Compression.lzw",
+    "hard": false
+   }
+  },
+  "hard_checks_passed": true,
+  "hard_failures": [],
+  "nonzero_inside_px": 33354,
+  "nonfinite_inside_px": 0,
+  "value_set_inside": [
+   0.0,
+   1.0
+  ]
+ },
+ "note": "S20 H43-1 TPB2-GKC greedy kernel-cover, tip-protected B2, 33354 dots; holdout gate FAILED; DO NOT SUBMIT",
+ "note_chars": 104,
+ "gate_pass_exp2": false,
+ "holdout_pooled_gain": -0.007434422474994887,
+ "verdict": "negative",
+ "submission_ready": false
+}

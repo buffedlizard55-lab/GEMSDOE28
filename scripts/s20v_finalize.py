@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""S20 finalize: verdict, note, manifest registration, protocol run card (knowledge/56).
+"""S20 finalize: verdict, note, manifest registration, protocol run card (knowledge/59).
 
 Verdict rule (frozen): promote iff LOSFO gate pass AND final-dot uniqueness pass AND both
 validator hard-check suites pass on the exact shipped bytes; otherwise negative. A promote
 verdict still selects no weekly slot (separate selector step). Writes:
   docs/downloads/note-*.txt, docs/downloads/checks-*.json, docs/downloads/manifest.json (updated),
-  evidence/s20_run_card.json, docs/data/run_card_s20.json, registry/current_session.json (updated).
+  evidence/s20v_run_card.json, docs/data/run_card_s20.json, registry/current_session.json (updated).
 """
 
 from __future__ import annotations
@@ -20,9 +20,9 @@ from gems27 import submission  # noqa: E402
 
 
 def main() -> int:
-    hold = json.loads((ROOT / "evidence/s20_holdout.json").read_text())
-    build = json.loads((ROOT / "evidence/s20_candidate_build.json").read_text())
-    forensic = json.loads((ROOT / "evidence/s20_forensic.json").read_text())
+    hold = json.loads((ROOT / "evidence/s20v_holdout.json").read_text())
+    build = json.loads((ROOT / "evidence/s20v_candidate_build.json").read_text())
+    forensic = json.loads((ROOT / "evidence/s20v_forensic.json").read_text())
     cid = build["content_id"]
     gate_pass = bool(hold["gate_pass"])
     uniq_pass = bool(build["uniqueness_pass"])
@@ -68,8 +68,8 @@ def main() -> int:
         "bytes_allfinite": build["bytes"]["allfinite"], "bytes_zip": build["bytes"]["zip"],
         "emitted_px": build["n_dots"], "format_verified": val_pass, "status": status, "note": note,
         "note_file": note_name, "submission_name": f"GEMSDOE28-s20-vesselness-lidarstep-{cid}",
-        "run_card": "evidence/s20_run_card.json", "holdout_evidence": "evidence/s20_holdout.json",
-        "holdout_preregistration": "knowledge/56_s20_preregistration_and_hypotheses.md",
+        "run_card": "evidence/s20v_run_card.json", "holdout_evidence": "evidence/s20v_holdout.json",
+        "holdout_preregistration": "knowledge/59_s20v_preregistration_and_hypotheses.md",
         "holdout_seeds": "340-342", "verdict": verdict}
     manifest_path = ROOT / "docs/downloads/manifest.json"
     manifest = json.loads(manifest_path.read_text())
@@ -78,7 +78,7 @@ def main() -> int:
         "run_id": "S20-H2-vesselness", "status": "NEGATIVE — NO FILE APPROVED" if verdict == "negative"
         else "PROMOTE-ELIGIBLE — SELECTOR STEP SEPARATE, NO SLOT SELECTED",
         "submission_ready": False, "slot_selected": False, "new_tiff_generated": True,
-        "run_card": "evidence/s20_run_card.json", "prior_parallel_review": "evidence/session19_run_card.json"}
+        "run_card": "evidence/s20v_run_card.json", "prior_parallel_review": "evidence/session19_run_card.json"}
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
 
     card = {
@@ -86,7 +86,7 @@ def main() -> int:
         "branch": "arena/6ee1b262-gemsdoe28",
         "lane": "S20-H2 Hessian tubularity of LiDAR step_max (self-assigned; see lane_note)",
         "lane_note": ("Prompt's 'single method paragraph' was not identifiable; lane declared and frozen in "
-                      "knowledge/56 before any S20 canary/DTI. No external exclusivity claimed."),
+                      "knowledge/59 before any S20 canary/DTI. No external exclusivity claimed."),
         "hypothesis": ("Second-derivative (Hessian) tubularity of the 100 m LiDAR scarp-step field marks "
                        "subdued/buried scarp centrelines missed by the Quaternary catalogue, beyond what "
                        "gradient magnitude or the tabular 32-band detector captures at matched budget."),
@@ -130,21 +130,21 @@ def main() -> int:
             "highest_nine_site_claim": {"site": "GEMSDOE32", "artifact": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
                                         "value": 0.2778, "class": "USER-REPORTED / UNVERIFIED"},
             "leaderboard_dated_observation": forensic["leaderboard_observation"],
-            "forensic": "evidence/s20_forensic.json (byte-verified ladder + closure inversion; education only)"},
+            "forensic": "evidence/s20v_forensic.json (byte-verified ladder + closure inversion; education only)"},
         "verdict": verdict, "promotion_eligible": bool(verdict == "promote"), "submission_ready": False,
         "download_decision": ("OK to download for research/reproducibility. NOT OK to submit: frozen LOSFO "
                               "gate failed. No human inspection changes this computed disposition."
                               if verdict == "negative" else
                               "Gate-passing; still requires separate selector decision + authenticated cap check."),
         "next_gate": ("Close S20-H2 at frozen settings (budget spent). Next programme priority S20-H1 U-Net "
-                      "patch segmentation on the restored 32-band stack (knowledge/56), new preregistration + fresh seeds."),
+                      "patch segmentation on the restored 32-band stack (knowledge/59), new preregistration + fresh seeds."),
     }
-    (ROOT / "evidence/s20_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
+    (ROOT / "evidence/s20v_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
     (ROOT / "docs/data/run_card_s20.json").write_text(json.dumps(card, indent=2) + "\n")
 
     # NOTE (Pass 2): registry/current_session.json is intentionally NOT updated. Its bytes are
     # hash-bound by historical evidence (evidence/current_run_card.json, enforced by
-    # tests/test_protocol_review.py); S20 session/lane facts live in the run card + knowledge/56.
+    # tests/test_protocol_review.py); S20 session/lane facts live in the run card + knowledge/59.
     # An earlier Pass-1 version of this block rewrote it and was reverted for exactly that reason.
     print(json.dumps({"verdict": verdict, "note": note, "note_chars": len(note),
                       "submission_name": entry["submission_name"], "gate_pass": gate_pass,

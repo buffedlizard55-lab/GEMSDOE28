@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "session_id": "S19-ASCP-20261026",
+  "branch": "arena/77bdd3ea-gemsdoe28",
+  "lane": "antislope scarp curvature pairs",
+  "lane_assignment_source": "Autonomous repository next step; owner prompt omitted identifiable method paragraph",
+  "lane_status": "Executed and closed after three frozen experiments; negative holdout verdict; do not rerun or submit.",
+  "shared_template_pin": "registry/protocol_assets.json",
+  "cached_features": "data/prepared/features.npy",
+  "cached_features_metadata": "data/prepared/features.json",
+  "required_parallel_registry": "Fresh nine-repository priority cache plus pre-run local archive; 53 unique-byte valid-grid rasters; not global private registry",
+  "frozen_protocol_comparable_best": "visible-only 32-band H38-style detector recomputed in shared SegmentHoldout",
+  "experiments_run": 3,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "slot_selected": false,
+  "weekly_cap": null,
+  "weekly_cap_status": "Authenticated account allowance unavailable; no selector action.",
+  "started_at_utc": "2026-10-26T00:00:00Z",
+  "verdict": "negative",
+  "run_card": "evidence/s19_ascp_run_card.json"
+}

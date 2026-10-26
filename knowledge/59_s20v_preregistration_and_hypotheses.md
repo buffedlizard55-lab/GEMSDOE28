@@ -1,4 +1,7 @@
-# S20 preregistration — Hessian-tubularity lane (frozen 2026-10-26, before any S20 holdout DTI)
+# S20V preregistration — Hessian-tubularity lane (frozen 2026-10-26, before any S20 holdout DTI)
+
+> **Merge rename (PR #53):** this run was labelled "S20" on its branch; a concurrent Session 20-H43 run merged first and owns the `s20_*` filenames and seeds 340–344 (interleaved protocol). This vesselness run is therefore **S20V** (`knowledge/59`/`60`, `evidence/s20v_*`). Seed overlap 340–342 across sessions is disclosed; protocols differ (LOSFO here) and numbers must never be pooled. Preregistration content below is unchanged from its frozen pre-experiment form except file-path updates.
+
 
 Session: `G28-S20-20261026`, branch `arena/6ee1b262-gemsdoe28`. Budget: 3 experiments / 2 hours
 (parallel-run protocol §6). This file was written **before** any S20 feature canary, holdout DTI, or
