@@ -3,6 +3,30 @@
   "note": "Verification status is stated per row. DrivenData is accessed manually only; there is no scraper, API poll, scheduled fetch, upload, or monitoring. The official public leaderboard was read once manually on 2026-10-03; its rows do not establish owner identity or local TIFF association. | 2026-10-03: the three GDR 1391 layers are no longer 'hash-pinned, raw bytes NOT downloaded': the repaired fetch-gdr-external-layers workflow downloaded them on a runner and every SHA-256 matched the independent 2026-09-30 pin (evidence/external_layer_inventory.json). | 2026-10-03 Session 14: official DrivenData problem, ScienceBase heat-flow/conductance, GDR #1391, and USGS 3DEP pages were rechecked. These checks establish that the pages/resources are listed, not that the contest owner mirrors are organizer-authenticated or that new layers are locally clipped/schema-audited. | S18 2026-10-25: one-off research-tool official page/PDF review in evidence/s18_official_source_review.json. Static feed still never contacts DrivenData. No organizer receipt or login obtained.",
   "sources": [
     {
+      "id": "dd-leaderboard-2026-10-26",
+      "title": "DrivenData #306 DOE GEMS - Public Leaderboard (one-off read-only check)",
+      "publisher": "DrivenData",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "category": "competition",
+      "used_for": "Reconciling the cited 0.3195 (2026-10-03 #1 DARD) vs 0.4413 (2026-10-26 #1 xiaofanhu) public DW-Tversky benchmarks",
+      "status": "Read once via research tool on 2026-10-26; no automated polling, login, or owner-file attribution",
+      "accessed": "2026-10-26",
+      "evidence": "Top 5 public DW-Tversky rows on 2026-10-26: #1 xiaofanhu 0.4413, #2 cfld__ 0.3916, #3 Batik Shirt Brothers 0.3904, #4 BrandenKMurray 0.3724, #5 No Fault of Our Own 0.3553. Public leaderboard rows do not identify owner repositories or prove any local TIFF score.",
+      "feed": false
+    },
+    {
+      "id": "epsg-32611",
+      "title": "EPSG:32611 - WGS 84 / UTM zone 11N",
+      "publisher": "EPSG / MapTiler",
+      "url": "https://epsg.io/32611",
+      "category": "reference",
+      "used_for": "Verifying competition GeoTIFF projection parameters (metre units, central meridian -117 deg, scale factor 0.9996, false easting 500,000 m)",
+      "status": "Verified via research tool on 2026-10-26",
+      "accessed": "2026-10-26",
+      "evidence": "Matches sample_submission.tif and gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif CRS (EPSG:32611).",
+      "feed": false
+    },
+    {
       "id": "dd-problem",
       "title": "DrivenData #306 DOE GEMS - Problem description",
       "publisher": "DrivenData (competition host)",

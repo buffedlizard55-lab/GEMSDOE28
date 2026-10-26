@@ -362,12 +362,13 @@
     "run_card": "data/run_card_s18.json"
   },
   "current_run": {
-    "run_id": "S18-MXTP",
+    "run_id": "S20-NCHC",
     "status": "NEGATIVE \u2014 NO FILE APPROVED",
     "submission_ready": false,
     "slot_selected": false,
     "new_tiff_generated": true,
-    "run_card": "data/current_run_card_2026-10-25.json",
+    "run_card": "evidence/s20_nchc_run_card.json",
+    "prior_s18_run_card": "data/current_run_card_2026-10-25.json",
     "prior_parallel_review": "evidence/s18_run_card.json"
   },
   "s18_h39_5_candidate": {
@@ -418,6 +419,31 @@
     "holdout_evidence": "evidence/s18_h42_losfo_gate.json",
     "holdout_preregistration": "knowledge/52_preregistration_H42-1_migration_relocation.md",
     "holdout_seeds": "310-314",
+    "verdict": "negative"
+  },
+  "s20_nchc_candidate": {
+    "slug": "s20-nchc",
+    "hypothesis": "H43-1 (S20-NCHC): Multi-scale 4-modality nematic strike concordance (magnetics, gravity, conductive base, piedmont relief) + clay-cap margin / K-metasomatism / silica geothermometry disequilibrium corridor + 300 m Minoux submodular kernel coverage (B=2).",
+    "content_id": "d432a1d5d6ee",
+    "nan": "gems28-s20-nchc-20261026-d432a1d5d6ee-nan.tif",
+    "allfinite": "gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif",
+    "zip": "gems28-s20-nchc-20261026-d432a1d5d6ee-nan.zip",
+    "sha256_nan": "bbc8ed38cc422c9cb6e7432ecdff1a15fb8e025c06c0379c5253a392c48e1040",
+    "sha256_allfinite": "1d629d6c953c94681ecfe51111d4210361f7014b1df41f5fcfa8d81c4f54f853",
+    "sha256_zip": "0c77d9cd0b48f51b7e376e70d5d1a37d47a862a7ec7e09b81e89023637b1dd95",
+    "bytes_nan": 1595128,
+    "bytes_allfinite": 830586,
+    "bytes_zip": 299267,
+    "emitted_px": 40071,
+    "format_verified": true,
+    "status": "DO NOT SUBMIT \u2014 OK TO DOWNLOAD FOR RESEARCH ONLY; HOLDOUT-DTI (gems-segment-pooled-v1, 60,988 withheld positives) = 0.131263 (95% CI [0.120346, 0.141838]) vs retrained visible-only 32-band H38 baseline 0.144433 (paired delta -0.013171, 95% CI [-0.027721, -0.000417], 1/4 folds; won Walker Lane SW fold 0.112115 vs 0.098698, +0.013416); all 28 feature canaries PASS (max AUC 0.601 <= 0.90); uniqueness PASS across all 112 published 9-site+PR48 rasters (max |Spearman| 0.1035 OOF / 0.1280 full surface / 0.0583 dots; max 3px dot overlap 53.63% <= 70%); byte validator PASS (allfinite strict [0,1] across all 12,279,160 cells, zero catalogue overlap); verdict negative; 0 weekly slots spent.",
+    "note": "S20-NCHC nematic+claycap 300m submod B2 40071d | HOLDOUT-DTI 0.1313 vs 0.1444 | DO NOT SUBMIT",
+    "note_file": "gems28-s20-nchc-20261026-d432a1d5d6ee.note.txt",
+    "submission_name": "GEMSDOE28-S20-NCHC-20261026-d432a1d5d6ee",
+    "run_card": "evidence/s20_nchc_run_card.json",
+    "holdout_evidence": "evidence/s20_nchc_exp2_holdout.json",
+    "holdout_preregistration": "knowledge/56_s20_preregistration.md",
+    "holdout_seeds": "340-344",
     "verdict": "negative"
   }
 }

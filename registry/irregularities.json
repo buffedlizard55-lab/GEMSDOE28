@@ -1,6 +1,36 @@
 {
-  "generated": "2026-10-25T00:00:00Z",
+  "generated": "2026-10-26T01:30:00Z",
   "items": [
+    {
+      "id": "s20-public-leaderboard-04413-vs-03195-reconciled",
+      "severity": "medium",
+      "issue": "Earlier project notes cited two different public leaderboard top values (0.3195 and 0.4413). One-off read-only inspection of the public DrivenData leaderboard (https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) on 2026-10-26 reconciled them: 0.3195 was the 2026-10-03 #1 snapshot (DARD, registry/leaderboard_snapshot_2026-10-03.json), while by 2026-10-26 the public top 5 reached 0.4413 (xiaofanhu), 0.3916 (cfld__), 0.3904 (Batik Shirt Brothers), 0.3724 (BrandenKMurray), and 0.3553 (No Fault of Our Own).",
+      "action": "Report both snapshots with exact observation dates and URLs; never attribute public leaderboard rows to local TIFFs without an organizer submission receipt. Keep GEMSDOE32 0.2778 labeled USER-REPORTED / UNVERIFIED."
+    },
+    {
+      "id": "s20-depth-to-base-surf-header-vs-problem-page",
+      "severity": "medium",
+      "issue": "Embedded GeoTIFF band 15 metadata in training_features.tif reads 'depth_to_base_surf - Depth to basement surface - thickness of sedimentary cover', whereas the official DrivenData problem page (https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) defines the band as 'depth to conductive base surface'.",
+      "action": "Treat depth_to_base_surf strictly as depth to the electromagnetic conductive base interface (em_cb_tubular_* in S20-NCHC), never as an authenticated crystalline-basement isopach."
+    },
+    {
+      "id": "s20-wellspring-volcanics-dist-known-fault-leak-column",
+      "severity": "high",
+      "issue": "Restored gdr_wellspring_in_footprint.csv and gdr_volcanic_vents_in_footprint.csv include a precomputed dist_known_fault_px column measured against the full unwithheld fault catalogue, which would leak withheld segments if read during hide-and-recover evaluation.",
+      "action": "Explicitly ban dist_known_fault_px via FORBIDDEN_WELLSPRING_COLUMNS in src/gems27/s20_nchc.py and enforce byte-identical output under poisoned values in tests/test_s20_nchc.py."
+    },
+    {
+      "id": "s20-synthetic-spacing5-lattice-pigeonhole-overlap",
+      "severity": "medium",
+      "issue": "Historic calibration raster inputs/calibration/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif places 206,895 dots on a regular 5x5 pixel lattice; by Euclidean geometry every interior cell has a lattice point within sqrt(2^2 + 2^2) = 2.828 <= 3.0 px (S20-NCHC raw Spearman = -0.00009, 3-px overlap = 0.9947).",
+      "action": "Report both the 112-member published 9-site+PR48 registry gate (max overlap 53.63% <= 70%, PASS) and shared gems.novelty.compare_prospective_registry across all 120 unique rasters (118 competing method lanes max overlap 58.35% <= 70%, PASS; 2 calibration controls explicitly separated and retained)."
+    },
+    {
+      "id": "s20-gemsdoe32-round6-full-catalogue-b2-demotion",
+      "severity": "high",
+      "issue": "Latest GEMSDOE32 HEAD (69d3abe, 2026-10-26) demoted its Round-6 candidate (gemsdoe32-r6-stepprofile-b2-37654) to DO NOT SUBMIT after auditing that its B=2 mask had been computed from the full catalogue prior to hide-and-recover evaluation.",
+      "action": "Enforce strict per-fold visible-only B=2 clearance (distance_transform_edt(~fold['visible']) > 2.0) in S20-NCHC and verify zero sensitivity to withheld positives in tests/test_s20_nchc.py."
+    },
     {
       "id": "s18-schema-is-not-upload-approval",
       "severity": "high",

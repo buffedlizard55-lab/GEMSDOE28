@@ -1,4 +1,22 @@
-# Session 19 review — 2026-10-26 (read first every session)
+# Session 20 (`S20-NCHC` / `H43-1`) — 2026-10-26 UTC (read first every session)
+
+## NEW GENUINELY UNIQUE GeoTIFF GENERATED & BYTE-VERIFIED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
+
+- **1-Click Research Download (All-Finite `[0, 1]` GeoTIFF):** [`docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif`](docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif) (`830,586` bytes · SHA-256 `1d629d6c953c94681ecfe51111d4210361f7014b1df41f5fcfa8d81c4f54f853` · `40,071` off-catalogue dots · `0` catalogue overlap · `EPSG:32611` · `3730 × 3292` · single-band `float32` `{0.0, 1.0}`)
+- **Template-NaN Twin & ZIP:** [`gems28-s20-nchc-20261026-d432a1d5d6ee-nan.tif`](docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-nan.tif) · [`gems28-s20-nchc-20261026-d432a1d5d6ee-nan.zip`](docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-nan.zip)
+- **Unique Portal Name:** `GEMSDOE28-S20-NCHC-20261026-d432a1d5d6ee`
+- **Short Submission Note (`93/140` chars):** `S20-NCHC nematic+claycap 300m submod B2 40071d | HOLDOUT-DTI 0.1313 vs 0.1444 | DO NOT SUBMIT`
+- **Automated Validation & Promotion Gate (`scripts/verify_downloads.py` + `scripts/check_promotion.py`):**
+  - **File / Portal `[0, 1]` Range Gate:** **PASS (`407 / 407` checks)** — zero NaN/Inf across all `12,279,160` cells, strict `[0.0, 1.0]`, exact template CRS/shape/geotransform, zero catalogue overlap.
+  - **Leakage Canary (`SegmentHoldout.canary`):** **PASS (`28 / 28` features)** — max single-feature `AUC = 0.6010 <= 0.90`.
+  - **Cross-Site Duplicate Stop:** **PASS** — across all `112` published 9-site+PR48 rasters, OOF surface `max |Spearman| = 0.1035 <= 0.90`, full surface `max |Spearman| = 0.1280 <= 0.90`, final dots `max |Spearman| = 0.0583 <= 0.90`, and `max 3-px dot overlap = 53.63% <= 70%` (`58.35% <= 70%` across all `118` method rasters incl. historic references).
+  - **Holdout Performance (`HOLDOUT-DTI`, `gems-segment-pooled-v1`, `60,988` withheld positives, `583` 10-km bootstrap blocks, seeds `340–344`):** **`0.131263` (`95% CI [0.120346, 0.141838]`)** vs retrained visible-only 32-band H38 baseline **`0.144433` (`95% CI [0.131520, 0.157926]`)**, paired delta **`-0.013171` (`95% CI [-0.027721, -0.000417]`)**. **Won the Walker Lane + geothermal `SW` quadrant (`0.112115` vs `0.098698`, `+0.013416`)** and jumped `6.44×` over `S18-MXTP` (`0.020384`), while diagnosing the missing signed piedmont concavity operator for `NE`/`SE` Basin-and-Range range fronts (`H43-2`).
+  - **Verdict:** `verdict: "negative"`, `submission_ready: false`, `slot_selected: false` (**DO NOT SUBMIT TO PORTAL — 0 weekly slots spent**).
+- **Auditable Deliverables:** [Executive Summary](docs/executive-summary.html) · [9-Site Executive Review](docs/cross-site-review.html) · [Frozen S20 Preregistration](knowledge/56_s20_preregistration.md) · [Full S20 Scientific & 9-Site Report](knowledge/57_s20_nchc_result_and_9site_review.md) · [S20 JSON Run Card](evidence/s20_nchc_run_card.json)
+
+---
+
+# Session 19 review — 2026-10-26 (archived prior session)
 
 **No new TIFF was generated; no file is approved to submit.** The nine-site review ranks the supplied GEMSDOE32 H33-2-B2 claim, `0.2778`, highest among the values in the prompt, but labels it **USER-REPORTED / UNVERIFIED** (not HOLDOUT-DTI or ORGANIZER-CONFIRMED). A method lane, complete parallel registry, frozen strict-protocol baseline, and local feature cache are missing. Do not reuse the prior S18 TIFF or copy/prune an older submission.
 

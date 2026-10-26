@@ -1,0 +1,1 @@
+S20-NCHC nematic+claycap 300m submod B2 40071d | HOLDOUT-DTI 0.1313 vs 0.1444 | DO NOT SUBMIT

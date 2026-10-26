@@ -68,6 +68,13 @@ on:
       - 'evidence/s18_official_source_review.json'
       - 'evidence/s18_champion_forensic.json'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
+      - 'evidence/s20_nchc_run_card.json'
+      - 'evidence/s20_nchc_exp2_holdout.json'
+      - 'registry/s20_hypotheses.json'
+      - 'docs/data/current_run_card_2026-10-26.json'
+      - 'data/current_run_card_2026-10-26.json'
+      - 'knowledge/56_s20_preregistration.md'
+      - 'knowledge/57_s20_nchc_result_and_9site_review.md'
       - 'docs/assets/**'
       - 'site_templates/**'
   pull_request:
@@ -136,6 +143,13 @@ on:
       - 'evidence/s18_official_source_review.json'
       - 'evidence/s18_champion_forensic.json'
       - 'knowledge/47_session15_high-score-review_and_blocked-experiment.md'
+      - 'evidence/s20_nchc_run_card.json'
+      - 'evidence/s20_nchc_exp2_holdout.json'
+      - 'registry/s20_hypotheses.json'
+      - 'docs/data/current_run_card_2026-10-26.json'
+      - 'data/current_run_card_2026-10-26.json'
+      - 'knowledge/56_s20_preregistration.md'
+      - 'knowledge/57_s20_nchc_result_and_9site_review.md'
       - 'docs/assets/**'
       - 'site_templates/**'
   workflow_dispatch:
@@ -155,4 +169,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json index.html executive-summary.html data/current_run_card_2026-10-25.json
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-25.json docs/data/current_run_card_2026-10-26.json index.html executive-summary.html data/current_run_card_2026-10-25.json data/current_run_card_2026-10-26.json

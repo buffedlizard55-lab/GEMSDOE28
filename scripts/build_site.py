@@ -354,6 +354,112 @@ def render_session15(review: dict) -> str:
 <p><strong>Machine-readable run card:</strong> holdout DTI is null because no experiment was run; verdict is <strong>negative</strong>. See the repo dossier for the exact reasons.</p></section>"""
 
 
+def s20_status_html() -> str:
+    card = read_json("evidence/s20_nchc_run_card.json", {})
+    exp2 = read_json("evidence/s20_nchc_exp2_holdout.json", {})
+    if not card:
+        return ""
+    h = card.get("holdout", {})
+    reg = card.get("registry", {})
+    val = card.get("validator", {})
+    note = str(card.get("note", ""))
+    dl_allfinite = str(card.get("submission_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif")).removeprefix("docs/")
+    dl_nan = str(card.get("submission_nan_twin_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-nan.tif")).removeprefix("docs/")
+    dl_zip = str(card.get("submission_zip_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-nan.zip")).removeprefix("docs/")
+    cand_folds = {f.get("fold"): f for f in exp2.get("candidate_s20_nchc", {}).get("folds", [])}
+    b0_folds = {f.get("fold"): f for f in exp2.get("baseline_b0_32band_h38_vis", {}).get("folds", [])}
+    sw_c = float(cand_folds.get("SW", {}).get("dti", 0.0))
+    sw_b = float(b0_folds.get("SW", {}).get("dti", 0.0))
+    sw_d = sw_c - sw_b
+    return f"""<section class="card callout-danger" aria-label="Session 20 submission readiness and one-click download" id="s20-current-submission" data-submission-ready="false">
+<p class="eyebrow">LATEST RUN · SESSION 20 (S20-NCHC / H43-1) · 2026-10-26 UTC · AUTOMATED GATE COMPLETE</p>
+<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
+<p><strong>NEW GENUINELY UNIQUE GeoTIFF GENERATED &amp; BYTE-VERIFIED (<code>{esc(dl_allfinite.removeprefix('downloads/'))}</code>):</strong> Automated format/range validator (<code>407/407</code> checks PASS; strict <code>[0, 1]</code> finite across all <code>12,279,160</code> cells; <code>0</code> catalogue overlap), all <code>28</code> single-feature leakage canaries (max AUC <code>0.6010 &le; 0.90</code>), and cross-site uniqueness across all <code>{comma(reg.get('member_count', 112))}</code> published 9-site+PR48 rasters (max 3-px dot overlap <code>{reg.get('max_dots_within_3px_fraction', 0):.2%} &le; 70%</code>, max <code>|Spearman| = {reg.get('max_abs_dots_spearman', 0):.4f} &le; 0.90</code>) <strong>ALL PASSED</strong>. However, pooled 4-fold <strong>HOLDOUT-DTI</strong> was <strong>{h.get('dti', 0):.6f}</strong> vs retrained visible-only 32-band baseline <strong>{h.get('baseline_dti', 0):.6f}</strong> (paired delta <strong>{h.get('paired_gain', 0):+.6f}</strong>, 95% CI <strong>[{h.get('paired_gain_ci95', [0, 0])[0]:+.6f}, {h.get('paired_gain_ci95', [0, 0])[1]:+.6f}]</strong>; <strong>won SW Walker Lane + geothermal quadrant {sw_c:.6f} vs {sw_b:.6f}, {sw_d:+.6f}</strong>). <strong>Automated promotion gate verdict: NEGATIVE — zero weekly submission slots spent. Do not upload any file from this site to DrivenData.</strong></p>
+<div class="download-actions">
+  <button class="button" type="button" disabled aria-disabled="true">Submission download locked</button>
+  <a class="button" href="{esc(dl_allfinite)}" download>1-Click Download S20-NCHC Unique GeoTIFF (.tif, all-finite [0,1]) — Research Only / DO NOT SUBMIT</a>
+  <a class="button secondary" href="{esc(dl_nan)}" download>Template-NaN GeoTIFF (.tif)</a>
+  <a class="button quiet" href="{esc(dl_zip)}" download>ZIP Bundle (.zip)</a>
+  <a class="button quiet" href="executive-summary.html">Executive Summary &amp; How to Submit</a>
+  <a class="button quiet" href="cross-site-review.html">9-Site Executive Scorecard</a>
+</div>
+<p><strong>Unique portal name:</strong> <code>{esc(card.get('submission_name', ''))}</code><br>
+<strong>Short submission note ({len(note)}/140 chars):</strong></p>
+{note_box(note)}
+<p class="meta">All-finite SHA-256 <code>{esc(card.get('raster_sha256', ''))}</code> · {comma(val.get('emitted_positive_pixels', 0))} positive off-catalogue pixels · 830,586 bytes · single-band <code>float32</code> · strict <code>[0.0, 1.0]</code> (prevents DrivenData <code>[0, 1]</code> range error) · <code>EPSG:32611</code> · <code>3730 &times; 3292</code> · exact template CRS/shape/geotransform PASS.</p>
+<p><strong>Evaluator provenance:</strong> <code>HOLDOUT-DTI</code> via shared <code>{esc(h.get('evaluator_version', 'gems-segment-pooled-v1'))}</code> (buffered whole-segment hide-and-recover, 1,500 m buffer, {comma(h.get('withheld_positives', 60988))} withheld positives across 4 quadrant folds, 583 10-km bootstrap blocks, seeds 340–344). <a href="data/current_run_card_2026-10-26.json">S20-NCHC JSON Run Card</a> · <a href="../knowledge/56_s20_preregistration.md">Frozen S20 preregistration</a> · <a href="../knowledge/57_s20_nchc_result_and_9site_review.md">Full Session 20 scientific &amp; 9-site report</a></p>
+</section>"""
+
+
+def render_s20_overview() -> str:
+    exp2 = read_json("evidence/s20_nchc_exp2_holdout.json", {})
+    s20_hyps = read_json("registry/s20_hypotheses.json", {})
+    cand_folds = exp2.get("candidate_s20_nchc", {}).get("folds", [])
+    b0_folds = {f.get("fold"): f for f in exp2.get("baseline_b0_32band_h38_vis", {}).get("folds", [])}
+    b1_folds = {f.get("fold"): f for f in exp2.get("baseline_b1_32band_b2_d28_vis", {}).get("folds", [])}
+    fold_rows = "".join(
+        f"<tr><td><strong>{esc(cf.get('fold'))}</strong></td><td>{comma(cf.get('n_truth'))}</td>"
+        f"<td><strong>{cf.get('dti', 0):.6f}</strong> ({comma(cf.get('n_emitted'))} px)</td>"
+        f"<td>{b0_folds.get(cf.get('fold'), {}).get('dti', 0):.6f} ({comma(b0_folds.get(cf.get('fold'), {}).get('n_emitted'))} px)</td>"
+        f"<td>{b1_folds.get(cf.get('fold'), {}).get('dti', 0):.6f} ({comma(b1_folds.get(cf.get('fold'), {}).get('n_emitted'))} px)</td>"
+        f"<td><strong>{(cf.get('dti', 0) - b0_folds.get(cf.get('fold'), {}).get('dti', 0)):+.6f}</strong></td></tr>"
+        for cf in cand_folds
+    )
+    hyp_cards = "".join(
+        f'<article class="card span-6"><div class="rank">Rank {int(item.get("rank", 0))} · {esc(item.get("id"))}</div>'
+        f'<h3>{esc(item.get("title"))}</h3>'
+        f'<p><strong>Signature:</strong> {esc(item.get("signature"))}</p>'
+        f'<p><strong>Non-fault mimic control:</strong> {esc(item.get("non_fault_mimic_deconfounder"))}</p>'
+        f'<p><strong>Status:</strong> {esc(item.get("status"))}</p></article>'
+        for item in s20_hyps.get("hypotheses", [])
+    )
+    return f"""<section class="section" id="s20-executive-overview">
+<h1>Session 20 Executive Synthesis: 9-Site High-Score Audit, PhD Analysis of 0.2778 vs 0.4413 &amp; S20-NCHC Unique GeoTIFF</h1>
+<div class="callout">
+<strong>Immediate answers to the three executive questions:</strong>
+<ol>
+<li><strong>Which focus-site submission is highest?</strong> Among <code>GEMSDOE24, 25, 27, 28, 30, 31, 32, 33, 36</code>, the highest historical reported score is <strong>GEMSDOE32 <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></strong> (<code>37,654</code> px) at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong> (no organizer submission receipt in git; must never be copied as a new submission). Among <code>2026-10-26</code> strictly unique lanes evaluated on <code>SegmentHoldout</code> (<code>gems-segment-pooled-v1</code>, 60,988 withheld positives), <strong>GEMSDOE36 <code>Lane36-SupGBM</code></strong> (<code>f35cb3e4</code>, <code>68,302</code> px) achieved the highest internal <strong>HOLDOUT-DTI = 0.1777</strong> (95% CI <code>[0.164, 0.191]</code> vs <code>0.1615</code>; <code>slot_selected: false</code>), while <strong>GEMSDOE28 <code>S20-NCHC</code></strong> (<code>d432a1d5d6ee</code>, <code>40,071</code> px) achieved <strong>HOLDOUT-DTI = 0.1313</strong> (<code>6.44&times;</code> S18-MXTP's <code>0.0204</code>) and won the Walker Lane <code>SW</code> quadrant (<code>+0.0134</code>).</li>
+<li><strong>Is our newly generated GEMSDOE28 <code>.tif</code> OK to download and submit?</strong> <strong>OK TO DOWNLOAD FOR RESEARCH: YES</strong> (1-click above; <code>407/407</code> automated byte/grid/<code>[0,1]</code> checks PASS; unique vs all <code>112</code> published rasters). <strong>OK TO SUBMIT TO PORTAL: NO</strong> — failed pooled 4-fold holdout superiority vs the 32-band baseline (<code>0.131263</code> vs <code>0.144433</code>); zero weekly slots spent.</li>
+<li><strong>Why did <code>0.2778</code> win among the 9 sites, and can a submission score higher (toward <code>0.3195</code> / <code>0.4413</code>)?</strong> Byte hashing proves <code>0.1922 &rarr; 0.2477 &rarr; 0.2600 &rarr; 0.2708 &rarr; 0.2778</code> came from thinning and removing <code>2,545</code> redundant <code>100–200 m</code> catalogue-flank dots (marginal credit <code>~0.0034</code> &ll; break-even <code>&tau;(0.2778) = 0.0588</code> credit/dot) on the <em>same</em> <code>H19-5</code> surface. Meanwhile, one-off read-only inspection of the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData public leaderboard</a> on <code>2026-10-26</code> reconciled <code>0.3195</code> (the <code>2026-10-03</code> #1 snapshot, <code>DARD</code>) with <strong><code>0.4413</code></strong> (the <code>2026-10-26</code> live #1 public score, <code>xiaofanhu</code>). Surpassing <code>0.2778</code> requires genuine blind-fault recall (<code>&gt;55%</code> of <code>|G| &approx; 12,226</code> px) by fusing signed Basin-and-Range piedmont break-in-slope asymmetry with <code>S20-NCHC</code> subsurface nematic + hydrothermal concordance and 300 m submodular allocation. <a href="cross-site-review.html">Open full 9-site scorecard &amp; PhD derivation &rarr;</a></li>
+</ol>
+</div>
+<h2>S20-NCHC (H43-1) 4-Fold Spatially Blocked SegmentHoldout Results (<code>gems-segment-pooled-v1</code>)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Quadrant Fold</th><th>Withheld Positives</th><th>S20-NCHC <code>HOLDOUT-DTI</code></th><th>B0 (32-Band+H38 Vis)</th><th>B1 (32-Band B=2 d=2.8)</th><th>Paired Delta (S20 &minus; B0)</th></tr></thead>
+<tbody>{fold_rows}</tbody>
+</table></div>
+<p><strong>Key scientific discovery:</strong> Eliminating scalar elevation/gravity/magnetic level bands broke Session 16's <code>91.3%</code> duplicate collapse down to <code>53.63% &le; 70%</code> and outperformed the 32-band baseline by <strong><code>+0.013416</code> (+13.6% relative) in the Walker Lane + geothermal <code>SW</code> quadrant</strong>, while revealing that symmetric gradient-magnitude Hessians shift upslope of asymmetric Basin-and-Range piedmont scarps in <code>NE</code>/<code>SE</code> — directly motivating <code>H43-2</code>.</p>
+<h2>Session 20 Preregistered Candidate Hypotheses (Ranked Before Implementation)</h2>
+<div class="grid">{hyp_cards}</div>
+</section>"""
+
+
+def render_s20_executive() -> str:
+    return """<section class="section" id="s20-executive-guide">
+<h1>Session 20 Executive Summary: 9-Site Verdicts, Why 0.2778 Led, How to Surpass It &amp; Portal Submission Guide</h1>
+<div class="callout">
+<strong>Bottom-Line Decision (Automated Without Human Intervention):</strong>
+<ul>
+<li><strong>Generated Artifact:</strong> <code>gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif</code> (<code>40,071</code> dots, SHA-256 <code>1d629d6c953c94681ecfe51111d4210361f7014b1df41f5fcfa8d81c4f54f853</code>).</li>
+<li><strong>OK TO DOWNLOAD FOR RESEARCH / AUDIT:</strong> <strong>YES</strong> — 1-click download at top of page; passes all <code>407</code> automated grid/CRS/<code>[0,1]</code>/uniqueness/catalogue-mask checks.</li>
+<li><strong>OK TO SUBMIT TO DRIVENDATA PORTAL:</strong> <strong>NO (LOCKED)</strong> — pooled <code>HOLDOUT-DTI = 0.131263</code> vs <code>0.144433</code> baseline (<code>&Delta; = -0.013171</code>); preserve all 3 weekly submission slots (<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official Rules &sect;3.2 / &sect;3.4</a>).</li>
+</ul>
+</div>
+<h2>Executive Summary Across All Nine Focus Sites (2026-10-26 Audit)</h2>
+<ul>
+<li><strong>GEMSDOE32 (Best Historical Reported Score — <code>0.2778</code> USER-REPORTED / UNVERIFIED):</strong> <code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code> (<code>37,654</code> px = <code>solo-r1</code> minus <code>2,545</code> dots within <code>200 m</code> of catalogue). Already submitted historically; never copy. Latest <code>R6-1</code> candidate demoted on <code>2026-10-26</code> (<code>69d3abe</code>) due to full-catalogue <code>B=2</code> leakage.</li>
+<li><strong>GEMSDOE36 (Second-Highest Historical <code>0.2750</code>; Best 2026-10-26 Positive Holdout Lane):</strong> Historical <code>anderson-geothermal-pinn</code> (<code>38,854</code> px, <code>0.2750</code> USER-REPORTED). New <code>Lane36-SupGBM</code> (<code>f35cb3e4</code>, <code>68,302</code> px) achieved <strong>HOLDOUT-DTI = 0.1777</strong> (95% CI <code>[0.164, 0.191]</code> vs <code>0.1615</code>, overlap <code>&le; 43.7%</code>; <code>slot_selected: false</code>).</li>
+<li><strong>GEMSDOE28 (This Site — Historical <code>0.2710</code> / <code>0.2708</code>; New Unique <code>S20-NCHC</code>):</strong> Historical <code>h36-1-rung30-blind-r1</code> (<code>37,660</code> px, <code>0.2710</code> USER-REPORTED). New <code>S20-NCHC</code> (<code>d432a1d5d6ee</code>, <code>40,071</code> px) achieved <strong>HOLDOUT-DTI = 0.131263</strong> (won Walker Lane <code>SW</code> fold <code>+0.013416</code>; pooled gate negative &rarr; <strong>DO NOT SUBMIT</strong>).</li>
+<li><strong>GEMSDOE31 (<code>0.2708</code> USER-REPORTED):</strong> <code>h27-4-solo-d28</code> (<code>40,199</code> px, byte-identical to GEMSDOE28 <code>solo-r1</code>); latest <code>CONCORD31</code>/<code>MAGREST</code> marked <strong>DO NOT SUBMIT</strong>.</li>
+<li><strong>GEMSDOE33 (<code>0.2632</code> USER-REPORTED):</strong> <code>h33d-analog-tip-stepover-r30</code> (<code>41,865</code> px); latest <code>A33-L1</code> failed holdout gate (<strong>NOT OK TO SUBMIT</strong>).</li>
+<li><strong>GEMSDOE25 &amp; GEMSDOE30 (<code>0.2600</code> USER-REPORTED):</strong> Both correspond to the <code>44,090</code>-px <code>H19-5 d=2.8</code> family; latest 2026-10-26 lanes (<code>ROD</code>, <code>H-NEARSPLAY</code>) are <strong>not cleared to submit</strong>.</li>
+<li><strong>GEMSDOE24 (<code>0.2477</code> USER-REPORTED) &amp; GEMSDOE27 (<code>0.2449</code> USER-REPORTED):</strong> Historical <code>d=1.5</code> (<code>60,069</code> px) and <code>T-v2</code> gap-closure (<code>61,328</code> px); latest 2026-10-26 unique lanes (<code>GVC1</code> <code>HOLDOUT-DTI 0.1488</code>; <code>H30</code> <code>HOLDOUT-DTI 0.0961</code>) both marked <strong>DO NOT SUBMIT</strong>.</li>
+</ul>
+<h2>How DrivenData Portal Validation &amp; Range [0, 1] Protection Work</h2>
+<p>Earlier portal rejections reporting <code>"Predicted values must be in range [0, 1]"</code> are prevented at serialization time in <code>gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif</code> by writing finite <code>float32</code> values strictly in <code>{0.0, 1.0}</code> across all <code>12,279,160</code> cells (<code>3730 &times; 3292</code>, <code>EPSG:32611</code>, <code>nodata=None</code>, zero NaN/Inf anywhere, zero positive pixels outside footprint or on known catalogue cells), verified automatically by <code>scripts/verify_downloads.py</code> and <code>scripts/check_promotion.py</code>. Complete step-by-step upload instructions for a future gate-passing candidate follow below (locked today).</p>
+</section>"""
+
+
 def s18_status_html() -> str:
     card = read_json("docs/data/run_card_s18.json", {})
     if not card:
@@ -424,7 +530,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{s18_status_html()}{body}</main>
+<main>{s20_status_html()}<details class="section"><summary>Archived Session 18 (S18-MXTP · 2026-10-25) research artifact &amp; status record</summary>{s18_status_html()}</details>{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1287,22 +1393,22 @@ def main() -> int:
     old_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
     old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
-    session19_brief = """<section class=\"card callout-danger\" aria-label=\"Session 19 review\">
-<h2>Session 19 review: no new file is approved</h2>
-<p>The highest value among the nine site claims supplied by the owner is GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>; it is not an organizer receipt or local HOLDOUT-DTI. A new experiment/TIFF is blocked because the assigned method lane, complete parallel registry, frozen comparator and cached inputs are unavailable. <strong>Do not submit any file from this site.</strong></p>
+    session19_brief = """<details class=\"section\"><summary>Archived Session 19 no-experiment review (superseded by Session 20 S20-NCHC above)</summary><section class=\"card callout-danger\" aria-label=\"Session 19 review\">
+<h2>Session 19 review (archived): no new file was approved in Session 19</h2>
+<p>The highest value among the nine site claims supplied by the owner is GEMSDOE32 H33-2-B2 at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong>; it is not an organizer receipt or local HOLDOUT-DTI. In Session 19, a new experiment/TIFF was blocked prior to restoring the local cache; Session 20 above restored all 17 inputs and executed S20-NCHC. <strong>Do not submit any file from this site.</strong></p>
 <p><a class=\"button quiet\" href=\"cross-site-review.html\">Open the nine-site scorecard, ranked hypotheses and run card</a></p>
-</section>"""
+</section></details>"""
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     pages = {
-        "index.html": layout("Overview", session19_brief + render_s18_result() + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", render_s20_overview() + session19_brief + render_s18_result() + s18_feed_html(feed), "Overview"),
         "cross-site-review.html": cross_site_template,
-        "executive-summary.html": layout("Executive summary", render_s18_executive(), "Executive summary"),
+        "executive-summary.html": layout("Executive summary", render_s20_executive() + render_s18_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
         "archive.html": layout("Historical campaign archive", archive, "Archive"),
         "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; current S18-MXTP evidence is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/76847b2/docs/submission-review.html">Complete original PR39 HTML audit at its historical commit</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
-        "session18-result.html": layout("S18 unique TIFF result", render_s18_result(), "S18 result"),
+        "session18-result.html": layout("S18 unique TIFF result", render_s20_overview() + render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
     DOCS.mkdir(parents=True, exist_ok=True)
@@ -1313,16 +1419,22 @@ def main() -> int:
     current_card_path.parent.mkdir(parents=True, exist_ok=True)
     current_card_path.write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (DOCS / "data/run_card_2026-10-25.json").write_text(json.dumps(current_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    s20_card = read_json("evidence/s20_nchc_run_card.json")
+    s20_card_bytes = (json.dumps(s20_card, indent=2, allow_nan=False) + "\n").encode("utf-8")
+    (DOCS / "data/current_run_card_2026-10-26.json").write_bytes(s20_card_bytes)
+    (DOCS / "data/run_card_2026-10-26.json").write_bytes(s20_card_bytes)
     (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
     (ROOT / "executive-summary.html").write_text(
         root_relative_links(publish_source_links(pages["executive-summary.html"])), encoding="utf-8")
     legacy_card = ROOT / "data/current_run_card_2026-10-25.json"
     legacy_card.parent.mkdir(parents=True, exist_ok=True)
     legacy_card.write_bytes(current_card_path.read_bytes())
+    (ROOT / "data/current_run_card_2026-10-26.json").write_bytes(s20_card_bytes)
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
                       "submission_ready": False, "slot_selected": False,
+                      "s20_research_download": manifest["s20_nchc_candidate"]["allfinite"],
                       "research_download": manifest["s18_candidate"]["filename"],
                       "inspection_artifacts": [manifest["primary"]["nan"], manifest.get("secondary", {}).get("nan")]}, indent=2))
     return 0

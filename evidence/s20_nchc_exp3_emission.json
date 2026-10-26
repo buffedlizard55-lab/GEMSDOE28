@@ -1,0 +1,307 @@
+{
+  "experiment": 3,
+  "session": "S20-NCHC",
+  "elapsed_seconds": 487.28,
+  "full_seed_fits": [
+    {
+      "seed": 340,
+      "n_train_pos": 60988,
+      "n_train_neg_total": 5106385,
+      "n_train_neg_sampled": 250000,
+      "neg_importance_weight": 20.42554,
+      "n_iter": 300
+    },
+    {
+      "seed": 341,
+      "n_train_pos": 60988,
+      "n_train_neg_total": 5106385,
+      "n_train_neg_sampled": 250000,
+      "neg_importance_weight": 20.42554,
+      "n_iter": 300
+    },
+    {
+      "seed": 342,
+      "n_train_pos": 60988,
+      "n_train_neg_total": 5106385,
+      "n_train_neg_sampled": 250000,
+      "neg_importance_weight": 20.42554,
+      "n_iter": 300
+    },
+    {
+      "seed": 343,
+      "n_train_pos": 60988,
+      "n_train_neg_total": 5106385,
+      "n_train_neg_sampled": 250000,
+      "neg_importance_weight": 20.42554,
+      "n_iter": 300
+    },
+    {
+      "seed": 344,
+      "n_train_pos": 60988,
+      "n_train_neg_total": 5106385,
+      "n_train_neg_sampled": 250000,
+      "neg_importance_weight": 20.42554,
+      "n_iter": 300
+    }
+  ],
+  "full_allocation": {
+    "n_domain": 5167373,
+    "n_target": 49090,
+    "n_candidates": 291770,
+    "n_selected": 40071,
+    "corridor_cut": 0.02661231718957424
+  },
+  "variant_checks_allfinite": {
+    "file": "gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif",
+    "bytes": 830586,
+    "sha256": "1d629d6c953c94681ecfe51111d4210361f7014b1df41f5fcfa8d81c4f54f853",
+    "format_valid": true,
+    "ok_to_upload": false,
+    "upload_authorization": "not evaluated by a format validator; separate scientific selector required",
+    "format_acceptable": true,
+    "submission_authorized": false,
+    "scope": "Format only; this does not certify bias audit, holdout promotion or weekly-slot eligibility",
+    "hard_failures": [],
+    "official_format_compliant": false,
+    "in_footprint_positive_pixels": 40071,
+    "in_footprint_mass": 40071.0,
+    "checks": {
+      "official_template_grid_and_footprint": {
+        "pass": true,
+        "detail": "Template must be the pinned organizer grid, not just a self-consistent arbitrary raster",
+        "hard_requirement": true
+      },
+      "single_band": {
+        "pass": true,
+        "detail": "count=1",
+        "hard_requirement": true
+      },
+      "dtype_float32": {
+        "pass": true,
+        "detail": "dtypes=('float32',)",
+        "hard_requirement": true
+      },
+      "crs_epsg_32611": {
+        "pass": true,
+        "detail": "EPSG:32611",
+        "hard_requirement": true
+      },
+      "shape_matches_template": {
+        "pass": true,
+        "detail": "(3730, 3292) vs (3730, 3292)",
+        "hard_requirement": true
+      },
+      "geotransform_matches_template": {
+        "pass": true,
+        "detail": "(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard_requirement": true
+      },
+      "footprint_all_finite": {
+        "pass": true,
+        "detail": "0 NaN/Inf inside the 5,167,373-pixel footprint",
+        "hard_requirement": true
+      },
+      "footprint_range_0_1": {
+        "pass": true,
+        "detail": "finite=5167373/5167373; range=0.0 to 1.0",
+        "hard_requirement": true
+      },
+      "outside_is_nan_official_text": {
+        "pass": false,
+        "detail": "0 of 7,111,787 outside pixels are NaN",
+        "hard_requirement": false
+      },
+      "nodata_tag_is_nan": {
+        "pass": false,
+        "detail": "nodata=None",
+        "hard_requirement": false
+      },
+      "variant_nan_aware_whole_array": {
+        "pass": true,
+        "detail": "np.nanmin/np.nanmax over the whole array",
+        "hard_requirement": true
+      },
+      "variant_masked_read": {
+        "pass": true,
+        "detail": "rasterio read(masked=True).compressed()",
+        "hard_requirement": true
+      },
+      "variant_strict_whole_array_no_nan_allowed": {
+        "pass": true,
+        "detail": "((a>=0)&(a<=1)).all() over the whole array - fails for ANY NaN, including the official sample's NaN outside",
+        "hard_requirement": false
+      },
+      "profile_matches_official_sample": {
+        "pass": false,
+        "detail": "driver/dtype/nodata/size/crs/transform equal to template; compress=lzw (template lzw)",
+        "hard_requirement": false
+      }
+    }
+  },
+  "variant_checks_nan": {
+    "file": "gems28-s20-nchc-20261026-d432a1d5d6ee-nan.tif",
+    "bytes": 1595128,
+    "sha256": "bbc8ed38cc422c9cb6e7432ecdff1a15fb8e025c06c0379c5253a392c48e1040",
+    "format_valid": true,
+    "ok_to_upload": false,
+    "upload_authorization": "not evaluated by a format validator; separate scientific selector required",
+    "format_acceptable": true,
+    "submission_authorized": false,
+    "scope": "Format only; this does not certify bias audit, holdout promotion or weekly-slot eligibility",
+    "hard_failures": [],
+    "official_format_compliant": true,
+    "in_footprint_positive_pixels": 40071,
+    "in_footprint_mass": 40071.0,
+    "checks": {
+      "official_template_grid_and_footprint": {
+        "pass": true,
+        "detail": "Template must be the pinned organizer grid, not just a self-consistent arbitrary raster",
+        "hard_requirement": true
+      },
+      "single_band": {
+        "pass": true,
+        "detail": "count=1",
+        "hard_requirement": true
+      },
+      "dtype_float32": {
+        "pass": true,
+        "detail": "dtypes=('float32',)",
+        "hard_requirement": true
+      },
+      "crs_epsg_32611": {
+        "pass": true,
+        "detail": "EPSG:32611",
+        "hard_requirement": true
+      },
+      "shape_matches_template": {
+        "pass": true,
+        "detail": "(3730, 3292) vs (3730, 3292)",
+        "hard_requirement": true
+      },
+      "geotransform_matches_template": {
+        "pass": true,
+        "detail": "(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard_requirement": true
+      },
+      "footprint_all_finite": {
+        "pass": true,
+        "detail": "0 NaN/Inf inside the 5,167,373-pixel footprint",
+        "hard_requirement": true
+      },
+      "footprint_range_0_1": {
+        "pass": true,
+        "detail": "finite=5167373/5167373; range=0.0 to 1.0",
+        "hard_requirement": true
+      },
+      "outside_is_nan_official_text": {
+        "pass": true,
+        "detail": "7,111,787 of 7,111,787 outside pixels are NaN",
+        "hard_requirement": false
+      },
+      "nodata_tag_is_nan": {
+        "pass": true,
+        "detail": "nodata=nan",
+        "hard_requirement": false
+      },
+      "variant_nan_aware_whole_array": {
+        "pass": true,
+        "detail": "np.nanmin/np.nanmax over the whole array",
+        "hard_requirement": true
+      },
+      "variant_masked_read": {
+        "pass": true,
+        "detail": "rasterio read(masked=True).compressed()",
+        "hard_requirement": true
+      },
+      "variant_strict_whole_array_no_nan_allowed": {
+        "pass": false,
+        "detail": "((a>=0)&(a<=1)).all() over the whole array - fails for ANY NaN, including the official sample's NaN outside",
+        "hard_requirement": false
+      },
+      "profile_matches_official_sample": {
+        "pass": true,
+        "detail": "driver/dtype/nodata/size/crs/transform equal to template; compress=lzw (template lzw)",
+        "hard_requirement": false
+      }
+    }
+  },
+  "full_surface_registry_summary": {
+    "member_count": 112,
+    "passed_spearman_gate": true,
+    "max_abs_spearman": 0.12797921411665644,
+    "max_abs_spearman_member": {
+      "name": "GEMSDOE36__gemsdoe36-lane36-supgbm-68302-20261026T002651Z-f35cb3e4-zeros.tif",
+      "raster_sha256": "45e626c01f9dc6e8aed59875d2758467c39f008c87543f566b3ae9d26a2234e7",
+      "spearman": 0.12797921411665644,
+      "top37654_within_3px_diagnostic": 0.7582726934721411,
+      "reference_dots": 68302
+    },
+    "max_top37654_within_3px_diagnostic": 0.8233653795081531,
+    "max_top37654_member": {
+      "name": "GEMSDOE30__gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "spearman": 0.09095527439610304,
+      "top37654_within_3px_diagnostic": 0.8233653795081531,
+      "reference_dots": 44090
+    }
+  },
+  "dots_registry_summary": {
+    "duplicate": false,
+    "member_count": 112,
+    "worst_spearman": {
+      "name": "GEMSDOE36__gemsdoe36-lane36-supgbm-68302-20261026T002651Z-f35cb3e4-zeros.tif",
+      "raster_sha256": "45e626c01f9dc6e8aed59875d2758467c39f008c87543f566b3ae9d26a2234e7",
+      "spearman": 0.05834510964500765,
+      "within_3px_fraction": 0.4787003069551546,
+      "reference_dots": 68302
+    },
+    "worst_3px_overlap": {
+      "name": "GEMSDOE28__gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif",
+      "raster_sha256": "8a59bc5ea68df8c64f2467fd5e8b3652a324fa3d5e364b9e974d993401c2ec1f",
+      "spearman": 0.02566811010021878,
+      "within_3px_fraction": 0.5363479823313618,
+      "reference_dots": 38545
+    }
+  },
+  "prospective_with_controls_summary": {
+    "method_lane_passed": true,
+    "literal_all_entries_passed": false,
+    "competing_method_rasters_count": 118,
+    "calibration_control_rasters_count": 2,
+    "method_lane_max_abs_rank_correlation": 0.37699985295256033,
+    "method_lane_max_dot_overlap": 0.5835142621846223,
+    "calibration_control_rows": [
+      {
+        "registry_id": "GEMSDOE24-inputs__13gems_20261001_r13-lattice-s5_v2_nan-outside",
+        "file": "inputs/calibration/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+        "footprint_sha256": "15bc7e7d4e21d284c42e4183bb7c63d087f67635818bd7b963d58f6beed44817",
+        "raw_spearman": -9.208233079162669e-05,
+        "kernel_spearman": -0.0028385585235713635,
+        "candidate_dot_overlap_within_3px": 0.9947343465349006,
+        "duplicate": true,
+        "entry_role": "synthetic_spacing5_calibration_lattice"
+      },
+      {
+        "registry_id": "GEMSDOE24-inputs__gemsdoe9-PLACEHOLDER-2314b599",
+        "file": "inputs/calibration/gemsdoe9-PLACEHOLDER-2314b599.tif",
+        "footprint_sha256": "af557dee286c6d5df9671a0ed6122ced9304576de5e38ddaa02d3e5a38ebc65b",
+        "raw_spearman": 0.007304423006771503,
+        "kernel_spearman": 0.00851318200234005,
+        "candidate_dot_overlap_within_3px": 0.07089915400164708,
+        "duplicate": false,
+        "entry_role": "all_zero_placeholder_control"
+      }
+    ]
+  },
+  "promotion_gate": {
+    "verdict": "negative",
+    "promotion_eligible": false,
+    "evidence_schema_passed": false,
+    "submission_ready": false,
+    "failures": [
+      "no positive paired gain CI over frozen current best"
+    ],
+    "slot_selected": false,
+    "scope": "Evidence schema eligibility only; no independent evidence authentication, slot selection, cap check or organizer acceptance."
+  }
+}
