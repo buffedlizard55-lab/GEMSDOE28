@@ -1,0 +1,294 @@
+{
+  "experiment": 2,
+  "session": "S22-DPMR",
+  "generated_utc": "2026-10-26T22:10:43Z",
+  "elapsed_seconds": 107.182687525,
+  "label": "HOLDOUT-DTI",
+  "evaluator_version": "gems-segment-pooled-v1",
+  "shared_evaluate_holdout_sha256": "040d4ea3b231f76fc3cd200206e95a67ee86babc1dd9f26027adae39f674df78",
+  "shared_evaluator_note": "The pinned evaluate_holdout.py is a hypothesis-specific runner, so this lane imports its hash-identical gems.holdout.SegmentHoldout authority; no private metric/evaluator fork.",
+  "candidate": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "TP_w": 3833.6747017423368,
+    "FP_w": 35880.85549255985,
+    "FN_w": 57154.32529825767,
+    "n_truth": 60988.0,
+    "n_emitted": 37654.0,
+    "dti": 0.06757361714668343,
+    "n_withheld_positive_pixels": 60988,
+    "n_unique_withheld_components": 3199,
+    "ci95": {
+      "level": 0.95,
+      "interval": [
+        0.0605746053796906,
+        0.07537228879202475
+      ],
+      "method": "percentile spatial-block bootstrap of pooled TPw/FPw/FNw",
+      "block_pixels": 100,
+      "block_size_m": 10000,
+      "n_blocks": 583,
+      "resamples": 1999,
+      "seed": 20261025,
+      "limitation": "Internal-validation uncertainty; geologic structures may cross blocks. Not a hidden-score interval."
+    },
+    "folds": [
+      {
+        "fold": "NW",
+        "TP_w": 662.841647703204,
+        "FP_w": 8101.454778228272,
+        "FN_w": 9502.158352296796,
+        "n_truth": 10165,
+        "n_emitted": 8414,
+        "dti": 0.06705625528628918,
+        "coverage": 0.06520822899195317
+      },
+      {
+        "fold": "NE_LidarGapHeavy",
+        "TP_w": 761.0199070721014,
+        "FP_w": 10032.880681140305,
+        "FN_w": 11749.980092927899,
+        "n_truth": 12511,
+        "n_emitted": 10404,
+        "dti": 0.06254488564759067,
+        "coverage": 0.0608280638695629
+      },
+      {
+        "fold": "SW",
+        "TP_w": 1338.893810871476,
+        "FP_w": 9797.868653930991,
+        "FN_w": 19195.106189128524,
+        "n_truth": 20534,
+        "n_emitted": 10410,
+        "dti": 0.0717730329564081,
+        "coverage": 0.06520375040768851
+      },
+      {
+        "fold": "SE",
+        "TP_w": 1070.9193360955553,
+        "FP_w": 7948.651379260284,
+        "FN_w": 16707.080663904446,
+        "n_truth": 17778,
+        "n_emitted": 8426,
+        "dti": 0.0668225598555283,
+        "coverage": 0.060238459674629055
+      }
+    ],
+    "protocol": {
+      "aggregation": "pooled TPw/FPw/FNw, not mean fold DTI",
+      "buffer_m": 1500,
+      "whole_components_hidden_everywhere": true,
+      "visible_fault_mask": "pixel-exact, applied before credit and FP calculation",
+      "catalogue_features": "must be constructed from fold.visible only",
+      "alpha": 0.2,
+      "beta": 0.8,
+      "triangular_kernel_radius_m": 300
+    }
+  },
+  "candidate_allocations": [
+    {
+      "fold": "NW",
+      "target": 8414,
+      "emitted": 8414,
+      "visible_overlap": 0
+    },
+    {
+      "fold": "NE_LidarGapHeavy",
+      "target": 10404,
+      "emitted": 10404,
+      "visible_overlap": 0
+    },
+    {
+      "fold": "SW",
+      "target": 10410,
+      "emitted": 10410,
+      "visible_overlap": 0
+    },
+    {
+      "fold": "SE",
+      "target": 8426,
+      "emitted": 8426,
+      "visible_overlap": 0
+    }
+  ],
+  "primary_baseline_b0_visible_only_32band_h38": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "TP_w": 8513.108125479625,
+    "FP_w": 42242.2390107266,
+    "FN_w": 52474.89187452037,
+    "n_truth": 60988.0,
+    "n_emitted": 45870.0,
+    "dti": 0.14443325231268564,
+    "n_withheld_positive_pixels": 60988,
+    "n_unique_withheld_components": 3199,
+    "ci95": {
+      "level": 0.95,
+      "interval": [
+        0.131736272010827,
+        0.15753155327644702
+      ],
+      "method": "percentile spatial-block bootstrap of pooled TPw/FPw/FNw",
+      "block_pixels": 100,
+      "block_size_m": 10000,
+      "n_blocks": 583,
+      "resamples": 1999,
+      "seed": 20261025,
+      "limitation": "Internal-validation uncertainty; geologic structures may cross blocks. Not a hidden-score interval."
+    },
+    "folds": [
+      {
+        "fold": "NW",
+        "TP_w": 1543.2286138720647,
+        "FP_w": 9543.553579257517,
+        "FN_w": 8621.771386127935,
+        "n_truth": 10165,
+        "n_emitted": 10232,
+        "dti": 0.1491134857523612,
+        "coverage": 0.15181786658849628
+      },
+      {
+        "fold": "NE_LidarGapHeavy",
+        "TP_w": 2198.9494866459954,
+        "FP_w": 11479.119426890076,
+        "FN_w": 10312.050513354005,
+        "n_truth": 12511,
+        "n_emitted": 12433,
+        "dti": 0.17254222313563586,
+        "coverage": 0.17576128899736196
+      },
+      {
+        "fold": "SW",
+        "TP_w": 1891.7556703714415,
+        "FP_w": 11807.337746965713,
+        "FN_w": 18642.24432962856,
+        "n_truth": 20534,
+        "n_emitted": 12634,
+        "dti": 0.09869848313933721,
+        "coverage": 0.09212796680488174
+      },
+      {
+        "fold": "SE",
+        "TP_w": 2879.174354590122,
+        "FP_w": 9412.22825761329,
+        "FN_w": 14898.825645409877,
+        "n_truth": 17778,
+        "n_emitted": 10571,
+        "dti": 0.172605329302931,
+        "coverage": 0.16195153305153123
+      }
+    ],
+    "protocol": {
+      "aggregation": "pooled TPw/FPw/FNw, not mean fold DTI",
+      "buffer_m": 1500,
+      "whole_components_hidden_everywhere": true,
+      "visible_fault_mask": "pixel-exact, applied before credit and FP calculation",
+      "catalogue_features": "must be constructed from fold.visible only",
+      "alpha": 0.2,
+      "beta": 0.8,
+      "triangular_kernel_radius_m": 300
+    }
+  },
+  "secondary_baseline_b1_visible_only_d28_b2_champion_analogue": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "TP_w": 8678.05408433367,
+    "FP_w": 44397.066175169624,
+    "FN_w": 52309.94591566632,
+    "n_truth": 60988.0,
+    "n_emitted": 48197.0,
+    "dti": 0.1460818472861555,
+    "n_withheld_positive_pixels": 60988,
+    "n_unique_withheld_components": 3199,
+    "ci95": {
+      "level": 0.95,
+      "interval": [
+        0.13323280316414562,
+        0.1594491522355018
+      ],
+      "method": "percentile spatial-block bootstrap of pooled TPw/FPw/FNw",
+      "block_pixels": 100,
+      "block_size_m": 10000,
+      "n_blocks": 583,
+      "resamples": 1999,
+      "seed": 20261025,
+      "limitation": "Internal-validation uncertainty; geologic structures may cross blocks. Not a hidden-score interval."
+    },
+    "folds": [
+      {
+        "fold": "NW",
+        "TP_w": 1568.419811581667,
+        "FP_w": 9950.221391422463,
+        "FN_w": 8596.580188418333,
+        "n_truth": 10165,
+        "n_emitted": 10669,
+        "dti": 0.15029327857203162,
+        "coverage": 0.1542960955810789
+      },
+      {
+        "fold": "NE_LidarGapHeavy",
+        "TP_w": 2238.114900875699,
+        "FP_w": 12087.30926182461,
+        "FN_w": 10272.885099124302,
+        "n_truth": 12511,
+        "n_emitted": 13089,
+        "dti": 0.17384922499859942,
+        "coverage": 0.17889176731481887
+      },
+      {
+        "fold": "SW",
+        "TP_w": 1934.3439684818336,
+        "FP_w": 12492.817601128609,
+        "FN_w": 18599.656031518167,
+        "n_truth": 20534,
+        "n_emitted": 13364,
+        "dti": 0.1001595192736822,
+        "coverage": 0.09420200489343691
+      },
+      {
+        "fold": "SE",
+        "TP_w": 2937.1754033944703,
+        "FP_w": 9866.71792079394,
+        "FN_w": 14840.82459660553,
+        "n_truth": 17778,
+        "n_emitted": 11075,
+        "dti": 0.17500709859751565,
+        "coverage": 0.16521405126529815
+      }
+    ],
+    "protocol": {
+      "aggregation": "pooled TPw/FPw/FNw, not mean fold DTI",
+      "buffer_m": 1500,
+      "whole_components_hidden_everywhere": true,
+      "visible_fault_mask": "pixel-exact, applied before credit and FP calculation",
+      "catalogue_features": "must be constructed from fold.visible only",
+      "alpha": 0.2,
+      "beta": 0.8,
+      "triangular_kernel_radius_m": 300
+    }
+  },
+  "paired_vs_b0": {
+    "delta_dti": -0.07685963516600221,
+    "ci95": [
+      -0.09112844271145243,
+      -0.06277592795270753
+    ],
+    "folds_improved": "0/4",
+    "passed_positive_ci95": false
+  },
+  "paired_vs_b1": {
+    "delta_dti": -0.07850823013947207,
+    "ci95": [
+      -0.09332010950225264,
+      -0.06309312522575741
+    ]
+  },
+  "gate_passed": false,
+  "verdict": "negative",
+  "submission_slot_spent": false,
+  "limitations": [
+    "Mapped-fault hide-and-recover is a local proxy, not organizer hidden truth.",
+    "The deterministic physical candidate is not trained per fold; catalogue is used only for visible-only placement masking.",
+    "No leaderboard score or organizer receipt was observed."
+  ]
+}
