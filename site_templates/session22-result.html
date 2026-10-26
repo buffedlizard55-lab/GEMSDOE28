@@ -43,7 +43,7 @@
 </section>
 
 <section class="section"><h2>Spatially blocked hide-and-recover result</h2>
-<p>Evaluator <code>gems-segment-pooled-v1</code>: whole fault components hidden; 1,500 m buffer; catalogue features rebuilt from visible faults only; visible faults pixel-exactly masked; pooled α=0.2, β=0.8, 300 m triangular kernel. There were 60,988 withheld positive pixels in 3,199 components and 583 ten-kilometre bootstrap blocks. This is local validation, not an organizer score.</p>
+<p>Evaluator <code>gems-segment-pooled-v1</code>: whole fault components hidden; 1,500 m buffer; catalogue features rebuilt from visible faults only; visible faults pixel-exactly masked; pooled α=0.2, β=0.8, 300 m triangular kernel. There were 60,988 withheld positive pixels in 3,199 components and 583 ten-kilometre bootstrap blocks. The pinned <code>evaluate_holdout.py</code> entry point is MTR1-specific, so S22 imported its hash-verified <code>gems.holdout.SegmentHoldout</code> authority without a private metric fork. This is local validation, not an organizer score.</p>
 <div class="table-wrap"><table><thead><tr><th>Fold</th><th>Withheld positives</th><th>S22 HOLDOUT-DTI</th><th>B0 visible-only</th><th>Delta</th></tr></thead><tbody>
 <tr><td>NW</td><td>10,165</td><td>0.067056</td><td>0.149113</td><td>−0.082057</td></tr>
 <tr><td>NE_LidarGapHeavy</td><td>12,511</td><td>0.062545</td><td>0.172542</td><td>−0.109997</td></tr>

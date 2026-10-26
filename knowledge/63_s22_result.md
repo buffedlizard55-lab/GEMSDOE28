@@ -23,7 +23,7 @@ The file passed leakage, bounded-registry uniqueness, exact-grid, range, finiten
 - paired candidate − B0 **−0.076860**, 95% CI **[−0.091128, −0.062776]**, **0/4 folds improved**;
 - visible-only champion analogue B1 **HOLDOUT-DTI 0.146082**, 95% CI **[0.133233, 0.159449]**.
 
-Evaluator: shared `gems-segment-pooled-v1`; four spatial quadrants; whole connected fault systems hidden with 1,500 m buffers; visible-only catalogue construction; pixel-exact visible-fault mask; pooled α=0.2, β=0.8, 300 m triangular kernel; **60,988 withheld positive pixels / 3,199 withheld components**; 583 spatial bootstrap blocks and 1,999 resamples. These are local hide-and-recover measurements, **not organizer scores**.
+Evaluator: shared `gems-segment-pooled-v1`; four spatial quadrants; whole connected fault systems hidden with 1,500 m buffers; visible-only catalogue construction; pixel-exact visible-fault mask; pooled α=0.2, β=0.8, 300 m triangular kernel; **60,988 withheld positive pixels / 3,199 withheld components**; 583 spatial bootstrap blocks and 1,999 resamples. The pinned `evaluate_holdout.py` entry point itself is MTR1-specific, so S22 imported its hash-verified `gems.holdout.SegmentHoldout` authority rather than forking the metric or misusing the MTR1 runner. These are local hide-and-recover measurements, **not organizer scores**.
 
 **Best action:** download S22 only to reproduce the negative result. **Upload nothing from this repository today.**
 
@@ -142,6 +142,6 @@ Competition and derived inputs used here are hash-pinned owner mirrors, not orga
 
 - **Pass 1 — implementation/science:** deterministic transform, focused synthetic tests, leakage canaries, bounded registry, shared holdout and writer.
 - **Pass 2 — bug/integrity:** fixed the import-only startup defect; reconciled canonical cache NaN handling with exact schema-3 missingness counts; registered and audited every archived TIFF.
-- **Pass 3 — request/claim review:** rechecked evidence labels, projection language, file hashes, `[0,1]`, finiteness, grid, uniqueness, note length, no-slot state, page links and download disposition.
+- **Pass 3 — request/claim review:** rechecked evidence labels, projection language, file hashes, `[0,1]`, finiteness, grid, uniqueness, note length, no-slot state, page links and download disposition. Final replay: **555 tests + 9 subtests passed** (7 dependency warnings), repository-wide Ruff passed, the exact-file download audit passed **723/723**, restored-input integrity passed, and two consecutive site builds produced identical hashes for all 20 generated pages/aliases.
 
 The transform should not be tuned on the spent S22 holdout. Highest-upside next work is a fresh preregistered patch encoder–decoder on suitable GPU infrastructure, or the signed piedmont-normal morphology operator on fresh evidence. Either must use a synchronized pre-run registry and a new holdout decision boundary. **Maximize P(Win): reject this lane. Own the Outcome: preserve the negative file and complete evidence rather than spending a slot.**

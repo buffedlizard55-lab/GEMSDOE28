@@ -479,6 +479,10 @@ def make_run_card(exp1: dict, exp2: dict, exp3: dict) -> dict:
         "holdout": {
             "label": "HOLDOUT-DTI",
             "evaluator_version": candidate["evaluator_version"],
+            "shared_evaluator_note": (
+                "The pinned evaluate_holdout.py entry point is MTR1-specific; S22 imports its "
+                "hash-verified gems.holdout.SegmentHoldout authority without a private metric fork."
+            ),
             "dti": candidate["dti"],
             "ci95": candidate["ci95"]["interval"],
             "withheld_positives": candidate["n_withheld_positive_pixels"],

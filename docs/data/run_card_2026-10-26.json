@@ -21,6 +21,7 @@
   "holdout": {
     "label": "HOLDOUT-DTI",
     "evaluator_version": "gems-segment-pooled-v1",
+    "shared_evaluator_note": "The pinned evaluate_holdout.py entry point is MTR1-specific; S22 imports its hash-verified gems.holdout.SegmentHoldout authority without a private metric fork.",
     "dti": 0.06757361714668343,
     "ci95": [
       0.0605746053796906,
