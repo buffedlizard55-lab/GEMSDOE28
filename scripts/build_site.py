@@ -61,6 +61,83 @@ def comma(value: Any) -> str:
         return esc(value)
 
 
+def render_priority_scorecard() -> str:
+    """Render the nine-site artifact table from the auditable JSON source record."""
+    review = read_json("docs/data/priority_site_review_2026-10-26.json")
+    rows = []
+    for site in review["sites"]:
+        uniqueness = site["uniqueness_audit"]
+        rows.append(
+            "<tr>"
+            f"<th scope=\"row\">{esc(site['site'])}</th>"
+            f"<td><code>{esc(site['artifact'])}</code></td>"
+            f"<td><strong>{float(site['reported_best_score']):.4f}</strong><br>"
+            "USER-REPORTED / UNVERIFIED; not a modeled estimate</td>"
+            f"<td>{esc(uniqueness['status'])}: {esc(uniqueness['finding'])}</td>"
+            f"<td><a href=\"{esc(site['raw_download_url'])}\" download>Download cited TIFF</a> · "
+            f"<a href=\"https://buffedlizard55-lab.github.io/{esc(site['site'])}/\">Site</a></td>"
+            "</tr>"
+        )
+    candidate = review["candidate_review"]
+    estimate_range = candidate.get("score_estimate_range")
+    if isinstance(estimate_range, list) and len(estimate_range) == 2:
+        estimate_range_text = f"; reported model range {float(estimate_range[0]):.2f}–{float(estimate_range[1]):.2f}"
+    else:
+        legacy_range = candidate.get("score_estimate_ci95")
+        estimate_range_text = (
+            f"; propagated range {float(legacy_range[0]):.3f}–{float(legacy_range[1]):.3f}"
+            if isinstance(legacy_range, list) and len(legacy_range) == 2 else ""
+        )
+    holdout_ci = candidate.get("holdout_ci95")
+    holdout_ci_text = (
+        f"95% CI [{float(holdout_ci[0]):.4f}, {float(holdout_ci[1]):.4f}]"
+        if isinstance(holdout_ci, list) and len(holdout_ci) == 2
+        else "95% CI not recorded in the source run card"
+    )
+    delta_ci = candidate.get("paired_delta_ci95")
+    delta_ci_text = (
+        f"; paired-delta 95% CI [{float(delta_ci[0]):+.4f}, {float(delta_ci[1]):+.4f}]"
+        if isinstance(delta_ci, list) and len(delta_ci) == 2 else ""
+    )
+    candidate_html = (
+        "<section class=\"card callout-danger\" aria-label=\"Latest generated candidate disposition\">"
+        "<h2>Most recent generated candidate: S22-SIGN — research download only; DO NOT SUBMIT</h2>"
+        f"<p><code>{esc(candidate['file'])}</code>. Estimate: <strong>{esc(candidate['score_estimate_class'])}: "
+        f"{float(candidate['score_estimate']):.3f}{estimate_range_text}</strong>. "
+        f"<strong>HOLDOUT-DTI {float(candidate['holdout_dti']):.4f}</strong> ({holdout_ci_text}; "
+        f"{comma(candidate['withheld_positives'])} withheld positives; {esc(candidate['holdout_evaluator'])}). "
+        f"Baseline {float(candidate['baseline_dti']):.4f}; paired delta {float(candidate['paired_delta']):+.4f}{delta_ci_text}. "
+        f"Uniqueness: {esc(candidate['uniqueness'])} "
+        f"Format: {esc(candidate['format'])}. Verdict: <strong>{esc(candidate['verdict'])}</strong>. "
+        f"Parallel-run disclosure: {esc(candidate['parallel_disclosure'])}</p>"
+        f"<p><strong>Name:</strong> <code>{esc(candidate['submission_name'])}</code> · "
+        f"<strong>Note ({len(candidate['note'])}/140):</strong> <code>{esc(candidate['note'])}</code><br>"
+        f"<strong>SHA-256:</strong> <code>{esc(candidate['sha256'])}</code></p>"
+        f"<div class=\"download-actions\"><button class=\"button\" type=\"button\" disabled aria-disabled=\"true\">Submission download locked</button> "
+        f"<a class=\"button\" href=\"downloads/{esc(candidate['file'])}\" download>Download S22-SIGN research TIFF — DO NOT SUBMIT</a> "
+        f"<a class=\"button secondary\" href=\"downloads/{esc(candidate['nan_file'])}\" download>NaN TIFF</a> "
+        f"<a class=\"button quiet\" href=\"downloads/{esc(candidate['zip_file'])}\" download>ZIP</a></div>"
+        f"<p><a href=\"session22-result.html\">S22-SIGN result</a> · "
+        f"<a href=\"data/s22_run_card.json\">S22-SIGN run card</a> · "
+        f"<a href=\"../evidence/s22_preflight.json\">S22 audit preflight (blocked; zero experiments)</a> · "
+        f"<a href=\"data/s22_archive_coverage.json\">Current filename coverage audit ({candidate['archive_unregistered_count']}/{candidate['archive_tif_count']} TIFFs unregistered)</a></p>"
+        "</section>"
+    )
+    return candidate_html + (
+        "<section class=\"section\"><h2>Nine-site historical scorecard</h2>"
+        "<p>Current filename/manifest coverage is INCOMPLETE: 14 of 48 TIFFs are unregistered; this coverage check does not validate their raster contents. "
+        "These are the highest values reported in the supplied site list, not organizer-confirmed receipts. "
+        "They are reported values, not independent model estimates. The uniqueness column is limited to explicitly documented evidence; "
+        "NOT CERTIFIED means the strict threshold was not established. Do not upload any of these historical files as a new submission.</p>"
+        "<div class=\"table-wrap\"><table><thead><tr><th>Site</th><th>File</th><th>Score / estimate status</th>"
+        "<th>Unique vs listed sites?</th><th>Download / review</th></tr></thead><tbody>"
+        + "".join(rows)
+        + "</tbody></table></div>"
+        "<p><a href=\"data/priority_site_review_2026-10-26.json\">Machine-readable scorecard and provenance</a> · "
+        "<a href=\"../knowledge/62_s21_scorecard_review_2026-10-26.md\">Three-pass review, findings and next steps</a></p></section>"
+    )
+
+
 def range_summary(record: dict) -> str:
     return str(record.get("conclusion", {}).get(
         "most_plausible_explanation", record.get("summary", "Historical validator cause remains unconfirmed.")))
@@ -366,9 +443,9 @@ def s21_status_html() -> str:
     return f"""<section class="card callout-danger" aria-label="Session 21 submission readiness" id="s21-submission" data-submission-ready="false">
 <p class="eyebrow">SESSION 21 · S21-PUHGB · 2026-10-26 · AUTOMATED GATES, NO HUMAN INSPECTOR</p>
 <h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
-<p><strong>NEW UNIQUE TIFF:</strong> <code>{esc(f.get('allfinite', ''))}</code> ({comma(f.get('positive_px', 0))} fresh 31-band PU-detector dots; SHA-256 <code>{esc(str(f.get('sha256_allfinite', ''))[:8])}…</code>; all-finite [0,1]). Format PASS · canary PASS (0.580) · unique vs all scored rasters (≤54.7% overlap; 28.7% vs 0.2778 champion) · <strong>HOLDOUT-DTI delta {g.get('holdout_delta', 0):+.4f} (CI wholly negative) → NEGATIVE. Do not upload.</strong> Estimated live score (MODEL): ~{est.get('estimate', 0):.2f}. Best historical file remains GEMSDOE32 <code>h33-h33-2-b2</code> (0.2778 OWNER-REPORTED) — learning reference only, never copy.</p>
-<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(f.get('allfinite', ''))}" download>1-Click Download S21 Unique GeoTIFF — Research Only / DO NOT SUBMIT</a><a class="button quiet" href="session21-result.html">Session 21 executive result + download table</a><a class="button quiet" href="data/run_card_s21.json" download>JSON run card</a></div>
-<p><strong>Unique name:</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
+<p><strong>PRIOR RESEARCH TIFF — STRICT UNIQUENESS FAIL:</strong> <code>{esc(f.get('allfinite', ''))}</code> ({comma(f.get('positive_px', 0))} fresh 31-band PU-detector dots; SHA-256 <code>{esc(str(f.get('sha256_allfinite', ''))[:8])}…</code>; all-finite [0,1]). Format PASS · canary PASS (0.580) · below thresholds vs scored rasters but strict any-raster rule FAIL (72.3% within 3 px of an unscored probe) · <strong>HOLDOUT-DTI delta {g.get('holdout_delta', 0):+.4f} (CI wholly negative) → NEGATIVE. Do not upload.</strong> MODEL PROJECTION (not a score): {est.get('estimate', 0):.3f} [{est.get('range_from_delta_ci', [0, 0])[0]:.3f}, {est.get('range_from_delta_ci', [0, 0])[1]:.3f}]. Best historical file remains GEMSDOE32 <code>h33-h33-2-b2</code> (0.2778 OWNER-REPORTED) — learning reference only, never copy.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button" href="downloads/{esc(f.get('allfinite', ''))}" download>1-Click Download S21-PUHGB Research TIFF — DO NOT SUBMIT</a><a class="button quiet" href="session21-result.html">Session 21 executive result + download table</a><a class="button quiet" href="data/run_card_s21.json" download>JSON run card</a></div>
+<p><strong>Research artifact name (not approved for upload):</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
 </section>"""
 
 
@@ -1480,12 +1557,16 @@ def main() -> int:
 <p><a class=\"button quiet\" href=\"session20-result.html\">Session 20-H43 executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
 </section>"""
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
+    scorecard_placeholder = "<!-- PRIORITY_SCORECARD -->"
+    if cross_site_template.count(scorecard_placeholder) != 1:
+        raise ValueError("Expected exactly one priority scorecard placeholder")
+    cross_site_page = cross_site_template.replace(scorecard_placeholder, render_priority_scorecard())
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
     session21_template = (ROOT / "site_templates" / "session21-result.html").read_text(encoding="utf-8")
     s20_nchc_block = render_s20_nchc_overview()
     pages = {
         "index.html": layout("Overview", s20_nchc_block + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
-        "cross-site-review.html": cross_site_template,
+        "cross-site-review.html": cross_site_page,
         "executive-summary.html": layout("Executive summary", s20_nchc_block + s20v_brief + session20_brief + render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
@@ -1499,9 +1580,24 @@ def main() -> int:
         "session18-result.html": layout("S18 historical unique TIFF result", render_s18_result(), "S18 result"),
         "session15-review.html": layout("Session 15 high-score review", render_session15(session15_review), "Session 15 review"),
     }
+    # The newer S22 landing pages are intentionally hand-curated from the merged S22-SIGN
+    # result and audit. Preserve them as checked-in source pages; the legacy campaign renderer
+    # below cannot regenerate their current status without discarding the newer run.
+    for name in ("index.html", "executive-summary.html"):
+        authoritative = DOCS / name
+        if authoritative.exists() and "S22-SIGN" in authoritative.read_text(encoding="utf-8"):
+            pages[name] = authoritative.read_text(encoding="utf-8")
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    # Publish the latest S22 run card and the filename-only archive coverage snapshot locally.
+    for source, destination in (
+        ("evidence/s22_run_card.json", "docs/data/s22_run_card.json"),
+        ("evidence/s22_archive_coverage.json", "docs/data/s22_archive_coverage.json"),
+    ):
+        output = ROOT / destination
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(read_json(source), indent=2, allow_nan=False) + "\n", encoding="utf-8")
     s21_card = read_json("evidence/s21_puhgb_run_card.json")
     (DOCS / "data/run_card_s21.json").parent.mkdir(parents=True, exist_ok=True)
     (DOCS / "data/run_card_s21.json").write_text(
@@ -1532,8 +1628,11 @@ def main() -> int:
                       "hypotheses": len(hypotheses.get("hypotheses", [])),
                       "generated_from_json_only": True, "external_requests": 0,
                       "submission_ready": False, "slot_selected": False,
-                      "research_download": Path(current_card["submission_file"]).name,
-                      "inspection_artifacts": [manifest["primary"]["nan"], manifest.get("secondary", {}).get("nan")]}, indent=2))
+                      "research_download": read_json("docs/data/priority_site_review_2026-10-26.json")["candidate_review"]["file"],
+                      "inspection_artifacts": [
+                          read_json("docs/data/priority_site_review_2026-10-26.json")["candidate_review"]["file"],
+                          read_json("docs/data/priority_site_review_2026-10-26.json")["candidate_review"]["nan_file"],
+                      ]}, indent=2))
     return 0
 
 

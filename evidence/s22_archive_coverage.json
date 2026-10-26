@@ -1,0 +1,87 @@
+{
+  "checked_utc": "2026-10-26T22:05:06Z",
+  "scope": "Filename/manifest coverage only; does not validate raster content, grid, range, provenance, score, or portal acceptance.",
+  "downloads_directory": "docs/downloads",
+  "manifest": "docs/downloads/manifest.json",
+  "manifest_sha256": "3c16dca2110be809d8ab4644e6894e16157e4bdba664a62dd05f1c58a9552f56",
+  "total_tif_count": 48,
+  "registered_tif_count": 34,
+  "unregistered_tif_count": 14,
+  "unregistered_tifs": [
+    {
+      "file": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-allfinite.tif",
+      "bytes": 832396,
+      "sha256": "f881810d6713a4bd8d6f9fd15bca99cc928ea052473bbd6a82c738d54dd4067b"
+    },
+    {
+      "file": "gems27-all-increments-d2-8-h27-4-r1-t-v2-20261002-23ad46a4d7ba-nan.tif",
+      "bytes": 1598402,
+      "sha256": "344e7c857f363b195dbfd6e64a0a0e0fc77923c8c14d7830e53bfd2d5c05610c"
+    },
+    {
+      "file": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-allfinite.tif",
+      "bytes": 854790,
+      "sha256": "7ae6f90df568a2578294968ec5e4a8a088653b569e5ab3c149afbe132ba29238"
+    },
+    {
+      "file": "gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif",
+      "bytes": 1622840,
+      "sha256": "17c67554a1fde7607e9ffe9846433162035364eb4ef5ec3d2ab65778fe3bbdd2"
+    },
+    {
+      "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-allfinite.tif",
+      "bytes": 863814,
+      "sha256": "60a7930a5ac229bb8a3a81656de49c1e228eab8398e0b26316972d516a2951f5"
+    },
+    {
+      "file": "gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif",
+      "bytes": 1630604,
+      "sha256": "61f9b53de42786e6d48afa50fd453a87c57d5d7b9b626c7dcf28c2dfbd20f411"
+    },
+    {
+      "file": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-allfinite.tif",
+      "bytes": 825484,
+      "sha256": "f0f50442dfe682911a2f49ee56d59a468b3f6b6f2ad35e90932532d3715abcc4"
+    },
+    {
+      "file": "gems28-h40-1-thermal-vent-r35-20261025T204851Z-7935260dcfad-nan.tif",
+      "bytes": 1590874,
+      "sha256": "149ba3dfee032bdc8f11c8b64f3f5b082671581fc9760e0d94ef520330996553"
+    },
+    {
+      "file": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-allfinite.tif",
+      "bytes": 826124,
+      "sha256": "89fd98a638a0aebe2e9be6da6948eb879154f05312d6fff24e083794b9f41515"
+    },
+    {
+      "file": "gems28-h41-1-thermal-spring-r30-20261025T205008Z-73e2b0bd94a8-nan.tif",
+      "bytes": 1591554,
+      "sha256": "4ff7626cc689d8c3a6f07d0b8512d76bc958c643d3efbeb49c01ffff09be1660"
+    },
+    {
+      "file": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-allfinite.tif",
+      "bytes": 817614,
+      "sha256": "960c3d493179deed8f743f0f6c5ab18fad1ca58a025b2dd57db565c36d56f117"
+    },
+    {
+      "file": "gems28-h43-1-tpb2gkc-20261026-76737f19814e-nan.tif",
+      "bytes": 1582326,
+      "sha256": "212439622ab36d282fee549b040df0d66d4c5a713a643685b5403ab0ed138ea9"
+    },
+    {
+      "file": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif",
+      "bytes": 826602,
+      "sha256": "2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c"
+    },
+    {
+      "file": "gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif",
+      "bytes": 1590770,
+      "sha256": "a43ae055706f44e0896fdb68499f1f85f424250bd27ee5ea66b14dfd6c45c625"
+    }
+  ],
+  "status": "FAIL",
+  "note": "A prior S21 full raster audit covered 44 TIFFs and found 12 unregistered. This post-PR57 refresh includes the two newly registered S22-SIGN TIFF variants; it is only a filename/manifest coverage check.",
+  "registered_filename_count": 34,
+  "dangling_manifest_reference_count": 0,
+  "method": "Recursively collect every string ending in .tif/.tiff from docs/downloads/manifest.json, normalize to basenames, compare with docs/downloads/*.tif, and SHA-256 each unregistered local TIFF."
+}

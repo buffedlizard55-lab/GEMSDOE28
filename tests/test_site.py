@@ -45,6 +45,10 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
     }
     inputs.add("docs/downloads/h28_1_candidate_manifest.json")
     for path in inputs | {
+        "evidence/s22_run_card.json",
+        "evidence/s22_archive_coverage.json",
+        "docs/data/s22_run_card.json",
+        "docs/data/s22_archive_coverage.json",
         "docs/data/topology_review_classes.json",
         "evidence/losfo_h38_1_raw.json",
         "evidence/h38_1_seed_audit_pre_run.json",
@@ -225,9 +229,11 @@ def test_session19_cross_site_review_is_linked_and_fail_closed():
     page = (DOCS / "cross-site-review.html").read_text()
     index = (DOCS / "index.html").read_text()
     card = json.loads((ROOT / "evidence/s19_ascp_run_card.json").read_text())
-    assert "GEMSDOE32 H33-2-B2" in page
+    assert "H33-2-B2" in page
     assert "0.2778" in page and "USER-REPORTED / UNVERIFIED" in page
-    assert "S19-ASCP research TIFF was generated" in page
+    assert "Most recent generated candidate" in page
+    assert "72.3%" in page
+    assert "NOT UNIQUE" in page
     assert "DO NOT SUBMIT" in page
     assert "autonomously chose" in page
     assert "Displaced potential-field piercing markers" in page
@@ -340,10 +346,16 @@ def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
         text = (DOCS / page).read_text()
         if page == "cross-site-review.html":
-            assert 'Current status: NOT READY TO SUBMIT' in text
-            assert 'NO FILE APPROVED' in text
+            assert 'Most recent generated candidate: S22-SIGN' in text
             assert 'DO NOT SUBMIT' in text
-            assert 's19_ascp_run_card.json' in text
+            assert 's22_archive_coverage.json' in text
+            assert '14 of 48 TIFFs' in text
+            continue
+        if page in {"index.html", "executive-summary.html"}:
+            assert 'S22-SIGN' in text
+            assert 'OK TO SUBMIT TO PORTAL: NO' in text
+            assert 'DO NOT SUBMIT' in text
+            assert 'How to Submit' in text or 'Exactly how a future approved submission works' in text
             continue
         assert 'Current run: NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text
@@ -384,8 +396,8 @@ def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(ca
     metadata = json.loads(capsys.readouterr().out)
     assert metadata['submission_ready'] is False and metadata['slot_selected'] is False
     assert 'primary_download' not in metadata
-    assert 's19-ascp' in metadata['research_download']
-    assert metadata['inspection_artifacts']
+    assert metadata['research_download'] == 'gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif'
+    assert metadata['inspection_artifacts'][0] == metadata['research_download']
     current = json.loads((DOCS / 'data/current_run_card_2026-10-26.json').read_text())
     exact = json.loads((ROOT / 'evidence/s19_ascp_run_card.json').read_text())
     assert current == exact and current['verdict'] == 'negative'
@@ -618,7 +630,7 @@ def test_session20_s20_nchc_candidate_and_nine_site_review_rendered():
     assert (DOCS / "downloads" / slot["nan"]).is_file()
     assert (DOCS / "downloads" / slot["zip"]).is_file()
     assert json.loads((DOCS / "data/run_card_s20_nchc.json").read_text()) == card
-    for page_name in ("index.html", "executive-summary.html", "cross-site-review.html"):
+    for page_name in ("index.html", "executive-summary.html"):
         page_text = (DOCS / page_name).read_text()
         assert f'href="downloads/{slot["allfinite"]}"' in page_text
         assert "OK TO DOWNLOAD FOR RESEARCH: YES" in page_text
@@ -627,6 +639,10 @@ def test_session20_s20_nchc_candidate_and_nine_site_review_rendered():
         assert "40,071" in page_text
         assert "53.63%" in page_text
         assert "0.2778" in page_text
+    scorecard_page = (DOCS / "cross-site-review.html").read_text()
+    assert "Nine-site historical scorecard" in scorecard_page
+    assert "NOT UNIQUE" in scorecard_page and "NOT CERTIFIED" in scorecard_page
+    assert "0.2778" in scorecard_page
     idx_text = (DOCS / "index.html").read_text()
     assert "0.112115" in idx_text and "+0.013416" in idx_text
     assert "NE_LidarGapHeavy" in idx_text and "0.4413" in idx_text and "0.3195" in idx_text

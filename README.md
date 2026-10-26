@@ -1,23 +1,27 @@
-# Session 22 (S22-SIGN) — 2026-10-27 UTC (read first every session)
+# Current review — S22-SIGN result + S22 audit · 2026-10-26 UTC (read first every session)
 
-## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
+**Decision: no approved submission.** The newest generated candidate is the separate S22-SIGN signed-piedmont TIFF, downloadable for research only. Its all-finite GeoTIFF passes local format/range and its 22-member run registry novelty checks, but HOLDOUT-DTI is negative (0.0547 vs 0.1219 baseline); **DO NOT SUBMIT**. Its live-score estimate (~0.18 [0.16–0.20]) is a MODEL PROJECTION, not a score; paired 95% CI was not recorded in that run card. The candidate is from a distinct concurrent lane and its result must not be pooled with this S22 audit.
 
-- **Download:** [`docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif`](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif) (826,250 bytes · SHA-256 `d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229` · 37,692 dots · all-finite `{0,1}` · EPSG:32611 · 3730 × 3292 · template-exact) · [NaN twin](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.tif) · [ZIP](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-nan.zip)
-- **Lane:** Signed piedmont break-in-slope (∂²z/∂n² >0) + asymmetric LiDAR polarity (upface-downface) + subsurface (mag/grav/depth) concordance, B=2 hygiene (200 m), dot_thin 2.8. Seeds 360–362 fresh, disjoint from S20/S21.
-- **Gates:** format PASS · leakage canary PASS (7/7 legs max AUC ~0.58 ≤0.90) · unique vs 22 prior registry rasters PASS (max 3-px overlap 43.3% ≤70%, max |Spearman| 0.028 ≤0.90) · **HOLDOUT-DTI 0.0547 vs 0.1219 baseline (Δ −0.0673, 12 cells, 4 folds ×3 seeds) → verdict `negative`, 0 slots spent.**
-- **Estimated live score (MODEL PROJECTION, not a score):** ~0.18 [0.16–0.20] (holdout-ratio to OWNER-REPORTED 0.2778 anchor). No file today is both unique and evidenced >0.2778; S22 is research-only.
-- **Deliverables:** [Session 22 executive page](docs/session22-result.html) · [5 ranked hypotheses + phd forensic of 0.2778](knowledge/62_s22_hypotheses.md) · [Frozen preregistration](knowledge/62_s22_preregistration.md) · [JSON run card](evidence/s22_run_card.json) · [S22 result doc](knowledge/63_s22_result.md) · Next: Euler SI=0 depth-coherence (H43-3) on fresh seeds 363+.
+- **Research-only artifact (not portal-approved):** [`gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif`](docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif) · 37,692 dots · SHA-256 `d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229`.
+
+This S22 scorecard audit itself generated no raster and ran zero geological experiments. Its fresh preflight verifies the nine pinned shared-template assets but blocks experiment execution because there is no explicit lane assignment for this run, complete synchronized registry, same-protocol frozen baseline, or prepared feature cache. The refreshed filename/manifest coverage check is incomplete: 14/48 TIFFs are unregistered (content not audited in this pass); the prior full raster audit covered 44 files and found 12 unregistered.
+
+- [Nine-site scorecard: files, owner-reported values, uniqueness findings, downloads](docs/cross-site-review.html)
+- [Three-pass review, interpretation of 0.2778, limitations and next steps](knowledge/62_s21_scorecard_review_2026-10-26.md)
+- [S22-SIGN result and run card](knowledge/63_s22_result.md) · [S22 audit preflight](evidence/s22_preflight.json) · [current filename coverage](evidence/s22_archive_coverage.json) · [prior full raster audit](evidence/s21_download_audit.json)
+- Historical highest cited value among the nine listed sites: GEMSDOE32 0.2778, **USER-REPORTED / UNVERIFIED**; no receipt links that number to the file. Do not copy it.
+- Official-source provenance for this reconciliation: [repository source ledger](docs/sources.html) is retained, but no official competition/data page, leaderboard, or submission receipt was independently refreshed in this turn.
 
 ---
 
-# Session 21 (`S21-PUHGB`) — 2026-10-26 UTC (read first every session)
+# Session 21 (`S21-PUHGB`) — 2026-10-26 UTC (historical result)
 
-## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO**
+## Previously generated research GeoTIFF — **OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO; strict uniqueness FAIL**
 
 - **Download:** [`docs/downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif`](docs/downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif) (826,602 bytes · SHA-256 `2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c` · 37,654 fresh dots · all-finite `{0,1}` · EPSG:32611 · 3730 × 3292 · template-exact) · [NaN twin](docs/downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-nan.tif) · [ZIP](docs/downloads/gems28-s21-puhgb-20261026-16bbf281ba9b-nan.zip)
 - **Lane:** fresh PU-HGB detector on 19 GeoDAWN + 12 LiDAR-scarp bands + coordinates (catalogue geometry used only for masking; zero H19-5 dots). Replicated the champion lineage byte-exactly (H19-5 121,131 → dotted 44,090 → solo 40,199 → champion 37,654; symdiff 0 at each step): **0.2778 = emission hygiene (2.8 px spacing + ≤2 px ring prune vs break-even τ≈0.0588/dot), not new geology.**
-- **Gates:** format PASS · leakage canary PASS (max single-feature AUC 0.580; two earlier variants VOIDED at AUC 1.00/0.963 on catalogue-density features — archived) · unique vs all scored rasters PASS (28.7% 3-px overlap vs champion; |Spearman| ≤0.089) but strict any-raster rule FAIL vs unscored dense H37-1 probe (72.3%) · **HOLDOUT-DTI 0.0839 vs dotted-b2 0.1062, Δ −0.0223 [−0.0309, −0.0137] (seeds 350–352, 35,900 withheld positives) → verdict `negative`, 0 slots spent.**
-- **Estimated live score (MODEL PROJECTION, not a score):** ~0.22 [0.20–0.24] (holdout-ratio to the OWNER-REPORTED 0.2778 anchor). No file today is both unique and evidenced >0.2778; the only evidenced higher direction (ring≤3 pruning, 35,483 dots, ~0.279–0.285 MODEL) is a 94%-champion duplicate — no file shipped.
+- **Gates:** format PASS · leakage canary PASS (max single-feature AUC 0.580; two earlier variants VOIDED at AUC 1.00/0.963 on catalogue-density features — archived) · scored-raster comparison PASS (28.7% 3-px overlap vs champion; |Spearman| ≤0.089) but strict any-raster uniqueness FAIL vs unscored dense H37-1 probe (72.3%) · **HOLDOUT-DTI 0.0839 vs dotted-b2 0.1062, Δ −0.0223 [−0.0309, −0.0137] (seeds 350–352, 35,900 withheld positives) → verdict `negative`, 0 slots spent.**
+- **MODEL PROJECTION, not a score:** ~0.2195 (range 0.1969–0.2419 propagated from paired-delta interval; not calibrated live-score uncertainty), conditional on OWNER-REPORTED 0.2778 anchor. No file today is both unique and evidenced >0.2778; the only recorded higher direction (ring≤3 pruning, 35,483 dots, ~0.279–0.285 MODEL) is a 94%-champion duplicate — no file shipped.
 - **Deliverables:** [Session 21 executive page](docs/session21-result.html) · [Full report + 9-site table + 5 ranked hypotheses](knowledge/61_s21_result.md) · [JSON run card](evidence/s21_puhgb_run_card.json) · Next: U-Net (GPU) or soft-probability emission on fresh seeds 360+.
 
 ---
@@ -132,7 +136,7 @@ The standing normalized owner prompt below remains the starting point every sess
 
 # Current result — 2026-10-26 S19-ASCP (read first every session)
 
-## NEW UNIQUE TIFF GENERATED — **DO NOT SUBMIT: HOLDOUT GATE FAILED**
+## Previously generated research TIFF — **DO NOT SUBMIT: HOLDOUT AND STRICT UNIQUENESS GATES FAILED**
 
 [**Download the new unique research TIFF**](docs/downloads/gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif)
 · [Executive summary / exact submission process](docs/executive-summary.html)

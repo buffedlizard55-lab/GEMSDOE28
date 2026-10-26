@@ -1,6 +1,6 @@
 # S22 Ranked Geological Hypotheses — 2026-10-26 (Pass 1)
 
-**Branch:** `arena/177c1ff2-gemsdoe28` · **Date:** 2026-10-26 UTC  
+**Branch:** `arena/177c1ff2-gemsdoe28` · **Date:** 2026-10-26 UTC
 **Context:** S20-NCHC (H43-1) proved swath-level uniqueness (53% max overlap vs 91% prior) and won the Walker Lane SW quadrant (+0.0134 HOLDOUT-DTI) but lost pooled (-0.0132). Its fold diagnostics isolate the missing operator: symmetric Hessian tubularity of |∇z| peaks *upslope* of true piedmont break-in-slope scarps, causing systematic misses in NE/SE Basin-and-Range range-front folds. S21-PUHGB (pure ML habitat without physics) lost pooled -0.0223. The synthesis is signed concavity + polarity.
 
 **Evaluator:** `gems-segment-pooled-v1` (quadrant LOSFO, 20% whole-component hide + 1500 m buffer, catalogue-derived features only from `fold["visible"]`, pixel-exact masks, α=0.2 β=0.8 300 m triangular DTI, 4-quadrant pooled + 583×10 km block bootstrap).

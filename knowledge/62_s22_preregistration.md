@@ -64,4 +64,3 @@ JSON with: session, hypothesis, mechanism, non_fault_mimic, holdout {label dti c
 ## Decision Disclosure
 
 S22 is one of several parallel sessions from identical prompt. Seeds 360–362 are unique to this branch; never pool numbers across concurrent lanes. A negative holdout is a deliverable; no slot is spent without superiority.
-
