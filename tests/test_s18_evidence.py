@@ -97,16 +97,24 @@ def test_s18_bootstrap_identical_arms_has_zero_paired_gain():
     assert ci["paired_gain_ci95"] == [0.0, 0.0]
 
 
-def test_current_s19_download_is_visible_and_s18_remains_historical():
-    card = load("evidence/s19_ascp_run_card.json")
-    filename = Path(card["submission_file"]).name
-    for page in ("index.html", "executive-summary.html", "session19-result.html"):
+def test_latest_s21_download_is_visible_and_s19_page_keeps_its_own_history():
+    s21 = load("evidence/s21_puhgb_run_card.json")
+    filename = s21["files"]["allfinite"]
+    for page in ("index.html", "executive-summary.html"):
         html = (ROOT / "docs" / page).read_text()
         assert filename in html
-        assert "Download NEW unique research TIFF — DO NOT SUBMIT" in html
-        assert "0.08081" in html and "60,988" in html
-        assert 'data/current_run_card_2026-10-26.json' in html
+        assert "RESEARCH ONLY / DO NOT SUBMIT" in html
+        assert "0.08391" in html or "0.0839" in html
+        assert "0.10621" in html or "0.1062" in html
+        assert "Download S21 research GeoTIFF" in html
         assert "Whether to submit is your decision" not in html
+    s19 = load("evidence/s19_ascp_run_card.json")
+    s19_filename = Path(s19["submission_file"]).name
+    historical_page = (ROOT / "docs/session19-result.html").read_text()
+    assert s19_filename in historical_page
+    assert "S19-ASCP JSON run card" in historical_page
+    assert "data/run_card_s19.json" in historical_page
+    assert "0.08081" in historical_page and "60,988" in historical_page
     assert (ROOT / "docs/session18-result.html").is_file()
 
 

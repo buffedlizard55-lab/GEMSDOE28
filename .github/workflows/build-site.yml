@@ -9,6 +9,10 @@ on:
       - 'registry/irregularities.json'
       - 'registry/sources.json'
       - 'docs/downloads/manifest.json'
+      - 'evidence/archive_audit_2026-10-26.json'
+      - 'evidence/session22_preflight.json'
+      - 'evidence/session22_review_run_card.json'
+      - 'knowledge/62_s22_archive_review.md'
       - 'docs/data/current_run_card_2026-10-26.json'
       - 'evidence/run_card_2026-10-25.json'
       - 'evidence/review_s18_submission_gate_2026-10-25.md'
@@ -102,6 +106,10 @@ on:
       - 'registry/irregularities.json'
       - 'registry/sources.json'
       - 'docs/downloads/manifest.json'
+      - 'evidence/archive_audit_2026-10-26.json'
+      - 'evidence/session22_preflight.json'
+      - 'evidence/session22_review_run_card.json'
+      - 'knowledge/62_s22_archive_review.md'
       - 'docs/data/current_run_card_2026-10-26.json'
       - 'evidence/run_card_2026-10-25.json'
       - 'evidence/review_s18_submission_gate_2026-10-25.md'
@@ -205,4 +213,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json index.html executive-summary.html data/current_run_card_2026-10-26.json
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json docs/data/run_card_2026-10-26.json docs/data/run_card_s19.json index.html executive-summary.html data/current_run_card_2026-10-26.json

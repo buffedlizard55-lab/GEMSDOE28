@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "session": "G28-S22-ARCHIVE-REVIEW-20261026",
+  "generated_at_utc": "2026-10-26T22:24:00Z",
+  "scope": "Local archive audit and site decision only; no scientific experiment authorized or executed.",
+  "status": "BLOCKED",
+  "verdict": "blocked",
+  "submission_ready": false,
+  "slot_selected": false,
+  "weekly_cap_status": "Not accessed; no account authentication or portal access.",
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "experiment_allowed": false,
+  "new_tiff_generated": false,
+  "holdout_evaluation": "NOT RUN in this archive-review session",
+  "holdout_dti": null,
+  "score_estimate": null,
+  "archive_audit": {
+    "status": "PASS",
+    "check_count": 890,
+    "download_tif_count": 46,
+    "registered_tif_count": 46,
+    "unregistered_tif_count": 0,
+    "report": "evidence/archive_audit_2026-10-26.json",
+    "report_sha256": "348f58b2b43c5b18eb4cb16335996a744b5a83e36249eea1939e5d85007bbafe",
+    "manifest_sha256": "b24f23af0e7f2963ea61f2fa6ddeb372a179fe4175b8ef4d182f9505022dc9df",
+    "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
+    "organizer_authenticated": false,
+    "portal_acceptance_claimed": false,
+    "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+  },
+  "preflight": {
+    "status": "BLOCKED",
+    "path": "evidence/session22_preflight.json",
+    "sha256": "3d867d0b2a8275ef343b72874c4343ed7e7ab99125b352d8d943ffbc45e69505",
+    "checked_at_utc": "2026-10-26T22:09:14Z",
+    "experiment_allowed": false,
+    "blockers": [
+      "Missing explicit assigned method lane and assignment source",
+      "Missing complete shared parallel-run registry",
+      "Missing frozen current-best result under the same strict protocol",
+      "Cached feature stack unavailable: [Errno 2] No such file or directory: '/home/user/GEMSDOE28/data/prepared/features.json'"
+    ],
+    "cached_feature_metadata": "data/prepared/features.json",
+    "cached_feature_stack": "data/prepared/features.npy"
+  },
+  "shared_tools": {
+    "status": "PASS",
+    "pin_manifest": "registry/protocol_assets.json",
+    "verified_files": 9,
+    "private_evaluator_or_writer_fork_used": false,
+    "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+    "source_commit": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+    "pin_manifest_sha256": "b4e23ba97cb72e89a78bcfda7d4b3076ea2076141ba1f648801083b79e500d79"
+  },
+  "historical_research_artifact": {
+    "session": "S21-PUHGB",
+    "filename": "gems28-s21-puhgb-20261026-16bbf281ba9b-allfinite.tif",
+    "sha256": "2bf4737ae0a3b844a160d4041d435e5a7daf92c6ec92f128a0c2c596ba23787c",
+    "bytes": 826602,
+    "research_download_allowed": true,
+    "portal_submission_approved": false,
+    "verdict": "negative-gate-fail",
+    "run_card": "evidence/s21_puhgb_run_card.json",
+    "run_card_sha256": "f1906bfd8189122cb21741c2e4eda68f4d7a583e993cf7fb1a09c4ebd536a60f"
+  },
+  "reported_score_policy": {
+    "nine_site_scores": "OWNER-REPORTED / UNVERIFIED absent a submission-page receipt bound to a file hash",
+    "gemsdoe32_0_2778": "Reported association; local byte-forensics explain construction, not score causation or organizer confirmation.",
+    "public_leaderboard_observations": {
+      "2026-10-03": 0.3195,
+      "2026-10-26": 0.4413
+    }
+  },
+  "external_data_availability": {
+    "fresh_check_performed": false,
+    "historical_inventory": "evidence/external_layer_inventory.json",
+    "historical_inventory_generated_at_utc": "2026-10-03T21:47:18Z",
+    "none_called_viable": true
+  },
+  "manual_geological_inspection_used_as_release_gate": false,
+  "drivendata_accessed": false,
+  "notes": [
+    "Archive PASS proves only local file integrity and consistency.",
+    "No current candidate, score estimate, weekly-slot decision, new TIFF, upload, or experiment was produced.",
+    "Do not submit any repository TIFF."
+  ],
+  "current_session_record_sha256": "ffb5f3e2b7363bd7b8b9a5208236f65e591eb2cc934053cd1c00b739dcd67ab2"
+}

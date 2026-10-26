@@ -3,8 +3,8 @@
 
 This script performs no network requests and never accesses DrivenData. It checks exact local hashes,
 bytes, content-addressed names, single-band float32 format, template grid, inside-footprint finiteness
-and [0,1] range, outside-footprint nodata convention, catalogue overlap, ZIP membership, and note length.
-It does not prove organizer authenticity or guarantee the portal will accept a file.
+and [0,1] range, variant-specific outside-footprint/nodata semantics, catalogue overlap, ZIP membership,
+and note length. It does not prove organizer authenticity or guarantee portal acceptance.
 """
 from __future__ import annotations
 
@@ -62,8 +62,12 @@ def main() -> int:
         template_array = template.read(1)
         footprint = np.isfinite(template_array)
         template_signature = (template.crs, template.shape, template.transform)
+        try:
+            template_label = str(template_path.resolve().relative_to(ROOT))
+        except ValueError:
+            template_label = str(template_path)
         template_info = {
-            "path": str(template_path), "sha256": sha256_file(template_path),
+            "path": template_label, "sha256": sha256_file(template_path),
             "crs": template.crs.to_string(), "shape": list(template.shape),
             "transform": list(tuple(template.transform)[:6]), "footprint_pixels": int(footprint.sum()),
         }
@@ -71,6 +75,7 @@ def main() -> int:
         labels = label_ds.read(1)
         label_grid_ok = (label_ds.crs, label_ds.shape, label_ds.transform) == template_signature
         catalogue = np.isfinite(labels) & (labels > 0)
+        catalogue_pixels = int(catalogue.sum())
     check(label_grid_ok, "labels_grid_matches_template", f"{labels_path.name} grid matches {template_path.name}")
     check(int(footprint.sum()) == 5_167_373 and template_info["shape"] == [3730, 3292]
           and template_info["crs"] == "EPSG:32611", "expected_template_grid",
@@ -183,40 +188,197 @@ def main() -> int:
             check(path.is_file() and path.read_text(encoding="utf-8").strip() == note,
                   f"{slot}_note_file_matches", str(note_file))
 
+    def audit_named_variant(prefix: str, item: dict, *, archive_entry: bool = False) -> np.ndarray | None:
+        """Audit a filename-style TIFF using its declared footprint/nodata variant."""
+        filename = str(item.get("filename", ""))
+        variant = item.get("variant", "allfinite")
+        variant_ok = variant in {"nan", "allfinite"}
+        check(variant_ok, f"{prefix}_variant", str(variant))
+        if not variant_ok:
+            variant = "allfinite"
+
+        safe_name = bool(filename and Path(filename).name == filename)
+        match = re.fullmatch(r".+-([0-9a-f]{12})-(nan|allfinite)\.tif", filename)
+        check(safe_name and match is not None, f"{prefix}_safe_content_addressed_name", filename)
+        if match:
+            check(match.group(2) == variant, f"{prefix}_filename_variant_matches", filename)
+            registered_cid = item.get("content_id")
+            if registered_cid is not None:
+                check(registered_cid == match.group(1), f"{prefix}_content_id_matches_filename", filename)
+        path = downloads_dir / filename if safe_name else downloads_dir / "__invalid__"
+        check(path.is_file(), f"{prefix}_file_exists", filename)
+        if not path.is_file():
+            return None
+
+        actual_bytes = path.stat().st_size
+        actual_sha = sha256_file(path)
+        expected_sha = item.get("sha256")
+        check(isinstance(expected_sha, str) and bool(re.fullmatch(r"[0-9a-f]{64}", expected_sha))
+              and actual_sha == expected_sha, f"{prefix}_exact_sha256", actual_sha)
+        if item.get("bytes") is not None or archive_entry:
+            check(isinstance(item.get("bytes"), int) and not isinstance(item.get("bytes"), bool)
+                  and actual_bytes == item.get("bytes"), f"{prefix}_byte_count", f"{actual_bytes} bytes")
+
+        with rasterio.open(path) as src:
+            arr = src.read(1)
+            grid_match = (src.crs, src.shape, src.transform) == template_signature
+            one_band_float32 = src.count == 1 and src.dtypes[0] == "float32"
+            if src.nodata is None:
+                observed_nodata = "none"
+            elif np.isnan(src.nodata):
+                observed_nodata = "nan"
+            else:
+                observed_nodata = "other"
+        check(grid_match, f"{prefix}_exact_grid", "CRS/shape/transform match template")
+        check(one_band_float32, f"{prefix}_single_band_float32", f"dtype={arr.dtype}")
+
+        expected_nodata = item.get("nodata_tag", "nan" if variant == "nan" else "none")
+        check(expected_nodata in {"nan", "none"} and observed_nodata == expected_nodata,
+              f"{prefix}_nodata_tag_matches", f"registered={expected_nodata}; actual={observed_nodata}")
+        inside = arr[footprint]
+        outside = arr[~footprint]
+        inside_finite = bool(np.isfinite(inside).all())
+        inside_range = bool(inside_finite and inside.min() >= 0.0 and inside.max() <= 1.0)
+        inside_binary = bool(inside_finite and np.isin(inside, [0.0, 1.0]).all())
+        emitted = int((inside == 1.0).sum()) if inside_finite else -1
+        overlap = int(((arr > 0) & catalogue & footprint).sum())
+        check(inside_finite, f"{prefix}_inside_finite", "all template-footprint cells are finite")
+        if item.get("footprint_pixels") is not None or archive_entry:
+            check(isinstance(item.get("footprint_pixels"), int)
+                  and not isinstance(item.get("footprint_pixels"), bool)
+                  and int(footprint.sum()) == item.get("footprint_pixels"),
+                  f"{prefix}_footprint_pixel_count", f"template footprint={int(footprint.sum())} cells")
+        check(inside_range, f"{prefix}_inside_0_1", "finite template-footprint values lie in [0,1]")
+        check(inside_binary, f"{prefix}_inside_exact_binary", "inside values are exactly 0 or 1")
+        check(not bool(np.isinf(arr).any()), f"{prefix}_no_infinities", "no infinity anywhere")
+        check(overlap == 0, f"{prefix}_no_catalogue_overlap", f"positive catalogue overlap={overlap}")
+        if item.get("catalogue_overlap_px") is not None or archive_entry:
+            check(isinstance(item.get("catalogue_overlap_px"), int)
+                  and not isinstance(item.get("catalogue_overlap_px"), bool)
+                  and overlap == item.get("catalogue_overlap_px"),
+                  f"{prefix}_catalogue_overlap_count", f"positive catalogue overlap={overlap}")
+        if item.get("emitted_px") is not None or archive_entry:
+            check(isinstance(item.get("emitted_px"), int) and not isinstance(item.get("emitted_px"), bool)
+                  and emitted == item.get("emitted_px"), f"{prefix}_emitted_count",
+                  f"{emitted} inside-footprint cells equal 1.0")
+
+        if variant == "nan":
+            outside_ok = bool(np.isnan(outside).all() and observed_nodata == "nan")
+            check(outside_ok, f"{prefix}_outside_nan", "outside footprint is NaN and nodata tag is NaN")
+        else:
+            whole_range = bool(np.isfinite(arr).all() and arr.min() >= 0.0 and arr.max() <= 1.0)
+            outside_zero = bool((outside == 0.0).all())
+            check(whole_range, f"{prefix}_strict_whole_array_0_1",
+                  "all array values, including outside-footprint cells, are finite and in [0,1]")
+            check(outside_zero, f"{prefix}_outside_zero", "outside-footprint cells are exactly zero")
+            check(observed_nodata in {"none", "nan"}, f"{prefix}_allfinite_nodata_metadata",
+                  f"all pixels are finite; nodata tag is {observed_nodata} (explicitly registered)")
+        return arr
+
     # Audit every filename-style artifact, including future/concurrent sessions.
     # A hardcoded s18_candidate here silently omitted s19_candidate.
     for slot, current in manifest.items():
         if not isinstance(current, dict) or "filename" not in current:
             continue
         prefix = slot.removesuffix("_candidate")
-        filename = str(current.get("filename", ""))
-        safe_name = bool(filename and Path(filename).name == filename and filename.endswith(".tif"))
-        check(safe_name, f"{prefix}_safe_filename", filename)
-        path = downloads_dir / filename if safe_name else downloads_dir / "__invalid__"
-        check(path.is_file(), f"{prefix}_file_exists", filename)
-        if path.is_file():
-            check(sha256_file(path) == current.get("sha256"), f"{prefix}_exact_sha256", sha256_file(path))
-            with rasterio.open(path) as src:
-                arr = src.read(1)
-                check((src.crs, src.shape, src.transform) == template_signature,
-                      f"{prefix}_exact_grid", "CRS/shape/transform match template")
-                check(src.count == 1 and src.dtypes[0] == "float32", f"{prefix}_single_band_float32", str(src.dtypes))
-            check(np.isfinite(arr).all() and ((arr >= 0) & (arr <= 1)).all(),
-                  f"{prefix}_strict_whole_array_0_1", "No NaN/infinity or out-of-range value anywhere")
-            check((arr[~footprint] == 0).all(), f"{prefix}_zero_outside_footprint", "zeros outside footprint")
-            check(not ((arr > 0) & catalogue & footprint).any(), f"{prefix}_no_catalogue_predictions", "no catalogue dots")
+        audit_named_variant(prefix, current)
         note = current.get("note")
         check(isinstance(note, str) and 0 < len(note) <= 140, f"{prefix}_note_140", str(note))
         if current.get("verdict") == "negative":
             check(current.get("submission_ready") is False,
                   f"{prefix}_rejected_not_approved", str(current.get("status")))
 
+    legacy = manifest.get("legacy_archive", {})
+    legacy = legacy if isinstance(legacy, dict) else {}
+    archive_entries = legacy.get("entries", [])
+    archive_entries = archive_entries if isinstance(archive_entries, list) else []
+    expected_archive_count = legacy.get("expected_entry_count")
+    check(isinstance(expected_archive_count, int) and not isinstance(expected_archive_count, bool)
+          and len(archive_entries) == expected_archive_count,
+          "legacy_archive_expected_entry_count",
+          f"registered={len(archive_entries)}; expected={expected_archive_count}")
+    archive_ids = [entry.get("id") for entry in archive_entries if isinstance(entry, dict)]
+    check(len(archive_ids) == len(archive_entries) and len(archive_ids) == len(set(archive_ids)),
+          "legacy_archive_ids_unique", f"{len(archive_ids)} archive entry ID(s)")
+    archive_filenames = [entry.get("filename") for entry in archive_entries if isinstance(entry, dict)]
+    check(len(archive_filenames) == len(archive_entries)
+          and len(archive_filenames) == len(set(archive_filenames)),
+          "legacy_archive_filenames_unique", f"{len(archive_filenames)} archive TIFF reference(s)")
+    expected_pair_count = legacy.get("expected_pair_count")
+    pair_groups: dict[str, list[tuple[dict, str | None]]] = {}
+    for entry in archive_entries:
+        if not isinstance(entry, dict):
+            check(False, "legacy_archive_entry_object", repr(entry))
+            continue
+        entry_id = str(entry.get("id", "entry"))
+        prefix = "legacy_archive_" + re.sub(r"[^A-Za-z0-9_]+", "_", entry_id).strip("_")
+        array = audit_named_variant(prefix, entry, archive_entry=True)
+        check(entry.get("disposition") == "research_only_not_submission_approved",
+              f"{prefix}_research_only", str(entry.get("disposition")))
+        check(entry.get("submission_ready") is False, f"{prefix}_not_submission_ready",
+              str(entry.get("submission_ready")))
+        check(entry.get("provenance_status") == "local_records_not_independent_authentication",
+              f"{prefix}_provenance_disclosure", str(entry.get("provenance_status")))
+        source_records = entry.get("source_records")
+        sources_ok = isinstance(source_records, list) and bool(source_records)
+        if sources_ok:
+            for source_record in source_records:
+                if not isinstance(source_record, str):
+                    sources_ok = False
+                    break
+                source_path = (ROOT / source_record).resolve()
+                if not source_path.is_relative_to(ROOT.resolve()) or not source_path.is_file():
+                    sources_ok = False
+                    break
+        check(sources_ok, f"{prefix}_local_source_records_exist",
+              ", ".join(str(value) for value in source_records) if isinstance(source_records, list)
+              else "source_records must be a nonempty list")
+        pair_id = entry.get("pair_id")
+        if expected_pair_count is not None:
+            check(isinstance(pair_id, str) and bool(pair_id), f"{prefix}_pair_id", str(pair_id))
+            if isinstance(pair_id, str) and pair_id:
+                inside_digest = (hashlib.sha256(array[footprint].tobytes()).hexdigest()
+                                 if array is not None else None)
+                pair_groups.setdefault(pair_id, []).append((entry, inside_digest))
+
+    if expected_pair_count is not None:
+        check(isinstance(expected_pair_count, int) and not isinstance(expected_pair_count, bool)
+              and len(pair_groups) == expected_pair_count,
+              "legacy_archive_expected_pair_count",
+              f"registered={len(pair_groups)}; expected={expected_pair_count}")
+        for pair_id, members in pair_groups.items():
+            pair_prefix = "legacy_archive_pair_" + re.sub(r"[^A-Za-z0-9_]+", "_", pair_id).strip("_")
+            variants = [item.get("variant") for item, _ in members]
+            variants_ok = (len(variants) == 2 and variants.count("nan") == 1
+                           and variants.count("allfinite") == 1)
+            check(variants_ok, f"{pair_prefix}_variant_membership",
+                  ", ".join(str(variant) for variant in variants))
+            content_ids = {item.get("content_id") for item, _ in members}
+            check(len(content_ids) == 1, f"{pair_prefix}_content_id_consistency", repr(content_ids))
+            inside_digests = [digest for _, digest in members]
+            check(len(inside_digests) == 2 and None not in inside_digests
+                  and len(set(inside_digests)) == 1, f"{pair_prefix}_same_inside_footprint_bytes",
+                  "NaN and all-finite variants encode the same ordered template-footprint values")
+
     names = [path.name for path in downloads_dir.glob("*.tif")]
-    registered_names = {
-        item[key] for item in manifest.values() if isinstance(item, dict)
-        for key in ("nan", "allfinite", "filename") if isinstance(item.get(key), str)
-    }
+    registered_references = []
+    for item in manifest.values():
+        if isinstance(item, dict):
+            # A single filename-style candidate can name its all-finite TIFF via
+            # both `filename` and `allfinite`; count that alias only once.
+            item_references = {
+                item[key] for key in ("nan", "allfinite", "filename")
+                if isinstance(item.get(key), str)
+            }
+            registered_references.extend(sorted(item_references))
+    registered_references.extend(
+        entry["filename"] for entry in archive_entries
+        if isinstance(entry, dict) and isinstance(entry.get("filename"), str)
+    )
+    registered_names = set(registered_references)
     unregistered = sorted(set(names) - registered_names)
+    check(len(registered_references) == len(registered_names), "manifest_tif_references_unique",
+          f"{len(registered_references)} registered TIFF references; {len(registered_names)} unique")
     check(not unregistered, "all_tifs_registered_for_audit",
           "Unregistered TIFFs (not fully audited): " + ", ".join(unregistered))
     check(len(names) == len(set(names)), "all_tif_names_unique", f"{len(names)} unique GeoTIFF(s)")
@@ -229,7 +391,20 @@ def main() -> int:
         "scope": "local format/grid/range/mask/hash audit only; no organizer authentication or portal acceptance claim",
         "network_access": "none",
         "template": template_info,
+        "labels": {"path": str(labels_path), "sha256": sha256_file(labels_path),
+                   "catalogue_positive_pixels": catalogue_pixels},
+        "archive_coverage": {
+            "download_tif_count": len(names),
+            "registered_tif_count": len(registered_names),
+            "unregistered_tif_count": len(unregistered),
+            "unregistered_files": unregistered,
+            "legacy_archive_entry_count": len(archive_entries),
+            "legacy_archive_expected_entry_count": expected_archive_count,
+            "legacy_archive_pair_count": len(pair_groups),
+            "legacy_archive_expected_pair_count": expected_pair_count,
+        },
         "manifest_sha256": sha256_file(manifest_path),
+        "validator_sha256": sha256_file(Path(__file__).resolve()),
         "checks": checks,
         "failures": failures,
         "check_count": len(checks),

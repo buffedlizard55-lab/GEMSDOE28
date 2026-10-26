@@ -159,23 +159,32 @@ def test_notice_ignores_forged_submission_ready_flag():
     assert ".tif" not in notice.lower()
 
 
-def test_current_review_evidence_is_bound_and_not_a_new_tiff():
+def test_prior_a51_review_card_is_preserved_and_session22_card_is_current():
+    # The G28-A51 review card is a historical, hash-bound record. Its old session
+    # pointer is intentionally superseded by the archive-review-only Session 22.
     card = json.loads((ROOT / "evidence/current_run_card.json").read_text())
+    assert card["session_id"] == "G28-A51-20261025"
     assert card["lane"] is None and card["raster_sha256"] is None
     assert card["holdout"]["dti"] is None and card["holdout"]["ci95"] is None
     assert card["experiments_run"] == 0 and card["new_raster_generated"] is False
     assert card["submission_ready"] is False and card["verdict"] == "negative"
     assert len(card["note"]) <= 140
     for path, expected in card["evidence_sha256"].items():
+        if path == "registry/current_session.json":
+            assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected
+            continue
         snapshots = {
             "docs/downloads/manifest.json": "evidence/pr39_manifest_snapshot.json",
             "scripts/check_run_preflight.py": "evidence/snapshots/pr39_check_run_preflight.py",
         }
         observed = ROOT / snapshots.get(path, path)
         assert hashlib.sha256(observed.read_bytes()).hexdigest() == expected, path
-    # The no-experiment review remains historical; current aliases bind the later MXTP experiment.
+    # The older MXTP experiment and the new archive-only review have separate cards.
     assert json.loads((ROOT / "docs/data/run_card_2026-10-25.json").read_text()) == json.loads(
         (ROOT / "evidence/s18_mxtp_run_card.json").read_text())
+    session22 = json.loads((ROOT / "evidence/session22_review_run_card.json").read_text())
+    assert session22["session"] == "G28-S22-ARCHIVE-REVIEW-20261026"
+    assert session22["experiments_run"] == 0 and session22["new_tiff_generated"] is False
 
 
 def test_priority_audit_is_not_called_a_complete_parallel_registry():

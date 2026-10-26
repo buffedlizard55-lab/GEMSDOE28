@@ -57,9 +57,10 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertIn("USER-REPORTED, UNVERIFIED", self.page)
         self.assertIn("data/priority_site_review_2026-10-26.json", self.page)
         self.assertIn("https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/", self.page)
-        self.assertIn("S19-ASCP research TIFF was generated", self.page)
-        self.assertIn("S19-ASCP JSON run card", self.page)
-        self.assertIn('href="session19-result.html">Latest result</a>', self.page)
+        self.assertIn("Archive audit PASS — 46/46 GeoTIFFs registered and checked", self.page)
+        self.assertIn("Latest research result · S21-PUHGB", self.page)
+        self.assertIn("S21-PUHGB JSON run card", self.page)
+        self.assertIn('href="session21-result.html">Latest result</a>', self.page)
         self.assertNotIn('href="session18-result.html">Latest result</a>', self.page)
         self.assertIn("DO NOT SUBMIT", self.page)
 

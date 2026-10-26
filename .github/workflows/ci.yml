@@ -24,4 +24,4 @@ jobs:
       - name: Site builds from JSON only and generated pages are current
         run: |
           python scripts/build_site.py
-          git diff --exit-code -- docs/*.html index.html executive-summary.html data/current_run_card_2026-10-26.json
+          git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json docs/data/run_card_2026-10-26.json docs/data/run_card_s19.json index.html executive-summary.html data/current_run_card_2026-10-26.json

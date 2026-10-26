@@ -201,24 +201,27 @@ def test_pages_source_links_resolve_to_public_repository_files():
     assert "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/12_preregistration_H31-1_euler.md" in research
 
 
-def test_repository_root_front_page_serves_the_one_click_download():
+def test_repository_root_front_page_exposes_the_latest_s21_research_download():
     man = json.loads((DOCS / "downloads/manifest.json").read_text())
     root_idx = (ROOT / "index.html").read_text()
-    candidate = man["s19_candidate"]
+    candidate = man["s21_candidate"]
     assert f'href="docs/downloads/{candidate["filename"]}"' in root_idx
-    assert "Download NEW unique research TIFF — DO NOT SUBMIT" in root_idx
+    assert "Download S21 research GeoTIFF — RESEARCH ONLY / DO NOT SUBMIT" in root_idx
+    assert "Submission download locked" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
 def test_front_page_has_download_and_exact_note():
     man = json.loads((DOCS / "downloads/manifest.json").read_text())
     idx = (DOCS / "index.html").read_text()
-    candidate = man["s19_candidate"]
+    candidate = man["s21_candidate"]
     assert f'href="downloads/{candidate["filename"]}"' in idx
     assert (DOCS / "downloads" / candidate["filename"]).is_file()
     assert candidate["note"] in idx and len(candidate["note"]) <= 140
-    assert candidate["submission_name"] in idx and candidate["sha256"] in idx
+    assert "GEMSDOE28-S21-PUHGB-20261026-16bbf281ba9b" in idx
+    assert candidate["sha256"][:8] in idx
     assert "Submission download locked" in idx
+    assert "do not copy it or upload this S21 file" in idx
 
 
 def test_session19_cross_site_review_is_linked_and_fail_closed():
@@ -227,7 +230,9 @@ def test_session19_cross_site_review_is_linked_and_fail_closed():
     card = json.loads((ROOT / "evidence/s19_ascp_run_card.json").read_text())
     assert "GEMSDOE32 H33-2-B2" in page
     assert "0.2778" in page and "USER-REPORTED / UNVERIFIED" in page
-    assert "S19-ASCP research TIFF was generated" in page
+    assert "Archive audit PASS — 46/46 GeoTIFFs registered and checked" in page
+    assert "S21-PUHGB" in page and "72.3%" in page
+    assert "OK TO DOWNLOAD FOR RESEARCH: YES" in page
     assert "DO NOT SUBMIT" in page
     assert "autonomously chose" in page
     assert "Displaced potential-field piercing markers" in page
@@ -336,36 +341,41 @@ def test_downloads_have_unique_names_and_zip_single_member():
             assert len(zf.namelist()) == 1 and zf.namelist()[0].endswith(".tif")
 
 
-def test_current_run_notice_is_above_historical_body():
+def test_current_archive_review_notice_is_clear_and_fail_closed():
     for page in PAGES:
         text = (DOCS / page).read_text()
-        if page == "cross-site-review.html":
-            assert 'Current status: NOT READY TO SUBMIT' in text
-            assert 'NO FILE APPROVED' in text
-            assert 'DO NOT SUBMIT' in text
-            assert 's19_ascp_run_card.json' in text
-            continue
-        assert 'Current run: NOT READY TO SUBMIT' in text
-        assert 'NO FILE APPROVED' in text
-        assert 'do not upload it' in text
-        assert 'data/current_run_card_2026-10-26.json' in text
+        assert 'DO NOT SUBMIT' in text
+        assert 'S21-PUHGB' in text
+        if page != 'cross-site-review.html':
+            assert 'OK TO SUBMIT TO PORTAL: NO' in text
+            assert 'data-submission-ready="false"' in text
+    cross_site = (DOCS / 'cross-site-review.html').read_text()
+    assert 'Current status: NOT READY TO SUBMIT' in cross_site
+    assert 'NO FILE APPROVED' in cross_site
+    assert 'knowledge/62_s22_archive_review.md' in cross_site
     overview = (DOCS / 'index.html').read_text()
     executive = (DOCS / 'executive-summary.html').read_text()
-    assert 'paired gain -0.06089' in overview
-    assert 'unique bytes, negative geology gate' in overview
+    assert 'Archive coverage audit PASS — 46/46 GeoTIFFs registered' in overview
+    assert 'OWNER-REPORTED / UNVERIFIED' in overview
+    assert '0.2778' in overview
+    assert 'paired delta -0.02230' in overview
     assert 'Historical GeoTIFF — NOT APPROVED FOR SUBMISSION' in (DOCS / 'archive.html').read_text()
-    assert 'NO FILE APPROVED' in executive
-    assert 'not OK to submit' in executive
+    assert 'Executive decision: archive audit fixed; no submission approved' in executive
+    assert 'Do not upload any repository TIFF' in executive
+    assert 'data/current_run_card_2026-10-26.json' in executive
+    assert '890 local checks' in executive
     assert 'The suggested `.tif` above' not in executive
     assert 'If you submit anything, use the primary' not in overview + executive
     card = json.loads((DOCS / 'data/run_card_2026-10-26.json').read_text())
-    assert card['verdict'] == 'negative'
+    assert card['verdict'] == 'blocked'
+    assert card['status'] == 'BLOCKED'
     assert card['submission_ready'] is False
-    # The current S19-ASCP card is bound to the exact TIFF; its negative gate cannot approve it.
-    assert card['session'] == 'S19-ASCP'
-    assert re.fullmatch(r'[0-9a-f]{64}', card['raster_sha256'])
     assert card['slot_selected'] is False
-    assert card['experiments_run'] == 3 and card['verdict'] == 'negative'
+    assert card['experiments_run'] == 0
+    assert card['new_tiff_generated'] is False
+    assert card['holdout_dti'] is None and card['score_estimate'] is None
+    assert card['archive_audit']['registered_tif_count'] == 46
+    assert card['archive_audit']['check_count'] == 890
 
 
 def test_download_manifest_marks_new_research_raster_not_approved():
@@ -377,19 +387,23 @@ def test_download_manifest_marks_new_research_raster_not_approved():
     assert manifest['s19_candidate']['verdict'] == 'negative'
 
 
-def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(capsys):
+def test_build_metadata_and_current_review_card_do_not_authorize_upload(capsys):
     from scripts import build_site
 
     assert build_site.main() == 0
     metadata = json.loads(capsys.readouterr().out)
     assert metadata['submission_ready'] is False and metadata['slot_selected'] is False
     assert 'primary_download' not in metadata
-    assert 's19-ascp' in metadata['research_download']
+    assert metadata['research_download'] is None
+    assert 's21-puhgb' in metadata['historical_research_download']
     assert metadata['inspection_artifacts']
     current = json.loads((DOCS / 'data/current_run_card_2026-10-26.json').read_text())
-    exact = json.loads((ROOT / 'evidence/s19_ascp_run_card.json').read_text())
-    assert current == exact and current['verdict'] == 'negative'
-    # The parallel blocked review is preserved, not overwritten with this experiment.
+    exact = json.loads((ROOT / 'evidence/session22_review_run_card.json').read_text())
+    assert current == exact and current['verdict'] == 'blocked'
+    assert current['experiments_run'] == 0 and current['new_tiff_generated'] is False
+    # The S19 and concurrent blocked review remain preserved as their own records.
+    s19 = json.loads((DOCS / 'data/run_card_s19.json').read_text())
+    assert s19['session'] == 'S19-ASCP' and s19['verdict'] == 'negative'
     parallel = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
     assert parallel['experiments_run'] == 0 and parallel['raster_sha256'] is None
 
@@ -474,11 +488,14 @@ def test_combined_archive_namespaces_ids_and_accessible_labels():
 
 
 
-def test_current_public_card_aliases_use_restored_data_review_not_older_checkout_state():
-    source = json.loads((ROOT / 'evidence/s19_ascp_run_card.json').read_text())
+def test_current_public_card_aliases_use_archive_review_not_older_experiment_state():
+    source = json.loads((ROOT / 'evidence/session22_review_run_card.json').read_text())
     for name in ('run_card_2026-10-26.json', 'current_run_card_2026-10-26.json'):
         assert json.loads((DOCS / 'data' / name).read_text()) == source
-    # Keep the concurrent negative review intact as its own historical record.
+    # Preserve actual experiment cards under their dated session IDs.
+    s19 = json.loads((ROOT / 'evidence/s19_ascp_run_card.json').read_text())
+    assert json.loads((DOCS / 'data/run_card_s19.json').read_text()) == s19
+    assert s19['session'] == 'S19-ASCP' and s19['verdict'] == 'negative'
     historical = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
     assert historical['run_id'] != source['session']
     assert historical['submission_ready'] is False
@@ -487,7 +504,9 @@ def test_current_public_card_aliases_use_restored_data_review_not_older_checkout
     assert (ROOT / 'data/current_run_card_2026-10-26.json').read_bytes() == (
         DOCS / 'data/current_run_card_2026-10-26.json').read_bytes()
     root_summary = (ROOT / 'executive-summary.html').read_text()
-    assert 'Submission download locked' in root_summary and 'docs/downloads/gems28-s19-ascp-' in root_summary
+    assert 'Submission download locked' in root_summary
+    assert 'docs/downloads/gems28-s21-puhgb-' in root_summary
+    assert 'docs/data/current_run_card_2026-10-26.json' in root_summary
 
 
 def test_session18_h39_5_candidate_is_unique_valid_but_do_not_submit():
