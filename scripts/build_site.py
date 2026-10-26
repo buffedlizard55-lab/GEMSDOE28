@@ -355,6 +355,81 @@ def render_session15(review: dict) -> str:
 <p><strong>Machine-readable run card:</strong> holdout DTI is null because no experiment was run; verdict is <strong>negative</strong>. See the repo dossier for the exact reasons.</p></section>"""
 
 
+def s20_nchc_status_html() -> str:
+    card = read_json("evidence/s20_nchc_run_card.json", {})
+    exp2 = read_json("evidence/s20_nchc_exp2_holdout.json", {})
+    if not card:
+        return ""
+    h = card.get("holdout", {})
+    reg = card.get("registry", {})
+    val = card.get("validator", {})
+    note = str(card.get("note", ""))
+    dl_allfinite = str(card.get("submission_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-allfinite.tif")).removeprefix("docs/")
+    dl_nan = str(card.get("submission_nan_twin_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-nan.tif")).removeprefix("docs/")
+    dl_zip = str(card.get("submission_zip_file", "docs/downloads/gems28-s20-nchc-20261026-d432a1d5d6ee-nan.zip")).removeprefix("docs/")
+    cand_folds = {f.get("fold"): f for f in exp2.get("candidate_s20_nchc", {}).get("folds", [])}
+    b0_folds = {f.get("fold"): f for f in exp2.get("baseline_b0_32band_h38_vis", {}).get("folds", [])}
+    sw_c = float(cand_folds.get("SW", {}).get("dti", 0.0))
+    sw_b = float(b0_folds.get("SW", {}).get("dti", 0.0))
+    sw_d = sw_c - sw_b
+    return f"""<section class="card callout-danger" aria-label="Session 20-NCHC submission readiness and one-click download" id="s20-nchc-submission" data-submission-ready="false">
+<p class="eyebrow">PARALLEL SESSION 20-NCHC (H43-1) · 2026-10-26 UTC · AUTOMATED GATE COMPLETE</p>
+<h2>OK TO DOWNLOAD FOR RESEARCH: YES · OK TO SUBMIT TO PORTAL: NO</h2>
+<p><strong>NEW GENUINELY UNIQUE GeoTIFF GENERATED &amp; BYTE-VERIFIED (<code>{esc(dl_allfinite.removeprefix('downloads/'))}</code>):</strong> Automated format/range validator (strict <code>[0, 1]</code> finite across all <code>12,279,160</code> cells; <code>0</code> catalogue overlap), all <code>28</code> single-feature leakage canaries (max AUC <code>0.6010 &le; 0.90</code>), and cross-site + concurrent-lane uniqueness across all <code>{comma(reg.get('member_count', 112))}</code> pre-merge 9-site+PR48 rasters plus all <code>4</code> concurrent <code>2026-10-26</code> lanes (max 3-px dot overlap <code>{reg.get('max_dots_within_3px_fraction', 0):.2%} &le; 70%</code>, max <code>|Spearman| = {reg.get('max_abs_dots_spearman', 0):.4f} &le; 0.90</code>) <strong>ALL PASSED</strong>. However, pooled 4-fold <strong>HOLDOUT-DTI</strong> was <strong>{h.get('dti', 0):.6f}</strong> vs retrained visible-only 32-band baseline <strong>{h.get('baseline_dti', 0):.6f}</strong> (paired delta <strong>{h.get('paired_gain', 0):+.6f}</strong>, 95% CI <strong>[{h.get('paired_gain_ci95', [0, 0])[0]:+.6f}, {h.get('paired_gain_ci95', [0, 0])[1]:+.6f}]</strong>; <strong>won SW Walker Lane + geothermal quadrant {sw_c:.6f} vs {sw_b:.6f}, {sw_d:+.6f}</strong>). Distinct parallel run (concurrent seed 340–344 overlap with S20-H43/S20V disclosed; never pool). <strong>Automated promotion gate verdict: NEGATIVE — zero weekly submission slots spent. Do not upload any file from this site to DrivenData.</strong></p>
+<div class="download-actions">
+  <button class="button" type="button" disabled aria-disabled="true">Submission download locked</button>
+  <a class="button" href="{esc(dl_allfinite)}" download>1-Click Download S20-NCHC Unique GeoTIFF (.tif, all-finite [0,1]) — Research Only / DO NOT SUBMIT</a>
+  <a class="button secondary" href="{esc(dl_nan)}" download>Template-NaN GeoTIFF (.tif)</a>
+  <a class="button quiet" href="{esc(dl_zip)}" download>ZIP Bundle (.zip)</a>
+  <a class="button quiet" href="executive-summary.html">Executive Summary &amp; How to Submit</a>
+  <a class="button quiet" href="cross-site-review.html">9-Site Executive Scorecard</a>
+</div>
+<p><strong>Unique portal name:</strong> <code>{esc(card.get('submission_name', ''))}</code><br>
+<strong>Short submission note ({len(note)}/140 chars):</strong></p>
+{note_box(note)}
+<p class="meta">All-finite SHA-256 <code>{esc(card.get('raster_sha256', ''))}</code> · {comma(val.get('emitted_positive_pixels', 0))} positive off-catalogue pixels · 830,586 bytes · single-band <code>float32</code> · strict <code>[0.0, 1.0]</code> (prevents DrivenData <code>[0, 1]</code> range error) · <code>EPSG:32611</code> · <code>3730 &times; 3292</code> · exact template CRS/shape/geotransform PASS.</p>
+<p><strong>Evaluator provenance:</strong> <code>HOLDOUT-DTI</code> via shared <code>{esc(h.get('evaluator_version', 'gems-segment-pooled-v1'))}</code> (buffered whole-segment hide-and-recover, 1,500 m buffer, {comma(h.get('withheld_positives', 60988))} withheld positives across 4 quadrant folds, 583 10-km bootstrap blocks, seeds 340–344). <a href="data/run_card_s20_nchc.json">S20-NCHC JSON Run Card</a> · <a href="../knowledge/56_s20_preregistration.md">Frozen S20-NCHC preregistration</a> · <a href="../knowledge/57_s20_nchc_result_and_9site_review.md">Full Session 20-NCHC scientific &amp; 9-site report</a></p>
+</section>"""
+
+
+def render_s20_nchc_overview() -> str:
+    exp2 = read_json("evidence/s20_nchc_exp2_holdout.json", {})
+    s20_hyps = read_json("registry/s20_hypotheses.json", {})
+    cand_folds = exp2.get("candidate_s20_nchc", {}).get("folds", [])
+    b0_folds = {f.get("fold"): f for f in exp2.get("baseline_b0_32band_h38_vis", {}).get("folds", [])}
+    b1_folds = {f.get("fold"): f for f in exp2.get("baseline_b1_32band_b2_d28_vis", {}).get("folds", [])}
+    fold_rows = "".join(
+        f"<tr><td><strong>{esc(cf.get('fold'))}</strong></td><td>{comma(cf.get('n_truth'))}</td>"
+        f"<td><strong>{cf.get('dti', 0):.6f}</strong> ({comma(cf.get('n_emitted'))} px)</td>"
+        f"<td>{b0_folds.get(cf.get('fold'), {}).get('dti', 0):.6f} ({comma(b0_folds.get(cf.get('fold'), {}).get('n_emitted'))} px)</td>"
+        f"<td>{b1_folds.get(cf.get('fold'), {}).get('dti', 0):.6f} ({comma(b1_folds.get(cf.get('fold'), {}).get('n_emitted'))} px)</td>"
+        f"<td><strong>{(cf.get('dti', 0) - b0_folds.get(cf.get('fold'), {}).get('dti', 0)):+.6f}</strong></td></tr>"
+        for cf in cand_folds
+    )
+    hyp_cards = "".join(
+        f'<article class="card span-6"><div class="rank">Rank {int(item.get("rank", 0))} · {esc(item.get("id"))}</div>'
+        f'<h3>{esc(item.get("title"))}</h3>'
+        f'<p><strong>Signature:</strong> {esc(item.get("signature"))}</p>'
+        f'<p><strong>Non-fault mimic control:</strong> {esc(item.get("non_fault_mimic_deconfounder"))}</p>'
+        f'<p><strong>Status:</strong> {esc(item.get("status"))}</p></article>'
+        for item in s20_hyps.get("hypotheses", [])
+    )
+    return f"""<section class="section" id="s20-nchc-overview">
+<h2>Parallel Session 20-NCHC Executive Synthesis: 9-Site HEAD Audit, PhD Analysis of 0.2778 vs 0.3195/0.4413 &amp; 4-Fold Results</h2>
+<div class="callout">
+<ol>
+<li><strong>Best historical focus-site submission:</strong> Across <code>GEMSDOE24, 25, 27, 28, 30, 31, 32, 33, 36</code>, <strong>GEMSDOE32 <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></strong> (<code>37,654</code> px) holds the highest reported score at <strong>0.2778 — USER-REPORTED / UNVERIFIED</strong> (no organizer submission receipt in git; never copy). Across 2026-10-26 live <code>HEAD</code> commits, <strong>GEMSDOE36 <code>Lane36-SupGBM</code></strong> (<code>f35cb3e4</code>, <code>68,302</code> px) achieved the strongest positive internal <strong>HOLDOUT-DTI = 0.1777</strong> (<code>[0.164, 0.191]</code> vs <code>0.1615</code>; <code>slot_selected: false</code>), while <strong>GEMSDOE28 <code>S20-NCHC</code></strong> (<code>d432a1d5d6ee</code>, <code>40,071</code> px) achieved <strong>HOLDOUT-DTI = 0.131263</strong> and won the Walker Lane <code>SW</code> quadrant (<code>+0.013416</code>).</li>
+<li><strong>Why <code>0.2778</code> led &amp; reconciliation of <code>0.3195</code> vs <code>0.4413</code>:</strong> Removing <code>2,545</code> <code>100–200 m</code> catalogue-flank blur dots (credit <code>~0.0034</code> &ll; break-even <code>&tau;(0.2778) = 0.0588</code> credit/dot for hidden <code>|G| &approx; 12,226</code> px) raised precision <code>+0.0070</code> on the unchanged <code>H19-5</code> surface. Read-only inspection of the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData public leaderboard</a> on <code>2026-10-26</code> reconciled <strong>0.3195</strong> (<code>2026-10-03</code> #1 snapshot, <code>DARD</code>) with <strong>0.4413</strong> (<code>2026-10-26</code> live #1 public score, <code>xiaofanhu</code>). Surpassing <code>0.2778</code> requires fusing signed Basin-and-Range piedmont break-in-slope concavity (<code>H43-2</code>) with <code>S20-NCHC</code> subsurface nematic + hydrothermal concordance and 300 m submodular coverage.</li>
+</ol>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th>Quadrant Fold</th><th>Withheld Positives</th><th>S20-NCHC <code>HOLDOUT-DTI</code></th><th>B0 (32-Band+H38 Vis)</th><th>B1 (32-Band B=2 d=2.8)</th><th>Paired Delta (S20 &minus; B0)</th></tr></thead>
+<tbody>{fold_rows}</tbody>
+</table></div>
+<div class="grid">{hyp_cards}</div>
+</section>"""
+
+
 def current_status_html() -> str:
     card = read_json("evidence/s19_ascp_run_card.json", {})
     if not card:
@@ -507,7 +582,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{current_status_html()}{s19b_parallel_html()}{body}</main>
+<main>{s20_nchc_status_html()}{current_status_html()}{s19b_parallel_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1383,10 +1458,11 @@ def main() -> int:
 </section>"""
     cross_site_template = (ROOT / "site_templates" / "cross-site-review.html").read_text(encoding="utf-8")
     session20_template = (ROOT / "site_templates" / "session20-result.html").read_text(encoding="utf-8")
+    s20_nchc_block = render_s20_nchc_overview()
     pages = {
-        "index.html": layout("Overview", s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", s20_nchc_block + s20v_brief + session20_brief + render_s19_result() + s18_feed_html(feed), "Overview"),
         "cross-site-review.html": cross_site_template,
-        "executive-summary.html": layout("Executive summary", s20v_brief + session20_brief + render_current_executive(), "Executive summary"),
+        "executive-summary.html": layout("Executive summary", s20_nchc_block + s20v_brief + session20_brief + render_current_executive(), "Executive summary"),
         "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
@@ -1401,6 +1477,11 @@ def main() -> int:
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
+    s20_nchc_card = read_json("evidence/s20_nchc_run_card.json")
+    (DOCS / "data/run_card_s20_nchc.json").parent.mkdir(parents=True, exist_ok=True)
+    (DOCS / "data/run_card_s20_nchc.json").write_text(
+        json.dumps(s20_nchc_card, indent=2, allow_nan=False) + "\n", encoding="utf-8"
+    )
     s20_card = read_json("evidence/session20_h43_run_card.json")
     (DOCS / "data/run_card_s20_2026-10-26.json").parent.mkdir(parents=True, exist_ok=True)
     (DOCS / "data/run_card_s20_2026-10-26.json").write_text(json.dumps(s20_card, indent=2, allow_nan=False) + "\n", encoding="utf-8")

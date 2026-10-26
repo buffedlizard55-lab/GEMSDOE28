@@ -597,3 +597,41 @@ def test_session20_result_is_linked_and_fail_closed():
     build = json.loads((ROOT / "evidence/s20_build.json").read_text())
     assert build["validator_primary_hard_pass"] is True
     assert build["dots"] == 33354 and build["budget_reached"] is False
+
+
+def test_session20_s20_nchc_candidate_and_nine_site_review_rendered():
+    manifest = json.loads((DOCS / "downloads/manifest.json").read_text())
+    slot = manifest["s20_nchc_candidate"]
+    card = json.loads((ROOT / "evidence/s20_nchc_run_card.json").read_text())
+    assert slot["content_id"] == "d432a1d5d6ee"
+    assert slot["verdict"] == "negative"
+    assert slot["sha256_allfinite"] == card["raster_sha256"]
+    assert len(card["note"]) <= 140 and "DO NOT SUBMIT" in card["note"]
+    assert card["submission_ready"] is False and card["slot_selected"] is False
+    assert card["holdout"]["label"] == "HOLDOUT-DTI"
+    assert card["registry"]["max_dots_within_3px_fraction"] <= 0.70
+    assert card["registry"]["max_abs_dots_spearman"] <= 0.90
+    assert card["registry"]["prospective_method_lane_passed"] is True
+    assert card["validator"]["emitted_positive_pixels"] == 40071
+    assert card["validator"]["catalogue_overlap_pixels"] == 0
+    assert (DOCS / "downloads" / slot["allfinite"]).is_file()
+    assert (DOCS / "downloads" / slot["nan"]).is_file()
+    assert (DOCS / "downloads" / slot["zip"]).is_file()
+    assert json.loads((DOCS / "data/run_card_s20_nchc.json").read_text()) == card
+    for page_name in ("index.html", "executive-summary.html", "cross-site-review.html"):
+        page_text = (DOCS / page_name).read_text()
+        assert f'href="downloads/{slot["allfinite"]}"' in page_text
+        assert "OK TO DOWNLOAD FOR RESEARCH: YES" in page_text
+        assert "OK TO SUBMIT TO PORTAL: NO" in page_text
+        assert card["raster_sha256"] in page_text
+        assert "40,071" in page_text
+        assert "53.63%" in page_text
+        assert "0.2778" in page_text
+    idx_text = (DOCS / "index.html").read_text()
+    assert "0.112115" in idx_text and "+0.013416" in idx_text
+    assert "NE_LidarGapHeavy" in idx_text and "0.4413" in idx_text and "0.3195" in idx_text
+    root_index = (ROOT / "index.html").read_text()
+    root_exec = (ROOT / "executive-summary.html").read_text()
+    assert f'href="docs/downloads/{slot["allfinite"]}"' in root_index
+    assert f'href="docs/downloads/{slot["allfinite"]}"' in root_exec
+

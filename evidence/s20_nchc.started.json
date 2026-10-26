@@ -1,0 +1,19 @@
+{
+  "session": "S20-NCHC",
+  "hypothesis_id": "H43-1",
+  "started_utc": "2026-10-26T00:58:46Z",
+  "preregistration_path": "knowledge/56_s20_preregistration.md",
+  "preregistration_sha256": "aabb77dcc0fa6624cd7855148c9337abe61748a28f991136498b504f75a022fc",
+  "oof_primary_seed": 340,
+  "full_fit_seeds": [
+    340,
+    341,
+    342,
+    343,
+    344
+  ],
+  "bootstrap_seed": 20261034,
+  "max_experiments": 3,
+  "registry_manifest_sha256": "6a70ecd111828f86ba313ca0b4b46204d10d197e2848d74a95e106d815e49030",
+  "registry_member_count": 112
+}

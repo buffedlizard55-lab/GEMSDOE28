@@ -1,0 +1,114 @@
+{
+  "generated_utc": "2026-10-26T01:35:00Z",
+  "session": "S20-NCHC",
+  "branch": "arena/3a8a5bef-gemsdoe28",
+  "preregistration": "knowledge/56_s20_preregistration.md",
+  "result_report": "knowledge/57_s20_nchc_result_and_9site_review.md",
+  "selected_hypothesis_id": "H43-1",
+  "hypotheses": [
+    {
+      "id": "H43-1",
+      "rank": 1,
+      "title": "Nematic Multi-Physics Strike Concordance + Hydrothermal Clay-Cap Margin Corridor + 300 m Submodular Kernel Allocation (S20-NCHC)",
+      "layers": [
+        "tmi / tmi_hg / rtp_tilt (GeoDAWN airborne magnetics)",
+        "isostatic_grav / grav_hg / grav_vd (gravity)",
+        "depth_to_base_surf (conductive base depth)",
+        "dem_100m / lidar_scarp_desc_100m (piedmont micro-relief)",
+        "geodawn_rad + K/Th, U/Th, U/K (radiometrics)",
+        "sb_mt_conductance_100m + sb_heatflow_100m (MT & conductive heat flow)",
+        "gdr_wellspring_in_footprint.csv + gdr_paleo_geothermal_in_footprint.csv + gdr_volcanic_vents_in_footprint.csv (INGENIOUS GDR #1391)"
+      ],
+      "signature": "Multi-scale Frangi tubularity + axial 2*theta nematic strike coherence across magnetic, gravity, conductive-base, and piedmont relief gradients at 300 m, 1,000 m, and 2,500 m, multiplied by clay-cap lateral conductance gradients, K/Th adularia-illite metasomatic halos, and cation-vs-quartz geothermometer disequilibrium plumes, allocated via 300 m Minoux lazy submodular kernel coverage at B=2.",
+      "why_off_catalogue": "Concealed alluvial and blind clay-cap/geothermal fault conduits lack continuous >1 m Quaternary scarps mapped in USGS Qfaults v2 / INGENIOUS, yet focus potential-field contacts, conductive-base steps, and lateral smectite-cap edges.",
+      "non_fault_mimic_deconfounder": "Explicit E-W GeoDAWN flight-line leveling stripe detector (geodawn_ew_stripe_150m), gravity-anchored topographic drape control, and closed-playa smectite basin suppression (low |grad log sigma| inside basin interiors).",
+      "differs_from_repo": "Uses zero raw scalar elevation/gravity/magnetic level bands from the 32-band prepared stack (breaking the 91.3% 52a13184267e duplicate collapse), replaces single-scale pairwise cosines with multi-scale 4-modality axial nematic order + hydrothermal disequilibrium, and replaces isotropic Poisson thinning with 300 m DTI-kernel submodular coverage.",
+      "expected_gain_vs_cost": "Expected +0.008 to +0.020 HOLDOUT-DTI at ~22 min total compute (highest expected DTI gain / compute ratio).",
+      "status": "TESTED — UNIQUE & FORMAT-VALID (40,071 dots, max 3px overlap 53.63% <= 70%, max |Spearman| 0.128 <= 0.90, 28/28 canaries PASS max AUC 0.601); WON SW Walker Lane fold (+0.013416: 0.112115 vs 0.098698); FAILED pooled 4-fold gate (HOLDOUT-DTI 0.131263 vs 0.144433, delta -0.013171); DO NOT SUBMIT (0 slots spent).",
+      "external_sources": [
+        {
+          "title": "USGS GeoDAWN Airborne Magnetic & Radiometric Surveys (Glen & Earney, 2024)",
+          "url": "https://doi.org/10.5066/P93LGLVQ",
+          "license": "CC0-1.0"
+        },
+        {
+          "title": "DOE GDR #1391 Great Basin INGENIOUS Play Fairway Dataset (Ayling et al., 2022)",
+          "url": "https://gdr.openei.org/submissions/1391",
+          "license": "CC-BY-4.0"
+        },
+        {
+          "title": "USGS ScienceBase MT Conductance (Peacock et al.) & Heat Flow (Erkan et al.)",
+          "url": "https://doi.org/10.5066/P9TWT2LU",
+          "license": "Public domain (USGS)"
+        }
+      ]
+    },
+    {
+      "id": "H43-2",
+      "rank": 2,
+      "title": "Signed Piedmont Break-in-Slope + Asymmetric Scarp Polarity + Subsurface Concordance Hybrid",
+      "layers": [
+        "dem_100m",
+        "lidar_scarp_desc_100m",
+        "isostatic_grav / grav_hg",
+        "tmi_hg / rtp_tilt",
+        "depth_to_base_surf"
+      ],
+      "signature": "Couples signed slope-normal profile concavity (d^2z/dn^2 > 0 at mountain-to-bajadas piedmont inflections) and asymmetric LiDAR upface/downface polarity with H43-1 subsurface nematic concordance.",
+      "why_off_catalogue": "Recovers degraded Quaternary piedmont scarps and range-front step-faults missed by aerial-photo compilation while retaining intrabasinal geophysical tracking.",
+      "non_fault_mimic_deconfounder": "Fluvial terrace riser and Lake Lahontan paleoshoreline contour-parallel elevation constancy filter (|dz/ds| ~ 0 at constant basin elevation).",
+      "differs_from_repo": "Directly fixes the symmetric Hessian upslope-shift identified by H43-1 in the NE/SE Basin-and-Range folds without re-admitting scalar elevation levels.",
+      "expected_gain_vs_cost": "Expected +0.010 to +0.025 HOLDOUT-DTI over B0 across both Basin-and-Range (NE/SE) and Walker Lane (SW); ~25 min compute.",
+      "status": "PROPOSED — top priority for Session 21 based on S20-NCHC fold diagnostics.",
+      "external_sources": []
+    },
+    {
+      "id": "H43-3",
+      "rank": 3,
+      "title": "3D Potential-Field Euler Structural-Index Zero-Contact Deconvolution",
+      "layers": [
+        "tmi / tmi_hg / tmi_rtp / rtp_tilt",
+        "isostatic_grav / grav_hg / grav_vd",
+        "dem_100m"
+      ],
+      "signature": "Joint magnetic/gravity Euler deconvolution solving for structural index N -> 0..0.5 contact solutions whose projected surface trace aligns across upward-continuation altitudes.",
+      "why_off_catalogue": "Resolves dipping concealed intrabasinal faults beneath 200-1,500 m of Plio-Quaternary valley fill where surface expression is zero.",
+      "non_fault_mimic_deconfounder": "Rejects N >= 1.5 cylindrical/spherical pluton/caldera margin solutions and steep-topography helicopter drape solutions.",
+      "differs_from_repo": "Inverts 3D source geometry and dip offset rather than 2D vertical-ridge maxima.",
+      "expected_gain_vs_cost": "Expected +0.005 to +0.012 HOLDOUT-DTI; ~35 min compute.",
+      "status": "PROPOSED — untried.",
+      "external_sources": [
+        {
+          "title": "USGS GeoDAWN Airborne Magnetic & Radiometric Surveys",
+          "url": "https://doi.org/10.5066/P93LGLVQ",
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "id": "H43-4",
+      "rank": 4,
+      "title": "Transtensional Stepover & Releasing-Bend Coulomb Dilation Bridge Tensor",
+      "layers": [
+        "geodetic_strain_2nd_inv",
+        "eq_density",
+        "sb_heatflow_100m",
+        "visible-only fold fault endpoints",
+        "grav_hg / tmi_hg"
+      ],
+      "signature": "Solves anisotropic Coulomb dilation fields strictly between visible-only fold fault tips weighted by geodetic strain rate, microseismicity, and geophysical bridge alignment.",
+      "why_off_catalogue": "Targets segmented accommodation zones and horsetail splays where displacement partitions across sub-resolution fractures (Faulds & Hinz, 2015).",
+      "non_fault_mimic_deconfounder": "Suppresses regional broad strain highs lacking localized gravity/magnetic transfer gradients; strictly bans precomputed full-catalogue sb_slip_tendency_in_footprint.json.",
+      "differs_from_repo": "Fold-isolated boundary-value physical stress bridge vs Session 18 straight-line tip extrapolation (S18-MXTP).",
+      "expected_gain_vs_cost": "Expected +0.003 to +0.008 HOLDOUT-DTI (concentrated in stepovers); ~20 min compute.",
+      "status": "PROPOSED — untried.",
+      "external_sources": [
+        {
+          "title": "Faulds & Hinz (2015) Structural Settings of Great Basin Geothermal Systems",
+          "url": "https://www.osti.gov/servlets/purl/1724082",
+          "license": "OSTI open access"
+        }
+      ]
+    }
+  ]
+}
