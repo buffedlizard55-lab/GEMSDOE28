@@ -56,3 +56,12 @@ current authenticated submission allowance is available.
 
 Verification: **493 passed, 6 skipped** (input-dependent checks), Ruff PASS,
 site build PASS with no generated-page drift, `git diff --check` PASS.
+
+## Concurrent-main reconciliation
+
+During the requested PR merge, main advanced with the independent S19-ASCP run.
+Merged it into this working branch and preserved its generated research TIFF and
+negative scientific verdict. This review's missing-input observations describe its
+original local checkout, not a claim that the concurrent run lacked data. The
+S19-ASCP report and website are now the latest scientific result. No evidence was
+pooled across runs and neither negative verdict was promoted.

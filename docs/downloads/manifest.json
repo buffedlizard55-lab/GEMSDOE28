@@ -362,13 +362,13 @@
     "run_card": "data/run_card_s18.json"
   },
   "current_run": {
-    "run_id": "S18-MXTP",
+    "run_id": "S19-ASCP",
     "status": "NEGATIVE \u2014 NO FILE APPROVED",
     "submission_ready": false,
     "slot_selected": false,
     "new_tiff_generated": true,
-    "run_card": "data/current_run_card_2026-10-25.json",
-    "prior_parallel_review": "evidence/s18_run_card.json"
+    "run_card": "evidence/s19_ascp_run_card.json",
+    "prior_run": "evidence/s18_mxtp_run_card.json"
   },
   "s18_h39_5_candidate": {
     "slug": "h39-5-extrap-swap35",
@@ -419,5 +419,21 @@
     "holdout_preregistration": "knowledge/52_preregistration_H42-1_migration_relocation.md",
     "holdout_seeds": "310-314",
     "verdict": "negative"
+  },
+  "s19_candidate": {
+    "filename": "gems28-s19-ascp-20261026-dc717c1ab13b-allfinite.tif",
+    "submission_name": "GEMSDOE28-S19-ASCP-dc717c1ab13b",
+    "sha256": "553bbd6db1ae0f3a8fc41a81ed8bc1f438e5af6bd74d43c5d260d6889d0e6537",
+    "bytes": 825912,
+    "emitted_px": 37654,
+    "note": "S19 ASCP paired antislope LiDAR scarps; 37654 dots; holdout rejected; DO NOT SUBMIT.",
+    "format_verified": true,
+    "unique_within_snapshot": true,
+    "submission_ready": false,
+    "verdict": "negative",
+    "status": "Unique and all-finite RESEARCH TIFF; failed frozen shared holdout superiority gate. DO NOT SUBMIT.",
+    "run_card": "evidence/s19_ascp_run_card.json",
+    "holdout_evidence": "evidence/s19_ascp_holdout.json",
+    "preregistration": "knowledge/55_s19_preregistration.md"
   }
 }
