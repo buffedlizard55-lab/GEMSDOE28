@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S22 Experiment 2 — leakage canary + 12-cell hide-and-recover holdout gate (frozen, knowledge/62).
+"""S22 Experiment 2 — leakage canary + 12-cell hide-and-recover holdout gate (frozen, knowledge/64).
 
 Arms (identical splits/samples/emission): lane = 32 base + 32 context; control = 32 base;
 dotted_b2 = S21 baseline construction (reference only). Seeds 360-362 x 4 quadrant folds.
@@ -230,7 +230,7 @@ def main() -> int:
         return [float(np.percentile(v, 2.5)), float(np.percentile(v, 97.5))]
 
     result = {
-        "experiment": "S22 Exp2 canary + holdout gate (frozen knowledge/62)",
+        "experiment": "S22 Exp2 canary + holdout gate (frozen knowledge/64)",
         "label": "HOLDOUT-DTI",
         "evaluator": "gems27.metric.dti_binary alpha0.2 beta0.8 300m triangular; "
                      "gems27.holdout quadrant component-hide 20% (gems-segment-pooled-v1 semantics)",
@@ -255,7 +255,7 @@ def main() -> int:
         "delta_vs_base_ci_lower_gt0": bool(result["delta_lane_minus_base_ci95"][0] > 0),
         "delta_vs_control_gt0": bool(result["delta_lane_minus_control"] > 0),
     }
-    out = ROOT / "evidence/s22_holdout.json"
+    out = ROOT / "evidence/s22c_holdout.json"
     out.write_text(json.dumps(result, indent=2, default=float) + "\n")
     log("POOLED", json.dumps(result["pooled_dti"], indent=2))
     log("DELTA vs base", result["delta_lane_minus_base"], result["delta_lane_minus_base_ci95"])

@@ -1,6 +1,8 @@
-# S22 preregistration — multi-scale spatial-context lane (frozen 2026-10-26, before any S22 canary/DTI)
+# S22C preregistration — multi-scale spatial-context lane (frozen 2026-10-26, before any S22 canary/DTI)
 
-Session: `G28-S22-20261026`, branch `arena/f2afeb88-gemsdoe28`. Budget: 3 experiments / 2 hours
+> **Merge rename (PR #63):** this run was labelled “S22” on its branch; three parallel same-prompt sessions (S22-SIGN, S22-AUDIT, S22-MOFR) merged first and own the plain `s22_*` filenames, `knowledge/62–63` S22 slots, and seeds **360–362** (S22-SIGN independently claimed the same seeds from the same base — disclosed seed collision; the shared deterministic splits make the withheld sets identical, 36,596 positives, which S22-AUDIT's own erratum on SIGN independently sums to). This context run is therefore **S22C** (`knowledge/64`/`65`, `evidence/s22c_*`, `scripts/*s22c*`). Preregistration content below is unchanged from its frozen pre-experiment form except file-path updates. Never pool numbers across S22-SIGN/S22-MOFR/S22C.
+
+Session: `G28-S22C-20261026` (branch label `G28-S22-20261026`), branch `arena/f2afeb88-gemsdoe28`. Budget: 3 experiments / 2 hours
 (parallel-run protocol §6). This file was written **before** any S22 feature canary, holdout DTI, or
 candidate dot was computed. The only computations already run are data restore/hash verification,
 the shared `prepare_data.py` cache build, and the Exp-1 byte forensic on already-scored files
@@ -17,7 +19,7 @@ because the same prompt orders autonomous completion with no manual input. No ex
 exclusivity is claimed. If a synchronized registry later shows another live lane with the same
 method, this run must be reclassified as a duplicate and stopped.
 
-**S22 lane (single method):** *A gradient-boosted detector whose features are the shared 32-band
+**S22C lane (single method):** *A gradient-boosted detector whose features are the shared 32-band
 per-pixel stack **plus explicit multi-scale spatial context** (Gaussian-pyramid means and
 gradient magnitudes at σ = 2 and 5 px of ten physical bands, and structure-tensor coherence of
 the LiDAR scarp-step and total-magnetic-gradient fields), with ridge-restricted, catalogue-hygiene

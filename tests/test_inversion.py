@@ -136,7 +136,7 @@ def test_verify_downloads_still_passes_with_four_slots(tmp_path):
     assert r.returncode == 1 and "2 failure(s)" in r.stdout
     for slot in ("primary", "secondary", "tertiary", "quaternary"):
         assert f"{slot}/nan" in r.stdout or slot in r.stdout, f"{slot} not verified"
-    s22_checks = [c for c in report["checks"] if c["check"].startswith("s22_candidate")]
+    s22_checks = [c for c in report["checks"] if c["check"].startswith("s22c_candidate")]
     assert s22_checks and all(c["pass"] for c in s22_checks)
 
 

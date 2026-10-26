@@ -130,7 +130,7 @@ def main() -> int:
         "overlap_vs_champion": overlap,
         "champion_lineage": lineage,
     }
-    ev = ROOT / "evidence/s22_forensic.json"
+    ev = ROOT / "evidence/s22c_forensic.json"
     ev.write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps({"files": {k: v["n_dots"] for k, v in info.items()},
                       "overlap_vs_champion": overlap, "lineage": lineage}, indent=2))

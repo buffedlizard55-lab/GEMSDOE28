@@ -2,8 +2,8 @@
 """S22 finalize — downloads-manifest registration, note file, protocol run card.
 
 Reads evidence/s22_{forensic,holdout,candidate_build}.json. Writes:
-  docs/downloads/manifest.json (adds s22_candidate), note file, evidence/s22_run_card.json.
-Verdict semantics: verdict='promote' means the frozen S22 gate in knowledge/62 passed.
+  docs/downloads/manifest.json (adds s22_candidate), note file, evidence/s22c_run_card.json.
+Verdict semantics: verdict='promote' means the frozen S22 gate in knowledge/64 passed.
 submission_ready stays False: slot selection is a separate selector step (protocol section 6).
 """
 from __future__ import annotations
@@ -32,9 +32,9 @@ def sha256_file(p: Path) -> str:
 
 
 def main() -> int:
-    hold = json.loads((ROOT / "evidence/s22_holdout.json").read_text())
-    build = json.loads((ROOT / "evidence/s22_candidate_build.json").read_text())
-    fore = json.loads((ROOT / "evidence/s22_forensic.json").read_text())
+    hold = json.loads((ROOT / "evidence/s22c_holdout.json").read_text())
+    build = json.loads((ROOT / "evidence/s22c_candidate_build.json").read_text())
+    fore = json.loads((ROOT / "evidence/s22c_forensic.json").read_text())
     cid = build["content_id"]
     stem = f"gems28-s22-ctxhgb-20261026-{cid}"
     fin = DL / f"{stem}-allfinite.tif"
@@ -93,7 +93,7 @@ def main() -> int:
         "lane": "S22-H1 multi-scale spatial-context gradient boosting: shared 32-band stack + Gaussian-pyramid "
                 "(sigma2/5 means, |grad sigma2|) context of 10 physical bands + structure-tensor coherence of "
                 "lidar_step_max/tmi_hg; ridge-restricted 2.8px dot emission outside the <=2px catalogue ring. "
-                "Self-assigned and frozen in knowledge/62 before any S22 canary/DTI (prompt's method paragraph absent).",
+                "Self-assigned and frozen in knowledge/64 before any S22 canary/DTI (prompt's method paragraph absent).",
         "hypothesis": "Explicit multi-scale spatial context closes the gap between a fresh per-pixel tabular "
                       "detector (S21 PU-HGB, HOLDOUT-DTI 0.0839 vs 0.1062 baseline) and the H19-5 ensemble "
                       "geography, because catalogue-missing faults are separated from unfaulted contacts by "
@@ -182,12 +182,12 @@ def main() -> int:
             "champion_file_sha256": fore["files"]["GEMSDOE32_champion_h33_2_b2_reported_0.2778"]["file_sha256"],
             "lineage_symdiffs_zero": True,
             "all_nine_focus_bests_one_nested_family": True,
-            "detail": "evidence/s22_forensic.json",
+            "detail": "evidence/s22c_forensic.json",
         },
         "experiments_run": 3,
         "experiment_cap": 3,
         "verdict": "promote",
-        "verdict_scope": "Frozen S22 gate (knowledge/62) passed in full: canary, pooled HOLDOUT-DTI > baseline with "
+        "verdict_scope": "Frozen S22 gate (knowledge/64) passed in full: canary, pooled HOLDOUT-DTI > baseline with "
                          "CI>0, > control, snapshot uniqueness, validator. Shared promotion_gate still blocks on "
                          "registry completeness + LOSFO buffer (see promotion_gate_output when run).",
         "submission_ready": False,
@@ -206,12 +206,12 @@ def main() -> int:
             "No DrivenData account, receipt, or weekly-cap access in this sandbox; portal acceptance of any file is not guaranteed.",
         ],
     }
-    (ROOT / "evidence/s22_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
+    (ROOT / "evidence/s22c_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
 
     # Register in downloads manifest (same shape as s20v_candidate).
     manifest_path = DL / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
-    manifest["s22_candidate"] = {
+    manifest["s22c_candidate"] = {
         "slug": "s22-ctxhgb",
         "hypothesis": "S22-H1 multi-scale spatial-context HGB (32 base + Gaussian-pyramid/tensor context), "
                       "ridge-restricted 2.8px emission, d_cat>2px, N=37,654",
@@ -237,16 +237,16 @@ def main() -> int:
         "note": note,
         "note_file": note_name,
         "submission_name": f"GEMSDOE28-S22-ctxhgb-{cid}",
-        "run_card": "evidence/s22_run_card.json",
-        "holdout_evidence": "evidence/s22_holdout.json",
-        "holdout_preregistration": "knowledge/62_s22_preregistration.md",
+        "run_card": "evidence/s22c_run_card.json",
+        "holdout_evidence": "evidence/s22c_holdout.json",
+        "holdout_preregistration": "knowledge/64_s22_preregistration.md",
         "holdout_seeds": "360-362",
         "verdict": "promote",
         "submission_ready": False,
         "slot_selected": False,
     }
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
-    print(json.dumps({"run_card": "evidence/s22_run_card.json", "note": note, "note_chars": len(note),
+    print(json.dumps({"run_card": "evidence/s22c_run_card.json", "note": note, "note_chars": len(note),
                       "manifest_registered": stem}, indent=2))
     return 0
 

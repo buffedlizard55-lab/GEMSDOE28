@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S22 Experiment 3 — final full-footprint candidate build (frozen recipe, knowledge/62).
+"""S22C Experiment 3 (renamed from S22 at merge; see knowledge/65) — final full-footprint candidate build (frozen recipe, knowledge/64).
 
 Trains the lane (32 base + 32 context) on ALL public labels, predicts the footprint, emits
 ridge-restricted 2.8px-spaced dots outside the <=2px catalogue ring at the 37,654 budget,
@@ -26,7 +26,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from gems27 import grid, paths, submission  # noqa: E402
 from gems27.oof_detector import ridge_nms  # noqa: E402
-from run_s22_holdout import greedy_emit  # noqa: E402
+from run_s22c_holdout import greedy_emit  # noqa: E402
 
 T0 = time.time()
 BUDGET = 37_654
@@ -152,7 +152,7 @@ def main() -> int:
     log("vs champion", champ_cmp)
 
     build = {
-        "experiment": "S22 Exp3 final candidate build (frozen knowledge/62)",
+        "experiment": "S22 Exp3 final candidate build (frozen knowledge/64)",
         "date_utc": "2026-10-26",
         "content_id": cid,
         "dotset_sha256": dsha,
@@ -183,7 +183,7 @@ def main() -> int:
         },
         "runtime_s": time.time() - T0,
     }
-    (ROOT / "evidence/s22_candidate_build.json").write_text(json.dumps(build, indent=2, default=str) + "\n")
+    (ROOT / "evidence/s22c_candidate_build.json").write_text(json.dumps(build, indent=2, default=str) + "\n")
     checks = {
         "candidate": stem,
         "validator_allfinite": ver_fin,

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """S22 archive-coverage fix: register previously unregistered download TIFFs in the manifest.
 
-Implements Session 21 next-step #1 (knowledge/61_s21_validation_review.md). Every registered
+Implements Session 21 next-step #1 (knowledge/61_s21_validation_review.md).
+MERGE NOTE (S22C): a parallel S22-AUDIT session independently registered the same files on main
+(keys s22_archive_*); at merge those entries were kept and this session's duplicate archive_*
+entries were dropped. Re-running this script after the merge is therefore a no-op (it skips
+already-registered filenames). Kept as the reproducible record of this session's registration. Every registered
 value is either (a) recomputed from the bytes on disk here (SHA-256, bytes, emitted_px), or
 (b) copied from an existing in-repo provenance file named in the entry (checks JSON / note txt /
 run card). No score, verdict upgrade, or scientific claim is invented: each entry's status states

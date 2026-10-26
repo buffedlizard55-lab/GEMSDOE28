@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Session 22 S22-CTXHGB: multi-scale spatial-context detector, first fresh lane to pass its frozen holdout gate vs the dotted H19-5 baseline; unique GeoTIFF, nine-site executive table, selector steps.">
-<title>Session 22 result | GEMSDOE28</title>
+<meta name="description" content="Session 22C (renamed from S22 at merge): multi-scale spatial-context detector, first fresh lane to pass its frozen holdout gate vs the dotted H19-5 baseline; unique GeoTIFF, nine-site executive table, selector steps.">
+<title>Session 22C result | GEMSDOE28</title>
 <link rel="stylesheet" href="assets/site.css">
 <script defer src="assets/site.js"></script>
 </head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
-<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session22-result.html" aria-current="page">S22 result</a><a href="session21-result.html">S21 result</a><a href="session20-result.html">S20 result</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
+<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="research.html">Research</a><a href="session22c-result.html" aria-current="page">S22C result</a><a href="session22-result.html">S22-SIGN result</a><a href="session22-mofr-result.html">S22-MOFR result</a><a href="session21-result.html">S21 result</a><a href="session20-result.html">S20 result</a><a href="cross-site-review.html">Nine-site review</a><a href="archive.html">Archive</a><a href="sources.html">Sources</a></nav>
 </div></header>
 <main>
-<p class="breadcrumb"><a href="index.html">Overview</a> / Session 22 result</p>
+<p class="breadcrumb"><a href="index.html">Overview</a> / Session 22C result</p>
 
-<section class="card callout-danger" data-submission-ready="false" id="s22-decision">
-<p class="eyebrow">Session 22 · S22-H1 multi-scale spatial-context lane · 2026-10-26 · automated gates, no human inspector</p>
+<section class="card callout-danger" data-submission-ready="false" id="s22c-decision">
+<p class="eyebrow">Session 22C (parallel session, renamed from “S22” at merge — S22-SIGN/S22-MOFR own the plain S22 names) · S22-H1 multi-scale spatial-context lane · 2026-10-26 · automated gates, no human inspector</p>
 <h2>OK TO DOWNLOAD: YES · OK TO SUBMIT: ONLY AFTER THE SELECTOR CHECKS BELOW — NO SLOT SPENT YET</h2>
 <h1>🟢 NEW UNIQUE TIFF — first fresh lane to PASS its frozen holdout gate vs the dotted baseline</h1>
 <p class="lead">Generated this session from a <strong>fresh multi-scale spatial-context detector</strong> (32-band stack + Gaussian-pyramid/tensor context; zero H19-5 dots): <code>gems28-s22-ctxhgb-20261026-e23dabcec6e2-allfinite.tif</code> — 37,654 dots, SHA-256 <code>77934be6…beb2e</code>, all-finite {0,1} in [0,1] (no NaN anywhere — removes every local numeric cause of the portal “[0, 1]” error), EPSG:32611, 3730 × 3292, template-exact, 0 dots on the catalogue.</p>
@@ -24,7 +24,7 @@
 <a class="button" href="downloads/gems28-s22-ctxhgb-20261026-e23dabcec6e2-allfinite.tif" download>⬇ 1-Click Download S22 Unique GeoTIFF (.tif, all-finite [0,1])</a>
 <a class="button secondary" href="downloads/gems28-s22-ctxhgb-20261026-e23dabcec6e2-nan.tif" download>Template-NaN GeoTIFF (.tif)</a>
 <a class="button quiet" href="downloads/gems28-s22-ctxhgb-20261026-e23dabcec6e2-nan.zip" download>ZIP Bundle (.zip)</a>
-<a class="button quiet" href="data/run_card_s22.json" download>JSON Run Card</a>
+<a class="button quiet" href="data/run_card_s22c.json" download>JSON Run Card</a>
 </div>
 <p><strong>Unique name:</strong> <code>GEMSDOE28-S22-ctxhgb-e23dabcec6e2</code> · <strong>Note (112/140):</strong> <code>S22 ctxHGB multiscale-context 37654d | HOLDOUT-DTI 0.1202 vs dotted 0.1052 (+0.0150) seeds360-362 | e23dabcec6e2</code></p>
 <p><strong>Gates (all automated):</strong> leakage canary PASS (worst single-feature AUC 0.7200 ≤ 0.90) · <strong>HOLDOUT-DTI 0.12018 vs dotted-b2 0.10519, paired Δ +0.01498, 95 % CI [+0.01067, +0.01932], 12/12 cells</strong> (seeds 360–362, 36,596 withheld positives) · vs per-pixel control 0.09505 (Δ +0.02512) · unique vs GEMSDOE32 champion (42.05 % within 3 px, Spearman +0.067) · validator PASS on shipped bytes (30/30 audit slot checks). <strong>Verdict: promote (frozen gate passed) — but slot selection is a separate selector step and has NOT happened. Do not upload until the checklist in “How to make a submission” is done.</strong></p>
@@ -41,11 +41,11 @@
 <tr><td>All other focus-site bests (24/25/27/28/30/31/33)</td><td>0.2449–0.2710 USER-REPORTED</td><td>NO — one nested H19-5 family (two cross-site pairs are identical dot-sets)</td><td>See nine-site table below.</td></tr>
 <tr><td>Public leaderboard #1 (2026-10-26, official page)</td><td><strong>0.4437</strong> (xiaofanhu, 31 submissions)</td><td>Unknown (not an owner file)</td><td>The detector-class target; unreachable by re-emission.</td></tr>
 </tbody></table></div>
-<p class="meta">Projection caveat (material): S22 dots sit closer to the catalogue than the champion's (median 8 px vs 19.6 px). Live inversion proved the ≤2 px ring earns ~0; the (2,5] px live credit is unmeasured, so live transfer may be worse than the ratio implies. Holdout truth is catalogue-internal; live truth is expert-mapped new faults. Full analysis: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/63_s22_result.md">knowledge/63</a>.</p>
+<p class="meta">Projection caveat (material): S22 dots sit closer to the catalogue than the champion's (median 8 px vs 19.6 px). Live inversion proved the ≤2 px ring earns ~0; the (2,5] px live credit is unmeasured, so live transfer may be worse than the ratio implies. Holdout truth is catalogue-internal; live truth is expert-mapped new faults. Full analysis: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/65_s22c_result.md">knowledge/63</a>.</p>
 </section>
 
 <section class="section"><h2>Why 0.2778 won — the whole ladder is one nested dot family (byte-verified)</h2>
-<p>This session byte-fetched the GEMSDOE30/31/32/33/36 best files and compared dot-sets exactly (<a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s22_forensic.json">evidence/s22_forensic.json</a>): H19-5 ridge 121,131 → <code>dot_thin(2.8)</code> 44,090 (symdiff 0) → minus ring ≤1 px = solo 40,199 (symdiff 0) → minus ring ≤2 px = champion 37,654 (symdiff <strong>0</strong> vs the fetched GEMSDOE32 bytes, SHA-256 <code>c55bafc4…6fa9</code>). GEMSDOE25-best ≡ GEMSDOE30-best and GEMSDOE28-solo ≡ GEMSDOE31-best are <em>identical dot-sets</em> under different site names. The 300 m triangular kernel makes 2.8 px-spaced dots nearly as creditworthy as a solid line at ~⅓ the false-positive cost, and dots within 200 m of catalogued faults earn ~0 live credit — so each nested prune raises DTI without detecting anything new (break-even τ ≈ 0.0588/dot at DTI 0.2778). <strong>0.2778 is emission hygiene on one surface, and further pruning caps at ≈0.285 as a pure duplicate. Beating it needs new credited coverage — which is what the S22 context lane was built and gated to test.</strong></p>
+<p>This session byte-fetched the GEMSDOE30/31/32/33/36 best files and compared dot-sets exactly (<a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s22c_forensic.json">evidence/s22c_forensic.json</a>): H19-5 ridge 121,131 → <code>dot_thin(2.8)</code> 44,090 (symdiff 0) → minus ring ≤1 px = solo 40,199 (symdiff 0) → minus ring ≤2 px = champion 37,654 (symdiff <strong>0</strong> vs the fetched GEMSDOE32 bytes, SHA-256 <code>c55bafc4…6fa9</code>). GEMSDOE25-best ≡ GEMSDOE30-best and GEMSDOE28-solo ≡ GEMSDOE31-best are <em>identical dot-sets</em> under different site names. The 300 m triangular kernel makes 2.8 px-spaced dots nearly as creditworthy as a solid line at ~⅓ the false-positive cost, and dots within 200 m of catalogued faults earn ~0 live credit — so each nested prune raises DTI without detecting anything new (break-even τ ≈ 0.0588/dot at DTI 0.2778). <strong>0.2778 is emission hygiene on one surface, and further pruning caps at ≈0.285 as a pure duplicate. Beating it needs new credited coverage — which is what the S22 context lane was built and gated to test.</strong></p>
 </section>
 
 <section class="section"><h2>Nine focus sites — best listed submission (USER-REPORTED / UNVERIFIED)</h2>
@@ -78,8 +78,8 @@
 </section>
 
 <section class="section"><h2>Method, hypotheses &amp; audit trail</h2>
-<p>Lane frozen before any canary/DTI in <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/62_s22_preregistration.md">knowledge/62</a> (5 ranked hypotheses; S22-H1 run, U-Net S22-H2 deferred to GPU programme). Exp 1 forensic → Exp 2 context build + canary + 12-cell gate → Exp 3 final build + validator + 30-raster uniqueness. Archive audit this session: 720 checks, only 2 legacy failures (nodata tag on two historical thermal files; bytes untouched) — all download TIFFs are now manifest-registered, closing the S21-AUDIT coverage failure.</p>
-<p><a href="data/run_card_s22.json">JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/63_s22_result.md">Full Session 22 report</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/scripts/run_s22_holdout.py">Gate code</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s22_holdout.json">Holdout cells</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s22_download_audit.json">Download audit</a></p>
+<p>Lane frozen before any canary/DTI in <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/64_s22c_preregistration.md">knowledge/62</a> (5 ranked hypotheses; S22-H1 run, U-Net S22-H2 deferred to GPU programme). Exp 1 forensic → Exp 2 context build + canary + 12-cell gate → Exp 3 final build + validator + 30-raster uniqueness. Archive audit this session: 720 checks, only 2 legacy failures (nodata tag on two historical thermal files; bytes untouched) — all download TIFFs are now manifest-registered, closing the S21-AUDIT coverage failure.</p>
+<p><a href="data/run_card_s22c.json">JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/65_s22c_result.md">Full Session 22C report</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/scripts/run_s22c_holdout.py">Gate code</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s22c_holdout.json">Holdout cells</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s22c_download_audit.json">Download audit</a></p>
 </section>
 </main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. HOLDOUT-DTI and MODEL projections are not competition scores.</p></div></footer>

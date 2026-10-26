@@ -1,7 +1,7 @@
-# S22 result — first fresh lane to pass its frozen holdout gate vs the dotted baseline (2026-10-26)
+# S22C result — first fresh lane to pass its frozen holdout gate vs the dotted baseline (2026-10-26)
 
-Session `G28-S22-20261026`, branch `arena/f2afeb88-gemsdoe28`. Preregistration (frozen before any
-canary/DTI): [`knowledge/62`](62_s22_preregistration.md). Budget used: **3/3 experiments**.
+Session `G28-S22C-20261026` (labelled S22 on its branch; renamed at merge, see §8), branch `arena/f2afeb88-gemsdoe28`. Preregistration (frozen before any
+canary/DTI): [`knowledge/64`](64_s22c_preregistration.md). Budget used: **3/3 experiments**.
 Every number below is labelled **HOLDOUT-DTI** (local hide-and-recover), **USER-REPORTED**
 (owner prompt/sites; no organizer receipt exists in this repository), **ORGANIZER-PUBLIC**
 (official DrivenData page fetched 2026-10-26), or **MODEL PROJECTION** (never a score).
@@ -38,7 +38,7 @@ Nothing has been uploaded.
 
 ## 1. Nine focus-site executive summary (all scores USER-REPORTED / UNVERIFIED)
 
-Exp 1 (`evidence/s22_forensic.json`) byte-fetched the best file of GEMSDOE30/31/32/33/36 from
+Exp 1 (`evidence/s22c_forensic.json`) byte-fetched the best file of GEMSDOE30/31/32/33/36 from
 GitHub on 2026-10-26 and compared dot-sets exactly. **The entire top of the owner table is one
 nested dot family**, not nine independent detectors: H19-5 ridge (121,131) ⊃ dotted d2.8
 (44,090) ⊃ solo (40,199) ⊃ champion (37,654), each step a verified subset (symmetric difference
@@ -94,9 +94,9 @@ leaderboard page). That gap is a detector-class gap (learned spatial-context mod
 not an emission gap. S22 is this repo's first context-aware step in that direction; its holdout
 margin (+14.2 % relative) is real but an order of magnitude smaller than the leaderboard gap.
 
-## 3. S22 lane result (HOLDOUT-DTI, frozen gate — `evidence/s22_holdout.json`)
+## 3. S22C lane result (HOLDOUT-DTI, frozen gate — `evidence/s22c_holdout.json`)
 
-Lane per `knowledge/62`: 32-band shared stack + 32 context features (Gaussian σ2/σ5 means and
+Lane per `knowledge/64`: 32-band shared stack + 32 context features (Gaussian σ2/σ5 means and
 |∇σ2| of 10 bands; structure-tensor coherence of `lidar_step_max`, `tmi_hg`); HGB (S21
 hyperparameters); ridge-NMS-restricted greedy emission (2.8 px, d_visible > 2, fold budget).
 Mimic: roads/canals/shorelines/terraces/contacts. Seeds 360–362 × 4 quadrants = 12 cells;
@@ -160,7 +160,7 @@ is exactly the profile the Final Prize Round rewards.
 
 ## 6. Irregularities flagged
 
-1. Lane self-assignment (prompt's method paragraph absent) — disclosed in `knowledge/62` §0.
+1. Lane self-assignment (prompt's method paragraph absent) — disclosed in `knowledge/64` §0.
 2. All nine-site scores USER-REPORTED; GEMSDOE25-best ≡ GEMSDOE30-best and GEMSDOE28-solo ≡
    GEMSDOE31-best are identical dot-sets under different site names (dot-set SHA equality).
 3. GEMSDOE36's "PINN" file is champion + 1,200 dots (97.40 % within 3 px) despite the
@@ -177,7 +177,7 @@ is exactly the profile the Final Prize Round rewards.
 ## 7. Three passes, limitations, next steps
 
 - **Pass 1 (implement+verify):** restored 17/17 pinned inputs; rebuilt shared 32-band cache;
-  Exp 1 forensic on fetched champion-family bytes; froze `knowledge/62`; built 32 context
+  Exp 1 forensic on fetched champion-family bytes; froze `knowledge/64`; built 32 context
   features; canary + 12-cell gate (Exp 2); final build + validator + 30-raster uniqueness
   (Exp 3); run card, manifest registration, download audit (S22 slot 30/30 PASS).
 - **Pass 2 (bugs/assumptions):** checked train-label isolation (other-quadrant only),
@@ -188,7 +188,7 @@ is exactly the profile the Final Prize Round rewards.
   strict shared `promotion_gate` and kept its fail-closed output instead of relabelling it.
 - **Pass 3 (requirements):** nine-site table with file/score/uniqueness ✓; why-0.2778 +
   beat-it analysis ✓; 5 ranked hypotheses with layers/signatures/mimics/costs/data-gates ✓
-  (`knowledge/62`); unique TIF with obvious disposition ✓; automated non-human validation ✓;
+  (`knowledge/64`); unique TIF with obvious disposition ✓; automated non-human validation ✓;
   HOLDOUT vs USER-REPORTED vs MODEL labelling ✓; JSON run card ✓; 3/3 experiments, 0 slots ✓.
 - **Next steps (prioritised):** (1) buffered LOSFO confirmation of the S22 surface on fresh
   seeds (370+) + distance-stratified credit audit to price the (2,5] ring; (2) S22-H2 tiny
@@ -198,3 +198,38 @@ is exactly the profile the Final Prize Round rewards.
   on the S22 slot with portal-cap verification.
 
 **Maximize P(Win) · Own the Outcome.**
+
+## 8. Merge addendum (PR #63) — parallel S22 sessions, rename to S22C, seed collision
+
+While this session ran, three parallel same-prompt sessions merged to `main` (PRs #57–#61):
+**S22-SIGN** (signed piedmont break-in-slope — this session's hypothesis #3), **S22-MOFR**
+(marker-offset piercing points — hypothesis #4), and **S22-AUDIT** (archive registration +
+scorecard). All are **negative / DO NOT SUBMIT** (SIGN: local-proxy candidate mean 0.0547 vs
+baseline 0.1219, paired −0.0673, gate fail, `evidence/s22_run_card.json`, plus an S22-AUDIT
+erratum voiding its canary/CI claims; MOFR: HOLDOUT-DTI 0.03385 vs baseline 0.14399,
+`evidence/s22_mofr_run_card.json`). Hypotheses #3 and #4 of `knowledge/64` are therefore now
+*tried and negative* — do not re-propose them as untried. S22-AUDIT independently performed the
+same archive-registration fix as this session's Exp-3 follow-up; at merge, main's
+`s22_archive_*` manifest entries were kept and this session's duplicate `archive_*` entries were
+dropped (the registration script is preserved as `scripts/register_legacy_downloads_s22c.py`,
+a no-op after the merge).
+
+**Rename:** this run was labelled "S22" on its branch and independently claimed seeds
+**360–362** — the same seeds S22-SIGN claimed from the same base commit. This is a disclosed
+parallel seed collision (same pattern as S20 340–344). Because the shared split code is
+deterministic in the seed, both sessions withheld the *same* components (36,596 pooled
+positives — the figure S22-AUDIT's erratum independently sums from SIGN's detail rows), so the
+two holdouts are directly comparable as *paired geography tests* but are **not** independent
+seed replicates; never pool them. To avoid filename collisions this session is **S22C** from the
+merge onward (`knowledge/64`/`65`, `evidence/s22c_*`, `scripts/*s22c*`,
+`docs/session22c-result.html`, manifest key `s22c_candidate`). The candidate TIFF, portal name
+and note are content-bound and unchanged. Original run-card bytes were renamed, not rewritten;
+fields inside it that name `knowledge/62` or the pre-merge downloads-manifest SHA-256 refer to
+the branch-time state.
+
+**Post-merge uniqueness regeneration** (merge duty, not a fourth experiment): computed after
+merging `main` and recorded in `evidence/s22c_merge_addendum.json` — final-dot overlap and
+surface Spearman of the S22C candidate vs the S22-SIGN and S22-MOFR TIFFs, plus the merged
+archive audit. The S22C frozen-gate verdict above is unchanged; if the merged comparison were
+to breach the 0.70/0.90 duplicate stops, this addendum (not a silent edit) is where the
+reclassification would be recorded.

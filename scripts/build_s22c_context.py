@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S22 context-feature builder (frozen in knowledge/62 before any canary/DTI).
+"""S22 context-feature builder (frozen in knowledge/64 before any canary/DTI).
 
 Reads the shared prepared matrix (data/prepared/features.npy) and writes 32 label-free
 multi-scale spatial-context features, footprint-ordered float16, to
@@ -120,7 +120,7 @@ def main() -> int:
         for chunk in iter(lambda: f.read(1 << 20), b""):
             h.update(chunk)
     cmeta = {
-        "schema": "s22-context-v1 (frozen in knowledge/62)",
+        "schema": "s22-context-v1 (frozen in knowledge/64)",
         "names": ctx_names,
         "shape": [int(len(foot_flat)), int(len(ctx_names))],
         "dtype": "float16",
