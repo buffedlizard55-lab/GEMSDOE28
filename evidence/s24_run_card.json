@@ -1,0 +1,44 @@
+{
+  "schema": "run-card-v1",
+  "session": "S24",
+  "date_utc": "2026-10-27",
+  "label_policy": "GEOMETRY-AUDIT / ORGANIZER-PUBLIC / USER-REPORTED; no HOLDOUT-DTI produced",
+  "lane": "none assigned; geometry audit of existing files only",
+  "hypothesis": "No new candidate raster is tested. Question: can the literal 70%/3 px registry rule be satisfied at budget 37,654 dots?",
+  "mechanism": "Counting bound: 6,649 footprint cells lie outside all lattice-control disks; passing needs >=11,297 uncovered dots.",
+  "named_non_fault_process_that_could_mimic": "Dense space-filling calibration lattice (registry-039) makes every file a duplicate regardless of geology.",
+  "holdout_dti_ci": "NOT RUN (0 experiments)",
+  "correlation_overlap_vs_registry": {
+    "lattice_control_3px_coverage": 0.9987132726822701,
+    "nine_real_files_overlap_to_lattice_range": [
+      0.9991,
+      0.9992
+    ],
+    "nine_real_files_pairs_over_0_70": "72 of 72",
+    "source": "evidence/s24_nine_site_overlap.json; evidence/s23_registry_feasibility.json"
+  },
+  "raster_sha256": {
+    "new_candidate": null,
+    "historical_best_files": "see evidence/s24_nine_site_overlap.json"
+  },
+  "validator_output": "NOT RUN for a new raster (none generated). Existing writer/validator unchanged; tests 645 passed, 5 skipped.",
+  "submission_name": null,
+  "submission_note_140_max": "S24 audit: no new TIFF. Literal lattice rule unsatisfiable (99.87% cover); decision needed. No slot used.",
+  "verdict": "negative",
+  "ok_to_download": false,
+  "ok_to_submit": false,
+  "weekly_slot_selected": false,
+  "decision_required": "User must choose rule A/B/C in knowledge/68_s24_result.md section 5",
+  "leaderboard_observation": {
+    "label": "ORGANIZER-PUBLIC (public page, not a receipt)",
+    "observed_utc": "2026-10-27 approx 18:50",
+    "top_public_dw_tversky": 0.4544,
+    "rank_25": 0.3195,
+    "rank_50": 0.2857
+  },
+  "limits": [
+    "User-reported scores have no organizer receipt",
+    "Masking convention not in official text",
+    "Hidden-label efficiency of catalogue-adjacent dots unknown"
+  ]
+}
