@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the static, source-linked manual-only Pages site from repository JSON records.
+"""Build the static, source-linked Pages site from repository JSON records.
 
 The build is deterministic apart from the data's checked-in observation dates. It reads no rasters,
 performs no external requests, and never contacts DrivenData. Review the original standing brief in
@@ -13,6 +13,11 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+
+try:
+    from scripts import site_s23
+except ModuleNotFoundError:
+    import site_s23
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -290,15 +295,9 @@ def nav() -> str:
         ("Overview", "index.html"),
         ("Executive summary", "executive-summary.html"),
         ("Research", "research.html"),
-        ("S19 archive", "session19-result.html"),
-        ("S20 result", "session20-result.html"),
-        ("S21 result", "session21-result.html"),
-        ("S22C result", "session22c-result.html"),
         ("Nine-site review", "cross-site-review.html"),
-        ("Archive", "archive.html"),
-        ("Parallel review", "submission-review.html"),
-        ("Topology", "topology.html"),
         ("Sources", "sources.html"),
+        ("Archive", "archive.html"),
     ]
     return "<nav aria-label=\"Main navigation\">" + "".join(
         f'<a href="{href}">{label}</a>' for label, href in links
@@ -358,31 +357,12 @@ def render_session15(review: dict) -> str:
 
 
 def s22c_status_html() -> str:
-    card = read_json("evidence/s22c_run_card.json", {})
-    if not card:
-        return ""
-    f = card.get("files", {})
-    h = card.get("holdout", {})
-    proj = card.get("live_projection", {})
-    return f"""<section class="card callout-danger" aria-label="Session 22 submission readiness" id="s22c-submission" data-submission-ready="false">
-<p class="eyebrow">SESSION 22C · S22-H1 MULTI-SCALE SPATIAL-CONTEXT (parallel session; renamed at merge — S22-SIGN/S22-MOFR own “S22”; seed 360–362 collision disclosed) · 2026-10-26 · AUTOMATED GATES, NO HUMAN INSPECTOR</p>
-<h2>OK TO DOWNLOAD: YES · OK TO SUBMIT: SELECTOR CHECKLIST REQUIRED — NO SLOT SPENT</h2>
-<p><strong>NEW UNIQUE TIFF — first fresh lane to PASS its frozen holdout gate:</strong> <code>{esc(f.get('primary_allfinite', ''))}</code> ({comma(card.get('n_dots', 0))} fresh context-detector dots, 0 on catalogue; SHA-256 <code>{esc(str(card.get('raster_sha256', ''))[:8])}…</code>; all-finite {{0,1}} in [0,1], no NaN anywhere). Canary PASS (0.7200 ≤ 0.90) · <strong>HOLDOUT-DTI {h.get('dti', 0):.5f} vs dotted-b2 {h.get('baseline_dti', 0):.5f} (paired Δ {h.get('paired_gain', 0):+.5f}, 95 % CI [{h.get('paired_gain_ci95', [0, 0])[0]:+.5f}, {h.get('paired_gain_ci95', [0, 0])[1]:+.5f}], 12/12 cells, seeds 360–362)</strong> · unique vs GEMSDOE32 champion (42.05 % within 3 px) · validator PASS. <strong>Verdict promote (frozen gate); submission_ready=false until the separate selector step confirms the weekly portal allowance. Nothing has been uploaded.</strong> Estimated live score (MODEL PROJECTION, not a score): ~{proj.get('projected_live_dti', 0):.3f} vs the 0.2778 USER-REPORTED champion anchor — see the transfer-risk caveats on the S22C page before believing it.</p>
-<div class="download-actions"><a class="button" href="downloads/{esc(f.get('primary_allfinite', ''))}" download>1-Click Download S22C Unique GeoTIFF — gate-passing candidate</a><a class="button quiet" href="session22c-result.html">Session 22C executive result + nine-site table + selector steps</a><a class="button quiet" href="data/run_card_s22c.json" download>JSON run card</a></div>
-<p><strong>Unique name:</strong> <code>{esc(card.get('submission_name', ''))}</code> · <strong>Note ({card.get('note_chars', 0)}/140):</strong> <code>{esc(card.get('note', ''))}</code></p>
-</section>"""
+    """A historical warning, never a current green light or score estimate."""
+    return '<section class="callout callout-danger"><h2>Historical S22C claim superseded — DO NOT SUBMIT</h2><p>S23 measured 99.62% final-dot overlap with a registered lattice. Its old frozen-gate promote label and ratio projection do not authorize upload. See <a href="session23-result.html">the current reassessment</a>.</p></section>'
 
 
 def current_status_html() -> str:
-    """Show the latest audit decision, never imply a new candidate exists."""
-    card = read_json("evidence/s22_audit_run_card.json")
-    audit = card["validator_outputs"]
-    return f"""<section class="card callout-danger" aria-label="Current submission readiness" id="current-submission" data-submission-ready="false">
-<h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
-<p><strong>S22 audit: no new TIFF or geological experiment.</strong> The assigned lane, complete current registry, reusable prepared cache and frozen same-protocol best are unavailable. The separate <a href="session22-result.html">S22-SIGN TIFF</a> exists for research only; <strong>do not upload it or any prior file</strong>. No human geological inspector was used and no slot was selected in this audit.</p>
-<p>Archive audit <strong>{esc(audit['archive_audit'])}</strong>: all {audit['registered_tiffs']} historical TIFFs are registered, but two all-finite variants retain NaN nodata metadata. This does not diagnose the portal error. Read the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official format</a>; acceptance is not guaranteed.</p>
-<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button quiet" href="data/current_run_card_2026-10-26.json">Current negative run card</a><a class="button quiet" href="cross-site-review.html">Nine-site evidence</a><a class="button quiet" href="archive.html">Historical research archive</a></div>
-</section>"""
+    return site_s23.notice(read_json("evidence/s23_run_card.json"))
 
 
 def render_focus_review() -> str:
@@ -476,34 +456,8 @@ def render_s19_result() -> str:
 
 
 def render_current_executive() -> str:
-    return """<section class="section"><h1>Executive summary: no candidate is approved</h1>
-<p>No new candidate was generated in this audit. A distinct concurrent <a href="session22-result.html">S22-SIGN research TIFF</a> is available for research only, but <strong>not OK to submit</strong>: its local holdout is negative and leakage/uniqueness evidence is incomplete. The decision is automatic and does not require a human geological inspector.</p>
-<h2>Exactly how a future approved submission works</h2><ol>
-<li>Preregister one explicit lane; use verified cached features and the hash-pinned shared evaluator/writer.</li>
-<li>Run every feature-alone leakage canary. Stop if either AUC polarity exceeds 0.90.</li>
-<li>Before placement, compare the surface to the registry. Stop at |Spearman| &gt;0.90 or support overlap &gt;70% within 3 pixels.</li>
-<li>Hide whole fault components with a buffer, construct every catalogue feature from visible faults only, mask them pixel-exactly, and pool DTI with alpha 0.2, beta 0.8 and the 300 m triangular kernel.</li>
-<li>Beat the frozen comparable baseline with a positive paired spatial-block 95% interval; then check final-dot uniqueness using the same stop thresholds.</li>
-<li>Write and independently re-read one float32 GeoTIFF. Require no NaN inside the footprint, values [0,1], one band, exact template CRS/shape/transform and a recorded SHA-256.</li>
-<li>Only after a separate selector approves a gate-passing card, download that exact file, open DrivenData’s New submission form, choose the TIFF (or ZIP containing exactly one TIFF), paste its ≤140-character note, and preserve the filename/hash-bound receipt.</li>
-</ol>
-<p><strong>Do not perform step 7 today.</strong> No competition slot was selected. A local validator cannot authenticate account allowance, eligibility, portal acceptance or organizer score.</p>
-<h2>Prior range-error uncertainty</h2><p>The error cause is unknown. The official problem specifies null or NaN outside the bounds; a zero-filled all-finite variant may differ from the sample convention and cannot guarantee portal acceptance. The current archive audit also fails two historical nodata metadata checks.</p>
-<p><a href="cross-site-review.html">Current nine-site executive table</a> · <a href="data/current_run_card_2026-10-26.json">Complete automated run card</a> · <a href="archive.html">Historical files — DO NOT SUBMIT</a></p></section>"""
-
-def render_s18_executive() -> str:
-    return """<section class="section"><h1>Executive summary: a new file, not an approved submission</h1>
-<p>A new independent research TIFF is downloadable above. It is unique within the audited snapshot and locally format-valid, but <strong>failed scientific validation</strong>. Do not select a file from this page at present. No human geological inspection is needed to detect this rejection.</p>
-<h2>Which prior site leads?</h2><p>The highest of the nine supplied historical site claims is GEMSDOE32 H33-2-B2 at 0.2778 (owner-reported, not organizer-confirmed). No current file is approved: S18-MXTP failed its holdout. See the <a href="../knowledge/55_focus_site_review.md">full nine-site executive comparison</a> for per-site maxima, provenance, interpretation and next steps.</p>
-<h2>Exactly how a future approved submission works</h2><ol>
-<li>Preregister an explicit lane, reuse verified cached features/shared evaluator/writer, test feature-alone leakage, and pass pre-placement registry checks.</li>
-<li>Recover whole withheld fault systems with a buffer and visible-only catalogue features. Beat the frozen comparable best on pooled HOLDOUT-DTI with a positive paired spatial-block confidence interval. Check final-dot uniqueness.</li>
-<li>Serialize and independently re-read the exact file. Require single-band float32, sample CRS/shape/transform, no NaN inside footprint, values [0,1] and registered SHA-256. Local validation cannot guarantee portal acceptance.</li>
-<li>Only after those gates and a separate selector decision, download that exact approved TIFF. Check the authenticated competition page's cap and remaining allowance. The September rules state three submissions per week; current account allowance is not available here.</li>
-<li>At DrivenData choose <strong>New submission → File to submit</strong>, select the approved single-band .tif (or ZIP containing that one TIFF), paste its registered note of at most 140 characters, and submit. Preserve the organizer receipt and file hash.</li>
-<li>Do not perform those upload steps today: S18-MXTP's paired holdout result is negative. The disabled submission control does not prevent downloading a clearly rejected research artifact for reproducibility.</li></ol>
-<h2>Why the prior range error is not diagnosed by its text alone</h2><p>The new research raster has no NaN anywhere and only values 0 and 1. This removes local numeric range violations but does not establish what caused the earlier portal error or prove official acceptance of any footprint convention.</p>
-<p><a href="session18-result.html">Scientific result, nine-site audit and official sources</a> · <a href="data/current_run_card_2026-10-25.json">Complete automated run card</a> · <a href="archive.html">Historical files and instructions — superseded, DO NOT SUBMIT</a></p></section>"""
+    """Single current authority; old result pages are explicitly historical."""
+    return site_s23.executive(read_json("evidence/s23_run_card.json"), read_json("evidence/s23_scorecard.json"))
 
 
 def s18_feed_html(feed: dict) -> str:
@@ -516,7 +470,7 @@ def layout(title: str, body: str, active: str = "") -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="GEMSDOE28 auditable geoscience research, manual-only submission path, and source-linked evidence.">
+  <meta name="description" content="GEMSDOE28 automated evidence gates, nine-site GeoTIFF scorecard, and clear submission readiness.">
   <title>{esc(title)} | GEMSDOE28</title>
   <link rel="stylesheet" href="assets/site.css">
   <script defer src="assets/site.js"></script>
@@ -526,7 +480,7 @@ def layout(title: str, body: str, active: str = "") -> str:
   <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   {nav()}
 </div></header>
-<main>{s22c_status_html()}{current_status_html()}{body}</main>
+<main>{current_status_html()}{body}</main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
@@ -1386,6 +1340,10 @@ def main() -> int:
     local_h38_claim = read_json("evidence/h38_1_holdout.started.json", {})
     session15_review = read_json("evidence/session15_review.json", {})
     feed = read_json("docs/data/feed.json")
+    s23_card = read_json("evidence/s23_run_card.json")
+    s23_scorecard = read_json("evidence/s23_scorecard.json")
+    s23_hypotheses = read_json("registry/s23_hypotheses.json")
+    s23_sources = read_json("evidence/s23_official_source_review.json")
     old_index = namespace_anchors(render_index(manifest, board, euler, range_audit, restore, screen, confirmation, seed_audit, h32, h35, h35_6, local_h38_claim), "archive-overview-")
     old_executive = namespace_anchors(render_executive(manifest, board, file_audit, range_audit, screen, confirmation, seed_audit, h32), "archive-executive-")
     archive = '<section class="section"><h1>SUPERSEDED · DO NOT SUBMIT THESE FILES</h1><p>Historical primary/secondary labels and proxy claims below are not current upload approval. No older artifact is a substitute for a gate-passing new candidate.</p></section>' + '<details><summary>Historical overview</summary>' + old_index + '</details><details><summary>Historical executive instructions</summary>' + old_executive + '</details>'
@@ -1394,21 +1352,17 @@ def main() -> int:
     session22_template = (ROOT / "site_templates" / "session22-result.html").read_text(encoding="utf-8")
     session22_mofr_template = (ROOT / "site_templates" / "session22-mofr-result.html").read_text(encoding="utf-8")
     session22c_template = (ROOT / "site_templates" / "session22c-result.html").read_text(encoding="utf-8")
-    session22_mofr_brief = """<section class=\"card callout-danger\" aria-label=\"Session 22 S22-MOFR result\">
-<h2>Session 22 S22-MOFR (2026-10-26): potential-field marker-offset lane — HOLDOUT GATE FAILED, DO NOT SUBMIT</h2>
-<p>A separate concurrent lane generated a new, catalogue-blind raster from paired TMI and isostatic-gravity horizontal-gradient ridge endpoints (<code>gems28-s22-mofr-union-20261026-599452947272-allfinite.tif</code>, 42,480 dots). Leakage canary <strong>PASS</strong> (max feature AUC 0.538); registry novelty <strong>PASS</strong> (max |Spearman| 0.0164, max 3-px overlap 18.9% vs the full registry \u2014 genuinely unique). But <strong>HOLDOUT-DTI 0.03385 [0.0300, 0.0375] vs a freshly retrained baseline 0.14399</strong> (paired gain -0.1101, 95% CI [-0.1239, -0.0972], 0/4 folds positive). This is a distinct concurrent lane from S22-SIGN and S22-AUDIT (see below); never pool their numbers. <strong>Verdict: negative \u2014 zero weekly slots spent. Do not upload any file from this site.</strong></p>
-<p><a class=\"button quiet\" href=\"session22-mofr-result.html\">Session 22 S22-MOFR executive answer, experiments and run card</a> <a class=\"button quiet\" href=\"cross-site-review.html\">Nine-site scorecard</a></p>
-</section>"""
     current_review = render_focus_review()
     pages = {
-        "index.html": layout("Overview", session22_mofr_brief + current_review + s18_feed_html(feed), "Overview"),
-        "cross-site-review.html": layout("Nine-site review", current_review, "Nine-site review"),
-        "executive-summary.html": layout("Executive summary", session22_mofr_brief + render_current_executive(), "Executive summary"),
-        "research.html": layout("Research and hypotheses", render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim), "Research"),
+        "index.html": layout("Overview", site_s23.overview(s23_card, s23_scorecard) + s18_feed_html(feed), "Overview"),
+        "cross-site-review.html": layout("Nine-site review", site_s23.score_table(s23_scorecard) + site_s23.site_details(s23_scorecard) + site_s23.scientific_answer() + site_s23.source_review(s23_sources) + '<details><summary>Historical S22 audit — superseded</summary>' + namespace_anchors(current_review, "s22-history-") + '</details>' + site_s23.history_links(), "Nine-site review"),
+        "executive-summary.html": layout("Executive summary", site_s23.executive(s23_card, s23_scorecard) + site_s23.source_review(s23_sources), "Executive summary"),
+        "session23-result.html": layout("S23 current reassessment", site_s23.executive(s23_card, s23_scorecard) + site_s23.hypotheses(s23_hypotheses) + site_s23.source_review(s23_sources), "Executive summary"),
+        "research.html": layout("Research and hypotheses", site_s23.hypotheses(s23_hypotheses) + '<details><summary>Historical research and prior hypotheses — not current approval</summary>' + render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim) + '</details>', "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
-        "sources.html": layout("Sources and verification", render_sources(sources, board), "Sources"),
-        "archive.html": layout("Historical campaign archive", archive, "Archive"),
-        "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; current S18-MXTP evidence is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/76847b2/docs/submission-review.html">Complete original PR39 HTML audit at its historical commit</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
+        "sources.html": layout("Sources and verification", site_s23.source_review(s23_sources) + s18_feed_html(feed) + render_sources(sources, board), "Sources"),
+        "archive.html": layout("Historical campaign archive", s22c_status_html() + site_s23.history_links() + archive, "Archive"),
+        "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; the current S23 audit decision is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/76847b2/docs/submission-review.html">Complete original PR39 HTML audit at its historical commit</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
         "session19-result.html": layout("S19 unique TIFF result", render_s19_result(), "S19 result"),
         "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),
         "session20-result.html": session20_template,
@@ -1421,6 +1375,11 @@ def main() -> int:
     }
     DOCS.mkdir(parents=True, exist_ok=True)
     for name, content in pages.items():
+        if 'id="current-submission"' not in content:
+            # Standalone historical templates must also lead with today's lock.
+            content = content.replace('<main>', '<main>' + current_status_html() +
+                '<section class="callout"><strong>Historical result below — superseded, not current approval.</strong> '
+                '<a href="session23-result.html">Read the S23 reassessment</a>.</section>', 1)
         (DOCS / name).write_text(publish_source_links(content), encoding="utf-8")
     s21_card = read_json("evidence/s21_puhgb_run_card.json")
     (DOCS / "data/run_card_s21.json").parent.mkdir(parents=True, exist_ok=True)
@@ -1459,16 +1418,22 @@ def main() -> int:
     (DOCS / "data/run_card_s22c.json").write_text(
         json.dumps(s22c_card, indent=2, allow_nan=False, default=str) + "\n", encoding="utf-8"
     )
-    (DOCS / "data/current_run_card.json").write_bytes(current_card_path.read_bytes())
-    (DOCS / "data/current_run_card_2026-10-27.json").write_bytes(current_card_path.read_bytes())
+    (DOCS / "data/s23_scorecard.json").write_text(
+        json.dumps(s23_scorecard, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    (DOCS / "data/s23_scorecard.csv").write_text(site_s23.score_csv(s23_scorecard), encoding="utf-8", newline="")
+    # Dated 2026-10-26 aliases remain immutable historical S22 evidence.
+    # Only generic/current-day aliases advance to this run.
+    s23_bytes = (ROOT / "evidence/s23_run_card.json").read_bytes()
+    for name in ("current_run_card.json", "current_run_card_2026-10-27.json", "s23_run_card.json"):
+        (DOCS / "data" / name).write_bytes(s23_bytes)
     (ROOT / "index.html").write_text(root_relative_links(publish_source_links(pages["index.html"])), encoding="utf-8")
     (ROOT / "executive-summary.html").write_text(
         root_relative_links(publish_source_links(pages["executive-summary.html"])), encoding="utf-8")
-    legacy_card = ROOT / "data/current_run_card_2026-10-26.json"
-    legacy_card.parent.mkdir(parents=True, exist_ok=True)
-    legacy_card.write_bytes(current_card_path.read_bytes())
+    (ROOT / "data").mkdir(parents=True, exist_ok=True)
+    for name in ("current_run_card_2026-10-26.json", "current_run_card.json", "current_run_card_2026-10-27.json"):
+        (ROOT / "data" / name).write_bytes((DOCS / "data" / name).read_bytes())
     print(json.dumps({"status": "built", "pages": sorted(pages), "sources": len(sources.get("sources", [])),
-                      "hypotheses": len(read_json("registry/s22_audit_hypotheses.json").get("hypotheses", [])),
+                      "hypotheses": len(s23_hypotheses["hypotheses"]),
                       "generated_from_json_only": True, "external_requests": 0,
                       "submission_ready": False, "slot_selected": False,
                       "research_download": None,

@@ -172,6 +172,9 @@ def test_current_review_evidence_is_bound_and_not_a_new_tiff():
             "scripts/check_run_preflight.py": "evidence/snapshots/pr39_check_run_preflight.py",
             "src/gems27/promotion.py": "evidence/snapshots/pr39_promotion.py",
             "scripts/audit_priority_repositories.py": "evidence/snapshots/pr39_audit_priority_repositories.py",
+            "registry/current_session.json": "evidence/snapshots/pre_s23_current_session.json",
+            "registry/protocol_assets.json": "evidence/snapshots/pre_s23_protocol_assets.json",
+            "scripts/audit_shared_template.py": "evidence/snapshots/pre_s23_audit_shared_template.py",
         }
         observed = ROOT / snapshots.get(path, path)
         assert hashlib.sha256(observed.read_bytes()).hexdigest() == expected, path

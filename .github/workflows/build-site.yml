@@ -106,6 +106,18 @@ on:
       - 'knowledge/57_s20_nchc_result_and_9site_review.md'
       - 'docs/assets/**'
       - 'site_templates/**'
+      - 'evidence/s23_run_card.json'
+      - 'evidence/s23_registry_feasibility.json'
+      - 'evidence/s23_scorecard.json'
+      - 'evidence/s23_official_source_review.json'
+      - 'evidence/s23_priority_audit.json'
+      - 'evidence/s23_focus_novelty.json'
+      - 'registry/s23_hypotheses.json'
+      - 'scripts/site_s23.py'
+      - 'docs/data/current_run_card.json'
+      - 'docs/data/current_run_card_2026-10-27.json'
+      - 'docs/data/s23_scorecard.json'
+      - 'docs/data/s23_scorecard.csv'
   pull_request:
     paths:
       - 'registry/next_hypotheses.json'
@@ -210,6 +222,18 @@ on:
       - 'knowledge/57_s20_nchc_result_and_9site_review.md'
       - 'docs/assets/**'
       - 'site_templates/**'
+      - 'evidence/s23_run_card.json'
+      - 'evidence/s23_registry_feasibility.json'
+      - 'evidence/s23_scorecard.json'
+      - 'evidence/s23_official_source_review.json'
+      - 'evidence/s23_priority_audit.json'
+      - 'evidence/s23_focus_novelty.json'
+      - 'registry/s23_hypotheses.json'
+      - 'scripts/site_s23.py'
+      - 'docs/data/current_run_card.json'
+      - 'docs/data/current_run_card_2026-10-27.json'
+      - 'docs/data/s23_scorecard.json'
+      - 'docs/data/s23_scorecard.csv'
   workflow_dispatch:
 
 permissions:

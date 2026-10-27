@@ -1,0 +1,91 @@
+{
+  "frozen_before_implementation": "knowledge/66_s23_preregistration.md",
+  "ranking": "Qualitative expected improvement versus cost; no numeric score predictions.",
+  "novelty_scope": "Specific operators not found in this checkout; no claim of global scientific novelty or external lane assignment.",
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "S23-PCSE",
+      "name": "Phase-congruent scarp energy",
+      "layers": [
+        "det_elev",
+        "tmi",
+        "iso_grav_anom"
+      ],
+      "physical_signature": "Oriented odd/even derivative-energy ratio and phase/polarity consistency over 100\u2013700 m cross-profile scales.",
+      "missing_catalogue_mechanism": "Weak or partly buried displacement could preserve a coherent step when single-scale amplitudes are too small for mapping; untested.",
+      "repo_difference": "No odd/even quadrature ratio and cross-scale phase-consistency implementation found; distinct from signed curvature, amplitude edges and Gaussian context.",
+      "non_fault_mimic": "Terrace risers, paleoshorelines, roads and unfaulted lithologic contacts.",
+      "expected_dti_improvement": null,
+      "expected_improvement_status": "Unknown; qualitative low-cost research priority, not a forecast.",
+      "implementation_cost": "medium",
+      "data_status": "Hash-verified existing cache available; no new external data needed.",
+      "viable_data_only": true,
+      "source": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "status": "UNTESTED / BLOCKED BEFORE IMPLEMENTATION"
+    },
+    {
+      "rank": 2,
+      "id": "S23-TCB",
+      "name": "Texture-covariance boundary",
+      "layers": [
+        "rtp",
+        "tmi_hg",
+        "cond_surf"
+      ],
+      "physical_signature": "Two-sided directional semivariogram/covariance change after side-specific mean removal.",
+      "missing_catalogue_mechanism": "Juxtaposition or damage can change correlation length/anisotropy even where regional potential-field amplitudes cancel; untested.",
+      "repo_difference": "No two-sided directional semivariogram or covariance-change operator found; not endpoint matching or Frangi amplitude.",
+      "non_fault_mimic": "Depositional facies, intrusive contacts, leveling seams and resampling.",
+      "expected_dti_improvement": null,
+      "expected_improvement_status": "Unknown; plausible complementary evidence.",
+      "implementation_cost": "medium-high",
+      "data_status": "Hash-verified existing cache available; no new external data needed.",
+      "viable_data_only": true,
+      "source": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "status": "UNTESTED / NOT IMPLEMENTED"
+    },
+    {
+      "rank": 3,
+      "id": "S23-MCR",
+      "name": "Matched conductive residual",
+      "layers": [
+        "cond_surf",
+        "depth_to_base_surf",
+        "det_elev",
+        "det_elev_slope"
+      ],
+      "physical_signature": "Spatially cross-fit a label-free conditional conductivity quantile model; score coherent margins in its residual.",
+      "missing_catalogue_mechanism": "Conditional residuals may reveal conductive alteration along concealed fluid conduits instead of generic basin fill; untested.",
+      "repo_difference": "No cross-fitted conditional-quantile conductivity residual operator found; not the existing raw clay-cap margin.",
+      "non_fault_mimic": "Saline aquifers, lacustrine clay, irrigation return flow and changing EM investigation depth.",
+      "expected_dti_improvement": null,
+      "expected_improvement_status": "Unknown; substantial confounding risk.",
+      "implementation_cost": "medium",
+      "data_status": "Hash-verified existing cache available; conductive-interface depth is not authenticated crystalline-basement thickness.",
+      "viable_data_only": true,
+      "source": "https://gdr.openei.org/submissions/1391",
+      "status": "UNTESTED / NOT IMPLEMENTED"
+    },
+    {
+      "rank": 4,
+      "id": "S23-CSD",
+      "name": "Compound-scarp diffusion spectrum",
+      "layers": [
+        "USGS 3DEP 1 m DEM tiles (new bytes required)"
+      ],
+      "physical_signature": "Repeated cross-profile fits to superposed scarp degradation/diffusion widths.",
+      "missing_catalogue_mechanism": "Multi-event morphology may survive on weakly mapped faults; untested.",
+      "repo_difference": "No multi-event scarp diffusion fit; cached 100 m maxima do not preserve the original profiles.",
+      "non_fault_mimic": "Multiple shorelines, terrace risers, road cuts and lithologic benches.",
+      "expected_dti_improvement": null,
+      "expected_improvement_status": "Unknown; not proposed as presently viable.",
+      "implementation_cost": "high",
+      "data_status": "CLOSED: official tile hosts outside runtime outbound allowlist; no original tile bytes obtained/verified this session.",
+      "viable_data_only": false,
+      "source": "https://www.usgs.gov/3d-elevation-program",
+      "status": "NOT VIABLE IN THIS SESSION / EXTERNAL DATA UNOBTAINED"
+    }
+  ],
+  "geological_experiments_run": 0
+}

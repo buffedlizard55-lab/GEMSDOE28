@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+  "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/2521cb676e172c141a4417e4925b73b6a896c1eb",
   "scope": "Read-only shared template; no private evaluator/writer fork.",
-  "authority": "Discovered shared tools in a priority repository; an assigned method lane is still absent.",
+  "authority": "Read-only upstream shared template; updated to existing upstream empty-canary/input guards and paired comparison. No private evaluator or writer fork. Assigned geological lane still absent.",
   "external_parallel_registry_complete": false,
   "files": [
     {
       "id": "template-__init__",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "src/gems/__init__.py",
       "dest": "shared_template/src/gems/__init__.py",
       "sha256": "1a0b12829abd20797161f12c4d4f900f5bfb2af13df35c68435ce647e6fb264a",
@@ -18,37 +18,37 @@
     {
       "id": "template-holdout",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "src/gems/holdout.py",
       "dest": "shared_template/src/gems/holdout.py",
-      "sha256": "3b1cc38fa15c849284116e875a00b11f722dd0c05b9afc5fe7ea71d5fa2312b8",
-      "bytes": 23976,
+      "sha256": "34fb7f12e849280c8162d5c433aa972f70746ddecf1a289ce3a9c81144b344dc",
+      "bytes": 26813,
       "group": "template"
     },
     {
       "id": "template-metric",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "src/gems/metric.py",
       "dest": "shared_template/src/gems/metric.py",
-      "sha256": "c024510de39746c9390e5bbf5c1d1b639a9ee895017a38fab4b609f0f2c33e48",
-      "bytes": 9544,
+      "sha256": "a49d99ed5e20b2c0087668a7d29a8684e25dca41635ece3c4f30b1dba1c5a432",
+      "bytes": 11390,
       "group": "template"
     },
     {
       "id": "template-submission",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "src/gems/submission.py",
       "dest": "shared_template/src/gems/submission.py",
-      "sha256": "380ef4c785680d0c9063f53f9fa6227e8a564314d40df02fa46f02fe37d29711",
-      "bytes": 10463,
+      "sha256": "a9b950e59ec50dfc1f1be44a755434848c70e0233923ebaad40f1589c69e9f18",
+      "bytes": 10860,
       "group": "template"
     },
     {
       "id": "template-validator",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "src/gems/validator.py",
       "dest": "shared_template/src/gems/validator.py",
       "sha256": "a5176d6e13924382f52bfd170a1f91c8beb1f31d413765295e881b65dc79a5e0",
@@ -58,42 +58,43 @@
     {
       "id": "template-novelty",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "src/gems/novelty.py",
       "dest": "shared_template/src/gems/novelty.py",
-      "sha256": "8ffb8d61bd44fd1191927ddf8f3fe040c7cb341cd6811a63f1af8e2093749842",
-      "bytes": 9833,
+      "sha256": "46ba2c88921a94bfbedd30cf604bf3843ed85d131431a1f56c28cd71c4e07dd5",
+      "bytes": 17695,
       "group": "template"
     },
     {
       "id": "template-evaluate_holdout",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "scripts/evaluate_holdout.py",
       "dest": "shared_template/scripts/evaluate_holdout.py",
-      "sha256": "040d4ea3b231f76fc3cd200206e95a67ee86babc1dd9f26027adae39f674df78",
-      "bytes": 13558,
+      "sha256": "66fbe1a696c0fe48b1d277619eaf810aa2d91866a92bc2a5d819c49fe4143da1",
+      "bytes": 15684,
       "group": "template"
     },
     {
       "id": "template-submission_writer",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "scripts/submission_writer.py",
       "dest": "shared_template/scripts/submission_writer.py",
-      "sha256": "552621e4f1a8836922cbd0557c56e409b22e98d90d8b091baaa77a2fa0ef0717",
-      "bytes": 1515,
+      "sha256": "30edfcca023a185ae49b752ac19fa6839f2382169db8a4852f90d1a454e5db61",
+      "bytes": 1652,
       "group": "template"
     },
     {
       "id": "template-priority-registry",
       "repo": "buffedlizard55-lab/GEMSDOE24",
-      "ref": "bddb55fca2c16e2b6f03c98d28751d8ff8cc7e5e",
+      "ref": "2521cb676e172c141a4417e4925b73b6a896c1eb",
       "path": "registry/priority_rasters.json",
       "dest": "research/shared_priority_registry.json",
       "sha256": "0844816e4cb8e9f6fa64970b339412dd97d12cb0b507c67b0b9bb3f2f3ea2974",
       "bytes": 83432,
       "group": "registry-manifest"
     }
-  ]
+  ],
+  "previous_manifest_snapshot": "evidence/snapshots/pre_s23_protocol_assets.json"
 }

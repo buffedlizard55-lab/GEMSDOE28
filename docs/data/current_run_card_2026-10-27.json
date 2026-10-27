@@ -1,65 +1,183 @@
 {
-  "session": "S22-AUDIT-20261026",
-  "hypothesis": "No geological hypothesis was assigned or tested. Ranked proposals remain research only.",
-  "mechanism": "A future displaced-marker lane would test repeated coherent offsets of magnetic or gravity contacts across a candidate fault corridor.",
-  "named_non_fault_mimic": "Branching lithologic contacts or survey-registration seams.",
-  "holdout_dti": {
+  "schema": "gems28-negative-audit-v1",
+  "session_id": "G28-S23-20261027",
+  "date_utc": "2026-10-27",
+  "branch": "arena/a774f0a0-gemsdoe28",
+  "lane": null,
+  "lane_status": "No method paragraph supplied; no external/exclusive lane invented. Read-only registry/preflight audit only.",
+  "hypothesis": "Proposed PCSE: catalogue-missing displacement might preserve cross-scale odd/even step phase even where gradient amplitude is weak. UNIMPLEMENTED and UNTESTED.",
+  "mechanism": "Oriented cross-profile first/second derivative energy and scale-consistent polarity; no finding of a fault or geothermal vent is claimed.",
+  "non_fault_mimic": "Terrace risers, paleoshorelines, road cuts and unfaulted lithologic contacts.",
+  "holdout": {
     "label": "HOLDOUT-DTI",
-    "evaluator_version": "gems-segment-pooled-v1",
+    "status": "NOT RUN: preflight/registry stop before a geological experiment",
+    "evaluator_version": "gems-segment-pooled-v1 (pinned shared SegmentHoldout, available but not run on a new model)",
     "dti": null,
     "ci95": null,
     "withheld_positives": null,
-    "reason": "No experiment; strict baseline and required feature cache unavailable."
+    "baseline_dti": null,
+    "paired_gain": null,
+    "paired_gain_ci95": null,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel": "triangular",
+    "kernel_m": 300
   },
-  "registry_correlations_overlaps": {
-    "scope": "Nine explicitly named historical artifacts only; not the complete parallel registry",
-    "artifact": "evidence/s22_focus_novelty.json",
-    "directional_pairs": 72,
-    "duplicate_pairs": 72,
-    "minimum_directional_overlap_3px": 0.8671895382207149,
-    "maximum_directional_overlap_3px": 1.0,
-    "maximum_absolute_spearman": 1.0,
-    "complete_current_parallel_registry": false,
-    "candidate_surface_checked": false,
-    "candidate_final_dots_checked": false
+  "feature_names": [],
+  "feature_canaries": {},
+  "canary_status": "No model features implemented/tested; an empty result is NOT a canary pass.",
+  "registry": {
+    "complete": false,
+    "scope": "Nine historical focus files plus one sufficient rejecting comparator from the pinned shared registry; not a synchronized global parallel registry.",
+    "control_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "manifest_sha256": "0844816e4cb8e9f6fa64970b339412dd97d12cb0b507c67b0b9bb3f2f3ea2974",
+    "preplacement_surface": "NOT AVAILABLE / NOT TESTED; no new placement performed",
+    "inherited_candidate_sha256": "77934be607d48a4daec5b046009cdabf61d3fdee210aadc75be82ac70f3beb2e",
+    "inherited_final_raw_spearman": 8.567561299515036e-05,
+    "inherited_final_kernel_spearman_sample200k": -0.0015011649539984765,
+    "inherited_final_within_3px_fraction": 0.9961757051043714,
+    "inherited_duplicate": true,
+    "bounds": {
+      "label": "GEOMETRY-AUDIT (not HOLDOUT-DTI or an organizer score)",
+      "footprint_pixels": 5167373,
+      "reference_positive_pixels": 206895,
+      "radius_px": 3.0,
+      "covered_pixels": 5160724,
+      "covered_fraction": 0.9987132726822701,
+      "uncovered_pixels": 6649,
+      "candidate_budget": 37654,
+      "overlap_limit": 0.7,
+      "required_uncovered_dots_to_pass": 11297,
+      "unspaced_overlap_lower_bound": 0.8234184947150369,
+      "unspaced_target_budget_impossible": true,
+      "max_budget_not_ruled_out_by_pixel_count": 22163,
+      "spacing": {
+        "min_spacing_px": 2.8,
+        "partition_side_pixels": 2,
+        "partition_diameter_px": 1.4142135623730951,
+        "uncovered_dot_capacity_upper_bound": 3603,
+        "overlap_lower_bound": 0.9043129547989589,
+        "partitions": [
+          {
+            "row_shift": 0,
+            "col_shift": 0,
+            "occupied_squares": 3756
+          },
+          {
+            "row_shift": 0,
+            "col_shift": 1,
+            "occupied_squares": 3791
+          },
+          {
+            "row_shift": 1,
+            "col_shift": 0,
+            "occupied_squares": 3603
+          },
+          {
+            "row_shift": 1,
+            "col_shift": 1,
+            "occupied_squares": 3630
+          }
+        ],
+        "target_budget_impossible": true
+      },
+      "target_budget_impossible": true,
+      "interpretation": "A necessary counting bound only. A non-blocked budget is not a novelty pass, a score estimate or permission to relocate dots."
+    }
   },
   "raster_sha256": null,
-  "validator_outputs": {
-    "new_candidate": "NOT RUN \u2014 no candidate",
-    "archive_audit": "FAIL",
-    "archive_check_count": 823,
-    "archive_failures": [
+  "validator": {
+    "status": "NOT RUN ON A NEW TIFF: no new file exists",
+    "no_nan_inside": null,
+    "range_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null,
+    "single_band": null,
+    "inherited_only_format_valid": true,
+    "inherited_only_sha256": "77934be607d48a4daec5b046009cdabf61d3fdee210aadc75be82ac70f3beb2e",
+    "inherited_scope": "Historical file passes shared format checks but fails novelty; format does not authorize upload."
+  },
+  "submission_name": null,
+  "note": "S23 audit: no new TIFF; inherited S22C fails literal registry rule. No weekly slot selected.",
+  "submission_note": "S23 audit: no new TIFF; inherited S22C fails literal registry rule. No weekly slot selected.",
+  "estimated_leaderboard_score": null,
+  "estimate_status": "Unavailable; withdraw the historical ratio projection from current recommendations. No organizer receipt or validated transfer calibration.",
+  "verdict": "negative",
+  "submission_ready": false,
+  "ok_to_submit": false,
+  "ok_to_download_new_submission": false,
+  "new_tiff_generated": false,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "slot_selected": false,
+  "submission_slots_spent": 0,
+  "weekly_cap": null,
+  "scientific_work_stopped_at": "Registry/preflight; no model fitted, no new surface, no new dots, no budget tuning around lattice holes.",
+  "evidence_sha256": {
+    "evidence/s23_priority_audit.json": "aedd283d533e829339009fb72b0bd82aad0fe6250c2b65ea4504bd3090b155b6",
+    "evidence/s23_focus_novelty.json": "f94011436e02974563b64e78ff1a409d54145cba3e3d3afaf33706c30623fe08",
+    "evidence/s23_registry_feasibility.json": "aa5cd06516fcd67c1c0ddfa8a7da6945ed6be5371846e1b2d7ee7f0edacb091d",
+    "evidence/s23_scorecard.json": "2100ca1aff6b5a50e2be9e961e319bf00f80c90a2da66aa78d2722deadbd9905",
+    "evidence/s23_official_source_review.json": "1c1cc322e9eff3519b2dc7e0d1d88844937ef7021d44186eee16ba8531827703",
+    "evidence/s23_preflight.json": "63f5b74303d9ef26ce9428f1b0f98d979f04954ce096bae0bb619000e8baa661",
+    "evidence/s23_shared_template_contract.json": "dc9deef0d294b97a03a37089a3b08ddf5bc4e87c0e74ff03cfbff5591e9c6872",
+    "registry/protocol_assets.json": "ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa",
+    "registry/current_session.json": "b8f030421d8c95aaad8c79f54acf45ad064ed58f2ed45abe01edef4ad4545aed",
+    "registry/s23_hypotheses.json": "c31b0c48cc93ba74240c786eba95e4868edae1987285760be5e42a2e037302e0",
+    "knowledge/66_s23_preregistration.md": "35747454f82d35c3050d1c954d516a2982a8d994163036120d3676cc908ec092",
+    "evidence/data_preparation.json": "bf8e319179ae5ddd365ab005a712eead48d135b7807290f62b74093085379e24",
+    "evidence/s23_download_audit.json": "8d8abe10048e43bbbdf4ddb25f4d4d84fccfd280cb28663396aa20b5b95cb106",
+    "evidence/s23_s22c_reassessment.json": "a8ea8a000b1f8d9232155f5fea504517ef86d9d51de48dde16da5f1232f98d4c",
+    "docs/downloads/manifest.json": "483f75aa3124392179b9f28dabf028b35e585fcff0d8267521b230b88870275e",
+    "evidence/snapshots/s23_source_feed.json": "3d689053dfdee81d6ffe35c3a4ac22059b0dae9dfbe7525fab1c2430baa9c102",
+    "registry/irregularities.json": "9d65ffd3bb18530365f1b82c922b1df17fa7fa9e66647e1ac5331851bec2ee23",
+    "evidence/s23_optional_restore.json": "23f7c282263f7905845f359082dccbcb5a5b7d7dff99e260d4c62d22f5b355b4",
+    "registry/data_manifest.json": "cd31840ccff6ce889f342d54332401e6861342ae7e1462df2272c1236482d16a"
+  },
+  "implementation_sha256": {
+    "scripts/finalize_s23_audit.py": "bcdddd82ee4ba126d43f8323a75179c8fd9093106c2040f54c31d84a9b6058a7",
+    "scripts/audit_registry_feasibility.py": "eb2f11f5616dedbd7e124dd4cbff837d64e580015f53d2eb64451245c6cb83c4",
+    "src/gems27/registry_feasibility.py": "c24fa89a2f3dc97139160c4b1074ca7e6b7fa97704cfd1884a0117d478cd4b66",
+    "src/gems27/cache_contract.py": "02af6e7e3a7493e249859b14480cd672ca8f2652bf9012d23caf5e4bcc6c02db",
+    "scripts/prepare_data.py": "71a5d0b93650386eb02cf5d103208380ee0cd7c1e18496747bde1857e66dee13",
+    "scripts/check_run_preflight.py": "28ad826db7e060c38924df6fc75deb2e4d0f980ce69e8bb30b075af72d415576",
+    "scripts/audit_shared_template.py": "1345b05a021e339392317e6abbaf4c3d7cc0bdb558f5ab332671f7da38dfbbcd",
+    "scripts/build_site.py": "6827d84388f123495ae63f477e26b3caa40420dc2975e337e48ac31db575eaee",
+    "scripts/site_s23.py": "c3fbab671c0fbef56ec4c917d77003b918b864b27d4fe25fbd89c594bce8a0fa",
+    "scripts/finalize_s22c.py": "3a619c5c9821b202a9b0f18fd831a5ba8a1197676372dea186d6af603b1ea305"
+  },
+  "historical_snapshot_sha256": {
+    "evidence/snapshots/pre_s23_current_session.json": "5efbb0a7a0928633127cbf80c90358c2f103685cc030fc446f6e89e629e41aae",
+    "evidence/snapshots/pre_s23_protocol_assets.json": "b4e23ba97cb72e89a78bcfda7d4b3076ea2076141ba1f648801083b79e500d79",
+    "evidence/snapshots/pre_s23_download_manifest.json": "68164afef2e90a799b8144a053e136758303fc476338b77917ff40d16860b272",
+    "evidence/snapshots/pre_s23_finalize_s22c.py": "66fbfc3c8c1f803976f5429069f53a358e3cb52f131672879934d6c6602b39ed",
+    "evidence/snapshots/pre_s23_audit_shared_template.py": "07006dec6ff474ffcfe735ccfaad7992b588eacc949143cfbe1f2a6a69c07127"
+  },
+  "source_feed_observation": {
+    "snapshot": "evidence/snapshots/s23_source_feed.json",
+    "checked_at_utc": "2026-10-27T17:29:17Z",
+    "status": "partial-or-unavailable",
+    "source_count": 18,
+    "freshly_observed_count": 10,
+    "scope": "GitHub metadata only for freshly observed entries; not new scientific-content verification. Old dated non-GitHub observations are retained, not refreshed."
+  },
+  "archive_audit": {
+    "status": "FAIL",
+    "check_count": 868,
+    "failures": [
       "s22_archive_h40_vent_allfinite_outside_zero",
       "s22_archive_h41_spring_allfinite_outside_zero"
     ],
-    "registered_tiffs": 48,
-    "preflight": "BLOCKED",
-    "preflight_failures": [
-      "Missing explicit assigned method lane and assignment source",
-      "Missing complete shared parallel-run registry",
-      "Missing frozen current-best result under the same strict protocol",
-      "Cached feature stack unavailable: [Errno 2] No such file or directory: '/home/user/GEMSDOE28/data/prepared/features.json'"
-    ],
-    "shared_synthetic_contract": "PASS; software test only"
+    "scope": "51 historical TIFFs registered, not 51 files approved. Two legacy allfinite variants retain NaN nodata metadata; not repaired/renamed as new candidates. Earlier portal-error causation remains unknown."
   },
-  "submission_name": null,
-  "submission_note": "S22 audit only; no candidate generated; DO NOT SUBMIT.",
-  "submission_note_characters": 54,
-  "new_tiff_generated": false,
-  "experiments_run": 0,
-  "slot_selected": false,
-  "submission_ready": false,
-  "verdict": "negative",
-  "source_access_irregularity": "One-off research-tool access to public competition pages may conflict with the manual-only project policy and quoted site terms; compliance is undetermined. No login or upload; do not repeat automated access absent permission.",
-  "concurrent_research_artifact": {
-    "session": "S22-SIGN (PR #57; separate lane)",
-    "file": "docs/downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
-    "sha256": "d9c235709d100e292f77293dd0fa94eeb5cc68728f2bacd49f97411fb1241229",
-    "download": "research only; DO NOT SUBMIT",
-    "holdout": "historical local quadrant cell mean 0.054664 vs 0.121914; CI not recorded; positive-count inconsistency in source",
-    "final_dot_audit": "55 available comparisons; 0 duplicates, maximum 53.56% within 3 px; complete registry and pre-placement surfaces unavailable",
-    "canary": "FAIL: recorded feature results empty despite pass flag",
-    "submission_ready": false,
-    "audit": "evidence/s22_sign_audit.json"
-  }
+  "limitations": [
+    "The requested unique submission and top-candidate holdout were not completed: the literal overlap gate is infeasible at 37,654 dots and the inherited lane is a measured duplicate.",
+    "A smaller budget is not universally impossible, but selecting cells to avoid this calibration lattice would evade the rule rather than establish a geological strategy.",
+    "Explicit assigned lane, synchronized complete registry, strict comparable frozen best, current authenticated weekly allowance and organizer receipts are unavailable.",
+    "Input integrity is checked against owner mirrors, not authenticated organizer downloads; official non-GitHub hosts and new DEM tiles are outside runtime network access.",
+    "Synthetic shared-tool tests are software validation only; they do not establish a new HOLDOUT-DTI or a higher leaderboard score.",
+    "Optional legacy input restoration hit the GitHub REST rate limit after nine existing inputs were re-verified; five input-dependent tests remain skipped, not passed."
+  ]
 }

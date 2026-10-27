@@ -307,6 +307,22 @@
         "fetch-failed": 2,
         "observed": 8
       }
+    },
+    {
+      "checked_at_utc": "2026-10-27T17:27:04Z",
+      "source_count": 10,
+      "status_counts": {
+        "not-checked-network-policy": 8,
+        "observed": 2
+      }
+    },
+    {
+      "checked_at_utc": "2026-10-27T17:29:17Z",
+      "source_count": 18,
+      "status_counts": {
+        "not-checked-network-policy": 8,
+        "observed": 10
+      }
     }
   ]
 }

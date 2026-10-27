@@ -68,5 +68,171 @@
     "valid"
   ],
   "lidar_metadata_sha256": "9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41",
-  "note": "Label-free feature matrix for spatial-CV detectors. Band 6 ('tc') is excluded because it is rank-identical to radiometric total count (Spearman 1.0000); all remaining 18 training bands are verified by embedded description."
+  "note": "Label-free feature matrix for spatial-CV detectors. Band 6 ('tc') is excluded because it is rank-identical to radiometric total count (Spearman 1.0000); all remaining 18 training bands are verified by embedded description.",
+  "missingness": {
+    "policy": "preserve-source-nodata-v1",
+    "imputed": false,
+    "bands": {
+      "mag_anom": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "rtp": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "tmi_hg": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "geod_2ndinv": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "iso_grav_anom_slope": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "geod_shearrate": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "geod_dilaterate": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "tmi_vg": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "deq_n100a15": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "iso_grav_anom_vg": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "det_elev": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "iso_grav_anom": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "tmi": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "depth_to_base_surf": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "ieq_n100a15": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "cond_surf": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "iso_grav_anom_hg": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "det_elev_slope": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "lidar_ex_max": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_ex_mean": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_step_max": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_lapneg_max": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_lappos_max": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_downface_max": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_upface_max": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_cross_max": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_relief": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_coh100": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_cos2strike": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "lidar_sin2strike": {
+        "finite": 3894460,
+        "nan": 1272913,
+        "infinity": 0
+      },
+      "det_local_relief": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      },
+      "det_gradient": {
+        "finite": 5164312,
+        "nan": 3061,
+        "infinity": 0
+      }
+    }
+  }
 }

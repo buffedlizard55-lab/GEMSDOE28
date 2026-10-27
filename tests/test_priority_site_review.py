@@ -59,7 +59,7 @@ class PrioritySiteReviewTests(unittest.TestCase):
         self.assertIn("https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/", self.page)
         self.assertIn("72 directional comparisons", self.page)
         self.assertIn("not the complete current registry", self.page)
-        self.assertIn("S22 audit: no new TIFF", self.page)
+        self.assertIn("S23 audit: no new TIFF", self.page)
         self.assertIn('href="session19-result.html">S19 archive</a>', self.page)
         self.assertIn("s22_focus_novelty.json", self.page)
         self.assertIn("DO NOT SUBMIT", self.page)

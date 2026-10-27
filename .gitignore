@@ -11,6 +11,8 @@ data/*
 # Small generated Pages route alias only; large training data/cache remain ignored.
 !data/current_run_card_2026-10-25.json
 !data/current_run_card_2026-10-26.json
+!data/current_run_card.json
+!data/current_run_card_2026-10-27.json
 *.egg-info/
 .DS_Store
 # large intermediate arrays are never committed; small derived evidence is

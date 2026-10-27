@@ -362,13 +362,13 @@
     "run_card": "data/run_card_s18.json"
   },
   "current_run": {
-    "run_id": "S22-AUDIT-20261026",
+    "run_id": "G28-S23-20261027",
     "status": "NEGATIVE \u2014 NO FILE APPROVED",
     "submission_ready": false,
     "slot_selected": false,
     "new_tiff_generated": false,
-    "run_card": "evidence/s22_audit_run_card.json",
-    "prior_run": "evidence/s19_ascp_run_card.json"
+    "run_card": "evidence/s23_run_card.json",
+    "prior_run": "evidence/s22c_run_card.json"
   },
   "s18_h39_5_candidate": {
     "slug": "h39-5-extrap-swap35",
@@ -755,7 +755,7 @@
     "bytes_zip": 293136,
     "emitted_px": 37654,
     "format_verified": true,
-    "status": "PASSES FROZEN S22 GATE \u2014 SELECTOR DECISION REQUIRED, NO SLOT SPENT BY THIS SESSION; HOLDOUT-DTI quadrant component-hide seeds 360-362 pooled lane 0.12018 vs dotted_b2 0.10519 (paired +0.01498, 95% CI [+0.01067,+0.01932], 12/12 cells) vs per-pixel control 0.09505; canary max AUC 0.7200 PASS; uniqueness vs champion 42.1% within3px / |Spearman| 0.067 PASS, worst 69.92% vs unscored H37-1 union-pool (margin 0.0008, disclosed); validator PASS (all-finite {0,1}); MODEL projection ~0.317 vs USER-REPORTED 0.2778 anchor (not a score); verdict promote (frozen gate), submission_ready=false, slot_selected=false.",
+    "status": "SUPERSEDED BY S23 \u2014 DO NOT SUBMIT. Historical frozen-gate promote claim retained only in evidence/s22c_run_card.json. Literal any-registry-raster rule FAIL: 99.6176% of dots within 3 px of registered spacing-5 lattice. Buffered confirmation not run. Historical ratio projection withdrawn from current recommendations. File bytes, identifying note and old evidence are preserved; no new TIFF or slot.",
     "note": "S22 ctxHGB multiscale-context 37654d | HOLDOUT-DTI 0.1202 vs dotted 0.1052 (+0.0150) seeds360-362 | e23dabcec6e2",
     "note_file": "note-gems28-s22-e23dabcec6e2.txt",
     "submission_name": "GEMSDOE28-S22-ctxhgb-e23dabcec6e2",
@@ -763,8 +763,11 @@
     "holdout_evidence": "evidence/s22c_holdout.json",
     "holdout_preregistration": "knowledge/64_s22c_preregistration.md",
     "holdout_seeds": "360-362",
-    "verdict": "promote",
+    "verdict": "negative",
     "submission_ready": false,
-    "slot_selected": false
+    "slot_selected": false,
+    "source_claim_verdict": "promote",
+    "archive_only": true,
+    "current_review": "evidence/s23_registry_feasibility.json"
   }
 }
