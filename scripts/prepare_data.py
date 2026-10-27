@@ -20,6 +20,7 @@ from scipy.ndimage import distance_transform_edt, gaussian_filter
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gems27 import grid, paths  # noqa: E402
+from gems27.cache_contract import missingness_counts  # noqa: E402
 
 # Verified against rasterio.open(paths.TRAINING).descriptions (band 6 'tc' excluded).
 TRAINING_BANDS: list[tuple[int, str]] = [
@@ -111,6 +112,10 @@ def main() -> int:
         except (OSError, ValueError, json.JSONDecodeError):
             cache_valid = False
         if cache_valid:
+            # Describe the existing values; never impute or rebuild a valid cache
+            # just to satisfy preflight. Missing source coverage is intentional.
+            cached_meta["missingness"] = missingness_counts(cached_arr, names)
+            meta_path.write_text(json.dumps(cached_meta, indent=2) + "\n")
             ev_path.write_text(json.dumps(cached_meta, indent=2) + "\n")
             print(json.dumps(cached_meta, indent=2))
             return 0
@@ -213,6 +218,7 @@ def main() -> int:
         "lidar_metadata_sha256": input_hashes["lidar_scarp_features_metadata"],
         "note": "Label-free feature matrix for spatial-CV detectors. Band 6 ('tc') is excluded because it is rank-identical to radiometric total count (Spearman 1.0000); all remaining 18 training bands are verified by embedded description.",
     }
+    metadata["missingness"] = missingness_counts(np.load(dest, mmap_mode="r"), names)
     meta_path.write_text(json.dumps(metadata, indent=2) + "\n")
     ev_path.write_text(json.dumps(metadata, indent=2) + "\n")
     print(json.dumps(metadata, indent=2))

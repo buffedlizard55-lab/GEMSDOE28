@@ -39,6 +39,12 @@ def exercise(shared) -> dict:
     checks["canary_rejects_deliberate_leak"] = canary["features"]["deliberate_catalogue_leak"]["leakage_suspected"]
     checks["canary_rejects_inverted_leak"] = canary["features"]["inverted_catalogue_leak"]["leakage_suspected"]
     checks["random_control_not_flagged"] = not canary["features"]["random_control"]["leakage_suspected"]
+    try:
+        context.canary({})
+    except ValueError:
+        checks["empty_canary_rejected"] = True
+    else:
+        checks["empty_canary_rejected"] = False
     errors = []
     for _ in range(12):
         truth = rng.random((17, 19)) < 0.05

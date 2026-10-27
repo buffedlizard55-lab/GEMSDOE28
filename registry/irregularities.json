@@ -1,6 +1,30 @@
 {
-  "generated": "2026-10-26T22:23:15Z",
+  "generated": "2026-10-27T17:38:00Z",
   "items": [
+    {
+      "id": "s23-s22c-literal-registry-duplicate",
+      "severity": "high",
+      "issue": "Inherited S22C was advertised as promote/unique using a narrowed snapshot, but exact final-dot comparison to an existing shared spacing-five lattice gives 99.6176% within 3 px. Low raw/kernel correlation does not override the alternative overlap rejection.",
+      "action": "Record current negative reassessment in evidence/s23_s22c_reassessment.json and exact proof in evidence/s23_registry_feasibility.json; correct current site/manifest/README, block old finalizer, preserve its exact source and historical claim/TIFF. No model/holdout/new TIFF or slot. Upstream GEMSDOE24 already documented the dense-control blocker; S23 confirms it and adds a spacing capacity bound. Do not exempt a comparator or optimize around holes."
+    },
+    {
+      "id": "s23-feature-cache-nodata-contract",
+      "severity": "medium",
+      "issue": "Existing preparation preserves legitimate source-nodata NaN while old preflight rejected every NaN, even with hash-identical usable HGB features.",
+      "action": "Use one explicit preserve-source-nodata-v1 per-band contract in preparation and preflight; audit every cell/count. Preserve identical feature array SHA 83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc with no imputation. Reject Inf, all-missing/empty columns and malformed/stale declarations. No canary or geological validation is inferred from this repair."
+    },
+    {
+      "id": "s23-incomplete-scientific-deliverable",
+      "severity": "high",
+      "issue": "The requested genuinely unique new TIFF and top-proposal buffered holdout were not completed. A measured inherited duplicate, infeasible champion-sized budget, missing exclusive lane/current complete registry and strict comparable best prevent truthful promotion.",
+      "action": "Keep null new-raster SHA/name/holdout/CI/estimate in evidence/s23_run_card.json, no approved download or slot. Four frozen physical proposals remain unimplemented. Smaller budgets are not universally impossible; no post-test budget selection or lattice-hole placement was performed."
+    },
+    {
+      "id": "s23-source-freshness-and-format-boundaries",
+      "severity": "medium",
+      "issue": "GitHub metadata freshness is not official scientific verification or an organizer receipt. Non-GitHub sources are not freshly retrievable here; current leaderboard/account weekly allowance unknown. Two historical allfinite nodata-tag variants still fail the 51-TIFF audit.",
+      "action": "Publish dated source-by-source evidence, 10/18 fresh metadata observations with immutable snapshot, preserve original old observation times. All supplied scores remain USER-REPORTED/UNVERIFIED; old ratio projection withdrawn. No automatic competition request. Preserve FAIL archive report evidence/s23_download_audit.json, not acceptance guarantees or a fabricated portal-error diagnosis. Additional optional 17-input restoration was blocked by GitHub REST rate limiting after re-verifying nine existing inputs (evidence/s23_optional_restore.json); five legacy tests stay explicitly skipped. No unchanged request repeated."
+    },
     {
       "id": "s22-sign-canary-holdout-count-and-runner",
       "severity": "high",

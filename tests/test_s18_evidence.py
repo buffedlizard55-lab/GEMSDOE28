@@ -108,7 +108,7 @@ def test_s19_download_remains_visible_on_its_historical_page_only():
     assert "s19_ascp_run_card.json" in page
     for name in ("index.html", "executive-summary.html"):
         html = (ROOT / "docs" / name).read_text()
-        assert "S22 audit: no new TIFF" in html
+        assert "S23 audit: no new TIFF" in html
         assert f'href="downloads/{filename}"' not in html
     assert (ROOT / "docs/session18-result.html").is_file()
 

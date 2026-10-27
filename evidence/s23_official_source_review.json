@@ -1,0 +1,106 @@
+{
+  "observed_utc": "2026-10-27T17:25:34.986768+00:00",
+  "access_method": "GitHub API via gh; no competition-site automation, login or upload.",
+  "official_reference": {
+    "repo": "drivendataorg/gems-prize-reference-solution",
+    "commit": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239",
+        "source": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md"
+      },
+      {
+        "path": "unet-mc-cv-reference-solution.ipynb",
+        "sha256": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0",
+        "source": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb"
+      }
+    ],
+    "verified_claims": [
+      {
+        "claim": "The organizer reference predicts geological faults, not geothermal vents.",
+        "location": "notebook cell 0",
+        "evidence_excerpt": "# GEMS Prize Reference Solution\n\n_author_: John Lipor, Associate Professor at Portland State University\n\n# Fault Detection Using U-Net with Monte Carlo Cross-Validation\n\nThis benchmark notebook implements a deep learning approach to geological fault detection. \nThe solution uses an ensemble of U-Net models trained across multiple train/test splits to \nproduce predictions.\n\n### Approach Overview:\n\n1. Load and pre-process multi-channel geospatial features (elevation, gradients, etc.) and fault labels\n\n1. Split feature and fault label rasters into patches\n\n1. Train U-Net models on patches with da"
+      },
+      {
+        "claim": "The reference U-Net uses a Tversky training loss with alpha 0.2 and beta 0.8. This is not the distance-weighted evaluator or a score receipt.",
+        "location": "notebook cell 16",
+        "evidence_excerpt": "alpha = 0.2; beta = 0.8; criterion = TverskyLoss(alpha=alpha, beta=beta, mode=\"binary\")"
+      },
+      {
+        "claim": "CPU-only training is supported; GPU improves speed rather than being universally required.",
+        "location": "README Choosing GPU vs. CPU",
+        "evidence_excerpt": "No GPU: Use the cpu option (uv) or environment-cpu.yml (conda) for the smallest install."
+      }
+    ]
+  },
+  "shared_template": {
+    "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/2521cb676e172c141a4417e4925b73b6a896c1eb",
+    "authority": "Owner-maintained shared implementation, NOT official organizer code. Hash-verified; no private fork.",
+    "manifest_sha256": "ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa",
+    "previous_manifest_snapshot": "evidence/snapshots/pre_s23_protocol_assets.json"
+  },
+  "external_sources_not_freshly_retrieved": [
+    {
+      "id": "competition",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "problem_format_metric",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "resources",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "data",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "leaderboard",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "rules_pdf",
+      "source": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "geodawn",
+      "source": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "ingenious",
+      "source": "https://gbcge.org/current-projects/ingenious/",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "gdr1391",
+      "source": "https://gdr.openei.org/submissions/1391",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    },
+    {
+      "id": "dem3dep",
+      "source": "https://www.usgs.gov/3d-elevation-program",
+      "status": "NOT RETRIEVED: host outside this runtime outbound allowlist; no current rule, data-download availability, account allowance or score inferred."
+    }
+  ],
+  "historical_public_leaderboard_observation": {
+    "source_evidence": "evidence/s22_official_source_review.json",
+    "sha256": "49b89f7d25cdc584d0417339d0a73795b8f5552b2042299209275780c5df0a8f",
+    "observed_utc": "2026-10-26T22:02:42Z",
+    "value": 0.4437,
+    "label": "HISTORICAL PUBLIC LEADERBOARD OBSERVATION, not a current refresh or raster-linked receipt",
+    "access_irregularity": "The previous audit disclosed potential conflict with repository manual-only competition-access policy. Do not repeat automated access."
+  },
+  "geological_hypotheses_status": "PCSE/TCB/MCR/CSD are hypotheses, not findings established by the official reference or freshly retrieved field literature.",
+  "organizer_confirmed_scores": [],
+  "mirror_provenance": "Input SHA-256 pins authenticate equality to owner GitHub mirrors, not organizer provenance, licensing or competition acceptance."
+}

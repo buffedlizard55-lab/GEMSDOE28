@@ -1,0 +1,19 @@
+{
+  "observed_utc": "2026-10-27T17:41:50Z",
+  "command": "python scripts/restore_data.py --group all",
+  "exit_code": 1,
+  "status": "BLOCKED_GITHUB_REST_RATE_LIMIT",
+  "manifest": "registry/data_manifest.json",
+  "manifest_sha256": "cd31840ccff6ce889f342d54332401e6861342ae7e1462df2272c1236482d16a",
+  "already_verified_inputs": 9,
+  "total_registered_inputs": 17,
+  "new_optional_inputs_restored": 0,
+  "first_failed_id": "geodawn_extensions",
+  "error": "HTTP 403 GitHub REST API rate limit exceeded; no authentication error, no credential request. Do not repeat unchanged requests before reset.",
+  "remaining_optional_inputs": "Not attempted after the first failure; no successful restore claim for them.",
+  "impact": "Five legacy input-dependent tests stay skipped, with explicit reasons in the verification record. Existing core/template/feature-cache geometry and shared-tool audits remain runnable.",
+  "provenance": "Existing hash-pinned owner mirrors only, not new authenticated official field/DEM data.",
+  "geological_experiments_run": 0,
+  "new_tiff_generated": false,
+  "slot_selected": false
+}

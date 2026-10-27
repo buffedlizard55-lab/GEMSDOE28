@@ -1,0 +1,118 @@
+{
+  "session_id": "G28-S23-20261027",
+  "verified_at_utc": "2026-10-27T17:49:13Z",
+  "status": "SOFTWARE_RECHECK_PASS_WITH_DISCLOSED_SKIPS; SCIENTIFIC_GATES_BLOCKED",
+  "scope": "Engineering, exact-file/registry forensics and static site only; not a new model, HOLDOUT-DTI, score forecast or competition acceptance.",
+  "passes": [
+    {
+      "pass": 1,
+      "scope": "Implement geometry/cache/preflight and current evidence/site authority",
+      "outcome": "Initial targeted suite 80 passed / 1 historical mutable-file binding failure; first full post-edit suite 601 passed / 9 stale current-site expectations failed. Findings fixed, not hidden."
+    },
+    {
+      "pass": 2,
+      "scope": "Review assumptions, edge cases, historical provenance, unsafe entry points, alias/deployment authority and unknowns",
+      "outcome": "611 passed / 5 skipped / 9 subtests passed; added 31 current evidence/page checks, preserved snapshots, rejected empty feature stacks/canaries, blocked old finalizer, retained archive failures."
+    },
+    {
+      "pass": 3,
+      "scope": "Final complete suite/lint, no-input mode, independent audit replays, deterministic stdlib build, links, exact hashes and diff",
+      "outcome": "PASS for this engineering scope, not scientific promotion."
+    }
+  ],
+  "final_local_tests": {
+    "passed": 642,
+    "skipped": 5,
+    "warnings": 12,
+    "subtests_passed": 9,
+    "seconds": 15.52,
+    "skip_details": [
+      "SKIPPED [1] tests/test_inversion.py:118: hash-pinned competition inputs are not restored in this environment (missing: qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.",
+      "SKIPPED [1] tests/test_newinfo.py:103: restored input rasters not present",
+      "SKIPPED [1] tests/test_s18_evidence.py:116: hash-pinned competition inputs are not restored in this environment (missing: qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.",
+      "SKIPPED [1] tests/test_thermal.py:140: GDR well/spring table not restored in this checkout",
+      "SKIPPED [1] tests/test_vector_and_oof.py:44: hash-pinned competition inputs are not restored in this environment (missing: qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only."
+    ]
+  },
+  "no_input_mode_tests": {
+    "passed": 641,
+    "skipped": 6,
+    "warnings": 12,
+    "subtests_passed": 9,
+    "seconds": 13.04,
+    "skip_details": [
+      "SKIPPED [1] tests/test_heatflow_euler.py:125: Real footprint or sb_heat_flow_in_footprint.json unavailable",
+      "SKIPPED [1] tests/test_inversion.py:118: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.",
+      "SKIPPED [1] tests/test_newinfo.py:103: restored input rasters not present",
+      "SKIPPED [1] tests/test_s18_evidence.py:116: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only.",
+      "SKIPPED [1] tests/test_thermal.py:140: GDR well/spring table not restored in this checkout",
+      "SKIPPED [1] tests/test_vector_and_oof.py:44: hash-pinned competition inputs are not restored in this environment (missing: sample_submission.tif, labels.tif, h19_5_nan.tif, dotted_h19_5_d1_5_nan.tif, qfaults_v2_in_footprint.json). Run `python scripts/restore_data.py` to execute these checks; CI builds the site and runs the pure-Python tests from JSON only."
+    ]
+  },
+  "lint": {
+    "command": "ruff check src scripts tests",
+    "result": "PASS",
+    "output": "All checks passed!"
+  },
+  "static_build": {
+    "command": "python -S scripts/build_site.py",
+    "third_party_packages_required": false,
+    "external_requests": 0,
+    "replays": 2,
+    "identical_output_files": 45,
+    "html_pages": 18,
+    "local_links_and_fragments": "PASS on all 18 docs pages; duplicate IDs rejected; one current lock per page.",
+    "live_preview": "Five routes checked HTTP 200; HTML locked and current JSON negative. No visual browser test claimed."
+  },
+  "fresh_audit_replays": {
+    "geometry": "DUPLICATE_STOP; exact report/code equality except observation time",
+    "focus": "All 72 comparisons and pixel forensics identical apart from observation time",
+    "preflight": "BLOCKED; same four reasons and identical cache/shared data apart from check time/elapsed time",
+    "archive": "FAIL; identical 868 checks, two retained legacy nodata-tag failures apart from observation time",
+    "nonzero_exit_codes_expected": true
+  },
+  "evidence_binding": {
+    "run_card": "evidence/s23_run_card.json",
+    "run_card_sha256": "d373768a12d9df61c857caf997bfde173037d151f233c93823c185f3ecad89bd",
+    "evidence_files": 19,
+    "implementation_files": 10,
+    "historical_snapshots": 5,
+    "all_pins_match": true
+  },
+  "budget": {
+    "started_at_utc": "2026-10-27T17:12:00Z",
+    "deadline_utc": "2026-10-27T19:12:00Z",
+    "elapsed_seconds_at_verification": 2233.286,
+    "cap_seconds": 7200,
+    "geological_experiments_run": 0,
+    "experiment_cap": 3
+  },
+  "change_scope": {
+    "branch": "arena/a774f0a0-gemsdoe28",
+    "base_commit": "67dbdf4da84fc92a98dd9644ab816ed18ae36bcc",
+    "staged_files": 81,
+    "new_or_modified_tiff_payloads": 0,
+    "new_dataset_or_model_payloads": 0,
+    "large_input_paths_ignored": true,
+    "diff_whitespace_check": "PASS"
+  },
+  "runtime_versions": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "rasterio": "1.4.4",
+    "scikit-learn": "1.9.1"
+  },
+  "limitations": [
+    "Requested unique TIFF and top-proposal buffered validation are uncompleted; no assigned exclusive lane/complete live registry/comparable strict frozen best.",
+    "Five legacy input-dependent tests remain skipped; optional restoration hit a GitHub REST rate limit, not an authentication failure. No optional new input was successfully restored.",
+    "No fresh non-GitHub official scientific content, current authenticated weekly allowance or organizer file-bound receipt. Metadata freshness is not scientific-source verification.",
+    "A necessary geometry bound rejects the 37,654-dot budget, not all conceivable smaller budgets; no post-test hole/budget optimization.",
+    "Known archive metadata failures and 12 pre-existing Rasterio affine deprecation warnings remain disclosed."
+  ],
+  "pull_request_note": "GitHub PR creation/checks/merge occur after this local verification artifact; consult actual GitHub state, not this artifact, for merge or deployment status. A code merge is not a competition submission.",
+  "new_tiff_generated": false,
+  "submission_ready": false,
+  "slot_selected": false,
+  "submission_slots_spent": 0
+}

@@ -138,3 +138,10 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
   .readiness-banner { padding: 20px 18px; }
   .readiness-banner .download-actions { align-items: stretch; flex-direction: column; }
 }
+
+/* Keep current scientific tables readable on narrow displays without page overflow. */
+caption { padding: 14px; text-align: left; font-weight: 650; color: var(--muted); }
+#nine-site-scorecard td:nth-child(2) { min-width: 200px; max-width: 360px; }
+#nine-site-scorecard th[scope="row"] { white-space: nowrap; }
+#s23-hypotheses td { min-width: 170px; }
+.section > details > summary, .section details > summary { cursor: pointer; font-weight: 700; }

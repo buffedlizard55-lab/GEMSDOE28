@@ -9,7 +9,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "cross-site-review.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "cross-site-review.html", "session23-result.html"]
 
 
 class Links(HTMLParser):
@@ -29,8 +29,8 @@ class Links(HTMLParser):
 def test_site_builds_from_json_only_and_pages_exist():
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_site.py")], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
-    # The current audit has three proposals after withdrawing the overlapping S22-SIGN arm.
-    assert json.loads(r.stdout)["hypotheses"] == 3
+    # The current audit ranks four unimplemented physical operators; none is a result.
+    assert json.loads(r.stdout)["hypotheses"] == 4
     for p in PAGES:
         assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
 
@@ -204,15 +204,15 @@ def test_pages_source_links_resolve_to_public_repository_files():
 def test_repository_root_front_page_locks_new_submission_download():
     root_idx = (ROOT / "index.html").read_text()
     assert 'href="docs/archive.html"' in root_idx
-    assert "S22 audit: no new TIFF" in root_idx
+    assert "S23 audit: no new TIFF" in root_idx
     assert "Submission download locked" in root_idx
     assert (ROOT / ".nojekyll").exists()
 
 
 def test_front_page_links_current_card_and_no_candidate_download():
     idx = (DOCS / "index.html").read_text()
-    card = json.loads((DOCS / "data/current_run_card_2026-10-26.json").read_text())
-    assert 'href="data/current_run_card_2026-10-26.json"' in idx
+    card = json.loads((DOCS / "data/current_run_card.json").read_text())
+    assert 'href="data/current_run_card.json"' in idx
     assert "Submission download locked" in idx
     assert card["submission_name"] is None and card["raster_sha256"] is None
     assert len(card["submission_note"]) <= 140
@@ -332,8 +332,8 @@ def test_current_run_notice_is_above_historical_body():
         text = (DOCS / page).read_text()
         assert 'Current run: NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text and 'do not upload it or any prior file' in text
-        assert 'S22 audit: no new TIFF' in text
-        assert 'data/current_run_card_2026-10-26.json' in text
+        assert 'S23 audit: no new TIFF' in text
+        assert 'data/current_run_card.json' in text
     overview = (DOCS / 'index.html').read_text()
     executive = (DOCS / 'executive-summary.html').read_text()
     assert '72 directional comparisons' in overview
@@ -367,6 +367,7 @@ def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(ca
     current = json.loads((DOCS / 'data/current_run_card_2026-10-26.json').read_text())
     exact = json.loads((ROOT / 'evidence/s22_audit_run_card.json').read_text())
     assert current == exact and current['verdict'] == 'negative'
+    assert (DOCS / 'data/current_run_card.json').read_bytes() == (ROOT / 'evidence/s23_run_card.json').read_bytes()
     parallel = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
     assert parallel['experiments_run'] == 0 and parallel['raster_sha256'] is None
 
@@ -450,7 +451,7 @@ def test_combined_archive_namespaces_ids_and_accessible_labels():
 
 
 
-def test_current_public_card_aliases_use_s22_audit_not_historical_candidate():
+def test_historical_dated_aliases_stay_s22_while_current_notice_advances():
     source = json.loads((ROOT / 'evidence/s22_audit_run_card.json').read_text())
     for name in ('run_card_2026-10-26.json', 'current_run_card_2026-10-26.json'):
         assert json.loads((DOCS / 'data' / name).read_text()) == source
@@ -461,7 +462,7 @@ def test_current_public_card_aliases_use_s22_audit_not_historical_candidate():
     assert (ROOT / 'data/current_run_card_2026-10-26.json').read_bytes() == (
         DOCS / 'data/current_run_card_2026-10-26.json').read_bytes()
     root_summary = (ROOT / 'executive-summary.html').read_text()
-    assert 'Submission download locked' in root_summary and 'S22 audit: no new TIFF' in root_summary
+    assert 'Submission download locked' in root_summary and 'S23 audit: no new TIFF' in root_summary
 
 
 def test_session18_h39_5_candidate_is_unique_valid_but_do_not_submit():

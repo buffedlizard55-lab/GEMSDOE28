@@ -7,7 +7,7 @@ on:
       - 'docs/**'
       - 'index.html'
       - 'executive-summary.html'
-      - 'data/current_run_card_2026-10-26.json'
+      - 'data/current_run_card.json'
       - '.nojekyll'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Bind the deployed run card to checked-out bytes
         id: release-proof
-        run: echo "sha256=$(sha256sum docs/data/current_run_card_2026-10-26.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+        run: echo "sha256=$(sha256sum docs/data/current_run_card.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
       - name: Prefer one Actions-based Pages deployment source
         id: pages-source
         continue-on-error: true
@@ -82,8 +82,10 @@ jobs:
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           expected = os.environ['EXPECTED_CARD_SHA256']
           paths = ['', 'executive-summary.html', 'docs/', 'docs/executive-summary.html',
-                   'data/current_run_card_2026-10-26.json',
-                   'docs/data/current_run_card_2026-10-26.json']
+                   'data/current_run_card.json',
+                   'docs/data/current_run_card.json',
+                   'data/current_run_card_2026-10-27.json',
+                   'docs/data/current_run_card_2026-10-27.json']
           # GitHub's deployment runner checks its own published website. This is
           # not a browser visual test, a portal call, or external research access.
           for attempt in range(12):

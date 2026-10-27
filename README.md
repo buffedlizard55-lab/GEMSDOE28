@@ -1,3 +1,167 @@
+# S23 · 2026-10-27 UTC — READ FIRST EVERY SESSION
+
+## **NO FILE APPROVED · No new TIFF generated · OK TO SUBMIT: NO**
+
+The requested genuinely unique submission TIFF and new buffered top-hypothesis validation are **not completed**. This session stopped the inherited lane under your literal duplicate rule; it did not copy, rename, retag or relocate an old raster to pretend otherwise. This is an automated rejection, not a request for a human geological inspector. **No weekly slot selected or spent; zero geological experiments.**
+
+**[Executive summary / exact submission guide](docs/executive-summary.html)** · **[Current site](docs/index.html)** · **[Current JSON run card](evidence/s23_run_card.json)** · [Nine-site CSV](docs/data/s23_scorecard.csv) · [Detailed report / limitations / next work](knowledge/67_s23_result.md) · [Frozen hypothesis ranking](knowledge/66_s23_preregistration.md)
+
+### What changed and what was actually verified
+
+- **Previous next step checked first:** S22C buffered confirmation was gated by registry validity before another model run. Its final dots overlap the registered spacing-five calibration lattice by **99.6176% within 3 px**: **DUPLICATE_STOP** regardless of low final-raster Spearman. Its old `promote` label and ~0.317 ratio projection are **superseded**, not current approval or a score. Exact historical evidence/TIFF bytes are preserved; the unsafe old finalizer is blocked. [Reassessment](evidence/s23_s22c_reassessment.json).
+- **Counting proof, GEOMETRY-AUDIT, not HOLDOUT-DTI:** lattice disks cover 5,160,724 / 5,167,373 footprint cells (**99.8713%**), leaving 6,649. At 37,654 dots, every placement overlaps ≥**82.3418%**; with ≥2.8 px spacing the bound is ≥**90.4313%**. This is **not a universal impossibility for smaller budgets**. We did not omit the control or optimize around its holes. The upstream shared repo already describes the blocker; S23 confirms it and independently tests the spacing bound. [Proof, exact counts and hashes](evidence/s23_registry_feasibility.json).
+- **Nine repositories / 28 selected historical variants** freshly audited and source-pinned. All **72 directional pairs** of the nine named historical best files violate the >70% overlap rule. Not a complete live registry. GEMSDOE32's construction is exactly solo minus 2,545 catalogue-adjacent dots; thinning may reduce redundant FP, but the reported score's cause and organizer association are unverified. [Full scorecard](evidence/s23_scorecard.json) · [Forensics](evidence/s23_focus_novelty.json).
+- **Shared software repaired, not privately forked:** nine owner-maintained assets pinned to GEMSDOE24 `2521cb676e172c141a4417e4925b73b6a896c1eb`. Preparation/preflight now share explicit source-NaN metadata without changing or imputing the 32-band array. Inf, all-missing/empty columns and malformed declarations fail. Synthetic shared tests reject deliberate/inverted leakage and an empty canary. They are not geological validation. [Contract](evidence/s23_shared_template_contract.json) · [BLOCKED preflight](evidence/s23_preflight.json).
+- **Four ranked unimplemented hypotheses:** PCSE phase-congruent scarp energy; TCB two-sided texture covariance; MCR cross-fitted conductive residual; CSD compound-scarp diffusion. Every expected improvement is **unknown**. CSD needs original official 1 m DEM bytes, unobtainable under this runtime's host policy, and is **not viable here**. No new feature/model/canary/holdout is falsely claimed.
+- **Source freshness is bounded:** feed observed **10/18** sources at **2026-10-27 17:29:17 UTC** (nine owner-repo commit metadata sources + official-reference commit metadata). Other official hosts were explicitly unattempted; retained older observations keep their real dates. Fresh metadata is not new scientific-content verification. Current leaderboard/weekly allowance unknown; conflicting 0.4413/0.3195 anchors remain unverified. Historical 0.4437 public observation is not a fresh/file-bound receipt. [Source ledger](evidence/s23_official_source_review.json) · [Immutable feed snapshot](evidence/snapshots/s23_source_feed.json).
+- **Historical format audit still FAILS:** 51 registered TIFFs / 868 checks, with two legacy H40/H41 nodata-tag failures. S22C format PASS does not override novelty FAIL. The previous portal range-error cause remains **unknown**; no acceptance guarantee. [Exact-file audit](evidence/s23_download_audit.json).
+
+### Nine-site executive table
+
+All supplied results below are **USER-REPORTED / UNVERIFIED**, not organizer-confirmed. No reliable numerical hidden-leaderboard estimate is available for any row. File links/source commits/SHA-256/format status and lower supplied claims are in the [full downloadable scorecard](docs/data/s23_scorecard.json) and [executive page](docs/executive-summary.html).
+
+| Site | Highest supplied historical claim | Unique among the nine? | New-file recommendation / OK TO SUBMIT? |
+|---|---:|---|---|
+| GEMSDOE24 | 0.2477 | No | None / **NO** |
+| GEMSDOE25 | 0.2600 | No | None / **NO** |
+| GEMSDOE27 | 0.2449 | No | None / **NO** |
+| GEMSDOE28 | 0.2710 | No | None / **NO** |
+| GEMSDOE30 | 0.2600 | No | None / **NO** |
+| GEMSDOE31 | 0.2708 | No | None / **NO** |
+| GEMSDOE32 | 0.2778 | No | None / **NO** |
+| GEMSDOE33 | 0.2632 | No | None / **NO** |
+| GEMSDOE36 | 0.2750 | No | None / **NO** |
+
+**No new submission name:** no new file. **Audit note (not an upload instruction, ≤140 characters):** `S23 audit: no new TIFF; inherited S22C fails literal registry rule. No weekly slot selected.`
+
+### Next work, in order
+
+1. Resolve the dense-control issue in the **shared, versioned registry protocol**, without silently excluding a comparator or retroactively approving S22C. The inherited lane stays closed meanwhile.
+2. Obtain an explicit single-lane assignment/source, synchronized complete surface/final registry and comparable frozen best under buffered visible-only whole-segment validation. Current historical evidence is insufficient.
+3. Only if those gates pass: freeze one new physical mechanism/budget, run every feature/missingness canary, pre-placement novelty, retrained comparable controls, pooled HOLDOUT-DTI + paired spatial 95% CI, final-dot novelty and exact-file validation. A separate selector then checks the actual authenticated weekly allowance. No speculative score forecasts or portal uploads.
+
+### Verification / development
+
+Run the three passes and read [the exact final verification record](evidence/s23_verification.json). The initial review found/fixed stale current-site tests and historical mutable-file hash bindings by preserving old bytes, not rewriting old evidence. The archive audit and preflight are deliberately non-green; a green software suite does not authorize an upload. A further optional input restore hit GitHub REST rate limiting after re-verifying nine existing inputs; five legacy tests remain explicitly skipped, not passed ([record](evidence/s23_optional_restore.json)).
+
+```sh
+python -m pytest -q
+ruff check src scripts tests
+python -S scripts/build_site.py   # deterministic, standard library only; no raster/network
+# These are expected to exit 1, not to authorize a candidate:
+python scripts/audit_registry_feasibility.py
+python scripts/check_run_preflight.py --out evidence/s23_preflight.json
+python scripts/verify_downloads.py --out evidence/s23_download_audit.json
+```
+
+Raw data/caches remain ignored; use existing pinned restoration scripts for reproduction. Never execute a historical snapshot or rerun a spent-seed lane. A code PR merge is not a competition submission. **Maximize P(Win) · Own the Outcome.**
+
+---
+
+## Full consolidated standing requirements — read every session
+
+This is the full normalized operational requirements record available in the repository, not a fabricated verbatim chat export. Historical verbatim prompt text is preserved below. The actual conversation remains authoritative; S23 uses the stricter ≤140-character note and three-experiment/two-hour limits.
+
+### Highest urgency
+
+> MUST GENERATE A UNIQUE TIF SUBMISSION FOR THE COMPETITION. DO NOT COPY A PREVIOUS
+> SUBMISSION UNLESS IT'S FOR LEARNING AND EDUCATION. BUT WE MUST GENERATE A UNIQUE TIF
+> SUBMISSION. IT MUST BE OBVIOUS WHETHER IT IS OK TO DOWNLOAD AND SUBMIT THE GENERATED TIF
+> SUBMISSION.
+
+The goal is to compete for the top prize with scientifically distinct fault-prediction strategies,
+not merely rename files or optimize a public-label proxy. Build a clean GitHub Pages site with the
+current decision and one-click `.tif` download visible at the beginning, an executive-summary
+submission guide, a unique submission name and a ≤140-character identifying note. Project inspection
+must be automated, not deferred to a human inspector. A file-format pass is not a high-performance
+validation or permission to spend a slot. Never promise that an untested file will beat a score.
+
+### Parallel-run protocol
+
+1. Stay in a single explicit method lane. If no paragraph is supplied, disclose that ambiguity;
+   do not silently claim an external exclusive assignment. Check the surface BEFORE placement and
+   final dots against the registry. Spearman >0.90 OR >70% of support/dots within 3 px of ANY one
+   registry raster means duplicate: log and stop. Do not copy old submissions as new predictions.
+2. Reuse the template cached feature stack, shared holdout evaluator and submission writer.
+   Hide entire fault segments/systems with a buffer. Every catalogue feature must use only visible
+   faults. Mask visible faults pixel-exactly. Pool DTI with α=0.2, β=0.8 and 300 m triangular kernel.
+   Fix any shared-tool defect once in the template; report it, do not maintain a private fork.
+3. Label computed performance HOLDOUT-DTI, with evaluator version, withheld-positive count and
+   95% CI. ORGANIZER-CONFIRMED requires a submission-page receipt. Projections are not scores.
+   Preserve user-supplied unverified claims as such; never fabricate receipts to force a label.
+4. Test each feature alone before trusting results; AUC >0.90 is leakage until explained.
+5. End with one JSON run card: hypothesis; mechanism; named non-fault mimic; holdout DTI + CI;
+   registry correlation/overlap; raster SHA-256; validator output (no NaN inside footprint, values
+   [0,1], matching CRS/shape/transform); submission name and short note; promote/negative verdict.
+   Negative results are deliverables.
+6. Stop after THREE experiments OR TWO hours. Do not pick/upload submissions. A separate selector
+   controls promotion to a weekly slot within the authenticated page allowance.
+
+### Research and implementation requirements
+
+- Review repo and previous-session next steps first. Prioritize the highest reported artifacts in
+  GEMSDOE24, 25, 27, 28, 30, 31, 32, 33 and 36. Study the GEMSDOE32 H33-2-B2 artifact associated
+  in the user's lists with 0.2778; explain construction and possible metric mechanism without
+  claiming hidden truth or score causation that cannot be verified.
+- The prompt quotes conflicting leaderboard tops 0.4413 and 0.3195. Obtain a dated official
+  observation when possible; distinguish public observation from a raster-linked receipt.
+- Before implementing, rank 3–5 hypotheses not yet executed here by expected improvement and cost.
+  For each: specific layers, physical transform/signature, why it might recover faults missing from
+  USGS/INGENIOUS, differences from existing implementation, and named non-fault mimics. Scientific
+  novelty is not established merely by different pixels. Any new data requirement needs a specific
+  free official source and an actual availability check before it is called viable.
+- Validate the top candidate on buffered spatial holdouts before a slot. It must beat the frozen
+  current best with robust uncertainty/spread gates. Do not spend a slot on an unvalidated idea.
+- Research physical mechanisms deeply and maintain an auditable source/knowledge table. Do not
+  confuse faults, permeability, geothermal favorability and verified geothermal vents. Preserve
+  official links for manual review without requiring manual geological inspection to determine
+  the pipeline's disposition. Autonomous operation cannot confer legal eligibility or authenticate
+  private data/receipts that it cannot access.
+- Fix the observed portal range-error risk using independent exact-file checks, not a silent clamp
+  or a claim of guaranteed portal acceptance. A valid submission is a single-band GeoTIFF (or ZIP
+  containing one) with template CRS, shape and geotransform, and finite interior confidence [0,1].
+- Restore actual available data rather than repeating a stale data-placement blocker. Use official
+  external sources and disclosed, hash-pinned owner mirrors as distinct provenance classes. Keep
+  large arrays and datasets out of Git. CPU/GPU requirements must reflect the actual method.
+- Store the standing brief in README and read it every session. Maintain an up-to-date public-source
+  feed where policy permits; never fabricate a refresh time or build a DrivenData scraper/login bot.
+- Core values: **Maximize P(Win)** (choose evidence-backed tradeoffs, protect scarce slots) and
+  **Own the Outcome** (own end-to-end file, UI, evidence and tests; act autonomously on defects).
+- THREE passes: (1) implement and verify; (2) review for bugs, omissions, assumptions and edge cases,
+  fix them; (3) check against the original request and improve accuracy/reliability/completeness.
+  Flag irregularities explicitly, with no invented measurements or unsupported conclusions.
+- Create a pull request and merge it to main after verification. Keep work on the Arena session
+  branch. State limitations and prioritized next-session work. A code PR merge is not a competition
+  submission or slot selection.
+
+### Requested source starting points
+
+- [Competition overview](https://www.drivendata.org/competitions/306/competition-doe-gems/)
+- [Problem, metric and file format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
+- [About / cited literature](https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/)
+- [Data](https://www.drivendata.org/competitions/306/competition-doe-gems/data/)
+- [Leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/)
+- [Official rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf)
+- [Official reference code](https://github.com/drivendataorg/gems-prize-reference-solution)
+- [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and)
+- [INGENIOUS](https://gbcge.org/current-projects/ingenious/)
+- [DOE GDR compilation 1391](https://gdr.openei.org/submissions/1391)
+- [EPSG:32611](https://epsg.io/32611)
+- [Tversky index background](https://en.wikipedia.org/wiki/Tversky_index)
+
+The current request also includes historical result lists for GEMSDOE through GEMSDOE92,
+Dropbox data links and a prior data-placement/training statement. Those are user-supplied context,
+not verified current facts or proof that every historical artifact has been reviewed. S18's declared
+nine-repository snapshot and actual input restoration are explicitly bounded in its run card.
+
+
+---
+
+<details>
+<summary><strong>Historical session records and verbatim prompt archive — superseded, not current approval</strong></summary>
+
+**Read-first warning:** the S23 decision above overrides all older download, promote, “unique,” projected-score and leaderboard claims below. Those sections preserve what earlier sessions claimed; they are not independent current recommendations. In particular the S22C frozen-gate promote claim fails the current literal registry audit, and unbuffered historical results are not the required strict buffered validation. Do not upload old files as new submissions.
+
 # Session 22C (`S22-CTXHGB`, parallel session renamed at merge) — 2026-10-26 UTC (read first every session)
 
 ## NEW UNIQUE GeoTIFF GENERATED — **OK TO DOWNLOAD: YES · OK TO SUBMIT: SELECTOR CHECKLIST REQUIRED (no slot spent by this session)**
@@ -1426,3 +1590,6 @@ GEMS_DATA_DIR=$PWD/data .venv/bin/python scripts/build_h36_1_submissions.py
 .venv/bin/python scripts/build_site.py
 .venv/bin/python -m pytest -q
 ```
+
+
+</details>

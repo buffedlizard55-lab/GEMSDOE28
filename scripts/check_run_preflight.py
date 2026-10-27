@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from gems27.cache_contract import validate_missingness  # noqa: E402
 from gems27.evidence_json import loads  # noqa: E402
 from gems27.grid import FOOTPRINT_PX  # noqa: E402
 from gems27.promotion import finite_number  # noqa: E402
@@ -73,6 +74,13 @@ def preflight(config: dict, *, root: Path = ROOT) -> dict:
                     identities.add(digest)
                 except (OSError, KeyError, TypeError, ValueError) as exc:
                     failures.append(f"Invalid registry member: {exc}")
+    if config.get("registry_geometry_audit") is not None:
+        geometry = evidence(config["registry_geometry_audit"], "Invalid registry feasibility evidence")
+        if geometry is not None and (
+                geometry.get("status") != "NECESSARY_CONDITION_ONLY"
+                or not isinstance(geometry.get("bounds"), dict)
+                or geometry["bounds"].get("target_budget_impossible") is not False):
+            failures.append("Literal registry overlap rule blocks the declared emission budget; do not tune around controls")
     baseline = evidence(config.get("frozen_protocol_comparable_best"),
                         "Missing frozen current-best result under the same strict protocol")
     if baseline is not None:
@@ -133,11 +141,12 @@ def preflight(config: dict, *, root: Path = ROOT) -> dict:
                 or len(names) != 32 or not all(isinstance(x, str) for x in names)
                 or len(set(names)) != 32):
             failures.append("Cached feature checksum, shape, dtype or band contract mismatch")
-        # Bound temporary memory while checking every value, not a random sample.
-        for start in range(0, array.shape[0], 65536):
-            if not np.isfinite(array[start:start + 65536]).all():
-                failures.append("Cached feature stack contains NaN or infinity")
-                break
+        # Shared preparation intentionally preserves source-nodata NaN (not Inf).
+        # Reconcile every value with the declared per-band missingness; no private
+        # imputation and no random-sample finiteness shortcut.
+        missingness = validate_missingness(array, names, meta.get("missingness"))
+        cache["missingness"] = missingness
+        failures.extend(missingness["failures"])
     except (OSError, EOFError, KeyError, TypeError, ValueError) as exc:
         failures.append(f"Cached feature stack unavailable: {exc}")
     try:
