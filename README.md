@@ -6,6 +6,8 @@ The requested genuinely unique submission TIFF and new buffered top-hypothesis v
 
 **[Executive summary / exact submission guide](docs/executive-summary.html)** · **[Current site](docs/index.html)** · **[Current JSON run card](evidence/s23_run_card.json)** · [Nine-site CSV](docs/data/s23_scorecard.csv) · [Detailed report / limitations / next work](knowledge/67_s23_result.md) · [Frozen hypothesis ranking](knowledge/66_s23_preregistration.md)
 
+**Active-checkout review (2026-10-27):** work is on `arena/d955c32f-gemsdoe28`. The prior S23 artifacts are frozen parallel-session provenance and identify branch `arena/a774f0a0-gemsdoe28`; do not silently rewrite those hashes. This checkout re-restored the nine pinned shared-template assets and rechecked tests/build. It did **not** generate a TIFF: the current fail-closed preflight still lacks the explicit lane, complete registry, prepared cache, and strict comparable baseline. See [current checkout review](knowledge/68_active_checkout_review_2026-10-27.md) and its [JSON run card](evidence/active_checkout_review_2026-10-27.json). Current gate: **NO file approved · OK to submit: NO**.
+
 ### What changed and what was actually verified
 
 - **Previous next step checked first:** S22C buffered confirmation was gated by registry validity before another model run. Its final dots overlap the registered spacing-five calibration lattice by **99.6176% within 3 px**: **DUPLICATE_STOP** regardless of low final-raster Spearman. Its old `promote` label and ~0.317 ratio projection are **superseded**, not current approval or a score. Exact historical evidence/TIFF bytes are preserved; the unsafe old finalizer is blocked. [Reassessment](evidence/s23_s22c_reassessment.json).
