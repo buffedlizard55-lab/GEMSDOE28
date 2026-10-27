@@ -50,6 +50,7 @@ Run the three passes and read [the exact final verification record](evidence/s23
 python -m pytest -q
 ruff check src scripts tests
 python -S scripts/build_site.py   # deterministic, standard library only; no raster/network
+python -S scripts/build_active_review.py  # overlays the active-checkout status without changing hash-bound S23 files
 # These are expected to exit 1, not to authorize a candidate:
 python scripts/audit_registry_feasibility.py
 python scripts/check_run_preflight.py --out evidence/s23_preflight.json
