@@ -1,3 +1,22 @@
+# S24 · 2026-10-27 UTC — READ FIRST (supersedes S23 where they differ)
+
+## NO NEW FILE APPROVED · OK TO DOWNLOAD: NO · OK TO SUBMIT: NO
+
+**Decision needed from you (the rule conflicts with itself):** the literal lane rule (≤70 % of dots within 3 px of any registry raster) is **unsatisfiable** against the calibration lattice `registry-039`, which covers **99.87 %** of the footprint. Every historical best file, including all nine focus sites, is at **99.9 %** overlap with it. Excluding that calibration control leaves the nine real files covering only 15–18 % each, so a unique file is possible. Choose A (keep literal), B (exclude the lattice; compare real submissions only), or C (exact-copy rule only). Details: [knowledge/68](knowledge/68_s24_result.md) §5.
+
+- **Why GEMSDOE32 (0.2778, USER-REPORTED) is highest:** its file is GEMSDOE31's emission minus exactly the 2,545 dots within 2 px of the catalogue. It has 0 catalogue-adjacent dots. Removing a dot set helps DTI when its efficiency falls below 0.0588 (`metric.inclusion_threshold`). That is a hypothesis consistent with the metric, not a measured fact.
+- **Official leaderboard (fetched 2026-10-27):** #1 = **0.4544**; #25 = 0.3195; #50 = 0.2857. The prompt's 0.4413 is not on the page, and the claim that 0.3195 is highest is wrong.
+- **Nine-site table:** all nine best files are pinned and re-hashed in [evidence/s24_nine_site_overlap.json](evidence/s24_nine_site_overlap.json). None is unique against the others (72/72 pairs >70 %). Estimated score: **not estimable** for every site (no organizer receipt, no calibrated hidden-score map).
+- **Run card:** [evidence/s24_run_card.json](evidence/s24_run_card.json). Zero holdout experiments, zero slots used.
+- **Inputs:** core training raster, labels, and sample submission restored from hash-pinned mirrors into the git-ignored `data/`; SHA-256 match the registry pins.
+
+```sh
+python scripts/audit_s24_nine_site_overlap.py   # re-fetches 9 pinned files; ~70 s; GEOMETRY-AUDIT only
+python -m pytest -q                              # 645 passed, 5 skipped
+```
+
+---
+
 # S23 · 2026-10-27 UTC — READ FIRST EVERY SESSION
 
 ## **NO FILE APPROVED · No new TIFF generated · OK TO SUBMIT: NO**
