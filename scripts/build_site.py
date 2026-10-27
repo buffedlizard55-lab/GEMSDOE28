@@ -1342,7 +1342,7 @@ def main() -> int:
     session15_review = read_json("evidence/session15_review.json", {})
     feed = read_json("docs/data/feed.json")
     s23_card = read_json("evidence/s23_run_card.json")
-    s24_card = read_json("evidence/s24_run_card.json")
+    s24_card = read_json("evidence/s24_repository_review_run_card.json")
     s23_scorecard = read_json("evidence/s23_scorecard.json")
     s23_hypotheses = read_json("registry/s23_hypotheses.json")
     s23_sources = read_json("evidence/s23_official_source_review.json")
@@ -1424,7 +1424,7 @@ def main() -> int:
     (DOCS / "data/s23_scorecard.json").write_text(
         json.dumps(s23_scorecard, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (DOCS / "data/s23_scorecard.csv").write_text(site_s23.score_csv(s23_scorecard), encoding="utf-8", newline="")
-    (DOCS / "data/s24_run_card.json").write_bytes((ROOT / "evidence/s24_run_card.json").read_bytes())
+    (DOCS / "data/s24_repository_review_run_card.json").write_bytes((ROOT / "evidence/s24_repository_review_run_card.json").read_bytes())
     # Dated 2026-10-26 aliases remain immutable historical S22 evidence.
     # Only generic/current-day aliases advance to this run.
     s23_bytes = (ROOT / "evidence/s23_run_card.json").read_bytes()

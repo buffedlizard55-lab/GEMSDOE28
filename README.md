@@ -4,13 +4,15 @@
 
 S24 is a read-only repository/software review; it does not replace S23's negative scientific decision. No new feature, candidate raster, HOLDOUT-DTI or score estimate was produced, and no slot was selected. **Do not upload an old TIFF under a new name.** The current checkout preflight is BLOCKED: the assigned lane, complete synchronized registry and same-protocol frozen best are missing, and the ignored feature cache plus all nine shared template assets are absent here. The previous S23 registry audit measured the inherited S22C file as a duplicate under the literal rule. The 37,654-dot geometry bound is not a universal proof about every smaller budget; no hole/budget search was performed.
 
-**Latest committed source-feed snapshot at this review:** 16/18 entries observed at **2026-10-27 17:51:14 UTC**; two source responses exceeded the 2,000,000-byte fetch limit. This is metadata, not a live observation or scientific-content/licence verification. It is later than the immutable S23 snapshot (10/18 at 17:29:17 UTC); both timestamps are retained honestly. No DrivenData page, leaderboard, weekly quota or receipt was queried.
+**Latest committed source-feed snapshot for this review:** 16/18 entries observed at **2026-10-27 17:51:14 UTC**; two source responses exceeded the 2,000,000-byte fetch limit. This is metadata, not a live observation or scientific-content/licence verification. It is later than the immutable S23 snapshot (10/18 at 17:29:17 UTC); both timestamps are retained honestly. This checkout did not query DrivenData, a leaderboard, weekly quota or receipt.
 
-- **[Executive summary + nine-site table + exact submission guide](docs/executive-summary.html)** · [Latest repository review](knowledge/68_s24_repository_review.md) · [S24 JSON run card](evidence/s24_run_card.json) · [Three-pass verification record](evidence/s24_verification.json) · [Blocked current-workspace preflight](evidence/s24_preflight.json) · [Immutable S24 source-feed snapshot](evidence/snapshots/s24_source_feed.json)
-- GEMSDOE32's supplied **0.2778 is USER-REPORTED / UNVERIFIED**. Pixel forensics establish a plausible catalogue-adjacent pruning mechanism, not the cause of an organizer score. No numerical hidden-score estimate is defensible for any of the nine sites; the current leaderboard is not refreshed.
-- The four ranked PCSE / TCB / MCR / CSD mechanisms remain proposals, not results. PCSE is not run because preflight stops before any geological experiment.
-- **S24 verification:** 647 passed, 6 data-dependent tests skipped (not passed), 12 warnings, 9 subtests; Ruff clean; deterministic standard-library site build succeeds with zero external requests. Full local record: [S24 review](knowledge/68_s24_repository_review.md).
-- **Next action:** resolve the registry protocol explicitly and restore the shared cache/tools plus a complete registry, assigned lane and comparable frozen best before any experiment. Keep the literal duplicate rule until a shared versioned decision changes it. No new TIFF is authorized.
+- **[Executive summary + nine-site table + exact submission guide](docs/executive-summary.html)** · [Latest repository review](knowledge/68_s24_repository_review.md) · [This checkout's S24 JSON run card](evidence/s24_repository_review_run_card.json) · [Three-pass verification record](evidence/s24_verification.json) · [Blocked current-workspace preflight](evidence/s24_preflight.json) · [Immutable S24 source-feed snapshot](evidence/snapshots/s24_source_feed.json)
+- GEMSDOE32's supplied **0.2778 is USER-REPORTED / UNVERIFIED**. Pixel forensics establish a plausible catalogue-adjacent pruning mechanism, not the cause of an organizer score. No numerical hidden-score estimate is defensible for any of the nine sites.
+- The four ranked PCSE / TCB / MCR / CSD mechanisms remain proposals, not results. PCSE was not run because preflight stops before any geological experiment.
+- **S24 verification:** 652 passed, 6 data-dependent tests skipped (not passed), 12 warnings, 9 subtests; Ruff clean; deterministic standard-library site build succeeds with zero external requests. Full local record: [S24 review](knowledge/68_s24_repository_review.md).
+- **Separate concurrent S24 geometry audit (not this checkout's run):** [report](knowledge/68_s24_result.md) · [run card](evidence/s24_run_card.json) · [overlap evidence](evidence/s24_nine_site_overlap.json). That record reports an **ORGANIZER-PUBLIC** leaderboard observation at approximately 18:50 UTC (#1 0.4544, #25 0.3195, #50 0.2857). It is not a file-bound receipt, hidden-score estimate, or current refresh; this checkout did not make that request. Treat its result and provenance separately from this review.
+- **Comparator policy:** the concurrent report discusses A/B/C rule options, but none is adopted here. The active instruction remains the literal all-registry duplicate stop; no comparator is excluded, and no lattice-hole search or tuning is authorized.
+- **Next action:** resolve any registry-protocol conflict only through an explicit shared, versioned decision; restore the shared cache/tools plus a complete registry, assigned lane and comparable frozen best before any experiment. No new TIFF is authorized.
 
 ---
 
@@ -21,6 +23,8 @@ S24 is a read-only repository/software review; it does not replace S23's negativ
 The requested genuinely unique submission TIFF and new buffered top-hypothesis validation are **not completed**. This session stopped the inherited lane under your literal duplicate rule; it did not copy, rename, retag or relocate an old raster to pretend otherwise. This is an automated rejection, not a request for a human geological inspector. **No weekly slot selected or spent; zero geological experiments.**
 
 **[Executive summary / exact submission guide](docs/executive-summary.html)** · **[Current site](docs/index.html)** · **[Current JSON run card](evidence/s23_run_card.json)** · [Nine-site CSV](docs/data/s23_scorecard.csv) · [Detailed report / limitations / next work](knowledge/67_s23_result.md) · [Frozen hypothesis ranking](knowledge/66_s23_preregistration.md)
+
+**Prior active-checkout review (2026-10-27; separate parallel branch):** that record names `arena/d955c32f-gemsdoe28`. The prior S23 artifacts are frozen parallel-session provenance and identify branch `arena/a774f0a0-gemsdoe28`; do not silently rewrite those hashes. That checkout re-restored the nine pinned shared-template assets and rechecked tests/build. It did **not** generate a TIFF: its fail-closed preflight still lacked the explicit lane, complete registry, prepared cache, and strict comparable baseline. See [current checkout review](knowledge/68_active_checkout_review_2026-10-27.md) and its [JSON run card](evidence/active_checkout_review_2026-10-27.json). Current gate: **NO file approved · OK to submit: NO**.
 
 ### What changed and what was actually verified
 
@@ -58,12 +62,15 @@ All supplied results below are **USER-REPORTED / UNVERIFIED**, not organizer-con
 
 ### Verification / development
 
-Run the three passes and read [the exact final verification record](evidence/s23_verification.json). The initial review found/fixed stale current-site tests and historical mutable-file hash bindings by preserving old bytes, not rewriting old evidence. The archive audit and preflight are deliberately non-green; a green software suite does not authorize an upload. A further optional input restore hit GitHub REST rate limiting after re-verifying nine existing inputs; five legacy tests remain explicitly skipped, not passed ([record](evidence/s23_optional_restore.json)).
+The independent current-checkout review is [recorded here](knowledge/68_checkout_review_2026-10-27.md). It confirms the no-TIFF/no-slot decision, reproduces the site build and software suite, records six input-dependent skips and the current checkout's missing ignored data/shared-template assets, and flags a frozen S23 branch-label mismatch without rewriting hash-bound evidence.
+
+Run the three passes and read [the exact S23 verification record](evidence/s23_verification.json); note that it records a different, earlier checkout with restored inputs. Current-checkout test/build results and their limitations are in the review linked above. The initial review found/fixed stale current-site tests and historical mutable-file hash bindings by preserving old bytes, not rewriting old evidence. The archive audit and preflight are deliberately non-green; a green software suite does not authorize an upload. A further optional input restore hit GitHub REST rate limiting after re-verifying nine existing inputs; five legacy tests remain explicitly skipped, not passed ([record](evidence/s23_optional_restore.json)).
 
 ```sh
 python -m pytest -q
 ruff check src scripts tests
 python -S scripts/build_site.py   # deterministic, standard library only; no raster/network
+python -S scripts/build_active_review.py  # overlays the active-checkout status without changing hash-bound S23 files
 # These are expected to exit 1, not to authorize a candidate:
 python scripts/audit_registry_feasibility.py
 python scripts/check_run_preflight.py --out evidence/s23_preflight.json

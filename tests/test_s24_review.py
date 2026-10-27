@@ -14,7 +14,7 @@ def load(relative):
 
 
 def test_s24_run_card_is_a_negative_read_only_disposition():
-    card = load("evidence/s24_run_card.json")
+    card = load("evidence/s24_repository_review_run_card.json")
     assert card["session_id"] == "G28-S24-20261027"
     assert card["branch"] == "arena/79bafcec-gemsdoe28"
     assert card["verdict"] == "negative"
@@ -45,7 +45,7 @@ def test_s24_run_card_is_a_negative_read_only_disposition():
 
 
 def test_s24_registry_numbers_are_labelled_and_stop_on_overlap():
-    card = load("evidence/s24_run_card.json")
+    card = load("evidence/s24_repository_review_run_card.json")
     registry = card["registry"]
     comparison = registry["final_dot_comparison"]
     bounds = registry["calibration_lattice_geometry_bound"]
@@ -66,7 +66,7 @@ def test_s24_registry_numbers_are_labelled_and_stop_on_overlap():
 
 
 def test_s24_preflight_and_feed_snapshots_are_exactly_hash_bound():
-    card = load("evidence/s24_run_card.json")
+    card = load("evidence/s24_repository_review_run_card.json")
     for relative, expected in card["historical_s23_implementation_snapshots"].items():
         actual = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
         assert actual == expected
@@ -96,9 +96,9 @@ def test_readme_read_first_and_s24_page_remain_locked():
     assert readme.startswith("# S24 · 2026-10-27 UTC — repository review")
     assert "NO NEW TIFF · NOT OK TO DOWNLOAD OR SUBMIT" in readme
     assert "knowledge/68_s24_repository_review.md" in readme
-    assert "evidence/s24_run_card.json" in readme
+    assert "evidence/s24_repository_review_run_card.json" in readme
 
-    rendered = site_s23.session24_review(load("evidence/s24_run_card.json"))
+    rendered = site_s23.session24_review(load("evidence/s24_repository_review_run_card.json"))
     assert "No new TIFF." in rendered
     assert "DUPLICATE_STOP" in rendered
     assert "USER-REPORTED / UNVERIFIED" in rendered
@@ -123,12 +123,23 @@ def test_static_site_builder_publishes_latest_review_and_run_card():
     page = (ROOT / "docs/session24-review.html").read_text(encoding="utf-8")
     assert "Latest review" in page
     assert "NOT READY TO SUBMIT" in page
-    assert "S24 JSON run card" in page
+    assert "JSON run card" in page
     assert 'data-submission-ready="false"' in page
     assert '<button class="button" type="button" disabled' in page
-    assert (ROOT / "docs/data/s24_run_card.json").read_bytes() == (
-        ROOT / "evidence/s24_run_card.json"
+    assert (ROOT / "docs/data/s24_repository_review_run_card.json").read_bytes() == (
+        ROOT / "evidence/s24_repository_review_run_card.json"
     ).read_bytes()
     workflow = (ROOT / ".github/workflows/build-site.yml").read_text()
-    assert workflow.count("'evidence/s24_run_card.json'") == 2
-    assert "docs/data/s24_run_card.json" in workflow.splitlines()[-1]
+    assert workflow.count("'evidence/s24_repository_review_run_card.json'") == 2
+    assert "docs/data/s24_repository_review_run_card.json" in workflow.splitlines()[-1]
+
+
+def test_parallel_s24_geometry_card_is_separate_and_does_not_request_rule_override():
+    card = load("evidence/s24_run_card.json")
+    assert card["schema"] == "run-card-v1"
+    assert card["verdict"] == "negative"
+    assert card["ok_to_download"] is False and card["ok_to_submit"] is False
+    assert "No active choice requested" in card["decision_required"]
+    assert "shared, versioned protocol decision" in card["decision_required"]
+    assert card["leaderboard_observation"]["label"] == "ORGANIZER-PUBLIC (public page, not a receipt)"
+    assert card["raster_sha256"]["new_candidate"] is None

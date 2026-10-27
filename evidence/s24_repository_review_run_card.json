@@ -37,7 +37,7 @@
       "label": "GEOMETRY-AUDIT / registry novelty check, not HOLDOUT-DTI",
       "comparator_registry_id": "registry-039",
       "comparator_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
-      "raw_spearman": 0.00008567561299515036,
+      "raw_spearman": 8.567561299515036e-05,
       "sampled_kernel_spearman": -0.0015011649539984765,
       "kernel_rank_sample_size": 200000,
       "candidate_dots_within_3px_fraction": 0.9961757051043714,
@@ -86,7 +86,10 @@
     "source_count": 18,
     "freshly_observed_count": 16,
     "failed_count": 2,
-    "failed_ids": ["hermant-2025", "usgs-qfaults"],
+    "failed_ids": [
+      "hermant-2025",
+      "usgs-qfaults"
+    ],
     "failure_reason": "Both responses exceeded the configured 2,000,000-byte cap.",
     "scope": "Committed source metadata snapshot; not live at S24 review time, not full scientific-content/licence/schema verification. No DrivenData request."
   },
@@ -120,13 +123,14 @@
   "verification_record": "evidence/s24_verification.json",
   "verification": {
     "pytest_command": ".venv/bin/python -m pytest -q",
-    "pytest_status": "647 passed, 6 skipped, 12 warnings, 9 subtests passed; six data-dependent skips are not passes.",
+    "pytest_status": "652 passed, 6 skipped, 12 warnings, 9 subtests passed; six data-dependent skips are not passes.",
     "page_count": 19,
     "ruff_command": ".venv/bin/ruff check src scripts tests",
     "ruff_status": "PASS",
     "site_build_command": "python -S scripts/build_site.py",
-    "site_build_status": "PASS; deterministic standard-library build; zero external requests.",
-    "diff_check": "PASS after S24 additions."
+    "site_build_status": "PASS; deterministic standard-library build plus separate parallel-review overlay; zero external requests.",
+    "diff_check": "PASS after S24 additions.",
+    "merge_integration": "PASS; independent S24 run cards retained separately; literal all-registry duplicate stop remains active."
   },
   "verdict": "negative",
   "new_tiff_generated": false,

@@ -29,6 +29,9 @@ class Links(HTMLParser):
 def test_site_builds_from_json_only_and_pages_exist():
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_site.py")], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
+    active = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_active_review.py")],
+                            capture_output=True, text=True)
+    assert active.returncode == 0, active.stderr
     # The current audit ranks four unimplemented physical operators; none is a result.
     assert json.loads(r.stdout)["hypotheses"] == 4
     for p in PAGES:
@@ -46,6 +49,11 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
     inputs.add("docs/downloads/h28_1_candidate_manifest.json")
     for path in inputs | {
         "docs/data/topology_review_classes.json",
+        "docs/data/active_checkout_review_2026-10-27.json",
+        "evidence/active_checkout_review_2026-10-27.json",
+        "scripts/build_active_review.py",
+        "knowledge/68_active_checkout_review_2026-10-27.md",
+        "tests/test_site.py",
         "evidence/losfo_h38_1_raw.json",
         "evidence/h38_1_seed_audit_pre_run.json",
         "knowledge/39_session14_closeout_2026-10-03.md",
@@ -207,6 +215,18 @@ def test_repository_root_front_page_locks_new_submission_download():
     assert "S23 audit: no new TIFF" in root_idx
     assert "Submission download locked" in root_idx
     assert (ROOT / ".nojekyll").exists()
+
+
+def test_active_checkout_review_is_exposed_without_overwriting_frozen_run_card():
+    review = json.loads((DOCS / "data/active_checkout_review_2026-10-27.json").read_text())
+    assert review["branch"] == "arena/d955c32f-gemsdoe28"
+    assert review["executive_decision"]["submission_ready"] is False
+    for name in ("index.html", "executive-summary.html", "cross-site-review.html"):
+        page = (DOCS / name).read_text()
+        assert "active-checkout-review" in page
+        assert "no new TIFF was generated" in page
+        assert 'data/active_checkout_review_2026-10-27.json' in page
+    assert json.loads((ROOT / "evidence/s23_run_card.json").read_text())["branch"] == "arena/a774f0a0-gemsdoe28"
 
 
 def test_front_page_links_current_card_and_no_candidate_download():

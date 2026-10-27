@@ -1,150 +1,45 @@
 {
-  "schema": "gems28-readonly-review-v1",
-  "session_id": "G28-S24-20261027",
+  "schema": "run-card-v1",
+  "session": "S24",
   "date_utc": "2026-10-27",
-  "branch": "arena/79bafcec-gemsdoe28",
-  "lane": null,
-  "lane_status": "No single method paragraph or assignment source supplied. Read-only repository review; no geological lane inferred.",
-  "hypothesis": "PCSE (phase-congruent scarp energy) remains the top-ranked unimplemented proposal from S23, not a tested or externally assigned hypothesis.",
-  "mechanism": "Proposed oriented cross-profile odd/even derivative energy and cross-scale step-polarity consistency in detrended elevation, TMI and isostatic gravity; no model or surface was built.",
-  "non_fault_process": "Terrace risers, paleoshorelines, roads and unfaulted lithologic contacts can mimic step-like displacement.",
-  "holdout": {
-    "label": "HOLDOUT-DTI",
-    "status": "NOT RUN: current preflight blocked before a geological experiment",
-    "evaluator_version": "gems-segment-pooled-v1 (pinned implementation; not executed on an S24 candidate)",
-    "dti": null,
-    "ci95": null,
-    "withheld_positives": null,
-    "baseline_dti": null,
-    "paired_gain": null,
-    "paired_gain_ci95": null,
-    "alpha": 0.2,
-    "beta": 0.8,
-    "kernel": "triangular",
-    "kernel_m": 300
+  "label_policy": "GEOMETRY-AUDIT / ORGANIZER-PUBLIC / USER-REPORTED; no HOLDOUT-DTI produced",
+  "lane": "none assigned; geometry audit of existing files only",
+  "hypothesis": "No new candidate raster is tested. Question: can the literal 70%/3 px registry rule be satisfied at budget 37,654 dots?",
+  "mechanism": "Counting bound: 6,649 footprint cells lie outside all lattice-control disks; passing needs >=11,297 uncovered dots.",
+  "named_non_fault_process_that_could_mimic": "Dense space-filling calibration lattice (registry-039) makes every file a duplicate regardless of geology.",
+  "holdout_dti_ci": "NOT RUN (0 experiments)",
+  "correlation_overlap_vs_registry": {
+    "lattice_control_3px_coverage": 0.9987132726822701,
+    "nine_real_files_overlap_to_lattice_range": [
+      0.9991,
+      0.9992
+    ],
+    "nine_real_files_pairs_over_0_70": "72 of 72",
+    "source": "evidence/s24_nine_site_overlap.json; evidence/s23_registry_feasibility.json"
   },
-  "feature_names": [],
-  "feature_canaries": {},
-  "canary_status": "NOT RUN; empty canary results are not a pass.",
-  "registry": {
-    "complete": false,
-    "scope": "S23 audited one registered rejecting calibration comparator and nine historical focus files; no synchronized complete global registry in S24.",
-    "inherited_candidate_file": "docs/downloads/gems28-s22-ctxhgb-20261026-e23dabcec6e2-allfinite.tif",
-    "inherited_candidate_sha256": "77934be607d48a4daec5b046009cdabf61d3fdee210aadc75be82ac70f3beb2e",
-    "inherited_candidate_is_new": false,
-    "preplacement_surface_tested": false,
-    "final_dot_comparison": {
-      "label": "GEOMETRY-AUDIT / registry novelty check, not HOLDOUT-DTI",
-      "comparator_registry_id": "registry-039",
-      "comparator_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
-      "raw_spearman": 0.00008567561299515036,
-      "sampled_kernel_spearman": -0.0015011649539984765,
-      "kernel_rank_sample_size": 200000,
-      "candidate_dots_within_3px_fraction": 0.9961757051043714,
-      "rank_limit": 0.9,
-      "overlap_limit": 0.7,
-      "duplicate_stop": true
-    },
-    "calibration_lattice_geometry_bound": {
-      "label": "GEOMETRY-AUDIT, not a score",
-      "footprint_pixels": 5167373,
-      "covered_within_3px_pixels": 5160724,
-      "coverage_fraction": 0.9987132726822701,
-      "uncovered_pixels": 6649,
-      "candidate_budget": 37654,
-      "unspaced_minimum_overlap_fraction": 0.8234184947150369,
-      "minimum_overlap_fraction_with_spacing_2_8px": 0.9043129547989589,
-      "interpretation": "Necessary counting/packing bounds for this budget only; not proof that every smaller budget is impossible. No hole- or budget-optimization was performed."
-    }
+  "raster_sha256": {
+    "new_candidate": null,
+    "historical_best_files": "see evidence/s24_nine_site_overlap.json"
   },
-  "raster_sha256": null,
-  "validator": {
-    "status": "NOT RUN ON A NEW TIFF: no S24 candidate exists",
-    "no_nan_inside_footprint": null,
-    "values_within_0_1": null,
-    "crs_matches_template": null,
-    "shape_matches_template": null,
-    "transform_matches_template": null,
-    "single_band": null,
-    "inherited_s22c_format_only": "S23 recorded format-valid, but novelty-failed; historical format pass is not S24 validation or upload authorization."
-  },
+  "validator_output": "NOT RUN for a new raster (none generated). Existing writer/validator unchanged; tests 645 passed, 5 skipped.",
   "submission_name": null,
-  "note": "S24 review only; no new TIFF; DO NOT SUBMIT.",
-  "note_character_count": 44,
-  "estimated_leaderboard_score": null,
-  "estimate_status": "Unavailable. No calibrated transfer model or filename/SHA-bound organizer receipt; user-supplied historical scores remain unverified.",
-  "score_claims": {
-    "GEMSDOE32_0_2778": "USER-REPORTED / UNVERIFIED; pixel construction does not prove score causation.",
-    "user_supplied_0_3195_and_0_4413": "Not refreshed or verified in S24.",
-    "historical_public_0_4437": "HISTORICAL PUBLIC LEADERBOARD OBSERVATION from 2026-10-26T22:02:42Z; not current and not a file-bound organizer receipt."
-  },
-  "source_feed_observation": {
-    "snapshot": "evidence/snapshots/s24_source_feed.json",
-    "snapshot_sha256": "467ff3a8a6d54a51b678431570b61186548e579842d294266b774bc7ba0cd8c6",
-    "checked_at_utc": "2026-10-27T17:51:14Z",
-    "status": "partial-or-unavailable",
-    "source_count": 18,
-    "freshly_observed_count": 16,
-    "failed_count": 2,
-    "failed_ids": ["hermant-2025", "usgs-qfaults"],
-    "failure_reason": "Both responses exceeded the configured 2,000,000-byte cap.",
-    "scope": "Committed source metadata snapshot; not live at S24 review time, not full scientific-content/licence/schema verification. No DrivenData request."
-  },
-  "historical_s23_implementation_snapshots": {
-    "evidence/snapshots/pre_s24_build_site.py": "6827d84388f123495ae63f477e26b3caa40420dc2975e337e48ac31db575eaee",
-    "evidence/snapshots/pre_s24_site_s23.py": "c3fbab671c0fbef56ec4c917d77003b918b864b27d4fe25fbd89c594bce8a0fa"
-  },
-  "preflight": {
-    "path": "evidence/s24_preflight.json",
-    "sha256": "6023c302b1a01e235383f03a7fd334dba022dfba95d8d510588477ce4d44239f",
-    "checked_at_utc": "2026-10-27T18:48:03Z",
-    "status": "BLOCKED",
-    "exit_code": 1,
-    "experiment_allowed": false,
-    "blockers": [
-      "Missing explicit assigned method lane and assignment source",
-      "Missing complete shared parallel-run registry",
-      "Literal registry overlap rule blocks the declared emission budget; do not tune around controls",
-      "Missing frozen current-best result under the same strict protocol",
-      "Cached feature stack and metadata are absent in the current checkout",
-      "All nine shared template assets are absent in the current checkout"
-    ]
-  },
-  "current_checkout_inputs": {
-    "prepared_feature_cache_present": false,
-    "shared_template_present": false,
-    "sample_submission_present": false,
-    "labels_present": false,
-    "training_features_present": false
-  },
-  "verification_record": "evidence/s24_verification.json",
-  "verification": {
-    "pytest_command": ".venv/bin/python -m pytest -q",
-    "pytest_status": "647 passed, 6 skipped, 12 warnings, 9 subtests passed; six data-dependent skips are not passes.",
-    "page_count": 19,
-    "ruff_command": ".venv/bin/ruff check src scripts tests",
-    "ruff_status": "PASS",
-    "site_build_command": "python -S scripts/build_site.py",
-    "site_build_status": "PASS; deterministic standard-library build; zero external requests.",
-    "diff_check": "PASS after S24 additions."
-  },
+  "submission_note_140_max": "S24 geometry audit: no new TIFF. Literal all-registry stop remains; no slot used.",
   "verdict": "negative",
-  "new_tiff_generated": false,
-  "new_holdout_run": false,
-  "experiments_run": 0,
-  "experiment_cap": 3,
-  "time_cap_seconds": 7200,
-  "slot_selected": false,
-  "submission_slots_spent": 0,
-  "submission_ready": false,
-  "ok_to_download_new_submission": false,
+  "ok_to_download": false,
   "ok_to_submit": false,
-  "scientific_work_stopped_at": "Preflight: protocol/lane and registry gates fail; current checkout also lacks the cached feature stack and shared template tools.",
-  "limitations": [
-    "No current explicit lane, complete synchronized registry, or same-protocol frozen best.",
-    "The any-registry-raster threshold rejects the inherited 37,654-dot budget; it is not a universal no-budget proof.",
-    "Current checkout lacks input rasters/cache and the nine shared template assets, so S24 cannot rerun model/format audits.",
-    "The latest committed source-feed observation is 56m49s old at the S24 preflight time; it is metadata only and two large-source fetches failed.",
-    "No current organizer leaderboard observation, authenticated weekly allowance, submission receipt, or validated score-transfer calibration."
-  ]
+  "weekly_slot_selected": false,
+  "decision_required": "No active choice requested: keep the literal all-registry duplicate stop. Any change requires an explicit shared, versioned protocol decision.",
+  "leaderboard_observation": {
+    "label": "ORGANIZER-PUBLIC (public page, not a receipt)",
+    "observed_utc": "2026-10-27 approx 18:50",
+    "top_public_dw_tversky": 0.4544,
+    "rank_25": 0.3195,
+    "rank_50": 0.2857
+  },
+  "limits": [
+    "User-reported scores have no organizer receipt",
+    "Masking convention not in official text",
+    "Hidden-label efficiency of catalogue-adjacent dots unknown"
+  ],
+  "prior_parallel_decision_request": "The prior-session report explored A/B/C alternatives; the active branch does not adopt them."
 }
