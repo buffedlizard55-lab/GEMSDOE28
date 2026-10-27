@@ -31,17 +31,19 @@ def render(review: dict, card_link: str) -> str:
     if not isinstance(blockers, list):
         raise ValueError("Review preflight blockers must be a list")
     blocker_text = " ".join(html.escape(str(item)) for item in blockers)
+    review_page = "docs/session24-review.html" if card_link.startswith("docs/") else "session24-review.html"
+    safe_review_page = html.escape(review_page, quote=True)
     holdout = review.get("holdout", {})
     if not isinstance(holdout, dict) or holdout.get("dti") is not None:
         raise ValueError("Current review must not claim an unrun HOLDOUT-DTI")
     if review.get("executive_decision", {}).get("submission_ready") is not False:
         raise ValueError("Active review is not a negative fail-closed decision")
-    return f'''<section class="section callout-warning" id="active-checkout-review" aria-label="Latest active checkout review">
-<p class="eyebrow">LATEST CHECKOUT REVIEW · {checked} · {branch}</p>
-<h2>Submission status: NO — no new TIFF was generated</h2>
-<p>The frozen S23 evidence was recorded on a different parallel-session branch; this audit preserves it and records the active checkout separately. The shared pinned tools have now been restored and hash-verified. Strict preflight remains <strong>BLOCKED</strong>; HOLDOUT-DTI was <strong>NOT RUN</strong>.</p>
-<p><strong>Open blockers:</strong> {blocker_text}</p>
-<p><a href="{html.escape(card_link, quote=True)}">Download this checkout's JSON run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/68_active_checkout_review_2026-10-27.md">Read the detailed code/research review</a>. No score estimate, weekly slot, or upload authorization is asserted.</p>
+    return f'''<section class="section callout-warning" id="active-checkout-review" aria-label="Prior parallel checkout review">
+<p class="eyebrow">PRIOR PARALLEL-CHECKOUT RECORD · {checked} · {branch}</p>
+<h2>Prior checkout status: NO — no new TIFF was generated</h2>
+<p>This immutable review belongs to a different branch and is retained as parallel-session provenance; its data/cache and shared-tool state do not describe the active checkout. That review recorded a blocked preflight and no HOLDOUT-DTI. For the current repository-review disposition, open <a href="{safe_review_page}">the S24 review for this branch</a>.</p>
+<p><strong>Blockers recorded by the prior checkout:</strong> {blocker_text}</p>
+<p><a href="{html.escape(card_link, quote=True)}">Open the prior checkout's JSON record</a> · <a href="{safe_review_page}">Current S24 repository review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/68_active_checkout_review_2026-10-27.md">Read the prior detailed review</a>. No score estimate, weekly slot, or upload authorization is asserted.</p>
 </section>'''
 
 

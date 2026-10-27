@@ -1,19 +1,18 @@
-# S24 · 2026-10-27 UTC — READ FIRST (supersedes S23 where they differ)
+# S24 · 2026-10-27 UTC — repository review · READ FIRST EVERY SESSION
 
-## NO NEW FILE APPROVED · OK TO DOWNLOAD: NO · OK TO SUBMIT: NO
+## **NO NEW TIFF · NOT OK TO DOWNLOAD OR SUBMIT · zero experiments**
 
-**Decision needed from you (the rule conflicts with itself):** the literal lane rule (≤70 % of dots within 3 px of any registry raster) is **unsatisfiable** against the calibration lattice `registry-039`, which covers **99.87 %** of the footprint. Every historical best file, including all nine focus sites, is at **99.9 %** overlap with it. Excluding that calibration control leaves the nine real files covering only 15–18 % each, so a unique file is possible. Choose A (keep literal), B (exclude the lattice; compare real submissions only), or C (exact-copy rule only). Details: [knowledge/68](knowledge/68_s24_result.md) §5.
+S24 is a read-only repository/software review; it does not replace S23's negative scientific decision. No new feature, candidate raster, HOLDOUT-DTI or score estimate was produced, and no slot was selected. **Do not upload an old TIFF under a new name.** The current checkout preflight is BLOCKED: the assigned lane, complete synchronized registry and same-protocol frozen best are missing, and the ignored feature cache plus all nine shared template assets are absent here. The previous S23 registry audit measured the inherited S22C file as a duplicate under the literal rule. The 37,654-dot geometry bound is not a universal proof about every smaller budget; no hole/budget search was performed.
 
-- **Why GEMSDOE32 (0.2778, USER-REPORTED) is highest:** its file is GEMSDOE31's emission minus exactly the 2,545 dots within 2 px of the catalogue. It has 0 catalogue-adjacent dots. Removing a dot set helps DTI when its efficiency falls below 0.0588 (`metric.inclusion_threshold`). That is a hypothesis consistent with the metric, not a measured fact.
-- **Official leaderboard (fetched 2026-10-27):** #1 = **0.4544**; #25 = 0.3195; #50 = 0.2857. The prompt's 0.4413 is not on the page, and the claim that 0.3195 is highest is wrong.
-- **Nine-site table:** all nine best files are pinned and re-hashed in [evidence/s24_nine_site_overlap.json](evidence/s24_nine_site_overlap.json). None is unique against the others (72/72 pairs >70 %). Estimated score: **not estimable** for every site (no organizer receipt, no calibrated hidden-score map).
-- **Run card:** [evidence/s24_run_card.json](evidence/s24_run_card.json). Zero holdout experiments, zero slots used.
-- **Inputs:** core training raster, labels, and sample submission restored from hash-pinned mirrors into the git-ignored `data/`; SHA-256 match the registry pins.
+**Latest committed source-feed snapshot for this review:** 16/18 entries observed at **2026-10-27 17:51:14 UTC**; two source responses exceeded the 2,000,000-byte fetch limit. This is metadata, not a live observation or scientific-content/licence verification. It is later than the immutable S23 snapshot (10/18 at 17:29:17 UTC); both timestamps are retained honestly. This checkout did not query DrivenData, a leaderboard, weekly quota or receipt.
 
-```sh
-python scripts/audit_s24_nine_site_overlap.py   # re-fetches 9 pinned files; ~70 s; GEOMETRY-AUDIT only
-python -m pytest -q                              # 645 passed, 5 skipped
-```
+- **[Executive summary + nine-site table + exact submission guide](docs/executive-summary.html)** · [Latest repository review](knowledge/68_s24_repository_review.md) · [This checkout's S24 JSON run card](evidence/s24_repository_review_run_card.json) · [Three-pass verification record](evidence/s24_verification.json) · [Blocked current-workspace preflight](evidence/s24_preflight.json) · [Immutable S24 source-feed snapshot](evidence/snapshots/s24_source_feed.json)
+- GEMSDOE32's supplied **0.2778 is USER-REPORTED / UNVERIFIED**. Pixel forensics establish a plausible catalogue-adjacent pruning mechanism, not the cause of an organizer score. No numerical hidden-score estimate is defensible for any of the nine sites.
+- The four ranked PCSE / TCB / MCR / CSD mechanisms remain proposals, not results. PCSE was not run because preflight stops before any geological experiment.
+- **S24 verification:** 652 passed, 6 data-dependent tests skipped (not passed), 12 warnings, 9 subtests; Ruff clean; deterministic standard-library site build succeeds with zero external requests. Full local record: [S24 review](knowledge/68_s24_repository_review.md).
+- **Separate concurrent S24 geometry audit (not this checkout's run):** [report](knowledge/68_s24_result.md) · [run card](evidence/s24_run_card.json) · [overlap evidence](evidence/s24_nine_site_overlap.json). That record reports an **ORGANIZER-PUBLIC** leaderboard observation at approximately 18:50 UTC (#1 0.4544, #25 0.3195, #50 0.2857). It is not a file-bound receipt, hidden-score estimate, or current refresh; this checkout did not make that request. Treat its result and provenance separately from this review.
+- **Comparator policy:** the concurrent report discusses A/B/C rule options, but none is adopted here. The active instruction remains the literal all-registry duplicate stop; no comparator is excluded, and no lattice-hole search or tuning is authorized.
+- **Next action:** resolve any registry-protocol conflict only through an explicit shared, versioned decision; restore the shared cache/tools plus a complete registry, assigned lane and comparable frozen best before any experiment. No new TIFF is authorized.
 
 ---
 
@@ -25,7 +24,7 @@ The requested genuinely unique submission TIFF and new buffered top-hypothesis v
 
 **[Executive summary / exact submission guide](docs/executive-summary.html)** · **[Current site](docs/index.html)** · **[Current JSON run card](evidence/s23_run_card.json)** · [Nine-site CSV](docs/data/s23_scorecard.csv) · [Detailed report / limitations / next work](knowledge/67_s23_result.md) · [Frozen hypothesis ranking](knowledge/66_s23_preregistration.md)
 
-**Active-checkout review (2026-10-27):** work is on `arena/d955c32f-gemsdoe28`. The prior S23 artifacts are frozen parallel-session provenance and identify branch `arena/a774f0a0-gemsdoe28`; do not silently rewrite those hashes. This checkout re-restored the nine pinned shared-template assets and rechecked tests/build. It did **not** generate a TIFF: the current fail-closed preflight still lacks the explicit lane, complete registry, prepared cache, and strict comparable baseline. See [current checkout review](knowledge/68_active_checkout_review_2026-10-27.md) and its [JSON run card](evidence/active_checkout_review_2026-10-27.json). Current gate: **NO file approved · OK to submit: NO**.
+**Prior active-checkout review (2026-10-27; separate parallel branch):** that record names `arena/d955c32f-gemsdoe28`. The prior S23 artifacts are frozen parallel-session provenance and identify branch `arena/a774f0a0-gemsdoe28`; do not silently rewrite those hashes. That checkout re-restored the nine pinned shared-template assets and rechecked tests/build. It did **not** generate a TIFF: its fail-closed preflight still lacked the explicit lane, complete registry, prepared cache, and strict comparable baseline. See [current checkout review](knowledge/68_active_checkout_review_2026-10-27.md) and its [JSON run card](evidence/active_checkout_review_2026-10-27.json). Current gate: **NO file approved · OK to submit: NO**.
 
 ### What changed and what was actually verified
 

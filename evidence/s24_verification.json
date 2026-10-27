@@ -1,0 +1,105 @@
+{
+  "schema": "gems28-s24-verification-v1",
+  "session_id": "G28-S24-20261027",
+  "verified_at_utc": "2026-10-27T19:05:16Z",
+  "branch": "arena/79bafcec-gemsdoe28",
+  "status": "SOFTWARE_REVIEW_PASS_WITH_SCIENTIFIC_GATES_BLOCKED",
+  "scope": "Repository review, current input/preflight audit, source-feed chronology, documentation/site addition and regression tests. Not geological experimentation, HOLDOUT-DTI, a score estimate, or competition acceptance.",
+  "passes": [
+    {
+      "pass": 1,
+      "scope": "Review standing prompt, current S23 negative decision, nine-site executive page, source feed, frozen evidence, shared pipeline contracts and submission path.",
+      "result": "Added a read-first S24 README status, auditable review report/run card, immutable feed snapshot, fail-closed current preflight record, current review page and tests. No TIFF or model was generated."
+    },
+    {
+      "pass": 2,
+      "scope": "Review correctness, provenance, edge cases and historical immutability.",
+      "result": "An initial test run correctly detected S23 hashes binding two site-generator source files. Their exact pre-S24 bytes were preserved; the S23 provenance test now checks those historical snapshots. The generated S24 JSON now copies exact source bytes, preventing a lexical float/list serialization mismatch. Six input-dependent skips remain explicit."
+    },
+    {
+      "pass": 3,
+      "scope": "Rebuild site, run full local test suite/lint/diff checks, and recheck the exact card/evidence/page output.",
+      "result": "PASS for software/documentation scope only; scientific and submission gates remain blocked."
+    }
+  ],
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 652,
+    "skipped": 6,
+    "warnings": 12,
+    "subtests_passed": 9,
+    "seconds": 14.33,
+    "skip_interpretation": "Six data-dependent tests were skipped because this checkout lacks restored competition rasters, vectors or cache; they are not counted as passes.",
+    "result_context": "Post-merge integration verification on arena/79bafcec-gemsdoe28; six data-dependent skips are not passes."
+  },
+  "lint": {
+    "command": ".venv/bin/ruff check src scripts tests",
+    "status": "PASS",
+    "output": "All checks passed!"
+  },
+  "site_build": {
+    "command": "python -S scripts/build_site.py && python -S scripts/build_active_review.py",
+    "status": "PASS",
+    "pages": 19,
+    "registered_sources": 43,
+    "ranked_unimplemented_hypotheses": 4,
+    "external_requests": 0,
+    "submission_ready": false,
+    "slot_selected": false,
+    "includes_latest_review_route": true,
+    "publishes_exact_s24_card_bytes": true,
+    "published_s24_card_path": "docs/data/s24_repository_review_run_card.json",
+    "prior_parallel_checkout_is_labeled_as_prior": true
+  },
+  "integrity_checks": {
+    "diff_check": "PASS",
+    "s24_preflight_sha256": "PASS",
+    "s24_source_snapshot_sha256": "PASS",
+    "s24_note_length_at_most_140": "PASS (44 characters)",
+    "current_review_page_submission_lock": "PASS",
+    "current_review_page_contains_tiff_download_link": false,
+    "historical_s23_site_generator_snapshots": "PASS; exact hashes match frozen S23 implementation pins",
+    "new_or_modified_tiff_payloads": 0,
+    "new_dataset_or_model_payloads": 0,
+    "s24_repository_review_run_card_json": "PASS; exact bytes copied to the generated site",
+    "all_internal_links": "PASS",
+    "parallel_s24_cards_separate": "PASS; geometry-audit card and repository-review card remain distinct",
+    "git_diff_check": "PASS"
+  },
+  "preflight": {
+    "path": "evidence/s24_preflight.json",
+    "checked_at_utc": "2026-10-27T18:48:03Z",
+    "status": "BLOCKED",
+    "exit_code": 1,
+    "experiment_allowed": false,
+    "scope": "No model, canary, holdout, surface, dots, raster, score estimate, or slot selection."
+  },
+  "source_feed": {
+    "snapshot": "evidence/snapshots/s24_source_feed.json",
+    "checked_at_utc": "2026-10-27T17:51:14Z",
+    "fresh_observations": "16/18 metadata endpoints; two oversized responses failed the 2,000,000-byte cap",
+    "interpretation": "Latest committed snapshot observed at S24 review; not live now and not full scientific-content, licence or schema verification. No DrivenData request."
+  },
+  "limitations": [
+    "No explicit assigned method lane, complete synchronized registry, or frozen comparable best under the requested strict protocol.",
+    "Current workspace is missing data/prepared/features.npy, feature metadata, sample_submission.tif, labels.tif, training_features.tif, and all nine shared-template assets.",
+    "The 37,654-dot budget fails the literal any-registry-raster proximity bound; the geometry proof does not rule out every smaller budget, and none was optimized or tested.",
+    "Six data-dependent tests remain skipped, not passed.",
+    "No organizer submission receipt, authenticated weekly allowance, or calibrated leaderboard-score transfer. A separate parallel review records an approximately 18:50 UTC ORGANIZER-PUBLIC observation; it is not a receipt and was not refreshed by this checkout."
+  ],
+  "new_tiff_generated": false,
+  "submission_ready": false,
+  "ok_to_download_new_submission": false,
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "submission_slots_spent": 0,
+  "post_merge_integration": {
+    "integrated_origin_main_commit": "191a5608af3fc2a7412853d5642e7494a3238f05",
+    "branch": "arena/79bafcec-gemsdoe28",
+    "result": "PASS; conflicts resolved without pooling parallel-session run cards or authorizing a comparator exception.",
+    "test_run": "652 passed, 6 skipped, 12 warnings, 9 subtests passed; all internal-link tests pass.",
+    "ruff": "PASS",
+    "site_build": "PASS; 19 pages, 43 sources, 4 hypotheses, zero external requests.",
+    "scientific_status": "BLOCKED; no experiment, new TIFF, score estimate, slot selection, or upload authorization."
+  }
+}

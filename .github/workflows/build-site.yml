@@ -107,11 +107,19 @@ on:
       - 'docs/assets/**'
       - 'site_templates/**'
       - 'evidence/s23_run_card.json'
+      - 'evidence/s24_run_card.json'
+      - 'evidence/s24_repository_review_run_card.json'
       - 'evidence/active_checkout_review_2026-10-27.json'
       - 'knowledge/68_active_checkout_review_2026-10-27.md'
       - 'docs/data/active_checkout_review_2026-10-27.json'
+      - 'docs/data/s24_repository_review_run_card.json'
       - 'tests/test_site.py'
       - 'scripts/build_active_review.py'
+      - 'evidence/s24_nine_site_overlap.json'
+      - 'knowledge/68_s24_result.md'
+      - 'scripts/audit_s24_nine_site_overlap.py'
+      - 'tests/test_s24_overlap.py'
+
       - 'evidence/s23_registry_feasibility.json'
       - 'evidence/s23_scorecard.json'
       - 'evidence/s23_official_source_review.json'
@@ -228,11 +236,19 @@ on:
       - 'docs/assets/**'
       - 'site_templates/**'
       - 'evidence/s23_run_card.json'
+      - 'evidence/s24_run_card.json'
+      - 'evidence/s24_repository_review_run_card.json'
       - 'evidence/active_checkout_review_2026-10-27.json'
       - 'knowledge/68_active_checkout_review_2026-10-27.md'
       - 'docs/data/active_checkout_review_2026-10-27.json'
+      - 'docs/data/s24_repository_review_run_card.json'
       - 'tests/test_site.py'
       - 'scripts/build_active_review.py'
+      - 'evidence/s24_nine_site_overlap.json'
+      - 'knowledge/68_s24_result.md'
+      - 'scripts/audit_s24_nine_site_overlap.py'
+      - 'tests/test_s24_overlap.py'
+
       - 'evidence/s23_registry_feasibility.json'
       - 'evidence/s23_scorecard.json'
       - 'evidence/s23_official_source_review.json'
@@ -261,4 +277,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py && python scripts/build_active_review.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json docs/data/active_checkout_review_2026-10-27.json index.html executive-summary.html data/current_run_card_2026-10-26.json
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json docs/data/active_checkout_review_2026-10-27.json docs/data/s24_repository_review_run_card.json index.html executive-summary.html data/current_run_card_2026-10-26.json

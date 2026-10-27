@@ -23,12 +23,12 @@
   },
   "validator_output": "NOT RUN for a new raster (none generated). Existing writer/validator unchanged; tests 645 passed, 5 skipped.",
   "submission_name": null,
-  "submission_note_140_max": "S24 audit: no new TIFF. Literal lattice rule unsatisfiable (99.87% cover); decision needed. No slot used.",
+  "submission_note_140_max": "S24 geometry audit: no new TIFF. Literal all-registry stop remains; no slot used.",
   "verdict": "negative",
   "ok_to_download": false,
   "ok_to_submit": false,
   "weekly_slot_selected": false,
-  "decision_required": "User must choose rule A/B/C in knowledge/68_s24_result.md section 5",
+  "decision_required": "No active choice requested: keep the literal all-registry duplicate stop. Any change requires an explicit shared, versioned protocol decision.",
   "leaderboard_observation": {
     "label": "ORGANIZER-PUBLIC (public page, not a receipt)",
     "observed_utc": "2026-10-27 approx 18:50",
@@ -40,5 +40,6 @@
     "User-reported scores have no organizer receipt",
     "Masking convention not in official text",
     "Hidden-label efficiency of catalogue-adjacent dots unknown"
-  ]
+  ],
+  "prior_parallel_decision_request": "The prior-session report explored A/B/C alternatives; the active branch does not adopt them."
 }

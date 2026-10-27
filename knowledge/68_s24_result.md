@@ -4,6 +4,8 @@
 
 This is an automated decision (no human inspector). S24 generated **no new TIFF**, ran **zero holdout experiments** and selected **no weekly slot**. The only computation was a geometry audit of existing files (`GEOMETRY-AUDIT`, not `HOLDOUT-DTI`, not an organizer score).
 
+> **Current policy / separate-session note:** this geometry audit is from a concurrent S24 run, not the active repository-review run. Its A/B/C alternatives and its then-recorded recommendation are analysis only; they do **not** change the user's standing instruction to compare every registry raster and stop on a duplicate. No comparator is excluded and no search/tuning around lattice holes is authorized. The active checkout's disposition and card are [here](68_s24_repository_review.md) and [here](../evidence/s24_repository_review_run_card.json). The public leaderboard values below are that session's `ORGANIZER-PUBLIC` observation, not a file-bound receipt or score estimate, and were not refreshed by this checkout.
+
 Machine-readable record: [`evidence/s24_run_card.json`](../evidence/s24_run_card.json) · overlap evidence: [`evidence/s24_nine_site_overlap.json`](../evidence/s24_nine_site_overlap.json) · reproduce: `python scripts/audit_s24_nine_site_overlap.py`
 
 ---
@@ -73,15 +75,15 @@ Source: <https://www.drivendata.org/competitions/306/competition-doe-gems/leader
 
 This is an **ORGANIZER-PUBLIC leaderboard observation**, not a submission receipt. Private-set scores can differ.
 
-## 5. Decision required from you (the rule is not satisfiable as written)
+## 5. Comparator-rule conflict (historical options; no alternative adopted here)
 
-Your instructions conflict. The highest-urgency line says "unique = not an exact copy of a previous submission". The protocol says "unique = ≤70 % of dots within 3 px of any registry raster". The second rule is unsatisfiable against the calibration lattice (section 1). Choose one:
+This section records options considered in that concurrent session; it is not a request for a manual choice and does not authorize a local protocol change. The active instruction requires every registry raster to be checked and duplicates to stop. The literal rule therefore remains controlling here; any change would require an explicit shared, versioned protocol decision. The calibration-lattice calculation is documented as GEOMETRY-AUDIT, not an excuse to omit a comparator or tune holes.
 
 - **A. Keep the literal rule, lattice included.** Result: no dense file can ever be approved. Expected output: none.
 - **B. Exclude the calibration lattice (it is a control, not a submission) and compare against real submissions only.** Result: the nine real files cover 15–18 % each, so a new file with ≥30 % of its dots outside every one of them is geometrically possible. It must still pass a pre-registered holdout (≤3 experiments, ≤2 h) before any slot selection.
 - **C. Use the exact-copy rule only.** Result: any new byte-distinct file is "unique". Risk: a near-copy with a relabel would pass. Not recommended.
 
-Recommendation (Maximize P(Win)): **B**, with the holdout gate and a visible decision on the site. Under B the next session can run one pre-registered experiment. Under A, no competitive file can be produced, and under C the uniqueness claim would be weak.
+The prior session recorded B as its research recommendation. **That recommendation is not adopted on the active branch and has no operational effect**; no alternative comparator set is in force.
 
 ## 6. Irregularities flagged for review
 
@@ -113,8 +115,8 @@ Recommendation (Maximize P(Win)): **B**, with the holdout gate and a visible dec
 
 ## 8. Next work, in priority order
 
-1. **User decision on section 5 (A/B/C).** Nothing else unblocks a file.
-2. If B: pre-register one new mechanism with a hard budget and holdout gate. Candidate families already ranked in `registry/s23_hypotheses.json` (PCSE, TCB, MCR, CSD) are not implemented.
+1. Keep the active literal all-registry stop in force. Any protocol change must be explicit, shared, versioned, and authorized; do not exclude the lattice or tune around its holes.
+2. Only after an explicit shared, versioned rule change is authorized, the assigned lane and all preflight gates pass: preregister one mechanism with a hard budget and holdout gate. Candidate families already ranked in `registry/s23_hypotheses.json` (PCSE, TCB, MCR, CSD) remain unimplemented.
 3. Verify the masking convention against the official rules PDF (`https://docs.nlr.gov/docs/fy26osti/96647.pdf`) and the competition rules page, then record the result.
 4. Rebuild the site so the official 0.4544 observation and the S24 decision are shown at the top.
 5. Re-run the S23 format audit once a file is chosen.
