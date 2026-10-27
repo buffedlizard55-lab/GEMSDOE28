@@ -323,6 +323,14 @@
         "not-checked-network-policy": 8,
         "observed": 10
       }
+    },
+    {
+      "checked_at_utc": "2026-10-27T17:51:14Z",
+      "source_count": 18,
+      "status_counts": {
+        "fetch-failed": 2,
+        "observed": 16
+      }
     }
   ]
 }
