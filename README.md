@@ -1,3 +1,19 @@
+# S24 · 2026-10-27 UTC — repository review · READ FIRST EVERY SESSION
+
+## **NO NEW TIFF · NOT OK TO DOWNLOAD OR SUBMIT · zero experiments**
+
+S24 is a read-only repository/software review; it does not replace S23's negative scientific decision. No new feature, candidate raster, HOLDOUT-DTI or score estimate was produced, and no slot was selected. **Do not upload an old TIFF under a new name.** The current checkout preflight is BLOCKED: the assigned lane, complete synchronized registry and same-protocol frozen best are missing, and the ignored feature cache plus all nine shared template assets are absent here. The previous S23 registry audit measured the inherited S22C file as a duplicate under the literal rule. The 37,654-dot geometry bound is not a universal proof about every smaller budget; no hole/budget search was performed.
+
+**Latest committed source-feed snapshot at this review:** 16/18 entries observed at **2026-10-27 17:51:14 UTC**; two source responses exceeded the 2,000,000-byte fetch limit. This is metadata, not a live observation or scientific-content/licence verification. It is later than the immutable S23 snapshot (10/18 at 17:29:17 UTC); both timestamps are retained honestly. No DrivenData page, leaderboard, weekly quota or receipt was queried.
+
+- **[Executive summary + nine-site table + exact submission guide](docs/executive-summary.html)** · [Latest repository review](knowledge/68_s24_repository_review.md) · [S24 JSON run card](evidence/s24_run_card.json) · [Three-pass verification record](evidence/s24_verification.json) · [Blocked current-workspace preflight](evidence/s24_preflight.json) · [Immutable S24 source-feed snapshot](evidence/snapshots/s24_source_feed.json)
+- GEMSDOE32's supplied **0.2778 is USER-REPORTED / UNVERIFIED**. Pixel forensics establish a plausible catalogue-adjacent pruning mechanism, not the cause of an organizer score. No numerical hidden-score estimate is defensible for any of the nine sites; the current leaderboard is not refreshed.
+- The four ranked PCSE / TCB / MCR / CSD mechanisms remain proposals, not results. PCSE is not run because preflight stops before any geological experiment.
+- **S24 verification:** 647 passed, 6 data-dependent tests skipped (not passed), 12 warnings, 9 subtests; Ruff clean; deterministic standard-library site build succeeds with zero external requests. Full local record: [S24 review](knowledge/68_s24_repository_review.md).
+- **Next action:** resolve the registry protocol explicitly and restore the shared cache/tools plus a complete registry, assigned lane and comparable frozen best before any experiment. Keep the literal duplicate rule until a shared versioned decision changes it. No new TIFF is authorized.
+
+---
+
 # S23 · 2026-10-27 UTC — READ FIRST EVERY SESSION
 
 ## **NO FILE APPROVED · No new TIFF generated · OK TO SUBMIT: NO**

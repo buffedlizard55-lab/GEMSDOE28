@@ -51,11 +51,19 @@ def test_current_card_reports_an_uncompleted_tiff_not_a_fabricated_negative_mode
 
 @pytest.mark.parametrize("field", ["evidence_sha256", "implementation_sha256", "historical_snapshot_sha256"])
 def test_current_evidence_code_and_historical_snapshots_are_byte_bound(field):
+    archived_s23_implementations = {
+        "scripts/build_site.py": "evidence/snapshots/pre_s24_build_site.py",
+        "scripts/site_s23.py": "evidence/snapshots/pre_s24_site_s23.py",
+    }
     for relative, expected in load("evidence/s23_run_card.json")[field].items():
         target = (ROOT / relative).resolve()
         assert target.is_relative_to(ROOT)
         assert re.fullmatch(r"[0-9a-f]{64}", expected)
-        assert sha(relative) == expected, relative
+        audited_path = (archived_s23_implementations.get(relative, relative)
+                        if field == "implementation_sha256" else relative)
+        assert sha(audited_path) == expected, relative
+        if audited_path != relative:
+            assert sha(relative) != expected, f"{relative} must remain a later implementation"
 
 
 def test_all_current_aliases_agree_without_rewriting_the_historical_day():

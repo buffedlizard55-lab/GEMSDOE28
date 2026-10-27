@@ -107,6 +107,7 @@ on:
       - 'docs/assets/**'
       - 'site_templates/**'
       - 'evidence/s23_run_card.json'
+      - 'evidence/s24_run_card.json'
       - 'evidence/s23_registry_feasibility.json'
       - 'evidence/s23_scorecard.json'
       - 'evidence/s23_official_source_review.json'
@@ -223,6 +224,7 @@ on:
       - 'docs/assets/**'
       - 'site_templates/**'
       - 'evidence/s23_run_card.json'
+      - 'evidence/s24_run_card.json'
       - 'evidence/s23_registry_feasibility.json'
       - 'evidence/s23_scorecard.json'
       - 'evidence/s23_official_source_review.json'
@@ -251,4 +253,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json index.html executive-summary.html data/current_run_card_2026-10-26.json
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json docs/data/s24_run_card.json index.html executive-summary.html data/current_run_card_2026-10-26.json

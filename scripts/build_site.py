@@ -294,6 +294,7 @@ def nav() -> str:
     links = [
         ("Overview", "index.html"),
         ("Executive summary", "executive-summary.html"),
+        ("Latest review", "session24-review.html"),
         ("Research", "research.html"),
         ("Nine-site review", "cross-site-review.html"),
         ("Sources", "sources.html"),
@@ -1341,6 +1342,7 @@ def main() -> int:
     session15_review = read_json("evidence/session15_review.json", {})
     feed = read_json("docs/data/feed.json")
     s23_card = read_json("evidence/s23_run_card.json")
+    s24_card = read_json("evidence/s24_run_card.json")
     s23_scorecard = read_json("evidence/s23_scorecard.json")
     s23_hypotheses = read_json("registry/s23_hypotheses.json")
     s23_sources = read_json("evidence/s23_official_source_review.json")
@@ -1358,6 +1360,7 @@ def main() -> int:
         "cross-site-review.html": layout("Nine-site review", site_s23.score_table(s23_scorecard) + site_s23.site_details(s23_scorecard) + site_s23.scientific_answer() + site_s23.source_review(s23_sources) + '<details><summary>Historical S22 audit — superseded</summary>' + namespace_anchors(current_review, "s22-history-") + '</details>' + site_s23.history_links(), "Nine-site review"),
         "executive-summary.html": layout("Executive summary", site_s23.executive(s23_card, s23_scorecard) + site_s23.source_review(s23_sources), "Executive summary"),
         "session23-result.html": layout("S23 current reassessment", site_s23.executive(s23_card, s23_scorecard) + site_s23.hypotheses(s23_hypotheses) + site_s23.source_review(s23_sources), "Executive summary"),
+        "session24-review.html": layout("S24 repository review", site_s23.session24_review(s24_card), "Latest review"),
         "research.html": layout("Research and hypotheses", site_s23.hypotheses(s23_hypotheses) + '<details><summary>Historical research and prior hypotheses — not current approval</summary>' + render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim) + '</details>', "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", site_s23.source_review(s23_sources) + s18_feed_html(feed) + render_sources(sources, board), "Sources"),
@@ -1421,6 +1424,7 @@ def main() -> int:
     (DOCS / "data/s23_scorecard.json").write_text(
         json.dumps(s23_scorecard, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (DOCS / "data/s23_scorecard.csv").write_text(site_s23.score_csv(s23_scorecard), encoding="utf-8", newline="")
+    (DOCS / "data/s24_run_card.json").write_bytes((ROOT / "evidence/s24_run_card.json").read_bytes())
     # Dated 2026-10-26 aliases remain immutable historical S22 evidence.
     # Only generic/current-day aliases advance to this run.
     s23_bytes = (ROOT / "evidence/s23_run_card.json").read_bytes()
