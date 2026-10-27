@@ -42,7 +42,9 @@ All supplied results below are **USER-REPORTED / UNVERIFIED**, not organizer-con
 
 ### Verification / development
 
-Run the three passes and read [the exact final verification record](evidence/s23_verification.json). The initial review found/fixed stale current-site tests and historical mutable-file hash bindings by preserving old bytes, not rewriting old evidence. The archive audit and preflight are deliberately non-green; a green software suite does not authorize an upload. A further optional input restore hit GitHub REST rate limiting after re-verifying nine existing inputs; five legacy tests remain explicitly skipped, not passed ([record](evidence/s23_optional_restore.json)).
+The independent current-checkout review is [recorded here](knowledge/68_checkout_review_2026-10-27.md). It confirms the no-TIFF/no-slot decision, reproduces the site build and software suite, records six input-dependent skips and the current checkout's missing ignored data/shared-template assets, and flags a frozen S23 branch-label mismatch without rewriting hash-bound evidence.
+
+Run the three passes and read [the exact S23 verification record](evidence/s23_verification.json); note that it records a different, earlier checkout with restored inputs. Current-checkout test/build results and their limitations are in the review linked above. The initial review found/fixed stale current-site tests and historical mutable-file hash bindings by preserving old bytes, not rewriting old evidence. The archive audit and preflight are deliberately non-green; a green software suite does not authorize an upload. A further optional input restore hit GitHub REST rate limiting after re-verifying nine existing inputs; five legacy tests remain explicitly skipped, not passed ([record](evidence/s23_optional_restore.json)).
 
 ```sh
 python -m pytest -q
