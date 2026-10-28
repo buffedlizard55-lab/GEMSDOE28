@@ -63,6 +63,9 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
         "tests/test_site.py",
         "evidence/losfo_h38_1_raw.json",
         "evidence/h38_1_seed_audit_pre_run.json",
+        "evidence/s27_run_card.json",
+        "knowledge/72_s27_active_branch_review_2026-10-28.md",
+        "scripts/build_s27_review.py",
         "knowledge/39_session14_closeout_2026-10-03.md",
         "AI_DISCLOSURE.md",
         "scripts/build_site.py",
@@ -234,6 +237,24 @@ def test_active_checkout_review_is_exposed_without_overwriting_frozen_run_card()
         assert "no new TIFF was generated" in page
         assert 'data/active_checkout_review_2026-10-27.json' in page
     assert json.loads((ROOT / "evidence/s23_run_card.json").read_text())["branch"] == "arena/a774f0a0-gemsdoe28"
+
+
+def test_s27_current_decision_is_rendered_prominently_and_fail_closed():
+    card = json.loads((ROOT / "evidence/s27_run_card.json").read_text())
+    mirror = json.loads((DOCS / "data/s27_run_card.json").read_text())
+    assert mirror == card
+    assert card["branch"] == "arena/265e6e24-gemsdoe28"
+    assert card["submission"]["ok_to_submit"] is False
+    assert card["submission"]["slot_selected"] is False
+    for page in (ROOT / "index.html", ROOT / "executive-summary.html",
+                 DOCS / "index.html", DOCS / "executive-summary.html", DOCS / "s27-review.html"):
+        text = page.read_text()
+        assert "s27-current-decision" in text
+        assert "NO FILE APPROVED" in text
+        assert "not submission-ready" in text
+        assert "S27 JSON run card" in text or "Download S27 JSON run card" in text
+        assert "HOLDOUT-DTI (gems-segment-pooled-v1) 0.0450" in text
+    assert "S27 active-branch review" in (DOCS / "s27-review.html").read_text()
 
 
 def test_front_page_links_current_card_and_no_candidate_download():

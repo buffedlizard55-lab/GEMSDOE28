@@ -1,0 +1,131 @@
+{
+  "schema": "gemsdoe28-s27-repository-review-v1",
+  "observed_utc": "2026-10-28T18:40:27Z",
+  "branch": "arena/265e6e24-gemsdoe28",
+  "hypothesis": "Top untried proposal from the existing ranked slate: two-sided directional texture-covariance boundaries in rtp, tmi_hg, and cond_surf (S26-TCB); not tested in this review.",
+  "mechanism": "A fault-related damage or alteration boundary may alter directional correlation length or anisotropy even where broad potential-field amplitudes cancel; this is a proxy hypothesis, not proof of a fault or geothermal vent.",
+  "named_non_fault_process": "Depositional facies boundaries, intrusive contacts, survey-leveling seams, and raster resampling can mimic covariance discontinuities.",
+  "experiment": {
+    "status": "NOT RUN",
+    "experiments_run_this_review": 0,
+    "experiment_cap": 3,
+    "reason": "Fail-closed preflight blocked: no assigned method lane, complete synchronized registry, frozen same-protocol best, prepared feature cache, pinned shared-template assets, or unexpired authorized two-hour clock. The 37,654-dot budget also violates the literal any-registry >70%/3-px novelty rule by a documented counting bound."
+  },
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN for S27-TCB; no current result",
+    "evaluator_version": "gems-segment-pooled-v1 (shared implementation required; absent locally)",
+    "dti": null,
+    "withheld_positives": null,
+    "ci95": null,
+    "protocol_required": {
+      "whole_fault_segments_with_buffer": true,
+      "catalogue_features_visible_only": true,
+      "pixel_exact_visible_fault_mask": true,
+      "pooled": true,
+      "alpha": 0.2,
+      "beta": 0.8,
+      "kernel": "triangular",
+      "kernel_radius_m": 300
+    },
+    "prior_result_not_current": {
+      "label": "HOLDOUT-DTI (S25 PCSE prior result; not an S27 experiment)",
+      "evaluator_version": "gems-segment-pooled-v1",
+      "dti": 0.045036118291659814,
+      "withheld_positives": 60988,
+      "ci95": [0.03802875957795745, 0.052519021758899796],
+      "random_k_control_dti": 0.06987475312496201,
+      "paired_delta_dti": -0.024838634833302196,
+      "paired_delta_ci95": [-0.032408964819704525, -0.016918084033470827]
+    }
+  },
+  "hypothesis_slate": {
+    "source": "registry/s26_hypotheses.json",
+    "ranking": [
+      {"rank": 1, "id": "S26-TCB", "name": "Two-sided directional texture-covariance boundary", "layers": ["rtp", "tmi_hg", "cond_surf"], "expected_improvement": "Unknown; no numeric forecast", "cost": "Medium-high", "data": "Existing competition bands; local feature cache absent"},
+      {"rank": 2, "id": "S26-MCR", "name": "Spatially cross-fitted conductivity residual margins", "layers": ["cond_surf", "depth_to_base_surf", "det_elev", "det_elev_slope"], "expected_improvement": "Unknown; no numeric forecast", "cost": "Medium", "data": "Existing competition bands; local feature cache absent"},
+      {"rank": 3, "id": "S26-HFR2M", "name": "Residual heat-flow and shallow-temperature conjunction", "layers": ["USGS Great Basin heat-flow residuals", "GDR #1391 temperature probes", "cond_surf", "depth_to_base_surf"], "expected_improvement": "Unknown; no numeric forecast", "cost": "High", "data": "External source hosts and raw bytes unavailable in this runtime"},
+      {"rank": 4, "id": "S26-DNT", "name": "Drainage-network displacement and knickpoint trains", "layers": ["USGS 3DEP 1 m DEM", "existing LiDAR terrain descriptors"], "expected_improvement": "Unknown; no numeric forecast", "cost": "Very high", "data": "Challenge-specific official DEM tiles absent and source host unavailable in this runtime"}
+    ]
+  },
+  "focus_sites": {
+    "scope": "Nine historical artifacts and scores supplied by user; repository's pinned nine-file geometry audit dated 2026-10-27; not a synchronized global registry",
+    "score_label": "USER-REPORTED / UNVERIFIED (no file-bound organizer receipt observed)",
+    "estimate_status": "Unavailable: no validated mapping from catalogue holdout to hidden leaderboard score",
+    "all_nine_historical_artifacts_fail_requested_uniqueness": true,
+    "comparison_evidence": "evidence/s23_focus_novelty.json and evidence/s24_nine_site_overlap.json",
+    "sites": [
+      {"site": "GEMSDOE24", "reported_score": 0.2477, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE25", "reported_score": 0.2600, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE27", "reported_score": 0.2449, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE28", "reported_score": 0.2710, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE30", "reported_score": 0.2600, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE31", "reported_score": 0.2708, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE32", "reported_score": 0.2778, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE33", "reported_score": 0.2632, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE36", "reported_score": 0.2750, "estimate": null, "unique_vs_other_eight": false}
+    ]
+  },
+  "registry": {
+    "current_s27_surface_test": "NOT RUN; no candidate surface or placement was generated",
+    "historical_focus_artifact_comparisons": {
+      "label": "GEOMETRY-AUDIT (not HOLDOUT-DTI or an organizer score)",
+      "pairwise_directional_comparisons": 72,
+      "pairs_over_0_70": 72,
+      "scope": "Nine pinned historical artifacts only; incomplete for concurrent or unpublished submissions"
+    },
+    "preplacement_surface_spearman": null,
+    "final_dots_max_within_3px_fraction": null,
+    "novelty_decision": "No new candidate exists to assess; do not describe an old file as a new unique submission."
+  },
+  "raster": {
+    "generated_this_review": false,
+    "existing_research_artifact": "docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif",
+    "sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+    "bytes": 1580182,
+    "submission_name": null,
+    "note": "S25 PCSE is review-only: HOLDOUT-DTI 0.045 < random-K 0.070; do not submit.",
+    "note_characters": 73,
+    "download_status": "YES for audit/research only; not a submission candidate",
+    "submit_status": "NO"
+  },
+  "validator": {
+    "existing_research_tif_basic_inspection": {
+      "single_band_float32": true,
+      "no_nan_inside_raster_mask": true,
+      "inside_values_in_0_1": true,
+      "crs": "EPSG:32611",
+      "shape": [3730, 3292],
+      "transform": [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0],
+      "valid_mask_pixels": 5167373,
+      "outside_mask_all_nan": true,
+      "sha256_matches_prior_run_card": true
+    },
+    "current_exact_download_audit": "FAIL CLOSED: data/sample_submission.tif and data/labels.tif are absent; no exact grid/catalogue validation and no TIF approval",
+    "fresh_preflight": "BLOCKED; evidence/s27_preflight.json",
+    "portal_acceptance": "NOT TESTED"
+  },
+  "score_estimate": null,
+  "score_estimate_status": "Unavailable; the 0.2778 GEMSDOE32 claim is user-reported, and internal holdout DTI is not a calibrated hidden-score estimator.",
+  "leaderboard_claims": {
+    "GEMSDOE32_0_2778": "USER-REPORTED / UNVERIFIED from user-provided results",
+    "current_high_score_0_3195": "USER-REPORTED / UNVERIFIED from prompt; not fetched",
+    "current_high_score_0_4413": "USER-REPORTED / UNVERIFIED from prompt; not fetched"
+  },
+  "submission": {
+    "name": null,
+    "note": "No new candidate generated; do not submit the archived research TIFF.",
+    "slot_selected": false,
+    "ok_to_download_as_new_submission": false,
+    "ok_to_submit": false
+  },
+  "verdict": "negative",
+  "limitations": [
+    "No unique new TIF was generated; fail-closed novelty and holdout gates take precedence over the request to emit one.",
+    "The site score claims are user supplied; no organizer receipts or current leaderboard were available.",
+    "The nine-site novelty audit is pinned historical scope, not a complete synchronized parallel registry.",
+    "The preflight configuration is an expired prior-session authorization; do not reset its lane, registry or clock silently.",
+    "Official non-GitHub sources, current competition login pages, and external data hosts were not reachable for fresh source-content verification in this turn.",
+    "This runtime's dependencies were installed in an ignored virtual environment for tests; local data and the shared template remain missing."
+  ]
+}
