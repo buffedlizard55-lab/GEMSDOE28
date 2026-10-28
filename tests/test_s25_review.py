@@ -56,7 +56,8 @@ def test_s25_preflight_is_exact_fail_closed_evidence():
 def test_s25_report_and_readme_keep_current_branch_separate_from_history():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     report = (ROOT / "knowledge/69_repository_review_2026-10-28.md").read_text(encoding="utf-8")
-    assert readme.startswith("# S26 · 2026-10-28 UTC")
+    assert readme.startswith("# S27 · 2026-10-28 UTC")
+    assert "# S26 · 2026-10-28 UTC" in readme  # newer sections are prepended
     assert "arena/95d8129d-gemsdoe28" in readme
     assert "arena/965e7dda-gemsdoe28" in readme
     assert "knowledge/69_repository_review_2026-10-28.md" in readme

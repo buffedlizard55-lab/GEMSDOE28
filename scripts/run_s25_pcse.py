@@ -193,11 +193,20 @@ def main() -> int:
     overlap_cat = int((final & catalogue).sum())
     assert overlap_cat == 0
 
+    # Output name is fixed before the novelty scan so the candidate can exclude itself.
+    pred_clean = np.where(eligible_final & final, np.float32(1.0), np.float32(0.0)).astype(np.float32)
+    cid = submission.scored_content_id(pred_clean, footprint, catalogue)
+    nan_name = submission.make_filename(FAMILY, SLUG, DATE, cid, "nan")
+
     # ---- Novelty vs every binary registry raster in docs/downloads ----------------------------
     reg_rows = []
     sv = surface[footprint].astype(np.float64)
     surf_ranks = rankdata(sv)  # surface is finite everywhere in the footprint (sentinel-filled)
     for tif in sorted(DOWNLOADS.glob("*.tif")):
+        # Never compare the candidate against its own output: a rerun would otherwise
+        # flag itself (overlap 1.0, rho 1.0). S27 fix; the committed S25 run predates the file.
+        if tif.name == nan_name:
+            continue
         with rasterio.open(tif) as ds:
             if ds.shape != footprint.shape:
                 reg_rows.append({"file": tif.name, "skipped": "shape mismatch"})
@@ -230,9 +239,6 @@ def main() -> int:
     dup_any = any(r.get("duplicate_flag") for r in reg_rows)
 
     # ---- Write submission ---------------------------------------------------------------------
-    pred_clean = np.where(eligible_final & final, np.float32(1.0), np.float32(0.0)).astype(np.float32)
-    cid = submission.scored_content_id(pred_clean, footprint, catalogue)
-    nan_name = submission.make_filename(FAMILY, SLUG, DATE, cid, "nan")
     nan_path = DOWNLOADS / nan_name
     submission.write_geotiff(pred_clean, template, nan_path, outside="nan")
     v = submission.verify_geotiff(nan_path, template)
