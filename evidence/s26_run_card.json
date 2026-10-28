@@ -1,0 +1,96 @@
+{
+  "schema": "gemsdoe28-s26-review-run-card-v1",
+  "observed_utc": "2026-10-28T16:15:00Z",
+  "branch": "arena/95d8129d-gemsdoe28",
+  "hypothesis": "Next untried candidate: S26-TCB, two-sided directional texture-covariance boundaries from rtp, tmi_hg, and cond_surf; not run in this review.",
+  "mechanism": "A fault-related damage/alteration boundary may change side-specific correlation length or anisotropy even when broad edge amplitude is weak; only a buffered catalogue holdout can test this proxy.",
+  "named_non_fault_process": "Depositional facies boundaries, intrusive contacts, leveling seams, and raster resampling can mimic covariance discontinuities.",
+  "experiment_this_review": {
+    "status": "NO EXPERIMENT RUN",
+    "reason": "Current fail-closed preflight: no explicit lane, complete synchronized registry, same-protocol frozen best, valid cache/shared tools, or remaining authorized experiment clock."
+  },
+  "prior_tested_artifact": {
+    "hypothesis": "S25 PCSE phase-congruent scarp energy; this is prior evidence, not a new S26 test.",
+    "evaluator": "gems-segment-pooled-v1",
+    "holdout_dti": {
+      "label": "HOLDOUT-DTI (prior S25 result)",
+      "value": 0.045036118291659814,
+      "withheld_positive_pixels": 60988,
+      "ci95": [0.03802875957795745, 0.052519021758899796],
+      "ci95_method": "percentile spatial-block bootstrap of pooled TPw/FPw/FNw; 583 blocks, 100-pixel (10 km) blocks, 1,999 resamples; internal-validation interval, not a hidden-score interval",
+      "metric_parameters": {
+        "alpha": 0.2,
+        "beta": 0.8,
+        "kernel": "triangular",
+        "kernel_radius_m": 300
+      }
+    },
+    "comparator": {
+      "label": "HOLDOUT-DTI (prior S25 same-fold random-K control)",
+      "value": 0.06987475312496201,
+      "ci95": [0.06668093988661791, 0.07314456035338139]
+    },
+    "paired_difference": {
+      "label": "HOLDOUT-DTI (prior S25 PCSE minus random-K)",
+      "value": -0.024838634833302196,
+      "ci95": [-0.032408964819704525, -0.016918084033470827],
+      "fold_wins": 0,
+      "folds": 4
+    },
+    "interpretation": "Negative against random-K; not a leaderboard score or hidden-score estimate."
+  },
+  "registry_comparison_for_prior_artifact": {
+    "scope": "Prior S25 novelty report: 51 TIFFs; not a complete synchronized global registry; not freshly replayed in S26.",
+    "preplacement_surface_max_abs_spearman": 0.06184394501386839,
+    "final_dot_max_candidate_side_fraction_within_3px": 0.44367132309980345,
+    "duplicate_rule": "duplicate if absolute Spearman > 0.90 OR candidate-side dot fraction within 3 px > 0.70",
+    "status": "Prior scope passes; global/current uniqueness not established."
+  },
+  "raster": {
+    "generated_this_review": false,
+    "existing_research_artifact": "docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif",
+    "sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+    "submission_name": "gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif",
+    "note": "S25 PCSE k37654: unique (max 3px overlap 0.44) but HOLDOUT-DTI 0.045 < random-K 0.070. NOT for submission.",
+    "note_characters": 106,
+    "ok_to_download": "YES, for audit/research only",
+    "ok_to_submit": false,
+    "weekly_slot_selected": false
+  },
+  "validator": {
+    "current_local_inspection": {
+      "single_band_float32": true,
+      "no_nan_inside_raster_mask": true,
+      "inside_mask_values_in_0_1": true,
+      "crs": "EPSG:32611",
+      "shape": [3730, 3292],
+      "transform": [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0],
+      "outside_mask_is_nan": true,
+      "valid_mask_pixels": 5167373,
+      "outside_mask_pixels": 7111787
+    },
+    "template_grid_match": "Reported PASS in prior S25 shared validation; current exact shared validator could not run because data/sample_submission.tif and data/labels.tif are absent.",
+    "fresh_exact_download_audit": "FAIL CLOSED: missing sample_submission.tif and labels.tif; no file approved.",
+    "portal_acceptance": "NOT TESTED; no guarantee"
+  },
+  "score_estimate": null,
+  "score_estimate_status": "Unavailable; no calibrated mapping from catalogue holdout to the hidden leaderboard and no current file-bound organizer receipt.",
+  "leaderboard_claims": {
+    "GEMSDOE32_0_2778": "USER-REPORTED / UNVERIFIED from prompt; no receipt checked.",
+    "current_leaderboard": "NOT CHECKED"
+  },
+  "validator_outputs": {
+    "preflight": "BLOCKED; evidence/s26_preflight.json",
+    "exact_download_audit": "FAIL CLOSED; evidence/s26_download_audit.json",
+    "rasterio_basic_inspection": "PASS for file structure, mask, range, and recorded grid metadata; not a sample-grid comparison"
+  },
+  "candidate_hypotheses": "registry/s26_hypotheses.json",
+  "verdict": "negative",
+  "limitations": [
+    "No new TIF generated in S26; the named PCSE file is a previous research artifact and is explicitly not for submission.",
+    "S25 novelty comparison includes 51 registry rasters, not a synchronized complete registry across all parallel runs.",
+    "Current exact-file audit lacks sample_submission.tif and labels.tif.",
+    "No current organizer leaderboard page, receipt, or weekly allowance was checked.",
+    "No numerical score projection is justified."
+  ]
+}

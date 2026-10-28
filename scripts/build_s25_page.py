@@ -68,7 +68,8 @@ def panel(prefix: str) -> str:
 <thead><tr><th>Question</th><th>Answer</th></tr></thead>
 <tbody>
 <tr><td>Unique vs the 51 registry TIFFs?</td><td>YES. Max 3 px overlap {overlap:.4f} (rule &gt; 0.70); max |Spearman| {rho:.4f} (rule &gt; 0.90).</td></tr>
-<tr><td>Format valid (CRS, shape, transform, [0,1], NaN outside)?</td><td>YES. All hard checks pass; NaN only outside the 5,167,373-px footprint, as in the sample.</td></tr>
+<tr><td>Format checks</td><td>PASS in the prior S25 exact validation; current basic Rasterio inspection agrees on band, CRS, shape, transform, mask, and [0,1]. Current shared exact audit is FAIL CLOSED because the local sample template and labels are absent.</td></tr>
+<tr><td>Fresh exact-file audit (S26 checkout)</td><td><strong>FAIL CLOSED.</strong> `data/sample_submission.tif` and `data/labels.tif` are missing; do not treat the historical format pass as current reauthorization.</td></tr>
 <tr><td>HOLDOUT-DTI (evaluator gems-segment-pooled-v1)</td><td><strong>{dti:.4f}</strong> (95% CI {_ci(ci)}); {card["holdout_dti"]["n_withheld_positive_pixels"]:,} withheld positives.</td></tr>
 <tr><td>Random-placement control, same folds</td><td>{ctrl:.4f}. PCSE minus control: {paired["paired_delta_dti"]:+.4f} (95% CI {_ci(paired["paired_delta_ci95"])}); PCSE wins {paired["fold_wins"]} of {paired["n_folds"]} folds.</td></tr>
 <tr><td>Ablation (diagnostic only)</td><td>Step-polarity term alone {ab_step:.4f}; energy term alone {ab_energy:.4f}.</td></tr>
@@ -78,7 +79,7 @@ def panel(prefix: str) -> str:
 </tbody>
 </table>
 <p><strong>Note ({len(note)} characters):</strong> {html.escape(note, quote=False)}</p>
-<p>Full record: <a href="{REPO_BLOB}knowledge/69_s25_pcse_result.md">knowledge/69_s25_pcse_result.md</a> · <a href="{REPO_BLOB}evidence/s25_pcse_run_card.json">run card</a> · <a href="{REPO_BLOB}evidence/s25_pcse_ablation.json">ablation</a> · <a href="{REPO_BLOB}evidence/s25_pcse_novelty.json">novelty</a>. Leaderboard values were not re-observed in this session.</p>
+<p>Full record: <a href="{REPO_BLOB}knowledge/69_s25_pcse_result.md">S25 PCSE result</a> · <a href="{REPO_BLOB}evidence/s25_pcse_run_card.json">run card</a> · <a href="{REPO_BLOB}evidence/s25_pcse_ablation.json">ablation</a> · <a href="{REPO_BLOB}evidence/s25_pcse_novelty.json">novelty</a>. <a href="{REPO_BLOB}knowledge/71_s26_review_2026-10-28.md">Current S26 review and candidate hypotheses</a> · <a href="{REPO_BLOB}registry/s26_hypotheses.json">machine-readable hypothesis ranking</a>. Leaderboard values were not re-observed in this session.</p>
 </section>'''
 
 
