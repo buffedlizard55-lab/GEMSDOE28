@@ -93,7 +93,8 @@ def test_s24_preflight_and_feed_snapshots_are_exactly_hash_bound():
 
 def test_readme_read_first_and_s24_page_remain_locked():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert readme.startswith("# S24 · 2026-10-27 UTC — repository review")
+    assert readme.startswith("# S25 · 2026-10-28 UTC — repository review")
+    assert "# S24 · 2026-10-27 UTC — historical repository review" in readme
     assert "NO NEW TIFF · NOT OK TO DOWNLOAD OR SUBMIT" in readme
     assert "knowledge/68_s24_repository_review.md" in readme
     assert "evidence/s24_repository_review_run_card.json" in readme
