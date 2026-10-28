@@ -9,6 +9,7 @@ S25 is a read-only review on `arena/965e7dda-gemsdoe28`. Fresh preflight at 2026
 - **Fresh software verification:** 655 passed, 6 skipped, 12 warnings, 9 subtests; Ruff clean; 19-page static build plus active-review overlay succeeds with zero external requests. Six data-dependent skips are not passes. Full details: [S25 review](knowledge/69_repository_review_2026-10-28.md).
 - **S25 decision:** no new file approved; `submission_ready=false`, `ok_to_submit=false`, `slot_selected=false`. Current preflight is recorded at [evidence/s25_preflight.json](evidence/s25_preflight.json). No experiment was started.
 - **Next work:** resolve missing lane, synchronized registry, shared cache/tools, and same-protocol baseline without bypassing duplicate controls; then obtain a fresh authorized budget before any experiment. No submission slot may be selected by this review.
+- **Supplemental exact-file check on branch `arena/7504de16-gemsdoe28`:** `scripts/verify_downloads.py` exited 1 / FAIL CLOSED because `data/sample_submission.tif` and `data/labels.tif` are missing. No historical file was approved. See [branch-specific verification](knowledge/70_checkout_validation_followup_2026-10-28.md) and [review run card](evidence/review_2026-10-28.json); do not pool it with other parallel branch records.
 
 ---
 
