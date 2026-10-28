@@ -1,0 +1,41 @@
+{
+  "experiment": "S25-exp2 PCSE ablation (diagnostic, frozen K and folds; no GeoTIFF)",
+  "results": {
+    "phase_stepfrac_only": {
+      "label": "HOLDOUT-DTI",
+      "dti": 0.03733920866918835,
+      "ci95": [
+        0.03358546176661287,
+        0.041271912720723815
+      ],
+      "TP_w": 2152.445339252969,
+      "FP_w": 42124.12403391031,
+      "FN_w": 58835.55466074703,
+      "n_withheld_positive_pixels": 60988
+    },
+    "energy_only": {
+      "label": "HOLDOUT-DTI",
+      "dti": 0.03766634623357238,
+      "ci95": [
+        0.030684650901781983,
+        0.04515044238017418
+      ],
+      "TP_w": 2188.834035342298,
+      "FP_w": 44414.82827463808,
+      "FN_w": 58799.1659646577,
+      "n_withheld_positive_pixels": 60988
+    }
+  },
+  "canary": {
+    "phase_stepfrac_only": {
+      "pooled_auc": 0.5099871831257752,
+      "leakage_suspected": false
+    },
+    "energy_only": {
+      "pooled_auc": 0.5701047535879717,
+      "leakage_suspected": false
+    }
+  },
+  "canary_passed": true,
+  "interpretation": "Each factor alone is an ablation diagnostic; neither is a submission."
+}

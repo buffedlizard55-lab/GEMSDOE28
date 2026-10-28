@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S25 PCSE result | GEMSDOE28</title>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
+  <nav aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../executive-summary.html">Executive summary</a><a href="index.html">S25 result</a></nav>
+</div></header>
+<main><section class="section callout-danger" id="s25-pcse-decision" aria-label="S25 PCSE submission decision">
+<p class="eyebrow">S25 · 2026-10-28 UTC · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
+<h2>S25 unique TIFF: UNIQUE + FORMAT-VALID, but HOLDOUT-NEGATIVE · OK TO SUBMIT: NO</h2>
+<p><strong>Download (review only):</strong> <a href="../downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif">gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif</a> (<a href="../downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.zip">ZIP</a>)</p>
+<table>
+<thead><tr><th>Question</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>Unique vs the 51 registry TIFFs?</td><td>YES. Max 3 px overlap 0.4437 (rule &gt; 0.70); max |Spearman| 0.0618 (rule &gt; 0.90).</td></tr>
+<tr><td>Format valid (CRS, shape, transform, [0,1], NaN outside)?</td><td>YES. All hard checks pass; NaN only outside the 5,167,373-px footprint, as in the sample.</td></tr>
+<tr><td>HOLDOUT-DTI (evaluator gems-segment-pooled-v1)</td><td><strong>0.0450</strong> (95% CI 0.0380 to 0.0525); 60,988 withheld positives.</td></tr>
+<tr><td>Random-placement control, same folds</td><td>0.0699. PCSE minus control: -0.0248 (95% CI -0.0324 to -0.0169); PCSE wins 0 of 4 folds.</td></tr>
+<tr><td>Ablation (diagnostic only)</td><td>Step-polarity term alone 0.0373; energy term alone 0.0377.</td></tr>
+<tr><td>Organizer score</td><td>None. Not organizer-confirmed.</td></tr>
+<tr><td><strong>OK to download?</strong></td><td>Yes, for review and audit only.</td></tr>
+<tr><td><strong>OK to submit?</strong></td><td><strong>NO.</strong> It scores below a random-placement control on the shared holdout.</td></tr>
+</tbody>
+</table>
+<p><strong>Note (106 characters):</strong> S25 PCSE k37654: unique (max 3px overlap 0.44) but HOLDOUT-DTI 0.045 &lt; random-K 0.070. NOT for submission.</p>
+<p>Full record: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/69_s25_pcse_result.md">knowledge/69_s25_pcse_result.md</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_run_card.json">run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_ablation.json">ablation</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_novelty.json">novelty</a>. Leaderboard values were not re-observed in this session.</p>
+</section></main>
+</body>
+</html>
