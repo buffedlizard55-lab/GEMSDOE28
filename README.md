@@ -1,3 +1,9 @@
+# S25 · 2026-10-28 UTC — active-checkout review · READ FIRST EVERY SESSION
+
+**NO TIFF generated · NOT OK TO DOWNLOAD/SUBMIT · zero experiments.** This branch review is [recorded here](knowledge/69_checkout_review_2026-10-28.md), with a machine-readable [review card](evidence/s25_checkout_review_2026-10-28.json). The site build passed, but Python lacks `pytest` and `numpy`, so tests and fresh preflight are blocked—not passed. The cache/shared-template inputs are absent. A site rebuild also strips injected review overlays; restore/regenerate them after building. No scores were refreshed and GEMSDOE32's supplied 0.2778 remains USER-REPORTED / UNVERIFIED. Continue only after restoring dependencies and inputs and resolving the explicit lane, full registry, and comparable-baseline gates. No submission slot was selected.
+
+---
+
 # S24 · 2026-10-27 UTC — repository review · READ FIRST EVERY SESSION
 
 ## **NO NEW TIFF · NOT OK TO DOWNLOAD OR SUBMIT · zero experiments**
