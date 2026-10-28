@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""S25 add-on: publish the PCSE decision panel and its standalone page. Standard library only.
+
+Runs from ``scripts/build_active_review.py`` after the generated site is built, so CI's clean-diff
+check still holds. It reads only ``evidence/s25_pcse_run_card.json`` and
+``evidence/s25_pcse_ablation.json``; it performs no network requests and never changes a
+hash-bound historical file. The panel reports the file as UNIQUE and FORMAT-VALID but NOT OK to
+submit, because its HOLDOUT-DTI is below the random-placement control.
+"""
+from __future__ import annotations
+
+import html
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+DOCS = ROOT / "docs"
+CARD = ROOT / "evidence" / "s25_pcse_run_card.json"
+ABLATION = ROOT / "evidence" / "s25_pcse_ablation.json"
+RESEARCH_MANIFEST = DOCS / "downloads" / "s25_research_manifest.json"
+REPO_BLOB = "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/"
+STANDALONE = DOCS / "s25" / "index.html"
+PANEL_ID = "s25-pcse-decision"
+# Page -> relative prefix to docs/downloads
+PAGES = {
+    DOCS / "index.html": "downloads/",
+    DOCS / "executive-summary.html": "downloads/",
+    ROOT / "index.html": "docs/downloads/",
+    ROOT / "executive-summary.html": "docs/downloads/",
+}
+
+
+def _ci(pair: list[float]) -> str:
+    return f"{pair[0]:.4f} to {pair[1]:.4f}"
+
+
+def _load() -> tuple[dict, dict]:
+    card = json.loads(CARD.read_text(encoding="utf-8"))
+    abl = json.loads(ABLATION.read_text(encoding="utf-8"))
+    sub = card["submission"]
+    if card["validator"].get("hard_checks_passed") is not True:
+        raise ValueError("S25 panel refuses to render: validator hard checks did not pass")
+    if sub["sha256_tif"] is None or len(sub["sha256_tif"]) != 64:
+        raise ValueError("S25 panel refuses to render: missing TIFF SHA-256")
+    return card, abl
+
+
+def panel(prefix: str) -> str:
+    card, abl = _load()
+    sub = card["submission"]
+    note = json.loads(RESEARCH_MANIFEST.read_text(encoding="utf-8"))["s25_pcse_research"]["note"]
+    if len(note) > 140:
+        raise ValueError("S25 note exceeds 140 characters")
+    name = html.escape(sub["name"], quote=True)
+    dti = card["holdout_dti"]["value"]
+    ci = card["holdout_dti"]["ci95"]["interval"]
+    ctrl = card["control_random_k_holdout_dti"]["value"]
+    paired = card["paired_vs_random_k"]
+    overlap = card["novelty"]["max_dot_overlap_within_3px_candidate_side"]
+    rho = card["novelty"]["max_abs_surface_spearman"]
+    ab_step = abl["results"]["phase_stepfrac_only"]["dti"]
+    ab_energy = abl["results"]["energy_only"]["dti"]
+    return f'''<section class="section callout-danger" id="{PANEL_ID}" aria-label="S25 PCSE submission decision">
+<p class="eyebrow">S25 · 2026-10-28 UTC · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
+<h2>S25 unique TIFF: UNIQUE + FORMAT-VALID, but HOLDOUT-NEGATIVE · OK TO SUBMIT: NO</h2>
+<p><strong>Download (review only):</strong> <a href="{prefix}{name}">{name}</a> (<a href="{prefix}{html.escape(sub["zip"], quote=True)}">ZIP</a>)</p>
+<table>
+<thead><tr><th>Question</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>Unique vs the 51 registry TIFFs?</td><td>YES. Max 3 px overlap {overlap:.4f} (rule &gt; 0.70); max |Spearman| {rho:.4f} (rule &gt; 0.90).</td></tr>
+<tr><td>Format valid (CRS, shape, transform, [0,1], NaN outside)?</td><td>YES. All hard checks pass; NaN only outside the 5,167,373-px footprint, as in the sample.</td></tr>
+<tr><td>HOLDOUT-DTI (evaluator gems-segment-pooled-v1)</td><td><strong>{dti:.4f}</strong> (95% CI {_ci(ci)}); {card["holdout_dti"]["n_withheld_positive_pixels"]:,} withheld positives.</td></tr>
+<tr><td>Random-placement control, same folds</td><td>{ctrl:.4f}. PCSE minus control: {paired["paired_delta_dti"]:+.4f} (95% CI {_ci(paired["paired_delta_ci95"])}); PCSE wins {paired["fold_wins"]} of {paired["n_folds"]} folds.</td></tr>
+<tr><td>Ablation (diagnostic only)</td><td>Step-polarity term alone {ab_step:.4f}; energy term alone {ab_energy:.4f}.</td></tr>
+<tr><td>Organizer score</td><td>None. Not organizer-confirmed.</td></tr>
+<tr><td><strong>OK to download?</strong></td><td>Yes, for review and audit only.</td></tr>
+<tr><td><strong>OK to submit?</strong></td><td><strong>NO.</strong> It scores below a random-placement control on the shared holdout.</td></tr>
+</tbody>
+</table>
+<p><strong>Note ({len(note)} characters):</strong> {html.escape(note, quote=False)}</p>
+<p>Full record: <a href="{REPO_BLOB}knowledge/69_s25_pcse_result.md">knowledge/69_s25_pcse_result.md</a> · <a href="{REPO_BLOB}evidence/s25_pcse_run_card.json">run card</a> · <a href="{REPO_BLOB}evidence/s25_pcse_ablation.json">ablation</a> · <a href="{REPO_BLOB}evidence/s25_pcse_novelty.json">novelty</a>. Leaderboard values were not re-observed in this session.</p>
+</section>'''
+
+
+def standalone() -> str:
+    body = panel("../downloads/")
+    return f'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S25 PCSE result | GEMSDOE28</title>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="../index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
+  <nav aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../executive-summary.html">Executive summary</a><a href="index.html">S25 result</a></nav>
+</div></header>
+<main>{body}</main>
+</body>
+</html>
+'''
+
+
+def inject(path: Path, prefix: str) -> bool:
+    page = path.read_text(encoding="utf-8")
+    if f'id="{PANEL_ID}"' in page:
+        start = page.index(f'<section class="section callout-danger" id="{PANEL_ID}"')
+        end = page.index("</section>", start) + len("</section>")
+        page = page[:start] + page[end:]
+    if "<main>" not in page:
+        raise ValueError(f"Missing main element in {path}")
+    page = page.replace("<main>", "<main>" + panel(prefix), 1)
+    path.write_text(page, encoding="utf-8")
+    return True
+
+
+def main() -> int:
+    STANDALONE.parent.mkdir(parents=True, exist_ok=True)
+    STANDALONE.write_text(standalone(), encoding="utf-8")
+    for path, prefix in PAGES.items():
+        inject(path, prefix)
+    print(json.dumps({"status": "built", "standalone": STANDALONE.relative_to(ROOT).as_posix(),
+                      "panel_pages": [p.relative_to(ROOT).as_posix() for p in PAGES],
+                      "network_requests": 0, "ok_to_submit": False}, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

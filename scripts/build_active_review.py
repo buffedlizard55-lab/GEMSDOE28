@@ -73,6 +73,12 @@ def main() -> int:
         page = page.replace("<main>", "<main>" + panel, 1)
         path.write_text(page, encoding="utf-8")
         updated.append(path.relative_to(ROOT).as_posix())
+    # S25 add-on: the newest decision panel is inserted above the historical panel (same CI pass).
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    import build_s25_page  # noqa: PLC0415
+
+    build_s25_page.main()
     print(json.dumps({"status": "built", "pages": updated,
                       "review_card": "docs/data/active_checkout_review_2026-10-27.json",
                       "network_requests": 0, "submission_ready": False}, indent=2))

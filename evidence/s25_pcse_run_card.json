@@ -1,0 +1,322 @@
+{
+  "run_card_schema": "s25-pcse-v1",
+  "generated_utc": "2026-10-28T11:43:56Z",
+  "hypothesis": "H-PCSE: cross-profile step (odd) energy with cross-scale polarity agreement, minus ridge (even) energy, over det_elev/tmi/iso_grav_anom; catalogue-free operator",
+  "mechanism": "Odd/even quadrature ratio at 100-700 m scales; scarps give consistent step phase",
+  "named_non_fault_mimic": "terrace risers, roads, paleoshorelines, unfaulted lithologic contacts",
+  "evaluator": "gems-segment-pooled-v1",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.045036118291659814,
+    "components": {
+      "TP_w": 2621.9524395781827,
+      "FP_w": 44520.455674545956,
+      "FN_w": 58366.04756042182,
+      "n_truth": 60988.0,
+      "n_emitted": 47373.0
+    },
+    "n_withheld_positive_pixels": 60988,
+    "ci95": {
+      "level": 0.95,
+      "interval": [
+        0.03802875957795745,
+        0.052519021758899796
+      ],
+      "method": "percentile spatial-block bootstrap of pooled TPw/FPw/FNw",
+      "block_pixels": 100,
+      "block_size_m": 10000,
+      "n_blocks": 583,
+      "resamples": 1999,
+      "seed": 20261025,
+      "limitation": "Internal-validation uncertainty; geologic structures may cross blocks. Not a hidden-score interval."
+    }
+  },
+  "control_random_k_holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.06987475312496201,
+    "ci95": {
+      "level": 0.95,
+      "interval": [
+        0.06668093988661791,
+        0.07314456035338139
+      ],
+      "method": "percentile spatial-block bootstrap of pooled TPw/FPw/FNw",
+      "block_pixels": 100,
+      "block_size_m": 10000,
+      "n_blocks": 583,
+      "resamples": 1999,
+      "seed": 20261025,
+      "limitation": "Internal-validation uncertainty; geologic structures may cross blocks. Not a hidden-score interval."
+    }
+  },
+  "paired_vs_random_k": {
+    "evaluator_version": "gems-segment-pooled-v1",
+    "candidate_dti": 0.045036118291659814,
+    "baseline_dti": 0.06987475312496201,
+    "paired_delta_dti": -0.024838634833302196,
+    "paired_delta_ci95": [
+      -0.032408964819704525,
+      -0.016918084033470827
+    ],
+    "ci95_strictly_positive": false,
+    "fold_wins": 0,
+    "n_folds": 4,
+    "min_fold_delta": -0.039906300376240995,
+    "folds": [
+      {
+        "fold": "NW",
+        "candidate_dti": 0.04463946400749037,
+        "baseline_dti": 0.06680565803383212,
+        "delta_dti": -0.02216619402634175,
+        "candidate_wins": false
+      },
+      {
+        "fold": "NE_LidarGapHeavy",
+        "candidate_dti": 0.027888777383375994,
+        "baseline_dti": 0.06779507775961699,
+        "delta_dti": -0.039906300376240995,
+        "candidate_wins": false
+      },
+      {
+        "fold": "SW",
+        "candidate_dti": 0.058313263795716705,
+        "baseline_dti": 0.07279206513888554,
+        "delta_dti": -0.01447880134316884,
+        "candidate_wins": false
+      },
+      {
+        "fold": "SE",
+        "candidate_dti": 0.04135355362148489,
+        "baseline_dti": 0.06995077775971725,
+        "delta_dti": -0.02859722413823236,
+        "candidate_wins": false
+      }
+    ]
+  },
+  "canary": {
+    "diagnostic": "LEAKAGE-CANARY AUC, not a DTI or organizer score",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "threshold": 0.9,
+    "two_polarities_checked": true,
+    "passed": true,
+    "features": {
+      "pcse_surface": {
+        "pooled_auc": 0.5792495268243603,
+        "leakage_suspected": false,
+        "folds": [
+          {
+            "fold": "NW",
+            "auc": 0.6221777537301196,
+            "positives": 10165,
+            "background": 15000
+          },
+          {
+            "fold": "NE_LidarGapHeavy",
+            "auc": 0.5444251805078199,
+            "positives": 12511,
+            "background": 15000
+          },
+          {
+            "fold": "SW",
+            "auc": 0.5785195444444444,
+            "positives": 15000,
+            "background": 15000
+          },
+          {
+            "fold": "SE",
+            "auc": 0.56834854,
+            "positives": 15000,
+            "background": 15000
+          }
+        ]
+      },
+      "det_elev_highpass": {
+        "pooled_auc": 0.39742325489786623,
+        "leakage_suspected": false,
+        "folds": [
+          {
+            "fold": "NW",
+            "auc": 0.44016455484505657,
+            "positives": 10165,
+            "background": 15000
+          },
+          {
+            "fold": "NE_LidarGapHeavy",
+            "auc": 0.3019108837556284,
+            "positives": 12511,
+            "background": 15000
+          },
+          {
+            "fold": "SW",
+            "auc": 0.4695099333333333,
+            "positives": 15000,
+            "background": 15000
+          },
+          {
+            "fold": "SE",
+            "auc": 0.3765513933333333,
+            "positives": 15000,
+            "background": 15000
+          }
+        ]
+      },
+      "tmi_highpass": {
+        "pooled_auc": 0.490514202704584,
+        "leakage_suspected": false,
+        "folds": [
+          {
+            "fold": "NW",
+            "auc": 0.48338553861288736,
+            "positives": 10165,
+            "background": 15000
+          },
+          {
+            "fold": "NE_LidarGapHeavy",
+            "auc": 0.49057559480990065,
+            "positives": 12511,
+            "background": 15000
+          },
+          {
+            "fold": "SW",
+            "auc": 0.4977090266666667,
+            "positives": 15000,
+            "background": 15000
+          },
+          {
+            "fold": "SE",
+            "auc": 0.48786488222222224,
+            "positives": 15000,
+            "background": 15000
+          }
+        ]
+      },
+      "iso_grav_anom_highpass": {
+        "pooled_auc": 0.5430742360531045,
+        "leakage_suspected": false,
+        "folds": [
+          {
+            "fold": "NW",
+            "auc": 0.5578494212165929,
+            "positives": 10165,
+            "background": 15000
+          },
+          {
+            "fold": "NE_LidarGapHeavy",
+            "auc": 0.5686353608824235,
+            "positives": 12511,
+            "background": 15000
+          },
+          {
+            "fold": "SW",
+            "auc": 0.5042567511111111,
+            "positives": 15000,
+            "background": 15000
+          },
+          {
+            "fold": "SE",
+            "auc": 0.5513295555555555,
+            "positives": 15000,
+            "background": 15000
+          }
+        ]
+      }
+    },
+    "interpretation": "AUC > .90 is leakage until explained; lower AUC does not prove independence or fault discovery."
+  },
+  "novelty": {
+    "max_dot_overlap_within_3px_candidate_side": 0.44367132309980345,
+    "max_abs_surface_spearman": 0.06184394501386839,
+    "any_duplicate_flag": false,
+    "rule": "dup if overlap>0.70 or |rho|>0.90 (shared novelty.is_duplicate)",
+    "details_file": "evidence/s25_pcse_novelty.json"
+  },
+  "budget_dots": 37654,
+  "emitted_on_catalogue": 0,
+  "submission": {
+    "name": "gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif",
+    "zip": "gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.zip",
+    "sha256_tif": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+    "sha256_zip": "bcda0b0254e5aff28d3aca66c69bd2726788cfa53fcaa2d82182d5e11ca28d74",
+    "note_max_chars": 140
+  },
+  "validator": {
+    "variant": "nan",
+    "checks": {
+      "grid_matches_template": {
+        "pass": true,
+        "detail": "EPSG:32611 (3730, 3292) (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+        "hard": true
+      },
+      "single_band_float32": {
+        "pass": true,
+        "detail": "count=1 dtype=float32",
+        "hard": true
+      },
+      "inside_footprint_all_finite": {
+        "pass": true,
+        "detail": "0 non-finite inside 5167373 px",
+        "hard": true
+      },
+      "inside_footprint_in_0_1": {
+        "pass": true,
+        "detail": "min=0 max=1",
+        "hard": true
+      },
+      "no_infinities_anywhere": {
+        "pass": true,
+        "detail": "np.isinf(whole array) is empty",
+        "hard": true
+      },
+      "nodata_convention": {
+        "pass": true,
+        "detail": "nodata must be absent (all-finite) or NaN; numeric sentinels are not approved",
+        "hard": true
+      },
+      "outside_footprint_is_nan": {
+        "pass": true,
+        "detail": "7111787/7111787 NaN outside the footprint (as in the sample)",
+        "hard": true
+      },
+      "nodata_tag_is_nan": {
+        "pass": true,
+        "detail": "nodata=NaN declared, same as the sample submission",
+        "hard": true
+      },
+      "masked_read_in_0_1": {
+        "pass": true,
+        "detail": "masked count=5167373, min=0, max=1",
+        "hard": true
+      },
+      "nan_aware_range_in_0_1": {
+        "pass": true,
+        "detail": "nanmin=0 nanmax=1",
+        "hard": true
+      },
+      "strict_whole_array_range_ignoring_nan_is_informational": {
+        "pass": false,
+        "detail": "A validator that compares NaN directly would fail ANY file with NaN outside the footprint, including the sample. Informational only; use the allfinite fallback if the portal rejects.",
+        "hard": false
+      },
+      "profile_driver_gtiff": {
+        "pass": true,
+        "detail": "GTiff",
+        "hard": true
+      },
+      "compression_like_sample": {
+        "pass": true,
+        "detail": "Compression.lzw",
+        "hard": false
+      }
+    },
+    "hard_checks_passed": true,
+    "hard_failures": [],
+    "nonzero_inside_px": 37654,
+    "nonfinite_inside_px": 0,
+    "value_set_inside": [
+      0.0,
+      1.0
+    ]
+  },
+  "verdict": "pending-review",
+  "runtime_seconds": 134.8
+}

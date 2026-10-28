@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "status": "S25 RESEARCH ONLY. Unique, format-valid, HOLDOUT NEGATIVE (below random-K control). OK to download for review; OK to SUBMIT: NO.",
+  "s25_pcse_research": {
+    "slug": "s25-pcse-scarp-energy-k37654",
+    "file": "gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif",
+    "zip": "gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.zip",
+    "sha256_tif": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+    "sha256_zip": "bcda0b0254e5aff28d3aca66c69bd2726788cfa53fcaa2d82182d5e11ca28d74",
+    "note": "S25 PCSE k37654: unique (max 3px overlap 0.44) but HOLDOUT-DTI 0.045 < random-K 0.070. NOT for submission.",
+    "holdout_dti": 0.045036118291659814,
+    "holdout_dti_ci95": [
+      0.03802875957795745,
+      0.052519021758899796
+    ],
+    "holdout_label": "HOLDOUT-DTI (gems-segment-pooled-v1; 60,988 withheld positives)",
+    "random_k_control_dti": 0.06987475312496201,
+    "paired_delta_vs_random_k": -0.024838634833302196,
+    "paired_delta_ci95": [
+      -0.032408964819704525,
+      -0.016918084033470827
+    ],
+    "novelty_max_3px_overlap": 0.44367132309980345,
+    "novelty_max_abs_spearman": 0.06184394501386839,
+    "organizer_score": null,
+    "evidence": "evidence/s25_pcse_run_card.json",
+    "knowledge": "knowledge/69_s25_pcse_result.md"
+  }
+}

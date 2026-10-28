@@ -26,6 +26,13 @@ class Links(HTMLParser):
             self.ids.add(d["id"])
 
 
+def _restore_overlays():
+    """Re-apply the add-on panels after an in-repo page rebuild, exactly as CI's build step does."""
+    overlay = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_active_review.py")],
+                             capture_output=True, text=True)
+    assert overlay.returncode == 0, overlay.stderr
+
+
 def test_site_builds_from_json_only_and_pages_exist():
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_site.py")], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
@@ -380,7 +387,9 @@ def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(ca
     from scripts import build_site
 
     assert build_site.main() == 0
+    _restore_overlays()
     metadata = json.loads(capsys.readouterr().out)
+    _restore_overlays()  # build_site.main() rewrites every page without the overlays
     assert metadata['submission_ready'] is False and metadata['slot_selected'] is False
     assert 'primary_download' not in metadata and metadata['research_download'] is None
     assert metadata['inspection_artifacts']
@@ -429,6 +438,7 @@ def test_site_build_metadata_does_not_call_historical_raster_a_submission_downlo
     from scripts import build_site
 
     assert build_site.main() == 0
+    _restore_overlays()
     build_result = json.loads(capsys.readouterr().out)
     assert build_result["submission_ready"] is False
     assert build_result["slot_selected"] is False
@@ -455,6 +465,7 @@ def test_static_build_still_needs_no_third_party_dependencies():
     result = subprocess.run([sys.executable, "-S", str(ROOT / "scripts/build_site.py")],
                             capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
+    _restore_overlays()
 
 
 

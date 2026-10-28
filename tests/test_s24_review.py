@@ -93,7 +93,9 @@ def test_s24_preflight_and_feed_snapshots_are_exactly_hash_bound():
 
 def test_readme_read_first_and_s24_page_remain_locked():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert readme.startswith("# S25 · 2026-10-28 UTC — repository review")
+    # S25 PCSE block (this session) sits above the parallel S25 repository-review block; both are retained.
+    assert readme.startswith("# S25 · 2026-10-28 UTC — PCSE experiment")
+    assert "# S25 · 2026-10-28 UTC — repository review" in readme
     assert "# S24 · 2026-10-27 UTC — historical repository review" in readme
     assert "knowledge/70_checkout_validation_followup_2026-10-28.md" in readme
     assert "evidence/review_2026-10-28.json" in readme

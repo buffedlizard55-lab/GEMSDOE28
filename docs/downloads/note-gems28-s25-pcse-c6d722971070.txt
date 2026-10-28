@@ -1,0 +1,1 @@
+S25 PCSE k37654: unique (max 3px overlap 0.44) but HOLDOUT-DTI 0.045 < random-K 0.070. NOT for submission.

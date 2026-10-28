@@ -1,3 +1,22 @@
+# S25 · 2026-10-28 UTC — PCSE experiment · READ FIRST EVERY SESSION
+
+## UNIQUE TIF GENERATED · FORMAT VALID · HOLDOUT NEGATIVE · OK TO SUBMIT: NO
+
+| File (download to review only) | Unique? | Format valid? | HOLDOUT-DTI (95% CI) | vs random-K control | OK to submit? | Organizer score |
+|---|---|---|---|---|---|---|
+| [gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif](docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif) | YES (max 3 px overlap 0.44 < 0.70; max abs rho 0.06 < 0.90 across 51 registry TIFs) | YES (all hard checks pass) | 0.0450 (0.0380–0.0525) · HOLDOUT-DTI, 60,988 withheld positives | 0.0699 (random-K) — **PCSE is worse, paired Δ −0.0248 (CI −0.0324 to −0.0169), 0/4 folds** | **NO** | none |
+
+- **Why not submit:** the file is unique and format-valid, but it scores below a random-placement control on the shared holdout. A unique file is not a skilled file. No organizer receipt exists.
+- Full record: [knowledge/69_s25_pcse_result.md](knowledge/69_s25_pcse_result.md) · run card [evidence/s25_pcse_run_card.json](evidence/s25_pcse_run_card.json) · ablation [evidence/s25_pcse_ablation.json](evidence/s25_pcse_ablation.json) · novelty [evidence/s25_pcse_novelty.json](evidence/s25_pcse_novelty.json) · manifest entry `s25_pcse_research` in [docs/downloads/manifest.json](docs/downloads/manifest.json).
+- **Restoration (this session):** training, labels, template, and model-group rasters restored from SHA-256-pinned owner GitHub mirrors (not organizer-authenticated). Shared template restored to GEMSDOE24 `2521cb67…`. `prepare_data.py` run. Previously this checkout was BLOCKED; it is no longer blocked for software, but organizer authenticity remains unverified.
+- **Bug fixed:** training rasters use float32 minimum (−3.4e38) as a missing sentinel in 3,061 footprint cells per band; now treated as missing.
+- **Experiments used:** 2 of 3 (PCSE full; its ablation). Stopped. No slot selected.
+- **Verification:** `pytest` 657 passed / 5 skipped (data-dependent); `ruff` clean. Public S25 page: [docs/s25/index.html](docs/s25/index.html) (also a panel on the top of the overview and executive-summary pages, inserted by `scripts/build_s25_page.py` during `build_active_review.py`).
+- **Leaderboard anchors** (0.4413 / 0.3195 / 0.4544) remain unverified from this sandbox, which cannot reach drivendata.org.
+- **Next:** see the ranked list in knowledge/69. The third experiment is reserved for a pre-declared, frozen change and only if motivated by the ablation.
+
+---
+
 # S25 · 2026-10-28 UTC — repository review · READ FIRST EVERY SESSION
 
 **Additional S25 record (input restoration, PR #72):** every pinned input restored and hash-verified, feature cache built, 658 tests pass; no TIFF, no holdout run, no slot. Remaining decisions (method lane, registry-rule budget, budget clock): [knowledge/69_s25_status_2026-10-28.md](knowledge/69_s25_status_2026-10-28.md) · [run card](evidence/s25_run_card.json).
