@@ -13,32 +13,7 @@
   <a class="brand" href="docs/index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   <nav aria-label="Main navigation"><a href="docs/index.html">Overview</a><a href="docs/executive-summary.html">Executive summary</a><a href="docs/session24-review.html">Latest review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
 </div></header>
-<main><section class="section callout-danger" id="s25-pcse-decision" aria-label="S25 PCSE submission decision">
-<p class="eyebrow">S25 · 2026-10-28 UTC · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
-<h2>S25 unique TIFF: UNIQUE + FORMAT-VALID, but HOLDOUT-NEGATIVE · OK TO SUBMIT: NO</h2>
-<p><strong>Download (review only):</strong> <a href="docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif">gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif</a> (<a href="docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.zip">ZIP</a>)</p>
-<table>
-<thead><tr><th>Question</th><th>Answer</th></tr></thead>
-<tbody>
-<tr><td>Unique vs the 51 registry TIFFs?</td><td>YES. Max 3 px overlap 0.4437 (rule &gt; 0.70); max |Spearman| 0.0618 (rule &gt; 0.90).</td></tr>
-<tr><td>Format valid (CRS, shape, transform, [0,1], NaN outside)?</td><td>YES. All hard checks pass; NaN only outside the 5,167,373-px footprint, as in the sample.</td></tr>
-<tr><td>HOLDOUT-DTI (evaluator gems-segment-pooled-v1)</td><td><strong>0.0450</strong> (95% CI 0.0380 to 0.0525); 60,988 withheld positives.</td></tr>
-<tr><td>Random-placement control, same folds</td><td>0.0699. PCSE minus control: -0.0248 (95% CI -0.0324 to -0.0169); PCSE wins 0 of 4 folds.</td></tr>
-<tr><td>Ablation (diagnostic only)</td><td>Step-polarity term alone 0.0373; energy term alone 0.0377.</td></tr>
-<tr><td>Organizer score</td><td>None. Not organizer-confirmed.</td></tr>
-<tr><td><strong>OK to download?</strong></td><td>Yes, for review and audit only.</td></tr>
-<tr><td><strong>OK to submit?</strong></td><td><strong>NO.</strong> It scores below a random-placement control on the shared holdout.</td></tr>
-</tbody>
-</table>
-<p><strong>Note (106 characters):</strong> S25 PCSE k37654: unique (max 3px overlap 0.44) but HOLDOUT-DTI 0.045 &lt; random-K 0.070. NOT for submission.</p>
-<p>Full record: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/69_s25_pcse_result.md">knowledge/69_s25_pcse_result.md</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_run_card.json">run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_ablation.json">ablation</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_novelty.json">novelty</a>. Leaderboard values were not re-observed in this session.</p>
-</section><section class="section callout-warning" id="active-checkout-review" aria-label="Prior parallel checkout review">
-<p class="eyebrow">PRIOR PARALLEL-CHECKOUT RECORD · 2026-10-27T18:46:06Z · arena/d955c32f-gemsdoe28</p>
-<h2>Prior checkout status: NO — no new TIFF was generated</h2>
-<p>This immutable review belongs to a different branch and is retained as parallel-session provenance; its data/cache and shared-tool state do not describe the active checkout. That review recorded a blocked preflight and no HOLDOUT-DTI. For the current repository-review disposition, open <a href="docs/session24-review.html">the S24 review for this branch</a>.</p>
-<p><strong>Blockers recorded by the prior checkout:</strong> No explicit assigned method lane or assignment source No complete shared parallel-run registry Declared 37,654-dot budget is blocked by the literal registry overlap rule; do not optimize around its holes No frozen comparable best under the required strict holdout protocol Required cached 32-band feature array/metadata absent</p>
-<p><a href="docs/data/active_checkout_review_2026-10-27.json">Open the prior checkout's JSON record</a> · <a href="docs/session24-review.html">Current S24 repository review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/68_active_checkout_review_2026-10-27.md">Read the prior detailed review</a>. No score estimate, weekly slot, or upload authorization is asserted.</p>
-</section><section class="readiness-banner callout-danger" id="current-submission" aria-label="Current submission readiness" data-submission-ready="false">
+<main><section class="readiness-banner callout-danger" id="current-submission" aria-label="Current submission readiness" data-submission-ready="false">
 <p class="eyebrow">S23 audit: no new TIFF · 27 OCT 2026 · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
 <h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
 <p><strong>OK to download a new submission: NO. OK to submit: NO.</strong> S23 stopped before a new model or TIFF. The shared calibration lattice covers <strong>99.8713%</strong> of the footprint within 3 pixels (GEOMETRY-AUDIT, not a score); it blocks the champion-sized budget under your literal any-raster rule.</p>
@@ -112,7 +87,7 @@
 <p>Historical results are preserved rather than rewritten. The S22C “promote” claim and ratio projection are superseded by S23's literal-rule reassessment. A different file hash is not a new geological method.</p>
 <p><a href="docs/session19-result.html">S19 archive</a> · <a href="docs/session20-result.html">S20 result</a> · <a href="docs/session21-result.html">S21 result</a> · <a href="docs/session22-result.html">S22-SIGN</a> · <a href="docs/session22-mofr-result.html">S22-MOFR</a> · <a href="docs/session22c-result.html">S22C historical result</a> · <a href="docs/submission-review.html">Parallel review</a> · <a href="docs/topology.html">Topology</a></p>
 <details><summary>S22C reference TIFF (duplicate; educational use only)</summary><p><a href="docs/downloads/gems28-s22-ctxhgb-20261026-e23dabcec6e2-allfinite.tif" download>Download historical S22C TIFF — DO NOT SUBMIT</a>. This is <strong>not a newly generated file</strong>. Content ID <code>e23dabcec6e2</code>; exact bytes remain registered in <a href="docs/data/run_card_s22c.json">the historical run card</a>.</p></details>
-<p><a class="button quiet" href="docs/archive.html">Open all historical research artifacts</a></p></section><section class="section"><h2>Source metadata feed (not a score feed)</h2><p>Last recorded run: <time datetime="2026-10-27T17:51:14Z" data-feed-time>2026-10-27T17:51:14Z</time>. <span data-feed-freshness>Observation time is not a guarantee of current availability.</span></p><p>Freshly observed: 16 of 18; partial-or-unavailable. This feed does not log into or monitor DrivenData. Dated one-off official research observations are separately recorded, not fabricated as feed successes.</p><p><a href="docs/data/feed.json">Raw feed</a> · <a href="docs/sources.html">Official source ledger</a></p></section></main>
+<p><a class="button quiet" href="docs/archive.html">Open all historical research artifacts</a></p></section><section class="section"><h2>Source metadata feed (not a score feed)</h2><p>Last recorded run: <time datetime="2026-10-28T12:55:13Z" data-feed-time>2026-10-28T12:55:13Z</time>. <span data-feed-freshness>Observation time is not a guarantee of current availability.</span></p><p>Freshly observed: 16 of 18; partial-or-unavailable. This feed does not log into or monitor DrivenData. Dated one-off official research observations are separately recorded, not fabricated as feed successes.</p><p><a href="docs/data/feed.json">Raw feed</a> · <a href="docs/sources.html">Official source ledger</a></p></section></main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> Static pages are source-linked and generated locally from repository JSON. No upload, login, scraping, polling, or automated DrivenData access occurs here. Research proxy results are not competition scores.</p></div></footer>
 </body>
 </html>
