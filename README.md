@@ -1,5 +1,7 @@
 # S25 · 2026-10-28 UTC — repository review · READ FIRST EVERY SESSION
 
+**Additional S25 record (input restoration, PR #72):** every pinned input restored and hash-verified, feature cache built, 658 tests pass; no TIFF, no holdout run, no slot. Remaining decisions (method lane, registry-rule budget, budget clock): [knowledge/69_s25_status_2026-10-28.md](knowledge/69_s25_status_2026-10-28.md) · [run card](evidence/s25_run_card.json).
+
 ## **NO NEW TIFF · NOT OK TO DOWNLOAD OR SUBMIT · zero experiments**
 
 S25 is a read-only review on `arena/965e7dda-gemsdoe28`. Fresh preflight at 2026-10-28 11:38:07 UTC exited 1 / BLOCKED: no assigned lane, complete synchronized registry, strict comparable baseline, cached feature stack, or nine pinned shared-template assets; the configured experiment wall-clock budget is also expired. No model, candidate, holdout, canary, score estimate, TIFF or slot decision was produced. **Do not upload an old TIFF under a new name.**

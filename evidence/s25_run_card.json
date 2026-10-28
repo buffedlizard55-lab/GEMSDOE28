@@ -1,0 +1,29 @@
+{
+  "session": "S25",
+  "date_utc": "2026-10-28",
+  "branch": "arena/1544255a-gemsdoe28",
+  "label": "NO SCORE — restoration and gate status only",
+  "hypothesis": "none tested this session",
+  "mechanism": "none",
+  "non_fault_mimic": "not applicable",
+  "holdout_dti": null,
+  "holdout_ci_95": null,
+  "withheld_positives": null,
+  "correlation_or_overlap_vs_registry": "not run on a candidate; registry feasibility re-run BLOCKED (6649 uncovered px; 22163 max budget not ruled out by pixel count at 37654-dot budget: impossible)",
+  "raster_sha256": null,
+  "validator": "not run (no candidate raster)",
+  "inputs_sha256": {
+    "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "prepared/features.npy": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "prepared/features.json": "bf8e319179ae5ddd365ab005a712eead48d135b7807290f62b74093085379e24"
+  },
+  "tests": "pytest 658 passed, 12 warnings, 9 subtests passed; ruff clean",
+  "submission_name": null,
+  "note": "S25: inputs restored and hash-verified; no TIFF. Lane and registry-rule decisions pending.",
+  "verdict": "negative",
+  "experiments_run": 0,
+  "submission_ready": false,
+  "slot_selected": false
+}
