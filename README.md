@@ -11,6 +11,25 @@
 
 ---
 
+# S27b · 2026-10-28 UTC — restore, reproduce, verify (parallel branch arena/123dd6aa-gemsdoe28)
+
+## CURRENT DECISION: NO NEW TIFF · S25 PCSE TIFF IS NOT OK TO SUBMIT · OFFICIAL TOP 0.4544
+
+- **Restored inputs.** Core (training features, labels, sample submission), model group, and the nine shared-template assets all restored and matched their pinned SHA-256 hashes. Source is owner-supplied GitHub mirrors, not DrivenData; DrivenData was not contacted.
+- **Reproduced.** The S25 PCSE pipeline reproduces the committed holdout exactly: HOLDOUT-DTI 0.0450361 (60,988 withheld positives, 95% CI 0.0380–0.0525) against random-K control 0.0699, and the same TIF SHA-256.
+- **Bug fixed.** `scripts/run_s25_pcse.py` no longer compares a candidate with its own output on rerun (it had reported a false duplicate).
+- **Leaderboard, observed from the official public board:** #1 = **0.4544**; #26 = **0.3195**. The prompt's 0.4413 is not on the live board. The public board is not the private prize scoring set.
+- **Not run:** no new TIFF. The preflight remains BLOCKED on four real gaps: no assigned method lane, no complete synchronized registry, no frozen same-protocol best, and an expired experiment clock. A new raster would bypass those gates.
+- **Exact-file audit (S27b):** 869 checks, 2 failures, both on archived historical all-finite files (NaN nodata tag). Flagged, not rewritten. S25 PCSE passes and is registered in a sibling research manifest.
+- **Tests:** 664 passed, 5 skipped; ruff clean.
+
+- [S27b knowledge note](knowledge/72_s27_restore_reproduction_2026-10-28.md) · [S27b run card](evidence/s27b_run_card.json) · [S27b exact-file audit](evidence/s27b_download_audit.json)
+- Official sources: [problem and metric](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/)
+
+---
+
+---
+
 # S26 · 2026-10-28 UTC — prior checkout review · historical, branch-specific
 
 The S26 review below was recorded on a different Arena branch (`arena/95d8129d-gemsdoe28`). Preserve it as historical parallel-session provenance; its checkout-specific condition must not be presented as a fresh S27 observation. S27 re-ran its own preflight and exact-file audit, recorded at `evidence/s27_preflight.json` and `evidence/s27_download_audit.json`.

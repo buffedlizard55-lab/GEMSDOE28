@@ -283,6 +283,19 @@ def main() -> int:
         item[key] for item in manifest.values() if isinstance(item, dict)
         for key in ("nan", "allfinite", "filename") if isinstance(item.get(key), str)
     }
+    # S27: research-only artifacts registered in a sibling manifest. Read it instead of editing
+    # docs/downloads/manifest.json, whose bytes are hash-bound by the S23 evidence record.
+    research_path = downloads_dir / "s25_research_manifest.json"
+    if research_path.is_file():
+        research = json.loads(research_path.read_text())
+        for item in research.values():
+            if isinstance(item, dict) and isinstance(item.get("file"), str):
+                registered_names.add(item["file"])
+                if isinstance(item.get("zip"), str):
+                    registered_names.add(item["zip"])
+                target = downloads_dir / item["file"]
+                check(target.is_file() and sha256_file(target) == item.get("sha256_tif"),
+                      "s25_research_sha256_matches_registry", item["file"])
     unregistered = sorted(set(names) - registered_names)
     check(not unregistered, "all_tifs_registered_for_audit",
           "Unregistered TIFFs (not fully audited): " + ", ".join(unregistered))
