@@ -12,6 +12,12 @@ S25 is a read-only review on `arena/965e7dda-gemsdoe28`. Fresh preflight at 2026
 
 ---
 
+## Parallel S25 checkout review — separate branch `arena/b74b9587-gemsdoe28`
+
+This immutable same-day review is [knowledge/69_checkout_review_2026-10-28.md](knowledge/69_checkout_review_2026-10-28.md) with its [JSON record](evidence/s25_checkout_review_2026-10-28.json). It found the site build succeeded but its runtime lacked `pytest` and `numpy`, so tests and fresh preflight were **not run**, rather than passed; it also noted the build must be followed by the active-review overlay step. Those observations belong to that separate checkout and are not the S25 validation above. Do not pool test/preflight evidence across branches.
+
+---
+
 # S24 · 2026-10-27 UTC — historical repository review · retained provenance
 
 S24 was a read-only review on a different branch (`arena/79bafcec-gemsdoe28`); its run card is not a review of the active S25 branch. It recorded no new TIFF, experiment, HOLDOUT-DTI, score estimate or slot decision. Its feed snapshot was observed 16/18 metadata endpoints at 2026-10-27 17:51:14 UTC; this is historical metadata, not current feed status. S24's preflight and source artifacts remain immutable under [knowledge/68_s24_repository_review.md](knowledge/68_s24_repository_review.md), [evidence/s24_repository_review_run_card.json](evidence/s24_repository_review_run_card.json), and [evidence/s24_preflight.json](evidence/s24_preflight.json). A separate concurrent S24 geometry audit recorded a public leaderboard observation, not a file-bound receipt or current refresh. Do not pool its claims with this branch or treat them as current approval.
