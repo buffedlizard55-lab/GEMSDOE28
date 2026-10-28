@@ -1,4 +1,17 @@
-# S25 · 2026-10-28 UTC — PCSE experiment · READ FIRST EVERY SESSION
+# S26 · 2026-10-28 UTC — current checkout review · READ FIRST EVERY SESSION
+
+## CURRENT DECISION: NO NEW TIFF · EXISTING UNIQUE RESEARCH TIFF IS NEGATIVE · OK TO SUBMIT: NO
+
+**Active branch:** `arena/95d8129d-gemsdoe28`. No geological experiment or new TIFF was run in this review. The prior S25 PCSE TIFF below is available to download **for research/audit only**; it is **not OK to submit** because its HOLDOUT-DTI (0.0450, 95% CI 0.0380–0.0525) is below the same-fold random-K HOLDOUT-DTI (0.0699, 95% CI 0.0667–0.0731). The exact current validator also fails closed because the local sample submission and labels are absent.
+
+- [S26 report and four candidate hypotheses](knowledge/71_s26_review_2026-10-28.md) · [S26 JSON run card](evidence/s26_run_card.json) · [fresh preflight](evidence/s26_preflight.json) · [fresh exact-file audit](evidence/s26_download_audit.json) · [hypothesis registry](registry/s26_hypotheses.json)
+- The highest supplied GEMSDOE32 score, **0.2778**, remains **USER-REPORTED / UNVERIFIED**; no calibrated estimate of hidden leaderboard performance is available. The PCSE holdout result is not a leaderboard score.
+- Top actionable untried idea: **S26-TCB**, two-sided directional covariance changes in `rtp`, `tmi_hg`, and `cond_surf`. It was **not run**: lane assignment, complete synchronized registry, frozen comparable baseline, cache/shared tools, and fresh experiment authorization are missing. No submission slot was selected.
+- Run next only after the fail-closed gates pass; run individual feature leakage canaries, the shared buffered whole-segment evaluator, and pre-placement/final-dot registry checks. Do not bypass or rewrite the shared protocol.
+
+---
+
+# S25 · 2026-10-28 UTC — prior PCSE experiment · READ FIRST EVERY SESSION
 
 ## UNIQUE TIF GENERATED · FORMAT VALID · HOLDOUT NEGATIVE · OK TO SUBMIT: NO
 

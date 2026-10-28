@@ -19,7 +19,8 @@
 <thead><tr><th>Question</th><th>Answer</th></tr></thead>
 <tbody>
 <tr><td>Unique vs the 51 registry TIFFs?</td><td>YES. Max 3 px overlap 0.4437 (rule &gt; 0.70); max |Spearman| 0.0618 (rule &gt; 0.90).</td></tr>
-<tr><td>Format valid (CRS, shape, transform, [0,1], NaN outside)?</td><td>YES. All hard checks pass; NaN only outside the 5,167,373-px footprint, as in the sample.</td></tr>
+<tr><td>Format checks</td><td>PASS in the prior S25 exact validation; current basic Rasterio inspection agrees on band, CRS, shape, transform, mask, and [0,1]. Current shared exact audit is FAIL CLOSED because the local sample template and labels are absent.</td></tr>
+<tr><td>Fresh exact-file audit (S26 checkout)</td><td><strong>FAIL CLOSED.</strong> `data/sample_submission.tif` and `data/labels.tif` are missing; do not treat the historical format pass as current reauthorization.</td></tr>
 <tr><td>HOLDOUT-DTI (evaluator gems-segment-pooled-v1)</td><td><strong>0.0450</strong> (95% CI 0.0380 to 0.0525); 60,988 withheld positives.</td></tr>
 <tr><td>Random-placement control, same folds</td><td>0.0699. PCSE minus control: -0.0248 (95% CI -0.0324 to -0.0169); PCSE wins 0 of 4 folds.</td></tr>
 <tr><td>Ablation (diagnostic only)</td><td>Step-polarity term alone 0.0373; energy term alone 0.0377.</td></tr>
@@ -29,7 +30,7 @@
 </tbody>
 </table>
 <p><strong>Note (106 characters):</strong> S25 PCSE k37654: unique (max 3px overlap 0.44) but HOLDOUT-DTI 0.045 &lt; random-K 0.070. NOT for submission.</p>
-<p>Full record: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/69_s25_pcse_result.md">knowledge/69_s25_pcse_result.md</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_run_card.json">run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_ablation.json">ablation</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_novelty.json">novelty</a>. Leaderboard values were not re-observed in this session.</p>
+<p>Full record: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/69_s25_pcse_result.md">S25 PCSE result</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_run_card.json">run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_ablation.json">ablation</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_novelty.json">novelty</a>. <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/71_s26_review_2026-10-28.md">Current S26 review and candidate hypotheses</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/registry/s26_hypotheses.json">machine-readable hypothesis ranking</a>. Leaderboard values were not re-observed in this session.</p>
 </section></main>
 </body>
 </html>
