@@ -1,0 +1,17 @@
+{
+  "checked_utc": "2026-10-28T18:40:27Z",
+  "status": "FAIL",
+  "scope": "input validation failed; no TIFF was approved",
+  "network_access": "none",
+  "checks": [
+    {
+      "check": "inputs_readable",
+      "pass": false,
+      "detail": "template or labels missing: /home/user/GEMSDOE28/data/sample_submission.tif, /home/user/GEMSDOE28/data/labels.tif"
+    }
+  ],
+  "failures": [
+    "inputs_readable"
+  ],
+  "check_count": 1
+}

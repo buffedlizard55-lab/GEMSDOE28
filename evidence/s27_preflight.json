@@ -1,0 +1,46 @@
+{
+  "status": "BLOCKED",
+  "checked_at_utc": "2026-10-28T18:40:27Z",
+  "elapsed_seconds": 91707.544658,
+  "time_cap_seconds": 7200,
+  "experiment_allowed": false,
+  "failures": [
+    "Missing explicit assigned method lane and assignment source",
+    "Missing complete shared parallel-run registry",
+    "Literal registry overlap rule blocks the declared emission budget; do not tune around controls",
+    "Missing frozen current-best result under the same strict protocol",
+    "Wall-clock budget exhausted or start timestamp is in the future",
+    "Cached feature stack unavailable: [Errno 2] No such file or directory: '/home/user/GEMSDOE28/data/prepared/features.json'",
+    "missing: template-__init__",
+    "missing: template-holdout",
+    "missing: template-metric",
+    "missing: template-submission",
+    "missing: template-validator",
+    "missing: template-novelty",
+    "missing: template-evaluate_holdout",
+    "missing: template-submission_writer",
+    "missing: template-priority-registry"
+  ],
+  "cached_features": {},
+  "shared_template": {
+    "passed": false,
+    "files": [],
+    "failures": [
+      "missing: template-__init__",
+      "missing: template-holdout",
+      "missing: template-metric",
+      "missing: template-submission",
+      "missing: template-validator",
+      "missing: template-novelty",
+      "missing: template-evaluate_holdout",
+      "missing: template-submission_writer",
+      "missing: template-priority-registry"
+    ],
+    "manifest_sha256": "ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa",
+    "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/2521cb676e172c141a4417e4925b73b6a896c1eb",
+    "network_access": "none"
+  },
+  "submission_ready": false,
+  "slot_selected": false,
+  "scope": "No model, no scientific evaluation, no raster emission, no weekly cap or slot decision"
+}

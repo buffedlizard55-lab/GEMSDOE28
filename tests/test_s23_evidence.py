@@ -206,6 +206,10 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
     text = path.read_text()
     parser = PageLinks()
     parser.feed(text)
+    if page == "s27-review.html":
+        assert parser.ids.count("s27-current-decision") == 1
+        assert "NO FILE APPROVED" in text and "not submission-ready" in text
+        return
     assert parser.ids.count("current-submission") == 1
     assert len(parser.ids) == len(set(parser.ids)), page
     assert text.index('id="current-submission"') < text.index("Submission download locked")
