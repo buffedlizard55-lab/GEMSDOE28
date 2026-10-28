@@ -1,6 +1,6 @@
 # S27 · restore, reproduce, verify — 2026-10-28 UTC
 
-**Branch:** `arena/123dd6aa-gemsdoe28` · **Run card:** [evidence/s27_run_card.json](../evidence/s27_run_card.json)
+**Branch:** `arena/123dd6aa-gemsdoe28` · **Run card:** [evidence/s27b_run_card.json](../evidence/s27b_run_card.json)
 
 ## Decision (read this first)
 
@@ -23,7 +23,7 @@
 
 ## Exact-file audit (restored inputs)
 
-`scripts/verify_downloads.py` now runs against the restored sample template: 869 checks, **2 failures**, both on archived historical all-finite variants that carry a NaN nodata tag (`s22_archive_h40_vent` and `s22_archive_h41_spring`). Both are archive-only and DO NOT SUBMIT. They are flagged, not rewritten, because their bytes are hash-bound. The S25 PCSE TIFF passes its checks and is registered in the sibling research manifest. Evidence: [evidence/s27_download_audit.json](../evidence/s27_download_audit.json).
+`scripts/verify_downloads.py` now runs against the restored sample template: 869 checks, **2 failures**, both on archived historical all-finite variants that carry a NaN nodata tag (`s22_archive_h40_vent` and `s22_archive_h41_spring`). Both are archive-only and DO NOT SUBMIT. They are flagged, not rewritten, because their bytes are hash-bound. The S25 PCSE TIFF passes its checks and is registered in the sibling research manifest. Evidence: [evidence/s27b_download_audit.json](../evidence/s27b_download_audit.json).
 
 ## Official leaderboard check (replaces the quoted numbers)
 

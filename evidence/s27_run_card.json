@@ -1,158 +1,131 @@
 {
-  "schema": "gemsdoe28-s27-run-card-v1",
-  "observed_utc": "2026-10-28T18:47:00Z",
-  "branch": "arena/123dd6aa-gemsdoe28",
-  "session": "S27",
-  "purpose": "Restore pinned inputs, reproduce the S25 PCSE holdout end to end, fix a novelty self-comparison bug, and record the official leaderboard observation.",
-  "new_candidate_generated": false,
-  "new_candidate_reason": "Method lane not assigned by the user (preflight: no explicit lane); no complete synchronized registry; no frozen same-protocol comparable best; the recorded 2-hour clock in registry/current_session.json (started 2026-10-27T17:12Z) is expired. Generating a new raster now would bypass the protocol's gates.",
-  "hypothesis": "None newly tested. Reproduction of the existing S25 PCSE (phase-congruent scarp energy) result only.",
-  "experiments_counted_against_budget": 0,
-  "reproduction": {
-    "method": "scripts/run_s25_pcse.py run in a scratch copy (/tmp/repro), so committed evidence and docs/downloads were not overwritten",
-    "evaluator": "gems-segment-pooled-v1 (alpha 0.2, beta 0.8, triangular kernel 300 m)",
-    "holdout_dti": {
-      "label": "HOLDOUT-DTI",
-      "value": 0.045036118291659814,
-      "withheld_positive_pixels": 60988,
-      "ci95": [
-        0.03802875957795745,
-        0.052519021758899796
-      ],
-      "committed_value_matches": true
-    },
-    "random_k_control_holdout_dti": {
-      "label": "HOLDOUT-DTI",
-      "value": 0.06987475312496201,
-      "ci95": [
-        0.06668093988661791,
-        0.07314456035338139
-      ],
-      "committed_value_matches": true
-    },
-    "tif_sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
-    "tif_sha256_matches_committed": true
+  "schema": "gemsdoe28-s27-repository-review-v1",
+  "observed_utc": "2026-10-28T18:40:27Z",
+  "branch": "arena/265e6e24-gemsdoe28",
+  "hypothesis": "Top untried proposal from the existing ranked slate: two-sided directional texture-covariance boundaries in rtp, tmi_hg, and cond_surf (S26-TCB); not tested in this review.",
+  "mechanism": "A fault-related damage or alteration boundary may alter directional correlation length or anisotropy even where broad potential-field amplitudes cancel; this is a proxy hypothesis, not proof of a fault or geothermal vent.",
+  "named_non_fault_process": "Depositional facies boundaries, intrusive contacts, survey-leveling seams, and raster resampling can mimic covariance discontinuities.",
+  "experiment": {
+    "status": "NOT RUN",
+    "experiments_run_this_review": 0,
+    "experiment_cap": 3,
+    "reason": "Fail-closed preflight blocked: no assigned method lane, complete synchronized registry, frozen same-protocol best, prepared feature cache, pinned shared-template assets, or unexpired authorized two-hour clock. The 37,654-dot budget also violates the literal any-registry >70%/3-px novelty rule by a documented counting bound."
   },
-  "novelty_bug_found_and_fixed": {
-    "file": "scripts/run_s25_pcse.py",
-    "symptom": "On rerun the novelty scan included the candidate's own output file already present in docs/downloads; overlap 1.0, |rho| 0.9999, duplicate flag true, exit code 2.",
-    "fix": "Output name is computed before the scan and the candidate skips its own name.",
-    "verified_after_fix": {
-      "max_dot_overlap_within_3px_candidate_side": 0.44367132309980345,
-      "max_abs_surface_spearman": 0.06184394501386839,
-      "registry_rasters_compared": 51,
-      "any_duplicate_flag": false,
-      "matches_committed_s25_novelty": true
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN for S27-TCB; no current result",
+    "evaluator_version": "gems-segment-pooled-v1 (shared implementation required; absent locally)",
+    "dti": null,
+    "withheld_positives": null,
+    "ci95": null,
+    "protocol_required": {
+      "whole_fault_segments_with_buffer": true,
+      "catalogue_features_visible_only": true,
+      "pixel_exact_visible_fault_mask": true,
+      "pooled": true,
+      "alpha": 0.2,
+      "beta": 0.8,
+      "kernel": "triangular",
+      "kernel_radius_m": 300
+    },
+    "prior_result_not_current": {
+      "label": "HOLDOUT-DTI (S25 PCSE prior result; not an S27 experiment)",
+      "evaluator_version": "gems-segment-pooled-v1",
+      "dti": 0.045036118291659814,
+      "withheld_positives": 60988,
+      "ci95": [0.03802875957795745, 0.052519021758899796],
+      "random_k_control_dti": 0.06987475312496201,
+      "paired_delta_dti": -0.024838634833302196,
+      "paired_delta_ci95": [-0.032408964819704525, -0.016918084033470827]
     }
   },
-  "leaderboard_observation": {
-    "label": "PUBLIC LEADERBOARD OBSERVATION (not an organizer receipt for this repo's files)",
-    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-    "observed_utc": "2026-10-28 (fetch time; relative ages on the page are as displayed)",
-    "top_public_dw_tversky": 0.4544,
-    "rank_1_participant": "xiaofanhu",
-    "rank_9": 0.3404,
-    "rank_26": {
-      "score": 0.3195,
-      "participant": "kpomazi"
-    },
-    "rank_27": 0.3169,
-    "user_quoted_0_4413_on_page": false,
-    "note": "The prompt quotes 0.4413 and 0.3195 as the top. The live public board shows 0.4544 at #1 and 0.3195 at #26. The board uses the public test subset; the Initial Prize Round is scored on a private subset."
-  },
-  "official_metric_check": {
-    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "alpha": 0.2,
-    "beta": 0.8,
-    "kernel_range_m": 300,
-    "submission_values": "float32 in [0,1]; outside bounds null or NaN; EPSG 32611; 100 m; same bounds",
-    "repo_matches_official": true
-  },
-  "tif_validator": {
-    "status": "not re-run for a new file (no new TIF). The S25 file re-checked by the reproduction run: hard checks passed; 0 non-finite inside 5,167,373 footprint px; values in [0,1]; EPSG:32611 (3730,3292), transform (100,0,243350,0,-100,4508550).",
-    "exact_comparison_to_organizer_sample": "The local sample is restored from an owner mirror and is not organizer-authenticated."
-  },
-  "data_inputs_restored_and_hash_verified": {
-    "provenance": "Owner-supplied public GitHub mirrors, SHA-256 pinned. NOT organizer-authenticated. DrivenData was not contacted.",
-    "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-    "labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-    "sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-    "h19_5_nan.tif": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
-    "shared_template_protocol_assets": "9 files verified (manifest sha256 ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa)"
-  },
-  "tests": {
-    "pytest": "664 passed, 5 skipped, 12 warnings, 9 subtests passed",
-    "ruff": "All checks passed (src, scripts, tests)",
-    "tests_edited": [
-      "tests/test_s24_review.py (README header now S27; S26 section still asserted present)",
-      "tests/test_s25_review.py (same)"
+  "hypothesis_slate": {
+    "source": "registry/s26_hypotheses.json",
+    "ranking": [
+      {"rank": 1, "id": "S26-TCB", "name": "Two-sided directional texture-covariance boundary", "layers": ["rtp", "tmi_hg", "cond_surf"], "expected_improvement": "Unknown; no numeric forecast", "cost": "Medium-high", "data": "Existing competition bands; local feature cache absent"},
+      {"rank": 2, "id": "S26-MCR", "name": "Spatially cross-fitted conductivity residual margins", "layers": ["cond_surf", "depth_to_base_surf", "det_elev", "det_elev_slope"], "expected_improvement": "Unknown; no numeric forecast", "cost": "Medium", "data": "Existing competition bands; local feature cache absent"},
+      {"rank": 3, "id": "S26-HFR2M", "name": "Residual heat-flow and shallow-temperature conjunction", "layers": ["USGS Great Basin heat-flow residuals", "GDR #1391 temperature probes", "cond_surf", "depth_to_base_surf"], "expected_improvement": "Unknown; no numeric forecast", "cost": "High", "data": "External source hosts and raw bytes unavailable in this runtime"},
+      {"rank": 4, "id": "S26-DNT", "name": "Drainage-network displacement and knickpoint trains", "layers": ["USGS 3DEP 1 m DEM", "existing LiDAR terrain descriptors"], "expected_improvement": "Unknown; no numeric forecast", "cost": "Very high", "data": "Challenge-specific official DEM tiles absent and source host unavailable in this runtime"}
     ]
   },
-  "registry_comparison_for_existing_s25_tif": {
-    "unique_under_scoped_registry": true,
-    "scope": "51 binary TIFFs in docs/downloads; not a complete synchronized global registry"
+  "focus_sites": {
+    "scope": "Nine historical artifacts and scores supplied by user; repository's pinned nine-file geometry audit dated 2026-10-27; not a synchronized global registry",
+    "score_label": "USER-REPORTED / UNVERIFIED (no file-bound organizer receipt observed)",
+    "estimate_status": "Unavailable: no validated mapping from catalogue holdout to hidden leaderboard score",
+    "all_nine_historical_artifacts_fail_requested_uniqueness": true,
+    "comparison_evidence": "evidence/s23_focus_novelty.json and evidence/s24_nine_site_overlap.json",
+    "sites": [
+      {"site": "GEMSDOE24", "reported_score": 0.2477, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE25", "reported_score": 0.2600, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE27", "reported_score": 0.2449, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE28", "reported_score": 0.2710, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE30", "reported_score": 0.2600, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE31", "reported_score": 0.2708, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE32", "reported_score": 0.2778, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE33", "reported_score": 0.2632, "estimate": null, "unique_vs_other_eight": false},
+      {"site": "GEMSDOE36", "reported_score": 0.2750, "estimate": null, "unique_vs_other_eight": false}
+    ]
   },
-  "decision": {
-    "verdict": "negative",
-    "ok_to_download_for_research": true,
-    "ok_to_submit": false,
-    "weekly_slot_selected": false,
-    "reason": "S25 PCSE holdout HOLDOUT-DTI 0.0450 (CI 0.0380-0.0525) is below the same-fold random-K control 0.0699 (CI 0.0667-0.0731); paired difference -0.0248 (CI -0.0324 to -0.0169), 0/4 folds."
+  "registry": {
+    "current_s27_surface_test": "NOT RUN; no candidate surface or placement was generated",
+    "historical_focus_artifact_comparisons": {
+      "label": "GEOMETRY-AUDIT (not HOLDOUT-DTI or an organizer score)",
+      "pairwise_directional_comparisons": 72,
+      "pairs_over_0_70": 72,
+      "scope": "Nine pinned historical artifacts only; incomplete for concurrent or unpublished submissions"
+    },
+    "preplacement_surface_spearman": null,
+    "final_dots_max_within_3px_fraction": null,
+    "novelty_decision": "No new candidate exists to assess; do not describe an old file as a new unique submission."
   },
-  "irregularities_for_review": [
-    "Holdout DTI values (about 0.05-0.07) are far below public leaderboard scores (0.2-0.45); the holdout is not calibrated to the leaderboard and must not be treated as a score estimate.",
-    "A random-K placement beats the PCSE operator on the holdout. This suggests the holdout rewards spatially spread predictions or that the operator anti-correlates with holdout truth; it has not been diagnosed.",
-    "Old GEMSDOE submissions were generated with the full catalogue visible, so evaluating them on the holdout is not a clean test of their fault-finding ability.",
-    "The user-quoted 0.4413 top score does not appear on the live public board observed here (top 0.4544).",
-    "GEMSDOE24-36 scores are user-supplied and unverified; no organizer receipt was available."
-  ],
-  "next_steps": [
-    "Assign a method lane explicitly (the user's protocol paragraph is ambiguous about lane assignment).",
-    "Reset the experiment clock by an explicit user-authorized session record before any experiment.",
-    "Diagnose why random-K beats PCSE on the holdout before proposing any new operator.",
-    "Consider graded (non-binary) predictions: the official DTI accepts probabilities in [0,1], and the FP/FN weighting makes soft confidence a distinct lever from binary dots. Test on the holdout before any slot."
-  ],
-  "sources": [
-    {
-      "label": "Official problem description and metric",
-      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/"
-    },
-    {
-      "label": "Official public leaderboard",
-      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/"
-    },
-    {
-      "label": "Competition data tab (login required)",
-      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/"
-    },
-    {
-      "label": "Reference solution",
-      "url": "https://github.com/drivendataorg/gems-prize-reference-solution"
-    },
-    {
-      "label": "EPSG:32611",
-      "url": "https://epsg.io/32611"
-    }
-  ],
-  "exact_file_audit": {
-    "command": "python scripts/verify_downloads.py --out evidence/s27_download_audit.json",
-    "evidence": "evidence/s27_download_audit.json",
-    "status": "FAIL (2 failures of 869 checks)",
-    "failures": [
-      "s22_archive_h40_vent_allfinite_outside_zero",
-      "s22_archive_h41_spring_allfinite_outside_zero"
-    ],
-    "failure_explanation": "The all-finite archive variants are zero outside the footprint and finite inside, but carry a NaN nodata tag, which the all-finite spec does not allow. These are archive-only files marked DO NOT SUBMIT. They are hash-bound historical bytes and were flagged, not rewritten.",
-    "s25_pcse_research_registration": "Registered via docs/downloads/s25_research_manifest.json (sibling registry; docs/downloads/manifest.json is hash-bound by S23 evidence and was not edited). SHA-256 of the S25 TIFF verified against its registry entry."
+  "raster": {
+    "generated_this_review": false,
+    "existing_research_artifact": "docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif",
+    "sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+    "bytes": 1580182,
+    "submission_name": null,
+    "note": "S25 PCSE is review-only: HOLDOUT-DTI 0.045 < random-K 0.070; do not submit.",
+    "note_characters": 73,
+    "download_status": "YES for audit/research only; not a submission candidate",
+    "submit_status": "NO"
   },
-  "experiments_note": "One reproduction re-run of an existing frozen operator plus one novelty-script fix. No new hypothesis tested; no budget consumed as a scientific experiment.",
-  "files_changed": [
-    "README.md",
-    "scripts/run_s25_pcse.py (self-exclusion fix)",
-    "scripts/verify_downloads.py (sibling research registry + SHA check)",
-    "scripts/build_s25_page.py (S27 audit row and official leaderboard sentence)",
-    "tests/test_s24_review.py and tests/test_s25_review.py (README header assertions)",
-    "docs/*, index.html, executive-summary.html (regenerated)",
-    "evidence/s27_run_card.json, evidence/s27_download_audit.json, knowledge/72_s27_restore_reproduction_2026-10-28.md"
+  "validator": {
+    "existing_research_tif_basic_inspection": {
+      "single_band_float32": true,
+      "no_nan_inside_raster_mask": true,
+      "inside_values_in_0_1": true,
+      "crs": "EPSG:32611",
+      "shape": [3730, 3292],
+      "transform": [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0],
+      "valid_mask_pixels": 5167373,
+      "outside_mask_all_nan": true,
+      "sha256_matches_prior_run_card": true
+    },
+    "current_exact_download_audit": "FAIL CLOSED: data/sample_submission.tif and data/labels.tif are absent; no exact grid/catalogue validation and no TIF approval",
+    "fresh_preflight": "BLOCKED; evidence/s27_preflight.json",
+    "portal_acceptance": "NOT TESTED"
+  },
+  "score_estimate": null,
+  "score_estimate_status": "Unavailable; the 0.2778 GEMSDOE32 claim is user-reported, and internal holdout DTI is not a calibrated hidden-score estimator.",
+  "leaderboard_claims": {
+    "GEMSDOE32_0_2778": "USER-REPORTED / UNVERIFIED from user-provided results",
+    "current_high_score_0_3195": "USER-REPORTED / UNVERIFIED from prompt; not fetched",
+    "current_high_score_0_4413": "USER-REPORTED / UNVERIFIED from prompt; not fetched"
+  },
+  "submission": {
+    "name": null,
+    "note": "No new candidate generated; do not submit the archived research TIFF.",
+    "slot_selected": false,
+    "ok_to_download_as_new_submission": false,
+    "ok_to_submit": false
+  },
+  "verdict": "negative",
+  "limitations": [
+    "No unique new TIF was generated; fail-closed novelty and holdout gates take precedence over the request to emit one.",
+    "The site score claims are user supplied; no organizer receipts or current leaderboard were available.",
+    "The nine-site novelty audit is pinned historical scope, not a complete synchronized parallel registry.",
+    "The preflight configuration is an expired prior-session authorization; do not reset its lane, registry or clock silently.",
+    "Official non-GitHub sources, current competition login pages, and external data hosts were not reachable for fresh source-content verification in this turn.",
+    "This runtime's dependencies were installed in an ignored virtual environment for tests; local data and the shared template remain missing."
   ]
 }

@@ -1,4 +1,17 @@
-# S27 · 2026-10-28 UTC — restore, reproduce, verify · READ FIRST EVERY SESSION
+# S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
+
+## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
+
+**Active branch:** `arena/265e6e24-gemsdoe28`. This pass reviewed the repository and existing evidence; it ran no geological experiment and generated no new TIFF. The prior S25 PCSE raster is an older research artifact—not this session's submission—and is **not OK to submit**: **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0450 (95% CI 0.0380–0.0525; 60,988 withheld positives), below same-fold random-K **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0699 (95% CI 0.0667–0.0731). This internal result is not a leaderboard estimate. Current exact validation fails closed because the local sample submission and labels are absent.
+
+- [S27 active-branch review](knowledge/72_s27_active_branch_review_2026-10-28.md) · [S27 run card](evidence/s27_run_card.json) · [fresh blocked preflight](evidence/s27_preflight.json) · [fresh fail-closed file audit](evidence/s27_download_audit.json)
+- The highest supplied GEMSDOE32 claim, **0.2778**, remains **USER-REPORTED / UNVERIFIED**; a calibrated hidden-score estimate is unavailable. The prompt's leaderboard anchors 0.3195 and 0.4413 conflict and were not rechecked.
+- The existing four-hypothesis slate ranks **S26-TCB** (two-sided directional covariance changes in `rtp`, `tmi_hg`, `cond_surf`) first, qualitatively only. It was not run because lane assignment, complete synchronized registry, frozen comparable baseline, feature cache/shared evaluator, and fresh authorization are missing. The 37,654-dot budget also fails the literal overlap counting bound. No submission slot was selected.
+- Execute only after all fail-closed gates pass. Use per-feature leakage canaries, the shared buffered whole-segment evaluator and writer, and surface-before-placement / final-dot registry checks. Never reset the stale authorization, bypass the duplicate rule, or call a projection a score.
+
+---
+
+# S27b · 2026-10-28 UTC — restore, reproduce, verify (parallel branch arena/123dd6aa-gemsdoe28)
 
 ## CURRENT DECISION: NO NEW TIFF · S25 PCSE TIFF IS NOT OK TO SUBMIT · OFFICIAL TOP 0.4544
 
@@ -7,26 +20,19 @@
 - **Bug fixed.** `scripts/run_s25_pcse.py` no longer compares a candidate with its own output on rerun (it had reported a false duplicate).
 - **Leaderboard, observed from the official public board:** #1 = **0.4544**; #26 = **0.3195**. The prompt's 0.4413 is not on the live board. The public board is not the private prize scoring set.
 - **Not run:** no new TIFF. The preflight remains BLOCKED on four real gaps: no assigned method lane, no complete synchronized registry, no frozen same-protocol best, and an expired experiment clock. A new raster would bypass those gates.
-- **Exact-file audit:** 869 checks, 2 failures, both on archived historical all-finite files (NaN nodata tag). Flagged, not rewritten. S25 PCSE passes and is registered in a sibling research manifest.
+- **Exact-file audit (S27b):** 869 checks, 2 failures, both on archived historical all-finite files (NaN nodata tag). Flagged, not rewritten. S25 PCSE passes and is registered in a sibling research manifest.
 - **Tests:** 664 passed, 5 skipped; ruff clean.
 
-- [S27 knowledge note](knowledge/72_s27_restore_reproduction_2026-10-28.md) · [S27 run card](evidence/s27_run_card.json)
+- [S27b knowledge note](knowledge/72_s27_restore_reproduction_2026-10-28.md) · [S27b run card](evidence/s27b_run_card.json) · [S27b exact-file audit](evidence/s27b_download_audit.json)
 - Official sources: [problem and metric](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/)
 
 ---
 
-# S26 · 2026-10-28 UTC — current checkout review · READ FIRST EVERY SESSION
-
-## CURRENT DECISION: NO NEW TIFF · EXISTING UNIQUE RESEARCH TIFF IS NEGATIVE · OK TO SUBMIT: NO
-
-**Active branch:** `arena/95d8129d-gemsdoe28`. No geological experiment or new TIFF was run in this review. The prior S25 PCSE TIFF below is available to download **for research/audit only**; it is **not OK to submit** because its HOLDOUT-DTI (0.0450, 95% CI 0.0380–0.0525) is below the same-fold random-K HOLDOUT-DTI (0.0699, 95% CI 0.0667–0.0731). The exact current validator also fails closed because the local sample submission and labels are absent.
-
-- [S26 report and four candidate hypotheses](knowledge/71_s26_review_2026-10-28.md) · [S26 JSON run card](evidence/s26_run_card.json) · [fresh preflight](evidence/s26_preflight.json) · [fresh exact-file audit](evidence/s26_download_audit.json) · [hypothesis registry](registry/s26_hypotheses.json)
-- The highest supplied GEMSDOE32 score, **0.2778**, remains **USER-REPORTED / UNVERIFIED**; no calibrated estimate of hidden leaderboard performance is available. The PCSE holdout result is not a leaderboard score.
-- Top actionable untried idea: **S26-TCB**, two-sided directional covariance changes in `rtp`, `tmi_hg`, and `cond_surf`. It was **not run**: lane assignment, complete synchronized registry, frozen comparable baseline, cache/shared tools, and fresh experiment authorization are missing. No submission slot was selected.
-- Run next only after the fail-closed gates pass; run individual feature leakage canaries, the shared buffered whole-segment evaluator, and pre-placement/final-dot registry checks. Do not bypass or rewrite the shared protocol.
-
 ---
+
+# S26 · 2026-10-28 UTC — prior checkout review · historical, branch-specific
+
+The S26 review below was recorded on a different Arena branch (`arena/95d8129d-gemsdoe28`). Preserve it as historical parallel-session provenance; its checkout-specific condition must not be presented as a fresh S27 observation. S27 re-ran its own preflight and exact-file audit, recorded at `evidence/s27_preflight.json` and `evidence/s27_download_audit.json`.
 
 # S25 · 2026-10-28 UTC — prior PCSE experiment · READ FIRST EVERY SESSION
 

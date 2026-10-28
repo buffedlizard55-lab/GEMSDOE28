@@ -1,0 +1,158 @@
+{
+  "schema": "gemsdoe28-s27-run-card-v1",
+  "observed_utc": "2026-10-28T18:47:00Z",
+  "branch": "arena/123dd6aa-gemsdoe28",
+  "session": "S27",
+  "purpose": "Restore pinned inputs, reproduce the S25 PCSE holdout end to end, fix a novelty self-comparison bug, and record the official leaderboard observation.",
+  "new_candidate_generated": false,
+  "new_candidate_reason": "Method lane not assigned by the user (preflight: no explicit lane); no complete synchronized registry; no frozen same-protocol comparable best; the recorded 2-hour clock in registry/current_session.json (started 2026-10-27T17:12Z) is expired. Generating a new raster now would bypass the protocol's gates.",
+  "hypothesis": "None newly tested. Reproduction of the existing S25 PCSE (phase-congruent scarp energy) result only.",
+  "experiments_counted_against_budget": 0,
+  "reproduction": {
+    "method": "scripts/run_s25_pcse.py run in a scratch copy (/tmp/repro), so committed evidence and docs/downloads were not overwritten",
+    "evaluator": "gems-segment-pooled-v1 (alpha 0.2, beta 0.8, triangular kernel 300 m)",
+    "holdout_dti": {
+      "label": "HOLDOUT-DTI",
+      "value": 0.045036118291659814,
+      "withheld_positive_pixels": 60988,
+      "ci95": [
+        0.03802875957795745,
+        0.052519021758899796
+      ],
+      "committed_value_matches": true
+    },
+    "random_k_control_holdout_dti": {
+      "label": "HOLDOUT-DTI",
+      "value": 0.06987475312496201,
+      "ci95": [
+        0.06668093988661791,
+        0.07314456035338139
+      ],
+      "committed_value_matches": true
+    },
+    "tif_sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+    "tif_sha256_matches_committed": true
+  },
+  "novelty_bug_found_and_fixed": {
+    "file": "scripts/run_s25_pcse.py",
+    "symptom": "On rerun the novelty scan included the candidate's own output file already present in docs/downloads; overlap 1.0, |rho| 0.9999, duplicate flag true, exit code 2.",
+    "fix": "Output name is computed before the scan and the candidate skips its own name.",
+    "verified_after_fix": {
+      "max_dot_overlap_within_3px_candidate_side": 0.44367132309980345,
+      "max_abs_surface_spearman": 0.06184394501386839,
+      "registry_rasters_compared": 51,
+      "any_duplicate_flag": false,
+      "matches_committed_s25_novelty": true
+    }
+  },
+  "leaderboard_observation": {
+    "label": "PUBLIC LEADERBOARD OBSERVATION (not an organizer receipt for this repo's files)",
+    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "observed_utc": "2026-10-28 (fetch time; relative ages on the page are as displayed)",
+    "top_public_dw_tversky": 0.4544,
+    "rank_1_participant": "xiaofanhu",
+    "rank_9": 0.3404,
+    "rank_26": {
+      "score": 0.3195,
+      "participant": "kpomazi"
+    },
+    "rank_27": 0.3169,
+    "user_quoted_0_4413_on_page": false,
+    "note": "The prompt quotes 0.4413 and 0.3195 as the top. The live public board shows 0.4544 at #1 and 0.3195 at #26. The board uses the public test subset; the Initial Prize Round is scored on a private subset."
+  },
+  "official_metric_check": {
+    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel_range_m": 300,
+    "submission_values": "float32 in [0,1]; outside bounds null or NaN; EPSG 32611; 100 m; same bounds",
+    "repo_matches_official": true
+  },
+  "tif_validator": {
+    "status": "not re-run for a new file (no new TIF). The S25 file re-checked by the reproduction run: hard checks passed; 0 non-finite inside 5,167,373 footprint px; values in [0,1]; EPSG:32611 (3730,3292), transform (100,0,243350,0,-100,4508550).",
+    "exact_comparison_to_organizer_sample": "The local sample is restored from an owner mirror and is not organizer-authenticated."
+  },
+  "data_inputs_restored_and_hash_verified": {
+    "provenance": "Owner-supplied public GitHub mirrors, SHA-256 pinned. NOT organizer-authenticated. DrivenData was not contacted.",
+    "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "h19_5_nan.tif": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+    "shared_template_protocol_assets": "9 files verified (manifest sha256 ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa)"
+  },
+  "tests": {
+    "pytest": "664 passed, 5 skipped, 12 warnings, 9 subtests passed",
+    "ruff": "All checks passed (src, scripts, tests)",
+    "tests_edited": [
+      "tests/test_s24_review.py (README header now S27; S26 section still asserted present)",
+      "tests/test_s25_review.py (same)"
+    ]
+  },
+  "registry_comparison_for_existing_s25_tif": {
+    "unique_under_scoped_registry": true,
+    "scope": "51 binary TIFFs in docs/downloads; not a complete synchronized global registry"
+  },
+  "decision": {
+    "verdict": "negative",
+    "ok_to_download_for_research": true,
+    "ok_to_submit": false,
+    "weekly_slot_selected": false,
+    "reason": "S25 PCSE holdout HOLDOUT-DTI 0.0450 (CI 0.0380-0.0525) is below the same-fold random-K control 0.0699 (CI 0.0667-0.0731); paired difference -0.0248 (CI -0.0324 to -0.0169), 0/4 folds."
+  },
+  "irregularities_for_review": [
+    "Holdout DTI values (about 0.05-0.07) are far below public leaderboard scores (0.2-0.45); the holdout is not calibrated to the leaderboard and must not be treated as a score estimate.",
+    "A random-K placement beats the PCSE operator on the holdout. This suggests the holdout rewards spatially spread predictions or that the operator anti-correlates with holdout truth; it has not been diagnosed.",
+    "Old GEMSDOE submissions were generated with the full catalogue visible, so evaluating them on the holdout is not a clean test of their fault-finding ability.",
+    "The user-quoted 0.4413 top score does not appear on the live public board observed here (top 0.4544).",
+    "GEMSDOE24-36 scores are user-supplied and unverified; no organizer receipt was available."
+  ],
+  "next_steps": [
+    "Assign a method lane explicitly (the user's protocol paragraph is ambiguous about lane assignment).",
+    "Reset the experiment clock by an explicit user-authorized session record before any experiment.",
+    "Diagnose why random-K beats PCSE on the holdout before proposing any new operator.",
+    "Consider graded (non-binary) predictions: the official DTI accepts probabilities in [0,1], and the FP/FN weighting makes soft confidence a distinct lever from binary dots. Test on the holdout before any slot."
+  ],
+  "sources": [
+    {
+      "label": "Official problem description and metric",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/"
+    },
+    {
+      "label": "Official public leaderboard",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/"
+    },
+    {
+      "label": "Competition data tab (login required)",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/"
+    },
+    {
+      "label": "Reference solution",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution"
+    },
+    {
+      "label": "EPSG:32611",
+      "url": "https://epsg.io/32611"
+    }
+  ],
+  "exact_file_audit": {
+    "command": "python scripts/verify_downloads.py --out evidence/s27b_download_audit.json",
+    "evidence": "evidence/s27b_download_audit.json",
+    "status": "FAIL (2 failures of 869 checks)",
+    "failures": [
+      "s22_archive_h40_vent_allfinite_outside_zero",
+      "s22_archive_h41_spring_allfinite_outside_zero"
+    ],
+    "failure_explanation": "The all-finite archive variants are zero outside the footprint and finite inside, but carry a NaN nodata tag, which the all-finite spec does not allow. These are archive-only files marked DO NOT SUBMIT. They are hash-bound historical bytes and were flagged, not rewritten.",
+    "s25_pcse_research_registration": "Registered via docs/downloads/s25_research_manifest.json (sibling registry; docs/downloads/manifest.json is hash-bound by S23 evidence and was not edited). SHA-256 of the S25 TIFF verified against its registry entry."
+  },
+  "experiments_note": "One reproduction re-run of an existing frozen operator plus one novelty-script fix. No new hypothesis tested; no budget consumed as a scientific experiment.",
+  "files_changed": [
+    "README.md",
+    "scripts/run_s25_pcse.py (self-exclusion fix)",
+    "scripts/verify_downloads.py (sibling research registry + SHA check)",
+    "scripts/build_s25_page.py (S27 audit row and official leaderboard sentence)",
+    "tests/test_s24_review.py and tests/test_s25_review.py (README header assertions)",
+    "docs/*, index.html, executive-summary.html (regenerated)",
+    "evidence/s27b_run_card.json, evidence/s27b_download_audit.json, knowledge/72_s27_restore_reproduction_2026-10-28.md"
+  ]
+}
