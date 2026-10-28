@@ -17,25 +17,36 @@
 
 ---
 
-# S24 · 2026-10-27 UTC — repository review · READ FIRST EVERY SESSION
+# S25 · 2026-10-28 UTC — repository review · READ FIRST EVERY SESSION
+
+**Additional S25 record (input restoration, PR #72):** every pinned input restored and hash-verified, feature cache built, 658 tests pass; no TIFF, no holdout run, no slot. Remaining decisions (method lane, registry-rule budget, budget clock): [knowledge/69_s25_status_2026-10-28.md](knowledge/69_s25_status_2026-10-28.md) · [run card](evidence/s25_run_card.json).
 
 ## **NO NEW TIFF · NOT OK TO DOWNLOAD OR SUBMIT · zero experiments**
 
-S24 is a read-only repository/software review; it does not replace S23's negative scientific decision. No new feature, candidate raster, HOLDOUT-DTI or score estimate was produced, and no slot was selected. **Do not upload an old TIFF under a new name.** The current checkout preflight is BLOCKED: the assigned lane, complete synchronized registry and same-protocol frozen best are missing, and the ignored feature cache plus all nine shared template assets are absent here. The previous S23 registry audit measured the inherited S22C file as a duplicate under the literal rule. The 37,654-dot geometry bound is not a universal proof about every smaller budget; no hole/budget search was performed.
+S25 is a read-only review on `arena/965e7dda-gemsdoe28`. Fresh preflight at 2026-10-28 11:38:07 UTC exited 1 / BLOCKED: no assigned lane, complete synchronized registry, strict comparable baseline, cached feature stack, or nine pinned shared-template assets; the configured experiment wall-clock budget is also expired. No model, candidate, holdout, canary, score estimate, TIFF or slot decision was produced. **Do not upload an old TIFF under a new name.**
 
-**Latest committed source-feed snapshot for this review:** 16/18 entries observed at **2026-10-27 17:51:14 UTC**; two source responses exceeded the 2,000,000-byte fetch limit. This is metadata, not a live observation or scientific-content/licence verification. It is later than the immutable S23 snapshot (10/18 at 17:29:17 UTC); both timestamps are retained honestly. This checkout did not query DrivenData, a leaderboard, weekly quota or receipt.
-
-- **[Executive summary + nine-site table + exact submission guide](docs/executive-summary.html)** · [Latest repository review](knowledge/68_s24_repository_review.md) · [This checkout's S24 JSON run card](evidence/s24_repository_review_run_card.json) · [Three-pass verification record](evidence/s24_verification.json) · [Blocked current-workspace preflight](evidence/s24_preflight.json) · [Immutable S24 source-feed snapshot](evidence/snapshots/s24_source_feed.json)
-- GEMSDOE32's supplied **0.2778 is USER-REPORTED / UNVERIFIED**. Pixel forensics establish a plausible catalogue-adjacent pruning mechanism, not the cause of an organizer score. No numerical hidden-score estimate is defensible for any of the nine sites.
-- The four ranked PCSE / TCB / MCR / CSD mechanisms remain proposals, not results. PCSE was not run because preflight stops before any geological experiment.
-- **S24 verification:** 652 passed, 6 data-dependent tests skipped (not passed), 12 warnings, 9 subtests; Ruff clean; deterministic standard-library site build succeeds with zero external requests. Full local record: [S24 review](knowledge/68_s24_repository_review.md).
-- **Separate concurrent S24 geometry audit (not this checkout's run):** [report](knowledge/68_s24_result.md) · [run card](evidence/s24_run_card.json) · [overlap evidence](evidence/s24_nine_site_overlap.json). That record reports an **ORGANIZER-PUBLIC** leaderboard observation at approximately 18:50 UTC (#1 0.4544, #25 0.3195, #50 0.2857). It is not a file-bound receipt, hidden-score estimate, or current refresh; this checkout did not make that request. Treat its result and provenance separately from this review.
-- **Comparator policy:** the concurrent report discusses A/B/C rule options, but none is adopted here. The active instruction remains the literal all-registry duplicate stop; no comparator is excluded, and no lattice-hole search or tuning is authorized.
-- **Next action:** resolve any registry-protocol conflict only through an explicit shared, versioned decision; restore the shared cache/tools plus a complete registry, assigned lane and comparable frozen best before any experiment. No new TIFF is authorized.
+- **[Executive summary + nine-site table + exact submission guide](docs/executive-summary.html)** · [S25 review](knowledge/69_repository_review_2026-10-28.md) · [S25 JSON run card](evidence/s25_repository_review_run_card.json) · [Exact fresh preflight](evidence/s25_preflight.json)
+- GEMSDOE32's supplied **0.2778 remains USER-REPORTED / UNVERIFIED**. Forensic description of catalogue-adjacent pruning is not proof of score causation. No calibrated hidden-score estimate is available; no live leaderboard or receipt was checked.
+- **Fresh software verification:** 655 passed, 6 skipped, 12 warnings, 9 subtests; Ruff clean; 19-page static build plus active-review overlay succeeds with zero external requests. Six data-dependent skips are not passes. Full details: [S25 review](knowledge/69_repository_review_2026-10-28.md).
+- **S25 decision:** no new file approved; `submission_ready=false`, `ok_to_submit=false`, `slot_selected=false`. Current preflight is recorded at [evidence/s25_preflight.json](evidence/s25_preflight.json). No experiment was started.
+- **Next work:** resolve missing lane, synchronized registry, shared cache/tools, and same-protocol baseline without bypassing duplicate controls; then obtain a fresh authorized budget before any experiment. No submission slot may be selected by this review.
+- **Supplemental exact-file check on branch `arena/7504de16-gemsdoe28`:** `scripts/verify_downloads.py` exited 1 / FAIL CLOSED because `data/sample_submission.tif` and `data/labels.tif` are missing. No historical file was approved. See [branch-specific verification](knowledge/70_checkout_validation_followup_2026-10-28.md) and [review run card](evidence/review_2026-10-28.json); do not pool it with other parallel branch records.
 
 ---
 
-# S23 · 2026-10-27 UTC — READ FIRST EVERY SESSION
+## Parallel S25 checkout review — separate branch `arena/b74b9587-gemsdoe28`
+
+This immutable same-day review is [knowledge/69_checkout_review_2026-10-28.md](knowledge/69_checkout_review_2026-10-28.md) with its [JSON record](evidence/s25_checkout_review_2026-10-28.json). It found the site build succeeded but its runtime lacked `pytest` and `numpy`, so tests and fresh preflight were **not run**, rather than passed; it also noted the build must be followed by the active-review overlay step. Those observations belong to that separate checkout and are not the S25 validation above. Do not pool test/preflight evidence across branches.
+
+---
+
+# S24 · 2026-10-27 UTC — historical repository review · retained provenance
+
+S24 was a read-only review on a different branch (`arena/79bafcec-gemsdoe28`); its run card is not a review of the active S25 branch. It recorded no new TIFF, experiment, HOLDOUT-DTI, score estimate or slot decision. Its feed snapshot was observed 16/18 metadata endpoints at 2026-10-27 17:51:14 UTC; this is historical metadata, not current feed status. S24's preflight and source artifacts remain immutable under [knowledge/68_s24_repository_review.md](knowledge/68_s24_repository_review.md), [evidence/s24_repository_review_run_card.json](evidence/s24_repository_review_run_card.json), and [evidence/s24_preflight.json](evidence/s24_preflight.json). A separate concurrent S24 geometry audit recorded a public leaderboard observation, not a file-bound receipt or current refresh. Do not pool its claims with this branch or treat them as current approval.
+
+---
+
+# S23 · 2026-10-27 UTC — historical review · read-first operating brief remains in force
 
 ## **NO FILE APPROVED · No new TIFF generated · OK TO SUBMIT: NO**
 

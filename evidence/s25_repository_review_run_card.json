@@ -1,0 +1,92 @@
+{
+  "schema": "gems28-repository-review-v1",
+  "session_id": "G28-S25-20261028",
+  "date_utc": "2026-10-28",
+  "branch": "arena/965e7dda-gemsdoe28",
+  "scope": "Read-only repository and workflow review, repeatable software checks, and current local experiment preflight. No external competition access.",
+  "hypothesis": "No geological hypothesis tested. S23-PCSE remains the prior qualitative top-ranked proposal only; this review did not adopt or run it.",
+  "mechanism": "No feature or prediction surface built.",
+  "non_fault_process": "Not applicable; no geological experiment was conducted.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN; current preflight BLOCKED",
+    "evaluator_version": null,
+    "dti": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel": "triangular",
+    "kernel_m": 300
+  },
+  "feature_canaries": {
+    "status": "NOT RUN; no candidate feature stack available"
+  },
+  "registry": {
+    "complete": false,
+    "surface_correlation_check": "NOT RUN; no candidate surface and no complete synchronized registry",
+    "final_dot_overlap_check": "NOT RUN; no candidate raster",
+    "historical_focus_site_claims": "The supplied scores are USER-REPORTED / UNVERIFIED; the committed nine-site table is historical and is not a current organizer receipt."
+  },
+  "raster": {
+    "generated": false,
+    "path": null,
+    "sha256": null
+  },
+  "validator": {
+    "status": "NOT RUN; no new TIFF",
+    "no_nan_inside_footprint": null,
+    "values_within_0_1": null,
+    "crs_matches_template": null,
+    "shape_matches_template": null,
+    "transform_matches_template": null,
+    "single_band": null
+  },
+  "submission": {
+    "name": null,
+    "note": "S25 read-only repository review; no TIFF generated or approved.",
+    "note_characters": 63,
+    "ok_to_download": false,
+    "ok_to_submit": false,
+    "slot_selected": false,
+    "slots_spent": 0
+  },
+  "preflight": {
+    "checked_at_utc": "2026-10-28T11:38:07Z",
+    "status": "BLOCKED",
+    "exit_code": 1,
+    "experiment_allowed": false,
+    "blocker_categories": [
+      "No explicit assigned method lane and assignment source",
+      "No complete shared parallel-run registry",
+      "Literal registry overlap rule blocks declared emission budget",
+      "No same-protocol frozen current-best result",
+      "Existing configured experiment wall-clock budget is expired",
+      "Missing prepared feature cache and metadata",
+      "All nine pinned shared-template assets are absent"
+    ],
+    "full_observation": "evidence/s25_preflight.json"
+  },
+  "verification": {
+    "pytest": "655 passed, 6 skipped, 12 warnings, 9 subtests passed; six data-dependent skips are not passes.",
+    "ruff": "PASS: .venv/bin/ruff check src scripts tests",
+    "site_build": "PASS: python -S scripts/build_site.py followed by python -S scripts/build_active_review.py; 19 pages, 43 sources, 4 untested hypotheses, zero external requests, download locked.",
+    "internal_links": "PASS through repository test suite.",
+    "git_diff_check": "PASS",
+    "working_tree": "Clean after generated pages were rebuilt through both documented steps."
+  },
+  "limitations": [
+    "No competition training data, prepared feature cache, sample submission, labels, or shared template source files are present in this checkout.",
+    "The shared protocol manifest explicitly marks the external parallel registry incomplete.",
+    "No lane assignment, fresh comparable holdout baseline, organizer receipt, authenticated weekly allowance, or score-transfer calibration is available.",
+    "This review did not fetch or verify current source-feed, public leaderboard, competition page, or external DEM bytes."
+  ],
+  "estimated_leaderboard_score": null,
+  "estimate_status": "Unavailable; no validated transfer calibration or filename/SHA-bound organizer receipt.",
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "verdict": "negative",
+  "new_tiff_generated": false,
+  "submission_ready": false,
+  "slot_selected": false
+}
