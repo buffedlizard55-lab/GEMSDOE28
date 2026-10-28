@@ -1,0 +1,76 @@
+{
+  "schema": "gemsdoe28-repository-review-v1",
+  "observed_utc": "2026-10-28T11:37:55Z",
+  "branch": "arena/7504de16-gemsdoe28",
+  "base_commit": "4955e29c7b66503ba2178b25d356d713dc1bc534",
+  "decision": "negative",
+  "hypothesis": "No new geological experiment authorized or run; the method lane is not explicitly assigned in the current session config.",
+  "mechanism": "Review-only. Historical catalogue-adjacent pruning may reduce false-positive contribution under the competition metric if removed pixels have little weighted true-positive credit, but the H33-2 score mechanism is not established from current checkout evidence.",
+  "non_fault_mimic": "Not applicable to a new prediction; candidate geophysical lineaments can be mimicked by lithologic contacts, dikes, terrace risers, shorelines, roads, and survey artifacts.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN",
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null
+  },
+  "registry": {
+    "status": "Historical pinned nine-site comparison only; not a fresh complete-registry replay",
+    "focus_site_directional_comparisons": 72,
+    "focus_site_comparisons_over_70_percent_3px": 72,
+    "focus_site_unique_historical_best_files": 0,
+    "historical_geometry_evidence": {
+      "label": "GEOMETRY-AUDIT (not HOLDOUT-DTI and not an organizer score)",
+      "declared_budget_dots": 37654,
+      "footprint_coverage_within_3px_percent": 99.8713,
+      "unspaced_overlap_lower_bound_percent": 82.3418,
+      "inherited_final_dot_overlap_percent": 99.6176,
+      "freshly_replayed_in_this_checkout": false
+    }
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "FAIL CLOSED: no new candidate exists; local download verification lacks data/sample_submission.tif and data/labels.tif",
+    "new_candidate_generated": false,
+    "no_nan_inside": null,
+    "values_in_0_1": null,
+    "single_band": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null,
+    "unique_under_full_registry": null
+  },
+  "submission_name": null,
+  "note": "Repository review only; no new TIFF, estimate, holdout score, or slot authorization.",
+  "scores": {
+    "GEMSDOE32_best_listed_claim": {
+      "value": 0.2778,
+      "label": "USER-REPORTED / UNVERIFIED; no organizer receipt in this checkout"
+    },
+    "leaderboard_anchor_0": {
+      "value": 0.4413,
+      "label": "USER-SUPPLIED, NOT FRESHLY VERIFIED; conflicts with another supplied anchor"
+    },
+    "leaderboard_anchor_1": {
+      "value": 0.3195,
+      "label": "USER-SUPPLIED, NOT FRESHLY VERIFIED; conflicts with another supplied anchor"
+    },
+    "score_estimate": null,
+    "score_estimate_status": "Unavailable: no validated transfer calibration or organizer-reconciled current observation."
+  },
+  "verification": {
+    "pytest": "Initial checkout run: 652 passed, 6 skipped, 12 warnings, 9 subtests passed; after rebasing onto merged main and rerunning at 2026-10-28T11:45Z: 655 passed, 6 skipped, 12 warnings, 9 subtests passed. Software tests only; skips are data-dependent.",
+    "ruff": "PASS",
+    "static_site_build_and_overlay": "PASS; zero external requests; tracked output unchanged",
+    "preflight": "BLOCKED",
+    "download_validator": "FAIL CLOSED because local template and labels are missing",
+    "git_tree_clean_after_checks": true,
+    "geological_experiments_run": 0,
+    "experiment_cap": 3,
+    "submission_slots_spent": 0,
+    "submission_ready": false,
+    "ok_to_download_and_submit": false,
+    "post_rebase_verified_at_utc": "2026-10-28T11:45:41Z"
+  }
+}
