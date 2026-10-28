@@ -1,8 +1,14 @@
-# S25 · 2026-10-28 UTC — READ FIRST EVERY SESSION
+# S25 · 2026-10-28 UTC — input restoration and gate status (PR #72) · READ FIRST EVERY SESSION
 
 ## **NO NEW TIFF · NOT OK TO DOWNLOAD OR SUBMIT · zero holdout experiments**
 
 S25 restored every hash-pinned input from GitHub mirrors (17 data files + 9 shared-template assets) and built the feature cache. The previous "missing data" blocker is cleared. Remaining blockers are decisions, not data: (1) no assigned method lane in the request, (2) the literal 70%/3-px all-registry rule makes the 37,654-dot budget impossible, (3) no comparable frozen holdout best, (4) the preflight's experiment-budget clock is stale. Details, irregularities and the three owner decisions: [knowledge/69_s25_status_2026-10-28.md](knowledge/69_s25_status_2026-10-28.md) · [run card](evidence/s25_run_card.json).
+
+# S25 · 2026-10-28 UTC — active-checkout review · READ FIRST EVERY SESSION
+
+**NO TIFF generated · NOT OK TO DOWNLOAD/SUBMIT · zero experiments.** This branch review is [recorded here](knowledge/69_checkout_review_2026-10-28.md), with a machine-readable [review card](evidence/s25_checkout_review_2026-10-28.json). The site build passed, but Python lacks `pytest` and `numpy`, so tests and fresh preflight are blocked—not passed. The cache/shared-template inputs are absent. A site rebuild also strips injected review overlays; restore/regenerate them after building. No scores were refreshed and GEMSDOE32's supplied 0.2778 remains USER-REPORTED / UNVERIFIED. Continue only after restoring dependencies and inputs and resolving the explicit lane, full registry, and comparable-baseline gates. No submission slot was selected.
+
+---
 
 # S24 · 2026-10-27 UTC — repository review · READ FIRST EVERY SESSION
 

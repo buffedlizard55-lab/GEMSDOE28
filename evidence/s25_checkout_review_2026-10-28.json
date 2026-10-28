@@ -1,0 +1,51 @@
+{
+  "schema": "gems28-s25-checkout-review-v1",
+  "date_utc": "2026-10-28",
+  "branch": "arena/b74b9587-gemsdoe28",
+  "base_commit": "4955e29c7b66503ba2178b25d356d713dc1bc534",
+  "review_only": true,
+  "experiments_run": 0,
+  "new_tiff_generated": false,
+  "holdout_dti": null,
+  "score_estimate": null,
+  "organizer_confirmed_score": null,
+  "submission_ready": false,
+  "ok_to_download_or_submit": false,
+  "slot_selected": false,
+  "preflight": {
+    "status": "NOT COMPLETED: python scripts/check_run_preflight.py failed to import numpy",
+    "failure": "ModuleNotFoundError: No module named 'numpy'",
+    "independent_prior_record": "evidence/s24_preflight.json",
+    "prior_record_status": "BLOCKED"
+  },
+  "tests": {
+    "status": "BLOCKED",
+    "command": "python -m pytest -q",
+    "result": "No module named pytest",
+    "prior_suite_results_not_recertified": true
+  },
+  "site_build": {
+    "status": "PASS",
+    "command": "python -S scripts/build_site.py",
+    "pages": 19,
+    "sources": 43,
+    "external_requests": 0,
+    "submission_ready": false,
+    "side_effect": "Rewrote six tracked HTML pages and removed independently injected checkout-review overlays; restored immediately."
+  },
+  "inputs": {
+    "data_directory_contains_only_json_records": true,
+    "shared_template_directory_present": false,
+    "cached_feature_stack_present": false
+  },
+  "hypothesis": "No newly assigned lane; no experiment authorized.",
+  "mechanism": "None tested.",
+  "non_fault_mimic": "Not applicable; no candidate feature surface generated.",
+  "registry_correlation_overlap": "No new surface or dots; registry comparison not run.",
+  "raster_sha256": null,
+  "validator": "Not run: no new raster.",
+  "submission_name": null,
+  "note": "S25 repository review only; no new TIFF, no score estimate, and no slot selected.",
+  "verdict": "negative",
+  "review": "knowledge/69_checkout_review_2026-10-28.md"
+}
