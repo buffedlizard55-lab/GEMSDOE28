@@ -85,6 +85,9 @@ def main() -> int:
     import build_s28_review  # noqa: PLC0415
 
     build_s28_review.main()
+    import build_current_review  # noqa: PLC0415
+
+    build_current_review.main()
     import build_s28c_review  # noqa: PLC0415
 
     build_s28c_review.main()

@@ -1,0 +1,267 @@
+{
+  "schema": "registry-feasibility-audit-v1",
+  "observed_utc": "2026-10-29T14:29:19.530455+00:00",
+  "label": "GEOMETRY-AUDIT (not HOLDOUT-DTI or an organizer score)",
+  "status": "DUPLICATE_STOP",
+  "control": {
+    "file": "inputs/calibration/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "footprint_sha256": "15bc7e7d4e21d284c42e4183bb7c63d087f67635818bd7b963d58f6beed44817",
+    "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/inputs/calibration/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "registry_member_id": "registry-039",
+    "shared_registry_path": "data/research/shared_priority_registry.json",
+    "shared_registry_sha256": "0844816e4cb8e9f6fa64970b339412dd97d12cb0b507c67b0b9bb3f2f3ea2974"
+  },
+  "bounds": {
+    "label": "GEOMETRY-AUDIT (not HOLDOUT-DTI or an organizer score)",
+    "footprint_pixels": 5167373,
+    "reference_positive_pixels": 206895,
+    "radius_px": 3.0,
+    "covered_pixels": 5160724,
+    "covered_fraction": 0.9987132726822701,
+    "uncovered_pixels": 6649,
+    "candidate_budget": 37654,
+    "overlap_limit": 0.7,
+    "required_uncovered_dots_to_pass": 11297,
+    "unspaced_overlap_lower_bound": 0.8234184947150369,
+    "unspaced_target_budget_impossible": true,
+    "max_budget_not_ruled_out_by_pixel_count": 22163,
+    "spacing": {
+      "min_spacing_px": 2.8,
+      "partition_side_pixels": 2,
+      "partition_diameter_px": 1.4142135623730951,
+      "uncovered_dot_capacity_upper_bound": 3603,
+      "overlap_lower_bound": 0.9043129547989589,
+      "partitions": [
+        {
+          "row_shift": 0,
+          "col_shift": 0,
+          "occupied_squares": 3756
+        },
+        {
+          "row_shift": 0,
+          "col_shift": 1,
+          "occupied_squares": 3791
+        },
+        {
+          "row_shift": 1,
+          "col_shift": 0,
+          "occupied_squares": 3603
+        },
+        {
+          "row_shift": 1,
+          "col_shift": 1,
+          "occupied_squares": 3630
+        }
+      ],
+      "target_budget_impossible": true
+    },
+    "target_budget_impossible": true,
+    "interpretation": "A necessary counting bound only. A non-blocked budget is not a novelty pass, a score estimate or permission to relocate dots."
+  },
+  "shared_control_classification": {
+    "is_space_filling_calibration_control": true,
+    "footprint_3px_covered_pixels": 5160724,
+    "footprint_3px_uncovered_pixels": 6649,
+    "footprint_3px_coverage": 0.9987132726822701,
+    "coverage_threshold": 0.7,
+    "pigeonhole_min_overlap_for_candidate_size": 0.8234184947150369
+  },
+  "inherited_candidate": {
+    "path": "docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif",
+    "sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+    "dots": 37654,
+    "final_dot_comparison": {
+      "stage": "final_dots",
+      "passed": false,
+      "registry_unique_rasters": 1,
+      "raw_rank_scope": "exact over all footprint pixels",
+      "raw_rank_pixels": 5167373,
+      "kernel_rank_sample_size": 200000,
+      "rank_sample_seed": 20261025,
+      "rank_limit": 0.9,
+      "overlap_limit": 0.7,
+      "overlap_distance_px": 3,
+      "overlap_scope": "ALL candidate dots, not a sample",
+      "max_abs_rank_correlation": 0.0002741088435606644,
+      "max_dot_overlap": 1.0,
+      "rows": [
+        {
+          "registry_id": "registry-039",
+          "file": "inputs/calibration/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+          "footprint_sha256": "15bc7e7d4e21d284c42e4183bb7c63d087f67635818bd7b963d58f6beed44817",
+          "raw_spearman": -0.0002741088435606644,
+          "kernel_spearman": 0.00011288956389153711,
+          "candidate_dot_overlap_within_3px": 1.0,
+          "duplicate": true,
+          "correlation_defined": true
+        }
+      ]
+    },
+    "duplicate_under_literal_rule": true,
+    "preplacement_surface_tested": false,
+    "preplacement_surface_status": "Not available; a final binary raster must not be relabeled as a pre-placement surface.",
+    "format_validator": {
+      "file": "gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif",
+      "bytes": 1580182,
+      "sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+      "format_valid": true,
+      "ok_to_upload": false,
+      "upload_authorization": "not evaluated by a format validator; separate scientific selector required",
+      "format_acceptable": true,
+      "submission_authorized": false,
+      "scope": "Format only; this does not certify bias audit, holdout promotion or weekly-slot eligibility",
+      "hard_failures": [],
+      "official_format_compliant": true,
+      "in_footprint_positive_pixels": 37654,
+      "in_footprint_mass": 37654.0,
+      "checks": {
+        "official_template_grid_and_footprint": {
+          "pass": true,
+          "detail": "Template must be the pinned organizer grid, not just a self-consistent arbitrary raster",
+          "hard_requirement": true
+        },
+        "single_band": {
+          "pass": true,
+          "detail": "count=1",
+          "hard_requirement": true
+        },
+        "dtype_float32": {
+          "pass": true,
+          "detail": "dtypes=('float32',)",
+          "hard_requirement": true
+        },
+        "crs_epsg_32611": {
+          "pass": true,
+          "detail": "EPSG:32611",
+          "hard_requirement": true
+        },
+        "shape_matches_template": {
+          "pass": true,
+          "detail": "(3730, 3292) vs (3730, 3292)",
+          "hard_requirement": true
+        },
+        "geotransform_matches_template": {
+          "pass": true,
+          "detail": "(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)",
+          "hard_requirement": true
+        },
+        "footprint_all_finite": {
+          "pass": true,
+          "detail": "0 NaN/Inf inside the 5,167,373-pixel footprint",
+          "hard_requirement": true
+        },
+        "footprint_range_0_1": {
+          "pass": true,
+          "detail": "finite=5167373/5167373; range=0.0 to 1.0",
+          "hard_requirement": true
+        },
+        "outside_is_nan_official_text": {
+          "pass": true,
+          "detail": "7,111,787 of 7,111,787 outside pixels are NaN",
+          "hard_requirement": false
+        },
+        "nodata_tag_is_nan": {
+          "pass": true,
+          "detail": "nodata=nan",
+          "hard_requirement": false
+        },
+        "variant_nan_aware_whole_array": {
+          "pass": true,
+          "detail": "np.nanmin/np.nanmax over the whole array",
+          "hard_requirement": true
+        },
+        "variant_masked_read": {
+          "pass": true,
+          "detail": "rasterio read(masked=True).compressed()",
+          "hard_requirement": true
+        },
+        "variant_strict_whole_array_no_nan_allowed": {
+          "pass": false,
+          "detail": "((a>=0)&(a<=1)).all() over the whole array - fails for ANY NaN, including the official sample's NaN outside",
+          "hard_requirement": false
+        },
+        "profile_matches_official_sample": {
+          "pass": true,
+          "detail": "driver/dtype/nodata/size/crs/transform equal to template; compress=lzw (template lzw)",
+          "hard_requirement": false
+        }
+      }
+    },
+    "disposition": "DO NOT SUBMIT; historical promote claim cannot override this literal-rule failure"
+  },
+  "shared_assets": {
+    "passed": true,
+    "files": [
+      {
+        "id": "template-__init__",
+        "dest": "shared_template/src/gems/__init__.py",
+        "sha256": "1a0b12829abd20797161f12c4d4f900f5bfb2af13df35c68435ce647e6fb264a",
+        "bytes": 410
+      },
+      {
+        "id": "template-holdout",
+        "dest": "shared_template/src/gems/holdout.py",
+        "sha256": "34fb7f12e849280c8162d5c433aa972f70746ddecf1a289ce3a9c81144b344dc",
+        "bytes": 26813
+      },
+      {
+        "id": "template-metric",
+        "dest": "shared_template/src/gems/metric.py",
+        "sha256": "a49d99ed5e20b2c0087668a7d29a8684e25dca41635ece3c4f30b1dba1c5a432",
+        "bytes": 11390
+      },
+      {
+        "id": "template-submission",
+        "dest": "shared_template/src/gems/submission.py",
+        "sha256": "a9b950e59ec50dfc1f1be44a755434848c70e0233923ebaad40f1589c69e9f18",
+        "bytes": 10860
+      },
+      {
+        "id": "template-validator",
+        "dest": "shared_template/src/gems/validator.py",
+        "sha256": "a5176d6e13924382f52bfd170a1f91c8beb1f31d413765295e881b65dc79a5e0",
+        "bytes": 396
+      },
+      {
+        "id": "template-novelty",
+        "dest": "shared_template/src/gems/novelty.py",
+        "sha256": "46ba2c88921a94bfbedd30cf604bf3843ed85d131431a1f56c28cd71c4e07dd5",
+        "bytes": 17695
+      },
+      {
+        "id": "template-evaluate_holdout",
+        "dest": "shared_template/scripts/evaluate_holdout.py",
+        "sha256": "66fbe1a696c0fe48b1d277619eaf810aa2d91866a92bc2a5d819c49fe4143da1",
+        "bytes": 15684
+      },
+      {
+        "id": "template-submission_writer",
+        "dest": "shared_template/scripts/submission_writer.py",
+        "sha256": "30edfcca023a185ae49b752ac19fa6839f2382169db8a4852f90d1a454e5db61",
+        "bytes": 1652
+      },
+      {
+        "id": "template-priority-registry",
+        "dest": "research/shared_priority_registry.json",
+        "sha256": "0844816e4cb8e9f6fa64970b339412dd97d12cb0b507c67b0b9bb3f2f3ea2974",
+        "bytes": 83432
+      }
+    ],
+    "failures": [],
+    "manifest_sha256": "ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa",
+    "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/2521cb676e172c141a4417e4925b73b6a896c1eb",
+    "network_access": "none"
+  },
+  "code_sha256": {
+    "scripts/audit_registry_feasibility.py": "eb2f11f5616dedbd7e124dd4cbff837d64e580015f53d2eb64451245c6cb83c4",
+    "src/gems27/registry_feasibility.py": "c24fa89a2f3dc97139160c4b1074ca7e6b7fa97704cfd1884a0117d478cd4b66"
+  },
+  "new_tiff_generated": false,
+  "geological_experiments_run": 0,
+  "new_holdout_run": false,
+  "submission_ready": false,
+  "slot_selected": false,
+  "scope": "One registered comparator is sufficient to reject a lane; this is not a complete global registry or a proof against every possible smaller dot budget.",
+  "next_action": "Stop the inherited lane. Do not omit the control or relocate predictions into lattice holes. Resolve the registry protocol before scientific promotion."
+}

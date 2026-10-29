@@ -72,10 +72,10 @@
     "evidence/s28c_official_reference_check.json": "7458b61c0f8eb81bf5d8d5f53a67adddfda44f3dd4114f70c7fe28110047b0fd"
   },
   "verification": {
-    "pytest": "675 passed, 5 skipped, 12 warnings, 9 subtests passed (after parallel merge integration)",
+    "pytest": "714 passed, 5 skipped, 34 warnings, 9 subtests passed (after both parallel merges)",
     "ruff": "clean",
     "diff_check": "clean",
     "build": "build_site.py + build_active_review.py, offline"
   },
-  "parallel_merge_note": "Independent S28 records merged first; this review renamed S28C. Preserve their S25 calibration-control duplicate correction."
+  "parallel_merge_note": "Independent S28 records merged first; this review renamed S28C. Preserve their S25 calibration-control duplicate correction. PR #81 then merged research-manifest inspection and current-card alias fixes; preserved and fully retested."
 }

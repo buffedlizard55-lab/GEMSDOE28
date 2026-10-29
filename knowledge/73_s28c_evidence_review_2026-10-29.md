@@ -67,3 +67,5 @@ The top-candidate experiment, per-feature AUC canaries, strict paired improvemen
 PR #79 merged independent S28 evidence while this PR was in CI. This session is now named S28C to preserve both evidence sets. The incoming S25 calibration-control duplicate correction is retained and surfaced; the earlier 51-file uniqueness claim is not global. Raw source inventory/check JSON was preserved verbatim, not search-replaced. Merge integration requires a fresh build and full test run.
 
 Integration verification: 675 passed, five skipped, 12 warnings, nine subtests passed; Ruff clean; offline full build succeeds. No scientific run or new TIFF.
+
+Second concurrent integration: PR #81 fixed actual TIFF/ZIP inspection for the research sibling manifest and current-card aliases. These fixes are preserved. Its extended audit counts 880 checks (our earlier dated audit counts 869); both flag the same two archive metadata failures. Final combined verification: 714 passed, five skipped, 34 warnings, nine subtests passed; Ruff clean and full offline build succeeds.

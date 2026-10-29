@@ -67,11 +67,13 @@ def test_current_evidence_code_and_historical_snapshots_are_byte_bound(field):
 
 
 def test_all_current_aliases_agree_without_rewriting_the_historical_day():
-    current = (ROOT / "evidence/s23_run_card.json").read_bytes()
-    for relative in ["docs/data/current_run_card.json", "docs/data/current_run_card_2026-10-27.json",
-                     "docs/data/s23_run_card.json", "data/current_run_card.json",
-                     "data/current_run_card_2026-10-27.json"]:
+    current = (ROOT / "evidence/s28_validation_run_card.json").read_bytes()
+    for relative in ["docs/data/current_run_card.json", "data/current_run_card.json"]:
         assert (ROOT / relative).read_bytes() == current
+    historical = (ROOT / "evidence/s23_run_card.json").read_bytes()
+    for relative in ["docs/data/current_run_card_2026-10-27.json", "docs/data/s23_run_card.json",
+                     "data/current_run_card_2026-10-27.json"]:
+        assert (ROOT / relative).read_bytes() == historical
     assert load("docs/data/current_run_card_2026-10-26.json") == load("evidence/s22_audit_run_card.json")
     assert load("docs/data/run_card_s22c.json") == load("evidence/s22c_run_card.json")
     assert load("evidence/s22c_run_card.json")["verdict"] == "promote"  # Preserved source claim.
@@ -210,15 +212,20 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert parser.ids.count("s27-current-decision") == 1
         assert "NO FILE APPROVED" in text and "not submission-ready" in text
         return
+    assert len(parser.ids) == len(set(parser.ids)), page
     if page == "s28c-review.html":
         assert parser.ids.count("s28c-current-decision") == 1
         assert 'data-submission-ready="false"' in text
         assert "OK TO SUBMIT: NO" in text
+    elif "current-checkout-decision" in parser.ids:
+        assert parser.ids.count("current-checkout-decision") == 1
+        assert text.index('id="current-checkout-decision"') < text.index("Submission download locked")
+        assert "No new submission approved" in text
+        assert "No new TIFF was generated" in text
     else:
         assert parser.ids.count("current-submission") == 1
         assert text.index('id="current-submission"') < text.index("Submission download locked")
         assert "S23 audit: no new TIFF" in text
-    assert len(parser.ids) == len(set(parser.ids)), page
     for ref in parser.refs:
         url = urlsplit(ref)
         if url.scheme or url.netloc:
