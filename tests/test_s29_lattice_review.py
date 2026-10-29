@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import pytest
-from scripts import build_s29_review as s29
+from scripts import build_s29_lattice_review as s29
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -14,7 +14,7 @@ def _json(rel):
 
 
 def test_run_card_is_fail_closed():
-    card = _json("evidence/s29_run_card.json")
+    card = _json("evidence/s29_lattice_run_card.json")
     assert card["ok_to_submit"] is False
     assert card["slot_selected"] is False
     assert card["new_tiff_generated"] is False
@@ -25,18 +25,18 @@ def test_run_card_is_fail_closed():
 
 
 def test_panel_refuses_approved_or_slot_selected_card():
-    card = _json("evidence/s29_run_card.json")
+    card = _json("evidence/s29_lattice_run_card.json")
     for key, bad in (("ok_to_submit", True), ("slot_selected", True), ("new_tiff_generated", True),
                      ("raster_sha256", "a" * 64), ("submission_name", "x")):
         broken = copy.deepcopy(card)
         broken[key] = bad
         with pytest.raises(ValueError):
-            s29.panel(broken, "data/s29_run_card.json", "s29-review.html")
+            s29.panel(broken, "data/s29_lattice_run_card.json", "s29-lattice-review.html")
 
 
 def test_panel_states_no_file_approved():
-    card = _json("evidence/s29_run_card.json")
-    html = s29.panel(card, "data/s29_run_card.json", "s29-review.html")
+    card = _json("evidence/s29_lattice_run_card.json")
+    html = s29.panel(card, "data/s29_lattice_run_card.json", "s29-lattice-review.html")
     assert "NO FILE APPROVED · OK TO SUBMIT: NO" in html
     assert 'data-submission-ready="false"' in html
 

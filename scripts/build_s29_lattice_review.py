@@ -13,13 +13,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BRANCH = "arena/9a3a5294-gemsdoe28"
-PANEL_ID = "s29-current-decision"
-REPORT_URL = "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/arena/9a3a5294-gemsdoe28/knowledge/75_s29_experiments_and_uniqueness_2026-10-29.md"
+PANEL_ID = "s29-lattice-decision"
+REPORT_URL = "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/arena/9a3a5294-gemsdoe28/knowledge/76_s29_lattice_experiments_2026-10-29.md"
 PAGES = {
-    ROOT / "docs/index.html": ("data/s29_run_card.json", "s29-review.html"),
-    ROOT / "docs/executive-summary.html": ("data/s29_run_card.json", "s29-review.html"),
-    ROOT / "index.html": ("docs/data/s29_run_card.json", "docs/s29-review.html"),
-    ROOT / "executive-summary.html": ("docs/data/s29_run_card.json", "docs/s29-review.html"),
+    ROOT / "docs/index.html": ("data/s29_lattice_run_card.json", "s29-lattice-review.html"),
+    ROOT / "docs/executive-summary.html": ("data/s29_lattice_run_card.json", "s29-lattice-review.html"),
+    ROOT / "index.html": ("docs/data/s29_lattice_run_card.json", "docs/s29-lattice-review.html"),
+    ROOT / "executive-summary.html": ("docs/data/s29_lattice_run_card.json", "docs/s29-lattice-review.html"),
 }
 EV = {
     "null": ROOT / "evidence/s29_null_controls.json",
@@ -28,7 +28,7 @@ EV = {
     "audit": ROOT / "evidence/s29_lattice_overlap_audit.json",
     "restore": ROOT / "evidence/restore_audit.json",
 }
-CARD_PATH = ROOT / "evidence/s29_run_card.json"
+CARD_PATH = ROOT / "evidence/s29_lattice_run_card.json"
 
 
 def _load(name: str) -> dict:
@@ -132,7 +132,7 @@ def build_card() -> dict:
         "leaderboard_estimate": None,
         "restore_audit": restore["status"],
         "evidence": sorted(p.relative_to(ROOT).as_posix() for p in EV.values())
-        + ["evidence/s29_run_card.json", "scripts/run_s29_null_controls.py", "scripts/run_s29_dispersion.py",
+        + ["evidence/s29_lattice_run_card.json", "scripts/run_s29_null_controls.py", "scripts/run_s29_dispersion.py",
            "scripts/run_s29_ridge_control.py", "scripts/audit_lattice_overlap.py"],
     }
 
@@ -185,12 +185,12 @@ def inject(path: Path, section: str) -> None:
 
 
 def standalone(card: dict) -> str:
-    body = panel(card, "data/s29_run_card.json", "s29-review.html")
+    body = panel(card, "data/s29_lattice_run_card.json", "s29-lattice-review.html")
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>S29 review | GEMSDOE28</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><header class="site-header"><div class="header-inner"><a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
-<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="s29-review.html">S29 review</a></nav></div></header>
+<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="s29-lattice-review.html">S29 review</a></nav></div></header>
 <main>{body}<section class="section"><h2>Decision boundary</h2><p>Holdout gains here are HOLDOUT-DTI only and cannot be converted into a leaderboard estimate. A file that is format-valid and unique could still be unapproved. The only correct current action is to keep this result negative and resolve the uniqueness rule and the attribution gap before authorizing another lane.</p></section></main>
 <footer><div class="footer-inner"><p><strong>Maximize P(Win) · Own the Outcome.</strong> No competition login, upload, polling, or slot selection occurred.</p></div></footer></body></html>'''
 
@@ -199,10 +199,10 @@ def main() -> int:
     card = build_card()
     CARD_PATH.write_text(json.dumps(card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     (ROOT / "docs/data").mkdir(parents=True, exist_ok=True)
-    (ROOT / "docs/data/s29_run_card.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    (ROOT / "docs/data/s29_lattice_run_card.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     for path, (card_href, review_href) in PAGES.items():
         inject(path, panel(card, card_href, review_href))
-    (ROOT / "docs/s29-review.html").write_text(standalone(card), encoding="utf-8")
+    (ROOT / "docs/s29-lattice-review.html").write_text(standalone(card), encoding="utf-8")
     print(json.dumps({"status": "built", "panel": PANEL_ID, "network_requests": 0,
                       "ok_to_submit": False, "new_tiff_generated": False}, indent=2))
     return 0

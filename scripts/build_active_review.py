@@ -94,9 +94,9 @@ def main() -> int:
 
     build_s28_review.main()
     # S29 (2026-10-29) is the newest decision; its panel goes last so it sits at the top of each page.
-    import build_s29_review  # noqa: PLC0415
+    import build_s29_lattice_review  # noqa: PLC0415
 
-    build_s29_review.main()
+    build_s29_lattice_review.main()
     print(json.dumps({"status": "built", "pages": updated,
                       "review_card": "docs/data/active_checkout_review_2026-10-27.json",
                       "network_requests": 0, "submission_ready": False}, indent=2))

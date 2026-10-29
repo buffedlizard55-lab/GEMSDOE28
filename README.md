@@ -2,7 +2,7 @@
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
 
-**Branch:** `arena/9a3a5294-gemsdoe28` (from `main` at `a1c0e18`). Full report: [`knowledge/75_s29_experiments_and_uniqueness_2026-10-29.md`](knowledge/75_s29_experiments_and_uniqueness_2026-10-29.md). Canonical run card: [`evidence/s29_run_card.json`](evidence/s29_run_card.json). Executive page: [`docs/s29-review.html`](docs/s29-review.html).
+**Branch:** `arena/9a3a5294-gemsdoe28` (from `main` at `a1c0e18`). Full report: [`knowledge/76_s29_lattice_experiments_2026-10-29.md`](knowledge/76_s29_lattice_experiments_2026-10-29.md). Canonical run card: [`evidence/s29_lattice_run_card.json`](evidence/s29_lattice_run_card.json). Executive page: [`docs/s29-lattice-review.html`](docs/s29-lattice-review.html).
 
 **Experiments (3 of 3 cap; HOLDOUT-DTI, `gems-segment-pooled-v1`, 60,988 withheld positives; never a leaderboard estimate):**
 - **E1 controls** (`scripts/run_s29_null_controls.py`): random-K 0.067406 [0.064397–0.070308]; geology-blind calibration lattice 0.074836 [0.071734–0.077850], paired Δ +0.007430 (4/4 folds); visible-proximity placement 0.018369 (Δ −0.049037, 0/4).
@@ -24,7 +24,7 @@
 - Parallel-run protocol: single method lane; duplicate if Spearman >0.90 or >70% of dots within 3 px of any registry raster; check surface before placement and final dots; shared cached feature stack, `evaluate_holdout.py`, `submission_writer.py`; hide-and-recover whole fault segments with buffer; pooled DTI α=0.2, β=0.8, 300 m triangular kernel; fix shared-tool defects once in the template; no private fork.
 - Label every number HOLDOUT-DTI (evaluator version, withheld positives, 95% CI) or ORGANIZER-CONFIRMED (submission-page receipt). Projections are never written as scores. Leakage canary AUC >0.90 means leakage until proven otherwise.
 - Budget: stop after 3 experiments or 2 hours. Do not select or upload submissions (selector is separate). Do not automate DrivenData access or login; use free official sources or disclosed, hash-pinned owner mirrors.
-- Run card JSON at end: hypothesis, mechanism, named non-fault mimic, holdout DTI + CI, correlation/overlap, raster SHA-256, validator output, submission name and note (≤140 chars), verdict promote/negative. Present: `evidence/s29_run_card.json`.
+- Run card JSON at end: hypothesis, mechanism, named non-fault mimic, holdout DTI + CI, correlation/overlap, raster SHA-256, validator output, submission name and note (≤140 chars), verdict promote/negative. Present: `evidence/s29_lattice_run_card.json`.
 - Must include: 0.2777/0.2778 explanation; 0.4413 vs 0.3195 discrepancy; portal error `Predicted values must be in range [0, 1]`. Code PR merge is not a competition submission.
 - The verbatim full prompt was not in the session context. Paste it here to store it verbatim.
 

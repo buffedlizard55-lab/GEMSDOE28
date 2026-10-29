@@ -1,7 +1,7 @@
 # S29 · 2026-10-29 UTC — experiments, uniqueness audit, and decision
 
 **Decision: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO.** Branch `arena/9a3a5294-gemsdoe28`.
-Run card: `evidence/s29_run_card.json` (canonical; also `docs/data/s29_run_card.json`). No slot was selected or spent. No competition login, upload, or polling occurred.
+Run card: `evidence/s29_lattice_run_card.json` (canonical; also `docs/data/s29_lattice_run_card.json`). No slot was selected or spent. No competition login, upload, or polling occurred.
 
 All numbers below are **HOLDOUT-DTI** (evaluator `gems-segment-pooled-v1`, 60,988 withheld positives, 95% CI, pooled α=0.2, β=0.8, 300 m triangular kernel = 3 px). None is a leaderboard estimate. Organizer-confirmed facts are labelled as such.
 

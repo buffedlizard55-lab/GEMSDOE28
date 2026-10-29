@@ -136,7 +136,7 @@ def main() -> int:
         "historical_rasters": rows,
         "summary": summary,
         "interpretation": "Any geology-driven placement of this size overlaps the lattice at the random-placement rate (about 99.8%). The literal 70% lane rule therefore cannot distinguish methods on this registry; it fails every dotted historical file, including the highest-scoring ones.",
-        "organizer_rules_checked": "No uniqueness or duplicate-submission rule appears in the official problem page or the official rules PDF (see knowledge/75).",
+        "organizer_rules_checked": "No uniqueness or duplicate-submission rule appears in the official problem page or the official rules PDF (see knowledge/76).",
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
