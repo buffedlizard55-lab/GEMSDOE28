@@ -1,3 +1,57 @@
+# S29 · 2026-10-29 UTC — review session · READ FIRST EVERY SESSION
+
+## Project charter (read before every session)
+
+**Goal:** place at the top of the DrivenData GEMS competition leaderboard by producing a unique, validated GeoTIFF of geothermal-vent / fault predictions that passes the portal's format rules and the project's own uniqueness and holdout gates, with no human inspection.
+
+**Core values:** *Maximize P(Win)* — weigh every decision by its probability of improving the final result. *Own the Outcome* — report failures and flag irregularities openly, then fix them.
+
+**Standing rules:**
+1. Every number is labelled **HOLDOUT-DTI** (evaluator version, withheld positives, 95% CI), **ORGANIZER-CONFIRMED** (copied from a submission-page receipt or the public leaderboard page with date), or **USER-REPORTED / UNVERIFIED**. A projection is never written as a score.
+2. A file is cleared only if all gates pass: a method lane is assigned; feature leakage canaries are ≤ 0.90 AUC; a fold-local holdout win has a paired 95% CI above zero; the raster is ≤ 70% overlapping (within 3 px) and Spearman ≤ 0.90 against every registry raster; the file passes exact format checks (single-band float32, CRS EPSG:32611, shape 3730 × 3292, transform matches the template, finite inside the footprint, values in [0, 1]); and a weekly slot is selected by a separate step.
+3. No human inspection. Automated validation is the only gate.
+4. Never copy or rename an old raster to pass as new. Never resubmit a file already submitted.
+5. Facts come only from official or verifiable sources, with links. Mark uncertainty and irregularities for review; do not hallucinate.
+
+**Official sources:** [competition page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [data tab (login)](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) · [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) · [reference solution](https://github.com/drivendataorg/gems-prize-reference-solution) · [submission format PDF (NLR 96647)](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [GeoDAWN USGS data](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) · [INGENIOUS (GBCGE)](https://gbcge.org/current-projects/ingenious/) · [EPSG:32611](https://epsg.io/32611) · [Tversky index](https://en.wikipedia.org/wiki/Tversky_index)
+
+## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
+
+No file was generated, uploaded, or slotted in S29. This session restored and checked the inputs, verified the live leaderboard, and ran the test and format audits. The gates above are still not met for any candidate, and a new candidate was not produced.
+
+**What was verified this session** ([run card](evidence/s29_review_run_card.json)):
+
+| Check | Result | Source / evidence |
+|---|---|---|
+| Live official leaderboard #1 | **0.4544** (xiaofanhu) — ORGANIZER-CONFIRMED (public page, 2026-10-29) | [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) |
+| Live official #26 | 0.3328 | same |
+| 0.3195 on live board | **#47** (kpomazi). The earlier README line saying "#26 = 0.3195" is **superseded** by this observation. | same |
+| 0.4413 on live board | **Not present** (#1–#50 checked). The 0.4413 anchor is unverified. | same |
+| Core inputs restored and hash-verified | training_features, labels, existing_faults, sample_submission all verified | `scripts/restore_data.py --group core`, [data manifest](registry/data_manifest.json) |
+| Test suite | 721 passed, 5 skipped, 9 subtests passed | `pytest` (local) |
+| Format audit, GEMSDOE28 downloads | 880 checks; **2 failures**, both the known legacy H40/H41 nodata-tag cases from S23 | [evidence/s29_download_audit.json](evidence/s29_download_audit.json) |
+| Independent footprint check, `h36-1 allfinite` | CRS, shape, transform match; 0 NaN in footprint; footprint min 0, max 1; 0 out of range | local check; not organizer validation |
+| GEMSDOE32 0.2778 | **USER-REPORTED / UNVERIFIED** (no receipt linking raster hash to score) | [GEMSDOE32 page](https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html) |
+
+**Why "Predicted values must be in range [0, 1]" happens:** the repo's forensic record ([evidence/range_validator_forensics_2026-10-03.json](evidence/range_validator_forensics_2026-10-03.json)) found NaN inside the template footprint in one earlier NaN-variant file. The portal's exact root cause is still **unknown**. Use the `-allfinite` variant (finite inside the footprint, values in [0, 1]) and do not assume it is accepted.
+
+**Why no new candidate was produced in S29:**
+- The full synchronized registry of rasters is not in this checkout, so the uniqueness gate cannot be run.
+- The S23 counting bound still applies: at 37,654 dots, any placement overlaps the dense spacing-five lattice control by at least 82.3%, above the 70% limit.
+- The protocol budget (3 experiments / 2 hours) and the S28 TCB negative result mean a new hypothesis needs a registry-verified gate before it is run.
+
+## Limitations and what is needed next
+
+1. **Registry access:** a dated, complete set of registry rasters (with hashes) from the owner repos. Those repos are on github.com, which is reachable from this sandbox. The collection step has not been done.
+2. **Organizer receipts:** no submission-page receipt exists for any score in the repo. Every score is user-reported or public-board-only.
+3. **Holdout budget:** the experiment clock and weekly slot allowance are not verified from the submission page.
+4. **Portal behaviour:** the cause of the range-validator rejection is unknown. A test upload is needed, using the official submission page.
+5. **Leaderboard drift:** the live board moves daily. Re-fetch before any decision.
+
+Proposed next session: (a) mirror the registry rasters and hash them, (b) rerun the 70%/Spearman check on the current best candidate against the full registry, (c) if and only if it passes, run one pre-registered holdout experiment on the 0.2778-class hypothesis family, and (d) stop and report.
+
+---
+
 # S28 · 2026-10-29 UTC — current branch decision · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
