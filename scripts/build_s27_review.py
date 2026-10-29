@@ -26,11 +26,11 @@ def panel(card: dict, report_href: str, card_href: str, artifact_prefix: str, re
     return f'''<section class="section callout-danger" id="{PANEL_ID}" aria-label="Historical S27 submission decision" data-submission-ready="false">
 <p class="eyebrow">S27 · 2026-10-28 UTC · HISTORICAL PARALLEL REVIEW · NO NEW TIFF</p>
 <h2>S27 decision: NO FILE APPROVED · OK TO SUBMIT: NO</h2>
-<p><strong>No new submission was generated.</strong> S26-TCB is only a ranked, untested hypothesis; preflight is blocked and exact-file validation fails closed. The archived S25 PCSE TIFF is <strong>research/audit only, not submission-ready</strong>; do not upload it.</p>
+<p><strong>No new submission was generated.</strong> S26-TCB is only a ranked, untested hypothesis; preflight was blocked and exact-file validation failed closed in the S27 checkout. The archived S25 PCSE TIFF is <strong>research/audit only, not submission-ready</strong>; do not upload it.</p>
 <table><thead><tr><th>Gate</th><th>Current result</th></tr></thead><tbody>
 <tr><td>Current candidate HOLDOUT-DTI</td><td>Not run; no S27 candidate exists.</td></tr>
 <tr><td>Prior S25 PCSE</td><td>HOLDOUT-DTI (gems-segment-pooled-v1) {score:.4f}; 95% CI {ci[0]:.4f}–{ci[1]:.4f}; {prior['withheld_positives']:,} withheld positives. Below same-fold random-K HOLDOUT-DTI {prior['random_k_control_dti']:.4f}; this is not a leaderboard score.</td></tr>
-<tr><td>Exact validator</td><td>FAIL CLOSED: local sample submission and labels are absent. No approval.</td></tr>
+<tr><td>S27 exact validator</td><td>FAIL CLOSED in that historical checkout: local sample submission and labels were absent. No approval.</td></tr>
 <tr><td>Unique new raster / upload</td><td>No new raster; no novelty result; no slot selected.</td></tr>
 </tbody></table>
 <p><strong>Research-only archive:</strong> <a href="{artifact_prefix}{archive}">{archive}</a>. Existing artifact link is provided for audit, not upload.</p>
@@ -47,8 +47,8 @@ def standalone(card: dict) -> str:
 <title>S27 active-branch review | GEMSDOE28</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><header class="site-header"><div class="header-inner"><a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
 <nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="s27-review.html">Current review</a></nav></div></header>
-<main>{body}<section class="section"><h2>Decision boundary</h2><p>This review did not fit a model, run holdout DTI, emit a candidate raster, or select a submission slot. The S25 holdout value above is inherited historical evidence. The companion report documents the experiment blockers, four preregistered hypothesis choices, source limitations, validation passes, and exact nine-site historical scorecard.</p>
-<p>Current 0.2778 / 0.3195 / 0.4413 claims are not freshly confirmed from an organizer page. Score estimates remain unavailable rather than invented.</p></section></main></body></html>'''
+<main>{body}<section class="section"><h2>Historical decision boundary</h2><p>This review did not fit a model, run holdout DTI, emit a candidate raster, or select a submission slot. The S25 holdout value above is inherited historical evidence. The companion report documents the experiment blockers, four preregistered hypothesis choices, source limitations, validation passes, and exact nine-site historical scorecard.</p>
+<p>The 0.2778 / 0.3195 / 0.4413 claims are not freshly confirmed from an organizer page. Score estimates remain unavailable rather than invented.</p></section></main></body></html>'''
 
 
 def inject(path: Path, section: str) -> None:

@@ -93,8 +93,9 @@ def test_s24_preflight_and_feed_snapshots_are_exactly_hash_bound():
 
 def test_readme_read_first_and_s24_page_remain_locked():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    # Current dated review leads; earlier records remain historical.
-    assert readme.startswith("# S28 · 2026-10-29 UTC — checkout review")
+    # The current S28 correction leads; prior branch reviews remain historical.
+    assert readme.startswith("# 2026-10-29 · CURRENT CHECKOUT")
+    assert "# S27 · 2026-10-28 UTC — active branch review" in readme
     assert "# S26 · 2026-10-28 UTC — prior checkout review" in readme
     assert "# S25 · 2026-10-28 UTC — prior PCSE experiment" in readme
     assert "# S25 · 2026-10-28 UTC — repository review" in readme
