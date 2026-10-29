@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CARD = ROOT / "evidence/s28_run_card.json"
+CARD = ROOT / "evidence/s28_novelty_run_card.json"
 AUDIT = ROOT / "evidence/s28_pcse_lattice_audit.json"
 PANEL_ID = "s28-current-decision"
 PAGES = [ROOT / "index.html", ROOT / "executive-summary.html",
@@ -27,7 +27,7 @@ def render(card: dict, audit: dict) -> str:
 <h2>NO FILE APPROVED · OK TO SUBMIT: NO</h2>
 <p>No new TIFF, score estimate, geological experiment, or submission slot. An explicit parallel lane, synchronized registry and comparable frozen baseline are missing. A separate selector must decide any future submission.</p>
 <p><strong>Correction:</strong> the old S25 PCSE TIFF is a duplicate under the literal shared-registry rule: {overlap:.1%} of its dots are within 3 pixels of a registered calibration raster. Its earlier “unique” claim applied only to a limited local comparison and is superseded. It also failed its prior holdout. Do not submit it.</p>
-<p>The nine-site historical scorecard below reports user-supplied scores, not organizer-confirmed receipts. A reliable hidden-score estimate is unavailable. <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/73_s28_review_2026-10-29.md">Full review and nine-site decision</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s28_pcse_lattice_audit.json">Exact duplicate audit</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s28_run_card.json">JSON run card</a>.</p>
+<p>The nine-site historical scorecard below reports user-supplied scores, not organizer-confirmed receipts. A reliable hidden-score estimate is unavailable. <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/73_s28_novelty_review_2026-10-29.md">Full review and nine-site decision</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s28_pcse_lattice_audit.json">Exact duplicate audit</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s28_novelty_run_card.json">JSON run card</a>.</p>
 </section>'''
 
 

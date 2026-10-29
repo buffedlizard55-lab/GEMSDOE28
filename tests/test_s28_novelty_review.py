@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_correction_covers_candidate_and_rejects_old_claim():
     audit = json.loads((ROOT / "evidence/s28_pcse_lattice_audit.json").read_text())
-    card = json.loads((ROOT / "evidence/s28_run_card.json").read_text())
+    card = json.loads((ROOT / "evidence/s28_novelty_run_card.json").read_text())
     assert audit["inherited_candidate"]["sha256"] == card["historical_s25_sha256"]
     assert audit["inherited_candidate"]["final_dot_comparison"]["max_dot_overlap"] == 1.0
     assert audit["inherited_candidate"]["preplacement_surface_tested"] is False
@@ -25,7 +25,7 @@ def test_correction_covers_candidate_and_rejects_old_claim():
 
 def test_panel_fails_closed_if_evidence_is_inconsistent():
     audit = json.loads((ROOT / "evidence/s28_pcse_lattice_audit.json").read_text())
-    card = json.loads((ROOT / "evidence/s28_run_card.json").read_text())
+    card = json.loads((ROOT / "evidence/s28_novelty_run_card.json").read_text())
     for field, value in (("status", "PASS"), ("status", None)):
         bad = copy.deepcopy(audit)
         bad[field] = value

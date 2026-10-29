@@ -39,6 +39,6 @@
   "slot_selected": false,
   "experiments_run": 0,
   "historical_s25_sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
-  "preflight": "evidence/s28_preflight.json",
-  "report": "knowledge/73_s28_review_2026-10-29.md"
+  "preflight": "evidence/s28_novelty_preflight.json",
+  "report": "knowledge/73_s28_novelty_review_2026-10-29.md"
 }
