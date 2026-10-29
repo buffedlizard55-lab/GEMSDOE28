@@ -57,7 +57,8 @@ def build_card() -> dict:
         "run_card_schema": "s29-run-card-v1",
         "run_id": "S29-LATTICE-DISPERSION-20261029",
         "branch": BRANCH,
-        "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        # Deterministic: the committed experiment finish time, so CI's "generated pages are current" diff is stable.
+        "generated_utc": ridge["generated_utc"],
         "experiments_run": 3,
         "experiment_cap": 3,
         "hypothesis": (
