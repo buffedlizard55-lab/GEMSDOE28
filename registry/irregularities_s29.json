@@ -1,57 +1,115 @@
 {
-  "generated": "2026-10-29",
-  "scope": "S29 disclosures; supplements registry/irregularities.json (byte-pinned, unchanged)",
-  "items": [
+  "generated": "2026-10-29T00:00:00Z",
+  "scope": "S29 irregularities from parallel branches on main (arena/9a3a5294 lattice lane, arena/df296ab5 checkout review) and from arena/fe0ed431 (hole-constrained TIF, holdout E1/E2). Kept separate from registry/irregularities.json, which is byte-pinned by an S23 audit binding.",
+  "irregularities": [
+    {
+      "id": "s29-leaderboard-anchor-conflict",
+      "date": "2026-10-29",
+      "severity": "conflict",
+      "issue": "Prompt anchors 0.4413 and 0.3195 are not on the public board read 2026-10-29 (ranks 1-47 checked). #1 is 0.4544; #26 is 0.3328. README S27b recorded #26 = 0.3195 at an earlier date.",
+      "action": "Record as dated observations. Do not use either prompt anchor as a fact. Re-read the board with a timestamp before any claim. See knowledge/75 section 4."
+    },
+    {
+      "id": "s29-score-string-0-2777-unsourced",
+      "date": "2026-10-29",
+      "severity": "unverified",
+      "issue": "The 0.2777 score string has no source in the repo. Only 0.2778 (GEMSDOE32, user-reported) appears in records.",
+      "action": "Treat 0.2777 as an unsourced variant. Require an organizer receipt for any score claim."
+    },
+    {
+      "id": "s29-allfinite-outside-footprint-variance",
+      "date": "2026-10-29",
+      "severity": "format-question",
+      "issue": "Of 52 historical GEMSDOE rasters, 27 have non-NaN values outside the footprint (all-finite variants write 0) and 25 have no nodata tag. The organizer text says nodata/NaN outside bounds. All 52 have in-range values inside the footprint.",
+      "action": "Flag as a conformance question. Do not claim it causes the portal error. Test only with a deliberate, approved upload. Evidence: evidence/s29_lattice_overlap_audit.json."
+    },
+    {
+      "id": "s29-lane-rule-non-discriminating",
+      "date": "2026-10-29",
+      "severity": "blocking",
+      "issue": "The literal 70%/3 px lane rule fails all 52 historical dotted rasters and random placements of the same budget (about 99.87% overlap with the calibration lattice). It does not discriminate between methods.",
+      "action": "User decision required: does the internal lane rule apply, and how? The official rules contain no uniqueness rule. Evidence: evidence/s29_lattice_overlap_audit.json."
+    },
+    {
+      "id": "s29-tcb-ranking-attribution-failed",
+      "date": "2026-10-29",
+      "severity": "negative",
+      "issue": "Random priority over the same ridge candidates and 5 px spacing scores the same as the TCB-ranked placement (0.083234 vs 0.083813 HOLDOUT-DTI). The holdout gain is not attributable to the TCB ranking.",
+      "action": "Do not promote. Run H-S29-A (surface-independent ridge null) before any geology claim. Evidence: evidence/s29_ridge_control_run_card.json."
+    },
+    {
+      "id": "s29-canary-numeric-auc-missing",
+      "date": "2026-10-29",
+      "severity": "limitation",
+      "issue": "The shared holdout canary API returns pass/fail at threshold 0.90 but not the numeric AUC, so the surface canary value is not recorded.",
+      "action": "Record pass/fail only. Add numeric AUC output to the shared template in a follow-up (fix once in the template)."
+    },
+    {
+      "id": "s29-branch-name-mismatch-s28-builder",
+      "date": "2026-10-29",
+      "severity": "process",
+      "issue": "README S28 header and scripts/build_s28_review.py refer to branch arena/09c38505-gemsdoe28. The active branch is arena/9a3a5294-gemsdoe28.",
+      "action": "S29 builder records the active branch. S28 panel retained unchanged. Reconcile branch names in a follow-up."
+    },
     {
       "id": "s29-verbatim-prompt-not-in-repo",
+      "date": "2026-10-29",
       "severity": "medium",
       "issue": "README carries an operational summary, not the verbatim multi-part prompt (README says so). The verbatim text cannot be reproduced from session memory.",
       "action": "User to paste the verbatim prompt if required. Until then the README states the gap."
     },
     {
       "id": "s29-comparable-best-null",
+      "date": "2026-10-29",
       "severity": "medium",
       "issue": "registry/current_session.json has frozen_protocol_comparable_best: null, so the slot rule has no recorded comparator. S29 used S28-TCB HOLDOUT-DTI 0.0553736 (same evaluator) by inference.",
       "action": "Record a frozen comparable best before any future slot decision. No slot was used in S29."
     },
     {
       "id": "s29-registry-039-absent-from-s25-novelty",
+      "date": "2026-10-29",
       "severity": "high",
       "issue": "evidence/s25_pcse_novelty.json (51 entries) does not contain the registry-039 spacing-five lattice, so the S25 UNIQUE label excluded the registered control.",
       "action": "S29 re-ran the literal gate against all 87 references including registry-039. Do not rely on the S25 uniqueness label."
     },
     {
       "id": "s29-leaderboard-0.4413-not-on-board",
+      "date": "2026-10-29",
       "severity": "medium",
       "issue": "Prompt cites 0.4413 as the current GEMSDOE high. Official public board fetched 2026-10-29 shows #1 xiaofanhu 0.4544 and no 0.4413 row. The 0.3195 anchor matches #47 kpomazi (another team).",
       "action": "Treat 0.4413 as UNVERIFIED and 0.3195 as another team's row, not a GEMSDOE result."
     },
     {
       "id": "s29-hole-constrained-candidate-conflicts-with-s23-guidance",
+      "date": "2026-10-29",
       "severity": "high",
       "issue": "S23 irregularity action said 'Do not ... optimize around holes'. S29 produced hole-constrained candidate B because the user requested a unique TIF and B passes the literal 70%/3 px rule. This conflicts with prior guidance.",
       "action": "B is labeled NOT OK TO SUBMIT (holdout negative, no slot). The user must decide whether such placements are acceptable before any future use."
     },
     {
       "id": "s29-lattice-control-not-budget-matched",
+      "date": "2026-10-29",
       "severity": "medium",
       "issue": "On gems-segment-pooled-v1 the registry-039 lattice (about 206k dots, unbudgeted) scores 0.2450, far above any budgeted candidate. The evaluator rewards dense emission; only random-K is budget-matched.",
       "action": "Report the lattice holdout as a dense control only. Do not use it as a benchmark for budgeted submissions."
     },
     {
       "id": "s29-candidate-gate-margin-thin",
+      "date": "2026-10-29",
       "severity": "low",
       "issue": "Candidate B passes with worst overlap 0.68 against the 0.70 limit, from a single reference (registry-039). A small change in placement could fail the rule.",
       "action": "Any future file must be re-gated automatically with scripts/s29_gate.py."
     },
     {
       "id": "s29-sample-submission-mirror-not-all-zero",
+      "date": "2026-10-29",
       "severity": "medium",
       "issue": "The mirrored data/sample_submission.tif is not the official all-zero sample. Its 60,988 ones coincide with label positives, and existing_faults.tif is hash-identical to labels.tif. It is an unauthenticated owner mirror.",
       "action": "Use only for grid and nodata checks. Never use it as truth or as a values template."
     },
     {
       "id": "s29-irregularities-ledger-byte-pinned",
+      "date": "2026-10-29",
       "severity": "medium",
       "issue": "The leaderboard and S29 disclosures were requested in registry/irregularities.json, but that file is byte-pinned by the S23 run card and its historical docs copies (tests/test_s23_evidence.py). Editing it breaks a historical record.",
       "action": "S29 disclosures live in registry/irregularities_s29.json. registry/irregularities.json is unchanged. Re-pinning requires an explicit decision about the historical record."
