@@ -1,0 +1,134 @@
+{
+  "schema": "gemsdoe28-checkout-review-v2",
+  "session": "S28",
+  "observed_utc": "2026-10-29T14:23:31.293156+00:00",
+  "branch": "arena/ff60f579-gemsdoe28",
+  "hypothesis": "Retained untried S26-TCB: two-sided directional texture-covariance boundary; not an assigned lane and not implemented.",
+  "mechanism": "Fault damage/alteration may change correlation length or anisotropy across a boundary despite weak amplitude contrast. Untested.",
+  "named_non_fault_process": "Depositional facies boundaries, intrusive contacts, survey-leveling seams and raster resampling.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "status": "NOT RUN: failed prerequisites",
+    "dti": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel": "triangular",
+    "kernel_m": 300
+  },
+  "prior_holdout_not_current": {
+    "label": "HOLDOUT-DTI",
+    "source": "evidence/s27_run_card.json and evidence/s27b_run_card.json; inherited S25 PCSE evidence, not a new experiment",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": 0.045036118291659814,
+    "ci95": [
+      0.03802875957795745,
+      0.052519021758899796
+    ],
+    "withheld_positives": 60988,
+    "control_dti": 0.06987475312496201,
+    "control_ci95": [
+      0.06668093988661791,
+      0.07314456035338139
+    ]
+  },
+  "feature_canaries": {
+    "status": "NOT RUN; no new candidate",
+    "results": null
+  },
+  "preflight": {
+    "status": "BLOCKED",
+    "checked_at_utc": "2026-10-29T14:21:20Z",
+    "failures": [
+      "Missing explicit assigned method lane and assignment source",
+      "Missing complete shared parallel-run registry",
+      "Literal registry overlap rule blocks the declared emission budget; do not tune around controls",
+      "Missing frozen current-best result under the same strict protocol",
+      "Wall-clock budget exhausted or start timestamp is in the future"
+    ],
+    "config": "registry/current_session.json",
+    "configuration_unchanged": true
+  },
+  "restoration": {
+    "scope": "Owner GitHub mirrors, not organizer-authenticated downloads",
+    "input_audit": "evidence/s28/input_audit.json",
+    "feature_cache": "data/prepared/features.npy",
+    "cache_sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "cache_missingness_passed": true,
+    "shared_assets_passed": true,
+    "shared_template_forked": false
+  },
+  "archive_audit": {
+    "status": "FAIL",
+    "check_count": 880,
+    "failures": [
+      "s22_archive_h40_vent_allfinite_outside_zero",
+      "s22_archive_h41_spring_allfinite_outside_zero"
+    ],
+    "source": "evidence/s28/download_audit.json",
+    "research_audit_fixed": "Reopen sibling-manifest raster and ZIP; matching hashes alone no longer exempt research artifacts from format audit.",
+    "old_artifacts_modified": false
+  },
+  "registry": {
+    "complete": false,
+    "current_surface_rank_correlation": null,
+    "current_final_dot_overlap_within_3px": null,
+    "status": "NOT RUN; no candidate",
+    "historical_nine_scope": "Inherited pinned nine-file geometry audit only; not a complete synchronized registry",
+    "historical_nine_evidence": "evidence/s23_focus_novelty.json",
+    "fresh_remote_head_scope": "evidence/s28/site_heads.json; metadata only, not refreshed raster bytes or score receipts"
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "NOT RUN ON NEW RASTER; no new raster exists",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null,
+    "single_band": null,
+    "historical_archive_audit": "evidence/s28/download_audit.json"
+  },
+  "submission_name": null,
+  "submission_note": "S28 audit only: restored inputs; repaired research-file validation and current reporting. No new TIFF or slot authorized.",
+  "estimated_leaderboard_score": null,
+  "score_estimate_status": "Unavailable; no file-bound organizer receipt or validated holdout-to-hidden-score calibration",
+  "new_tiff_generated": false,
+  "submission_ready": false,
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "submission_slots_spent": 0,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "verdict": "negative",
+  "limitations": [
+    "Method paragraph absent; cannot infer an exclusive parallel-run lane.",
+    "Complete synchronized registry and frozen strict comparable best unavailable.",
+    "Existing configured experiment clock expired; not reset.",
+    "Declared dot budget blocked by existing literal registry feasibility bound.",
+    "DrivenData/USGS/GDR/NLR hosts outside sandbox network allowlist; no current portal/receipt/leaderboard verification.",
+    "Cannot estimate hidden leaderboard score from catalogue holdout without calibration."
+  ],
+  "verification": {
+    "status": "Fresh software verification recorded separately in evidence/s28/software_verification.json; does not validate a model"
+  },
+  "evidence_sha256": {
+    "evidence/s28/preflight.json": "df83985ea2bcd0df36c5f01dc4aa6d3f625b16b468d2dccf454f92a09ee3439a",
+    "evidence/s28/input_audit.json": "035445512d6fe793359f176443598f22db375f49b35bcfaf77784fb27d34a2e0",
+    "evidence/s28/download_audit.json": "934e802be020a950fdc7c3d975fe5d322a4a0dcde7c997da65cd93906fc9fc62",
+    "evidence/s28/shared_assets.json": "61842624b62aaf8f3e8254cac5a1d6033d5806298119e706e786ec4b846aa8e2",
+    "evidence/s28/site_heads.json": "73f7c646185f60b56a8ecf151dce8d77022ac926acf5b275280d61d7e7ee3079",
+    "evidence/s28/official_reference_README.md": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239",
+    "evidence/s23_scorecard.json": "2100ca1aff6b5a50e2be9e961e319bf00f80c90a2da66aa78d2722deadbd9905",
+    "evidence/s23_focus_novelty.json": "f94011436e02974563b64e78ff1a409d54145cba3e3d3afaf33706c30623fe08",
+    "registry/s26_hypotheses.json": "baf7c3039aadf4e239b158f9b23d164ba40ee3c703322141650a46d1deca57fe",
+    "evidence/s28/official_reference_cells.json": "5c3ba3b33f61b484599f82e497da8e70be8cb0f40c331e83a4228db991a674ce",
+    "scripts/audit_research_downloads.py": "bf74c8544287ffeb520b4862e2adf780bcf0a1cb690c9581cff55c59bcda2950",
+    "scripts/verify_downloads.py": "1872233d1fc8b94017a81e2945bb335801860f2ea50a4dd1f29557d2404a2509",
+    "scripts/build_current_review.py": "e065dbb7472be10814a6c077089484f081b447d92de3e7c07eab8b788aa5eb95",
+    "scripts/check_run_preflight.py": "28ad826db7e060c38924df6fc75deb2e4d0f980ce69e8bb30b075af72d415576",
+    "registry/data_manifest.json": "cd31840ccff6ce889f342d54332401e6861342ae7e1462df2272c1236482d16a",
+    "registry/protocol_assets.json": "ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa"
+  }
+}

@@ -33,11 +33,14 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       run_card_sha256: ${{ steps.release-proof.outputs.sha256 }}
+      historical_card_sha256: ${{ steps.release-proof.outputs.historical_sha256 }}
     steps:
       - uses: actions/checkout@v4
       - name: Bind the deployed run card to checked-out bytes
         id: release-proof
-        run: echo "sha256=$(sha256sum docs/data/current_run_card.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "sha256=$(sha256sum docs/data/current_run_card.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+          echo "historical_sha256=$(sha256sum docs/data/current_run_card_2026-10-27.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
       - name: Prefer one Actions-based Pages deployment source
         id: pages-source
         continue-on-error: true
@@ -71,6 +74,7 @@ jobs:
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
           EXPECTED_CARD_SHA256: ${{ needs.build.outputs.run_card_sha256 }}
+          EXPECTED_HISTORICAL_CARD_SHA256: ${{ needs.build.outputs.historical_card_sha256 }}
         run: |
           python - <<'PY'
           import hashlib
@@ -81,7 +85,8 @@ jobs:
 
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           expected = os.environ['EXPECTED_CARD_SHA256']
-          paths = ['', 'executive-summary.html', 'docs/', 'docs/executive-summary.html',
+          paths = ['', 'executive-summary.html', 'current-review.html',
+                   'docs/', 'docs/executive-summary.html', 'docs/current-review.html',
                    'data/current_run_card.json',
                    'docs/data/current_run_card.json',
                    'data/current_run_card_2026-10-27.json',
@@ -98,7 +103,11 @@ jobs:
                           body = response.read()
                           assert response.status == 200, url
                       if path.endswith('.json'):
-                          assert hashlib.sha256(body).hexdigest() == expected, 'stale run-card bytes: ' + url
+                          # Generic current aliases advance; dated snapshots are immutable.
+                          expected_hash = (os.environ['EXPECTED_HISTORICAL_CARD_SHA256']
+                                           if path.endswith('current_run_card_2026-10-27.json')
+                                           else expected)
+                          assert hashlib.sha256(body).hexdigest() == expected_hash, 'stale run-card bytes: ' + url
                           card = json.loads(body)
                           assert card['submission_ready'] is False and card['slot_selected'] is False
                       else:

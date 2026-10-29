@@ -24,8 +24,9 @@ def panel(card: dict, report_href: str, card_href: str, artifact_prefix: str, re
     score = float(prior["dti"])
     ci = prior["ci95"]
     return f'''<section class="section callout-danger" id="{PANEL_ID}" aria-label="Current S27 submission decision" data-submission-ready="false">
-<p class="eyebrow">S27 · 2026-10-28 UTC · ACTIVE-BRANCH REVIEW · NO NEW TIFF</p>
-<h2>Current decision: NO FILE APPROVED · OK TO SUBMIT: NO</h2>
+<p class="eyebrow">HISTORICAL S27 · 2026-10-28 UTC · PRIOR CHECKOUT REVIEW · NO NEW TIFF</p>
+<h2>Historical decision: NO FILE APPROVED · OK TO SUBMIT: NO</h2>
+<p>This dated record describes its original checkout only. For the latest restored-input status, use <a href="{'docs/' if artifact_prefix.startswith('docs/') else ''}current-review.html">the current review</a>.</p>
 <p><strong>No new submission was generated.</strong> S26-TCB is only a ranked, untested hypothesis; preflight is blocked and exact-file validation fails closed. The archived S25 PCSE TIFF is <strong>research/audit only, not submission-ready</strong>; do not upload it.</p>
 <table><thead><tr><th>Gate</th><th>Current result</th></tr></thead><tbody>
 <tr><td>Current candidate HOLDOUT-DTI</td><td>Not run; no S27 candidate exists.</td></tr>

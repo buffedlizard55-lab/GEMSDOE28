@@ -1,3 +1,20 @@
+# S28 · 2026-10-29 UTC — READ FIRST EVERY SESSION
+
+## NO NEW TIFF · NO APPROVED DOWNLOAD · OK TO SUBMIT: NO
+
+**Current checkout:** `arena/ff60f579-gemsdoe28`. The requested unique, high-scoring new submission could not be produced without bypassing the supplied parallel-run protocol. No method paragraph is supplied; no exclusive lane, complete synchronized registry or frozen comparable best is configured. The old experiment clock is expired and the declared dot budget fails the existing registry bound. No geological experiment, canary, new TIFF, score estimate, upload or weekly slot was selected. **Do not resubmit an old file under a new name.**
+
+- **[Current executive summary + nine-site file table + submission guide](docs/current-review.html)** · [S28 report, official-source observations and next steps](knowledge/74_s28_validation_review_2026-10-29.md) · [single current JSON run card](evidence/s28_validation_run_card.json).
+- **Restored and verified:** all pinned owner-mirror inputs, shared-template assets, and the existing cached feature stack. They are integrity-verified, **not organizer-authenticated**. Older missing-input banners below describe their original checkouts, not today's state.
+- **Validation bug fixed:** S25 sibling-manifest research TIFFs/ZIPs now receive actual raster/ZIP inspection, not only a hash-registration check. Fresh archive audit: **880 checks, two historical failures** (H40 vent / H41 spring all-finite nodata conventions). Existing files are flagged and preserved byte-identically, not silently repaired or approved.
+- **Reporting bug fixed:** generic current run-card aliases now point to S28; immutable dated S23 cards remain unchanged. Pages checks current and historical digests separately.
+- **Evidence interpretation:** GEMSDOE32's supplied 0.2778 remains **USER-REPORTED / UNVERIFIED**, with no organizer receipt or calibrated hidden-score forecast. The S25 PCSE research TIFF is NOT unique under the shared-registry rule (parallel correction: all dots within 3 px of the registered lattice) and is not approved: **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0450 (95% CI 0.0380–0.0525; 60,988 withheld positives), below same-fold random-K **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0699 (95% CI 0.0667–0.0731; same positives). These are inherited results, not new S28 experiments.
+- The normalized full standing requirements and historical prompt archive below remain mandatory reading. **Maximize P(Win) · Own the Outcome.** Fresh software results: [verification record](evidence/s28/software_verification.json). Next: explicit lane, synchronized registry and same-protocol frozen best, then a valid new run budget before testing the retained TCB proposal.
+
+---
+
+## Historical and parallel-session records below — not current checkout authorization
+
 # S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO

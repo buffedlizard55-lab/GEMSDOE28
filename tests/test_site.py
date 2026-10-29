@@ -417,7 +417,8 @@ def test_build_metadata_and_canonical_card_do_not_authorize_historical_upload(ca
     current = json.loads((DOCS / 'data/current_run_card_2026-10-26.json').read_text())
     exact = json.loads((ROOT / 'evidence/s22_audit_run_card.json').read_text())
     assert current == exact and current['verdict'] == 'negative'
-    assert (DOCS / 'data/current_run_card.json').read_bytes() == (ROOT / 'evidence/s23_run_card.json').read_bytes()
+    assert (DOCS / 'data/current_run_card.json').read_bytes() == (ROOT / 'evidence/s28_validation_run_card.json').read_bytes()
+    assert (DOCS / 'data/current_run_card_2026-10-27.json').read_bytes() == (ROOT / 'evidence/s23_run_card.json').read_bytes()
     parallel = json.loads((ROOT / 'evidence/s18_run_card.json').read_text())
     assert parallel['experiments_run'] == 0 and parallel['raster_sha256'] is None
 

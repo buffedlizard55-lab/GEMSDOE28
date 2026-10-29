@@ -108,7 +108,8 @@ def test_concurrent_sign_historical_record_is_reconciled_without_overwriting():
     assert review["final_dots"]["surface_verified"] is False
     assert load("docs/data/s22_run_card.json") == historical
     assert load("docs/data/current_run_card_2026-10-26.json") == load("evidence/s22_audit_run_card.json")
-    assert load("docs/data/current_run_card.json") == load("evidence/s23_run_card.json")
+    assert load("docs/data/current_run_card.json") == load("evidence/s28_validation_run_card.json")
+    assert load("docs/data/current_run_card_2026-10-27.json") == load("evidence/s23_run_card.json")
     page = (ROOT / "docs/session22-result.html").read_text()
     assert "DO NOT SUBMIT" in page and "36,596" in page and "60,988" in page
     assert "empty canary object" in page and "95% CI not recorded" in page

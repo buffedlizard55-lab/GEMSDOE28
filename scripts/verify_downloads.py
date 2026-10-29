@@ -287,15 +287,18 @@ def main() -> int:
     # docs/downloads/manifest.json, whose bytes are hash-bound by the S23 evidence record.
     research_path = downloads_dir / "s25_research_manifest.json"
     if research_path.is_file():
-        research = json.loads(research_path.read_text())
-        for item in research.values():
-            if isinstance(item, dict) and isinstance(item.get("file"), str):
-                registered_names.add(item["file"])
-                if isinstance(item.get("zip"), str):
-                    registered_names.add(item["zip"])
-                target = downloads_dir / item["file"]
-                check(target.is_file() and sha256_file(target) == item.get("sha256_tif"),
-                      "s25_research_sha256_matches_registry", item["file"])
+        # A matching hash establishes identity, not valid grid/range/ZIP content.
+        try:
+            from scripts.audit_research_downloads import audit_research
+        except ModuleNotFoundError:
+            from audit_research_downloads import audit_research
+        research_checks, research_names = audit_research(
+            research_path, downloads_dir, template_signature, footprint,
+            catalogue if label_grid_ok else None,
+        )
+        registered_names.update(research_names)
+        for row in research_checks:
+            check(row["pass"], row["check"], row["detail"])
     unregistered = sorted(set(names) - registered_names)
     check(not unregistered, "all_tifs_registered_for_audit",
           "Unregistered TIFFs (not fully audited): " + ", ".join(unregistered))

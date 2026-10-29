@@ -1,0 +1,68 @@
+{
+  "observed_utc": "2026-10-29T14:27:45.010772+00:00",
+  "scope": "Software and local HTTP checks only; not a scientific experiment or portal submission",
+  "passes_completed": 3,
+  "pytest": {
+    "command": ".venv/bin/python -m pytest -q",
+    "exit_code": 0,
+    "summary": "710 passed, 34 warnings, 9 subtests passed in 26.09s",
+    "skipped": 0
+  },
+  "ruff": {
+    "command": ".venv/bin/ruff check src scripts tests",
+    "exit_code": 0,
+    "result": "All checks passed"
+  },
+  "offline_build": {
+    "result": "PASS",
+    "repeat_bytes_identical": true,
+    "sha256": {
+      "docs/index.html": "fed354a983004f66070e04ea360c182aaa533a193d47521add62c73c3fd3d5c6",
+      "docs/executive-summary.html": "ddbd456d0bfdecc70b265c637e77da1bc325c5ff4c308e324d90721877a7ee69",
+      "docs/current-review.html": "5708cf20376e99392438b20152c092d33c06654606bc5c10671b9dd385dc863e",
+      "docs/data/current_run_card.json": "b2756f538e34a8c7c3fdd50be9a4dd9993f948d6a78ed966982e375a4d074650",
+      "index.html": "b004d7d69b5275c8908d359b5f271cf530e20b4ba02d0c9f6e293b5dc1ffe636",
+      "executive-summary.html": "1c5062700189fc4bcc50d28908eefb990a166ddbbf13ccb1621505fcaccb98e7",
+      "data/current_run_card.json": "b2756f538e34a8c7c3fdd50be9a4dd9993f948d6a78ed966982e375a4d074650",
+      "docs/data/current_run_card_2026-10-27.json": "d373768a12d9df61c857caf997bfde173037d151f233c93823c185f3ecad89bd"
+    }
+  },
+  "local_http": [
+    {
+      "route": "/",
+      "status": 200,
+      "exact_bytes_match": true
+    },
+    {
+      "route": "/executive-summary.html",
+      "status": 200,
+      "exact_bytes_match": true
+    },
+    {
+      "route": "/current-review.html",
+      "status": 200,
+      "exact_bytes_match": true
+    },
+    {
+      "route": "/data/current_run_card.json",
+      "status": 200,
+      "exact_bytes_match": true
+    }
+  ],
+  "visual_browser_test": false,
+  "archive_audit": {
+    "exit_code": 1,
+    "status": "FAIL as expected",
+    "checks": 880,
+    "historical_failures": 2,
+    "new_research_checks_passed": true
+  },
+  "preflight": {
+    "exit_code": 1,
+    "status": "BLOCKED as expected",
+    "remaining_failures": 5
+  },
+  "experiments_run": 0,
+  "submission_ready": false,
+  "slot_selected": false
+}
