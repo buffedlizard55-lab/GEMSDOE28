@@ -37,14 +37,15 @@
         "Confirmed exact active branch and no unrelated/uncommitted changes before this review began."
       ],
       "additional_checks": [
-        "Targeted S29 pytest suite: 4 passed in an isolated validation venv.",
+        "Full repository pytest suite: 724 passed, 7 skipped, 34 warnings, 9 subtests passed in an isolated validation venv. The seven skips require missing raster/external input files.",
         "Full repository Ruff check (`ruff check src scripts tests`): all checks passed in the isolated validation venv.",
+        "Targeted S29 tests: 4 passed as part of the full suite.",
         "Static local-link audit: no missing relative links on the S29 page or four entry/executive pages.",
         "S29 overlay rebuilt twice; output hashes matched byte-for-byte."
       ],
       "not_run": [
-        "Full repository pytest suite: not run because geospatial/ML dependencies and prepared input rasters are absent in this checkout.",
         "Geological holdout and feature canaries: not run; prerequisites and explicit lane are absent.",
+        "Experiment-level shared evaluator preflight: not run because cached features/shared template are absent and the configured experiment authorization is expired.",
         "Official external source reachability, DrivenData leaderboard, submission portal receipt, and weekly cap: not queried."
       ]
     }

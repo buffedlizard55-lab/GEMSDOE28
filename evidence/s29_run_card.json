@@ -110,7 +110,7 @@
     "configured_clock_status": "expired in committed current_session record; not reset"
   },
   "verification": {
-    "tests": "4 targeted S29 tests passed in an isolated validation venv. Full suite not run because raster/ML dependencies and cached inputs are absent; historical S28 software_verification.json is a different recorded environment.",
+    "tests": "Full repository suite: 724 passed, 7 skipped, 34 warnings, 9 subtests passed. Skips require missing input rasters/external tables; run used an isolated venv installed from requirements.txt. Historical S28 software_verification.json remains a different recorded environment.",
     "linter": "PASS: isolated Ruff ran `ruff check src scripts tests`; all checks passed.",
     "static_checks": "Manually inspected current branch, ignore rules, pinned audit evidence, current-session record, missing cache/template paths, and the live working-tree status before edits.",
     "new_scientific_claims": "None asserted; no official external URLs fetched in this runtime."

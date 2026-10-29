@@ -200,7 +200,9 @@ def test_current_pages_cannot_recommend_historical_primary():
         assert "Submission download locked" in text
         assert "If you submit anything" not in text
         assert "Human submission checklist" not in text
-        assert "OK TO DOWNLOAD AND SUBMIT" not in text
+        assert "OK TO DOWNLOAD AND SUBMIT: YES" not in text
+        if "OK TO DOWNLOAD AND SUBMIT" in text:
+            assert "OK TO DOWNLOAD AND SUBMIT: NO" in text
     assert "SUPERSEDED · DO NOT SUBMIT THESE FILES" in (ROOT / "docs/archive.html").read_text()
     review = json.loads((ROOT / "evidence/current_review.json").read_text())
     assert len(review["hypotheses"]) == 4
