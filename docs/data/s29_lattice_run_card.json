@@ -1,0 +1,128 @@
+{
+  "run_card_schema": "s29-run-card-v1",
+  "run_id": "S29-LATTICE-DISPERSION-20261029",
+  "branch": "arena/9a3a5294-gemsdoe28",
+  "generated_utc": "2026-10-29T16:57:58Z",
+  "experiments_run": 3,
+  "experiment_cap": 3,
+  "hypothesis": "Dispersed, ridge-aligned placement of the S26/S28 TCB surface, with a 5 px minimum spacing, scores above random and lattice controls on the spatially blocked holdout.",
+  "mechanism": "Holdout DTI rewards dispersion. Experiment 3 indicates the gain comes from dots along the ridge network with spacing, not from the TCB ranking (random priority scores the same).",
+  "named_non_fault_mimic": "The TCB surface's own ridge network (a texture mimic; not verified as non-fault geology); and the geology-blind calibration lattice (spacing-only mimic).",
+  "verdict": "negative",
+  "verdict_reason": "Holdout-positive versus controls, but the TCB ranking is not shown to add anything over random priority on the same ridge candidates, and the final placement duplicates the calibration lattice (100% within 3 px). Not promoted.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": 0.08381252085317022,
+    "ci95": [
+      0.07978802043533167,
+      0.08781474445673523
+    ],
+    "withheld_positives": 60988
+  },
+  "controls": {
+    "random_k": {
+      "label": "HOLDOUT-DTI",
+      "dti": 0.06740599054785862,
+      "ci95": [
+        0.0643965146556148,
+        0.0703079936084281
+      ]
+    },
+    "lattice_subset": {
+      "label": "HOLDOUT-DTI",
+      "dti": 0.07483612428380033,
+      "ci95": [
+        0.0717337811236531,
+        0.07785003892086617
+      ]
+    },
+    "visible_proximity": {
+      "label": "HOLDOUT-DTI",
+      "dti": 0.018368764975005322,
+      "ci95": [
+        0.010457792532223644,
+        0.02747076600943491
+      ]
+    },
+    "ridge_random_priority": {
+      "label": "HOLDOUT-DTI",
+      "dti": 0.08323444337689817,
+      "ci95": [
+        0.07998839219861635,
+        0.08645476719285172
+      ]
+    }
+  },
+  "paired": {
+    "dispersed_tcb_vs_random_k": {
+      "paired_delta_dti": 0.016406530305311598,
+      "ci95": [
+        0.01204028267336565,
+        0.02089441563366668
+      ],
+      "fold_wins": 4
+    },
+    "dispersed_tcb_vs_lattice_subset": {
+      "paired_delta_dti": 0.008976396569369882,
+      "ci95": [
+        0.004006078686026057,
+        0.013917194236352218
+      ],
+      "fold_wins": 4
+    },
+    "lattice_subset_vs_random_k": {
+      "paired_delta_dti": 0.007430133735941716,
+      "ci95": [
+        0.003573704718776348,
+        0.011602858878342965
+      ],
+      "fold_wins": 4
+    },
+    "dispersed_tcb_minus_ridge_random_priority_unpaired": {
+      "value": 0.0005780774762720459,
+      "note": "Unpaired difference of two DTI values. Paired CI not computed (re-running would exceed the 3-experiment cap). Not established."
+    }
+  },
+  "correlation_overlap": {
+    "lane_threshold": 0.7,
+    "lane_radius_px": 3,
+    "candidate_fraction_within_3px_of_lattice": 1.0,
+    "candidate_binary_pearson_vs_lattice": 0.0002713708163830744,
+    "candidate_duplicate": true,
+    "lattice_footprint_coverage_within_3px": 0.9987132726822701,
+    "random_placement_overlap_mean": {
+      "10000": 0.99863,
+      "22163": 0.9986960249063754,
+      "37654": 0.9986774313485951
+    },
+    "historical_rasters_lane_duplicate": "52/52"
+  },
+  "raster_sha256": null,
+  "raster_serialized": false,
+  "validator_output": "Not run: no candidate raster was serialized. Historical format gates: see evidence/s29_lattice_overlap_audit.json.",
+  "leakage_canary": {
+    "passed": true,
+    "threshold": 0.9,
+    "numeric_auc": "not recorded by the canary API"
+  },
+  "submission_name": null,
+  "submission_note": null,
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "new_tiff_generated": false,
+  "leaderboard_estimate": null,
+  "restore_audit": "PASS: local hashes, grid, band order, and prepared matrix verified",
+  "evidence": [
+    "evidence/restore_audit.json",
+    "evidence/s29_dispersion_run_card.json",
+    "evidence/s29_lattice_overlap_audit.json",
+    "evidence/s29_null_controls.json",
+    "evidence/s29_ridge_control_run_card.json",
+    "evidence/s29_lattice_run_card.json",
+    "scripts/run_s29_null_controls.py",
+    "scripts/run_s29_dispersion.py",
+    "scripts/run_s29_ridge_control.py",
+    "scripts/audit_lattice_overlap.py"
+  ]
+}

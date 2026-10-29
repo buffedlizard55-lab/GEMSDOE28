@@ -40,7 +40,7 @@
 
 # S29 · 2026-10-29 UTC — parallel checkout review (arena/df296ab5-gemsdoe28) · READ FIRST EVERY SESSION
 
-> **Two S29 records exist on `main`.** This block (branch `arena/fe0ed431-gemsdoe28`) generated a unique GeoTIFF and records it as NOT OK to submit. The parallel S29 checkout review below (branch `arena/df296ab5-gemsdoe28`) generated no TIFF because its gates were unmet. Both records agree on the outcome that matters: **OK TO SUBMIT: NO**, and no weekly slot was used. Their run cards are separate: `evidence/s29_candidate_run_card.json` (this branch) and `evidence/s29_run_card.json` (parallel branch).
+> **Three S29 records exist on `main`** (this branch plus parallel branches `arena/df296ab5-gemsdoe28` and `arena/9a3a5294-gemsdoe28`). This block (branch `arena/fe0ed431-gemsdoe28`) generated a unique GeoTIFF and records it as NOT OK to submit. The parallel S29 checkout review below (branch `arena/df296ab5-gemsdoe28`) generated no TIFF because its gates were unmet; the lattice-lane block after it (branch `arena/9a3a5294-gemsdoe28`) is a third parallel record. All three agree on the outcome that matters: **OK TO SUBMIT: NO**. This branch used no weekly slot. Their run cards are separate: `evidence/s29_candidate_run_card.json` (this branch) and `evidence/s29_run_card.json` (parallel branch).
 
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
@@ -58,6 +58,38 @@
 **Parallel S29 evidence merged to main (separate checkout; not independently reproduced on this branch):** [parallel run card](evidence/s29_review_run_card.json) records a 2026-10-29 public leaderboard observation and the prior checkout's input/test/format checks. Treat its live-board figures as time-bounded public-page observations, not submission-page receipts or scores for any file in this repo. The parallel audit records 880 format checks with two historical nodata failures. This branch did not access DrivenData or restore those ignored input files; it does not inherit the other checkout's runtime, byte restoration, or test result as a fresh local result.
 
 **Standing prompt—read before each session.** Maximize P(Win) and Own the Outcome. The goal is an auditable system that researches the DOE GEMS fault-detection problem, maintains a source-linked current feed, and produces a genuinely unique single-band GeoTIFF only when every scientific, novelty, format and selector gate passes. For every session: (1) read this S29 decision, the standing requirements below, current run card, and current registry; (2) before implementation, rank 3–5 genuinely untested geological hypotheses, naming layers, target physical signature/transform, why a catalogue-missing fault could be detected, difference from implemented work, non-fault mimic, implementation cost, and whether required official free data are actually obtainable; (3) honor the explicit single method lane and stop on surface |Spearman| >0.90 or >70% of dots within 3 px of any registry raster; test both before placement and after final placement; (4) reuse the hash-pinned shared cached features, evaluator and writer, never fork them; hide whole fault segments with a buffer, derive catalogue features from visible faults only, mask visible faults pixel-exactly, and report pooled DTI at α=0.2, β=0.8 with the 300 m triangular kernel and spatial 95% CI; (5) test each feature alone for leakage (AUC >0.90 is leakage until disproven); (6) stay within three experiments/two hours and never spend/select a weekly submission slot inside a research run; (7) distinguish HOLDOUT-DTI, ORGANIZER-CONFIRMED (receipt), USER-REPORTED and MODEL estimates; projections are never scores; (8) make the automated submission page state clearly which exact file is approved, include a unique name and ≤140-character note, and validate footprint NaNs, [0,1] values, CRS, shape, transform and single band; (9) finish with one JSON run card. A negative result is a deliverable. Do not claim human inspection is required or substitute it for the automated project gates. Historical scores, links and raw data supplied by a user are not verified merely by being copied into this repository.
+
+---
+
+# S29 · 2026-10-29 UTC — lattice lane experiments (parallel branch arena/9a3a5294-gemsdoe28)
+
+## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
+
+**Branch:** `arena/9a3a5294-gemsdoe28` (from `main` at `a1c0e18`). Full report: [`knowledge/76_s29_lattice_experiments_2026-10-29.md`](knowledge/76_s29_lattice_experiments_2026-10-29.md). Canonical run card: [`evidence/s29_lattice_run_card.json`](evidence/s29_lattice_run_card.json). Executive page: [`docs/s29-lattice-review.html`](docs/s29-lattice-review.html).
+
+**Experiments (3 of 3 cap; HOLDOUT-DTI, `gems-segment-pooled-v1`, 60,988 withheld positives; never a leaderboard estimate):**
+- **E1 controls** (`scripts/run_s29_null_controls.py`): random-K 0.067406 [0.064397–0.070308]; geology-blind calibration lattice 0.074836 [0.071734–0.077850], paired Δ +0.007430 (4/4 folds); visible-proximity placement 0.018369 (Δ −0.049037, 0/4).
+- **E2 dispersed TCB** (`scripts/run_s29_dispersion.py`, 5 px minimum spacing): 0.083813 [0.079788–0.087815]; Δ vs random-K +0.016407 (4/4), Δ vs lattice +0.008976 (4/4). **Global placement overlaps the lattice 100% within 3 px → lane duplicate.** Auto-verdict "promote" overridden to negative (see card).
+- **E3 attribution** (`scripts/run_s29_ridge_control.py`): same ridge candidates and spacing with random priority = 0.083234 [0.079988–0.086455]. The TCB ranking is therefore **not shown to add** to the gain (unpaired +0.000579; not established).
+
+**Uniqueness** (`scripts/audit_lattice_overlap.py` → `evidence/s29_lattice_overlap_audit.json`): the calibration lattice covers 99.8713% of the footprint within 3 px; random placements of the same budget overlap at about 99.87%; **all 52 historical dotted GeoTIFFs fail the 70%/3 px lane rule** (99.29–100%). The literal rule does not discriminate between methods. The official rules contain no uniqueness or duplicate-submission rule (ORGANIZER-CONFIRMED; NLR rules PDF, chunks 0–6 read).
+
+**Restore audit** (`scripts/verify_restored_inputs.py` → `evidence/restore_audit.json`): PASS. 17 owner-mirrored, hash-pinned inputs verified locally; grid and bands match; not organizer-authenticated.
+
+**Leaderboard (public board read 2026-10-29, ORGANIZER-CONFIRMED):** #1 0.4544; #26 0.3328. The prompt's 0.4413 and 0.3195 were not found in ranks 1–47. Irregularity recorded.
+
+**GEMSDOE32 (0.2778, USER-REPORTED / UNVERIFIED):** repo records GEMSDOE32 = GEMSDOE31 solo minus 2,545 catalogue-adjacent dots. Causation not proven. 0.2777 has no source in the repo. Portal error `Predicted values must be in range [0, 1]`: root cause unknown; not reproduced by the local in-range check. Format variance (all-finite files write 0 outside the footprint; 25 lack a nodata tag) is flagged as a conformance question.
+
+**Decision needed from the user:** whether the internal 70%/3 px lane rule applies, and how. Until decided, no TIFF is serialized. Even if the rule is relaxed, the holdout gain must be attributed by a surface-independent ridge null first (H-S29-A, next step).
+
+### User requirements carried forward (from session memory)
+- Highest urgency: a unique, downloadable GeoTIFF valid in [0,1], unique name, note ≤140 characters, with an obvious download/submit status. Current status: **not generated** (lane duplicate; attribution failed); decision required (above).
+- Parallel-run protocol: single method lane; duplicate if Spearman >0.90 or >70% of dots within 3 px of any registry raster; check surface before placement and final dots; shared cached feature stack, `evaluate_holdout.py`, `submission_writer.py`; hide-and-recover whole fault segments with buffer; pooled DTI α=0.2, β=0.8, 300 m triangular kernel; fix shared-tool defects once in the template; no private fork.
+- Label every number HOLDOUT-DTI (evaluator version, withheld positives, 95% CI) or ORGANIZER-CONFIRMED (submission-page receipt). Projections are never written as scores. Leakage canary AUC >0.90 means leakage until proven otherwise.
+- Budget: stop after 3 experiments or 2 hours. Do not select or upload submissions (selector is separate). Do not automate DrivenData access or login; use free official sources or disclosed, hash-pinned owner mirrors.
+- Run card JSON at end: hypothesis, mechanism, named non-fault mimic, holdout DTI + CI, correlation/overlap, raster SHA-256, validator output, submission name and note (≤140 chars), verdict promote/negative. Present: `evidence/s29_lattice_run_card.json`.
+- Must include: 0.2777/0.2778 explanation; 0.4413 vs 0.3195 discrepancy; portal error `Predicted values must be in range [0, 1]`. Code PR merge is not a competition submission.
+- The verbatim full prompt was not in the session context. Paste it here to store it verbatim.
 
 ---
 

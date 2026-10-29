@@ -1,0 +1,103 @@
+{
+  "run_card_schema": "s29-null-controls-v1",
+  "run_id": "S29-NULL-CONTROLS-20261029",
+  "started_at_utc": "2026-10-29T16:52:32Z",
+  "generated_utc": "2026-10-29T16:53:34Z",
+  "purpose": "Diagnostic: does the shared holdout separate geology from budget-matched geology-blind placement?",
+  "budget_dots_per_fold": 37654,
+  "buffer_px": 15,
+  "controls": {
+    "random_k": {
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "gems-segment-pooled-v1",
+      "dti": 0.06740599054785862,
+      "ci95": [
+        0.0643965146556148,
+        0.0703079936084281
+      ],
+      "withheld_positives": 60988,
+      "n_emitted": 38080,
+      "recall_w": 0.0628597050320412
+    },
+    "lattice_subset": {
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "gems-segment-pooled-v1",
+      "dti": 0.07483612428380033,
+      "ci95": [
+        0.0717337811236531,
+        0.07785003892086617
+      ],
+      "withheld_positives": 60988,
+      "n_emitted": 37945,
+      "recall_w": 0.06984378498872397
+    },
+    "visible_proximity": {
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "gems-segment-pooled-v1",
+      "dti": 0.018368764975005322,
+      "ci95": [
+        0.010457792532223644,
+        0.02747076600943491
+      ],
+      "withheld_positives": 60988,
+      "n_emitted": 38080,
+      "recall_w": 0.016857248385224576
+    }
+  },
+  "paired": {
+    "lattice_subset_vs_random_k": {
+      "candidate_dti": 0.07483612428380033,
+      "baseline_dti": 0.06740599054785862,
+      "paired_delta_dti": 0.007430133735941716,
+      "paired_delta_ci95": [
+        0.003573704718776348,
+        0.011602858878342965
+      ],
+      "fold_wins": 4,
+      "n_folds": 4
+    },
+    "visible_proximity_vs_random_k": {
+      "candidate_dti": 0.018368764975005322,
+      "baseline_dti": 0.06740599054785862,
+      "paired_delta_dti": -0.049037225572853296,
+      "paired_delta_ci95": [
+        -0.05705941719796898,
+        -0.03958439038887539
+      ],
+      "fold_wins": 0,
+      "n_folds": 4
+    }
+  },
+  "structural_checks": {
+    "min_distance_visible_to_scored_quadrant_px": [
+      16.0,
+      16.0,
+      16.0,
+      16.0
+    ],
+    "scored_dots_per_fold_random_k": [
+      8488,
+      10493,
+      10564,
+      8535
+    ],
+    "scored_dots_per_fold_visible_proximity": [
+      8488,
+      10493,
+      10564,
+      8535
+    ]
+  },
+  "inputs": {
+    "calibration_lattice_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "lattice_dots_in_footprint": 206895,
+    "catalogue_positive_pixels": 60988
+  },
+  "uses_geology_layers": false,
+  "leaderboard_estimate": null,
+  "new_tiff_generated": false,
+  "slot_selected": false,
+  "experiments_run_this_session": 1,
+  "experiment_cap": 3,
+  "verdict": "diagnostic"
+}

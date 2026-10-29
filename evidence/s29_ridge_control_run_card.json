@@ -1,0 +1,42 @@
+{
+  "run_card_schema": "s29-ridge-control-v1",
+  "run_id": "S29-RIDGE-RANDOM-PRIORITY-20261029",
+  "started_at_utc": "2026-10-29T16:56:20Z",
+  "generated_utc": "2026-10-29T16:57:58Z",
+  "question": "Is the dispersed-TCB gain due to TCB ranking, or to ridge geometry plus spacing?",
+  "control": "Same ridge-NMS candidates and R_MIN=5 px spacing; random seeded priority replaces TCB ranking.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": 0.08323444337689817,
+    "ci95": [
+      0.07998839219861635,
+      0.08645476719285172
+    ],
+    "withheld_positives": 60988
+  },
+  "reference_dispersed_tcb_holdout_dti": 0.08381252085317022,
+  "reference_random_k_holdout_dti": 0.06740599054785862,
+  "reference_lattice_subset_holdout_dti": 0.07483612428380033,
+  "paired_vs_random_k": {
+    "paired_delta_dti": 0.015828452829039552,
+    "ci95": [
+      0.011771956647613019,
+      0.01992455289716556
+    ],
+    "fold_wins": 4
+  },
+  "paired_vs_lattice_subset": {
+    "paired_delta_dti": 0.008398319093097836,
+    "ci95": [
+      0.004044788349243258,
+      0.012948312100722623
+    ],
+    "fold_wins": 4
+  },
+  "new_tiff_generated": false,
+  "slot_selected": false,
+  "experiments_run_this_session": 3,
+  "experiment_cap": 3,
+  "verdict": "diagnostic"
+}
