@@ -1,11 +1,11 @@
 {
-  "observed_utc": "2026-10-29T14:30:00.723342+00:00",
+  "observed_utc": "2026-10-29T14:41:44.621535+00:00",
   "scope": "Software and local HTTP checks only; not a scientific experiment or portal submission",
   "passes_completed": 3,
   "pytest": {
     "command": ".venv/bin/python -m pytest -q",
     "exit_code": 0,
-    "summary": "714 passed, 34 warnings, 9 subtests passed in 25.87s",
+    "summary": "720 passed, 34 warnings, 9 subtests passed in 27.33s",
     "skipped": 0
   },
   "ruff": {
@@ -17,14 +17,15 @@
     "result": "PASS",
     "repeat_bytes_identical": true,
     "sha256": {
-      "docs/index.html": "4dcc556c6ead75651ce1ea9ce48b82229c201dbd84cf0ce5da133ef2f4cce64d",
-      "docs/executive-summary.html": "c7dedea83ee970c213c7dd47f560f93651f3ed64567950c155504256405d91e1",
+      "docs/index.html": "171d83bbfa249af772ef22e603e193708d9c36ee8ebfba949c720a1de2a7a70e",
+      "docs/executive-summary.html": "587a825222691c976c806e49491818b590f70661c2674f60f498307bd1316c11",
       "docs/current-review.html": "b02a467c67a3e3895a7c71738f38573081773fb9da5d0f9559b00ac2a73eb186",
-      "docs/data/current_run_card.json": "baeeb8cffac7d5c69aca29b34042e5b33e2ac263e73b29c00c05563e059f06d6",
-      "index.html": "258910bcfa24c30e63415fa4a699bfa282538a6e88d7595e7eaaa8f704e8cd7c",
-      "executive-summary.html": "da5d34a400d5c2463e070200c335e283ad613e847355b28ca4eabcb476ff6be2",
-      "data/current_run_card.json": "baeeb8cffac7d5c69aca29b34042e5b33e2ac263e73b29c00c05563e059f06d6",
-      "docs/data/current_run_card_2026-10-27.json": "d373768a12d9df61c857caf997bfde173037d151f233c93823c185f3ecad89bd"
+      "docs/data/current_run_card.json": "8163eb8d7277c921fa431fbafba9f35a6c28c051570cddf9ca8619711fb59f09",
+      "index.html": "eb9cb4e8fcb40f880b236aceb677fa0ea017a2d75be0f786f7b92188988d5db2",
+      "executive-summary.html": "a730ce745d0b10231f13b4ca671bc4877672113c99e3f6e43edcd904ea7b1742",
+      "data/current_run_card.json": "8163eb8d7277c921fa431fbafba9f35a6c28c051570cddf9ca8619711fb59f09",
+      "docs/data/current_run_card_2026-10-27.json": "d373768a12d9df61c857caf997bfde173037d151f233c93823c185f3ecad89bd",
+      "current-review.html": "c4302de91f31e1ed9aae9d1d39b64f066f27ef415d9c935ec1e883eb7d021564"
     }
   },
   "local_http": [
@@ -74,5 +75,17 @@
     ],
     "this_review_card": "evidence/s28_validation_run_card.json",
     "historical_duplicate_reproduced": true
+  },
+  "root_and_docs_route_static_regression": "PASS: appropriate asset/card paths for both legacy repository-root and Actions docs-root publishing",
+  "deployment_observation": {
+    "source": "GitHub Pages API",
+    "build_type": "legacy",
+    "source_branch": "main",
+    "source_path": "/",
+    "update_build_type_http_status": 403,
+    "detailed_runner_logs_available": false,
+    "deployment_step": "passed on main run 40892857668",
+    "published_verification": "failed on main run 40892857668 before root-route compatibility fix",
+    "post_fix_published_verification": "not yet run in this recorded pre-merge snapshot"
   }
 }

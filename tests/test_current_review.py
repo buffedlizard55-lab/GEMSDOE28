@@ -98,3 +98,20 @@ def test_renderer_rejects_evidence_that_contradicts_its_narrative(defect):
         scores["sites"][0] = scores["sites"][1]
     with pytest.raises(ValueError):
         build_current_review.render(card, scores, hypotheses)
+
+
+def test_standalone_review_supports_both_pages_source_modes():
+    # Actions stages docs/ as the public root. Legacy Pages may serve the repo
+    # root instead if its administrative source cannot be changed by the token.
+    root = (ROOT / "current-review.html").read_text()
+    docs = (ROOT / "docs/current-review.html").read_text()
+    for page in (root, docs):
+        assert 'id="current-checkout-decision"' in page
+        assert 'data-submission-ready="false"' in page
+        assert "Submission download locked" in page
+    assert 'href="docs/assets/site.css"' in root
+    assert 'href="docs/data/current_run_card.json"' in root
+    assert 'href="assets/site.css"' in docs
+    assert 'href="data/current_run_card.json"' in docs
+    workflow = (ROOT / ".github/workflows/pages.yml").read_text()
+    assert "- 'current-review.html'" in workflow

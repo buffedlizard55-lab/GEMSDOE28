@@ -106,6 +106,12 @@ def main():
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>Current executive summary | GEMSDOE28</title>
 <link rel="stylesheet" href="assets/site.css"></head><body><header class="site-header"><nav aria-label="Main navigation"><a href="index.html">GEMSDOE28 overview</a> · <a href="executive-summary.html">Executive summary</a></nav></header><main>{docs_section}</main></body></html>'''
     (ROOT / "docs/current-review.html").write_text(standalone)
+    # Pages may still use the legacy repository-root source when the integration
+    # cannot change its administrative build_type. Support that route too; the
+    # Actions artifact continues to stage docs/ as its root without this alias.
+    root_standalone = standalone.replace('href="assets/site.css"', 'href="docs/assets/site.css"')
+    root_standalone = root_standalone.replace(docs_section, root_section)
+    (ROOT / "current-review.html").write_text(root_standalone)
     # Advance only generic aliases; dated cards retain the exact historical bytes.
     for filename in ("docs/data/current_run_card.json", "data/current_run_card.json"):
         (ROOT / filename).write_bytes(card_bytes)

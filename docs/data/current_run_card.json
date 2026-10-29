@@ -136,7 +136,7 @@
     "evidence/s28/official_reference_cells.json": "5c3ba3b33f61b484599f82e497da8e70be8cb0f40c331e83a4228db991a674ce",
     "scripts/audit_research_downloads.py": "bf74c8544287ffeb520b4862e2adf780bcf0a1cb690c9581cff55c59bcda2950",
     "scripts/verify_downloads.py": "1872233d1fc8b94017a81e2945bb335801860f2ea50a4dd1f29557d2404a2509",
-    "scripts/build_current_review.py": "488e554af95700518c076997fa9c47be5ec07d77a8d197eea0f43ca9620272cd",
+    "scripts/build_current_review.py": "7b77e5f39fd069b6cbacb7b854516a538594586eafe8d05faa430c7f67041b5c",
     "scripts/check_run_preflight.py": "28ad826db7e060c38924df6fc75deb2e4d0f980ce69e8bb30b075af72d415576",
     "registry/data_manifest.json": "cd31840ccff6ce889f342d54332401e6861342ae7e1462df2272c1236482d16a",
     "registry/protocol_assets.json": "ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa",
