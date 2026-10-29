@@ -133,6 +133,9 @@
     "prior_configured_session": "registry/current_session.json",
     "prior_preflight": "evidence/s28/preflight.json",
     "prior_S28_negative_result": "evidence/s28_tcb_run_card.json",
-    "historical_software_verification_not_current": "evidence/s28/software_verification.json"
-  }
+    "historical_software_verification_not_current": "evidence/s28/software_verification.json",
+    "parallel_S29_review_not_reproduced_here": "evidence/s29_review_run_card.json",
+    "parallel_S29_format_audit_not_reproduced_here": "evidence/s29_download_audit.json"
+  },
+  "parallel_observation_note": "origin/main advanced via PR #84 while this review branch was open. Its public-board and runtime observations are preserved as distinct checkout evidence, not reproduced or reclassified as submission-page receipts here."
 }
