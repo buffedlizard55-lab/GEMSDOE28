@@ -339,6 +339,14 @@
         "fetch-failed": 2,
         "observed": 16
       }
+    },
+    {
+      "checked_at_utc": "2026-10-29T13:01:23Z",
+      "source_count": 18,
+      "status_counts": {
+        "fetch-failed": 2,
+        "observed": 16
+      }
     }
   ]
 }
