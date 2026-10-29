@@ -1,0 +1,14 @@
+Fetching training_features → /home/user/GEMSDOE28/data/training_features.tif
+  assembled part 1/5: data/bridge/gems-geodawn-numerical-features.tif.part-000
+  assembled part 2/5: data/bridge/gems-geodawn-numerical-features.tif.part-001
+  assembled part 3/5: data/bridge/gems-geodawn-numerical-features.tif.part-002
+  assembled part 4/5: data/bridge/gems-geodawn-numerical-features.tif.part-003
+  assembled part 5/5: data/bridge/gems-geodawn-numerical-features.tif.part-004
+  restored-and-verified: 418,912,844 bytes; sha256=4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5
+Fetching labels → /home/user/GEMSDOE28/data/labels.tif
+  restored-and-verified: 425,830 bytes; sha256=7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093
+Fetching existing_faults → /home/user/GEMSDOE28/data/existing_faults.tif
+  restored-and-verified: 425,830 bytes; sha256=7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093
+Fetching sample_submission → /home/user/GEMSDOE28/data/sample_submission.tif
+  restored-and-verified: 1,599,597 bytes; sha256=2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc
+Verified 4 inputs in /home/user/GEMSDOE28/data

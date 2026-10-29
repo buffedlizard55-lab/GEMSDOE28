@@ -88,6 +88,9 @@ def main() -> int:
     import build_current_review  # noqa: PLC0415
 
     build_current_review.main()
+    import build_s28c_review  # noqa: PLC0415
+
+    build_s28c_review.main()
     print(json.dumps({"status": "built", "pages": updated,
                       "review_card": "docs/data/active_checkout_review_2026-10-27.json",
                       "network_requests": 0, "submission_ready": False}, indent=2))

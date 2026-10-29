@@ -1,0 +1,40 @@
+........................................................................ [ 10%]
+........................................................................ [ 21%]
+........................................................s............... [ 31%]
+..............................................s......................... [ 42%]
+............................................................... [ 51%]
+........................................................................ [ 62%]
+..........................................s............................. [ 73%]
+........................................................................ [ 83%]
+..............F...................................................s..... [ 94%]
+.............s.......................                                    [100%]
+=================================== FAILURES ===================================
+_____ test_legacy_main_root_routes_match_generated_pages_and_current_card ______
+
+    def test_legacy_main_root_routes_match_generated_pages_and_current_card():
+        from scripts.build_site import root_relative_links
+    
+        for name in ('index.html', 'executive-summary.html'):
+            expected = root_relative_links((DOCS / name).read_text())
+>           assert (ROOT / name).read_text() == expected
+E           assert '<!doctype ht...y>\n</html>\n' == '<!doctype ht...y>\n</html>\n'
+E             
+E             Skipping 724 identical leading characters in diff, use -v to show
+E             - ef="docs/s28c-review.html">Latest review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
+E             ?            ^
+E             + ef="docs/session24-review.html">Latest review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
+E             ?           ++++++ ^
+E               </div></heade...
+E             
+E             ...Full output truncated, use '-vv' to show
+
+tests/test_site.py:555: AssertionError
+=============================== warnings summary ===============================
+tests/test_download_audit_discovery.py: 12 warnings
+  /home/user/GEMSDOE28/.venv/lib/python3.11/site-packages/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_site.py::test_legacy_main_root_routes_match_generated_pages_and_current_card
+1 failed, 670 passed, 5 skipped, 12 warnings, 9 subtests passed in 19.19s
