@@ -24,3 +24,11 @@ Build a manual-only submission path, source-linked Pages site, concise executive
 - Euler research must target depth-labeled magnetic-source solutions/clusters, not use edge or gradient peaks as source locations; state structural-index caveats.
 - Keep large restored datasets/caches out of Git; use hash-pinned provenance and label owner mirrors as unauthenticated.
 - User requested a PR and merge onto `main`. PR #1 from this fixed Arena branch was merged at `d32b72d`; verify the live Pages URL after every follow-up merge.
+
+## S29 · 2026-10-29 UTC — standing-brief update (branch arena/fe0ed431-gemsdoe28)
+
+- **Decision:** a unique GeoTIFF was generated (`docs/candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif`). It passes the automated literal 70%/3 px and 0.90 rank gate against 87 references (worst overlap 0.68). **OK TO SUBMIT: NO.** HOLDOUT-DTI 0.0295 is below its random-K baseline (0.0396) and the comparable best (0.0553736). No weekly slot was used.
+- **Experiments:** 2 of 3 used (E1 preregistered HGB cross-fit: HOLDOUT-DTI 0.0498 vs random-K 0.0684, negative; E2 hole-constrained: negative).
+- **Evidence:** `evidence/s29_candidate_run_card.json`, `evidence/s29_holdout.json`, `evidence/s29_b_holdout.json`, `evidence/s29_gate_*.json`. Disclosures in `registry/irregularities_s29.json`.
+- **Executive summary and how to submit:** `docs/s29-submission-guide.html`; detail in `knowledge/75_s29_result_2026-10-29.md`.
+- **Unchanged standing rules:** Maximize P(Win) and Own the Outcome; labels HOLDOUT-DTI / ORGANIZER-CONFIRMED / USER-REPORTED-UNVERIFIED; leakage canary >0.90 = leakage; slot only when the comparable holdout best is beaten.

@@ -1,0 +1,25 @@
+{
+  "schema": "s29-preregistration-v1",
+  "session": "S29",
+  "recorded_utc": "2026-10-29",
+  "status": "frozen before any model fit in this session",
+  "question": "Does a cross-fitted, label-supervised gradient-boosted surface on the 18 non-catalogue training features beat (a) a random-K control and (b) the registry-039 spacing-five lattice under the same SegmentHoldout evaluator, on whole-component buffered quadrant hide-and-recover?",
+  "hypothesis_id": "S29-E1-HGB-CF",
+  "hypothesis": "Visible catalogue labels in the other three quadrants (outside a 15 px collar) teach a per-quadrant classifier which 100 m feature combinations co-occur with mapped faults; the hidden quadrant's components should receive higher emission scores than random cells.",
+  "mechanism": "Conjunctions of magnetic (rtp, tmi, tmi_hg, tmi_vg, mag_anom), gravity (iso_grav_anom family), conductivity (cond_surf, depth_to_base_surf), terrain (det_elev, det_elev_slope) and geodetic strain (dilatation, shear, second invariant) layers.",
+  "named_non_fault_mimic": "Rock-type or basin-margin contrasts, survey line/seam artefacts, and conductive cover edges that co-locate with mapped faults without faulting.",
+  "features": "18 bands of data/training_features.tif, indices 1-5 and 7-19 (band 6 'tc' excluded per scripts/prepare_data.py). No catalogue-derived feature and no lidar/derived layer is used.",
+  "model": "sklearn HistGradientBoostingClassifier, max_iter=200, learning_rate=0.1, max_leaf_nodes=31, l2_regularization=1.0, random_state=20261029; training sample = up to 250,000 pixels from fold.train (all visible positives kept up to 60,000) with label fold.visible.",
+  "cross_fit": "one model per SegmentHoldout quadrant trained with fold.train/fold.visible only; its surface is used only inside that quadrant.",
+  "emission": "per quadrant: ridge_nms(surface, sigma=1.0) on eligible = quadrant & ~visible, then select_top_positive with K_f = round(37654 * quadrant_pixels / 5167373).",
+  "controls": {
+    "random_K": "uniform random cells in eligible with the same K_f, seed 20261029",
+    "registry_039_lattice": "registry-039 positive cells inside eligible (no budget matching; reported as the registered dense control)"
+  },
+  "holdout": "shared gems.holdout.SegmentHoldout(footprint, catalogue, buffer_px=15), evaluator gems-segment-pooled-v1 (alpha 0.2, beta 0.8, 3 px triangular kernel), pooled TPw/FPw/FNw, paired block bootstrap CI.",
+  "leakage_canary": "shared ho.canary() one-feature AUC per feature and for the stitched surface; any AUC > 0.90 means leakage until proven otherwise.",
+  "primary_endpoint": "HOLDOUT-DTI of the S29 surface minus HOLDOUT-DTI of random-K (paired); success requires the 95% paired CI to exclude zero AND beat the registry-039 lattice on the same evaluator.",
+  "promotion_gate": "No weekly slot. Promotion requires: primary endpoint success, all canaries < 0.90, surface and final-dot duplicate checks passed under the literal 70%/3 px and 0.90 rank rules against the 46 pinned registry rasters plus the local TIFFs, validator PASS, and an explicit user decision.",
+  "budget": "one run; no hyperparameter search after seeing holdout results; at most 3 experiments and 2 hours per the user's protocol",
+  "not_claimed": "No leaderboard estimate. HOLDOUT-DTI is catalogue-internal and is not calibrated to the hidden new-fault test set."
+}
