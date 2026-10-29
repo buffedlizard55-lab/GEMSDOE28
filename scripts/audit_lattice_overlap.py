@@ -15,8 +15,6 @@ from __future__ import annotations
 import glob
 import hashlib
 import json
-import os
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -82,7 +80,7 @@ def main() -> int:
     for path in sorted(glob.glob(str(ROOT / "docs/downloads/*.tif"))):
         p = Path(path)
         with rasterio.open(p) as r:
-            same_grid = (r.shape, r.crs.to_string() if r.crs else None) == (t_shape := grid[0], grid[1])
+            same_grid = (r.shape, r.crs.to_string() if r.crs else None) == (grid[0], grid[1])
             same_grid = same_grid and tuple(r.transform)[:6] == grid[2]
             data = r.read(1).astype("float64")
             nodata = r.nodata

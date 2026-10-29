@@ -28,7 +28,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from gems27 import paths  # noqa: E402
 from gems27.shared_template import load_shared  # noqa: E402
 from run_s28_tcb import (  # noqa: E402  reuse the verified S28 harness functions; no private fork
     BUFFER_PX,

@@ -25,7 +25,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from gems27 import paths  # noqa: E402
 from gems27.shared_template import load_shared  # noqa: E402
 from gems27.tcb import build_surface  # noqa: E402
 from run_s28_tcb import (  # noqa: E402
@@ -35,7 +34,6 @@ from run_s28_tcb import (  # noqa: E402
     random_control,
     read_cached_layers,
     read_footprint_and_catalogue,
-    sha256_file,
 )
 from run_s29_null_controls import lattice_subset_control  # noqa: E402
 

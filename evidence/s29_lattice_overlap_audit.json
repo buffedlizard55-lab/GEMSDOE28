@@ -1,6 +1,6 @@
 {
   "schema": "s29-lattice-overlap-audit-v1",
-  "generated_utc": "2026-10-29T16:59:24Z",
+  "generated_utc": "2026-10-29T17:15:44Z",
   "template": "data/sample_submission.tif (restored, hash-pinned mirror)",
   "control": {
     "file": "13gems_20261001_r13-lattice-s5_v2_nan-outside.tif (GEMSDOE13 submission; registered calibration control)",
