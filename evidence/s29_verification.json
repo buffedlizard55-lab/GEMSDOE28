@@ -1,0 +1,54 @@
+{
+  "schema": "gemsdoe28-s29-three-pass-review-v1",
+  "observed_utc": "2026-10-29T16:44:20Z",
+  "branch": "arena/df296ab5-gemsdoe28",
+  "passes": [
+    {
+      "pass": 1,
+      "name": "Implement and verify the requested review",
+      "result": "PASS WITH NEGATIVE SUBMISSION VERDICT",
+      "checks": [
+        "Reviewed repository status, current branch, ignore rules, current-session manifest, historical preflight, S28 evidence, and nine-site artifact/novelty audit.",
+        "Recorded nine requested sites, user-supplied score claims with explicit unverified labels, pinned historical artifact links, uniqueness classification, unavailable estimates, and no-submit decision.",
+        "Created current run card, review report, and web executive page; surfaced disabled download decision on root and docs landing/executive pages."
+      ]
+    },
+    {
+      "pass": 2,
+      "name": "Review for bugs, missing requirements, assumptions, and edge cases",
+      "result": "PASS; issues documented and corrected",
+      "checks": [
+        "Corrected the README read-first branch status so the current Arena branch is not confused with S28's parallel branch.",
+        "Marked all supplied score claims as USER-REPORTED / UNVERIFIED and all hidden leaderboard estimates unavailable.",
+        "Excluded TCB and PCSE from the untried candidate slate because prior evidence records them as tested-negative.",
+        "Marked HFR2M and DNT unavailable pending raw-source/coverage checks; did not imply official URLs or owner mirrors prove data availability.",
+        "Kept historical file links explicitly audit-only and disabled current download control; did not expose a misleading file for submission.",
+        "Distinguished inherited audit scope (nine selected rasters) from a complete synchronized global registry."
+      ]
+    },
+    {
+      "pass": 3,
+      "name": "Re-check final implementation against the request",
+      "result": "PASS for bounded repository review; experiment and submission remain blocked",
+      "checks": [
+        "Confirmed nine table rows, all nine expected site labels, one run card schema, no new TIFF reference, no submission name, null score estimate, and false submit/slot flags.",
+        "Confirmed S29 alert appears before inherited S28 notices in the four published entry/executive pages and shows the download as disabled.",
+        "Confirmed published run-card copy is byte-identical to evidence/s29_run_card.json.",
+        "Confirmed exact active branch and no unrelated/uncommitted changes before this review began."
+      ],
+      "additional_checks": [
+        "Full repository pytest suite: 724 passed, 7 skipped, 34 warnings, 9 subtests passed in an isolated validation venv. The seven skips require missing raster/external input files.",
+        "Full repository Ruff check (`ruff check src scripts tests`): all checks passed in the isolated validation venv.",
+        "Targeted S29 tests: 4 passed as part of the full suite.",
+        "Static local-link audit: no missing relative links on the S29 page or four entry/executive pages.",
+        "S29 overlay rebuilt twice; output hashes matched byte-for-byte."
+      ],
+      "not_run": [
+        "Geological holdout and feature canaries: not run; prerequisites and explicit lane are absent.",
+        "Experiment-level shared evaluator preflight: not run because cached features/shared template are absent and the configured experiment authorization is expired.",
+        "Official external source reachability, DrivenData leaderboard, submission portal receipt, and weekly cap: not queried."
+      ]
+    }
+  ],
+  "overall": "PASS WITH NEGATIVE VERDICT: no new TIF is approved; no experiment or slot was used."
+}

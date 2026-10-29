@@ -37,6 +37,8 @@ jobs:
       historical_card_sha256: ${{ steps.release-proof.outputs.historical_sha256 }}
     steps:
       - uses: actions/checkout@v4
+      - name: Build current fail-closed S29 status overlay
+        run: python3 scripts/build_s29_review.py
       - name: Bind the deployed run card to checked-out bytes
         id: release-proof
         run: |
