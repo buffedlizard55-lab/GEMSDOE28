@@ -1,11 +1,11 @@
 {
-  "observed_utc": "2026-10-29T14:41:44.621535+00:00",
+  "observed_utc": "2026-10-29T14:45:32.202548+00:00",
   "scope": "Software and local HTTP checks only; not a scientific experiment or portal submission",
   "passes_completed": 3,
   "pytest": {
     "command": ".venv/bin/python -m pytest -q",
     "exit_code": 0,
-    "summary": "720 passed, 34 warnings, 9 subtests passed in 27.33s",
+    "summary": "726 passed, 34 warnings, 9 subtests passed in 24.39s",
     "skipped": 0
   },
   "ruff": {
@@ -17,15 +17,15 @@
     "result": "PASS",
     "repeat_bytes_identical": true,
     "sha256": {
-      "docs/index.html": "171d83bbfa249af772ef22e603e193708d9c36ee8ebfba949c720a1de2a7a70e",
-      "docs/executive-summary.html": "587a825222691c976c806e49491818b590f70661c2674f60f498307bd1316c11",
-      "docs/current-review.html": "b02a467c67a3e3895a7c71738f38573081773fb9da5d0f9559b00ac2a73eb186",
-      "docs/data/current_run_card.json": "8163eb8d7277c921fa431fbafba9f35a6c28c051570cddf9ca8619711fb59f09",
-      "index.html": "eb9cb4e8fcb40f880b236aceb677fa0ea017a2d75be0f786f7b92188988d5db2",
-      "executive-summary.html": "a730ce745d0b10231f13b4ca671bc4877672113c99e3f6e43edcd904ea7b1742",
-      "data/current_run_card.json": "8163eb8d7277c921fa431fbafba9f35a6c28c051570cddf9ca8619711fb59f09",
+      "docs/index.html": "4529f437425ee77c521cf4e523f4773331e0fd9040cf185162abc05e98957ec9",
+      "docs/executive-summary.html": "615ecdb306469311f29dfcbe2a9615959ab3e4d9b67389f4d807649eb9ce1e34",
+      "docs/current-review.html": "5151b6b92f2fb74b5ad1ef69151202707d81818fcb78b6d07cd6a8055b3a9d59",
+      "docs/data/current_run_card.json": "6f9bdaf0c39996c5ec3f74f20924152a90fbb6c7228948255cf4f3a015b3a04f",
+      "index.html": "f9f53a5658c0c17760347b81483896530f2083b5aa3717fd7ba37bb5511b179a",
+      "executive-summary.html": "b282ebe0ba80f3ce4e7db24d1724eef5faf574cebbb038fbbe2c9a91da5bd69b",
+      "data/current_run_card.json": "6f9bdaf0c39996c5ec3f74f20924152a90fbb6c7228948255cf4f3a015b3a04f",
       "docs/data/current_run_card_2026-10-27.json": "d373768a12d9df61c857caf997bfde173037d151f233c93823c185f3ecad89bd",
-      "current-review.html": "c4302de91f31e1ed9aae9d1d39b64f066f27ef415d9c935ec1e883eb7d021564"
+      "current-review.html": "6f87e031d7f85ca26af2ebde06792307b3d4b33e6eab00d5f7771d3a086e3d3e"
     }
   },
   "local_http": [
@@ -74,7 +74,12 @@
       "evidence/s28_novelty_run_card.json"
     ],
     "this_review_card": "evidence/s28_validation_run_card.json",
-    "historical_duplicate_reproduced": true
+    "historical_duplicate_reproduced": true,
+    "additional_preserved_PRs": [
+      80,
+      82
+    ],
+    "parallel_TCB_experiment_not_reproduced_here": true
   },
   "root_and_docs_route_static_regression": "PASS: appropriate asset/card paths for both legacy repository-root and Actions docs-root publishing",
   "deployment_observation": {

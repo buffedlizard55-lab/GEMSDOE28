@@ -1,0 +1,31 @@
+{
+  "verification_schema": "s28-verification-v1",
+  "run_id": "S28-TCB-20261029",
+  "branch": "arena/09c38505-gemsdoe28",
+  "passes": [
+    {
+      "name": "scientific and evidence contract",
+      "command": "S28 runner (completed once; evidence/s28_tcb_run_card.json preserved)",
+      "result": "pass: negative scientific verdict; final novelty duplicate stop; no TIFF serialized"
+    },
+    {
+      "name": "unit and integration suite",
+      "command": ".venv/bin/python -m pytest -q",
+      "result": "pass: 674 passed, 3 skipped, 9 subtests passed"
+    },
+    {
+      "name": "static site and source audit",
+      "command": ".venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_active_review.py && .venv/bin/ruff check src scripts tests",
+      "result": "pass: deterministic offline build; CI paths ruff-clean; all current panels fail closed; no TIF link; mirror matches authoritative card"
+    }
+  ],
+  "all_passed": true,
+  "checked_artifacts": {
+    "run_card_sha256": "31edd5e880dbd062bdbc41c862797bad737df927421cb46adf4fa6fcd0e49dd1",
+    "report_sha256": "ab4a0d5dceb80787e71355fe3a5dbd29346ed6fc765f863550a30737e1415ad6",
+    "page_count": 5,
+    "network_requests": 0,
+    "new_tiff_generated": false,
+    "ok_to_submit": false
+  }
+}

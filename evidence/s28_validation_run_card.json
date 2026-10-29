@@ -3,7 +3,7 @@
   "session": "S28",
   "observed_utc": "2026-10-29T14:29:34.281706+00:00",
   "branch": "arena/ff60f579-gemsdoe28",
-  "hypothesis": "Retained untried S26-TCB: two-sided directional texture-covariance boundary; not an assigned lane and not implemented.",
+  "hypothesis": "Earlier proposed S26-TCB covariance-boundary mechanism; no experiment in this branch. Parallel S28-TCB now reports a negative result; no longer untried.",
   "mechanism": "Fault damage/alteration may change correlation length or anisotropy across a boundary despite weak amplitude contrast. Untested.",
   "named_non_fault_process": "Depositional facies boundaries, intrusive contacts, survey-leveling seams and raster resampling.",
   "holdout": {
@@ -136,11 +136,27 @@
     "evidence/s28/official_reference_cells.json": "5c3ba3b33f61b484599f82e497da8e70be8cb0f40c331e83a4228db991a674ce",
     "scripts/audit_research_downloads.py": "bf74c8544287ffeb520b4862e2adf780bcf0a1cb690c9581cff55c59bcda2950",
     "scripts/verify_downloads.py": "1872233d1fc8b94017a81e2945bb335801860f2ea50a4dd1f29557d2404a2509",
-    "scripts/build_current_review.py": "7b77e5f39fd069b6cbacb7b854516a538594586eafe8d05faa430c7f67041b5c",
+    "scripts/build_current_review.py": "b7c966d0d84f28b30fcc2c8334958398b2902ccedc5987602b4727abfe61492b",
     "scripts/check_run_preflight.py": "28ad826db7e060c38924df6fc75deb2e4d0f980ce69e8bb30b075af72d415576",
     "registry/data_manifest.json": "cd31840ccff6ce889f342d54332401e6861342ae7e1462df2272c1236482d16a",
     "registry/protocol_assets.json": "ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa",
     "evidence/s28_pcse_lattice_audit.json": "94bf6fd570111be0fc471477bebc94982fc52da606778616445da397b93a96a9",
-    "evidence/s28/pcse_lattice_reproduction.json": "9a42bc7de7a3d18e49670bb74b67f2b876c139be53122e7169d5681f886e734e"
+    "evidence/s28/pcse_lattice_reproduction.json": "9a42bc7de7a3d18e49670bb74b67f2b876c139be53122e7169d5681f886e734e",
+    "evidence/s28_tcb_run_card.json": "31edd5e880dbd062bdbc41c862797bad737df927421cb46adf4fa6fcd0e49dd1"
+  },
+  "parallel_tcb_result": {
+    "scope": "Recorded independent parallel session, not run or reproduced here; do not pool with S25",
+    "source": "evidence/s28_tcb_run_card.json",
+    "verdict": "negative",
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": 0.055373609877035955,
+    "ci95": [
+      0.051817352586122654,
+      0.05899706145522981
+    ],
+    "withheld_positives": 60988,
+    "final_dot_overlap_with_control": 1.0,
+    "new_tiff_generated": false
   }
 }
