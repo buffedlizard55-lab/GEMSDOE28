@@ -126,6 +126,14 @@ on:
       - 'evidence/s28_verification_passes.json'
       - 'scripts/run_s28_tcb.py'
       - 'src/gems27/tcb.py'
+      - 'scripts/build_s28c_review.py'
+      - 'evidence/s28c*.json'
+      - 'scripts/build_s25_page.py'
+      - 'evidence/s28_pcse_lattice_audit.json'
+      - 'evidence/s28_novelty_run_card.json'
+      - 'scripts/build_current_review.py'
+      - 'evidence/s28_validation_run_card.json'
+      - 'knowledge/74_s28_validation_review_2026-10-29.md'
       - 'tests/test_site.py'
       - 'scripts/build_active_review.py'
       - 'evidence/s24_nine_site_overlap.json'
@@ -268,6 +276,14 @@ on:
       - 'evidence/s28_verification_passes.json'
       - 'scripts/run_s28_tcb.py'
       - 'src/gems27/tcb.py'
+      - 'scripts/build_s28c_review.py'
+      - 'evidence/s28c*.json'
+      - 'scripts/build_s25_page.py'
+      - 'evidence/s28_pcse_lattice_audit.json'
+      - 'evidence/s28_novelty_run_card.json'
+      - 'scripts/build_current_review.py'
+      - 'evidence/s28_validation_run_card.json'
+      - 'knowledge/74_s28_validation_review_2026-10-29.md'
       - 'tests/test_site.py'
       - 'scripts/build_active_review.py'
       - 'evidence/s24_nine_site_overlap.json'
@@ -303,4 +319,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py && python scripts/build_active_review.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json docs/data/active_checkout_review_2026-10-27.json docs/data/s24_repository_review_run_card.json docs/data/s27_run_card.json docs/data/s28_tcb_run_card.json index.html executive-summary.html data/current_run_card_2026-10-26.json
+        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json docs/data/active_checkout_review_2026-10-27.json docs/data/s24_repository_review_run_card.json docs/data/s27_run_card.json docs/data/s28_tcb_run_card.json docs/data/s28_run_card.json docs/data/s28c_run_card.json docs/data/current_run_card.json index.html executive-summary.html data/current_run_card_2026-10-26.json

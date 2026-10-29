@@ -37,6 +37,10 @@ The reported GEMSDOE32 **0.2778 remains USER-REPORTED / UNVERIFIED**; there is n
 
 ---
 
+# S28C · 2026-10-29 UTC — parallel main review (preserved provenance)
+
+Main carried additional fail-closed S28/S28C and validation reviews from parallel branches. They remain useful audit records, but they do not replace the active Arena branch's completed S28-TCB result above. See [S28C evidence review](knowledge/73_s28c_evidence_review_2026-10-29.md), [S28C run card](evidence/s28c_run_card.json), [validation review](knowledge/74_s28_validation_review_2026-10-29.md), and [current-review card](evidence/s28_validation_run_card.json). All are no-upload/no-slot records; the reported GEMSDOE32 value remains USER-REPORTED / UNVERIFIED.
+
 # S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO

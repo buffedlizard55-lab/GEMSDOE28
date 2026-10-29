@@ -22,7 +22,33 @@ def _number(value: object, digits: int = 4) -> str:
     return f"{float(value):.{digits}f}"
 
 
-def panel(card: dict, card_href: str, report_href: str, review_href: str) -> str:
+def _novelty_panel(card: dict, audit: dict) -> str:
+    """Retain the pre-TCB S28 novelty correction API used by main's tests."""
+    candidate = audit["inherited_candidate"]
+    overlap = candidate["final_dot_comparison"]["max_dot_overlap"]
+    if (
+        card.get("submission_ready") is not False
+        or card.get("slot_selected") is not False
+        or card.get("verdict") != "negative"
+        or audit.get("status") != "DUPLICATE_STOP"
+        or candidate.get("sha256") != card.get("historical_s25_sha256")
+        or candidate.get("duplicate_under_literal_rule") is not True
+        or not isinstance(overlap, (int, float))
+        or not 0.70 < overlap <= 1
+    ):
+        raise ValueError("Inconsistent negative review or duplicate evidence")
+    return f'''<section class="section callout-danger" id="s28-current-decision" aria-label="Latest submission decision" data-submission-ready="false">
+<p class="eyebrow">29 OCT 2026 · CURRENT CHECKOUT REVIEW</p>
+<h2>NO FILE APPROVED · OK TO SUBMIT: NO</h2>
+<p>No new TIFF, score estimate, geological experiment, or submission slot. An explicit parallel lane, synchronized registry and comparable frozen baseline are missing. A separate selector must decide any future submission.</p>
+<p><strong>Correction:</strong> the old S25 PCSE TIFF is a duplicate under the literal shared-registry rule: {overlap:.1%} of its dots are within 3 pixels of a registered calibration raster. Its earlier “unique” claim applied only to a limited local comparison and is superseded. It also failed its prior holdout. Do not submit it.</p>
+<p>The nine-site historical scorecard below reports user-supplied scores, not organizer-confirmed receipts. A reliable hidden-score estimate is unavailable.</p>
+</section>'''
+
+
+def panel(card: dict, card_href: str | dict, report_href: str | None = None, review_href: str | None = None) -> str:
+    if isinstance(card_href, dict) and report_href is None and review_href is None:
+        return _novelty_panel(card, card_href)
     holdout = card.get("holdout") or {}
     random_control = card.get("random_k_control") or {}
     paired = card.get("paired_vs_random_k") or {}
@@ -60,6 +86,13 @@ def panel(card: dict, card_href: str, report_href: str, review_href: str) -> str
 <div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button><a class="button quiet" href="{html.escape(card_href, quote=True)}" download>Download S28 run card</a><a class="button quiet" href="{html.escape(review_href, quote=True)}">Open S28 review</a></div>
 <p><strong>There is no TIF link because no candidate passed the scientific and uniqueness gates.</strong> Historical files in the nine-site table remain audit/education references and are not approved uploads. <a href="{html.escape(report_href, quote=True)}">Read the complete nine-site executive summary, hypotheses, sources, and run card</a>.</p>
 </section>'''
+
+
+def render(card: dict, card_or_audit, report_href: str | None = None, review_href: str | None = None) -> str:
+    """Compatibility renderer for the pre-TCB novelty evidence API."""
+    if isinstance(card_or_audit, dict) and report_href is None and review_href is None:
+        return _novelty_panel(card, card_or_audit)
+    return panel(card, card_or_audit, report_href, review_href)
 
 
 def inject(path: Path, section: str) -> None:

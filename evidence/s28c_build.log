@@ -1,0 +1,78 @@
+{
+  "status": "built",
+  "pages": [
+    "archive.html",
+    "cross-site-review.html",
+    "executive-summary.html",
+    "index.html",
+    "research.html",
+    "session15-review.html",
+    "session18-result.html",
+    "session19-result.html",
+    "session19b-result.html",
+    "session20-result.html",
+    "session21-result.html",
+    "session22-mofr-result.html",
+    "session22-result.html",
+    "session22c-result.html",
+    "session23-result.html",
+    "session24-review.html",
+    "sources.html",
+    "submission-review.html",
+    "topology.html"
+  ],
+  "sources": 43,
+  "hypotheses": 4,
+  "generated_from_json_only": true,
+  "external_requests": 0,
+  "submission_ready": false,
+  "slot_selected": false,
+  "research_download": null,
+  "concurrent_research_download": "downloads/gems28-s22-signed-piedmont-20261026-08703322d2af-allfinite.tif",
+  "concurrent_submission_ready": false,
+  "inspection_artifacts": [
+    "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+    "gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-nan.tif"
+  ]
+}
+{
+  "status": "built",
+  "standalone": "docs/s25/index.html",
+  "panel_pages": [
+    "docs/index.html",
+    "docs/executive-summary.html",
+    "index.html",
+    "executive-summary.html"
+  ],
+  "network_requests": 0,
+  "ok_to_submit": false
+}
+{
+  "status": "built",
+  "pages": [
+    "docs/index.html",
+    "docs/executive-summary.html",
+    "index.html",
+    "executive-summary.html"
+  ],
+  "standalone": "docs/s27-review.html",
+  "network_requests": 0,
+  "ok_to_submit": false
+}
+{"status": "built", "submission_ready": false, "network_requests": 0}
+{"current_card": "evidence/s28_validation_run_card.json", "submission_ready": false, "dated_history_preserved": true, "network_requests": 0}
+S28C review published offline; no file approved
+{
+  "status": "built",
+  "pages": [
+    "docs/index.html",
+    "docs/executive-summary.html",
+    "docs/cross-site-review.html",
+    "docs/session23-result.html",
+    "index.html",
+    "executive-summary.html"
+  ],
+  "review_card": "docs/data/active_checkout_review_2026-10-27.json",
+  "network_requests": 0,
+  "submission_ready": false
+}

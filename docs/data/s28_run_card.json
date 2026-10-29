@@ -1,0 +1,38 @@
+{
+  "session": "G28-S28-20261029",
+  "branch": "arena/15038fa9-gemsdoe28",
+  "observed_utc": "2026-10-29T14:20:30Z",
+  "hypothesis": "S26-TCB: two-sided directional texture covariance changes in RTP, TMI horizontal gradient and surface conductivity might identify concealed fault damage zones; proposed, not assigned or tested.",
+  "mechanism": "Compare directional covariance across candidate boundaries after side-specific mean removal.",
+  "non_fault_mimic": "Depositional facies boundaries and survey leveling seams.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "status": "not run"
+  },
+  "registry": {
+    "surface_correlation": null,
+    "final_dot_overlap": null,
+    "status": "not tested; no candidate surface or dots; complete synchronized registry unavailable"
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "not run on a new TIFF; no new TIFF exists",
+    "no_nan_inside": null,
+    "range_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null
+  },
+  "submission_name": null,
+  "note": "No candidate generated; preflight blocked. Do not submit an archived research file.",
+  "verdict": "negative",
+  "submission_ready": false,
+  "slot_selected": false,
+  "experiments_run": 0,
+  "preflight": "evidence/s28_preflight.json",
+  "archive_audit": "evidence/s28_download_audit.json"
+}

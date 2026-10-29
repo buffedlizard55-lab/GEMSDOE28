@@ -82,6 +82,14 @@ def main() -> int:
     import build_s27_review  # noqa: PLC0415
 
     build_s27_review.main()
+    import build_current_review  # noqa: PLC0415
+
+    build_current_review.main()
+    import build_s28c_review  # noqa: PLC0415
+
+    build_s28c_review.main()
+    # S28-TCB is the active Arena experiment; place its fail-closed panel last
+    # so later parallel-review add-ons cannot hide the actual current decision.
     import build_s28_review  # noqa: PLC0415
 
     build_s28_review.main()
