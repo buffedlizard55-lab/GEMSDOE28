@@ -1,0 +1,138 @@
+{
+  "schema": "gemsdoe28-s29-repository-review-v1",
+  "observed_utc": "2026-10-29T16:44:20Z",
+  "branch": "arena/df296ab5-gemsdoe28",
+  "scope": "Read-only repository/evidence review; no geological experiment and no new submission artifact.",
+  "hypothesis": "No lane assigned; candidate slate is qualitative only. Top actionable untested proposal: spatially cross-fitted conductivity residual margins (MCR).",
+  "mechanism": "Not run. MCR would identify spatially coherent conductivity residual margins after conditioning on basement-depth and terrain context; no test result is claimed.",
+  "named_non_fault_process": "Saline groundwater, lacustrine clay, irrigation return flow, and variation in EM investigation depth can mimic conductivity residual margins.",
+  "candidate_slate": [
+    {
+      "rank": 1,
+      "id": "MCR",
+      "status": "unrun proposal; prior hypothesis record, not newly discovered",
+      "layers": ["cond_surf", "depth_to_base_surf", "det_elev", "det_elev_slope"],
+      "signature": "Spatially cross-fitted conditional-quantile residual margins",
+      "expected_dti_improvement": "unknown; qualitative priority only",
+      "implementation_cost": "medium; existing cache only",
+      "data_gate": "cache absent from active checkout"
+    },
+    {
+      "rank": 2,
+      "id": "HFR2M",
+      "status": "unrun proposal; external source bytes not present",
+      "layers": ["USGS Great Basin heat-flow residuals", "DOE GDR 1391 2 m probe temperatures", "cond_surf", "depth_to_base_surf"],
+      "signature": "Independent heat-flow and shallow-temperature conjunction",
+      "expected_dti_improvement": "unknown; qualitative priority only",
+      "implementation_cost": "high",
+      "data_gate": "raw sources not locally present; non-GitHub hosts outside runtime allowlist; coverage not verified"
+    },
+    {
+      "rank": 3,
+      "id": "DNT",
+      "status": "unrun proposal; challenge-specific tiles not present",
+      "layers": ["challenge-linked 1 m bare-earth DEM", "existing potential-field lineaments"],
+      "signature": "Channel offsets, beheaded streams, wind gaps, and aligned knickpoint trains",
+      "expected_dti_improvement": "unknown; qualitative priority only",
+      "implementation_cost": "very high",
+      "data_gate": "DEM URLs/coverage/bytes absent; USGS hosts outside runtime allowlist"
+    }
+  ],
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN in this checkout; no new candidate",
+    "evaluator_version": "gems-segment-pooled-v1 (required shared evaluator; not executed)",
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel": "300 m triangular",
+    "reason": "No explicit method paragraph/lane, absent local cache and shared template, missing complete synchronized registry and frozen comparable best, expired configured experiment clock, Python dependencies unavailable."
+  },
+  "leakage_canaries": {
+    "status": "NOT RUN",
+    "results": null,
+    "required_rule": "test each feature alone; AUC > 0.90 indicates leakage until proven otherwise"
+  },
+  "historical_scores": {
+    "label": "USER-REPORTED / UNVERIFIED (values supplied by user; no organizer receipts)",
+    "GEMSDOE24": 0.2477,
+    "GEMSDOE25": 0.26,
+    "GEMSDOE27": 0.2449,
+    "GEMSDOE28": 0.271,
+    "GEMSDOE30": 0.26,
+    "GEMSDOE31": 0.2708,
+    "GEMSDOE32": 0.2778,
+    "GEMSDOE33": 0.2632,
+    "GEMSDOE36": 0.275,
+    "leaderboard_estimates": "Unavailable for every row; no validated holdout-to-hidden-score calibration or receipt-linked outcomes."
+  },
+  "registry_comparison": {
+    "label": "GEOMETRY-AUDIT, not a score",
+    "focus_sites": ["GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30", "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"],
+    "scope": "Inherited pairwise audit of nine selected historical files only; not a complete synchronized global registry.",
+    "pairwise_comparisons": 72,
+    "all_selected_historical_files_flagged_duplicate_under_3px_threshold": true,
+    "surface_rank_correlation_vs_registry": null,
+    "final_dot_overlap_vs_registry": null,
+    "new_candidate_compared": false
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "NOT RUN; no new raster exists",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null,
+    "single_band": null,
+    "organizer_acceptance": null
+  },
+  "submission_name": null,
+  "note": "S29 repository review only; no unique new TIF or slot authorized.",
+  "note_character_count": 65,
+  "score_estimate": null,
+  "score_estimate_status": "Unavailable; USER-REPORTED historical claims are unverified and no transfer calibration exists.",
+  "new_tiff_generated": false,
+  "submission_ready": false,
+  "ok_to_download_and_submit": false,
+  "slot_selected": false,
+  "submission_slots_spent": 0,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "preflight": {
+    "status": "BLOCKED; no Python preflight rerun because system dependencies are absent",
+    "lane_assigned": false,
+    "cache_present": false,
+    "shared_template_present": false,
+    "complete_global_registry_present": false,
+    "frozen_comparable_best_present": false,
+    "configured_clock_status": "expired in committed current_session record; not reset"
+  },
+  "verification": {
+    "tests": "4 targeted S29 tests passed in an isolated validation venv. Full suite not run because raster/ML dependencies and cached inputs are absent; historical S28 software_verification.json is a different recorded environment.",
+    "linter": "PASS: isolated Ruff ran `ruff check src scripts tests`; all checks passed.",
+    "static_checks": "Manually inspected current branch, ignore rules, pinned audit evidence, current-session record, missing cache/template paths, and the live working-tree status before edits.",
+    "new_scientific_claims": "None asserted; no official external URLs fetched in this runtime."
+  },
+  "verdict": "negative",
+  "limitations": [
+    "The prompt refers to an assigned method paragraph but supplies no such paragraph.",
+    "No synchronized global registry or frozen strict-protocol comparator is available.",
+    "Prepared feature cache and shared-template assets are missing from this checkout.",
+    "Configured two-hour experiment clock expired; must not be reset implicitly.",
+    "Competition data mirrors are owner-supplied, not organizer-authenticated.",
+    "No authenticated DrivenData receipt, current leaderboard, or weekly submission allowance verified.",
+    "Historical score claims and conflicting leaderboard anchors are not organizer-confirmed here.",
+    "No defensible numerical leaderboard score estimate is available."
+  ],
+  "evidence": {
+    "review": "knowledge/75_s29_checkout_review_2026-10-29.md",
+    "nine_site_inventory": "evidence/s28_priority_repository_audit.json",
+    "nine_site_pairwise_novelty": "evidence/s28_focus_novelty.json",
+    "prior_configured_session": "registry/current_session.json",
+    "prior_preflight": "evidence/s28/preflight.json",
+    "prior_S28_negative_result": "evidence/s28_tcb_run_card.json",
+    "historical_software_verification_not_current": "evidence/s28/software_verification.json"
+  }
+}
