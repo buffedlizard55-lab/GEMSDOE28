@@ -1,0 +1,49 @@
+{
+  "schema": "s29-candidate-build-v1",
+  "entries_used": 87,
+  "entries_skipped": [],
+  "uncovered_px_union_all_references": 700,
+  "uncovered_px_registry_039": 6649,
+  "A": {
+    "file": "s29_A_dense_k37654.tif",
+    "dots": 37654,
+    "worst_overlap": 1.0,
+    "worst_reference": "registry-039"
+  },
+  "B_search": [
+    {
+      "N": 37654,
+      "hole_dots": 6514,
+      "worst_overlap": 0.8270037711796887,
+      "worst_reference": "registry-039",
+      "passes_margin": false
+    },
+    {
+      "N": 30000,
+      "hole_dots": 6514,
+      "worst_overlap": 0.7828666666666667,
+      "worst_reference": "registry-039",
+      "passes_margin": false
+    },
+    {
+      "N": 25000,
+      "hole_dots": 6514,
+      "worst_overlap": 0.73944,
+      "worst_reference": "registry-039",
+      "passes_margin": false
+    },
+    {
+      "N": 20000,
+      "hole_dots": 6400,
+      "worst_overlap": 0.68,
+      "worst_reference": "registry-039",
+      "passes_margin": true
+    }
+  ],
+  "B": {
+    "file": "s29_B_holeconstrained_k20000.tif",
+    "dots": 20000,
+    "hole_dots": 6400
+  },
+  "interpretation": "Builder output only. Overlap here is a pre-gate estimate; the gate decides OK status."
+}

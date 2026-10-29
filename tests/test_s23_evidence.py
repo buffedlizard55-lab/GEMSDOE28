@@ -218,7 +218,11 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert text.index('id="s28-current-decision"') < text.index("Submission download locked")
         return
     assert len(parser.ids) == len(set(parser.ids)), page
-    if page == "s28c-review.html":
+    if page == "s29-submission-guide.html":
+        assert parser.ids.count("s29-current-decision") == 1
+        assert "OK TO SUBMIT: NO" in text and "NOT approved" in text
+        assert text.index('id="s29-current-decision"') < text.index("Submission download locked")
+    elif page == "s28c-review.html":
         assert parser.ids.count("s28c-current-decision") == 1
         assert 'data-submission-ready="false"' in text
         assert "OK TO SUBMIT: NO" in text

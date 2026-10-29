@@ -1,3 +1,43 @@
+# S29 · 2026-10-29 UTC — current branch decision · READ FIRST EVERY SESSION
+
+## CURRENT DECISION: UNIQUE TIF GENERATED · OK TO SUBMIT: NO · NO WEEKLY SLOT USED
+
+**Active branch:** `arena/fe0ed431-gemsdoe28`. Automated checks only; no human inspection and no DrivenData access.
+
+- **Unique TIF:** `docs/candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif` (SHA-256 `bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3`, 20,000 dots). It passes the literal 70%/3 px and 0.90 rank gate against 87 references (worst overlap 0.68). It is **NOT OK TO SUBMIT**: HOLDOUT-DTI 0.0295 (CI 0.0234–0.0360) is below its random-K baseline (0.0396) and the comparable best (0.0553736).
+- **Dense S29 candidate (37,654 dots):** measured duplicate of registry-039 (overlap 1.00). NOT OK. Kept out of `docs/`.
+- **S29-E1** (preregistered HGB cross-fit): HOLDOUT-DTI 0.0498 vs random-K 0.0684; paired CI excludes zero on the negative side. Negative. Canary max AUC 0.613 (threshold 0.90).
+- **Experiments used:** 2 of 3. The third remains unused.
+- **Nine-site summary:** all 72 site pairs are duplicates under the 70%/3 px rule. All scores are USER-REPORTED / UNVERIFIED. No organizer receipts exist.
+- **Leaderboard (fetched 2026-10-29):** #1 0.4544; 0.4413 is not on the board (UNVERIFIED); the 0.3195 anchor is #47 kpomazi, another team.
+- **Executive summary and how to submit:** [docs/s29-submission-guide.html](docs/s29-submission-guide.html) · [knowledge/75_s29_result_2026-10-29.md](knowledge/75_s29_result_2026-10-29.md) · [run card](evidence/s29_run_card.json).
+- **Full prompt:** this README carries an operational summary, not the verbatim prompt. The user must paste the verbatim prompt if it is required (see `s29-verbatim-prompt-not-in-repo` in `registry/irregularities_s29.json`).
+- **Standing rules that continue:** Maximize P(Win) and Own the Outcome stay central. Weekly slot only for a candidate that beats the comparable holdout best. Pages URL https://buffedlizard55-lab.github.io/GEMSDOE28/ must be verified after every merge.
+
+## S29 run card (JSON summary)
+
+```json
+{
+  "hypothesis": "S29-E1-HGB-CF (preregistered); S29-B hole-constrained placement",
+  "mechanism": "Per-quadrant HGB on 18 non-catalogue bands; visible catalogue labels teach feature conjunctions that co-occur with mapped faults",
+  "named_non_fault_process": "rock-type or basin-margin contrasts; survey seams; conductive cover edges",
+  "holdout_dti_E1": 0.049816171483106644,
+  "holdout_ci95_E1": [0.04133651638447839, 0.05862182830763166],
+  "paired_delta_vs_random_k_E1": -0.01862688963271715,
+  "holdout_dti_B": 0.02951795654634091,
+  "holdout_ci95_B": [0.023351140586235934, 0.035974722047644375],
+  "comparable_best_holdout_dti": 0.0553736,
+  "overlap_vs_registry_039": {"dense_A": 1.0, "B_hole_constrained": 0.68},
+  "raster_sha256": "bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3",
+  "validator": "gems27.submission.verify_geotiff: hard_checks_passed true",
+  "submission_name": "gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif",
+  "submission_note": "S29 HGB hole-constrained k20000; unique under 70%/3px gate; holdout negative; NOT approved to submit",
+  "verdict": "negative (no slot)"
+}
+```
+
+---
+
 # S28 · 2026-10-29 UTC — current branch decision · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO

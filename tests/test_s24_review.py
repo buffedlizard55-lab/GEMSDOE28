@@ -94,7 +94,8 @@ def test_s24_preflight_and_feed_snapshots_are_exactly_hash_bound():
 def test_readme_read_first_and_s24_page_remain_locked():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     # The active Arena S28-TCB result leads; merged parallel reviews remain provenance.
-    assert readme.startswith("# S28 · 2026-10-29 UTC — current branch decision")
+    assert readme.startswith("# S29 · 2026-10-29 UTC — current branch decision")
+    assert "# S28 · 2026-10-29 UTC — current branch decision" in readme
     assert "NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO" in readme
     assert "# S27 · 2026-10-28 UTC — active branch review" in readme
     assert "# S26 · 2026-10-28 UTC — prior checkout review" in readme

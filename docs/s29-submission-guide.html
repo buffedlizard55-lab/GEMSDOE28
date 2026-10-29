@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEMSDOE28 · S29 submission guide and executive summary</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 980px; margin: 0 auto; padding: 24px; color: #1b1f24; line-height: 1.5; }
+  h1 { font-size: 1.6rem; } h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid #d0d7de; padding-bottom: 4px; }
+  .banner { border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+  .no { background: #ffebe9; border: 2px solid #cf222e; }
+  .ok { background: #dafbe1; border: 2px solid #1a7f37; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin: 10px 0; }
+  th, td { border: 1px solid #d0d7de; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #f6f8fa; }
+  code { background: #f6f8fa; padding: 1px 4px; border-radius: 4px; word-break: break-all; }
+  .small { font-size: 0.85rem; color: #57606a; }
+</style>
+</head>
+<body>
+<h1>GEMSDOE28 · S29 submission guide and executive summary</h1>
+<p class="small">Updated 2026-10-29 (UTC). Labels: <strong>HOLDOUT-DTI</strong> = catalogue-internal evaluator <code>gems-segment-pooled-v1</code> with withheld positives and a 95% block-bootstrap CI. <strong>ORGANIZER-CONFIRMED</strong> = none exists for any file in this repository. <strong>USER-REPORTED / UNVERIFIED</strong> = claims supplied by the requester, with no organizer receipt. Projections are never written as scores.</p>
+
+<div class="banner no" id="s29-current-decision">
+  <strong>CURRENT STATUS — OK TO SUBMIT: NO.</strong><br>
+  The file is NOT approved for submission. A unique GeoTIFF was generated and passes the automated duplicate gate. Its holdout is negative (below its own random-K baseline and below the comparable best of 0.0553736). <strong>No weekly submission slot was used.</strong><br>
+  Download for review only: <a href="candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif">gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif</a> (SHA-256 <code>bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3</code>).
+<p><button class="button" type="button" disabled aria-disabled="true">Submission download locked</button> Download for review only. Submission is not approved and no slot was used.</p>
+
+<h2>1. The unique TIF, its checks, and its status</h2>
+<table>
+  <tr><th>Item</th><th>Value</th><th>Verdict</th></tr>
+  <tr><td>Format</td><td>Single-band float32 GeoTIFF, EPSG:32611, 3730 × 3292, 100 m, same transform as the competition grid</td><td>PASS (automated validator)</td></tr>
+  <tr><td>Values</td><td>Inside the 5,167,373-pixel footprint: finite and in [0, 1] (binary 0/1). Outside: NaN, as the official format specifies.</td><td>PASS</td></tr>
+  <tr><td>Dots</td><td>20,000 (6,400 of them in pixels more than 3 px from every reference dot)</td><td>—</td></tr>
+  <tr><td>Duplicate gate (literal rule, 87 references)</td><td>Worst overlap 0.68 (registry-039, limit 0.70). Max |rank correlation| 0.21 (limit 0.90). Zero references flagged.</td><td><strong>PASS</strong> (thin margin)</td></tr>
+  <tr><td>Holdout (HOLDOUT-DTI)</td><td>0.0295 (CI 0.0234–0.0360); random-K at the same budget 0.0396; paired Δ −0.0101 (CI −0.0166 to −0.0028)</td><td><strong>NEGATIVE</strong></td></tr>
+  <tr><td>Weekly slot</td><td>Not selected. Rule: beat the comparable best (0.0553736) and the paired CI must exclude zero.</td><td><strong>NOT USED</strong></td></tr>
+  <tr><td><strong>Submit?</strong></td><td colspan="2"><strong>NO.</strong> Unique, but not approved. Expected to score low.</td></tr>
+</table>
+<p class="small">Evidence: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s29_run_card.json">run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s29_gate_B_holeconstrained.json">B gate</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s29_b_holdout.json">B holdout</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/75_s29_result_2026-10-29.md">S29 knowledge note</a></p>
+
+<h2>2. The dense S29 candidate is NOT OK</h2>
+<p>The 37,654-dot dense S29 surface overlaps the spacing-five registry-039 lattice at <strong>1.00</strong> (limit 0.70). Five references are flagged, so it fails the literal duplicate rule. It is kept out of <code>docs/</code>.</p>
+
+<h2>3. How to submit when a file is approved (exact steps)</h2>
+<p>Use these steps only after a file's status is changed to <strong>OK TO SUBMIT: YES</strong> in the README and in the run card. None is approved today.</p>
+<ol>
+  <li><strong>Choose the file.</strong> Either the single-band GeoTIFF (<code>.tif</code>) or a <code>.zip</code> containing exactly one GeoTIFF with the same CRS, shape, and geotransform.</li>
+  <li><strong>Use a unique name.</strong> The name must not match any earlier entry. The pattern used here is <code>gems29-&lt;slug&gt;-&lt;date&gt;-&lt;content-id&gt;-nan.tif</code>. The current candidate's name is <code>gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif</code>.</li>
+  <li><strong>Add a short note</strong> (140 characters or fewer). Example style: <em>clustering with k=25</em>. The current draft note (not approved): <em>S29 HGB hole-constrained k20000; unique under 70%/3px gate; holdout negative; NOT approved to submit</em> (100 characters).</li>
+  <li><strong>Check the file first.</strong> Run <code>scripts/verify_downloads.py</code> and the gate <code>scripts/s29_gate.py</code>. Both must pass.</li>
+  <li><strong>Submit once per slot.</strong> Do not submit a file whose status is NOT OK. Do not copy an earlier submission.</li>
+</ol>
+<p class="small">Official rules, verified: <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">NLR competition rules PDF</a> · <a href="https://www.herox.com/GEMSPrize/resource/2274">HeroX rules resource</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData problem and metric page</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">public leaderboard</a>.</p>
+
+<h2>4. Nine-site executive summary</h2>
+<p class="small">Sources: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s23_scorecard.json">s23 scorecard</a> and <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s23_focus_novelty.json">s23 focus novelty</a>. All 72 pairwise comparisons among these nine sites are duplicates under the 70%/3 px rule. No file is approved for submission.</p>
+<table>
+  <tr><th>Site</th><th>Best supplied file (repo copy)</th><th>Claim (USER-REPORTED / UNVERIFIED)</th><th>Estimated score</th><th>Unique vs other listed sites?</th><th>Submit?</th></tr>
+  <tr><td>GEMSDOE24</td><td><code>gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif</code></td><td>0.2477</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+  <tr><td>GEMSDOE25</td><td><code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif</code></td><td>0.2600</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+  <tr><td>GEMSDOE27</td><td><code>gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif</code></td><td>0.2449</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+  <tr><td>GEMSDOE28</td><td><code>gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-allfinite.tif</code></td><td>0.2710</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+  <tr><td>GEMSDOE30</td><td><code>gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif</code></td><td>0.2600</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+  <tr><td>GEMSDOE31</td><td><code>gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-allfinite.tif</code></td><td>0.2708</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+  <tr><td>GEMSDOE32</td><td><code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></td><td>0.2778 (highest claim)</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+  <tr><td>GEMSDOE33</td><td><code>GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif</code></td><td>0.2632</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+  <tr><td>GEMSDOE36</td><td><code>gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif</code></td><td>0.2750</td><td>not estimable</td><td>No (duplicate)</td><td>NO</td></tr>
+</table>
+<p>No ORGANIZER-CONFIRMED score exists for any site. The GEMSDOE32 claim is not verified, and the repository cannot explain why it is the highest claim.</p>
+
+<h2>5. Leaderboard (official, fetched 2026-10-29)</h2>
+<table>
+  <tr><th>Rank</th><th>Team</th><th>Score (ORGANIZER-CONFIRMED, public board)</th></tr>
+  <tr><td>1</td><td>xiaofanhu</td><td>0.4544</td></tr>
+  <tr><td>2</td><td>cfld__</td><td>0.3916</td></tr>
+  <tr><td>3</td><td>Batik Shirt Brothers</td><td>0.3911</td></tr>
+  <tr><td>47</td><td>kpomazi</td><td>0.3195 (matches the user anchor; another team's row, not a GEMSDOE site)</td></tr>
+</table>
+<p class="small">The value 0.4413 does not appear on the board; it is UNVERIFIED. The value 0.2778 for GEMSDOE32 is USER-REPORTED / UNVERIFIED.</p>
+
+<h2>6. Remaining work</h2>
+<ul>
+  <li>Establish a surface that beats random-K on the comparable holdout (paired CI above zero) before any new placement.</li>
+  <li>Test H29-1 (USGS Quaternary fault traces, <a href="https://earthquake.usgs.gov/hazards/qfaults/">official page</a>) as the top candidate. The third experiment slot is still unused.</li>
+  <li>Resolve the verbatim-prompt gap: the repo holds an operational summary, not the verbatim prompt.</li>
+</ul>
+<p class="small"><a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/README.md">README</a> · <a href="index.html">Home</a> · <a href="executive-summary.html">Executive summary</a></p>
+</body>
+</html>
