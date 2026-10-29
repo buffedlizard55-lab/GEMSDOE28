@@ -1,8 +1,14 @@
-# S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
+# S28 · 2026-10-29 UTC — checkout review · READ FIRST
+
+**NO NEW TIFF · OK TO SUBMIT: NO.** Restored hash-pinned core/model mirrors and shared tools and prepared the feature cache; mirror integrity is not organizer authentication. Fresh preflight remains BLOCKED by absent assigned lane, complete synchronized registry and comparable frozen best, the overlap-budget conflict, and the expired prior clock. No geological experiment or submission slot used. Archived-file audit: two legacy nodata-metadata failures. No score forecast is supported. [Full review](knowledge/73_s28_review_2026-10-29.md) · [run card](evidence/s28_run_card.json) · [preflight](evidence/s28_preflight.json) · [audit](evidence/s28_download_audit.json). These are dated observations, not a live status.
+
+---
+
+# S27 · 2026-10-28 UTC — historical parallel branch review
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
 
-**Active branch:** `arena/265e6e24-gemsdoe28`. This pass reviewed the repository and existing evidence; it ran no geological experiment and generated no new TIFF. The prior S25 PCSE raster is an older research artifact—not this session's submission—and is **not OK to submit**: **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0450 (95% CI 0.0380–0.0525; 60,988 withheld positives), below same-fold random-K **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0699 (95% CI 0.0667–0.0731). This internal result is not a leaderboard estimate. Current exact validation fails closed because the local sample submission and labels are absent.
+**Historical branch:** `arena/265e6e24-gemsdoe28`. This pass reviewed the repository and existing evidence; it ran no geological experiment and generated no new TIFF. The prior S25 PCSE raster is an older research artifact—not this session's submission—and is **not OK to submit**: **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0450 (95% CI 0.0380–0.0525; 60,988 withheld positives), below same-fold random-K **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0699 (95% CI 0.0667–0.0731). This internal result is not a leaderboard estimate. Current exact validation fails closed because the local sample submission and labels are absent.
 
 - [S27 active-branch review](knowledge/72_s27_active_branch_review_2026-10-28.md) · [S27 run card](evidence/s27_run_card.json) · [fresh blocked preflight](evidence/s27_preflight.json) · [fresh fail-closed file audit](evidence/s27_download_audit.json)
 - The highest supplied GEMSDOE32 claim, **0.2778**, remains **USER-REPORTED / UNVERIFIED**; a calibrated hidden-score estimate is unavailable. The prompt's leaderboard anchors 0.3195 and 0.4413 conflict and were not rechecked.
