@@ -1,3 +1,42 @@
+# S28 · 2026-10-29 UTC — current branch decision · READ FIRST EVERY SESSION
+
+## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
+
+**Active branch:** `arena/09c38505-gemsdoe28`. S28 ran the top untried S26-TCB hypothesis once with the restored hash-pinned cache and the shared `gems-segment-pooled-v1` evaluator. The result is **negative**: HOLDOUT-DTI **0.0553736** (60,988 withheld positives; 95% CI **0.0518174–0.0589971**) versus paired random-K HOLDOUT-DTI **0.0674060** (95% CI **0.0643965–0.0703080**), paired ΔDTI **−0.0120324** (95% CI **−0.0163464–−0.0078205**, 0/4 folds). These are internal holdout measurements, not leaderboard estimates.
+
+The TCB surface passed the pre-placement audit (29 current artifact/control comparisons; maximum absolute surface rank correlation 0.0186062), but the final 37,654-dot placement was a measured duplicate of the registered spacing-five calibration control (**1.0000000** of dots within 3 pixels). The protocol stopped before serialization. **No unique TIF was generated, no old raster was renamed, and no slot was selected.** Do not download or submit any historical file.
+
+- [S28 TCB result and nine-site executive summary](knowledge/73_s28_tcb_result_2026-10-29.md)
+- [S28 run card](evidence/s28_tcb_run_card.json) · [three verification passes](evidence/s28_verification_passes.json) · [current public nine-site audit](evidence/s28_priority_repository_audit.json) · [72-pair focus novelty audit](evidence/s28_focus_novelty.json)
+- [S28 entry-page review](docs/s28-review.html) · [executive summary](docs/executive-summary.html)
+
+The reported GEMSDOE32 **0.2778 remains USER-REPORTED / UNVERIFIED**; there is no organizer receipt binding it to the raster. The current S28 TCB candidate has no organizer score and no valid leaderboard estimate. A format checker cannot authorize an upload.
+
+**Why this matters:** the user's literal any-registry duplicate rule makes a champion-sized placement incompatible with the registered dense calibration lattice. S28 did not evade that fact by tuning the budget or placing dots in holes. The next candidate is not authorized until a synchronized global registry, a fresh experiment clock, and a comparable baseline are available.
+
+## S28 run card (JSON summary)
+
+```json
+{
+  "hypothesis": "S26-TCB",
+  "mechanism": "two-sided directional texture covariance",
+  "named_non_fault_process": "depositional facies or intrusive contacts; survey seams/resampling",
+  "holdout_dti": 0.055373609877035955,
+  "holdout_ci95": [0.051817352586122654, 0.05899706145522981],
+  "withheld_positives": 60988,
+  "paired_random_k_holdout_dti": 0.06740599054785862,
+  "paired_delta_ci95": [-0.016346412780907628, -0.00782045412725453],
+  "final_dot_overlap_vs_spacing5_control": 1.0,
+  "raster_sha256": null,
+  "validator": null,
+  "submission_name": null,
+  "note": null,
+  "verdict": "negative"
+}
+```
+
+---
+
 # S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO

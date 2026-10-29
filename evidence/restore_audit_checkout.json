@@ -12,7 +12,7 @@
    "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0",
    "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
    "expected_bytes": 418912844,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0",
    "got_bytes": 418912844,
    "got_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
    "status": "verified"
@@ -24,7 +24,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
    "expected_bytes": 425830,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 425830,
    "got_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
    "status": "verified"
@@ -36,7 +36,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
    "expected_bytes": 425830,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 425830,
    "got_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
    "status": "verified"
@@ -48,7 +48,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
    "expected_bytes": 1599597,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 1599597,
    "got_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
    "status": "verified"
@@ -60,7 +60,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
    "expected_bytes": 1712322,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 1712322,
    "got_sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
    "status": "verified"
@@ -72,7 +72,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
    "expected_bytes": 1632732,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 1632732,
    "got_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
    "status": "verified"
@@ -84,7 +84,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
    "expected_bytes": 1603424,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 1603424,
    "got_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
    "status": "verified"
@@ -96,7 +96,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
    "expected_bytes": 36943606,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 36943606,
    "got_sha256": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
    "status": "verified"
@@ -108,7 +108,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41",
    "expected_bytes": 3531,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 3531,
    "got_sha256": "9ef0df6e87598a8b0cd52fe821661e5fdb3a00568c5d9b1c5d61fd6b242dcd41",
    "status": "verified"
@@ -120,7 +120,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
    "expected_bytes": 27132925,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 27132925,
    "got_sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
    "status": "verified"
@@ -132,7 +132,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
    "expected_bytes": 26612970,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 26612970,
    "got_sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
    "status": "verified"
@@ -144,7 +144,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
    "expected_bytes": 198602,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 198602,
    "got_sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
    "status": "verified"
@@ -156,7 +156,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c",
    "expected_bytes": 126177,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 126177,
    "got_sha256": "9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c",
    "status": "verified"
@@ -168,7 +168,8 @@
    "ref": "ee5d7c65ede2d0b891f747619ac8da81e8e76a15",
    "expected_sha256": "4d6efc7bb3659ea2545353fcec574ef085b0acdb189c7590e4420a7c6c57b41c",
    "expected_bytes": 1252341,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+   "head_note": "checkout HEAD is not the pinned ref; hash check still decides",
    "status": "source-missing",
    "missing": "/tmp/gems-mirrors/GEMSDOE24/data_external/qfaults_v2_in_footprint.json"
   },
@@ -179,7 +180,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "f91bafbaccaaf2754e71d60434fc0f9eb2c7b880c6e714883f4974542ff6a0bf",
    "expected_bytes": 672,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 672,
    "got_sha256": "f91bafbaccaaf2754e71d60434fc0f9eb2c7b880c6e714883f4974542ff6a0bf",
    "status": "verified"
@@ -191,7 +192,7 @@
    "ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "expected_sha256": "122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea",
    "expected_bytes": 2146771,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
    "got_bytes": 2146771,
    "got_sha256": "122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea",
    "status": "verified"
@@ -203,7 +204,7 @@
    "ref": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0",
    "expected_sha256": "8804dbff8754dd885df88bf412cced52b0be6490aa79142f4588700a8e4ada7b",
    "expected_bytes": 541953,
-   "checkout_head": "ref: refs/heads/main",
+   "checkout_head": "c0c06ac82178f26b94fce3397036ef8f12a2f3a0",
    "got_bytes": 541953,
    "got_sha256": "8804dbff8754dd885df88bf412cced52b0be6490aa79142f4588700a8e4ada7b",
    "status": "verified"
