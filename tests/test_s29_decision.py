@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CARD = json.loads((ROOT / "evidence/s29_run_card.json").read_text(encoding="utf-8"))
+CARD = json.loads((ROOT / "evidence/s29_candidate_run_card.json").read_text(encoding="utf-8"))
 GATE_B = json.loads((ROOT / "evidence/s29_gate_B_holeconstrained.json").read_text(encoding="utf-8"))
 GATE_A = json.loads((ROOT / "evidence/s29_gate_A_dense.json").read_text(encoding="utf-8"))
 E2 = json.loads((ROOT / "evidence/s29_b_holdout.json").read_text(encoding="utf-8"))

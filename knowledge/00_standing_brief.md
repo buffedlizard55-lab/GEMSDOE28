@@ -29,6 +29,6 @@ Build a manual-only submission path, source-linked Pages site, concise executive
 
 - **Decision:** a unique GeoTIFF was generated (`docs/candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif`). It passes the automated literal 70%/3 px and 0.90 rank gate against 87 references (worst overlap 0.68). **OK TO SUBMIT: NO.** HOLDOUT-DTI 0.0295 is below its random-K baseline (0.0396) and the comparable best (0.0553736). No weekly slot was used.
 - **Experiments:** 2 of 3 used (E1 preregistered HGB cross-fit: HOLDOUT-DTI 0.0498 vs random-K 0.0684, negative; E2 hole-constrained: negative).
-- **Evidence:** `evidence/s29_run_card.json`, `evidence/s29_holdout.json`, `evidence/s29_b_holdout.json`, `evidence/s29_gate_*.json`. Disclosures in `registry/irregularities_s29.json`.
+- **Evidence:** `evidence/s29_candidate_run_card.json`, `evidence/s29_holdout.json`, `evidence/s29_b_holdout.json`, `evidence/s29_gate_*.json`. Disclosures in `registry/irregularities_s29.json`.
 - **Executive summary and how to submit:** `docs/s29-submission-guide.html`; detail in `knowledge/75_s29_result_2026-10-29.md`.
 - **Unchanged standing rules:** Maximize P(Win) and Own the Outcome; labels HOLDOUT-DTI / ORGANIZER-CONFIRMED / USER-REPORTED-UNVERIFIED; leakage canary >0.90 = leakage; slot only when the comparable holdout best is beaten.

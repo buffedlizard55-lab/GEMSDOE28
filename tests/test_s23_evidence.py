@@ -218,7 +218,13 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert text.index('id="s28-current-decision"') < text.index("Submission download locked")
         return
     assert len(parser.ids) == len(set(parser.ids)), page
-    if page == "s29-submission-guide.html":
+    if page == "s29-review.html":
+        assert parser.ids.count("s29-current-decision") == 1
+        assert text.index('id="s29-current-decision"') < text.index("No approved TIFF to download")
+        assert "OK TO DOWNLOAD AND SUBMIT: NO" in text
+        assert 'data-submission-ready="false"' in text
+        assert "Estimated leaderboard score:</strong> unavailable" in text
+    elif page == "s29-submission-guide.html":
         assert parser.ids.count("s29-current-decision") == 1
         assert "OK TO SUBMIT: NO" in text and "NOT approved" in text
         assert text.index('id="s29-current-decision"') < text.index("Submission download locked")

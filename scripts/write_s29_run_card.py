@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble evidence/s29_run_card.json from the S29 evidence files (no numbers typed by hand)."""
+"""Assemble evidence/s29_candidate_run_card.json from the S29 evidence files (no numbers typed by hand)."""
 import hashlib
 import json
 from pathlib import Path
@@ -109,5 +109,5 @@ card = {
     "download_ok_for_review": True,
     "decision": "NO SLOT. B is unique but its holdout is negative. A is a measured duplicate. Nothing is approved.",
 }
-(E / "s29_run_card.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-print("wrote evidence/s29_run_card.json; note length", len(note))
+(E / "s29_candidate_run_card.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+print("wrote evidence/s29_candidate_run_card.json; note length", len(note))

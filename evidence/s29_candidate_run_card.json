@@ -1,0 +1,111 @@
+{
+  "schema": "s29-run-card-v1",
+  "session": "S29",
+  "date_utc": "2026-10-29",
+  "experiments_used": 2,
+  "experiment_cap": 3,
+  "weekly_slot_selected": false,
+  "experiments": [
+    {
+      "id": "E1",
+      "hypothesis": "S29-E1-HGB-CF (preregistered, evidence/s29_prereg.json)",
+      "mechanism": "Visible catalogue labels in other quadrants teach a per-quadrant HGB which 100 m feature conjunctions co-occur with mapped faults",
+      "named_non_fault_process": "Rock-type or basin-margin contrasts; survey line/seam artefacts; conductive cover edges",
+      "holdout_dti": 0.049816171483106644,
+      "holdout_ci95": [
+        0.04133651638447839,
+        0.05862182830763166
+      ],
+      "withheld_positives": 60988.0,
+      "random_k_holdout_dti": 0.0684430611158238,
+      "paired_delta_vs_random_k": -0.01862688963271715,
+      "paired_delta_ci95_vs_random_k": [
+        -0.028036611523043115,
+        -0.009162213745682619
+      ],
+      "registry_039_lattice_holdout_dti": 0.24503645055533027,
+      "note_lattice": "unbudgeted dense control (about 206k dots); not a budget-matched comparison",
+      "canary_max_auc": 0.6134692190624447,
+      "canary_threshold": 0.9,
+      "canary_passed": true,
+      "raster_sha256": null,
+      "validator": null,
+      "submission_name": null,
+      "verdict": "negative",
+      "verdict_reason": "paired CI vs random-K excludes zero on the negative side; primary endpoint failed"
+    },
+    {
+      "id": "E2",
+      "hypothesis": "S29-B: hole-constrained placement of the E1 surface (>=32% of dots in registry-uncovered px)",
+      "mechanism": "Same surfaces as E1; placement forced into pixels >3 px from every registry-039 dot",
+      "named_non_fault_process": "as E1",
+      "holdout_dti": 0.02951795654634091,
+      "holdout_ci95": [
+        0.023351140586235934,
+        0.035974722047644375
+      ],
+      "withheld_positives": 60988,
+      "random_k_holdout_dti": 0.03962040497191176,
+      "paired_delta_vs_random_k": -0.010102448425570846,
+      "paired_delta_ci95_vs_random_k": [
+        -0.01662988776718028,
+        -0.002758822160125839
+      ],
+      "comparable_best_holdout_dti": 0.0553736,
+      "decision": {
+        "beats_comparable_best": false,
+        "paired_ci_excludes_zero_positive": false,
+        "slot_allowed": false
+      },
+      "raster_sha256": "bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3",
+      "validator": {
+        "hard_checks_passed": true,
+        "source": "gems27.submission.verify_geotiff"
+      },
+      "submission_name": "gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif",
+      "submission_note": "S29 HGB hole-constrained k20000; unique under 70%/3px gate; holdout negative; NOT approved to submit",
+      "submission_note_length": 100,
+      "verdict": "negative",
+      "verdict_reason": "HOLDOUT-DTI below comparable best 0.0553736 and below its own random-K; no slot"
+    }
+  ],
+  "candidate_files": {
+    "B_unique_gate_pass_NOT_approved": {
+      "path": "docs/candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif",
+      "sha256": "bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3",
+      "dots": 20000,
+      "hole_dots": 6400,
+      "registry_gate": {
+        "file": "evidence/s29_gate_B_holeconstrained.json",
+        "passed": true,
+        "references_checked": 87,
+        "max_candidate_within_3px": 0.68,
+        "max_abs_raw_spearman": 0.037007674639772614,
+        "max_abs_kernel_spearman": 0.2101898032312595
+      },
+      "status": "UNIQUE under the automated gate; NOT OK TO SUBMIT (holdout negative; no slot)"
+    },
+    "A_dense_NOT_unique": {
+      "path": "data/research/candidates/s29_A_dense_k37654.tif (git-ignored, not published)",
+      "sha256": "13b0052a9ca784e324f538e8718d1e3acb8b16a45396b5e49c4a76c0aa8e9074",
+      "dots": 37654,
+      "registry_gate": {
+        "file": "evidence/s29_gate_A_dense.json",
+        "passed": false,
+        "flagged": [
+          "registry-016",
+          "registry-039",
+          "local:gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif",
+          "local:gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif",
+          "local:gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.tif"
+        ],
+        "max_candidate_within_3px": 1.0
+      },
+      "status": "DUPLICATE of registry-039 (literal 70%/3px rule): NOT OK"
+    }
+  },
+  "verdict": "negative",
+  "submit_ok": false,
+  "download_ok_for_review": true,
+  "decision": "NO SLOT. B is unique but its holdout is negative. A is a measured duplicate. Nothing is approved."
+}
