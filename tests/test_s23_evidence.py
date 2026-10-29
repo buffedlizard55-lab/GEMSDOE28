@@ -223,7 +223,13 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert 'data-submission-ready="false"' in text
         return
     assert len(parser.ids) == len(set(parser.ids)), page
-    if page == "s28c-review.html":
+    if page == "s29-review.html":
+        assert parser.ids.count("s29-current-decision") == 1
+        assert text.index('id="s29-current-decision"') < text.index("No approved TIFF to download")
+        assert "OK TO DOWNLOAD AND SUBMIT: NO" in text
+        assert 'data-submission-ready="false"' in text
+        assert "Estimated leaderboard score:</strong> unavailable" in text
+    elif page == "s28c-review.html":
         assert parser.ids.count("s28c-current-decision") == 1
         assert 'data-submission-ready="false"' in text
         assert "OK TO SUBMIT: NO" in text

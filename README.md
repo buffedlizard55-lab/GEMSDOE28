@@ -1,4 +1,24 @@
-# S29 · 2026-10-29 UTC — current decision · READ FIRST EVERY SESSION
+# S29 · 2026-10-29 UTC — current checkout review · READ FIRST EVERY SESSION
+
+## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
+
+**Active branch:** `arena/df296ab5-gemsdoe28`. This checkout is blocked: the user prompt points to a single assigned method paragraph, but no such paragraph or assignment source is present; `registry/current_session.json` has no lane; the configured 7,200-second experiment clock has expired; the prepared feature cache and shared-template assets are absent locally; and there is no complete synchronized global registry or frozen strict-protocol comparator. Do not reset the clock, infer a lane, change the budget to evade a duplicate check, or use a historical TIFF as a new submission. No experiment, TIFF generation, upload or slot selection occurred in this checkout.
+
+**The required deliverable for this review is a negative decision, not a fabricated submission:** there is no file to download or submit. The current entry page locks the TIFF download and prominently says **OK TO DOWNLOAD AND SUBMIT: NO**. Leaderboard-score estimates are **unavailable** absent organizer receipts and a validated holdout-to-hidden-score calibration. Historical score claims remain USER-REPORTED / UNVERIFIED.
+
+- [S29 checkout review and nine-site executive table](knowledge/75_s29_checkout_review_2026-10-29.md) · [S29 run card](evidence/s29_run_card.json) · [three-pass verification record](evidence/s29_verification.json) · [S29 Pages review](docs/s29-review.html)
+- The S29 table identifies the supplied historical artifact and claim for each of GEMSDOE24/25/27/28/30/31/32/33/36; all nine fail the inherited pairwise 3-pixel novelty audit within that selected subset. No numerical estimate is asserted.
+- The inherited S28-TCB run was negative and is not to be repeated as “untried”: HOLDOUT-DTI 0.0553736 (60,988 withheld positives; 95% CI 0.0518174–0.0589971), below paired random-K HOLDOUT-DTI 0.0674060 (95% CI 0.0643965–0.0703080). These are historical internal holdout results, not leaderboard scores, and the candidate's attempted final placement duplicated a registered calibration raster.
+- The S29 candidate slate excludes tested-negative PCSE and TCB. It ranks MCR first qualitatively; HFR2M and DNT require official external bytes absent/unobtainable in this runtime. These are proposals only, with unknown score impact, and none is authorized to run.
+- [Official competition and format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [official rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [official reference solution](https://github.com/drivendataorg/gems-prize-reference-solution) · [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) · [INGENIOUS](https://gbcge.org/current-projects/ingenious/).
+
+**Parallel S29 evidence merged to main (separate checkout; not independently reproduced on this branch):** [parallel run card](evidence/s29_review_run_card.json) records a 2026-10-29 public leaderboard observation and the prior checkout's input/test/format checks. Treat its live-board figures as time-bounded public-page observations, not submission-page receipts or scores for any file in this repo. The parallel audit records 880 format checks with two historical nodata failures. This branch did not access DrivenData or restore those ignored input files; it does not inherit the other checkout's runtime, byte restoration, or test result as a fresh local result.
+
+**Standing prompt—read before each session.** Maximize P(Win) and Own the Outcome. The goal is an auditable system that researches the DOE GEMS fault-detection problem, maintains a source-linked current feed, and produces a genuinely unique single-band GeoTIFF only when every scientific, novelty, format and selector gate passes. For every session: (1) read this S29 decision, the standing requirements below, current run card, and current registry; (2) before implementation, rank 3–5 genuinely untested geological hypotheses, naming layers, target physical signature/transform, why a catalogue-missing fault could be detected, difference from implemented work, non-fault mimic, implementation cost, and whether required official free data are actually obtainable; (3) honor the explicit single method lane and stop on surface |Spearman| >0.90 or >70% of dots within 3 px of any registry raster; test both before placement and after final placement; (4) reuse the hash-pinned shared cached features, evaluator and writer, never fork them; hide whole fault segments with a buffer, derive catalogue features from visible faults only, mask visible faults pixel-exactly, and report pooled DTI at α=0.2, β=0.8 with the 300 m triangular kernel and spatial 95% CI; (5) test each feature alone for leakage (AUC >0.90 is leakage until disproven); (6) stay within three experiments/two hours and never spend/select a weekly submission slot inside a research run; (7) distinguish HOLDOUT-DTI, ORGANIZER-CONFIRMED (receipt), USER-REPORTED and MODEL estimates; projections are never scores; (8) make the automated submission page state clearly which exact file is approved, include a unique name and ≤140-character note, and validate footprint NaNs, [0,1] values, CRS, shape, transform and single band; (9) finish with one JSON run card. A negative result is a deliverable. Do not claim human inspection is required or substitute it for the automated project gates. Historical scores, links and raw data supplied by a user are not verified merely by being copied into this repository.
+
+---
+
+# S29 · 2026-10-29 UTC — lattice lane experiments (parallel branch arena/9a3a5294-gemsdoe28)
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
 
@@ -30,11 +50,9 @@
 
 ---
 
-# S28 · 2026-10-29 UTC — current branch decision · READ FIRST EVERY SESSION
+# S28 · 2026-10-29 UTC — historical parallel-run result and review · not this checkout's decision
 
-## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
-
-**Active branch:** `arena/09c38505-gemsdoe28`. S28 ran the top untried S26-TCB hypothesis once with the restored hash-pinned cache and the shared `gems-segment-pooled-v1` evaluator. The result is **negative**: HOLDOUT-DTI **0.0553736** (60,988 withheld positives; 95% CI **0.0518174–0.0589971**) versus paired random-K HOLDOUT-DTI **0.0674060** (95% CI **0.0643965–0.0703080**), paired ΔDTI **−0.0120324** (95% CI **−0.0163464–−0.0078205**, 0/4 folds). These are internal holdout measurements, not leaderboard estimates.
+**Originating parallel branch:** `arena/09c38505-gemsdoe28`. S28 ran the top untried S26-TCB hypothesis once with the restored hash-pinned cache and the shared `gems-segment-pooled-v1` evaluator. The result is **negative**: HOLDOUT-DTI **0.0553736** (60,988 withheld positives; 95% CI **0.0518174–0.0589971**) versus paired random-K HOLDOUT-DTI **0.0674060** (95% CI **0.0643965–0.0703080**), paired ΔDTI **−0.0120324** (95% CI **−0.0163464–−0.0078205**, 0/4 folds). These are internal holdout measurements, not leaderboard estimates.
 
 The TCB surface passed the pre-placement audit (29 current artifact/control comparisons; maximum absolute surface rank correlation 0.0186062), but the final 37,654-dot placement was a measured duplicate of the registered spacing-five calibration control (**1.0000000** of dots within 3 pixels). The protocol stopped before serialization. **No unique TIF was generated, no old raster was renamed, and no slot was selected.** Do not download or submit any historical file.
 

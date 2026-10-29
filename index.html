@@ -11,7 +11,7 @@
 <body>
 <header class="site-header"><div class="header-inner">
   <a class="brand" href="docs/index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
-  <nav aria-label="Main navigation"><a href="docs/index.html">Overview</a><a href="docs/executive-summary.html">Executive summary</a><a href="docs/s28c-review.html">Latest review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
+  <nav aria-label="Main navigation"><a href="docs/index.html">Overview</a><a href="docs/executive-summary.html">Executive summary</a><a href="docs/s29-review.html">Current review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
 </div></header>
 <main><section class="section callout-danger" id="s29-lattice-decision" aria-label="Current S29 submission decision" data-submission-ready="false">
 <p class="eyebrow">S29 · 2026-10-29 UTC · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
@@ -31,22 +31,11 @@
 <div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Download disabled: no approved file</button><a class="button quiet" href="docs/data/s29_lattice_run_card.json" download>Download S29 run card (JSON)</a><a class="button quiet" href="docs/s29-lattice-review.html">Open S29 review</a></div>
 <p><strong>Decision needed from you:</strong> whether the 70%/3 px lane rule applies. It is an internal protocol rule; the official rules contain no duplicate rule (ORGANIZER-CONFIRMED, NLR rules PDF). If you decide it does not apply, a candidate could be serialized, but it would still need a surface-independent ridge null before any geology claim. <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/arena/9a3a5294-gemsdoe28/knowledge/76_s29_lattice_experiments_2026-10-29.md">Read the full S29 report</a>.</p>
 </section><section class="section callout-danger" id="s29-current-decision" aria-label="Current S29 submission decision" data-submission-ready="false">
-<p class="eyebrow">S29 · 2026-10-29 UTC · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
-<h2>Current decision: NO FILE APPROVED · OK TO SUBMIT: NO</h2>
-<p><strong>No new TIFF was generated, and no upload is authorized.</strong> Three diagnostic experiments ran (the budget cap). The best holdout result is a registry duplicate, and its attribution failed. No file is approved, and no weekly slot was spent.</p>
-<table><caption>Holdout experiments. All numbers are HOLDOUT-DTI (gems-segment-pooled-v1, 60,988 withheld positives), never leaderboard estimates.</caption><thead><tr><th>Experiment</th><th>HOLDOUT-DTI (95% CI)</th><th>Paired ΔDTI vs random-K (folds won)</th></tr></thead><tbody>
-<tr><td>E1 random-K baseline (budget-matched)</td><td>0.0674 (0.0644–0.0703)</td><td>—</td></tr>
-<tr><td>E1 geology-blind calibration lattice</td><td>0.0748 (0.0717–0.0779)</td><td>+0.0074 (4/4)</td></tr>
-<tr><td>E1 visible-proximity placement (in-scope)</td><td>0.0184 (0.0105–0.0275)</td><td>negative control</td></tr>
-<tr><td>E2 dispersed TCB, 5 px minimum spacing</td><td>0.0838 (0.0798–0.0878)</td><td>+0.0164 (4/4); vs lattice +0.0090 (4/4)</td></tr>
-<tr><td>E3 same ridge candidates and spacing, random priority</td><td>0.0832 (0.0800–0.0865)</td><td>TCB minus this: +0.0006 (unpaired; not established)</td></tr>
-</tbody></table>
-<p><strong>What this means.</strong> On this holdout, dispersion matters: the lattice beats random placement, and spacing-constrained ridge placement beats both. However, random priority over the same ridge candidates matches the TCB-ranked result, so the TCB ranking is not shown to add anything. The gain is not established as geology.</p>
-<p><strong>Uniqueness.</strong> The lane rule is more than 70% of dots within 3 px of a registry raster. The calibration lattice covers 99.87% of the footprint, and random placements of the same budget overlap it at about 99.9%. All 52/52 historical dotted rasters exceed the threshold, so the literal rule does not discriminate between methods. The best candidate overlaps it at 100%.</p>
-<p><strong>Canary and validator.</strong> Leakage canary: PASS at the 0.90 threshold (numeric AUC not recorded by the API). No raster was serialized, so no validator run was possible.</p>
-<p><strong>Leaderboard context (ORGANIZER-CONFIRMED on the public board read 2026-10-29):</strong> #1 is 0.4544 and #26 is 0.3328. The prompt's 0.4413 and 0.3195 were not found in ranks 1–47. This is an irregularity, and the public board is not the private scoring set.</p>
-<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">Download disabled: no approved file</button><a class="button quiet" href="docs/data/s29_run_card.json" download>Download S29 run card (JSON)</a><a class="button quiet" href="docs/s29-review.html">Open S29 review</a></div>
-<p><strong>Decision needed from you:</strong> whether the 70%/3 px lane rule applies. It is an internal protocol rule; the official rules contain no duplicate rule (ORGANIZER-CONFIRMED, NLR rules PDF). If you decide it does not apply, a candidate could be serialized, but it would still need a surface-independent ridge null before any geology claim. <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/arena/9a3a5294-gemsdoe28/knowledge/75_s29_experiments_and_uniqueness_2026-10-29.md">Read the full S29 report</a>.</p>
+<p class="eyebrow">S29 · 2026-10-29 UTC · AUTOMATED REVIEW</p>
+<h2>NO FILE APPROVED · OK TO DOWNLOAD AND SUBMIT: NO</h2>
+<p><strong>No new TIFF was generated.</strong> This checkout has no assigned method lane, restored cache/shared template, complete synchronized registry, frozen comparable baseline, or fresh experiment authorization. No score estimate is defensible.</p>
+<div class="download-actions"><button class="button" type="button" disabled aria-disabled="true">No approved TIFF to download</button><a class="button quiet" href="docs/data/s29_run_card.json" download>Download S29 run card</a><a class="button quiet" href="docs/s29-review.html">Nine-site executive review</a></div>
+<p>Historical TIFFs are audit-only and must not be submitted. <a href="docs/s29-review.html">See the nine-site table, candidate slate, source links and limitations.</a></p>
 </section><section class="section callout-danger" id="s28-current-decision" aria-label="Current S28 submission decision" data-submission-ready="false">
 <p class="eyebrow">S28 · 2026-10-29 UTC · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
 <h2>Current decision: NO FILE APPROVED · OK TO SUBMIT: NO</h2>

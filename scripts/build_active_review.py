@@ -93,7 +93,11 @@ def main() -> int:
     import build_s28_review  # noqa: PLC0415
 
     build_s28_review.main()
-    # S29 (2026-10-29) is the newest decision; its panel goes last so it sits at the top of each page.
+    # S29 is the active checkout review; insert it after all older historical overlays.
+    import build_s29_review  # noqa: PLC0415
+
+    build_s29_review.main()
+    # S29 lattice lane (parallel): experiments + uniqueness audit. Placed last so it leads the page.
     import build_s29_lattice_review  # noqa: PLC0415
 
     build_s29_lattice_review.main()
