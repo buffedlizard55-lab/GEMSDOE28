@@ -10,6 +10,12 @@ Core/model inputs, cache and pinned shared evaluator/writer were restored from o
 
 ---
 
+# S28 · 2026-10-29 UTC — checkout review · READ FIRST
+
+**NO NEW TIFF · OK TO SUBMIT: NO.** Restored hash-pinned core/model mirrors and shared tools and prepared the feature cache; mirror integrity is not organizer authentication. Fresh preflight remains BLOCKED by absent assigned lane, complete synchronized registry and comparable frozen best, the overlap-budget conflict, and the expired prior clock. No geological experiment or submission slot used. Archived-file audit: two legacy nodata-metadata failures. No score forecast is supported. [Full review](knowledge/73_s28_review_2026-10-29.md) · [run card](evidence/s28_run_card.json) · [preflight](evidence/s28_preflight.json) · [audit](evidence/s28_download_audit.json). These are dated observations, not a live status.
+
+---
+
 # S27 · 2026-10-28 UTC — active branch review · HISTORICAL PARALLEL BRANCH
 
 **Historical record:** prior S27 and S25 claims are not the present checkout or current uniqueness decision; see the correction at the top of this README.
