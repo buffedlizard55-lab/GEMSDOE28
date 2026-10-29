@@ -1,21 +1,44 @@
-# S28 · 2026-10-29 UTC — current branch evidence review · READ FIRST
+# 2026-10-29 · CURRENT CHECKOUT — READ FIRST EVERY SESSION
+
+## NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
+
+**Correction:** the previous S25 PCSE research TIFF is **not unique** under the literal shared-registry rule: all of its dots overlap the registered calibration raster within 3 pixels. The 51-file comparison omitted that raster. Its prior holdout was also negative. Its historical evidence and manifest are preserved, but their uniqueness claim is superseded. [Exact audit](evidence/s28_pcse_lattice_audit.json) · [Current review and nine-site decision](knowledge/73_s28_novelty_review_2026-10-29.md) · [run card](evidence/s28_novelty_run_card.json).
+
+Core/model inputs, cache and pinned shared evaluator/writer were restored from owner mirrors and hash checked; they are not organizer-authenticated. The [preflight](evidence/s28_novelty_preflight.json) remains blocked on the absent lane assignment, complete registry, literal control overlap, comparable frozen baseline, and old expired clock. No experiment, new candidate or weekly slot was used. Current leaderboard and allowance are unknown; no hidden-score prediction is justified.
+
+**Standing brief:** maximize P(Win), own outcomes, do independent source-grounded geological research, and make a single-band competition GeoTIFF easy to download **only after** automated checks establish format, fresh per-feature canaries, buffered whole-segment holdout with pooled DTI and 95% CI, superiority to a comparable frozen best, both surface/final registry novelty, and separate slot selection. Record negative results; do not invent scores, claim receipt confirmation, change registry membership silently, or copy an old submission. Cap work at three experiments or two hours per authorized lane. Preserve actual prompt and source provenance: this is a concise operational summary, not a verbatim copy of the full user request; historical material below is not current checkout status. Follow [current review next steps](knowledge/73_s28_novelty_review_2026-10-29.md#next-work) first.
+
+---
+
+# S28C · 2026-10-29 UTC — current branch evidence review · READ FIRST
+
+**Parallel review on `arena/cc67fd6a-gemsdoe28`:** S25 also fails the shared calibration-control uniqueness rule; preserve the correction above.
 
 ## OK TO SUBMIT: NO · NO NEW TIFF · NO WEEKLY SLOT USED
 
 **Active branch:** `arena/cc67fd6a-gemsdoe28`. This section supersedes checkout-state claims in older records below. The full consolidated standing requirements and historical prompt archive remain below and must be read each session. **Maximize P(Win) · Own the Outcome:** do not fabricate score estimates or approve a duplicate just to produce a download.
 
-- **[Current executive summary: nine-site file table + submission guide](docs/s28-review.html)** · [run card](evidence/s28_run_card.json) · [fresh nine-repository inventory](evidence/s28_priority_repository_audit.json) · [fresh shared-comparator results](evidence/s28_priority_novelty.json).
+- **[Current executive summary: nine-site file table + submission guide](docs/s28c-review.html)** · [run card](evidence/s28c_run_card.json) · [fresh nine-repository inventory](evidence/s28c_priority_repository_audit.json) · [fresh shared-comparator results](evidence/s28c_priority_novelty.json).
 - Restored core/model inputs and nine shared-template assets from hash-pinned owner GitHub mirrors; prepared the 32-band feature cache. These are **not organizer-authenticated downloads**. Raw data and cache remain ignored.
 - All nine historical leaders fail the final-dot duplicate rule against at least one other named leader. GEMSDOE25 = GEMSDOE30 inside the footprint. GEMSDOE28 solo = GEMSDOE31 solo. The GEMSDOE32 dots are exactly the solo dots minus 2,545 catalogue-adjacent dots, with no additions; this does not establish score causation.
 - Estimated leaderboard score: **unavailable** for every artifact. Supplied scores are **USER-REPORTED / UNVERIFIED**, not ORGANIZER-CONFIRMED. No current leaderboard was fetched here.
-- [Fresh exact-file audit](evidence/s28_download_audit.json): 869 checks, two failures on archived H40/H41 all-finite nodata metadata; no historical file is newly approved. [Fresh preflight](evidence/s28_preflight.json): five remaining blockers, including absent lane, synchronized registry and comparable baseline, literal overlap-budget conflict, and expired configured clock. No scientific experiment was run.
+- [Fresh exact-file audit](evidence/s28c_download_audit.json): 869 checks, two failures on archived H40/H41 all-finite nodata metadata; no historical file is newly approved. [Fresh preflight](evidence/s28c_preflight.json): five remaining blockers, including absent lane, synchronized registry and comparable baseline, literal overlap-budget conflict, and expired configured clock. No scientific experiment was run.
 - Four previously proposed, untried geological hypotheses remain ranked in [the hypothesis registry](registry/s26_hypotheses.json) and the current summary; do not relabel them as fresh discoveries. TCB remains a proposal only. External heat-flow/probe and 3DEP hypotheses are not currently viable without source bytes/coverage verification.
-- Three-pass review: [S28 report](knowledge/73_s28_evidence_review_2026-10-29.md). Final software checks: **671 passed, five skipped**, Ruff clean, offline site build and diff checks pass. Official reference README confirms CPU-only operation is supported; GPU is not strictly required.
+- Three-pass review: [S28C report](knowledge/73_s28c_evidence_review_2026-10-29.md). Final software checks: **675 passed, five skipped**, Ruff clean, offline site build and diff checks pass. Official reference README confirms CPU-only operation is supported; GPU is not strictly required.
 - Code merge/deployment is separate from competition promotion. Do not select or upload a weekly slot from this review.
+
 
 ---
 
-# S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
+# S28 · 2026-10-29 UTC — checkout review · READ FIRST
+
+**NO NEW TIFF · OK TO SUBMIT: NO.** Restored hash-pinned core/model mirrors and shared tools and prepared the feature cache; mirror integrity is not organizer authentication. Fresh preflight remains BLOCKED by absent assigned lane, complete synchronized registry and comparable frozen best, the overlap-budget conflict, and the expired prior clock. No geological experiment or submission slot used. Archived-file audit: two legacy nodata-metadata failures. No score forecast is supported. [Full review](knowledge/73_s28_review_2026-10-29.md) · [run card](evidence/s28_run_card.json) · [preflight](evidence/s28_preflight.json) · [audit](evidence/s28_download_audit.json). These are dated observations, not a live status.
+
+---
+
+# S27 · 2026-10-28 UTC — active branch review · HISTORICAL PARALLEL BRANCH
+
+**Historical record:** prior S27 and S25 claims are not the present checkout or current uniqueness decision; see the correction at the top of this README.
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
 
@@ -53,7 +76,7 @@ The S26 review below was recorded on a different Arena branch (`arena/95d8129d-g
 
 # S25 · 2026-10-28 UTC — prior PCSE experiment · READ FIRST EVERY SESSION
 
-## UNIQUE TIF GENERATED · FORMAT VALID · HOLDOUT NEGATIVE · OK TO SUBMIT: NO
+## HISTORICAL S25 CLAIM — UNIQUENESS SUPERSEDED BY S28 · DO NOT SUBMIT
 
 | File (download to review only) | Unique? | Format valid? | HOLDOUT-DTI (95% CI) | vs random-K control | OK to submit? | Organizer score |
 |---|---|---|---|---|---|---|

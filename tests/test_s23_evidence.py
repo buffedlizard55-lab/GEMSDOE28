@@ -210,8 +210,8 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert parser.ids.count("s27-current-decision") == 1
         assert "NO FILE APPROVED" in text and "not submission-ready" in text
         return
-    if page == "s28-review.html":
-        assert parser.ids.count("s28-current-decision") == 1
+    if page == "s28c-review.html":
+        assert parser.ids.count("s28c-current-decision") == 1
         assert 'data-submission-ready="false"' in text
         assert "OK TO SUBMIT: NO" in text
     else:

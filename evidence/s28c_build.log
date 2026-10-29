@@ -59,7 +59,8 @@
   "network_requests": 0,
   "ok_to_submit": false
 }
-S28 review published offline; no file approved
+{"status": "built", "submission_ready": false, "network_requests": 0}
+S28C review published offline; no file approved
 {
   "status": "built",
   "pages": [

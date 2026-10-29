@@ -43,7 +43,7 @@ def select_leaders(inventory):
 def main():
     import rasterio
 
-    source = ROOT / "evidence/s28_priority_repository_audit.json"
+    source = ROOT / "evidence/s28c_priority_repository_audit.json"
     inventory = json.loads(source.read_text())
     if not inventory["priority_inventory_retrieved"]:
         raise ValueError("Incomplete priority inventory")
@@ -95,7 +95,7 @@ def main():
               "forensic": forensic,
               "source_inventory_sha256": sha256_file(source), "leaders": leaders,
               "new_raster_generated": False, "experiments_run": 0, "slot_selected": False}
-    (ROOT / "evidence/s28_priority_novelty.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
+    (ROOT / "evidence/s28c_priority_novelty.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
     return 0
 
 

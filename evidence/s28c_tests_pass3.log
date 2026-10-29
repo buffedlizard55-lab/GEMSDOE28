@@ -20,7 +20,7 @@ _____ test_legacy_main_root_routes_match_generated_pages_and_current_card ______
 E           assert '<!doctype ht...y>\n</html>\n' == '<!doctype ht...y>\n</html>\n'
 E             
 E             Skipping 724 identical leading characters in diff, use -v to show
-E             - ef="docs/s28-review.html">Latest review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
+E             - ef="docs/s28c-review.html">Latest review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
 E             ?            ^
 E             + ef="docs/session24-review.html">Latest review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
 E             ?           ++++++ ^
