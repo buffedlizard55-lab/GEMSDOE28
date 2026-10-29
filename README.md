@@ -1,63 +1,47 @@
-# 2026-10-29 · CURRENT CHECKOUT — READ FIRST EVERY SESSION
+# S28 · 2026-10-29 UTC — current branch decision · READ FIRST EVERY SESSION
 
-## NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
+## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
 
-**Correction:** the previous S25 PCSE research TIFF is **not unique** under the literal shared-registry rule: all of its dots overlap the registered calibration raster within 3 pixels. The 51-file comparison omitted that raster. Its prior holdout was also negative. Its historical evidence and manifest are preserved, but their uniqueness claim is superseded. [Exact audit](evidence/s28_pcse_lattice_audit.json) · [Current review and nine-site decision](knowledge/73_s28_novelty_review_2026-10-29.md) · [run card](evidence/s28_novelty_run_card.json).
+**Active branch:** `arena/09c38505-gemsdoe28`. S28 ran the top untried S26-TCB hypothesis once with the restored hash-pinned cache and the shared `gems-segment-pooled-v1` evaluator. The result is **negative**: HOLDOUT-DTI **0.0553736** (60,988 withheld positives; 95% CI **0.0518174–0.0589971**) versus paired random-K HOLDOUT-DTI **0.0674060** (95% CI **0.0643965–0.0703080**), paired ΔDTI **−0.0120324** (95% CI **−0.0163464–−0.0078205**, 0/4 folds). These are internal holdout measurements, not leaderboard estimates.
 
-Core/model inputs, cache and pinned shared evaluator/writer were restored from owner mirrors and hash checked; they are not organizer-authenticated. The [preflight](evidence/s28_novelty_preflight.json) remains blocked on the absent lane assignment, complete registry, literal control overlap, comparable frozen baseline, and old expired clock. No experiment, new candidate or weekly slot was used. Current leaderboard and allowance are unknown; no hidden-score prediction is justified.
+The TCB surface passed the pre-placement audit (29 current artifact/control comparisons; maximum absolute surface rank correlation 0.0186062), but the final 37,654-dot placement was a measured duplicate of the registered spacing-five calibration control (**1.0000000** of dots within 3 pixels). The protocol stopped before serialization. **No unique TIF was generated, no old raster was renamed, and no slot was selected.** Do not download or submit any historical file.
 
-**Standing brief:** maximize P(Win), own outcomes, do independent source-grounded geological research, and make a single-band competition GeoTIFF easy to download **only after** automated checks establish format, fresh per-feature canaries, buffered whole-segment holdout with pooled DTI and 95% CI, superiority to a comparable frozen best, both surface/final registry novelty, and separate slot selection. Record negative results; do not invent scores, claim receipt confirmation, change registry membership silently, or copy an old submission. Cap work at three experiments or two hours per authorized lane. Preserve actual prompt and source provenance: this is a concise operational summary, not a verbatim copy of the full user request; historical material below is not current checkout status. Follow [current review next steps](knowledge/73_s28_novelty_review_2026-10-29.md#next-work) first.
+- [S28 TCB result and nine-site executive summary](knowledge/73_s28_tcb_result_2026-10-29.md)
+- [S28 run card](evidence/s28_tcb_run_card.json) · [three verification passes](evidence/s28_verification_passes.json) · [current public nine-site audit](evidence/s28_priority_repository_audit.json) · [72-pair focus novelty audit](evidence/s28_focus_novelty.json)
+- [S28 entry-page review](docs/s28-review.html) · [executive summary](docs/executive-summary.html)
 
----
+The reported GEMSDOE32 **0.2778 remains USER-REPORTED / UNVERIFIED**; there is no organizer receipt binding it to the raster. The current S28 TCB candidate has no organizer score and no valid leaderboard estimate. A format checker cannot authorize an upload.
 
-# S28C · 2026-10-29 UTC — current branch evidence review · READ FIRST
+**Why this matters:** the user's literal any-registry duplicate rule makes a champion-sized placement incompatible with the registered dense calibration lattice. S28 did not evade that fact by tuning the budget or placing dots in holes. The next candidate is not authorized until a synchronized global registry, a fresh experiment clock, and a comparable baseline are available.
 
-**Parallel review on `arena/cc67fd6a-gemsdoe28`:** S25 also fails the shared calibration-control uniqueness rule; preserve the correction above.
+## S28 run card (JSON summary)
 
-## OK TO SUBMIT: NO · NO NEW TIFF · NO WEEKLY SLOT USED
-
-**Active branch:** `arena/cc67fd6a-gemsdoe28`. This section supersedes checkout-state claims in older records below. The full consolidated standing requirements and historical prompt archive remain below and must be read each session. **Maximize P(Win) · Own the Outcome:** do not fabricate score estimates or approve a duplicate just to produce a download.
-
-- **[Current executive summary: nine-site file table + submission guide](docs/s28c-review.html)** · [run card](evidence/s28c_run_card.json) · [fresh nine-repository inventory](evidence/s28c_priority_repository_audit.json) · [fresh shared-comparator results](evidence/s28c_priority_novelty.json).
-- Restored core/model inputs and nine shared-template assets from hash-pinned owner GitHub mirrors; prepared the 32-band feature cache. These are **not organizer-authenticated downloads**. Raw data and cache remain ignored.
-- All nine historical leaders fail the final-dot duplicate rule against at least one other named leader. GEMSDOE25 = GEMSDOE30 inside the footprint. GEMSDOE28 solo = GEMSDOE31 solo. The GEMSDOE32 dots are exactly the solo dots minus 2,545 catalogue-adjacent dots, with no additions; this does not establish score causation.
-- Estimated leaderboard score: **unavailable** for every artifact. Supplied scores are **USER-REPORTED / UNVERIFIED**, not ORGANIZER-CONFIRMED. No current leaderboard was fetched here.
-- [Fresh exact-file audit](evidence/s28c_download_audit.json): 869 checks, two failures on archived H40/H41 all-finite nodata metadata; no historical file is newly approved. [Fresh preflight](evidence/s28c_preflight.json): five remaining blockers, including absent lane, synchronized registry and comparable baseline, literal overlap-budget conflict, and expired configured clock. No scientific experiment was run.
-- Four previously proposed, untried geological hypotheses remain ranked in [the hypothesis registry](registry/s26_hypotheses.json) and the current summary; do not relabel them as fresh discoveries. TCB remains a proposal only. External heat-flow/probe and 3DEP hypotheses are not currently viable without source bytes/coverage verification.
-- Three-pass review: [S28C report](knowledge/73_s28c_evidence_review_2026-10-29.md). Final software checks: **714 passed, five skipped**, Ruff clean, offline site build and diff checks pass. Official reference README confirms CPU-only operation is supported; GPU is not strictly required.
-- Code merge/deployment is separate from competition promotion. Do not select or upload a weekly slot from this review.
-
-
----
-
-
----
-
-# S28 validation follow-up · 2026-10-29 UTC — this branch
-
-## NO NEW TIFF · NO APPROVED DOWNLOAD · OK TO SUBMIT: NO
-
-**Current checkout:** `arena/ff60f579-gemsdoe28`. The requested unique, high-scoring new submission could not be produced without bypassing the supplied parallel-run protocol. No method paragraph is supplied; no exclusive lane, complete synchronized registry or frozen comparable best is configured. The old experiment clock is expired and the declared dot budget fails the existing registry bound. No geological experiment, canary, new TIFF, score estimate, upload or weekly slot was selected. **Do not resubmit an old file under a new name.**
-
-- **[Current executive summary + nine-site file table + submission guide](docs/current-review.html)** · [S28 report, official-source observations and next steps](knowledge/74_s28_validation_review_2026-10-29.md) · [single current JSON run card](evidence/s28_validation_run_card.json).
-- **Restored and verified:** all pinned owner-mirror inputs, shared-template assets, and the existing cached feature stack. They are integrity-verified, **not organizer-authenticated**. Older missing-input banners below describe their original checkouts, not today's state.
-- **Validation bug fixed:** S25 sibling-manifest research TIFFs/ZIPs now receive actual raster/ZIP inspection, not only a hash-registration check. Fresh archive audit: **880 checks, two historical failures** (H40 vent / H41 spring all-finite nodata conventions). Existing files are flagged and preserved byte-identically, not silently repaired or approved.
-- **Reporting bug fixed:** generic current run-card aliases now point to S28; immutable dated S23 cards remain unchanged. Pages checks current and historical digests separately.
-- **Evidence interpretation:** GEMSDOE32's supplied 0.2778 remains **USER-REPORTED / UNVERIFIED**, with no organizer receipt or calibrated hidden-score forecast. The S25 PCSE research TIFF is NOT unique under the shared-registry rule (parallel correction: all dots within 3 px of the registered lattice) and is not approved: **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0450 (95% CI 0.0380–0.0525; 60,988 withheld positives), below same-fold random-K **HOLDOUT-DTI (gems-segment-pooled-v1)** 0.0699 (95% CI 0.0667–0.0731; same positives). These are inherited results, not new S28 experiments.
-- The normalized full standing requirements and historical prompt archive below remain mandatory reading. **Maximize P(Win) · Own the Outcome.** Fresh software results: [verification record](evidence/s28/software_verification.json). Next: explicit lane, synchronized registry and same-protocol frozen best, then a valid new run budget before testing the retained TCB proposal.
+```json
+{
+  "hypothesis": "S26-TCB",
+  "mechanism": "two-sided directional texture covariance",
+  "named_non_fault_process": "depositional facies or intrusive contacts; survey seams/resampling",
+  "holdout_dti": 0.055373609877035955,
+  "holdout_ci95": [0.051817352586122654, 0.05899706145522981],
+  "withheld_positives": 60988,
+  "paired_random_k_holdout_dti": 0.06740599054785862,
+  "paired_delta_ci95": [-0.016346412780907628, -0.00782045412725453],
+  "final_dot_overlap_vs_spacing5_control": 1.0,
+  "raster_sha256": null,
+  "validator": null,
+  "submission_name": null,
+  "note": null,
+  "verdict": "negative"
+}
+```
 
 ---
 
+# S28C · 2026-10-29 UTC — parallel main review (preserved provenance)
 
-# S28 · 2026-10-29 UTC — checkout review · READ FIRST
+Main carried additional fail-closed S28/S28C and validation reviews from parallel branches. They remain useful audit records, but they do not replace the active Arena branch's completed S28-TCB result above. See [S28C evidence review](knowledge/73_s28c_evidence_review_2026-10-29.md), [S28C run card](evidence/s28c_run_card.json), [validation review](knowledge/74_s28_validation_review_2026-10-29.md), and [current-review card](evidence/s28_validation_run_card.json). All are no-upload/no-slot records; the reported GEMSDOE32 value remains USER-REPORTED / UNVERIFIED.
 
-**NO NEW TIFF · OK TO SUBMIT: NO.** Restored hash-pinned core/model mirrors and shared tools and prepared the feature cache; mirror integrity is not organizer authentication. Fresh preflight remains BLOCKED by absent assigned lane, complete synchronized registry and comparable frozen best, the overlap-budget conflict, and the expired prior clock. No geological experiment or submission slot used. Archived-file audit: two legacy nodata-metadata failures. No score forecast is supported. [Full review](knowledge/73_s28_review_2026-10-29.md) · [run card](evidence/s28_run_card.json) · [preflight](evidence/s28_preflight.json) · [audit](evidence/s28_download_audit.json). These are dated observations, not a live status.
-
----
-
-# S27 · 2026-10-28 UTC — active branch review · HISTORICAL PARALLEL BRANCH
-
-**Historical record:** prior S27 and S25 claims are not the present checkout or current uniqueness decision; see the correction at the top of this README.
+# S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
 
@@ -95,7 +79,7 @@ The S26 review below was recorded on a different Arena branch (`arena/95d8129d-g
 
 # S25 · 2026-10-28 UTC — prior PCSE experiment · READ FIRST EVERY SESSION
 
-## HISTORICAL S25 CLAIM — UNIQUENESS SUPERSEDED BY S28 · DO NOT SUBMIT
+## UNIQUE TIF GENERATED · FORMAT VALID · HOLDOUT NEGATIVE · OK TO SUBMIT: NO
 
 | File (download to review only) | Unique? | Format valid? | HOLDOUT-DTI (95% CI) | vs random-K control | OK to submit? | Organizer score |
 |---|---|---|---|---|---|---|

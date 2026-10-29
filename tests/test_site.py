@@ -45,6 +45,28 @@ def test_site_builds_from_json_only_and_pages_exist():
         assert (DOCS / p).is_file() and (DOCS / p).stat().st_size > 2000
 
 
+def test_s28_entry_panel_is_fail_closed_and_matches_run_card():
+    card = json.loads((ROOT / "evidence" / "s28_tcb_run_card.json").read_text())
+    assert card["branch"] == "arena/09c38505-gemsdoe28"
+    assert card["verdict"] == "negative"
+    assert card["new_tiff_generated"] is False
+    assert card["ok_to_submit"] is False
+    assert card["slot_selected"] is False
+    assert card["raster_sha256"] is None
+    assert card["validator"] is None
+    assert card["submission_name"] is None
+    page = (DOCS / "index.html").read_text()
+    summary = (DOCS / "executive-summary.html").read_text()
+    standalone = (DOCS / "s28-review.html").read_text()
+    for text in (page, summary, standalone):
+        assert 'id="s28-current-decision"' in text
+        assert "No new TIFF was generated" in text
+        assert "OK TO SUBMIT: NO" in text
+        assert "Submission download locked" in text
+    assert "1.000000" in page
+    assert "HOLDOUT-DTI" in summary
+
+
 def test_build_site_workflow_tracks_generator_inputs_and_outputs():
     workflow = (ROOT / ".github" / "workflows" / "build-site.yml").read_text()
     builder = (ROOT / "scripts" / "build_site.py").read_text()
@@ -66,6 +88,16 @@ def test_build_site_workflow_tracks_generator_inputs_and_outputs():
         "evidence/s27_run_card.json",
         "knowledge/72_s27_active_branch_review_2026-10-28.md",
         "scripts/build_s27_review.py",
+        "evidence/s28_tcb_run_card.json",
+        "knowledge/73_s28_tcb_result_2026-10-29.md",
+        "scripts/build_s28_review.py",
+        "docs/data/s28_tcb_run_card.json",
+        "docs/s28-review.html",
+        "evidence/s28_priority_repository_audit.json",
+        "evidence/s28_focus_novelty.json",
+        "evidence/s28_verification_passes.json",
+        "scripts/run_s28_tcb.py",
+        "src/gems27/tcb.py",
         "knowledge/39_session14_closeout_2026-10-03.md",
         "AI_DISCLOSURE.md",
         "scripts/build_site.py",
