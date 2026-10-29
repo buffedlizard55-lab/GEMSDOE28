@@ -1,0 +1,55 @@
+{
+  "generated": "2026-10-29T00:00:00Z",
+  "scope": "S29 irregularities. Kept separate from registry/irregularities.json, which is byte-pinned by an S23 audit binding.",
+  "irregularities": [
+    {
+      "id": "s29-leaderboard-anchor-conflict",
+      "date": "2026-10-29",
+      "severity": "conflict",
+      "issue": "Prompt anchors 0.4413 and 0.3195 are not on the public board read 2026-10-29 (ranks 1-47 checked). #1 is 0.4544; #26 is 0.3328. README S27b recorded #26 = 0.3195 at an earlier date.",
+      "action": "Record as dated observations. Do not use either prompt anchor as a fact. Re-read the board with a timestamp before any claim. See knowledge/75 section 4."
+    },
+    {
+      "id": "s29-score-string-0-2777-unsourced",
+      "date": "2026-10-29",
+      "severity": "unverified",
+      "issue": "The 0.2777 score string has no source in the repo. Only 0.2778 (GEMSDOE32, user-reported) appears in records.",
+      "action": "Treat 0.2777 as an unsourced variant. Require an organizer receipt for any score claim."
+    },
+    {
+      "id": "s29-allfinite-outside-footprint-variance",
+      "date": "2026-10-29",
+      "severity": "format-question",
+      "issue": "Of 52 historical GEMSDOE rasters, 27 have non-NaN values outside the footprint (all-finite variants write 0) and 25 have no nodata tag. The organizer text says nodata/NaN outside bounds. All 52 have in-range values inside the footprint.",
+      "action": "Flag as a conformance question. Do not claim it causes the portal error. Test only with a deliberate, approved upload. Evidence: evidence/s29_lattice_overlap_audit.json."
+    },
+    {
+      "id": "s29-lane-rule-non-discriminating",
+      "date": "2026-10-29",
+      "severity": "blocking",
+      "issue": "The literal 70%/3 px lane rule fails all 52 historical dotted rasters and random placements of the same budget (about 99.87% overlap with the calibration lattice). It does not discriminate between methods.",
+      "action": "User decision required: does the internal lane rule apply, and how? The official rules contain no uniqueness rule. Evidence: evidence/s29_lattice_overlap_audit.json."
+    },
+    {
+      "id": "s29-tcb-ranking-attribution-failed",
+      "date": "2026-10-29",
+      "severity": "negative",
+      "issue": "Random priority over the same ridge candidates and 5 px spacing scores the same as the TCB-ranked placement (0.083234 vs 0.083813 HOLDOUT-DTI). The holdout gain is not attributable to the TCB ranking.",
+      "action": "Do not promote. Run H-S29-A (surface-independent ridge null) before any geology claim. Evidence: evidence/s29_ridge_control_run_card.json."
+    },
+    {
+      "id": "s29-canary-numeric-auc-missing",
+      "date": "2026-10-29",
+      "severity": "limitation",
+      "issue": "The shared holdout canary API returns pass/fail at threshold 0.90 but not the numeric AUC, so the surface canary value is not recorded.",
+      "action": "Record pass/fail only. Add numeric AUC output to the shared template in a follow-up (fix once in the template)."
+    },
+    {
+      "id": "s29-branch-name-mismatch-s28-builder",
+      "date": "2026-10-29",
+      "severity": "process",
+      "issue": "README S28 header and scripts/build_s28_review.py refer to branch arena/09c38505-gemsdoe28. The active branch is arena/9a3a5294-gemsdoe28.",
+      "action": "S29 builder records the active branch. S28 panel retained unchanged. Reconcile branch names in a follow-up."
+    }
+  ]
+}
