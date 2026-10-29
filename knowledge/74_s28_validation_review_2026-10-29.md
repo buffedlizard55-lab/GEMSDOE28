@@ -29,7 +29,15 @@ The two archive failures are `s22_archive_h40_vent_allfinite_outside_zero` and `
 
 ## Parallel correction integrated before PR
 
-While this branch was being verified, PR #79 merged an independent audit of the historical S25 TIFF against the registered calibration control. Its prior local-only uniqueness claim is superseded: `evidence/s28_pcse_lattice_audit.json` reports all candidate dots within 3 pixels of that control. This is geometry evidence, not a HOLDOUT-DTI or a new model experiment. Preserve the parallel run cards (`s28_run_card.json` and `s28_novelty_run_card.json`) and reports separately; this branch uses `s28_validation_run_card.json` and this `74_s28_validation_review` namespace. The canonical current report includes the correction. The original S25 files are unchanged. See the parallel audit and its source hashes for provenance; this session did not claim a new pre-placement test.
+While this branch was being verified, PR #79 merged an independent audit of the historical S25 TIFF against the registered calibration control. Its prior local-only uniqueness claim is superseded: `evidence/s28_pcse_lattice_audit.json` reports all candidate dots within 3 pixels of that control. This is geometry evidence, not a HOLDOUT-DTI or a new model experiment. Preserve the parallel run cards (`s28_run_card.json` and `s28_novelty_run_card.json`) and reports separately; this branch uses `s28_validation_run_card.json` and this `74_s28_validation_review` namespace. The canonical current report includes the correction. The original S25 files are unchanged. The result was then independently reproduced in this checkout using the existing hash-pinned shared comparator and validator: `evidence/s28/pcse_lattice_reproduction.json` returns `DUPLICATE_STOP`, max candidate-side 3 px overlap 1.0. This read-only archive audit is not a geological experiment or new pre-placement test. It verifies one sufficient rejecting comparator, not completeness. Command:
+
+```sh
+.venv/bin/python scripts/audit_registry_feasibility.py \
+  --control data/s28/lattice.tif \
+  --candidate docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif \
+  --out evidence/s28/pcse_lattice_reproduction.json
+# expected exit 1: DUPLICATE_STOP
+```
 
 ## Why GEMSDOE32's supplied 0.2778 may have improved
 
@@ -70,7 +78,7 @@ The prompt's conflicting 0.3195/0.4413 leaderboard maxima are not current verifi
 ## Three-pass review
 
 1. **Implement and verify:** restore inputs/shared stack, prepare cache, run existing preflight and exact archive audit; implement missing sibling-manifest inspections and publish the current negative executive summary/card.
-2. **Bug/edge-case review:** synthetic matching-hash corrupt-content tests, malformed manifests, shifted grid, range/NaN/Inf, ZIP/path/symlink tests; separate current/historical deployment digests; preserve historical bytes and scientific evidence. Initial full-suite failures exposed tests that incorrectly froze the generic current alias to S23; update them to require S28 for generic aliases and S23 for immutable dated aliases, retaining exact-byte assertions and local-link checks.
+2. **Bug/edge-case review:** synthetic matching-hash corrupt-content tests, malformed manifests, shifted grid, range/NaN/Inf, ZIP/path/symlink tests; separate current/historical deployment digests; preserve historical bytes and scientific evidence. Fresh full-suite result after parallel integration: **714 passed, no skips, 34 Rasterio pending-deprecation warnings, 9 subtests passed**. Ruff passes. Initial full-suite failures exposed tests that incorrectly froze the generic current alias to S23; update them to require S28 for generic aliases and S23 for immutable dated aliases, retaining exact-byte assertions and local-link checks.
 3. **Requirements recheck:** record software results in `evidence/s28/software_verification.json`; verify offline build reproducibility, canonical aliases, nine rows, honest source/score labels, no approved upload, no new TIFF, no experiment/slot selected. Software passes do not confer scientific validation or promotion.
 
 ## Prioritized next-session work and limitations

@@ -2,10 +2,9 @@
 """S25 add-on: publish the PCSE decision panel and its standalone page. Standard library only.
 
 Runs from ``scripts/build_active_review.py`` after the generated site is built, so CI's clean-diff
-check still holds. It reads only ``evidence/s25_pcse_run_card.json`` and
-``evidence/s25_pcse_ablation.json``; it performs no network requests and never changes a
-hash-bound historical file. The panel reports the file as UNIQUE and FORMAT-VALID but NOT OK to
-submit, because its HOLDOUT-DTI is below the random-placement control.
+check still holds. It reads the S25 card and ablation plus the S28 shared-registry audit; it performs no network requests and never changes a
+hash-bound historical file. The panel reports the historical limited comparison, superseded by the S28 shared-registry
+control audit. The file is a duplicate under the literal rule and is not OK to submit.
 """
 from __future__ import annotations
 
@@ -17,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 CARD = ROOT / "evidence" / "s25_pcse_run_card.json"
 ABLATION = ROOT / "evidence" / "s25_pcse_ablation.json"
-RESEARCH_MANIFEST = DOCS / "downloads" / "s25_research_manifest.json"
+AUDIT = ROOT / "evidence" / "s28_pcse_lattice_audit.json"
 REPO_BLOB = "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/"
 STANDALONE = DOCS / "s25" / "index.html"
 PANEL_ID = "s25-pcse-decision"
@@ -48,9 +47,13 @@ def _load() -> tuple[dict, dict]:
 def panel(prefix: str) -> str:
     card, abl = _load()
     sub = card["submission"]
-    note = json.loads(RESEARCH_MANIFEST.read_text(encoding="utf-8"))["s25_pcse_research"]["note"]
-    if len(note) > 140:
-        raise ValueError("S25 note exceeds 140 characters")
+    audit = json.loads(AUDIT.read_text(encoding="utf-8"))
+    candidate = audit["inherited_candidate"]
+    if (audit.get("status") != "DUPLICATE_STOP"
+            or candidate.get("sha256") != sub["sha256_tif"]
+            or candidate.get("duplicate_under_literal_rule") is not True
+            or not 0.70 < candidate["final_dot_comparison"]["max_dot_overlap"] <= 1):
+        raise ValueError("Missing or inconsistent S25 shared-registry duplicate audit")
     name = html.escape(sub["name"], quote=True)
     dti = card["holdout_dti"]["value"]
     ci = card["holdout_dti"]["ci95"]["interval"]
@@ -62,13 +65,13 @@ def panel(prefix: str) -> str:
     ab_energy = abl["results"]["energy_only"]["dti"]
     return f'''<section class="section callout-danger" id="{PANEL_ID}" aria-label="S25 PCSE submission decision">
 <p class="eyebrow">S25 · 2026-10-28 UTC · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
-<h2>S25 unique TIFF: UNIQUE + FORMAT-VALID, but HOLDOUT-NEGATIVE · OK TO SUBMIT: NO</h2>
+<h2>S25 research TIFF: DUPLICATE + HOLDOUT-NEGATIVE · OK TO SUBMIT: NO</h2>
 <p><strong>Download (review only):</strong> <a href="{prefix}{name}">{name}</a> (<a href="{prefix}{html.escape(sub["zip"], quote=True)}">ZIP</a>)</p>
 <table>
 <thead><tr><th>Question</th><th>Answer</th></tr></thead>
 <tbody>
-<tr><td>Unique vs the 51 registry TIFFs?</td><td>YES. Max 3 px overlap {overlap:.4f} (rule &gt; 0.70); max |Spearman| {rho:.4f} (rule &gt; 0.90).</td></tr>
-<tr><td>Format checks</td><td>PASS in the prior S25 exact validation; current basic Rasterio inspection agrees on band, CRS, shape, transform, mask, and [0,1]. Current shared exact audit is FAIL CLOSED because the local sample template and labels are absent.</td></tr>
+<tr><td>Uniqueness under the literal shared-registry rule</td><td><strong>NO.</strong> All candidate dots (100%) are within 3 px of the registered calibration lattice. A prior comparison of 51 local TIFFs reported {overlap:.4f} overlap and {rho:.4f} max |surface Spearman| but omitted that control; it does not establish global uniqueness. The original surface was not checked against this control.</td></tr>
+<tr><td>Format checks</td><td>PASS in the prior S25 exact validation; current basic Rasterio inspection agrees on band, CRS, shape, transform, mask, and [0,1]. A fresh check against the hash-pinned owner-mirror template also passes the local format checks; this does not guarantee portal acceptance.</td></tr>
 <tr><td>Fresh exact-file audit (S26 checkout)</td><td><strong>FAIL CLOSED</strong> at the time (sample and labels were missing). Historical; superseded by the S27 row below.</td></tr>
 <tr><td>Exact-file audit (S27, restored inputs)</td><td>Run against the restored sample template (owner mirror, SHA-256 pinned, not organizer-authenticated). The S25 file passes every check: EPSG:32611 grid, single float32 band, 37,654 dots, NaN outside footprint, values in [0,1], no catalogue overlap, registered in manifest. Audit overall: <strong>FAIL on two historical archive variants</strong> (H40/H41 all-finite files carry a NaN nodata tag). Those are archive-only, DO NOT SUBMIT, and were not rewritten.</td></tr>
 <tr><td>HOLDOUT-DTI (evaluator gems-segment-pooled-v1)</td><td><strong>{dti:.4f}</strong> (95% CI {_ci(ci)}); {card["holdout_dti"]["n_withheld_positive_pixels"]:,} withheld positives.</td></tr>
@@ -76,11 +79,11 @@ def panel(prefix: str) -> str:
 <tr><td>Ablation (diagnostic only)</td><td>Step-polarity term alone {ab_step:.4f}; energy term alone {ab_energy:.4f}.</td></tr>
 <tr><td>Organizer score</td><td>None. Not organizer-confirmed.</td></tr>
 <tr><td><strong>OK to download?</strong></td><td>Yes, for review and audit only.</td></tr>
-<tr><td><strong>OK to submit?</strong></td><td><strong>NO.</strong> It scores below a random-placement control on the shared holdout.</td></tr>
+<tr><td><strong>OK to submit?</strong></td><td><strong>NO.</strong> It fails the literal registry overlap rule and scores below a random-placement control on the shared holdout.</td></tr>
 </tbody>
 </table>
-<p><strong>Note ({len(note)} characters):</strong> {html.escape(note, quote=False)}</p>
-<p>Full record: <a href="{REPO_BLOB}knowledge/69_s25_pcse_result.md">S25 PCSE result</a> · <a href="{REPO_BLOB}evidence/s25_pcse_run_card.json">run card</a> · <a href="{REPO_BLOB}evidence/s25_pcse_ablation.json">ablation</a> · <a href="{REPO_BLOB}evidence/s25_pcse_novelty.json">novelty</a>. <a href="{REPO_BLOB}knowledge/71_s26_review_2026-10-28.md">Current S26 review and candidate hypotheses</a> · <a href="{REPO_BLOB}registry/s26_hypotheses.json">machine-readable hypothesis ranking</a>. Official public leaderboard observed 2026-10-28: #1 0.4544; #26 0.3195; the prompt's 0.4413 is not on the board. Public-board rank is not the private prize score.</p>
+<p>No upload note: this file is not eligible for submission.</p>
+<p>Full record: <a href="{REPO_BLOB}knowledge/69_s25_pcse_result.md">S25 PCSE result</a> · <a href="{REPO_BLOB}evidence/s25_pcse_run_card.json">run card</a> · <a href="{REPO_BLOB}evidence/s25_pcse_ablation.json">ablation</a> · <a href="{REPO_BLOB}evidence/s25_pcse_novelty.json">historical limited novelty</a> · <a href="{REPO_BLOB}evidence/s28_pcse_lattice_audit.json">superseding lattice audit</a>. <a href="{REPO_BLOB}knowledge/71_s26_review_2026-10-28.md">Historical S26 review and candidate hypotheses</a> · <a href="{REPO_BLOB}registry/s26_hypotheses.json">machine-readable hypothesis ranking</a>. Official public leaderboard observed 2026-10-28: #1 0.4544; #26 0.3195; the prompt's 0.4413 is not on the board. Public-board rank is not the private prize score.</p>
 </section>'''
 
 

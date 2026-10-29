@@ -116,6 +116,10 @@ on:
       - 'evidence/s27_run_card.json'
       - 'knowledge/72_s27_active_branch_review_2026-10-28.md'
       - 'scripts/build_s27_review.py'
+      - 'scripts/build_s28_review.py'
+      - 'scripts/build_s25_page.py'
+      - 'evidence/s28_pcse_lattice_audit.json'
+      - 'evidence/s28_novelty_run_card.json'
       - 'tests/test_site.py'
       - 'scripts/build_active_review.py'
       - 'scripts/build_current_review.py'
@@ -251,6 +255,10 @@ on:
       - 'evidence/s27_run_card.json'
       - 'knowledge/72_s27_active_branch_review_2026-10-28.md'
       - 'scripts/build_s27_review.py'
+      - 'scripts/build_s28_review.py'
+      - 'scripts/build_s25_page.py'
+      - 'evidence/s28_pcse_lattice_audit.json'
+      - 'evidence/s28_novelty_run_card.json'
       - 'tests/test_site.py'
       - 'scripts/build_active_review.py'
       - 'scripts/build_current_review.py'
@@ -289,4 +297,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py && python scripts/build_active_review.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/data/current_run_card_2026-10-26.json docs/data/active_checkout_review_2026-10-27.json docs/data/s24_repository_review_run_card.json docs/data/s27_run_card.json docs/data/current_run_card.json index.html executive-summary.html data/current_run_card_2026-10-26.json
+        run: git diff --exit-code -- docs/*.html docs/s25/index.html docs/data/current_run_card_2026-10-26.json docs/data/active_checkout_review_2026-10-27.json docs/data/s24_repository_review_run_card.json docs/data/s27_run_card.json docs/data/s28_run_card.json index.html executive-summary.html data/current_run_card_2026-10-26.json

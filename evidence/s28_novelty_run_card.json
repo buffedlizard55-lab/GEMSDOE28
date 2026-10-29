@@ -1,0 +1,44 @@
+{
+  "schema": "gems28-s28-run-card-v1",
+  "branch": "arena/ee7dabd4-gemsdoe28",
+  "hypothesis": "No assigned lane; S26-TCB is a proposal, not an experiment.",
+  "mechanism": "Proposed two-sided directional texture covariance discontinuity in RTP, TMI gradient and conductance.",
+  "non_fault_mimic": "Survey leveling seams or depositional facies boundaries can change texture.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN",
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null
+  },
+  "registry": {
+    "complete": false,
+    "surface": "not checked; no new surface",
+    "dots": "no new dots",
+    "historical_s25_control": {
+      "dot_overlap_fraction": 1.0,
+      "raw_spearman": -0.0002741088435606644,
+      "duplicate": true,
+      "audit": "evidence/s28_pcse_lattice_audit.json"
+    }
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "NOT RUN: no new raster",
+    "no_nan_inside": null,
+    "range_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null
+  },
+  "submission_name": null,
+  "note": "No new TIFF; S25 fails the shared-registry overlap rule. No slot selected.",
+  "verdict": "negative",
+  "submission_ready": false,
+  "slot_selected": false,
+  "experiments_run": 0,
+  "historical_s25_sha256": "c6d722971070f6624a9b2a374c2858db46137f64dcd74805f160ba13f179edef",
+  "preflight": "evidence/s28_novelty_preflight.json",
+  "report": "knowledge/73_s28_novelty_review_2026-10-29.md"
+}

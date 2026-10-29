@@ -1,4 +1,16 @@
-# S28 · 2026-10-29 UTC — READ FIRST EVERY SESSION
+# 2026-10-29 · CURRENT CHECKOUT — READ FIRST EVERY SESSION
+
+## NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
+
+**Correction:** the previous S25 PCSE research TIFF is **not unique** under the literal shared-registry rule: all of its dots overlap the registered calibration raster within 3 pixels. The 51-file comparison omitted that raster. Its prior holdout was also negative. Its historical evidence and manifest are preserved, but their uniqueness claim is superseded. [Exact audit](evidence/s28_pcse_lattice_audit.json) · [Current review and nine-site decision](knowledge/73_s28_novelty_review_2026-10-29.md) · [run card](evidence/s28_novelty_run_card.json).
+
+Core/model inputs, cache and pinned shared evaluator/writer were restored from owner mirrors and hash checked; they are not organizer-authenticated. The [preflight](evidence/s28_novelty_preflight.json) remains blocked on the absent lane assignment, complete registry, literal control overlap, comparable frozen baseline, and old expired clock. No experiment, new candidate or weekly slot was used. Current leaderboard and allowance are unknown; no hidden-score prediction is justified.
+
+**Standing brief:** maximize P(Win), own outcomes, do independent source-grounded geological research, and make a single-band competition GeoTIFF easy to download **only after** automated checks establish format, fresh per-feature canaries, buffered whole-segment holdout with pooled DTI and 95% CI, superiority to a comparable frozen best, both surface/final registry novelty, and separate slot selection. Record negative results; do not invent scores, claim receipt confirmation, change registry membership silently, or copy an old submission. Cap work at three experiments or two hours per authorized lane. Preserve actual prompt and source provenance: this is a concise operational summary, not a verbatim copy of the full user request; historical material below is not current checkout status. Follow [current review next steps](knowledge/73_s28_novelty_review_2026-10-29.md#next-work) first.
+
+---
+
+# S28 validation follow-up · 2026-10-29 UTC — this branch
 
 ## NO NEW TIFF · NO APPROVED DOWNLOAD · OK TO SUBMIT: NO
 
@@ -13,9 +25,16 @@
 
 ---
 
-## Historical and parallel-session records below — not current checkout authorization
 
-# S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
+# S28 · 2026-10-29 UTC — checkout review · READ FIRST
+
+**NO NEW TIFF · OK TO SUBMIT: NO.** Restored hash-pinned core/model mirrors and shared tools and prepared the feature cache; mirror integrity is not organizer authentication. Fresh preflight remains BLOCKED by absent assigned lane, complete synchronized registry and comparable frozen best, the overlap-budget conflict, and the expired prior clock. No geological experiment or submission slot used. Archived-file audit: two legacy nodata-metadata failures. No score forecast is supported. [Full review](knowledge/73_s28_review_2026-10-29.md) · [run card](evidence/s28_run_card.json) · [preflight](evidence/s28_preflight.json) · [audit](evidence/s28_download_audit.json). These are dated observations, not a live status.
+
+---
+
+# S27 · 2026-10-28 UTC — active branch review · HISTORICAL PARALLEL BRANCH
+
+**Historical record:** prior S27 and S25 claims are not the present checkout or current uniqueness decision; see the correction at the top of this README.
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
 
@@ -53,7 +72,7 @@ The S26 review below was recorded on a different Arena branch (`arena/95d8129d-g
 
 # S25 · 2026-10-28 UTC — prior PCSE experiment · READ FIRST EVERY SESSION
 
-## UNIQUE TIF GENERATED · FORMAT VALID · HOLDOUT NEGATIVE · OK TO SUBMIT: NO
+## HISTORICAL S25 CLAIM — UNIQUENESS SUPERSEDED BY S28 · DO NOT SUBMIT
 
 | File (download to review only) | Unique? | Format valid? | HOLDOUT-DTI (95% CI) | vs random-K control | OK to submit? | Organizer score |
 |---|---|---|---|---|---|---|

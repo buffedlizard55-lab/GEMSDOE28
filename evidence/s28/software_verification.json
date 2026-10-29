@@ -1,11 +1,11 @@
 {
-  "observed_utc": "2026-10-29T14:27:45.010772+00:00",
+  "observed_utc": "2026-10-29T14:30:00.723342+00:00",
   "scope": "Software and local HTTP checks only; not a scientific experiment or portal submission",
   "passes_completed": 3,
   "pytest": {
     "command": ".venv/bin/python -m pytest -q",
     "exit_code": 0,
-    "summary": "710 passed, 34 warnings, 9 subtests passed in 26.09s",
+    "summary": "714 passed, 34 warnings, 9 subtests passed in 25.87s",
     "skipped": 0
   },
   "ruff": {
@@ -17,13 +17,13 @@
     "result": "PASS",
     "repeat_bytes_identical": true,
     "sha256": {
-      "docs/index.html": "fed354a983004f66070e04ea360c182aaa533a193d47521add62c73c3fd3d5c6",
-      "docs/executive-summary.html": "ddbd456d0bfdecc70b265c637e77da1bc325c5ff4c308e324d90721877a7ee69",
-      "docs/current-review.html": "5708cf20376e99392438b20152c092d33c06654606bc5c10671b9dd385dc863e",
-      "docs/data/current_run_card.json": "b2756f538e34a8c7c3fdd50be9a4dd9993f948d6a78ed966982e375a4d074650",
-      "index.html": "b004d7d69b5275c8908d359b5f271cf530e20b4ba02d0c9f6e293b5dc1ffe636",
-      "executive-summary.html": "1c5062700189fc4bcc50d28908eefb990a166ddbbf13ccb1621505fcaccb98e7",
-      "data/current_run_card.json": "b2756f538e34a8c7c3fdd50be9a4dd9993f948d6a78ed966982e375a4d074650",
+      "docs/index.html": "4dcc556c6ead75651ce1ea9ce48b82229c201dbd84cf0ce5da133ef2f4cce64d",
+      "docs/executive-summary.html": "c7dedea83ee970c213c7dd47f560f93651f3ed64567950c155504256405d91e1",
+      "docs/current-review.html": "b02a467c67a3e3895a7c71738f38573081773fb9da5d0f9559b00ac2a73eb186",
+      "docs/data/current_run_card.json": "baeeb8cffac7d5c69aca29b34042e5b33e2ac263e73b29c00c05563e059f06d6",
+      "index.html": "258910bcfa24c30e63415fa4a699bfa282538a6e88d7595e7eaaa8f704e8cd7c",
+      "executive-summary.html": "da5d34a400d5c2463e070200c335e283ad613e847355b28ca4eabcb476ff6be2",
+      "data/current_run_card.json": "baeeb8cffac7d5c69aca29b34042e5b33e2ac263e73b29c00c05563e059f06d6",
       "docs/data/current_run_card_2026-10-27.json": "d373768a12d9df61c857caf997bfde173037d151f233c93823c185f3ecad89bd"
     }
   },
@@ -64,5 +64,15 @@
   },
   "experiments_run": 0,
   "submission_ready": false,
-  "slot_selected": false
+  "slot_selected": false,
+  "parallel_integration": {
+    "origin_main_commit": "425d927",
+    "source_PR": 79,
+    "preserved_parallel_cards": [
+      "evidence/s28_run_card.json",
+      "evidence/s28_novelty_run_card.json"
+    ],
+    "this_review_card": "evidence/s28_validation_run_card.json",
+    "historical_duplicate_reproduced": true
+  }
 }
