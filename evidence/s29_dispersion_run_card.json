@@ -1,0 +1,102 @@
+{
+  "run_card_schema": "s29-dispersion-v1",
+  "run_id": "S29-DISPERSED-TCB-20261029",
+  "started_at_utc": "2026-10-29T16:54:13Z",
+  "generated_utc": "2026-10-29T16:55:53Z",
+  "hypothesis": "Spacing, not geology, explains the lattice control's holdout gain; a spacing-constrained TCB placement should match or beat the lattice-subset control if the TCB surface carries signal beyond coverage.",
+  "candidate": "TCB surface (S26/S28 operator, unchanged) + minimum-spacing selection R_MIN=5 px",
+  "r_min_px": 5.0,
+  "budget_dots_per_fold": 37654,
+  "fold_shortfall_dots": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "fold_ridge_candidates": [
+    701243,
+    708929,
+    730053,
+    715379
+  ],
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": 0.08381252085317022,
+    "ci95": [
+      0.07978802043533167,
+      0.08781474445673523
+    ],
+    "withheld_positives": 60988,
+    "n_emitted_scored": 44480
+  },
+  "random_k": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": 0.06740599054785862,
+    "ci95": [
+      0.0643965146556148,
+      0.0703079936084281
+    ],
+    "withheld_positives": 60988,
+    "n_emitted_scored": 38080
+  },
+  "lattice_subset": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems-segment-pooled-v1",
+    "dti": 0.07483612428380033,
+    "ci95": [
+      0.0717337811236531,
+      0.07785003892086617
+    ],
+    "withheld_positives": 60988,
+    "n_emitted_scored": 37945
+  },
+  "paired_vs_random_k": {
+    "candidate_dti": 0.08381252085317022,
+    "baseline_dti": 0.06740599054785862,
+    "paired_delta_dti": 0.016406530305311598,
+    "paired_delta_ci95": [
+      0.01204028267336565,
+      0.02089441563366668
+    ],
+    "fold_wins": 4,
+    "n_folds": 4
+  },
+  "paired_vs_lattice_subset": {
+    "candidate_dti": 0.08381252085317022,
+    "baseline_dti": 0.07483612428380033,
+    "paired_delta_dti": 0.008976396569369882,
+    "paired_delta_ci95": [
+      0.004006078686026057,
+      0.013917194236352218
+    ],
+    "fold_wins": 4,
+    "n_folds": 4
+  },
+  "feature_canary": {
+    "passed": true,
+    "note": "Surface is label-free; canary tests fold-visible one-feature AUC only.",
+    "summary": {
+      "threshold": 0.9,
+      "passed": true
+    }
+  },
+  "registry_global_overlap": {
+    "dots": 37654,
+    "fraction_within_3px_of_calibration_lattice": 1.0,
+    "binary_pearson_vs_calibration_lattice": 0.0002713708163830744,
+    "duplicate_rule_70pct_triggered": true
+  },
+  "uses_catalogue_in_surface": false,
+  "new_tiff_generated": false,
+  "slot_selected": false,
+  "experiments_run_this_session": 2,
+  "experiment_cap": 3,
+  "verdict": "negative",
+  "verdict_note": "Holdout-positive against controls, but attribution failed and the registry duplicate gate fails. No raster serialized.",
+  "cache_sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+  "verdict_auto_at_run": "promote",
+  "verdict_superseded_by": "evidence/s29_ridge_control_run_card.json",
+  "verdict_override_reason": "The automated rule promoted on holdout superiority alone. Experiment 3 showed that random priority over the same ridge candidates and spacing scores the same (0.08323 vs 0.08381), so the TCB ranking is not shown to cause the gain. The final placement also duplicates the calibration lattice (100% within 3 px). Not promoted."
+}
