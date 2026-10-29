@@ -13,7 +13,52 @@
   <a class="brand" href="docs/index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
   <nav aria-label="Main navigation"><a href="docs/index.html">Overview</a><a href="docs/executive-summary.html">Executive summary</a><a href="docs/session24-review.html">Latest review</a><a href="docs/research.html">Research</a><a href="docs/cross-site-review.html">Nine-site review</a><a href="docs/sources.html">Sources</a><a href="docs/archive.html">Archive</a></nav>
 </div></header>
-<main><section class="readiness-banner callout-danger" id="current-submission" aria-label="Current submission readiness" data-submission-ready="false">
+<main><section class="section callout-danger" id="s28-current-decision" aria-label="Latest submission decision" data-submission-ready="false">
+<p class="eyebrow">29 OCT 2026 · CURRENT CHECKOUT REVIEW</p>
+<h2>NO FILE APPROVED · OK TO SUBMIT: NO</h2>
+<p>No new TIFF, score estimate, geological experiment, or submission slot. An explicit parallel lane, synchronized registry and comparable frozen baseline are missing. A separate selector must decide any future submission.</p>
+<p><strong>Correction:</strong> the old S25 PCSE TIFF is a duplicate under the literal shared-registry rule: 100.0% of its dots are within 3 pixels of a registered calibration raster. Its earlier “unique” claim applied only to a limited local comparison and is superseded. It also failed its prior holdout. Do not submit it.</p>
+<p>The nine-site historical scorecard below reports user-supplied scores, not organizer-confirmed receipts. A reliable hidden-score estimate is unavailable. <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/73_s28_review_2026-10-29.md">Full review and nine-site decision</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s28_pcse_lattice_audit.json">Exact duplicate audit</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s28_run_card.json">JSON run card</a>.</p>
+</section><section class="section callout-danger" id="s27-current-decision" aria-label="Historical S27 submission decision" data-submission-ready="false">
+<p class="eyebrow">S27 · 2026-10-28 UTC · PRIOR BRANCH REVIEW · NO NEW TIFF</p>
+<h2>S27 decision (historical): NO FILE APPROVED · OK TO SUBMIT: NO</h2>
+<p><strong>No new submission was generated.</strong> S26-TCB is only a ranked, untested hypothesis; preflight was blocked and exact-file validation failed closed in the S27 checkout. The archived S25 PCSE TIFF is <strong>research/audit only, not submission-ready</strong>; do not upload it.</p>
+<table><thead><tr><th>Gate</th><th>Current result</th></tr></thead><tbody>
+<tr><td>Current candidate HOLDOUT-DTI</td><td>Not run; no S27 candidate exists.</td></tr>
+<tr><td>Prior S25 PCSE</td><td>HOLDOUT-DTI (gems-segment-pooled-v1) 0.0450; 95% CI 0.0380–0.0525; 60,988 withheld positives. Below same-fold random-K HOLDOUT-DTI 0.0699; this is not a leaderboard score.</td></tr>
+<tr><td>S27 exact validator</td><td>FAIL CLOSED in that historical checkout: local sample submission and labels were absent. No approval.</td></tr>
+<tr><td>Unique new raster / upload</td><td>No new raster; no novelty result; no slot selected.</td></tr>
+</tbody></table>
+<p><strong>Research-only archive:</strong> <a href="docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif">gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif</a>. Existing artifact link is provided for audit, not upload.</p>
+<p><a href="docs/s27-review.html">Open the S27 review page</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/72_s27_active_branch_review_2026-10-28.md">Read the full report and nine-site table</a> · <a href="docs/data/s27_run_card.json" download>Download S27 JSON run card</a></p>
+</section><section class="section callout-danger" id="s25-pcse-decision" aria-label="S25 PCSE submission decision">
+<p class="eyebrow">S25 · 2026-10-28 UTC · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
+<h2>S25 research TIFF: DUPLICATE + HOLDOUT-NEGATIVE · OK TO SUBMIT: NO</h2>
+<p><strong>Download (review only):</strong> <a href="docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif">gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.tif</a> (<a href="docs/downloads/gems28-s25-pcse-scarp-energy-k37654-20261028-4af5ddbb4b50-nan.zip">ZIP</a>)</p>
+<table>
+<thead><tr><th>Question</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>Uniqueness under the literal shared-registry rule</td><td><strong>NO.</strong> All candidate dots (100%) are within 3 px of the registered calibration lattice. A prior comparison of 51 local TIFFs reported 0.4437 overlap and 0.0618 max |surface Spearman| but omitted that control; it does not establish global uniqueness. The original surface was not checked against this control.</td></tr>
+<tr><td>Format checks</td><td>PASS in the prior S25 exact validation; current basic Rasterio inspection agrees on band, CRS, shape, transform, mask, and [0,1]. A fresh check against the hash-pinned owner-mirror template also passes the local format checks; this does not guarantee portal acceptance.</td></tr>
+<tr><td>Fresh exact-file audit (S26 checkout)</td><td><strong>FAIL CLOSED</strong> at the time (sample and labels were missing). Historical; superseded by the S27 row below.</td></tr>
+<tr><td>Exact-file audit (S27, restored inputs)</td><td>Run against the restored sample template (owner mirror, SHA-256 pinned, not organizer-authenticated). The S25 file passes every check: EPSG:32611 grid, single float32 band, 37,654 dots, NaN outside footprint, values in [0,1], no catalogue overlap, registered in manifest. Audit overall: <strong>FAIL on two historical archive variants</strong> (H40/H41 all-finite files carry a NaN nodata tag). Those are archive-only, DO NOT SUBMIT, and were not rewritten.</td></tr>
+<tr><td>HOLDOUT-DTI (evaluator gems-segment-pooled-v1)</td><td><strong>0.0450</strong> (95% CI 0.0380 to 0.0525); 60,988 withheld positives.</td></tr>
+<tr><td>Random-placement control, same folds</td><td>0.0699. PCSE minus control: -0.0248 (95% CI -0.0324 to -0.0169); PCSE wins 0 of 4 folds.</td></tr>
+<tr><td>Ablation (diagnostic only)</td><td>Step-polarity term alone 0.0373; energy term alone 0.0377.</td></tr>
+<tr><td>Organizer score</td><td>None. Not organizer-confirmed.</td></tr>
+<tr><td><strong>OK to download?</strong></td><td>Yes, for review and audit only.</td></tr>
+<tr><td><strong>OK to submit?</strong></td><td><strong>NO.</strong> It fails the literal registry overlap rule and scores below a random-placement control on the shared holdout.</td></tr>
+</tbody>
+</table>
+<p>No upload note: this file is not eligible for submission.</p>
+<p>Full record: <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/69_s25_pcse_result.md">S25 PCSE result</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_run_card.json">run card</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_ablation.json">ablation</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s25_pcse_novelty.json">historical limited novelty</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/evidence/s28_pcse_lattice_audit.json">superseding lattice audit</a>. <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/71_s26_review_2026-10-28.md">Historical S26 review and candidate hypotheses</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/registry/s26_hypotheses.json">machine-readable hypothesis ranking</a>. Official public leaderboard observed 2026-10-28: #1 0.4544; #26 0.3195; the prompt's 0.4413 is not on the board. Public-board rank is not the private prize score.</p>
+</section><section class="section callout-warning" id="active-checkout-review" aria-label="Prior parallel checkout review">
+<p class="eyebrow">PRIOR PARALLEL-CHECKOUT RECORD · 2026-10-27T18:46:06Z · arena/d955c32f-gemsdoe28</p>
+<h2>Prior checkout status: NO — no new TIFF was generated</h2>
+<p>This immutable review belongs to a different branch and is retained as parallel-session provenance; its data/cache and shared-tool state do not describe the active checkout. That review recorded a blocked preflight and no HOLDOUT-DTI. For the current repository-review disposition, open <a href="docs/session24-review.html">the S24 review for this branch</a>.</p>
+<p><strong>Blockers recorded by the prior checkout:</strong> No explicit assigned method lane or assignment source No complete shared parallel-run registry Declared 37,654-dot budget is blocked by the literal registry overlap rule; do not optimize around its holes No frozen comparable best under the required strict holdout protocol Required cached 32-band feature array/metadata absent</p>
+<p><a href="docs/data/active_checkout_review_2026-10-27.json">Open the prior checkout's JSON record</a> · <a href="docs/session24-review.html">Current S24 repository review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/knowledge/68_active_checkout_review_2026-10-27.md">Read the prior detailed review</a>. No score estimate, weekly slot, or upload authorization is asserted.</p>
+</section><section class="readiness-banner callout-danger" id="current-submission" aria-label="Current submission readiness" data-submission-ready="false">
 <p class="eyebrow">S23 audit: no new TIFF · 27 OCT 2026 · AUTOMATED DECISION · NO HUMAN INSPECTOR</p>
 <h2>Current run: NOT READY TO SUBMIT — NO FILE APPROVED</h2>
 <p><strong>OK to download a new submission: NO. OK to submit: NO.</strong> S23 stopped before a new model or TIFF. The shared calibration lattice covers <strong>99.8713%</strong> of the footprint within 3 pixels (GEOMETRY-AUDIT, not a score); it blocks the champion-sized budget under your literal any-raster rule.</p>
