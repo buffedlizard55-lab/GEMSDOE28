@@ -1,0 +1,24 @@
+# S28 checkout review — 2026-10-29 UTC
+
+**Decision: no new TIFF, no approved file, no submission slot.** The user-supplied prompt lacks the single method paragraph required by its parallel-run protocol. The S26 slate remains an unassigned proposal, not authorization to run that lane. The registry is not certified complete or synchronized, and no frozen best meets the strict protocol. The inherited experiment clock has expired. The prior registry feasibility evidence says the declared 37,654-dot budget cannot meet the literal 70% proximity threshold against the space-filling calibration raster. This is a counting bound, not proof that every smaller-budget raster is impossible. Do not game the calibration control.
+
+## What changed in this checkout
+
+- Restored four core and five model files from SHA-256-pinned owner GitHub mirrors using `restore_data.py`; these are **not organizer-authenticated**. Restored nine pinned shared assets via `restore_protocol_assets.py`. Built the cached feature stack with `prepare_data.py`, SHA-256 `83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc`. These files are git-ignored, so another checkout must restore them again.
+- Fresh [preflight](../evidence/s28_preflight.json) after restoration is still BLOCKED on the five issues above. No model or leakage canary ran. No new score estimate, raster, novelty test or selector decision exists.
+- Fresh [historical-download audit](../evidence/s28_download_audit.json) ran against the restored mirror template and labels: overall FAIL, two legacy all-finite H40/H41 files have NaN nodata tags. Individual checks do not authorize submission, and the cause of the user's portal rejection remains unknown. NaN outside the footprint may be rejected by a strict whole-array validator; a future writer should use zero outside, clear nodata metadata, and validate every pixel as well as the grid.
+- Test pass before restoration: `pytest -q`: 664 passed, 7 skipped, 12 warnings, 9 subtests. After restoring data and updating the read-first regression checks, `pytest -q`: 667 passed, 5 skipped, 12 warnings, 9 subtests. `ruff check src scripts tests` passed. `ruff check .` reports 16 violations in a historical evidence snapshot; preserve the snapshot rather than alter evidence-bound bytes.
+
+## Site review, hypotheses and interpretation
+
+The earlier [nine-site review](72_s27_active_branch_review_2026-10-28.md) lists each requested site's historical candidate and user-reported, **unverified** score, and records the pairwise proximity findings. It is not a current organizer receipt or a guarantee of registry completeness. The current [ranked four-hypothesis slate](../registry/s26_hypotheses.json) names layers, signatures, fault rationale, differences, non-fault mimics, cost and data limitations. The top TCB hypothesis has not been validated. DTI improvement is unknown for all four.
+
+For GEMSDOE32, prior forensic records describe pruning near-catalogue dots from an earlier pattern. Less redundant prediction mass could plausibly improve the asymmetric distance-tolerant metric, but hidden labels and an organizer receipt are unavailable; causation is not established. The provided 0.2778 is user-reported and unverified, not a prediction. There is no defensible calibrated estimate that a new method will beat it. Prompt leaderboard figures conflict; do not present them as current.
+
+## Next work
+
+1. Coordinate and document a non-overlapping method lane and a complete synchronized registry, including a clear interpretation of calibration-control inclusion. Do not silently change the user's thresholds.
+2. Freeze a genuinely comparable, fold-retrained baseline and establish a fresh experiment start under the requested budget. Run individual-feature leakage canaries, surface novelty, buffered whole-segment holdout and final-dot novelty in that order, stopping at any failed gate.
+3. If and only if the candidate beats the frozen holdout best and all novelty gates, write and validate a single-band TIFF against the organizer-authenticated template, including a whole-array finite [0,1] check, and use a separate selector for the weekly slot. Confirm source licensing and portal allowance on the authenticated site.
+
+Official references for manual review: [competition problem and format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [data](https://www.drivendata.org/competitions/306/competition-doe-gems/data/), [reference solution](https://github.com/drivendataorg/gems-prize-reference-solution), [USGS GeoDAWN survey](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and), [GDR INGENIOUS](https://gdr.openei.org/submissions/1391). Non-GitHub hosts are not reachable from this runtime; no fresh live leaderboard or official receipt was checked.

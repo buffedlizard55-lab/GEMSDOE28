@@ -1,0 +1,23 @@
+{
+  "session": "S28 checkout review 2026-10-29",
+  "branch": "arena/f1134836-gemsdoe28",
+  "hypothesis": "S26-TCB: two-sided directional texture-covariance boundaries in RTP, magnetic horizontal gradient and surface conductivity",
+  "mechanism": "Fracture or alteration may change spatial anisotropy across a concealed boundary even where broad amplitudes cancel; untested.",
+  "non_fault_mimic": "Depositional facies boundary or survey leveling seam",
+  "holdout_dti": null,
+  "holdout_evaluator": "gems-segment-pooled-v1 (not run)",
+  "withheld_positives": null,
+  "ci95": null,
+  "registry_correlation": null,
+  "registry_dot_overlap": null,
+  "raster_sha256": null,
+  "validator_output": "No candidate to validate. Historical downloads audit fails on two legacy nodata tags; see s28_download_audit.json.",
+  "submission_name": null,
+  "submission_note": "No candidate; blocked preflight. Do not submit.",
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "experiments_run": 0,
+  "slot_selected": false,
+  "preflight": "evidence/s28_preflight.json",
+  "download_audit": "evidence/s28_download_audit.json"
+}

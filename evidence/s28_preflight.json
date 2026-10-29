@@ -1,0 +1,254 @@
+{
+  "status": "BLOCKED",
+  "checked_at_utc": "2026-10-29T14:21:59Z",
+  "elapsed_seconds": 162599.371544,
+  "time_cap_seconds": 7200,
+  "experiment_allowed": false,
+  "failures": [
+    "Missing explicit assigned method lane and assignment source",
+    "Missing complete shared parallel-run registry",
+    "Literal registry overlap rule blocks the declared emission budget; do not tune around controls",
+    "Missing frozen current-best result under the same strict protocol",
+    "Wall-clock budget exhausted or start timestamp is in the future"
+  ],
+  "cached_features": {
+    "path": "data/prepared/features.npy",
+    "sha256": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc",
+    "missingness": {
+      "passed": true,
+      "failures": [],
+      "actual": {
+        "policy": "preserve-source-nodata-v1",
+        "imputed": false,
+        "bands": {
+          "mag_anom": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "rtp": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "tmi_hg": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "geod_2ndinv": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "iso_grav_anom_slope": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "geod_shearrate": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "geod_dilaterate": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "tmi_vg": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "deq_n100a15": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "iso_grav_anom_vg": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "det_elev": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "iso_grav_anom": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "tmi": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "depth_to_base_surf": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "ieq_n100a15": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "cond_surf": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "iso_grav_anom_hg": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "det_elev_slope": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "lidar_ex_max": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_ex_mean": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_step_max": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_lapneg_max": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_lappos_max": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_downface_max": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_upface_max": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_cross_max": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_relief": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_coh100": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_cos2strike": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "lidar_sin2strike": {
+            "finite": 3894460,
+            "nan": 1272913,
+            "infinity": 0
+          },
+          "det_local_relief": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          },
+          "det_gradient": {
+            "finite": 5164312,
+            "nan": 3061,
+            "infinity": 0
+          }
+        }
+      }
+    }
+  },
+  "shared_template": {
+    "passed": true,
+    "files": [
+      {
+        "id": "template-__init__",
+        "dest": "shared_template/src/gems/__init__.py",
+        "sha256": "1a0b12829abd20797161f12c4d4f900f5bfb2af13df35c68435ce647e6fb264a",
+        "bytes": 410
+      },
+      {
+        "id": "template-holdout",
+        "dest": "shared_template/src/gems/holdout.py",
+        "sha256": "34fb7f12e849280c8162d5c433aa972f70746ddecf1a289ce3a9c81144b344dc",
+        "bytes": 26813
+      },
+      {
+        "id": "template-metric",
+        "dest": "shared_template/src/gems/metric.py",
+        "sha256": "a49d99ed5e20b2c0087668a7d29a8684e25dca41635ece3c4f30b1dba1c5a432",
+        "bytes": 11390
+      },
+      {
+        "id": "template-submission",
+        "dest": "shared_template/src/gems/submission.py",
+        "sha256": "a9b950e59ec50dfc1f1be44a755434848c70e0233923ebaad40f1589c69e9f18",
+        "bytes": 10860
+      },
+      {
+        "id": "template-validator",
+        "dest": "shared_template/src/gems/validator.py",
+        "sha256": "a5176d6e13924382f52bfd170a1f91c8beb1f31d413765295e881b65dc79a5e0",
+        "bytes": 396
+      },
+      {
+        "id": "template-novelty",
+        "dest": "shared_template/src/gems/novelty.py",
+        "sha256": "46ba2c88921a94bfbedd30cf604bf3843ed85d131431a1f56c28cd71c4e07dd5",
+        "bytes": 17695
+      },
+      {
+        "id": "template-evaluate_holdout",
+        "dest": "shared_template/scripts/evaluate_holdout.py",
+        "sha256": "66fbe1a696c0fe48b1d277619eaf810aa2d91866a92bc2a5d819c49fe4143da1",
+        "bytes": 15684
+      },
+      {
+        "id": "template-submission_writer",
+        "dest": "shared_template/scripts/submission_writer.py",
+        "sha256": "30edfcca023a185ae49b752ac19fa6839f2382169db8a4852f90d1a454e5db61",
+        "bytes": 1652
+      },
+      {
+        "id": "template-priority-registry",
+        "dest": "research/shared_priority_registry.json",
+        "sha256": "0844816e4cb8e9f6fa64970b339412dd97d12cb0b507c67b0b9bb3f2f3ea2974",
+        "bytes": 83432
+      }
+    ],
+    "failures": [],
+    "manifest_sha256": "ab6538fedcf7ae3325d6ab52c55eb68988b61b125c5d3ee4cb5247321d2b7efa",
+    "source": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/2521cb676e172c141a4417e4925b73b6a896c1eb",
+    "network_access": "none"
+  },
+  "submission_ready": false,
+  "slot_selected": false,
+  "scope": "No model, no scientific evaluation, no raster emission, no weekly cap or slot decision"
+}

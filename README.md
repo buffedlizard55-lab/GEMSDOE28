@@ -1,3 +1,11 @@
+# S28 · 2026-10-29 UTC — current checkout · READ FIRST
+
+**NO NEW TIFF · OK TO SUBMIT: NO.** Pinned owner-mirror inputs and shared tools were restored and the feature cache built in this checkout, but the [fresh preflight](evidence/s28_preflight.json) remains blocked: lane, synchronized registry, same-protocol baseline, literal overlap feasibility and experiment clock. No holdout experiment or submission slot was spent. The restored files are ignored by Git and are not organizer-authenticated. [Full review](knowledge/73_s28_checkout_review_2026-10-29.md) · [run card](evidence/s28_run_card.json) · [download audit](evidence/s28_download_audit.json).
+
+**Project operating brief:** pursue a unique, high-scoring DOE GEMS GeoTIFF, not a renamed duplicate. Check single-feature leakage and surface/final-dot novelty, evaluate buffered whole-segment holdout with visible-only catalogue features, and validate the exact raster automatically before a separate submission selector. Never label an estimate as an organizer score. Stop within the stated experiment budget; negative outcomes are deliverables. Keep source provenance, limits, and next actions auditable. Maximize probability of winning while owning the outcome end to end. The detailed historic project requirements and results are retained below.
+
+---
+
 # S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
