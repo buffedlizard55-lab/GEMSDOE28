@@ -210,10 +210,15 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert parser.ids.count("s27-current-decision") == 1
         assert "NO FILE APPROVED" in text and "not submission-ready" in text
         return
-    assert parser.ids.count("current-submission") == 1
+    if page == "s28-review.html":
+        assert parser.ids.count("s28-current-decision") == 1
+        assert 'data-submission-ready="false"' in text
+        assert "OK TO SUBMIT: NO" in text
+    else:
+        assert parser.ids.count("current-submission") == 1
+        assert text.index('id="current-submission"') < text.index("Submission download locked")
+        assert "S23 audit: no new TIFF" in text
     assert len(parser.ids) == len(set(parser.ids)), page
-    assert text.index('id="current-submission"') < text.index("Submission download locked")
-    assert "S23 audit: no new TIFF" in text
     for ref in parser.refs:
         url = urlsplit(ref)
         if url.scheme or url.netloc:

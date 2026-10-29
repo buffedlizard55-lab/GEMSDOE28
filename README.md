@@ -1,3 +1,20 @@
+# S28 · 2026-10-29 UTC — current branch evidence review · READ FIRST
+
+## OK TO SUBMIT: NO · NO NEW TIFF · NO WEEKLY SLOT USED
+
+**Active branch:** `arena/cc67fd6a-gemsdoe28`. This section supersedes checkout-state claims in older records below. The full consolidated standing requirements and historical prompt archive remain below and must be read each session. **Maximize P(Win) · Own the Outcome:** do not fabricate score estimates or approve a duplicate just to produce a download.
+
+- **[Current executive summary: nine-site file table + submission guide](docs/s28-review.html)** · [run card](evidence/s28_run_card.json) · [fresh nine-repository inventory](evidence/s28_priority_repository_audit.json) · [fresh shared-comparator results](evidence/s28_priority_novelty.json).
+- Restored core/model inputs and nine shared-template assets from hash-pinned owner GitHub mirrors; prepared the 32-band feature cache. These are **not organizer-authenticated downloads**. Raw data and cache remain ignored.
+- All nine historical leaders fail the final-dot duplicate rule against at least one other named leader. GEMSDOE25 = GEMSDOE30 inside the footprint. GEMSDOE28 solo = GEMSDOE31 solo. The GEMSDOE32 dots are exactly the solo dots minus 2,545 catalogue-adjacent dots, with no additions; this does not establish score causation.
+- Estimated leaderboard score: **unavailable** for every artifact. Supplied scores are **USER-REPORTED / UNVERIFIED**, not ORGANIZER-CONFIRMED. No current leaderboard was fetched here.
+- [Fresh exact-file audit](evidence/s28_download_audit.json): 869 checks, two failures on archived H40/H41 all-finite nodata metadata; no historical file is newly approved. [Fresh preflight](evidence/s28_preflight.json): five remaining blockers, including absent lane, synchronized registry and comparable baseline, literal overlap-budget conflict, and expired configured clock. No scientific experiment was run.
+- Four previously proposed, untried geological hypotheses remain ranked in [the hypothesis registry](registry/s26_hypotheses.json) and the current summary; do not relabel them as fresh discoveries. TCB remains a proposal only. External heat-flow/probe and 3DEP hypotheses are not currently viable without source bytes/coverage verification.
+- Three-pass review: [S28 report](knowledge/73_s28_evidence_review_2026-10-29.md). Final software checks: **671 passed, five skipped**, Ruff clean, offline site build and diff checks pass. Official reference README confirms CPU-only operation is supported; GPU is not strictly required.
+- Code merge/deployment is separate from competition promotion. Do not select or upload a weekly slot from this review.
+
+---
+
 # S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO

@@ -1,0 +1,80 @@
+{
+  "schema": "gemsdoe28-s28-review-v1",
+  "observed_utc": "2026-10-29T14:22:01Z",
+  "branch": "arena/cc67fd6a-gemsdoe28",
+  "hypothesis": "No assigned method paragraph; retain ranked untested S26-TCB as a proposal, not an experiment.",
+  "mechanism": "Audit historical leaders using pinned shared novelty tools and exact pixel sets; no new geological operator.",
+  "non_fault_mimic": "Depositional facies boundaries and survey leveling seams could mimic the proposed covariance boundary.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN",
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null
+  },
+  "registry": {
+    "complete": false,
+    "scope": "Nine historical leaders, eight comparisons per leader",
+    "all_nine_fail_final_dot_uniqueness": true,
+    "surface_before_placement": null,
+    "final_dots": "evidence/s28_priority_novelty.json"
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "NOT RUN ON A NEW TIFF; no new candidate",
+    "no_nan_inside": null,
+    "range_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null,
+    "historical_audit": "evidence/s28_download_audit.json",
+    "historical_check_count": 869,
+    "historical_failures": [
+      "s22_archive_h40_vent_allfinite_outside_zero",
+      "s22_archive_h41_spring_allfinite_outside_zero"
+    ]
+  },
+  "submission_name": null,
+  "note": "S28 audit only: nine historical leaders fail uniqueness; no new TIFF, holdout or weekly slot. Do not submit.",
+  "new_raster_generated": false,
+  "experiments_run": 0,
+  "estimated_leaderboard_score": null,
+  "organizer_confirmed_scores": [],
+  "preflight": {
+    "status": "BLOCKED",
+    "evidence": "evidence/s28_preflight.json",
+    "failures": [
+      "Missing explicit assigned method lane and assignment source",
+      "Missing complete shared parallel-run registry",
+      "Literal registry overlap rule blocks the declared emission budget; do not tune around controls",
+      "Missing frozen current-best result under the same strict protocol",
+      "Wall-clock budget exhausted or start timestamp is in the future"
+    ]
+  },
+  "input_provenance": "SHA-256-pinned owner GitHub mirrors, not organizer-authenticated; core, model, shared tools restored and cache prepared.",
+  "verdict": "negative",
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "limitations": [
+    "Missing method paragraph and synchronized parallel registry",
+    "No frozen comparable best",
+    "Dense calibration lattice conflicts with declared emission budget under literal overlap rule",
+    "Official non-GitHub source hosts unavailable in this runtime",
+    "Historical score claims have no organizer receipts; no calibrated score forecast"
+  ],
+  "evidence_sha256": {
+    "evidence/s28_preflight.json": "6383cfbf4c70b509f2ab3db70d5e7b740973da867de0123044aff320ef9971e8",
+    "evidence/s28_priority_repository_audit.json": "0842e9916dcbb3a05b9a0b4eb9bd4eab04079b0e5c4b5275c2cba13dbfb00008",
+    "evidence/s28_priority_novelty.json": "d86d059c4876d1945af9a00fc53f1f68eae7e09323222a39ab58485994f917f6",
+    "evidence/s28_download_audit.json": "82639850fae41aa6472c136da825282b0f481728d266f458382e489037d1ed2b",
+    "registry/s26_hypotheses.json": "baf7c3039aadf4e239b158f9b23d164ba40ee3c703322141650a46d1deca57fe",
+    "evidence/s28_official_reference_check.json": "7458b61c0f8eb81bf5d8d5f53a67adddfda44f3dd4114f70c7fe28110047b0fd"
+  },
+  "verification": {
+    "pytest": "671 passed, 5 skipped, 12 warnings, 9 subtests passed",
+    "ruff": "clean",
+    "diff_check": "clean",
+    "build": "build_site.py + build_active_review.py, offline"
+  }
+}

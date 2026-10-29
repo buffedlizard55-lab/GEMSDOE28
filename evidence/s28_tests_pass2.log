@@ -1,0 +1,41 @@
+........................................................................ [ 10%]
+........................................................................ [ 21%]
+........................................................s............... [ 31%]
+..............................................s......................... [ 42%]
+............................................................... [ 51%]
+........................................................................ [ 62%]
+..........................................s............................. [ 73%]
+................F....................................................... [ 83%]
+..................................................................s..... [ 94%]
+.............s.......................                                    [100%]
+=================================== FAILURES ===================================
+_ test_all_pages_lead_with_one_current_lock_and_have_working_local_links[s28-review.html] _
+
+page = 's28-review.html'
+
+    @pytest.mark.parametrize("page", sorted(p.name for p in DOCS.glob("*.html")))
+    def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page):
+        path = DOCS / page
+        text = path.read_text()
+        parser = PageLinks()
+        parser.feed(text)
+        if page == "s27-review.html":
+            assert parser.ids.count("s27-current-decision") == 1
+            assert "NO FILE APPROVED" in text and "not submission-ready" in text
+            return
+>       assert parser.ids.count("current-submission") == 1
+E       AssertionError: assert 0 == 1
+E        +  where 0 = <built-in method count of list object at 0x7f1b04850e80>('current-submission')
+E        +    where <built-in method count of list object at 0x7f1b04850e80> = ['s28-current-decision'].count
+E        +      where ['s28-current-decision'] = <test_s23_evidence.PageLinks object at 0x7f1b04896fd0>.ids
+
+tests/test_s23_evidence.py:213: AssertionError
+=============================== warnings summary ===============================
+tests/test_download_audit_discovery.py: 12 warnings
+  /home/user/GEMSDOE28/.venv/lib/python3.11/site-packages/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_s23_evidence.py::test_all_pages_lead_with_one_current_lock_and_have_working_local_links[s28-review.html]
+1 failed, 670 passed, 5 skipped, 12 warnings, 9 subtests passed in 19.30s

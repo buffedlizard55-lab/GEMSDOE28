@@ -1,0 +1,20 @@
+{
+  "repository": "drivendataorg/gems-prize-reference-solution",
+  "commit": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+  "source": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md",
+  "sha256": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239",
+  "observed_date_utc": "2026-10-29",
+  "verified_claims": [
+    {
+      "claim": "The official reference offers CPU-only operation; GPU is recommended for faster training, not an absolute requirement.",
+      "line_number": 47,
+      "text": "Training is much faster on a GPU, so use one if you have it."
+    },
+    {
+      "claim": "The official reference offers CPU-only operation; GPU is recommended for faster training, not an absolute requirement.",
+      "line_number": 57,
+      "text": "- **No GPU:** Use the `cpu` option (uv) or `environment-cpu.yml` (conda) for the"
+    }
+  ],
+  "scope": "README checked via GitHub API, not a fresh metric or organizer receipt verification"
+}
