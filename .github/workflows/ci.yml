@@ -25,4 +25,4 @@ jobs:
         run: |
           python scripts/build_site.py
           python scripts/build_active_review.py
-          git diff --exit-code -- docs/*.html docs/data/*run_card*.json docs/data/s23_scorecard.* docs/data/active_checkout_review_2026-10-27.json index.html executive-summary.html data/current_run_card*.json
+          git diff --exit-code -- docs/*.html docs/data/*run_card*.json docs/data/s23_scorecard.* docs/data/active_checkout_review_2026-10-27.json index.html executive-summary.html current-review.html data/current_run_card*.json
