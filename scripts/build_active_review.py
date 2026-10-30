@@ -101,6 +101,10 @@ def main() -> int:
     import build_s29_lattice_review  # noqa: PLC0415
 
     build_s29_lattice_review.main()
+    # S30 nine-site byte audit is the newest decision; it leads every page it is inserted into.
+    import build_s30_review  # noqa: PLC0415
+
+    build_s30_review.main()
     print(json.dumps({"status": "built", "pages": updated,
                       "review_card": "docs/data/active_checkout_review_2026-10-27.json",
                       "network_requests": 0, "submission_ready": False}, indent=2))

@@ -1,3 +1,26 @@
+# S30 · 2026-10-30 UTC — nine-site byte audit · READ FIRST EVERY SESSION
+
+## CURRENT DECISION: OK TO DOWNLOAD AND SUBMIT: NO · NO NEW TIF · NO WEEKLY SLOT USED
+
+- **Why no file is OK:** every nine-site best file passes the official format and [0,1] check, but all 36 pairs exceed the 70% / 3 px uniqueness rule (overlap 0.87–1.00), and GEMSDOE25 and GEMSDOE30 contain identical dot sets. No leaderboard score can be estimated: no calibrated estimate and no organizer receipt exist.
+- **Best claimed file:** GEMSDOE32 `…e5eb6e7e-zeros.tif`, 0.2778 (owner-reported, already submitted per its owner page). It is in the same family as the other eight, so it is not a unique candidate.
+- **Start here:** [S30 executive summary (nine sites, table, overlap matrix)](docs/s30-nine-site-executive-summary.html) · [knowledge note 77](knowledge/77_s30_nine_site_byte_audit_2026-10-30.md) · [run card](evidence/s30_run_card.json) · [byte audit](evidence/nine_site_byte_audit_2026-10-30.json) · [irregularities](registry/irregularities_s30.json).
+- **Official sources:** [problem and metric](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) (rank 1 = 0.4544 on 2026-10-30; the prompt's 0.4413 and 0.3195 are not in ranks 1–47).
+- **Open decisions for the user:** (1) does the internal 70% / 3 px rule apply? (2) which exact file produced the portal error "Predicted values must be in range [0, 1]"? The nine best files have no in-footprint value outside [0,1]; the cause is not established.
+
+### Standing project prompt (condensed; read before each session)
+
+The full prompt is too long to paste in full. Its operative requirements are:
+
+1. **Goal:** place at the top of DrivenData GEMS prize leaderboard (competition 306) with a single-band float32 GeoTIFF, 100 m, EPSG:32611, values in [0,1], scored by a distance-weighted Tversky index (α 0.2, β 0.8, 300 m kernel). Sources: [problem page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf).
+2. **Every number carries a label:** ORGANIZER-CONFIRMED (receipt), OFFICIAL (organizer text), MEASURED (computed from bytes here), OWNER/USER-REPORTED, or HOLDOUT-DTI (local proxy, never a leaderboard score). A projection is never written as a score.
+3. **Fail-closed submission gates:** a file is OK to download and submit only if (a) format matches the official grid and [0,1] rule, (b) it is unique (≤ 70% of dots within 3 px of any other file, |phi| ≤ 0.90 — internal rule, to be confirmed by the user), (c) it has a calibrated or organizer-confirmed estimate, and (d) a weekly slot is selected by a separate step. The page must show the decision at the top.
+4. **Research discipline:** before implementing, rank 3–5 untested geological hypotheses (layers, physical signature, why it catches a catalogue-missing fault, difference from implemented work, non-fault mimic, cost, data source). Test the top one on the spatially blocked holdout before any submission slot is used. Leakage canary: any single feature with AUC > 0.90 means leakage until proven otherwise.
+5. **Data:** only free, official or owner-mirrored sources with SHA-256 pins. Mirrors are not organizer-authenticated. Do not contact DrivenData automatically.
+6. **Own the outcome:** Maximize P(Win) and Own the Outcome stay central. Report irregularities for review, verify line by line, and do not fabricate numbers or sources.
+
+---
+
 # S29 · 2026-10-29 UTC — current checkout review · branch arena/fe0ed431-gemsdoe28 · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: UNIQUE TIF GENERATED · OK TO SUBMIT: NO · NO WEEKLY SLOT USED
