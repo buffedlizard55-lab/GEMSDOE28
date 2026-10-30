@@ -32,7 +32,9 @@
 
 ## S30 verification closeout
 
-Post-change verification: Ruff clean; **747 passed, 7 skipped, 34 Rasterio deprecation warnings, 9 subtests passed**. The seven skips require absent input rasters, templates or external data and are not passes. Offline `build_site.py` plus `build_active_review.py` completed with zero network requests; generated HTML/S30 JSON/root pages were deterministic across consecutive builds. Nine S30-specific tests cover the fail-closed publisher, score table, overlap audit, source scope and hypothesis slate. Full details and pass definitions: [knowledge/80_s30_review_2026-10-30.md](knowledge/80_s30_review_2026-10-30.md). PR/merge status will be reported only after the branch-only GitHub operation returns an explicit result.
+Post-change verification: Ruff clean; **747 passed, 7 skipped, 34 Rasterio deprecation warnings, 9 subtests passed**. The seven skips require absent input rasters, templates or external data and are not passes. Offline `build_site.py` plus `build_active_review.py` completed with zero network requests; generated HTML/S30 JSON/root pages were deterministic across consecutive builds. Nine S30-specific tests cover the fail-closed publisher, score table, overlap audit, source scope and hypothesis slate. Full details and pass definitions: [knowledge/80_s30_review_2026-10-30.md](knowledge/80_s30_review_2026-10-30.md).
+
+**PR #89:** [opened from this active branch](https://github.com/buffedlizard55-lab/GEMSDOE28/pull/89). At this commit, the merge had not yet been confirmed; the GitHub PR state and checks are authoritative. No direct write to `main` was attempted.
 
 ---
 
