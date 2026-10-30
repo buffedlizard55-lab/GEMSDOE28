@@ -24,7 +24,8 @@ import rasterio
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from gems27 import grid, uniqueness as U  # noqa: E402
+from gems27 import grid  # noqa: E402
+from gems27 import uniqueness as U  # noqa: E402
 
 FOCUS = {  # user-named best submission per site (USER-REPORTED scores; see README S30 table)
     "GEMSDOE24": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",

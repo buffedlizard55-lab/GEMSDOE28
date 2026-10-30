@@ -17,7 +17,8 @@ from scipy.ndimage import distance_transform_edt
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from gems27 import grid, uniqueness as U  # noqa: E402
+from gems27 import grid  # noqa: E402
+from gems27 import uniqueness as U  # noqa: E402
 
 AUDIT = json.loads((ROOT / "evidence/s30_registry_audit.json").read_text())
 GATE = json.loads((ROOT / "evidence/s30_candidate_gate.json").read_text())
@@ -100,7 +101,6 @@ def main() -> int:
     cand_vs = cand_overlap_vs_focus()
     band = parent_band()
     n_reg = AUDIT["n_registry_rasters"]
-    n_off = AUDIT["n_off_grid"] if "n_off_grid" in AUDIT else None
     n_compared = GATE["uniqueness"]["rasters_compared"]
     n_cat_rasters = sum(1 for r in AUDIT["rows"] if (r.get("dots_on_catalogue") or 0) > 0)
     for r in AUDIT["rows"]:
@@ -117,7 +117,6 @@ def main() -> int:
              "focus_rows": rows}
     (ROOT / "evidence/s30_summary_table.json").write_text(json.dumps(table, indent=1) + "\n")
 
-    best_known = max(rows, key=lambda r: r["reported"])
     cand_link = f"candidates/{CAND_FILE}"
 
     def dup_text(r):

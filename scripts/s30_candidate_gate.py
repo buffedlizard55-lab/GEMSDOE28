@@ -23,7 +23,8 @@ from scipy.spatial import cKDTree
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from gems27 import grid, uniqueness as U  # noqa: E402
+from gems27 import grid  # noqa: E402
+from gems27 import uniqueness as U  # noqa: E402
 
 CAND = ROOT / "docs/candidates/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif"
 RUN_CARD = ROOT / "evidence/s30_candidate_run_card.json"

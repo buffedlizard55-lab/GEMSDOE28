@@ -26,12 +26,13 @@ from pathlib import Path
 
 import numpy as np
 import rasterio
-from scipy.ndimage import distance_transform_edt, gaussian_gradient_magnitude, gaussian_filter
+from scipy.ndimage import distance_transform_edt, gaussian_filter, gaussian_gradient_magnitude
 from scipy.spatial import cKDTree
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from gems27 import grid, submission, uniqueness as U  # noqa: E402
+from gems27 import grid, submission  # noqa: E402
+from gems27 import uniqueness as U  # noqa: E402
 
 PARENT = ROOT / "data/site_submissions/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
 TEMPLATE = ROOT / "data/sample_submission.tif"
