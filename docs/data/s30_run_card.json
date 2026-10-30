@@ -1,0 +1,287 @@
+{
+  "schema": "gemsdoe28-s30-blocked-repository-review-v1",
+  "session": "S30-20261030",
+  "observed_utc": "2026-10-30T22:52:57Z",
+  "branch": "arena/6aaf0523-gemsdoe28",
+  "scope": "Three-pass repository and submission-safety review. No geological experiment, no new raster emission, no portal access, no score receipt, and no weekly slot selection.",
+  "hypothesis": "S30-MCR: spatially cross-fitted conductivity residual margins are the highest-actionability untested proposal in the local slate; proposal only, not an assigned lane or experiment.",
+  "mechanism": "NOT RUN. Proposed label-free operator: model cond_surf conditional on depth_to_base_surf, det_elev, and det_elev_slope using spatial cross-fitting, then test whether coherent residual margins identify concealed fluid/alteration corridors outside the visible catalogue. No feature was built and no effect is claimed.",
+  "named_non_fault_process": "Saline groundwater, lacustrine clay, irrigation return flow, and variation in electromagnetic investigation depth can create conductivity residual margins without a fault.",
+  "candidate_slate": [
+    {
+      "rank": 1,
+      "id": "MCR",
+      "name": "Spatially cross-fitted conductivity residual margins",
+      "status": "Previously recorded as untested; not implemented or evaluated in this checkout; not authorized to run.",
+      "layers": ["cond_surf", "depth_to_base_surf", "det_elev", "det_elev_slope"],
+      "physical_signature": "Spatially cross-fitted conditional-quantile residual field; coherent residual margins rather than raw conductivity or a generic edge.",
+      "why_it_may_find_catalogue_missing_faults": "A buried, fluid-bearing damage zone could be locally conductive or resistive relative to basin-depth and terrain context even when no surface trace is mapped. This is a hypothesis, not proof of fault or vent causation.",
+      "difference_from_repo": "The local inventory contains raw conductivity, clay-cap margins, conductivity interactions, and structural-step operators, but no exact spatially cross-fitted conditional-quantile conductivity-residual operator was located. This inventory comparison does not prove global novelty.",
+      "non_fault_mimic": "Saline groundwater, lacustrine clay, irrigation return flow, and EM investigation-depth changes.",
+      "expected_holdout_dti_improvement": "Unknown; highest qualitative actionability only, not a numerical prediction or leaderboard estimate.",
+      "implementation_cost": "Medium; existing competition feature stack only, once restored and hash-verified.",
+      "data_obtainability": "No new external data required in principle. The exact training raster, labels, prepared feature cache, and shared tools are absent from this checkout; therefore it is not runnable now.",
+      "official_source": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/"
+    },
+    {
+      "rank": 2,
+      "id": "HFR2M",
+      "name": "Independent heat-flow residual × shallow-temperature-probe conjunction",
+      "status": "Previously recorded as untested; exact combined operator not validated here; not viable in this checkout because raw source bytes are absent and source reachability was not rechecked.",
+      "layers": ["USGS Great Basin conductive heat-flow residuals", "DOE GDR #1391 2 m temperature probes", "cond_surf", "depth_to_base_surf"],
+      "physical_signature": "Spatially supported positive heat-flow residual coincident with an independent 2 m temperature anomaly and a candidate structural corridor; no emission from a single thermal channel.",
+      "why_it_may_find_catalogue_missing_faults": "A concealed fluid conduit may produce shallow thermal expression without a mapped surface scarp; independent thermal corroboration could identify an off-catalogue upflow corridor.",
+      "difference_from_repo": "Distinct from single-source heat-flow/Euler and well/spring proximity work by requiring independent heat-flow and shallow-probe evidence together. Exact scope must be re-audited against all merged work before any future test.",
+      "non_fault_mimic": "Groundwater discharge, warm aquifers, uneven well/probe sampling, and non-tectonic hydrothermal circulation.",
+      "expected_holdout_dti_improvement": "Unknown; second qualitative priority only; not a score projection.",
+      "implementation_cost": "High; external schemas, uncertainty, sample-density controls, and spatial matching.",
+      "required_free_official_sources": [
+        "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+        "https://gdr.openei.org/submissions/1391"
+      ],
+      "data_obtainability": "Current checkout has no corresponding raw source files; ScienceBase and GDR hosts are outside this runtime's permitted outbound hosts. Prior repository records describe an earlier runner fetch, but that is not a fresh check or current local possession. Not viable now."
+    },
+    {
+      "rank": 3,
+      "id": "RUDP",
+      "name": "Lithology-conditioned U/Th cross-corridor transport dipoles",
+      "status": "Previously proposed as an unimplemented operator; not evaluated here; external layer availability is unverified and it is not viable now.",
+      "layers": ["official GeoDAWN potassium, equivalent-uranium, and equivalent-thorium radiometry", "official lithology or SGMC map units", "competition potential-field lineaments for independent corridor context"],
+      "physical_signature": "Signed, paired cross-corridor U/Th and K/Th residual dipoles conditioned on local mapped lithology, rather than an unconditioned ratio maximum or scalar lineament score.",
+      "why_it_may_find_catalogue_missing_faults": "Hydrothermal redox and fluid transport may redistribute uranium or thorium asymmetrically along a concealed permeable structure without a mapped Quaternary trace.",
+      "difference_from_repo": "Different from the repository's scalar radiometric ratios and Th/K lineament operators: the target is an ordered, lithology-conditioned cross-structure residual dipole. No exact operator match was found in the inspected source inventory; global novelty is not established.",
+      "non_fault_mimic": "Groundwater redox fronts, sediment sorting, lithologic contacts, radon disequilibrium, and survey seams.",
+      "expected_holdout_dti_improvement": "Unknown; third qualitative priority only; no numeric estimate.",
+      "implementation_cost": "Medium-high; units, lithology strata, quantization, footprint, and source alignment must be audited.",
+      "required_free_official_sources": [
+        "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+        "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+        "https://mrdata.usgs.gov/geology/state/shp/NV.zip",
+        "https://mrdata.usgs.gov/geology/state/shp/CA.zip"
+      ],
+      "data_obtainability": "No official raw radiometric/lithology layers are present in this checkout. NV/CA SGMC sources and sibling-runner pins are documented historically, but those files are not locally present and were not re-fetched or re-verified in S30; GeoDAWN product coverage is also unchecked. The cited official hosts are outside the runtime allowlist. Not viable now."
+    },
+    {
+      "rank": 4,
+      "id": "DNT",
+      "name": "Drainage displacement and knickpoint-train topology",
+      "status": "Previously proposed as untested; source tiles are absent and coverage/availability was not rechecked; not viable here.",
+      "layers": ["challenge-linked USGS 3DEP 1 m bare-earth DEM tiles", "independent competition potential-field lineaments"],
+      "physical_signature": "Flow-routed channel offsets, beheaded reaches, wind gaps, and aligned knickpoint trains that cross a candidate structure.",
+      "why_it_may_find_catalogue_missing_faults": "Drainage geometry can preserve displacement evidence after low-relief scarps have been diffused or obscured by basin fill; this is fault evidence, not direct evidence of geothermal activity.",
+      "difference_from_repo": "The local LiDAR operators emphasize pixelwise terrain amplitude, roughness, openness, and steps; no flow-network topology implementation was found in the inspected code inventory.",
+      "non_fault_mimic": "Lithologic resistance, landslides, stream capture, artificial channels, roads/culverts, and DEM artifacts.",
+      "expected_holdout_dti_improvement": "Unknown; fourth qualitative priority only; no numeric estimate.",
+      "implementation_cost": "Very high; many tiles and hydrologic preprocessing with extensive artifact controls.",
+      "required_free_official_sources": [
+        "https://www.usgs.gov/3d-elevation-program",
+        "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e"
+      ],
+      "data_obtainability": "No 1 m tile URLs or bytes are present in this checkout. Exact challenge-linked coverage was not verified, and USGS hosts are outside the runtime allowlist. Not viable now."
+    }
+  ],
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN in S30; no geological candidate or authorized experiment.",
+    "evaluator_version": "gems-segment-pooled-v1 (required shared evaluator; absent locally, not executed)",
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel": "300 m triangular",
+    "reason": "No assigned method lane, complete parallel registry, frozen same-protocol baseline, prepared cache, or hash-verified shared holdout/writer assets; configured two-hour clock expired."
+  },
+  "leakage_canaries": {
+    "status": "NOT RUN; no authorized feature surface or holdout.",
+    "results": null,
+    "required_rule": "Test every feature alone; AUC above 0.90 is leakage until disproven."
+  },
+  "correlation_overlap_vs_registry": {
+    "status": "NOT RUN for S30; no new surface or final dot set exists.",
+    "registry_complete": false,
+    "references_checked": 0,
+    "surface_rank_correlation": null,
+    "final_dot_overlap_within_3px": null,
+    "stop_thresholds": {
+      "absolute_rank_correlation_greater_than": 0.9,
+      "candidate_dots_within_3px_greater_than": 0.7
+    },
+    "historical_nine_site_audit": {
+      "label": "GEOMETRY-AUDIT, not HOLDOUT-DTI",
+      "scope": "Nine selected historical files only; inherited audit, not a complete synchronized registry.",
+      "ordered_pair_comparisons": 72,
+      "all_nine_flagged_duplicate_under_3px_rule": true,
+      "evidence": "evidence/s28_focus_novelty.json"
+    }
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "NOT RUN for a new S30 raster; no new TIFF exists.",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null,
+    "single_band": null,
+    "organizer_acceptance": null,
+    "archived_s29_candidate": {
+      "path": "docs/candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif",
+      "sha256": "bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3",
+      "status": "Inherited S29 artifact; read-only metadata/value check against repository grid constants only; not an S30 candidate or approval.",
+      "single_band_float32": true,
+      "finite_values_in_0_1": true,
+      "crs_shape_transform_match_repository_constants": true,
+      "exact_official_template_comparison": false,
+      "prior_shared_validator_record": "S29 run card says hard checks passed; this S30 checkout lacks the sample template and labels to reproduce that full check.",
+      "prior_holdout_dti": 0.02951795654634091,
+      "prior_holdout_ci95": [0.023351140586235934, 0.035974722047644375],
+      "prior_verdict": "negative; not approved to submit"
+    }
+  },
+  "submission_name": null,
+  "submission_note": "S30 blocked: no lane, cache, registry, or baseline; no TIF approved.",
+  "submission_note_character_count": 68,
+  "score_estimate": null,
+  "score_estimate_status": "Unavailable. Historical values are USER-REPORTED / UNVERIFIED; no validated holdout-to-hidden-leaderboard calibration or receipt-bound outcomes exist.",
+  "historical_scores": {
+    "label": "USER-REPORTED / UNVERIFIED; copied from the user prompt, not organizer-confirmed",
+    "GEMSDOE24": 0.2477,
+    "GEMSDOE25": 0.26,
+    "GEMSDOE27": 0.2449,
+    "GEMSDOE28": 0.271,
+    "GEMSDOE30": 0.26,
+    "GEMSDOE31": 0.2708,
+    "GEMSDOE32": 0.2778,
+    "GEMSDOE33": 0.2632,
+    "GEMSDOE36": 0.275
+  },
+  "preflight": {
+    "status": "BLOCKED",
+    "elapsed_seconds": 279657.355131,
+    "time_cap_seconds": 7200,
+    "experiment_allowed": false,
+    "blockers": [
+      "Missing explicit assigned method lane and assignment source",
+      "Missing complete shared parallel-run registry",
+      "Literal registry overlap rule blocks the declared emission budget; do not tune around controls",
+      "Missing frozen current-best result under the same strict protocol",
+      "Wall-clock budget exhausted or start timestamp is in the future",
+      "Cached feature stack unavailable: [Errno 2] No such file or directory: '/home/user/GEMSDOE28/data/prepared/features.json'",
+      "missing: template-__init__",
+      "missing: template-holdout",
+      "missing: template-metric",
+      "missing: template-submission",
+      "missing: template-validator",
+      "missing: template-novelty",
+      "missing: template-evaluate_holdout",
+      "missing: template-submission_writer",
+      "missing: template-priority-registry"
+    ],
+    "evidence": "evidence/s30_preflight.json"
+  },
+  "download_validation": {
+    "status": "FAIL CLOSED before raster audit; no TIF approved.",
+    "failure": "data/sample_submission.tif and data/labels.tif are absent.",
+    "evidence": "evidence/s30_download_audit.json"
+  },
+  "historical_scorecard": {
+    "path": "evidence/s30_scorecard.json",
+    "sites": 9,
+    "pairwise_comparisons": 72,
+    "all_selected_historical_files_duplicate_under_requested_rule": true,
+    "complete_global_registry": false,
+    "numerical_leaderboard_estimate_for_each_site": null
+  },
+  "note": "S30 blocked: no lane, cache, registry, or baseline; no TIF approved.",
+  "note_character_count": 68,
+  "new_tiff_generated": false,
+  "submission_ready": false,
+  "ok_to_download_and_submit": false,
+  "slot_selected": false,
+  "submission_slots_spent": 0,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "verdict": "negative",
+  "verdict_reason": "Fail-closed preflight blocked the run; no hypothesis was tested, no TIF emitted, and no slot authorized. The existing S29 unique research artifact underperformed its matched random-K and comparable holdout and is not approved.",
+  "limitations": [
+    "The prompt refers to one assigned method paragraph, but no method paragraph or assignment source is present in the provided request or committed session manifest.",
+    "registry/current_session.json is inherited S23 metadata on branch arena/a774f0a0-gemsdoe28, not an S30 authorization; its lane is null, global registry and comparator fields are null, and its clock is expired. It was not edited or reset.",
+    "No complete synchronized registry, prepared feature cache, official sample template, labels, or pinned shared evaluator/writer assets are present in data/.",
+    "The local S30 environment can run software checks after installing requirements in an ignored virtual environment; software checks are not a geological holdout or source verification.",
+    "Owner-repository mirrors and historical score strings are not organizer-authenticated; no submission receipt or current leaderboard was obtained.",
+    "The user-supplied leaderboard anchors 0.3195 and 0.4413 conflict and were not freshly checked; neither is treated as a current fact.",
+    "No numerical leaderboard score estimate is defensible without receipt-linked historical outcomes and a validated transfer calibration.",
+    "Official source URLs below are supplied for manual review from the prompt and checked-in source registry; non-GitHub official hosts were not contacted under the runtime network policy."
+  ],
+  "official_manual_review_links": [
+    {
+      "label": "DrivenData competition problem and submission format",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "DrivenData competition about page",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "DrivenData public leaderboard",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "Official DOE/NLR rules PDF",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "DrivenData reference solution repository",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "USGS GeoDAWN survey data description",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "DOE GDR INGENIOUS submission 1391",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "USGS Great Basin heat-flow source",
+      "url": "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "USGS 3DEP 1 m DEM program",
+      "url": "https://www.usgs.gov/3d-elevation-program",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "USGS 3DEP 1 m DEM data catalog",
+      "url": "https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e",
+      "freshly_checked_in_S30": false
+    },
+    {
+      "label": "EPSG:32611 grid reference",
+      "url": "https://epsg.io/32611",
+      "freshly_checked_in_S30": false
+    }
+  ],
+  "evidence": {
+    "preflight": "evidence/s30_preflight.json",
+    "download_audit": "evidence/s30_download_audit.json",
+    "historical_nine_site_novelty": "evidence/s28_focus_novelty.json",
+    "scorecard": "evidence/s30_scorecard.json",
+    "archived_tiff_local_inspection": "evidence/s30_archived_candidate_inspection.json",
+    "archived_tiff_prior_run_card": "evidence/s29_candidate_run_card.json",
+    "repository_current_session_manifest": "registry/current_session.json",
+    "shared_asset_pins": "registry/protocol_assets.json",
+    "submission_format_forensics": "evidence/range_validator_forensics_2026-10-03.json",
+    "GEMSDOE32_pixel_forensics": "evidence/s15_champion_forensic.json",
+    "GEMSDOE32_metric_analysis": "evidence/why_026_won.json",
+    "historical_decision_review": "knowledge/75_s29_checkout_review_2026-10-29.md"
+  }
+}

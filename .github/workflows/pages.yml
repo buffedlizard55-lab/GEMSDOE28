@@ -35,15 +35,21 @@ jobs:
     outputs:
       run_card_sha256: ${{ steps.release-proof.outputs.sha256 }}
       historical_card_sha256: ${{ steps.release-proof.outputs.historical_sha256 }}
+      s30_card_sha256: ${{ steps.release-proof.outputs.s30_card_sha256 }}
+      s30_scorecard_sha256: ${{ steps.release-proof.outputs.s30_scorecard_sha256 }}
     steps:
       - uses: actions/checkout@v4
-      - name: Build current fail-closed S29 status overlay
+      - name: Build historical S29 status overlay
         run: python3 scripts/build_s29_review.py
-      - name: Bind the deployed run card to checked-out bytes
+      - name: Build current S30 fail-closed decision and executive page
+        run: python3 scripts/build_s30_review.py
+      - name: Bind deployed run cards to checked-out bytes
         id: release-proof
         run: |
           echo "sha256=$(sha256sum docs/data/current_run_card.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
           echo "historical_sha256=$(sha256sum docs/data/current_run_card_2026-10-27.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+          echo "s30_card_sha256=$(sha256sum docs/data/s30_run_card.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+          echo "s30_scorecard_sha256=$(sha256sum docs/data/s30_scorecard.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
       - name: Prefer one Actions-based Pages deployment source
         id: pages-source
         continue-on-error: true
@@ -78,6 +84,8 @@ jobs:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
           EXPECTED_CARD_SHA256: ${{ needs.build.outputs.run_card_sha256 }}
           EXPECTED_HISTORICAL_CARD_SHA256: ${{ needs.build.outputs.historical_card_sha256 }}
+          EXPECTED_S30_CARD_SHA256: ${{ needs.build.outputs.s30_card_sha256 }}
+          EXPECTED_S30_SCORECARD_SHA256: ${{ needs.build.outputs.s30_scorecard_sha256 }}
         run: |
           python - <<'PY'
           import hashlib
@@ -89,11 +97,13 @@ jobs:
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           expected = os.environ['EXPECTED_CARD_SHA256']
           paths = ['', 'executive-summary.html', 'current-review.html',
-                   'docs/', 'docs/executive-summary.html', 'docs/current-review.html',
-                   'data/current_run_card.json',
-                   'docs/data/current_run_card.json',
+                   's30-review.html', 'docs/', 'docs/executive-summary.html',
+                   'docs/current-review.html', 'docs/s30-review.html',
+                   'data/current_run_card.json', 'docs/data/current_run_card.json',
                    'data/current_run_card_2026-10-27.json',
-                   'docs/data/current_run_card_2026-10-27.json']
+                   'docs/data/current_run_card_2026-10-27.json',
+                   'data/s30_run_card.json', 'docs/data/s30_run_card.json',
+                   'data/s30_scorecard.json', 'docs/data/s30_scorecard.json']
           # GitHub's deployment runner checks its own published website. This is
           # not a browser visual test, a portal call, or external research access.
           for attempt in range(12):
@@ -106,16 +116,32 @@ jobs:
                           body = response.read()
                           assert response.status == 200, url
                       if path.endswith('.json'):
-                          # Generic current aliases advance; dated snapshots are immutable.
-                          expected_hash = (os.environ['EXPECTED_HISTORICAL_CARD_SHA256']
-                                           if path.endswith('current_run_card_2026-10-27.json')
-                                           else expected)
-                          assert hashlib.sha256(body).hexdigest() == expected_hash, 'stale run-card bytes: ' + url
+                          # Generic and S30 cards are bound to the exact bytes built above;
+                          # dated S23 history stays immutable.
+                          if path.endswith('s30_run_card.json'):
+                              expected_hash = os.environ['EXPECTED_S30_CARD_SHA256']
+                          elif path.endswith('s30_scorecard.json'):
+                              expected_hash = os.environ['EXPECTED_S30_SCORECARD_SHA256']
+                          elif path.endswith('current_run_card_2026-10-27.json'):
+                              expected_hash = os.environ['EXPECTED_HISTORICAL_CARD_SHA256']
+                          else:
+                              expected_hash = expected
+                          assert hashlib.sha256(body).hexdigest() == expected_hash, 'stale JSON bytes: ' + url
                           card = json.loads(body)
-                          assert card['submission_ready'] is False and card['slot_selected'] is False
+                          if path.endswith('s30_run_card.json'):
+                              assert card['submission_ready'] is False and card['ok_to_download_and_submit'] is False
+                              assert card['slot_selected'] is False and card['raster_sha256'] is None
+                          elif path.endswith('s30_scorecard.json'):
+                              assert card['current_submission_file'] is None
+                              assert len(card['rows']) == 9
+                              assert all(row['current_ok_to_download_and_submit'] is False for row in card['rows'])
+                          else:
+                              assert card['submission_ready'] is False and card['slot_selected'] is False
                       else:
                           assert b'data-submission-ready="false"' in body, 'missing locked-download marker: ' + url
-                          assert b'Submission download locked' in body, url
+                          assert (b'No approved TIFF to download' in body
+                                  or b'Submission download locked' in body
+                                  or b'Download disabled: no approved file' in body), url
                       verified.append(base + path)
                   print(json.dumps({'verified_urls': verified, 'run_card_sha256': expected,
                                     'submission_ready': False, 'visual_browser_test': False}, indent=2))

@@ -349,4 +349,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py && python scripts/build_active_review.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/s25/index.html docs/data/*run_card*.json docs/data/s24_repository_review_run_card.json docs/data/active_checkout_review_2026-10-27.json index.html executive-summary.html current-review.html data/current_run_card*.json
+        run: git diff --exit-code -- docs/*.html docs/s25/index.html docs/data/*run_card*.json docs/data/s30_scorecard.json docs/data/s24_repository_review_run_card.json docs/data/active_checkout_review_2026-10-27.json index.html executive-summary.html current-review.html data/current_run_card*.json

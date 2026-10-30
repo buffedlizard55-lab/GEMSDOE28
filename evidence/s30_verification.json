@@ -1,0 +1,126 @@
+{
+  "schema": "gemsdoe28-s30-verification-v1",
+  "observed_utc": "2026-10-30T23:12:12Z",
+  "branch": "arena/6aaf0523-gemsdoe28",
+  "base_commit": "424bf795ed2183000c643d6e30a12ce2d4bf401d",
+  "disposition": "REPOSITORY REVIEW PASS; SCIENTIFIC EXPERIMENT AND SUBMISSION BLOCKED",
+  "submission_state": {
+    "new_tiff_generated": false,
+    "ok_to_download_and_submit": false,
+    "submission_ready": false,
+    "submission_name": null,
+    "raster_sha256": null,
+    "weekly_slot_selected": false,
+    "weekly_slots_spent": 0,
+    "geological_experiments_run": 0,
+    "submission_note_characters": 68,
+    "submission_note_limit": 140
+  },
+  "automated_gates": {
+    "preflight": {
+      "status": "BLOCKED",
+      "experiment_allowed": false,
+      "evidence": "evidence/s30_preflight.json",
+      "blocker_groups": [
+        "No explicit assigned method lane or assignment source",
+        "No complete synchronized shared parallel-run registry",
+        "No frozen same-protocol current-best comparator",
+        "Configured 7200-second experiment budget expired",
+        "Prepared feature cache missing",
+        "All nine pinned shared-template files missing"
+      ]
+    },
+    "exact_file_download_audit": {
+      "status": "FAIL CLOSED before candidate raster audit",
+      "approved_tiff": false,
+      "missing_inputs": [
+        "data/sample_submission.tif",
+        "data/labels.tif"
+      ],
+      "evidence": "evidence/s30_download_audit.json"
+    },
+    "holdout": {
+      "label": "HOLDOUT-DTI",
+      "status": "NOT RUN",
+      "evaluator_version_required": "gems-segment-pooled-v1",
+      "withheld_positive_count": null,
+      "dti": null,
+      "ci95": null
+    },
+    "feature_leakage_canaries": "NOT RUN; no authorized feature or holdout",
+    "surface_and_final_dot_novelty": "NOT RUN for S30; no candidate surface or final dot set",
+    "format_validator": "NOT RUN for a new raster; exact sample template absent",
+    "historical_nine_file_geometry_audit": {
+      "scope": "The nine selected historical files only; not the complete global registry",
+      "ordered_pair_comparisons": 72,
+      "all_nine_flagged_duplicate_under_requested_70_percent_within_3px_rule": true,
+      "scorecard": "evidence/s30_scorecard.json"
+    }
+  },
+  "software_and_publication_checks": {
+    "strict_evidence_json_loader": {
+      "status": "PASS",
+      "loader": "gems27.evidence_json.loads",
+      "validated_files": [
+        "evidence/s30_preflight.json",
+        "evidence/s30_download_audit.json",
+        "evidence/s30_archived_candidate_inspection.json",
+        "evidence/s30_scorecard.json",
+        "evidence/s30_run_card.json",
+        "evidence/s30_verification.json",
+        "docs/data/s30_scorecard.json",
+        "docs/data/s30_run_card.json"
+      ],
+      "published_json_bytes_match_evidence": true
+    },
+    "pytest": {
+      "command": ".venv/bin/pytest -q",
+      "status": "PASS",
+      "passed": 744,
+      "skipped": 7,
+      "warnings": 34,
+      "subtests_passed": 9
+    },
+    "ruff": {
+      "command": ".venv/bin/ruff check src scripts tests",
+      "status": "PASS"
+    },
+    "static_site_build": {
+      "commands": [
+        "python3 scripts/build_site.py",
+        "python3 scripts/build_active_review.py"
+      ],
+      "status": "PASS",
+      "build_site_external_requests": 0,
+      "active_review_network_requests": 0,
+      "deterministic_rebuild": "PASS; repeated build hashes matched for entry pages and S30 JSON",
+      "s30_review_page": "docs/s30-review.html",
+      "s30_decision_overlay": "docs/index.html, docs/executive-summary.html, docs/current-review.html, index.html, executive-summary.html, current-review.html",
+      "disabled_tiff_download_visible": true,
+      "downloadable_tiff_link_exposed_by_s30_panel": false
+    },
+    "github_workflow_yaml_parse": {
+      "status": "PASS",
+      "parser": "PyYAML 6.0.3",
+      "files": [
+        ".github/workflows/pages.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/build-site.yml"
+      ]
+    },
+    "git_diff_check": "PASS"
+  },
+  "artifact_hashes": {
+    "run_card_sha256": "08942ceebf5e23dc2f00f0b578e7cd2bec739df06f12455a8289599ffe80dc57",
+    "scorecard_sha256": "bb089745cd3d8556e8fedd43e2768f2115c321df9b087795d9c7783cd9b546ee",
+    "preflight_sha256": "a3d5ad80b46b1367eb1a305f1afd59fde7e1fba93031e4c753cfacd87d059c12",
+    "download_audit_sha256": "0f7387371d7647df71a2f04cca6ea9a13ad36da231bab46422d26f83b9cd5126",
+    "archived_candidate_inspection_sha256": "b6d902fd8bfc54313a68dc43977e37677890c27408fd33760591ba466492b002"
+  },
+  "limitations": [
+    "No geological experiment, HOLDOUT-DTI, feature leakage test, S30 raster, exact official-template validation, organizer upload/receipt, current leaderboard check, or slot selection occurred.",
+    "Official non-GitHub source hosts were not contacted in S30; URLs are provided for manual review and are not fresh availability checks.",
+    "Historical score claims are USER-REPORTED / UNVERIFIED and are not calibrated leaderboard estimates.",
+    "The inherited nine-site geometry audit is not a complete synchronized global registry audit."
+  ]
+}

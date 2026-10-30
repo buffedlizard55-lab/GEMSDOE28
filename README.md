@@ -1,44 +1,40 @@
-# S29 · 2026-10-29 UTC — current checkout review · branch arena/fe0ed431-gemsdoe28 · READ FIRST EVERY SESSION
+# S30 · 2026-10-30 UTC — active branch review · READ FIRST EVERY SESSION
 
-## CURRENT DECISION: UNIQUE TIF GENERATED · OK TO SUBMIT: NO · NO WEEKLY SLOT USED
+## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO DOWNLOAD AND SUBMIT: NO
 
-**Active branch:** `arena/fe0ed431-gemsdoe28`. Automated checks only; no human inspection and no DrivenData access.
+**Active branch:** `arena/6aaf0523-gemsdoe28`. This review performed no geological experiment, emitted no new TIFF, did not upload anything, and selected or spent no weekly slot. Current decision and evidence: [S30 executive review](docs/s30-review.html) · [full research/repository report](knowledge/77_s30_repository_review_2026-10-30.md) · [single JSON run card](evidence/s30_run_card.json) · [nine-site scorecard](evidence/s30_scorecard.json) · [three-pass verification](evidence/s30_verification.json).
 
-- **Unique TIF:** `docs/candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif` (SHA-256 `bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3`, 20,000 dots). It passes the literal 70%/3 px and 0.90 rank gate against 87 references (worst overlap 0.68). It is **NOT OK TO SUBMIT**: HOLDOUT-DTI 0.0295 (CI 0.0234–0.0360) is below its random-K baseline (0.0396) and the comparable best (0.0553736).
-- **Dense S29 candidate (37,654 dots):** measured duplicate of registry-039 (overlap 1.00). NOT OK. Kept out of `docs/`.
-- **S29-E1** (preregistered HGB cross-fit): HOLDOUT-DTI 0.0498 vs random-K 0.0684; paired CI excludes zero on the negative side. Negative. Canary max AUC 0.613 (threshold 0.90).
-- **Experiments used:** 2 of 3. The third remains unused.
-- **Nine-site summary:** all 72 site pairs are duplicates under the 70%/3 px rule. All scores are USER-REPORTED / UNVERIFIED. No organizer receipts exist.
-- **Leaderboard (fetched 2026-10-29):** #1 0.4544; 0.4413 is not on the board (UNVERIFIED); the 0.3195 anchor is #47 kpomazi, another team.
-- **Executive summary and how to submit:** [docs/s29-submission-guide.html](docs/s29-submission-guide.html) · [knowledge/75_s29_result_2026-10-29.md](knowledge/75_s29_result_2026-10-29.md) · [run card](evidence/s29_candidate_run_card.json).
-- **Full prompt:** this README carries an operational summary, not the verbatim prompt. The user must paste the verbatim prompt if it is required (see `s29-verbatim-prompt-not-in-repo` in `registry/irregularities_s29.json`).
-- **Standing rules that continue:** Maximize P(Win) and Own the Outcome stay central. Weekly slot only for a candidate that beats the comparable holdout best. Pages URL https://buffedlizard55-lab.github.io/GEMSDOE28/ must be verified after every merge.
+### Current prompt and standing project specification — read before every session
 
-## S29 run card (JSON summary)
+The mission is to maximize the probability of a defensible high-scoring DOE GEMS submission, maintain an auditable scientific/source feed, and make the exact approved single-band GeoTIFF easy to download. The entry and executive pages must make **OK TO DOWNLOAD AND SUBMIT** unmistakable. Do not fabricate a score or call a model projection an observed result. Core values: **Maximize P(Win)** and **Own the Outcome**.
 
-```json
-{
-  "hypothesis": "S29-E1-HGB-CF (preregistered); S29-B hole-constrained placement",
-  "mechanism": "Per-quadrant HGB on 18 non-catalogue bands; visible catalogue labels teach feature conjunctions that co-occur with mapped faults",
-  "named_non_fault_process": "rock-type or basin-margin contrasts; survey seams; conductive cover edges",
-  "holdout_dti_E1": 0.049816171483106644,
-  "holdout_ci95_E1": [0.04133651638447839, 0.05862182830763166],
-  "paired_delta_vs_random_k_E1": -0.01862688963271715,
-  "holdout_dti_B": 0.02951795654634091,
-  "holdout_ci95_B": [0.023351140586235934, 0.035974722047644375],
-  "comparable_best_holdout_dti": 0.0553736,
-  "overlap_vs_registry_039": {"dense_A": 1.0, "B_hole_constrained": 0.68},
-  "raster_sha256": "bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3",
-  "validator": "gems27.submission.verify_geotiff: hard_checks_passed true",
-  "submission_name": "gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif",
-  "submission_note": "S29 HGB hole-constrained k20000; unique under 70%/3px gate; holdout negative; NOT approved to submit",
-  "verdict": "negative (no slot)"
-}
-```
+**Focus sites and highest supplied historical claims** (all are **USER-REPORTED / UNVERIFIED**, not organizer receipts): GEMSDOE24 0.2477; GEMSDOE25 0.2600; GEMSDOE27 0.2449; GEMSDOE28 0.2710; GEMSDOE30 0.2600; GEMSDOE31 0.2708; GEMSDOE32 0.2778; GEMSDOE33 0.2632; GEMSDOE36 0.2750. No calibrated holdout-to-leaderboard transfer exists, so the numerical estimated score for each is **unavailable**. The prompt’s 0.3195 and 0.4413 leaderboard anchors conflict; neither is asserted current without a fresh permitted observation.
+
+**Highest-priority safety and scientific protocol:**
+
+1. The session’s lane is only the explicitly assigned single method paragraph. Do not infer it from a site, candidate list, or score. Stop as a duplicate if absolute rank-correlation with a registry raster exceeds 0.90 or if more than 70% of final dots fall within 3 px of one registry raster; test the candidate surface before placement and final dots after placement. A complete synchronized registry is required.
+2. Reuse the hash-pinned template’s cached feature stack, `evaluate_holdout.py`, and `submission_writer.py`; never maintain a private evaluator/writer fork. Hide whole fault segments with a buffer, derive catalogue-dependent features from visible faults only, mask visible faults pixel-exactly, and report pooled HOLDOUT-DTI (alpha 0.2, beta 0.8, 300 m triangular kernel), evaluator version, withheld-positive count, and 95% CI.
+3. Test each feature alone for leakage before trusting it; AUC >0.90 is leakage until disproven. Rank 3–5 untried geological hypotheses before implementation, with layers, target physical signature, missing-catalogue-fault rationale, difference from existing code, named non-fault mimic, expected qualitative DTI priority, implementation cost, and external-source availability. If official external bytes/coverage cannot be verified, mark the idea not viable.
+4. Stop after at most 3 experiments or 2 hours. Do not reset an expired clock or spend/select a submission slot during research. Promotion is a separate selector step within the current authenticated weekly cap.
+5. Label every number as HOLDOUT-DTI (evaluator, positive count, CI), ORGANIZER-CONFIRMED (receipt bound to exact file), USER-REPORTED / UNVERIFIED, or non-score geometry/software evidence. Negative results are deliverables.
+6. A submission requires a unique name, a note ≤140 characters, one GeoTIFF (or one-file ZIP), one float32 band, matching sample CRS/shape/geotransform, finite in-footprint values in [0,1], no infinity, and the required outside-footprint mask. The exact final bytes must pass automated validation before an enabled download is shown. No human geological inspection substitutes for the project’s holdout/validator.
+7. Use verified official sources and provide links for manual review; do not claim a link or owner mirror proves current availability, organizer authenticity, score attribution, or portal acceptance. Preserve anomalies for review. Run implementation, defect review, and final requirement review as three passes.
+
+**S30 result and blockers:** the actual fail-closed preflight reports no lane/assignment, no complete registry, no frozen same-protocol baseline, an expired 7,200-second clock, no prepared cache, and all nine shared template files absent. `sample_submission.tif` and `labels.tif` are also absent; the exact-file audit fails before inspecting a candidate. No experiment or TIFF was authorized. The old S29 candidate in `docs/candidates/` is research-only: prior HOLDOUT-DTI 0.0295 (95% CI 0.0234–0.0360; 60,988 withheld positives) was below its matched random-K and comparable best. It is **NOT OK TO DOWNLOAD AND SUBMIT**.
+
+**GEMSDOE32 explanation:** inherited pixel forensics find its 37,654-dot set equals the H27-4 solo set minus exactly 2,545 catalogue-adjacent dots, no additions. This supports—but does not prove—a selective-emission/coverage-efficiency explanation for the supplied 0.2778 claim. The claim has no organizer receipt; no causal score effect or new-file estimate is inferred.
+
+**Inherited nine-file novelty audit:** all 72 directional comparisons among the nine selected historical artifacts were flagged duplicate under the requested >70%/3 px rule. This is a bounded audit of those nine files, not a complete global registry. All nine rows say “unique: NO” and “download now: NONE” in the [S30 executive table](docs/s30-review.html).
+
+**Submission procedure once an exact file is separately approved:** use only the enabled approved `.tif` (or `.zip` containing only that raster); verify exact grid and every footprint value through the shared writer/validator; complete leakage canaries, buffered whole-segment holdout and pre-/post-placement global novelty checks; get a separate selector’s approval; upload that exact file on DrivenData’s New submission form with a short note; bind the returned organizer receipt to its SHA-256. S30 has no eligible file, slot, account receipt, or enabled download.
+
+**Manual-review sources:** [DrivenData problem/format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [official rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [reference solution](https://github.com/drivendataorg/gems-prize-reference-solution) · [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) · [DOE GDR #1391](https://gdr.openei.org/submissions/1391) · [USGS 3DEP](https://www.usgs.gov/3d-elevation-program) · [EPSG:32611](https://epsg.io/32611). Non-GitHub official hosts were not contacted in this S30 runtime; listed links are for manual review, not fresh source-availability claims.
+
+## Archived S29 run card — historical, not the active branch decision
 
 ---
 
-# S29 · 2026-10-29 UTC — parallel checkout review (arena/df296ab5-gemsdoe28) · READ FIRST EVERY SESSION
+# S29 · 2026-10-29 UTC — archived parallel checkout review (arena/df296ab5-gemsdoe28) · historical only
 
 > **Three S29 records exist on `main`** (this branch plus parallel branches `arena/df296ab5-gemsdoe28` and `arena/9a3a5294-gemsdoe28`). This block (branch `arena/fe0ed431-gemsdoe28`) generated a unique GeoTIFF and records it as NOT OK to submit. The parallel S29 checkout review below (branch `arena/df296ab5-gemsdoe28`) generated no TIFF because its gates were unmet; the lattice-lane block after it (branch `arena/9a3a5294-gemsdoe28`) is a third parallel record. All three agree on the outcome that matters: **OK TO SUBMIT: NO**. This branch used no weekly slot. Their run cards are separate: `evidence/s29_candidate_run_card.json` (this branch) and `evidence/s29_run_card.json` (parallel branch).
 
@@ -89,7 +85,7 @@
 - Budget: stop after 3 experiments or 2 hours. Do not select or upload submissions (selector is separate). Do not automate DrivenData access or login; use free official sources or disclosed, hash-pinned owner mirrors.
 - Run card JSON at end: hypothesis, mechanism, named non-fault mimic, holdout DTI + CI, correlation/overlap, raster SHA-256, validator output, submission name and note (≤140 chars), verdict promote/negative. Present: `evidence/s29_lattice_run_card.json`.
 - Must include: 0.2777/0.2778 explanation; 0.4413 vs 0.3195 discrepancy; portal error `Predicted values must be in range [0, 1]`. Code PR merge is not a competition submission.
-- The verbatim full prompt was not in the session context. Paste it here to store it verbatim.
+- ARCHIVED NOTE from S29: that session did not receive the verbatim prompt. The active S30 canonical project specification at the top of this README supersedes this historical note; it is not a current request to paste or infer an assignment.
 
 ---
 
@@ -134,7 +130,7 @@ The reported GEMSDOE32 **0.2778 remains USER-REPORTED / UNVERIFIED**; there is n
 
 Main carried additional fail-closed S28/S28C and validation reviews from parallel branches. They remain useful audit records, but they do not replace the active Arena branch's completed S28-TCB result above. See [S28C evidence review](knowledge/73_s28c_evidence_review_2026-10-29.md), [S28C run card](evidence/s28c_run_card.json), [validation review](knowledge/74_s28_validation_review_2026-10-29.md), and [current-review card](evidence/s28_validation_run_card.json). All are no-upload/no-slot records; the reported GEMSDOE32 value remains USER-REPORTED / UNVERIFIED.
 
-# S27 · 2026-10-28 UTC — active branch review · READ FIRST EVERY SESSION
+# S27 · 2026-10-28 UTC — archived active-branch review · historical only
 
 ## CURRENT DECISION: NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO
 
@@ -170,7 +166,7 @@ Main carried additional fail-closed S28/S28C and validation reviews from paralle
 
 The S26 review below was recorded on a different Arena branch (`arena/95d8129d-gemsdoe28`). Preserve it as historical parallel-session provenance; its checkout-specific condition must not be presented as a fresh S27 observation. S27 re-ran its own preflight and exact-file audit, recorded at `evidence/s27_preflight.json` and `evidence/s27_download_audit.json`.
 
-# S25 · 2026-10-28 UTC — prior PCSE experiment · READ FIRST EVERY SESSION
+# S25 · 2026-10-28 UTC — archived PCSE experiment · historical only
 
 ## UNIQUE TIF GENERATED · FORMAT VALID · HOLDOUT NEGATIVE · OK TO SUBMIT: NO
 
@@ -189,7 +185,7 @@ The S26 review below was recorded on a different Arena branch (`arena/95d8129d-g
 
 ---
 
-# S25 · 2026-10-28 UTC — repository review · READ FIRST EVERY SESSION
+# S25 · 2026-10-28 UTC — archived repository review · historical only
 
 **Additional S25 record (input restoration, PR #72):** every pinned input restored and hash-verified, feature cache built, 658 tests pass; no TIFF, no holdout run, no slot. Remaining decisions (method lane, registry-rule budget, budget clock): [knowledge/69_s25_status_2026-10-28.md](knowledge/69_s25_status_2026-10-28.md) · [run card](evidence/s25_run_card.json).
 
@@ -406,7 +402,7 @@ nine-repository snapshot and actual input restoration are explicitly bounded in 
 
 ---
 
-# Session 22 audit — 2026-10-26 UTC (READ FIRST EVERY SESSION)
+# Session 22 audit — 2026-10-26 UTC (archived historical record)
 
 **DO NOT SUBMIT. This audit produced no TIFF or geological experiment and selected no slot.**
 The requested method assignment, complete current parallel registry, reusable prepared feature cache,

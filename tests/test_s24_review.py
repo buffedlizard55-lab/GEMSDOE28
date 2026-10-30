@@ -93,15 +93,18 @@ def test_s24_preflight_and_feed_snapshots_are_exactly_hash_bound():
 
 def test_readme_read_first_and_s24_page_remain_locked():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    # The active S29 checkout review leads; prior/parallel session records remain provenance.
-    assert readme.startswith("# S29 · 2026-10-29 UTC — current checkout review")
+    # The active S30 review leads; prior/parallel session records remain provenance.
+    assert readme.startswith("# S30 · 2026-10-30 UTC — active branch review")
+    assert "arena/6aaf0523-gemsdoe28" in readme
+    assert "OK TO DOWNLOAD AND SUBMIT: NO" in readme
+    assert "knowledge/77_s30_repository_review_2026-10-30.md" in readme
     assert "arena/df296ab5-gemsdoe28" in readme
     assert "# S28 · 2026-10-29 UTC — historical parallel-run result" in readme
     assert "NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO" in readme
-    assert "# S27 · 2026-10-28 UTC — active branch review" in readme
+    assert "# S27 · 2026-10-28 UTC — archived active-branch review · historical only" in readme
     assert "# S26 · 2026-10-28 UTC — prior checkout review" in readme
-    assert "# S25 · 2026-10-28 UTC — prior PCSE experiment" in readme
-    assert "# S25 · 2026-10-28 UTC — repository review" in readme
+    assert "# S25 · 2026-10-28 UTC — archived PCSE experiment · historical only" in readme
+    assert "# S25 · 2026-10-28 UTC — archived repository review · historical only" in readme
     assert "# S24 · 2026-10-27 UTC — historical repository review" in readme
     assert "knowledge/70_checkout_validation_followup_2026-10-28.md" in readme
     assert "evidence/review_2026-10-28.json" in readme
@@ -133,6 +136,14 @@ def test_static_site_builder_publishes_latest_review_and_run_card():
     result = json.loads(proc.stdout)
     assert result["status"] == "built"
     assert result["external_requests"] == 0
+    overlay = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_active_review.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert overlay.returncode == 0, overlay.stderr
     page = (ROOT / "docs/session24-review.html").read_text(encoding="utf-8")
     assert "Latest review" in page
     assert "NOT READY TO SUBMIT" in page

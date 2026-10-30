@@ -29,6 +29,19 @@ def sha(path):
     return hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
 
 
+@pytest.fixture(scope="module", autouse=True)
+def ensure_active_review_overlays_are_current():
+    """S23 page checks run with the active fail-closed overlay, as in CI's build step."""
+    proc = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_active_review.py")],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert proc.returncode == 0, proc.stderr
+
+
 def test_current_card_reports_an_uncompleted_tiff_not_a_fabricated_negative_model():
     card = load("evidence/s23_run_card.json")
     assert card["session_id"] == "G28-S23-20261027"
@@ -223,7 +236,23 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert 'data-submission-ready="false"' in text
         return
     assert len(parser.ids) == len(set(parser.ids)), page
-    if page == "s29-review.html":
+    if page == "s30-review.html":
+        assert parser.ids.count("gemsdoe28-s30-review") == 1
+        assert "NO FILE APPROVED · OK TO DOWNLOAD AND SUBMIT: NO" in text
+        assert text.index('id="gemsdoe28-s30-review"') < text.index("No approved TIFF to download")
+        assert "Leaderboard score estimate:</strong> unavailable" in text
+        assert "HOLDOUT-DTI improvement" in text
+        assert "no lane assigned or test run" in text
+        assert 'data-submission-ready="false"' in text
+    elif "s30-current-decision" in parser.ids:
+        assert parser.ids.count("s30-current-decision") == 1
+        assert text.index('id="s30-current-decision"') < text.index("Submission download locked")
+        if "current-checkout-decision" in parser.ids:
+            assert text.index('id="s30-current-decision"') < text.index('id="current-checkout-decision"')
+        assert "OK TO DOWNLOAD AND SUBMIT: NO" in text
+        assert "No approved TIFF to download" in text
+        assert 'data-submission-ready="false"' in text
+    elif page == "s29-review.html":
         assert parser.ids.count("s29-current-decision") == 1
         assert text.index('id="s29-current-decision"') < text.index("No approved TIFF to download")
         assert "OK TO DOWNLOAD AND SUBMIT: NO" in text

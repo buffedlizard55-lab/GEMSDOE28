@@ -1,0 +1,74 @@
+{
+  "schema": "gemsdoe28-s30-archived-raster-inspection-v1",
+  "observed_utc": "2026-10-30T22:52:57Z",
+  "scope": "Read-only local metadata/value inspection of an inherited S29 research TIFF; NOT a new S30 candidate or approval.",
+  "path": "docs/candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif",
+  "sha256": "bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3",
+  "metadata": {
+    "band_count": 1,
+    "dtype": [
+      "float32"
+    ],
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata_is_nan": true
+  },
+  "array_checks": {
+    "finite_count": 5167373,
+    "nan_count": 7111787,
+    "infinity_count": 0,
+    "finite_min": 0.0,
+    "finite_max": 1.0,
+    "unique_finite_values": [
+      0.0,
+      1.0
+    ],
+    "one_count": 20000,
+    "zero_count": 5147373
+  },
+  "checks_against_repository_grid_contract": {
+    "single_band_float32": true,
+    "crs_matches_grid_constant": true,
+    "shape_matches_grid_constant": true,
+    "transform_matches_grid_constant": true,
+    "finite_values_within_0_1": true,
+    "no_infinity": true,
+    "finite_count_matches_repository_footprint_constant": true,
+    "nan_count_matches_repository_outside_constant": true
+  },
+  "not_verified_here": [
+    "Exact footprint comparison against the official sample_submission.tif (missing from data/).",
+    "Official CRS/shape/transform validation against an organizer-authenticated template.",
+    "Current registry completeness or uniqueness outside the inherited 87-reference S29 audit.",
+    "Organizer acceptance or any leaderboard score."
+  ],
+  "inherited_s29_status": {
+    "artifact_role": "S29-E2 hole-constrained research artifact; not generated in this S30 review.",
+    "prior_holdout_dti": 0.02951795654634091,
+    "prior_holdout_ci95": [
+      0.023351140586235934,
+      0.035974722047644375
+    ],
+    "withheld_positives": 60988,
+    "evaluator_version": "gems-segment-pooled-v1",
+    "novelty_references_checked": 87,
+    "max_dot_overlap_within_3px": 0.68,
+    "max_abs_raw_spearman": 0.037007674639772614,
+    "max_abs_kernel_spearman": 0.2101898032312595,
+    "slot_selected": false,
+    "submit_approved": false,
+    "source_run_card": "evidence/s29_candidate_run_card.json"
+  },
+  "disposition": "ARCHIVE ONLY \u2014 prior HOLDOUT-DTI is negative; no current submission approval or download link."
+}
