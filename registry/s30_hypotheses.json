@@ -1,0 +1,99 @@
+{
+  "schema": "gemsdoe28-s30-ranked-hypotheses-v1",
+  "recorded_utc": "2026-10-30",
+  "status": "preregistered research slate only; no experiment authorized or run",
+  "scope": "Three candidates carried forward from the repository's prior untested-hypothesis inventory and re-screened against the current code inventory. They are not claimed as globally novel. S28-TCB, S25-PCSE, H28-1 cross-potential-field edge coherence, and previous drainage/thermal work are not presented as new.",
+  "ranking_basis": "Qualitative next-test priority balancing physical complementarity, implementation cost, and whether required data are actually present/obtainable. Expected ΔDTI and leaderboard score are unknown for every candidate; this order is not a numeric forecast.",
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "S30-MCR",
+      "name": "Spatially cross-fitted conductivity residual margins",
+      "layers": [
+        "cond_surf",
+        "depth_to_base_surf",
+        "det_elev",
+        "det_elev_slope"
+      ],
+      "physical_signature": "Fit a label-free, spatially blocked conditional-quantile model of surface conductivity from depth and terrain context; map coherent signed residual margins rather than raw conductivity amplitude.",
+      "why_it_may_find_catalogue_missing_faults": "A concealed fluid/alteration corridor may produce conductivity that is anomalous relative to local basin-depth and terrain context even where a young surface trace is absent from the USGS/INGENIOUS catalogue. This is a testable hypothesis, not an established fault or geothermal indicator.",
+      "difference_from_implemented_repo_work": "The inspected source inventory contains raw conductivity, clay-cap margins, conductivity interactions, edge/context models and cross-fitted classifiers, but no cross-fitted conditional-quantile residual-margin operator. This inventory comparison is bounded to this checkout; it does not establish novelty outside the repository.",
+      "named_non_fault_mimic": "Saline groundwater, lacustrine clay, irrigation return flow, lithologic contrasts, and spatially varying electromagnetic investigation depth.",
+      "expected_holdout_dti_improvement": "Unknown; no defensible numerical estimate.",
+      "implementation_cost": "Medium: residual model, spatial cross-fit, controls and holdout integration; no new external layer is required.",
+      "data_required": "The existing 32-band prepared feature stack and the pinned shared evaluator/writer.",
+      "data_obtainability_check": {
+        "external_data_required": false,
+        "required_local_cache_present": false,
+        "shared_template_present": false,
+        "current_status": "Not runnable in this checkout: the prepared feature cache and all nine hash-pinned shared assets are absent. The experiment preflight is BLOCKED."
+      },
+      "status": "Untried in the documented S26/S29 slate; NOT AUTHORIZED in S30 because lane, registry, cache, shared tools, baseline and experiment clock gates fail."
+    },
+    {
+      "rank": 2,
+      "id": "S30-HFR2M",
+      "name": "Independent heat-flow residual × shallow-probe conjunction",
+      "layers": [
+        "USGS Great Basin heat-flow well residuals / mapped heat-flow field",
+        "DOE GDR #1391 INGENIOUS 2 m temperature-probe observations",
+        "competition cond_surf and depth_to_base_surf"
+      ],
+      "physical_signature": "Require spatially supported positive heat-flow residual and an independent shallow temperature anomaly to corroborate a candidate corridor; do not emit from either thermal source alone.",
+      "why_it_may_find_catalogue_missing_faults": "A buried permeable conduit can move heat and fluid without a mapped Quaternary scarp. Independent thermal observations could locate a corridor that a surface-fault inventory does not contain; thermal observations alone do not prove faulting or geothermal causation.",
+      "difference_from_implemented_repo_work": "Prior work includes heat-flow/Euler and well/spring/geothermometer ideas. This candidate requires a spatially supported conjunction of the USGS heat-flow residual product and separate GDR 2 m probes, conditioned on a candidate corridor; no such conjunction runner or verified holdout result is present in this checkout.",
+      "named_non_fault_mimic": "Non-tectonic groundwater circulation, warm aquifers, seasonal or sampling bias, and uneven probe/well density.",
+      "expected_holdout_dti_improvement": "Unknown; no defensible numerical estimate.",
+      "implementation_cost": "High: two external schemas, spatial support/uncertainty, density controls and buffered holdout handling.",
+      "data_required": "Free official USGS ScienceBase Great Basin heat-flow item https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28 and DOE GDR #1391 https://gdr.openei.org/submissions/1391.",
+      "data_obtainability_check": {
+        "historical_availability": "A dated repository inventory records HTTP 200 and matching SHA-256 pins for the USGS heat-flow archive and GDR 2 m probes on 2026-10-03 (evidence/external_layer_inventory.json). This is historical availability evidence only.",
+        "present_in_current_checkout": false,
+        "current_fetch_attempted": false,
+        "reason_not_checked": "ScienceBase and GDR are outside this runtime's outbound host allowlist; the present run did not contact them.",
+        "current_status": "NOT VIABLE for a confirmatory run until exact source bytes, coverage, schema and hashes are restored and checked."
+      },
+      "status": "Untried as this exact conjunction in the documented S26 slate; NOT VIABLE for S30 because required external bytes are absent and inaccessible here."
+    },
+    {
+      "rank": 3,
+      "id": "S30-DNT",
+      "name": "Drainage-network displacement and knickpoint trains",
+      "layers": [
+        "Challenge-footprint USGS 3DEP 1 m bare-earth DEM tiles, as indexed by the competition's 1m_DEM_links.csv",
+        "Existing LiDAR scarp/roughness descriptors for independent comparison",
+        "A potential-field lineament used as corroboration, not as a fault label"
+      ],
+      "physical_signature": "Route channels and detect aligned knickpoint trains, channel deflections/offsets, beheaded channels or wind gaps; require agreement with independently derived structure and score by the shared buffered whole-segment holdout.",
+      "why_it_may_find_catalogue_missing_faults": "Drainage can retain geomorphic displacement evidence after a low-relief scarp has been degraded or buried, potentially exposing structures not represented in the mapped fault catalogue. Drainage geometry is not direct evidence of geothermal activity.",
+      "difference_from_implemented_repo_work": "The current LiDAR modules primarily use pixelwise terrain descriptors, scarp edges, ridges, step/openess, graph and topology features; no audited flow-routing/channel-network displacement pipeline is present in the current proposal inventory. Prior proposal history exists, so this is untried here, not a newly discovered global method.",
+      "named_non_fault_mimic": "Lithologic resistance boundaries, landslides, stream capture, roads/culverts, artificial drainage and DEM artifacts.",
+      "expected_holdout_dti_improvement": "Unknown; no defensible numerical estimate.",
+      "implementation_cost": "Very high: exact tile inventory, acquisition, hydrologic preprocessing, artifact controls and spatial validation.",
+      "data_required": "Free official USGS 3DEP bare-earth elevation products https://www.usgs.gov/3d-elevation-program plus the competition's challenge-specific 1 m tile-link table.",
+      "data_obtainability_check": {
+        "challenge_tile_table_present": false,
+        "challenge_specific_urls_or_bytes_present": false,
+        "current_fetch_attempted": false,
+        "reason_not_checked": "The exact 1 m tile URLs are not in this checkout and USGS hosts are outside this runtime's outbound host allowlist.",
+        "current_status": "NOT VIABLE until the official challenge-specific tiles, coverage, metadata and checksums are actually obtained and audited."
+      },
+      "status": "Untried as a local flow-network pipeline; NOT VIABLE for S30 because the official tile bytes and exact challenge link table are unavailable here."
+    }
+  ],
+  "exclusions": [
+    "S25-PCSE was tested and rejected.",
+    "S26/S28-TCB was tested and rejected in a parallel run; do not label it untried.",
+    "H28-1 magnetic/gravity edge coherence is already implemented and tested.",
+    "Do not select a candidate, begin a holdout, generate a TIFF, or use a weekly slot without the explicit lane, complete registry, shared assets, cached feature stack, same-protocol baseline, fresh authorized clock and passing preflight."
+  ],
+  "official_manual_review_links": [
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+    "https://github.com/drivendataorg/gems-prize-reference-solution/tree/aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+    "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+    "https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28",
+    "https://gdr.openei.org/submissions/1391",
+    "https://www.usgs.gov/3d-elevation-program"
+  ]
+}

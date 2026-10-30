@@ -347,6 +347,14 @@
         "fetch-failed": 2,
         "observed": 16
       }
+    },
+    {
+      "checked_at_utc": "2026-10-30T22:54:34Z",
+      "source_count": 18,
+      "status_counts": {
+        "not-checked-network-policy": 8,
+        "observed": 10
+      }
     }
   ]
 }

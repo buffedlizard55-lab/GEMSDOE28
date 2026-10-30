@@ -167,6 +167,13 @@ on:
       - 'docs/data/current_run_card_2026-10-27.json'
       - 'docs/data/s23_scorecard.json'
       - 'docs/data/s23_scorecard.csv'
+      - 'README.md'
+      - 'evidence/s30*.json'
+      - 'registry/s30_hypotheses.json'
+      - 'scripts/build_s30_review.py'
+      - 'tests/test_s30_review.py'
+      - 'knowledge/80_s30_review_2026-10-30.md'
+      - 'docs/data/s30_*.json'
   pull_request:
     paths:
       - 'registry/next_hypotheses.json'
@@ -332,6 +339,13 @@ on:
       - 'docs/data/current_run_card_2026-10-27.json'
       - 'docs/data/s23_scorecard.json'
       - 'docs/data/s23_scorecard.csv'
+      - 'README.md'
+      - 'evidence/s30*.json'
+      - 'registry/s30_hypotheses.json'
+      - 'scripts/build_s30_review.py'
+      - 'tests/test_s30_review.py'
+      - 'knowledge/80_s30_review_2026-10-30.md'
+      - 'docs/data/s30_*.json'
   workflow_dispatch:
 
 permissions:
@@ -349,4 +363,4 @@ jobs:
       - name: Build pages without network access
         run: python scripts/build_site.py && python scripts/build_active_review.py
       - name: Require generated pages to be current
-        run: git diff --exit-code -- docs/*.html docs/s25/index.html docs/data/*run_card*.json docs/data/s24_repository_review_run_card.json docs/data/active_checkout_review_2026-10-27.json index.html executive-summary.html current-review.html data/current_run_card*.json
+        run: git diff --exit-code -- docs/*.html docs/s25/index.html docs/data/*run_card*.json docs/data/s24_repository_review_run_card.json docs/data/active_checkout_review_2026-10-27.json docs/data/s30_*.json index.html executive-summary.html current-review.html data/current_run_card*.json

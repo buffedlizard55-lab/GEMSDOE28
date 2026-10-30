@@ -9,7 +9,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "cross-site-review.html", "session23-result.html", "session24-review.html"]
+PAGES = ["index.html", "executive-summary.html", "topology.html", "research.html", "sources.html", "cross-site-review.html", "session23-result.html", "session24-review.html", "s30-review.html"]
 
 
 class Links(HTMLParser):
@@ -409,11 +409,16 @@ def test_downloads_have_unique_names_and_zip_single_member():
 
 def test_current_run_notice_is_above_historical_body():
     for page in PAGES:
+        if page == "s30-review.html":
+            continue  # S30's standalone review has its own current-decision banner.
         text = (DOCS / page).read_text()
         assert 'Current run: NOT READY TO SUBMIT' in text
         assert 'NO FILE APPROVED' in text and 'do not upload it or any prior file' in text
         assert 'S23 audit: no new TIFF' in text
         assert 'data/current_run_card.json' in text
+    s30 = (DOCS / "s30-review.html").read_text()
+    assert 'id="s30-current-decision"' in s30
+    assert "NO NEW TIFF" in s30 and "SUBMIT: NO" in s30
     overview = (DOCS / 'index.html').read_text()
     executive = (DOCS / 'executive-summary.html').read_text()
     assert '72 directional comparisons' in overview

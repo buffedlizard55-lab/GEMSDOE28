@@ -239,9 +239,17 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert "OK TO SUBMIT: NO" in text
     elif "current-checkout-decision" in parser.ids:
         assert parser.ids.count("current-checkout-decision") == 1
-        assert text.index('id="current-checkout-decision"') < text.index("Submission download locked")
+        panel_start = text.index('id="current-checkout-decision"')
+        panel_end = text.index("</section>", panel_start)
+        assert "Submission download locked" in text[panel_start:panel_end]
         assert "No new submission approved" in text
         assert "No new TIFF was generated" in text
+    elif page == "s30-review.html":
+        assert parser.ids.count("s30-current-decision") == 1
+        assert text.index('id="s30-current-decision"') < text.index("Nine-site executive summary")
+        assert "NO NEW TIFF" in text and "DOWNLOAD: NO FILE EXISTS" in text
+        assert "SUBMIT: NO" in text and "NOT ESTIMABLE" in text
+        assert 'data-submission-ready="false"' in text
     else:
         assert parser.ids.count("current-submission") == 1
         assert text.index('id="current-submission"') < text.index("Submission download locked")

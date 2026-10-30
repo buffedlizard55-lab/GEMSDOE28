@@ -97,10 +97,14 @@ def main() -> int:
     import build_s29_review  # noqa: PLC0415
 
     build_s29_review.main()
-    # S29 lattice lane (parallel): experiments + uniqueness audit. Placed last so it leads the page.
+    # S29 lattice lane (parallel): experiments + uniqueness audit.
     import build_s29_lattice_review  # noqa: PLC0415
 
     build_s29_lattice_review.main()
+    # S30 is the active branch review; it leads every entry page and stays fail-closed.
+    import build_s30_review  # noqa: PLC0415
+
+    build_s30_review.main()
     print(json.dumps({"status": "built", "pages": updated,
                       "review_card": "docs/data/active_checkout_review_2026-10-27.json",
                       "network_requests": 0, "submission_ready": False}, indent=2))

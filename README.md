@@ -1,8 +1,46 @@
-# S29 · 2026-10-29 UTC — current checkout review · branch arena/fe0ed431-gemsdoe28 · READ FIRST EVERY SESSION
+# S30 · 2026-10-30 UTC — active branch review · branch arena/5a9fd894-gemsdoe28 · READ FIRST EVERY SESSION
 
-## CURRENT DECISION: UNIQUE TIF GENERATED · OK TO SUBMIT: NO · NO WEEKLY SLOT USED
+## CURRENT DECISION: PREFLIGHT BLOCKED · NO NEW TIFF · DOWNLOAD: NO FILE EXISTS · SUBMIT: NO
 
-**Active branch:** `arena/fe0ed431-gemsdoe28`. Automated checks only; no human inspection and no DrivenData access.
+**Active branch:** `arena/5a9fd894-gemsdoe28`. This S30 record supersedes every lower S29/S28 status banner. The literal 70%/3 px duplicate gate is binding; do not reopen the earlier S29 request for a human waiver.
+
+- **No file:** zero geological experiments, holdouts, raster emissions, or TIFF downloads were performed in S30. No unique submission GeoTIFF exists. `OK TO DOWNLOAD: NO NEW FILE EXISTS · OK TO SUBMIT: NO · WEEKLY SLOT: NONE SELECTED OR SPENT`.
+- **Fresh automated preflight:** [evidence/s30_preflight.json](evidence/s30_preflight.json) is `BLOCKED`. No assigned single-method lane, complete shared parallel registry, frozen comparable best, prepared feature cache, or nine hash-pinned shared evaluator/writer/validator assets are available. The recorded 7,200-second clock is expired (279,711.725 seconds elapsed); it was not reset. Do not infer a lane or bypass any gate.
+- **Nine-site claims:** [S30 executive review](docs/s30-review.html) covers GEMSDOE24/25/27/28/30/31/32/33/36. The highest historical claims are 0.2477, 0.2600, 0.2449, 0.2710, 0.2600, 0.2708, 0.2778, 0.2632, 0.2750 respectively. All are **USER-REPORTED / UNVERIFIED**, not ORGANIZER-CONFIRMED. No hidden-score estimate is defensible. All nine are historical references only and must not be downloaded for submission or relabeled as new.
+- **Novelty:** the selected nine-file geometry audit has 72/72 directed comparisons above 70% within 3 px (maximum 100%). This is not a complete live registry; the missing full registry still blocks any new candidate.
+- **GEMSDOE32 0.2778:** owner-reported, no organizer receipt found. Its 37,654 dots are an exact subset of GEMSDOE31 H27-4 solo: 2,545 catalogue-adjacent dots removed, none added. That could reduce low-credit false-positive cost, but does not prove score causation or a new detector. See the forensic section in the S30 review.
+- **Leaderboard anchors:** the conflicting 0.4413 and 0.3195 claims were not refreshed from the official site in S30. The latest saved repository observation is dated 2026-10-29 (#1 0.4544, #26 0.3328); it is historical, not today's verified standing and not a receipt for any local raster.
+- **Pre-implementation slate:** three ranked proposals are in [registry/s30_hypotheses.json](registry/s30_hypotheses.json). Expected DTI gain is unknown for all. MCR is not runnable without the missing cache/shared tools/lane; HFR2M and DNT are not viable until exact official source bytes are obtained and checked. No candidate is selected or authorized.
+- **Source scope:** GitHub-only refresh at 2026-10-30 22:54 UTC observed all nine focus-site repo heads and the reference-solution metadata (10/18 total feed sources). DrivenData, USGS, ScienceBase and GDR were not freshly queried; no leaderboard, account allowance, or submission receipt was checked. See [evidence/s30_source_refresh.json](evidence/s30_source_refresh.json) and [docs/data/feed.json](docs/data/feed.json).
+- **Run card:** [evidence/s30_run_card.json](evidence/s30_run_card.json). Verdict: negative; no experiment, no HOLDOUT-DTI, no validator output, no TIFF hash, no submission name, no score estimate, no slot. The machine-readable card gives a 57-character note only as a future placeholder; it does not authorize an upload.
+
+## Standing project prompt and decision contract — read before every session
+
+**Maximize P(Win) · Own the Outcome.** Build an auditable, source-linked research and submission system for the DOE GEMS fault-detection competition. Focus executive analysis on GEMSDOE24, GEMSDOE25, GEMSDOE27, GEMSDOE28, GEMSDOE30, GEMSDOE31, GEMSDOE32, GEMSDOE33 and GEMSDOE36. Keep this README's current S30 section and the current run card/preflight as the read-first record at the start of each session.
+
+1. **Never copy or relabel an old submission as new.** A new GeoTIFF must be genuinely unique under the full, synchronized registry and have a clear automated download/submit approval state. Automated checks, not human inspection, must validate it. No candidate exists in S30.
+2. **Stay in the assigned single-method lane.** Stop on pre-placement surface rank-correlation `|Spearman ρ| > 0.90` against any registry raster or if more than 70% of candidate dots are within 3 px of any registry raster. Apply the same tests to final dots. Do not infer a lane, bypass a duplicate, or use the selected nine-site subset as if it were the complete registry.
+3. **Use the pinned shared feature cache, evaluator and writer.** Do not fork shared tools privately. Hold out whole buffered fault segments; derive catalogue features from visible faults only; mask visible faults pixel-exactly; use pooled DTI with α=0.2, β=0.8 and a 300 m triangular kernel. Report evaluator version, withheld-positive count and 95% CI.
+4. **Test each feature alone for leakage.** AUC >0.90 is leakage until disproven. Label numbers precisely: `HOLDOUT-DTI` (with evaluator, withheld count and CI), `ORGANIZER-CONFIRMED` (file-bound submission-page receipt), `USER-REPORTED`, or `NOT ESTIMABLE`. A projection is never a score.
+5. **Before implementation, preregister 3–5 untried geological hypotheses.** For each, name layers, physical signature/transform, why it could detect faults missing from USGS/INGENIOUS, difference from repository methods, a named non-fault mimic, cost and free official-data availability. Actually check required external data before calling a candidate viable. A negative result is a deliverable.
+6. **Cap work at 3 experiments or 2 hours.** Do not select or spend a weekly submission slot in a research run; promotion is a separate selector step. End each completed run with one JSON card containing hypothesis/mechanism/mimic, holdout and CI, registry overlap/correlation, raster hash, automated validator output, submission name/note, and promote/negative verdict.
+7. **Use trusted official sources and links.** Do not invent evidence, leaderboard ranks or numeric score estimates. The 0.4413 and 0.3195 anchors conflict and must be checked against a current official observation before being called current. Preserve source time, pinned revisions, hashes and uncertainty.
+8. **Keep the submission path obvious and fail-closed.** Only the exact file selected by the automated promotion record may be offered for upload. Validate raster format, CRS, grid, bounds, values and outside-footprint encoding. The submission note must be one line and ≤140 characters. Capture the organizer receipt before labeling any score ORGANIZER-CONFIRMED.
+9. **Run three verification passes.** Implement against the contract, review the science/evidence/code and site independently, then re-check all gates and tests. Create a PR and request merge only when permissions and tests allow; never overstate a failed or blocked step.
+
+**Current official-source caveat:** the linked official problem, leaderboard, USGS, ScienceBase, GDR and 3DEP pages are review sources, not fresh verification from S30. The runtime host allowlist prevented those requests. Do not present historical availability or saved leaderboard observations as current.
+
+## S30 verification closeout
+
+Post-change verification: Ruff clean; **747 passed, 7 skipped, 34 Rasterio deprecation warnings, 9 subtests passed**. The seven skips require absent input rasters, templates or external data and are not passes. Offline `build_site.py` plus `build_active_review.py` completed with zero network requests; generated HTML/S30 JSON/root pages were deterministic across consecutive builds. Nine S30-specific tests cover the fail-closed publisher, score table, overlap audit, source scope and hypothesis slate. Full details and pass definitions: [knowledge/80_s30_review_2026-10-30.md](knowledge/80_s30_review_2026-10-30.md). PR/merge status will be reported only after the branch-only GitHub operation returns an explicit result.
+
+---
+
+# S29 · 2026-10-29 UTC — archived checkout review · branch arena/fe0ed431-gemsdoe28
+
+## ARCHIVED S29 BRANCH RESULT — NOT THE ACTIVE BRANCH · OK TO SUBMIT: NO · NO WEEKLY SLOT USED
+
+**Archived branch:** `arena/fe0ed431-gemsdoe28`. This is preserved as historical provenance only; S30 above is the active branch decision. Automated checks only; no human inspection and no DrivenData access.
 
 - **Unique TIF:** `docs/candidates/gems29-s29-hole-k20000-20261029-b68117a828cc-nan.tif` (SHA-256 `bcc92b8d8c5d81e095b9f4a7b73e2578e22fccf6fddb98c08a170c4089816cb3`, 20,000 dots). It passes the literal 70%/3 px and 0.90 rank gate against 87 references (worst overlap 0.68). It is **NOT OK TO SUBMIT**: HOLDOUT-DTI 0.0295 (CI 0.0234–0.0360) is below its random-K baseline (0.0396) and the comparable best (0.0553736).
 - **Dense S29 candidate (37,654 dots):** measured duplicate of registry-039 (overlap 1.00). NOT OK. Kept out of `docs/`.
@@ -11,7 +49,7 @@
 - **Nine-site summary:** all 72 site pairs are duplicates under the 70%/3 px rule. All scores are USER-REPORTED / UNVERIFIED. No organizer receipts exist.
 - **Leaderboard (fetched 2026-10-29):** #1 0.4544; 0.4413 is not on the board (UNVERIFIED); the 0.3195 anchor is #47 kpomazi, another team.
 - **Executive summary and how to submit:** [docs/s29-submission-guide.html](docs/s29-submission-guide.html) · [knowledge/75_s29_result_2026-10-29.md](knowledge/75_s29_result_2026-10-29.md) · [run card](evidence/s29_candidate_run_card.json).
-- **Full prompt:** this README carries an operational summary, not the verbatim prompt. The user must paste the verbatim prompt if it is required (see `s29-verbatim-prompt-not-in-repo` in `registry/irregularities_s29.json`).
+- **Prompt persistence:** the standing project prompt and decision contract are recorded at the top of this README under the S30 read-first section. This older S29 note is retained only as history.
 - **Standing rules that continue:** Maximize P(Win) and Own the Outcome stay central. Weekly slot only for a candidate that beats the comparable holdout best. Pages URL https://buffedlizard55-lab.github.io/GEMSDOE28/ must be verified after every merge.
 
 ## S29 run card (JSON summary)

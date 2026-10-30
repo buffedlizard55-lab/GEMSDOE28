@@ -1,0 +1,74 @@
+{
+  "schema": "gemsdoe28-s30-source-refresh-v1",
+  "checked_at_utc": "2026-10-30T22:54:34Z",
+  "source_feed": "docs/data/feed.json",
+  "feed_policy": "Non-competition metadata only. Runtime allowlist was github.com and api.github.com. DrivenData was explicitly forbidden, including redirects.",
+  "feed_status": "partial-or-unavailable",
+  "source_count": 18,
+  "freshly_observed_count": 10,
+  "not_checked_by_network_policy_count": 8,
+  "drivendata_contacted": false,
+  "leaderboard_or_submission_receipts_checked": false,
+  "focus_site_owner_repositories": [
+    {
+      "site": "GEMSDOE24",
+      "status": "observed",
+      "default_branch_head": "63d5885b68f73c19a7746052ccb3e5690f3271b5",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE24/tree/63d5885b68f73c19a7746052ccb3e5690f3271b5"
+    },
+    {
+      "site": "GEMSDOE25",
+      "status": "observed",
+      "default_branch_head": "f59a398541f0aa9530879d117993a8dbbad4f1bf",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE25/tree/f59a398541f0aa9530879d117993a8dbbad4f1bf"
+    },
+    {
+      "site": "GEMSDOE27",
+      "status": "observed",
+      "default_branch_head": "fe16740fedf901a499df10b219e1f4ef3a9d7347",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE27/tree/fe16740fedf901a499df10b219e1f4ef3a9d7347"
+    },
+    {
+      "site": "GEMSDOE28",
+      "status": "observed",
+      "default_branch_head": "424bf795ed2183000c643d6e30a12ce2d4bf401d",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/tree/424bf795ed2183000c643d6e30a12ce2d4bf401d"
+    },
+    {
+      "site": "GEMSDOE30",
+      "status": "observed",
+      "default_branch_head": "eaff218f81e89fadc605650bb2cd55dd4b58e18d",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/tree/eaff218f81e89fadc605650bb2cd55dd4b58e18d"
+    },
+    {
+      "site": "GEMSDOE31",
+      "status": "observed",
+      "default_branch_head": "f9248200f20def2654af596c1cc13ab2f9d96687",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE31/tree/f9248200f20def2654af596c1cc13ab2f9d96687"
+    },
+    {
+      "site": "GEMSDOE32",
+      "status": "observed",
+      "default_branch_head": "c8e560f1aae650b120dc31c9e7495ced6a587701",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE32/tree/c8e560f1aae650b120dc31c9e7495ced6a587701"
+    },
+    {
+      "site": "GEMSDOE33",
+      "status": "observed",
+      "default_branch_head": "ee2e464b61cb0e0aa604b0525044ad9ff31c9ec7",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE33/tree/ee2e464b61cb0e0aa604b0525044ad9ff31c9ec7"
+    },
+    {
+      "site": "GEMSDOE36",
+      "status": "observed",
+      "default_branch_head": "b0824c550c02792897d0ebe3aba1cb0e75583ea1",
+      "pinned_tree_url": "https://github.com/buffedlizard55-lab/GEMSDOE36/tree/b0824c550c02792897d0ebe3aba1cb0e75583ea1"
+    }
+  ],
+  "official_reference_repository": {
+    "status": "observed",
+    "default_branch_head": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+    "pinned_tree_url": "https://github.com/drivendataorg/gems-prize-reference-solution/tree/aebe92f7c8a990f0e3443451b7a825d9afd6336b"
+  },
+  "interpretation": "All nine focus-site owner repositories had a GitHub commit-metadata observation in this feed run. This is not a content-level score audit, a complete live submission registry, or an organizer score receipt. Source-specific current pages were inspected for the focus sites; their owner-reported scores remain unverified. Eight non-GitHub sources were deliberately not requested under the runtime allowlist."
+}

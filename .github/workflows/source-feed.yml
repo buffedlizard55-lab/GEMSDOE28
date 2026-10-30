@@ -37,6 +37,7 @@ jobs:
         run: |
           python scripts/refresh_source_feed.py
           python scripts/build_site.py
+          python scripts/build_active_review.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit feed to this branch only
@@ -44,7 +45,7 @@ jobs:
           set -euo pipefail
           git config user.name 'GEMS source feed'
           git config user.email 'gems-feed@users.noreply.github.com'
-          git add docs/data/feed.json docs/data/feed_history.json docs/*.html index.html executive-summary.html data/current_run_card_2026-10-26.json
+          git add docs/data/feed.json docs/data/feed_history.json docs/data/s30_*.json docs/*.html index.html executive-summary.html data/current_run_card_2026-10-26.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "feed: refresh source metadata and dated pages"
           for i in 1 2 3 4; do

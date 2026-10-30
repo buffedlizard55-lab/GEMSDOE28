@@ -1,0 +1,189 @@
+{
+  "schema": "gemsdoe28-s30-repository-review-v1",
+  "run_id": "G28-S30-20261030-REVIEW",
+  "observed_utc": "2026-10-30T23:07:38Z",
+  "branch": "arena/5a9fd894-gemsdoe28",
+  "status": "BLOCKED — repository review only; no geological experiment or holdout run",
+  "hypothesis": {
+    "id": "S30-MCR",
+    "name": "Spatially cross-fitted conductivity residual margins",
+    "rank_in_untried_slate": 1,
+    "selection_status": "NOT SELECTED FOR EXPERIMENT; lane and all experiment gates are blocked",
+    "layers": [
+      "cond_surf",
+      "depth_to_base_surf",
+      "det_elev",
+      "det_elev_slope"
+    ],
+    "mechanism": "A label-free, spatially blocked conditional-quantile model would detect coherent signed conductivity residual margins relative to depth and terrain context; no such model was run.",
+    "named_non_fault_mimic": "Saline groundwater, lacustrine clay, irrigation return flow, lithologic contrasts, and varying electromagnetic investigation depth.",
+    "expected_dti_improvement": "Unknown; no numerical projection or leaderboard estimate is defensible."
+  },
+  "experiment_budget": {
+    "cap_experiments": 3,
+    "cap_hours": 2,
+    "experiments_run": 0,
+    "holdouts_run": 0,
+    "raster_emissions": 0,
+    "budget_clock_reset": false,
+    "status": "No experiment authorized. The fresh preflight records 279711.725385 elapsed seconds against a 7200-second cap."
+  },
+  "preflight": {
+    "path": "evidence/s30_preflight.json",
+    "status": "BLOCKED",
+    "experiment_allowed": false,
+    "submission_ready": false,
+    "slot_selected": false,
+    "blockers": [
+      "No explicit assigned method lane or assignment source.",
+      "No complete shared parallel-run registry.",
+      "No frozen same-protocol current-best result.",
+      "Prepared feature cache absent.",
+      "All nine pinned shared template/evaluator/writer/validator/registry assets are absent.",
+      "The existing declared emission budget is over the literal registry-overlap gate.",
+      "Recorded 2-hour clock is expired; no reset was requested or performed."
+    ]
+  },
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "status": "NOT RUN — preflight blocked",
+    "evaluator_version": "gems-segment-pooled-v1 (required shared version; unavailable in this checkout)",
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel": "300 m triangular",
+    "note": "No local measurement. Do not interpret a historical or projected value as S30 HOLDOUT-DTI."
+  },
+  "registry_uniqueness": {
+    "rule": "Stop if surface rank-correlation with any registry raster exceeds 0.90 OR if more than 70% of candidate dots fall within 3 px of a registry raster; check before placement and on final dots.",
+    "s30_surface_rank_correlation": null,
+    "s30_final_dot_fraction_within_3px": null,
+    "s30_status": "NOT RUN — no S30 surface, final dots, or raster was created; full registry is missing.",
+    "historical_nine_site_audit": {
+      "path": "evidence/s24_nine_site_overlap.json",
+      "label": "GEOMETRY-AUDIT, not HOLDOUT-DTI",
+      "directed_comparisons": 72,
+      "comparisons_over_0_70": 72,
+      "maximum_overlap": 1.0,
+      "interpretation": "All 72 directed comparisons among the nine selected historical best rasters exceed the requested 70% threshold. This subset audit is not a complete current registry."
+    }
+  },
+  "raster": {
+    "new_tiff_generated": false,
+    "submission_name": null,
+    "sha256": null,
+    "validator_output": {
+      "status": "NOT RUN — no candidate GeoTIFF exists",
+      "single_band": null,
+      "float32": null,
+      "epsg_32611": null,
+      "100m_grid": null,
+      "template_shape_and_transform": null,
+      "inside_values_in_0_1": null,
+      "outside_encoding": null,
+      "registry_preplacement_gate": null,
+      "registry_final_dot_gate": null
+    }
+  },
+  "approval": {
+    "research_download": "NO NEW FILE EXISTS",
+    "ok_to_download": false,
+    "ok_to_submit": false,
+    "weekly_slot_selected": false,
+    "weekly_slot_spent": false,
+    "submission_note": "S30 review only; no new TIFF; no slot used; not approved.",
+    "submission_note_characters": 57
+  },
+  "score_claim_hygiene": {
+    "focus_site_highest_claims": "USER-REPORTED / UNVERIFIED historical claims; see evidence/s23_scorecard.json.",
+    "organizer_confirmed_score_receipts": [],
+    "leaderboard_score_estimate": null,
+    "leaderboard_score_estimate_status": "NOT ESTIMABLE; no validated hidden-score calibration or current official-page read in this run.",
+    "owner_supplied_conflicting_anchors": [0.4413, 0.3195],
+    "latest_saved_public_board_observation": {
+      "observed_date": "2026-10-29",
+      "rank_1": 0.4544,
+      "rank_26": 0.3328,
+      "status": "historical repository observation only; not refreshed on 2026-10-30 and not a receipt for a local raster"
+    }
+  },
+  "gemdoe32_0_2778_analysis": {
+    "claim_class": "OWNER-REPORTED / UNVERIFIED; no organizer receipt",
+    "artifact": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+    "artifact_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "dots": 37654,
+    "forensic_relation": "Exact subset of GEMSDOE31 H27-4 solo: 2545 dots removed, zero added; removed dots are within 2 px of the published USGS/INGENIOUS catalogue.",
+    "score_difference_vs_0_2708_claim": 0.007,
+    "interpretation": "The removal is consistent with reducing low-credit/false-positive contribution under the metric, but does not verify the score, establish a causal score explanation, or constitute a new detector."
+  },
+  "source_review": {
+    "path": "evidence/s30_source_refresh.json",
+    "checked_at_utc": "2026-10-30T22:54:34Z",
+    "focus_owner_repositories_observed": 9,
+    "metadata_sources_fresh": 10,
+    "metadata_sources_total": 18,
+    "non_github_sources_refreshed": 0,
+    "competition_site_or_leaderboard_contacted": false,
+    "submission_receipts_checked": false,
+    "official_source_status": "Manual official-source links are provided, but DrivenData, USGS, ScienceBase and GDR pages were not freshly fetched in this runtime."
+  },
+  "slate": {
+    "path": "registry/s30_hypotheses.json",
+    "candidate_count": 3,
+    "all_expected_dti_improvements": "Unknown; no numeric score projections",
+    "no_candidate_viable_or_experiment_authorized": true
+  },
+  "verification_passes": [
+    {
+      "pass": 1,
+      "name": "Read-first inventory and baseline gates",
+      "status": "PASS — recorded a blocked scientific preflight before implementation",
+      "checks": [
+        "README and active protocol reread; branch and workspace inventoried.",
+        "Baseline Ruff, pytest, and offline site builds passed before S30 page changes.",
+        "Fresh preflight preserved BLOCKED status; no lane inference, clock reset, experiment, holdout, TIFF, or slot selection."
+      ]
+    },
+    {
+      "pass": 2,
+      "name": "Evidence and candidate review before implementation",
+      "status": "PASS — three-candidate slate preregistered before review-page implementation",
+      "checks": [
+        "Pinned current GitHub commit metadata and fetched current summary pages for all nine focus-site repositories.",
+        "Re-read the GEMSDOE32 forensic relation and 72 directed nine-site overlap comparisons.",
+        "Checked external-data availability honestly: no current non-GitHub requests were possible; external candidates remain not viable."
+      ]
+    },
+    {
+      "pass": 3,
+      "name": "Post-change automated recheck",
+      "status": "PASS — all required offline checks succeeded",
+      "ruff": "All checks passed: .venv/bin/ruff check src scripts tests",
+      "pytest": "747 passed, 7 skipped, 34 Rasterio PendingDeprecation warnings, 9 subtests passed.",
+      "skips": [
+        "Heat-flow footprint and derived layer unavailable.",
+        "Hash-pinned competition training/label rasters and historical inputs absent.",
+        "Restored input rasters absent.",
+        "Exact sample-submission template absent.",
+        "GDR well/spring table absent."
+      ],
+      "site_build": "scripts/build_site.py and scripts/build_active_review.py succeeded from committed JSON; zero external requests; S30 overlay remained fail-closed.",
+      "determinism": "SHA-256 snapshot of generated HTML, S30 JSON copies, and root entry pages was unchanged across consecutive offline build cycles.",
+      "new_experiment_or_raster": false
+    }
+  ],
+  "submission_verdict": "negative",
+  "verdict_reason": "Fail-closed preflight blocked experiments and submission. No candidate TIFF exists, no score estimate is defensible, no slot was selected or spent, and historical files are not approved for download or submission.",
+  "evidence": [
+    "evidence/s30_preflight.json",
+    "evidence/s30_source_refresh.json",
+    "registry/s30_hypotheses.json",
+    "evidence/s23_scorecard.json",
+    "evidence/s24_nine_site_overlap.json",
+    "evidence/s15_champion_forensic.json",
+    "evidence/why_026_won.json",
+    "docs/data/feed.json"
+  ]
+}

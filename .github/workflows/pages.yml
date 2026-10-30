@@ -9,6 +9,11 @@ on:
       - 'executive-summary.html'
       - 'current-review.html'
       - 'data/current_run_card.json'
+      - 'evidence/s30_preflight.json'
+      - 'evidence/s30_run_card.json'
+      - 'evidence/s30_source_refresh.json'
+      - 'registry/s30_hypotheses.json'
+      - 'scripts/build_s30_review.py'
       - '.nojekyll'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
@@ -37,8 +42,10 @@ jobs:
       historical_card_sha256: ${{ steps.release-proof.outputs.historical_sha256 }}
     steps:
       - uses: actions/checkout@v4
-      - name: Build current fail-closed S29 status overlay
-        run: python3 scripts/build_s29_review.py
+      - name: Build current fail-closed S29 then S30 overlays
+        run: |
+          python3 scripts/build_s29_review.py
+          python3 scripts/build_s30_review.py
       - name: Bind the deployed run card to checked-out bytes
         id: release-proof
         run: |
@@ -89,6 +96,7 @@ jobs:
           base = os.environ['PAGE_URL'].rstrip('/') + '/'
           expected = os.environ['EXPECTED_CARD_SHA256']
           paths = ['', 'executive-summary.html', 'current-review.html',
+                   's30-review.html', 'docs/s30-review.html',
                    'docs/', 'docs/executive-summary.html', 'docs/current-review.html',
                    'data/current_run_card.json',
                    'docs/data/current_run_card.json',
@@ -114,8 +122,13 @@ jobs:
                           card = json.loads(body)
                           assert card['submission_ready'] is False and card['slot_selected'] is False
                       else:
-                          assert b'data-submission-ready="false"' in body, 'missing locked-download marker: ' + url
-                          assert b'Submission download locked' in body, url
+                          if path.endswith('s30-review.html'):
+                              assert b'id="s30-current-decision"' in body, 'missing S30 decision panel: ' + url
+                              assert b'data-submission-ready="false"' in body, 'S30 page is not fail-closed: ' + url
+                              assert b'NO NEW TIFF' in body and b'SUBMIT: NO' in body, url
+                          else:
+                              assert b'data-submission-ready="false"' in body, 'missing locked-download marker: ' + url
+                              assert b'Submission download locked' in body, url
                       verified.append(base + path)
                   print(json.dumps({'verified_urls': verified, 'run_card_sha256': expected,
                                     'submission_ready': False, 'visual_browser_test': False}, indent=2))
