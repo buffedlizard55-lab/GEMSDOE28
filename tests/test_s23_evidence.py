@@ -217,6 +217,12 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert "NO FILE APPROVED" in text and "OK TO SUBMIT: NO" in text
         assert text.index('id="s28-current-decision"') < text.index("Submission download locked")
         return
+    if page == "s30-executive-summary.html":
+        assert parser.ids.count("s30-current-decision") == 1
+        assert text.index('id="s30-current-decision"') < text.index("Nine-site table")
+        assert "OK TO DOWNLOAD: YES" in text
+        assert "Expected score: NOT ESTIMABLE" in text
+        return
     if page == "s29-lattice-review.html":
         assert parser.ids.count("s29-lattice-decision") == 1
         assert "NO FILE APPROVED" in text and "OK TO SUBMIT: NO" in text

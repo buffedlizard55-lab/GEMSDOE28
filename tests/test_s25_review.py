@@ -56,7 +56,8 @@ def test_s25_preflight_is_exact_fail_closed_evidence():
 def test_s25_report_and_readme_keep_current_branch_separate_from_history():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     report = (ROOT / "knowledge/69_repository_review_2026-10-28.md").read_text(encoding="utf-8")
-    assert readme.startswith("# S29 · 2026-10-29 UTC")
+    assert readme.startswith("# S30 · 2026-10-30 UTC")
+    assert "# S29 · 2026-10-29 UTC" in readme
     assert "# S28 · 2026-10-29 UTC — historical parallel-run result" in readme
     assert "arena/df296ab5-gemsdoe28" in readme
     assert "NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO" in readme

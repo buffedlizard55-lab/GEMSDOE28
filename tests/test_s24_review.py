@@ -93,8 +93,9 @@ def test_s24_preflight_and_feed_snapshots_are_exactly_hash_bound():
 
 def test_readme_read_first_and_s24_page_remain_locked():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    # The active S29 checkout review leads; prior/parallel session records remain provenance.
-    assert readme.startswith("# S29 · 2026-10-29 UTC — current checkout review")
+    # The active S30 review leads; prior/parallel session records remain provenance.
+    assert readme.startswith("# S30 · 2026-10-30 UTC")
+    assert "# S29 · 2026-10-29 UTC — current checkout review" in readme
     assert "arena/df296ab5-gemsdoe28" in readme
     assert "# S28 · 2026-10-29 UTC — historical parallel-run result" in readme
     assert "NO NEW TIFF · NO FILE APPROVED · OK TO SUBMIT: NO" in readme
