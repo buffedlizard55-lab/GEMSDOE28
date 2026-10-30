@@ -1,0 +1,81 @@
+{
+  "generated": "2026-10-30T00:00:00Z",
+  "scope": "S30 irregularities found by byte-level audit of the nine competitor repositories and by checking the restored training mirror against the official rules. Complements registry/irregularities_s29.json (not edited).",
+  "irregularities": [
+    {
+      "id": "s30-sample-submission-mirror-equals-catalogue",
+      "date": "2026-10-30",
+      "severity": "blocking-for-validation",
+      "issue": "The restored sample_submission.tif (owner mirror, sha256 2176d08e…) has 60,988 positive pixels, and they equal labels.tif == 1 exactly inside the footprint. The official problem page says the sample 'predicts total fault absence'. So the mirror is not the official sample.",
+      "action": "Do not use data/sample_submission.tif as a template for predictions or as a 'no-fault' baseline. Use only its grid/footprint (finite mask, 5,167,373 px). Ask the owner to confirm which file the mirror holds. Evidence: this audit, scripts/audit_nine_site_bytes.py --footprint.",
+      "sources": [
+        "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/"
+      ]
+    },
+    {
+      "id": "s30-gemsdoe25-gemsdoe30-identical-dot-sets",
+      "date": "2026-10-30",
+      "severity": "duplicate",
+      "issue": "GEMSDOE25 (dotted-h19-5-d2-8 …-nan, 44,090 dots) and GEMSDOE30 (d28-poisson300m-offcat-44090 …, 44,090 dots) have identical positive pixels in the footprint (phi = 1.00, overlap 1.00). Both are claimed at 0.2600. One is a duplicate of the other under two site names.",
+      "action": "Treat as one submission. Do not count them as two independent results. Confirm the submission log. Evidence: evidence/nine_site_byte_audit_2026-10-30.json (overlap_3px, phi_footprint)."
+    },
+    {
+      "id": "s30-family-overlap-all-pairs",
+      "date": "2026-10-30",
+      "severity": "blocking-for-uniqueness",
+      "issue": "All 36 pairs among the nine best files exceed the 70% / 3 px rule (range 0.87–1.00). Footprint-wise phi is 0.52–1.00. The nine files are one dot-placement family, not nine independent methods.",
+      "action": "A new file counts as unique only if it places most of its dots outside the family's 3-px zone (19.6% of the footprint). Any new idea must justify its signal, not its name. Evidence: evidence/nine_site_byte_audit_2026-10-30.json."
+    },
+    {
+      "id": "s30-zeros-variant-outside-footprint",
+      "date": "2026-10-30",
+      "severity": "format-question",
+      "issue": "The 'zeros' files (GEMSDOE32 0.2778, GEMSDOE36 0.2750, GEMSDOE30, GEMSDOE33) write 0.0 outside the 5,167,373-px footprint (nodata None, 0 NaN). The official text says data outside the bounds is null or nan. The 'nan' files match the sample's NaN convention.",
+      "action": "Flag for review. Do not assert the portal rejects zeros: owner-reported scores exist for zeros files. A conformance test on a deliberate approved upload would settle it. Do not attribute the portal error to this without evidence.",
+      "sources": [
+        "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/"
+      ]
+    },
+    {
+      "id": "s30-range-error-cause-unresolved",
+      "date": "2026-10-30",
+      "severity": "unresolved",
+      "issue": "The user reports the portal error 'Predicted values must be in range [0, 1]'. All nine best files have in-footprint values in {0, 1} (none outside [0,1]); NaN appears only outside the footprint. The file that produced the error is not identified in the prompt, so the cause is not established.",
+      "action": "Ask the user which exact file and variant (nan / zeros / allfinite / zip) was uploaded, and attach the error's file name. Until then, do not claim a fix. Evidence: nine_site_byte_audit values_min/values_max/in_0_1_all_finite."
+    },
+    {
+      "id": "s30-leaderboard-anchors-not-found",
+      "date": "2026-10-30",
+      "severity": "conflict",
+      "issue": "Prompt anchors 0.4413 and 0.3195 are not in ranks 1-47 of the public board fetched on 2026-10-30. Rank 1 is 0.4544, rank 26 is 0.3388 and rank 36 is 0.3328. Conflicting records: registry/irregularities_s29.json says rank 26 = 0.3328 (2026-10-29), and the S27b note says rank 26 = 0.3195 (earlier date). Today's fetch does not match either record for rank 26.",
+      "action": "Record as dated observations only. Do not use either prompt anchor as fact until a timestamped board snapshot shows it. Public board is not the private scoring set."
+    },
+    {
+      "id": "s30-owner-holdout-vs-leaderboard-scale",
+      "date": "2026-10-30",
+      "severity": "methodological",
+      "issue": "The GEMSDOE32 owner page reports the 0.2778 champion at HIDE-RECOVER-v3.0 HOLDOUT-DTI 0.004515 and the H51 candidate at 0.115134 on the same evaluator. The user/owner-reported score of 0.2778 is not on that scale. A holdout DTI therefore cannot be read as a leaderboard estimate.",
+      "action": "Keep every holdout number labelled HOLDOUT-DTI. Build no score estimate from holdout values until a calibration against organizer receipts exists. Evidence: GEMSDOE32 docs/index.html (repository copy, codeload).",
+      "sources": [
+        "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html"
+      ]
+    },
+    {
+      "id": "s30-0-2778-no-organizer-receipt",
+      "date": "2026-10-30",
+      "severity": "unverified",
+      "issue": "The 0.2778 value is recorded by the GEMSDOE32 owner page as OWNER-REPORT with no submission-page receipt linking the raster hash to the score. Its audit also states 'UNSCORED' in the note. The page marks the file 'already submitted - do not resubmit'.",
+      "action": "Treat 0.2778 as USER/OWNER-REPORTED. Confirm the submission receipt before citing it. Evidence: GEMSDOE32 docs/downloads/…-e5eb6e7e-audit.json and docs/index.html.",
+      "sources": [
+        "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html"
+      ]
+    },
+    {
+      "id": "s30-github-pages-unreachable-from-sandbox",
+      "date": "2026-10-30",
+      "severity": "limitation",
+      "issue": "The sandbox allows github.com, codeload.github.com and api.github.com only. The owner GitHub Pages sites (buffedlizard55-lab.github.io) return HTTP 000 (unreachable). The pages were therefore read from repository copies, which may differ from the published pages.",
+      "action": "Verify the published page text manually against the repository copy before quoting it."
+    }
+  ]
+}

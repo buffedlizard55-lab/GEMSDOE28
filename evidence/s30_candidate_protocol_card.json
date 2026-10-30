@@ -1,0 +1,104 @@
+{
+ "schema": 1,
+ "session": "S30",
+ "date_utc": "2026-10-30",
+ "branch": "arena/ec9eefb5-gemsdoe28",
+ "lane": "single",
+ "protocol": {
+  "duplicate_rule": "more than 70% of dots within 3 px of one registry raster's dots, or rank correlation > 0.90",
+  "leakage_canary_auc_gate": 0.9,
+  "budget": {
+   "experiments_max": 3,
+   "hours_max": 2
+  }
+ },
+ "experiments": [
+  {
+   "id": "E1",
+   "name": "registry fetch + format/encoding audit (475 rasters)",
+   "scored": false,
+   "outputs": [
+    "evidence/s30_registry_audit.json"
+   ]
+  },
+  {
+   "id": "E2",
+   "name": "unique candidate build (catalogue-distance retention + budgeted refill)",
+   "scored": false,
+   "outputs": [
+    "docs/candidates/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif",
+    "evidence/s30_candidate_run_card.json"
+   ]
+  },
+  {
+   "id": "E3",
+   "name": "independent gate re-read (KD-tree overlap, format, catalogue)",
+   "scored": false,
+   "outputs": [
+    "evidence/s30_candidate_gate.json"
+   ]
+  }
+ ],
+ "experiments_used": 3,
+ "hours_used_note": "not timed precisely; no holdout experiment run",
+ "hypothesis": "H-S30-A: catalogue-distance retention of the GEMSDOE32 dots plus a budgeted magnetic-ridge refill in registry-uncovered cells",
+ "mechanism": "Near-catalogue predictions are more likely false positives for new-fault truth under alpha=0.2; removing them trims FP mass. Refill tests new positions under a per-raster uniqueness budget.",
+ "named_non_fault_mimic": "catalogue-halo alignment: dots that follow mapped traces score as hits or misses by offset, not by fault presence",
+ "labels": {
+  "reported_scores": "USER-REPORTED (not HOLDOUT-DTI, not ORGANIZER-CONFIRMED)",
+  "holdout_dti_candidate": "NOT COMPUTED (no applicable holdout; see knowledge/77 section 5)",
+  "overlap_and_format_numbers": "LOCAL-GATE (not scores)"
+ },
+ "gates": {
+  "max_overlap_any_registry_raster": 0.6799808785255218,
+  "max_overlap_raster": "GEMSDOE24/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-allfinite.tif",
+  "rasters_compared": 472,
+  "rasters_over_70pct": 0,
+  "overlap_vs_h33_2_parent": 0.671668348648218,
+  "surface_rank_corr_ridge_vs_registry_density": 0.3145356162184424,
+  "binary_rank_corr_gate": "not applicable: tied ranks for dot rasters",
+  "leakage_canary_auc": "not applicable: no model trained",
+  "all_hard_format_checks_pass": true
+ },
+ "file": {
+  "name": "gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif",
+  "sha256": "7f205dd77dd51ea1ae2bf414827d917300608b5ad887223881cc8c2a4662705d",
+  "bytes": 825632,
+  "final_dots": 37654,
+  "encoding": "float32 single band, zeros outside footprint, values exactly 0 or 1 inside"
+ },
+ "submission_note": "S30 H33-2 keep-far-65pct + budgeted RTP-ridge fill; zeros outside; score unverified; <=68% within 3px of any registry raster",
+ "submission_note_chars": 124,
+ "verdict": {
+  "file": "VALID AND UNIQUE",
+  "score_promotion": "NEGATIVE: holdout-promotion gate not met and not applicable; expected score not estimable",
+  "ok_to_download": true,
+  "ok_to_submit_as_valid_unique_file": true,
+  "slot_selection": "not performed by the agent (owner's decision within the weekly cap)"
+ },
+ "irregularities": [
+  "portal error 'Predicted values must be in range [0, 1]': root cause unknown; one registry raster has NaN inside the footprint (gemsdoe31-csdu-stepover-8cf9dc27-nan.tif)",
+  "official text: outside-bounds values 'null or nan'; zeros-outside used by the candidate and by the 0.2778 file",
+  "catalogue masking assumed by the repo but absent from the official page",
+  "public leaderboard #1 is 0.4544 (not 0.4413); 0.3195 not in ranks 1-23 read",
+  "registry label: H33-2 described as MT conductance alignment; the artefact is a catalogue-pruned H27-4 subset",
+  "DO-NOT-SUBMIT files are in the owner registry"
+ ],
+ "nine_site_unique_vs_registry": {
+  "GEMSDOE24": false,
+  "GEMSDOE25": false,
+  "GEMSDOE27": false,
+  "GEMSDOE28": false,
+  "GEMSDOE30": false,
+  "GEMSDOE31": false,
+  "GEMSDOE32": false,
+  "GEMSDOE33": false,
+  "GEMSDOE36": false
+ },
+ "remaining_work": [
+  "restore MT conductance and heat-flow bytes from the official source if reachable (sandbox blocks sciencebase.gov)",
+  "run H-S30-B radius sweep only as a slot experiment (holdout cannot adjudicate)",
+  "resolve catalogue masking with an organizer statement or a receipt-matched probe",
+  "obtain the organizer receipt for any file the owner submits"
+ ]
+}
