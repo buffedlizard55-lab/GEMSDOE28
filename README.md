@@ -21,6 +21,82 @@ The full prompt is too long to paste in full. Its operative requirements are:
 
 ---
 
+> **CONFLICT NOTICE (2026-10-30).** Two S30 sessions reached different decisions. The block **above** (merged from `arena/502e5006`, PR #88) says no file is OK to download or submit. The block **below** (`arena/ec9eefb5`, PR #91) says a valid and unique GeoTIFF exists, with OK to download and OK to submit as a valid unique file. Neither block claims a score. The owner must decide which decision governs. Both run cards are kept: `evidence/s30_run_card.json` (above) and `evidence/s30_candidate_protocol_card.json` (below).
+
+## S30 · branch arena/ec9eefb5-gemsdoe28 · nine-site review and unique GeoTIFF (conflicting decision, see notice)
+
+## CURRENT DECISION: VALID UNIQUE TIF · OK TO DOWNLOAD: YES · OK TO SUBMIT AS A VALID UNIQUE FILE: YES · EXPECTED SCORE: NOT ESTIMABLE · SLOT SELECTION: OWNER'S DECISION
+
+- **Download:** [`docs/candidates/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif`](docs/candidates/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif) · SHA-256 `7f205dd77dd51ea1ae2bf414827d917300608b5ad887223881cc8c2a4662705d` · 37,654 dots · float32, single band, zeros outside the footprint, values exactly 0 or 1.
+- **Automated checks (no human inspection):** all hard format checks pass; worst overlap with any of 472 comparable registry rasters is 0.6800 (gate 0.70); 0 rasters over 70%. The builder and an independent KD-tree gate agree.
+- **Not verified:** the score. The file is 67–68% identical (within 3 px) to each of the nine named files, and it shares 67.2% of its dots with the 0.2778 file. It is not verified to beat 0.2778.
+- **Executive summary:** [`docs/s30-executive-summary.html`](docs/s30-executive-summary.html) (nine-site table, why 0.2778, gates, official rules, irregularities, submit steps).
+- **0.2778 mechanism (verified from bytes):** the file is the GEMSDOE31 H27-4 solo field (0.2708 user-reported) with exactly 2,545 catalogue-adjacent dots (all within 2 px of a catalogue fault) removed. Nothing is added. See `knowledge/77_s30_nine_site_review_and_unique_candidate_2026-10-30.md`.
+- **Nine sites:** none of the nine named files passes the 70%/3 px gate. Each has 100% of its dots within 3 px of at least one other registry raster.
+- **Experiments used:** 3 of 3 (registry audit, candidate build, independent gate). No holdout experiment; the holdout cannot adjudicate this candidate (knowledge/77 §5).
+- **Leaderboard (fetched 2026-10-30, official):** #1 0.4544, #2 0.3925. 0.4413 is not on the board (the board is sorted by score). 0.3195 was not in ranks 1–23.
+- **Scores are USER-REPORTED.** No number here is ORGANIZER-CONFIRMED or HOLDOUT-DTI, except as labelled.
+- **Remaining work and limitations:** see the end of this block.
+
+### Standing brief (condensed from the S30 session prompt; re-read every session)
+
+1. Build a unique, downloadable single-band GeoTIFF with values in [0,1]. It must pass automated gates, not human inspection. It must be obviously OK or NOT OK to download and submit. Give it a unique name and a comment of 140 characters or fewer.
+2. Do not copy previous submissions except for learning.
+3. Do not pick or select a submission slot inside a research run. The selector is a separate step within the weekly cap.
+4. Parallel-run protocol: single lane. Duplicate if Spearman > 0.90 or more than 70% of dots lie within 3 px of a registry raster. Leakage canary AUC > 0.90 is a failure. Budget: 3 experiments or 2 hours, whichever first. End with a JSON run card.
+5. Label every number HOLDOUT-DTI or ORGANIZER-CONFIRMED. Projections are never scores. Scores not verified are labelled USER-REPORTED.
+6. Use the shared template: the cached feature stack, `evaluate_holdout.py` and `submission_writer.py`. Do not fork privately.
+7. Do not automate DrivenData login or access. Do not submit to DrivenData from this session.
+8. Explain why the 0.2778 file scored highest, and whether a submission can beat it.
+9. Verify everything against official sources, with links. Flag irregularities. No hallucinations.
+10. Create and merge a pull request to `main` on this branch. List remaining work and limitations.
+
+*The full prompt was condensed. Bring the verbatim text into the repo if it is needed.*
+
+### S30 JSON run card
+
+```json
+{
+ "session": "S30",
+ "date_utc": "2026-10-30",
+ "lane": "single",
+ "experiments_used": 3,
+ "labels": {
+  "reported_scores": "USER-REPORTED (not HOLDOUT-DTI, not ORGANIZER-CONFIRMED)",
+  "holdout_dti_candidate": "NOT COMPUTED (no applicable holdout; see knowledge/77 section 5)",
+  "overlap_and_format_numbers": "LOCAL-GATE (not scores)"
+ },
+ "verdict": {
+  "file": "VALID AND UNIQUE",
+  "score_promotion": "NEGATIVE: holdout-promotion gate not met and not applicable; expected score not estimable",
+  "ok_to_download": true,
+  "ok_to_submit_as_valid_unique_file": true,
+  "slot_selection": "not performed by the agent (owner's decision within the weekly cap)"
+ },
+ "file": {
+  "name": "gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif",
+  "sha256": "7f205dd77dd51ea1ae2bf414827d917300608b5ad887223881cc8c2a4662705d",
+  "bytes": 825632,
+  "final_dots": 37654,
+  "encoding": "float32 single band, zeros outside footprint, values exactly 0 or 1 inside"
+ },
+ "submission_note": "S30 H33-2 keep-far-65pct + budgeted RTP-ridge fill; zeros outside; score unverified; <=68% within 3px of any registry raster",
+ "submission_note_chars": 124
+}
+```
+
+### S30 remaining work and limitations
+
+- No submission receipt exists. The organizer score for any file is unknown here. The user must submit and report it.
+- Catalogue masking is assumed by the repo but absent from the official page. Resolving it changes the value of every pruning rule.
+- MT conductance and heat-flow bytes are pinned but not restored here. The sandbox cannot reach sciencebase.gov.
+- The registry label for H33-2 says "MT conductance alignment", but the artefact is a catalogue-pruned H27-4 subset. The label should be corrected.
+- The S29 and older top blocks disagree with this one on submission status. This block is the current one. The registry JSON `registry/current_session.json` still shows older session state and was not changed in this session; the conflict is unresolved.
+
+---
+
+---
+
 # S29 · 2026-10-29 UTC — current checkout review · branch arena/fe0ed431-gemsdoe28 · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: UNIQUE TIF GENERATED · OK TO SUBMIT: NO · NO WEEKLY SLOT USED

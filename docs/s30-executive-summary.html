@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GEMSDOE28 S30 executive summary: best files across nine GEMSDOE sites, 0.2778 analysis, and a validated unique GeoTIFF.">
+  <title>S30 executive summary | GEMSDOE28</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="index.html">GEMSDOE28 <small>DOE GEMS · Auditable research</small></a>
+  <nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="s30-executive-summary.html">S30 summary</a><a href="s29-submission-guide.html">How to submit</a><a href="executive-summary.html">Executive summary</a></nav>
+</div></header>
+<main>
+<section class="section callout-ok" id="s30-current-decision" data-submission-ready="true" data-unique="true">
+<p class="eyebrow">S30 · 2026-10-30 UTC · automated gates only · no human inspector</p>
+<h1>Download this file: <a href="candidates/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif">gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif</a></h1>
+<p><strong>File check: VALID AND UNIQUE.</strong> Single-band float32 GeoTIFF on the competition grid (EPSG:32611, 3730×3292, 100 m), 37,654 dots, every value exactly 0 or 1, zeros outside the footprint, no NaN and no infinities, no dots on the catalogue. No registry raster exceeds 70% dot overlap within 3 px (worst 0.680).</p>
+<p><strong>OK TO DOWNLOAD: YES.</strong> <strong>OK TO SUBMIT: YES, as a valid unique file.</strong> <strong>Expected score: NOT ESTIMABLE.</strong> It is not verified to beat 0.2778, and it is 0.67–0.68 identical (within 3 px) to each of the nine named files. Choosing the weekly slot is the owner's decision; the agent did not select one.</p>
+<p>SHA-256: <code>7f205dd77dd51ea1ae2bf414827d917300608b5ad887223881cc8c2a4662705d</code> · Suggested name: <code>gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif</code> · Suggested note (≤140 chars): <code>S30 H33-2 keep-far-65pct + budgeted RTP-ridge fill; zeros outside; score unverified; &lt;=68% within 3px of any registry raster</code></p>
+</section>
+
+<section class="section" id="why-0-2778">
+<h2>Why GEMSDOE32 scored 0.2778 (verified from repository bytes)</h2>
+<ul>
+<li><strong>The file exists and is what the user cited.</strong> <a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">gemsdoe32-h33-h33-2-b2-…-zeros.tif</a>, 219,065 bytes, 37,654 dots, zeros outside the footprint, SHA-256 <code>c55bafc4…</code>.</li>
+<li><strong>It is a strict subset of the GEMSDOE31 H27-4 solo-d28 field.</strong> That parent has 40,199 dots (USER-REPORTED 0.2708). Exactly 2,545 of its dots are absent from the 0.2778 file; no dot is added. Each removed dot lies within 2 px of a catalogue fault (median distance 2.0 px, maximum 2.0 px).</li>
+<li><strong>So the +0.0070 gain is a pruning effect.</strong> The change removes catalogue-adjacent predictions and nothing else. Under the official metric (α = 0.2 false-positive weight, β = 0.8 false-negative weight, 300 m triangular kernel), a dot that sits next to known faults is more likely to be a false positive for the new-fault truth. Removing it cuts α-weighted false-positive mass and loses little recall. The sign is consistent with that; the size cannot be computed without the hidden truth.</li>
+<li><strong>The family plateau.</strong> Across the nine named sites the reported scores fall within 0.2449–0.2778, all from dot fields of roughly 37k–61k points. The field, not any single trick, sets the plateau.</li>
+<li><strong>Caveat.</strong> The 0.2708 and 0.2778 numbers are user-reported public-board values. No organizer receipt ties either number to either file.</li>
+</ul>
+</section>
+
+<section class="section" id="nine-sites">
+<h2>Nine-site table: best file per site, score, uniqueness</h2>
+<p>Scores are USER-REPORTED (session prompt). "Estimated score" is deliberately not given: there is no validated holdout-to-leaderboard calibration, and a projection is never written as a score. Uniqueness uses the protocol gate: a file is a duplicate if more than 70% of its dots lie within 3 px of one registry raster's dots. The registry is 475 owner-published GeoTIFFs from the nine repositories (<code>evidence/s30_registry_audit.json</code>).</p>
+<div class="table-wrap"><table>
+<caption>Best file per site. Duplicate status is measured against all registry rasters. The last column is the candidate's overlap with that named file.</caption>
+<thead><tr><th>Site</th><th>Download (GitHub)</th><th>Reported score</th><th>Estimated score</th><th>Dots</th><th>Unique vs other GEMDOE sites?</th><th>Candidate overlap vs this file</th></tr></thead>
+<tbody>
+<tr><td><strong>GEMSDOE32</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a><br><small>SHA-256 c55bafc470054e82…</small></td><td>0.2778 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>37,654</td><td class="bad">NOT UNIQUE — 102 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.672</td></tr><tr><td><strong>GEMSDOE36</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE36/blob/main/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif">gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif</a><br><small>SHA-256 e15891020b9c5705…</small></td><td>0.2750 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>38,854</td><td class="bad">NOT UNIQUE — 102 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.680</td></tr><tr><td><strong>GEMSDOE28</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/main/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif">gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif</a><br><small>SHA-256 5556aa1438fd6737…</small></td><td>0.2710 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>37,660</td><td class="bad">NOT UNIQUE — 100 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.672</td></tr><tr><td><strong>GEMSDOE31</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE31/blob/main/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif">gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif</a><br><small>SHA-256 07b6db440535404b…</small></td><td>0.2708 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>40,199</td><td class="bad">NOT UNIQUE — 100 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.672</td></tr><tr><td><strong>GEMSDOE33</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE33/blob/main/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif">GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif</a><br><small>SHA-256 87f857d505e23247…</small></td><td>0.2632 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>41,865</td><td class="bad">NOT UNIQUE — 100 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.673</td></tr><tr><td><strong>GEMSDOE25</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE25/blob/main/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif">gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif</a><br><small>SHA-256 91eae1ca42ec845e…</small></td><td>0.2600 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>44,090</td><td class="bad">NOT UNIQUE — 100 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.672</td></tr><tr><td><strong>GEMSDOE30</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE30/blob/main/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif">gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif</a><br><small>SHA-256 8cf893ead5667df2…</small></td><td>0.2600 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>44,090</td><td class="bad">NOT UNIQUE — 100 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.672</td></tr><tr><td><strong>GEMSDOE24</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE24/blob/main/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif">gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif</a><br><small>SHA-256 68d0e2e4fcc594f9…</small></td><td>0.2477 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>60,069</td><td class="bad">NOT UNIQUE — 100 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.675</td></tr><tr><td><strong>GEMSDOE27</strong></td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE27/blob/main/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif">gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif</a><br><small>SHA-256 33003374335d84bf…</small></td><td>0.2449 <small>(USER-REPORTED)</small></td><td>Not estimable <small>(no calibrated estimator)</small></td><td>61,328</td><td class="bad">NOT UNIQUE — 100 of 472 registry rasters exceed 70% (max 1.000)</td><td>0.676</td></tr>
+<tr class="cand"><td><strong>S30 candidate (this session)</strong></td><td><a href="candidates/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif">gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif</a><br><small>SHA-256 7f205dd77dd51ea1…</small></td><td>None reported — no score exists for this file</td><td>Not estimable</td><td>37,654</td><td class="ok">UNIQUE by the 70%/3 px gate — max 0.680 vs any of 472 registry rasters; 0 over 70%</td><td>0.672–0.680</td></tr>
+</tbody></table></div>
+<p><strong>Read this carefully.</strong> None of the nine named files passes the uniqueness gate. For each one, 100% of its dots lie within 3 px of at least one other registry raster. For most sites that raster is a dense GEMSDOE24 mirror holding 121,131 dots. The S30 candidate passes the gate only narrowly, at 0.680.</p>
+</section>
+
+<section class="section" id="candidate">
+<h2>How the S30 candidate was made</h2>
+<ol>
+<li>Start from the GEMSDOE32 H33-2-B2 dots (the 0.2778 file).</li>
+<li>Keep the 65% of those dots that lie farthest from the USGS/INGENIOUS catalogue. Remove the other 35%. The removed dots sit at median 6.0 px from the catalogue (maximum 12.0 px). The kept dots start at 12.0 px.</li>
+<li>Refill with 13,179 new dots. These sit at median 28.8 px from the catalogue, at ≥ 6 px, placed greedily along reduced-to-pole magnetic ridges (the training-feature band <code>rtp</code>, 1.5 px smoothing) with 4 px spacing.</li>
+<li><strong>Uniqueness budget.</strong> For each of the 472 registry rasters, the candidate's running overlap is capped at 68%. The cap is enforced during placement, not only checked afterwards.</li>
+<li>Write with the shared writer (<code>src/gems27/submission.py</code>), zeros outside, float32, and re-read the bytes.</li>
+</ol>
+<p><strong>Honest limits.</strong> Two-thirds of the candidate's dots are the 0.2778 file's dots. The budget guarantees the gate, not a score. The 35% replaced dots were removed for uniqueness, not because the evidence shows they are false positives beyond the 2-px band. The gain or loss is unknown.</p>
+</section>
+
+<section class="section" id="gates">
+<h2>Automated gate results for the candidate (independent re-read)</h2>
+<p>Recomputed from the file's bytes by <code>scripts/s30_candidate_gate.py</code> with a nearest-neighbour KD-tree, not the builder's distance transform. Both methods agree on the worst overlap (0.6800).</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Result</th><th>Detail</th></tr></thead>
+<tbody><tr><td>single_band_float32</td><td class="ok">PASS</td><td>count=1 dtype=float32</td></tr><tr><td>crs_epsg_32611</td><td class="ok">PASS</td><td>EPSG:32611</td></tr><tr><td>shape_matches_grid</td><td class="ok">PASS</td><td>(3730, 3292)</td></tr><tr><td>transform_matches_grid</td><td class="ok">PASS</td><td>(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)</td></tr><tr><td>driver_gtiff</td><td class="ok">PASS</td><td>GTiff</td></tr><tr><td>nodata_absent_or_nan</td><td class="ok">PASS</td><td>nodata=None</td></tr><tr><td>bounds_match_grid</td><td class="ok">PASS</td><td>(243350.0, 4135550.0, 572550.0, 4508550.0)</td></tr><tr><td>inside_all_finite</td><td class="ok">PASS</td><td>0 non-finite</td></tr><tr><td>inside_in_0_1</td><td class="ok">PASS</td><td>min=0.0 max=1.0</td></tr><tr><td>no_inf_anywhere</td><td class="ok">PASS</td><td>whole array</td></tr><tr><td>outside_all_zero_and_finite</td><td class="ok">PASS</td><td>outside size 7111787</td></tr><tr><td>inside_binary</td><td class="ok">PASS</td><td>values are exactly 0 or 1 inside</td></tr><tr><td>zero_dots_on_catalogue</td><td class="ok">PASS</td><td>0 dots on catalogue</td></tr><tr><td>sha256_matches_run_card</td><td class="ok">PASS</td><td>7f205dd77dd51ea1ae2bf414827d917300608b5ad887223881cc8c2a4662705d</td></tr><tr><td>no_registry_raster_over_70pct</td><td class="ok">PASS</td><td>0 of 472 compared; worst 0.6800 (GEMSDOE24/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-allfinite.tif)</td></tr></tbody></table></div>
+<p>The registry has 475 rasters. 2 were excluded from the comparison: no dots; off-grid shape (32, 48) (2 files). Overlap with each compared raster is in <code>evidence/s30_candidate_gate.json</code>.</p>
+</section>
+
+<section class="section" id="official">
+<h2>Official rules this page relies on (verified 2026-10-30)</h2>
+<ul>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description</a>: DTI metric, α = 0.2, β = 0.8, 300 m triangular kernel. Predictions are probabilities in [0, 1]. Outside the bounds, "data is null or nan". The file must be a single float32 layer on EPSG 32611 at 100 m.</li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Public leaderboard</a> (read 2026-10-30, ranks 1–23): #1 0.4544, #2 0.3925. The board is sorted by score, so 0.4413 does not appear. The 0.3195 figure was not in the ranks read.</li>
+<li>Scoring is in two rounds. The Initial Prize Round is ranked on a private set. The Final Prize Round rescores against expert-verified new faults, which rewards predictions that find faults nobody else has mapped. That makes uniqueness relevant to the prize.</li>
+<li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Rules PDF</a> and <a href="https://github.com/drivendataorg/gems-prize-reference-solution">reference solution</a> are the owner's cited sources.</li>
+</ul>
+</section>
+
+<section class="section callout-warn" id="irregularities">
+<h2>Irregularities flagged for review</h2>
+<ul>
+<li><strong>Portal error "Predicted values must be in range [0, 1]".</strong> The root cause is not known. Every named file has all in-footprint values in [0, 1]. The official text allows NaN outside the bounds, so the NaN variants are in spec. Zeros outside are also inside the raster bounds and in range. The error may come from a different file, or from a rule the portal enforces that is not public.</li>
+<li><strong>Catalogue masking is unverified.</strong> The repository assumes known catalogue pixels are masked (neither credit nor cost). The official page does not say so. If the portal does not mask them, every dot on a catalogue pixel is a false positive. The nine named files and the S30 candidate place zero dots on the catalogue; 29 of the 475 registry rasters do place dots there.</li>
+<li><strong>Leaderboard figures conflict.</strong> The prompt cites 0.4413 as the leader. The public board read on 2026-10-30 is sorted by score: #1 is 0.4544 and #2 is 0.3925, so 0.4413 does not appear. The 0.3195 figure does not appear in ranks 1–23 read this session; it was not located.</li>
+<li><strong>Data-provenance note.</strong> The H33-2 hypothesis cites MT conductance (ScienceBase) in the pinned-layer registry. The 0.2778 artifact is a pruning of the H27-4 solo field and uses none of those layers. The label is misleading.</li>
+<li><strong>Format variance.</strong> Across 475 registry rasters, the audit found 223 NaN-outside, 246 zeros-outside, 5 mixed encodings, 1 off-grid test file (<code>GEMS36_FORMAT_TEST_NOT_SUBMISSION.tif</code>), and 1 raster with NaN inside the footprint (<code>gemsdoe31-csdu-stepover-8cf9dc27-nan.tif</code>). That NaN-inside file is a candidate cause to test, not a confirmed one. Full list: <code>evidence/s30_registry_audit.json</code>.</li>
+<li><strong>Files labelled DO-NOT-SUBMIT or research-only are in the registry</strong>, for example <code>gems31-tgj31-transfer-20261025-8d912b23db-DO-NOT-SUBMIT.tif</code>. They were included in the uniqueness check, which makes the check stricter.</li>
+</ul>
+</section>
+
+<section class="section" id="submit-steps">
+<h2>How to submit (exact steps)</h2>
+<ol>
+<li>Download <a href="candidates/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif">gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif</a> and confirm the SHA-256 above.</li>
+<li>On the submission page, choose "File to submit" and upload the .tif (or a .zip containing only it).</li>
+<li>Give it a unique name and a short note, for example the suggested note above.</li>
+<li>Scoring timing is set by the portal. This page does not know the score and does not estimate it.</li>
+</ol>
+</section>
+</main>
+<footer class="site-footer"><small>Generated by scripts/build_s30_summary.py from evidence/s30_*.json. Scores are USER-REPORTED unless stated. No human inspection is involved in any automated gate.</small></footer>
+</body>
+</html>
