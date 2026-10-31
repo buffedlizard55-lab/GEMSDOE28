@@ -1,0 +1,188 @@
+{
+ "schema": "s31-losfo-refill/v1",
+ "session": "S31",
+ "experiment": "E2 (of at most 3): refill-prior validation, LOSFO far-field protocol",
+ "started_utc": "2026-10-31T01:13:12Z",
+ "runtime_seconds": 190.7,
+ "branch": "arena/6c34b640-gemsdoe28",
+ "protocol": {
+  "instrument": "src/gems27/losfo.py (leave-fault-system-out, 600 m buffer)",
+  "seeds": [
+   210,
+   211,
+   212
+  ],
+  "k_dots_per_fold": 9414,
+  "habitat": "footprint cells >= 6 px from the known catalogue",
+  "metric": "shared exact DTI, alpha 0.2, beta 0.8, 300 m triangular kernel",
+  "truth_is_off_catalogue": true,
+  "known_limit": "Held-out systems are mapped faults; absolute DTI is an upper bound for genuinely unmapped faults, not an estimate of leaderboard skill."
+ },
+ "n_fault_systems": 758,
+ "cells": [
+  {
+   "seed": 210,
+   "fold": "NW",
+   "n_truth": 1962,
+   "min_dist_hidden_to_known_px": 8.0
+  },
+  {
+   "seed": 210,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 3264,
+   "min_dist_hidden_to_known_px": 8.0
+  },
+  {
+   "seed": 210,
+   "fold": "SW",
+   "n_truth": 6793,
+   "min_dist_hidden_to_known_px": 8.94427190999916
+  },
+  {
+   "seed": 210,
+   "fold": "SE",
+   "n_truth": 5032,
+   "min_dist_hidden_to_known_px": 8.94427190999916
+  },
+  {
+   "seed": 211,
+   "fold": "NW",
+   "n_truth": 1715,
+   "min_dist_hidden_to_known_px": 8.246211251235321
+  },
+  {
+   "seed": 211,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 3802,
+   "min_dist_hidden_to_known_px": 8.0
+  },
+  {
+   "seed": 211,
+   "fold": "SW",
+   "n_truth": 6099,
+   "min_dist_hidden_to_known_px": 8.06225774829855
+  },
+  {
+   "seed": 211,
+   "fold": "SE",
+   "n_truth": 5049,
+   "min_dist_hidden_to_known_px": 8.06225774829855
+  },
+  {
+   "seed": 212,
+   "fold": "NW",
+   "n_truth": 2929,
+   "min_dist_hidden_to_known_px": 8.246211251235321
+  },
+  {
+   "seed": 212,
+   "fold": "NE_LidarGapHeavy",
+   "n_truth": 2899,
+   "min_dist_hidden_to_known_px": 8.0
+  },
+  {
+   "seed": 212,
+   "fold": "SW",
+   "n_truth": 4960,
+   "min_dist_hidden_to_known_px": 8.0
+  },
+  {
+   "seed": 212,
+   "fold": "SE",
+   "n_truth": 3449,
+   "min_dist_hidden_to_known_px": 8.0
+  }
+ ],
+ "summary": {
+  "random": {
+   "dti_per_seed": [
+    0.054289,
+    0.053458,
+    0.052821
+   ],
+   "mean_dti": 0.053522329139059445,
+   "std_dti": 0.0006009969374947102
+  },
+  "rtp_ridge": {
+   "dti_per_seed": [
+    0.024243,
+    0.025802,
+    0.024458
+   ],
+   "mean_dti": 0.024834361905053417,
+   "std_dti": 0.0006895365997867212
+  },
+  "joint_px": {
+   "dti_per_seed": [
+    0.031856,
+    0.028502,
+    0.027251
+   ],
+   "mean_dti": 0.029203052919937727,
+   "std_dti": 0.001944039794011804
+  },
+  "gsd_strain": {
+   "dti_per_seed": [
+    0.027353,
+    0.03596,
+    0.028807
+   ],
+   "mean_dti": 0.03070651702421053,
+   "std_dti": 0.0037616726097712077
+  },
+  "cs_step": {
+   "dti_per_seed": [
+    0.019257,
+    0.028209,
+    0.029612
+   ],
+   "mean_dti": 0.02569259891001334,
+   "std_dti": 0.00458629316448552
+  }
+ },
+ "paired_vs_random": {
+  "rtp_ridge_vs_random": {
+   "delta_per_seed": [
+    -0.030046,
+    -0.027656,
+    -0.028362
+   ],
+   "mean_delta": -0.028687967234006028,
+   "seeds_improved": 0,
+   "n_seeds": 3
+  },
+  "joint_px_vs_random": {
+   "delta_per_seed": [
+    -0.022433,
+    -0.024955,
+    -0.02557
+   ],
+   "mean_delta": -0.024319276219121718,
+   "seeds_improved": 0,
+   "n_seeds": 3
+  },
+  "gsd_strain_vs_random": {
+   "delta_per_seed": [
+    -0.026936,
+    -0.017498,
+    -0.024014
+   ],
+   "mean_delta": -0.022815812114848916,
+   "seeds_improved": 0,
+   "n_seeds": 3
+  },
+  "cs_step_vs_random": {
+   "delta_per_seed": [
+    -0.035031,
+    -0.025249,
+    -0.023209
+   ],
+   "mean_delta": -0.027829730229046102,
+   "seeds_improved": 0,
+   "n_seeds": 3
+  }
+ },
+ "input_hashes": {
+  "features": "83ed2704ee2de03cf8b1c8f2966fcf71813501df97c1c35400e6c0415393f6dc"
+ }
+}

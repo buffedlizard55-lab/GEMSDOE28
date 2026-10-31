@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HOLD = json.loads((ROOT / "evidence/s31_holdout.json").read_text())
 CAL = json.loads((ROOT / "evidence/s31_calibration.json").read_text())
 BUILD = json.loads((ROOT / "evidence/s31_build.json").read_text())
-GATE = json.loads((ROOT / "evidence/s31_gate.json").read_text())
+GATE = json.loads((ROOT / "evidence/s31_midband_gate.json").read_text())
 SEEDS = json.loads((ROOT / "evidence/s31_seed_audit.json").read_text())
 
 fill = BUILD["frozen_rule"]["selected"]
@@ -77,7 +77,7 @@ card = {
     "experiment_cap": 3,
     "seed_freshness": {"range": "400-404", "collisions": len(SEEDS.get("collisions_excluding_exact_claim", []))},
 }
-(ROOT / "evidence/s31_run_card.json").write_text(json.dumps(card, indent=1) + "\n")
+(ROOT / "evidence/s31_midband_run_card.json").write_text(json.dumps(card, indent=1) + "\n")
 # also expose under docs/data for the Pages site
-(ROOT / "docs/data/s31_run_card.json").write_text(json.dumps(card, indent=1) + "\n")
+(ROOT / "docs/data/s31_midband_run_card.json").write_text(json.dumps(card, indent=1) + "\n")
 print(json.dumps({k: card[k] for k in ("session", "verdict", "raster_sha256", "experiments_used")}, indent=1))

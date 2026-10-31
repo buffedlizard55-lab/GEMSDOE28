@@ -13,14 +13,14 @@ def _load(name: str) -> dict:
 
 
 def test_gate_sha_matches_candidate_bytes():
-    gate = _load("s31_gate.json")
+    gate = _load("s31_midband_gate.json")
     path = ROOT / gate["path"]
     assert path.is_file(), "candidate file must exist"
     assert hashlib.sha256(path.read_bytes()).hexdigest() == gate["sha256"]
 
 
 def test_gate_decision_is_fail_closed_and_positive():
-    gate = _load("s31_gate.json")
+    gate = _load("s31_midband_gate.json")
     v = gate["verdict"]
     assert gate["validator_hard_checks_passed"] and gate["no_nan_inside_footprint"]
     assert gate["values_in_01"] and gate["unique_under_70pct_3px"] and gate["lane_ok"]
@@ -29,7 +29,7 @@ def test_gate_decision_is_fail_closed_and_positive():
 
 
 def test_projection_is_never_a_score():
-    gate = _load("s31_gate.json")
+    gate = _load("s31_midband_gate.json")
     build = _load("s31_build.json")
     # Out-of-range composition must be declared NOT ESTIMABLE in both records.
     assert gate["projection"]["estimable"] is False
@@ -49,8 +49,8 @@ def test_holdout_canary_passed_and_build_rule_recorded():
 
 
 def test_summary_page_candidate_row_matches_gate():
-    gate = _load("s31_gate.json")
-    html = (ROOT / "docs" / "s31-executive-summary.html").read_text()
+    gate = _load("s31_midband_gate.json")
+    html = (ROOT / "docs" / "s31-midband-executive-summary.html").read_text()
     assert gate["file"] in html
     assert gate["sha256"][:32] in html
     assert "data-submission-ready=\"true\"" in html
@@ -58,7 +58,7 @@ def test_summary_page_candidate_row_matches_gate():
 
 
 def test_run_card_labels_present():
-    card = _load("s31_run_card.json")
+    card = _load("s31_midband_run_card.json")
     assert card["projection"]["label"].startswith("PROJECTION")
     assert card["holdout"]["label"] == "HOLDOUT-DTI"
     assert card["verdict"].startswith("promote")

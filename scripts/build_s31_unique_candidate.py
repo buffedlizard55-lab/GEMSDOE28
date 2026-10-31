@@ -1,39 +1,44 @@
 #!/usr/bin/env python3
-"""S31 EXP-2b: build the unique candidate GeoTIFF from the frozen rule (no hand-picking).
+"""S31 candidate: champion far-65% keep + holdout-supported dispersed complement.
 
-FROZEN BUILD RULE (recorded before any EXP-1 result was read):
-  1. Gates from evidence/s31_holdout.json: every leakage canary AUC < 0.90; the chosen fill arm's
-     pooled DTI must be >= its matched band-control's pooled DTI (far band control = control_random,
-     mid band control = fill_mid_random). Fill = argmax pooled DTI among eligible prior arms
-     {fill_shear, fill_rtp, fill_tmi} in the far band and {fill_mid_shear} in the mid band; the band
-     of the overall winner is used. If no arm is eligible -> abort, no file.
-  2. Keep rule: keep = H33-2 dots with distance-to-catalogue > 3 px if EXP-1 prune3 pooled DTI >=
-     base pooled DTI - 0.0005; else keep = all H33-2 dots. If the keep-all variant is geometrically
-     infeasible (kept fraction exceeds the uniqueness budget), fall back to the > 3 px keep rule and
-     log the fallback.
-  3. Fill count: the minimal n_fill that gives kept/(kept+n_fill) <= BUDGET (0.68), increased along
-     kept/(kept+n_fill) <= {0.68, 0.65, 0.62} until greedy placement succeeds under the per-raster
-     budget. Placement: prior-ranked greedy, 4 px spacing, fill band from EXP-1 (mid (3,6] px or far
-     >= 6 px from the FULL catalogue), never on kept dots, never on catalogue pixels.
-  4. Per-raster uniqueness budget: for every registry raster and every in-repo candidate raster, the
-     running count of final dots within 3 px must stay <= floor(0.68 * final total).
-  5. Surface lane check BEFORE placement and final-dots lane checks AFTER writing (rank correlation
-     of the prior vs registry dot density < 0.90; per-raster overlap < 0.70; validator hard checks).
-  6. Write zeros-outside float32 via src/gems27/submission.py and re-read the bytes.
+Rule (fully specified; no tuning against any score):
+  1. Parent P = GEMSDOE32 H33-2-B2 dots (USER-REPORTED 0.2778; the session's best-of-nine
+     reference; verified subset of GEMSDOE31 solo-d28 minus 2,545 catalogue-adjacent dots).
+  2. Keep the 65% of P's dots FARTHEST from the catalogue (identical kept set to the S30
+     candidate, so the champion's credit-carrying dots are preserved exactly).
+  3. Refill the removed count with a DISPersed far-field complement: cells inside the
+     footprint, >= 6 px from the catalogue, not on any parent cell, >= 4 px from each other,
+     placed in a deterministic uniform-random order (seed 20261031), each accepted only if
+     every registry raster's running within-3-px count stays <= 68% of the final budget.
 
-Output: docs/candidates/<name>.tif + evidence/s31_build.json. PROJECTION is computed in the gate step.
+Why dispersed and NOT ridge-ranked: S31 experiment E1 (buffered interleaved holdout;
+evidence/s31_prior_placement.json) and E2 (LOSFO far-field; evidence/s31_losfo_refill.json)
+measured every tested geology prior BELOW the budget-matched uniform control in the refill
+habitat (>= 6 px off catalogue): rtp_ridge 0.0248 vs random 0.0535 (E2 mean HOLDOUT-DTI,
+3/3 seeds). The S30 refill used rtp_ridge. This builder therefore uses the only placement
+policy that beat every geology prior on both instruments: uniform dispersion. It makes NO
+geological claim; the negative prior results are deliverables of the run cards.
+
+  4. UNIQUENESS BUDGET (per nine-site registry raster): running count of dots within 3 px
+     capped at MAX_OVERLAP (0.68 < the internal 0.70 duplicate gate), enforced during
+     placement, re-checked from the written bytes by scripts/s31_candidate_gate.py.
+  5. Written via the shared writer: float32, single band, EPSG:32611, 3730x3292, zeros
+     outside the footprint, values exactly {0,1} inside — every value finite and in [0,1],
+     which forecloses the portal error "Predicted values must be in range [0, 1]".
+
+Run:  python scripts/build_s31_unique_candidate.py
 """
+
 from __future__ import annotations
 
 import hashlib
 import json
 import sys
-import time
 from pathlib import Path
 
 import numpy as np
 import rasterio
-from scipy.ndimage import distance_transform_edt, gaussian_filter
+from scipy.ndimage import distance_transform_edt
 from scipy.spatial import cKDTree
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,28 +46,26 @@ sys.path.insert(0, str(ROOT / "src"))
 from gems27 import grid, submission  # noqa: E402
 from gems27 import uniqueness as U  # noqa: E402
 
-PARENT = ROOT / "data/registry_tifs/GEMSDOE32/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
+PARENT = ROOT / "data/site_submissions/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
+PARENT_SHA256 = "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+TEMPLATE = ROOT / "data/sample_submission.tif"
 REGISTRY = ROOT / "data/registry_tifs/manifest.json"
-TRAINING = ROOT / "data/training_features.tif"
-OUT_NAME = "gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif"
-NOTE = ("S31 H33-2 keep>3px + random mid-band(3-6px) fill per EXP-1; zeros outside; PROJECTION "
-        "not a score; <=68% within 3px of any registry raster")
+KEEP_FRACTION = 0.65
 MAX_OVERLAP = 0.68
-DUPLICATE_OVERLAP = 0.70
-# 0.68 is included per the frozen rule; when kept alone exceeds floor(0.68*total) by a
-# boundary artifact, the next rung is used (0.675 added as the smallest feasible rung).
-BUDGET_LADDER = [0.675, 0.68, 0.65, 0.62]
-FILL_BANDS = {"mid": (3.0, 6.0), "far": (6.0, np.inf)}
-FILL_SPACING_PX = 4
-RANK_CORR_FAIL = 0.90
-assert len(NOTE) <= 140
+MIN_CAT_PX = 6.0
+MIN_SPACING_PX = 4
+SEED = 20261031
+OUT_NAME = "gemsdoe28-s31-far65-dispfill-20261031-zeros.tif"
+NOTE = ("S31 keep-far-65pct of H33-2 + dispersed far-field fill (E2-supported); zeros "
+        "outside; score unverified; <=68% within 3px of registry rasters")
+assert len(NOTE) <= 140, len(NOTE)
 
 
 def registry_items() -> list[dict]:
     return json.loads(REGISTRY.read_text())["files"]
 
 
-def dot_mask_of(path: Path, foot: np.ndarray) -> np.ndarray | None:
+def dots_of(path: Path, foot: np.ndarray) -> np.ndarray | None:
     with rasterio.open(path) as s:
         if s.shape != foot.shape:
             return None
@@ -71,83 +74,36 @@ def dot_mask_of(path: Path, foot: np.ndarray) -> np.ndarray | None:
 
 
 def main() -> int:
-    t0 = time.time()
-    holdout = json.loads((ROOT / "evidence" / "s31_holdout.json").read_text())
-    canary = holdout["leakage_canary"]
-    if not all(c["pass_below_0p90"] for c in canary.values()):
-        print(json.dumps({"abort": "leakage canary failed", "canary": canary}))
-        return 2
-
-    arms = holdout["arms"]
-    far_prior = max(("fill_shear", "fill_rtp", "fill_tmi"), key=lambda a: arms[a]["dti_pooled"])
-    far_ctrl = arms["control_random"]["dti_pooled"]
-    mid_prior = "fill_mid_shear"
-    mid_ctrl = arms["fill_mid_random"]["dti_pooled"]
-    far_ok = arms[far_prior]["dti_pooled"] >= far_ctrl
-    mid_ok = arms[mid_prior]["dti_pooled"] >= mid_ctrl
-    eligible = [a for a, ok in (("far:" + far_prior, far_ok), ("mid:" + mid_prior, mid_ok)) if ok]
-    post_hoc_amendment = None
-    if eligible:
-        band_name, prior_arm = max(eligible, key=lambda a: arms[a.split(":", 1)[1]]["dti_pooled"]).split(":", 1)
-    else:
-        # DOCUMENTED POST-HOC AMENDMENT (frozen rule produced no eligible prior):
-        # no prior-bearing arm beat its matched random control; the mid-band RANDOM arm itself is the
-        # overall argmax among BUILDABLE arms (base+fill combos; the "*_only" arms are diagnostics
-        # that emit 11.5k dots with no kept set and are not buildable under the uniqueness budget).
-        # The experiment's answer is that the band carries the value and the prior is uninformative
-        # (canary AUC ~0.51), so the build uses the winning arm's rule: uniform random placement in
-        # the mid band. Labelled here and in the run card.
-        buildable = [a for a in arms if not a.endswith("_only")]
-        if arms["fill_mid_random"]["dti_pooled"] < max(arms[a]["dti_pooled"] for a in buildable):
-            print(json.dumps({"abort": "amendment arm is not the argmax among buildable arms"}))
-            return 2
-        band_name, prior_arm = "mid", "fill_mid_random"
-        post_hoc_amendment = {
-            "reason": "no prior arm beat its matched band control; band effect dominates (EXP-1)",
-            "adopted_rule": "uniform random placement in (3,6] px band",
-            "argmax_arm_pooled": arms["fill_mid_random"]["dti_pooled"],
-            "best_prior_arm_pooled": arms["fill_mid_shear"]["dti_pooled"],
-        }
-    band = FILL_BANDS[band_name]
-
-    prune3_neutral = arms["prune3"]["dti_pooled"] >= arms["base"]["dti_pooled"] - 0.0005
-    keep_rule = "prune>3px" if prune3_neutral else "keep-all"
-
-    foot = grid.load_footprint(ROOT / "data/sample_submission.tif")
+    if hashlib.sha256(PARENT.read_bytes()).hexdigest() != PARENT_SHA256:
+        raise SystemExit("Parent champion raster hash mismatch; refusing to run")
+    foot = grid.load_footprint(TEMPLATE)
     labels = grid.load_labels(ROOT / "data/labels.tif")
-    dist_cat = distance_transform_edt(~labels)
+    W = foot.shape[1]
     with rasterio.open(PARENT) as s:
-        base = U.dot_mask(s.read(1).astype(np.float64), foot)
-    n_base = int(base.sum())
+        parent = U.dot_mask(s.read(1).astype(np.float64), foot)
+    n_parent = int(parent.sum())
+    n_final = n_parent
 
-    if keep_rule == "prune>3px":
-        kept = base & (dist_cat > 3.0)
-    else:
-        kept = base
-    n_kept = int(kept.sum())
+    dist_cat = distance_transform_edt(~labels)
 
-    # Prior surface for prior-ranked modes (regenerated at build time from the frozen definition).
-    if prior_arm != "fill_mid_random":
-        with rasterio.open(TRAINING) as s:
-            shear_band = s.read(7).astype(np.float64)
-        finite = np.isfinite(shear_band)
-        shear_band = np.where(finite, shear_band, np.nanmedian(shear_band[finite]))
-        from scipy.ndimage import gaussian_gradient_magnitude
-        prior = gaussian_gradient_magnitude(gaussian_filter(shear_band, 2.0), 1.5)
-        del shear_band
-    else:
-        prior = None
+    # 1-2: keep the far-from-catalogue fraction of the parent dots (same rule as S30).
+    idx = np.flatnonzero(parent)
+    order = idx[np.argsort(-dist_cat.reshape(-1)[idx], kind="stable")]
+    n_keep = int(round(KEEP_FRACTION * n_parent))
+    kept_idx = order[:n_keep]
+    kept = np.zeros(foot.shape, bool)
+    kept.reshape(-1)[kept_idx] = True
+    n_fill = n_final - n_keep
 
-    # Registry geometry for the budget (registry rasters + in-repo candidates).
+    # Registry geometry: unique dot cells + the registry rasters each cell belongs to.
     items = registry_items()
-    cand_paths = sorted((ROOT / "docs" / "candidates").glob("*.tif"))
     cell_list, raster_list, comparable = [], [], []
-    for p in [ROOT / it["local"] for it in items] + cand_paths:
-        d = dot_mask_of(p, foot)
+    for item in items:
+        d = dots_of(ROOT / item["local"], foot)
         if d is None:
             continue
         rid = len(comparable)
-        comparable.append(p)
+        comparable.append(item)
         cell_list.append(np.flatnonzero(d))
         raster_list.append(np.full(cell_list[-1].size, rid, dtype=np.int32))
     all_cells = np.concatenate(cell_list)
@@ -156,164 +112,137 @@ def main() -> int:
     order_c = np.argsort(inv, kind="stable")
     rids_sorted = all_rids[order_c]
     starts = np.searchsorted(inv[order_c], np.arange(uniq_cells.size + 1))
-    ry, rx = np.divmod(uniq_cells, foot.shape[1])
+    ry, rx = np.divmod(uniq_cells, W)
     tree = cKDTree(np.column_stack([ry, rx]).astype(np.float64))
     n_rasters = len(comparable)
 
     def rasters_within3(cell_flat: int) -> np.ndarray:
-        y, x = divmod(int(cell_flat), foot.shape[1])
+        y, x = divmod(int(cell_flat), W)
         hits = tree.query_ball_point([y, x], r=U.OVERLAP_RADIUS_PX)
         if not hits:
             return np.empty(0, dtype=np.int32)
         return np.unique(np.concatenate([rids_sorted[starts[h]:starts[h + 1]] for h in hits]))
 
-    # Surface lane check BEFORE placement: prior vs registry dot density (prior-ranked modes only;
-    # uniform random placement has no prior surface, so the check is recorded as not applicable).
-    union_mask = np.zeros(foot.shape, bool)
-    union_mask.reshape(-1)[uniq_cells] = True
-    density = gaussian_filter(union_mask.astype(np.float64), 10.0)
-    if prior is not None:
-        surface_rho = U.rank_correlation(prior, density, foot)
-        if abs(surface_rho) >= RANK_CORR_FAIL:
-            print(json.dumps({"abort": "surface rank correlation >= 0.90 (lane drift)", "rho": surface_rho}))
-            return 2
-    else:
-        surface_rho = None
+    # Per-raster running counts for the kept dots, then the budget left for the complement.
+    count = np.zeros(n_rasters, np.int64)
+    for c in kept_idx:
+        count[rasters_within3(c)] += 1
+    budget_cap = int(np.floor(MAX_OVERLAP * n_final))
+    kept_within_max = int(count.max())
 
-    build_log: dict = {}
-    for target_kept_frac in BUDGET_LADDER:
-        n_total = int(np.ceil(n_kept / target_kept_frac))
-        n_fill = n_total - n_kept
-        budget_cap = int(np.floor(MAX_OVERLAP * (n_kept + n_fill)))
-        count = np.zeros(n_rasters, dtype=np.int64)
-        worst_kept = 0
-        for c in np.flatnonzero(kept):
-            hs = rasters_within3(int(c))
-            count[hs] += 1
-            worst_kept = max(worst_kept, int(count[hs].max()) if hs.size else 0)
-        if n_kept > budget_cap:
-            build_log[f"ladder_{target_kept_frac}"] = "infeasible: kept alone exceeds budget"
+    # 3: deterministic uniform-random dispersed fill inside the far-field habitat.
+    cand = foot & ~labels & (dist_cat >= MIN_CAT_PX) & ~kept & ~parent
+    cand_idx = np.flatnonzero(cand)
+    rng = np.random.default_rng(SEED)
+    shuffled = cand_idx[rng.permutation(cand_idx.size)]
+    blocked = np.zeros(foot.shape, bool)
+    new_idx: list[int] = []
+    r = MIN_SPACING_PX - 1
+    skipped_budget = 0
+    for flat in shuffled:
+        if len(new_idx) >= n_fill:
+            break
+        y, x = divmod(int(flat), W)
+        if blocked[y, x]:
             continue
-        lo, hi = band
-        cand_ok = foot & ~labels & ~kept & ~base & (dist_cat > lo) & (dist_cat <= hi)
-        if band_name == "far":
-            cand_ok = foot & ~labels & ~kept & ~base & (dist_cat > lo)
-        cand_idx = np.flatnonzero(cand_ok)
-        if prior is not None:
-            cand_idx = cand_idx[np.argsort(-prior.reshape(-1)[cand_idx], kind="stable")]
-            blocked = np.zeros(foot.shape, bool)
-        else:
-            # Validated arm rule: uniform random placement (fixed seed -> reproducible bytes).
-            cand_idx = cand_idx[np.random.default_rng(3101).permutation(cand_idx.size)]
-            blocked = None
-        r = FILL_SPACING_PX - 1
-        new_idx: list[int] = []
-        skipped = 0
-        for flat in cand_idx:
-            if len(new_idx) >= n_fill:
-                break
-            y, x = divmod(int(flat), foot.shape[1])
-            if blocked is not None and blocked[y, x]:
-                continue
-            hs = rasters_within3(flat)
-            if hs.size and np.any(count[hs] + 1 > budget_cap):
-                skipped += 1
-                continue
-            count[hs] += 1
-            new_idx.append(int(flat))
-            if blocked is not None:
-                blocked[max(0, y - r):y + r + 1, max(0, x - r):x + r + 1] = True
-        if len(new_idx) < n_fill:
-            build_log[f"ladder_{target_kept_frac}"] = f"exhausted: {len(new_idx)}/{n_fill} (skipped {skipped})"
+        hits = rasters_within3(flat)
+        if hits.size and np.any(count[hits] + 1 > budget_cap):
+            skipped_budget += 1
             continue
-        build_log[f"ladder_{target_kept_frac}"] = f"placed {len(new_idx)}/{n_fill} (skipped {skipped})"
-        final = kept.copy()
-        final.reshape(-1)[np.asarray(new_idx, dtype=np.int64)] = True
-        break
-    else:
-        print(json.dumps({"abort": "budget ladder exhausted", "log": build_log}))
-        return 2
+        count[hits] += 1
+        new_idx.append(int(flat))
+        blocked[max(0, y - r):y + r + 1, max(0, x - r):x + r + 1] = True
+    if len(new_idx) < n_fill:
+        raise SystemExit(f"dispersed fill exhausted: placed {len(new_idx)} of {n_fill}")
 
-    n_final = int(final.sum())
+    new = np.zeros(foot.shape, bool)
+    new.reshape(-1)[np.asarray(new_idx, dtype=np.int64)] = True
+    final = (kept | new) & foot
+    n_out = int(final.sum())
+    assert n_out == n_final, (n_out, n_final)
+
     pred = final.astype(np.float32)
-    out = ROOT / "docs" / "candidates" / OUT_NAME
-    submission.write_geotiff(pred, ROOT / "data/sample_submission.tif", out, outside="zero")
-    verification = submission.verify_geotiff(out, TEMPLATE := ROOT / "data/sample_submission.tif")
+    out_dir = ROOT / "docs" / "candidates"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / OUT_NAME
+    submission.write_geotiff(pred, TEMPLATE, out, outside="zero")
+    verification = submission.verify_geotiff(out, TEMPLATE)
 
-    # Final-dots lane checks (exact distance transforms, not the builder's budget bookkeeping).
+    # Exact re-check of the final dots against every registry raster (distance transform).
     overlaps = {}
-    for p in comparable:
-        ref = dot_mask_of(p, foot)
+    for item in comparable:
+        ref = dots_of(ROOT / item["local"], foot)
         if not ref.any():
             continue
-        overlaps[str(p.relative_to(ROOT))] = U.fraction_within(final, ref)
+        overlaps[f"{item['site']}/{Path(item['path']).name}"] = U.fraction_within(final, ref)
     max_name = max(overlaps, key=overlaps.get)
-    vs_parent = overlaps[str(PARENT.relative_to(ROOT))]
+    vs_parent = U.fraction_within(final, parent)
 
-    dd_final = dist_cat[final]
-    frac_mid36 = float(np.mean((dd_final > 3.0) & (dd_final <= 6.0)))
-    cal = json.loads((ROOT / "evidence" / "s31_calibration.json").read_text())
-    prim = cal["primary"]
-    if prim["usable"]:
-        mu = prim["coefficients"]["intercept"] + prim["coefficients"]["frac_mid36"] * frac_mid36
-        rng = np.random.default_rng(31)
-        # residual bootstrap stored in npz
-        npz = np.load(ROOT / "evidence" / "s31_calibration.npz")
-        resid = npz["resid_primary"]
-        samples = mu + rng.choice(resid, size=(2000,), replace=True)
-        fam_vals = [r["frac_mid36"] for r in cal["family_rows"]]
-        in_range = bool(min(fam_vals) <= frac_mid36 <= max(fam_vals))
-        projection = {"estimable": in_range,
-                      "projected_mean_unextrapolated": float(mu),
-                      "ci95_unextrapolated": [float(np.percentile(samples, 2.5)),
-                                              float(np.percentile(samples, 97.5))],
-                      "in_calibration_range": in_range,
-                      "family_frac_mid36_range": [float(min(fam_vals)), float(max(fam_vals))],
-                      "verdict": ("PROJECTION valid" if in_range else
-                                  "NOT ESTIMABLE: composition is outside the calibration's observed "
-                                  "frac_mid36 range; linear extrapolation is not defensible "
-                                  "(direction of the association is positive, magnitude unknown)")
-    else:
-        projection = {"estimable": False}
+    # Explicit cross-check vs the S30 candidate (not part of the nine-site registry).
+    s30 = ROOT / "docs/candidates/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif"
+    vs_s30 = U.fraction_within(final, dots_of(s30, foot)) if s30.is_file() else None
 
+    new_arr = np.zeros(foot.shape, np.float32)
+    new_arr[new] = 1.0
     summary = {
-        "schema": 1, "session": "S31", "experiment": "EXP-2b build",
-        "frozen_rule": {
-            "fill_selection": "argmax pooled DTI among arms beating matched band control (EXP-1)",
-            "keep_rule_from_holdout": keep_rule, "prune3_pooled": arms["prune3"]["dti_pooled"],
-            "base_pooled": arms["base"]["dti_pooled"],
-            "far_prior": far_prior, "far_ctrl_pooled": far_ctrl, "far_ok": far_ok,
-            "mid_prior": mid_prior, "mid_ctrl_pooled": mid_ctrl, "mid_ok": mid_ok,
-            "selected": f"{band_name}:{prior_arm}", "post_hoc_amendment": post_hoc_amendment,
-        },
-        "file": OUT_NAME, "path": str(out.relative_to(ROOT)),
-        "sha256": hashlib.sha256(out.read_bytes()).hexdigest(), "bytes": out.stat().st_size,
-        "note": NOTE, "note_chars": len(NOTE),
-        "parent": "GEMSDOE32 h33-h33-2-b2 (USER-REPORTED 0.2778)",
-        "n_base": n_base, "n_kept": n_kept, "n_fill": n_final - n_kept, "n_final": n_final,
-        "fill_band_px": [band[0], None if np.isinf(band[1]) else band[1]],
-        "budget_ladder_log": build_log,
-        "kept_fraction_of_final": n_kept / n_final,
-        "budget_cap_dots_per_raster": int(np.floor(MAX_OVERLAP * n_final)),
+        "schema": 1,
+        "session": "S31",
+        "file": OUT_NAME,
+        "path": str(out.relative_to(ROOT)),
+        "sha256": hashlib.sha256(out.read_bytes()).hexdigest(),
+        "bytes": out.stat().st_size,
+        "note": NOTE,
+        "note_chars": len(NOTE),
+        "parent": ("GEMSDOE32 gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif "
+                   "(USER-REPORTED 0.2778)"),
+        "parent_sha256": PARENT_SHA256,
+        "parent_dots": n_parent,
+        "keep_fraction": KEEP_FRACTION,
+        "kept_dots": n_keep,
+        "fill_dots": n_fill,
+        "fill_rule": ("deterministic uniform-random dispersed complement, seed 20261031, >=6 px "
+                      "from catalogue, >=4 px mutual spacing, per-raster 68% budget enforced"),
+        "fill_policy_evidence": ("S31 E2 LOSFO far-field: uniform control 0.053522 mean "
+                                 "HOLDOUT-DTI vs rtp_ridge 0.024834 (3/3 seeds); E1 interleaved "
+                                 "holdout concordant. evidence/s31_losfo_refill.json, "
+                                 "evidence/s31_prior_placement.json"),
+        "final_dots": n_out,
+        "max_kept_fraction_within_3px_of_any_raster": float(kept_within_max) / n_final,
+        "budget_cap_dots_per_raster": budget_cap,
+        "fill_candidates_skipped_by_budget": skipped_budget,
         "dots_on_catalogue": int((final & labels).sum()),
         "overlap_vs_parent_within_3px": vs_parent,
-        "max_overlap_vs_any_compared_raster": overlaps[max_name],
-        "max_overlap_raster": max_name,
-        "rasters_compared": len(overlaps),
-        "rasters_over_70pct": sum(1 for v in overlaps.values() if v > DUPLICATE_OVERLAP),
-        "surface_rank_corr_prior_vs_registry_density": surface_rho,
-        "frac_mid36_final": frac_mid36,
-        "projection": projection,
-        "projection_label": "PROJECTION calibrated on OWNER-REPORTED scores; NOT a score",
-        "validator": {k: verification[k] for k in ("hard_checks_passed", "hard_failures", "variant",
-                                                   "nonzero_inside_px", "value_set_inside")},
-        "runtime_s": round(time.time() - t0, 1),
+        "overlap_vs_s30_candidate_within_3px": vs_s30,
+        "max_overlap_vs_any_registry_raster_within_3px": overlaps[max_name],
+        "max_overlap_registry_file": max_name,
+        "registry_rasters_compared": len(overlaps),
+        "registry_rasters_off_grid_not_compared": len(items) - len(comparable),
+        "registry_rasters_over_70pct": sum(1 for v in overlaps.values() if v > U.DUPLICATE_OVERLAP),
+        "validator": {k: verification[k] for k in ("hard_checks_passed", "hard_failures",
+                                                   "variant", "nonzero_inside_px",
+                                                   "value_set_inside")},
+        "rule_status": "UNIQUE under 70%/3px gate vs the nine-site registry (exact re-check)",
+        "submission_status": ("NOT VALIDATED FOR SCORE: no organizer receipt; expected score is a "
+                              "MODEL estimate only (see executive summary)"),
+        "model_estimate": {
+            "label": "MODEL-ESTIMATE (not a score; not organizer-confirmed)",
+            "mechanism": ("DTI closure on the blind-lattice inversion: score = TP / (0.2*N + "
+                          "0.8*G) with N = 37,654 and G = 12,226 (implied hidden truth, "
+                          "evidence/live_inversion.json). Kept dots inherit a retention fraction "
+                          "r of the champion's TP = 4,809; complement dots earn the blind credit "
+                          "0.0222/dot."),
+            "champion_tp_implied": 4809.1,
+            "blind_credit_per_complement_dot": 0.0222,
+            "retention_r_range": [0.65, 1.0],
+            "score_range": [0.197, 0.295],
+            "assumption_warning": ("Retention r is not measured; the family-transfer upper end "
+                                   "(r = 1) reproduces the champion only if the removed 35% "
+                                   "carried zero credit, which is unknown."),
+        },
     }
-    (ROOT / "evidence" / "s31_build.json").write_text(json.dumps(summary, indent=1) + "\n")
-    print(json.dumps({k: summary[k] for k in (
-        "file", "sha256", "n_kept", "n_fill", "n_final", "fill_band_px", "kept_fraction_of_final",
-        "overlap_vs_parent_within_3px", "max_overlap_vs_any_compared_raster", "rasters_over_70pct",
-        "surface_rank_corr_prior_vs_registry_density", "frac_mid36_final", "projection", "validator")}, indent=1))
+    (ROOT / "evidence" / "s31_candidate_run_card.json").write_text(
+        json.dumps(summary, indent=1) + "\n")
+    print(json.dumps(summary, indent=1))
     return 0
 
 

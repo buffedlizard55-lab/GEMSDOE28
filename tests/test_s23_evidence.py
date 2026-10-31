@@ -228,6 +228,13 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert "NO FILE APPROVED" in text and "OK TO SUBMIT: NO" in text
         assert 'data-submission-ready="false"' in text
         return
+    if page == "s31-executive-summary.html":
+        assert parser.ids.count("s31-decision") == 1
+        assert text.index('id="s31-decision"') < text.index("The table: best submission")
+        assert "OK TO DOWNLOAD: YES" in text
+        assert 'data-submission-ready="true"' in text
+        assert "MODEL-ESTIMATE" in text and "HOLDOUT-DTI" in text
+        return
     assert len(parser.ids) == len(set(parser.ids)), page
     if page == "s29-review.html":
         assert parser.ids.count("s29-current-decision") == 1
@@ -244,9 +251,9 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert "OK TO DOWNLOAD AND SUBMIT: NO" in text
         assert 'data-submission-ready="false"' in text
         assert "No new TIF was generated" in text
-    elif page == "s31-executive-summary.html":
-        assert parser.ids.count("s31-decision") == 1
-        assert text.index('id="s31-decision"') < text.index("Nine-site table")
+    elif page == "s31-midband-executive-summary.html":
+        assert parser.ids.count("s31-midband-decision") == 1
+        assert text.index('id="s31-midband-decision"') < text.index("Nine-site table")
         assert "OK TO DOWNLOAD AND SUBMIT" in text
         assert 'data-submission-ready="true"' in text
         assert "NOT ESTIMABLE" in text

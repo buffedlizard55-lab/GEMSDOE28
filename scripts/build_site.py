@@ -468,7 +468,7 @@ def s18_feed_html(feed: dict) -> str:
 def s31_status_html() -> str:
     """S31 current decision banner (fail-closed if its evidence files are absent)."""
     try:
-        gate = read_json("evidence/s31_gate.json")
+        gate = read_json("evidence/s31_midband_gate.json")
         build = read_json("evidence/s31_build.json")
         sha = gate["sha256"]
         path = gate["path"].split("/", 1)[1]  # docs-relative link
@@ -479,6 +479,22 @@ def s31_status_html() -> str:
     except (FileNotFoundError, KeyError, ValueError):
         ok = False
         sha, path, n_final, max_ov, note = "n/a", "", "n/a", "n/a", ""
+    # Second parallel-lane candidate (far-dispersed refill), fail-closed as well.
+    try:
+        gate2 = read_json("evidence/s31_candidate_gate.json")
+        ok2 = bool(gate2["checks"]["inside_in_0_1"]["pass"] and gate2["checks"]["shape_matches_grid"]["pass"]
+                   and gate2["checks"]["crs_epsg_32611"]["pass"])
+        path2 = gate2["file"].split("/", 1)[1]
+        sha2 = gate2["sha256"]
+        dots2 = f"{int(gate2['dots']):,}"
+    except (FileNotFoundError, KeyError, ValueError):
+        ok2, path2, sha2, dots2 = False, "", "", "n/a"
+    lane2 = ""
+    if ok2:
+        lane2 = (f'<p><strong>Parallel-lane candidate (far-dispersed refill):</strong> '
+                 f'<a href="{esc(path2)}" download>{esc(gate2["file"])}</a> | SHA-256 <code>{esc(sha2)}</code> | '
+                 f'{dots2} dots | format gates PASS per evidence/s31_candidate_gate.json | '
+                 f'score likewise NOT ESTABLISHED (PROJECTION is never a score).</p>')
     if not ok:
         return ('<section class="section callout-danger" id="s31-decision" '
                 'data-submission-ready="false"><p class="eyebrow">S31 - AUTOMATED DECISION</p>'
@@ -495,10 +511,12 @@ def s31_status_html() -> str:
         f'uniqueness PASS (max {max_ov}% of dots within 3 px of any one of 478 byte-pinned registry rasters + all in-repo candidates; zero over the 70% gate); '
         f'lane PASS (density rank correlation max &lt; 0.90; leakage canary AUC &lt;= 0.525). '
         '<strong>Scores: USER-REPORTED only; this file&#39;s score is NOT ESTABLISHED and its calibration projection is NOT ESTIMABLE (composition outside calibration support). A projection is never a score.</strong></p>'
-        f'<div class="download-actions"><a class="button" href="{path}" download>Download the S31 submission GeoTIFF</a> '
-        '<a class="button quiet" href="s31-executive-summary.html">Open S31 executive summary (nine-site table)</a> '
+        f'<p><strong>Parallel-lane candidate (mid-band random refill, this session):</strong> the download above.</p>'
+        + lane2 +
+        f'<div class="download-actions"><a class="button" href="{path}" download>Download the S31 mid-band GeoTIFF</a> '
+        '<a class="button quiet" href="s31-midband-executive-summary.html">Open S31 mid-band executive summary (nine-site table)</a> '
         '<a class="button quiet" href="s29-submission-guide.html">How to submit</a> '
-        '<a class="button quiet" href="data/s31_run_card.json" download>Run card (JSON)</a></div>'
+        '<a class="button quiet" href="data/s31_midband_run_card.json" download>Run card (JSON)</a></div>'
         '</section>'
     )
 

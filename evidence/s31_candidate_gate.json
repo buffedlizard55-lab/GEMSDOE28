@@ -1,0 +1,124 @@
+{
+ "schema": 1,
+ "session": "S31",
+ "file": "docs/candidates/gemsdoe28-s31-far65-dispfill-20261031-zeros.tif",
+ "sha256": "baf007bd1f360ee3b381584ee67eb15120deb15829f76d8632bfce0b2815e7eb",
+ "bytes": 825076,
+ "dots": 37654,
+ "checks": {
+  "single_band_float32": {
+   "pass": true,
+   "detail": "count=1 dtype=float32"
+  },
+  "crs_epsg_32611": {
+   "pass": true,
+   "detail": "EPSG:32611"
+  },
+  "shape_matches_grid": {
+   "pass": true,
+   "detail": "(3730, 3292)"
+  },
+  "transform_matches_grid": {
+   "pass": true,
+   "detail": "(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
+  },
+  "driver_gtiff": {
+   "pass": true,
+   "detail": "GTiff"
+  },
+  "nodata_absent_or_nan": {
+   "pass": true,
+   "detail": "nodata=None"
+  },
+  "bounds_match_grid": {
+   "pass": true,
+   "detail": "(243350.0, 4135550.0, 572550.0, 4508550.0)"
+  },
+  "inside_all_finite": {
+   "pass": true,
+   "detail": "non-finite=0"
+  },
+  "inside_in_0_1": {
+   "pass": true,
+   "detail": "min=0.0 max=1.0"
+  },
+  "no_inf_anywhere": {
+   "pass": true,
+   "detail": "whole array"
+  },
+  "outside_all_zero_and_finite": {
+   "pass": true,
+   "detail": "outside size 7111787"
+  },
+  "inside_binary": {
+   "pass": true,
+   "detail": "values are exactly 0 or 1 inside"
+  },
+  "zero_dots_on_catalogue": {
+   "pass": true,
+   "detail": "0 dots on catalogue"
+  },
+  "sha256_matches_run_card": {
+   "pass": true,
+   "detail": "baf007bd1f360ee3b381584ee67eb15120deb15829f76d8632bfce0b2815e7eb"
+  },
+  "note_within_140_chars": {
+   "pass": true,
+   "detail": "140 chars"
+  },
+  "no_registry_raster_over_70pct": {
+   "pass": true,
+   "detail": "0 of 475 compared; worst 0.6800 (GEMSDOE25/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-nan.tif)"
+  },
+  "s30_candidate_overlap_under_70pct": {
+   "pass": true,
+   "detail": "0.6800"
+  }
+ },
+ "all_hard_checks_pass": true,
+ "uniqueness": {
+  "gate": "duplicate if >70% of dots within 3 px of one registry raster's dots",
+  "registry_scope": "the nine owner-published sites GEMSDOE{24,25,27,28,30,31,32,33,36}; the GEMSDOE13 spacing-five calibration lattice is NOT a submission and is excluded by the S30 merged convention (flagged for the owner)",
+  "rasters_compared": 475,
+  "rasters_skipped": [
+   {
+    "file": "data/registry_tifs/GEMSDOE32/gems32-probe-S2-SCALE-lambda-0.5.tif",
+    "reason": "no dots"
+   },
+   {
+    "file": "data/registry_tifs/GEMSDOE36/GEMS36_FORMAT_TEST_NOT_SUBMISSION.tif",
+    "reason": "off-grid shape (32, 48)"
+   }
+  ],
+  "max_overlap": 0.6799808785255218,
+  "max_overlap_raster": "GEMSDOE25/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-nan.tif",
+  "rasters_over_70pct": 0,
+  "per_raster_overlap": {
+   "GEMSDOE25/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-nan.tif": 0.6799808785255218,
+   "GEMSDOE25/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-zeros.tif": 0.6799808785255218,
+   "GEMSDOE28/gemsdoe28-s30-catfar65-budgetfill-20261030-zeros.tif": 0.6799808785255218,
+   "GEMSDOE32/gemsdoe32-h47-lli-unique-coupling-49231-20261026T230000Z-33464ce2-zeros.tif": 0.6799808785255218,
+   "GEMSDOE31/gemsdoe31-union-b-p060-20261004-8acb75e1-allfinite.tif": 0.6787592287671961,
+   "GEMSDOE31/gemsdoe31-union-b-p060-20261004-8acb75e1-nan.tif": 0.6787592287671961,
+   "GEMSDOE24/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-allfinite.tif": 0.6759441228023583,
+   "GEMSDOE24/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-nan.tif": 0.6759441228023583,
+   "GEMSDOE24/gems24-reference-h19-5-20261002-80d47e1ab2ee-allfinite.tif": 0.6759441228023583,
+   "GEMSDOE24/gems24-reference-h19-5-20261002-80d47e1ab2ee-nan.tif": 0.6759441228023583,
+   "GEMSDOE32/gems32-probe-S3-NULLADD-2000px.tif": 0.6747755882509162,
+   "GEMSDOE27/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif": 0.6729431136134275,
+   "GEMSDOE27/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": 0.6729431136134275,
+   "GEMSDOE27/gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-allfinite.tif": 0.6729431136134275,
+   "GEMSDOE27/gems27-topo-gap-closure-t-v2-plus-h27-4-r1-on-d1-5-20261002-d466b251f309-nan.tif": 0.6729431136134275,
+   "GEMSDOE28/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-allfinite.tif": 0.6729431136134275,
+   "GEMSDOE28/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": 0.6729431136134275,
+   "GEMSDOE32/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif": 0.6729431136134275,
+   "GEMSDOE24/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-allfinite.tif": 0.6719870398895204,
+   "GEMSDOE24/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif": 0.6719870398895204
+  },
+  "overlap_vs_h33_2_parent": 0.6687735698730547,
+  "overlap_vs_s30_candidate": 0.6799808785255218,
+  "spearman_note": "binary dot raster: rank correlation vs registry rasters is tied and tiny; the 70%/3 px overlap gate is the operative uniqueness test (same convention as the S30 sessions)"
+ },
+ "verdict_file": "VALID AND UNIQUE",
+ "provenance": "local recomputation from owner-published registry bytes; no organizer receipt"
+}

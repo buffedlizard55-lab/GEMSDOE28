@@ -1,0 +1,14 @@
+{
+ "schema": 1,
+ "session": "S31",
+ "kind": "MEASURED cross-candidate uniqueness (parallel lanes)",
+ "pairs": {
+  "midband_vs_far65": {
+   "frac_midband_within_3px_of_far65": 0.48769213209557144,
+   "frac_far65_within_3px_of_midband": 0.6767408509056143
+  }
+ },
+ "gate": 0.7,
+ "verdict": "both directions below the 70% duplicate gate; the two lane candidates are mutually unique",
+ "note": "computed 2026-10-31 after the parallel lane's candidate landed on main; complements each lane's own registry gate"
+}

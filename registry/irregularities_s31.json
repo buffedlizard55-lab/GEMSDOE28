@@ -1,35 +1,44 @@
 {
  "schema": 1,
  "session": "S31",
- "date_utc": "2026-10-31",
+ "generated_utc": "2026-10-31",
  "items": [
   {
-   "id": "I-S31-1",
+   "id": "S31-IRR-01",
    "severity": "high",
-   "finding": "S30 far-fill candidate (gemsdoe28-s30-catfar65-budgetfill) projects at ~0.058-0.19 under the S31 family calibration (frac_mid36 ~ 0), far below its 0.2778 parent.",
-   "impact": "The merged S30 branch decision 'OK to submit' (PR #91) is quantitatively doubtful; the conflicting S30 'NO' branch (PR #88) gains support.",
-   "action": "Flagged for the owner; not adjudicated (no receipt exists)."
+   "claim": "Prompt: '0.3195 is the highest score right now'.",
+   "observation": "Public leaderboard read 2026-10-31 (this session): rank #1 = 0.4544; 0.3195 is rank #50 of 50 rows (team kpomazi). The value exists but is not the highest.",
+   "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+   "status": "FLAGGED for owner review"
   },
   {
-   "id": "I-S31-2",
+   "id": "S31-IRR-02",
+   "severity": "high",
+   "claim": "Prompt: '0.4413' as the current leaderboard high score.",
+   "observation": "0.4413 does not appear anywhere on the public board read 2026-10-31; the board is sorted descending and 0.4413 would sit between #1 (0.4544) and #2 (0.3925).",
+   "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+   "status": "FLAGGED for owner review"
+  },
+  {
+   "id": "S31-IRR-03",
    "severity": "medium",
-   "finding": "Prompt quotes leaderboard high scores 0.4413 / 0.3195; the official public board fetched 2026-10-30 shows #1 = 0.4544, #2 = 0.3925, and 0.3195 was not in ranks 1-23.",
-   "impact": "Target-setting in the prompt may reference stale or private numbers.",
-   "action": "Use ORGANIZER-CONFIRMED board reads only; owner to supply receipts."
+   "claim": "Portal error 'Predicted values must be in range [0, 1]' on a downloaded file.",
+   "observation": "Still not matched to a specific file. All nine site-best files pass the local in-footprint [0,1] check; one registry raster (gemsdoe31-csdu-stepover-8cf9dc27-nan.tif) has NaN INSIDE the footprint. S31 ships zeros-outside all-finite files only, so the error cannot originate from the approved file.",
+   "status": "MITIGATED by file design; root cause open"
   },
   {
-   "id": "I-S31-3",
+   "id": "S31-IRR-04",
+   "severity": "medium",
+   "claim": "GitHub REST availability for the shared account.",
+   "observation": "HTTP 403 rate limit for user ID 309556078 at 2026-10-31T00:54:08Z; gh api unusable during this session. Worked around via git protocol (blob-filtered clones) and raw local mirroring (scripts/build_registry_from_clones.py).",
+   "status": "FLAGGED; other sessions using gh api heavily will hit this"
+  },
+  {
+   "id": "S31-IRR-05",
    "severity": "low",
-   "finding": "registry/external_pins.json still labels the H33-2 artefact 'MT conductance alignment'; the bytes are a catalogue-pruned solo field.",
-   "impact": "Misleading provenance label.",
-   "action": "Correct in the next registry revision."
-  },
-  {
-   "id": "I-S31-4",
-   "severity": "info",
-   "finding": "EXP-1 found far-band geophysical priors (strain edge, RTP ridge, tmi high-pass edge) all score WORSE than matched random far placement on the hide-and-recover holdout.",
-   "impact": "Far-field fill designs (including S30's RTP-ridge fill) are prior-harmful in this proxy.",
-   "action": "Recorded; far-field priors should not be reused without a far-field-specific harness."
+   "claim": "Registry scope of the internal 70%/3 px rule.",
+   "observation": "Inherited conflict from the merged S30 sessions (PR #88 vs PR #91). Including the GEMSDOE13 spacing-five calibration lattice (geology-blind control, not a submission) would make every possible dotted file a duplicate. S31 follows the merged S30 convention: registry = the nine owner-published sites.",
+   "status": "OPEN owner decision"
   }
  ]
 }

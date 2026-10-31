@@ -105,6 +105,10 @@ def main() -> int:
     import build_s30_review  # noqa: PLC0415
 
     build_s30_review.main()
+    # S31 unique candidate + two-holdout experiments: the newest decision; leads every page.
+    import build_s31_review  # noqa: PLC0415
+
+    build_s31_review.main()
     print(json.dumps({"status": "built", "pages": updated,
                       "review_card": "docs/data/active_checkout_review_2026-10-27.json",
                       "network_requests": 0, "submission_ready": False}, indent=2))
