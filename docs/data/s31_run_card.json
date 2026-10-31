@@ -1,0 +1,303 @@
+{
+ "schema": "s31-session-run-card/v1",
+ "session": "S31",
+ "generated_utc": "2026-10-31T01:36:06Z",
+ "branch": "arena/6c34b640-gemsdoe28",
+ "lane": "single method paragraph: fixed-budget (37,654) off-catalogue dot placement under the 70%/3px uniqueness gate, building on the champion far-65% keep set (S30 lineage)",
+ "experiments_used": 3,
+ "experiment_cap": 3,
+ "time_cap_seconds": 7200,
+ "slot_selected": false,
+ "hypothesis": "A catalogue-free conjunction prior (two independent potential fields, or geodetic strain, or a basement step edge) places the fixed 37,654-dot budget nearer withheld catalogue segments than random-K and than the single-field RTP ridge prior.",
+ "mechanism": "Catalogue-free conjunction priors (RTP x gravity coherence, geodetic strain ridges, basement step edges) should concentrate the fixed budget nearer withheld fault segments than uniform dispersion.",
+ "named_non_fault_mimics": {
+  "joint_px": "Igneous intrusion contacts and basin-edge density contrasts mimic RTP x gravity coherence.",
+  "gsd_strain": "Plate-boundary-wide smooth strain gradients and aquifer extraction mimic shear/dilatation ridges.",
+  "cs_step": "Playa edges and lithologic contacts mimic basement depth steps.",
+  "rtp_ridge": "Single-field magnetic contacts and dike swarms mimic RTP ridges."
+ },
+ "results": {
+  "E1_buffered_interleaved_holdout": {
+   "label": "HOLDOUT-DTI",
+   "evaluator": "gems-segment-pooled-v1",
+   "n_withheld_positive_pixels": 60988,
+   "arms": {
+    "random_k": {
+     "dti": 0.06985810325396907,
+     "ci95": [
+      0.0667370055609114,
+      0.0728821187699489
+     ]
+    },
+    "rtp_ridge": {
+     "dti": 0.03538843811515262,
+     "ci95": [
+      0.027731408409731786,
+      0.04331606729171173
+     ]
+    },
+    "joint_px": {
+     "dti": 0.04160688240849276,
+     "ci95": [
+      0.03480711040999933,
+      0.04874203960878263
+     ]
+    },
+    "gsd_strain": {
+     "dti": 0.04606912251856188,
+     "ci95": [
+      0.03833378709148213,
+      0.05399753766304489
+     ]
+    },
+    "cs_step": {
+     "dti": 0.032458331043319445,
+     "ci95": [
+      0.027086661376445463,
+      0.03820261501676121
+     ]
+    }
+   },
+   "paired_vs_random_k": {
+    "rtp_ridge_vs_random_k": {
+     "delta": -0.034469665138816455,
+     "ci95": [
+      -0.042967989113016164,
+      -0.026196028625230718
+     ],
+     "strictly_positive": false,
+     "fold_wins": 0
+    },
+    "joint_px_vs_random_k": {
+     "delta": -0.028251220845476314,
+     "ci95": [
+      -0.036080757128772865,
+      -0.020361068832175856
+     ],
+     "strictly_positive": false,
+     "fold_wins": 0
+    },
+    "gsd_strain_vs_random_k": {
+     "delta": -0.023788980735407195,
+     "ci95": [
+      -0.03211264535331456,
+      -0.01576653330065382
+     ],
+     "strictly_positive": false,
+     "fold_wins": 0
+    },
+    "cs_step_vs_random_k": {
+     "delta": -0.03739977221064963,
+     "ci95": [
+      -0.04416289557523547,
+      -0.030854021011707308
+     ],
+     "strictly_positive": false,
+     "fold_wins": 0
+    },
+    "joint_px_vs_rtp_ridge": {
+     "delta": 0.00621844429334014,
+     "ci95": [
+      -0.0034299821512457393,
+      0.01553125119987135
+     ],
+     "strictly_positive": false,
+     "fold_wins": 3
+    }
+   },
+   "verdict": "NEGATIVE: all four geology priors strictly below the uniform control (0/4 folds)"
+  },
+  "E2_losfo_farfield": {
+   "label": "HOLDOUT-DTI",
+   "protocol": {
+    "instrument": "src/gems27/losfo.py (leave-fault-system-out, 600 m buffer)",
+    "seeds": [
+     210,
+     211,
+     212
+    ],
+    "k_dots_per_fold": 9414,
+    "habitat": "footprint cells >= 6 px from the known catalogue",
+    "metric": "shared exact DTI, alpha 0.2, beta 0.8, 300 m triangular kernel",
+    "truth_is_off_catalogue": true,
+    "known_limit": "Held-out systems are mapped faults; absolute DTI is an upper bound for genuinely unmapped faults, not an estimate of leaderboard skill."
+   },
+   "arms_mean_dti": {
+    "random": 0.053522329139059445,
+    "rtp_ridge": 0.024834361905053417,
+    "joint_px": 0.029203052919937727,
+    "gsd_strain": 0.03070651702421053,
+    "cs_step": 0.02569259891001334
+   },
+   "paired_vs_random": {
+    "rtp_ridge_vs_random": {
+     "delta_per_seed": [
+      -0.030046,
+      -0.027656,
+      -0.028362
+     ],
+     "mean_delta": -0.028687967234006028,
+     "seeds_improved": 0,
+     "n_seeds": 3
+    },
+    "joint_px_vs_random": {
+     "delta_per_seed": [
+      -0.022433,
+      -0.024955,
+      -0.02557
+     ],
+     "mean_delta": -0.024319276219121718,
+     "seeds_improved": 0,
+     "n_seeds": 3
+    },
+    "gsd_strain_vs_random": {
+     "delta_per_seed": [
+      -0.026936,
+      -0.017498,
+      -0.024014
+     ],
+     "mean_delta": -0.022815812114848916,
+     "seeds_improved": 0,
+     "n_seeds": 3
+    },
+    "cs_step_vs_random": {
+     "delta_per_seed": [
+      -0.035031,
+      -0.025249,
+      -0.023209
+     ],
+     "mean_delta": -0.027829730229046102,
+     "seeds_improved": 0,
+     "n_seeds": 3
+    }
+   },
+   "verdict": "NEGATIVE for every geology prior; the uniform dispersed control wins in the far-field habitat (0/3 seeds for every prior)"
+  },
+  "E3_candidate_build_and_gate": {
+   "verdict": "PROMOTE (as a valid unique file): builder + independent KD-tree gate both PASS",
+   "file": "docs/candidates/gemsdoe28-s31-far65-dispfill-20261031-zeros.tif",
+   "sha256": "baf007bd1f360ee3b381584ee67eb15120deb15829f76d8632bfce0b2815e7eb",
+   "bytes": 825076,
+   "final_dots": 37654
+  }
+ },
+ "leakage_canary": {
+  "label": "LEAKAGE-CANARY AUC (not a score)",
+  "threshold": 0.9,
+  "passed": true,
+  "max_pooled_auc": 0.5327938088503303
+ },
+ "correlation_vs_registry": {
+  "pre_placement_surface_spearman_max": 0.27847384719270224,
+  "gate": 0.9,
+  "final_dots_max_overlap_within_3px": 0.6799808785255218,
+  "final_dots_max_overlap_raster": "GEMSDOE25/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-nan.tif",
+  "rasters_over_0_70": 0,
+  "overlap_vs_parent_0_2778": 0.6687735698730547,
+  "overlap_vs_s30_candidate": 0.6799808785255218,
+  "registry_scope_note": "the nine owner-published sites GEMSDOE{24,25,27,28,30,31,32,33,36}; the GEMSDOE13 spacing-five calibration lattice is NOT a submission and is excluded by the S30 merged convention (flagged for the owner)"
+ },
+ "raster_sha256": "baf007bd1f360ee3b381584ee67eb15120deb15829f76d8632bfce0b2815e7eb",
+ "validator_output": {
+  "single_band_float32": {
+   "pass": true,
+   "detail": "count=1 dtype=float32"
+  },
+  "crs_epsg_32611": {
+   "pass": true,
+   "detail": "EPSG:32611"
+  },
+  "shape_matches_grid": {
+   "pass": true,
+   "detail": "(3730, 3292)"
+  },
+  "transform_matches_grid": {
+   "pass": true,
+   "detail": "(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
+  },
+  "driver_gtiff": {
+   "pass": true,
+   "detail": "GTiff"
+  },
+  "nodata_absent_or_nan": {
+   "pass": true,
+   "detail": "nodata=None"
+  },
+  "bounds_match_grid": {
+   "pass": true,
+   "detail": "(243350.0, 4135550.0, 572550.0, 4508550.0)"
+  },
+  "inside_all_finite": {
+   "pass": true,
+   "detail": "non-finite=0"
+  },
+  "inside_in_0_1": {
+   "pass": true,
+   "detail": "min=0.0 max=1.0"
+  },
+  "no_inf_anywhere": {
+   "pass": true,
+   "detail": "whole array"
+  },
+  "outside_all_zero_and_finite": {
+   "pass": true,
+   "detail": "outside size 7111787"
+  },
+  "inside_binary": {
+   "pass": true,
+   "detail": "values are exactly 0 or 1 inside"
+  },
+  "zero_dots_on_catalogue": {
+   "pass": true,
+   "detail": "0 dots on catalogue"
+  },
+  "sha256_matches_run_card": {
+   "pass": true,
+   "detail": "baf007bd1f360ee3b381584ee67eb15120deb15829f76d8632bfce0b2815e7eb"
+  },
+  "note_within_140_chars": {
+   "pass": true,
+   "detail": "140 chars"
+  },
+  "no_registry_raster_over_70pct": {
+   "pass": true,
+   "detail": "0 of 475 compared; worst 0.6800 (GEMSDOE25/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-nan.tif)"
+  },
+  "s30_candidate_overlap_under_70pct": {
+   "pass": true,
+   "detail": "0.6800"
+  }
+ },
+ "submission_name": "gemsdoe28-s31-far65-dispfill-20261031-zeros.tif",
+ "submission_note": "S31 keep-far-65pct of H33-2 + dispersed far-field fill (E2-supported); zeros outside; score unverified; <=68% within 3px of registry rasters",
+ "submission_note_chars": 140,
+ "expected_score": {
+  "label": "MODEL-ESTIMATE (never a score; not organizer-confirmed)",
+  "range": [
+   0.197,
+   0.295
+  ],
+  "mechanism": "DTI closure on the blind-lattice inversion: score = TP / (0.2*N + 0.8*G) with N = 37,654 and G = 12,226 (implied hidden truth, evidence/live_inversion.json). Kept dots inherit a retention fraction r of the champion's TP = 4,809; complement dots earn the blind credit 0.0222/dot."
+ },
+ "official_sources": {
+  "problem_and_metric": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+  "rules_pdf": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+  "leaderboard_read_2026_10_31": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "reference_solution": "https://github.com/drivendataorg/gems-prize-reference-solution"
+ },
+ "leaderboard_observation": {
+  "label": "ORGANIZER-CONFIRMED public board page read 2026-10-31 (this session)",
+  "rank_1": 0.4544,
+  "rank_2": 0.3925,
+  "rank_50_last": 0.3195,
+  "prompt_anchor_0_4413_found": false,
+  "prompt_claim_0_3195_highest": "inconsistent with the board (rank 50 of 50 rows)"
+ },
+ "verdict": "PROMOTE the S31 candidate as a valid unique downloadable file; score promotion NEGATIVE (no holdout transfer to a leaderboard estimate; slots are the owner's step)",
+ "irregularities": [
+  "Prompt's 0.4413 does not appear on the public board read 2026-10-31; 0.3195 is rank #50, not the highest.",
+  "No submission receipt exists in this repository; all family scores are USER-REPORTED.",
+  "Cause of the portal error 'Predicted values must be in range [0, 1]' remains unmatched to a file; this session ships only all-finite zeros-outside files so the error cannot occur on them.",
+  "Registry scope convention (nine owner sites; calibration lattice excluded) is inherited from the merged S30 sessions and remains an open owner decision."
+ ]
+}

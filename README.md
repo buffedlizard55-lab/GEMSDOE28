@@ -1,3 +1,49 @@
+# S31 · 2026-10-31 UTC — unique S31 GeoTIFF generated · READ FIRST EVERY SESSION
+
+## CURRENT DECISION: OK TO DOWNLOAD: YES · OK TO SUBMIT AS A VALID UNIQUE FILE: YES · EXPECTED SCORE: MODEL-ESTIMATE 0.197–0.295 (NOT A SCORE) · WEEKLY SLOT = OWNER'S STEP
+
+- **Download (the one file this site approves):** [`docs/candidates/gemsdoe28-s31-far65-dispfill-20261031-zeros.tif`](docs/candidates/gemsdoe28-s31-far65-dispfill-20261031-zeros.tif) · SHA-256 `baf007bd1f360ee3b381584ee67eb15120deb15829f76d8632bfce0b2815e7eb` · 37,654 dots · float32 single band · EPSG:32611 · values exactly {0,1} inside, zeros finite outside (all-finite → the portal error “Predicted values must be in range [0, 1]” cannot occur on this file).
+- **Submission note (≤140 chars, paste into the portal):** `S31 keep-far-65pct of H33-2 + dispersed far-field fill (E2-supported); zeros outside; score unverified; <=68% within 3px of registry rasters`
+- **Uniqueness (MEASURED):** worst overlap 0.67998 ≤ 0.70 vs 475 nine-site registry rasters (0 over gate); independent KD-tree gate PASS (`evidence/s31_candidate_gate.json`); overlap vs the 0.2778 parent 0.66877; vs the S30 candidate 0.67998.
+- **Nine-site table (the executive summary you asked for):** [S31 executive summary](docs/s31-executive-summary.html) · machine-readable [s31_summary_table.json](docs/data/s31_summary_table.json). Best claimed of the nine: GEMSDOE32 `…e5eb6e7e-zeros.tif` = **0.2778 (USER-REPORTED)** — reference only, fails uniqueness vs every other site, already submitted per its owner page.
+- **Why 0.2778 won (PhD-level, verified):** it is GEMSDOE31's 0.2708 field minus exactly 2,545 catalogue-adjacent dots (nothing added). Under DTI = TPw/(TPw + 0.2·FPw + 0.8·FNw) with scored truth = “new faults not in the USGS catalogue”, catalogue-flank dots pay FP mass but earn no TP; pruning reallocates the fixed 37,654-dot budget. Model closure (blind-lattice calibration): 0.2778 ⇒ TPw ≈ 4,809 (0.128 credit/dot); board #1 0.4544 ⇒ TPw ≈ 7,867 at the same budget (0.209 credit/dot) — beating 0.2778 needs better placement of the same budget, beating 0.4544 needs ~2× enrichment = a new physical signal.
+- **S31 experiments (3/3 cap; all HOLDOUT-DTI, shared pinned evaluator):** E1 buffered interleaved holdout — uniform control 0.069858; ALL four priors (rtp_ridge 0.035388, joint_px 0.041607, gsd_strain 0.046069, cs_step 0.032458) strictly below it (0/4 folds each); canary PASS (max AUC 0.5302); surface Spearman max 0.2785 < 0.90. E2 LOSFO far-field (the habitat a shipped file occupies) — uniform 0.053522 beats every prior (rtp_ridge 0.024834 … gsd_strain 0.030707; 0/3 seeds each). E3 build+independent gate PASS. **Verdict: geology priors NEGATIVE; the candidate therefore keeps the champion's far-65% dots and refills with the holdout-supported dispersed complement.**
+- **Leaderboard (ORGANIZER-CONFIRMED, public board read this session 2026-10-31):** #1 0.4544 · #2 0.3925 · #50 (last) **0.3195**. FLAGGED: the prompt's “0.3195 is the highest” is inconsistent with the board (it is rank 50); “0.4413” does not appear on the board at all.
+- **Run cards:** [session](evidence/s31_run_card.json) · [E1](evidence/s31_prior_placement.json) · [E2](evidence/s31_losfo_refill.json) · [candidate](evidence/s31_candidate_run_card.json) · [gate](evidence/s31_candidate_gate.json) · knowledge note [`knowledge/78_s31_far65_dispersed_complement_2026-10-31.md`](knowledge/78_s31_far65_dispersed_complement_2026-10-31.md) · **standing prompt (verbatim): [`PROMPT.md`](PROMPT.md)**.
+- **Official sources:** [problem and metric](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) · [reference solution](https://github.com/drivendataorg/gems-prize-reference-solution).
+- **Open owner decisions carried forward:** (1) does the internal 70%/3 px rule include the GEMSDOE13 calibration lattice (a geology-blind control, not a submission)? S31 follows the merged S30 convention: registry = the nine owner sites. (2) Which exact file produced the portal “Predicted values must be in range [0, 1]” error? Not matched; S31 ships zeros-outside all-finite files so it cannot occur on this file. (3) Submitting spends one weekly-cap slot — owner's step; no receipt exists in this repo, so no score here is ORGANIZER-CONFIRMED.
+
+### Standing brief (condensed from `PROMPT.md`; read `PROMPT.md` verbatim each session)
+
+1. **Goal:** place at the top of the DrivenData GEMS leaderboard (competition 306) with a single-band float32 GeoTIFF, 100 m, EPSG:32611, values in [0,1], scored by the distance-weighted Tversky index (α 0.2, β 0.8, 300 m kernel). A unique, obviously-OK-or-NOT-OK downloadable TIF is the highest-urgency deliverable; automated gates replace human inspection.
+2. **Parallel-run protocol:** single lane; duplicate if |Spearman| > 0.90 vs any registry raster or >70% of dots within 3 px of one registry raster's dots — checked before placement and on final dots. Reuse the hash-pinned shared template (cached feature stack, `evaluate_holdout.py`, `submission_writer.py`); never fork privately. Holdout = hide-and-recover whole fault segments with a buffer; catalogue features from visible faults only; pooled DTI. Leakage canary: any single feature AUC > 0.90 = leakage until disproven. Budget: 3 experiments or 2 hours; never select a weekly slot inside a research run.
+3. **Labels:** every number is HOLDOUT-DTI (evaluator version, withheld positives, 95% CI), ORGANIZER-CONFIRMED (receipt), USER-REPORTED, MODEL-ESTIMATE, or MEASURED. A projection is never written as a score.
+4. **Research discipline:** rank 3–5 genuinely untested hypotheses (layers, physical signature, why it catches a catalogue-missing fault, difference from implemented work, named non-fault mimic, cost, data obtainability) before implementing; validate the top one on the spatially-blocked holdout before any slot. Negative results are deliverables.
+5. **Data:** free, official or disclosed owner-mirrored sources with SHA-256 pins; never automate DrivenData login.
+6. **Core values:** Maximize P(Win); Own the Outcome. Verify line by line, flag irregularities, no hallucinations.
+
+### S31 JSON run card (protocol §5)
+
+```json
+{
+ "session": "S31", "date_utc": "2026-10-31", "lane": "single (champion far-65% keep + fixed-budget off-catalogue placement under the 70%/3px gate)",
+ "experiments_used": 3, "experiment_cap": 3, "slot_selected": false,
+ "hypothesis": "catalogue-free conjunction priors (RTP x gravity, geodetic strain, basement step) place the fixed budget nearer withheld faults than uniform dispersion",
+ "mechanism": "two independent fields / active strain / basement steps mark real boundaries absent from the scarp-based catalogue",
+ "named_non_fault_mimic": "igneous contacts; plate-wide strain gradients and aquifer extraction; playa edges",
+ "holdout_dti": {"E1_random_control": "0.069858 [0.066737-0.072882]", "E1_best_geology_gsd_strain": "0.046069 [0.038334-0.053998]", "E1_paired_vs_random": "all four priors strictly negative, 0/4 folds", "E2_losfo_random": "0.053522 (3 seeds)", "E2_best_geology_gsd_strain": "0.030707 (0/3 seeds)", "label": "HOLDOUT-DTI, evaluator gems-segment-pooled-v1 / LOSFO, never a leaderboard score"},
+ "correlation_vs_registry": {"pre_placement_spearman_max": 0.2785, "final_dots_max_overlap_3px": 0.67998, "rasters_over_0_70": 0, "overlap_vs_parent_0_2778": 0.66877, "overlap_vs_s30": 0.67998},
+ "raster_sha256": "baf007bd1f360ee3b381584ee67eb15120deb15829f76d8632bfce0b2815e7eb",
+ "validator_output": "PASS: no NaN/inf anywhere; values in [0,1]; zeros outside; float32 single band; CRS/shape/transform match; 0 dots on catalogue",
+ "submission_name": "gemsdoe28-s31-far65-dispfill-20261031-zeros.tif",
+ "submission_note": "S31 keep-far-65pct of H33-2 + dispersed far-field fill (E2-supported); zeros outside; score unverified; <=68% within 3px of registry rasters",
+ "expected_score": "MODEL-ESTIMATE 0.197-0.295 (not a score; not organizer-confirmed)",
+ "verdict": "PROMOTE as a valid unique downloadable file; score promotion NEGATIVE; slot selection is the owner's step"
+}
+```
+
+---
+
 # S30 · 2026-10-30 UTC — nine-site byte audit · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: OK TO DOWNLOAD AND SUBMIT: NO · NO NEW TIF · NO WEEKLY SLOT USED
