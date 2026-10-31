@@ -4,6 +4,10 @@ on:
   push:
     branches: ['**']
     paths:
+      - 'evidence/s31_gate.json'
+      - 'evidence/s31_build.json'
+      - 'evidence/s31_candidate_gate.json'
+      - 'evidence/s31_midband_gate.json'
       - 'registry/next_hypotheses.json'
       - 'registry/leaderboard_snapshot_2026-10-03.json'
       - 'registry/irregularities.json'
@@ -154,7 +158,6 @@ on:
       - 'scripts/build_s31_review.py'
       - 'scripts/build_s31_summary.py'
       - 'evidence/s31_candidate_run_card.json'
-      - 'evidence/s31_candidate_gate.json'
       - 'evidence/s31_run_card.json'
       - 'registry/irregularities_s31.json'
       - 'evidence/s24_nine_site_overlap.json'
@@ -175,6 +178,10 @@ on:
       - 'docs/data/s23_scorecard.csv'
   pull_request:
     paths:
+      - 'evidence/s31_gate.json'
+      - 'evidence/s31_build.json'
+      - 'evidence/s31_candidate_gate.json'
+      - 'evidence/s31_midband_gate.json'
       - 'registry/next_hypotheses.json'
       - 'registry/leaderboard_snapshot_2026-10-03.json'
       - 'registry/irregularities.json'
@@ -325,7 +332,6 @@ on:
       - 'scripts/build_s31_review.py'
       - 'scripts/build_s31_summary.py'
       - 'evidence/s31_candidate_run_card.json'
-      - 'evidence/s31_candidate_gate.json'
       - 'evidence/s31_run_card.json'
       - 'registry/irregularities_s31.json'
       - 'evidence/s24_nine_site_overlap.json'

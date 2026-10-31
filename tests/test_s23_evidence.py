@@ -251,6 +251,13 @@ def test_all_pages_lead_with_one_current_lock_and_have_working_local_links(page)
         assert "OK TO DOWNLOAD AND SUBMIT: NO" in text
         assert 'data-submission-ready="false"' in text
         assert "No new TIF was generated" in text
+    elif page == "s31-midband-executive-summary.html":
+        assert parser.ids.count("s31-midband-decision") == 1
+        assert text.index('id="s31-midband-decision"') < text.index("Nine-site table")
+        assert "OK TO DOWNLOAD AND SUBMIT" in text
+        assert 'data-submission-ready="true"' in text
+        assert "NOT ESTIMABLE" in text
+        assert "candidates/gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif" in text
     elif page == "s28c-review.html":
         assert parser.ids.count("s28c-current-decision") == 1
         assert 'data-submission-ready="false"' in text
