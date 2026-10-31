@@ -1,0 +1,151 @@
+{
+ "schema": "s31-summary-table/v1",
+ "best_of_nine_claimed": {
+  "site": "GEMSDOE32",
+  "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+  "score": 0.2778,
+  "score_label": "USER-REPORTED (no receipt)",
+  "dots": 37654,
+  "max_overlap": 1.0,
+  "max_overlap_site": "GEMSDOE24",
+  "identical": "\u2014",
+  "unique": false,
+  "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+  "url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html"
+ },
+ "recommended": {
+  "site": "GEMSDOE28 (this session, S31)",
+  "file": "gemsdoe28-s31-far65-dispfill-20261031-zeros.tif",
+  "score": [
+   0.197,
+   0.295
+  ],
+  "score_label": "MODEL-ESTIMATE (not a score; not organizer-confirmed)",
+  "dots": 37654,
+  "max_overlap": 0.6799808785255218,
+  "max_overlap_site": "GEMSDOE25/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-nan.tif",
+  "identical": "\u2014",
+  "unique": true,
+  "verdict": "OK TO DOWNLOAD \u00b7 OK TO SUBMIT AS A VALID UNIQUE FILE \u00b7 expected score UNVERIFIED \u00b7 slot selection is the owner's step",
+  "url": "candidates/gemsdoe28-s31-far65-dispfill-20261031-zeros.tif"
+ },
+ "rows": [
+  {
+   "site": "GEMSDOE24",
+   "file": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+   "score": 0.2477,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 60069,
+   "max_overlap": 1.0,
+   "max_overlap_site": "GEMSDOE25",
+   "identical": "\u2014",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE24/"
+  },
+  {
+   "site": "GEMSDOE25",
+   "file": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "score": 0.26,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 44090,
+   "max_overlap": 1.0,
+   "max_overlap_site": "GEMSDOE24",
+   "identical": "GEMSDOE30",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE25/"
+  },
+  {
+   "site": "GEMSDOE27",
+   "file": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+   "score": 0.2449,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 61328,
+   "max_overlap": 1.0,
+   "max_overlap_site": "GEMSDOE24",
+   "identical": "\u2014",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE27/"
+  },
+  {
+   "site": "GEMSDOE28",
+   "file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+   "score": 0.271,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 37660,
+   "max_overlap": 1.0,
+   "max_overlap_site": "GEMSDOE24",
+   "identical": "\u2014",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE28/"
+  },
+  {
+   "site": "GEMSDOE30",
+   "file": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+   "score": 0.26,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 44090,
+   "max_overlap": 1.0,
+   "max_overlap_site": "GEMSDOE24",
+   "identical": "GEMSDOE25",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE30/"
+  },
+  {
+   "site": "GEMSDOE31",
+   "file": "gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+   "score": 0.2708,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 40199,
+   "max_overlap": 1.0,
+   "max_overlap_site": "GEMSDOE24",
+   "identical": "\u2014",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE31/docs/"
+  },
+  {
+   "site": "GEMSDOE32",
+   "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+   "score": 0.2778,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 37654,
+   "max_overlap": 1.0,
+   "max_overlap_site": "GEMSDOE24",
+   "identical": "\u2014",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html"
+  },
+  {
+   "site": "GEMSDOE33",
+   "file": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+   "score": 0.2632,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 41865,
+   "max_overlap": 0.9998,
+   "max_overlap_site": "GEMSDOE32",
+   "identical": "\u2014",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE33/"
+  },
+  {
+   "site": "GEMSDOE36",
+   "file": "gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+   "score": 0.275,
+   "score_label": "USER-REPORTED (no receipt)",
+   "dots": 38854,
+   "max_overlap": 1.0,
+   "max_overlap_site": "GEMSDOE32",
+   "identical": "\u2014",
+   "unique": false,
+   "verdict": "Reference only \u2014 fails the 70%/3 px gate; already submitted by its owner per owner pages",
+   "url": "https://buffedlizard55-lab.github.io/GEMSDOE36/docs/"
+  }
+ ]
+}

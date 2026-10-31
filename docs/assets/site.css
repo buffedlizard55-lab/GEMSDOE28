@@ -145,3 +145,12 @@ caption { padding: 14px; text-align: left; font-weight: 650; color: var(--muted)
 #nine-site-scorecard th[scope="row"] { white-space: nowrap; }
 #s23-hypotheses td { min-width: 170px; }
 .section > details > summary, .section details > summary { cursor: pointer; font-weight: 700; }
+
+/* S31 decision banner + summary table states */
+.section.callout-ok { background: #ecfbf1; border: 2px solid #2e9e5b; border-left: 8px solid #1b7a45; border-radius: 14px; padding: 26px 30px; box-shadow: var(--shadow); }
+.section.callout-ok strong { color: #14532d; }
+.section.callout-ok h2 { color: #14532d; }
+td.ok { color: #14532d; font-weight: 750; }
+td.bad { color: #762c18; font-weight: 750; }
+tr.highlight td { background: #ecfbf1; }
+tr.highlight td.ok { border-top: 2px solid #1b7a45; }

@@ -1,0 +1,44 @@
+{
+ "schema": 1,
+ "session": "S31",
+ "generated_utc": "2026-10-31",
+ "items": [
+  {
+   "id": "S31-IRR-01",
+   "severity": "high",
+   "claim": "Prompt: '0.3195 is the highest score right now'.",
+   "observation": "Public leaderboard read 2026-10-31 (this session): rank #1 = 0.4544; 0.3195 is rank #50 of 50 rows (team kpomazi). The value exists but is not the highest.",
+   "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+   "status": "FLAGGED for owner review"
+  },
+  {
+   "id": "S31-IRR-02",
+   "severity": "high",
+   "claim": "Prompt: '0.4413' as the current leaderboard high score.",
+   "observation": "0.4413 does not appear anywhere on the public board read 2026-10-31; the board is sorted descending and 0.4413 would sit between #1 (0.4544) and #2 (0.3925).",
+   "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+   "status": "FLAGGED for owner review"
+  },
+  {
+   "id": "S31-IRR-03",
+   "severity": "medium",
+   "claim": "Portal error 'Predicted values must be in range [0, 1]' on a downloaded file.",
+   "observation": "Still not matched to a specific file. All nine site-best files pass the local in-footprint [0,1] check; one registry raster (gemsdoe31-csdu-stepover-8cf9dc27-nan.tif) has NaN INSIDE the footprint. S31 ships zeros-outside all-finite files only, so the error cannot originate from the approved file.",
+   "status": "MITIGATED by file design; root cause open"
+  },
+  {
+   "id": "S31-IRR-04",
+   "severity": "medium",
+   "claim": "GitHub REST availability for the shared account.",
+   "observation": "HTTP 403 rate limit for user ID 309556078 at 2026-10-31T00:54:08Z; gh api unusable during this session. Worked around via git protocol (blob-filtered clones) and raw local mirroring (scripts/build_registry_from_clones.py).",
+   "status": "FLAGGED; other sessions using gh api heavily will hit this"
+  },
+  {
+   "id": "S31-IRR-05",
+   "severity": "low",
+   "claim": "Registry scope of the internal 70%/3 px rule.",
+   "observation": "Inherited conflict from the merged S30 sessions (PR #88 vs PR #91). Including the GEMSDOE13 spacing-five calibration lattice (geology-blind control, not a submission) would make every possible dotted file a duplicate. S31 follows the merged S30 convention: registry = the nine owner-published sites.",
+   "status": "OPEN owner decision"
+  }
+ ]
+}
