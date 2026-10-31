@@ -1,3 +1,117 @@
+# S31 · 2026-10-31 UTC — unique mid-band candidate generated, gated, and published · branch arena/c4748811-gemsdoe28 · READ FIRST EVERY SESSION
+
+## CURRENT DECISION: UNIQUE TIF GENERATED · FORMAT VALID · UNIQUENESS PASS · OK TO DOWNLOAD: YES · OK TO SUBMIT (VALID UNIQUE FILE): YES · SCORE: NOT ESTABLISHED · SLOT: OWNER'S SEPARATE STEP
+
+- **Download:** [`docs/candidates/gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif`](docs/candidates/gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif) · SHA-256 `665abda6f0acdac857bb3e3c7433085362408a6393b21c3f26fd5246d3c6774e` · 52,568 dots (35,483 kept + 17,085 filled) · float32 single band, zeros outside, values exactly 0/1 inside · note (138/140 chars): "S31 H33-2 keep>3px + random mid-band(3-6px) fill per EXP-1; zeros outside; PROJECTION not a score; <=68% within 3px of any registry raster".
+- **Automated gates (no human inspector):** validator PASS (EPSG:32611, 3730×3292, transform/bounds match, no NaN inside footprint, all values in [0,1]); uniqueness PASS — max 68.00% of dots within 3 px of any one of 478 byte-pinned registry rasters + all in-repo candidates, zero over 70%; lane PASS — density rank-corr max 0.875 < 0.90, leakage canary AUC ≤ 0.525.
+- **Scores:** every number on this site is USER-REPORTED, HOLDOUT-DTI, or PROJECTION. **No organizer receipt exists. The score of this file is NOT ESTABLISHED.** Its calibration projection is **NOT ESTIMABLE** (composition frac_mid36 = 0.413 lies outside the calibration's observed range 0.092–0.123; linear extrapolation is not defensible).
+- **Executive summary:** [`docs/s31-executive-summary.html`](docs/s31-executive-summary.html) — nine-site table (file to download, score, uniqueness), why 0.2778 leads, holdout evidence, hypotheses, exact submission steps. The submit page steps are also in [`docs/s29-submission-guide.html`](docs/s29-submission-guide.html).
+- **Lane (parallel-run protocol):** hide-and-recover holdout on the template cached feature stack (`src/gems27/holdout.py`, `src/gems27/metric.py`, `src/gems27/submission.py`); catalogue-based features derived from visible faults only; visible faults masked pixel-exactly; pooled DTI (α 0.2, β 0.8, 300 m triangular kernel); seeds 400–404 (0 collisions, `evidence/s31_seed_audit.json`).
+
+### What the three experiments found (budget: 3/3 used)
+
+1. **EXP-1 holdout suite** (`evidence/s31_holdout.json`, HOLDOUT-DTI, 20 splits): base H33-2 field 0.00189; prune>3px 0.00186 (≈ neutral, within the frozen −0.0005 tolerance → keep rule = prune >3 px); far-band fills 0.00428–0.00468, all WORSE than matched random far control (0.01048); mid-band (3,6] px fills 0.01548 (prior) and 0.01575 (random) — the band carries ~8× the value, the prior adds nothing (canary AUC 0.507). No prior-bearing arm beat its control, so the build adopted the winning control arm (uniform random mid-band fill) as a **documented post-hoc amendment** (`evidence/s31_build.json` → `frozen_rule.post_hoc_amendment`).
+2. **EXP-2a calibration** (`evidence/s31_calibration.json`): PROJECTION model score ≈ 0.0580 + 1.809·frac_mid36 on 13 nine-site rasters with USER-REPORTED scores ≥ 0.20 (SHA-256s recomputed from bytes); LOO R² = 0.555; 18-row global model REJECTED (LOO R² = -1.07). It reproduces the verified 0.2708→0.2778 prune direction and **projects the S30 far-fill candidate at ≈ 0.06–0.19** — flagged as an irregularity against that branch's "OK to submit" decision.
+3. **EXP-2b build + EXP-3 gate** (`evidence/s31_build.json`, `evidence/s31_gate.json`): build from the frozen rule (no hand-picking; budget ladder first rung 0.675 placed all 17,085 fills, 18494 candidates skipped by the budget); independent gate re-read the bytes with a KD-tree and agreed (SHA and dot count match).
+
+### Run card (JSON)
+
+```json
+{
+ "session": "S31",
+ "date_utc": "2026-10-31",
+ "branch": "arena/c4748811-gemsdoe28",
+ "lane": "hide-and-recover holdout lane (template cached feature stack; src/gems27/holdout.py + metric.py; withhold whole fault segments; catalogue-based features from visible faults only; visible faults masked pixel-exactly; pooled DTI alpha 0.2 beta 0.8, 300 m triangular kernel)",
+ "hypothesis": "H-S31-A/B'/C/D: extend the leaderboard-verified catalogue-distance prune to the (3,6] px band with a strain-rate edge condition, and refill the uniqueness-mandated dots in the holdout-winning distance band (mid (3,6] vs far >=6 px) with the holdout-winning prior; composition chosen by the family calibration.",
+ "mechanism": "Dots at 1-2 px of the catalogue are ~pure false positives under the DTI kernel (verified: +0.0070 USER-REPORTED for removing 2,545 such dots vs +0.0288 theoretical max). The (3,6] px band is where sub-parallel unmapped splays are most plausible; uniqueness (<=70% of dots within 3 px of any registry raster) forces >=32% new dots, so their band and prior decide the score.",
+ "named_non_fault_process": "Digitisation/rasterisation halo of the mapped catalogue itself and lithologic/basin-margin geophysical edges (gravity/magnetic contacts, strain-rate imagery seams) can mimic sub-parallel fault splays.",
+ "holdout": {
+  "label": "HOLDOUT-DTI",
+  "evaluator_version": "gems-segment-pooled-v1 (src/gems27/holdout.py + metric.py)",
+  "n_withheld_splits": 20,
+  "withheld_positives_total": 60404.1902521342,
+  "dti_base": 0.0018939145442951567,
+  "dti_selected_fill_arm": 0.01575393321780135,
+  "ci95": [
+   0.013482309949880861,
+   0.017610707659648464
+  ],
+  "note": "pooled DTI over hide-and-recover splits; catalogue-internal proxy, never a leaderboard score"
+ },
+ "leakage_canary": {
+  "shear_edge": {
+   "auc_pooled_subsample": 0.5066686178566112,
+   "auc_mean_of_splits": 0.5094775364380976,
+   "auc": 0.5066686178566112,
+   "pass_below_0p90": true,
+   "n_splits_with_auc": 20
+  },
+  "rtp_ridge": {
+   "auc_pooled_subsample": 0.5247244196203505,
+   "auc_mean_of_splits": 0.5240415379005848,
+   "auc": 0.5247244196203505,
+   "pass_below_0p90": true,
+   "n_splits_with_auc": 20
+  },
+  "tmi_edge": {
+   "auc_pooled_subsample": 0.519119570250389,
+   "auc_mean_of_splits": 0.5209676752999649,
+   "auc": 0.519119570250389,
+   "pass_below_0p90": true,
+   "n_splits_with_auc": 20
+  }
+ },
+ "correlation_overlap_vs_registry": {
+  "surface_prior_vs_registry_density_spearman": null,
+  "final_max_overlap_within_3px": 0.6799954344848577,
+  "final_max_overlap_raster": "data/registry_tifs/GEMSDOE24/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-allfinite.tif",
+  "rasters_over_70pct": 0,
+  "density_rank_corr_max_abs": 0.8745263265137911,
+  "binary_spearman": "not applicable (tied ranks), as in S30"
+ },
+ "raster_sha256": "665abda6f0acdac857bb3e3c7433085362408a6393b21c3f26fd5246d3c6774e",
+ "validator": {
+  "no_nan_inside_footprint": true,
+  "values_in_01": true,
+  "crs_shape_transform_match": true,
+  "hard_failures": []
+ },
+ "projection": {
+  "label": "PROJECTION calibrated on 13 OWNER-REPORTED family scores (LOO R^2 = 0.555); NOT a score, NOT organizer-confirmed",
+  "estimable": false,
+  "projected_mean_unextrapolated": 0.8053230067421778,
+  "ci95_unextrapolated": [
+   0.7765247067211115,
+   0.8173738467494798
+  ],
+  "in_calibration_range": false,
+  "verdict": "NOT ESTIMABLE: outside calibration support; direction only"
+ },
+ "submission": {
+  "name": "gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif",
+  "note": "S31 H33-2 keep>3px + random mid-band(3-6px) fill per EXP-1; zeros outside; PROJECTION not a score; <=68% within 3px of any registry raster",
+  "note_chars": 138,
+  "sha256": "665abda6f0acdac857bb3e3c7433085362408a6393b21c3f26fd5246d3c6774e"
+ },
+ "verdict": "promote to the owner's selector step (file is format-valid, unique, lane-clean; score remains unestablished)",
+ "experiments_used": 3,
+ "experiment_cap": 3,
+ "seed_freshness": {
+  "range": "400-404",
+  "collisions": 0
+ }
+}
+```
+
+### Remaining work and limitations
+
+- No submission receipt exists; the owner must submit within the weekly cap and report the score.
+- The projection is NOT ESTIMABLE for this composition; only a receipt can establish the score. The mid-band bet is supported by the holdout (catalogue-internal, known bias toward near-catalogue structure) and by the family association, and contradicted by nothing verified — but the ≤2 px prune's verified success shows near-catalogue dots CAN be net-negative.
+- Registry covers only the owner's published files; other teams' files are not in the uniqueness gate.
+- MT/heat-flow external layers remain unrestorable in this sandbox (sciencebase.gov unreachable).
+
+---
+
 # S30 · 2026-10-30 UTC — nine-site byte audit · READ FIRST EVERY SESSION
 
 ## CURRENT DECISION: OK TO DOWNLOAD AND SUBMIT: NO · NO NEW TIF · NO WEEKLY SLOT USED

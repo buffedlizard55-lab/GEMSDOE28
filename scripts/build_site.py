@@ -465,6 +465,45 @@ def s18_feed_html(feed: dict) -> str:
     return f"""<section class="section"><h2>Source metadata feed (not a score feed)</h2><p>Last recorded run: <time datetime="{esc(feed.get('checked_at_utc', ''))}" data-feed-time>{esc(feed.get('checked_at_utc', 'not recorded'))}</time>. <span data-feed-freshness>Observation time is not a guarantee of current availability.</span></p><p>Freshly observed: {esc(feed.get('freshly_observed_count', 'not recorded'))} of {esc(feed.get('source_count', 'not recorded'))}; {esc(feed.get('status', 'historical record'))}. This feed does not log into or monitor DrivenData. Dated one-off official research observations are separately recorded, not fabricated as feed successes.</p><p><a href="data/feed.json">Raw feed</a> · <a href="sources.html">Official source ledger</a></p></section>"""
 
 
+def s31_status_html() -> str:
+    """S31 current decision banner (fail-closed if its evidence files are absent)."""
+    try:
+        gate = read_json("evidence/s31_gate.json")
+        build = read_json("evidence/s31_build.json")
+        sha = gate["sha256"]
+        path = gate["path"].split("/", 1)[1]  # docs-relative link
+        n_final = f"{int(gate['n_final_dots']):,}"
+        max_ov = f"{100.0 * float(gate['max_overlap']):.2f}"
+        ok = bool(gate["verdict"]["ok_to_download"])
+        note = esc(build.get("note", ""))
+    except (FileNotFoundError, KeyError, ValueError):
+        ok = False
+        sha, path, n_final, max_ov, note = "n/a", "", "n/a", "n/a", ""
+    if not ok:
+        return ('<section class="section callout-danger" id="s31-decision" '
+                'data-submission-ready="false"><p class="eyebrow">S31 - AUTOMATED DECISION</p>'
+                '<h2>OK TO DOWNLOAD AND SUBMIT: NO</h2>'
+                '<p>No gate-passing S31 candidate is on record.</p></section>')
+    return (
+        '<section class="section callout" id="s31-decision" aria-label="S31 submission decision" data-submission-ready="true">'
+        '<p class="eyebrow">S31 | 2026-10-31 UTC | AUTOMATED DECISION | NO HUMAN INSPECTOR</p>'
+        '<h2>Current decision: valid unique file - OK to download, OK to submit; score NOT ESTABLISHED</h2>'
+        f'<p><strong>File:</strong> <a href="{path}" download><strong>{gate["file"]}</strong></a> '
+        f'SHA-256 <code>{sha}</code> | {n_final} dots | float32, single band, zeros outside, values exactly 0/1 inside | '
+        f'note: <em>{note}</em>.</p>'
+        f'<p><strong>Automated gates:</strong> validator PASS (EPSG:32611, 3730x3292, transform/bounds match, no NaN inside footprint, every value in [0,1]); '
+        f'uniqueness PASS (max {max_ov}% of dots within 3 px of any one of 478 byte-pinned registry rasters + all in-repo candidates; zero over the 70% gate); '
+        f'lane PASS (density rank correlation max &lt; 0.90; leakage canary AUC &lt;= 0.525). '
+        '<strong>Scores: USER-REPORTED only; this file&#39;s score is NOT ESTABLISHED and its calibration projection is NOT ESTIMABLE (composition outside calibration support). A projection is never a score.</strong></p>'
+        f'<div class="download-actions"><a class="button" href="{path}" download>Download the S31 submission GeoTIFF</a> '
+        '<a class="button quiet" href="s31-executive-summary.html">Open S31 executive summary (nine-site table)</a> '
+        '<a class="button quiet" href="s29-submission-guide.html">How to submit</a> '
+        '<a class="button quiet" href="data/s31_run_card.json" download>Run card (JSON)</a></div>'
+        '</section>'
+    )
+
+
+
 def layout(title: str, body: str, active: str = "") -> str:
     return f"""<!doctype html>
 <html lang="en">
@@ -1356,7 +1395,7 @@ def main() -> int:
     session22c_template = (ROOT / "site_templates" / "session22c-result.html").read_text(encoding="utf-8")
     current_review = render_focus_review()
     pages = {
-        "index.html": layout("Overview", site_s23.overview(s23_card, s23_scorecard) + s18_feed_html(feed), "Overview"),
+        "index.html": layout("Overview", s31_status_html() + '<section class="section"><p>Historical decision records (S30 - S25) are preserved on the <a href="archive.html">archive page</a>; they are superseded, not current approval.</p></section>' + site_s23.overview(s23_card, s23_scorecard) + s18_feed_html(feed), "Overview"),
         "cross-site-review.html": layout("Nine-site review", site_s23.score_table(s23_scorecard) + site_s23.site_details(s23_scorecard) + site_s23.scientific_answer() + site_s23.source_review(s23_sources) + '<details><summary>Historical S22 audit — superseded</summary>' + namespace_anchors(current_review, "s22-history-") + '</details>' + site_s23.history_links(), "Nine-site review"),
         "executive-summary.html": layout("Executive summary", site_s23.executive(s23_card, s23_scorecard) + site_s23.source_review(s23_sources), "Executive summary"),
         "session23-result.html": layout("S23 current reassessment", site_s23.executive(s23_card, s23_scorecard) + site_s23.hypotheses(s23_hypotheses) + site_s23.source_review(s23_sources), "Executive summary"),
@@ -1364,7 +1403,7 @@ def main() -> int:
         "research.html": layout("Research and hypotheses", site_s23.hypotheses(s23_hypotheses) + '<details><summary>Historical research and prior hypotheses — not current approval</summary>' + render_research(hypotheses, h28_manifest, euler, board, screen, confirmation, seed_audit, h32, frontier, losfo, h33, h34, h34_hold, h35, h35_6, local_h38_claim) + '</details>', "Research"),
         "topology.html": layout("Topology review", render_topology(manifest, irregularities, sources, topology_review), "Topology"),
         "sources.html": layout("Sources and verification", site_s23.source_review(s23_sources) + s18_feed_html(feed) + render_sources(sources, board), "Sources"),
-        "archive.html": layout("Historical campaign archive", s22c_status_html() + site_s23.history_links() + archive, "Archive"),
+        "archive.html": layout("Historical campaign archive", s22c_status_html() + '<details><summary>S30-S25 era index (historical decision banners) - superseded, not current approval</summary>' + namespace_anchors((ROOT / "site_templates" / "index-history-s31.html").read_text(encoding="utf-8"), "s30era-") + '</details>' + site_s23.history_links() + archive, "Archive"),
         "submission-review.html": layout("Parallel historical audit", '<section class="section"><h1>Parallel pre-experiment audit — historical, not MXTP results</h1><h2>Concurrent H38-1 claim: rejected</h2><p>The parallel audit proved the historical H38 claim was a duplicate; that rejection remains in force.</p><p>That audit ran no experiment. Its files and safety findings are preserved; the current S23 audit decision is displayed above. Do not combine the two runs.</p><a href="../knowledge/51_current_review_and_next_steps.md">Full parallel review</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE28/blob/76847b2/docs/submission-review.html">Complete original PR39 HTML audit at its historical commit</a> · <a href="../evidence/current_run_card.json">Preserved no-experiment review card</a></section>'),
         "session19-result.html": layout("S19 unique TIFF result", render_s19_result(), "S19 result"),
         "session19b-result.html": layout("S19B parallel unique TIFF result", render_s19b_result(), "S19 result"),

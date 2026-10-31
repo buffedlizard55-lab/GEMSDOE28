@@ -1,0 +1,35 @@
+{
+ "schema": 1,
+ "session": "S31",
+ "date_utc": "2026-10-31",
+ "items": [
+  {
+   "id": "I-S31-1",
+   "severity": "high",
+   "finding": "S30 far-fill candidate (gemsdoe28-s30-catfar65-budgetfill) projects at ~0.058-0.19 under the S31 family calibration (frac_mid36 ~ 0), far below its 0.2778 parent.",
+   "impact": "The merged S30 branch decision 'OK to submit' (PR #91) is quantitatively doubtful; the conflicting S30 'NO' branch (PR #88) gains support.",
+   "action": "Flagged for the owner; not adjudicated (no receipt exists)."
+  },
+  {
+   "id": "I-S31-2",
+   "severity": "medium",
+   "finding": "Prompt quotes leaderboard high scores 0.4413 / 0.3195; the official public board fetched 2026-10-30 shows #1 = 0.4544, #2 = 0.3925, and 0.3195 was not in ranks 1-23.",
+   "impact": "Target-setting in the prompt may reference stale or private numbers.",
+   "action": "Use ORGANIZER-CONFIRMED board reads only; owner to supply receipts."
+  },
+  {
+   "id": "I-S31-3",
+   "severity": "low",
+   "finding": "registry/external_pins.json still labels the H33-2 artefact 'MT conductance alignment'; the bytes are a catalogue-pruned solo field.",
+   "impact": "Misleading provenance label.",
+   "action": "Correct in the next registry revision."
+  },
+  {
+   "id": "I-S31-4",
+   "severity": "info",
+   "finding": "EXP-1 found far-band geophysical priors (strain edge, RTP ridge, tmi high-pass edge) all score WORSE than matched random far placement on the hide-and-recover holdout.",
+   "impact": "Far-field fill designs (including S30's RTP-ridge fill) are prior-harmful in this proxy.",
+   "action": "Recorded; far-field priors should not be reused without a far-field-specific harness."
+  }
+ ]
+}

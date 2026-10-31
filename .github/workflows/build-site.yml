@@ -4,6 +4,8 @@ on:
   push:
     branches: ['**']
     paths:
+      - 'evidence/s31_gate.json'
+      - 'evidence/s31_build.json'
       - 'registry/next_hypotheses.json'
       - 'registry/leaderboard_snapshot_2026-10-03.json'
       - 'registry/irregularities.json'
@@ -169,6 +171,8 @@ on:
       - 'docs/data/s23_scorecard.csv'
   pull_request:
     paths:
+      - 'evidence/s31_gate.json'
+      - 'evidence/s31_build.json'
       - 'registry/next_hypotheses.json'
       - 'registry/leaderboard_snapshot_2026-10-03.json'
       - 'registry/irregularities.json'

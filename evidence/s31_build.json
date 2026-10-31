@@ -1,0 +1,78 @@
+{
+ "schema": 1,
+ "session": "S31",
+ "experiment": "EXP-2b build",
+ "frozen_rule": {
+  "fill_selection": "argmax pooled DTI among arms beating matched band control (EXP-1)",
+  "keep_rule_from_holdout": "prune>3px",
+  "prune3_pooled": 0.0018613620392534107,
+  "base_pooled": 0.0018939145442951567,
+  "far_prior": "fill_tmi",
+  "far_ctrl_pooled": 0.010479050761498628,
+  "far_ok": false,
+  "mid_prior": "fill_mid_shear",
+  "mid_ctrl_pooled": 0.01575393321780135,
+  "mid_ok": false,
+  "selected": "mid:fill_mid_random",
+  "post_hoc_amendment": {
+   "reason": "no prior arm beat its matched band control; band effect dominates (EXP-1)",
+   "adopted_rule": "uniform random placement in (3,6] px band",
+   "argmax_arm_pooled": 0.01575393321780135,
+   "best_prior_arm_pooled": 0.01548361253101315
+  }
+ },
+ "file": "gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif",
+ "path": "docs/candidates/gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif",
+ "sha256": "665abda6f0acdac857bb3e3c7433085362408a6393b21c3f26fd5246d3c6774e",
+ "bytes": 851624,
+ "note": "S31 H33-2 keep>3px + random mid-band(3-6px) fill per EXP-1; zeros outside; PROJECTION not a score; <=68% within 3px of any registry raster",
+ "note_chars": 138,
+ "parent": "GEMSDOE32 h33-h33-2-b2 (USER-REPORTED 0.2778)",
+ "n_base": 37654,
+ "n_kept": 35483,
+ "n_fill": 17085,
+ "n_final": 52568,
+ "fill_band_px": [
+  3.0,
+  6.0
+ ],
+ "budget_ladder_log": {
+  "ladder_0.675": "placed 17085/17085 (skipped 18494)"
+ },
+ "kept_fraction_of_final": 0.6749923908080961,
+ "budget_cap_dots_per_raster": 35746,
+ "dots_on_catalogue": 0,
+ "overlap_vs_parent_within_3px": 0.6778838837315477,
+ "max_overlap_vs_any_compared_raster": 0.6799954344848577,
+ "max_overlap_raster": "data/registry_tifs/GEMSDOE24/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-allfinite.tif",
+ "rasters_compared": 478,
+ "rasters_over_70pct": 0,
+ "surface_rank_corr_prior_vs_registry_density": null,
+ "frac_mid36_final": 0.4130840054786182,
+ "projection": {
+  "estimable": false,
+  "projected_mean_unextrapolated": 0.8053230067421778,
+  "ci95_unextrapolated": [
+   0.7765247067211115,
+   0.8173738467494798
+  ],
+  "in_calibration_range": false,
+  "family_frac_mid36_range": [
+   0.09215488394327295,
+   0.12296170393583683
+  ],
+  "verdict": "NOT ESTIMABLE: composition is outside the calibration's observed frac_mid36 range; linear extrapolation is not defensible (direction of the association is positive, magnitude unknown)"
+ },
+ "projection_label": "PROJECTION calibrated on OWNER-REPORTED scores; NOT a score",
+ "validator": {
+  "hard_checks_passed": true,
+  "hard_failures": [],
+  "variant": "allfinite",
+  "nonzero_inside_px": 52568,
+  "value_set_inside": [
+   0.0,
+   1.0
+  ]
+ },
+ "runtime_s": 462.5
+}

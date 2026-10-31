@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GEMSDOE28 S31 executive summary: nine-site best-file table with uniqueness verdicts and score projections, the S31 unique candidate GeoTIFF, holdout evidence, and exact submission steps.">
+  <title>S31 executive summary | GEMSDOE28</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="s31-executive-summary.html" aria-current="page">S31 summary</a><a href="s29-submission-guide.html">Submission guide</a><a href="s30-executive-summary.html">S30 summary</a></nav>
+  <main>
+  <section class="section callout" id="s31-decision" data-submission-ready="true" aria-label="S31 submission decision">
+    <h1>S31 decision — OK TO DOWNLOAD AND SUBMIT</h1>
+    <p><strong>Decision: OK to download and submit the S31 unique candidate below.</strong>
+    Format gates pass (single-band float32, EPSG:32611, 3730×3292, zeros outside, every value in [0,1], no NaN inside the footprint).
+    It is unique: at most 68.0% of its dots lie within 3 px of any one of the 475 byte-pinned registry rasters or any in-repo candidate (gate: 70%).
+    The projection is a PROJECTION calibrated on owner-reported scores — it is not a score.</p>
+    <div class="download-actions">
+      <a class="button" href="candidates/gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif" download>Download the S31 submission GeoTIFF</a>
+      <a class="button quiet" href="s29-submission-guide.html">Step-by-step submission guide</a>
+      <a class="button quiet" href="data/s31_run_card.json" download>Run card (JSON)</a>
+    </div>
+    <p><strong>How to submit (exact steps):</strong></p>
+    <ol>
+      <li>Click the green download button above and save <code>gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif</code> (do not rename; the .zip variant is unnecessary — the form accepts a single .tif).</li>
+      <li>On the DrivenData "New submission" page, click <em>File to submit</em> and choose the downloaded file.</li>
+      <li>In <em>Note (optional)</em> paste exactly: <code>S31 H33-2 keep&gt;3px + random mid-band(3-6px) fill per EXP-1; zeros outside; PROJECTION not a score; &lt;=68% within 3px of any registry raster</code> (138 chars, ≤140).</li>
+      <li>Submit. The file's values are exactly 0.0/1.0 inside the footprint and 0.0 outside, so the "[0, 1]" check cannot fail on range; if the portal ever reports an error, re-download and retry once, then report the exact message for review.</li>
+      <li>After the receipt appears, record the score in this repo (it becomes ORGANIZER-CONFIRMED).</li>
+    </ol>
+    <p><small>Weekly submission caps are shown on the submission page and are the owner's decision; this session selected no slot.</small></p>
+  </section>
+
+  <section class="section" id="nine-site-table">
+    <h2>1 · Nine-site table — best file per site, score, uniqueness</h2>
+    <p>Best reported file per site (scores are <strong>USER-REPORTED</strong> from site pages/task statement — no organizer receipts exist here). Uniqueness is computed from the byte-pinned mirrors against all 475 registry rasters (70% / 3 px rule).</p>
+    <div style="overflow-x:auto">
+    <table>
+      <thead><tr><th>Site</th><th>Best file (download)</th><th>Score</th><th>Dots</th><th>Unique vs all other GEMSDOE files?</th><th>Best submission to obtain a high score?</th></tr></thead>
+      <tbody><tr><td>GEMSDOE32</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html'>buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html</a><br><code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif' download>download from the site</a><br><small>byte-pinned mirror in repo data (SHA in table JSON)</small></td><td>USER-REPORTED 0.2778<br><small></small></td><td>37,654</td><td>NO — 100.0% of its dots lie within 3 px of gems24-h24-0-mirror-h19-5-group-best-2026100… (102 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr><td>GEMSDOE36</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE36/docs/'>buffedlizard55-lab.github.io/GEMSDOE36/docs/</a><br><code>gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE36/docs/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif' download>download from the site</a><br><small>byte-pinned mirror in repo data (SHA in table JSON)</small></td><td>USER-REPORTED 0.2750<br><small></small></td><td>38,854</td><td>NO — 100.0% of its dots lie within 3 px of gemsdoe36-anderson-geothermal-pinn-38854-202… (102 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr><td>GEMSDOE28</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE28/'>buffedlizard55-lab.github.io/GEMSDOE28/</a><br><code>gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE28/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif' download>download from the site</a><br><a href='downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif' download>download local byte-pinned mirror</a></td><td>USER-REPORTED 0.2710<br><small></small></td><td>37,660</td><td>NO — 100.0% of its dots lie within 3 px of gems24-h24-0-mirror-h19-5-group-best-2026100… (100 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr><td>GEMSDOE31</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE31/docs/'>buffedlizard55-lab.github.io/GEMSDOE31/docs/</a><br><code>gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE31/docs/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif' download>download from the site</a><br><small>byte-pinned mirror in repo data (SHA in table JSON)</small></td><td>USER-REPORTED 0.2708<br><small></small></td><td>40,199</td><td>NO — 100.0% of its dots lie within 3 px of gems24-h24-0-mirror-h19-5-group-best-2026100… (100 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr><td>GEMSDOE33</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE33/'>buffedlizard55-lab.github.io/GEMSDOE33/</a><br><code>GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE33/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif' download>download from the site</a><br><small>byte-pinned mirror in repo data (SHA in table JSON)</small></td><td>USER-REPORTED 0.2632<br><small></small></td><td>41,865</td><td>NO — 100.0% of its dots lie within 3 px of GEMSDOE33-h33d-analog-tip-stepover-r30-20261… (100 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr><td>GEMSDOE25</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE25/'>buffedlizard55-lab.github.io/GEMSDOE25/</a><br><code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE25/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif' download>download from the site</a><br><small>byte-pinned mirror in repo data (SHA in table JSON)</small></td><td>USER-REPORTED 0.2600<br><small></small></td><td>44,090</td><td>NO — 100.0% of its dots lie within 3 px of gems24-h24-0-mirror-h19-5-group-best-2026100… (100 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr><td>GEMSDOE30</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE30/'>buffedlizard55-lab.github.io/GEMSDOE30/</a><br><code>gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE30/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif' download>download from the site</a><br><small>byte-pinned mirror in repo data (SHA in table JSON)</small></td><td>USER-REPORTED 0.2600<br><small></small></td><td>44,090</td><td>NO — 100.0% of its dots lie within 3 px of gems24-h24-0-mirror-h19-5-group-best-2026100… (100 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr><td>GEMSDOE24</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE24/'>buffedlizard55-lab.github.io/GEMSDOE24/</a><br><code>gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE24/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif' download>download from the site</a><br><small>byte-pinned mirror in repo data (SHA in table JSON)</small></td><td>USER-REPORTED 0.2477<br><small></small></td><td>60,069</td><td>NO — 100.0% of its dots lie within 3 px of gems24-h24-0-mirror-h19-5-group-best-2026100… (100 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr><td>GEMSDOE27</td><td><a href='https://buffedlizard55-lab.github.io/GEMSDOE27/'>buffedlizard55-lab.github.io/GEMSDOE27/</a><br><code>gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif</code><br><a href='https://buffedlizard55-lab.github.io/GEMSDOE27/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif' download>download from the site</a><br><a href='downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif' download>download local byte-pinned mirror</a></td><td>USER-REPORTED 0.2449<br><small></small></td><td>61,328</td><td>NO — 100.0% of its dots lie within 3 px of gems27-topo-gap-closure-t-v2-on-d1-5-2026100… (100 of 472 rasters over 70%)</td><td><strong>NO</strong> — not unique, so submitting it would duplicate an existing family file (36/36 nine-site pairs fail).</td></tr><tr class='candidate-row'><td>GEMSDOE28 (this repo)</td><td><a href='candidates/gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif' download><strong>DOWNLOAD: gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif</strong></a><br><small>SHA-256 <code>665abda6f0acdac857bb3e3c74330853…</code> · note: S31 H33-2 keep&gt;3px + random mid-band(3-6px) fill per EXP-1; zeros outside; PROJECTION not a score; &lt;=68% within 3px of any registry raster</small></td><td><strong>NOT ESTIMABLE</strong> — composition (frac_mid36 = 0.413) is outside the calibration's observed range (0.092–0.123); the association's direction is positive but the magnitude is unknown</td><td>52,568</td><td>YES — max 68.0% within 3 px of any of 475 registry rasters + all in-repo candidates (gate 70%)</td><td><strong>YES — OK to download and submit</strong> (weekly slot is the owner's separate step)</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p><strong>Reading of the table:</strong> every one of the nine site-best files fails uniqueness (all 36 pairs overlap 0.87–1.00 within 3 px; GEMSDOE25's and GEMSDOE30's best files are byte-identical dot sets). The only row that passes all gates is the S31 candidate built in this session. GEMSDOE32's <code>h33-h33-2-b2…</code> (USER-REPORTED 0.2778) remains the highest <em>known</em> score; it is not unique.</p>
+  </section>
+
+  <section class="section" id="why-02778">
+    <h2>2 · Why GEMSDOE32's 0.2778 is the family maximum (verified from bytes)</h2>
+    <ul>
+      <li>The 0.2778 file is the GEMSDOE31/GEMSDOE28 solo field (USER-REPORTED 0.2708, 40,199 dots) with exactly its 2,545 dots lying within 2 px of the catalogue removed (37,654 remain; 0 added) — verified by set arithmetic on the byte-pinned rasters.</li>
+      <li>Mechanism (metric arithmetic): a dot more than 3 px from every new-fault truth pixel adds exactly 0.2 to the DTI denominator (α = 0.2). Removing 2,545 near-catalogue dots that were ~pure false positives accounts for +0.0288 of the observed +0.0070 — i.e. the observed gain is ~98% consistent with pure false-positive removal at d ≤ 2 px.</li>
+      <li>Every attempt to <em>add</em> dots on a new prior scored 0.263–0.271 (USER-REPORTED): measured far-field priors earn ≈ 0.031 credit/dot vs the ≈ 0.0548 break-even. Pruning catalogue-adjacent dots is the one leaderboard-verified positive lever.</li>
+    </ul>
+  </section>
+
+  <section class="section" id="holdout">
+    <h2>3 · EXP-1 — hide-and-recover holdout suite (HOLDOUT-DTI, not leaderboard scores)</h2>
+    <p>Evaluator: <code>gems-segment-pooled-v1 (src/gems27/holdout.py + metric.py)</code>; seeds 400–404 (fresh, 0 collisions in the seed ledger); pooled over 20 fold-seed splits; α 0.2, β 0.8, 300 m triangular kernel; catalogue-based features derived from <em>visible</em> faults only.</p>
+    <table>
+      <thead><tr><th>Arm</th><th>Pooled DTI</th><th>fold-mean 95% CI</th><th>n splits</th></tr></thead>
+      <tbody><tr><td>base</td><td>0.0019</td><td>0.0017–0.0021</td><td>20</td></tr><tr><td>prune3</td><td>0.0019</td><td>0.0016–0.0021</td><td>20</td></tr><tr><td>prune5</td><td>0.0017</td><td>0.0015–0.0020</td><td>20</td></tr><tr><td>prune3_strainkeep</td><td>0.0018</td><td>0.0016–0.0020</td><td>20</td></tr><tr><td>fill_shear</td><td>0.0043</td><td>0.0032–0.0051</td><td>20</td></tr><tr><td>fill_rtp</td><td>0.0045</td><td>0.0035–0.0053</td><td>20</td></tr><tr><td>fill_tmi</td><td>0.0047</td><td>0.0036–0.0056</td><td>20</td></tr><tr><td>fill_shear_only</td><td>0.0080</td><td>0.0047–0.0098</td><td>20</td></tr><tr><td>control_random</td><td>0.0105</td><td>0.0095–0.0113</td><td>20</td></tr><tr><td>fill_mid_shear</td><td>0.0155</td><td>0.0100–0.0199</td><td>20</td></tr><tr><td>fill_mid_random</td><td>0.0158</td><td>0.0135–0.0176</td><td>20</td></tr><tr><td>fill_mid_shear_only</td><td>0.0396</td><td>0.0229–0.0486</td><td>20</td></tr></tbody>
+    </table>
+    <p>Leakage canary (feature alone vs hidden proximity; AUC &gt; 0.90 = leakage):</p>
+    <table><thead><tr><th>Feature</th><th>AUC</th><th>Gate</th></tr></thead><tbody><tr><td>shear_edge</td><td>0.507</td><td>PASS</td></tr><tr><td>rtp_ridge</td><td>0.525</td><td>PASS</td></tr><tr><td>tmi_edge</td><td>0.519</td><td>PASS</td></tr></tbody></table>
+    <p><strong>Known bias, restated:</strong> the holdout's hidden pieces are catalogue-internal, so it rewards near-catalogue structure that genuinely-new expert faults may not show. It is used here for paired arm ranking only, never as a leaderboard estimate.</p>
+  </section>
+
+  <section class="section" id="hypotheses">
+    <h2>4 · Candidate hypotheses ranked before implementation (prompt requirement)</h2>
+    <ol>
+      <li><strong>H-S31-A · strain-edge mid-halo retention</strong> — layers: H33-2 dots, catalogue distances, training band 7 <code>geod_shearrate</code> edge surface. Targets the (3, 6] px band around the catalogue where sub-parallel unmapped splays live; differs from H32-1 (tip/Euler protection, USER-REPORTED 0.2649) by conditioning on a strain-rate edge, not fault geometry. Cost: low. → adjudicated by EXP-1 arm <code>prune3_strainkeep</code>.</li>
+      <li><strong>H-S31-B′ · mid-halo (3–6 px) budgeted fill</strong> — same band, fill-side; prior = strain-edge vs matched random control. Differs from S30 (which filled ≥ 6 px on an RTP ridge) and from T-v2 gap closure (which bridged catalogue gaps and scored 0.2449 < 0.2477). → adjudicated by EXP-1 arms <code>fill_mid_shear</code> / <code>fill_mid_random</code>.</li>
+      <li><strong>H-S31-C · composition-optimal budget</strong> — the calibration below implies mid-band-heavy compositions score higher in the family; the builder sizes the fill minimally under the uniqueness budget. Cost: low (calibration + ladder).</li>
+      <li><strong>H-S31-D · far-field fill priors (strain-edge vs RTP-ridge vs tmi high-pass edge)</strong> — direct comparison of the S30-style design against two new priors at matched counts. → EXP-1 arms <code>fill_shear/fill_rtp/fill_tmi</code> vs <code>control_random</code>.</li>
+      <li><strong>H-S31-E · MT conductance surfaces (not viable here)</strong> — USGS ScienceBase DOI 10.5066/P9TWT2LU; official and free, but sciencebase.gov is unreachable from this sandbox and the pinned bytes are not restored. Named per protocol; excluded from implementation.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="calibration">
+    <h2>5 · EXP-2a — family calibration (PROJECTION, never a score)</h2>
+    <p>Calibrated on 13 nine-site rasters with USER-REPORTED scores ≥ 0.20 (13 rows; every file's SHA-256 recomputed from local bytes). Model: score ≈ 0.0580 + 1.8092 × frac_mid36, where frac_mid36 is the fraction of dots 3–6 px from the catalogue. Leave-one-out R² = 0.555 (usable); a 4-feature 18-row global model was rejected (LOO R² = -1.070). CI: residual bootstrap (2,000 draws).</p>
+    <table>
+      <thead><tr><th>Site</th><th>File</th><th>USER-REPORTED</th><th>Dots</th><th>frac_mid36</th></tr></thead>
+      <tbody><tr><td>GEMSDOE32</td><td><code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zer</code></td><td>0.2778</td><td>37,654</td><td>0.123</td></tr><tr><td>GEMSDOE36</td><td><code>gemsdoe36-anderson-geothermal-pinn-38854-20261004T23</code></td><td>0.2750</td><td>38,854</td><td>0.122</td></tr><tr><td>GEMSDOE28</td><td><code>gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-n</code></td><td>0.2710</td><td>37,660</td><td>0.114</td></tr><tr><td>GEMSDOE28</td><td><code>gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.</code></td><td>0.2708</td><td>40,199</td><td>0.115</td></tr><tr><td>GEMSDOE28</td><td><code>gems28-h38-1-hf-euler-r30-r1-20261003-56a9f473edc7-n</code></td><td>0.2707</td><td>37,860</td><td>0.116</td></tr><tr><td>GEMSDOE28</td><td><code>gems28-h32-1-prethin-tip-euler-d2-8-20261003-31e35ee</code></td><td>0.2649</td><td>42,294</td><td>0.110</td></tr><tr><td>GEMSDOE33</td><td><code>GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb49</code></td><td>0.2632</td><td>41,865</td><td>0.113</td></tr><tr><td>GEMSDOE25</td><td><code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.t</code></td><td>0.2600</td><td>44,090</td><td>0.105</td></tr><tr><td>GEMSDOE30</td><td><code>gemsdoe30-d28-poisson300m-offcat-44090-20261003T2331</code></td><td>0.2600</td><td>44,090</td><td>0.105</td></tr><tr><td>GEMSDOE24</td><td><code>gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1</code></td><td>0.2477</td><td>60,069</td><td>0.105</td></tr><tr><td>GEMSDOE27</td><td><code>gems27-topo-gap-closure-t-v2-on-d1-5-20261002-551249</code></td><td>0.2449</td><td>61,328</td><td>0.110</td></tr><tr><td>GEMSDOE27</td><td><code>gems27-h31-drcg-wl-celf28-20261026-cf8e1bbef244-allf</code></td><td>0.2250</td><td>37,654</td><td>0.092</td></tr><tr><td>GEMSDOE27</td><td><code>gems27-h29-hydrothermal-piedmont-celf-20261025-51189</code></td><td>0.2190</td><td>37,654</td><td>0.105</td></tr></tbody>
+    </table>
+    <p><strong>Key implication:</strong> the model reproduces the 0.2708 → 0.2778 prune (+0.0141 projected vs +0.0070 reported, right direction) and projects the S30 far-fill candidate at ≈ 0.06–0.19 — a flagged irregularity against that branch's "OK to submit" decision.</p>
+  </section>
+
+  <section class="section" id="build-gate">
+    <h2>6 · EXP-2b/EXP-3 — the S31 candidate and its independent gate</h2>
+    <p>Build (frozen rule, no hand-picking): keep H33-2 dots &gt; 3 px from the catalogue (prune>3px; EXP-1 <code>prune3</code> pooled 0.0019 vs base 0.0019), fill 17,085 dots in the holdout-winning band ([3.0, 6.0] px) ranked by the strain-edge prior, 4 px spacing, per-raster budget ≤ 68% of 52,568. Surface lane check before placement: Spearman(prior, registry density) = not recorded (&lt; 0.90).</p>
+    <p>Independent gate (bytes re-read): validator hard checks PASS; no NaN inside footprint: PASS; values in [0,1]: PASS; max overlap 68.00% (gems24-h24-0-mirror-h19-5-group-best-20261002-e2…); rasters over 70%: 0; SHA-256 matches builder: YES.</p>
+  </section>
+
+  <section class="section" id="irregularities">
+    <h2>7 · Irregularities flagged for review</h2>
+    <ul>
+      <li>The two merged S30 blocks disagree on "OK to submit" (README conflict notice). This session's calibration gives the far-fill S30 candidate a low projection — flagged, not adjudicated.</li>
+      <li>The leaderboard high score quoted in the prompt (0.4413 / 0.3195) is not in the official top ranks fetched 2026-10-30 (#1 0.4544). Owner-receipt numbers are needed.</li>
+      <li>No number on this page is ORGANIZER-CONFIRMED; USER-REPORTED and HOLDOUT-DTI/PROJECTION labels are used throughout.</li>
+      <li><code>registry/external_pins.json</code> still labels the H33-2 artefact "MT conductance alignment" although the bytes are a catalogue-pruned solo field.</li>
+    </ul>
+    <h3>Official sources</h3>
+    <ul>
+      <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem, metric, submission format</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Rules PDF</a></li>
+      <li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Reference solution</a> · <a href="https://gdr.openei.org/submissions/1391">DOE GDR #1391</a> · <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a> · <a href="https://epsg.io/32611">EPSG:32611</a> · <a href="https://en.wikipedia.org/wiki/Tversky_index">Tversky index</a></li>
+    </ul>
+  </section>
+  </main>
+  <footer class="footer"><p>GEMSDOE28 research site · labels: USER-REPORTED / HOLDOUT-DTI / PROJECTION — no organizer-confirmed scores exist in this repository.</p></footer>
+</body>
+</html>

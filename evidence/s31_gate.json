@@ -1,0 +1,41 @@
+{
+ "schema": 1,
+ "session": "S31",
+ "experiment": "EXP-3 gate",
+ "file": "gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif",
+ "path": "docs/candidates/gemsdoe28-s31-midband-random-budgetfill-20261031-zeros.tif",
+ "sha256": "665abda6f0acdac857bb3e3c7433085362408a6393b21c3f26fd5246d3c6774e",
+ "sha_matches_builder": true,
+ "n_final_dots": 52568,
+ "n_dots_match_builder": true,
+ "validator_hard_checks_passed": true,
+ "validator_failures": [],
+ "no_nan_inside_footprint": true,
+ "values_in_01": true,
+ "max_overlap": 0.6799954344848577,
+ "max_overlap_raster": "data/registry_tifs/GEMSDOE24/gems24-h24-0-mirror-h19-5-group-best-20261002-e27054cf-allfinite.tif",
+ "rasters_over_70pct": 0,
+ "unique_under_70pct_3px": true,
+ "density_rank_corr_max_abs": 0.8745263265137911,
+ "density_rank_corr_failures": [],
+ "binary_spearman": "not applicable (tied ranks, as in S30)",
+ "lane_ok": true,
+ "projection": {
+  "estimable": false,
+  "projected_mean_unextrapolated": 0.8053230067421778,
+  "ci95_unextrapolated": [
+   0.7765247067211115,
+   0.8173738467494798
+  ],
+  "in_calibration_range": false,
+  "verdict": "NOT ESTIMABLE: outside calibration support; direction only"
+ },
+ "projection_label": "PROJECTION calibrated on 13 OWNER-REPORTED family scores; NOT a score",
+ "verdict": {
+  "format_valid": true,
+  "unique": true,
+  "lane_ok": true,
+  "ok_to_download": true,
+  "score": "NOT ESTABLISHED: no organizer receipt; projection is not a score"
+ }
+}
